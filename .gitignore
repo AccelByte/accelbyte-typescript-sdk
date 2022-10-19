@@ -1,0 +1,60 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Coverage directory used by tools like istanbul
+coverage
+.eslintcache
+.changelog.json
+apps/**/version.json
+.DS_Store
+.Thumbs.db
+.idea/
+node_modules
+.snowpack
+.vscode/
+
+**/release/app/dist
+**/release/dist
+**/release/build
+**/build
+**/dist
+**/dev-dist
+**/.bin/dll
+
+*.bdic
+.idea
+npm-debug.log.*
+*.css.d.ts
+*.sass.d.ts
+*.scss.d.ts
+
+
+.vscode/
+
+# testing
+**/storybook-static
+# sync style for storybook
+**/.storybook/index.css
+
+# generated network call from swagger 
+# **/generated
+
+# swagger jsonpatch result
+**/swaggers/patched
+
+# Cache folders.
+.cache/
+
+# Environment files.
+.env
+
+docs/
+
+
+scripts/publishing
