@@ -31,8 +31,7 @@ export const ThirdPartyLoginPlatformCredentialRequest = z.object({
   TeamID: z.string(),
   TokenAuthenticationType: z.string(),
   TokenClaimsMapping: z.record(z.string()),
-  TokenEndpoint: z.string(),
-  scopes: z.array(z.string())
+  TokenEndpoint: z.string()
 })
 
 export type ThirdPartyLoginPlatformCredentialRequest = z.TypeOf<typeof ThirdPartyLoginPlatformCredentialRequest>

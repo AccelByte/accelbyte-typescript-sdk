@@ -1,5 +1,4 @@
-/*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+/* Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,7 +15,6 @@ import { TokenIntrospectResponse } from './definitions/TokenIntrospectResponse'
 import { TokenResponse } from './definitions/TokenResponse'
 import { TokenResponseV3 } from './definitions/TokenResponseV3'
 import { TokenThirdPartyResponse } from './definitions/TokenThirdPartyResponse'
-import { TokenWithDeviceCookieResponseV3 } from './definitions/TokenWithDeviceCookieResponseV3'
 
 /**
  * DON'T EDIT THIS FILE, it is AUTO GENERATED
@@ -211,7 +209,7 @@ export class OAuth20$ {
     }, z.unknown())
   }
 
-  postIamV3OauthToken<T = TokenWithDeviceCookieResponseV3>(data: {
+  postIamV3OauthToken<T = TokenResponseV3>(data: {
     grant_type: string | null
     username?: string | null
     password?: string | null
@@ -231,7 +229,7 @@ export class OAuth20$ {
 
     return Validate.responseType(() => {
       return resultPromise
-    }, TokenWithDeviceCookieResponseV3)
+    }, TokenResponseV3)
   }
 
   postIamV3OauthVerify<T = TokenResponseV3>(data: { token: string | null }): Promise<IResponse<T>> {

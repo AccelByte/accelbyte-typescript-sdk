@@ -1,5 +1,9 @@
+/* Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
 import { SDKRequestConfig } from '@od-web-sdk/AccelbyteSDK'
-import { TokenWithDeviceCookieResponseV3 } from '@od-web-sdk/generated-public/iam/definitions/TokenWithDeviceCookieResponseV3'
+import { TokenResponseV3 } from '@od-web-sdk/generated-public/iam/definitions/TokenResponseV3'
 import { OAuth20$ } from '@od-web-sdk/generated-public/iam/OAuth20$'
 import { doRefreshSession, refreshWithLock } from '@od-web-sdk/interceptors/AuthInterceptors'
 import { MFADataResponse } from '@od-web-sdk/models/TwoFA'
@@ -243,7 +247,7 @@ export class UserAuthorization {
     return CodeChallenge.generateChallenge()
   }
 
-  refreshToken = (): Promise<Partial<TokenWithDeviceCookieResponseV3> | false> => {
+  refreshToken = (): Promise<Partial<TokenResponseV3> | false> => {
     const { isDesktopApp, clientId, refreshToken } = this.options
     if (isDesktopApp) {
       return Promise.resolve().then(doRefreshSession({ axiosConfig: this.conf, clientId, isDesktopApp, refreshToken }))

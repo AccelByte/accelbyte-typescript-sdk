@@ -5,11 +5,6 @@
  */
 import { z } from 'zod'
 
-export const UserBaseInfo = z.object({
-  avatarUrl: z.string(),
-  displayName: z.string(),
-  platformUserIds: z.record(z.string()),
-  userId: z.string()
-})
+export const RestapiErrorResponse = z.object({ Code: z.number().int().nullish(), Message: z.string() })
 
-export type UserBaseInfo = z.TypeOf<typeof UserBaseInfo>
+export type RestapiErrorResponse = z.TypeOf<typeof RestapiErrorResponse>

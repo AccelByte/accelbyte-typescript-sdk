@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/core",
-  "version": "0.1.1-alpha-30",
+  "version": "0.1.1-alpha-28",
   "author": "AccelByte Inc",
   "license": "AccelByte License",
   "main": "./dist/index.js",
@@ -21,7 +21,7 @@
     "@types/platform": "1.3.4",
     "@types/uuid": "8.3.4",
     "axios": "0.27.2",
-    "justice-js-common-utils": "git+https://github.com/AccelByte/justice-js-common-utils.git#1.36.2",
+    "justice-js-common-utils": "git+https://github.com/AccelByte/justice-js-common-utils.git#1.36.1",
     "nanoid": "3.1.30",
     "rimraf": "3.0.2",
     "rollup": "2.56.2",
@@ -34,7 +34,7 @@
   },
   "peerDependencies": {
     "axios": "0.27.2",
-    "justice-js-common-utils": "git+https://github.com/AccelByte/justice-js-common-utils.git#1.36.2",
+    "justice-js-common-utils": "git+https://github.com/AccelByte/justice-js-common-utils.git#1.36.1",
     "nanoid": "3.1.30",
     "validator": "10.2.0",
     "zod": "3.17.3"

@@ -1,11 +1,3 @@
-### 0.1.1-alpha-30 - 2022-10-13
-
-- OS-7863 [Dev][PP][Launcher] Validate IAM inputs using regex returned from backend
-
-### 0.1.1-alpha-29 - 2022-10-11
-
-- OS-7812 - [Dev][PP][Launcher] Update `justice-js-common-utils` to improve `generatePattern` logic in `InputValidationHelper`
-
 ### 0.1.1-alpha-28 - 2022-10-07
 
 - OS-7799 - [Dev][PP][Launcher] Update `justice-js-common-utils` to improve `generatePattern` logic in `InputValidationHelper`
