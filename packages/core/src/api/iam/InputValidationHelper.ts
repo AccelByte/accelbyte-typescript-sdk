@@ -6,7 +6,6 @@ import { InputValidationDataPublic } from '@od-web-sdk/generated-public/iam/defi
 import { ValidationDetailPublic } from '@od-web-sdk/generated-public/iam/definitions/ValidationDetailPublic'
 import {
   CharacterLocationType,
-  generatePattern,
   LetterCaseType,
   RegexGeneratorParam,
   validateForbiddenWords,
@@ -92,7 +91,7 @@ export class InputValidationHelper {
     }
 
     if (!result) {
-      result = validateRegex(value, generatePattern(this.getFormattedValidation(validation)), {
+      result = validateRegex(value, validation.regex, {
         allowUnicode: validation.allowUnicode || validation.isCustomRegex
       })
     }

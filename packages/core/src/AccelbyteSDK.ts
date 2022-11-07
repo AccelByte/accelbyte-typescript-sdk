@@ -37,8 +37,7 @@ import { Method } from 'axios'
 export type Overrides = { config?: SDKRequestConfig; cache?: boolean }
 
 export interface AccelbyteSDK {
-  updateOption(option: Partial<SDKOptions>): void
-  updateConfig(config?: SDKRequestConfig): void
+  updateTokens(accessToken: string | undefined | null, refreshToken: string | undefined | null)
 
   iam: {
     userAuthorization(overrides?: Overrides): UserAuthorization
@@ -94,7 +93,6 @@ export interface SDKOptions {
   namespace: string
   cache?: boolean
   loglevel?: keyof typeof LogLevel
-  environment?: string
   accessToken?: string
   refreshToken?: string
   isDesktopApp?: boolean

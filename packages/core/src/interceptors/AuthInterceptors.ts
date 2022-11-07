@@ -3,7 +3,7 @@
  * and restrictions contact your company contract manager.
  */
 import { SDKOptions } from '@od-web-sdk/AccelbyteSDK'
-import { TokenResponseV3 } from '@od-web-sdk/generated-public/iam/definitions/TokenResponseV3'
+import { TokenWithDeviceCookieResponseV3 } from '@od-web-sdk/generated-public/iam/definitions/TokenWithDeviceCookieResponseV3'
 import { OAuth20$ } from '@od-web-sdk/generated-public/iam/OAuth20$'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import { injectRequestInterceptors, injectResponseInterceptors, Network } from '../utils/Network'
@@ -54,7 +54,7 @@ export const refreshWithLock = ({
   refreshToken,
   clientId,
   isDesktopApp
-}: RefreshArgs): Promise<Partial<TokenResponseV3> | false> => {
+}: RefreshArgs): Promise<Partial<TokenWithDeviceCookieResponseV3> | false> => {
   //
   if (RefreshSession.isLocked()) {
     return Promise.resolve().then(async () => {
@@ -169,7 +169,7 @@ const initOnUnAuthorizedHandlerImpl = ({
 
 const uponRefreshComplete = (
   error: AxiosError,
-  tokenResponse: Partial<TokenResponseV3> | false,
+  tokenResponse: Partial<TokenWithDeviceCookieResponseV3> | false,
   onGetUserSession: ((accessToken: string, refreshToken: string) => void) | undefined,
   onSessionExpired: (() => void) | undefined,
   axiosConfig: AxiosRequestConfig,

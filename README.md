@@ -1,11 +1,10 @@
-# Odin Web SDK
+# AccelByte Web SDK
 
-Accelbyte Web SDK is a JavaScript library enabling building web application consuming AccelByte API services.
-The library is platform-agnostic and can be consumed in a browser or in server environment.
+AccelByte Web SDK is a JavaScript library enabling building web application using AccelByte API services. The library is platform-agnostic and can be consumed in a browser or in a server environment.
 
-Accelbyte SDK is build with TypeScript and integrates runtime type-checking validations.
+AccelByte SDK is build with TypeScript and integrates runtime type-checking validations.
 
-Below is the list of Accelbyte service APIs the library supports:
+Below is the list of AccelByte service APIs the library supports:
 
 1. **IAM** - https://docs.accelbyte.io/guides/access/iam-client.html
 2. **Platform**
@@ -45,6 +44,6 @@ Sample usage of the library against IAM service:
 // Login to IAM
 sdk.iam.userAuthorization().loginWithAuthorizationCode({ code, codeVerifier })
 
-// Retrieve user object 
+// Retrieve the user object 
 sdk.iam.userApi().getCurrentUser()
 ```

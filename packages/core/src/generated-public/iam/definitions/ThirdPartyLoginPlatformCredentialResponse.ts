@@ -33,7 +33,8 @@ export const ThirdPartyLoginPlatformCredentialResponse = z.object({
   TokenAuthenticationType: z.string(),
   TokenClaimsMapping: z.record(z.string()),
   TokenEndpoint: z.string().nullish(),
-  registeredDomains: z.array(RegisteredDomain)
+  registeredDomains: z.array(RegisteredDomain),
+  scopes: z.array(z.string()).nullish()
 })
 
 export type ThirdPartyLoginPlatformCredentialResponse = z.TypeOf<typeof ThirdPartyLoginPlatformCredentialResponse>

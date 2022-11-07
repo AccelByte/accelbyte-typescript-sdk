@@ -351,9 +351,9 @@ js-tokens@^4.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-"justice-js-common-utils@git+https://github.com/AccelByte/justice-js-common-utils.git#1.36.1":
-  version "1.36.1"
-  resolved "git+https://github.com/AccelByte/justice-js-common-utils.git#6d2f5a3b049a0904ed1e72ad873770916d6027af"
+"justice-js-common-utils@git+https://github.com/AccelByte/justice-js-common-utils.git#1.36.2":
+  version "1.36.2"
+  resolved "git+https://github.com/AccelByte/justice-js-common-utils.git#0c038e35e884cae5710254f4c1517b2f6f38c0d3"
   dependencies:
     "@types/xregexp" "^3.0.30"
     naughty-words "^1.1.0"

@@ -32,7 +32,6 @@ class AccelbyteSDKFactory {
   constructor(options: SDKOptions, config?: SDKRequestConfig, events?: SDKEvents) {
     this.options = {
       loglevel: 'INFO',
-      environment: 'prod',
       ...options
     }
     this.events = events
@@ -73,6 +72,14 @@ class AccelbyteSDKFactory {
     }
   }
 
+  private updateTokens = (accessToken, refreshToken) => {
+    if (refreshToken && accessToken) {
+      // @ts-ignore
+      this.updateOption({ accessToken, refreshToken })
+    }
+    this.mergeConfigs({ headers: { Authorization: accessToken ? `Bearer ${accessToken}` : '' } })
+  }
+
   init(): AccelbyteSDK {
     const { baseURL } = this.options
     injectAuthInterceptors({
@@ -84,8 +91,7 @@ class AccelbyteSDKFactory {
     injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
 
     return {
-      updateConfig: (conf?: SDKRequestConfig) => this.mergeConfigs(conf),
-      updateOption: (option: SDKOptions) => this.updateOption(option),
+      updateTokens: (accessToken, refreshToken) => this.updateTokens(accessToken, refreshToken),
       iam: {
         userAuthorization: (overrides?: Overrides) =>
           ApiFactory.userAuthorization(this.config, this.options, this.options.namespace, overrides),

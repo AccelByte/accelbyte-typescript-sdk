@@ -9,7 +9,8 @@ export const UserBaseInfo = z.object({
   avatarUrl: z.string(),
   displayName: z.string(),
   platformUserIds: z.record(z.string()),
-  userId: z.string()
+  userId: z.string(),
+  username: z.string().nullish()
 })
 
 export type UserBaseInfo = z.TypeOf<typeof UserBaseInfo>

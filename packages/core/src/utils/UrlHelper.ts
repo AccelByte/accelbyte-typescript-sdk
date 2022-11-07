@@ -3,6 +3,22 @@
  * and restrictions contact your company contract manager.
  */
 export class UrlHelper {
+  static silentSearchParamsBuilder(usvString: string): URLSearchParams {
+    try {
+      return new URLSearchParams(usvString)
+    } catch (error) {
+      return new URLSearchParams('')
+    }
+  }
+
+  static isCompleteURLString = (urlString: string) => {
+    try {
+      const url = new URL(urlString)
+      return url.hostname !== ''
+    } catch (error) {}
+    return false
+  }
+
   static trimSlashFromStringEnd(pathString: string) {
     let newString = pathString
     while (newString[newString.length - 1] === '/') {
