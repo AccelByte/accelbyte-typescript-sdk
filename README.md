@@ -1,8 +1,9 @@
 # AccelByte Web SDK
 
-AccelByte Web SDK is a JavaScript library enabling building web application using AccelByte API services. The library is platform-agnostic and can be consumed in a browser or in a server environment.
+AccelByte Web SDK is a JavaScript library enabling building web application using AccelByte API services. The library is
+platform-agnostic and can be consumed in a browser or in a server environment.
 
-AccelByte SDK is build with TypeScript and integrates runtime type-checking validations.
+AccelByte SDK is build with TypeScript and uses runtime type-checking validations.
 
 Below is the list of AccelByte service APIs the library supports:
 
@@ -17,33 +18,57 @@ Below is the list of AccelByte service APIs the library supports:
 # Getting started
 
 ## NPM installation
-To npm install the lib, place the below code in your package.json dependencies.
 
-```json
-{
-   "accelbyte-web-sdk": "git+https://github.com/AccelByte/accelbyte-web-sdk.git#<version>"
-}
+To npm install the library execute
+
+```shell
+    npm install @accelbyte/sdk
 ```
 
-To instantiate the Web SDK, a prerequisite is having a `IAM Client ID`. The example below creates an instance of the SDK that have access to all APIs
+## Usage:
+
+To instantiate the Web SDK, a prerequisite is having a `IAM Client ID`. The example below creates an instance of the SDK
+that have access to all APIs
 
 ```typescript
-const sdk = await Accelbyte.SDK(
-    {
-        baseURL: "<Publisher Base URL, e.g. https://demo.accelbyte.io>",
-        clientId: "<Publisher Client ID>",
-        redirectURI: "<Publisher Redirect URL, e.g. https://demo.accelbyte.io>",
-        accessToken: "<Publisher Bearer Token>", // bearer token
-        namespace: "<Publisher namespace>"
-    }
-)
+const sdk = await Accelbyte.SDK({
+  options: {
+    baseURL: "<Publisher Base URL, e.g. https://demo.accelbyte.io>",
+    clientId: "<Publisher Client ID>",
+    redirectURI: "<Publisher Redirect URL, e.g. https://demo.accelbyte.io>",
+    namespace: "<Publisher namespace>"
+  },
+
+  config: {
+    withCredentials: true // default true. If true it will send the Cookie automatically
+  },
+
+  onEvents: {
+    // a callback function invoked on session expiry
+    onSessionExpired: () => {},
+    // a callback function invoked on session retrieval
+    onGetUserSession: (accessToken: string, refreshToken: string) => {},
+    // a callback function invoked on UserEligibilityChange
+    onUserEligibilityChange: () => {},
+    // a callback function fired on error
+    onError: (error: SDKError) => {}
+  }
+})
 ```
 
-Sample usage of the library against IAM service:
+Sample consumption of the AccelByte IAM service using the library:
+
 ```typescript
 // Login to IAM
-sdk.iam.userAuthorization().loginWithAuthorizationCode({ code, codeVerifier })
+sdk.IAM.UserAuthorization().loginWithAuthorizationCode({code, codeVerifier})
 
 // Retrieve the user object 
-sdk.iam.userApi().getCurrentUser()
+sdk.IAM.UserApi().getCurrentUser()
+```
+
+
+## Testing
+
+```shell
+yarn --cwd packages/sdk test
 ```

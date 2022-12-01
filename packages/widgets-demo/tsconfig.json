@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "types": ["vite/client", "node"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "newLine": "crlf",
+    "allowJs": true,
+    "alwaysStrict": true,
+    "checkJs": true,
+    "lib": ["dom", "ESNext"],
+    "declarationMap": true,
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "target": "ES6",
+    "baseUrl": ".",
+    "module": "CommonJS",
+    "paths": {
+      "src/*": ["../widgets-demo/src/*"],
+      "@accelbyte/sdk/*": ["../sdk/src/*"],
+      "accelbyte-web-sdk": ["../sdk/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*", "types/*", "*"],
+  "exclude": ["*.cjs", "node_modules"]
+}

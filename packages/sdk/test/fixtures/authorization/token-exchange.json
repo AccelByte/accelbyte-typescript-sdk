@@ -1,0 +1,22 @@
+{
+  "access_token": "test-access-token",
+  "bans": [],
+  "display_name": "test-display-name",
+  "expires_in": 3600,
+  "is_comply": true,
+  "jflgs": 1,
+  "namespace": "test-namespace",
+  "namespace_roles": [
+    { "roleId": "role-1", "namespace": "*" },
+    { "roleId": "role-2", "namespace": "test-namespace" }
+  ],
+  "permissions": [],
+  "platform_id": "",
+  "platform_user_id": "",
+  "refresh_expires_in": 86400,
+  "refresh_token": "test-refresh-token",
+  "roles": ["role-1", "role-2"],
+  "scope": "commerce account social publishing analytics",
+  "token_type": "Bearer",
+  "user_id": "test-user-id"
+}

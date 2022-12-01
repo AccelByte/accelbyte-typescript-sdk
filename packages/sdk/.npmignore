@@ -1,0 +1,13 @@
+# Development files.
+src/
+docs/
+test/
+
+# Config files.
+*.config.*
+tsconfig.*
+typedoc.json
+
+# Version files.
+version.json
+.changelog.json
