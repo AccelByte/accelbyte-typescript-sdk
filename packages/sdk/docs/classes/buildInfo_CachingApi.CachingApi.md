@@ -31,4 +31,4 @@ This API is used to retrieve detailed diff cache.<br/>The response will contains
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/CachingApi.ts:19](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/buildInfo/CachingApi.ts#lines-19)
+[packages/sdk/src/api/buildInfo/CachingApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/buildInfo/CachingApi.ts#L19)

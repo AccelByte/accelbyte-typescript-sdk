@@ -117,6 +117,7 @@ export interface SDKRequestConfig<D = any> {
   data?: D
   timeout?: number
   timeoutErrorMessage?: string
+  signal?: AbortSignal
   // `withCredentials` indicates whether or not cross-site Access-Control requests should be made using credentials
   // withCredentials:true will automatically send the cookie to the client-side
   withCredentials?: boolean // default true

@@ -32,7 +32,7 @@ get my wallet by currency code and namespace.<br>Other detail info: <ul><li><i>R
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:20](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/WalletApi.ts#lines-20)
+[packages/sdk/src/api/platform/WalletApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/WalletApi.ts#L20)
 
 ___
 
@@ -55,13 +55,13 @@ get a wallet by currency code.<br>Other detail info: <ul><li><i>Required permiss
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:27](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/WalletApi.ts#lines-27)
+[packages/sdk/src/api/platform/WalletApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/WalletApi.ts#L27)
 
 ___
 
 ### getWalletMap
 
-▸ **getWalletMap**(`__namedParameters`): `Promise`<{ `error`: ``null`` = null; `value`: `Map`<`string`, { `balance`: `number` ; `balanceOrigin`: `string` ; `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `id`: `string` ; `namespace`: `string` ; `status`: ``"ACTIVE"`` \| ``"INACTIVE"`` ; `timeLimitedBalances`: `undefined` \| ``null`` \| { expireAt?: string \| null \| undefined; balance?: number \| null \| undefined; balanceSource?: string \| null \| undefined; }[] ; `totalPermanentBalance`: `undefined` \| ``null`` \| `number` ; `totalTimeLimitedBalance`: `undefined` \| ``null`` \| `number` ; `updatedAt`: `string` ; `userId`: `string`  }\>  } \| { `error`: `unknown` ; `value`: ``null`` = null }\>
+▸ **getWalletMap**(`«destructured»`): `Promise`<{ `error`: ``null`` = null; `value`: `Map`<`string`, { `balance`: `number` ; `balanceOrigin`: `string` ; `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `id`: `string` ; `namespace`: `string` ; `status`: ``"ACTIVE"`` \| ``"INACTIVE"`` ; `timeLimitedBalances`: `undefined` \| ``null`` \| { expireAt?: string \| null \| undefined; balance?: number \| null \| undefined; balanceSource?: string \| null \| undefined; }[] ; `totalPermanentBalance`: `undefined` \| ``null`` \| `number` ; `totalTimeLimitedBalance`: `undefined` \| ``null`` \| `number` ; `updatedAt`: `string` ; `userId`: `string`  }\>  } \| { `error`: `unknown` ; `value`: ``null`` = null }\>
 
 get a map of wallet represented by its currency code
 
@@ -69,9 +69,9 @@ get a map of wallet represented by its currency code
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.currencyCodes` | `string`[] |
-| `__namedParameters.userId` | `string` |
+| `«destructured»` | `Object` |
+| › `currencyCodes` | `string`[] |
+| › `userId` | `string` |
 
 #### Returns
 
@@ -79,4 +79,4 @@ get a map of wallet represented by its currency code
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:34](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/WalletApi.ts#lines-34)
+[packages/sdk/src/api/platform/WalletApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/WalletApi.ts#L34)

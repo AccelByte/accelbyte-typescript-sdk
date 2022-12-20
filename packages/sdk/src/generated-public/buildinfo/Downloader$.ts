@@ -3,23 +3,19 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { BasicBuildManifestArray } from './definitions/BasicBuildManifestArray'
 import { BlockDownloadUrls } from './definitions/BlockDownloadUrls'
-/* eslint-disable camelcase */
 import { BlockDownloadUrlsRequest } from './definitions/BlockDownloadUrlsRequest'
 import { BuildAvailabilityArray } from './definitions/BuildAvailabilityArray'
 import { BuildManifest } from './definitions/BuildManifest'
 import { DiffStatusReport } from './definitions/DiffStatusReport'
 import { VersionChain } from './definitions/VersionChain'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class Downloader$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

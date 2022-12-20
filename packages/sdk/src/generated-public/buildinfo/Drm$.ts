@@ -3,18 +3,14 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
-import { AxiosInstance } from 'axios'
-/* eslint-disable camelcase */
-import { EncryptedIdentity } from './definitions/EncryptedIdentity'
-import { PublicKeyPresignedUrl } from './definitions/PublicKeyPresignedUrl'
-
 /**
  * DON'T EDIT THIS FILE, it is AUTO GENERATED
  */
+import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { AxiosInstance } from 'axios'
+import { EncryptedIdentity } from './definitions/EncryptedIdentity'
+import { PublicKeyPresignedUrl } from './definitions/PublicKeyPresignedUrl'
+
 export class Drm$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

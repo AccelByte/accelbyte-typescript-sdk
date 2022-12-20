@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:58](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-58)
+[packages/sdk/src/api/iam/TwoFA.ts:58](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L58)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:49](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-49)
+[packages/sdk/src/api/iam/TwoFA.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L49)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:107](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-107)
+[packages/sdk/src/api/iam/TwoFA.ts:107](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L107)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:85](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-85)
+[packages/sdk/src/api/iam/TwoFA.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L85)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:31](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-31)
+[packages/sdk/src/api/iam/TwoFA.ts:31](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L31)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:103](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-103)
+[packages/sdk/src/api/iam/TwoFA.ts:103](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L103)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:40](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-40)
+[packages/sdk/src/api/iam/TwoFA.ts:40](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L40)
 
 ___
 
@@ -162,7 +162,7 @@ A QR code URI is also returned so that frontend can generate QR code image.</p>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:95](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-95)
+[packages/sdk/src/api/iam/TwoFA.ts:95](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L95)
 
 ___
 
@@ -180,7 +180,7 @@ Each code is a one-time code and will be deleted once used.</p>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:22](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-22)
+[packages/sdk/src/api/iam/TwoFA.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L22)
 
 ___
 
@@ -197,7 +197,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:67](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-67)
+[packages/sdk/src/api/iam/TwoFA.ts:67](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L67)
 
 ___
 
@@ -211,7 +211,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:99](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-99)
+[packages/sdk/src/api/iam/TwoFA.ts:99](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L99)
 
 ___
 
@@ -234,4 +234,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:76](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/TwoFA.ts#lines-76)
+[packages/sdk/src/api/iam/TwoFA.ts:76](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/TwoFA.ts#L76)

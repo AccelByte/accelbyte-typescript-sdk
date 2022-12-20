@@ -1,7 +1,32 @@
+### 0.1.1-alpha.45 - 2022-12-19
+
+- Update conditional exports to support both Node and Browser environments
+
+### 0.1.1-alpha.44 - 2022-12-09
+
+- Make CJS to always be built with browser: false and ESM with browser: true
+
+### 0.1.1-alpha.43 - 2022-12-09
+
+- Fix missing types in package.json
+
+### 0.1.1-alpha.42 - 2022-12-08
+
+- Remove peer dependencies
+
+### 0.1.1-alpha.40 - 2022-12-01
+
+- Fix build and publish process (2)
+
+### 0.1.1-alpha.39 - 2022-12-01
+
+- [Dev][PP] Add account linking with one time code page
+- Fix build and publish process
+
 ### 0.1.1-alpha.38 - 2022-11-23
 
 - Prettify config files
-- CW-1704 - [Dev][Legal app] Odin legal app not displaying list of game namespace legal document
+- [Dev][Legal app] Odin legal app not displaying list of game namespace legal document
 
 ### 0.1.1-alpha-37 - 2022-11-17
 

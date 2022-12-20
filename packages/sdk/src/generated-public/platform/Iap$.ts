@@ -3,12 +3,13 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { IResponse, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AppleIapReceipt } from './definitions/AppleIapReceipt'
-/* eslint-disable camelcase */
 import { EpicGamesReconcileRequest } from './definitions/EpicGamesReconcileRequest'
 import { EpicGamesReconcileResultArray } from './definitions/EpicGamesReconcileResultArray'
 import { GoogleIapReceipt } from './definitions/GoogleIapReceipt'
@@ -21,9 +22,6 @@ import { TwitchSyncRequest } from './definitions/TwitchSyncRequest'
 import { XblReconcileRequest } from './definitions/XblReconcileRequest'
 import { XblReconcileResultArray } from './definitions/XblReconcileResultArray'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class Iap$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

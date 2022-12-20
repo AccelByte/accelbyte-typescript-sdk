@@ -1,14 +1,9 @@
 {
   "name": "accelbyte-web-sdk",
-  "private": true,
-  "repository": "https://github.com/AccelByte/accelbyte-web-sdk",
-  "publishToNpm": [
-    "packages/sdk",
-    "packages/widgets"
-  ],
-  "publishToGithub": [
+  "workspaces": [
     "packages/sdk",
     "packages/widgets-demo"
   ],
-  "version": "2.6.0"
+  "private": true,
+  "repository": "https://github.com/AccelByte/accelbyte-web-sdk"
 }

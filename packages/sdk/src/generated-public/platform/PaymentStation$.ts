@@ -3,10 +3,10 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { PaymentMethodArray } from './definitions/PaymentMethodArray'
@@ -15,13 +15,9 @@ import { PaymentOrderPaidResult } from './definitions/PaymentOrderPaidResult'
 import { PaymentProcessResult } from './definitions/PaymentProcessResult'
 import { PaymentToken } from './definitions/PaymentToken'
 import { PaymentUrl } from './definitions/PaymentUrl'
-/* eslint-disable camelcase */
 import { PaymentUrlCreate } from './definitions/PaymentUrlCreate'
 import { TaxResult } from './definitions/TaxResult'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class PaymentStation$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

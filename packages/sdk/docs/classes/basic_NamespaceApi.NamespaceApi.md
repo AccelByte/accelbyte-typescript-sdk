@@ -30,4 +30,4 @@ Get all namespaces.<br>Other detail info: <ul><li><i>Required permission</i>: lo
 
 #### Defined in
 
-[packages/sdk/src/api/basic/NamespaceApi.ts:19](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/basic/NamespaceApi.ts#lines-19)
+[packages/sdk/src/api/basic/NamespaceApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/basic/NamespaceApi.ts#L19)

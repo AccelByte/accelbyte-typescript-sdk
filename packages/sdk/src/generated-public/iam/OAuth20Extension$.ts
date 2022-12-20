@@ -3,20 +3,18 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CountryLocationResponse } from './definitions/CountryLocationResponse'
 import { GameTokenCodeResponse } from './definitions/GameTokenCodeResponse'
-/* eslint-disable camelcase */
+import { OneTimeLinkingCodeResponse } from './definitions/OneTimeLinkingCodeResponse'
+import { OneTimeLinkingCodeValidationResponse } from './definitions/OneTimeLinkingCodeValidationResponse'
 import { TokenResponseV3 } from './definitions/TokenResponseV3'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class OAuth20Extension$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
@@ -88,6 +86,62 @@ export class OAuth20Extension$ {
   postIamV3HeadlessToken<T = TokenResponseV3>(data: { linkingToken: string | null; extend_exp?: boolean | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/headless/token'
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, TokenResponseV3)
+  }
+
+  /**
+   * <p>This endpoint is being used to request the one time code [8 length] for headless account to link or upgrade to a full account.<br>
+   * 		It require a valid user token.<br>
+   * 		Should specify the target platform id and current user should already linked to this platform.<br>
+   * 		Current user should be a headless account.<br>
+   * 		</p>
+   */
+  postIamV3LinkCodeRequest<T = OneTimeLinkingCodeResponse>(data: { platformId: string | null }): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/link/code/request'
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, OneTimeLinkingCodeResponse)
+  }
+
+  /**
+   * <p>This endpoint is being used to validate one time link code.<br>
+   * 		It require a valid user token.<br>
+   * 		Should specify the target platform id and current user should already linked to this platform.<br>
+   * 		Current user should be a headless account.<br>
+   * 		</p>
+   */
+  postIamV3LinkCodeValidate<T = OneTimeLinkingCodeValidationResponse>(data: { oneTimeLinkCode: string | null }): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/link/code/validate'
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, OneTimeLinkingCodeValidationResponse)
+  }
+
+  /**
+   * <p>This endpoint is being used to generate user's token by one time link code.<br>
+   * 		It require publisher ClientID<br>
+   * 		It required a code which can be generated from <strong>/iam/v3/link/code/request</strong>.<br>
+   * 		</p>
+   */
+  postIamV3LinkTokenExchange<T = TokenResponseV3>(data: {
+    oneTimeLinkCode: string | null
+    client_id: string | null
+  }): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/link/token/exchange'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
       ...params,
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }

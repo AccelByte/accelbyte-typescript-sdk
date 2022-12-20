@@ -35,9 +35,9 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:48](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-48)
+[packages/sdk/src/api/iam/UserAuthorization.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L48)
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:49](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-49)
+[packages/sdk/src/api/iam/UserAuthorization.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L49)
 
 ___
 
@@ -47,9 +47,9 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:30](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-30)
+[packages/sdk/src/api/iam/UserAuthorization.ts:30](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L30)
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:31](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-31)
+[packages/sdk/src/api/iam/UserAuthorization.ts:31](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L31)
 
 ## Variables
 
@@ -59,9 +59,9 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:48](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-48)
+[packages/sdk/src/api/iam/UserAuthorization.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L48)
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:49](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-49)
+[packages/sdk/src/api/iam/UserAuthorization.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L49)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:23](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-23)
+[packages/sdk/src/api/iam/UserAuthorization.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L23)
 
 ___
 
@@ -81,6 +81,6 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:30](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-30)
+[packages/sdk/src/api/iam/UserAuthorization.ts:30](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L30)
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:31](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-31)
+[packages/sdk/src/api/iam/UserAuthorization.ts:31](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/UserAuthorization.ts#L31)

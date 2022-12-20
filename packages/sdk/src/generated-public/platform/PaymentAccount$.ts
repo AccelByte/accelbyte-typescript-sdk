@@ -3,18 +3,14 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
-import { AxiosInstance } from 'axios'
-import { z } from 'zod'
-/* eslint-disable camelcase */
-import { PaymentAccountArray } from './definitions/PaymentAccountArray'
-
 /**
  * DON'T EDIT THIS FILE, it is AUTO GENERATED
  */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { AxiosInstance } from 'axios'
+import { z } from 'zod'
+import { PaymentAccountArray } from './definitions/PaymentAccountArray'
+
 export class PaymentAccount$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

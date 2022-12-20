@@ -3,19 +3,15 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
-import { AxiosInstance } from 'axios'
-import { z } from 'zod'
-import { CountryObjectArray } from './definitions/CountryObjectArray'
-/* eslint-disable camelcase */
-import { RetrieveTimeResponse } from './definitions/RetrieveTimeResponse'
-
 /**
  * DON'T EDIT THIS FILE, it is AUTO GENERATED
  */
+import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { AxiosInstance } from 'axios'
+import { z } from 'zod'
+import { CountryObjectArray } from './definitions/CountryObjectArray'
+import { RetrieveTimeResponse } from './definitions/RetrieveTimeResponse'
+
 export class Misc$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

@@ -12,53 +12,95 @@ import json from '@rollup/plugin-json'
 import resolve from '@rollup/plugin-node-resolve'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import typescript from '@rollup/plugin-typescript'
-import packageJson from './package.json'
+import alias from '@rollup/plugin-alias'
 import tsconfigBuildJson from './tsconfig.build.json'
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs'
+import { writeFileSync, readFileSync } from 'fs'
 
-/** @type {import('rollup').RollupOptions} */
-const opts = {
-  input: './src/index.ts',
-  output: [
-    {
-      file: packageJson.module,
-      format: 'es',
-      sourcemap: true,
-      assetFileNames: '[name]-[hash][extname]'
-    },
-    {
-      file: packageJson.main,
-      format: 'cjs',
-      sourcemap: true,
-      assetFileNames: '[name]-[hash][extname]'
+/**
+ *
+ * @param {import('rollup').RollupOptions} config
+ * @param {boolean} isBrowser
+ * @returns
+ */
+function createConfig(config, isBrowser) {
+  /** @type {import('rollup').RollupOptions} */
+  const opts = {
+    input: config.input,
+    output: config.output,
+    plugins: [
+      peerDepsExternal(),
+      alias({
+        entries: {
+          '@accelbyte/sdk': path.resolve('./src')
+        }
+      }),
+      resolve({ jsnext: true, preferBuiltins: true, browser: isBrowser }),
+      commonjs(),
+      typescript({
+        tsconfig: './tsconfig.build.json',
+        sourceMap: true
+      }),
+      json({
+        compact: true
+      }),
+      declarationRewritePlugin()
+    ],
+    onwarn: warning => {
+      if (warning.code !== 'CIRCULAR_DEPENDENCY') {
+        throw new Error(warning.message)
+      }
     }
-  ],
-  plugins: [
-    peerDepsExternal(),
-    resolve({ jsnext: true, preferBuiltins: true, browser: true }),
-    commonjs(),
-    typescript({
-      tsconfig: './tsconfig.build.json',
-      sourceMap: true
-    }),
-    json({
-      compact: true
-    }),
-    declarationRewritePlugin()
-  ],
-  onwarn: warning => {
-    throw new Error(warning.message);
   }
+
+  return opts
 }
 
-export default opts
+export default async function createConfigs() {
+  return [
+    // Browser.
+    createConfig(
+      {
+        input: './src/index.browser.ts',
+        output: {
+          file: path.join(tsconfigBuildJson.compilerOptions.outDir, 'index.browser.es.js'),
+          format: 'es',
+          sourcemap: true,
+          assetFileNames: '[name]-[hash][extname]'
+        }
+      },
+      true
+    ),
+
+    // FIXME: create conditional exports in package.json. At the moment, we are assuming that
+    // Node will always use CJS and browser will always use ESM, which may not be true.
+    // We need to also cover the ESM side of Node.js later.
+    // Node.
+    createConfig({
+      input: './src/index.ts',
+      output: [
+        {
+          file: path.join(tsconfigBuildJson.compilerOptions.outDir, 'index.es.js'),
+          format: 'es',
+          sourcemap: true,
+          assetFileNames: '[name]-[hash][extname]'
+        },
+        {
+          file: path.join(tsconfigBuildJson.compilerOptions.outDir, 'index.js'),
+          format: 'cjs',
+          sourcemap: true,
+          assetFileNames: '[name]-[hash][extname]'
+        }
+      ]
+    })
+  ]
+}
 
 // Local plugins.
 // This is a custom plugin to rewrite the declaration files.
 // Read more about the "hooks" of Rollup, visit https://rollupjs.org/guide/en/#output-generation-hooks.
 const ACTUAL_ANCHOR = path.join(path.resolve(__dirname), 'src').replace(/\\/g, '/')
 const IMPORT_ANCHOR = `@accelbyte/sdk`
-const IMPORT_REGEX = /@accelbyte\/sdk(\/\w+)+/g
+const IMPORT_REGEX = /@accelbyte\/sdk(\/\w+)*/g
 
 function declarationRewritePlugin() {
   return {
@@ -108,35 +150,8 @@ function declarationRewritePlugin() {
         }
       }
       updateVersionFromChangelog()
-      generateBuildPackageJson()
     }
   }
-}
-
-function generateBuildPackageJson() {
-  const {
-    name,
-    version,
-    author,
-    license,
-    main,
-    module,
-    peerDependencies,
-    types,
-  } = JSON.parse(readFileSync(path.resolve('./package.json'), 'utf-8'))
-  if (!existsSync(path.resolve(`./dist`))) {
-      mkdirSync(path.resolve(`./dist`))
-  }
-  writeFileSync(path.resolve(`./dist/package.json`), JSON.stringify({
-    name,
-    version,
-    author,
-    license,
-    main: main.replace("/dist/", "/"),
-    module: module.replace("/dist/", "/"),
-    types: types.replace("/dist/", "/"),
-    peerDependencies,
-  }, null, 2))
 }
 
 function updateVersionFromChangelog() {

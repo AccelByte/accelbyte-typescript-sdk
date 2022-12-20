@@ -105,7 +105,7 @@ export const injectAuthInterceptors = (
   getSDKConfig: () => AxiosRequestConfig,
   onSessionExpired?: () => void,
   onGetUserSession?: (accessToken: string, refreshToken: string) => void,
-  refreshToken?: string | undefined
+  getRefreshToken?: () => string | undefined
 ) => {
   // ===== request
   injectRequestInterceptors(
@@ -140,6 +140,7 @@ export const injectAuthInterceptors = (
         if (response?.status === 401) {
           const { url } = config
           const axiosConfig = getSDKConfig()
+          const refreshToken = getRefreshToken ? getRefreshToken() : undefined
 
           // expected business case, exit
           // @ts-ignore

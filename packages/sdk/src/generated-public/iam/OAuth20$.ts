@@ -3,24 +3,20 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { JwkSet } from './definitions/JwkSet'
 import { RevocationList } from './definitions/RevocationList'
-/* eslint-disable camelcase */
 import { TokenIntrospectResponse } from './definitions/TokenIntrospectResponse'
 import { TokenResponse } from './definitions/TokenResponse'
 import { TokenResponseV3 } from './definitions/TokenResponseV3'
 import { TokenThirdPartyResponse } from './definitions/TokenThirdPartyResponse'
 import { TokenWithDeviceCookieResponseV3 } from './definitions/TokenWithDeviceCookieResponseV3'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class OAuth20$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
@@ -73,6 +69,7 @@ export class OAuth20$ {
     target_auth_page?: string | null
     createHeadless?: boolean | null
     useRedirectUriAsLoginUrlWhenLocked?: boolean | null
+    oneTimeLinkCode?: string | null
   }): Promise<IResponseWithSync<unknown>> {
     const params = {
       response_type: 'code',

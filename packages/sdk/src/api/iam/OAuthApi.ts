@@ -140,6 +140,27 @@ export class OAuthApi {
     return this.newOAuth20Extension().postIamV3AuthenticateWithLink(data)
   }
 
+  /**
+   * This method is being used to validate one time link code.
+   * It require a valid user token.
+   * Should specify the target platform id and current user should already linked to this platform.
+   * Current user should be a headless account.
+   *
+   */
+  validateOneTimeLinkCode(data: { oneTimeLinkCode: string | null }) {
+    return this.newOAuth20Extension().postIamV3LinkCodeValidate(data)
+  }
+
+  /**
+   * This method is being used to generate user's token by one time link code.
+   * It require publisher ClientID
+   * It required a code which can be generated from <strong>/iam/v3/link/code/request</strong>.<br>
+   *
+   */
+  exchangeTokenByOneTimeLinkCode(data: { oneTimeLinkCode: string | null; client_id: string | null }) {
+    return this.newOAuth20Extension().postIamV3LinkTokenExchange(data)
+  }
+
   private newInstance() {
     return new OAuth20$(Network.create(this.conf), this.namespace, this.cache)
   }

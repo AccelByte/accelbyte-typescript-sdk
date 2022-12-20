@@ -3,24 +3,20 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AppInfo } from './definitions/AppInfo'
 import { ItemDynamicDataInfo } from './definitions/ItemDynamicDataInfo'
 import { ItemInfo } from './definitions/ItemInfo'
 import { ItemInfoArray } from './definitions/ItemInfoArray'
 import { ItemPagingSlicedResult } from './definitions/ItemPagingSlicedResult'
-/* eslint-disable camelcase */
 import { ItemPurchaseConditionValidateRequest } from './definitions/ItemPurchaseConditionValidateRequest'
 import { ItemPurchaseConditionValidateResultArray } from './definitions/ItemPurchaseConditionValidateResultArray'
 import { PopulatedItemInfo } from './definitions/PopulatedItemInfo'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class Item$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

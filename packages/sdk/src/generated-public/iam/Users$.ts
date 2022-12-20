@@ -3,19 +3,21 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CountryV3Response } from './definitions/CountryV3Response'
 import { CreateJusticeUserResponse } from './definitions/CreateJusticeUserResponse'
 import { DistinctPlatformResponseV3 } from './definitions/DistinctPlatformResponseV3'
 import { ForgotPasswordRequestV3 } from './definitions/ForgotPasswordRequestV3'
+import { GetLinkHeadlessAccountConflictResponse } from './definitions/GetLinkHeadlessAccountConflictResponse'
 import { GetPublisherUserV3Response } from './definitions/GetPublisherUserV3Response'
 import { GetUserBanV3Response } from './definitions/GetUserBanV3Response'
 import { GetUserMappingV3Array } from './definitions/GetUserMappingV3Array'
+import { LinkHeadlessAccountRequest } from './definitions/LinkHeadlessAccountRequest'
 import { LinkPlatformAccountRequest } from './definitions/LinkPlatformAccountRequest'
 import { LinkPlatformAccountWithProgressionRequest } from './definitions/LinkPlatformAccountWithProgressionRequest'
 import { LinkRequest } from './definitions/LinkRequest'
@@ -27,7 +29,6 @@ import { PublicUserResponseV3 } from './definitions/PublicUserResponseV3'
 import { ResetPasswordRequestV3 } from './definitions/ResetPasswordRequestV3'
 import { SendRegisterVerificationCodeRequest } from './definitions/SendRegisterVerificationCodeRequest'
 import { SendVerificationCodeRequestV3 } from './definitions/SendVerificationCodeRequestV3'
-/* eslint-disable camelcase */
 import { SendVerificationLinkRequest } from './definitions/SendVerificationLinkRequest'
 import { UnlinkUserPlatformRequest } from './definitions/UnlinkUserPlatformRequest'
 import { UpgradeHeadlessAccountV3Request } from './definitions/UpgradeHeadlessAccountV3Request'
@@ -47,9 +48,6 @@ import { UserVerificationRequestV3 } from './definitions/UserVerificationRequest
 import { VerifyRegistrationCode } from './definitions/VerifyRegistrationCode'
 import { WebLinkingResponse } from './definitions/WebLinkingResponse'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class Users$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
@@ -894,6 +892,7 @@ export class Users$ {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/users/me'
     const resultPromise = this.axiosInstance.get(url, { params })
+
     const res = () => Validate.responseType(() => resultPromise, UserResponseV3)
 
     if (!this.cache) {
@@ -901,6 +900,40 @@ export class Users$ {
     }
     const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(key, res)
+  }
+
+  /**
+   * Note:<br>
+   * 1. My account should be full account
+   * 2. My account not linked to request headless account's third platform.
+   */
+  fetchIamV3PublicUsersMeHeadlessLinkConflict<T = GetLinkHeadlessAccountConflictResponse>(queryParams?: {
+    oneTimeLinkCode: string | null
+  }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v3/public/users/me/headless/link/conflict'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, GetLinkHeadlessAccountConflictResponse)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(key, res)
+  }
+
+  /**
+   * Note:<br>
+   * 1. My account should be full account
+   * 2. My account not linked to headless account's third platform.
+   */
+  postIamV3PublicUsersMeHeadlessLinkWithProgression(data: LinkHeadlessAccountRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/users/me/headless/linkWithProgression'
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
   }
 
   /**

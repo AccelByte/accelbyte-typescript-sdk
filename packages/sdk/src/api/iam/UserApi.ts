@@ -6,6 +6,7 @@
 import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
 import { CreateUserRequestV4 } from '@accelbyte/sdk/generated-public/iam/definitions/CreateUserRequestV4'
 import { EmailUpdateRequestV4 } from '@accelbyte/sdk/generated-public/iam/definitions/EmailUpdateRequestV4'
+import { LinkHeadlessAccountRequest } from '@accelbyte/sdk/generated-public/iam/definitions/LinkHeadlessAccountRequest'
 import { LinkPlatformAccountRequest } from '@accelbyte/sdk/generated-public/iam/definitions/LinkPlatformAccountRequest'
 import { SendRegisterVerificationCodeRequest } from '@accelbyte/sdk/generated-public/iam/definitions/SendRegisterVerificationCodeRequest'
 import { SendVerificationCodeRequestV3 } from '@accelbyte/sdk/generated-public/iam/definitions/SendVerificationCodeRequestV3'
@@ -329,6 +330,24 @@ export class UserApi {
    */
   getLinkedAccount(userId: string) {
     return this.newInstance().fetchV3UsersByUseridPlatforms(userId)
+  }
+
+  /**
+   * Note:<br>
+   * 1. My account should be full account
+   * 2. My account not linked to request headless account's third platform.
+   */
+  getLinkAccountByOneTimeCodeConflict(params: { oneTimeLinkCode: string | null }) {
+    return this.newInstance().fetchIamV3PublicUsersMeHeadlessLinkConflict(params)
+  }
+
+  /**
+   * Note:<br>
+   * 1. My account should be full account
+   * 2. My account not linked to headless account's third platform.
+   */
+  linkWithProgression(data: LinkHeadlessAccountRequest) {
+    return this.newInstance().postIamV3PublicUsersMeHeadlessLinkWithProgression(data)
   }
 
   /**

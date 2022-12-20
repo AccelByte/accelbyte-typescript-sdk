@@ -24,4 +24,4 @@ Retrieve the active policies and its conformance status by user.<br>This process
 
 #### Defined in
 
-[packages/sdk/src/api/legal/EligibilitiesApi.ts:19](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/legal/EligibilitiesApi.ts#lines-19)
+[packages/sdk/src/api/legal/EligibilitiesApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/legal/EligibilitiesApi.ts#L19)

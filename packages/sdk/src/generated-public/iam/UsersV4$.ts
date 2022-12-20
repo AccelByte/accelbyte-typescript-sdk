@@ -3,10 +3,10 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AuthenticatorKeyResponseV4 } from './definitions/AuthenticatorKeyResponseV4'
@@ -16,7 +16,6 @@ import { CreateUserRequestV4 } from './definitions/CreateUserRequestV4'
 import { CreateUserResponseV4 } from './definitions/CreateUserResponseV4'
 import { EmailUpdateRequestV4 } from './definitions/EmailUpdateRequestV4'
 import { EnabledFactorsResponseV4 } from './definitions/EnabledFactorsResponseV4'
-/* eslint-disable camelcase */
 import { UpgradeHeadlessAccountRequestV4 } from './definitions/UpgradeHeadlessAccountRequestV4'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from './definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4'
 import { UserCreateFromInvitationRequestV4 } from './definitions/UserCreateFromInvitationRequestV4'
@@ -24,12 +23,9 @@ import { UserResponseV3 } from './definitions/UserResponseV3'
 import { UserResponseV4 } from './definitions/UserResponseV4'
 import { UserUpdateRequestV3 } from './definitions/UserUpdateRequestV3'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class UsersV4$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) { }
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
    * Create a test user and not send verification code email
@@ -353,10 +349,7 @@ export class UsersV4$ {
   postV4UsersMeMfaEmailEnable(data: { code: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/enable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
-      ...params,
-      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
-    })
+    const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown())
   }

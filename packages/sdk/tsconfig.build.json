@@ -42,6 +42,9 @@
     "outDir": "dist",
     "rootDir": "src"
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
     "scripts",
     "test",

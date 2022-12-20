@@ -3,20 +3,16 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
-import { AxiosInstance } from 'axios'
-import { RetrieveBaseGameResponseArray } from './definitions/RetrieveBaseGameResponseArray'
-import { RetrieveDependencyCompatibilityResponse } from './definitions/RetrieveDependencyCompatibilityResponse'
-/* eslint-disable camelcase */
-import { RetrieveDependencyLinkResponse } from './definitions/RetrieveDependencyLinkResponse'
-import { RetrieveLatestDlcResponseArray } from './definitions/RetrieveLatestDlcResponseArray'
-
 /**
  * DON'T EDIT THIS FILE, it is AUTO GENERATED
  */
+import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { AxiosInstance } from 'axios'
+import { RetrieveBaseGameResponseArray } from './definitions/RetrieveBaseGameResponseArray'
+import { RetrieveDependencyCompatibilityResponse } from './definitions/RetrieveDependencyCompatibilityResponse'
+import { RetrieveDependencyLinkResponse } from './definitions/RetrieveDependencyLinkResponse'
+import { RetrieveLatestDlcResponseArray } from './definitions/RetrieveLatestDlcResponseArray'
+
 export class Dlc$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

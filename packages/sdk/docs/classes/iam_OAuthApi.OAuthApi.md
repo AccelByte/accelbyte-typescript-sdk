@@ -9,11 +9,13 @@
 ### Methods
 
 - [authenticateWithLink](iam_OAuthApi.OAuthApi.md#authenticatewithlink)
+- [exchangeTokenByOneTimeLinkCode](iam_OAuthApi.OAuthApi.md#exchangetokenbyonetimelinkcode)
 - [getCurrentLocationCountry](iam_OAuthApi.OAuthApi.md#getcurrentlocationcountry)
 - [getThirdPartyPlatformToken](iam_OAuthApi.OAuthApi.md#getthirdpartyplatformtoken)
 - [logout](iam_OAuthApi.OAuthApi.md#logout)
 - [request2FAEmailCode](iam_OAuthApi.OAuthApi.md#request2faemailcode)
 - [revoke](iam_OAuthApi.OAuthApi.md#revoke)
+- [validateOneTimeLinkCode](iam_OAuthApi.OAuthApi.md#validateonetimelinkcode)
 - [verify2FA](iam_OAuthApi.OAuthApi.md#verify2fa)
 
 ## Methods
@@ -48,7 +50,33 @@ This method will read device cookie from cookie <b>auth-trust-id</b>. If device 
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:133](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/OAuthApi.ts#lines-133)
+[packages/sdk/src/api/iam/OAuthApi.ts:133](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L133)
+
+___
+
+### exchangeTokenByOneTimeLinkCode
+
+▸ **exchangeTokenByOneTimeLinkCode**(`data`): `Promise`<`IResponse`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+
+This method is being used to generate user's token by one time link code.
+It require publisher ClientID
+It required a code which can be generated from <strong>/iam/v3/link/code/request</strong>.<br>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | `Object` |
+| `data.client_id` | ``null`` \| `string` |
+| `data.oneTimeLinkCode` | ``null`` \| `string` |
+
+#### Returns
+
+`Promise`<`IResponse`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+
+#### Defined in
+
+[packages/sdk/src/api/iam/OAuthApi.ts:160](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L160)
 
 ___
 
@@ -64,7 +92,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:97](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/OAuthApi.ts#lines-97)
+[packages/sdk/src/api/iam/OAuthApi.ts:97](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L97)
 
 ___
 
@@ -101,7 +129,7 @@ Passing platform group name or it's member will return same access token that ca
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:118](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/OAuthApi.ts#lines-118)
+[packages/sdk/src/api/iam/OAuthApi.ts:118](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L118)
 
 ___
 
@@ -122,19 +150,19 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:46](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/OAuthApi.ts#lines-46)
+[packages/sdk/src/api/iam/OAuthApi.ts:46](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L46)
 
 ___
 
 ### request2FAEmailCode
 
-▸ **request2FAEmailCode**(`__namedParameters`): `Promise`<`IDataStatus`<`unknown`\>\>
+▸ **request2FAEmailCode**(`«destructured»`): `Promise`<`IDataStatus`<`unknown`\>\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Request2FAEmailCode` |
+| `«destructured»` | `Request2FAEmailCode` |
 
 #### Returns
 
@@ -142,13 +170,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:88](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/OAuthApi.ts#lines-88)
+[packages/sdk/src/api/iam/OAuthApi.ts:88](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L88)
 
 ___
 
 ### revoke
 
-▸ **revoke**(`__namedParameters`): `Promise`<`IResponse`<`unknown`\>\>
+▸ **revoke**(`«destructured»`): `Promise`<`IResponse`<`unknown`\>\>
 
 <p>This method revokes a token.</p>
           <p>This method requires authorized requests header with Basic Authentication from client that establish the token.</p><br>action code: 10706
@@ -157,8 +185,8 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.token` | `string` |
+| `«destructured»` | `Object` |
+| › `token` | `string` |
 
 #### Returns
 
@@ -166,13 +194,39 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:60](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/OAuthApi.ts#lines-60)
+[packages/sdk/src/api/iam/OAuthApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L60)
+
+___
+
+### validateOneTimeLinkCode
+
+▸ **validateOneTimeLinkCode**(`data`): `Promise`<`IResponse`<{ `expired`: `boolean` ; `valid`: `boolean`  }\>\>
+
+This method is being used to validate one time link code.
+It require a valid user token.
+Should specify the target platform id and current user should already linked to this platform.
+Current user should be a headless account.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | `Object` |
+| `data.oneTimeLinkCode` | ``null`` \| `string` |
+
+#### Returns
+
+`Promise`<`IResponse`<{ `expired`: `boolean` ; `valid`: `boolean`  }\>\>
+
+#### Defined in
+
+[packages/sdk/src/api/iam/OAuthApi.ts:150](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L150)
 
 ___
 
 ### verify2FA
 
-▸ **verify2FA**(`__namedParameters`): `Promise`<`IDataStatus`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **verify2FA**(`«destructured»`): `Promise`<`IDataStatus`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
 
 Verify 2FA code<br/>
 <p>This method is used for verifying 2FA code.</p>
@@ -183,7 +237,7 @@ Verify 2FA code<br/>
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Verify2FAParam` |
+| `«destructured»` | `Verify2FAParam` |
 
 #### Returns
 
@@ -191,4 +245,4 @@ Verify 2FA code<br/>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:79](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/OAuthApi.ts#lines-79)
+[packages/sdk/src/api/iam/OAuthApi.ts:79](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L79)

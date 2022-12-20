@@ -268,7 +268,7 @@ export class UserAuthorization {
     }
   }
 
-  createLoginURL = (returnPath?: string | null, targetAuthPage?: string): string => {
+  createLoginURL = (returnPath?: string | null, targetAuthPage?: string, oneTimeLinkCode?: string): string => {
     const { verifier, challenge } = CodeChallenge.generateChallenge()
     const csrf = CodeChallenge.generateCsrf()
     const storedState = {
@@ -287,6 +287,10 @@ export class UserAuthorization {
 
     if (targetAuthPage) {
       searchParams.append('target_auth_page', targetAuthPage)
+    }
+
+    if (oneTimeLinkCode) {
+      searchParams.append('oneTimeLinkCode', oneTimeLinkCode)
     }
 
     const url = new URL(UrlHelper.combineURLPaths(this.options.baseURL, `${AUTHORIZE_URL}?${searchParams.toString()}`))

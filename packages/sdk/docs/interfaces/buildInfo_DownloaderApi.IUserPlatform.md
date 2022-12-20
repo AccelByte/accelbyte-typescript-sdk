@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:15](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/buildInfo/DownloaderApi.ts#lines-15)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:15](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L15)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:14](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/buildInfo/DownloaderApi.ts#lines-14)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:14](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L14)

@@ -3,20 +3,18 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { IResponse, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { EpicGamesDlcSyncRequest } from './definitions/EpicGamesDlcSyncRequest'
-/* eslint-disable camelcase */
 import { PlayStationDlcSyncMultiServiceLabelsRequest } from './definitions/PlayStationDlcSyncMultiServiceLabelsRequest'
 import { PlayStationDlcSyncRequest } from './definitions/PlayStationDlcSyncRequest'
 import { SteamDlcSyncRequest } from './definitions/SteamDlcSyncRequest'
 import { XblDlcSyncRequest } from './definitions/XblDlcSyncRequest'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class Dlc$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

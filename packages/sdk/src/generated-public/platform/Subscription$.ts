@@ -3,23 +3,19 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BillingHistoryPagingSlicedResult } from './definitions/BillingHistoryPagingSlicedResult'
-/* eslint-disable camelcase */
 import { CancelRequest } from './definitions/CancelRequest'
 import { Subscribable } from './definitions/Subscribable'
 import { SubscribeRequest } from './definitions/SubscribeRequest'
 import { SubscriptionInfo } from './definitions/SubscriptionInfo'
 import { SubscriptionPagingSlicedResult } from './definitions/SubscriptionPagingSlicedResult'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class Subscription$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

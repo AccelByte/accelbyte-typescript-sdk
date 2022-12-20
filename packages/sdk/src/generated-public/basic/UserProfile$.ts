@@ -3,10 +3,10 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { UserProfileCreate } from './definitions/UserProfileCreate'
@@ -16,15 +16,11 @@ import { UserProfilePrivateInfo } from './definitions/UserProfilePrivateInfo'
 import { UserProfilePrivateUpdate } from './definitions/UserProfilePrivateUpdate'
 import { UserProfilePublicInfo } from './definitions/UserProfilePublicInfo'
 import { UserProfilePublicInfoArray } from './definitions/UserProfilePublicInfoArray'
-/* eslint-disable camelcase */
 import { UserProfileStatusUpdate } from './definitions/UserProfileStatusUpdate'
 import { UserProfileUpdate } from './definitions/UserProfileUpdate'
 import { UserZipCode } from './definitions/UserZipCode'
 import { UserZipCodeUpdate } from './definitions/UserZipCodeUpdate'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class UserProfile$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
@@ -98,6 +94,7 @@ export class UserProfile$ {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/me/profiles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
+
     const res = () => Validate.responseType(() => resultPromise, UserProfilePrivateInfo)
 
     if (!this.cache) {

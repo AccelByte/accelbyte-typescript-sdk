@@ -3,14 +3,13 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { CodeGenUtil } from '@accelbyte/sdk/utils/CodeGenUtil'
-import { SdkCache } from '@accelbyte/sdk/utils/SdkCache'
-import { IResponse, IResponseWithSync, Validate } from '@accelbyte/sdk/utils/Validate'
+/**
+ * DON'T EDIT THIS FILE, it is AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AppEntitlementInfo } from './definitions/AppEntitlementInfo'
 import { AppEntitlementPagingSlicedResult } from './definitions/AppEntitlementPagingSlicedResult'
-/* eslint-disable camelcase */
 import { EntitlementDecrement } from './definitions/EntitlementDecrement'
 import { EntitlementDecrementResult } from './definitions/EntitlementDecrementResult'
 import { EntitlementInfo } from './definitions/EntitlementInfo'
@@ -20,9 +19,6 @@ import { Ownership } from './definitions/Ownership'
 import { OwnershipToken } from './definitions/OwnershipToken'
 import { TimedOwnership } from './definitions/TimedOwnership'
 
-/**
- * DON'T EDIT THIS FILE, it is AUTO GENERATED
- */
 export class Entitlement$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}

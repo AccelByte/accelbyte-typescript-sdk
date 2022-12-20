@@ -55,7 +55,8 @@ class AccelbyteSDKFactory {
 
   init(): AccelbyteSDK {
     const { baseURL, clientId } = this.options
-    injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.refreshToken)
+
+    injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.getRefreshToken)
     injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
 
     return {
@@ -113,6 +114,8 @@ class AccelbyteSDKFactory {
       }
     }
   }
+
+  private getRefreshToken = (): string | undefined => this.refreshToken
 
   private getConfig = () => this.config
 
