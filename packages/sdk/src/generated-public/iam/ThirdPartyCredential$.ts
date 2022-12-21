@@ -27,14 +27,14 @@ export class ThirdPartyCredential$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * This is the Public API to Get All Active OIDC Platform Credential By Client ID
    */
-  fetchV3PlatformsClientsOidc<T = PublicThirdPartyPlatformInfoArray>(queryParams?: {
+  fetchV3PlatformsClientsOidc<T = PublicThirdPartyPlatformInfoArray>(queryParams: {
     clientId: string | null
   }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -46,7 +46,7 @@ export class ThirdPartyCredential$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 }

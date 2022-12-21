@@ -18,7 +18,13 @@ export class FileUploadApi {
   /**
    * Generate an upload URL. It's valid for 10 minutes.<br/>Other detail info: <ul><li><i>Required permission</i>: resource = <b>"NAMESPACE:{namespace}:FILEUPLOAD"</b>, action=1 <b>(CREATE)</b></li><li><i>Action code</i>: 11101</li><li><i>Returns</i>: URL data</li></ul>
    */
-  generateFolderUploadFileUrl = ({ folder, queryParams }: { folder: string; queryParams?: { fileType: string | null } }) => {
+  generateFolderUploadFileUrl = ({
+    folder,
+    queryParams
+  }: {
+    folder: string
+    queryParams: Parameters<FileUpload$['postV1FoldersByFolderFiles']>[1]
+  }) => {
     return this.newInstance().postV1FoldersByFolderFiles(folder, queryParams)
   }
 

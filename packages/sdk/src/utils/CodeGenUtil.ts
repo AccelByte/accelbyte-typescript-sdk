@@ -20,7 +20,7 @@ export class CodeGenUtil {
     return hash
   }
 
-  static getFormUrlEncodedData = (data: any): URLSearchParams => {
+  static getFormUrlEncodedData = (data: Record<string, any>): URLSearchParams => {
     const formPayload = new URLSearchParams()
     const formKeys = Object.keys(data) as []
     formKeys.forEach(key => {

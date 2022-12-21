@@ -43,7 +43,7 @@ export class PaymentApi {
   processPaymentOrder = (
     paymentOrderNo: string,
     data: PaymentToken,
-    queryParams?: { paymentProvider?: string | null; zipCode?: string | null }
+    queryParams: Parameters<PaymentStation$['postPaymentOrdersByPaymentordernoPay']>[2]
   ) => {
     return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).postPaymentOrdersByPaymentordernoPay(
       paymentOrderNo,
@@ -55,7 +55,11 @@ export class PaymentApi {
   /**
    * Get payment provider public config, at current only Strip provide public config.<br>Other detail info: <ul><li><i>Returns</i>: Public config</li></ul>
    */
-  getPaymentProviderPublicConfig = (paymentProvider: string | null, region: string | null, sandbox?: boolean | null) => {
+  getPaymentProviderPublicConfig = (
+    paymentProvider: Parameters<PaymentStation$['fetchPaymentPublicconfig']>[0]['paymentProvider'],
+    region: string | null,
+    sandbox?: boolean | null
+  ) => {
     return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchPaymentPublicconfig({
       paymentProvider,
       region,
@@ -82,7 +86,11 @@ export class PaymentApi {
   /**
    * Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i>Returns</i>: tax result</li></ul>
    */
-  getPaymentTax = (paymentProvider: string | null, paymentOrderNo: string | null, zipCode?: string | null) => {
+  getPaymentTax = (
+    paymentProvider: Parameters<PaymentStation$['fetchPaymentTax']>[0]['paymentProvider'],
+    paymentOrderNo: string | null,
+    zipCode?: string | null
+  ) => {
     return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchPaymentTax({
       paymentProvider,
       paymentOrderNo,

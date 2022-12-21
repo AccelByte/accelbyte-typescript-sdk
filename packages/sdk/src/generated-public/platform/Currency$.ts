@@ -17,7 +17,7 @@ export class Currency$ {
   /**
    * List currencies of a namespace.<br>Other detail info: <ul><li><i>Returns</i>: Currency List</li></ul>
    */
-  fetchCurrencies<T = CurrencyInfoArray>(queryParams?: { currencyType?: string | null }): Promise<IResponseWithSync<T>> {
+  fetchCurrencies<T = CurrencyInfoArray>(queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/currencies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -27,7 +27,7 @@ export class Currency$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 }

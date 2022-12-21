@@ -40,7 +40,7 @@ Cancel a subscription, only ACTIVE subscription can be cancelled. <b>Ensure succ
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:78](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/SubscriptionApi.ts#L78)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:70](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/SubscriptionApi.ts#L70)
 
 ___
 
@@ -70,7 +70,7 @@ Subscribe a subscription. Support both real and virtual payment. Need go through
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/SubscriptionApi.ts#L49)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/SubscriptionApi.ts#L41)
 
 ___
 
@@ -98,7 +98,7 @@ Get user subscription billing histories.<br>Other detail info: <ul><li><i>Requir
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/SubscriptionApi.ts#L56)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/SubscriptionApi.ts#L48)
 
 ___
 
@@ -122,7 +122,7 @@ Get user subscription.<br>Other detail info: <ul><li><i>Required permission</i>:
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/SubscriptionApi.ts#L42)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/SubscriptionApi.ts#L34)
 
 ___
 
@@ -138,13 +138,13 @@ Query user subscriptions.<br>Other detail info: <ul><li><i>Required permission</
 | :------ | :------ |
 | `«destructured»` | `Object` |
 | › `queryParams?` | `Object` |
-| › `queryParams.chargeStatus?` | ``null`` \| `string` |
+| › `queryParams.chargeStatus?` | ``"CHARGED"`` \| ``"NEVER"`` \| ``"SETUP"`` \| ``"RECURRING_CHARGING"`` \| ``"CHARGE_FAILED"`` |
 | › `queryParams.itemId?` | ``null`` \| `string` |
 | › `queryParams.limit?` | `number` |
 | › `queryParams.offset?` | `number` |
 | › `queryParams.sku?` | ``null`` \| `string` |
-| › `queryParams.status?` | ``null`` \| `string` |
-| › `queryParams.subscribedBy?` | ``null`` \| `string` |
+| › `queryParams.status?` | ``"ACTIVE"`` \| ``"INIT"`` \| ``"CANCELLED"`` \| ``"EXPIRED"`` |
+| › `queryParams.subscribedBy?` | ``"USER"`` \| ``"PLATFORM"`` |
 | › `userId` | `string` |
 
 #### Returns
@@ -153,7 +153,7 @@ Query user subscriptions.<br>Other detail info: <ul><li><i>Required permission</
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/SubscriptionApi.ts#L21)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/SubscriptionApi.ts#L21)
 
 ___
 
@@ -177,4 +177,4 @@ Request to change a subscription billing account, this will guide user to paymen
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:71](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/SubscriptionApi.ts#L71)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:63](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/SubscriptionApi.ts#L63)

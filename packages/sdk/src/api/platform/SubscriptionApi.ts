@@ -23,15 +23,7 @@ export class SubscriptionApi {
     queryParams
   }: {
     userId: string
-    queryParams?: {
-      itemId?: string | null
-      sku?: string | null
-      status?: string | null
-      chargeStatus?: string | null
-      subscribedBy?: string | null
-      offset?: number
-      limit?: number
-    }
+    queryParams?: Parameters<Subscription$['fetchUsersByUseridSubscriptions']>[1]
   }) {
     return this.newInstance().fetchUsersByUseridSubscriptions(userId, queryParams)
   }

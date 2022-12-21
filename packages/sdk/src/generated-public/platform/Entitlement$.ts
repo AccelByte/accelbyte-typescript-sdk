@@ -26,7 +26,7 @@ export class Entitlement$ {
   /**
    * Get my app entitlement ownership by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace app entitlement ownership</b></li></ul></li></ul>
    */
-  fetchUsersMeEntitlementsOwnershipByAppId<T = Ownership>(queryParams?: { appId: string | null }): Promise<IResponseWithSync<T>> {
+  fetchUsersMeEntitlementsOwnershipByAppId<T = Ownership>(queryParams: { appId: string | null }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -36,8 +36,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -57,16 +57,16 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * Get my entitlement ownership by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
    */
-  fetchUsersMeEntitlementsOwnershipBySku<T = TimedOwnership>(queryParams?: {
+  fetchUsersMeEntitlementsOwnershipBySku<T = TimedOwnership>(queryParams: {
     sku: string | null
-    entitlementClazz?: string | null
+    entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
   }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/bySku'.replace('{namespace}', this.namespace)
@@ -77,16 +77,16 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * Get my entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
    */
-  fetchUsersMeEntitlementsOwnershipByItemId<T = TimedOwnership>(queryParams?: {
+  fetchUsersMeEntitlementsOwnershipByItemId<T = TimedOwnership>(queryParams: {
     itemId: string | null
-    entitlementClazz?: string | null
+    entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
   }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byItemId'.replace('{namespace}', this.namespace)
@@ -97,8 +97,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -147,8 +147,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -169,8 +169,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -178,7 +178,10 @@ export class Entitlement$ {
    */
   fetchUsersByUseridEntitlementsOwnershipByItemId<T = TimedOwnership>(
     userId: string,
-    queryParams?: { itemId: string | null; entitlementClazz?: string | null }
+    queryParams: {
+      itemId: string | null
+      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+    }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemId'
@@ -191,8 +194,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -200,7 +203,7 @@ export class Entitlement$ {
    */
   fetchUsersByUseridEntitlementsByAppId<T = AppEntitlementInfo>(
     userId: string,
-    queryParams?: { appId: string | null }
+    queryParams: { appId: string | null }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppId'
@@ -213,8 +216,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -222,7 +225,10 @@ export class Entitlement$ {
    */
   fetchUsersByUseridEntitlementsOwnershipBySku<T = TimedOwnership>(
     userId: string,
-    queryParams?: { sku: string | null; entitlementClazz?: string | null }
+    queryParams: {
+      sku: string | null
+      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+    }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/bySku'
@@ -235,8 +241,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -257,8 +263,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -267,8 +273,8 @@ export class Entitlement$ {
   fetchUsersByUseridEntitlements<T = EntitlementPagingSlicedResult>(
     userId: string,
     queryParams?: {
-      entitlementClazz?: string | null
-      appType?: string | null
+      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+      appType?: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'
       entitlementName?: string | null
       itemId?: string[]
       features?: string[]
@@ -287,8 +293,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -296,7 +302,10 @@ export class Entitlement$ {
    */
   fetchUsersByUseridEntitlementsByItemId<T = EntitlementInfo>(
     userId: string,
-    queryParams?: { itemId: string | null; entitlementClazz?: string | null }
+    queryParams: {
+      itemId: string | null
+      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+    }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byItemId'
@@ -309,8 +318,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -329,8 +338,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -338,7 +347,7 @@ export class Entitlement$ {
    */
   fetchUsersByUseridEntitlementsOwnershipByAppId<T = Ownership>(
     userId: string,
-    queryParams?: { appId: string | null }
+    queryParams: { appId: string | null }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byAppId'
@@ -351,8 +360,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -360,7 +369,10 @@ export class Entitlement$ {
    */
   fetchUsersByUseridEntitlementsBySku<T = EntitlementInfo>(
     userId: string,
-    queryParams?: { sku: string | null; entitlementClazz?: string | null }
+    queryParams: {
+      sku: string | null
+      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+    }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/bySku'
@@ -373,8 +385,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -382,7 +394,7 @@ export class Entitlement$ {
    */
   fetchUsersByUseridEntitlementsByAppType<T = AppEntitlementPagingSlicedResult>(
     userId: string,
-    queryParams?: { appType: string | null; offset?: number; limit?: number }
+    queryParams: { appType: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'; offset?: number; limit?: number }
   ): Promise<IResponseWithSync<T>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppType'
@@ -395,8 +407,8 @@ export class Entitlement$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

@@ -24,7 +24,7 @@ export class SsoSaml20$ {
    */
   postV3SsoSamlPlatformsByPlatformidAuthenticate(
     platformId: string,
-    queryParams?: { state: string | null; code?: string | null; error?: string | null }
+    queryParams: { state: string | null; code?: string | null; error?: string | null }
   ): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/sso/saml/platforms/{platformId}/authenticate'.replace('{platformId}', platformId)

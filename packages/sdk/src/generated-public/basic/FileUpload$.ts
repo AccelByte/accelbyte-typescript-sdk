@@ -17,7 +17,7 @@ export class FileUpload$ {
   /**
    * Generate an upload URL. It's valid for 10 minutes.<br/>Other detail info: <ul><li><i>Required permission</i>: resource = <b>"NAMESPACE:{namespace}:FILEUPLOAD"</b>, action=1 <b>(CREATE)</b></li><li><i>Action code</i>: 11101</li><li><i>Returns</i>: URL data</li></ul>
    */
-  postV1FoldersByFolderFiles<T = FileUploadUrlInfo>(folder: string, queryParams?: { fileType: string | null }): Promise<IResponse<T>> {
+  postV1FoldersByFolderFiles<T = FileUploadUrlInfo>(folder: string, queryParams: { fileType: string | null }): Promise<IResponse<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/folders/{folder}/files'
       .replace('{namespace}', this.namespace)
@@ -32,7 +32,7 @@ export class FileUpload$ {
    */
   postV1UsersByUseridFiles<T = FileUploadUrlInfo>(
     userId: string,
-    queryParams?: { fileType: string | null; category?: string | null }
+    queryParams: { fileType: string | null; category?: string | null }
   ): Promise<IResponse<T>> {
     const params = { category: 'default', ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/{userId}/files'

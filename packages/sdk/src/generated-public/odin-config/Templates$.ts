@@ -27,8 +27,8 @@ export class Templates$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   fetchV1TemplatesByTemplateConfigsByConfig<T = Config>(template: string, config: string): Promise<IResponseWithSync<T>> {
@@ -44,7 +44,7 @@ export class Templates$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 }

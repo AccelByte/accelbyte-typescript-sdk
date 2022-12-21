@@ -67,8 +67,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -113,8 +113,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -132,8 +132,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -157,8 +157,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -192,7 +192,7 @@ export class Users$ {
    * 	- Account Not Available : 204 (no content)
    *
    */
-  fetchV3UsersAvailability(queryParams?: { field: string | null; query: string | null }): Promise<IResponseWithSync<unknown>> {
+  fetchV3UsersAvailability(queryParams: { field: string | null; query: string | null }): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/availability'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -202,8 +202,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -284,8 +284,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -619,8 +619,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -628,7 +628,7 @@ export class Users$ {
    */
   fetchV3UsersMePlatformsByPlatformidWebLinkEstablish(
     platformId: string,
-    queryParams?: { state: string | null }
+    queryParams: { state: string | null }
   ): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/web/link/establish'
@@ -641,8 +641,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -669,8 +669,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -697,8 +697,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -718,8 +718,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -738,8 +738,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -760,8 +760,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -783,8 +783,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -803,8 +803,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -860,8 +860,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -898,8 +898,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -907,7 +907,7 @@ export class Users$ {
    * 1. My account should be full account
    * 2. My account not linked to request headless account's third platform.
    */
-  fetchIamV3PublicUsersMeHeadlessLinkConflict<T = GetLinkHeadlessAccountConflictResponse>(queryParams?: {
+  fetchIamV3PublicUsersMeHeadlessLinkConflict<T = GetLinkHeadlessAccountConflictResponse>(queryParams: {
     oneTimeLinkCode: string | null
   }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -919,8 +919,8 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -960,7 +960,7 @@ export class Users$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 }

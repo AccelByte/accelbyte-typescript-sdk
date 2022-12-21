@@ -23,7 +23,23 @@ export class Order$ {
    */
   fetchUsersByUseridOrders<T = OrderPagingSlicedResult>(
     userId: string,
-    queryParams?: { itemId?: string | null; status?: string | null; offset?: number; limit?: number }
+    queryParams?: {
+      itemId?: string | null
+      status?:
+        | 'INIT'
+        | 'CHARGED'
+        | 'CHARGEBACK'
+        | 'CHARGEBACK_REVERSED'
+        | 'FULFILLED'
+        | 'FULFILL_FAILED'
+        | 'REFUNDING'
+        | 'REFUNDED'
+        | 'REFUND_FAILED'
+        | 'CLOSED'
+        | 'DELETED'
+      offset?: number
+      limit?: number
+    }
   ): Promise<IResponseWithSync<T>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders'
@@ -36,8 +52,8 @@ export class Order$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -69,8 +85,8 @@ export class Order$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -89,8 +105,8 @@ export class Order$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -123,7 +139,7 @@ export class Order$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 }

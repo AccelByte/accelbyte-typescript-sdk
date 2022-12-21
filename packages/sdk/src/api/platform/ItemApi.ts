@@ -45,14 +45,14 @@ export class ItemApi {
   /**
    * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
    */
-  getItemsByItemIds({ queryParams }: { queryParams?: QueryParamsItemIds }) {
+  getItemsByItemIds({ queryParams }: { queryParams: QueryParamsItemIds }) {
     return this.newInstance().fetchItemsLocaleByIds(queryParams)
   }
 
   /**
    * Fetch the items and convert it into a map of `itemId` and its item info
    */
-  async fetchAvailableItemInfoMap({ queryParams }: { queryParams?: QueryParamsItemIds }) {
+  async fetchAvailableItemInfoMap({ queryParams }: { queryParams: QueryParamsItemIds }) {
     const result = await this.getItemsByItemIds({ queryParams })
     if (result.response) {
       return {

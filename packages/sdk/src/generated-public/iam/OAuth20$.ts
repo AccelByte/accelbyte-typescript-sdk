@@ -58,21 +58,20 @@ export class OAuth20$ {
    *
    *
    */
-  fetchIamV3OauthAuthorize(queryParams?: {
-    response_type: string | null
+  fetchIamV3OauthAuthorize(queryParams: {
+    response_type: 'code'
     client_id: string | null
     redirect_uri?: string | null
     state?: string | null
     scope?: string | null
     code_challenge?: string | null
-    code_challenge_method?: string | null
+    code_challenge_method?: 'S256' | 'plain'
     target_auth_page?: string | null
     createHeadless?: boolean | null
     useRedirectUriAsLoginUrlWhenLocked?: boolean | null
     oneTimeLinkCode?: string | null
   }): Promise<IResponseWithSync<unknown>> {
     const params = {
-      response_type: 'code',
       scope: 'commerce account social publishing analytics',
       code_challenge_method: 'plain',
       createHeadless: true,
@@ -86,8 +85,8 @@ export class OAuth20$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -126,8 +125,8 @@ export class OAuth20$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -224,8 +223,8 @@ export class OAuth20$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -257,7 +256,7 @@ export class OAuth20$ {
    */
   fetchV3OauthPlatformsByPlatformidAuthorize(
     platformId: string,
-    queryParams?: { request_id: string | null; client_id?: string | null; redirect_uri?: string | null }
+    queryParams: { request_id: string | null; client_id?: string | null; redirect_uri?: string | null }
   ): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/oauth/platforms/{platformId}/authorize'.replace('{platformId}', platformId)
@@ -268,8 +267,8 @@ export class OAuth20$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -396,8 +395,8 @@ export class OAuth20$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -493,7 +492,7 @@ export class OAuth20$ {
    * 			<p>action code: 10703
    */
   postIamV3OauthToken<T = TokenWithDeviceCookieResponseV3>(data: {
-    grant_type: string | null
+    grant_type: 'authorization_code' | 'client_credentials' | 'password' | 'refresh_token'
     username?: string | null
     password?: string | null
     code?: string | null

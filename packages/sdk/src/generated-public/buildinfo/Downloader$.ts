@@ -36,7 +36,7 @@ export class Downloader$ {
   /**
    * This API is used to check whether supplied list of appId has valid buildmanifest and at  least one of its build set as latest.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: list of build availability</li></ul>
    */
-  fetchBulkCheckLatest<T = BuildAvailabilityArray>(queryParams?: { appIds: string[] }): Promise<IResponseWithSync<T>> {
+  fetchBulkCheckLatest<T = BuildAvailabilityArray>(queryParams: { appIds: string[] }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/bulkCheckLatest'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -46,8 +46,8 @@ export class Downloader$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -71,8 +71,8 @@ export class Downloader$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -90,8 +90,8 @@ export class Downloader$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -113,14 +113,14 @@ export class Downloader$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * This API is used to get version history.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: version chain from specified build</li></ul>
    */
-  fetchVersionHistory<T = VersionChain>(queryParams?: {
+  fetchVersionHistory<T = VersionChain>(queryParams: {
     appId: string | null
     comparedBuildId: string | null
   }): Promise<IResponseWithSync<T>> {
@@ -133,8 +133,8 @@ export class Downloader$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -153,8 +153,8 @@ export class Downloader$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -172,7 +172,7 @@ export class Downloader$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 }

@@ -43,7 +43,7 @@ Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link<
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:96](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L96)
+[packages/sdk/src/api/platform/PaymentApi.ts:104](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L104)
 
 ___
 
@@ -68,7 +68,7 @@ Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L29)
+[packages/sdk/src/api/platform/PaymentApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L29)
 
 ___
 
@@ -90,7 +90,7 @@ Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: 
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L22)
+[packages/sdk/src/api/platform/PaymentApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L22)
 
 ___
 
@@ -112,7 +112,7 @@ Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment or
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L36)
+[packages/sdk/src/api/platform/PaymentApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L36)
 
 ___
 
@@ -134,7 +134,7 @@ Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment metho
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:78](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L78)
+[packages/sdk/src/api/platform/PaymentApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L82)
 
 ___
 
@@ -156,7 +156,7 @@ Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: P
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:69](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L69)
+[packages/sdk/src/api/platform/PaymentApi.ts:73](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L73)
 
 ___
 
@@ -170,7 +170,7 @@ Get payment provider public config, at current only Strip provide public config.
 
 | Name | Type |
 | :------ | :------ |
-| `paymentProvider` | ``null`` \| `string` |
+| `paymentProvider` | ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` |
 | `region` | ``null`` \| `string` |
 | `sandbox?` | ``null`` \| `boolean` |
 
@@ -180,7 +180,7 @@ Get payment provider public config, at current only Strip provide public config.
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:58](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L58)
+[packages/sdk/src/api/platform/PaymentApi.ts:58](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L58)
 
 ___
 
@@ -194,7 +194,7 @@ Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i
 
 | Name | Type |
 | :------ | :------ |
-| `paymentProvider` | ``null`` \| `string` |
+| `paymentProvider` | ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` |
 | `paymentOrderNo` | ``null`` \| `string` |
 | `zipCode?` | ``null`` \| `string` |
 
@@ -204,13 +204,13 @@ Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L85)
+[packages/sdk/src/api/platform/PaymentApi.ts:89](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L89)
 
 ___
 
 ### processPaymentOrder
 
-▸ **processPaymentOrder**(`paymentOrderNo`, `data`, `queryParams?`): `Promise`<`IResponse`<{ `pending`: `boolean` ; `reason`: `undefined` \| ``null`` \| `string` ; `redirectUrl`: `undefined` \| ``null`` \| `string` ; `success`: `boolean`  }\>\>
+▸ **processPaymentOrder**(`paymentOrderNo`, `data`, `queryParams`): `Promise`<`IResponse`<{ `pending`: `boolean` ; `reason`: `undefined` \| ``null`` \| `string` ; `redirectUrl`: `undefined` \| ``null`` \| `string` ; `success`: `boolean`  }\>\>
 
 Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><li><i>Returns</i>: Payment process result</li></ul>
 
@@ -221,9 +221,7 @@ Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><
 | `paymentOrderNo` | `string` |
 | `data` | `Object` |
 | `data.token` | `undefined` \| ``null`` \| `string` |
-| `queryParams?` | `Object` |
-| `queryParams.paymentProvider?` | ``null`` \| `string` |
-| `queryParams.zipCode?` | ``null`` \| `string` |
+| `queryParams` | `undefined` \| { `paymentProvider?`: ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` ; `zipCode?`: ``null`` \| `string`  } |
 
 #### Returns
 
@@ -231,4 +229,4 @@ Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:43](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/PaymentApi.ts#L43)
+[packages/sdk/src/api/platform/PaymentApi.ts:43](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/PaymentApi.ts#L43)

@@ -159,7 +159,7 @@ export class UserAuthorization {
     }
     const axios = Network.create(config)
 
-    const data = {
+    const data: Parameters<OAuth20$['postIamV3OauthToken']>[0] = {
       grant_type: 'authorization_code',
       code: code,
       code_verifier: codeVerifier,

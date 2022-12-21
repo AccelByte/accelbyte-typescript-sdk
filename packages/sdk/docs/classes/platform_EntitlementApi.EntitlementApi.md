@@ -40,7 +40,7 @@ Consume user entitlement. If the entitlement useCount is 0, the status will be C
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:69](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/EntitlementApi.ts#L69)
+[packages/sdk/src/api/platform/EntitlementApi.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/EntitlementApi.ts#L56)
 
 ___
 
@@ -64,7 +64,7 @@ Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required perm
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/EntitlementApi.ts#L20)
+[packages/sdk/src/api/platform/EntitlementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/EntitlementApi.ts#L20)
 
 ___
 
@@ -89,7 +89,7 @@ Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Requi
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:62](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/EntitlementApi.ts#L62)
+[packages/sdk/src/api/platform/EntitlementApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/EntitlementApi.ts#L49)
 
 ___
 
@@ -104,7 +104,7 @@ Exists any user active entitlement of specified itemIds, skus and appIds<p>Other
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `queryParams?` | `Object` |
+| › `queryParams` | `Object` |
 | › `queryParams.appIds?` | `string`[] |
 | › `queryParams.itemIds?` | `string`[] |
 | › `queryParams.skus?` | `string`[] |
@@ -116,7 +116,7 @@ Exists any user active entitlement of specified itemIds, skus and appIds<p>Other
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/EntitlementApi.ts#L49)
+[packages/sdk/src/api/platform/EntitlementApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/EntitlementApi.ts#L36)
 
 ___
 
@@ -131,13 +131,7 @@ Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Req
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `queryParams?` | `Object` |
-| › `queryParams.appType?` | ``null`` \| `string` |
-| › `queryParams.entitlementClazz?` | ``null`` \| `string` |
-| › `queryParams.entitlementName?` | ``null`` \| `string` |
-| › `queryParams.itemId?` | `string`[] |
-| › `queryParams.limit?` | `number` |
-| › `queryParams.offset?` | `number` |
+| › `queryParams` | `undefined` \| { `appType?`: ``"GAME"`` \| ``"SOFTWARE"`` \| ``"DLC"`` \| ``"DEMO"`` ; `entitlementClazz?`: ``"APP"`` \| ``"CODE"`` \| ``"SUBSCRIPTION"`` \| ``"MEDIA"`` \| ``"OPTIONBOX"`` \| ``"LOOTBOX"`` \| ``"ENTITLEMENT"`` ; `entitlementName?`: ``null`` \| `string` ; `features?`: `string`[] ; `itemId?`: `string`[] ; `limit?`: `number` ; `offset?`: `number`  } |
 | › `userId` | `string` |
 
 #### Returns
@@ -146,4 +140,4 @@ Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Req
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/platform/EntitlementApi.ts#L29)
+[packages/sdk/src/api/platform/EntitlementApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/platform/EntitlementApi.ts#L29)

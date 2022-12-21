@@ -39,8 +39,8 @@ export class Subscription$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -63,8 +63,8 @@ export class Subscription$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -72,7 +72,7 @@ export class Subscription$ {
    */
   fetchUsersByUseridSubscriptionsSubscribableByItemId<T = Subscribable>(
     userId: string,
-    queryParams?: { itemId: string | null }
+    queryParams: { itemId: string | null }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/subscriptions/subscribable/byItemId'
@@ -85,8 +85,8 @@ export class Subscription$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -97,9 +97,9 @@ export class Subscription$ {
     queryParams?: {
       itemId?: string | null
       sku?: string | null
-      status?: string | null
-      chargeStatus?: string | null
-      subscribedBy?: string | null
+      status?: 'INIT' | 'ACTIVE' | 'CANCELLED' | 'EXPIRED'
+      chargeStatus?: 'NEVER' | 'SETUP' | 'RECURRING_CHARGING' | 'CHARGED' | 'CHARGE_FAILED'
+      subscribedBy?: 'USER' | 'PLATFORM'
       offset?: number
       limit?: number
     }
@@ -115,8 +115,8 @@ export class Subscription$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

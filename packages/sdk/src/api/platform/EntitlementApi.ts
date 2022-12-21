@@ -26,20 +26,7 @@ export class EntitlementApi {
   /**
    * Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement list</li></ul>
    */
-  getEntitlements({
-    userId,
-    queryParams
-  }: {
-    userId: string
-    queryParams?: {
-      entitlementClazz?: string | null
-      appType?: string | null
-      entitlementName?: string | null
-      itemId?: string[]
-      offset?: number
-      limit?: number
-    }
-  }) {
+  getEntitlements({ userId, queryParams }: { userId: string; queryParams: Parameters<Entitlement$['fetchUsersByUseridEntitlements']>[1] }) {
     return this.newInstance().fetchUsersByUseridEntitlements(userId, queryParams)
   }
 
@@ -51,7 +38,7 @@ export class EntitlementApi {
     queryParams
   }: {
     userId: string
-    queryParams?: { itemIds?: string[]; appIds?: string[]; skus?: string[] }
+    queryParams: { itemIds?: string[]; appIds?: string[]; skus?: string[] }
   }) {
     return this.newInstance().fetchUsersByUseridEntitlementsOwnershipAny(userId, queryParams)
   }

@@ -163,8 +163,8 @@ export class OAuth20Extension$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -232,7 +232,7 @@ export class OAuth20Extension$ {
    */
   fetchV3PlatformsByPlatformidAuthenticate(
     platformId: string,
-    queryParams?: {
+    queryParams: {
       state: string | null
       ns?: string | null
       mode?: string | null
@@ -257,8 +257,8 @@ export class OAuth20Extension$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

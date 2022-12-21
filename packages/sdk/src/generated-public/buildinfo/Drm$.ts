@@ -18,7 +18,7 @@ export class Drm$ {
   /**
    * This API is used to get encrypted userId and machineId for entitled user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:BUILDINFO", action=2 (READ)</li><li><i>Returns</i>: data field containing encrypted userId and machineId separated by comma</li></ul>
    */
-  fetchDrmlicenseEncrypt<T = EncryptedIdentity>(queryParams?: {
+  fetchDrmlicenseEncrypt<T = EncryptedIdentity>(queryParams: {
     appId: string | null
     machineId: string | null
   }): Promise<IResponseWithSync<T>> {
@@ -31,8 +31,8 @@ export class Drm$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -48,7 +48,7 @@ export class Drm$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 }

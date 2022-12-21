@@ -21,12 +21,7 @@ export class PoliciesApi {
     queryParams
   }: {
     countryCode: string
-    queryParams?: {
-      policyType?: string | null
-      tags?: string | null
-      defaultOnEmpty?: boolean | null
-      alwaysIncludeDefault?: boolean | null
-    }
+    queryParams: Parameters<Policies$['fetchPublicPoliciesNamespacesByNamespaceCountriesByCountrycode']>[1]
   }) {
     return this.newInstance().fetchPublicPoliciesNamespacesByNamespaceCountriesByCountrycode(countryCode, queryParams)
   }
@@ -39,11 +34,7 @@ export class PoliciesApi {
     queryParams
   }: {
     countryCode: string
-    queryParams?: {
-      policyType?: string | null
-      tags?: string | null
-      defaultOnEmpty?: boolean | null
-    }
+    queryParams?: Parameters<Policies$['fetchPublicPoliciesCountriesByCountrycode']>[1]
   }) {
     return this.newInstance().fetchPublicPoliciesCountriesByCountrycode(countryCode, queryParams)
   }

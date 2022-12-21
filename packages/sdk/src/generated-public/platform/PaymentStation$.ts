@@ -37,15 +37,15 @@ export class PaymentStation$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i>Returns</i>: tax result</li></ul>
    */
-  fetchPaymentTax<T = TaxResult>(queryParams?: {
-    paymentProvider: string | null
+  fetchPaymentTax<T = TaxResult>(queryParams: {
+    paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
     paymentOrderNo: string | null
     zipCode?: string | null
   }): Promise<IResponseWithSync<T>> {
@@ -58,8 +58,8 @@ export class PaymentStation$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -68,7 +68,10 @@ export class PaymentStation$ {
   postPaymentOrdersByPaymentordernoPay<T = PaymentProcessResult>(
     paymentOrderNo: string,
     data: PaymentToken,
-    queryParams?: { paymentProvider?: string | null; zipCode?: string | null }
+    queryParams?: {
+      paymentProvider?: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
+      zipCode?: string | null
+    }
   ): Promise<IResponse<T>> {
     const params = { paymentProvider: 'CHECKOUT', ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/pay'
@@ -82,8 +85,8 @@ export class PaymentStation$ {
   /**
    * Get payment provider public config, at current only Strip provide public config.<br>Other detail info: <ul><li><i>Returns</i>: Public config</li></ul>
    */
-  fetchPaymentPublicconfig(queryParams?: {
-    paymentProvider: string | null
+  fetchPaymentPublicconfig(queryParams: {
+    paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
     region: string | null
     sandbox?: boolean | null
   }): Promise<IResponseWithSync<unknown>> {
@@ -96,8 +99,8 @@ export class PaymentStation$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -105,11 +108,11 @@ export class PaymentStation$ {
    *
    * When the shopper has completed the payment you will receive a successful AUTHORISATION.</li><li>RECEIVED: Inform the shopper that you've received their order, and are waiting for the payment to clear.</li><li>UNKNOWN: An error occurred during the payment processing.</li><li>FAILED: Shopper paid failed because of various reasons.</li></ul></td></tr><tr><td>reason</td><td>String</td><td>No</td><td>payment status reason</td></tr></table>Other detail info: <ul><li><i>xsolla</i>: parameters 'user_id', 'foreinginvoice', 'invoice_id' and 'status' will be automatically added to the link</li><li><i>adyen</i>: https://docs.adyen.com/developers/checkout/web-sdk</li></ul>
    */
-  fetchPaymentReturnurl(queryParams?: {
+  fetchPaymentReturnurl(queryParams: {
     returnUrl: string | null
     orderNo: string | null
     paymentOrderNo: string | null
-    paymentProvider: string | null
+    paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
     user_id?: string | null
     foreinginvoice?: string | null
     invoice_id?: string | null
@@ -131,14 +134,14 @@ export class PaymentStation$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment method list</li></ul>
    */
-  fetchPaymentMethods<T = PaymentMethodArray>(queryParams?: { paymentOrderNo: string | null }): Promise<IResponseWithSync<T>> {
+  fetchPaymentMethods<T = PaymentMethodArray>(queryParams: { paymentOrderNo: string | null }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/methods'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -148,8 +151,8 @@ export class PaymentStation$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -167,14 +170,14 @@ export class PaymentStation$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * Get qrcode.<br>Other detail info: <ul><li><i>Returns</i>: QRCode image stream</li></ul>
    */
-  fetchPaymentQrcode(queryParams?: { code: string | null }): Promise<IResponseWithSync<unknown>> {
+  fetchPaymentQrcode(queryParams: { code: string | null }): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/qrcode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -184,8 +187,8 @@ export class PaymentStation$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

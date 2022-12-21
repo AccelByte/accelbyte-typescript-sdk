@@ -27,7 +27,7 @@ Retrieve all active latest policies based on country from all namespaces.<br>Oth
 | › `countryCode` | `string` |
 | › `queryParams?` | `Object` |
 | › `queryParams.defaultOnEmpty?` | ``null`` \| `boolean` |
-| › `queryParams.policyType?` | ``null`` \| `string` |
+| › `queryParams.policyType?` | ``"LEGAL_DOCUMENT_TYPE"`` \| ``"MARKETING_PREFERENCE_TYPE"`` |
 | › `queryParams.tags?` | ``null`` \| `string` |
 
 #### Returns
@@ -36,7 +36,7 @@ Retrieve all active latest policies based on country from all namespaces.<br>Oth
 
 #### Defined in
 
-[packages/sdk/src/api/legal/PoliciesApi.ts:37](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/legal/PoliciesApi.ts#L37)
+[packages/sdk/src/api/legal/PoliciesApi.ts:32](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/legal/PoliciesApi.ts#L32)
 
 ___
 
@@ -52,11 +52,7 @@ Retrieve all active latest policies based on a namespace and country.<br>Other d
 | :------ | :------ |
 | `«destructured»` | `Object` |
 | › `countryCode` | `string` |
-| › `queryParams?` | `Object` |
-| › `queryParams.alwaysIncludeDefault?` | ``null`` \| `boolean` |
-| › `queryParams.defaultOnEmpty?` | ``null`` \| `boolean` |
-| › `queryParams.policyType?` | ``null`` \| `string` |
-| › `queryParams.tags?` | ``null`` \| `string` |
+| › `queryParams` | `undefined` \| { `alwaysIncludeDefault?`: ``null`` \| `boolean` ; `defaultOnEmpty?`: ``null`` \| `boolean` ; `policyType?`: ``"LEGAL_DOCUMENT_TYPE"`` \| ``"MARKETING_PREFERENCE_TYPE"`` ; `tags?`: ``null`` \| `string`  } |
 
 #### Returns
 
@@ -64,4 +60,4 @@ Retrieve all active latest policies based on a namespace and country.<br>Other d
 
 #### Defined in
 
-[packages/sdk/src/api/legal/PoliciesApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/legal/PoliciesApi.ts#L19)
+[packages/sdk/src/api/legal/PoliciesApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/legal/PoliciesApi.ts#L19)

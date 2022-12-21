@@ -50,7 +50,7 @@ This method will read device cookie from cookie <b>auth-trust-id</b>. If device 
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:133](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L133)
+[packages/sdk/src/api/iam/OAuthApi.ts:133](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L133)
 
 ___
 
@@ -76,7 +76,7 @@ It required a code which can be generated from <strong>/iam/v3/link/code/request
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:160](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L160)
+[packages/sdk/src/api/iam/OAuthApi.ts:160](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L160)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:97](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L97)
+[packages/sdk/src/api/iam/OAuthApi.ts:97](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L97)
 
 ___
 
@@ -129,7 +129,7 @@ Passing platform group name or it's member will return same access token that ca
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:118](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L118)
+[packages/sdk/src/api/iam/OAuthApi.ts:118](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L118)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:46](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L46)
+[packages/sdk/src/api/iam/OAuthApi.ts:46](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L46)
 
 ___
 
@@ -170,7 +170,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:88](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L88)
+[packages/sdk/src/api/iam/OAuthApi.ts:88](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L88)
 
 ___
 
@@ -194,7 +194,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L60)
+[packages/sdk/src/api/iam/OAuthApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L60)
 
 ___
 
@@ -220,7 +220,7 @@ Current user should be a headless account.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:150](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L150)
+[packages/sdk/src/api/iam/OAuthApi.ts:150](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L150)
 
 ___
 
@@ -245,4 +245,4 @@ Verify 2FA code<br/>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:79](https://github.com/AccelByte/accelbyte-web-sdk/blob/4759e62/packages/sdk/src/api/iam/OAuthApi.ts#L79)
+[packages/sdk/src/api/iam/OAuthApi.ts:79](https://github.com/AccelByte/accelbyte-web-sdk/blob/7b90afb/packages/sdk/src/api/iam/OAuthApi.ts#L79)

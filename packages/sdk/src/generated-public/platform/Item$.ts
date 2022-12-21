@@ -39,14 +39,14 @@ export class Item$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * This API is used to get the item by sku.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with sku</li></ul>
    */
-  fetchItemsBySku<T = ItemInfo>(queryParams?: {
+  fetchItemsBySku<T = ItemInfo>(queryParams: {
     storeId?: string | null
     sku: string | null
     language?: string | null
@@ -61,18 +61,29 @@ export class Item$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * This API is used to search items by keyword in title, description and long description, It's language constrained, also if item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
    */
-  fetchItemsSearch<T = ItemPagingSlicedResult>(queryParams?: {
+  fetchItemsSearch<T = ItemPagingSlicedResult>(queryParams: {
     storeId?: string | null
     language: string | null
     keyword: string | null
-    itemType?: string | null
+    itemType?:
+      | 'APP'
+      | 'COINS'
+      | 'INGAMEITEM'
+      | 'BUNDLE'
+      | 'CODE'
+      | 'SUBSCRIPTION'
+      | 'SEASON'
+      | 'MEDIA'
+      | 'OPTIONBOX'
+      | 'EXTENSION'
+      | 'LOOTBOX'
     region?: string | null
     offset?: number
     limit?: number
@@ -86,14 +97,14 @@ export class Item$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * This API is used to get item by appId.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with that appId</li></ul>
    */
-  fetchItemsByAppId<T = ItemInfo>(queryParams?: {
+  fetchItemsByAppId<T = ItemInfo>(queryParams: {
     storeId?: string | null
     appId: string | null
     language?: string | null
@@ -108,8 +119,8 @@ export class Item$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -130,8 +141,8 @@ export class Item$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -143,8 +154,19 @@ export class Item$ {
     region?: string | null
     categoryPath?: string | null
     includeSubCategoryItem?: boolean | null
-    itemType?: string | null
-    appType?: string | null
+    itemType?:
+      | 'APP'
+      | 'COINS'
+      | 'INGAMEITEM'
+      | 'BUNDLE'
+      | 'CODE'
+      | 'SUBSCRIPTION'
+      | 'SEASON'
+      | 'MEDIA'
+      | 'OPTIONBOX'
+      | 'EXTENSION'
+      | 'LOOTBOX'
+    appType?: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'
     baseAppId?: string | null
     tags?: string | null
     features?: string | null
@@ -161,8 +183,8 @@ export class Item$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -180,8 +202,8 @@ export class Item$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -200,7 +222,7 @@ export class Item$ {
   /**
    * This API is used to bulk get locale items. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Returns</i>: the list of items info</li></ul>
    */
-  fetchItemsLocaleByIds<T = ItemInfoArray>(queryParams?: {
+  fetchItemsLocaleByIds<T = ItemInfoArray>(queryParams: {
     storeId?: string | null
     itemIds: string | null
     region?: string | null
@@ -215,7 +237,7 @@ export class Item$ {
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
-    const key = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(key, res)
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 }
