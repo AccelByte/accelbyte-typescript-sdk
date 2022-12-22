@@ -66,6 +66,16 @@ sdk.IAM.UserAuthorization().loginWithAuthorizationCode({code, codeVerifier})
 sdk.IAM.UserApi().getCurrentUser()
 ```
 
+# AccelByte Web SDK Widgets
+In addition to the Accelbyte Web SDK, the library provides an extension called "SDK Widgets" allow the creation of SDK UI components. AccelByte Web SDK Widgets is a UI library consisting of a set of JavaScript React components that can be embedded inside a browser. These components have the same appearance and business functionality as the AccelByte Player Portal.
+
+## NPM installation
+
+To npm install the SDK Widgets execute
+
+```shell
+    npm install @accelbyte/widgets
+```
 
 ## Testing
 

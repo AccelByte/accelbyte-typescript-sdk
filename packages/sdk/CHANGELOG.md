@@ -1,3 +1,7 @@
+### 0.1.1-alpha.46 - 2022-12-22
+
+- Make dependencies exist in SDK when publishing
+
 ### 0.1.1-alpha.45 - 2022-12-19
 
 - Update conditional exports to support both Node and Browser environments
