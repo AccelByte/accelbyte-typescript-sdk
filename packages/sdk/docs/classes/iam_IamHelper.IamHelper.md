@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/iam/IamHelper.ts#L48)
+[packages/sdk/src/api/iam/IamHelper.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/iam/IamHelper.ts#L48)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:43](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/iam/IamHelper.ts#L43)
+[packages/sdk/src/api/iam/IamHelper.ts:43](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/iam/IamHelper.ts#L43)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/iam/IamHelper.ts#L23)
+[packages/sdk/src/api/iam/IamHelper.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/iam/IamHelper.ts#L23)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:33](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/iam/IamHelper.ts#L33)
+[packages/sdk/src/api/iam/IamHelper.ts:33](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/iam/IamHelper.ts#L33)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/iam/IamHelper.ts#L28)
+[packages/sdk/src/api/iam/IamHelper.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/iam/IamHelper.ts#L28)
 
 ___
 
@@ -149,4 +149,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:11](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/iam/IamHelper.ts#L11)
+[packages/sdk/src/api/iam/IamHelper.ts:11](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/iam/IamHelper.ts#L11)

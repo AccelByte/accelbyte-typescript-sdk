@@ -30,4 +30,4 @@ Retrieve specific localized policy version including the policy version and base
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LocalizedPolicyVersionsApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/legal/LocalizedPolicyVersionsApi.ts#L19)
+[packages/sdk/src/api/legal/LocalizedPolicyVersionsApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/legal/LocalizedPolicyVersionsApi.ts#L19)

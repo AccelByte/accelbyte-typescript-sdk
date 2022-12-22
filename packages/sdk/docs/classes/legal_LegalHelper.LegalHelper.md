@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:30](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/legal/LegalHelper.ts#L30)
+[packages/sdk/src/api/legal/LegalHelper.ts:30](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/legal/LegalHelper.ts#L30)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/legal/LegalHelper.ts#L56)
+[packages/sdk/src/api/legal/LegalHelper.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/legal/LegalHelper.ts#L56)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/legal/LegalHelper.ts#L85)
+[packages/sdk/src/api/legal/LegalHelper.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/legal/LegalHelper.ts#L85)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:64](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/legal/LegalHelper.ts#L64)
+[packages/sdk/src/api/legal/LegalHelper.ts:64](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/legal/LegalHelper.ts#L64)
 
 ___
 
@@ -124,4 +124,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:16](https://github.com/AccelByte/accelbyte-web-sdk/blob/ed77741/packages/sdk/src/api/legal/LegalHelper.ts#L16)
+[packages/sdk/src/api/legal/LegalHelper.ts:16](https://github.com/AccelByte/accelbyte-web-sdk/blob/e713f5b/packages/sdk/src/api/legal/LegalHelper.ts#L16)

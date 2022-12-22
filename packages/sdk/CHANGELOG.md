@@ -1,3 +1,7 @@
+### 0.1.1-alpha.47 - 2022-12-22
+
+- Fix wrong fields in package.json being deleted
+
 ### 0.1.1-alpha.46 - 2022-12-22
 
 - Make dependencies exist in SDK when publishing
