@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk",
-  "version": "0.1.1-alpha.47",
+  "version": "0.1.1-alpha.48",
   "author": "AccelByte Inc",
   "license": "AccelByte License",
   "main": "./dist/index.js",

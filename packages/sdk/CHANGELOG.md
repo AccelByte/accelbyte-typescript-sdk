@@ -1,3 +1,7 @@
+### 0.1.1-alpha.48 - 2022-12-27
+
+- Fix user is unable to activate 2fa with email due to missing `content-type: application/x-www-form-urlencoded`
+
 ### 0.1.1-alpha.47 - 2022-12-22
 
 - Fix wrong fields in package.json being deleted

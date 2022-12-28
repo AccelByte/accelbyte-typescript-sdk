@@ -349,7 +349,10 @@ export class UsersV4$ {
   postV4UsersMeMfaEmailEnable(data: { code: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/enable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
 
     return Validate.responseType(() => resultPromise, z.unknown())
   }
