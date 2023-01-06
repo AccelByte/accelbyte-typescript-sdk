@@ -31,7 +31,7 @@ Retrieve the list of DLC available on specific game. Use DLC's appId to query.<p
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DlcApi.ts:26](https://github.com/AccelByte/accelbyte-web-sdk/blob/a3afe6b/packages/sdk/src/api/buildInfo/DlcApi.ts#L26)
+[packages/sdk/src/api/buildInfo/DlcApi.ts:26](https://github.com/AccelByte/accelbyte-web-sdk/blob/9d4cc94/packages/sdk/src/api/buildInfo/DlcApi.ts#L26)
 
 ___
 
@@ -53,4 +53,4 @@ Retrieve the list of DLC available on specific game. Use game's appId to query.<
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DlcApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/a3afe6b/packages/sdk/src/api/buildInfo/DlcApi.ts#L19)
+[packages/sdk/src/api/buildInfo/DlcApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/9d4cc94/packages/sdk/src/api/buildInfo/DlcApi.ts#L19)

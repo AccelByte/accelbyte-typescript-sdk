@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/a3afe6b/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L36)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/9d4cc94/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L36)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/a3afe6b/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L20)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/9d4cc94/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L20)
 
 ___
 
@@ -82,4 +82,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/a3afe6b/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L28)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/9d4cc94/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L28)

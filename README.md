@@ -1,7 +1,8 @@
 # AccelByte Web SDK
 
-### Note:
-### The Web SDK and associated SDK Widgets are currently undergoing Alpha testing. If you would like to participate in the Alpha test, we encourage you to reach out to your assigned DPM resource before making use of these solutions.
+## Note
+
+The Web SDK and associated SDK Widgets are currently undergoing Alpha testing. If you would like to participate in the Alpha test, we encourage you to reach out to your assigned DPM resource before making use of these solutions.
 
 AccelByte Web SDK is a JavaScript library enabling building web application using AccelByte API services. The library is
 platform-agnostic and can be consumed in a browser or in a server environment.
@@ -22,10 +23,10 @@ Below is the list of AccelByte service APIs the library supports:
 
 ## NPM installation
 
-To npm install the library execute
+To install the library execute
 
 ```shell
-    npm install @accelbyte/sdk
+    yarn add @accelbyte/sdk
 ```
 
 ## Usage:
@@ -77,11 +78,11 @@ In addition to the Accelbyte Web SDK, the library provides an extension called "
 To npm install the SDK Widgets execute
 
 ```shell
-    npm install @accelbyte/widgets
+    yarn add @accelbyte/widgets
 ```
 
 ## Testing
 
 ```shell
-yarn --cwd packages/sdk test
+    yarn --cwd packages/sdk test
 ```

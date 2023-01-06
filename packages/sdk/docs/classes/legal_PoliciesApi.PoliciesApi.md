@@ -36,7 +36,7 @@ Retrieve all active latest policies based on country from all namespaces.<br>Oth
 
 #### Defined in
 
-[packages/sdk/src/api/legal/PoliciesApi.ts:32](https://github.com/AccelByte/accelbyte-web-sdk/blob/a3afe6b/packages/sdk/src/api/legal/PoliciesApi.ts#L32)
+[packages/sdk/src/api/legal/PoliciesApi.ts:32](https://github.com/AccelByte/accelbyte-web-sdk/blob/9d4cc94/packages/sdk/src/api/legal/PoliciesApi.ts#L32)
 
 ___
 
@@ -60,4 +60,4 @@ Retrieve all active latest policies based on a namespace and country.<br>Other d
 
 #### Defined in
 
-[packages/sdk/src/api/legal/PoliciesApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/a3afe6b/packages/sdk/src/api/legal/PoliciesApi.ts#L19)
+[packages/sdk/src/api/legal/PoliciesApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/9d4cc94/packages/sdk/src/api/legal/PoliciesApi.ts#L19)

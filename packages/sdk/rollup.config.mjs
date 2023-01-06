@@ -13,8 +13,9 @@ import resolve from '@rollup/plugin-node-resolve'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import typescript from '@rollup/plugin-typescript'
 import alias from '@rollup/plugin-alias'
-import tsconfigBuildJson from './tsconfig.build.json'
 import { writeFileSync, readFileSync } from 'fs'
+
+const CONFIG = JSON.parse(readFileSync('./tsconfig.build.json', 'utf-8'))
 
 /**
  *
@@ -62,7 +63,7 @@ export default async function createConfigs() {
       {
         input: './src/index.browser.ts',
         output: {
-          file: path.join(tsconfigBuildJson.compilerOptions.outDir, 'index.browser.es.js'),
+          file: path.join(CONFIG.compilerOptions.outDir, 'index.browser.es.js'),
           format: 'es',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'
@@ -79,13 +80,13 @@ export default async function createConfigs() {
       input: './src/index.ts',
       output: [
         {
-          file: path.join(tsconfigBuildJson.compilerOptions.outDir, 'index.es.js'),
+          file: path.join(CONFIG.compilerOptions.outDir, 'index.es.js'),
           format: 'es',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'
         },
         {
-          file: path.join(tsconfigBuildJson.compilerOptions.outDir, 'index.js'),
+          file: path.join(CONFIG.compilerOptions.outDir, 'index.js'),
           format: 'cjs',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'
@@ -98,7 +99,7 @@ export default async function createConfigs() {
 // Local plugins.
 // This is a custom plugin to rewrite the declaration files.
 // Read more about the "hooks" of Rollup, visit https://rollupjs.org/guide/en/#output-generation-hooks.
-const ACTUAL_ANCHOR = path.join(path.resolve(__dirname), 'src').replace(/\\/g, '/')
+const ACTUAL_ANCHOR = path.join(path.resolve(process.cwd()), 'src').replace(/\\/g, '/')
 const IMPORT_ANCHOR = `@accelbyte/sdk`
 const IMPORT_REGEX = /@accelbyte\/sdk(\/\w+)*/g
 
@@ -115,10 +116,7 @@ function declarationRewritePlugin() {
         // Normalize the full path. This is because we might have `declarationDir`
         // in `tsconfig.build.json`. If we don't normalize it, then the imports will be referring
         // to incorrect paths.
-        const normalizedFullPath = fullPathToFile.replace(
-          path.join(ACTUAL_ANCHOR, tsconfigBuildJson.compilerOptions.declarationDir),
-          ACTUAL_ANCHOR
-        )
+        const normalizedFullPath = fullPathToFile.replace(path.join(ACTUAL_ANCHOR, CONFIG.compilerOptions.declarationDir), ACTUAL_ANCHOR)
         // If it is a declaration file, then we replace "@accelbyte/sdk" with ".".
         if (fileName.endsWith('.d.ts')) {
           // Example `fileName`: accelbyte-web-sdk/packages/sdk/src/generated/platform/definitions/WalletPagingSlicedResult.d.ts.

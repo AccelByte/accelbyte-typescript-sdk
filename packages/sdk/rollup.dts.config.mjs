@@ -6,12 +6,12 @@
  */
 
 import dts from 'rollup-plugin-dts'
-
 import path from 'path'
-import tsconfigBuildJson from './tsconfig.build.json'
+import { readFileSync } from 'fs'
 
-const DIST_DIR = path.join(__dirname, tsconfigBuildJson.compilerOptions.outDir)
-const PATH_TO_INPUT = path.join(DIST_DIR, tsconfigBuildJson.compilerOptions.declarationDir, 'index.d.ts')
+const CONFIG = JSON.parse(readFileSync('./tsconfig.build.json', 'utf-8'))
+const DIST_DIR = path.join(process.cwd(), CONFIG.compilerOptions.outDir)
+const PATH_TO_INPUT = path.join(DIST_DIR, CONFIG.compilerOptions.declarationDir, 'index.d.ts')
 
 /** @type {import('rollup').RollupOptions} */
 const opts = {

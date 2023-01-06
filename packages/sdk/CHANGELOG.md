@@ -1,3 +1,11 @@
+### 0.1.1-alpha.50 - 2023-01-04
+
+- Fix build error
+
+### 0.1.1-alpha.49 - 2023-01-03
+
+- Update dependency versions
+
 ### 0.1.1-alpha.48 - 2022-12-27
 
 - Fix user is unable to activate 2fa with email due to missing `content-type: application/x-www-form-urlencoded`
