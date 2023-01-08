@@ -43,13 +43,13 @@ Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link<
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:104](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L104)
+[packages/sdk/src/api/platform/PaymentApi.ts:96](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-96)
 
 ___
 
 ### deletePaymentAccount
 
-▸ **deletePaymentAccount**(`«destructured»`): `Promise`<`IResponse`<`unknown`\>\>
+▸ **deletePaymentAccount**(`__namedParameters`): `Promise`<`IResponse`<`unknown`\>\>
 
 Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=8 (DELETE)</li><li><i>Returns</i>:</li></ul>
 
@@ -57,10 +57,10 @@ Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `id` | `string` |
-| › `type` | `string` |
-| › `userId` | `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.id` | `string` |
+| `__namedParameters.type` | `string` |
+| `__namedParameters.userId` | `string` |
 
 #### Returns
 
@@ -68,7 +68,7 @@ Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L29)
+[packages/sdk/src/api/platform/PaymentApi.ts:29](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-29)
 
 ___
 
@@ -90,7 +90,7 @@ Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: 
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L22)
+[packages/sdk/src/api/platform/PaymentApi.ts:22](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-22)
 
 ___
 
@@ -112,7 +112,7 @@ Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment or
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L36)
+[packages/sdk/src/api/platform/PaymentApi.ts:36](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-36)
 
 ___
 
@@ -134,7 +134,7 @@ Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment metho
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L82)
+[packages/sdk/src/api/platform/PaymentApi.ts:78](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-78)
 
 ___
 
@@ -156,7 +156,7 @@ Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: P
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:73](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L73)
+[packages/sdk/src/api/platform/PaymentApi.ts:69](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-69)
 
 ___
 
@@ -170,7 +170,7 @@ Get payment provider public config, at current only Strip provide public config.
 
 | Name | Type |
 | :------ | :------ |
-| `paymentProvider` | ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` |
+| `paymentProvider` | ``null`` \| `string` |
 | `region` | ``null`` \| `string` |
 | `sandbox?` | ``null`` \| `boolean` |
 
@@ -180,7 +180,7 @@ Get payment provider public config, at current only Strip provide public config.
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:58](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L58)
+[packages/sdk/src/api/platform/PaymentApi.ts:58](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-58)
 
 ___
 
@@ -194,7 +194,7 @@ Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i
 
 | Name | Type |
 | :------ | :------ |
-| `paymentProvider` | ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` |
+| `paymentProvider` | ``null`` \| `string` |
 | `paymentOrderNo` | ``null`` \| `string` |
 | `zipCode?` | ``null`` \| `string` |
 
@@ -204,13 +204,13 @@ Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:89](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L89)
+[packages/sdk/src/api/platform/PaymentApi.ts:85](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-85)
 
 ___
 
 ### processPaymentOrder
 
-▸ **processPaymentOrder**(`paymentOrderNo`, `data`, `queryParams`): `Promise`<`IResponse`<{ `pending`: `boolean` ; `reason`: `undefined` \| ``null`` \| `string` ; `redirectUrl`: `undefined` \| ``null`` \| `string` ; `success`: `boolean`  }\>\>
+▸ **processPaymentOrder**(`paymentOrderNo`, `data`, `queryParams?`): `Promise`<`IResponse`<{ `pending`: `boolean` ; `reason`: `undefined` \| ``null`` \| `string` ; `redirectUrl`: `undefined` \| ``null`` \| `string` ; `success`: `boolean`  }\>\>
 
 Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><li><i>Returns</i>: Payment process result</li></ul>
 
@@ -221,7 +221,9 @@ Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><
 | `paymentOrderNo` | `string` |
 | `data` | `Object` |
 | `data.token` | `undefined` \| ``null`` \| `string` |
-| `queryParams` | `undefined` \| { `paymentProvider?`: ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` ; `zipCode?`: ``null`` \| `string`  } |
+| `queryParams?` | `Object` |
+| `queryParams.paymentProvider?` | ``null`` \| `string` |
+| `queryParams.zipCode?` | ``null`` \| `string` |
 
 #### Returns
 
@@ -229,4 +231,4 @@ Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:43](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/PaymentApi.ts#L43)
+[packages/sdk/src/api/platform/PaymentApi.ts:43](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/PaymentApi.ts#lines-43)

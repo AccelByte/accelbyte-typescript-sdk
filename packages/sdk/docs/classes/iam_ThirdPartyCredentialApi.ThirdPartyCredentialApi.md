@@ -24,4 +24,4 @@ This is the Public API to Get All Active 3rd Platform Credential.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/ThirdPartyCredentialApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/ThirdPartyCredentialApi.ts#L19)
+[packages/sdk/src/api/iam/ThirdPartyCredentialApi.ts:19](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/ThirdPartyCredentialApi.ts#lines-19)

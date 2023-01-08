@@ -36,6 +36,13 @@
       ],
       "@accelbyte/sdk/*": [
         "./src/*"
+      ],
+      "@accelbyte/validator": [
+        "../validator/src",
+        "../validator/src/index.ts"
+      ],
+      "@accelbyte/validator/*": [
+        "../validator/src/*"
       ]
     },
     "declarationDir": ".",

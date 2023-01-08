@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/IamHelper.ts#L48)
+[packages/sdk/src/api/iam/IamHelper.ts:49](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/IamHelper.ts#lines-49)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:43](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/IamHelper.ts#L43)
+[packages/sdk/src/api/iam/IamHelper.ts:44](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/IamHelper.ts#lines-44)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/IamHelper.ts#L23)
+[packages/sdk/src/api/iam/IamHelper.ts:24](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/IamHelper.ts#lines-24)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:33](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/IamHelper.ts#L33)
+[packages/sdk/src/api/iam/IamHelper.ts:34](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/IamHelper.ts#lines-34)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/IamHelper.ts#L28)
+[packages/sdk/src/api/iam/IamHelper.ts:29](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/IamHelper.ts#lines-29)
 
 ___
 
@@ -149,4 +149,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:11](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/IamHelper.ts#L11)
+[packages/sdk/src/api/iam/IamHelper.ts:12](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/IamHelper.ts#lines-12)

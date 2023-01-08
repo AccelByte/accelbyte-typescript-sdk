@@ -32,10 +32,48 @@
     "baseUrl": ".",
     "paths": {
       "@accelbyte/sdk": [
-        "./src"
+        "./src",
+        "../../accelbyte-web-sdk/packages/sdk/src"
       ],
       "@accelbyte/sdk/*": [
-        "./src/*"
+        "./src/*",
+        "../../accelbyte-web-sdk/packages/sdk/src/*"
+      ],
+      "@accelbyte/validator": [
+        "../validator/src"
+      ],
+      "@resources/*": [
+        "../../resources/*"
+      ],
+      "@od-components/*": [
+        "../../packages/od-components/src/*"
+      ],
+      "@od-shared/*": [
+        "../../packages/od-shared/src/*"
+      ],
+      "@od-desktop/*": [
+        "../../packages/od-desktop/src/*"
+      ],
+      "@od-legal/*": [
+        "../../packages/od-legal/src/*"
+      ],
+      "@od-account/*": [
+        "../../packages/od-account/src/*"
+      ],
+      "@od-ecommerce/*": [
+        "../../packages/od-ecommerce/src/*"
+      ],
+      "@od-state/*": [
+        "../../packages/od-state/src/*"
+      ],
+      "@od-web-sdk-admin/*": [
+        "../../packages/od-web-sdk-admin/src/*"
+      ],
+      "odin-web-sdk-admin": [
+        "../../packages/od-web-sdk-admin/src/index.ts"
+      ],
+      "crypto": [
+        "./node_modules/crypto-browserify"
       ]
     },
     "declarationDir": "types",

@@ -58,7 +58,8 @@ function createConfig(config, isBrowser) {
 
 export default async function createConfigs() {
   return [
-    // Browser.
+    /*
+    // Browser Module, Immediately-invoked Function Expressions (IIFE). Enable if a direct browser support is needed
     createConfig(
       {
         input: './src/index.browser.ts',
@@ -71,11 +72,13 @@ export default async function createConfigs() {
       },
       true
     ),
+     */
 
     // FIXME: create conditional exports in package.json. At the moment, we are assuming that
     // Node will always use CJS and browser will always use ESM, which may not be true.
     // We need to also cover the ESM side of Node.js later.
-    // Node.
+
+    // ESM and CJS Modules
     createConfig({
       input: './src/index.ts',
       output: [

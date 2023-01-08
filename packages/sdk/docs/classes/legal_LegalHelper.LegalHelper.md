@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:30](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/legal/LegalHelper.ts#L30)
+[packages/sdk/src/api/legal/LegalHelper.ts:33](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/legal/LegalHelper.ts#lines-33)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/legal/LegalHelper.ts#L56)
+[packages/sdk/src/api/legal/LegalHelper.ts:59](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/legal/LegalHelper.ts#lines-59)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/legal/LegalHelper.ts#L85)
+[packages/sdk/src/api/legal/LegalHelper.ts:88](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/legal/LegalHelper.ts#lines-88)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:64](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/legal/LegalHelper.ts#L64)
+[packages/sdk/src/api/legal/LegalHelper.ts:67](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/legal/LegalHelper.ts#lines-67)
 
 ___
 
@@ -124,4 +124,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:16](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/legal/LegalHelper.ts#L16)
+[packages/sdk/src/api/legal/LegalHelper.ts:17](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/legal/LegalHelper.ts#lines-17)

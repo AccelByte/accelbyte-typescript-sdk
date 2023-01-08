@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L36)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:36](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/gdpr/DataDeletionApi.ts#lines-36)
 
 ___
 
@@ -56,13 +56,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L20)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:20](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/gdpr/DataDeletionApi.ts#lines-20)
 
 ___
 
 ### requestAccountDeletion
 
-▸ **requestAccountDeletion**(`«destructured»`): `Promise`<`IResponse`<{ `Namespace`: `string` ; `UserID`: `string`  }\>\>
+▸ **requestAccountDeletion**(`__namedParameters`): `Promise`<`IResponse`<{ `Namespace`: `string` ; `UserID`: `string`  }\>\>
 
 <p>Request an account's deletion</p>
 <p>Requires valid user access token and password
@@ -71,10 +71,10 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.password` | ``null`` \| `string` |
-| › `userId` | `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.data` | `Object` |
+| `__namedParameters.data.password` | ``null`` \| `string` |
+| `__namedParameters.userId` | `string` |
 
 #### Returns
 
@@ -82,4 +82,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L28)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:28](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/gdpr/DataDeletionApi.ts#lines-28)

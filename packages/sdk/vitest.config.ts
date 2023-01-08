@@ -4,11 +4,13 @@
  * and restrictions contact your company contract manager.
  */
 import { defineConfig } from 'vitest/config'
+import { resolve } from 'path'
 
 export default defineConfig({
   resolve: {
     alias: {
-      '@accelbyte/sdk': './src'
+      '@accelbyte/sdk': './src',
+      '@accelbyte/validator': resolve('../validator/src')
     }
   },
   test: {

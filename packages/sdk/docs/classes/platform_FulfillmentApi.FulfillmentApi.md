@@ -14,7 +14,7 @@
 
 ### redeemCode
 
-▸ **redeemCode**(`«destructured»`): `Promise`<`IResponse`<{ `creditSummaries`: `undefined` \| ``null`` \| { namespace: string; userId: string; walletId: string; amount: number; }[] ; `entitlementSummaries`: `undefined` \| ``null`` \| { endDate?: string \| null \| undefined; storeId?: string \| null \| undefined; itemId?: string \| null \| undefined; startDate?: string \| null \| undefined; stackable?: boolean \| null \| undefined; ... 8 more ...; clazz: "APP" \| ... 5 more ... \| "ENTITLEMENT"; }[] ; `namespace`: `string` ; `subscriptionSummaries`: `undefined` \| ``null`` \| { sku?: string \| null \| undefined; currentPeriodStart?: string \| null \| undefined; currentPeriodEnd?: string \| null \| undefined; subscribedBy?: "USER" \| "PLATFORM" \| null \| undefined; ... 4 more ...; itemId: string; }[] ; `userId`: `string`  }\>\>
+▸ **redeemCode**(`__namedParameters`): `Promise`<`IResponse`<{ `creditSummaries`: `undefined` \| ``null`` \| { namespace: string; userId: string; walletId: string; amount: number; }[] ; `entitlementSummaries`: `undefined` \| ``null`` \| { endDate?: string \| null \| undefined; storeId?: string \| null \| undefined; itemId?: string \| null \| undefined; startDate?: string \| null \| undefined; stackable?: boolean \| null \| undefined; ... 8 more ...; clazz: "APP" \| ... 5 more ... \| "ENTITLEMENT"; }[] ; `namespace`: `string` ; `subscriptionSummaries`: `undefined` \| ``null`` \| { sku?: string \| null \| undefined; currentPeriodStart?: string \| null \| undefined; currentPeriodEnd?: string \| null \| undefined; subscribedBy?: "USER" \| "PLATFORM" \| null \| undefined; ... 4 more ...; itemId: string; }[] ; `userId`: `string`  }\>\>
 
 Redeem campaign code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:FULFILLMENT", action=1 (CREATED)</li><li><i>Returns</i>: fulfillment result</li></ul>
 
@@ -22,12 +22,12 @@ Redeem campaign code.<br>Other detail info: <ul><li><i>Required permission</i>: 
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.code` | `string` |
-| › `data.language` | `undefined` \| ``null`` \| `string` |
-| › `data.region` | `undefined` \| ``null`` \| `string` |
-| › `userId` | `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.data` | `Object` |
+| `__namedParameters.data.code` | `string` |
+| `__namedParameters.data.language` | `undefined` \| ``null`` \| `string` |
+| `__namedParameters.data.region` | `undefined` \| ``null`` \| `string` |
+| `__namedParameters.userId` | `string` |
 
 #### Returns
 
@@ -35,4 +35,4 @@ Redeem campaign code.<br>Other detail info: <ul><li><i>Required permission</i>: 
 
 #### Defined in
 
-[packages/sdk/src/api/platform/FulfillmentApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/platform/FulfillmentApi.ts#L20)
+[packages/sdk/src/api/platform/FulfillmentApi.ts:20](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/platform/FulfillmentApi.ts#lines-20)

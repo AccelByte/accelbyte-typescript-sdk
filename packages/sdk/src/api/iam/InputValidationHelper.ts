@@ -15,7 +15,7 @@ import {
   ValidateLengthErrorType,
   validateRegex,
   ValidateRegexErrorType
-} from 'justice-js-common-utils'
+} from '@accelbyte/validator'
 import { isEmpty } from 'validator'
 import { z } from 'zod'
 

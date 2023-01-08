@@ -14,7 +14,7 @@
 
 ### getAccountHistoryByUserId
 
-▸ **getAccountHistoryByUserId**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: { payload?: Record<string, any\> \| null \| undefined; name: string; namespace: string; userId: string; version: number; clientId: string; id: string; sessionId: string; timestamp: string; traceId: string; }[] ; `paging`: { first?: string \| null \| undefined; last?: string \| null \| undefined; next?: string \| null \| undefined; previous?: string \| null \| undefined; } = Paging }\>\>
+▸ **getAccountHistoryByUserId**(`__namedParameters`): `Promise`<`IResponseWithSync`<{ `data`: { payload?: Record<string, any\> \| null \| undefined; name: string; namespace: string; userId: string; version: number; clientId: string; id: string; sessionId: string; timestamp: string; traceId: string; }[] ; `paging`: { first?: string \| null \| undefined; last?: string \| null \| undefined; next?: string \| null \| undefined; previous?: string \| null \| undefined; } = Paging }\>\>
 
 <p>Available Type: </p>
      <ul>
@@ -31,14 +31,14 @@
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `queryParams?` | `Object` |
-| › `queryParams.endDate?` | ``null`` \| `string` |
-| › `queryParams.offset?` | ``null`` \| `number` |
-| › `queryParams.pageSize?` | ``null`` \| `number` |
-| › `queryParams.startDate?` | ``null`` \| `string` |
-| › `queryParams.type?` | ``null`` \| `string` |
-| › `userId` | `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.queryParams?` | `Object` |
+| `__namedParameters.queryParams.endDate?` | ``null`` \| `string` |
+| `__namedParameters.queryParams.offset?` | ``null`` \| `number` |
+| `__namedParameters.queryParams.pageSize?` | ``null`` \| `number` |
+| `__namedParameters.queryParams.startDate?` | ``null`` \| `string` |
+| `__namedParameters.queryParams.type?` | ``null`` \| `string` |
+| `__namedParameters.userId` | `string` |
 
 #### Returns
 
@@ -46,4 +46,4 @@
 
 #### Defined in
 
-[packages/sdk/src/api/event/EventApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/event/EventApi.ts#L28)
+[packages/sdk/src/api/event/EventApi.ts:28](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/event/EventApi.ts#lines-28)

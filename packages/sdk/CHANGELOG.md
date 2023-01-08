@@ -1,3 +1,7 @@
+### 0.1.1-alpha.51 - 2023-01-06
+
+- Deprecate justice-js-common-utils
+
 ### 0.1.1-alpha.50 - 2023-01-04
 
 - Fix build error

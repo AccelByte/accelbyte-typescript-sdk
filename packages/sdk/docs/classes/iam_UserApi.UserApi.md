@@ -11,7 +11,6 @@
 - [createUser](iam_UserApi.UserApi.md#createuser)
 - [getAgeRestrictionByCountry](iam_UserApi.UserApi.md#getagerestrictionbycountry)
 - [getCurrentUser](iam_UserApi.UserApi.md#getcurrentuser)
-- [getLinkAccountByOneTimeCodeConflict](iam_UserApi.UserApi.md#getlinkaccountbyonetimecodeconflict)
 - [getLinkRequestStatus](iam_UserApi.UserApi.md#getlinkrequeststatus)
 - [getLinkedAccount](iam_UserApi.UserApi.md#getlinkedaccount)
 - [getThirdPartyURL](iam_UserApi.UserApi.md#getthirdpartyurl)
@@ -19,7 +18,6 @@
 - [getUserLinkedPlatform](iam_UserApi.UserApi.md#getuserlinkedplatform)
 - [linkAccountToPlatform](iam_UserApi.UserApi.md#linkaccounttoplatform)
 - [linkPlatformToUserAccount](iam_UserApi.UserApi.md#linkplatformtouseraccount)
-- [linkWithProgression](iam_UserApi.UserApi.md#linkwithprogression)
 - [notifyGameSDK](iam_UserApi.UserApi.md#notifygamesdk)
 - [renderImageFromGlbModel](iam_UserApi.UserApi.md#renderimagefromglbmodel)
 - [requestNewUserVerificationCode](iam_UserApi.UserApi.md#requestnewuserverificationcode)
@@ -78,7 +76,7 @@ Create a new user with unique email address and username.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:296](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L296)
+[packages/sdk/src/api/iam/UserApi.ts:295](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-295)
 
 ___
 
@@ -100,7 +98,7 @@ Get age restriction by country code. It will always get by publisher namespace
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:244](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L244)
+[packages/sdk/src/api/iam/UserApi.ts:243](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-243)
 
 ___
 
@@ -116,32 +114,7 @@ get currently logged in user
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L35)
-
-___
-
-### getLinkAccountByOneTimeCodeConflict
-
-▸ **getLinkAccountByOneTimeCodeConflict**(`params`): `Promise`<`IResponseWithSync`<{ `currentAccount`: `undefined` \| ``null`` \| { displayName?: string \| null \| undefined; userName?: string \| null \| undefined; email?: string \| null \| undefined; linkedGames?: string[] \| null \| undefined; } ; `headlessAccount`: `undefined` \| ``null`` \| { displayName?: string \| null \| undefined; userName?: string \| null \| undefined; email?: string \| null \| undefined; linkedGames?: string[] \| null \| undefined; } ; `platformAlreadyLinked`: `boolean` ; `platformId`: `string` ; `platformLinkConflict`: `boolean`  }\>\>
-
-Note:<br>
-1. My account should be full account
-2. My account not linked to request headless account's third platform.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.oneTimeLinkCode` | ``null`` \| `string` |
-
-#### Returns
-
-`Promise`<`IResponseWithSync`<{ `currentAccount`: `undefined` \| ``null`` \| { displayName?: string \| null \| undefined; userName?: string \| null \| undefined; email?: string \| null \| undefined; linkedGames?: string[] \| null \| undefined; } ; `headlessAccount`: `undefined` \| ``null`` \| { displayName?: string \| null \| undefined; userName?: string \| null \| undefined; email?: string \| null \| undefined; linkedGames?: string[] \| null \| undefined; } ; `platformAlreadyLinked`: `boolean` ; `platformId`: `string` ; `platformLinkConflict`: `boolean`  }\>\>
-
-#### Defined in
-
-[packages/sdk/src/api/iam/UserApi.ts:340](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L340)
+[packages/sdk/src/api/iam/UserApi.ts:34](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-34)
 
 ___
 
@@ -163,7 +136,7 @@ Get the linking status between a third-party platform to a user
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:180](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L180)
+[packages/sdk/src/api/iam/UserApi.ts:179](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-179)
 
 ___
 
@@ -186,13 +159,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:331](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L331)
+[packages/sdk/src/api/iam/UserApi.ts:330](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-330)
 
 ___
 
 ### getThirdPartyURL
 
-▸ **getThirdPartyURL**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `third_party_url`: `string`  }\>\>
+▸ **getThirdPartyURL**(`__namedParameters`): `Promise`<`IResponseWithSync`<{ `third_party_url`: `string`  }\>\>
 
 This method is used to generate third party login page which will redirected to establish method.
 
@@ -200,11 +173,11 @@ This method is used to generate third party login page which will redirected to 
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `platformId` | `string` |
-| › `queryParams?` | `Object` |
-| › `queryParams.clientId?` | ``null`` \| `string` |
-| › `queryParams.redirectUri?` | ``null`` \| `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.platformId` | `string` |
+| `__namedParameters.queryParams?` | `Object` |
+| `__namedParameters.queryParams.clientId?` | ``null`` \| `string` |
+| `__namedParameters.queryParams.redirectUri?` | ``null`` \| `string` |
 
 #### Returns
 
@@ -212,7 +185,7 @@ This method is used to generate third party login page which will redirected to 
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:231](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L231)
+[packages/sdk/src/api/iam/UserApi.ts:230](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-230)
 
 ___
 
@@ -236,7 +209,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:305](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L305)
+[packages/sdk/src/api/iam/UserApi.ts:304](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-304)
 
 ___
 
@@ -259,13 +232,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:143](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L143)
+[packages/sdk/src/api/iam/UserApi.ts:142](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-142)
 
 ___
 
 ### linkAccountToPlatform
 
-▸ **linkAccountToPlatform**(`«destructured»`): `Promise`<`IResponse`<`unknown`\>\>
+▸ **linkAccountToPlatform**(`__namedParameters`): `Promise`<`IResponse`<`unknown`\>\>
 
 Required valid user authorization.
    <p><br><b>Prerequisite:</b>
@@ -296,11 +269,11 @@ Required valid user authorization.
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.redirectUri?` | ``null`` \| `string` |
-| › `data.ticket` | ``null`` \| `string` |
-| › `platformId` | `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.data` | `Object` |
+| `__namedParameters.data.redirectUri?` | ``null`` \| `string` |
+| `__namedParameters.data.ticket` | ``null`` \| `string` |
+| `__namedParameters.platformId` | `string` |
 
 #### Returns
 
@@ -308,13 +281,13 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:173](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L173)
+[packages/sdk/src/api/iam/UserApi.ts:172](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-172)
 
 ___
 
 ### linkPlatformToUserAccount
 
-▸ **linkPlatformToUserAccount**(`«destructured»`): `Promise`<`IResponse`<`unknown`\>\>
+▸ **linkPlatformToUserAccount**(`__namedParameters`): `Promise`<`IResponse`<`unknown`\>\>
 
 It is going to be <strong>DEPRECATED</strong>.
 Update Platform Account relation to current User Account.
@@ -325,11 +298,11 @@ transferred. If the data is tight to game user ID, the user will have the game p
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.platformId` | `string` |
-| › `data.platformUserId` | `string` |
-| › `userId` | `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.data` | `Object` |
+| `__namedParameters.data.platformId` | `string` |
+| `__namedParameters.data.platformUserId` | `string` |
+| `__namedParameters.userId` | `string` |
 
 #### Returns
 
@@ -337,33 +310,7 @@ transferred. If the data is tight to game user ID, the user will have the game p
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:191](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L191)
-
-___
-
-### linkWithProgression
-
-▸ **linkWithProgression**(`data`): `Promise`<`IResponse`<`unknown`\>\>
-
-Note:<br>
-1. My account should be full account
-2. My account not linked to headless account's third platform.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `data` | `Object` |
-| `data.chosenNamespaces` | `string`[] |
-| `data.oneTimeLinkCode` | `string` |
-
-#### Returns
-
-`Promise`<`IResponse`<`unknown`\>\>
-
-#### Defined in
-
-[packages/sdk/src/api/iam/UserApi.ts:349](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L349)
+[packages/sdk/src/api/iam/UserApi.ts:190](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-190)
 
 ___
 
@@ -383,7 +330,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:259](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L259)
+[packages/sdk/src/api/iam/UserApi.ts:258](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-258)
 
 ___
 
@@ -407,7 +354,7 @@ Render 2D Avatar via readyplayer.me (https://docs.readyplayer.me/ready-player-me
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:251](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L251)
+[packages/sdk/src/api/iam/UserApi.ts:250](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-250)
 
 ___
 
@@ -436,7 +383,7 @@ This code can be verified by this <a href="#operations-Users-PublicVerifyRegistr
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:275](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L275)
+[packages/sdk/src/api/iam/UserApi.ts:274](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-274)
 
 ___
 
@@ -479,7 +426,7 @@ Required valid user authorization
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L82)
+[packages/sdk/src/api/iam/UserApi.ts:81](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-81)
 
 ___
 
@@ -503,13 +450,13 @@ Required valid user authorization
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:323](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L323)
+[packages/sdk/src/api/iam/UserApi.ts:322](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-322)
 
 ___
 
 ### unLinkAccountFromPlatform
 
-▸ **unLinkAccountFromPlatform**(`«destructured»`): `Promise`<`IResponse`<`unknown`\>\>
+▸ **unLinkAccountFromPlatform**(`__namedParameters`): `Promise`<`IResponse`<`unknown`\>\>
 
 Required valid user authorization.
      <h2>Supported platforms:</h2>
@@ -543,10 +490,10 @@ Required valid user authorization.
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.platformNamespace` | `undefined` \| ``null`` \| `string` |
-| › `platformId` | `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.data` | `Object` |
+| `__namedParameters.data.platformNamespace` | `undefined` \| ``null`` \| `string` |
+| `__namedParameters.platformId` | `string` |
 
 #### Returns
 
@@ -554,7 +501,7 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:224](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L224)
+[packages/sdk/src/api/iam/UserApi.ts:223](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-223)
 
 ___
 
@@ -577,7 +524,7 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:313](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L313)
+[packages/sdk/src/api/iam/UserApi.ts:312](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-312)
 
 ___
 
@@ -601,7 +548,7 @@ update current user's email
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L49)
+[packages/sdk/src/api/iam/UserApi.ts:48](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-48)
 
 ___
 
@@ -626,7 +573,7 @@ update current user's password
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L56)
+[packages/sdk/src/api/iam/UserApi.ts:55](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-55)
 
 ___
 
@@ -654,7 +601,7 @@ update current user
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L42)
+[packages/sdk/src/api/iam/UserApi.ts:41](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-41)
 
 ___
 
@@ -696,7 +643,7 @@ In order to get a verification code for the method, please check the send verifi
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:114](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L114)
+[packages/sdk/src/api/iam/UserApi.ts:113](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-113)
 
 ___
 
@@ -741,7 +688,7 @@ Require valid user access token.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:135](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L135)
+[packages/sdk/src/api/iam/UserApi.ts:134](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-134)
 
 ___
 
@@ -771,4 +718,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:94](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserApi.ts#L94)
+[packages/sdk/src/api/iam/UserApi.ts:93](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserApi.ts#lines-93)

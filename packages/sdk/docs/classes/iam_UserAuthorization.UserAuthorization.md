@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:301](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L301)
+[packages/sdk/src/api/iam/UserAuthorization.ts:297](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-297)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:271](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L271)
+[packages/sdk/src/api/iam/UserAuthorization.ts:271](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-271)
 
 ___
 
@@ -74,22 +74,22 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:223](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L223)
+[packages/sdk/src/api/iam/UserAuthorization.ts:223](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-223)
 
 ___
 
 ### exchangeAuthorizationCode
 
-▸ **exchangeAuthorizationCode**(`«destructured»`): `Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\> = loginResult.response; `returnPath`: `any`  }\>
+▸ **exchangeAuthorizationCode**(`__namedParameters`): `Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\> = loginResult.response; `returnPath`: `any`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `code?` | ``null`` \| `string` |
-| › `error?` | ``null`` \| `string` |
-| › `state?` | ``null`` \| `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.code?` | ``null`` \| `string` |
+| `__namedParameters.error?` | ``null`` \| `string` |
+| `__namedParameters.state?` | ``null`` \| `string` |
 
 #### Returns
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:234](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L234)
+[packages/sdk/src/api/iam/UserAuthorization.ts:234](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-234)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:324](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L324)
+[packages/sdk/src/api/iam/UserAuthorization.ts:320](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-320)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:181](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L181)
+[packages/sdk/src/api/iam/UserAuthorization.ts:181](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-181)
 
 ___
 
@@ -150,13 +150,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:194](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L194)
+[packages/sdk/src/api/iam/UserAuthorization.ts:194](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-194)
 
 ___
 
 ### loginWithAuthorizationCode
 
-▸ **loginWithAuthorizationCode**(`«destructured»`): `Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: `IDataStatus`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>  }\>
+▸ **loginWithAuthorizationCode**(`__namedParameters`): `Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: `IDataStatus`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>  }\>
 
 <p>This method supports grant type:</p><ol>
      <li>Grant Type == <code>authorization_code</code>:<br />
@@ -238,9 +238,9 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | `Object` |
-| › `code` | `string` |
-| › `codeVerifier` | `string` |
+| `__namedParameters` | `Object` |
+| `__namedParameters.code` | `string` |
+| `__namedParameters.codeVerifier` | `string` |
 
 #### Returns
 
@@ -248,7 +248,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:147](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L147)
+[packages/sdk/src/api/iam/UserAuthorization.ts:147](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-147)
 
 ___
 
@@ -268,7 +268,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:203](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L203)
+[packages/sdk/src/api/iam/UserAuthorization.ts:203](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-203)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:328](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L328)
+[packages/sdk/src/api/iam/UserAuthorization.ts:324](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-324)
 
 ___
 
@@ -296,4 +296,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:199](https://github.com/AccelByte/accelbyte-web-sdk/blob/67c6f8c/packages/sdk/src/api/iam/UserAuthorization.ts#L199)
+[packages/sdk/src/api/iam/UserAuthorization.ts:199](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/iam/UserAuthorization.ts#lines-199)
