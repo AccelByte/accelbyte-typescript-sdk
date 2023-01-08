@@ -12,16 +12,16 @@ AccelByte SDK is build with TypeScript and uses runtime type-checking validation
 Below is the list of AccelByte service APIs the library supports:
 
 1. **IAM** - https://docs.accelbyte.io/guides/access/iam-client.html
-2. **Platform**
+2. **Monetization** - https://docs.accelbyte.io/guides/monetization/monetization-overview.html
 3. **Basic**
-4. **Build Info** - aka DL Patcher
-5. **GDPR**
+4. **Build Info** - https://docs.accelbyte.io/guides/distribution/app-distribution.html
+5. **GDPR** - https://docs.accelbyte.io/guides/access/gdpr-overview.html
 6. **Event**
-7. **Legal**
+7. **Legal** - https://docs.accelbyte.io/guides/access/legal.html
 
 # Getting started
 
-## NPM installation
+## Installation
 
 To install the library execute
 
@@ -35,12 +35,14 @@ To instantiate the Web SDK, a prerequisite is having a `IAM Client ID`. The exam
 that have access to all APIs
 
 ```typescript
+import { Accelbyte } from '@accelbyte/sdk';
+
 const sdk = await Accelbyte.SDK({
   options: {
     baseURL: "<Publisher Base URL, e.g. https://demo.accelbyte.io>",
-    clientId: "<Publisher Client ID>",
+    clientId: "<Publisher Client ID>, e.g. 32_char_guid",
     redirectURI: "<Publisher Redirect URL, e.g. https://demo.accelbyte.io>",
-    namespace: "<Publisher namespace>"
+    namespace: "<Publisher namespace>, e.g. 'accelbyte'"
   },
 
   config: {
@@ -64,10 +66,13 @@ Sample consumption of the AccelByte IAM service using the library:
 
 ```typescript
 // Login to IAM
-sdk.IAM.UserAuthorization().loginWithAuthorizationCode({code, codeVerifier})
+const token = await sdk.IAM.UserAuthorization().loginWithAuthorizationCode({code, codeVerifier})
 
-// Retrieve the user object 
-sdk.IAM.UserApi().getCurrentUser()
+// Retrieve the user object
+const user = await sdk.IAM.User().getCurrentUser()
+
+// Retrieve legal policies
+const Policies = await sdk.Legal.Policies().fetchAllPoliciesByCountry({countryCode: 'Bulgaria'})
 ```
 
 # AccelByte Web SDK Widgets
