@@ -29,11 +29,11 @@ To install the library execute
     yarn add @accelbyte/sdk
 ```
 
-#Prerequisites
+## Prerequisites
 
-* **ES Modules** - The SDK currently supports ES Modules format only, please [set type property in Package.json to module](https://codevoweb.com/solve-to-load-an-es-module-set-type-module-in-the-package-json-or-use-the-mjs-extension/)
-* **Yarn** - We like `yarn`, while `npm` may work it is not supported and may be unstable.
-* **TypeScript** - The SDK has a full TypeScript support, and it should be preferred over vanilla JavaScript. https://typestrong.org/ts-node/
+* **ES Modules** - The SDK currently supports ES Modules format only, please [set type property in Package.json to module](https://nodejs.org/api/packages.html#type)
+* **Yarn** - We like `yarn`. While `npm` may work, it is not supported and may be unstable.
+* **TypeScript** - The SDK has a full TypeScript support, and it should be preferred over a vanilla JavaScript. https://typestrong.org/ts-node/
 
 ## Usage
 
