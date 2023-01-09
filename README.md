@@ -29,10 +29,16 @@ To install the library execute
     yarn add @accelbyte/sdk
 ```
 
-## Usage:
+#Prerequisites
+
+* **ES Modules** - The SDK currently supports ES Modules format only, please [set type property in Package.json to module](https://codevoweb.com/solve-to-load-an-es-module-set-type-module-in-the-package-json-or-use-the-mjs-extension/)
+* **Yarn** - We like `yarn`, while `npm` may work it is not supported and may be unstable.
+* **TypeScript** - The SDK has a full TypeScript support, and it should be preferred over vanilla JavaScript. https://typestrong.org/ts-node/
+
+## Usage
 
 To instantiate the Web SDK, a prerequisite is having a `IAM Client ID`. The example below creates an instance of the SDK
-that have access to all APIs
+that have access to all APIs.
 
 ```typescript
 import { Accelbyte } from '@accelbyte/sdk';
@@ -62,17 +68,17 @@ const sdk = await Accelbyte.SDK({
 })
 ```
 
-Sample consumption of the AccelByte IAM service using the library:
+Sample usage of the AccelByte services using the Web SDK:
 
 ```typescript
+// Retrieve legal policies
+const Policies = await sdk.Legal.Policies().fetchAllPoliciesByCountry({countryCode: 'Bulgaria'})
+
 // Login to IAM
 const token = await sdk.IAM.UserAuthorization().loginWithAuthorizationCode({code, codeVerifier})
 
 // Retrieve the user object
 const user = await sdk.IAM.User().getCurrentUser()
-
-// Retrieve legal policies
-const Policies = await sdk.Legal.Policies().fetchAllPoliciesByCountry({countryCode: 'Bulgaria'})
 ```
 
 # AccelByte Web SDK Widgets
