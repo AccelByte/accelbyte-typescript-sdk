@@ -1,6 +1,6 @@
-@accelbyte/sdk
-
 # @accelbyte/sdk
+
+[README](../../../README.md)
 
 ## Table of contents
 
