@@ -1,3 +1,3 @@
 # AccelByte Web SDK
 
-[README](../../README.md)
+[README](https://github.com/AccelByte/accelbyte-web-sdk/blob/main/README.md)

@@ -1,9 +1,11 @@
-### 0.1.1-alpha.52 - 2022-12-28
+### 0.1.1-alpha.53 - 2022-01-11
+
+- Fixed od-shared dependency error
+
+### 0.1.1-alpha.51 - 2023-01-06
 
 - Register feature flag for Login Web placed under Player Portal section
 - Add 3rd-party login config to hide/show it as the login option
-### 0.1.1-alpha.51 - 2023-01-06
-
 - Deprecate justice-js-common-utils
 
 ### 0.1.1-alpha.50 - 2023-01-04
