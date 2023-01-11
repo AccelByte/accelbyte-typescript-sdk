@@ -71,18 +71,29 @@ const sdk = await Accelbyte.SDK({
 Sample usage of the AccelByte services using the Web SDK:
 
 ```typescript
-// Retrieve legal policies
-const Policies = await sdk.Legal.Policies().fetchAllPoliciesByCountry({countryCode: 'Bulgaria'})
+console.log('Accelbyte SDK', sdk, '\n')
 
 // Login to IAM
 const token = await sdk.IAM.UserAuthorization().loginWithAuthorizationCode({code, codeVerifier})
 
-// Retrieve the user object
+// And retrieve the user object
 const user = await sdk.IAM.User().getCurrentUser()
+
+// Retrieve store items
+const items = await sdk.Platform.Item().fetchItemsByCriteria({ queryParams: { appType: 'GAME' } })
+console.log('Items:', items, items?.response?.data, '\n')
+
+// Retrieve store currencies
+const currencies = await sdk.Platform.Currency().getCurrencyMap()
+console.log('Currencies:', currencies, '\n')
+
+// Retrieve legal policies
+const policies = await sdk.Legal.Policies().fetchAllPoliciesByCountry({countryCode: 'Bulgaria'})
+console.log('Policies:', policies, '\n')
 ```
 
 # AccelByte Web SDK Widgets
-In addition to the Accelbyte Web SDK, the library provides an extension called "SDK Widgets" allow the creation of SDK UI components. AccelByte Web SDK Widgets is a UI library consisting of a set of JavaScript React components that can be embedded inside a browser. These components have the same appearance and business functionality as the AccelByte Player Portal.
+In addition to the Accelbyte Web SDK, the library provides an extension called [SDK Widgets](https://www.npmjs.com/package/@accelbyte/widgets) allowing the creation of SDK UI components. AccelByte Web SDK Widgets is a UI library consisting of a set of JavaScript React components that can be embedded inside a browser. These components have the same appearance and business functionality as the AccelByte Player Portal.
 
 ## NPM installation
 

@@ -42,6 +42,9 @@
       "@accelbyte/validator": [
         "../validator/src"
       ],
+      "@accelbyte/error-translator": [
+        "../error-translator/src"
+      ],
       "@resources/*": [
         "../../resources/*"
       ],

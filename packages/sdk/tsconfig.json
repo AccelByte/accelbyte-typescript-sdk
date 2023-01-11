@@ -41,6 +41,9 @@
         "../validator/src",
         "../validator/src/index.ts"
       ],
+      "@accelbyte/error-translator": [
+        "../error-translator/src"
+      ],
       "@accelbyte/validator/*": [
         "../validator/src/*"
       ]

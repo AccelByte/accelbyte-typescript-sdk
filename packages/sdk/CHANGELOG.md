@@ -1,3 +1,7 @@
+### 0.1.1-alpha.52 - 2022-12-28
+
+- Register feature flag for Login Web placed under Player Portal section
+- Add 3rd-party login config to hide/show it as the login option
 ### 0.1.1-alpha.51 - 2023-01-06
 
 - Deprecate justice-js-common-utils
@@ -24,6 +28,7 @@
 
 ### 0.1.1-alpha.45 - 2022-12-19
 
+- Update typings of IResponseError
 - Update conditional exports to support both Node and Browser environments
 
 ### 0.1.1-alpha.44 - 2022-12-09
@@ -37,6 +42,7 @@
 ### 0.1.1-alpha.42 - 2022-12-08
 
 - Remove peer dependencies
+- [Editor] Global Styles are automatically applied to all areas of Player Portal V2, Launcher V2 and other apps
 
 ### 0.1.1-alpha.40 - 2022-12-01
 

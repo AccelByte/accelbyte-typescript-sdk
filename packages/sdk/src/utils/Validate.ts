@@ -3,22 +3,11 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import { z, ZodError } from 'zod'
 import { Logger } from './Logger'
 
-export type IResponseError =
-  | Error
-  | {
-      name: string
-      message: string
-      stack?: string
-      // AxiosError type
-      code?: string
-      status?: string
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      toJSON: () => object
-    }
+export type IResponseError = Error | AxiosError
 
 // AxiosResponse
 export type IDataStatus<D> = {
