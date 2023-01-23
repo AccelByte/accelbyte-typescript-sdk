@@ -1,4 +1,12 @@
-### 0.1.1-alpha.53 - 2022-01-11
+### 0.1.1-alpha.55 - 2023-01-23
+
+- Fix generateLoginURL not working in Node.js because getRandomValues is not polyfilled
+
+### 0.1.1-alpha.54 - 2023-01-12
+
+- Add `brandName` to DiscoveryConfigData
+
+### 0.1.1-alpha.53 - 2023-01-11
 
 - Fixed od-shared dependency error
 

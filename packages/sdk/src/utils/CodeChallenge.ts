@@ -6,6 +6,7 @@
 import cryptoJs from 'crypto-js'
 import * as uuid from 'uuid'
 import { z } from 'zod'
+import { BrowserHelper } from './BrowserHelper'
 
 export class CodeChallenge {
   //
@@ -14,11 +15,15 @@ export class CodeChallenge {
   }
 
   static save = (codeVerifier: any) => {
-    localStorage.setItem('pp:pkce:cd', stringifyStoredState(codeVerifier))
+    if (BrowserHelper.isOnBrowser()) {
+      localStorage.setItem('pp:pkce:cd', stringifyStoredState(codeVerifier))
+    }
   }
 
   static clear = () => {
-    localStorage.removeItem('pp:pkce:cd')
+    if (BrowserHelper.isOnBrowser()) {
+      localStorage.removeItem('pp:pkce:cd')
+    }
   }
 
   static generateChallenge() {

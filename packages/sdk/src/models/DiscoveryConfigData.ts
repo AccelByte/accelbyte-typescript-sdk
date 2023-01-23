@@ -74,37 +74,43 @@ export const GlobalStyleConfig = z.object({
 })
 export type GlobalStyleConfig = z.infer<typeof GlobalStyleConfig>
 
+export const SocialLinkConfig = z.object({
+  url: z.string(),
+  platform: z.string(),
+  apps: z.array(z.string())
+})
+export type SocialLinkConfig = z.infer<typeof SocialLinkConfig>
+
+export const TemplateInfoConfig = z.object({
+  draft: z.string(),
+  published: z.string()
+})
+export type TemplateInfoConfig = z.infer<typeof TemplateInfoConfig>
+
 export const DiscoveryConfigData = z.object({
   ppTemplateInfo: Config.merge(
     z.object({
-      data: z.object({
-        draft: z.string(),
-        published: z.string()
-      })
+      data: TemplateInfoConfig
     })
   ),
   launcherTemplateInfo: Config.merge(
     z.object({
-      data: z.object({
-        draft: z.string(),
-        published: z.string()
-      })
+      data: TemplateInfoConfig
     })
   ),
   loginTemplateInfo: Config.merge(
     z.object({
-      data: z.object({
-        draft: z.string(),
-        published: z.string()
-      })
+      data: TemplateInfoConfig
     })
   ),
   legalTemplateInfo: Config.merge(
     z.object({
-      data: z.object({
-        draft: z.string(),
-        published: z.string()
-      })
+      data: TemplateInfoConfig
+    })
+  ),
+  paymentTemplateInfo: Config.merge(
+    z.object({
+      data: TemplateInfoConfig
     })
   ),
   ppFeatureFlags: Config,
@@ -114,13 +120,7 @@ export const DiscoveryConfigData = z.object({
   socialLinks: Config.merge(
     z.object({
       data: z.object({
-        value: z.array(
-          z.object({
-            url: z.string(),
-            platform: z.string(),
-            apps: z.array(z.string())
-          })
-        )
+        value: z.array(SocialLinkConfig)
       })
     })
   ),
@@ -150,6 +150,34 @@ export const DiscoveryConfigData = z.object({
     })
   ),
   templateConfig: Config.merge(
+    z.object({
+      data: z.object({
+        value: z.string()
+      })
+    })
+  ),
+  appId: Config.merge(
+    z.object({
+      data: z.object({
+        value: z.string()
+      })
+    })
+  ),
+  avatarsList: Config.merge(
+    z.object({
+      data: z.object({
+        value: z.string()
+      })
+    })
+  ),
+  brandName: Config.merge(
+    z.object({
+      data: z.object({
+        value: z.string()
+      })
+    })
+  ),
+  favicon: Config.merge(
     z.object({
       data: z.object({
         value: z.string()

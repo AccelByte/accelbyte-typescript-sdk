@@ -78,18 +78,19 @@ export default async function createConfigs() {
     // Node will always use CJS and browser will always use ESM, which may not be true.
     // We need to also cover the ESM side of Node.js later.
 
-    // ESM and CJS Modules
+    // Node bundle. This is because when we use `isBrowser: true`, Rollup is smart that it'll polyfill
+    // and import the correct libraries automatically (e.g. correctly import from conditionals in package.json).
     createConfig({
-      input: './src/index.ts',
+      input: './src/index.node.ts',
       output: [
         {
-          file: path.join(CONFIG.compilerOptions.outDir, 'index.es.js'),
+          file: path.join(CONFIG.compilerOptions.outDir, 'index.node.es.js'),
           format: 'es',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'
         },
         {
-          file: path.join(CONFIG.compilerOptions.outDir, 'index.js'),
+          file: path.join(CONFIG.compilerOptions.outDir, 'index.node.js'),
           format: 'cjs',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'

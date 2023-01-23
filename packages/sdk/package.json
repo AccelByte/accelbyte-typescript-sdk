@@ -1,9 +1,9 @@
 {
   "name": "@accelbyte/sdk",
-  "version": "0.1.1-alpha.53",
+  "version": "0.1.1-alpha.55",
   "author": "AccelByte Inc",
   "license": "AccelByte License",
-  "main": "./dist/index.js",
+  "main": "./dist/index.node.js",
   "types": "./dist/index.d.ts",
   "type": "module",
   "exports": {
@@ -11,8 +11,8 @@
       "types": "./dist/index.d.ts",
       "browser": "./dist/index.browser.es.js",
       "default": {
-        "import": "./dist/index.es.js",
-        "default": "./dist/index.js"
+        "import": "./dist/index.node.es.js",
+        "default": "./dist/index.node.js"
       }
     },
     "./package.json": "./package.json"

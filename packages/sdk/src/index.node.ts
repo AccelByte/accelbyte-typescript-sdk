@@ -5,5 +5,5 @@
  */
 
 // This needs to be imported otherwise the polyfill will appear after all of the code bundles.
-import './polyfills/browser'
+import './polyfills/node'
 export * from './index'
