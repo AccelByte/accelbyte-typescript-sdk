@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -294,7 +294,6 @@ export class OAuth20$ {
    * 				<li><strong>device</strong>: Every device that does’nt run Android and iOS is categorized as a device. The device_id is the device’s ID.</li>
    * 				<li><strong>justice</strong>: The platform_token’s value is the designated user’s access token.</li>
    * 				<li><strong>epicgames</strong>: The platform_token’s value is an access-token obtained from Epicgames EOS Account Service.</li>
-   *                 <li><strong>stadia</strong>: The platform_token's value is a JWT Token, which can be obtained after calling the Stadia SDK's function.</li>
    * 				<li><strong>ps4</strong>: The platform_token’s value is the authorization code returned by Sony OAuth.</li>
    * 				<li><strong>ps5</strong>: The platform_token’s value is the authorization code returned by Sony OAuth.</li>
    * 				<li><strong>nintendo</strong>: The platform_token’s value is the authorization code(id_token) returned by Nintendo OAuth.</li>

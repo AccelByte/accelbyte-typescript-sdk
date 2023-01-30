@@ -6,9 +6,6 @@
 import { InputValidationDataPublic } from '@accelbyte/sdk/generated-public/iam/definitions/InputValidationDataPublic'
 import { ValidationDetailPublic } from '@accelbyte/sdk/generated-public/iam/definitions/ValidationDetailPublic'
 import {
-  CharacterLocationType,
-  LetterCaseType,
-  RegexGeneratorParam,
   validateForbiddenWords,
   ValidateForbiddenWordsErrorType,
   validateLength,
@@ -16,7 +13,7 @@ import {
   validateRegex,
   ValidateRegexErrorType
 } from '@accelbyte/validator'
-import { isEmpty } from 'validator'
+import isEmpty from 'validator/lib/isEmpty'
 import { z } from 'zod'
 
 export const ValidateableInputField = z.enum(['username', 'displayName', 'password', 'email'])
@@ -64,12 +61,12 @@ export class InputValidationHelper {
       const lastCharacter = value.slice(-1)
       const isLastCharacterSpecial = /[^a-zA-Z0-9]/.test(lastCharacter)
       if (isLastCharacterSpecial && value.length > 1) {
-        result = validation.specialCharacterLocation === 'middle' ? ValidateRegexErrorType.invalidFormat : null
+        result = validation.specialCharacterLocation === 'middle' ? ValidateRegexErrorType.enum.invalidFormat : null
       }
 
       if (!result && !validation.allowSpace) {
         const isSpaceFound = /\s/.test(value)
-        result = isSpaceFound ? ValidateRegexErrorType.invalidFormat : null
+        result = isSpaceFound ? ValidateRegexErrorType.enum.invalidFormat : null
       }
     }
 
@@ -98,15 +95,5 @@ export class InputValidationHelper {
     const inputValidation = validations.find(validator => validator.field === key)
     if (!inputValidation) return
     return inputValidation.validation
-  }
-
-  static getFormattedValidation = (validation: ValidationDetailPublic): RegexGeneratorParam => {
-    const { letterCase, specialCharacterLocation, ...data } = validation
-
-    return {
-      ...data,
-      letterCase: letterCase as LetterCaseType,
-      specialCharacterLocation: specialCharacterLocation as CharacterLocationType
-    }
   }
 }

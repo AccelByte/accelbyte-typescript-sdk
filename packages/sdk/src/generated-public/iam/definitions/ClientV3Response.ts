@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,7 +22,9 @@ export const ClientV3Response = z.object({
   oauthClientType: z.string(),
   oauthRefreshTokenExpiration: z.number().int().nullish(),
   oauthRefreshTokenExpirationTimeUnit: z.string().nullish(),
+  parentNamespace: z.string().nullish(),
   redirectUri: z.string(),
+  roles: z.array(z.string()).nullish(),
   scopes: z.array(z.string()),
   twoFactorEnabled: z.boolean()
 })

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,7 +14,7 @@ export const CatalogChangeInfo = z.object({
   itemType: z
     .enum(['APP', 'COINS', 'INGAMEITEM', 'BUNDLE', 'CODE', 'SUBSCRIPTION', 'SEASON', 'MEDIA', 'OPTIONBOX', 'EXTENSION', 'LOOTBOX'])
     .nullish(),
-  type: z.enum(['STORE', 'CATEGORY', 'ITEM']).nullish(),
+  type: z.enum(['STORE', 'CATEGORY', 'ITEM', 'VIEW', 'SECTION']).nullish(),
   title: z.string().nullish(),
   sku: z.string().nullish(),
   action: z.enum(['CREATE', 'UPDATE', 'DELETE']),
@@ -22,6 +22,8 @@ export const CatalogChangeInfo = z.object({
   publishedAt: z.string().nullish(),
   description: z.string().nullish(),
   selected: z.boolean(),
+  viewId: z.string().nullish(),
+  sectionId: z.string().nullish(),
   createdAt: z.string(),
   updatedAt: z.string()
 })

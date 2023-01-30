@@ -10,7 +10,7 @@ import { RetrieveUserEligibilitiesResponse } from '@accelbyte/sdk/generated-publ
 import { RetrieveUserEligibilitiesResponseArray } from '@accelbyte/sdk/generated-public/legal/definitions/RetrieveUserEligibilitiesResponseArray'
 import { DisplayedPolicy } from '@accelbyte/sdk/models/Legal'
 import { UrlHelper } from '@accelbyte/sdk/utils/UrlHelper'
-import { isURL } from 'validator'
+import isURL from 'validator/lib/isURL'
 
 export class LegalHelper {
   static getUnsignedPolicies = (userEligibilities: RetrieveUserEligibilitiesResponseArray): RetrieveUserEligibilitiesResponseArray => {

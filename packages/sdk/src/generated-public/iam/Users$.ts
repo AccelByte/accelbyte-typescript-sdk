@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -484,7 +484,6 @@ export class Users$ {
    * 				<li><strong>awscognito</strong>: The ticket’s value is the aws cognito access token (JWT).</li>
    * 				<li><strong>epicgames</strong>: The ticket’s value is an access-token obtained from Epicgames EOS Account Service.</li>
    * 				<li><strong>nintendo</strong>: The ticket’s value is the authorization code(id_token) returned by Nintendo OAuth.</li>
-   * 				<li><strong>stadia</strong>: The ticket’s value is a JWT Token, which can be obtained after calling the Stadia SDK's function.</li>
    * 			</ul>
    * 		<br>action code : 10144
    */
@@ -522,7 +521,6 @@ export class Users$ {
    * 				<li><strong>awscognito</strong></li>
    * 				<li><strong>epicgames</strong></li>
    * 				<li><strong>nintendo</strong></li>
-   * 				<li><strong>stadia</strong></li>
    * 			</ul>
    * 			<p>Unlink user's account from a specific platform. 'justice' platform might have multiple accounts from different namespaces linked.
    * 			<br><i>platformNamespace</i> need to be specified when the platform ID is 'justice'.
@@ -576,7 +574,6 @@ export class Users$ {
    * 				<li><strong>device</strong>: Every device that does’nt run Android and iOS is categorized as a device. The device_id is the device’s ID.</li>
    * 				<li><strong>justice</strong>: The platform_token’s value is the designated user’s access token.</li>
    * 				<li><strong>epicgames</strong>: The platform_token’s value is an access-token obtained from Epicgames EOS Account Service.</li>
-   *                 <li><strong>stadia</strong>: The platform_token's value is a JWT Token, which can be obtained after calling the Stadia SDK's function.</li>
    * 				<li><strong>ps4</strong>: The platform_token’s value is the authorization code returned by Sony OAuth.</li>
    * 				<li><strong>ps5</strong>: The platform_token’s value is the authorization code returned by Sony OAuth.</li>
    * 				<li><strong>nintendo</strong>: The platform_token’s value is the authorization code(id_token) returned by Nintendo OAuth.</li>
@@ -747,7 +744,7 @@ export class Users$ {
    */
   fetchV3UsersByUseridLoginsHistories<T = LoginHistoriesResponse>(
     userId: string,
-    queryParams?: { before?: number | null; after?: number | null; limit?: number }
+    queryParams?: { before?: number; after?: number; limit?: number }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/logins/histories'

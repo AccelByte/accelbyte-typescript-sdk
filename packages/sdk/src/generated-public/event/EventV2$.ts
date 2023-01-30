@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -28,13 +28,7 @@ export class EventV2$ {
    */
   fetchEventV2UsersByUseridEdithistory<T = EventResponseV2>(
     userId: string,
-    queryParams?: {
-      pageSize?: number | null
-      startDate?: string | null
-      endDate?: string | null
-      offset?: number | null
-      type?: string | null
-    }
+    queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; type?: string | null }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/edithistory'
@@ -56,13 +50,7 @@ export class EventV2$ {
    */
   fetchEventV2UsersByUseridEvent<T = EventResponseV2>(
     userId: string,
-    queryParams?: {
-      pageSize?: number | null
-      startDate?: string | null
-      endDate?: string | null
-      offset?: number | null
-      eventName?: string | null
-    }
+    queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; eventName?: string | null }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/event'

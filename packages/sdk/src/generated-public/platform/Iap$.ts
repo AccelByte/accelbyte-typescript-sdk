@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,7 +16,7 @@ import { GoogleIapReceipt } from './definitions/GoogleIapReceipt'
 import { GoogleReceiptResolveResult } from './definitions/GoogleReceiptResolveResult'
 import { PlayStationMultiServiceLabelsReconcileRequest } from './definitions/PlayStationMultiServiceLabelsReconcileRequest'
 import { PlayStationReconcileRequest } from './definitions/PlayStationReconcileRequest'
-import { StadiaSyncRequest } from './definitions/StadiaSyncRequest'
+import { PlayStationReconcileResultArray } from './definitions/PlayStationReconcileResultArray'
 import { SteamSyncRequest } from './definitions/SteamSyncRequest'
 import { TwitchSyncRequest } from './definitions/TwitchSyncRequest'
 import { XblReconcileRequest } from './definitions/XblReconcileRequest'
@@ -55,30 +55,33 @@ export class Iap$ {
   /**
    * Synchronize with entitlements in PSN Store with multiple service labels.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putUsersByUseridIapPsnSyncMultiServiceLabels(
+  putUsersByUseridIapPsnSyncMultiServiceLabels<T = PlayStationReconcileResultArray>(
     userId: string,
     data: PlayStationMultiServiceLabelsReconcileRequest
-  ): Promise<IResponse<unknown>> {
+  ): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync/multiServiceLabels'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown())
+    return Validate.responseType(() => resultPromise, PlayStationReconcileResultArray)
   }
 
   /**
    * Synchronize with entitlements in PSN Store.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putUsersByUseridIapPsnSync(userId: string, data: PlayStationReconcileRequest): Promise<IResponse<unknown>> {
+  putUsersByUseridIapPsnSync<T = PlayStationReconcileResultArray>(
+    userId: string,
+    data: PlayStationReconcileRequest
+  ): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown())
+    return Validate.responseType(() => resultPromise, PlayStationReconcileResultArray)
   }
 
   /**
@@ -87,19 +90,6 @@ export class Iap$ {
   putUsersByUseridIapTwitchSync(userId: string, data: TwitchSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/twitch/sync'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * Sync stadia entitlements.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
-   */
-  putUsersByUseridIapStadiaSync(userId: string, data: StadiaSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/stadia/sync'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })

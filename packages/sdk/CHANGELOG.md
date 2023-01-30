@@ -1,3 +1,11 @@
+### 0.1.1-alpha.57 - 2023-01-24
+
+- Don't use ESM-only build yet for validator
+
+### 0.1.1-alpha.56 - 2023-01-23
+
+- Allow building SDK without requiring validator to be built, fix browser bundle, bump dependencies
+
 ### 0.1.1-alpha.55 - 2023-01-23
 
 - Fix generateLoginURL not working in Node.js because getRandomValues is not polyfilled

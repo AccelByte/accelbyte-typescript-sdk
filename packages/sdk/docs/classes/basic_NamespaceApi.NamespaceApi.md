@@ -14,7 +14,7 @@
 
 ### getNamespaces
 
-▸ **getNamespaces**(`activeOnly?`): `Promise`<`IResponseWithSync`<{ `createdAt`: `undefined` \| ``null`` \| `string` ; `displayName`: `undefined` \| ``null`` \| `string` ; `namespace`: `undefined` \| ``null`` \| `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"DELETED"`` ; `updatedAt`: `undefined` \| ``null`` \| `string`  }[]\>\>
+▸ **getNamespaces**(`activeOnly?`): `Promise`<`IResponseWithSync`<{ `clientId`: `undefined` \| ``null`` \| `string` ; `createdAt`: `undefined` \| ``null`` \| `string` ; `displayName`: `undefined` \| ``null`` \| `string` ; `namespace`: `undefined` \| ``null`` \| `string` ; `parentNamespace`: `undefined` \| ``null`` \| `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"DELETED"`` ; `updatedAt`: `undefined` \| ``null`` \| `string`  }[]\>\>
 
 Get all namespaces.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Action code</i>: 11303</li><li><i>Returns</i>: list of namespaces</li></ul>
 
@@ -26,8 +26,8 @@ Get all namespaces.<br>Other detail info: <ul><li><i>Required permission</i>: lo
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `createdAt`: `undefined` \| ``null`` \| `string` ; `displayName`: `undefined` \| ``null`` \| `string` ; `namespace`: `undefined` \| ``null`` \| `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"DELETED"`` ; `updatedAt`: `undefined` \| ``null`` \| `string`  }[]\>\>
+`Promise`<`IResponseWithSync`<{ `clientId`: `undefined` \| ``null`` \| `string` ; `createdAt`: `undefined` \| ``null`` \| `string` ; `displayName`: `undefined` \| ``null`` \| `string` ; `namespace`: `undefined` \| ``null`` \| `string` ; `parentNamespace`: `undefined` \| ``null`` \| `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"DELETED"`` ; `updatedAt`: `undefined` \| ``null`` \| `string`  }[]\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/basic/NamespaceApi.ts:19](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/basic/NamespaceApi.ts#lines-19)
+[packages/sdk/src/api/basic/NamespaceApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/basic/NamespaceApi.ts#L19)

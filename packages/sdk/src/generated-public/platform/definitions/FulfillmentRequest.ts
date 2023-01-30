@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -21,7 +21,7 @@ export const FulfillmentRequest = z.object({
   duration: z.number().int().nullish(),
   region: z.string().nullish(),
   language: z.string().nullish(),
-  origin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'Stadia', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
+  origin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
 })
 
 export type FulfillmentRequest = z.TypeOf<typeof FulfillmentRequest>

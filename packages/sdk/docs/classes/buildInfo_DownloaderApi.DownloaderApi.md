@@ -33,7 +33,7 @@ This API is used to get simple build manifest that contains list of current buil
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:27](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/buildInfo/DownloaderApi.ts#lines-27)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L27)
 
 ___
 
@@ -56,7 +56,7 @@ This API is used to get build manifest of release version of the application.<p>
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:34](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/buildInfo/DownloaderApi.ts#lines-34)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L34)
 
 ___
 
@@ -79,13 +79,13 @@ This API is used to retrieve detailed diff cache.<br/>The response will contains
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:42](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/buildInfo/DownloaderApi.ts#lines-42)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L42)
 
 ___
 
 ### getMatchPlatform
 
-▸ **getMatchPlatform**(`__namedParameters`): ``null`` \| `string`
+▸ **getMatchPlatform**(`«destructured»`): ``null`` \| `string`
 
 Check which platform is available for the user to download the game
 
@@ -93,9 +93,9 @@ Check which platform is available for the user to download the game
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.buildsAvailability` | { `appId`: `undefined` \| ``null`` \| `string` ; `appSize`: `undefined` \| ``null`` \| `number` ; `buildId`: `undefined` \| ``null`` \| `string` ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string`  }[] |
-| `__namedParameters.userPlatform` | [`IUserPlatform`](../interfaces/buildInfo_DownloaderApi.IUserPlatform.md) |
+| `«destructured»` | `Object` |
+| › `buildsAvailability` | { `appId`: `undefined` \| ``null`` \| `string` ; `appSize`: `undefined` \| ``null`` \| `number` ; `buildId`: `undefined` \| ``null`` \| `string` ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string`  }[] |
+| › `userPlatform` | [`IUserPlatform`](../interfaces/buildInfo_DownloaderApi.IUserPlatform.md) |
 
 #### Returns
 
@@ -103,4 +103,4 @@ Check which platform is available for the user to download the game
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:52](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/buildInfo/DownloaderApi.ts#lines-52)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:52](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L52)

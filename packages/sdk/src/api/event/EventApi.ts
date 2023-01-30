@@ -31,10 +31,10 @@ export class EventApi {
   }: {
     userId: string
     queryParams?: {
-      pageSize?: number | null
+      pageSize?: number | undefined
       startDate?: string | null
       endDate?: string | null
-      offset?: number | null
+      offset?: number | undefined
       type?: string | null
     }
   }) => {

@@ -32,7 +32,8 @@ function createConfig(config, isBrowser) {
       peerDepsExternal(),
       alias({
         entries: {
-          '@accelbyte/sdk': path.resolve('./src')
+          '@accelbyte/sdk': path.resolve('./src'),
+          '@accelbyte/validator': path.resolve('../validator/src')
         }
       }),
       resolve({ jsnext: true, preferBuiltins: true, browser: isBrowser }),
@@ -58,8 +59,9 @@ function createConfig(config, isBrowser) {
 
 export default async function createConfigs() {
   return [
-    /*
-    // Browser Module, Immediately-invoked Function Expressions (IIFE). Enable if a direct browser support is needed
+    // Browser module, DO NOT comment this.
+    // The output is ESM and the `isBrowser: true` indicates that it will resolve dependencies compatible for browser,
+    // so that it could work in non-SSR and non-Node environments.
     createConfig(
       {
         input: './src/index.browser.ts',
@@ -72,14 +74,10 @@ export default async function createConfigs() {
       },
       true
     ),
-     */
 
-    // FIXME: create conditional exports in package.json. At the moment, we are assuming that
-    // Node will always use CJS and browser will always use ESM, which may not be true.
-    // We need to also cover the ESM side of Node.js later.
-
-    // Node bundle. This is because when we use `isBrowser: true`, Rollup is smart that it'll polyfill
-    // and import the correct libraries automatically (e.g. correctly import from conditionals in package.json).
+    // ESM and CJS Modules, for Node.js (can also run in SSR).
+    // The `isBrowser: false` indicates that it will resolve dependencies compatible for Node.js,
+    // so that it could work in SSR and Node environments.
     createConfig({
       input: './src/index.node.ts',
       output: [
@@ -103,9 +101,9 @@ export default async function createConfigs() {
 // Local plugins.
 // This is a custom plugin to rewrite the declaration files.
 // Read more about the "hooks" of Rollup, visit https://rollupjs.org/guide/en/#output-generation-hooks.
-const ACTUAL_ANCHOR = path.join(path.resolve(process.cwd()), 'src').replace(/\\/g, '/')
-const IMPORT_ANCHOR = `@accelbyte/sdk`
-const IMPORT_REGEX = /@accelbyte\/sdk(\/\w+)*/g
+const ACTUAL_ANCHOR = path.join(process.cwd(), CONFIG.compilerOptions.outDir).replace(/\\/g, '/')
+const IMPORT_ANCHOR = /@accelbyte\/(sdk|validator)/g
+const IMPORT_REGEX = /@accelbyte\/(sdk|validator)(\/\w+)*/g
 
 function declarationRewritePlugin() {
   return {
@@ -120,7 +118,8 @@ function declarationRewritePlugin() {
         // Normalize the full path. This is because we might have `declarationDir`
         // in `tsconfig.build.json`. If we don't normalize it, then the imports will be referring
         // to incorrect paths.
-        const normalizedFullPath = fullPathToFile.replace(path.join(ACTUAL_ANCHOR, CONFIG.compilerOptions.declarationDir), ACTUAL_ANCHOR)
+        const anchorPath = fullPathToFile.slice(0, fullPathToFile.indexOf('src/') + 'src/'.length)
+
         // If it is a declaration file, then we replace "@accelbyte/sdk" with ".".
         if (fileName.endsWith('.d.ts')) {
           // Example `fileName`: accelbyte-web-sdk/packages/sdk/src/generated/platform/definitions/WalletPagingSlicedResult.d.ts.
@@ -137,8 +136,8 @@ function declarationRewritePlugin() {
             const deduped = Array.from(new Set(imports))
             for (const match of deduped) {
               // Replace the imports with the relative paths.
-              const actualPath = match.replace(IMPORT_ANCHOR, ACTUAL_ANCHOR)
-              let relativePath = path.relative(path.dirname(normalizedFullPath), actualPath).replace(/\\/g, '/')
+              const actualPath = match.replace(IMPORT_ANCHOR, anchorPath)
+              let relativePath = path.relative(path.dirname(fullPathToFile), actualPath).replace(/\\/g, '/')
               // Add relative indicator so it doesn't try to resolve from `node_modules`.
               if (!relativePath.startsWith('.')) {
                 relativePath = `./${relativePath}`

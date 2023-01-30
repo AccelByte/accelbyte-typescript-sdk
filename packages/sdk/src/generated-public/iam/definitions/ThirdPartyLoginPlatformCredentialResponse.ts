@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -11,7 +11,7 @@ export const ThirdPartyLoginPlatformCredentialResponse = z.object({
   ACSURL: z.string(),
   AWSCognitoRegion: z.string(),
   AWSCognitoUserPool: z.string(),
-  AllowedClients: z.array(z.string()),
+  AllowedClients: z.array(z.string()).nullish(),
   AppId: z.string(),
   AuthorizationEndpoint: z.string().nullish(),
   ClientId: z.string(),
@@ -31,7 +31,7 @@ export const ThirdPartyLoginPlatformCredentialResponse = z.object({
   Secret: z.string(),
   TeamID: z.string(),
   TokenAuthenticationType: z.string(),
-  TokenClaimsMapping: z.record(z.string()),
+  TokenClaimsMapping: z.record(z.string()).nullish(),
   TokenEndpoint: z.string().nullish(),
   registeredDomains: z.array(RegisteredDomain),
   scopes: z.array(z.string()).nullish()

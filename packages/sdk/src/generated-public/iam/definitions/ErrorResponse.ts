@@ -1,9 +1,10 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { UserBan } from './UserBan'
 
 export const ErrorResponse = z.object({
   clientId: z.string().nullish(),
@@ -16,7 +17,8 @@ export const ErrorResponse = z.object({
   linkingToken: z.string().nullish(),
   messageVariables: z.record(z.string()).nullish(),
   mfa_token: z.string().nullish(),
-  platformId: z.string().nullish()
+  platformId: z.string().nullish(),
+  userBan: UserBan.nullish()
 })
 
 export type ErrorResponse = z.TypeOf<typeof ErrorResponse>

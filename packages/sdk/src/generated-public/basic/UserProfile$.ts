@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -174,7 +174,7 @@ export class UserProfile$ {
   }
 
   /**
-   * Get custom attributes info.<br>Other detail info: <ul><li><i>Required permission</i>: resource=<b>"NAMESPACE:{namespace}:USER:{userId}:PROFILE"</b>, action=2 <b>(READ)</b></li><li><i>Action code</i>: 11404</li><li><i>Returns</i>: user custom attributes</li></ul>
+   * Get custom attributes info.<br>Other detail info: <ul><li><i>Action code</i>: 11404</li><li><i>Returns</i>: user custom attributes</li></ul>
    */
   fetchV1UsersByUseridProfilesCustomAttributes(userId: string): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig

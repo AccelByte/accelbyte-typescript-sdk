@@ -52,24 +52,30 @@ export const ColorConfig = z.object({
 })
 export type ColorConfig = z.infer<typeof ColorConfig>
 
+export const ColorConfigs = z.object({
+  background: ColorConfig,
+  card: ColorConfig,
+  overlay: ColorConfig,
+  primary: ColorConfig,
+  secondary: ColorConfig,
+  text: ColorConfig
+})
+export type ColorConfigs = z.infer<typeof ColorConfigs>
+
+export const FontConfigs = z.object({
+  body: z.string(),
+  bodyCss: z.string(),
+  customBodyFontUrl: z.string(),
+  title: z.string(),
+  titleCss: z.string(),
+  customTitleFontUrl: z.string()
+})
+export type FontConfigs = z.infer<typeof FontConfigs>
+
 export const GlobalStyleConfig = z.object({
   global: z.object({
-    colors: z.object({
-      background: ColorConfig,
-      card: ColorConfig,
-      overlay: ColorConfig,
-      primary: ColorConfig,
-      secondary: ColorConfig,
-      text: ColorConfig
-    }),
-    fonts: z.object({
-      body: z.string(),
-      bodyCss: z.string(),
-      customBodyFontUrl: z.string(),
-      title: z.string(),
-      titleCss: z.string(),
-      customTitleFontUrl: z.string()
-    })
+    colors: ColorConfigs,
+    fonts: FontConfigs
   })
 })
 export type GlobalStyleConfig = z.infer<typeof GlobalStyleConfig>

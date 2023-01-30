@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -99,6 +99,30 @@ export class OAuth20Extension$ {
    * 		It require a valid user token.<br>
    * 		Should specify the target platform id and current user should already linked to this platform.<br>
    * 		Current user should be a headless account.<br>
+   * 			<h2>Supported platforms:</h2>
+   * 			<ul>
+   * 				<li><strong>steam</strong></li>
+   * 				<li><strong>steamopenid</strong></li>
+   * 				<li><strong>facebook</strong></li>
+   * 				<li><strong>google</strong></li>
+   * 				<li><strong>oculus</strong></li>
+   * 				<li><strong>twitch</strong></li>
+   * 				<li><strong>discord</strong></li>
+   * 				<li><strong>android</strong></li>
+   * 				<li><strong>ios</strong></li>
+   * 				<li><strong>apple</strong></li>
+   * 				<li><strong>device</strong></li>
+   * 				<li><strong>justice</strong></li>
+   * 				<li><strong>epicgames</strong></li>
+   * 				<li><strong>ps4</strong></li>
+   * 				<li><strong>ps5</strong></li>
+   * 				<li><strong>nintendo</strong></li>
+   * 				<li><strong>awscognito</strong></li>
+   * 				<li><strong>live</strong></li>
+   * 				<li><strong>xblweb</strong></li>
+   * 				<li><strong>netflix</strong></li>
+   * 				<li><strong>snapchat</strong></li>
+   * 			</ul>
    * 		</p>
    */
   postIamV3LinkCodeRequest<T = OneTimeLinkingCodeResponse>(data: { platformId: string | null }): Promise<IResponse<T>> {

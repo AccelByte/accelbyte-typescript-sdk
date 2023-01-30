@@ -43,7 +43,7 @@ Create my profile.<br><b>Client with user token can create user profile in targe
 
 #### Defined in
 
-[packages/sdk/src/api/basic/UserProfileApi.ts:28](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/basic/UserProfileApi.ts#lines-28)
+[packages/sdk/src/api/basic/UserProfileApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/basic/UserProfileApi.ts#L28)
 
 ___
 
@@ -59,7 +59,7 @@ Get my profile<br><b>Client with user token can get user profile in target names
 
 #### Defined in
 
-[packages/sdk/src/api/basic/UserProfileApi.ts:21](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/basic/UserProfileApi.ts#lines-21)
+[packages/sdk/src/api/basic/UserProfileApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/basic/UserProfileApi.ts#L21)
 
 ___
 
@@ -82,7 +82,7 @@ Update partially custom attributes tied to user id.<br>Other detail info: <ul><l
 
 #### Defined in
 
-[packages/sdk/src/api/basic/UserProfileApi.ts:42](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/basic/UserProfileApi.ts#lines-42)
+[packages/sdk/src/api/basic/UserProfileApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/basic/UserProfileApi.ts#L42)
 
 ___
 
@@ -115,4 +115,4 @@ Update my profile.<br>Updates user profile in the target namespace. If token's n
 
 #### Defined in
 
-[packages/sdk/src/api/basic/UserProfileApi.ts:35](https://bitbucket.org/accelbyte/justice-odin/src/d39c8cbe8/accelbyte-web-sdk/packages/sdk/src/api/basic/UserProfileApi.ts#lines-35)
+[packages/sdk/src/api/basic/UserProfileApi.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/basic/UserProfileApi.ts#L35)
