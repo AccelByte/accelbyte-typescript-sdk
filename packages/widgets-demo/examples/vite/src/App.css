@@ -1,0 +1,41 @@
+#root {
+  width: 100%;
+  text-align: center;
+}
+
+main {
+  padding: 16px;
+}
+
+hr {
+  border-color: #5a5a5a;
+  border-bottom-width: 1px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+#sdk-widget-app {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.paymentScenario__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 640px;
+}
+
+.paymentScenario__form label {
+  margin-right: 8px;
+}
+
+.paymentScenario__form .paymentScenario__submit-button {
+  margin-top: 16px;
+  width: 100%;
+}

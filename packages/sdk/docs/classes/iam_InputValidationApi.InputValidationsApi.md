@@ -33,4 +33,4 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/5292758/packages/sdk/src/api/iam/InputValidationApi.ts#L22)
+[packages/sdk/src/api/iam/InputValidationApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/68edbf1/packages/sdk/src/api/iam/InputValidationApi.ts#L22)

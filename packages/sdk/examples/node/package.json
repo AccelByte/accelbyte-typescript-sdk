@@ -1,0 +1,14 @@
+{
+  "name": "sdk-demo-node",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "test": "node index.mjs",
+    "link:start": "yarn link @accelbyte/sdk",
+    "link:stop": "yarn unlink @accelbyte/sdk && yarn install --force"
+  },
+  "dependencies": {
+    "@accelbyte/sdk": "0.1.1-alpha.55",
+    "dotenv": "16.0.3"
+  }
+}

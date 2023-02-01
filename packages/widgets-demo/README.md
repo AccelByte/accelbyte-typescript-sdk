@@ -1,10 +1,3 @@
-## Run Widgets Demo in dev mode:
+# AccelByte SDK Widgets Demo
 
-Prepare and copy `.env.example` as `.env` file, then replace the values
-
-```shell
-yarn:start
-```
-
-Open http://localhost:3030/
-
+This folder contains [examples](./examples) of the AccelByte SDK Widgets. This folder is intentionally kept empty so that each of the examples has their own "workspace", so there are no mixing of dependencies in between examples.

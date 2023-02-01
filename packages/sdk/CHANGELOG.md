@@ -1,3 +1,11 @@
+### 0.1.1-alpha.59 - 2023-02-01
+
+- Move example SDK and Widgets usages to the SDK and Widgets folder
+
+### 0.1.1-alpha.58 - 2023-01-30
+
+- Bump dependencies versions for security patches
+
 ### 0.1.1-alpha.57 - 2023-01-24
 
 - Don't use ESM-only build yet for validator

@@ -1,0 +1,29 @@
+{
+  "name": "@accelbyte/widgets-demo",
+  "version": "0.0.0",
+  "author": "AccelByte Inc",
+  "license": "AccelByte License",
+  "private": true,
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "clean": "rimraf dist/"
+  },
+  "dependencies": {
+    "@accelbyte/widgets": "0.1.1-alpha.45",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-router-dom": "5.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
+    "@types/react-router-dom": "5.1.7",
+    "typescript": "4.6.4",
+    "vite": "4.0.3",
+    "vite-plugin-checker": "0.4.6"
+  }
+}
