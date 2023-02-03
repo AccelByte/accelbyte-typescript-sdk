@@ -31,7 +31,7 @@ List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list<
 
 #### Defined in
 
-[packages/sdk/src/api/basic/MiscApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/95af6d2/packages/sdk/src/api/basic/MiscApi.ts#L19)
+[packages/sdk/src/api/basic/MiscApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/basic/MiscApi.ts#L19)
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/basic/MiscApi.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/95af6d2/packages/sdk/src/api/basic/MiscApi.ts#L23)
+[packages/sdk/src/api/basic/MiscApi.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/basic/MiscApi.ts#L23)
