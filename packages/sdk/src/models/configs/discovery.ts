@@ -5,6 +5,7 @@
  */
 import { Config } from '@accelbyte/sdk/generated-public/odin-config/definitions/Config'
 import { z } from 'zod'
+import { ColorConfigs, FontConfigs } from './base-configs'
 
 export const CompanyLogo = z.object({
   url: z.string(),
@@ -19,58 +20,6 @@ export const CompanyLogoConfig = z.object({
 })
 
 export type CompanyLogoConfig = z.TypeOf<typeof CompanyLogoConfig>
-
-export const LogoVariantConfig = z.object({
-  header: z.number(),
-  footer: z.number()
-})
-
-export type LogoVariantConfig = z.TypeOf<typeof LogoVariantConfig>
-
-export const ColorConfig = z.object({
-  hex: z.string(),
-  rgb: z.object({
-    r: z.number(),
-    g: z.number(),
-    b: z.number(),
-    a: z.number()
-  }),
-  hsl: z.object({
-    h: z.number(),
-    s: z.number(),
-    l: z.number(),
-    a: z.number()
-  }),
-  hsv: z.object({
-    h: z.number(),
-    s: z.number(),
-    v: z.number(),
-    a: z.number()
-  }),
-  oldHue: z.number(),
-  source: z.string()
-})
-export type ColorConfig = z.infer<typeof ColorConfig>
-
-export const ColorConfigs = z.object({
-  background: ColorConfig,
-  card: ColorConfig,
-  overlay: ColorConfig,
-  primary: ColorConfig,
-  secondary: ColorConfig,
-  text: ColorConfig
-})
-export type ColorConfigs = z.infer<typeof ColorConfigs>
-
-export const FontConfigs = z.object({
-  body: z.string(),
-  bodyCss: z.string(),
-  customBodyFontUrl: z.string(),
-  title: z.string(),
-  titleCss: z.string(),
-  customTitleFontUrl: z.string()
-})
-export type FontConfigs = z.infer<typeof FontConfigs>
 
 export const GlobalStyleConfig = z.object({
   global: z.object({
@@ -193,10 +142,3 @@ export const DiscoveryConfigData = z.object({
 })
 
 export type DiscoveryConfigData = z.infer<typeof DiscoveryConfigData>
-
-export const HomepagePPConfig = z.object({
-  isDisabled: z.boolean(),
-  redirectionURL: z.string(),
-  siteBrandURL: z.string()
-})
-export type HomepagePPConfig = z.infer<typeof HomepagePPConfig>

@@ -6,7 +6,7 @@
 import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
 import { DISCOVERY_TEMPLATE_NAME } from '@accelbyte/sdk/constants/DiscoveryTemplate'
 import { Templates$ } from '@accelbyte/sdk/generated-public/odin-config/Templates$'
-import { DiscoveryConfigData } from '@accelbyte/sdk/models/DiscoveryConfigData'
+import { DiscoveryConfigData } from '@accelbyte/sdk/models/configs/discovery'
 import { Network } from '@accelbyte/sdk/utils/Network'
 
 /**

@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk@0.1.1-alpha.55":
-  version "0.1.1-alpha.55"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.1.1-alpha.55.tgz#637a0ae1a6d590292c547152a88f33e1802d0372"
-  integrity sha512-ZbO6GLAciaAXR3FK4TsbqS11c0xFFTebNXVusBn+Y4u2lhLtxzE6AlTR49HRxNG1vK53wcc/n2QHmjRCRC+esg==
+"@accelbyte/sdk@0.1.1-alpha.57":
+  version "0.1.1-alpha.57"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.1.1-alpha.57.tgz#c61e64262cf27427a86a0b290ca7a2e09650c66b"
+  integrity sha512-yg3mTTyQWkOR+OkKQo5Vj322jmZkGBcoAyaqhOlobTaVGdqxahgR4wEoFaYbsspIlfNvEvrfQ/ZNhz7ybpbgbQ==
   dependencies:
     axios "0.27.2"
     buffer "6.0.3"
@@ -15,7 +15,7 @@
     platform "1.3.6"
     query-string "7.1.1"
     uuid "8.3.2"
-    validator "11.1.0"
+    validator "13.7.0"
     zod "3.17.3"
 
 "@next/env@13.0.7":
@@ -370,10 +370,10 @@ uuid@8.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
-validator@11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-11.1.0.tgz#ac18cac42e0aa5902b603d7a5d9b7827e2346ac4"
-  integrity sha512-qiQ5ktdO7CD6C/5/mYV4jku/7qnqzjrxb3C/Q5wR3vGGinHTgJZN/TdFT3ZX4vXhX2R1PXx42fB1cn5W+uJ4lg==
+validator@13.7.0:
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
+  integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
 
 zod@3.17.3:
   version "3.17.3"

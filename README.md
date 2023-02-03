@@ -26,7 +26,7 @@ Below is the list of AccelByte service APIs the library supports:
 To install the library execute
 
 ```shell
-    yarn add @accelbyte/sdk
+yarn add @accelbyte/sdk
 ```
 
 ## Prerequisites
@@ -100,11 +100,11 @@ In addition to the Accelbyte Web SDK, the library provides an extension called [
 To npm install the SDK Widgets execute
 
 ```shell
-    yarn add @accelbyte/widgets
+yarn add @accelbyte/widgets
 ```
 
 ## Testing
 
 ```shell
-    yarn --cwd packages/sdk test
+yarn --cwd packages/sdk test
 ```

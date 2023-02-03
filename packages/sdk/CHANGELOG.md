@@ -1,6 +1,7 @@
 ### 0.1.1-alpha.59 - 2023-02-01
 
 - Move example SDK and Widgets usages to the SDK and Widgets folder
+- Expose passing data config from SDK to Widget
 
 ### 0.1.1-alpha.58 - 2023-01-30
 
