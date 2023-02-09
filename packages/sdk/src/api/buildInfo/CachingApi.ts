@@ -17,7 +17,7 @@ export class CachingApi {
    * This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
    */
   getDiffCache(sourceBuildId: string, destinationBuildId: string) {
-    return this.newInstance().fetchDiffCacheSourceBySourcebuildidDestByDestinationbuildid(sourceBuildId, destinationBuildId)
+    return this.newInstance().fetchNsDiffCacheSourceBySourcebuildidDestByDestinationbuildid(sourceBuildId, destinationBuildId)
   }
 
   private newInstance() {

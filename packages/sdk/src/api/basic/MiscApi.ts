@@ -17,11 +17,11 @@ export class MiscApi {
    * List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
    */
   getCountries = (lang?: string) => {
-    return this.newInstance().fetchV1MiscCountries({ lang })
+    return this.newInstance().fetchV1NsMiscCountries({ lang })
   }
 
   getLanguages = () => {
-    return this.newInstance().fetchV1MiscLanguages()
+    return this.newInstance().fetchV1NsMiscLanguages()
   }
 
   private newInstance() {

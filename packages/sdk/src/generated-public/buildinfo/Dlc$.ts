@@ -20,7 +20,7 @@ export class Dlc$ {
   /**
    * This API is used to retrieve DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
    */
-  fetchDlcByBuildidLink<T = RetrieveDependencyLinkResponse>(buildId: string): Promise<IResponseWithSync<T>> {
+  fetchNsDlcByBuildidLink<T = RetrieveDependencyLinkResponse>(buildId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/dlc/{buildId}/link'
       .replace('{namespace}', this.namespace)
@@ -39,7 +39,7 @@ export class Dlc$ {
   /**
    * Retrieve the list of DLC available on specific game. Use DLC's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: appId of game and list of its builds by platformId</li></ul>
    */
-  fetchAppsLatestByDlcAppIdByDlcappid<T = RetrieveBaseGameResponseArray>(dlcAppId: string): Promise<IResponseWithSync<T>> {
+  fetchNsAppsLatestByDlcAppIdByDlcappid<T = RetrieveBaseGameResponseArray>(dlcAppId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/apps/latest/byDLCAppId/{dlcAppId}'
       .replace('{namespace}', this.namespace)
@@ -58,7 +58,7 @@ export class Dlc$ {
   /**
    * Retrieve the list of DLC available on specific game. Use game's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: list of DLC</li></ul>
    */
-  fetchDlcsLatestByGameAppIdByAppid<T = RetrieveLatestDlcResponseArray>(appId: string): Promise<IResponseWithSync<T>> {
+  fetchNsDlcsLatestByGameAppIdByAppid<T = RetrieveLatestDlcResponseArray>(appId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/dlcs/latest/byGameAppId/{appId}'
       .replace('{namespace}', this.namespace)
@@ -77,7 +77,7 @@ export class Dlc$ {
   /**
    * This API is used to retrieve compatibility of specific DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
    */
-  fetchDlcByBuildidCompatibility<T = RetrieveDependencyCompatibilityResponse>(buildId: string): Promise<IResponseWithSync<T>> {
+  fetchNsDlcByBuildidCompatibility<T = RetrieveDependencyCompatibilityResponse>(buildId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/dlc/{buildId}/compatibility'
       .replace('{namespace}', this.namespace)

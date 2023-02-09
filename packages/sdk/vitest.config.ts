@@ -9,11 +9,11 @@ import { resolve } from 'path'
 export default defineConfig({
   resolve: {
     alias: {
-      '@accelbyte/sdk': './src',
+      '@accelbyte/sdk': resolve('./src'),
       '@accelbyte/validator': resolve('../validator/src')
     }
   },
   test: {
-    environment: 'jsdom'
+    environment: 'happy-dom'
   }
 })

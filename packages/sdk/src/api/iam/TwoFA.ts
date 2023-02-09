@@ -20,7 +20,7 @@ export class TwoFA {
    *
    */
   getBackupCode = () => {
-    return this.newInstance().fetchV4UsersMeMfaBackupCode()
+    return this.newInstance().fetchV4NsUsersMeMfaBackupCode()
   }
 
   /**
@@ -29,7 +29,7 @@ export class TwoFA {
    *
    */
   enable2FABackupCodes = () => {
-    return this.newInstance().postV4UsersMeMfaBackupCodeEnable()
+    return this.newInstance().postV4NsUsersMeMfaBackupCodeEnable()
   }
 
   /**
@@ -38,7 +38,7 @@ export class TwoFA {
    *
    */
   generateBackupCodes = () => {
-    return this.newInstance().postV4UsersMeMfaBackupCode()
+    return this.newInstance().postV4NsUsersMeMfaBackupCode()
   }
 
   /**
@@ -47,7 +47,7 @@ export class TwoFA {
    *
    */
   disableBackupCodes = () => {
-    return this.newInstance().deleteV4UsersMeMfaBackupCodeDisable()
+    return this.newInstance().deleteV4NsUsersMeMfaBackupCodeDisable()
   }
 
   /**
@@ -56,7 +56,7 @@ export class TwoFA {
    *
    */
   disableAuthenticator = () => {
-    return this.newInstance().deleteV4UsersMeMfaAuthenticatorDisable()
+    return this.newInstance().deleteV4NsUsersMeMfaAuthenticatorDisable()
   }
 
   /**
@@ -65,7 +65,7 @@ export class TwoFA {
    *
    */
   getEnabledMethods = () => {
-    return this.newInstance().fetchV4UsersMeMfaFactor()
+    return this.newInstance().fetchV4NsUsersMeMfaFactor()
   }
 
   /**
@@ -74,7 +74,7 @@ export class TwoFA {
    *
    */
   set2FAAsDefault = (factor: string) => {
-    return this.newInstance().postV4UsersMeMfaFactor({ factor })
+    return this.newInstance().postV4NsUsersMeMfaFactor({ factor })
   }
 
   /**
@@ -83,7 +83,7 @@ export class TwoFA {
    *
    */
   enable2FAAuthenticator = (code: string) => {
-    return this.newInstance().postV4UsersMeMfaAuthenticatorEnable({ code })
+    return this.newInstance().postV4NsUsersMeMfaAuthenticatorEnable({ code })
   }
 
   /**
@@ -93,19 +93,19 @@ export class TwoFA {
    *
    */
   generateSecretKey = () => {
-    return this.newInstance().postV4UsersMeMfaAuthenticatorKey()
+    return this.newInstance().postV4NsUsersMeMfaAuthenticatorKey()
   }
 
   requestEmailCode = () => {
-    return this.newInstance().postV4UsersMeMfaEmailCode()
+    return this.newInstance().postV4NsUsersMeMfaEmailCode()
   }
 
   enableEmailMethod = (code: string) => {
-    return this.newInstance().postV4UsersMeMfaEmailEnable({ code })
+    return this.newInstance().postV4NsUsersMeMfaEmailEnable({ code })
   }
 
   disableEmailMethod = () => {
-    return this.newInstance().postV4UsersMeMfaEmailDisable()
+    return this.newInstance().postV4NsUsersMeMfaEmailDisable()
   }
 
   private newInstance() {

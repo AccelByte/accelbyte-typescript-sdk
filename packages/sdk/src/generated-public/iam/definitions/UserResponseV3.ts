@@ -14,7 +14,7 @@ export const UserResponseV3 = z.object({
   bans: z.array(UserActiveBanResponseV3),
   country: z.string(),
   createdAt: z.string(),
-  dateOfBirth: z.string(),
+  dateOfBirth: z.string().nullish(),
   deletionStatus: z.boolean(),
   displayName: z.string(),
   emailAddress: z.string(),

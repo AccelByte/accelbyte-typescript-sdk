@@ -17,7 +17,7 @@ export class ThirdPartyCredentialApi {
    * This is the Public API to Get All Active 3rd Platform Credential.
    */
   getThirdPartyPlatformInfo = () => {
-    return this.newInstance().fetchV3PlatformsClientsActive()
+    return this.newInstance().fetchV3NsPlatformsClientsActive()
   }
 
   /**

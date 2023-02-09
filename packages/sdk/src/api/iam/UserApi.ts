@@ -40,21 +40,21 @@ export class UserApi {
    * update current user
    */
   updateUserMe = (data: UserUpdateRequestV3) => {
-    return this.newInstance().patchV3UsersMe(data)
+    return this.newInstance().patchV3NsUsersMe(data)
   }
 
   /**
    * update current user's email
    */
   updateEmailMe = (data: EmailUpdateRequestV4) => {
-    return this.newInstance4().putV4UsersMeEmail(data)
+    return this.newInstance4().putV4NsUsersMeEmail(data)
   }
 
   /**
    * update current user's password
    */
   updatePasswordMe = (data: UserPasswordUpdateV3Request) => {
-    return this.newInstance().putV3UsersMePassword(data)
+    return this.newInstance().putV3NsUsersMePassword(data)
   }
 
   /**
@@ -80,7 +80,7 @@ export class UserApi {
    *
    */
   requestVerificationCode = (data: SendVerificationCodeRequestV3) => {
-    return this.newInstance().postV3UsersMeCodeRequest(data)
+    return this.newInstance().postV3NsUsersMeCodeRequest(data)
   }
 
   /**
@@ -92,7 +92,7 @@ export class UserApi {
    *
    */
   verifyCode = (data: UserVerificationRequestV3) => {
-    return this.newInstance().postV3UsersMeCodeVerify(data)
+    return this.newInstance().postV3NsUsersMeCodeVerify(data)
   }
 
   /**
@@ -112,7 +112,7 @@ export class UserApi {
    *        <br>action code : 10124</p>
    */
   upgradeHeadlessAccount = (data: UpgradeHeadlessAccountWithVerificationCodeRequestV3) => {
-    return this.newInstance().postV3UsersMeHeadlessCodeVerify(data)
+    return this.newInstance().postV3NsUsersMeHeadlessCodeVerify(data)
   }
 
   /**
@@ -133,7 +133,7 @@ export class UserApi {
    *          action code : 10124
    */
   upgradeHeadlessAccountV4 = (data: UpgradeHeadlessAccountWithVerificationCodeRequestV4) => {
-    return this.newInstance4().postV4UsersMeHeadlessCodeVerify(data)
+    return this.newInstance4().postV4NsUsersMeHeadlessCodeVerify(data)
   }
 
   /**
@@ -141,7 +141,7 @@ export class UserApi {
    *          <br>action code: 10128 </p>
    */
   getUserLinkedPlatform = (userId: string) => {
-    return this.newInstance().fetchV3UsersByUseridPlatforms(userId)
+    return this.newInstance().fetchV3NsUsersByUseridPlatforms(userId)
   }
 
   /**
@@ -171,14 +171,14 @@ export class UserApi {
    *    <br>action code : 10144
    */
   linkAccountToPlatform = ({ platformId, data }: { platformId: string; data: { ticket: string | null; redirectUri?: string | null } }) => {
-    return this.newInstance().postV3UsersMePlatformsByPlatformid(platformId, data)
+    return this.newInstance().postV3NsUsersMePlatformsByPlatformid(platformId, data)
   }
 
   /**
    * Get the linking status between a third-party platform to a user
    */
   getLinkRequestStatus = (requestId: string) => {
-    return this.newInstance().fetchV3RequestsByRequestidAsyncStatus(requestId)
+    return this.newInstance().fetchV3NsRequestsByRequestidAsyncStatus(requestId)
   }
 
   /**
@@ -189,7 +189,7 @@ export class UserApi {
    *
    */
   linkPlatformToUserAccount = ({ userId, data }: { userId: string; data: LinkPlatformAccountRequest }) => {
-    return this.newInstance().postV3UsersByUseridPlatformsLink(userId, data)
+    return this.newInstance().postV3NsUsersByUseridPlatformsLink(userId, data)
   }
 
   /**
@@ -222,7 +222,7 @@ export class UserApi {
    *      <br>action code : 10121 </p>
    */
   unLinkAccountFromPlatform = ({ platformId, data }: { platformId: string; data: UnlinkUserPlatformRequest }) => {
-    return this.newInstance().deleteV3UsersMePlatformsByPlatformid(platformId, data)
+    return this.newInstance().deleteV3NsUsersMePlatformsByPlatformid(platformId, data)
   }
 
   /**
@@ -235,14 +235,14 @@ export class UserApi {
     platformId: string
     queryParams?: { clientId?: string | null; redirectUri?: string | null }
   }) => {
-    return this.newInstance().fetchV3UsersMePlatformsByPlatformidWebLink(platformId, queryParams)
+    return this.newInstance().fetchV3NsUsersMePlatformsByPlatformidWebLink(platformId, queryParams)
   }
 
   /**
    * Get age restriction by country code. It will always get by publisher namespace
    */
   getAgeRestrictionByCountry = (countryCode: string) => {
-    return this.newInstance().fetchV3AgerestrictionsCountriesByCountrycode(countryCode)
+    return this.newInstance().fetchV3NsAgerestrictionsCountriesByCountrycode(countryCode)
   }
 
   /**
@@ -273,7 +273,7 @@ export class UserApi {
    *
    */
   requestNewUserVerificationCode(data: SendRegisterVerificationCodeRequest) {
-    return this.newInstance().postV3UsersCodeRequest(data)
+    return this.newInstance().postV3NsUsersCodeRequest(data)
   }
 
   /**
@@ -294,7 +294,7 @@ export class UserApi {
    *
    */
   createUser(data: CreateUserRequestV4) {
-    return this.newInstance4().postV4Users(data)
+    return this.newInstance4().postV4NsUsers(data)
   }
 
   /**
@@ -303,7 +303,7 @@ export class UserApi {
    *          <br>Required valid user authorization.</p>
    */
   getUserDistinctLinkedPlatform(userId: string) {
-    return this.newInstance().fetchV3UsersByUseridDistinctPlatforms(userId)
+    return this.newInstance().fetchV3NsUsersByUseridDistinctPlatforms(userId)
   }
 
   /**
@@ -311,7 +311,7 @@ export class UserApi {
    *      <p>Unlink user's account from for all third platforms. </p>
    */
   unLinkAccountFromPlatformDistinct(platformId: string) {
-    return this.newInstance().deleteV3UsersMePlatformsByPlatformidAll(platformId)
+    return this.newInstance().deleteV3NsUsersMePlatformsByPlatformidAll(platformId)
   }
 
   /**
@@ -329,7 +329,7 @@ export class UserApi {
    *          <br>action code: 10128 </p>
    */
   getLinkedAccount(userId: string) {
-    return this.newInstance().fetchV3UsersByUseridPlatforms(userId)
+    return this.newInstance().fetchV3NsUsersByUseridPlatforms(userId)
   }
 
   /**

@@ -18,7 +18,7 @@ export class Wallet$ {
   /**
    * get my wallet by currency code and namespace.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li><li><i>Path's namespace</i> : <ul>   <li>can be filled with <b>publisher namespace</b> in order to get <b>publisher user wallet</b></li>   <li>can be filled with <b>game namespace</b> in order to get <b>game user wallet</b></li>   </ul></li></ul>
    */
-  fetchUsersMeWalletsByCurrencycode<T = PlatformWallet>(currencyCode: string): Promise<IResponseWithSync<T>> {
+  fetchNsUsersMeWalletsByCurrencycode<T = PlatformWallet>(currencyCode: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/me/wallets/{currencyCode}'
       .replace('{namespace}', this.namespace)
@@ -37,7 +37,7 @@ export class Wallet$ {
   /**
    * List wallet transactions by currency code ordered by create time desc.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:WALLET", action=2 (READ)</li><li><i>Returns</i>: currency transaction info</li></ul>
    */
-  fetchUsersByUseridWalletsByCurrencycodeTransactions<T = WalletTransactionPagingSlicedResult>(
+  fetchNsUsersByUseridWalletsByCurrencycodeTransactions<T = WalletTransactionPagingSlicedResult>(
     userId: string,
     currencyCode: string,
     queryParams?: { offset?: number; limit?: number }
@@ -61,7 +61,7 @@ export class Wallet$ {
   /**
    * get a wallet by currency code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li></ul>
    */
-  fetchUsersByUseridWalletsByCurrencycode<T = PlatformWallet>(userId: string, currencyCode: string): Promise<IResponseWithSync<T>> {
+  fetchNsUsersByUseridWalletsByCurrencycode<T = PlatformWallet>(userId: string, currencyCode: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/wallets/{currencyCode}'
       .replace('{namespace}', this.namespace)

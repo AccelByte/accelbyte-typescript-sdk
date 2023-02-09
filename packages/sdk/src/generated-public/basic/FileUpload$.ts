@@ -17,7 +17,7 @@ export class FileUpload$ {
   /**
    * Generate an upload URL. It's valid for 10 minutes.<br/>Other detail info: <ul><li><i>Required permission</i>: resource = <b>"NAMESPACE:{namespace}:FILEUPLOAD"</b>, action=1 <b>(CREATE)</b></li><li><i>Action code</i>: 11101</li><li><i>Returns</i>: URL data</li></ul>
    */
-  postV1FoldersByFolderFiles<T = FileUploadUrlInfo>(folder: string, queryParams: { fileType: string | null }): Promise<IResponse<T>> {
+  postV1NsFoldersByFolderFiles<T = FileUploadUrlInfo>(folder: string, queryParams: { fileType: string | null }): Promise<IResponse<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/folders/{folder}/files'
       .replace('{namespace}', this.namespace)
@@ -30,7 +30,7 @@ export class FileUpload$ {
   /**
    * Generate an upload URL for user content. It's valid for 10 minutes.<br/>There are 2 kinds of storage limitation per user : maximum file count and maximum file size.<br/>The threshold of those limitations is different between upload category that is used.<br/>Other detail info: <ul><li><i>Required permission</i>: resource = <b>"NAMESPACE:{namespace}:USER:{userId}:FILEUPLOAD"</b>, action=1 <b>(CREATE)</b></li><li><i>Action code</i>: 11102</li><li><i>Default maximum file count per user</i>: 10 files</li><li><i>Default maximum file size per user</i>: 104857600 bytes</li><li><i>Returns</i>: URL data</li></ul>
    */
-  postV1UsersByUseridFiles<T = FileUploadUrlInfo>(
+  postV1NsUsersByUseridFiles<T = FileUploadUrlInfo>(
     userId: string,
     queryParams: { fileType: string | null; category?: string | null }
   ): Promise<IResponse<T>> {

@@ -24,29 +24,29 @@ export class ItemApi {
    * This API is used to get item by appId.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with that appId</li></ul>
    */
   getItemByAppId({ ...queryParams }: { storeId?: string; appId: string; language?: string; region?: string }) {
-    return this.newInstance().fetchItemsByAppId(queryParams)
+    return this.newInstance().fetchNsItemsByAppId(queryParams)
   }
 
   /**
    * Get item dynamic data for a published item.<br>Other detail info: <ul><li><i>Returns</i>: item dynamic data</li></ul>
    */
   getItemByItemIdDynamic(itemId: string) {
-    return this.newInstance().fetchItemsByItemidDynamic(itemId)
+    return this.newInstance().fetchNsItemsByItemidDynamic(itemId)
   }
 
   fetchItemsByCriteria({
     queryParams
   }: {
-    queryParams?: Parameters<Item$['fetchItemsByCriteria']>[0]
+    queryParams?: Parameters<Item$['fetchNsItemsByCriteria']>[0]
   }): Promise<IResponseWithSync<ItemPagingSlicedResult>> {
-    return this.newInstance().fetchItemsByCriteria(queryParams)
+    return this.newInstance().fetchNsItemsByCriteria(queryParams)
   }
 
   /**
    * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
    */
   getItemsByItemIds({ queryParams }: { queryParams: QueryParamsItemIds }) {
-    return this.newInstance().fetchItemsLocaleByIds(queryParams)
+    return this.newInstance().fetchNsItemsLocaleByIds(queryParams)
   }
 
   /**
@@ -72,22 +72,22 @@ export class ItemApi {
   /**
    * This API is used to get an item in locale. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: item data</li></ul>
    */
-  getItemsByItemIdLocale({ itemId, queryParams }: { itemId: string; queryParams?: Parameters<Item$['fetchItemsByItemidLocale']>[1] }) {
-    return this.newInstance().fetchItemsByItemidLocale(itemId, queryParams)
+  getItemsByItemIdLocale({ itemId, queryParams }: { itemId: string; queryParams?: Parameters<Item$['fetchNsItemsByItemidLocale']>[1] }) {
+    return this.newInstance().fetchNsItemsByItemidLocale(itemId, queryParams)
   }
 
   /**
    * This API is used to get an app in locale. If app not exist in specific region, default region app will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Returns</i>: app data</li></ul>
    */
   getAppInfoByItemId({ itemId, queryParams }: { itemId: string; queryParams?: QueryParams }) {
-    return this.newInstance().fetchItemsByItemidAppLocale(itemId, queryParams)
+    return this.newInstance().fetchNsItemsByItemidAppLocale(itemId, queryParams)
   }
 
   /**
    * This API is used to validate user item purchase condition
    */
   validatePurchaseCondition(data: ItemPurchaseConditionValidateRequest) {
-    return this.newInstance().postItemsPurchaseConditionsValidate(data)
+    return this.newInstance().postNsItemsPurchaseConditionsValidate(data)
   }
 
   private newInstance() {

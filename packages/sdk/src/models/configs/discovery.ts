@@ -42,6 +42,129 @@ export const TemplateInfoConfig = z.object({
 })
 export type TemplateInfoConfig = z.infer<typeof TemplateInfoConfig>
 
+export enum TemplateConfig {
+  SINGLE = 'single-game',
+  MULTIPLE = 'multiple-game'
+}
+
+export const PlayerPortalFeatureFlagsConfig = z.object({
+  /**
+   * Determines whether "Account Overview" menu in Accounts page is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isAccountOverviewVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Change Password" menu in Accounts page and profile dropdown are visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isChangePasswordVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Delete Account" menu in Accounts page is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isDeleteAccountVisible: z.boolean().default(true),
+  /**
+   * Determines whether the "Get Launcher" button is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isGetLauncherVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Linked Accounts" menu in Accounts page is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isLinkedAccountsVisible: z.boolean().default(true),
+  /**
+   * Determines whether "My Profile" menu in Accounts page is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isMyProfileVisible: z.boolean().default(true),
+  /**
+   * Determines whether "News" feature is visible or not.
+   *
+   * Defaults to `false`.
+   **/
+  isNewsVisible: z.boolean().default(false),
+  /**
+   * Determines whether "Notifications" feature is visible or not.
+   *
+   * Defaults to `false`.
+   **/
+  isNotificationsVisible: z.boolean().default(false),
+  /**
+   * Determines whether "Order History" menu in Accounts page and profile dropdown are visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isOrderHistoryVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Payment Methods" menu in Accounts page is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isPaymentMethodsVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Personal Data" menu in Accounts page is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isPersonalDataVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Privacy Records" menu in Accounts page is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isPrivacyRecordsVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Purchased Items" menu in Accounts page is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isPurchasedItemsVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Redeem Code" menu in Accounts page and profile dropdown are visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isRedeemCodeVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Store" feature is visible or not.
+   *
+   * Defaults to `true`.
+   **/
+  isStoreVisible: z.boolean().default(true),
+  /**
+   * Determines whether "Subscriptions" feature is visible or not.
+   *
+   * Defaults to `false`.
+   **/
+  isSubscriptionsVisible: z.boolean().default(false),
+  /**
+   * Determines whether "Support" feature is visible or not.
+   *
+   * Defaults to `false`.
+   **/
+  isSupportVisible: z.boolean().default(false),
+  /**
+   * Determines whether "Virtual Currency" feature is visible or not.
+   *
+   * Defaults to `false`.
+   **/
+  isVirtualCurrencyVisible: z.boolean().default(false),
+  /**
+   * Determines whether the "News" (unreleased) feature is visible or not.
+   *
+   * Defaults to `false`.
+   **/
+  isNewsV2Visible: z.boolean().default(false)
+})
+export type PlayerPortalFeatureFlagsConfig = z.infer<typeof PlayerPortalFeatureFlagsConfig>
+
 export const DiscoveryConfigData = z.object({
   ppTemplateInfo: Config.merge(
     z.object({
@@ -68,7 +191,11 @@ export const DiscoveryConfigData = z.object({
       data: TemplateInfoConfig
     })
   ),
-  ppFeatureFlags: Config,
+  ppFeatureFlags: Config.merge(
+    z.object({
+      data: PlayerPortalFeatureFlagsConfig
+    })
+  ),
   launcherFeatureFlags: Config,
   loginFeatureFlags: Config,
   experimentalFeatureFlags: Config,
@@ -107,7 +234,7 @@ export const DiscoveryConfigData = z.object({
   templateConfig: Config.merge(
     z.object({
       data: z.object({
-        value: z.string()
+        value: z.union([z.literal(`${TemplateConfig.SINGLE}`), z.literal(`${TemplateConfig.MULTIPLE}`)])
       })
     })
   ),

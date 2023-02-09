@@ -23,7 +23,7 @@ export class Subscription$ {
   /**
    * Get user subscription.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: subscription</li></ul>
    */
-  fetchUsersByUseridSubscriptionsBySubscriptionid<T = SubscriptionInfo>(
+  fetchNsUsersByUseridSubscriptionsBySubscriptionid<T = SubscriptionInfo>(
     userId: string,
     subscriptionId: string
   ): Promise<IResponseWithSync<T>> {
@@ -46,7 +46,7 @@ export class Subscription$ {
   /**
    * Get user subscription billing histories.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: paginated subscription history</li></ul>
    */
-  fetchUsersByUseridSubscriptionsBySubscriptionidHistory<T = BillingHistoryPagingSlicedResult>(
+  fetchNsUsersByUseridSubscriptionsBySubscriptionidHistory<T = BillingHistoryPagingSlicedResult>(
     userId: string,
     subscriptionId: string,
     queryParams?: { excludeFree?: boolean | null; offset?: number; limit?: number }
@@ -70,7 +70,7 @@ export class Subscription$ {
   /**
    * Check user subscription subscribable by itemId, ACTIVE USER subscription can't do subscribe again.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: subscribable info</li></ul>
    */
-  fetchUsersByUseridSubscriptionsSubscribableByItemId<T = Subscribable>(
+  fetchNsUsersByUseridSubscriptionsSubscribableByItemId<T = Subscribable>(
     userId: string,
     queryParams: { itemId: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -92,7 +92,7 @@ export class Subscription$ {
   /**
    * Query user subscriptions.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: paginated subscription</li></ul>
    */
-  fetchUsersByUseridSubscriptions<T = SubscriptionPagingSlicedResult>(
+  fetchNsUsersByUseridSubscriptions<T = SubscriptionPagingSlicedResult>(
     userId: string,
     queryParams?: {
       itemId?: string | null
@@ -122,7 +122,7 @@ export class Subscription$ {
   /**
    * Subscribe a subscription. Support both real and virtual payment. Need go through payment flow using the paymentOrderNo if paymentFlowRequired true.<br><b>ACTIVE USER subscription can't do subscribe again.</b><br><b>The next billing date will be X(default 4) hours before the current period ends if correctly subscribed.</b><br>User with permission SANDBOX will create sandbox subscription that not real paid.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=1 (CREATE)</li><li><i>Optional permission(user with this permission will create sandbox subscription)</i>: resource="SANDBOX", action=1 (CREATE)</li><li>It will be forbidden while the user is banned: ORDER_INITIATE or ORDER_AND_PAYMENT</li><li><i>Returns</i>: created subscription</li></ul>
    */
-  postUsersByUseridSubscriptions(userId: string, data: SubscribeRequest): Promise<IResponse<unknown>> {
+  postNsUsersByUseridSubscriptions(userId: string, data: SubscribeRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/subscriptions'
       .replace('{namespace}', this.namespace)
@@ -135,7 +135,7 @@ export class Subscription$ {
   /**
    * Cancel a subscription, only ACTIVE subscription can be cancelled. <b>Ensure successfully cancel, recommend at least 1 day before current period ends, otherwise it may be charging or charged.</b><br>Set immediate true, the subscription will be terminated immediately, otherwise till the end of current billing cycle.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=4 (UPDATE)</li><li><i>Returns</i>: cancelled subscription</li></ul>
    */
-  putUsersByUseridSubscriptionsBySubscriptionidCancel<T = SubscriptionInfo>(
+  putNsUsersByUseridSubscriptionsBySubscriptionidCancel<T = SubscriptionInfo>(
     userId: string,
     subscriptionId: string,
     data: CancelRequest
@@ -153,7 +153,7 @@ export class Subscription$ {
   /**
    * Request to change a subscription billing account, this will guide user to payment station. The actual change will happen at the 0 payment notification successfully handled.<br>Only ACTIVE USER subscription with real currency billing account can be changed.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=4 (UPDATE)</li><li><i>Returns</i>: updated subscription</li></ul>
    */
-  putUsersByUseridSubscriptionsBySubscriptionidBillingAccount<T = SubscriptionInfo>(
+  putNsUsersByUseridSubscriptionsBySubscriptionidBillingAccount<T = SubscriptionInfo>(
     userId: string,
     subscriptionId: string
   ): Promise<IResponse<T>> {

@@ -5,16 +5,20 @@
  */
 import { z } from 'zod'
 import { PlatformReward } from './PlatformReward'
+import { RevocationResult } from './RevocationResult'
 import { RevokeResult } from './RevokeResult'
 
 export const DlcRecord = z.object({
   id: z.string().nullish(),
   obtainedAt: z.string().nullish(),
   rewards: z.array(PlatformReward).nullish(),
-  status: z.enum(['REVOKED', 'FULFILLED']).nullish(),
+  status: z.enum(['REVOKED', 'FULFILLED', 'REVOKE_FAILED']).nullish(),
   revokedAt: z.string().nullish(),
+  transactionId: z.string().nullish(),
   revokeResults: z.array(RevokeResult).nullish(),
-  sources: z.array(z.string()).nullish()
+  revocationResult: RevocationResult.nullish(),
+  sources: z.array(z.string()).nullish(),
+  version: z.number().int().nullish()
 })
 
 export type DlcRecord = z.TypeOf<typeof DlcRecord>

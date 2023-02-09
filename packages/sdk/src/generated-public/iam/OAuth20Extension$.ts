@@ -137,11 +137,7 @@ export class OAuth20Extension$ {
   }
 
   /**
-   * <p>This endpoint is being used to validate one time link code.<br>
-   * 		It require a valid user token.<br>
-   * 		Should specify the target platform id and current user should already linked to this platform.<br>
-   * 		Current user should be a headless account.<br>
-   * 		</p>
+   * <p>This endpoint is being used to validate one time link code.<br></p>
    */
   postIamV3LinkCodeValidate<T = OneTimeLinkingCodeValidationResponse>(data: { oneTimeLinkCode: string | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig

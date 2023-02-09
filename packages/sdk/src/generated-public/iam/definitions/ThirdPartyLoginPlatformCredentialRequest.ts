@@ -32,6 +32,8 @@ export const ThirdPartyLoginPlatformCredentialRequest = z.object({
   TokenAuthenticationType: z.string(),
   TokenClaimsMapping: z.record(z.string()),
   TokenEndpoint: z.string(),
+  UserInfoEndpoint: z.string(),
+  UserInfoHTTPMethod: z.string(),
   scopes: z.array(z.string())
 })
 

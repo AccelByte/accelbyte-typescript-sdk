@@ -23,23 +23,23 @@ export class SubscriptionApi {
     queryParams
   }: {
     userId: string
-    queryParams?: Parameters<Subscription$['fetchUsersByUseridSubscriptions']>[1]
+    queryParams?: Parameters<Subscription$['fetchNsUsersByUseridSubscriptions']>[1]
   }) {
-    return this.newInstance().fetchUsersByUseridSubscriptions(userId, queryParams)
+    return this.newInstance().fetchNsUsersByUseridSubscriptions(userId, queryParams)
   }
 
   /**
    * Get user subscription.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: subscription</li></ul>
    */
   getUserSubscriptionBySubscriptionId({ userId, subscriptionId }: { userId: string; subscriptionId: string }) {
-    return this.newInstance().fetchUsersByUseridSubscriptionsBySubscriptionid(userId, subscriptionId)
+    return this.newInstance().fetchNsUsersByUseridSubscriptionsBySubscriptionid(userId, subscriptionId)
   }
 
   /**
    * Subscribe a subscription. Support both real and virtual payment. Need go through payment flow using the paymentOrderNo if paymentFlowRequired true.<br><b>ACTIVE USER subscription can't do subscribe again.</b><br><b>The next billing date will be X(default 4) hours before the current period ends if correctly subscribed.</b><br>User with permission SANDBOX will create sandbox subscription that not real paid.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=1 (CREATE)</li><li><i>Optional permission(user with this permission will create sandbox subscription)</i>: resource="SANDBOX", action=1 (CREATE)</li><li>It will be forbidden while the user is banned: ORDER_INITIATE or ORDER_AND_PAYMENT</li><li><i>Returns</i>: created subscription</li></ul>
    */
   createSubscription({ userId, data }: { userId: string; data: SubscribeRequest }) {
-    return this.newInstance().postUsersByUseridSubscriptions(userId, data)
+    return this.newInstance().postNsUsersByUseridSubscriptions(userId, data)
   }
 
   /**
@@ -54,21 +54,21 @@ export class SubscriptionApi {
     subscriptionId: string
     queryParams?: { excludeFree?: boolean | null; offset?: number; limit?: number }
   }) {
-    return this.newInstance().fetchUsersByUseridSubscriptionsBySubscriptionidHistory(userId, subscriptionId, queryParams)
+    return this.newInstance().fetchNsUsersByUseridSubscriptionsBySubscriptionidHistory(userId, subscriptionId, queryParams)
   }
 
   /**
    * Request to change a subscription billing account, this will guide user to payment station. The actual change will happen at the 0 payment notification successfully handled.<br>Only ACTIVE USER subscription with real currency billing account can be changed.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=4 (UPDATE)</li><li><i>Returns</i>: updated subscription</li></ul>
    */
   updateUserSubscriptionPaymentMethod({ userId, subscriptionId }: { userId: string; subscriptionId: string }) {
-    return this.newInstance().putUsersByUseridSubscriptionsBySubscriptionidBillingAccount(userId, subscriptionId)
+    return this.newInstance().putNsUsersByUseridSubscriptionsBySubscriptionidBillingAccount(userId, subscriptionId)
   }
 
   /**
    * Cancel a subscription, only ACTIVE subscription can be cancelled. <b>Ensure successfully cancel, recommend at least 1 day before current period ends, otherwise it may be charging or charged.</b><br>Set immediate true, the subscription will be terminated immediately, otherwise till the end of current billing cycle.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=4 (UPDATE)</li><li><i>Returns</i>: cancelled subscription</li></ul>
    */
   cancelUserSubscription({ userId, subscriptionId, data }: { userId: string; subscriptionId: string; data: CancelRequest }) {
-    return this.newInstance().putUsersByUseridSubscriptionsBySubscriptionidCancel(userId, subscriptionId, data)
+    return this.newInstance().putNsUsersByUseridSubscriptionsBySubscriptionidCancel(userId, subscriptionId, data)
   }
 
   private newInstance() {

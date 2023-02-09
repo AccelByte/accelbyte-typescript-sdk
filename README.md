@@ -4,10 +4,10 @@
 
 ***The Web SDK and associated SDK Widgets are currently undergoing Alpha testing. If you would like to participate in the Alpha test, we encourage you to reach out to your assigned DPM resource before making use of these solutions.***
 
-AccelByte Web SDK is a JavaScript library enabling building web application using AccelByte API services. The library is
+AccelByte Web SDK is a JavaScript library enabling the building of web applications using AccelByte API services. The library is
 platform-agnostic and can be consumed in a browser or in a server environment.
 
-AccelByte SDK is build with TypeScript and uses runtime type-checking validations.
+AccelByte SDK is built with TypeScript and uses runtime type-checking validations.
 
 Below is the list of AccelByte service APIs the library supports:
 
@@ -23,7 +23,7 @@ Below is the list of AccelByte service APIs the library supports:
 
 ## Installation
 
-To install the library execute
+To install the library execute the following command.
 
 ```shell
 yarn add @accelbyte/sdk
@@ -33,11 +33,11 @@ yarn add @accelbyte/sdk
 
 * **ES Modules** - The SDK currently supports ES Modules format only, please [set type property in Package.json to module](https://nodejs.org/api/packages.html#type)
 * **Yarn** - We like `yarn`. While `npm` may work, it is not supported and may be unstable.
-* **TypeScript** - The SDK has a full TypeScript support, and it should be preferred over a vanilla JavaScript. https://typestrong.org/ts-node/
+* **TypeScript** - The SDK has full TypeScript support, and it should be preferred over vanilla JavaScript. https://typestrong.org/ts-node/
 
 ## Usage
 
-To instantiate the Web SDK, a prerequisite is having a `IAM Client ID`. The example below creates an instance of the SDK
+To instantiate the Web SDK, a prerequisite is having an `IAM Client ID`. The example below creates an instance of the SDK
 that have access to all APIs.
 
 ```typescript

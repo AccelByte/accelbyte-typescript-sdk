@@ -302,6 +302,7 @@ export class OAuth20$ {
    * 				<li><strong>xblweb</strong>: The platform_token’s value is code returned by xbox after login</li>
    * 				<li><strong>netflix</strong>: The platform_token’s value is GAT (Gamer Access Token) returned by Netflix backend</li>
    * 				<li><strong>snapchat</strong>: The platform_token’s value is the authorization code returned by Snapchat OAuth.</li>
+   * 				<br><li><strong>for specific generic oauth (OIDC)</strong>: The platform_token’s value should be the same type as created OIDC auth type whether it is auth code, idToken or bearerToken.</li>
    * 			</ul>
    * 			<h2>Account Group</h2>
    * 			<p>Several platforms are grouped under account groups. The accounts on these platforms have the same platform user id.

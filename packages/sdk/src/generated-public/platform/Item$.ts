@@ -24,7 +24,7 @@ export class Item$ {
   /**
    * This API is used to get an app in locale. If app not exist in specific region, default region app will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Returns</i>: app data</li></ul>
    */
-  fetchItemsByItemidAppLocale<T = AppInfo>(
+  fetchNsItemsByItemidAppLocale<T = AppInfo>(
     itemId: string,
     queryParams?: { storeId?: string | null; region?: string | null; language?: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -46,7 +46,7 @@ export class Item$ {
   /**
    * This API is used to get the item by sku.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with sku</li></ul>
    */
-  fetchItemsBySku<T = ItemInfo>(queryParams: {
+  fetchNsItemsBySku<T = ItemInfo>(queryParams: {
     storeId?: string | null
     sku: string | null
     language?: string | null
@@ -68,7 +68,7 @@ export class Item$ {
   /**
    * This API is used to search items by keyword in title, description and long description, It's language constrained, also if item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
    */
-  fetchItemsSearch<T = ItemPagingSlicedResult>(queryParams: {
+  fetchNsItemsSearch<T = ItemPagingSlicedResult>(queryParams: {
     storeId?: string | null
     language: string | null
     keyword: string | null
@@ -104,7 +104,7 @@ export class Item$ {
   /**
    * This API is used to get item by appId.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with that appId</li></ul>
    */
-  fetchItemsByAppId<T = ItemInfo>(queryParams: {
+  fetchNsItemsByAppId<T = ItemInfo>(queryParams: {
     storeId?: string | null
     appId: string | null
     language?: string | null
@@ -126,7 +126,7 @@ export class Item$ {
   /**
    * This API is used to get an item in locale. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: item data</li></ul>
    */
-  fetchItemsByItemidLocale<T = PopulatedItemInfo>(
+  fetchNsItemsByItemidLocale<T = PopulatedItemInfo>(
     itemId: string,
     queryParams?: { storeId?: string | null; region?: string | null; language?: string | null; populateBundle?: boolean | null }
   ): Promise<IResponseWithSync<T>> {
@@ -148,7 +148,7 @@ export class Item$ {
   /**
    * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
    */
-  fetchItemsByCriteria<T = ItemPagingSlicedResult>(queryParams?: {
+  fetchNsItemsByCriteria<T = ItemPagingSlicedResult>(queryParams?: {
     storeId?: string | null
     language?: string | null
     region?: string | null
@@ -190,7 +190,7 @@ export class Item$ {
   /**
    * Get item dynamic data for a published item.<br>Other detail info: <ul><li><i>Returns</i>: item dynamic data</li></ul>
    */
-  fetchItemsByItemidDynamic<T = ItemDynamicDataInfo>(itemId: string): Promise<IResponseWithSync<T>> {
+  fetchNsItemsByItemidDynamic<T = ItemDynamicDataInfo>(itemId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/{itemId}/dynamic'
       .replace('{namespace}', this.namespace)
@@ -209,7 +209,7 @@ export class Item$ {
   /**
    * This API is used to validate user item purchase condition
    */
-  postItemsPurchaseConditionsValidate<T = ItemPurchaseConditionValidateResultArray>(
+  postNsItemsPurchaseConditionsValidate<T = ItemPurchaseConditionValidateResultArray>(
     data: ItemPurchaseConditionValidateRequest
   ): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
@@ -222,7 +222,7 @@ export class Item$ {
   /**
    * This API is used to bulk get locale items. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Returns</i>: the list of items info</li></ul>
    */
-  fetchItemsLocaleByIds<T = ItemInfoArray>(queryParams: {
+  fetchNsItemsLocaleByIds<T = ItemInfoArray>(queryParams: {
     storeId?: string | null
     itemIds: string | null
     region?: string | null

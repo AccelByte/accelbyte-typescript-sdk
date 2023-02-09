@@ -14,7 +14,6 @@ export const EligibleUser = UserResponseV4.pick({
   emailVerified: true,
   displayName: true,
   country: true,
-  dateOfBirth: true,
   emailAddress: true,
   bans: true,
   username: true,

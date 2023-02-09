@@ -26,7 +26,7 @@ export class Entitlement$ {
   /**
    * Get my app entitlement ownership by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace app entitlement ownership</b></li></ul></li></ul>
    */
-  fetchUsersMeEntitlementsOwnershipByAppId<T = Ownership>(queryParams: { appId: string | null }): Promise<IResponseWithSync<T>> {
+  fetchNsUsersMeEntitlementsOwnershipByAppId<T = Ownership>(queryParams: { appId: string | null }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -43,7 +43,7 @@ export class Entitlement$ {
   /**
    * Exists any my active entitlement of specified itemIds, skus and appIds<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersMeEntitlementsOwnershipAny<T = Ownership>(queryParams?: {
+  fetchNsUsersMeEntitlementsOwnershipAny<T = Ownership>(queryParams?: {
     itemIds?: string[]
     appIds?: string[]
     skus?: string[]
@@ -64,7 +64,7 @@ export class Entitlement$ {
   /**
    * Get my entitlement ownership by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
    */
-  fetchUsersMeEntitlementsOwnershipBySku<T = TimedOwnership>(queryParams: {
+  fetchNsUsersMeEntitlementsOwnershipBySku<T = TimedOwnership>(queryParams: {
     sku: string | null
     entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
   }): Promise<IResponseWithSync<T>> {
@@ -84,7 +84,7 @@ export class Entitlement$ {
   /**
    * Get my entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
    */
-  fetchUsersMeEntitlementsOwnershipByItemId<T = TimedOwnership>(queryParams: {
+  fetchNsUsersMeEntitlementsOwnershipByItemId<T = TimedOwnership>(queryParams: {
     itemId: string | null
     entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
   }): Promise<IResponseWithSync<T>> {
@@ -133,7 +133,7 @@ export class Entitlement$ {
    * }
    * </code></pre><b>if there's no active entitlement for the specific params, the entitlements section will be omitted</b>.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersMeEntitlementsOwnershipToken<T = OwnershipToken>(queryParams?: {
+  fetchNsUsersMeEntitlementsOwnershipToken<T = OwnershipToken>(queryParams?: {
     itemIds?: string[]
     appIds?: string[]
     skus?: string[]
@@ -154,7 +154,7 @@ export class Entitlement$ {
   /**
    * Exists any user active entitlement of specified itemIds, skus and appIds<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersByUseridEntitlementsOwnershipAny<T = Ownership>(
+  fetchNsUsersByUseridEntitlementsOwnershipAny<T = Ownership>(
     userId: string,
     queryParams?: { itemIds?: string[]; appIds?: string[]; skus?: string[] }
   ): Promise<IResponseWithSync<T>> {
@@ -176,7 +176,7 @@ export class Entitlement$ {
   /**
    * Get user entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersByUseridEntitlementsOwnershipByItemId<T = TimedOwnership>(
+  fetchNsUsersByUseridEntitlementsOwnershipByItemId<T = TimedOwnership>(
     userId: string,
     queryParams: {
       itemId: string | null
@@ -201,7 +201,7 @@ export class Entitlement$ {
   /**
    * Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersByUseridEntitlementsByAppId<T = AppEntitlementInfo>(
+  fetchNsUsersByUseridEntitlementsByAppId<T = AppEntitlementInfo>(
     userId: string,
     queryParams: { appId: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -223,7 +223,7 @@ export class Entitlement$ {
   /**
    * Get user entitlement ownership by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersByUseridEntitlementsOwnershipBySku<T = TimedOwnership>(
+  fetchNsUsersByUseridEntitlementsOwnershipBySku<T = TimedOwnership>(
     userId: string,
     queryParams: {
       sku: string | null
@@ -248,7 +248,7 @@ export class Entitlement$ {
   /**
    * Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersByUseridEntitlementsOwnershipByItemIds<T = EntitlementOwnershipArray>(
+  fetchNsUsersByUseridEntitlementsOwnershipByItemIds<T = EntitlementOwnershipArray>(
     userId: string,
     queryParams?: { ids?: string[] }
   ): Promise<IResponseWithSync<T>> {
@@ -270,7 +270,7 @@ export class Entitlement$ {
   /**
    * Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement list</li></ul>
    */
-  fetchUsersByUseridEntitlements<T = EntitlementPagingSlicedResult>(
+  fetchNsUsersByUseridEntitlements<T = EntitlementPagingSlicedResult>(
     userId: string,
     queryParams?: {
       entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
@@ -300,7 +300,7 @@ export class Entitlement$ {
   /**
    * Get user entitlement by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersByUseridEntitlementsByItemId<T = EntitlementInfo>(
+  fetchNsUsersByUseridEntitlementsByItemId<T = EntitlementInfo>(
     userId: string,
     queryParams: {
       itemId: string | null
@@ -325,7 +325,10 @@ export class Entitlement$ {
   /**
    * Get user entitlement.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement</li></ul>
    */
-  fetchUsersByUseridEntitlementsByEntitlementid<T = EntitlementInfo>(userId: string, entitlementId: string): Promise<IResponseWithSync<T>> {
+  fetchNsUsersByUseridEntitlementsByEntitlementid<T = EntitlementInfo>(
+    userId: string,
+    entitlementId: string
+  ): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}'
       .replace('{namespace}', this.namespace)
@@ -345,7 +348,7 @@ export class Entitlement$ {
   /**
    * Get user app entitlement ownership by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersByUseridEntitlementsOwnershipByAppId<T = Ownership>(
+  fetchNsUsersByUseridEntitlementsOwnershipByAppId<T = Ownership>(
     userId: string,
     queryParams: { appId: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -367,7 +370,7 @@ export class Entitlement$ {
   /**
    * Get user entitlement by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchUsersByUseridEntitlementsBySku<T = EntitlementInfo>(
+  fetchNsUsersByUseridEntitlementsBySku<T = EntitlementInfo>(
     userId: string,
     queryParams: {
       sku: string | null
@@ -392,7 +395,7 @@ export class Entitlement$ {
   /**
    * Query app entitlements by appType.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: app entitlement pagination</li></ul>
    */
-  fetchUsersByUseridEntitlementsByAppType<T = AppEntitlementPagingSlicedResult>(
+  fetchNsUsersByUseridEntitlementsByAppType<T = AppEntitlementPagingSlicedResult>(
     userId: string,
     queryParams: { appType: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'; offset?: number; limit?: number }
   ): Promise<IResponseWithSync<T>> {
@@ -414,7 +417,7 @@ export class Entitlement$ {
   /**
    * Consume user entitlement. If the entitlement useCount is 0, the status will be CONSUMED. Client should pass item id in options if entitlement clazz is OPTIONBOX<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=4 (UPDATE)</li><li><i>Returns</i>: consumed entitlement</li></ul>
    */
-  putUsersByUseridEntitlementsByEntitlementidDecrement<T = EntitlementDecrementResult>(
+  putNsUsersByUseridEntitlementsByEntitlementidDecrement<T = EntitlementDecrementResult>(
     userId: string,
     entitlementId: string,
     data: EntitlementDecrement

@@ -17,7 +17,7 @@ export class ThirdPartyCredential$ {
   /**
    * This is the Public API to Get All Active 3rd Platform Credential.
    */
-  fetchV3PlatformsClientsActive<T = PublicThirdPartyPlatformInfoArray>(): Promise<IResponseWithSync<T>> {
+  fetchV3NsPlatformsClientsActive<T = PublicThirdPartyPlatformInfoArray>(): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/platforms/clients/active'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -34,7 +34,7 @@ export class ThirdPartyCredential$ {
   /**
    * This is the Public API to Get All Active OIDC Platform Credential By Client ID
    */
-  fetchV3PlatformsClientsOidc<T = PublicThirdPartyPlatformInfoArray>(queryParams: {
+  fetchV3NsPlatformsClientsOidc<T = PublicThirdPartyPlatformInfoArray>(queryParams: {
     clientId: string | null
   }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig

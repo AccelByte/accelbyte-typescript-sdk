@@ -18,7 +18,7 @@ export class Fulfillment$ {
   /**
    * Redeem campaign code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:FULFILLMENT", action=1 (CREATED)</li><li><i>Returns</i>: fulfillment result</li></ul>
    */
-  postUsersByUseridFulfillmentCode<T = FulfillmentResult>(userId: string, data: FulfillCodeRequest): Promise<IResponse<T>> {
+  postNsUsersByUseridFulfillmentCode<T = FulfillmentResult>(userId: string, data: FulfillCodeRequest): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/fulfillment/code'
       .replace('{namespace}', this.namespace)

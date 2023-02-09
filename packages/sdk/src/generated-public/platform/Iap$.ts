@@ -29,7 +29,7 @@ export class Iap$ {
   /**
    * Sync steam inventory's items.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridIapSteamSync(userId: string, data: SteamSyncRequest): Promise<IResponse<unknown>> {
+  putNsUsersByUseridIapSteamSync(userId: string, data: SteamSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/steam/sync'
       .replace('{namespace}', this.namespace)
@@ -42,7 +42,7 @@ export class Iap$ {
   /**
    * Verify apple iap receipt and fulfill item.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridIapAppleReceipt(userId: string, data: AppleIapReceipt): Promise<IResponse<unknown>> {
+  putNsUsersByUseridIapAppleReceipt(userId: string, data: AppleIapReceipt): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/apple/receipt'
       .replace('{namespace}', this.namespace)
@@ -55,7 +55,7 @@ export class Iap$ {
   /**
    * Synchronize with entitlements in PSN Store with multiple service labels.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putUsersByUseridIapPsnSyncMultiServiceLabels<T = PlayStationReconcileResultArray>(
+  putNsUsersByUseridIapPsnSyncMultiServiceLabels<T = PlayStationReconcileResultArray>(
     userId: string,
     data: PlayStationMultiServiceLabelsReconcileRequest
   ): Promise<IResponse<T>> {
@@ -71,7 +71,7 @@ export class Iap$ {
   /**
    * Synchronize with entitlements in PSN Store.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putUsersByUseridIapPsnSync<T = PlayStationReconcileResultArray>(
+  putNsUsersByUseridIapPsnSync<T = PlayStationReconcileResultArray>(
     userId: string,
     data: PlayStationReconcileRequest
   ): Promise<IResponse<T>> {
@@ -87,7 +87,7 @@ export class Iap$ {
   /**
    * Sync twitch drops entitlements.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridIapTwitchSync(userId: string, data: TwitchSyncRequest): Promise<IResponse<unknown>> {
+  putNsUsersByUseridIapTwitchSync(userId: string, data: TwitchSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/twitch/sync'
       .replace('{namespace}', this.namespace)
@@ -100,7 +100,7 @@ export class Iap$ {
   /**
    * Verify google iap receipt and fulfill item.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridIapGoogleReceipt<T = GoogleReceiptResolveResult>(userId: string, data: GoogleIapReceipt): Promise<IResponse<T>> {
+  putNsUsersByUseridIapGoogleReceipt<T = GoogleReceiptResolveResult>(userId: string, data: GoogleIapReceipt): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/google/receipt'
       .replace('{namespace}', this.namespace)
@@ -113,7 +113,7 @@ export class Iap$ {
   /**
    * Sync Xbox inventory's items.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridIapXblSync<T = XblReconcileResultArray>(userId: string, data: XblReconcileRequest): Promise<IResponse<T>> {
+  putNsUsersByUseridIapXblSync<T = XblReconcileResultArray>(userId: string, data: XblReconcileRequest): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/xbl/sync'
       .replace('{namespace}', this.namespace)
@@ -126,7 +126,7 @@ export class Iap$ {
   /**
    * Sync epic games inventory's items.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridIapEpicgamesSync<T = EpicGamesReconcileResultArray>(
+  putNsUsersByUseridIapEpicgamesSync<T = EpicGamesReconcileResultArray>(
     userId: string,
     data: EpicGamesReconcileRequest
   ): Promise<IResponse<T>> {

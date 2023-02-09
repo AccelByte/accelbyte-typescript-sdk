@@ -18,7 +18,7 @@ export class FulfillmentApi {
    * Redeem campaign code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:FULFILLMENT", action=1 (CREATED)</li><li><i>Returns</i>: fulfillment result</li></ul>
    */
   redeemCode = ({ userId, data }: { userId: string; data: FulfillCodeRequest }) => {
-    return this.newInstance().postUsersByUseridFulfillmentCode(userId, data)
+    return this.newInstance().postNsUsersByUseridFulfillmentCode(userId, data)
   }
 
   private newInstance() {

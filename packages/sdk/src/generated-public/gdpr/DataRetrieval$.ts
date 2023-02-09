@@ -20,7 +20,7 @@ export class DataRetrieval$ {
   /**
    * <p>Requires valid user access token</p>
    */
-  fetchGdprUsersByUseridRequests<T = UserPersonalDataResponse>(
+  fetchGdprNsUsersByUseridRequests<T = UserPersonalDataResponse>(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<IResponseWithSync<T>> {
@@ -42,7 +42,7 @@ export class DataRetrieval$ {
   /**
    * <p>Requires valid user access token</p>
    */
-  postGdprUsersByUseridRequests<T = DataRetrievalResponse>(userId: string, data: { password: string | null }): Promise<IResponse<T>> {
+  postGdprNsUsersByUseridRequests<T = DataRetrievalResponse>(userId: string, data: { password: string | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/requests'
       .replace('{namespace}', this.namespace)
@@ -58,7 +58,7 @@ export class DataRetrieval$ {
   /**
    * <p>Requires valid user access token</p>
    */
-  deleteGdprUsersByUseridRequestsByRequestdate(userId: string, requestDate: string): Promise<IResponse<unknown>> {
+  deleteGdprNsUsersByUseridRequestsByRequestdate(userId: string, requestDate: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/requests/{requestDate}'
       .replace('{namespace}', this.namespace)
@@ -72,7 +72,7 @@ export class DataRetrieval$ {
   /**
    * <p>Requires valid user access token</p>
    */
-  postGdprUsersByUseridRequestsByRequestdateGenerate<T = UserDataUrl>(
+  postGdprNsUsersByUseridRequestsByRequestdateGenerate<T = UserDataUrl>(
     userId: string,
     requestDate: string,
     data: { password: string | null }

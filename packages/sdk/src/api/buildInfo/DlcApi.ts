@@ -17,14 +17,14 @@ export class DlcApi {
    * Retrieve the list of DLC available on specific game. Use game's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: list of DLC</li></ul>
    */
   getLatestDLCByGameAppId(appId: string) {
-    return this.newInstance().fetchDlcsLatestByGameAppIdByAppid(appId)
+    return this.newInstance().fetchNsDlcsLatestByGameAppIdByAppid(appId)
   }
 
   /**
    * Retrieve the list of DLC available on specific game. Use DLC's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: appId of game and list of its builds by platformId</li></ul>
    */
   getBaseGamesByDlcAppId(dlcAppId: string) {
-    return this.newInstance().fetchAppsLatestByDlcAppIdByDlcappid(dlcAppId)
+    return this.newInstance().fetchNsAppsLatestByDlcAppIdByDlcappid(dlcAppId)
   }
 
   private newInstance() {

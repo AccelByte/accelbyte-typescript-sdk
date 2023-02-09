@@ -20,21 +20,23 @@ export class PaymentApi {
    * Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=2 (READ)</li><li><i>Returns</i>: Payment account list</li></ul>
    */
   getPaymentAccounts = (userId: string) => {
-    return this.newInstance().fetchUsersByUseridPaymentAccounts(userId)
+    return this.newInstance().fetchNsUsersByUseridPaymentAccounts(userId)
   }
 
   /**
    * Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=8 (DELETE)</li><li><i>Returns</i>:</li></ul>
    */
   deletePaymentAccount = ({ userId, type, id }: { userId: string; type: string; id: string }) => {
-    return this.newInstance().deleteUsersByUseridPaymentAccountsByTypeById(userId, type, id)
+    return this.newInstance().deleteNsUsersByUseridPaymentAccountsByTypeById(userId, type, id)
   }
 
   /**
    * Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment order details</li></ul>
    */
   getPaymentInfo = (paymentOrderNo: string) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchPaymentOrdersByPaymentordernoInfo(paymentOrderNo)
+    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentOrdersByPaymentordernoInfo(
+      paymentOrderNo
+    )
   }
 
   /**
@@ -43,9 +45,9 @@ export class PaymentApi {
   processPaymentOrder = (
     paymentOrderNo: string,
     data: PaymentToken,
-    queryParams: Parameters<PaymentStation$['postPaymentOrdersByPaymentordernoPay']>[2]
+    queryParams: Parameters<PaymentStation$['postNsPaymentOrdersByPaymentordernoPay']>[2]
   ) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).postPaymentOrdersByPaymentordernoPay(
+    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).postNsPaymentOrdersByPaymentordernoPay(
       paymentOrderNo,
       data,
       queryParams
@@ -56,11 +58,11 @@ export class PaymentApi {
    * Get payment provider public config, at current only Strip provide public config.<br>Other detail info: <ul><li><i>Returns</i>: Public config</li></ul>
    */
   getPaymentProviderPublicConfig = (
-    paymentProvider: Parameters<PaymentStation$['fetchPaymentPublicconfig']>[0]['paymentProvider'],
+    paymentProvider: Parameters<PaymentStation$['fetchNsPaymentPublicconfig']>[0]['paymentProvider'],
     region: string | null,
     sandbox?: boolean | null
   ) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchPaymentPublicconfig({
+    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentPublicconfig({
       paymentProvider,
       region,
       sandbox
@@ -71,7 +73,7 @@ export class PaymentApi {
    * Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: Payment order paid result</li></ul>
    */
   getPaymentOrderStatus = (paymentOrderNo: string) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchPaymentOrdersByPaymentordernoStatus(
+    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentOrdersByPaymentordernoStatus(
       paymentOrderNo
     )
   }
@@ -80,18 +82,18 @@ export class PaymentApi {
    * Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment method list</li></ul>
    */
   getPaymentMethods = (paymentOrderNo: string | null) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchPaymentMethods({ paymentOrderNo })
+    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentMethods({ paymentOrderNo })
   }
 
   /**
    * Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i>Returns</i>: tax result</li></ul>
    */
   getPaymentTax = (
-    paymentProvider: Parameters<PaymentStation$['fetchPaymentTax']>[0]['paymentProvider'],
+    paymentProvider: Parameters<PaymentStation$['fetchNsPaymentTax']>[0]['paymentProvider'],
     paymentOrderNo: string | null,
     zipCode?: string | null
   ) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchPaymentTax({
+    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentTax({
       paymentProvider,
       paymentOrderNo,
       zipCode
@@ -102,7 +104,7 @@ export class PaymentApi {
    * Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link</li></ul>
    */
   createPaymentUrl = (data: PaymentUrlCreate) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).postPaymentLink(data)
+    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).postNsPaymentLink(data)
   }
 
   private newInstance() {

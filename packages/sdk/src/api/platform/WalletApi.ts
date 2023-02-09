@@ -18,14 +18,14 @@ export class WalletApi {
    * get my wallet by currency code and namespace.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li><li><i>Path's namespace</i> : <ul>   <li>can be filled with <b>publisher namespace</b> in order to get <b>publisher user wallet</b></li>   <li>can be filled with <b>game namespace</b> in order to get <b>game user wallet</b></li>   </ul></li></ul>
    */
   getUserMeWallet = (currencyCode: string) => {
-    return this.newInstance().fetchUsersMeWalletsByCurrencycode(currencyCode)
+    return this.newInstance().fetchNsUsersMeWalletsByCurrencycode(currencyCode)
   }
 
   /**
    * get a wallet by currency code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li></ul>
    */
   getWalletByUserId = (userId: string, currencyCode: string) => {
-    return this.newInstance().fetchUsersByUseridWalletsByCurrencycode(userId, currencyCode)
+    return this.newInstance().fetchNsUsersByUseridWalletsByCurrencycode(userId, currencyCode)
   }
 
   /**

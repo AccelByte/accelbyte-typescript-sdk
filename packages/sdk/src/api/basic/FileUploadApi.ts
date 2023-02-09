@@ -23,9 +23,9 @@ export class FileUploadApi {
     queryParams
   }: {
     folder: string
-    queryParams: Parameters<FileUpload$['postV1FoldersByFolderFiles']>[1]
+    queryParams: Parameters<FileUpload$['postV1NsFoldersByFolderFiles']>[1]
   }) => {
-    return this.newInstance().postV1FoldersByFolderFiles(folder, queryParams)
+    return this.newInstance().postV1NsFoldersByFolderFiles(folder, queryParams)
   }
 
   /**

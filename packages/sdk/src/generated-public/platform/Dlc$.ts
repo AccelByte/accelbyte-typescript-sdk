@@ -22,7 +22,7 @@ export class Dlc$ {
   /**
    * Sync steam dlc.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridDlcSteamSync(userId: string, data: SteamDlcSyncRequest): Promise<IResponse<unknown>> {
+  putNsUsersByUseridDlcSteamSync(userId: string, data: SteamDlcSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/steam/sync'
       .replace('{namespace}', this.namespace)
@@ -35,7 +35,7 @@ export class Dlc$ {
   /**
    * Sync Xbox inventory's dlc items.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridDlcXblSync(userId: string, data: XblDlcSyncRequest): Promise<IResponse<unknown>> {
+  putNsUsersByUseridDlcXblSync(userId: string, data: XblDlcSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/xbl/sync'
       .replace('{namespace}', this.namespace)
@@ -48,7 +48,7 @@ export class Dlc$ {
   /**
    * Synchronize with dlc entitlements in PSN Store.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putUsersByUseridDlcPsnSync(userId: string, data: PlayStationDlcSyncRequest): Promise<IResponse<unknown>> {
+  putNsUsersByUseridDlcPsnSync(userId: string, data: PlayStationDlcSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/psn/sync'
       .replace('{namespace}', this.namespace)
@@ -61,7 +61,7 @@ export class Dlc$ {
   /**
    * Sync epic games dlc items.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putUsersByUseridDlcEpicgamesSync(userId: string, data: EpicGamesDlcSyncRequest): Promise<IResponse<unknown>> {
+  putNsUsersByUseridDlcEpicgamesSync(userId: string, data: EpicGamesDlcSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/epicgames/sync'
       .replace('{namespace}', this.namespace)
@@ -74,7 +74,7 @@ export class Dlc$ {
   /**
    * Synchronize with dlc entitlements in PSN Store with multiple service labels.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putUsersByUseridDlcPsnSyncMultiServiceLabels(
+  putNsUsersByUseridDlcPsnSyncMultiServiceLabels(
     userId: string,
     data: PlayStationDlcSyncMultiServiceLabelsRequest
   ): Promise<IResponse<unknown>> {

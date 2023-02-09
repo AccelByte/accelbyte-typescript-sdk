@@ -21,7 +21,7 @@ export class Order$ {
   /**
    * Query user orders.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: get order</li></ul>
    */
-  fetchUsersByUseridOrders<T = OrderPagingSlicedResult>(
+  fetchNsUsersByUseridOrders<T = OrderPagingSlicedResult>(
     userId: string,
     queryParams?: {
       itemId?: string | null
@@ -59,7 +59,7 @@ export class Order$ {
   /**
    * Create an order. The result contains the checkout link and payment token. User with permission SANDBOX will create sandbox order that not real paid for xsolla/alipay and not validate price for wxpay.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=1 (CREATE)</li><li><i>Optional permission(user with this permission will create sandbox order)</i>: resource="SANDBOX", action=1 (CREATE)</li><li>It will be forbidden while the user is banned: ORDER_INITIATE or ORDER_AND_PAYMENT</li><li><i>Returns</i>: created order</li></ul>
    */
-  postUsersByUseridOrders<T = OrderInfo>(userId: string, data: OrderCreate): Promise<IResponse<T>> {
+  postNsUsersByUseridOrders<T = OrderInfo>(userId: string, data: OrderCreate): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders'
       .replace('{namespace}', this.namespace)
@@ -72,7 +72,7 @@ export class Order$ {
   /**
    * Get user order.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: get order</li></ul>
    */
-  fetchUsersByUseridOrdersByOrderno<T = OrderInfo>(userId: string, orderNo: string): Promise<IResponseWithSync<T>> {
+  fetchNsUsersByUseridOrdersByOrderno<T = OrderInfo>(userId: string, orderNo: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}'
       .replace('{namespace}', this.namespace)
@@ -92,7 +92,7 @@ export class Order$ {
   /**
    * Download user order receipt by orderNo.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: order receipt pdf</li></ul>
    */
-  fetchUsersByUseridOrdersByOrdernoReceiptPdf(userId: string, orderNo: string): Promise<IResponseWithSync<unknown>> {
+  fetchNsUsersByUseridOrdersByOrdernoReceiptPdf(userId: string, orderNo: string): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/receipt.pdf'
       .replace('{namespace}', this.namespace)
@@ -112,7 +112,7 @@ export class Order$ {
   /**
    * Cancel user order.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=4 (UPDATE)</li><li><i>Returns</i>: cancelled order</li></ul>
    */
-  putUsersByUseridOrdersByOrdernoCancel<T = OrderInfo>(userId: string, orderNo: string): Promise<IResponse<T>> {
+  putNsUsersByUseridOrdersByOrdernoCancel<T = OrderInfo>(userId: string, orderNo: string): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/cancel'
       .replace('{namespace}', this.namespace)
@@ -126,7 +126,7 @@ export class Order$ {
   /**
    * Get user order histories.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: get order history</li></ul>
    */
-  fetchUsersByUseridOrdersByOrdernoHistory<T = OrderHistoryInfoArray>(userId: string, orderNo: string): Promise<IResponseWithSync<T>> {
+  fetchNsUsersByUseridOrdersByOrdernoHistory<T = OrderHistoryInfoArray>(userId: string, orderNo: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/history'
       .replace('{namespace}', this.namespace)

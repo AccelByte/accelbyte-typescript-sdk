@@ -18,7 +18,7 @@ export class CurrencyApi {
    * List currencies of a namespace.<br>Other detail info: <ul><li><i>Returns</i>: Currency List</li></ul>
    */
   getCurrencies = () => {
-    return this.newInstance().fetchCurrencies()
+    return this.newInstance().fetchNsCurrencies()
   }
 
   /**

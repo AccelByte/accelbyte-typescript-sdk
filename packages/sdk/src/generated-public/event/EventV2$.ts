@@ -26,7 +26,7 @@ export class EventV2$ {
    * 			</ul>
    * 			<p>Requires a valid user access token</p>
    */
-  fetchEventV2UsersByUseridEdithistory<T = EventResponseV2>(
+  fetchEventV2NsUsersByUseridEdithistory<T = EventResponseV2>(
     userId: string,
     queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; type?: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -48,7 +48,7 @@ export class EventV2$ {
   /**
    * <p>Requires valid user access token</p>
    */
-  fetchEventV2UsersByUseridEvent<T = EventResponseV2>(
+  fetchEventV2NsUsersByUseridEvent<T = EventResponseV2>(
     userId: string,
     queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; eventName?: string | null }
   ): Promise<IResponseWithSync<T>> {

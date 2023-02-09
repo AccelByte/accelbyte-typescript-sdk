@@ -18,7 +18,7 @@ export class UserAction$ {
   /**
    * This API is used to report a game user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ACTION", action=1 (CREATE)</li></ul>
    */
-  postV1UsersByUseridActionsReport(userId: string, data: UserReportRequest): Promise<IResponse<unknown>> {
+  postV1NsUsersByUseridActionsReport(userId: string, data: UserReportRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/{userId}/actions/report'
       .replace('{namespace}', this.namespace)

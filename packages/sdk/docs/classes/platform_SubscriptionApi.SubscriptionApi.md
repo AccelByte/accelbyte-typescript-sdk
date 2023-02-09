@@ -40,7 +40,7 @@ Cancel a subscription, only ACTIVE subscription can be cancelled. <b>Ensure succ
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:70](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/SubscriptionApi.ts#L70)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:70](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/SubscriptionApi.ts#L70)
 
 ___
 
@@ -70,7 +70,7 @@ Subscribe a subscription. Support both real and virtual payment. Need go through
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/SubscriptionApi.ts#L41)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/SubscriptionApi.ts#L41)
 
 ___
 
@@ -98,7 +98,7 @@ Get user subscription billing histories.<br>Other detail info: <ul><li><i>Requir
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/SubscriptionApi.ts#L48)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/SubscriptionApi.ts#L48)
 
 ___
 
@@ -122,13 +122,13 @@ Get user subscription.<br>Other detail info: <ul><li><i>Required permission</i>:
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/SubscriptionApi.ts#L34)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/SubscriptionApi.ts#L34)
 
 ___
 
 ### getUserSubscriptions
 
-▸ **getUserSubscriptions**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: { language?: string \| null \| undefined; description?: string \| null \| undefined; source?: string \| null \| undefined; title?: string \| null \| undefined; sku?: string \| null \| undefined; ... 37 more ...; paymentFlowRequired: boolean; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+▸ **getUserSubscriptions**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: { language?: string \| null \| undefined; description?: string \| null \| undefined; title?: string \| null \| undefined; sku?: string \| null \| undefined; price?: number \| null \| undefined; ... 37 more ...; paymentFlowRequired: boolean; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
 
 Query user subscriptions.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: paginated subscription</li></ul>
 
@@ -149,11 +149,11 @@ Query user subscriptions.<br>Other detail info: <ul><li><i>Required permission</
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: { language?: string \| null \| undefined; description?: string \| null \| undefined; source?: string \| null \| undefined; title?: string \| null \| undefined; sku?: string \| null \| undefined; ... 37 more ...; paymentFlowRequired: boolean; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+`Promise`<`IResponseWithSync`<{ `data`: { language?: string \| null \| undefined; description?: string \| null \| undefined; title?: string \| null \| undefined; sku?: string \| null \| undefined; price?: number \| null \| undefined; ... 37 more ...; paymentFlowRequired: boolean; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/SubscriptionApi.ts#L21)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/SubscriptionApi.ts#L21)
 
 ___
 
@@ -177,4 +177,4 @@ Request to change a subscription billing account, this will guide user to paymen
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:63](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/SubscriptionApi.ts#L63)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:63](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/SubscriptionApi.ts#L63)

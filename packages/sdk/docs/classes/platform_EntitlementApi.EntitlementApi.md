@@ -40,7 +40,7 @@ Consume user entitlement. If the entitlement useCount is 0, the status will be C
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/EntitlementApi.ts#L56)
+[packages/sdk/src/api/platform/EntitlementApi.ts:62](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/EntitlementApi.ts#L62)
 
 ___
 
@@ -64,7 +64,7 @@ Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required perm
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/EntitlementApi.ts#L20)
+[packages/sdk/src/api/platform/EntitlementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/EntitlementApi.ts#L20)
 
 ___
 
@@ -89,7 +89,7 @@ Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Requi
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/EntitlementApi.ts#L49)
+[packages/sdk/src/api/platform/EntitlementApi.ts:55](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/EntitlementApi.ts#L55)
 
 ___
 
@@ -116,13 +116,13 @@ Exists any user active entitlement of specified itemIds, skus and appIds<p>Other
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/EntitlementApi.ts#L36)
+[packages/sdk/src/api/platform/EntitlementApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/EntitlementApi.ts#L42)
 
 ___
 
 ### getEntitlements
 
-▸ **getEntitlements**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: `undefined` \| ``null`` \| { appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; endDate?: string \| null \| undefined; sku?: string \| null \| undefined; storeId?: string \| ... 1 more ... \| undefined; ... 18 more ...; itemNamespace: string; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+▸ **getEntitlements**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: `undefined` \| ``null`` \| { appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; endDate?: string \| null \| undefined; sku?: string \| null \| undefined; storeId?: string \| ... 1 more ... \| undefined; ... 18 more ...; source: "REWARD" \| ... 7 more ... \| "OTHER"; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
 
 Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement list</li></ul>
 
@@ -136,8 +136,8 @@ Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Req
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: `undefined` \| ``null`` \| { appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; endDate?: string \| null \| undefined; sku?: string \| null \| undefined; storeId?: string \| ... 1 more ... \| undefined; ... 18 more ...; itemNamespace: string; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+`Promise`<`IResponseWithSync`<{ `data`: `undefined` \| ``null`` \| { appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; endDate?: string \| null \| undefined; sku?: string \| null \| undefined; storeId?: string \| ... 1 more ... \| undefined; ... 18 more ...; source: "REWARD" \| ... 7 more ... \| "OTHER"; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/platform/EntitlementApi.ts#L29)
+[packages/sdk/src/api/platform/EntitlementApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/platform/EntitlementApi.ts#L29)

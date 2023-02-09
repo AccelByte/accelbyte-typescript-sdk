@@ -1,3 +1,16 @@
+### 0.1.1-alpha.62 - 2023-02-08
+
+- Allow simplication when passing configs to widgetOptions in SdkWidget
+
+### 0.1.1-alpha.61 - 2023-02-07
+
+- OS-8668 fixing check EligibleUser dateOfBirth is now could be undefined
+
+### 0.1.1-alpha.60 - 2023-02-06
+
+- Fix build for Windows
+- Create missing config types and move configs from private package
+
 ### 0.1.1-alpha.59 - 2023-02-01
 
 - Move example SDK and Widgets usages to the SDK and Widgets folder

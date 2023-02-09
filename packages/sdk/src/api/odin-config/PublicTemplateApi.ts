@@ -16,15 +16,15 @@ export class PublicTemplateApi<ConfigKeysEnum extends string> {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   getTemplateConfigs = (template: string) => {
-    return this.newInstance().fetchV1TemplatesByTemplateConfigs(template)
+    return this.newInstance().fetchV1NsTemplatesByTemplateConfigs(template)
   }
 
   getTemplateConfig = (template: string, configId: ConfigKeysEnum) => {
-    return this.newInstance().fetchV1TemplatesByTemplateConfigsByConfig(template, configId)
+    return this.newInstance().fetchV1NsTemplatesByTemplateConfigsByConfig(template, configId)
   }
 
   getDiscoveryTemplateConfigs = () => {
-    return this.newInstance().fetchV1TemplatesByTemplateConfigs<DiscoveryConfigData>(DISCOVERY_TEMPLATE_NAME)
+    return this.newInstance().fetchV1NsTemplatesByTemplateConfigs<DiscoveryConfigData>(DISCOVERY_TEMPLATE_NAME)
   }
 
   private newInstance() {

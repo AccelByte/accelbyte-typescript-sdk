@@ -18,7 +18,7 @@ export class Namespace$ {
   /**
    * Get namespace info related publisher namespace.<br>Other detail info: <ul><li><i>Required permission</i>: resource=<b>"NAMESPACE:{namespace}:NAMESPACE"</b>, action=2 <b>(READ)</b></li><li><i>Action code</i>: 11305</li><li><i>Returns</i>: Namespace info related publisher namespace</li></ul>
    */
-  fetchV1Publisher<T = NamespacePublisherInfo>(): Promise<IResponseWithSync<T>> {
+  fetchV1NsPublisher<T = NamespacePublisherInfo>(): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/publisher'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

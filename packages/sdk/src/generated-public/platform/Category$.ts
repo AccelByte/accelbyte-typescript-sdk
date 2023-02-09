@@ -19,7 +19,7 @@ export class Category$ {
   /**
    * This API is used to get child categories by category path.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: list of child categories data</li></ul>
    */
-  fetchCategoriesByCategorypathChildren<T = CategoryInfoArray>(
+  fetchNsCategoriesByCategorypathChildren<T = CategoryInfoArray>(
     categoryPath: string,
     queryParams?: { storeId?: string | null; language?: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -41,7 +41,7 @@ export class Category$ {
   /**
    * This API is used to get category by category path.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1 (CREATE)(user with this permission can view draft store category)</li><li><i>Returns</i>: category data</li></ul>
    */
-  fetchCategoriesByCategorypath<T = CategoryInfo>(
+  fetchNsCategoriesByCategorypath<T = CategoryInfo>(
     categoryPath: string,
     queryParams?: { storeId?: string | null; language?: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -63,7 +63,7 @@ export class Category$ {
   /**
    * This API is used to get root categories.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: root category data</li></ul>
    */
-  fetchCategories<T = CategoryInfoArray>(queryParams?: {
+  fetchNsCategories<T = CategoryInfoArray>(queryParams?: {
     storeId?: string | null
     language?: string | null
   }): Promise<IResponseWithSync<T>> {
@@ -83,7 +83,7 @@ export class Category$ {
   /**
    * This API is used to get descendant categories by category path.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: list of descendant categories data</li></ul>
    */
-  fetchCategoriesByCategorypathDescendants<T = CategoryInfoArray>(
+  fetchNsCategoriesByCategorypathDescendants<T = CategoryInfoArray>(
     categoryPath: string,
     queryParams?: { language?: string | null; storeId?: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -105,7 +105,7 @@ export class Category$ {
   /**
    * This API is used to download store's structured categories.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store content)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store content)</li><li><i>Returns</i>: structured categories</li></ul>
    */
-  fetchCategoriesDownload<T = HierarchicalCategoryInfoArray>(queryParams?: {
+  fetchNsCategoriesDownload<T = HierarchicalCategoryInfoArray>(queryParams?: {
     storeId?: string | null
     language?: string | null
   }): Promise<IResponseWithSync<T>> {

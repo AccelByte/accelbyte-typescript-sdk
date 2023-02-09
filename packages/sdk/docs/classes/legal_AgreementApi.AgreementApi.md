@@ -32,7 +32,7 @@ Accepts many legal policy versions all at once. Supply with localized version po
 
 #### Defined in
 
-[packages/sdk/src/api/legal/AgreementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/legal/AgreementApi.ts#L20)
+[packages/sdk/src/api/legal/AgreementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/legal/AgreementApi.ts#L20)
 
 ___
 
@@ -48,7 +48,7 @@ Retrieve accepted Legal Agreements.<br>Other detail info: <ul><li><i>Required pe
 
 #### Defined in
 
-[packages/sdk/src/api/legal/AgreementApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/legal/AgreementApi.ts#L27)
+[packages/sdk/src/api/legal/AgreementApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/legal/AgreementApi.ts#L27)
 
 ___
 
@@ -70,4 +70,4 @@ Change marketing preference consent.<br>Other detail info: <ul><li><i>Required p
 
 #### Defined in
 
-[packages/sdk/src/api/legal/AgreementApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/10c884a/packages/sdk/src/api/legal/AgreementApi.ts#L34)
+[packages/sdk/src/api/legal/AgreementApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/1cf5789/packages/sdk/src/api/legal/AgreementApi.ts#L34)

@@ -15,7 +15,7 @@ export class Templates$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
-  fetchV1TemplatesByTemplateConfigs<T = Configs>(template: string): Promise<IResponseWithSync<T>> {
+  fetchV1NsTemplatesByTemplateConfigs<T = Configs>(template: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/public/namespaces/{namespace}/templates/{template}/configs'
       .replace('{namespace}', this.namespace)
@@ -31,7 +31,7 @@ export class Templates$ {
     return SdkCache.withCache(cacheKey, res)
   }
 
-  fetchV1TemplatesByTemplateConfigsByConfig<T = Config>(template: string, config: string): Promise<IResponseWithSync<T>> {
+  fetchV1NsTemplatesByTemplateConfigsByConfig<T = Config>(template: string, config: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/public/namespaces/{namespace}/templates/{template}/configs/{config}'
       .replace('{namespace}', this.namespace)

@@ -4,9 +4,33 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { Config } from '@accelbyte/sdk/generated-public/odin-config/definitions/Config'
+
+// Dev's note: using zod, unfortunately we can't have generics.
+// This is a "hack" so that we can have a safe typing for Config.
+// Perhaps there's a better way to do it, like using z.lazy?
+// ts-prune-ignore-next
+export interface ExtendedConfig<T extends Record<string, any>> extends z.TypeOf<typeof Config> {
+  data: T
+}
+
+export enum BackgroundOverlayType {
+  GRADIENT = 'gradient',
+  FULL = 'full'
+}
+
+export const BackgroundOverlay = z.object({
+  isEnabled: z.boolean(),
+  type: z.nativeEnum(BackgroundOverlayType),
+  /** Number between 0-100. The bigger, the more solid the color will be. */
+  opacity: z.number().min(0).max(100)
+})
+export type BackgroundOverlay = z.infer<typeof BackgroundOverlay>
 
 export const LogoVariantConfig = z.object({
+  /** The index of the image located in the `companyLogo` inside the discovery configs. */
   header: z.number().nullable(),
+  /** The index of the image located in the `companyLogo` inside the discovery configs. */
   footer: z.number().nullable()
 })
 export type LogoVariantConfig = z.TypeOf<typeof LogoVariantConfig>
@@ -18,21 +42,7 @@ export const ColorConfig = z.object({
     g: z.number(),
     b: z.number(),
     a: z.number()
-  }),
-  hsl: z.object({
-    h: z.number(),
-    s: z.number(),
-    l: z.number(),
-    a: z.number()
-  }),
-  hsv: z.object({
-    h: z.number(),
-    s: z.number(),
-    v: z.number(),
-    a: z.number()
-  }),
-  oldHue: z.number(),
-  source: z.string()
+  })
 })
 export type ColorConfig = z.infer<typeof ColorConfig>
 
@@ -47,17 +57,26 @@ export const ColorConfigs = z.object({
 export type ColorConfigs = z.infer<typeof ColorConfigs>
 
 export const FontConfigs = z.object({
+  /**
+   * The font-family that will be used for the body. Supported default fonts are as the following:
+   * 'Exo', 'Rubik', 'Roboto', 'Inter', and 'Poppins'.
+   **/
   body: z.string(),
-  bodyCss: z.string(),
+  /** The public URL of the font, if you want to use custom font. */
   customBodyFontUrl: z.string(),
+  /**
+   * The font-family that will be used for the headings (including buttons). Supported default fonts are as the following:
+   * 'Exo', 'Rubik', 'Roboto', 'Inter', and 'Poppins'.
+   **/
   title: z.string(),
-  titleCss: z.string(),
+  /** The public URL of the font, if you want to use custom font. */
   customTitleFontUrl: z.string()
 })
 export type FontConfigs = z.infer<typeof FontConfigs>
 
 export const PageConfig = z.object({
   templatePreview: z.string().optional(),
+  /** When enabled, then it will use the styles defined in the `global.colors` and `global.fonts`. */
   isLocalStyleEnabled: z.boolean(),
   global: z.object({
     colors: z.object({
@@ -68,14 +87,7 @@ export const PageConfig = z.object({
       background: ColorConfig,
       card: ColorConfig
     }),
-    fonts: z.object({
-      title: z.string(),
-      titleCss: z.string(),
-      customTitleFontUrl: z.string(),
-      body: z.string(),
-      bodyCss: z.string(),
-      customBodyFontUrl: z.string()
-    })
+    fonts: FontConfigs
   })
 })
 export type PageConfig = z.infer<typeof PageConfig>

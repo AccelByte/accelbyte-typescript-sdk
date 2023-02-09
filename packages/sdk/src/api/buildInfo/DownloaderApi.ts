@@ -25,7 +25,7 @@ export class DownloaderApi {
    * This API is used to get simple build manifest that contains list of current build in various platform.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
    */
   getAvailableBuilds(appId: string) {
-    return this.newInstance().fetchAvailablebuildsByAppid(appId)
+    return this.newInstance().fetchNsAvailablebuildsByAppid(appId)
   }
 
   /**
@@ -33,14 +33,14 @@ export class DownloaderApi {
    */
   getBuildManifest(appId: string, platformId: string) {
     const axios = Network.create({ ...this.conf, timeout: 1800000 })
-    return new Downloader$(axios, this.namespace, false).fetchV2UpdategameByAppidByPlatformid(appId, platformId)
+    return new Downloader$(axios, this.namespace, false).fetchNsV2UpdategameByAppidByPlatformid(appId, platformId)
   }
 
   /**
    * This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
    */
   getDiffCache(sourceBuildId: string, destinationBuildId: string) {
-    return new Caching$(Network.create(this.conf), this.namespace, false).fetchDiffCacheSourceBySourcebuildidDestByDestinationbuildid(
+    return new Caching$(Network.create(this.conf), this.namespace, false).fetchNsDiffCacheSourceBySourcebuildidDestByDestinationbuildid(
       sourceBuildId,
       destinationBuildId
     )

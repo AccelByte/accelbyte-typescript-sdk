@@ -36,7 +36,7 @@ export class Misc$ {
   /**
    * List time zones.<br>Other detail info: <ul><li><i>Returns</i>: time zones</li></ul>
    */
-  fetchV1MiscTimezones(): Promise<IResponseWithSync<unknown>> {
+  fetchV1NsMiscTimezones(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/misc/timezones'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -53,7 +53,7 @@ export class Misc$ {
   /**
    * List languages.<br>Other detail info: <ul><li><i>Returns</i>: language list</li></ul>
    */
-  fetchV1MiscLanguages(): Promise<IResponseWithSync<unknown>> {
+  fetchV1NsMiscLanguages(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/misc/languages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -70,7 +70,7 @@ export class Misc$ {
   /**
    * List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
    */
-  fetchV1MiscCountries<T = CountryObjectArray>(queryParams?: { lang?: string | null }): Promise<IResponseWithSync<T>> {
+  fetchV1NsMiscCountries<T = CountryObjectArray>(queryParams?: { lang?: string | null }): Promise<IResponseWithSync<T>> {
     const params = { lang: 'en', ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

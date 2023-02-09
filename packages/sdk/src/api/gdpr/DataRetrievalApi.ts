@@ -18,7 +18,7 @@ export class DataRetrievalApi {
    * <p>Requires valid user access token</p>
    */
   getGdprDataRequestList({ userId, queryParams }: { userId: string; queryParams?: { limit?: number; offset?: number } }) {
-    return this.newInstance().fetchGdprUsersByUseridRequests(userId, queryParams)
+    return this.newInstance().fetchGdprNsUsersByUseridRequests(userId, queryParams)
   }
 
   /**
@@ -26,7 +26,7 @@ export class DataRetrievalApi {
    * <p>Requires valid user access token</p>
    */
   requestGdprData({ userId, data }: { userId: string; data: { password: string | null } }) {
-    return this.newInstance().postGdprUsersByUseridRequests(userId, data)
+    return this.newInstance().postGdprNsUsersByUseridRequests(userId, data)
   }
 
   /**
@@ -34,7 +34,7 @@ export class DataRetrievalApi {
    * <p>Requires valid user access token</p>
    */
   cancelGdprDataRequest({ userId, requestDate }: { userId: string; requestDate: string }) {
-    return this.newInstance().deleteGdprUsersByUseridRequestsByRequestdate(userId, requestDate)
+    return this.newInstance().deleteGdprNsUsersByUseridRequestsByRequestdate(userId, requestDate)
   }
 
   /**
@@ -42,7 +42,7 @@ export class DataRetrievalApi {
    * <p>Requires valid user access token</p>
    */
   requestGdprDataDownloadUrl({ userId, requestDate, data }: { userId: string; requestDate: string; data: { password: string | null } }) {
-    return this.newInstance().postGdprUsersByUseridRequestsByRequestdateGenerate(userId, requestDate, data)
+    return this.newInstance().postGdprNsUsersByUseridRequestsByRequestdateGenerate(userId, requestDate, data)
   }
 
   private newInstance() {

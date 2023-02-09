@@ -101,7 +101,7 @@ export default async function createConfigs() {
 // Local plugins.
 // This is a custom plugin to rewrite the declaration files.
 // Read more about the "hooks" of Rollup, visit https://rollupjs.org/guide/en/#output-generation-hooks.
-const ACTUAL_ANCHOR = path.join(process.cwd(), CONFIG.compilerOptions.outDir).replace(/\\/g, '/')
+const ACTUAL_ANCHOR = nixifyPath(path.join(process.cwd(), CONFIG.compilerOptions.outDir))
 const IMPORT_ANCHOR = /@accelbyte\/(sdk|validator)/g
 const IMPORT_REGEX = /@accelbyte\/(sdk|validator)(\/\w+)*/g
 
@@ -114,7 +114,7 @@ function declarationRewritePlugin() {
       for (let i = 0; i < fileNames.length; i += 1) {
         const fileName = fileNames[i]
         // Full filesystem path.
-        const fullPathToFile = path.join(ACTUAL_ANCHOR, fileName)
+        const fullPathToFile = nixifyPath(path.join(ACTUAL_ANCHOR, fileName))
         // Normalize the full path. This is because we might have `declarationDir`
         // in `tsconfig.build.json`. If we don't normalize it, then the imports will be referring
         // to incorrect paths.
@@ -137,7 +137,7 @@ function declarationRewritePlugin() {
             for (const match of deduped) {
               // Replace the imports with the relative paths.
               const actualPath = match.replace(IMPORT_ANCHOR, anchorPath)
-              let relativePath = path.relative(path.dirname(fullPathToFile), actualPath).replace(/\\/g, '/')
+              let relativePath = nixifyPath(path.relative(path.dirname(fullPathToFile), actualPath))
               // Add relative indicator so it doesn't try to resolve from `node_modules`.
               if (!relativePath.startsWith('.')) {
                 relativePath = `./${relativePath}`
@@ -163,4 +163,8 @@ function updateVersionFromChangelog() {
     packageJson.version = version
   }
   writeFileSync(path.resolve('./package.json'), JSON.stringify(packageJson, null, 2))
+}
+
+function nixifyPath(p) {
+  return p.replace(/\\/g, '/')
 }
