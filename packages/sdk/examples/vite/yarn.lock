@@ -2,16 +2,16 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk@0.1.1-alpha.57":
-  version "0.1.1-alpha.57"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.1.1-alpha.57.tgz#c61e64262cf27427a86a0b290ca7a2e09650c66b"
-  integrity sha512-yg3mTTyQWkOR+OkKQo5Vj322jmZkGBcoAyaqhOlobTaVGdqxahgR4wEoFaYbsspIlfNvEvrfQ/ZNhz7ybpbgbQ==
+"@accelbyte/sdk@0.1.1-alpha.62":
+  version "0.1.1-alpha.62"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.1.1-alpha.62.tgz#418b615631c31ebea4218b3e2e552ef09540e60f"
+  integrity sha512-2z/syFPI/3Z/RTUC0XGIaGkzKaWz5LCtjqtOWRml88Tb/vx40n/CeMdXGlR6MFZMjp7xoqJzW+smmrve94Wrbg==
   dependencies:
     axios "0.27.2"
     buffer "6.0.3"
     crypto-js "4.1.1"
     lodash-core "4.17.19"
-    nanoid "3.1.30"
+    nanoid "3.1.31"
     platform "1.3.6"
     query-string "7.1.1"
     uuid "8.3.2"
@@ -681,10 +681,10 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-nanoid@3.1.30:
-  version "3.1.30"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.30.tgz#63f93cc548d2a113dc5dfbc63bfa09e2b9b64362"
-  integrity sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==
+nanoid@3.1.31:
+  version "3.1.31"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.31.tgz#f5b58a1ce1b7604da5f0605757840598d8974dc6"
+  integrity sha512-ZivnJm0o9bb13p2Ot5CpgC2rQdzB9Uxm/mFZweqm5eMViqOJe3PV6LU2E30SiLgheesmcPrjquqraoolONSA0A==
 
 nanoid@^3.3.4:
   version "3.3.4"

@@ -9,22 +9,17 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-import { Accelbyte, CurrencyInfo, DiscoveryConfigData, ItemInfo, ItemPagingSlicedResult, NamespaceInfo } from '@accelbyte/sdk'
+import { Accelbyte, CurrencyInfo, DiscoveryConfigData, ItemPagingSlicedResult, NamespaceInfo } from '@accelbyte/sdk'
 
 const SDK_CONFIG = {
-  baseURL: process.env.NEXT_SDK_BASE_URL || '',
-  clientId: process.env.NEXT_SDK_CLIENT_ID || '',
-  namespace: process.env.NEXT_SDK_NAMESPACE || '',
-  redirectURI: process.env.NEXT_SDK_REDIRECT_URI || ''
+  baseURL: 'https://demo.accelbyte.io',
+  clientId: '77f88506b6174c3ea4d925f5b4096ce8',
+  namespace: 'accelbyte',
+  redirectURI: 'http://localhost:3030'
 }
 
 const sdk = Accelbyte.SDK({
-  options: SDK_CONFIG,
-  config: {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_SDK_ACCESS_TOKEN}`
-    }
-  }
+  options: SDK_CONFIG
 })
 
 interface TestSdkReturnType {
@@ -43,8 +38,14 @@ export const getServerSideProps: GetServerSideProps<{ data: TestSdkReturnType }>
     sdk.Platform.Item().fetchItemsByCriteria({}),
 
     // These require authentication and we can't use it right away.
-    // Ensure that you have set `NEXT_SDK_ACCESS_TOKEN` in the `.env` file.
-    sdk.Basic.Namespace().getNamespaces()
+    // Ensure that you have logged in (have cookies) or pass the access token to the `Authorization` header.
+    sdk.Basic.Namespace({
+      config: {
+        headers: {
+          Authorization: `Bearer <replace-this-with-access-token>`
+        }
+      }
+    }).getNamespaces()
   ])
 
   return {
@@ -54,7 +55,7 @@ export const getServerSideProps: GetServerSideProps<{ data: TestSdkReturnType }>
         listDiscoveryConfigs: listDiscoveryConfigs.response?.data,
         listOfCurrencies: listOfCurrencies.response?.data,
         listOfItems: listOfItems.response?.data,
-        listOfNamespaces: listOfNamespaces.response?.data
+        listOfNamespaces: listOfNamespaces.response?.data || null
       }
     }
   }

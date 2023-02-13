@@ -1,3 +1,7 @@
+### 0.1.1-alpha.56 - 2023-02-09
+
+- Added License file
+
 ### 0.1.1-alpha.55 - 2023-01-24
 
 - Don't use ESM-only build yet for validator

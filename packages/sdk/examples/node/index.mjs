@@ -5,19 +5,14 @@ import { config } from 'dotenv'
 config()
 
 const SDK_CONFIG = {
-  baseURL: process.env.SDK_BASE_URL || '',
-  clientId: process.env.SDK_CLIENT_ID || '',
-  namespace: process.env.SDK_NAMESPACE || '',
-  redirectURI: process.env.SDK_REDIRECT_URI || ''
+  baseURL: 'https://demo.accelbyte.io',
+  clientId: '77f88506b6174c3ea4d925f5b4096ce8',
+  namespace: 'accelbyte',
+  redirectURI: 'http://localhost:3030'
 }
 
 const sdk = Accelbyte.SDK({
-  options: SDK_CONFIG,
-  config: {
-    headers: {
-      Authorization: `Bearer ${process.env.SDK_ACCESS_TOKEN}`
-    }
-  }
+  options: SDK_CONFIG
 })
 
 // Sample SDK calls:
@@ -43,8 +38,14 @@ async function main() {
   console.info(JSON.stringify(listOfItems))
 
   // These require authentication and we can't use it right away.
-  // Ensure that you have set `SDK_ACCESS_TOKEN` in the `.env` file.
-  const listOfNamespaces = await sdk.Basic.Namespace().getNamespaces()
+  // Ensure that you have logged in (have cookies) or pass the access token to the `Authorization` header.
+  const listOfNamespaces = sdk.Basic.Namespace({
+    config: {
+      headers: {
+        Authorization: `Bearer <replace-this-with-access-token>`
+      }
+    }
+  }).getNamespaces()
 
   console.info('List of namespaces:')
   console.info(JSON.stringify(listOfNamespaces))

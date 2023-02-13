@@ -2,28 +2,28 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk@^0.1.1-alpha.51":
-  version "0.1.1-alpha.57"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.1.1-alpha.57.tgz#c61e64262cf27427a86a0b290ca7a2e09650c66b"
-  integrity sha512-yg3mTTyQWkOR+OkKQo5Vj322jmZkGBcoAyaqhOlobTaVGdqxahgR4wEoFaYbsspIlfNvEvrfQ/ZNhz7ybpbgbQ==
+"@accelbyte/sdk@0.1.1-alpha.62":
+  version "0.1.1-alpha.62"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.1.1-alpha.62.tgz#418b615631c31ebea4218b3e2e552ef09540e60f"
+  integrity sha512-2z/syFPI/3Z/RTUC0XGIaGkzKaWz5LCtjqtOWRml88Tb/vx40n/CeMdXGlR6MFZMjp7xoqJzW+smmrve94Wrbg==
   dependencies:
     axios "0.27.2"
     buffer "6.0.3"
     crypto-js "4.1.1"
     lodash-core "4.17.19"
-    nanoid "3.1.30"
+    nanoid "3.1.31"
     platform "1.3.6"
     query-string "7.1.1"
     uuid "8.3.2"
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/widgets@0.1.1-alpha.60":
-  version "0.1.1-alpha.60"
-  resolved "https://registry.yarnpkg.com/@accelbyte/widgets/-/widgets-0.1.1-alpha.60.tgz#441ff2301db4c84a7cbb545982ef699996614aaf"
-  integrity sha512-42jxD8LmZXCl8Gco+TDeL0h0QJ3uM3x69H6X663a2yvxzMO7sv5cemlCA89t7kpFRhWnTNP6Ef2mC8wSzQDSkQ==
+"@accelbyte/widgets@0.1.1-alpha.64":
+  version "0.1.1-alpha.64"
+  resolved "https://registry.yarnpkg.com/@accelbyte/widgets/-/widgets-0.1.1-alpha.64.tgz#64e1751ba9888b9fad8f9996027de3db76d5980a"
+  integrity sha512-e4ExKT1dVks+ljzcSA0poqhdyAmavhFPVNca+MM0uluJP4Fq4lx02PRQHb4A3tF4+MLExGfsFO3LfdZTl06vaw==
   dependencies:
-    "@accelbyte/sdk" "^0.1.1-alpha.51"
+    "@accelbyte/sdk" "0.1.1-alpha.62"
     "@types/react-router-dom" "5.1.7"
     "@zxcvbn-ts/core" "^2.0.4"
     axios "0.27.2"
@@ -35,14 +35,14 @@
     dompurify "2.3.9"
     filesize "8.0.7"
     framer-motion "6.3.3"
-    jwt-simple "0.5.6"
+    i18next "22.4.9"
     moment "2.29.4"
     platform-typescript-medium-serde "git+https://github.com/AccelByte/justice-platform-typescript-medium-serde.git#0.2.0"
     qrious "4.0.2"
     react-copy-to-clipboard "5.0.2"
     react-datepicker "3.2.2"
     react-helmet "6.1.0"
-    react-i18next "11.8.1"
+    react-i18next "12.1.4"
     react-lines-ellipsis "0.14.1"
     react-otp-input "2.4.0"
     react-player "1.15.2"
@@ -238,7 +238,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.19.0"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.12.0", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.12.0", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.6", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.7":
   version "7.20.13"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"
   integrity sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==
@@ -1275,12 +1275,12 @@ hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.1:
   dependencies:
     react-is "^16.7.0"
 
-html-parse-stringify2@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/html-parse-stringify2/-/html-parse-stringify2-2.0.1.tgz#dc5670b7292ca158b7bc916c9a6735ac8872834a"
-  integrity sha512-wMKQ3aJ/dwXzDHPpA7XgsRXXCkEhHkAF6Ioh7D51lgZO7Qy0LmcFddC9TI/qNQJvSM1KL8KbcR3FtuybsrzFlQ==
+html-parse-stringify@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/html-parse-stringify/-/html-parse-stringify-3.0.1.tgz#dfc1017347ce9f77c8141a507f233040c59c55d2"
+  integrity sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==
   dependencies:
-    void-elements "^2.0.1"
+    void-elements "3.1.0"
 
 http-errors@~1.7.2:
   version "1.7.3"
@@ -1292,6 +1292,13 @@ http-errors@~1.7.2:
     setprototypeof "1.1.1"
     statuses ">= 1.5.0 < 2"
     toidentifier "1.0.0"
+
+i18next@22.4.9:
+  version "22.4.9"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-22.4.9.tgz#98c8384c6bd41ff937da98b1e809ba03d3b41053"
+  integrity sha512-8gWMmUz460KJDQp/ob3MNUX84cVuDRY9PLFPnV8d+Qezz/6dkjxwOaH70xjrCNDO+JrUL25iXfAIN9wUkInNZw==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
 
 ieee754@^1.2.1:
   version "1.2.1"
@@ -1411,11 +1418,6 @@ json5@^2.1.3, json5@^2.2.2:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
-
-jwt-simple@0.5.6:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/jwt-simple/-/jwt-simple-0.5.6.tgz#3357adec55b26547114157be66748995b75b333a"
-  integrity sha512-40aUybvhH9t2h71ncA1/1SbtTNCVZHgsTsTgqPUxGWDmUDrXyDf2wMNQKEbdBjbf4AI+fQhbECNTV6lWxQKUzg==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
@@ -1543,10 +1545,10 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-nanoid@3.1.30:
-  version "3.1.30"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.30.tgz#63f93cc548d2a113dc5dfbc63bfa09e2b9b64362"
-  integrity sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==
+nanoid@3.1.31:
+  version "3.1.31"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.31.tgz#f5b58a1ce1b7604da5f0605757840598d8974dc6"
+  integrity sha512-ZivnJm0o9bb13p2Ot5CpgC2rQdzB9Uxm/mFZweqm5eMViqOJe3PV6LU2E30SiLgheesmcPrjquqraoolONSA0A==
 
 nanoid@^2.0.0:
   version "2.1.11"
@@ -1769,13 +1771,13 @@ react-helmet@6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
-react-i18next@11.8.1:
-  version "11.8.1"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-11.8.1.tgz#bf60a03aa1522bb227a669e1b41afab25089acec"
-  integrity sha512-PbKWBphflI7la0gFc4MneeigmnCT2M/axnUUhCAz3MqfVekRdupFJFvYE25jiIMzbJcIpJeQJDfp/zyktD/O6Q==
+react-i18next@12.1.4:
+  version "12.1.4"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-12.1.4.tgz#be0a60d3a45acc4321909f8a4b8cde16518a2926"
+  integrity sha512-XQND7jYtgM7ht5PH3yIZljCRpAMTlH/zmngM9ZjToqa+0BR6xuu8c7QF0WIIOEjcMTB2S3iOfpN/xG/ZrAnO6g==
   dependencies:
-    "@babel/runtime" "^7.3.1"
-    html-parse-stringify2 "2.0.1"
+    "@babel/runtime" "^7.20.6"
+    html-parse-stringify "^3.0.1"
 
 react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0:
   version "16.13.1"
@@ -2264,10 +2266,10 @@ vite@^4.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-void-elements@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
-  integrity sha512-qZKX4RnBzH2ugr8Lxa7x+0V6XD9Sb/ouARtiasEQCHB1EVU4NXtmHsDDrx1dO4ne5fc3J6EW05BP1Dl0z0iung==
+void-elements@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
+  integrity sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==
 
 warning@^4.0.2, warning@^4.0.3:
   version "4.0.3"

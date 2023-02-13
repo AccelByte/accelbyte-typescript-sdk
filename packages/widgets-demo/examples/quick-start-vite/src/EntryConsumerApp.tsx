@@ -7,7 +7,6 @@
 import { SdkWidget } from '@accelbyte/widgets'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Env } from './constants/Env'
 import { ConsumerApp } from './ConsumerApp'
 import '@accelbyte/widgets/dist/style.css'
 
@@ -15,10 +14,10 @@ ReactDOM.render(
   <React.StrictMode>
     <SdkWidget
       sdkOptions={{
-        baseURL: Env.IS_DEV_MODE ? `${window.location.origin}/api` : Env.BASE_URL,
-        clientId: Env.CLIENT_ID,
-        redirectURI: Env.REDIRECT_URL,
-        namespace: Env.NAMESPACE
+        baseURL: `${window.location.origin}/api`,
+        clientId: '77f88506b6174c3ea4d925f5b4096ce8',
+        namespace: 'accelbyte',
+        redirectURI: 'http://localhost:3030'
       }}>
       <ConsumerApp />
     </SdkWidget>
