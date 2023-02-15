@@ -32,7 +32,7 @@ get my wallet by currency code and namespace.<br>Other detail info: <ul><li><i>R
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/WalletApi.ts#L20)
+[packages/sdk/src/api/platform/WalletApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/WalletApi.ts#L20)
 
 ___
 
@@ -55,7 +55,7 @@ get a wallet by currency code.<br>Other detail info: <ul><li><i>Required permiss
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/WalletApi.ts#L27)
+[packages/sdk/src/api/platform/WalletApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/WalletApi.ts#L27)
 
 ___
 
@@ -79,4 +79,4 @@ get a map of wallet represented by its currency code
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/WalletApi.ts#L34)
+[packages/sdk/src/api/platform/WalletApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/WalletApi.ts#L34)

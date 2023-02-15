@@ -24,9 +24,9 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/iam/InputValidationHelper.ts#L19)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/InputValidationHelper.ts#L19)
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/iam/InputValidationHelper.ts#L20)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/InputValidationHelper.ts#L20)
 
 ## Variables
 
@@ -36,6 +36,6 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/iam/InputValidationHelper.ts#L19)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/InputValidationHelper.ts#L19)
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/iam/InputValidationHelper.ts#L20)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/InputValidationHelper.ts#L20)

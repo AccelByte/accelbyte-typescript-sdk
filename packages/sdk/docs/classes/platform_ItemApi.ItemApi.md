@@ -38,7 +38,7 @@ Fetch the items and convert it into a map of `itemId` and its item info
 
 #### Defined in
 
-[packages/sdk/src/api/platform/ItemApi.ts:55](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/ItemApi.ts#L55)
+[packages/sdk/src/api/platform/ItemApi.ts:55](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/ItemApi.ts#L55)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/platform/ItemApi.ts:37](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/ItemApi.ts#L37)
+[packages/sdk/src/api/platform/ItemApi.ts:37](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/ItemApi.ts#L37)
 
 ___
 
@@ -96,7 +96,7 @@ This API is used to get an app in locale. If app not exist in specific region, d
 
 #### Defined in
 
-[packages/sdk/src/api/platform/ItemApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/ItemApi.ts#L82)
+[packages/sdk/src/api/platform/ItemApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/ItemApi.ts#L82)
 
 ___
 
@@ -122,7 +122,7 @@ This API is used to get item by appId.<p>Other detail info: <ul><li><i>Optional 
 
 #### Defined in
 
-[packages/sdk/src/api/platform/ItemApi.ts:26](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/ItemApi.ts#L26)
+[packages/sdk/src/api/platform/ItemApi.ts:26](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/ItemApi.ts#L26)
 
 ___
 
@@ -144,7 +144,7 @@ Get item dynamic data for a published item.<br>Other detail info: <ul><li><i>Ret
 
 #### Defined in
 
-[packages/sdk/src/api/platform/ItemApi.ts:33](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/ItemApi.ts#L33)
+[packages/sdk/src/api/platform/ItemApi.ts:33](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/ItemApi.ts#L33)
 
 ___
 
@@ -172,7 +172,7 @@ This API is used to get an item in locale. If item not exist in specific region,
 
 #### Defined in
 
-[packages/sdk/src/api/platform/ItemApi.ts:75](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/ItemApi.ts#L75)
+[packages/sdk/src/api/platform/ItemApi.ts:75](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/ItemApi.ts#L75)
 
 ___
 
@@ -195,7 +195,7 @@ This API is used to query items by criteria within a store. If item not exist in
 
 #### Defined in
 
-[packages/sdk/src/api/platform/ItemApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/ItemApi.ts#L48)
+[packages/sdk/src/api/platform/ItemApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/ItemApi.ts#L48)
 
 ___
 
@@ -218,4 +218,4 @@ This API is used to validate user item purchase condition
 
 #### Defined in
 
-[packages/sdk/src/api/platform/ItemApi.ts:89](https://github.com/AccelByte/accelbyte-web-sdk/blob/8cb9ca2/packages/sdk/src/api/platform/ItemApi.ts#L89)
+[packages/sdk/src/api/platform/ItemApi.ts:89](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/ItemApi.ts#L89)
