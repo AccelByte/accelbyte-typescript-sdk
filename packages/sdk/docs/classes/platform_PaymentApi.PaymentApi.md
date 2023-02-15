@@ -43,7 +43,7 @@ Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link<
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:106](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L106)
+[packages/sdk/src/api/platform/PaymentApi.ts:106](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L106)
 
 ___
 
@@ -68,7 +68,7 @@ Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L29)
+[packages/sdk/src/api/platform/PaymentApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L29)
 
 ___
 
@@ -90,7 +90,7 @@ Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: 
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L22)
+[packages/sdk/src/api/platform/PaymentApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L22)
 
 ___
 
@@ -112,7 +112,7 @@ Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment or
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L36)
+[packages/sdk/src/api/platform/PaymentApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L36)
 
 ___
 
@@ -134,7 +134,7 @@ Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment metho
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:84](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L84)
+[packages/sdk/src/api/platform/PaymentApi.ts:84](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L84)
 
 ___
 
@@ -156,7 +156,7 @@ Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: P
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:75](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L75)
+[packages/sdk/src/api/platform/PaymentApi.ts:75](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L75)
 
 ___
 
@@ -180,7 +180,7 @@ Get payment provider public config, at current only Strip provide public config.
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L60)
+[packages/sdk/src/api/platform/PaymentApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L60)
 
 ___
 
@@ -204,7 +204,7 @@ Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:91](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L91)
+[packages/sdk/src/api/platform/PaymentApi.ts:91](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L91)
 
 ___
 
@@ -229,4 +229,4 @@ Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:45](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/platform/PaymentApi.ts#L45)
+[packages/sdk/src/api/platform/PaymentApi.ts:45](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L45)

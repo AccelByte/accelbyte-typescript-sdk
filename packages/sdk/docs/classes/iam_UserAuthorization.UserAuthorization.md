@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:301](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L301)
+[packages/sdk/src/api/iam/UserAuthorization.ts:301](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L301)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:271](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L271)
+[packages/sdk/src/api/iam/UserAuthorization.ts:271](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L271)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:223](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L223)
+[packages/sdk/src/api/iam/UserAuthorization.ts:223](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L223)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:234](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L234)
+[packages/sdk/src/api/iam/UserAuthorization.ts:234](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L234)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:324](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L324)
+[packages/sdk/src/api/iam/UserAuthorization.ts:324](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L324)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:181](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L181)
+[packages/sdk/src/api/iam/UserAuthorization.ts:181](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L181)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:194](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L194)
+[packages/sdk/src/api/iam/UserAuthorization.ts:194](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L194)
 
 ___
 
@@ -248,7 +248,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:147](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L147)
+[packages/sdk/src/api/iam/UserAuthorization.ts:147](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L147)
 
 ___
 
@@ -268,7 +268,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:203](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L203)
+[packages/sdk/src/api/iam/UserAuthorization.ts:203](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L203)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:328](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L328)
+[packages/sdk/src/api/iam/UserAuthorization.ts:328](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L328)
 
 ___
 
@@ -296,4 +296,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:199](https://github.com/AccelByte/accelbyte-web-sdk/blob/8ad2c35/packages/sdk/src/api/iam/UserAuthorization.ts#L199)
+[packages/sdk/src/api/iam/UserAuthorization.ts:199](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L199)

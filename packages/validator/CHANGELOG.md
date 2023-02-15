@@ -1,3 +1,7 @@
+### 0.1.1-alpha.57 - 2023-02-15
+
+- Export validateSeasonPassCode
+
 ### 0.1.1-alpha.56 - 2023-02-09
 
 - Added License file
