@@ -1,6 +1,6 @@
 # AccelByte Web SDK
 
-This folder contains the source code of the AccelByte Web SDK.
+This folder contains the source code of the AccelByte Web SDK. For full documentation open [github.com/AccelByte/accelbyte-web-sdk](https://github.com/AccelByte/accelbyte-web-sdk)
 
 ## Key directories
 

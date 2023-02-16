@@ -36,7 +36,7 @@ Cancel user order.<br>Other detail info: <ul><li><i>Required permission</i>: res
 
 #### Defined in
 
-[packages/sdk/src/api/platform/OrderApi.ts:38](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/platform/OrderApi.ts#L38)
+[packages/sdk/src/api/platform/OrderApi.ts:38](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/platform/OrderApi.ts#L38)
 
 ___
 
@@ -60,7 +60,7 @@ Create an order. The result contains the checkout link and payment token. User w
 
 #### Defined in
 
-[packages/sdk/src/api/platform/OrderApi.ts:45](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/platform/OrderApi.ts#L45)
+[packages/sdk/src/api/platform/OrderApi.ts:45](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/platform/OrderApi.ts#L45)
 
 ___
 
@@ -84,7 +84,7 @@ Fetch all information needed for a user to check the user's availability to purc
 
 #### Defined in
 
-[packages/sdk/src/api/platform/OrderApi.ts:52](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/platform/OrderApi.ts#L52)
+[packages/sdk/src/api/platform/OrderApi.ts:52](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/platform/OrderApi.ts#L52)
 
 ___
 
@@ -108,7 +108,7 @@ Get user order.<br>Other detail info: <ul><li><i>Required permission</i>: resour
 
 #### Defined in
 
-[packages/sdk/src/api/platform/OrderApi.ts:31](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/platform/OrderApi.ts#L31)
+[packages/sdk/src/api/platform/OrderApi.ts:31](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/platform/OrderApi.ts#L31)
 
 ___
 
@@ -136,4 +136,4 @@ Query user orders.<br>Other detail info: <ul><li><i>Required permission</i>: res
 
 #### Defined in
 
-[packages/sdk/src/api/platform/OrderApi.ts:24](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/platform/OrderApi.ts#L24)
+[packages/sdk/src/api/platform/OrderApi.ts:24](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/platform/OrderApi.ts#L24)

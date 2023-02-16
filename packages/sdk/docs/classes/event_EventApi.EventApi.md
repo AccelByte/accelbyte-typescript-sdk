@@ -46,4 +46,4 @@
 
 #### Defined in
 
-[packages/sdk/src/api/event/EventApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/event/EventApi.ts#L28)
+[packages/sdk/src/api/event/EventApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/event/EventApi.ts#L28)

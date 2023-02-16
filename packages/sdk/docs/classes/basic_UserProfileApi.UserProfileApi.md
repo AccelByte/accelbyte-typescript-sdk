@@ -33,7 +33,7 @@ Create my profile.<br><b>Client with user token can create user profile in targe
 
 #### Defined in
 
-[packages/sdk/src/api/basic/UserProfileApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/basic/UserProfileApi.ts#L28)
+[packages/sdk/src/api/basic/UserProfileApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/basic/UserProfileApi.ts#L28)
 
 ___
 
@@ -49,7 +49,7 @@ Get my profile<br><b>Client with user token can get user profile in target names
 
 #### Defined in
 
-[packages/sdk/src/api/basic/UserProfileApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/basic/UserProfileApi.ts#L21)
+[packages/sdk/src/api/basic/UserProfileApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/basic/UserProfileApi.ts#L21)
 
 ___
 
@@ -72,7 +72,7 @@ Update partially custom attributes tied to user id.<br>Other detail info: <ul><l
 
 #### Defined in
 
-[packages/sdk/src/api/basic/UserProfileApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/basic/UserProfileApi.ts#L42)
+[packages/sdk/src/api/basic/UserProfileApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/basic/UserProfileApi.ts#L42)
 
 ___
 
@@ -94,4 +94,4 @@ Update my profile.<br>Updates user profile in the target namespace. If token's n
 
 #### Defined in
 
-[packages/sdk/src/api/basic/UserProfileApi.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/basic/UserProfileApi.ts#L35)
+[packages/sdk/src/api/basic/UserProfileApi.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/basic/UserProfileApi.ts#L35)

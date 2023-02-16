@@ -67,7 +67,7 @@ Create a new user with unique email address and username.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:296](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L296)
+[packages/sdk/src/api/iam/UserApi.ts:296](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L296)
 
 ___
 
@@ -89,7 +89,7 @@ Get age restriction by country code. It will always get by publisher namespace
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:244](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L244)
+[packages/sdk/src/api/iam/UserApi.ts:244](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L244)
 
 ___
 
@@ -105,7 +105,7 @@ get currently logged in user
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L35)
+[packages/sdk/src/api/iam/UserApi.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L35)
 
 ___
 
@@ -130,7 +130,7 @@ Note:<br>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:340](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L340)
+[packages/sdk/src/api/iam/UserApi.ts:340](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L340)
 
 ___
 
@@ -152,7 +152,7 @@ Get the linking status between a third-party platform to a user
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:180](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L180)
+[packages/sdk/src/api/iam/UserApi.ts:180](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L180)
 
 ___
 
@@ -175,7 +175,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:331](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L331)
+[packages/sdk/src/api/iam/UserApi.ts:331](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L331)
 
 ___
 
@@ -201,7 +201,7 @@ This method is used to generate third party login page which will redirected to 
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:231](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L231)
+[packages/sdk/src/api/iam/UserApi.ts:231](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L231)
 
 ___
 
@@ -225,7 +225,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:305](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L305)
+[packages/sdk/src/api/iam/UserApi.ts:305](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L305)
 
 ___
 
@@ -248,7 +248,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:143](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L143)
+[packages/sdk/src/api/iam/UserApi.ts:143](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L143)
 
 ___
 
@@ -297,7 +297,7 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:173](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L173)
+[packages/sdk/src/api/iam/UserApi.ts:173](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L173)
 
 ___
 
@@ -324,7 +324,7 @@ transferred. If the data is tight to game user ID, the user will have the game p
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:191](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L191)
+[packages/sdk/src/api/iam/UserApi.ts:191](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L191)
 
 ___
 
@@ -348,7 +348,7 @@ Note:<br>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:349](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L349)
+[packages/sdk/src/api/iam/UserApi.ts:349](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L349)
 
 ___
 
@@ -368,7 +368,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:259](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L259)
+[packages/sdk/src/api/iam/UserApi.ts:259](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L259)
 
 ___
 
@@ -392,7 +392,7 @@ Render 2D Avatar via readyplayer.me (https://docs.readyplayer.me/ready-player-me
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:251](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L251)
+[packages/sdk/src/api/iam/UserApi.ts:251](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L251)
 
 ___
 
@@ -419,7 +419,7 @@ This code can be verified by this <a href="#operations-Users-PublicVerifyRegistr
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:275](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L275)
+[packages/sdk/src/api/iam/UserApi.ts:275](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L275)
 
 ___
 
@@ -459,7 +459,7 @@ Required valid user authorization
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L82)
+[packages/sdk/src/api/iam/UserApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L82)
 
 ___
 
@@ -483,7 +483,7 @@ Required valid user authorization
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:323](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L323)
+[packages/sdk/src/api/iam/UserApi.ts:323](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L323)
 
 ___
 
@@ -533,7 +533,7 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:224](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L224)
+[packages/sdk/src/api/iam/UserApi.ts:224](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L224)
 
 ___
 
@@ -556,7 +556,7 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:313](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L313)
+[packages/sdk/src/api/iam/UserApi.ts:313](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L313)
 
 ___
 
@@ -578,7 +578,7 @@ update current user's email
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L49)
+[packages/sdk/src/api/iam/UserApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L49)
 
 ___
 
@@ -600,7 +600,7 @@ update current user's password
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L56)
+[packages/sdk/src/api/iam/UserApi.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L56)
 
 ___
 
@@ -622,7 +622,7 @@ update current user
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L42)
+[packages/sdk/src/api/iam/UserApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L42)
 
 ___
 
@@ -657,7 +657,7 @@ In order to get a verification code for the method, please check the send verifi
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:114](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L114)
+[packages/sdk/src/api/iam/UserApi.ts:114](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L114)
 
 ___
 
@@ -693,7 +693,7 @@ Require valid user access token.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:135](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L135)
+[packages/sdk/src/api/iam/UserApi.ts:135](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L135)
 
 ___
 
@@ -719,4 +719,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:94](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserApi.ts#L94)
+[packages/sdk/src/api/iam/UserApi.ts:94](https://github.com/AccelByte/accelbyte-web-sdk/blob/96dad9f/packages/sdk/src/api/iam/UserApi.ts#L94)

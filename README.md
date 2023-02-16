@@ -11,13 +11,13 @@ AccelByte SDK is built with TypeScript and uses runtime type-checking validation
 
 Below is the list of AccelByte service APIs the library supports:
 
-1. **IAM** - https://docs.accelbyte.io/guides/access/iam-client.html
-2. **Monetization** - https://docs.accelbyte.io/guides/monetization/monetization-overview.html
-3. **Basic**
-4. **Build Info** - https://docs.accelbyte.io/guides/distribution/app-distribution.html
-5. **GDPR** - https://docs.accelbyte.io/guides/access/gdpr-overview.html
-6. **Event**
-7. **Legal** - https://docs.accelbyte.io/guides/access/legal.html
+1. [IAM](https://docs.accelbyte.io/api-endpoints.html#access)
+2. [Monetization](https://docs.accelbyte.io/api-endpoints.html#monetization)
+3. [Basic](https://docs.accelbyte.io/api-endpoints.html#basic)
+4. [Build Info](https://docs.accelbyte.io/api-endpoints.html#distribution)
+5. [GDPR](https://docs.accelbyte.io/api-endpoints.html#access)
+6. [Event](https://docs.accelbyte.io/api-endpoints.html#access)
+7. [Legal](https://docs.accelbyte.io/api-endpoints.html#access)
 
 # Getting started
 
@@ -108,3 +108,7 @@ yarn add @accelbyte/widgets
 ```shell
 yarn --cwd packages/sdk test
 ```
+
+## Web SDK Playground
+
+In addition, there is a [Playground web application](https://demo.accelbyte.io/web-sdk-playground/) allowing to live test the Web SDK. 
