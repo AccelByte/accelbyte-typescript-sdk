@@ -37,7 +37,7 @@ Consume user entitlement. If the entitlement useCount is 0, the status will be C
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:62](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L62)
+[packages/sdk/src/api/platform/EntitlementApi.ts:62](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/EntitlementApi.ts#L62)
 
 ___
 
@@ -61,7 +61,7 @@ Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required perm
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L20)
+[packages/sdk/src/api/platform/EntitlementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/EntitlementApi.ts#L20)
 
 ___
 
@@ -86,7 +86,7 @@ Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Requi
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:55](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L55)
+[packages/sdk/src/api/platform/EntitlementApi.ts:55](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/EntitlementApi.ts#L55)
 
 ___
 
@@ -113,7 +113,7 @@ Exists any user active entitlement of specified itemIds, skus and appIds<p>Other
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L42)
+[packages/sdk/src/api/platform/EntitlementApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/EntitlementApi.ts#L42)
 
 ___
 
@@ -137,4 +137,4 @@ Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Req
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L29)
+[packages/sdk/src/api/platform/EntitlementApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/EntitlementApi.ts#L29)

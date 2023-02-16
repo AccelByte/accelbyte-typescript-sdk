@@ -38,7 +38,7 @@ Cancel a subscription, only ACTIVE subscription can be cancelled. <b>Ensure succ
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:70](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L70)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:70](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/SubscriptionApi.ts#L70)
 
 ___
 
@@ -62,7 +62,7 @@ Subscribe a subscription. Support both real and virtual payment. Need go through
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L41)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/SubscriptionApi.ts#L41)
 
 ___
 
@@ -90,7 +90,7 @@ Get user subscription billing histories.<br>Other detail info: <ul><li><i>Requir
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L48)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/SubscriptionApi.ts#L48)
 
 ___
 
@@ -114,7 +114,7 @@ Get user subscription.<br>Other detail info: <ul><li><i>Required permission</i>:
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L34)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/SubscriptionApi.ts#L34)
 
 ___
 
@@ -145,7 +145,7 @@ Query user subscriptions.<br>Other detail info: <ul><li><i>Required permission</
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L21)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/SubscriptionApi.ts#L21)
 
 ___
 
@@ -169,4 +169,4 @@ Request to change a subscription billing account, this will guide user to paymen
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:63](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L63)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:63](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/SubscriptionApi.ts#L63)

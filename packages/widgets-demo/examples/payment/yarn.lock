@@ -18,10 +18,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/widgets@0.1.1-alpha.64":
-  version "0.1.1-alpha.64"
-  resolved "https://registry.yarnpkg.com/@accelbyte/widgets/-/widgets-0.1.1-alpha.64.tgz#64e1751ba9888b9fad8f9996027de3db76d5980a"
-  integrity sha512-e4ExKT1dVks+ljzcSA0poqhdyAmavhFPVNca+MM0uluJP4Fq4lx02PRQHb4A3tF4+MLExGfsFO3LfdZTl06vaw==
+"@accelbyte/widgets@0.1.1-alpha.65":
+  version "0.1.1-alpha.65"
+  resolved "https://registry.yarnpkg.com/@accelbyte/widgets/-/widgets-0.1.1-alpha.65.tgz#6ead30928e1a31a80e0b2449502aa7eed9e7bb73"
+  integrity sha512-gTwSs2TM+cIMajZ0LR0KYr7DndsvH9gaI3jk1xvJodx7w1YdPjPAiK14CmZPzJ0L/TOxDMXa6dXV8mYdqmvEDg==
   dependencies:
     "@accelbyte/sdk" "0.1.1-alpha.62"
     "@types/react-router-dom" "5.1.7"

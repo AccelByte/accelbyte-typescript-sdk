@@ -33,7 +33,7 @@ This API is used to get simple build manifest that contains list of current buil
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L27)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L27)
 
 ___
 
@@ -56,7 +56,7 @@ This API is used to get build manifest of release version of the application.<p>
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L34)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L34)
 
 ___
 
@@ -79,7 +79,7 @@ This API is used to retrieve detailed diff cache.<br/>The response will contains
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L42)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L42)
 
 ___
 
@@ -103,4 +103,4 @@ Check which platform is available for the user to download the game
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:52](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L52)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:52](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L52)
