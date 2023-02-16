@@ -8,4 +8,4 @@ import { BasicBuildManifest } from './BasicBuildManifest'
 
 export const BasicBuildManifestArray = z.array(BasicBuildManifest)
 
-export type BasicBuildManifestArray = z.TypeOf<typeof BasicBuildManifestArray>
+export interface BasicBuildManifestArray extends z.TypeOf<typeof BasicBuildManifestArray> {}

@@ -12,4 +12,4 @@ export const PayPalConfig = z.object({
   returnUrl: z.string().nullish()
 })
 
-export type PayPalConfig = z.TypeOf<typeof PayPalConfig>
+export interface PayPalConfig extends z.TypeOf<typeof PayPalConfig> {}

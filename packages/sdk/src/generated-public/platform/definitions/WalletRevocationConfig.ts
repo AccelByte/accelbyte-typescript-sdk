@@ -10,4 +10,4 @@ export const WalletRevocationConfig = z.object({
   strategy: z.enum(['REVOKE_OR_REPORT', 'ALWAYS_REVOKE']).nullish()
 })
 
-export type WalletRevocationConfig = z.TypeOf<typeof WalletRevocationConfig>
+export interface WalletRevocationConfig extends z.TypeOf<typeof WalletRevocationConfig> {}

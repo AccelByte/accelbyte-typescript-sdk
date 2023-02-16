@@ -9,4 +9,4 @@ import { RewardInfo } from './RewardInfo'
 
 export const RewardPagingSlicedResult = z.object({ data: z.array(RewardInfo), paging: Paging.nullish() })
 
-export type RewardPagingSlicedResult = z.TypeOf<typeof RewardPagingSlicedResult>
+export interface RewardPagingSlicedResult extends z.TypeOf<typeof RewardPagingSlicedResult> {}

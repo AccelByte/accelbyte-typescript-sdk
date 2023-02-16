@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const BulkOperationResult = z.object({ affected: z.number().int().nullish() })
 
-export type BulkOperationResult = z.TypeOf<typeof BulkOperationResult>
+export interface BulkOperationResult extends z.TypeOf<typeof BulkOperationResult> {}

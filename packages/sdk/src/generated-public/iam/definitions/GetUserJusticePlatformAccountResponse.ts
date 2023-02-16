@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const GetUserJusticePlatformAccountResponse = z.object({ DesignatedNamespace: z.string(), UserID: z.string() })
 
-export type GetUserJusticePlatformAccountResponse = z.TypeOf<typeof GetUserJusticePlatformAccountResponse>
+export interface GetUserJusticePlatformAccountResponse extends z.TypeOf<typeof GetUserJusticePlatformAccountResponse> {}

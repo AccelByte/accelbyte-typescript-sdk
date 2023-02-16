@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PlatformRewardItem = z.object({ itemType: z.string().nullish(), itemId: z.string().nullish(), itemSku: z.string().nullish() })
 
-export type PlatformRewardItem = z.TypeOf<typeof PlatformRewardItem>
+export interface PlatformRewardItem extends z.TypeOf<typeof PlatformRewardItem> {}

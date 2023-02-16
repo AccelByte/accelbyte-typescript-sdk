@@ -14,4 +14,4 @@ export const UserCreateRequest = z.object({
   PasswordMD5Sum: z.string().nullish()
 })
 
-export type UserCreateRequest = z.TypeOf<typeof UserCreateRequest>
+export interface UserCreateRequest extends z.TypeOf<typeof UserCreateRequest> {}

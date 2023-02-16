@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ClientUpdateRequest = z.object({ ClientName: z.string(), RedirectUri: z.string(), TwoFactorEnabled: z.boolean() })
 
-export type ClientUpdateRequest = z.TypeOf<typeof ClientUpdateRequest>
+export interface ClientUpdateRequest extends z.TypeOf<typeof ClientUpdateRequest> {}

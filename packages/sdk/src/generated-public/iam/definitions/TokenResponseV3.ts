@@ -29,4 +29,4 @@ export const TokenResponseV3 = z.object({
   xuid: z.string().nullish()
 })
 
-export type TokenResponseV3 = z.TypeOf<typeof TokenResponseV3>
+export interface TokenResponseV3 extends z.TypeOf<typeof TokenResponseV3> {}

@@ -28,4 +28,4 @@ export const ItemNaming = z.object({
   seasonType: z.enum(['PASS', 'TIER']).nullish()
 })
 
-export type ItemNaming = z.TypeOf<typeof ItemNaming>
+export interface ItemNaming extends z.TypeOf<typeof ItemNaming> {}

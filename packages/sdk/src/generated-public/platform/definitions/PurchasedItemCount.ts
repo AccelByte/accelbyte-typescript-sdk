@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PurchasedItemCount = z.object({ count: z.number().int().nullish() })
 
-export type PurchasedItemCount = z.TypeOf<typeof PurchasedItemCount>
+export interface PurchasedItemCount extends z.TypeOf<typeof PurchasedItemCount> {}

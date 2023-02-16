@@ -13,4 +13,4 @@ export const Permission = z.object({
   SchedRange: z.array(z.string()).nullish()
 })
 
-export type Permission = z.TypeOf<typeof Permission>
+export interface Permission extends z.TypeOf<typeof Permission> {}

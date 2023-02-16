@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RetrieveUserInfoCacheStatusResponse = z.object({ namespace: z.string(), lastUpdatedAt: z.string() })
 
-export type RetrieveUserInfoCacheStatusResponse = z.TypeOf<typeof RetrieveUserInfoCacheStatusResponse>
+export interface RetrieveUserInfoCacheStatusResponse extends z.TypeOf<typeof RetrieveUserInfoCacheStatusResponse> {}

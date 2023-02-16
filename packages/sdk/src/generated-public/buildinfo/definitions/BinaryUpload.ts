@@ -12,4 +12,4 @@ export const BinaryUpload = z.object({
   blockSize: z.number().int().nullish()
 })
 
-export type BinaryUpload = z.TypeOf<typeof BinaryUpload>
+export interface BinaryUpload extends z.TypeOf<typeof BinaryUpload> {}

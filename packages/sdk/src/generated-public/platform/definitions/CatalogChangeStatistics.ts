@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CatalogChangeStatistics = z.object({ count: z.number().int(), selectedCount: z.number().int() })
 
-export type CatalogChangeStatistics = z.TypeOf<typeof CatalogChangeStatistics>
+export interface CatalogChangeStatistics extends z.TypeOf<typeof CatalogChangeStatistics> {}

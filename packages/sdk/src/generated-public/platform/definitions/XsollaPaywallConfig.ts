@@ -12,4 +12,4 @@ export const XsollaPaywallConfig = z.object({
   showCloseButton: z.boolean()
 })
 
-export type XsollaPaywallConfig = z.TypeOf<typeof XsollaPaywallConfig>
+export interface XsollaPaywallConfig extends z.TypeOf<typeof XsollaPaywallConfig> {}

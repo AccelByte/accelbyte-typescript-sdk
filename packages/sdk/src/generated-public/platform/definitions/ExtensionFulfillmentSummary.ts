@@ -19,4 +19,4 @@ export const ExtensionFulfillmentSummary = z.object({
   grantedAt: z.string().nullish()
 })
 
-export type ExtensionFulfillmentSummary = z.TypeOf<typeof ExtensionFulfillmentSummary>
+export interface ExtensionFulfillmentSummary extends z.TypeOf<typeof ExtensionFulfillmentSummary> {}

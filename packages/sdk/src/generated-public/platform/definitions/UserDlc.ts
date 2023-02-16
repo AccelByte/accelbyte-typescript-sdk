@@ -17,4 +17,4 @@ export const UserDlc = z.object({
   dlcs: z.array(DlcRecord).nullish()
 })
 
-export type UserDlc = z.TypeOf<typeof UserDlc>
+export interface UserDlc extends z.TypeOf<typeof UserDlc> {}

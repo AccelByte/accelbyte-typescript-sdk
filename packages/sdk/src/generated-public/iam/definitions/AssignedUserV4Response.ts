@@ -13,4 +13,4 @@ export const AssignedUserV4Response = z.object({
   userId: z.string()
 })
 
-export type AssignedUserV4Response = z.TypeOf<typeof AssignedUserV4Response>
+export interface AssignedUserV4Response extends z.TypeOf<typeof AssignedUserV4Response> {}

@@ -20,4 +20,4 @@ export const DeviceBanResponseV4 = z.object({
   targetNamespace: z.string()
 })
 
-export type DeviceBanResponseV4 = z.TypeOf<typeof DeviceBanResponseV4>
+export interface DeviceBanResponseV4 extends z.TypeOf<typeof DeviceBanResponseV4> {}

@@ -8,4 +8,4 @@ import { Description } from './Description'
 
 export const BanV3 = z.object({ ban: z.string(), description: z.string().nullish(), descriptions: Description.nullish(), type: z.string() })
 
-export type BanV3 = z.TypeOf<typeof BanV3>
+export interface BanV3 extends z.TypeOf<typeof BanV3> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserLastActivity = z.object({ LastActivityTime: z.string(), Namespace: z.string(), UserID: z.string() })
 
-export type UserLastActivity = z.TypeOf<typeof UserLastActivity>
+export interface UserLastActivity extends z.TypeOf<typeof UserLastActivity> {}

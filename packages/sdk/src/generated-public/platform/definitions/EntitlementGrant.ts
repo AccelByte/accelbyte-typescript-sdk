@@ -18,4 +18,4 @@ export const EntitlementGrant = z.object({
   language: z.string().nullish()
 })
 
-export type EntitlementGrant = z.TypeOf<typeof EntitlementGrant>
+export interface EntitlementGrant extends z.TypeOf<typeof EntitlementGrant> {}

@@ -12,4 +12,4 @@ export const KeyGroupUpdate = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']).nullish()
 })
 
-export type KeyGroupUpdate = z.TypeOf<typeof KeyGroupUpdate>
+export interface KeyGroupUpdate extends z.TypeOf<typeof KeyGroupUpdate> {}

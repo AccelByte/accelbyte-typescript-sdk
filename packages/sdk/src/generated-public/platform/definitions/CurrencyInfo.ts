@@ -16,4 +16,4 @@ export const CurrencyInfo = z.object({
   updatedAt: z.string()
 })
 
-export type CurrencyInfo = z.TypeOf<typeof CurrencyInfo>
+export interface CurrencyInfo extends z.TypeOf<typeof CurrencyInfo> {}

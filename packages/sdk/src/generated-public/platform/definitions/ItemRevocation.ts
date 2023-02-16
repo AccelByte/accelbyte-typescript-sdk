@@ -23,7 +23,7 @@ export const ItemRevocation: z.ZodType<ItemRevocation> = z.lazy(() =>
   })
 )
 
-export type ItemRevocation = {
+export interface ItemRevocation {
   itemId?: string | null | undefined
   itemSku?: string | null | undefined
   itemType?:

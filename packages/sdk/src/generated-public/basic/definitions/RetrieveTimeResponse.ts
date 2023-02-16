@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RetrieveTimeResponse = z.object({ currentTime: z.string().nullish() })
 
-export type RetrieveTimeResponse = z.TypeOf<typeof RetrieveTimeResponse>
+export interface RetrieveTimeResponse extends z.TypeOf<typeof RetrieveTimeResponse> {}

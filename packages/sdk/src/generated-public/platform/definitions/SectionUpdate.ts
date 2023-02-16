@@ -22,4 +22,4 @@ export const SectionUpdate = z.object({
   ext: z.record(z.any()).nullish()
 })
 
-export type SectionUpdate = z.TypeOf<typeof SectionUpdate>
+export interface SectionUpdate extends z.TypeOf<typeof SectionUpdate> {}

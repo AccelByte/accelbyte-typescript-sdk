@@ -17,4 +17,4 @@ export const OrderCreate = z.object({
   ext: z.record(z.any()).nullish()
 })
 
-export type OrderCreate = z.TypeOf<typeof OrderCreate>
+export interface OrderCreate extends z.TypeOf<typeof OrderCreate> {}

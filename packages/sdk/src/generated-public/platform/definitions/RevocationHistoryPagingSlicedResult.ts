@@ -9,4 +9,4 @@ import { RevocationHistoryInfo } from './RevocationHistoryInfo'
 
 export const RevocationHistoryPagingSlicedResult = z.object({ data: z.array(RevocationHistoryInfo), paging: Paging.nullish() })
 
-export type RevocationHistoryPagingSlicedResult = z.TypeOf<typeof RevocationHistoryPagingSlicedResult>
+export interface RevocationHistoryPagingSlicedResult extends z.TypeOf<typeof RevocationHistoryPagingSlicedResult> {}

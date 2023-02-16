@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ValidationDescription = z.object({ language: z.string(), message: z.array(z.string()) })
 
-export type ValidationDescription = z.TypeOf<typeof ValidationDescription>
+export interface ValidationDescription extends z.TypeOf<typeof ValidationDescription> {}

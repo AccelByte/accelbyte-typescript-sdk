@@ -27,4 +27,4 @@ export const ImportStoreItemInfo = z.object({
   localizations: z.record(Localization)
 })
 
-export type ImportStoreItemInfo = z.TypeOf<typeof ImportStoreItemInfo>
+export interface ImportStoreItemInfo extends z.TypeOf<typeof ImportStoreItemInfo> {}

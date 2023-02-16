@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const SendVerificationCodeRequest = z.object({ Context: z.string().nullish(), LanguageTag: z.string(), LoginID: z.string() })
 
-export type SendVerificationCodeRequest = z.TypeOf<typeof SendVerificationCodeRequest>
+export interface SendVerificationCodeRequest extends z.TypeOf<typeof SendVerificationCodeRequest> {}

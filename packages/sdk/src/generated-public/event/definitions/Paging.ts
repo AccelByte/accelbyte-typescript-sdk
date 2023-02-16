@@ -12,4 +12,4 @@ export const Paging = z.object({
   previous: z.string().nullish()
 })
 
-export type Paging = z.TypeOf<typeof Paging>
+export interface Paging extends z.TypeOf<typeof Paging> {}

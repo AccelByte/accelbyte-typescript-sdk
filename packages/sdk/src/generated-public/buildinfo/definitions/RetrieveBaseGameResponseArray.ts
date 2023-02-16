@@ -8,4 +8,4 @@ import { RetrieveBaseGameResponse } from './RetrieveBaseGameResponse'
 
 export const RetrieveBaseGameResponseArray = z.array(RetrieveBaseGameResponse)
 
-export type RetrieveBaseGameResponseArray = z.TypeOf<typeof RetrieveBaseGameResponseArray>
+export interface RetrieveBaseGameResponseArray extends z.TypeOf<typeof RetrieveBaseGameResponseArray> {}

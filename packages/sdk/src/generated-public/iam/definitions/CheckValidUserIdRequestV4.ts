@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CheckValidUserIdRequestV4 = z.object({ userIds: z.array(z.string()) })
 
-export type CheckValidUserIdRequestV4 = z.TypeOf<typeof CheckValidUserIdRequestV4>
+export interface CheckValidUserIdRequestV4 extends z.TypeOf<typeof CheckValidUserIdRequestV4> {}

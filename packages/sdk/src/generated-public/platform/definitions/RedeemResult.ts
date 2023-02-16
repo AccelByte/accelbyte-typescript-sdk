@@ -8,4 +8,4 @@ import { RedeemableItem } from './RedeemableItem'
 
 export const RedeemResult = z.object({ items: z.array(RedeemableItem).nullish() })
 
-export type RedeemResult = z.TypeOf<typeof RedeemResult>
+export interface RedeemResult extends z.TypeOf<typeof RedeemResult> {}

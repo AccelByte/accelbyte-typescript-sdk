@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PlatformDomainDeleteRequest = z.object({ domain: z.string() })
 
-export type PlatformDomainDeleteRequest = z.TypeOf<typeof PlatformDomainDeleteRequest>
+export interface PlatformDomainDeleteRequest extends z.TypeOf<typeof PlatformDomainDeleteRequest> {}

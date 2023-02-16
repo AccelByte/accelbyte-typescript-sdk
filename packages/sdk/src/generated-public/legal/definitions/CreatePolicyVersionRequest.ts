@@ -11,4 +11,4 @@ export const CreatePolicyVersionRequest = z.object({
   isCommitted: z.boolean().nullish()
 })
 
-export type CreatePolicyVersionRequest = z.TypeOf<typeof CreatePolicyVersionRequest>
+export interface CreatePolicyVersionRequest extends z.TypeOf<typeof CreatePolicyVersionRequest> {}

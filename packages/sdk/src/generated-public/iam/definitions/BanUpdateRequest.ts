@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const BanUpdateRequest = z.object({ enabled: z.boolean(), skipNotif: z.boolean() })
 
-export type BanUpdateRequest = z.TypeOf<typeof BanUpdateRequest>
+export interface BanUpdateRequest extends z.TypeOf<typeof BanUpdateRequest> {}

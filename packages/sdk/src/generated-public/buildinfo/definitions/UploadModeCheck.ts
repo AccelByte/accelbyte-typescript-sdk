@@ -8,4 +8,4 @@ import { BuildManifest } from './BuildManifest'
 
 export const UploadModeCheck = z.object({ buildManifest: BuildManifest.nullish(), uploadDifferentialMode: z.boolean().nullish() })
 
-export type UploadModeCheck = z.TypeOf<typeof UploadModeCheck>
+export interface UploadModeCheck extends z.TypeOf<typeof UploadModeCheck> {}

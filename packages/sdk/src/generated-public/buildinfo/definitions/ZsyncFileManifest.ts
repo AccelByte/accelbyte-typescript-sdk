@@ -21,4 +21,4 @@ export const ZsyncFileManifest = z.object({
   uploadStatus: z.string().nullish()
 })
 
-export type ZsyncFileManifest = z.TypeOf<typeof ZsyncFileManifest>
+export interface ZsyncFileManifest extends z.TypeOf<typeof ZsyncFileManifest> {}

@@ -11,4 +11,4 @@ export const FulfillmentError = z.object({
   message: z.string().nullish()
 })
 
-export type FulfillmentError = z.TypeOf<typeof FulfillmentError>
+export interface FulfillmentError extends z.TypeOf<typeof FulfillmentError> {}

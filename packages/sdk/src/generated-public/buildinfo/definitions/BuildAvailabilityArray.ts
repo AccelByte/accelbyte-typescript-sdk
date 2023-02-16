@@ -8,4 +8,4 @@ import { BuildAvailability } from './BuildAvailability'
 
 export const BuildAvailabilityArray = z.array(BuildAvailability)
 
-export type BuildAvailabilityArray = z.TypeOf<typeof BuildAvailabilityArray>
+export interface BuildAvailabilityArray extends z.TypeOf<typeof BuildAvailabilityArray> {}

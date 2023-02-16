@@ -14,4 +14,4 @@ export const StoreUpdate = z.object({
   defaultLanguage: z.string().nullish()
 })
 
-export type StoreUpdate = z.TypeOf<typeof StoreUpdate>
+export interface StoreUpdate extends z.TypeOf<typeof StoreUpdate> {}

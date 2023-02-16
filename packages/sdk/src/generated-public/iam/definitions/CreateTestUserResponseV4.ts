@@ -18,4 +18,4 @@ export const CreateTestUserResponseV4 = z.object({
   verified: z.boolean()
 })
 
-export type CreateTestUserResponseV4 = z.TypeOf<typeof CreateTestUserResponseV4>
+export interface CreateTestUserResponseV4 extends z.TypeOf<typeof CreateTestUserResponseV4> {}

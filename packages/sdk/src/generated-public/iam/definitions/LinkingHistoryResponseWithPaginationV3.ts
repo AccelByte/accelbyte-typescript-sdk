@@ -12,4 +12,4 @@ export const LinkingHistoryResponseWithPaginationV3 = z.object({
   totalData: z.number().int()
 })
 
-export type LinkingHistoryResponseWithPaginationV3 = z.TypeOf<typeof LinkingHistoryResponseWithPaginationV3>
+export interface LinkingHistoryResponseWithPaginationV3 extends z.TypeOf<typeof LinkingHistoryResponseWithPaginationV3> {}

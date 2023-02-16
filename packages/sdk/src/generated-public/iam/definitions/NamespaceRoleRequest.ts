@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const NamespaceRoleRequest = z.object({ namespace: z.string(), roleId: z.string() })
 
-export type NamespaceRoleRequest = z.TypeOf<typeof NamespaceRoleRequest>
+export interface NamespaceRoleRequest extends z.TypeOf<typeof NamespaceRoleRequest> {}

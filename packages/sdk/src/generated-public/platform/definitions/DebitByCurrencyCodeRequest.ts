@@ -12,4 +12,4 @@ export const DebitByCurrencyCodeRequest = z.object({
   allowOverdraft: z.boolean().nullish()
 })
 
-export type DebitByCurrencyCodeRequest = z.TypeOf<typeof DebitByCurrencyCodeRequest>
+export interface DebitByCurrencyCodeRequest extends z.TypeOf<typeof DebitByCurrencyCodeRequest> {}

@@ -9,4 +9,4 @@ import { WalletTransactionInfo } from './WalletTransactionInfo'
 
 export const WalletTransactionPagingSlicedResult = z.object({ data: z.array(WalletTransactionInfo), paging: Paging.nullish() })
 
-export type WalletTransactionPagingSlicedResult = z.TypeOf<typeof WalletTransactionPagingSlicedResult>
+export interface WalletTransactionPagingSlicedResult extends z.TypeOf<typeof WalletTransactionPagingSlicedResult> {}

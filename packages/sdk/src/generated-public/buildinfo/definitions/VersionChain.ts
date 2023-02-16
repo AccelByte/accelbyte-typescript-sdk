@@ -14,4 +14,4 @@ export const VersionChain = z.object({
   nextVersions: z.array(VersionNode).nullish()
 })
 
-export type VersionChain = z.TypeOf<typeof VersionChain>
+export interface VersionChain extends z.TypeOf<typeof VersionChain> {}

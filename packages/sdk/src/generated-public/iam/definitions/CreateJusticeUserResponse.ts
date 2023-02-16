@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CreateJusticeUserResponse = z.object({ namespace: z.string(), userId: z.string() })
 
-export type CreateJusticeUserResponse = z.TypeOf<typeof CreateJusticeUserResponse>
+export interface CreateJusticeUserResponse extends z.TypeOf<typeof CreateJusticeUserResponse> {}

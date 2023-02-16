@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const BlockData = z.object({ uuid: z.string().nullish(), checksum: z.string().nullish(), blockSize: z.number().int().nullish() })
 
-export type BlockData = z.TypeOf<typeof BlockData>
+export interface BlockData extends z.TypeOf<typeof BlockData> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const AgeRestrictionRequest = z.object({ AgeRestriction: z.number().int(), Enable: z.boolean() })
 
-export type AgeRestrictionRequest = z.TypeOf<typeof AgeRestrictionRequest>
+export interface AgeRestrictionRequest extends z.TypeOf<typeof AgeRestrictionRequest> {}

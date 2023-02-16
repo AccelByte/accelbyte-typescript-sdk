@@ -12,4 +12,4 @@ export const PredicateValidateResult = z.object({
   unmatched: z.array(z.string()).nullish()
 })
 
-export type PredicateValidateResult = z.TypeOf<typeof PredicateValidateResult>
+export interface PredicateValidateResult extends z.TypeOf<typeof PredicateValidateResult> {}

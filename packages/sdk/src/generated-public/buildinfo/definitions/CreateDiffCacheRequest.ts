@@ -12,4 +12,4 @@ export const CreateDiffCacheRequest = z.object({
   diffFile: z.string().nullish()
 })
 
-export type CreateDiffCacheRequest = z.TypeOf<typeof CreateDiffCacheRequest>
+export interface CreateDiffCacheRequest extends z.TypeOf<typeof CreateDiffCacheRequest> {}

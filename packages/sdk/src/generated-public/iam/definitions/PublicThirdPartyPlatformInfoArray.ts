@@ -8,4 +8,4 @@ import { PublicThirdPartyPlatformInfo } from './PublicThirdPartyPlatformInfo'
 
 export const PublicThirdPartyPlatformInfoArray = z.array(PublicThirdPartyPlatformInfo)
 
-export type PublicThirdPartyPlatformInfoArray = z.TypeOf<typeof PublicThirdPartyPlatformInfoArray>
+export interface PublicThirdPartyPlatformInfoArray extends z.TypeOf<typeof PublicThirdPartyPlatformInfoArray> {}

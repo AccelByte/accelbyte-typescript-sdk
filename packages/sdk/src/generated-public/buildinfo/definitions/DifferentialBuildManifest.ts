@@ -22,4 +22,4 @@ export const DifferentialBuildManifest = z.object({
   obsoleteFiles: z.array(ObsoleteFileManifest).nullish()
 })
 
-export type DifferentialBuildManifest = z.TypeOf<typeof DifferentialBuildManifest>
+export interface DifferentialBuildManifest extends z.TypeOf<typeof DifferentialBuildManifest> {}

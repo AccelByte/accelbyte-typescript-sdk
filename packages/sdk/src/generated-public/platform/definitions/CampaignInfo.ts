@@ -27,4 +27,4 @@ export const CampaignInfo = z.object({
   updatedAt: z.string()
 })
 
-export type CampaignInfo = z.TypeOf<typeof CampaignInfo>
+export interface CampaignInfo extends z.TypeOf<typeof CampaignInfo> {}

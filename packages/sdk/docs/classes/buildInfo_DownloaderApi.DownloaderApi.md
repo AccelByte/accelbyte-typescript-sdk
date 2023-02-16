@@ -17,7 +17,7 @@
 
 ### getAvailableBuilds
 
-▸ **getAvailableBuilds**(`appId`): `Promise`<`IResponseWithSync`<{ `appId`: `undefined` \| ``null`` \| `string` ; `appSize`: `undefined` \| ``null`` \| `number` ; `buildId`: `undefined` \| ``null`` \| `string` ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string`  }[]\>\>
+▸ **getAvailableBuilds**(`appId`): `Promise`<`IResponseWithSync`<`BasicBuildManifestArray`\>\>
 
 This API is used to get simple build manifest that contains list of current build in various platform.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
 
@@ -29,17 +29,17 @@ This API is used to get simple build manifest that contains list of current buil
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `appId`: `undefined` \| ``null`` \| `string` ; `appSize`: `undefined` \| ``null`` \| `number` ; `buildId`: `undefined` \| ``null`` \| `string` ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string`  }[]\>\>
+`Promise`<`IResponseWithSync`<`BasicBuildManifestArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L27)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L27)
 
 ___
 
 ### getBuildManifest
 
-▸ **getBuildManifest**(`appId`, `platformId`): `Promise`<`IResponseWithSync`<{ `appId`: `undefined` \| ``null`` \| `string` ; `appSize`: `undefined` \| ``null`` \| `number` ; `appType`: `undefined` \| ``null`` \| `string` ; `baseUrls`: `undefined` \| ``null`` \| `string`[] ; `buildId`: `undefined` \| ``null`` \| `string` ; `buildInfoVersion`: `undefined` \| ``null`` \| `string` ; `defaultLaunchProfile`: `undefined` \| ``null`` \| { defaultEntryPoint?: string \| null \| undefined; defaultClientId?: string \| null \| undefined; defaultRedirectURI?: string \| null \| undefined; } ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `files`: `undefined` \| ``null`` \| { path?: string \| null \| undefined; filesize?: number \| null \| undefined; uuid?: string \| null \| undefined; checksum?: string \| null \| undefined; blocks?: { uuid?: string \| null \| undefined; checksum?: string \| ... 1 more ... \| undefined; blockSize?: number \| ... 1 more ... \| undefined; offset?: number \| ... 1 more ...[] ; `gameAppId`: `undefined` \| ``null`` \| `string` ; `launchArguments`: `undefined` \| ``null`` \| `string` ; `obsoleteFiles`: `undefined` \| ``null`` \| { path?: string \| null \| undefined; }[] ; `platformId`: `undefined` \| ``null`` \| `string` ; `releaseNoteUrls`: `undefined` \| ``null`` \| `string`[]  }\>\>
+▸ **getBuildManifest**(`appId`, `platformId`): `Promise`<`IResponseWithSync`<`BuildManifest`\>\>
 
 This API is used to get build manifest of release version of the application.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
 
@@ -52,17 +52,17 @@ This API is used to get build manifest of release version of the application.<p>
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `appId`: `undefined` \| ``null`` \| `string` ; `appSize`: `undefined` \| ``null`` \| `number` ; `appType`: `undefined` \| ``null`` \| `string` ; `baseUrls`: `undefined` \| ``null`` \| `string`[] ; `buildId`: `undefined` \| ``null`` \| `string` ; `buildInfoVersion`: `undefined` \| ``null`` \| `string` ; `defaultLaunchProfile`: `undefined` \| ``null`` \| { defaultEntryPoint?: string \| null \| undefined; defaultClientId?: string \| null \| undefined; defaultRedirectURI?: string \| null \| undefined; } ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `files`: `undefined` \| ``null`` \| { path?: string \| null \| undefined; filesize?: number \| null \| undefined; uuid?: string \| null \| undefined; checksum?: string \| null \| undefined; blocks?: { uuid?: string \| null \| undefined; checksum?: string \| ... 1 more ... \| undefined; blockSize?: number \| ... 1 more ... \| undefined; offset?: number \| ... 1 more ...[] ; `gameAppId`: `undefined` \| ``null`` \| `string` ; `launchArguments`: `undefined` \| ``null`` \| `string` ; `obsoleteFiles`: `undefined` \| ``null`` \| { path?: string \| null \| undefined; }[] ; `platformId`: `undefined` \| ``null`` \| `string` ; `releaseNoteUrls`: `undefined` \| ``null`` \| `string`[]  }\>\>
+`Promise`<`IResponseWithSync`<`BuildManifest`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L34)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L34)
 
 ___
 
 ### getDiffCache
 
-▸ **getDiffCache**(`sourceBuildId`, `destinationBuildId`): `Promise`<`IResponseWithSync`<{ `baseUrls`: `string`[] ; `diffCaches`: { url: string; filePath: string; diffFile: string; }[] ; `summaryFile`: `string`  }\>\>
+▸ **getDiffCache**(`sourceBuildId`, `destinationBuildId`): `Promise`<`IResponseWithSync`<`RetrieveDiffCacheResponse`\>\>
 
 This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
 
@@ -75,11 +75,11 @@ This API is used to retrieve detailed diff cache.<br/>The response will contains
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `baseUrls`: `string`[] ; `diffCaches`: { url: string; filePath: string; diffFile: string; }[] ; `summaryFile`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`RetrieveDiffCacheResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L42)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L42)
 
 ___
 
@@ -94,7 +94,7 @@ Check which platform is available for the user to download the game
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `buildsAvailability` | { `appId`: `undefined` \| ``null`` \| `string` ; `appSize`: `undefined` \| ``null`` \| `number` ; `buildId`: `undefined` \| ``null`` \| `string` ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string`  }[] |
+| › `buildsAvailability` | `BasicBuildManifest`[] |
 | › `userPlatform` | [`IUserPlatform`](../interfaces/buildInfo_DownloaderApi.IUserPlatform.md) |
 
 #### Returns
@@ -103,4 +103,4 @@ Check which platform is available for the user to download the game
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:52](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L52)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:52](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L52)

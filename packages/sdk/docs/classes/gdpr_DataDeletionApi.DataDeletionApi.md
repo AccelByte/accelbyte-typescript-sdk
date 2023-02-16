@@ -33,13 +33,13 @@
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L36)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L36)
 
 ___
 
 ### getGdprDeletionStatus
 
-▸ **getGdprDeletionStatus**(`userId`): `Promise`<`IResponseWithSync`<{ `DeletionStatus`: `boolean` ; `DisplayName`: `string` ; `ExecutionDate`: `undefined` \| ``null`` \| `string` ; `Status`: `string` ; `UserID`: `string`  }\>\>
+▸ **getGdprDeletionStatus**(`userId`): `Promise`<`IResponseWithSync`<`DeletionStatus`\>\>
 
 <p>Fetch the status to check whether or not a user's account is on a deletion status</p>
 <p>Requires valid user access token</p>
@@ -52,17 +52,17 @@ ___
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `DeletionStatus`: `boolean` ; `DisplayName`: `string` ; `ExecutionDate`: `undefined` \| ``null`` \| `string` ; `Status`: `string` ; `UserID`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`DeletionStatus`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L20)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L20)
 
 ___
 
 ### requestAccountDeletion
 
-▸ **requestAccountDeletion**(`«destructured»`): `Promise`<`IResponse`<{ `Namespace`: `string` ; `UserID`: `string`  }\>\>
+▸ **requestAccountDeletion**(`«destructured»`): `Promise`<`IResponse`<`RequestDeleteResponse`\>\>
 
 <p>Request an account's deletion</p>
 <p>Requires valid user access token and password
@@ -78,8 +78,8 @@ ___
 
 #### Returns
 
-`Promise`<`IResponse`<{ `Namespace`: `string` ; `UserID`: `string`  }\>\>
+`Promise`<`IResponse`<`RequestDeleteResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataDeletionApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L28)
+[packages/sdk/src/api/gdpr/DataDeletionApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/gdpr/DataDeletionApi.ts#L28)

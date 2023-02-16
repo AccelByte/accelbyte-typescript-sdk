@@ -12,4 +12,4 @@ export const Localization = z.object({
   localExt: z.record(z.any()).nullish()
 })
 
-export type Localization = z.TypeOf<typeof Localization>
+export interface Localization extends z.TypeOf<typeof Localization> {}

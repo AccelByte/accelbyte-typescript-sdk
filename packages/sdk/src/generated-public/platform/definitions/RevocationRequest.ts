@@ -13,4 +13,4 @@ export const RevocationRequest = z.object({
   meta: z.record(z.any()).nullish()
 })
 
-export type RevocationRequest = z.TypeOf<typeof RevocationRequest>
+export interface RevocationRequest extends z.TypeOf<typeof RevocationRequest> {}

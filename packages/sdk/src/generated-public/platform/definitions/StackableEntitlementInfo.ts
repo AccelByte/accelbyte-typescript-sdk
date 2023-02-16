@@ -34,4 +34,4 @@ export const StackableEntitlementInfo = z.object({
   stackedUseCount: z.number().int().nullish()
 })
 
-export type StackableEntitlementInfo = z.TypeOf<typeof StackableEntitlementInfo>
+export interface StackableEntitlementInfo extends z.TypeOf<typeof StackableEntitlementInfo> {}

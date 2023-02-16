@@ -13,4 +13,4 @@ export const ListUsersWithPlatformAccountsResponse = z.object({
   totalData: z.number().int()
 })
 
-export type ListUsersWithPlatformAccountsResponse = z.TypeOf<typeof ListUsersWithPlatformAccountsResponse>
+export interface ListUsersWithPlatformAccountsResponse extends z.TypeOf<typeof ListUsersWithPlatformAccountsResponse> {}

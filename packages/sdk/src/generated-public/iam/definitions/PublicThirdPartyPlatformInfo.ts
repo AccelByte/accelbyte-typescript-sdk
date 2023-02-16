@@ -14,4 +14,4 @@ export const PublicThirdPartyPlatformInfo = z.object({
   PlatformName: z.string()
 })
 
-export type PublicThirdPartyPlatformInfo = z.TypeOf<typeof PublicThirdPartyPlatformInfo>
+export interface PublicThirdPartyPlatformInfo extends z.TypeOf<typeof PublicThirdPartyPlatformInfo> {}

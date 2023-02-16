@@ -9,4 +9,4 @@ import { UserLoginHistoryResponse } from './UserLoginHistoryResponse'
 
 export const LoginHistoriesResponse = z.object({ Data: z.array(UserLoginHistoryResponse), Paging: Pagination })
 
-export type LoginHistoriesResponse = z.TypeOf<typeof LoginHistoriesResponse>
+export interface LoginHistoriesResponse extends z.TypeOf<typeof LoginHistoriesResponse> {}

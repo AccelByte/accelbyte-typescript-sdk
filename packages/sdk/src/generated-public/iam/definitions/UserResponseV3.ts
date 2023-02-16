@@ -38,4 +38,4 @@ export const UserResponseV3 = z.object({
   userName: z.string().nullish()
 })
 
-export type UserResponseV3 = z.TypeOf<typeof UserResponseV3>
+export interface UserResponseV3 extends z.TypeOf<typeof UserResponseV3> {}

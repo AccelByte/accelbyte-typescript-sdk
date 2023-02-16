@@ -13,4 +13,4 @@ export const DeletionStatus = z.object({
   UserID: z.string()
 })
 
-export type DeletionStatus = z.TypeOf<typeof DeletionStatus>
+export interface DeletionStatus extends z.TypeOf<typeof DeletionStatus> {}

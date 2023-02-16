@@ -22,7 +22,7 @@
 
 ### authenticateWithLink
 
-▸ **authenticateWithLink**(`data`): `Promise`<`IResponse`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **authenticateWithLink**(`data`): `Promise`<`IResponse`<`TokenResponseV3`\>\>
 
 This method is being used to authenticate a user account and perform platform link.
 It validates user's email / username and password.
@@ -46,17 +46,17 @@ This method will read device cookie from cookie <b>auth-trust-id</b>. If device 
 
 #### Returns
 
-`Promise`<`IResponse`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IResponse`<`TokenResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:133](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L133)
+[packages/sdk/src/api/iam/OAuthApi.ts:133](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L133)
 
 ___
 
 ### exchangeTokenByOneTimeLinkCode
 
-▸ **exchangeTokenByOneTimeLinkCode**(`data`): `Promise`<`IResponse`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **exchangeTokenByOneTimeLinkCode**(`data`): `Promise`<`IResponse`<`TokenResponseV3`\>\>
 
 This method is being used to generate user's token by one time link code.
 It require publisher ClientID
@@ -72,33 +72,33 @@ It required a code which can be generated from <strong>/iam/v3/link/code/request
 
 #### Returns
 
-`Promise`<`IResponse`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IResponse`<`TokenResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:160](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L160)
+[packages/sdk/src/api/iam/OAuthApi.ts:160](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L160)
 
 ___
 
 ### getCurrentLocationCountry
 
-▸ **getCurrentLocationCountry**(): `Promise`<`IResponseWithSync`<{ `city`: `string` ; `countryCode`: `string` ; `countryName`: `string` ; `state`: `string`  }\>\>
+▸ **getCurrentLocationCountry**(): `Promise`<`IResponseWithSync`<`CountryLocationResponse`\>\>
 
 <p>This method get country location based on the request.</p>
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `city`: `string` ; `countryCode`: `string` ; `countryName`: `string` ; `state`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`CountryLocationResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:97](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L97)
+[packages/sdk/src/api/iam/OAuthApi.ts:97](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L97)
 
 ___
 
 ### getThirdPartyPlatformToken
 
-▸ **getThirdPartyPlatformToken**(`userId`, `platformId`): `Promise`<`IResponseWithSync`<{ `platform_token`: `string` ; `sand_box_id`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **getThirdPartyPlatformToken**(`userId`, `platformId`): `Promise`<`IResponseWithSync`<`TokenThirdPartyResponse`\>\>
 
 Retrieve User Third Party Platform Token<br/>
 <p>
@@ -125,11 +125,11 @@ Passing platform group name or it's member will return same access token that ca
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `platform_token`: `string` ; `sand_box_id`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IResponseWithSync`<`TokenThirdPartyResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:118](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L118)
+[packages/sdk/src/api/iam/OAuthApi.ts:118](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L118)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:46](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L46)
+[packages/sdk/src/api/iam/OAuthApi.ts:46](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L46)
 
 ___
 
@@ -170,7 +170,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:88](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L88)
+[packages/sdk/src/api/iam/OAuthApi.ts:88](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L88)
 
 ___
 
@@ -194,13 +194,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L60)
+[packages/sdk/src/api/iam/OAuthApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L60)
 
 ___
 
 ### validateOneTimeLinkCode
 
-▸ **validateOneTimeLinkCode**(`data`): `Promise`<`IResponse`<{ `expired`: `boolean` ; `valid`: `boolean`  }\>\>
+▸ **validateOneTimeLinkCode**(`data`): `Promise`<`IResponse`<`OneTimeLinkingCodeValidationResponse`\>\>
 
 This method is being used to validate one time link code.
 It require a valid user token.
@@ -216,17 +216,17 @@ Current user should be a headless account.
 
 #### Returns
 
-`Promise`<`IResponse`<{ `expired`: `boolean` ; `valid`: `boolean`  }\>\>
+`Promise`<`IResponse`<`OneTimeLinkingCodeValidationResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:150](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L150)
+[packages/sdk/src/api/iam/OAuthApi.ts:150](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L150)
 
 ___
 
 ### verify2FA
 
-▸ **verify2FA**(`«destructured»`): `Promise`<`IDataStatus`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **verify2FA**(`«destructured»`): `Promise`<`IDataStatus`<`TokenResponseV3`\>\>
 
 Verify 2FA code<br/>
 <p>This method is used for verifying 2FA code.</p>
@@ -241,8 +241,8 @@ Verify 2FA code<br/>
 
 #### Returns
 
-`Promise`<`IDataStatus`<{ `access_token`: `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `number` ; `refresh_token`: `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IDataStatus`<`TokenResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:79](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/OAuthApi.ts#L79)
+[packages/sdk/src/api/iam/OAuthApi.ts:79](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/OAuthApi.ts#L79)

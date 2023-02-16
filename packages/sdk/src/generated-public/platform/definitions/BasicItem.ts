@@ -36,4 +36,4 @@ export const BasicItem = z.object({
   updatedAt: z.string()
 })
 
-export type BasicItem = z.TypeOf<typeof BasicItem>
+export interface BasicItem extends z.TypeOf<typeof BasicItem> {}

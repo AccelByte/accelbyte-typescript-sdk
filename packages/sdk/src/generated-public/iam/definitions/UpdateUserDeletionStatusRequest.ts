@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UpdateUserDeletionStatusRequest = z.object({ enabled: z.boolean() })
 
-export type UpdateUserDeletionStatusRequest = z.TypeOf<typeof UpdateUserDeletionStatusRequest>
+export interface UpdateUserDeletionStatusRequest extends z.TypeOf<typeof UpdateUserDeletionStatusRequest> {}

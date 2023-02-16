@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const AgentType = z.object({ AgentType: z.number().int(), Description: z.string() })
 
-export type AgentType = z.TypeOf<typeof AgentType>
+export interface AgentType extends z.TypeOf<typeof AgentType> {}

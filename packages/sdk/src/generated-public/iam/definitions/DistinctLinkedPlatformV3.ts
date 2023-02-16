@@ -13,4 +13,4 @@ export const DistinctLinkedPlatformV3 = z.object({
   platformUserId: z.string().nullish()
 })
 
-export type DistinctLinkedPlatformV3 = z.TypeOf<typeof DistinctLinkedPlatformV3>
+export interface DistinctLinkedPlatformV3 extends z.TypeOf<typeof DistinctLinkedPlatformV3> {}

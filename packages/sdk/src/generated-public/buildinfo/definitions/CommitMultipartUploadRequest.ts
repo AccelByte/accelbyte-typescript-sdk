@@ -8,4 +8,4 @@ import { MultipartUploadedPart } from './MultipartUploadedPart'
 
 export const CommitMultipartUploadRequest = z.object({ parts: z.array(MultipartUploadedPart) })
 
-export type CommitMultipartUploadRequest = z.TypeOf<typeof CommitMultipartUploadRequest>
+export interface CommitMultipartUploadRequest extends z.TypeOf<typeof CommitMultipartUploadRequest> {}

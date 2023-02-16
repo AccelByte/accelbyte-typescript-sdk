@@ -23,4 +23,4 @@ export const RetrieveUserAcceptedAgreementResponse = z.object({
   isAccepted: z.boolean().nullish()
 })
 
-export type RetrieveUserAcceptedAgreementResponse = z.TypeOf<typeof RetrieveUserAcceptedAgreementResponse>
+export interface RetrieveUserAcceptedAgreementResponse extends z.TypeOf<typeof RetrieveUserAcceptedAgreementResponse> {}

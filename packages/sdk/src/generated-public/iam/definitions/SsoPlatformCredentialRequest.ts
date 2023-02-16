@@ -16,4 +16,4 @@ export const SsoPlatformCredentialRequest = z.object({
   ssoUrl: z.string()
 })
 
-export type SsoPlatformCredentialRequest = z.TypeOf<typeof SsoPlatformCredentialRequest>
+export interface SsoPlatformCredentialRequest extends z.TypeOf<typeof SsoPlatformCredentialRequest> {}

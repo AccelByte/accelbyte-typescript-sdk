@@ -12,4 +12,4 @@ export const ItemTypeConfigUpdate = z.object({
   dryRun: z.boolean().nullish()
 })
 
-export type ItemTypeConfigUpdate = z.TypeOf<typeof ItemTypeConfigUpdate>
+export interface ItemTypeConfigUpdate extends z.TypeOf<typeof ItemTypeConfigUpdate> {}

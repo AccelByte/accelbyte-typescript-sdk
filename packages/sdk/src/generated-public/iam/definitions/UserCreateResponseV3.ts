@@ -15,4 +15,4 @@ export const UserCreateResponseV3 = z.object({
   userId: z.string()
 })
 
-export type UserCreateResponseV3 = z.TypeOf<typeof UserCreateResponseV3>
+export interface UserCreateResponseV3 extends z.TypeOf<typeof UserCreateResponseV3> {}

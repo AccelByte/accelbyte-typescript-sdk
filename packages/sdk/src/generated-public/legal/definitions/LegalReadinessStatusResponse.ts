@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const LegalReadinessStatusResponse = z.object({ isReady: z.boolean().nullish() })
 
-export type LegalReadinessStatusResponse = z.TypeOf<typeof LegalReadinessStatusResponse>
+export interface LegalReadinessStatusResponse extends z.TypeOf<typeof LegalReadinessStatusResponse> {}

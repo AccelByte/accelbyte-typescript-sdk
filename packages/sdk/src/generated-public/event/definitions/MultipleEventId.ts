@@ -8,4 +8,4 @@ import { EventId } from './EventId'
 
 export const MultipleEventId = z.object({ EventIDs: z.array(EventId) })
 
-export type MultipleEventId = z.TypeOf<typeof MultipleEventId>
+export interface MultipleEventId extends z.TypeOf<typeof MultipleEventId> {}

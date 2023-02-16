@@ -16,4 +16,4 @@ export const PaymentProviderConfigEdit = z.object({
   useGlobalTaxJarApiToken: z.boolean().nullish()
 })
 
-export type PaymentProviderConfigEdit = z.TypeOf<typeof PaymentProviderConfigEdit>
+export interface PaymentProviderConfigEdit extends z.TypeOf<typeof PaymentProviderConfigEdit> {}

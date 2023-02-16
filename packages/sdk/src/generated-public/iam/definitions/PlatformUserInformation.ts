@@ -15,4 +15,4 @@ export const PlatformUserInformation = z.object({
   XUID: z.string().nullish()
 })
 
-export type PlatformUserInformation = z.TypeOf<typeof PlatformUserInformation>
+export interface PlatformUserInformation extends z.TypeOf<typeof PlatformUserInformation> {}

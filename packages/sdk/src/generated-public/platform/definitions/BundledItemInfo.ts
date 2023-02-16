@@ -73,4 +73,4 @@ export const BundledItemInfo = z.object({
   localExt: z.record(z.any()).nullish()
 })
 
-export type BundledItemInfo = z.TypeOf<typeof BundledItemInfo>
+export interface BundledItemInfo extends z.TypeOf<typeof BundledItemInfo> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PlaystationIapConfigRequest = z.object({ environment: z.string() })
 
-export type PlaystationIapConfigRequest = z.TypeOf<typeof PlaystationIapConfigRequest>
+export interface PlaystationIapConfigRequest extends z.TypeOf<typeof PlaystationIapConfigRequest> {}

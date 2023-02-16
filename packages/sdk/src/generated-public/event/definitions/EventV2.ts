@@ -18,4 +18,4 @@ export const EventV2 = z.object({
   version: z.number().int()
 })
 
-export type EventV2 = z.TypeOf<typeof EventV2>
+export interface EventV2 extends z.TypeOf<typeof EventV2> {}

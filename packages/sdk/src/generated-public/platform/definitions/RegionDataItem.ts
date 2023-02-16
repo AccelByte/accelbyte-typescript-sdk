@@ -20,4 +20,4 @@ export const RegionDataItem = z.object({
   discountExpireAt: z.string().nullish()
 })
 
-export type RegionDataItem = z.TypeOf<typeof RegionDataItem>
+export interface RegionDataItem extends z.TypeOf<typeof RegionDataItem> {}

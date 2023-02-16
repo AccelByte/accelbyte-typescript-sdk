@@ -38,7 +38,7 @@
 
 ### createUser
 
-▸ **createUser**(`data`): `Promise`<`IResponse`<{ `authType`: `string` ; `country`: `string` ; `dateOfBirth`: `string` ; `displayName`: `string` ; `emailAddress`: `string` ; `namespace`: `string` ; `userId`: `string` ; `username`: `string`  }\>\>
+▸ **createUser**(`data`): `Promise`<`IResponse`<`CreateUserResponseV4`\>\>
 
 Create a new user with unique email address and username.
    <p>
@@ -59,32 +59,21 @@ Create a new user with unique email address and username.
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.acceptedPolicies` | `undefined` \| ``null`` \| { isAccepted: boolean; localizedPolicyVersionId: string; policyId: string; policyVersionId: string; }[] |
-| `data.authType` | `string` |
-| `data.code` | `string` |
-| `data.country` | `string` |
-| `data.dateOfBirth` | `undefined` \| ``null`` \| `string` |
-| `data.displayName` | `string` |
-| `data.emailAddress` | `string` |
-| `data.password` | `string` |
-| `data.passwordMD5Sum` | `undefined` \| ``null`` \| `string` |
-| `data.reachMinimumAge` | `boolean` |
-| `data.username` | `string` |
+| `data` | `CreateUserRequestV4` |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `authType`: `string` ; `country`: `string` ; `dateOfBirth`: `string` ; `displayName`: `string` ; `emailAddress`: `string` ; `namespace`: `string` ; `userId`: `string` ; `username`: `string`  }\>\>
+`Promise`<`IResponse`<`CreateUserResponseV4`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:296](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L296)
+[packages/sdk/src/api/iam/UserApi.ts:296](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L296)
 
 ___
 
 ### getAgeRestrictionByCountry
 
-▸ **getAgeRestrictionByCountry**(`countryCode`): `Promise`<`IResponseWithSync`<{ `ageRestriction`: `number` ; `countryCode`: `string` ; `countryName`: `string` ; `enable`: `boolean`  }\>\>
+▸ **getAgeRestrictionByCountry**(`countryCode`): `Promise`<`IResponseWithSync`<`CountryV3Response`\>\>
 
 Get age restriction by country code. It will always get by publisher namespace
 
@@ -96,33 +85,33 @@ Get age restriction by country code. It will always get by publisher namespace
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `ageRestriction`: `number` ; `countryCode`: `string` ; `countryName`: `string` ; `enable`: `boolean`  }\>\>
+`Promise`<`IResponseWithSync`<`CountryV3Response`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:244](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L244)
+[packages/sdk/src/api/iam/UserApi.ts:244](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L244)
 
 ___
 
 ### getCurrentUser
 
-▸ **getCurrentUser**(): `Promise`<`IResponseWithSync`<{ `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **getCurrentUser**(): `Promise`<`IResponseWithSync`<`UserResponseV3`\>\>
 
 get currently logged in user
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IResponseWithSync`<`UserResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L35)
+[packages/sdk/src/api/iam/UserApi.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L35)
 
 ___
 
 ### getLinkAccountByOneTimeCodeConflict
 
-▸ **getLinkAccountByOneTimeCodeConflict**(`params`): `Promise`<`IResponseWithSync`<{ `currentAccount`: `undefined` \| ``null`` \| { displayName?: string \| null \| undefined; userName?: string \| null \| undefined; email?: string \| null \| undefined; linkedGames?: string[] \| null \| undefined; } ; `headlessAccount`: `undefined` \| ``null`` \| { displayName?: string \| null \| undefined; userName?: string \| null \| undefined; email?: string \| null \| undefined; linkedGames?: string[] \| null \| undefined; } ; `platformAlreadyLinked`: `boolean` ; `platformId`: `string` ; `platformLinkConflict`: `boolean`  }\>\>
+▸ **getLinkAccountByOneTimeCodeConflict**(`params`): `Promise`<`IResponseWithSync`<`GetLinkHeadlessAccountConflictResponse`\>\>
 
 Note:<br>
 1. My account should be full account
@@ -137,17 +126,17 @@ Note:<br>
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `currentAccount`: `undefined` \| ``null`` \| { displayName?: string \| null \| undefined; userName?: string \| null \| undefined; email?: string \| null \| undefined; linkedGames?: string[] \| null \| undefined; } ; `headlessAccount`: `undefined` \| ``null`` \| { displayName?: string \| null \| undefined; userName?: string \| null \| undefined; email?: string \| null \| undefined; linkedGames?: string[] \| null \| undefined; } ; `platformAlreadyLinked`: `boolean` ; `platformId`: `string` ; `platformLinkConflict`: `boolean`  }\>\>
+`Promise`<`IResponseWithSync`<`GetLinkHeadlessAccountConflictResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:340](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L340)
+[packages/sdk/src/api/iam/UserApi.ts:340](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L340)
 
 ___
 
 ### getLinkRequestStatus
 
-▸ **getLinkRequestStatus**(`requestId`): `Promise`<`IResponseWithSync`<{ `client_id`: `string` ; `conflict_publisher_user_id`: `undefined` \| ``null`` \| `string` ; `conflict_user_linked_games`: `undefined` \| ``null`` \| `string`[] ; `current_user_linked_games`: `undefined` \| ``null`` \| `string`[] ; `error`: `undefined` \| ``null`` \| { messageVariables?: { platformUserID: string; publisherAccounts: { namespace: string; displayName: string; userId: string; emailAddress: string; linkedPlatforms: { platformId?: string \| null \| undefined; namespace: string; platformUserId: string; }[]; }[]; } \| null \| undefined; errorCode: number; errorMessage: stri... ; `expiration`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `operation_name`: `string` ; `payload`: `Record`<`string`, `any`\> ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformID`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `redirect_uri`: `string` ; `refreshToken`: `undefined` \| ``null`` \| `string` ; `request_id`: `string` ; `status`: `string`  }\>\>
+▸ **getLinkRequestStatus**(`requestId`): `Promise`<`IResponseWithSync`<`LinkRequest`\>\>
 
 Get the linking status between a third-party platform to a user
 
@@ -159,17 +148,17 @@ Get the linking status between a third-party platform to a user
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `client_id`: `string` ; `conflict_publisher_user_id`: `undefined` \| ``null`` \| `string` ; `conflict_user_linked_games`: `undefined` \| ``null`` \| `string`[] ; `current_user_linked_games`: `undefined` \| ``null`` \| `string`[] ; `error`: `undefined` \| ``null`` \| { messageVariables?: { platformUserID: string; publisherAccounts: { namespace: string; displayName: string; userId: string; emailAddress: string; linkedPlatforms: { platformId?: string \| null \| undefined; namespace: string; platformUserId: string; }[]; }[]; } \| null \| undefined; errorCode: number; errorMessage: stri... ; `expiration`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `operation_name`: `string` ; `payload`: `Record`<`string`, `any`\> ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformID`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `redirect_uri`: `string` ; `refreshToken`: `undefined` \| ``null`` \| `string` ; `request_id`: `string` ; `status`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`LinkRequest`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:180](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L180)
+[packages/sdk/src/api/iam/UserApi.ts:180](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L180)
 
 ___
 
 ### getLinkedAccount
 
-▸ **getLinkedAccount**(`userId`): `Promise`<`IResponseWithSync`<{ `data`: { displayName?: string \| null \| undefined; platformId?: string \| null \| undefined; emailAddress?: string \| null \| undefined; platformUserId?: string \| null \| undefined; namespace: string; userId: string; accountGroup: string; linkedAt: string; originNamespace: string; }[] ; `paging`: { first: string; last: string; next: string; previous: string; } = PaginationV3 }\>\>
+▸ **getLinkedAccount**(`userId`): `Promise`<`IResponseWithSync`<`UserLinkedPlatformsResponseV3`\>\>
 
 <p>This method retrieves platform accounts linked to user. Required valid user authorization.
          <br>action code: 10128 </p>
@@ -182,17 +171,17 @@ ___
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: { displayName?: string \| null \| undefined; platformId?: string \| null \| undefined; emailAddress?: string \| null \| undefined; platformUserId?: string \| null \| undefined; namespace: string; userId: string; accountGroup: string; linkedAt: string; originNamespace: string; }[] ; `paging`: { first: string; last: string; next: string; previous: string; } = PaginationV3 }\>\>
+`Promise`<`IResponseWithSync`<`UserLinkedPlatformsResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:331](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L331)
+[packages/sdk/src/api/iam/UserApi.ts:331](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L331)
 
 ___
 
 ### getThirdPartyURL
 
-▸ **getThirdPartyURL**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `third_party_url`: `string`  }\>\>
+▸ **getThirdPartyURL**(`«destructured»`): `Promise`<`IResponseWithSync`<`WebLinkingResponse`\>\>
 
 This method is used to generate third party login page which will redirected to establish method.
 
@@ -208,17 +197,17 @@ This method is used to generate third party login page which will redirected to 
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `third_party_url`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`WebLinkingResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:231](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L231)
+[packages/sdk/src/api/iam/UserApi.ts:231](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L231)
 
 ___
 
 ### getUserDistinctLinkedPlatform
 
-▸ **getUserDistinctLinkedPlatform**(`userId`): `Promise`<`IResponseWithSync`<{ `platforms`: { platformUserId?: string \| null \| undefined; linkedAt: string; details: { displayName?: string \| null \| undefined; platformId?: string \| null \| undefined; namespace: string; linkedAt: string; originNamespace: string; }[]; platformName: string; }[]  }\>\>
+▸ **getUserDistinctLinkedPlatform**(`userId`): `Promise`<`IResponseWithSync`<`DistinctPlatformResponseV3`\>\>
 
 <p>This method retrieves platform accounts linked to user.
          <br>It will query all linked platform accounts and result will be distinct & grouped, same platform we will pick oldest linked one.
@@ -232,17 +221,17 @@ ___
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `platforms`: { platformUserId?: string \| null \| undefined; linkedAt: string; details: { displayName?: string \| null \| undefined; platformId?: string \| null \| undefined; namespace: string; linkedAt: string; originNamespace: string; }[]; platformName: string; }[]  }\>\>
+`Promise`<`IResponseWithSync`<`DistinctPlatformResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:305](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L305)
+[packages/sdk/src/api/iam/UserApi.ts:305](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L305)
 
 ___
 
 ### getUserLinkedPlatform
 
-▸ **getUserLinkedPlatform**(`userId`): `Promise`<`IResponseWithSync`<{ `data`: { displayName?: string \| null \| undefined; platformId?: string \| null \| undefined; emailAddress?: string \| null \| undefined; platformUserId?: string \| null \| undefined; namespace: string; userId: string; accountGroup: string; linkedAt: string; originNamespace: string; }[] ; `paging`: { first: string; last: string; next: string; previous: string; } = PaginationV3 }\>\>
+▸ **getUserLinkedPlatform**(`userId`): `Promise`<`IResponseWithSync`<`UserLinkedPlatformsResponseV3`\>\>
 
 <p>This method retrieves platform accounts linked to user. Required valid user authorization.
          <br>action code: 10128 </p>
@@ -255,11 +244,11 @@ ___
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: { displayName?: string \| null \| undefined; platformId?: string \| null \| undefined; emailAddress?: string \| null \| undefined; platformUserId?: string \| null \| undefined; namespace: string; userId: string; accountGroup: string; linkedAt: string; originNamespace: string; }[] ; `paging`: { first: string; last: string; next: string; previous: string; } = PaginationV3 }\>\>
+`Promise`<`IResponseWithSync`<`UserLinkedPlatformsResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:143](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L143)
+[packages/sdk/src/api/iam/UserApi.ts:143](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L143)
 
 ___
 
@@ -308,7 +297,7 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:173](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L173)
+[packages/sdk/src/api/iam/UserApi.ts:173](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L173)
 
 ___
 
@@ -326,9 +315,7 @@ transferred. If the data is tight to game user ID, the user will have the game p
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.platformId` | `string` |
-| › `data.platformUserId` | `string` |
+| › `data` | `LinkPlatformAccountRequest` |
 | › `userId` | `string` |
 
 #### Returns
@@ -337,7 +324,7 @@ transferred. If the data is tight to game user ID, the user will have the game p
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:191](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L191)
+[packages/sdk/src/api/iam/UserApi.ts:191](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L191)
 
 ___
 
@@ -353,9 +340,7 @@ Note:<br>
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.chosenNamespaces` | `string`[] |
-| `data.oneTimeLinkCode` | `string` |
+| `data` | `LinkHeadlessAccountRequest` |
 
 #### Returns
 
@@ -363,7 +348,7 @@ Note:<br>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:349](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L349)
+[packages/sdk/src/api/iam/UserApi.ts:349](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L349)
 
 ___
 
@@ -383,7 +368,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:259](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L259)
+[packages/sdk/src/api/iam/UserApi.ts:259](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L259)
 
 ___
 
@@ -407,7 +392,7 @@ Render 2D Avatar via readyplayer.me (https://docs.readyplayer.me/ready-player-me
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:251](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L251)
+[packages/sdk/src/api/iam/UserApi.ts:251](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L251)
 
 ___
 
@@ -426,9 +411,7 @@ This code can be verified by this <a href="#operations-Users-PublicVerifyRegistr
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.emailAddress` | `string` |
-| `data.languageTag` | `undefined` \| ``null`` \| `string` |
+| `data` | `SendRegisterVerificationCodeRequest` |
 
 #### Returns
 
@@ -436,7 +419,7 @@ This code can be verified by this <a href="#operations-Users-PublicVerifyRegistr
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:275](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L275)
+[packages/sdk/src/api/iam/UserApi.ts:275](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L275)
 
 ___
 
@@ -468,10 +451,7 @@ Required valid user authorization
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.context` | `undefined` \| ``null`` \| `string` |
-| `data.emailAddress` | `string` |
-| `data.languageTag` | `undefined` \| ``null`` \| `string` |
+| `data` | `SendVerificationCodeRequestV3` |
 
 #### Returns
 
@@ -479,7 +459,7 @@ Required valid user authorization
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L82)
+[packages/sdk/src/api/iam/UserApi.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L82)
 
 ___
 
@@ -503,7 +483,7 @@ Required valid user authorization
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:323](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L323)
+[packages/sdk/src/api/iam/UserApi.ts:323](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L323)
 
 ___
 
@@ -544,8 +524,7 @@ Required valid user authorization.
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.platformNamespace` | `undefined` \| ``null`` \| `string` |
+| › `data` | `UnlinkUserPlatformRequest` |
 | › `platformId` | `string` |
 
 #### Returns
@@ -554,7 +533,7 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:224](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L224)
+[packages/sdk/src/api/iam/UserApi.ts:224](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L224)
 
 ___
 
@@ -577,7 +556,7 @@ Required valid user authorization.
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:313](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L313)
+[packages/sdk/src/api/iam/UserApi.ts:313](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L313)
 
 ___
 
@@ -591,9 +570,7 @@ update current user's email
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.code` | `string` |
-| `data.emailAddress` | `string` |
+| `data` | `EmailUpdateRequestV4` |
 
 #### Returns
 
@@ -601,7 +578,7 @@ update current user's email
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L49)
+[packages/sdk/src/api/iam/UserApi.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L49)
 
 ___
 
@@ -615,10 +592,7 @@ update current user's password
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.languageTag` | `string` |
-| `data.newPassword` | `string` |
-| `data.oldPassword` | `string` |
+| `data` | `UserPasswordUpdateV3Request` |
 
 #### Returns
 
@@ -626,13 +600,13 @@ update current user's password
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L56)
+[packages/sdk/src/api/iam/UserApi.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L56)
 
 ___
 
 ### updateUserMe
 
-▸ **updateUserMe**(`data`): `Promise`<`IResponse`<{ `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **updateUserMe**(`data`): `Promise`<`IResponse`<`UserResponseV3`\>\>
 
 update current user
 
@@ -640,27 +614,21 @@ update current user
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.avatarUrl` | `undefined` \| ``null`` \| `string` |
-| `data.country` | `undefined` \| ``null`` \| `string` |
-| `data.dateOfBirth` | `undefined` \| ``null`` \| `string` |
-| `data.displayName` | `undefined` \| ``null`` \| `string` |
-| `data.languageTag` | `undefined` \| ``null`` \| `string` |
-| `data.userName` | `undefined` \| ``null`` \| `string` |
+| `data` | `UserUpdateRequestV3` |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IResponse`<`UserResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L42)
+[packages/sdk/src/api/iam/UserApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L42)
 
 ___
 
 ### upgradeHeadlessAccount
 
-▸ **upgradeHeadlessAccount**(`data`): `Promise`<`IResponse`<{ `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **upgradeHeadlessAccount**(`data`): `Promise`<`IResponse`<`UserResponseV3`\>\>
 
 <p>If validateOnly is set false, consume code and upgrade headless account and automatically verified the email address if it is succeeded</p>
 Require valid user access token.
@@ -681,28 +649,21 @@ In order to get a verification code for the method, please check the send verifi
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.code` | `string` |
-| `data.country` | `undefined` \| ``null`` \| `string` |
-| `data.dateOfBirth` | `undefined` \| ``null`` \| `string` |
-| `data.displayName` | `undefined` \| ``null`` \| `string` |
-| `data.emailAddress` | `string` |
-| `data.password` | `string` |
-| `data.validateOnly` | `undefined` \| ``null`` \| `boolean` |
+| `data` | `UpgradeHeadlessAccountWithVerificationCodeRequestV3` |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IResponse`<`UserResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:114](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L114)
+[packages/sdk/src/api/iam/UserApi.ts:114](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L114)
 
 ___
 
 ### upgradeHeadlessAccountV4
 
-▸ **upgradeHeadlessAccountV4**(`data`): `Promise`<`IResponse`<{ `authType`: `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `username`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **upgradeHeadlessAccountV4**(`data`): `Promise`<`IResponse`<`UserResponseV4`\>\>
 
 Require valid user access token.
          The method upgrades a headless account by linking the headless account with the email address, username, and password.
@@ -724,24 +685,15 @@ Require valid user access token.
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.code` | `string` |
-| `data.country` | `undefined` \| ``null`` \| `string` |
-| `data.dateOfBirth` | `undefined` \| ``null`` \| `string` |
-| `data.displayName` | `undefined` \| ``null`` \| `string` |
-| `data.emailAddress` | `string` |
-| `data.password` | `string` |
-| `data.reachMinimumAge` | `boolean` |
-| `data.username` | `string` |
-| `data.validateOnly` | `undefined` \| ``null`` \| `boolean` |
+| `data` | `UpgradeHeadlessAccountWithVerificationCodeRequestV4` |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `authType`: `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `username`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IResponse`<`UserResponseV4`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:135](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L135)
+[packages/sdk/src/api/iam/UserApi.ts:135](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L135)
 
 ___
 
@@ -759,11 +711,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.code` | `string` |
-| `data.contactType` | `string` |
-| `data.languageTag` | `string` |
-| `data.validateOnly` | `undefined` \| ``null`` \| `boolean` |
+| `data` | `UserVerificationRequestV3` |
 
 #### Returns
 
@@ -771,4 +719,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserApi.ts:94](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserApi.ts#L94)
+[packages/sdk/src/api/iam/UserApi.ts:94](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserApi.ts#L94)

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const LinkPlatformAccountRequest = z.object({ platformId: z.string(), platformUserId: z.string() })
 
-export type LinkPlatformAccountRequest = z.TypeOf<typeof LinkPlatformAccountRequest>
+export interface LinkPlatformAccountRequest extends z.TypeOf<typeof LinkPlatformAccountRequest> {}

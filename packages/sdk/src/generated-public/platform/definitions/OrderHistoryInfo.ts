@@ -29,4 +29,4 @@ export const OrderHistoryInfo = z.object({
   updatedAt: z.string()
 })
 
-export type OrderHistoryInfo = z.TypeOf<typeof OrderHistoryInfo>
+export interface OrderHistoryInfo extends z.TypeOf<typeof OrderHistoryInfo> {}

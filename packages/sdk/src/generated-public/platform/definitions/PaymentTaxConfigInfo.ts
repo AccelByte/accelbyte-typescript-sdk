@@ -12,4 +12,4 @@ export const PaymentTaxConfigInfo = z.object({
   taxJarProductCodesMapping: z.record(z.string()).nullish()
 })
 
-export type PaymentTaxConfigInfo = z.TypeOf<typeof PaymentTaxConfigInfo>
+export interface PaymentTaxConfigInfo extends z.TypeOf<typeof PaymentTaxConfigInfo> {}

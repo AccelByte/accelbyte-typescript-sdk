@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EntitlementOwnership = z.object({ owned: z.boolean(), itemId: z.string().nullish() })
 
-export type EntitlementOwnership = z.TypeOf<typeof EntitlementOwnership>
+export interface EntitlementOwnership extends z.TypeOf<typeof EntitlementOwnership> {}

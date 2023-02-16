@@ -12,4 +12,4 @@ export const AccountProgressionInfo = z.object({
   userName: z.string().nullish()
 })
 
-export type AccountProgressionInfo = z.TypeOf<typeof AccountProgressionInfo>
+export interface AccountProgressionInfo extends z.TypeOf<typeof AccountProgressionInfo> {}

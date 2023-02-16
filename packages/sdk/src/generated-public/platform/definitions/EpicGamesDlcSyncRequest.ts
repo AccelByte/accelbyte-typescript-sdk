@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EpicGamesDlcSyncRequest = z.object({ epicGamesJwtToken: z.string().nullish() })
 
-export type EpicGamesDlcSyncRequest = z.TypeOf<typeof EpicGamesDlcSyncRequest>
+export interface EpicGamesDlcSyncRequest extends z.TypeOf<typeof EpicGamesDlcSyncRequest> {}

@@ -16,4 +16,4 @@ export const FullViewInfo = z.object({
   updatedAt: z.string()
 })
 
-export type FullViewInfo = z.TypeOf<typeof FullViewInfo>
+export interface FullViewInfo extends z.TypeOf<typeof FullViewInfo> {}

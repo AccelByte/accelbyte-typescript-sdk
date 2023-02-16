@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TokenThirdPartyResponse = z.object({ platform_token: z.string(), sand_box_id: z.string().nullish() })
 
-export type TokenThirdPartyResponse = z.TypeOf<typeof TokenThirdPartyResponse>
+export interface TokenThirdPartyResponse extends z.TypeOf<typeof TokenThirdPartyResponse> {}

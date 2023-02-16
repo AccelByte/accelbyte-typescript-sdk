@@ -13,4 +13,4 @@ export const ItemDynamicDataInfo = z.object({
   userPurchaseLimit: z.number().int()
 })
 
-export type ItemDynamicDataInfo = z.TypeOf<typeof ItemDynamicDataInfo>
+export interface ItemDynamicDataInfo extends z.TypeOf<typeof ItemDynamicDataInfo> {}

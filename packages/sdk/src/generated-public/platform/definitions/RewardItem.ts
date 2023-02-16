@@ -11,4 +11,4 @@ export const RewardItem = z.object({
   duration: z.number().int().nullish()
 })
 
-export type RewardItem = z.TypeOf<typeof RewardItem>
+export interface RewardItem extends z.TypeOf<typeof RewardItem> {}

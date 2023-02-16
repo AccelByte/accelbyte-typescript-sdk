@@ -12,4 +12,4 @@ export const AddCountryGroupRequest = z.object({
   countries: z.array(CountryObject).nullish()
 })
 
-export type AddCountryGroupRequest = z.TypeOf<typeof AddCountryGroupRequest>
+export interface AddCountryGroupRequest extends z.TypeOf<typeof AddCountryGroupRequest> {}

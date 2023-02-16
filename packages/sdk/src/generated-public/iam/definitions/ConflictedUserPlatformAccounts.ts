@@ -11,4 +11,4 @@ export const ConflictedUserPlatformAccounts = z.object({
   publisherAccounts: z.array(UserWithLinkedPlatformAccounts)
 })
 
-export type ConflictedUserPlatformAccounts = z.TypeOf<typeof ConflictedUserPlatformAccounts>
+export interface ConflictedUserPlatformAccounts extends z.TypeOf<typeof ConflictedUserPlatformAccounts> {}

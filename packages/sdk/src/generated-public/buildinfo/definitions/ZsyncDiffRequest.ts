@@ -25,4 +25,4 @@ export const ZsyncDiffRequest = z.object({
   binaryUpload: BinaryUpload.nullish()
 })
 
-export type ZsyncDiffRequest = z.TypeOf<typeof ZsyncDiffRequest>
+export interface ZsyncDiffRequest extends z.TypeOf<typeof ZsyncDiffRequest> {}

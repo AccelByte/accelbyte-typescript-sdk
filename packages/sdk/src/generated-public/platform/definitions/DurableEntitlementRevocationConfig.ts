@@ -10,4 +10,4 @@ export const DurableEntitlementRevocationConfig = z.object({
   strategy: z.enum(['REVOKE_OR_REPORT']).nullish()
 })
 
-export type DurableEntitlementRevocationConfig = z.TypeOf<typeof DurableEntitlementRevocationConfig>
+export interface DurableEntitlementRevocationConfig extends z.TypeOf<typeof DurableEntitlementRevocationConfig> {}

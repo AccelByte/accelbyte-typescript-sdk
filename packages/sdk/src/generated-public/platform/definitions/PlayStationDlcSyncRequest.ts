@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PlayStationDlcSyncRequest = z.object({ serviceLabel: z.number().int().nullish() })
 
-export type PlayStationDlcSyncRequest = z.TypeOf<typeof PlayStationDlcSyncRequest>
+export interface PlayStationDlcSyncRequest extends z.TypeOf<typeof PlayStationDlcSyncRequest> {}

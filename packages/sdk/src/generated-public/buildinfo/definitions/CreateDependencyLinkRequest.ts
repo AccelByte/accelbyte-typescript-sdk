@@ -8,4 +8,4 @@ import { DependencyObject } from './DependencyObject'
 
 export const CreateDependencyLinkRequest = z.object({ buildId: z.string().nullish(), dependencies: z.array(DependencyObject).nullish() })
 
-export type CreateDependencyLinkRequest = z.TypeOf<typeof CreateDependencyLinkRequest>
+export interface CreateDependencyLinkRequest extends z.TypeOf<typeof CreateDependencyLinkRequest> {}

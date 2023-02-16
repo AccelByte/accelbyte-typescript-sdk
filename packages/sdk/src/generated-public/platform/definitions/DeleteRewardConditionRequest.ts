@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const DeleteRewardConditionRequest = z.object({ userId: z.string().nullish(), conditionName: z.string().nullish() })
 
-export type DeleteRewardConditionRequest = z.TypeOf<typeof DeleteRewardConditionRequest>
+export interface DeleteRewardConditionRequest extends z.TypeOf<typeof DeleteRewardConditionRequest> {}

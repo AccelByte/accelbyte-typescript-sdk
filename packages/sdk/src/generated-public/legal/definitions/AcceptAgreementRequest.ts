@@ -13,4 +13,4 @@ export const AcceptAgreementRequest = z.object({
   isNeedToSendEventMarketing: z.boolean().nullish()
 })
 
-export type AcceptAgreementRequest = z.TypeOf<typeof AcceptAgreementRequest>
+export interface AcceptAgreementRequest extends z.TypeOf<typeof AcceptAgreementRequest> {}

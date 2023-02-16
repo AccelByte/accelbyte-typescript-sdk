@@ -18,4 +18,4 @@ export const ViewInfo = z.object({
   localExt: z.record(z.any()).nullish()
 })
 
-export type ViewInfo = z.TypeOf<typeof ViewInfo>
+export interface ViewInfo extends z.TypeOf<typeof ViewInfo> {}

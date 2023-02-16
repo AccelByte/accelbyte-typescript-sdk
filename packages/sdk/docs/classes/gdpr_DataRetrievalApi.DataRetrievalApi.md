@@ -36,13 +36,13 @@
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L36)
+[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L36)
 
 ___
 
 ### getGdprDataRequestList
 
-▸ **getGdprDataRequestList**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `Data`: { Status: string; DataExpirationDate: string; RequestDate: string; }[] ; `Paging`: { First: string; Last: string; Next: string; Previous: string; } = Pagination }\>\>
+▸ **getGdprDataRequestList**(`«destructured»`): `Promise`<`IResponseWithSync`<`UserPersonalDataResponse`\>\>
 
 <p>Fetch personal data request list</p>
 <p>Requires valid user access token</p>
@@ -59,17 +59,17 @@ ___
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `Data`: { Status: string; DataExpirationDate: string; RequestDate: string; }[] ; `Paging`: { First: string; Last: string; Next: string; Previous: string; } = Pagination }\>\>
+`Promise`<`IResponseWithSync`<`UserPersonalDataResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L20)
+[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L20)
 
 ___
 
 ### requestGdprData
 
-▸ **requestGdprData**(`«destructured»`): `Promise`<`IResponse`<{ `Namespace`: `string` ; `RequestDate`: `string` ; `UserID`: `string`  }\>\>
+▸ **requestGdprData**(`«destructured»`): `Promise`<`IResponse`<`DataRetrievalResponse`\>\>
 
 <p>Create a request for personal data download</p>
 <p>Requires valid user access token</p>
@@ -85,17 +85,17 @@ ___
 
 #### Returns
 
-`Promise`<`IResponse`<{ `Namespace`: `string` ; `RequestDate`: `string` ; `UserID`: `string`  }\>\>
+`Promise`<`IResponse`<`DataRetrievalResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L28)
+[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L28)
 
 ___
 
 ### requestGdprDataDownloadUrl
 
-▸ **requestGdprDataDownloadUrl**(`«destructured»`): `Promise`<`IResponse`<{ `URL`: `string`  }\>\>
+▸ **requestGdprDataDownloadUrl**(`«destructured»`): `Promise`<`IResponse`<`UserDataUrl`\>\>
 
 <p>Create a download URL for personal data request</p>
 <p>Requires valid user access token</p>
@@ -112,8 +112,8 @@ ___
 
 #### Returns
 
-`Promise`<`IResponse`<{ `URL`: `string`  }\>\>
+`Promise`<`IResponse`<`UserDataUrl`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:44](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L44)
+[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:44](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L44)

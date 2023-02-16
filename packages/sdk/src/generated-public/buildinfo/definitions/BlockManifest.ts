@@ -12,4 +12,4 @@ export const BlockManifest = z.object({
   offset: z.number().int().nullish()
 })
 
-export type BlockManifest = z.TypeOf<typeof BlockManifest>
+export interface BlockManifest extends z.TypeOf<typeof BlockManifest> {}

@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { AchievementInfo } from './AchievementInfo'
 
-export const ADtoObjectForQueryingXboxUserAchievements = z.object({ achievements: z.array(AchievementInfo).nullish() })
+export const XblUserAchievements = z.object({ achievements: z.array(AchievementInfo).nullish() })
 
-export type ADtoObjectForQueryingXboxUserAchievements = z.TypeOf<typeof ADtoObjectForQueryingXboxUserAchievements>
+export interface XblUserAchievements extends z.TypeOf<typeof XblUserAchievements> {}

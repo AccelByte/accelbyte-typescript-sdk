@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EpicGamesReconcileRequest = z.object({ epicGamesJwtToken: z.string().nullish() })
 
-export type EpicGamesReconcileRequest = z.TypeOf<typeof EpicGamesReconcileRequest>
+export interface EpicGamesReconcileRequest extends z.TypeOf<typeof EpicGamesReconcileRequest> {}

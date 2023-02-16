@@ -25,4 +25,4 @@ export const BuildManifest = z.object({
   obsoleteFiles: z.array(ObsoleteFileManifest).nullish()
 })
 
-export type BuildManifest = z.TypeOf<typeof BuildManifest>
+export interface BuildManifest extends z.TypeOf<typeof BuildManifest> {}

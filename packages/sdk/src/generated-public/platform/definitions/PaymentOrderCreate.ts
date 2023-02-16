@@ -30,4 +30,4 @@ export const PaymentOrderCreate = z.object({
   platform: z.string().nullish()
 })
 
-export type PaymentOrderCreate = z.TypeOf<typeof PaymentOrderCreate>
+export interface PaymentOrderCreate extends z.TypeOf<typeof PaymentOrderCreate> {}

@@ -12,4 +12,4 @@ export const StripeConfig = z.object({
   allowedPaymentMethodTypes: z.array(z.string()).nullish()
 })
 
-export type StripeConfig = z.TypeOf<typeof StripeConfig>
+export interface StripeConfig extends z.TypeOf<typeof StripeConfig> {}

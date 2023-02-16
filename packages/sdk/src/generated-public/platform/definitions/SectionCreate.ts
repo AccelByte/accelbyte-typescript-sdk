@@ -22,4 +22,4 @@ export const SectionCreate = z.object({
   ext: z.record(z.any()).nullish()
 })
 
-export type SectionCreate = z.TypeOf<typeof SectionCreate>
+export interface SectionCreate extends z.TypeOf<typeof SectionCreate> {}

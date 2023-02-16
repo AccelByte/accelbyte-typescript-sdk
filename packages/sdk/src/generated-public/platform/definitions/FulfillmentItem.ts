@@ -17,4 +17,4 @@ export const FulfillmentItem = z.object({
   extraSubscriptionDays: z.number().int().nullish()
 })
 
-export type FulfillmentItem = z.TypeOf<typeof FulfillmentItem>
+export interface FulfillmentItem extends z.TypeOf<typeof FulfillmentItem> {}

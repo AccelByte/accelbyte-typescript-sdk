@@ -14,4 +14,4 @@ export const Slide = z.object({
   previewUrl: z.string().nullish()
 })
 
-export type Slide = z.TypeOf<typeof Slide>
+export interface Slide extends z.TypeOf<typeof Slide> {}

@@ -8,4 +8,4 @@ import { RetrieveUserEligibilitiesResponse } from './RetrieveUserEligibilitiesRe
 
 export const RetrieveUserEligibilitiesResponseArray = z.array(RetrieveUserEligibilitiesResponse)
 
-export type RetrieveUserEligibilitiesResponseArray = z.TypeOf<typeof RetrieveUserEligibilitiesResponseArray>
+export interface RetrieveUserEligibilitiesResponseArray extends z.TypeOf<typeof RetrieveUserEligibilitiesResponseArray> {}

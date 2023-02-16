@@ -12,4 +12,4 @@ export const ErrorEntity = z.object({
   devStackTrace: z.string().nullish()
 })
 
-export type ErrorEntity = z.TypeOf<typeof ErrorEntity>
+export interface ErrorEntity extends z.TypeOf<typeof ErrorEntity> {}

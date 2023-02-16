@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const NamespaceUpdate = z.object({ displayName: z.string() })
 
-export type NamespaceUpdate = z.TypeOf<typeof NamespaceUpdate>
+export interface NamespaceUpdate extends z.TypeOf<typeof NamespaceUpdate> {}

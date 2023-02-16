@@ -28,4 +28,4 @@ export const ItemTypeConfigInfo = z.object({
   updatedAt: z.string()
 })
 
-export type ItemTypeConfigInfo = z.TypeOf<typeof ItemTypeConfigInfo>
+export interface ItemTypeConfigInfo extends z.TypeOf<typeof ItemTypeConfigInfo> {}

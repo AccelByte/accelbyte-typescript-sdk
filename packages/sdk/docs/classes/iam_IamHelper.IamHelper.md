@@ -35,7 +35,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `user` | ``null`` \| { `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  } |
+| `user` | ``null`` \| `UserResponseV3` |
 
 #### Returns
 
@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/IamHelper.ts#L48)
+[packages/sdk/src/api/iam/IamHelper.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/IamHelper.ts#L48)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `user` | ``null`` \| { `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  } |
+| `user` | ``null`` \| `UserResponseV3` |
 
 #### Returns
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:43](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/IamHelper.ts#L43)
+[packages/sdk/src/api/iam/IamHelper.ts:43](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/IamHelper.ts#L43)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `user` | ``null`` \| { `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  } |
+| `user` | ``null`` \| `UserResponseV3` |
 
 #### Returns
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/IamHelper.ts#L23)
+[packages/sdk/src/api/iam/IamHelper.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/IamHelper.ts#L23)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `user` | ``null`` \| { `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  } |
+| `user` | ``null`` \| `UserResponseV3` |
 
 #### Returns
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:33](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/IamHelper.ts#L33)
+[packages/sdk/src/api/iam/IamHelper.ts:33](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/IamHelper.ts#L33)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `user` | ``null`` \| { `authType`: `string` ; `avatarUrl`: `undefined` \| ``null`` \| `string` ; `bans`: { ban: string; banId: string; endDate: string; }[] ; `country`: `string` ; `createdAt`: `string` ; `dateOfBirth`: `undefined` \| ``null`` \| `string` ; `deletionStatus`: `boolean` ; `displayName`: `string` ; `emailAddress`: `string` ; `emailVerified`: `boolean` ; `enabled`: `boolean` ; `lastDateOfBirthChangedTime`: `string` ; `lastEnabledChangedTime`: `string` ; `namespace`: `string` ; `namespaceRoles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `newEmailAddress`: `undefined` \| ``null`` \| `string` ; `oldEmailAddress`: `string` ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `phoneNumber`: `undefined` \| ``null`` \| `string` ; `phoneVerified`: `boolean` ; `platformAvatarUrl`: `undefined` \| ``null`` \| `string` ; `platformDisplayName`: `undefined` \| ``null`` \| `string` ; `platformId`: `undefined` \| ``null`` \| `string` ; `platformUserId`: `undefined` \| ``null`` \| `string` ; `roles`: `string`[] ; `userId`: `string` ; `userName`: `undefined` \| ``null`` \| `string`  } |
+| `user` | ``null`` \| `UserResponseV3` |
 
 #### Returns
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/IamHelper.ts#L28)
+[packages/sdk/src/api/iam/IamHelper.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/IamHelper.ts#L28)
 
 ___
 
@@ -149,4 +149,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/IamHelper.ts:11](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/IamHelper.ts#L11)
+[packages/sdk/src/api/iam/IamHelper.ts:11](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/IamHelper.ts#L11)

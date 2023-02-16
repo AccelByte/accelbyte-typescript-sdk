@@ -13,4 +13,4 @@ export const SimpleUserPlatformInfoV3 = z.object({
   platformId: z.string().nullish()
 })
 
-export type SimpleUserPlatformInfoV3 = z.TypeOf<typeof SimpleUserPlatformInfoV3>
+export interface SimpleUserPlatformInfoV3 extends z.TypeOf<typeof SimpleUserPlatformInfoV3> {}

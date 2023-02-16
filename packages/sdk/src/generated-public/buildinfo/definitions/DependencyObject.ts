@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const DependencyObject = z.object({ dependencyAppId: z.string().nullish(), compatibleBuildId: z.array(z.string()).nullish() })
 
-export type DependencyObject = z.TypeOf<typeof DependencyObject>
+export interface DependencyObject extends z.TypeOf<typeof DependencyObject> {}

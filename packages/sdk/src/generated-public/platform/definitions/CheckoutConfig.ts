@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CheckoutConfig = z.object({ publicKey: z.string().nullish(), secretKey: z.string().nullish() })
 
-export type CheckoutConfig = z.TypeOf<typeof CheckoutConfig>
+export interface CheckoutConfig extends z.TypeOf<typeof CheckoutConfig> {}

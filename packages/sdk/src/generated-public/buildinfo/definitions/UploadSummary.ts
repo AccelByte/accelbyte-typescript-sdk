@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UploadSummary = z.object({ presignedUrl: z.string().nullish(), uuid: z.string().nullish() })
 
-export type UploadSummary = z.TypeOf<typeof UploadSummary>
+export interface UploadSummary extends z.TypeOf<typeof UploadSummary> {}

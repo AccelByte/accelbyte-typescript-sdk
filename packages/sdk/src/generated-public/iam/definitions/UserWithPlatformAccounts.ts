@@ -8,4 +8,4 @@ import { PlatformAccount } from './PlatformAccount'
 
 export const UserWithPlatformAccounts = z.object({ linkedPlatforms: z.array(PlatformAccount), namespace: z.string(), userId: z.string() })
 
-export type UserWithPlatformAccounts = z.TypeOf<typeof UserWithPlatformAccounts>
+export interface UserWithPlatformAccounts extends z.TypeOf<typeof UserWithPlatformAccounts> {}

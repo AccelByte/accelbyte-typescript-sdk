@@ -73,4 +73,4 @@ export const PaymentOrderInfo = z.object({
   updatedAt: z.string()
 })
 
-export type PaymentOrderInfo = z.TypeOf<typeof PaymentOrderInfo>
+export interface PaymentOrderInfo extends z.TypeOf<typeof PaymentOrderInfo> {}

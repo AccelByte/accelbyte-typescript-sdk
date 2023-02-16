@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const OrderRefundCreate = z.object({ description: z.string() })
 
-export type OrderRefundCreate = z.TypeOf<typeof OrderRefundCreate>
+export interface OrderRefundCreate extends z.TypeOf<typeof OrderRefundCreate> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const OrderStatistics = z.object({ total: z.number().int(), statusCount: z.record(z.number().int()) })
 
-export type OrderStatistics = z.TypeOf<typeof OrderStatistics>
+export interface OrderStatistics extends z.TypeOf<typeof OrderStatistics> {}

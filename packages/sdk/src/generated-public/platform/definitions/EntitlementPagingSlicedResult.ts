@@ -9,4 +9,4 @@ import { Paging } from './Paging'
 
 export const EntitlementPagingSlicedResult = z.object({ data: z.array(EntitlementInfo).nullish(), paging: Paging.nullish() })
 
-export type EntitlementPagingSlicedResult = z.TypeOf<typeof EntitlementPagingSlicedResult>
+export interface EntitlementPagingSlicedResult extends z.TypeOf<typeof EntitlementPagingSlicedResult> {}

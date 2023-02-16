@@ -16,4 +16,4 @@ export const UserCreateFromInvitationRequestV3 = z.object({
   reachMinimumAge: z.boolean()
 })
 
-export type UserCreateFromInvitationRequestV3 = z.TypeOf<typeof UserCreateFromInvitationRequestV3>
+export interface UserCreateFromInvitationRequestV3 extends z.TypeOf<typeof UserCreateFromInvitationRequestV3> {}

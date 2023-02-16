@@ -16,7 +16,7 @@
 
 ### getUserMeWallet
 
-▸ **getUserMeWallet**(`currencyCode`): `Promise`<`IResponseWithSync`<{ `balance`: `number` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `id`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` ; `userId`: `string` ; `walletInfos`: `undefined` \| ``null`` \| { timeLimitedBalances?: { expireAt?: string \| null \| undefined; balance?: number \| null \| undefined; balanceSource?: string \| null \| undefined; }[] \| null \| undefined; totalPermanentBalance?: number \| ... 1 more ... \| undefined; ... 10 more ...; balanceOrigin: string; }[] ; `walletStatus`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"``  }\>\>
+▸ **getUserMeWallet**(`currencyCode`): `Promise`<`IResponseWithSync`<`PlatformWallet`\>\>
 
 get my wallet by currency code and namespace.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li><li><i>Path's namespace</i> : <ul>   <li>can be filled with <b>publisher namespace</b> in order to get <b>publisher user wallet</b></li>   <li>can be filled with <b>game namespace</b> in order to get <b>game user wallet</b></li>   </ul></li></ul>
 
@@ -28,17 +28,17 @@ get my wallet by currency code and namespace.<br>Other detail info: <ul><li><i>R
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `balance`: `number` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `id`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` ; `userId`: `string` ; `walletInfos`: `undefined` \| ``null`` \| { timeLimitedBalances?: { expireAt?: string \| null \| undefined; balance?: number \| null \| undefined; balanceSource?: string \| null \| undefined; }[] \| null \| undefined; totalPermanentBalance?: number \| ... 1 more ... \| undefined; ... 10 more ...; balanceOrigin: string; }[] ; `walletStatus`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"``  }\>\>
+`Promise`<`IResponseWithSync`<`PlatformWallet`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/WalletApi.ts#L20)
+[packages/sdk/src/api/platform/WalletApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/WalletApi.ts#L20)
 
 ___
 
 ### getWalletByUserId
 
-▸ **getWalletByUserId**(`userId`, `currencyCode`): `Promise`<`IResponseWithSync`<{ `balance`: `number` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `id`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` ; `userId`: `string` ; `walletInfos`: `undefined` \| ``null`` \| { timeLimitedBalances?: { expireAt?: string \| null \| undefined; balance?: number \| null \| undefined; balanceSource?: string \| null \| undefined; }[] \| null \| undefined; totalPermanentBalance?: number \| ... 1 more ... \| undefined; ... 10 more ...; balanceOrigin: string; }[] ; `walletStatus`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"``  }\>\>
+▸ **getWalletByUserId**(`userId`, `currencyCode`): `Promise`<`IResponseWithSync`<`PlatformWallet`\>\>
 
 get a wallet by currency code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li></ul>
 
@@ -51,17 +51,17 @@ get a wallet by currency code.<br>Other detail info: <ul><li><i>Required permiss
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `balance`: `number` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `id`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` ; `userId`: `string` ; `walletInfos`: `undefined` \| ``null`` \| { timeLimitedBalances?: { expireAt?: string \| null \| undefined; balance?: number \| null \| undefined; balanceSource?: string \| null \| undefined; }[] \| null \| undefined; totalPermanentBalance?: number \| ... 1 more ... \| undefined; ... 10 more ...; balanceOrigin: string; }[] ; `walletStatus`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"``  }\>\>
+`Promise`<`IResponseWithSync`<`PlatformWallet`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/WalletApi.ts#L27)
+[packages/sdk/src/api/platform/WalletApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/WalletApi.ts#L27)
 
 ___
 
 ### getWalletMap
 
-▸ **getWalletMap**(`«destructured»`): `Promise`<{ `error`: ``null`` = null; `value`: `Map`<`string`, { `balance`: `number` ; `balanceOrigin`: `string` ; `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `id`: `string` ; `namespace`: `string` ; `status`: ``"ACTIVE"`` \| ``"INACTIVE"`` ; `timeLimitedBalances`: `undefined` \| ``null`` \| { expireAt?: string \| null \| undefined; balance?: number \| null \| undefined; balanceSource?: string \| null \| undefined; }[] ; `totalPermanentBalance`: `undefined` \| ``null`` \| `number` ; `totalTimeLimitedBalance`: `undefined` \| ``null`` \| `number` ; `updatedAt`: `string` ; `userId`: `string`  }\>  } \| { `error`: `unknown` ; `value`: ``null`` = null }\>
+▸ **getWalletMap**(`«destructured»`): `Promise`<{ `error`: ``null`` = null; `value`: `Map`<`string`, `WalletInfo`\>  } \| { `error`: `unknown` ; `value`: ``null`` = null }\>
 
 get a map of wallet represented by its currency code
 
@@ -75,8 +75,8 @@ get a map of wallet represented by its currency code
 
 #### Returns
 
-`Promise`<{ `error`: ``null`` = null; `value`: `Map`<`string`, { `balance`: `number` ; `balanceOrigin`: `string` ; `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `id`: `string` ; `namespace`: `string` ; `status`: ``"ACTIVE"`` \| ``"INACTIVE"`` ; `timeLimitedBalances`: `undefined` \| ``null`` \| { expireAt?: string \| null \| undefined; balance?: number \| null \| undefined; balanceSource?: string \| null \| undefined; }[] ; `totalPermanentBalance`: `undefined` \| ``null`` \| `number` ; `totalTimeLimitedBalance`: `undefined` \| ``null`` \| `number` ; `updatedAt`: `string` ; `userId`: `string`  }\>  } \| { `error`: `unknown` ; `value`: ``null`` = null }\>
+`Promise`<{ `error`: ``null`` = null; `value`: `Map`<`string`, `WalletInfo`\>  } \| { `error`: `unknown` ; `value`: ``null`` = null }\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/WalletApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/WalletApi.ts#L34)
+[packages/sdk/src/api/platform/WalletApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/WalletApi.ts#L34)

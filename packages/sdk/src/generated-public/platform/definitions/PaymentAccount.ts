@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PaymentAccount = z.object({ id: z.string(), type: z.enum(['card', 'paypal']), name: z.string() })
 
-export type PaymentAccount = z.TypeOf<typeof PaymentAccount>
+export interface PaymentAccount extends z.TypeOf<typeof PaymentAccount> {}

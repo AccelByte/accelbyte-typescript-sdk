@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EpicGamesIapConfigInfo = z.object({ namespace: z.string(), sandboxId: z.string() })
 
-export type EpicGamesIapConfigInfo = z.TypeOf<typeof EpicGamesIapConfigInfo>
+export interface EpicGamesIapConfigInfo extends z.TypeOf<typeof EpicGamesIapConfigInfo> {}

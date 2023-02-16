@@ -9,4 +9,4 @@ import { Paging } from './Paging'
 
 export const EventResponseV2 = z.object({ data: z.array(EventV2), paging: Paging })
 
-export type EventResponseV2 = z.TypeOf<typeof EventResponseV2>
+export interface EventResponseV2 extends z.TypeOf<typeof EventResponseV2> {}

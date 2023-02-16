@@ -22,4 +22,4 @@ export const UserProfileInfo = z.object({
   publicId: z.string().nullish()
 })
 
-export type UserProfileInfo = z.TypeOf<typeof UserProfileInfo>
+export interface UserProfileInfo extends z.TypeOf<typeof UserProfileInfo> {}

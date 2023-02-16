@@ -22,4 +22,4 @@ export const Event = z.object({
   UserID: z.string()
 })
 
-export type Event = z.TypeOf<typeof Event>
+export interface Event extends z.TypeOf<typeof Event> {}

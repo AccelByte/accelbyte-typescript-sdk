@@ -15,4 +15,4 @@ export const UserLoginHistoryResponse = z.object({
   deviceName: z.string()
 })
 
-export type UserLoginHistoryResponse = z.TypeOf<typeof UserLoginHistoryResponse>
+export interface UserLoginHistoryResponse extends z.TypeOf<typeof UserLoginHistoryResponse> {}

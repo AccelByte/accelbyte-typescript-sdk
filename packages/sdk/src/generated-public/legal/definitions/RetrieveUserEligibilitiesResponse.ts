@@ -21,4 +21,4 @@ export const RetrieveUserEligibilitiesResponse = z.object({
   isAccepted: z.boolean()
 })
 
-export type RetrieveUserEligibilitiesResponse = z.TypeOf<typeof RetrieveUserEligibilitiesResponse>
+export interface RetrieveUserEligibilitiesResponse extends z.TypeOf<typeof RetrieveUserEligibilitiesResponse> {}

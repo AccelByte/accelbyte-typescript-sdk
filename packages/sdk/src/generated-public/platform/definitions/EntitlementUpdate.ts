@@ -13,4 +13,4 @@ export const EntitlementUpdate = z.object({
   endDate: z.string().nullish()
 })
 
-export type EntitlementUpdate = z.TypeOf<typeof EntitlementUpdate>
+export interface EntitlementUpdate extends z.TypeOf<typeof EntitlementUpdate> {}

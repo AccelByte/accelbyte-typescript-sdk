@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const NamespacePublisherInfo = z.object({ publisher: z.boolean().nullish(), publisherNamespace: z.string().nullish() })
 
-export type NamespacePublisherInfo = z.TypeOf<typeof NamespacePublisherInfo>
+export interface NamespacePublisherInfo extends z.TypeOf<typeof NamespacePublisherInfo> {}

@@ -8,4 +8,4 @@ import { EpicGamesReconcileResult } from './EpicGamesReconcileResult'
 
 export const EpicGamesReconcileResultArray = z.array(EpicGamesReconcileResult)
 
-export type EpicGamesReconcileResultArray = z.TypeOf<typeof EpicGamesReconcileResultArray>
+export interface EpicGamesReconcileResultArray extends z.TypeOf<typeof EpicGamesReconcileResultArray> {}

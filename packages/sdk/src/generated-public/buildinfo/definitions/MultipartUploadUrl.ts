@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const MultipartUploadUrl = z.object({ partNumber: z.number().int(), presignedUrl: z.string() })
 
-export type MultipartUploadUrl = z.TypeOf<typeof MultipartUploadUrl>
+export interface MultipartUploadUrl extends z.TypeOf<typeof MultipartUploadUrl> {}

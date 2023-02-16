@@ -8,4 +8,4 @@ import { PermissionV3 } from './PermissionV3'
 
 export const PermissionsV3 = z.object({ permissions: z.array(PermissionV3) })
 
-export type PermissionsV3 = z.TypeOf<typeof PermissionsV3>
+export interface PermissionsV3 extends z.TypeOf<typeof PermissionsV3> {}

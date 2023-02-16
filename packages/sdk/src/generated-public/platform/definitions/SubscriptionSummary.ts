@@ -17,4 +17,4 @@ export const SubscriptionSummary = z.object({
   subscribedBy: z.enum(['USER', 'PLATFORM']).nullish()
 })
 
-export type SubscriptionSummary = z.TypeOf<typeof SubscriptionSummary>
+export interface SubscriptionSummary extends z.TypeOf<typeof SubscriptionSummary> {}

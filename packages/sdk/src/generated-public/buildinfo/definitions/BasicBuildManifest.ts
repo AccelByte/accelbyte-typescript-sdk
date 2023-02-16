@@ -13,4 +13,4 @@ export const BasicBuildManifest = z.object({
   displayVersion: z.string().nullish()
 })
 
-export type BasicBuildManifest = z.TypeOf<typeof BasicBuildManifest>
+export interface BasicBuildManifest extends z.TypeOf<typeof BasicBuildManifest> {}

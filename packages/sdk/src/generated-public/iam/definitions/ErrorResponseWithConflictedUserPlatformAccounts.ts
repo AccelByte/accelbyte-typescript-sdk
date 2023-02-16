@@ -12,4 +12,4 @@ export const ErrorResponseWithConflictedUserPlatformAccounts = z.object({
   messageVariables: ConflictedUserPlatformAccounts.nullish()
 })
 
-export type ErrorResponseWithConflictedUserPlatformAccounts = z.TypeOf<typeof ErrorResponseWithConflictedUserPlatformAccounts>
+export interface ErrorResponseWithConflictedUserPlatformAccounts extends z.TypeOf<typeof ErrorResponseWithConflictedUserPlatformAccounts> {}

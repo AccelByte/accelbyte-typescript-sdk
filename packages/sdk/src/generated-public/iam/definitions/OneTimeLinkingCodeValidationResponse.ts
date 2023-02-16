@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const OneTimeLinkingCodeValidationResponse = z.object({ expired: z.boolean(), valid: z.boolean() })
 
-export type OneTimeLinkingCodeValidationResponse = z.TypeOf<typeof OneTimeLinkingCodeValidationResponse>
+export interface OneTimeLinkingCodeValidationResponse extends z.TypeOf<typeof OneTimeLinkingCodeValidationResponse> {}

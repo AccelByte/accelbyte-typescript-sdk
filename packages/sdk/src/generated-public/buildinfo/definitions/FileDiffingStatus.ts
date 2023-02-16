@@ -22,4 +22,4 @@ export const FileDiffingStatus = z.object({
   preDiffStatus: z.number().int().nullish()
 })
 
-export type FileDiffingStatus = z.TypeOf<typeof FileDiffingStatus>
+export interface FileDiffingStatus extends z.TypeOf<typeof FileDiffingStatus> {}

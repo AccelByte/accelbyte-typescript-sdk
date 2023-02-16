@@ -37,4 +37,4 @@ export const EntitlementDecrementResult = z.object({
   rewards: z.array(EntitlementLootBoxReward).nullish()
 })
 
-export type EntitlementDecrementResult = z.TypeOf<typeof EntitlementDecrementResult>
+export interface EntitlementDecrementResult extends z.TypeOf<typeof EntitlementDecrementResult> {}

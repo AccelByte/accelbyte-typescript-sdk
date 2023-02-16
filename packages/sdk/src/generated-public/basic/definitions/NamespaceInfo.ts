@@ -15,4 +15,4 @@ export const NamespaceInfo = z.object({
   updatedAt: z.string().nullish()
 })
 
-export type NamespaceInfo = z.TypeOf<typeof NamespaceInfo>
+export interface NamespaceInfo extends z.TypeOf<typeof NamespaceInfo> {}

@@ -14,4 +14,4 @@ export const JwkKey = z.object({
   use: z.string().nullish()
 })
 
-export type JwkKey = z.TypeOf<typeof JwkKey>
+export interface JwkKey extends z.TypeOf<typeof JwkKey> {}

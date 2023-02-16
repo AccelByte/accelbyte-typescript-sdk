@@ -9,4 +9,4 @@ import { UserBanResponseV3 } from './UserBanResponseV3'
 
 export const ListBulkUserBanResponseV3 = z.object({ failedBans: z.array(FailedBanUnbanUserV3), successBans: z.array(UserBanResponseV3) })
 
-export type ListBulkUserBanResponseV3 = z.TypeOf<typeof ListBulkUserBanResponseV3>
+export interface ListBulkUserBanResponseV3 extends z.TypeOf<typeof ListBulkUserBanResponseV3> {}

@@ -13,4 +13,4 @@ export const XsollaConfig = z.object({
   flowCompletionUrl: z.string().nullish()
 })
 
-export type XsollaConfig = z.TypeOf<typeof XsollaConfig>
+export interface XsollaConfig extends z.TypeOf<typeof XsollaConfig> {}

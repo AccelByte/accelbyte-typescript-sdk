@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TokenThirdPartyLinkStatusResponse = z.object({ linked: z.boolean() })
 
-export type TokenThirdPartyLinkStatusResponse = z.TypeOf<typeof TokenThirdPartyLinkStatusResponse>
+export interface TokenThirdPartyLinkStatusResponse extends z.TypeOf<typeof TokenThirdPartyLinkStatusResponse> {}

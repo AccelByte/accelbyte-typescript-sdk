@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const OneTimeLinkingCodeResponse = z.object({ exp: z.number().int(), oneTimeLinkCode: z.string(), oneTimeLinkUrl: z.string() })
 
-export type OneTimeLinkingCodeResponse = z.TypeOf<typeof OneTimeLinkingCodeResponse>
+export interface OneTimeLinkingCodeResponse extends z.TypeOf<typeof OneTimeLinkingCodeResponse> {}

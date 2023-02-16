@@ -8,4 +8,4 @@ import { RetrieveLatestDlcResponse } from './RetrieveLatestDlcResponse'
 
 export const RetrieveLatestDlcResponseArray = z.array(RetrieveLatestDlcResponse)
 
-export type RetrieveLatestDlcResponseArray = z.TypeOf<typeof RetrieveLatestDlcResponseArray>
+export interface RetrieveLatestDlcResponseArray extends z.TypeOf<typeof RetrieveLatestDlcResponseArray> {}

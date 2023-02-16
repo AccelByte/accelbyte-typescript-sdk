@@ -11,4 +11,4 @@ export const RetrieveLatestDlcResponse = z.object({
   version: z.string().nullish()
 })
 
-export type RetrieveLatestDlcResponse = z.TypeOf<typeof RetrieveLatestDlcResponse>
+export interface RetrieveLatestDlcResponse extends z.TypeOf<typeof RetrieveLatestDlcResponse> {}

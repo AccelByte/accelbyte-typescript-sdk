@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const AuthenticatorKeyResponseV4 = z.object({ secretKey: z.string(), uri: z.string() })
 
-export type AuthenticatorKeyResponseV4 = z.TypeOf<typeof AuthenticatorKeyResponseV4>
+export interface AuthenticatorKeyResponseV4 extends z.TypeOf<typeof AuthenticatorKeyResponseV4> {}

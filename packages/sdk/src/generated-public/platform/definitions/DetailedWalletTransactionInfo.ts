@@ -19,4 +19,4 @@ export const DetailedWalletTransactionInfo = z.object({
   updatedAt: z.string()
 })
 
-export type DetailedWalletTransactionInfo = z.TypeOf<typeof DetailedWalletTransactionInfo>
+export interface DetailedWalletTransactionInfo extends z.TypeOf<typeof DetailedWalletTransactionInfo> {}

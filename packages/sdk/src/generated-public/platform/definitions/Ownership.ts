@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const Ownership = z.object({ owned: z.boolean() })
 
-export type Ownership = z.TypeOf<typeof Ownership>
+export interface Ownership extends z.TypeOf<typeof Ownership> {}

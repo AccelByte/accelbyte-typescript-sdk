@@ -12,4 +12,4 @@ export const BillingAccount = z.object({
   additionalData: AdditionalData.nullish()
 })
 
-export type BillingAccount = z.TypeOf<typeof BillingAccount>
+export interface BillingAccount extends z.TypeOf<typeof BillingAccount> {}

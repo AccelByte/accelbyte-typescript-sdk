@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserInfoResponse = z.object({ displayName: z.string(), emailAddress: z.string(), namespace: z.string(), userId: z.string() })
 
-export type UserInfoResponse = z.TypeOf<typeof UserInfoResponse>
+export interface UserInfoResponse extends z.TypeOf<typeof UserInfoResponse> {}

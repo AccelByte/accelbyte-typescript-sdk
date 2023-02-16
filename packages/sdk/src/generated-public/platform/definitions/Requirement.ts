@@ -17,4 +17,4 @@ export const Requirement = z.object({
   additionals: z.string().nullish()
 })
 
-export type Requirement = z.TypeOf<typeof Requirement>
+export interface Requirement extends z.TypeOf<typeof Requirement> {}

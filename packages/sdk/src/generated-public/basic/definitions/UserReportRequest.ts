@@ -13,4 +13,4 @@ export const UserReportRequest = z.object({
   gameSessionId: z.string().nullish()
 })
 
-export type UserReportRequest = z.TypeOf<typeof UserReportRequest>
+export interface UserReportRequest extends z.TypeOf<typeof UserReportRequest> {}

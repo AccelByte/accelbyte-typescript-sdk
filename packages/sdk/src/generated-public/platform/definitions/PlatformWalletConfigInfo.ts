@@ -14,4 +14,4 @@ export const PlatformWalletConfigInfo = z.object({
   updatedAt: z.string().nullish()
 })
 
-export type PlatformWalletConfigInfo = z.TypeOf<typeof PlatformWalletConfigInfo>
+export interface PlatformWalletConfigInfo extends z.TypeOf<typeof PlatformWalletConfigInfo> {}

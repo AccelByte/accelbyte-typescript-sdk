@@ -22,4 +22,4 @@ export const EntitlementSummary = z.object({
   endDate: z.string().nullish()
 })
 
-export type EntitlementSummary = z.TypeOf<typeof EntitlementSummary>
+export interface EntitlementSummary extends z.TypeOf<typeof EntitlementSummary> {}

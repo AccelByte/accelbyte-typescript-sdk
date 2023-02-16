@@ -25,4 +25,4 @@ export const ItemTypeConfigCreate = z.object({
   dryRun: z.boolean().nullish()
 })
 
-export type ItemTypeConfigCreate = z.TypeOf<typeof ItemTypeConfigCreate>
+export interface ItemTypeConfigCreate extends z.TypeOf<typeof ItemTypeConfigCreate> {}

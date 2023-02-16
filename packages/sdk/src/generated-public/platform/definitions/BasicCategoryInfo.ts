@@ -14,4 +14,4 @@ export const BasicCategoryInfo = z.object({
   root: z.boolean().nullish()
 })
 
-export type BasicCategoryInfo = z.TypeOf<typeof BasicCategoryInfo>
+export interface BasicCategoryInfo extends z.TypeOf<typeof BasicCategoryInfo> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CalculateDiffCacheRequest = z.object({ sourceBuildId: z.string().nullish(), destinationBuildId: z.string().nullish() })
 
-export type CalculateDiffCacheRequest = z.TypeOf<typeof CalculateDiffCacheRequest>
+export interface CalculateDiffCacheRequest extends z.TypeOf<typeof CalculateDiffCacheRequest> {}

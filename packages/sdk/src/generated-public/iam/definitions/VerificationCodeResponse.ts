@@ -12,4 +12,4 @@ export const VerificationCodeResponse = z.object({
   updateEmail: z.string()
 })
 
-export type VerificationCodeResponse = z.TypeOf<typeof VerificationCodeResponse>
+export interface VerificationCodeResponse extends z.TypeOf<typeof VerificationCodeResponse> {}

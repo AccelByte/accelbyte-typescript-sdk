@@ -22,4 +22,4 @@ export const WalletInfo = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE'])
 })
 
-export type WalletInfo = z.TypeOf<typeof WalletInfo>
+export interface WalletInfo extends z.TypeOf<typeof WalletInfo> {}

@@ -17,4 +17,4 @@ export const UserCreateFromInvitationRequestV4 = z.object({
   username: z.string()
 })
 
-export type UserCreateFromInvitationRequestV4 = z.TypeOf<typeof UserCreateFromInvitationRequestV4>
+export interface UserCreateFromInvitationRequestV4 extends z.TypeOf<typeof UserCreateFromInvitationRequestV4> {}

@@ -11,4 +11,4 @@ export const BuildAvailability = z.object({
   available: z.boolean().nullish()
 })
 
-export type BuildAvailability = z.TypeOf<typeof BuildAvailability>
+export interface BuildAvailability extends z.TypeOf<typeof BuildAvailability> {}

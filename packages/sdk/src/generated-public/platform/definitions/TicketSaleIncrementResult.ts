@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TicketSaleIncrementResult = z.object({ success: z.boolean(), maxSaleCount: z.number().int() })
 
-export type TicketSaleIncrementResult = z.TypeOf<typeof TicketSaleIncrementResult>
+export interface TicketSaleIncrementResult extends z.TypeOf<typeof TicketSaleIncrementResult> {}

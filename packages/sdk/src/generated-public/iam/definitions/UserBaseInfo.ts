@@ -13,4 +13,4 @@ export const UserBaseInfo = z.object({
   username: z.string().nullish()
 })
 
-export type UserBaseInfo = z.TypeOf<typeof UserBaseInfo>
+export interface UserBaseInfo extends z.TypeOf<typeof UserBaseInfo> {}

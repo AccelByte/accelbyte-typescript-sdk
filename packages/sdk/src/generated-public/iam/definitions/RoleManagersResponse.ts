@@ -8,4 +8,4 @@ import { RoleManager } from './RoleManager'
 
 export const RoleManagersResponse = z.object({ Managers: z.array(RoleManager) })
 
-export type RoleManagersResponse = z.TypeOf<typeof RoleManagersResponse>
+export interface RoleManagersResponse extends z.TypeOf<typeof RoleManagersResponse> {}

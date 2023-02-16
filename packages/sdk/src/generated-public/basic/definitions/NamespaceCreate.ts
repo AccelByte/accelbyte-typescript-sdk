@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const NamespaceCreate = z.object({ displayName: z.string(), namespace: z.string() })
 
-export type NamespaceCreate = z.TypeOf<typeof NamespaceCreate>
+export interface NamespaceCreate extends z.TypeOf<typeof NamespaceCreate> {}

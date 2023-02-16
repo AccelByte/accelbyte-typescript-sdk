@@ -8,4 +8,4 @@ import { RegisteredDomain } from './RegisteredDomain'
 
 export const PlatformDomainResponse = z.object({ registeredDomains: z.array(RegisteredDomain) })
 
-export type PlatformDomainResponse = z.TypeOf<typeof PlatformDomainResponse>
+export interface PlatformDomainResponse extends z.TypeOf<typeof PlatformDomainResponse> {}

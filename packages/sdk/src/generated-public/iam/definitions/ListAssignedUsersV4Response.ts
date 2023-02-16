@@ -9,4 +9,4 @@ import { PaginationV3 } from './PaginationV3'
 
 export const ListAssignedUsersV4Response = z.object({ data: z.array(AssignedUserV4Response), paging: PaginationV3 })
 
-export type ListAssignedUsersV4Response = z.TypeOf<typeof ListAssignedUsersV4Response>
+export interface ListAssignedUsersV4Response extends z.TypeOf<typeof ListAssignedUsersV4Response> {}

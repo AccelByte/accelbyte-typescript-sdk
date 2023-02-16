@@ -8,4 +8,4 @@ import { Ban } from './Ban'
 
 export const Bans = z.object({ Bans: z.array(Ban) })
 
-export type Bans = z.TypeOf<typeof Bans>
+export interface Bans extends z.TypeOf<typeof Bans> {}

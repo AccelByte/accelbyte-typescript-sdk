@@ -17,4 +17,4 @@ export const UserLinkedPlatform = z.object({
   XUID: z.string().nullish()
 })
 
-export type UserLinkedPlatform = z.TypeOf<typeof UserLinkedPlatform>
+export interface UserLinkedPlatform extends z.TypeOf<typeof UserLinkedPlatform> {}

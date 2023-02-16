@@ -15,4 +15,4 @@ export const DeviceBanRequestV4 = z.object({
   reason: z.string()
 })
 
-export type DeviceBanRequestV4 = z.TypeOf<typeof DeviceBanRequestV4>
+export interface DeviceBanRequestV4 extends z.TypeOf<typeof DeviceBanRequestV4> {}

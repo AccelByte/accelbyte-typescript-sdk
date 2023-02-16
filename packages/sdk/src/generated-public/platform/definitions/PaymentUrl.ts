@@ -14,4 +14,4 @@ export const PaymentUrl = z.object({
   sessionData: z.string().nullish()
 })
 
-export type PaymentUrl = z.TypeOf<typeof PaymentUrl>
+export interface PaymentUrl extends z.TypeOf<typeof PaymentUrl> {}

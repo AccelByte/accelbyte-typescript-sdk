@@ -12,4 +12,4 @@ export const PlayStationReconcileRequest = z.object({
   serviceLabel: z.number().int().nullish()
 })
 
-export type PlayStationReconcileRequest = z.TypeOf<typeof PlayStationReconcileRequest>
+export interface PlayStationReconcileRequest extends z.TypeOf<typeof PlayStationReconcileRequest> {}

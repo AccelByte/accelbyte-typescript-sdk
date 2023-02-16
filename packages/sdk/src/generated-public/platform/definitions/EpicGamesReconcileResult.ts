@@ -13,4 +13,4 @@ export const EpicGamesReconcileResult = z.object({
   status: z.enum(['VERIFIED', 'FULFILLED', 'FAILED']).nullish()
 })
 
-export type EpicGamesReconcileResult = z.TypeOf<typeof EpicGamesReconcileResult>
+export interface EpicGamesReconcileResult extends z.TypeOf<typeof EpicGamesReconcileResult> {}

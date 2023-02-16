@@ -21,4 +21,4 @@ export const DlcRecord = z.object({
   version: z.number().int().nullish()
 })
 
-export type DlcRecord = z.TypeOf<typeof DlcRecord>
+export interface DlcRecord extends z.TypeOf<typeof DlcRecord> {}

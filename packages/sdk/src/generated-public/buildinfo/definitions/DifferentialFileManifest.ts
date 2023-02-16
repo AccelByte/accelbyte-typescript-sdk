@@ -17,4 +17,4 @@ export const DifferentialFileManifest = z.object({
   status: z.number().int().nullish()
 })
 
-export type DifferentialFileManifest = z.TypeOf<typeof DifferentialFileManifest>
+export interface DifferentialFileManifest extends z.TypeOf<typeof DifferentialFileManifest> {}

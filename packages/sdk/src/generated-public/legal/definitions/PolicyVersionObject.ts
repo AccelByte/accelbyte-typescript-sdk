@@ -17,4 +17,4 @@ export const PolicyVersionObject = z.object({
   isInEffect: z.boolean()
 })
 
-export type PolicyVersionObject = z.TypeOf<typeof PolicyVersionObject>
+export interface PolicyVersionObject extends z.TypeOf<typeof PolicyVersionObject> {}

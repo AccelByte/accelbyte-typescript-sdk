@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const BlockDownloadUrls = z.object({ urls: z.record(z.string()) })
 
-export type BlockDownloadUrls = z.TypeOf<typeof BlockDownloadUrls>
+export interface BlockDownloadUrls extends z.TypeOf<typeof BlockDownloadUrls> {}

@@ -13,4 +13,4 @@ export const RoleResponse = z.object({
   RoleName: z.string()
 })
 
-export type RoleResponse = z.TypeOf<typeof RoleResponse>
+export interface RoleResponse extends z.TypeOf<typeof RoleResponse> {}

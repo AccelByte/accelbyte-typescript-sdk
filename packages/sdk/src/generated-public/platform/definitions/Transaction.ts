@@ -41,4 +41,4 @@ export const Transaction = z.object({
   notified: z.boolean().nullish()
 })
 
-export type Transaction = z.TypeOf<typeof Transaction>
+export interface Transaction extends z.TypeOf<typeof Transaction> {}

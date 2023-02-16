@@ -13,4 +13,4 @@ export const Config = z.object({
   version: z.number().int()
 })
 
-export type Config = z.TypeOf<typeof Config>
+export interface Config extends z.TypeOf<typeof Config> {}

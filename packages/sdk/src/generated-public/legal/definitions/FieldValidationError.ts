@@ -13,4 +13,4 @@ export const FieldValidationError = z.object({
   messageVariables: z.record(z.string()).nullish()
 })
 
-export type FieldValidationError = z.TypeOf<typeof FieldValidationError>
+export interface FieldValidationError extends z.TypeOf<typeof FieldValidationError> {}

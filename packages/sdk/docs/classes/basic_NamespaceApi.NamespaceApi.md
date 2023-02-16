@@ -14,7 +14,7 @@
 
 ### getNamespaces
 
-▸ **getNamespaces**(`activeOnly?`): `Promise`<`IResponseWithSync`<{ `clientId`: `undefined` \| ``null`` \| `string` ; `createdAt`: `undefined` \| ``null`` \| `string` ; `displayName`: `undefined` \| ``null`` \| `string` ; `namespace`: `undefined` \| ``null`` \| `string` ; `parentNamespace`: `undefined` \| ``null`` \| `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"DELETED"`` ; `updatedAt`: `undefined` \| ``null`` \| `string`  }[]\>\>
+▸ **getNamespaces**(`activeOnly?`): `Promise`<`IResponseWithSync`<`NamespaceInfoArray`\>\>
 
 Get all namespaces.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Action code</i>: 11303</li><li><i>Returns</i>: list of namespaces</li></ul>
 
@@ -26,8 +26,8 @@ Get all namespaces.<br>Other detail info: <ul><li><i>Required permission</i>: lo
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `clientId`: `undefined` \| ``null`` \| `string` ; `createdAt`: `undefined` \| ``null`` \| `string` ; `displayName`: `undefined` \| ``null`` \| `string` ; `namespace`: `undefined` \| ``null`` \| `string` ; `parentNamespace`: `undefined` \| ``null`` \| `string` ; `status`: `undefined` \| ``null`` \| ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"DELETED"`` ; `updatedAt`: `undefined` \| ``null`` \| `string`  }[]\>\>
+`Promise`<`IResponseWithSync`<`NamespaceInfoArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/basic/NamespaceApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/basic/NamespaceApi.ts#L19)
+[packages/sdk/src/api/basic/NamespaceApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/basic/NamespaceApi.ts#L19)

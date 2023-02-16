@@ -17,4 +17,4 @@ export const KeyGroupInfo = z.object({
   updatedAt: z.string()
 })
 
-export type KeyGroupInfo = z.TypeOf<typeof KeyGroupInfo>
+export interface KeyGroupInfo extends z.TypeOf<typeof KeyGroupInfo> {}

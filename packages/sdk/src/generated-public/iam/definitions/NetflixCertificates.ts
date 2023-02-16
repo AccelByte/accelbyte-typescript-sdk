@@ -14,4 +14,4 @@ export const NetflixCertificates = z.object({
   rootCertificateName: z.string()
 })
 
-export type NetflixCertificates = z.TypeOf<typeof NetflixCertificates>
+export interface NetflixCertificates extends z.TypeOf<typeof NetflixCertificates> {}

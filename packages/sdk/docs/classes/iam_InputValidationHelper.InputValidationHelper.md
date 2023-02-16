@@ -37,7 +37,7 @@
 | Name | Type |
 | :------ | :------ |
 | `key` | ``"username"`` \| ``"displayName"`` \| ``"password"`` \| ``"email"`` |
-| `validations` | { `field`: `string` ; `validation`: { allowAllSpecialCharacters: boolean; allowDigit: boolean; allowLetter: boolean; allowSpace: boolean; allowUnicode: boolean; blockedWord: string[]; description: { message: string[]; language: string; }; ... 9 more ...; specialCharacters: string[]; } = ValidationDetailPublic }[] |
+| `validations` | `InputValidationDataPublic`[] |
 
 #### Returns
 
@@ -45,7 +45,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:94](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/InputValidationHelper.ts#L94)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:94](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/InputValidationHelper.ts#L94)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `key` | ``"username"`` \| ``"displayName"`` \| ``"password"`` \| ``"email"`` |
-| `validations` | { `field`: `string` ; `validation`: { allowAllSpecialCharacters: boolean; allowDigit: boolean; allowLetter: boolean; allowSpace: boolean; allowUnicode: boolean; blockedWord: string[]; description: { message: string[]; language: string; }; ... 9 more ...; specialCharacters: string[]; } = ValidationDetailPublic }[] |
+| `validations` | `InputValidationDataPublic`[] |
 
 #### Returns
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/InputValidationHelper.ts#L82)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:82](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/InputValidationHelper.ts#L82)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 | :------ | :------ | :------ |
 | `value` | `string` | `undefined` |
 | `isRequired` | `boolean` | `false` |
-| `validations` | { `field`: `string` ; `validation`: { allowAllSpecialCharacters: boolean; allowDigit: boolean; allowLetter: boolean; allowSpace: boolean; allowUnicode: boolean; blockedWord: string[]; description: { message: string[]; language: string; }; ... 9 more ...; specialCharacters: string[]; } = ValidationDetailPublic }[] | `undefined` |
+| `validations` | `InputValidationDataPublic`[] | `undefined` |
 
 #### Returns
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/InputValidationHelper.ts#L23)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/InputValidationHelper.ts#L23)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `value` | `string` |
-| `validations` | { `field`: `string` ; `validation`: { allowAllSpecialCharacters: boolean; allowDigit: boolean; allowLetter: boolean; allowSpace: boolean; allowUnicode: boolean; blockedWord: string[]; description: { message: string[]; language: string; }; ... 9 more ...; specialCharacters: string[]; } = ValidationDetailPublic }[] |
+| `validations` | `InputValidationDataPublic`[] |
 
 #### Returns
 
@@ -109,7 +109,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/InputValidationHelper.ts#L41)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/InputValidationHelper.ts#L41)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `value` | `string` |
-| `validations` | { `field`: `string` ; `validation`: { allowAllSpecialCharacters: boolean; allowDigit: boolean; allowLetter: boolean; allowSpace: boolean; allowUnicode: boolean; blockedWord: string[]; description: { message: string[]; language: string; }; ... 9 more ...; specialCharacters: string[]; } = ValidationDetailPublic }[] |
+| `validations` | `InputValidationDataPublic`[] |
 
 #### Returns
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/InputValidationHelper.ts#L35)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:35](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/InputValidationHelper.ts#L35)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `value` | `string` |
-| `validations` | { `field`: `string` ; `validation`: { allowAllSpecialCharacters: boolean; allowDigit: boolean; allowLetter: boolean; allowSpace: boolean; allowUnicode: boolean; blockedWord: string[]; description: { message: string[]; language: string; }; ... 9 more ...; specialCharacters: string[]; } = ValidationDetailPublic }[] |
+| `validations` | `InputValidationDataPublic`[] |
 
 #### Returns
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/InputValidationHelper.ts#L29)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/InputValidationHelper.ts#L29)
 
 ___
 
@@ -161,29 +161,12 @@ ___
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `value` | `string` | `undefined` |
-| `«destructured»` | `Object` | `undefined` |
-| › `isRequired?` | `boolean` | `undefined` |
-| › `validation` | `Object` | `undefined` |
-| › `validation.allowAllSpecialCharacters` | `boolean` | `undefined` |
-| › `validation.allowDigit` | `boolean` | `undefined` |
-| › `validation.allowLetter` | `boolean` | `undefined` |
-| › `validation.allowSpace` | `boolean` | `undefined` |
-| › `validation.allowUnicode` | `boolean` | `undefined` |
-| › `validation.blockedWord` | `string`[] | `undefined` |
-| › `validation.description` | { message: string[]; language: string; } | `InputValidationDescription` |
-| › `validation.isCustomRegex` | `boolean` | `undefined` |
-| › `validation.letterCase` | `string` | `undefined` |
-| › `validation.maxLength` | `number` | `undefined` |
-| › `validation.maxRepeatingAlphaNum` | `number` | `undefined` |
-| › `validation.maxRepeatingSpecialCharacter` | `number` | `undefined` |
-| › `validation.minCharType` | `number` | `undefined` |
-| › `validation.minLength` | `number` | `undefined` |
-| › `validation.regex` | `string` | `undefined` |
-| › `validation.specialCharacterLocation` | `string` | `undefined` |
-| › `validation.specialCharacters` | `string`[] | `undefined` |
+| Name | Type |
+| :------ | :------ |
+| `value` | `string` |
+| `«destructured»` | `Object` |
+| › `isRequired?` | `boolean` |
+| › `validation` | `ValidationDetailPublic` |
 
 #### Returns
 
@@ -191,4 +174,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationHelper.ts:47](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/InputValidationHelper.ts#L47)
+[packages/sdk/src/api/iam/InputValidationHelper.ts:47](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/InputValidationHelper.ts#L47)

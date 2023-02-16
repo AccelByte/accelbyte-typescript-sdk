@@ -14,4 +14,4 @@ export const PlatformReward = z.object({
   quantity: z.number().int().nullish()
 })
 
-export type PlatformReward = z.TypeOf<typeof PlatformReward>
+export interface PlatformReward extends z.TypeOf<typeof PlatformReward> {}

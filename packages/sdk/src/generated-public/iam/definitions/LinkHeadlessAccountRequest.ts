@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const LinkHeadlessAccountRequest = z.object({ chosenNamespaces: z.array(z.string()), oneTimeLinkCode: z.string() })
 
-export type LinkHeadlessAccountRequest = z.TypeOf<typeof LinkHeadlessAccountRequest>
+export interface LinkHeadlessAccountRequest extends z.TypeOf<typeof LinkHeadlessAccountRequest> {}

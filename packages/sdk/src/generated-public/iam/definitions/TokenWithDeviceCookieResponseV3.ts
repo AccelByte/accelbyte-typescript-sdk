@@ -30,4 +30,4 @@ export const TokenWithDeviceCookieResponseV3 = z.object({
   xuid: z.string().nullish()
 })
 
-export type TokenWithDeviceCookieResponseV3 = z.TypeOf<typeof TokenWithDeviceCookieResponseV3>
+export interface TokenWithDeviceCookieResponseV3 extends z.TypeOf<typeof TokenWithDeviceCookieResponseV3> {}

@@ -14,4 +14,4 @@ export const UserWithLinkedPlatformAccounts = z.object({
   userId: z.string()
 })
 
-export type UserWithLinkedPlatformAccounts = z.TypeOf<typeof UserWithLinkedPlatformAccounts>
+export interface UserWithLinkedPlatformAccounts extends z.TypeOf<typeof UserWithLinkedPlatformAccounts> {}

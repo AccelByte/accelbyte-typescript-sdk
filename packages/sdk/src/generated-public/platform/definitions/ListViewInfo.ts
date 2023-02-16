@@ -14,4 +14,4 @@ export const ListViewInfo = z.object({
   updatedAt: z.string()
 })
 
-export type ListViewInfo = z.TypeOf<typeof ListViewInfo>
+export interface ListViewInfo extends z.TypeOf<typeof ListViewInfo> {}

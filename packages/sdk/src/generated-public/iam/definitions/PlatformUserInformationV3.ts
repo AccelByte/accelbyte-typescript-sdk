@@ -15,4 +15,4 @@ export const PlatformUserInformationV3 = z.object({
   xboxUserId: z.string().nullish()
 })
 
-export type PlatformUserInformationV3 = z.TypeOf<typeof PlatformUserInformationV3>
+export interface PlatformUserInformationV3 extends z.TypeOf<typeof PlatformUserInformationV3> {}

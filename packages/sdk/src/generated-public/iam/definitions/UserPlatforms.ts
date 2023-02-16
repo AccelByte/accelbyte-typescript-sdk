@@ -8,4 +8,4 @@ import { UserPlatformInfo } from './UserPlatformInfo'
 
 export const UserPlatforms = z.object({ userIdPlatforms: z.array(UserPlatformInfo) })
 
-export type UserPlatforms = z.TypeOf<typeof UserPlatforms>
+export interface UserPlatforms extends z.TypeOf<typeof UserPlatforms> {}

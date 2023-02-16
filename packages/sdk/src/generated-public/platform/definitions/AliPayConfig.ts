@@ -12,4 +12,4 @@ export const AliPayConfig = z.object({
   returnUrl: z.string().nullish()
 })
 
-export type AliPayConfig = z.TypeOf<typeof AliPayConfig>
+export interface AliPayConfig extends z.TypeOf<typeof AliPayConfig> {}

@@ -15,4 +15,4 @@ export const Action = z.object({
   icon: z.string().nullish()
 })
 
-export type Action = z.TypeOf<typeof Action>
+export interface Action extends z.TypeOf<typeof Action> {}

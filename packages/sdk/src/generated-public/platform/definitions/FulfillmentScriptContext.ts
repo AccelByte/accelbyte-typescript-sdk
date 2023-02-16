@@ -14,4 +14,4 @@ export const FulfillmentScriptContext = z.object({
   item: ItemInfo
 })
 
-export type FulfillmentScriptContext = z.TypeOf<typeof FulfillmentScriptContext>
+export interface FulfillmentScriptContext extends z.TypeOf<typeof FulfillmentScriptContext> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const DataRetrievalResponse = z.object({ Namespace: z.string(), RequestDate: z.string(), UserID: z.string() })
 
-export type DataRetrievalResponse = z.TypeOf<typeof DataRetrievalResponse>
+export interface DataRetrievalResponse extends z.TypeOf<typeof DataRetrievalResponse> {}

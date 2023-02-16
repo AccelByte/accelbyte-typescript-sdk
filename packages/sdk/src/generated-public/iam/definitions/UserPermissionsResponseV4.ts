@@ -13,4 +13,4 @@ export const UserPermissionsResponseV4 = z.object({
   schedRange: z.array(z.string()).nullish()
 })
 
-export type UserPermissionsResponseV4 = z.TypeOf<typeof UserPermissionsResponseV4>
+export interface UserPermissionsResponseV4 extends z.TypeOf<typeof UserPermissionsResponseV4> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const AssignUserV4Request = z.object({ assignedNamespaces: z.array(z.string()), namespace: z.string(), userId: z.string() })
 
-export type AssignUserV4Request = z.TypeOf<typeof AssignUserV4Request>
+export interface AssignUserV4Request extends z.TypeOf<typeof AssignUserV4Request> {}

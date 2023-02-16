@@ -12,4 +12,4 @@ export const KeyGroupCreate = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']).nullish()
 })
 
-export type KeyGroupCreate = z.TypeOf<typeof KeyGroupCreate>
+export interface KeyGroupCreate extends z.TypeOf<typeof KeyGroupCreate> {}

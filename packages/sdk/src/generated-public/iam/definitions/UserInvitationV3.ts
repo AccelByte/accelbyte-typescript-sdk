@@ -14,4 +14,4 @@ export const UserInvitationV3 = z.object({
   roles: z.array(NamespaceRole)
 })
 
-export type UserInvitationV3 = z.TypeOf<typeof UserInvitationV3>
+export interface UserInvitationV3 extends z.TypeOf<typeof UserInvitationV3> {}

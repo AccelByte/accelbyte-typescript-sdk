@@ -14,7 +14,7 @@
 
 ### getValidations
 
-▸ **getValidations**(`languageCode?`, `defaultOnEmpty?`): `Promise`<`IResponseWithSync`<{ `data`: { validation: { allowAllSpecialCharacters: boolean; allowDigit: boolean; allowLetter: boolean; allowSpace: boolean; allowUnicode: boolean; blockedWord: string[]; description: { message: string[]; language: string; }; ... 9 more ...; specialCharacters: string[]; }; field: string; }[] ; `version`: `number`  }\>\>
+▸ **getValidations**(`languageCode?`, `defaultOnEmpty?`): `Promise`<`IResponseWithSync`<`InputValidationsPublicResponse`\>\>
 
 <p>No role required</p>
    <p>This method is to get list of input validation configuration.</p>
@@ -29,8 +29,8 @@
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: { validation: { allowAllSpecialCharacters: boolean; allowDigit: boolean; allowLetter: boolean; allowSpace: boolean; allowUnicode: boolean; blockedWord: string[]; description: { message: string[]; language: string; }; ... 9 more ...; specialCharacters: string[]; }; field: string; }[] ; `version`: `number`  }\>\>
+`Promise`<`IResponseWithSync`<`InputValidationsPublicResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/InputValidationApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/InputValidationApi.ts#L22)
+[packages/sdk/src/api/iam/InputValidationApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/InputValidationApi.ts#L22)

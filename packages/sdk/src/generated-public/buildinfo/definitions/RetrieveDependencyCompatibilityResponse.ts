@@ -13,4 +13,4 @@ export const RetrieveDependencyCompatibilityResponse = z.object({
   compatibilities: z.array(CompatibilityObject).nullish()
 })
 
-export type RetrieveDependencyCompatibilityResponse = z.TypeOf<typeof RetrieveDependencyCompatibilityResponse>
+export interface RetrieveDependencyCompatibilityResponse extends z.TypeOf<typeof RetrieveDependencyCompatibilityResponse> {}

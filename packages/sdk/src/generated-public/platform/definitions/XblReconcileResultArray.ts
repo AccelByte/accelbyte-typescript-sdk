@@ -8,4 +8,4 @@ import { XblReconcileResult } from './XblReconcileResult'
 
 export const XblReconcileResultArray = z.array(XblReconcileResult)
 
-export type XblReconcileResultArray = z.TypeOf<typeof XblReconcileResultArray>
+export interface XblReconcileResultArray extends z.TypeOf<typeof XblReconcileResultArray> {}

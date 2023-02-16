@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RedeemRequest = z.object({ code: z.string(), orderNo: z.string().nullish() })
 
-export type RedeemRequest = z.TypeOf<typeof RedeemRequest>
+export interface RedeemRequest extends z.TypeOf<typeof RedeemRequest> {}

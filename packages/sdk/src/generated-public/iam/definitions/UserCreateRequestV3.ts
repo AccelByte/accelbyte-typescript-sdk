@@ -19,4 +19,4 @@ export const UserCreateRequestV3 = z.object({
   reachMinimumAge: z.boolean()
 })
 
-export type UserCreateRequestV3 = z.TypeOf<typeof UserCreateRequestV3>
+export interface UserCreateRequestV3 extends z.TypeOf<typeof UserCreateRequestV3> {}

@@ -14,4 +14,4 @@ export const UserUpdateRequestV3 = z.object({
   userName: z.string().nullish()
 })
 
-export type UserUpdateRequestV3 = z.TypeOf<typeof UserUpdateRequestV3>
+export interface UserUpdateRequestV3 extends z.TypeOf<typeof UserUpdateRequestV3> {}

@@ -13,4 +13,4 @@ export const RetrieveDependencyLinkResponse = z.object({
   dependencies: z.array(DependencyObject).nullish()
 })
 
-export type RetrieveDependencyLinkResponse = z.TypeOf<typeof RetrieveDependencyLinkResponse>
+export interface RetrieveDependencyLinkResponse extends z.TypeOf<typeof RetrieveDependencyLinkResponse> {}

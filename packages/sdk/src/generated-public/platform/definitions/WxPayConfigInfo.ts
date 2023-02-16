@@ -13,4 +13,4 @@ export const WxPayConfigInfo = z.object({
   returnUrl: z.string().nullish()
 })
 
-export type WxPayConfigInfo = z.TypeOf<typeof WxPayConfigInfo>
+export interface WxPayConfigInfo extends z.TypeOf<typeof WxPayConfigInfo> {}

@@ -8,4 +8,4 @@ import { UserProfilePublicInfo } from './UserProfilePublicInfo'
 
 export const UserProfilePublicInfoArray = z.array(UserProfilePublicInfo)
 
-export type UserProfilePublicInfoArray = z.TypeOf<typeof UserProfilePublicInfoArray>
+export interface UserProfilePublicInfoArray extends z.TypeOf<typeof UserProfilePublicInfoArray> {}

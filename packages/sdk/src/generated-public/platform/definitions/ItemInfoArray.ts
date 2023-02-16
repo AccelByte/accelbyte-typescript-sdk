@@ -8,4 +8,4 @@ import { ItemInfo } from './ItemInfo'
 
 export const ItemInfoArray = z.array(ItemInfo)
 
-export type ItemInfoArray = z.TypeOf<typeof ItemInfoArray>
+export interface ItemInfoArray extends z.TypeOf<typeof ItemInfoArray> {}

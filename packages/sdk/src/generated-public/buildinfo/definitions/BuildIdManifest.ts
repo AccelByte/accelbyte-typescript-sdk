@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const BuildIdManifest = z.object({ buildId: z.string().nullish() })
 
-export type BuildIdManifest = z.TypeOf<typeof BuildIdManifest>
+export interface BuildIdManifest extends z.TypeOf<typeof BuildIdManifest> {}

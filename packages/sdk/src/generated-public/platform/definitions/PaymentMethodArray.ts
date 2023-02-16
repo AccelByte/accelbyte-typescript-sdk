@@ -8,4 +8,4 @@ import { PaymentMethod } from './PaymentMethod'
 
 export const PaymentMethodArray = z.array(PaymentMethod)
 
-export type PaymentMethodArray = z.TypeOf<typeof PaymentMethodArray>
+export interface PaymentMethodArray extends z.TypeOf<typeof PaymentMethodArray> {}

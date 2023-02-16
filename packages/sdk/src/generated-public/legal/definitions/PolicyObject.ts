@@ -20,4 +20,4 @@ export const PolicyObject = z.object({
   isDefaultSelection: z.boolean()
 })
 
-export type PolicyObject = z.TypeOf<typeof PolicyObject>
+export interface PolicyObject extends z.TypeOf<typeof PolicyObject> {}

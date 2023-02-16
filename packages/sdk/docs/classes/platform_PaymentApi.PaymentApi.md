@@ -22,7 +22,7 @@
 
 ### createPaymentUrl
 
-▸ **createPaymentUrl**(`data`): `Promise`<`IResponse`<{ `paymentProvider`: ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` ; `paymentType`: ``"LINK"`` \| ``"QR_CODE"`` ; `paymentUrl`: `undefined` \| ``null`` \| `string` ; `returnUrl`: `undefined` \| ``null`` \| `string` ; `sessionData`: `undefined` \| ``null`` \| `string` ; `sessionId`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **createPaymentUrl**(`data`): `Promise`<`IResponse`<`PaymentUrl`\>\>
 
 Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link</li></ul>
 
@@ -30,20 +30,15 @@ Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link<
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `Object` |
-| `data.paymentOrderNo` | `string` |
-| `data.paymentProvider` | ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` |
-| `data.returnUrl` | `undefined` \| ``null`` \| `string` |
-| `data.ui` | `undefined` \| ``null`` \| `string` |
-| `data.zipCode` | `undefined` \| ``null`` \| `string` |
+| `data` | `PaymentUrlCreate` |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `paymentProvider`: ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` ; `paymentType`: ``"LINK"`` \| ``"QR_CODE"`` ; `paymentUrl`: `undefined` \| ``null`` \| `string` ; `returnUrl`: `undefined` \| ``null`` \| `string` ; `sessionData`: `undefined` \| ``null`` \| `string` ; `sessionId`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<`IResponse`<`PaymentUrl`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:106](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L106)
+[packages/sdk/src/api/platform/PaymentApi.ts:106](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L106)
 
 ___
 
@@ -68,13 +63,13 @@ Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L29)
+[packages/sdk/src/api/platform/PaymentApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L29)
 
 ___
 
 ### getPaymentAccounts
 
-▸ **getPaymentAccounts**(`userId`): `Promise`<`IResponseWithSync`<{ `id`: `string` ; `name`: `string` ; `type`: ``"card"`` \| ``"paypal"``  }[]\>\>
+▸ **getPaymentAccounts**(`userId`): `Promise`<`IResponseWithSync`<`PaymentAccountArray`\>\>
 
 Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=2 (READ)</li><li><i>Returns</i>: Payment account list</li></ul>
 
@@ -86,17 +81,17 @@ Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: 
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `id`: `string` ; `name`: `string` ; `type`: ``"card"`` \| ``"paypal"``  }[]\>\>
+`Promise`<`IResponseWithSync`<`PaymentAccountArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L22)
+[packages/sdk/src/api/platform/PaymentApi.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L22)
 
 ___
 
 ### getPaymentInfo
 
-▸ **getPaymentInfo**(`paymentOrderNo`): `Promise`<`IResponseWithSync`<{ `charging`: `boolean` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `description`: `undefined` \| ``null`` \| `string` ; `displayName`: `undefined` \| ``null`` \| `string` ; `price`: `string` ; `region`: `undefined` \| ``null`` \| `string` ; `sandbox`: `boolean` ; `title`: `string`  }\>\>
+▸ **getPaymentInfo**(`paymentOrderNo`): `Promise`<`IResponseWithSync`<`PaymentOrderDetails`\>\>
 
 Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment order details</li></ul>
 
@@ -108,17 +103,17 @@ Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment or
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `charging`: `boolean` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `description`: `undefined` \| ``null`` \| `string` ; `displayName`: `undefined` \| ``null`` \| `string` ; `price`: `string` ; `region`: `undefined` \| ``null`` \| `string` ; `sandbox`: `boolean` ; `title`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`PaymentOrderDetails`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L36)
+[packages/sdk/src/api/platform/PaymentApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L36)
 
 ___
 
 ### getPaymentMethods
 
-▸ **getPaymentMethods**(`paymentOrderNo`): `Promise`<`IResponseWithSync`<{ `enableTax`: `undefined` \| ``null`` \| `string` ; `name`: `string` ; `paymentProvider`: ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"``  }[]\>\>
+▸ **getPaymentMethods**(`paymentOrderNo`): `Promise`<`IResponseWithSync`<`PaymentMethodArray`\>\>
 
 Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment method list</li></ul>
 
@@ -130,17 +125,17 @@ Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment metho
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `enableTax`: `undefined` \| ``null`` \| `string` ; `name`: `string` ; `paymentProvider`: ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"``  }[]\>\>
+`Promise`<`IResponseWithSync`<`PaymentMethodArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:84](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L84)
+[packages/sdk/src/api/platform/PaymentApi.ts:84](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L84)
 
 ___
 
 ### getPaymentOrderStatus
 
-▸ **getPaymentOrderStatus**(`paymentOrderNo`): `Promise`<`IResponseWithSync`<{ `charging`: `boolean` ; `success`: `boolean`  }\>\>
+▸ **getPaymentOrderStatus**(`paymentOrderNo`): `Promise`<`IResponseWithSync`<`PaymentOrderPaidResult`\>\>
 
 Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: Payment order paid result</li></ul>
 
@@ -152,11 +147,11 @@ Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: P
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `charging`: `boolean` ; `success`: `boolean`  }\>\>
+`Promise`<`IResponseWithSync`<`PaymentOrderPaidResult`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:75](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L75)
+[packages/sdk/src/api/platform/PaymentApi.ts:75](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L75)
 
 ___
 
@@ -180,13 +175,13 @@ Get payment provider public config, at current only Strip provide public config.
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L60)
+[packages/sdk/src/api/platform/PaymentApi.ts:60](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L60)
 
 ___
 
 ### getPaymentTax
 
-▸ **getPaymentTax**(`paymentProvider`, `paymentOrderNo`, `zipCode?`): `Promise`<`IResponseWithSync`<{ `enableTax`: `undefined` \| ``null`` \| `boolean` ; `formattedTax`: `undefined` \| ``null`` \| `string` ; `state`: `undefined` \| ``null`` \| `string` ; `tax`: `undefined` \| ``null`` \| `number`  }\>\>
+▸ **getPaymentTax**(`paymentProvider`, `paymentOrderNo`, `zipCode?`): `Promise`<`IResponseWithSync`<`TaxResult`\>\>
 
 Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i>Returns</i>: tax result</li></ul>
 
@@ -200,17 +195,17 @@ Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `enableTax`: `undefined` \| ``null`` \| `boolean` ; `formattedTax`: `undefined` \| ``null`` \| `string` ; `state`: `undefined` \| ``null`` \| `string` ; `tax`: `undefined` \| ``null`` \| `number`  }\>\>
+`Promise`<`IResponseWithSync`<`TaxResult`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:91](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L91)
+[packages/sdk/src/api/platform/PaymentApi.ts:91](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L91)
 
 ___
 
 ### processPaymentOrder
 
-▸ **processPaymentOrder**(`paymentOrderNo`, `data`, `queryParams`): `Promise`<`IResponse`<{ `pending`: `boolean` ; `reason`: `undefined` \| ``null`` \| `string` ; `redirectUrl`: `undefined` \| ``null`` \| `string` ; `success`: `boolean`  }\>\>
+▸ **processPaymentOrder**(`paymentOrderNo`, `data`, `queryParams`): `Promise`<`IResponse`<`PaymentProcessResult`\>\>
 
 Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><li><i>Returns</i>: Payment process result</li></ul>
 
@@ -219,14 +214,13 @@ Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><
 | Name | Type |
 | :------ | :------ |
 | `paymentOrderNo` | `string` |
-| `data` | `Object` |
-| `data.token` | `undefined` \| ``null`` \| `string` |
+| `data` | `PaymentToken` |
 | `queryParams` | `undefined` \| { `paymentProvider?`: ``"WALLET"`` \| ``"XSOLLA"`` \| ``"ADYEN"`` \| ``"STRIPE"`` \| ``"CHECKOUT"`` \| ``"ALIPAY"`` \| ``"WXPAY"`` \| ``"PAYPAL"`` ; `zipCode?`: ``null`` \| `string`  } |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `pending`: `boolean` ; `reason`: `undefined` \| ``null`` \| `string` ; `redirectUrl`: `undefined` \| ``null`` \| `string` ; `success`: `boolean`  }\>\>
+`Promise`<`IResponse`<`PaymentProcessResult`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/PaymentApi.ts:45](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/PaymentApi.ts#L45)
+[packages/sdk/src/api/platform/PaymentApi.ts:45](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/PaymentApi.ts#L45)

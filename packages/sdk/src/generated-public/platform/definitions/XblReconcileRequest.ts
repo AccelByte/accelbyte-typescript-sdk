@@ -12,4 +12,4 @@ export const XblReconcileRequest = z.object({
   currencyCode: z.string().nullish()
 })
 
-export type XblReconcileRequest = z.TypeOf<typeof XblReconcileRequest>
+export interface XblReconcileRequest extends z.TypeOf<typeof XblReconcileRequest> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ReleaseNoteLocalizationDto = z.object({ lang: z.string(), uuid: z.string() })
 
-export type ReleaseNoteLocalizationDto = z.TypeOf<typeof ReleaseNoteLocalizationDto>
+export interface ReleaseNoteLocalizationDto extends z.TypeOf<typeof ReleaseNoteLocalizationDto> {}

@@ -14,4 +14,4 @@ export const LootBoxReward = z.object({
   odds: z.number().nullish()
 })
 
-export type LootBoxReward = z.TypeOf<typeof LootBoxReward>
+export interface LootBoxReward extends z.TypeOf<typeof LootBoxReward> {}

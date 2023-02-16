@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:301](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L301)
+[packages/sdk/src/api/iam/UserAuthorization.ts:301](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L301)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:271](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L271)
+[packages/sdk/src/api/iam/UserAuthorization.ts:271](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L271)
 
 ___
 
@@ -74,13 +74,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:223](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L223)
+[packages/sdk/src/api/iam/UserAuthorization.ts:223](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L223)
 
 ___
 
 ### exchangeAuthorizationCode
 
-▸ **exchangeAuthorizationCode**(`«destructured»`): `Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\> = loginResult.response; `returnPath`: `any`  }\>
+▸ **exchangeAuthorizationCode**(`«destructured»`): `Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<`TokenWithDeviceCookieResponseV3`\> = loginResult.response; `returnPath`: `any`  }\>
 
 #### Parameters
 
@@ -93,11 +93,11 @@ ___
 
 #### Returns
 
-`Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\> = loginResult.response; `returnPath`: `any`  }\>
+`Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<`TokenWithDeviceCookieResponseV3`\> = loginResult.response; `returnPath`: `any`  }\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:234](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L234)
+[packages/sdk/src/api/iam/UserAuthorization.ts:234](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L234)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:324](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L324)
+[packages/sdk/src/api/iam/UserAuthorization.ts:324](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L324)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:181](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L181)
+[packages/sdk/src/api/iam/UserAuthorization.ts:181](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L181)
 
 ___
 
@@ -150,13 +150,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:194](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L194)
+[packages/sdk/src/api/iam/UserAuthorization.ts:194](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L194)
 
 ___
 
 ### loginWithAuthorizationCode
 
-▸ **loginWithAuthorizationCode**(`«destructured»`): `Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: `IDataStatus`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>  }\>
+▸ **loginWithAuthorizationCode**(`«destructured»`): `Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: `IDataStatus`<`TokenWithDeviceCookieResponseV3`\>  }\>
 
 <p>This method supports grant type:</p><ol>
      <li>Grant Type == <code>authorization_code</code>:<br />
@@ -244,11 +244,11 @@ ___
 
 #### Returns
 
-`Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: `IDataStatus`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>  }\>
+`Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: `IDataStatus`<`TokenWithDeviceCookieResponseV3`\>  }\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:147](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L147)
+[packages/sdk/src/api/iam/UserAuthorization.ts:147](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L147)
 
 ___
 
@@ -268,21 +268,21 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:203](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L203)
+[packages/sdk/src/api/iam/UserAuthorization.ts:203](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L203)
 
 ___
 
 ### refreshToken
 
-▸ **refreshToken**(): `Promise`<``false`` \| `Partial`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+▸ **refreshToken**(): `Promise`<``false`` \| `Partial`<`TokenWithDeviceCookieResponseV3`\>\>
 
 #### Returns
 
-`Promise`<``false`` \| `Partial`<{ `access_token`: `string` ; `auth_trust_id`: `undefined` \| ``null`` \| `string` ; `bans`: `undefined` \| ``null`` \| { disabledDate?: string \| null \| undefined; ban: string; endDate: string; enabled: boolean; targetedNamespace: string; }[] ; `display_name`: `undefined` \| ``null`` \| `string` ; `expires_in`: `number` ; `is_comply`: `undefined` \| ``null`` \| `boolean` ; `jflgs`: `undefined` \| ``null`` \| `number` ; `namespace`: `string` ; `namespace_roles`: `undefined` \| ``null`` \| { namespace: string; roleId: string; }[] ; `permissions`: { schedAction?: number \| null \| undefined; schedCron?: string \| null \| undefined; schedRange?: string[] \| null \| undefined; action: number; resource: string; }[] ; `platform_id`: `undefined` \| ``null`` \| `string` ; `platform_user_id`: `undefined` \| ``null`` \| `string` ; `refresh_expires_in`: `undefined` \| ``null`` \| `number` ; `refresh_token`: `undefined` \| ``null`` \| `string` ; `roles`: `undefined` \| ``null`` \| `string`[] ; `scope`: `string` ; `token_type`: `string` ; `user_id`: `undefined` \| ``null`` \| `string` ; `xuid`: `undefined` \| ``null`` \| `string`  }\>\>
+`Promise`<``false`` \| `Partial`<`TokenWithDeviceCookieResponseV3`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:328](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L328)
+[packages/sdk/src/api/iam/UserAuthorization.ts:328](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L328)
 
 ___
 
@@ -296,4 +296,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:199](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/UserAuthorization.ts#L199)
+[packages/sdk/src/api/iam/UserAuthorization.ts:199](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/UserAuthorization.ts#L199)

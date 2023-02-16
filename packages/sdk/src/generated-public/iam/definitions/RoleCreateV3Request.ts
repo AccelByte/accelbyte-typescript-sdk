@@ -18,4 +18,4 @@ export const RoleCreateV3Request = z.object({
   roleName: z.string()
 })
 
-export type RoleCreateV3Request = z.TypeOf<typeof RoleCreateV3Request>
+export interface RoleCreateV3Request extends z.TypeOf<typeof RoleCreateV3Request> {}

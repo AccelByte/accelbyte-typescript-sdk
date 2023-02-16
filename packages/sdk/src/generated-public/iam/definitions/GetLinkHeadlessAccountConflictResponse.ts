@@ -14,4 +14,4 @@ export const GetLinkHeadlessAccountConflictResponse = z.object({
   platformLinkConflict: z.boolean()
 })
 
-export type GetLinkHeadlessAccountConflictResponse = z.TypeOf<typeof GetLinkHeadlessAccountConflictResponse>
+export interface GetLinkHeadlessAccountConflictResponse extends z.TypeOf<typeof GetLinkHeadlessAccountConflictResponse> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ClientPermissionV3 = z.object({ action: z.number().int(), resource: z.string() })
 
-export type ClientPermissionV3 = z.TypeOf<typeof ClientPermissionV3>
+export interface ClientPermissionV3 extends z.TypeOf<typeof ClientPermissionV3> {}

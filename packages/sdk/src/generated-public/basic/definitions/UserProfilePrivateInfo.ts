@@ -23,4 +23,4 @@ export const UserProfilePrivateInfo = z.object({
   privateCustomAttributes: z.record(z.any()).nullish()
 })
 
-export type UserProfilePrivateInfo = z.TypeOf<typeof UserProfilePrivateInfo>
+export interface UserProfilePrivateInfo extends z.TypeOf<typeof UserProfilePrivateInfo> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserPasswordUpdateRequest = z.object({ LanguageTag: z.string(), NewPassword: z.string(), OldPassword: z.string() })
 
-export type UserPasswordUpdateRequest = z.TypeOf<typeof UserPasswordUpdateRequest>
+export interface UserPasswordUpdateRequest extends z.TypeOf<typeof UserPasswordUpdateRequest> {}

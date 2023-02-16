@@ -9,4 +9,4 @@ import { UserRevocationListRecord } from './UserRevocationListRecord'
 
 export const RevocationList = z.object({ revoked_tokens: FilterJson, revoked_users: z.array(UserRevocationListRecord) })
 
-export type RevocationList = z.TypeOf<typeof RevocationList>
+export interface RevocationList extends z.TypeOf<typeof RevocationList> {}

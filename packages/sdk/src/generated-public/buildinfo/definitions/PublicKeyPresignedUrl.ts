@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PublicKeyPresignedUrl = z.object({ namespace: z.string().nullish(), url: z.string().nullish() })
 
-export type PublicKeyPresignedUrl = z.TypeOf<typeof PublicKeyPresignedUrl>
+export interface PublicKeyPresignedUrl extends z.TypeOf<typeof PublicKeyPresignedUrl> {}

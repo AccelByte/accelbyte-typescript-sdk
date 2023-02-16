@@ -11,4 +11,4 @@ export const KeyGroupDynamicInfo = z.object({
   saleCount: z.number().int()
 })
 
-export type KeyGroupDynamicInfo = z.TypeOf<typeof KeyGroupDynamicInfo>
+export interface KeyGroupDynamicInfo extends z.TypeOf<typeof KeyGroupDynamicInfo> {}

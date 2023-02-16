@@ -32,4 +32,4 @@ export const PaymentMerchantConfigInfo = z.object({
   updatedAt: z.string()
 })
 
-export type PaymentMerchantConfigInfo = z.TypeOf<typeof PaymentMerchantConfigInfo>
+export interface PaymentMerchantConfigInfo extends z.TypeOf<typeof PaymentMerchantConfigInfo> {}

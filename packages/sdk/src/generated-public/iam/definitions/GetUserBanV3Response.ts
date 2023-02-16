@@ -9,4 +9,4 @@ import { UserBanResponseV3 } from './UserBanResponseV3'
 
 export const GetUserBanV3Response = z.object({ data: z.array(UserBanResponseV3), paging: PaginationV3 })
 
-export type GetUserBanV3Response = z.TypeOf<typeof GetUserBanV3Response>
+export interface GetUserBanV3Response extends z.TypeOf<typeof GetUserBanV3Response> {}

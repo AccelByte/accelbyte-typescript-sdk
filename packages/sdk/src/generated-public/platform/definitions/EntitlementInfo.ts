@@ -33,4 +33,4 @@ export const EntitlementInfo = z.object({
   updatedAt: z.string()
 })
 
-export type EntitlementInfo = z.TypeOf<typeof EntitlementInfo>
+export interface EntitlementInfo extends z.TypeOf<typeof EntitlementInfo> {}

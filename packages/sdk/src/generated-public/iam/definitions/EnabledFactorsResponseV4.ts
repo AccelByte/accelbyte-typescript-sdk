@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EnabledFactorsResponseV4 = z.object({ default: z.string(), enabled: z.array(z.string()) })
 
-export type EnabledFactorsResponseV4 = z.TypeOf<typeof EnabledFactorsResponseV4>
+export interface EnabledFactorsResponseV4 extends z.TypeOf<typeof EnabledFactorsResponseV4> {}

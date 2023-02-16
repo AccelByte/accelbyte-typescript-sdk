@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserPersonalData = z.object({ DataExpirationDate: z.string(), RequestDate: z.string(), Status: z.string() })
 
-export type UserPersonalData = z.TypeOf<typeof UserPersonalData>
+export interface UserPersonalData extends z.TypeOf<typeof UserPersonalData> {}

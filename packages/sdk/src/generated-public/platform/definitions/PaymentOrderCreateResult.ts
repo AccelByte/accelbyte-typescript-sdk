@@ -29,4 +29,4 @@ export const PaymentOrderCreateResult = z.object({
   createdTime: z.string()
 })
 
-export type PaymentOrderCreateResult = z.TypeOf<typeof PaymentOrderCreateResult>
+export interface PaymentOrderCreateResult extends z.TypeOf<typeof PaymentOrderCreateResult> {}

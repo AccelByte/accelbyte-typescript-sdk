@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UnlinkUserPlatformRequest = z.object({ platformNamespace: z.string().nullish() })
 
-export type UnlinkUserPlatformRequest = z.TypeOf<typeof UnlinkUserPlatformRequest>
+export interface UnlinkUserPlatformRequest extends z.TypeOf<typeof UnlinkUserPlatformRequest> {}

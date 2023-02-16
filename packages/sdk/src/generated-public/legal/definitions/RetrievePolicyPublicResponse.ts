@@ -27,4 +27,4 @@ export const RetrievePolicyPublicResponse = z.object({
   isDefaultSelection: z.boolean()
 })
 
-export type RetrievePolicyPublicResponse = z.TypeOf<typeof RetrievePolicyPublicResponse>
+export interface RetrievePolicyPublicResponse extends z.TypeOf<typeof RetrievePolicyPublicResponse> {}

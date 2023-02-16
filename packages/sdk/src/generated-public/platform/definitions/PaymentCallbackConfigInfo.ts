@@ -12,4 +12,4 @@ export const PaymentCallbackConfigInfo = z.object({
   dryRun: z.boolean().nullish()
 })
 
-export type PaymentCallbackConfigInfo = z.TypeOf<typeof PaymentCallbackConfigInfo>
+export interface PaymentCallbackConfigInfo extends z.TypeOf<typeof PaymentCallbackConfigInfo> {}

@@ -57,4 +57,4 @@ export const AppInfo = z.object({
   language: z.string().nullish()
 })
 
-export type AppInfo = z.TypeOf<typeof AppInfo>
+export interface AppInfo extends z.TypeOf<typeof AppInfo> {}

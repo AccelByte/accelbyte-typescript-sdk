@@ -34,4 +34,4 @@ export const BillingHistoryInfo = z.object({
   updatedAt: z.string()
 })
 
-export type BillingHistoryInfo = z.TypeOf<typeof BillingHistoryInfo>
+export interface BillingHistoryInfo extends z.TypeOf<typeof BillingHistoryInfo> {}

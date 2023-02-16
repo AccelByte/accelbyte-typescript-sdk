@@ -24,4 +24,4 @@ export const FulfillmentRequest = z.object({
   origin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
 })
 
-export type FulfillmentRequest = z.TypeOf<typeof FulfillmentRequest>
+export interface FulfillmentRequest extends z.TypeOf<typeof FulfillmentRequest> {}

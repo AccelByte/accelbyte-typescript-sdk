@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CancelRequest = z.object({ immediate: z.boolean().nullish(), reason: z.string().nullish() })
 
-export type CancelRequest = z.TypeOf<typeof CancelRequest>
+export interface CancelRequest extends z.TypeOf<typeof CancelRequest> {}

@@ -11,4 +11,4 @@ export const UpdatePermissionScheduleRequest = z.object({
   SchedRange: z.array(z.string()).nullish()
 })
 
-export type UpdatePermissionScheduleRequest = z.TypeOf<typeof UpdatePermissionScheduleRequest>
+export interface UpdatePermissionScheduleRequest extends z.TypeOf<typeof UpdatePermissionScheduleRequest> {}

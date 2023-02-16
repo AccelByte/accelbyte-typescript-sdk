@@ -13,4 +13,4 @@ export const CurrencySummary = z.object({
   decimals: z.number().int()
 })
 
-export type CurrencySummary = z.TypeOf<typeof CurrencySummary>
+export interface CurrencySummary extends z.TypeOf<typeof CurrencySummary> {}

@@ -8,4 +8,4 @@ import { UserBaseInfo } from './UserBaseInfo'
 
 export const ListBulkUserResponse = z.object({ data: z.array(UserBaseInfo) })
 
-export type ListBulkUserResponse = z.TypeOf<typeof ListBulkUserResponse>
+export interface ListBulkUserResponse extends z.TypeOf<typeof ListBulkUserResponse> {}

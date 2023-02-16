@@ -13,4 +13,4 @@ export const ADtoObjectForEqu8UserStatus = z.object({
   expires: z.string().nullish()
 })
 
-export type ADtoObjectForEqu8UserStatus = z.TypeOf<typeof ADtoObjectForEqu8UserStatus>
+export interface ADtoObjectForEqu8UserStatus extends z.TypeOf<typeof ADtoObjectForEqu8UserStatus> {}

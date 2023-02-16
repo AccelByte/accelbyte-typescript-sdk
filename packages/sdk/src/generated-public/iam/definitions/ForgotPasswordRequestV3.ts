@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ForgotPasswordRequestV3 = z.object({ emailAddress: z.string(), languageTag: z.string().nullish() })
 
-export type ForgotPasswordRequestV3 = z.TypeOf<typeof ForgotPasswordRequestV3>
+export interface ForgotPasswordRequestV3 extends z.TypeOf<typeof ForgotPasswordRequestV3> {}

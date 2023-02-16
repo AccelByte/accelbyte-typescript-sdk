@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ADtoForUpdateEqu8ConfigApiCall = z.object({ apiKey: z.string().nullish() })
 
-export type ADtoForUpdateEqu8ConfigApiCall = z.TypeOf<typeof ADtoForUpdateEqu8ConfigApiCall>
+export interface ADtoForUpdateEqu8ConfigApiCall extends z.TypeOf<typeof ADtoForUpdateEqu8ConfigApiCall> {}

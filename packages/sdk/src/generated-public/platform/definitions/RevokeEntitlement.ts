@@ -5,11 +5,6 @@
  */
 import { z } from 'zod'
 
-export const RevokeEntitlement = z.object({
-  entitlementId: z.string().nullish(),
-  ownerId: z.string().nullish(),
-  type: z.enum(['DURABLE', 'CONSUMABLE']).nullish(),
-  clazz: z.enum(['APP', 'ENTITLEMENT', 'CODE', 'SUBSCRIPTION', 'MEDIA', 'OPTIONBOX', 'LOOTBOX']).nullish()
-})
+export const RevokeEntitlement = z.object({ entitlementId: z.string().nullish() })
 
-export type RevokeEntitlement = z.TypeOf<typeof RevokeEntitlement>
+export interface RevokeEntitlement extends z.TypeOf<typeof RevokeEntitlement> {}

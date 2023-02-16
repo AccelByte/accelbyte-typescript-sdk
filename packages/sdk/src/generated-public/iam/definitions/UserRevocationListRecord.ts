@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserRevocationListRecord = z.object({ id: z.string(), revoked_at: z.string() })
 
-export type UserRevocationListRecord = z.TypeOf<typeof UserRevocationListRecord>
+export interface UserRevocationListRecord extends z.TypeOf<typeof UserRevocationListRecord> {}

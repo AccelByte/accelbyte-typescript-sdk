@@ -13,4 +13,4 @@ export const CampaignDynamicInfo = z.object({
   remainder: z.number().int()
 })
 
-export type CampaignDynamicInfo = z.TypeOf<typeof CampaignDynamicInfo>
+export interface CampaignDynamicInfo extends z.TypeOf<typeof CampaignDynamicInfo> {}

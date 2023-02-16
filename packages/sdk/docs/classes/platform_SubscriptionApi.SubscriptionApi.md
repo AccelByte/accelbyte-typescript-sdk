@@ -19,7 +19,7 @@
 
 ### cancelUserSubscription
 
-▸ **cancelUserSubscription**(`«destructured»`): `Promise`<`IResponse`<{ `billingAccount`: `undefined` \| ``null`` \| { paymentProvider?: "WALLET" \| "XSOLLA" \| "ADYEN" \| "STRIPE" \| "CHECKOUT" \| "ALIPAY" \| "WXPAY" \| "PAYPAL" \| null \| undefined; paymentMethod?: string \| null \| undefined; additionalData?: { ...; } \| ... 1 more ... \| undefined; } ; `chargeStatus`: ``"CHARGED"`` \| ``"NEVER"`` \| ``"SETUP"`` \| ``"RECURRING_CHARGING"`` \| ``"CHARGE_FAILED"`` ; `chargedCycles`: `undefined` \| ``null`` \| `number` ; `createdAt`: `string` ; `currency`: `undefined` \| ``null`` \| { namespace: string; currencyCode: string; currencySymbol: string; currencyType: "REAL" \| "VIRTUAL"; decimals: number; } ; `currentCycle`: `undefined` \| ``null`` \| `number` ; `currentPeriodEnd`: `undefined` \| ``null`` \| `string` ; `currentPeriodStart`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `end`: `undefined` \| ``null`` \| `string` ; `entitlements`: `undefined` \| ``null`` \| { endDate?: string \| null \| undefined; storeId?: string \| null \| undefined; itemId?: string \| null \| undefined; startDate?: string \| null \| undefined; stackable?: boolean \| null \| undefined; ... 8 more ...; clazz: "APP" \| ... 5 more ... \| "ENTITLEMENT"; }[] ; `firstSubscribe`: `undefined` \| ``null`` \| `boolean` ; `id`: `string` ; `inFixedCycleTrial`: `boolean` ; `inFixedFreeDays`: `boolean` ; `itemId`: `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `language`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `nextBillingDate`: `undefined` \| ``null`` \| `string` ; `paid`: `undefined` \| ``null`` \| `boolean` ; `paymentFlowRequired`: `boolean` ; `paymentOrderNo`: `undefined` \| ``null`` \| `string` ; `paymentStationUrl`: `undefined` \| ``null`` \| `string` ; `price`: `undefined` \| ``null`` \| `number` ; `recurring`: { cycle: "WEEKLY" \| "MONTHLY" \| "QUARTERLY" \| "YEARLY"; fixedFreeDays: number; fixedTrialCycles: number; graceDays: number; } = Recurring; `region`: `undefined` \| ``null`` \| `string` ; `retryAttempted`: `undefined` \| ``null`` \| `number` ; `returnUrl`: `undefined` \| ``null`` \| `string` ; `sandbox`: `undefined` \| ``null`` \| `boolean` ; `sku`: `undefined` \| ``null`` \| `string` ; `source`: `undefined` \| ``null`` \| `string` ; `start`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INIT"`` \| ``"CANCELLED"`` \| ``"EXPIRED"`` ; `subscribedAt`: `undefined` \| ``null`` \| `string` ; `subscribedBy`: `undefined` \| ``null`` \| ``"USER"`` \| ``"PLATFORM"`` ; `title`: `undefined` \| ``null`` \| `string` ; `trialPrice`: `undefined` \| ``null`` \| `number` ; `trialedCycles`: `undefined` \| ``null`` \| `number` ; `unsubscribeReason`: `undefined` \| ``null`` \| `string` ; `unsubscribedAt`: `undefined` \| ``null`` \| `string` ; `updatedAt`: `string` ; `userId`: `string`  }\>\>
+▸ **cancelUserSubscription**(`«destructured»`): `Promise`<`IResponse`<`SubscriptionInfo`\>\>
 
 Cancel a subscription, only ACTIVE subscription can be cancelled. <b>Ensure successfully cancel, recommend at least 1 day before current period ends, otherwise it may be charging or charged.</b><br>Set immediate true, the subscription will be terminated immediately, otherwise till the end of current billing cycle.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=4 (UPDATE)</li><li><i>Returns</i>: cancelled subscription</li></ul>
 
@@ -28,19 +28,17 @@ Cancel a subscription, only ACTIVE subscription can be cancelled. <b>Ensure succ
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.immediate` | `undefined` \| ``null`` \| `boolean` |
-| › `data.reason` | `undefined` \| ``null`` \| `string` |
+| › `data` | `CancelRequest` |
 | › `subscriptionId` | `string` |
 | › `userId` | `string` |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `billingAccount`: `undefined` \| ``null`` \| { paymentProvider?: "WALLET" \| "XSOLLA" \| "ADYEN" \| "STRIPE" \| "CHECKOUT" \| "ALIPAY" \| "WXPAY" \| "PAYPAL" \| null \| undefined; paymentMethod?: string \| null \| undefined; additionalData?: { ...; } \| ... 1 more ... \| undefined; } ; `chargeStatus`: ``"CHARGED"`` \| ``"NEVER"`` \| ``"SETUP"`` \| ``"RECURRING_CHARGING"`` \| ``"CHARGE_FAILED"`` ; `chargedCycles`: `undefined` \| ``null`` \| `number` ; `createdAt`: `string` ; `currency`: `undefined` \| ``null`` \| { namespace: string; currencyCode: string; currencySymbol: string; currencyType: "REAL" \| "VIRTUAL"; decimals: number; } ; `currentCycle`: `undefined` \| ``null`` \| `number` ; `currentPeriodEnd`: `undefined` \| ``null`` \| `string` ; `currentPeriodStart`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `end`: `undefined` \| ``null`` \| `string` ; `entitlements`: `undefined` \| ``null`` \| { endDate?: string \| null \| undefined; storeId?: string \| null \| undefined; itemId?: string \| null \| undefined; startDate?: string \| null \| undefined; stackable?: boolean \| null \| undefined; ... 8 more ...; clazz: "APP" \| ... 5 more ... \| "ENTITLEMENT"; }[] ; `firstSubscribe`: `undefined` \| ``null`` \| `boolean` ; `id`: `string` ; `inFixedCycleTrial`: `boolean` ; `inFixedFreeDays`: `boolean` ; `itemId`: `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `language`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `nextBillingDate`: `undefined` \| ``null`` \| `string` ; `paid`: `undefined` \| ``null`` \| `boolean` ; `paymentFlowRequired`: `boolean` ; `paymentOrderNo`: `undefined` \| ``null`` \| `string` ; `paymentStationUrl`: `undefined` \| ``null`` \| `string` ; `price`: `undefined` \| ``null`` \| `number` ; `recurring`: { cycle: "WEEKLY" \| "MONTHLY" \| "QUARTERLY" \| "YEARLY"; fixedFreeDays: number; fixedTrialCycles: number; graceDays: number; } = Recurring; `region`: `undefined` \| ``null`` \| `string` ; `retryAttempted`: `undefined` \| ``null`` \| `number` ; `returnUrl`: `undefined` \| ``null`` \| `string` ; `sandbox`: `undefined` \| ``null`` \| `boolean` ; `sku`: `undefined` \| ``null`` \| `string` ; `source`: `undefined` \| ``null`` \| `string` ; `start`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INIT"`` \| ``"CANCELLED"`` \| ``"EXPIRED"`` ; `subscribedAt`: `undefined` \| ``null`` \| `string` ; `subscribedBy`: `undefined` \| ``null`` \| ``"USER"`` \| ``"PLATFORM"`` ; `title`: `undefined` \| ``null`` \| `string` ; `trialPrice`: `undefined` \| ``null`` \| `number` ; `trialedCycles`: `undefined` \| ``null`` \| `number` ; `unsubscribeReason`: `undefined` \| ``null`` \| `string` ; `unsubscribedAt`: `undefined` \| ``null`` \| `string` ; `updatedAt`: `string` ; `userId`: `string`  }\>\>
+`Promise`<`IResponse`<`SubscriptionInfo`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:70](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/SubscriptionApi.ts#L70)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:70](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L70)
 
 ___
 
@@ -55,13 +53,7 @@ Subscribe a subscription. Support both real and virtual payment. Need go through
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.currencyCode` | `string` |
-| › `data.itemId` | `string` |
-| › `data.language` | `undefined` \| ``null`` \| `string` |
-| › `data.region` | `undefined` \| ``null`` \| `string` |
-| › `data.returnUrl` | `undefined` \| ``null`` \| `string` |
-| › `data.source` | `undefined` \| ``null`` \| `string` |
+| › `data` | `SubscribeRequest` |
 | › `userId` | `string` |
 
 #### Returns
@@ -70,13 +62,13 @@ Subscribe a subscription. Support both real and virtual payment. Need go through
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/SubscriptionApi.ts#L41)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:41](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L41)
 
 ___
 
 ### getUserSubscriptionBillingHistory
 
-▸ **getUserSubscriptionBillingHistory**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: { description?: string \| null \| undefined; sku?: string \| null \| undefined; statusReason?: string \| null \| undefined; totalTax?: number \| null \| undefined; totalPrice?: number \| null \| undefined; ... 18 more ...; recurringOrderNo: string; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+▸ **getUserSubscriptionBillingHistory**(`«destructured»`): `Promise`<`IResponseWithSync`<`BillingHistoryPagingSlicedResult`\>\>
 
 Get user subscription billing histories.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: paginated subscription history</li></ul>
 
@@ -94,17 +86,17 @@ Get user subscription billing histories.<br>Other detail info: <ul><li><i>Requir
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: { description?: string \| null \| undefined; sku?: string \| null \| undefined; statusReason?: string \| null \| undefined; totalTax?: number \| null \| undefined; totalPrice?: number \| null \| undefined; ... 18 more ...; recurringOrderNo: string; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+`Promise`<`IResponseWithSync`<`BillingHistoryPagingSlicedResult`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/SubscriptionApi.ts#L48)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:48](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L48)
 
 ___
 
 ### getUserSubscriptionBySubscriptionId
 
-▸ **getUserSubscriptionBySubscriptionId**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `billingAccount`: `undefined` \| ``null`` \| { paymentProvider?: "WALLET" \| "XSOLLA" \| "ADYEN" \| "STRIPE" \| "CHECKOUT" \| "ALIPAY" \| "WXPAY" \| "PAYPAL" \| null \| undefined; paymentMethod?: string \| null \| undefined; additionalData?: { ...; } \| ... 1 more ... \| undefined; } ; `chargeStatus`: ``"CHARGED"`` \| ``"NEVER"`` \| ``"SETUP"`` \| ``"RECURRING_CHARGING"`` \| ``"CHARGE_FAILED"`` ; `chargedCycles`: `undefined` \| ``null`` \| `number` ; `createdAt`: `string` ; `currency`: `undefined` \| ``null`` \| { namespace: string; currencyCode: string; currencySymbol: string; currencyType: "REAL" \| "VIRTUAL"; decimals: number; } ; `currentCycle`: `undefined` \| ``null`` \| `number` ; `currentPeriodEnd`: `undefined` \| ``null`` \| `string` ; `currentPeriodStart`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `end`: `undefined` \| ``null`` \| `string` ; `entitlements`: `undefined` \| ``null`` \| { endDate?: string \| null \| undefined; storeId?: string \| null \| undefined; itemId?: string \| null \| undefined; startDate?: string \| null \| undefined; stackable?: boolean \| null \| undefined; ... 8 more ...; clazz: "APP" \| ... 5 more ... \| "ENTITLEMENT"; }[] ; `firstSubscribe`: `undefined` \| ``null`` \| `boolean` ; `id`: `string` ; `inFixedCycleTrial`: `boolean` ; `inFixedFreeDays`: `boolean` ; `itemId`: `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `language`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `nextBillingDate`: `undefined` \| ``null`` \| `string` ; `paid`: `undefined` \| ``null`` \| `boolean` ; `paymentFlowRequired`: `boolean` ; `paymentOrderNo`: `undefined` \| ``null`` \| `string` ; `paymentStationUrl`: `undefined` \| ``null`` \| `string` ; `price`: `undefined` \| ``null`` \| `number` ; `recurring`: { cycle: "WEEKLY" \| "MONTHLY" \| "QUARTERLY" \| "YEARLY"; fixedFreeDays: number; fixedTrialCycles: number; graceDays: number; } = Recurring; `region`: `undefined` \| ``null`` \| `string` ; `retryAttempted`: `undefined` \| ``null`` \| `number` ; `returnUrl`: `undefined` \| ``null`` \| `string` ; `sandbox`: `undefined` \| ``null`` \| `boolean` ; `sku`: `undefined` \| ``null`` \| `string` ; `source`: `undefined` \| ``null`` \| `string` ; `start`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INIT"`` \| ``"CANCELLED"`` \| ``"EXPIRED"`` ; `subscribedAt`: `undefined` \| ``null`` \| `string` ; `subscribedBy`: `undefined` \| ``null`` \| ``"USER"`` \| ``"PLATFORM"`` ; `title`: `undefined` \| ``null`` \| `string` ; `trialPrice`: `undefined` \| ``null`` \| `number` ; `trialedCycles`: `undefined` \| ``null`` \| `number` ; `unsubscribeReason`: `undefined` \| ``null`` \| `string` ; `unsubscribedAt`: `undefined` \| ``null`` \| `string` ; `updatedAt`: `string` ; `userId`: `string`  }\>\>
+▸ **getUserSubscriptionBySubscriptionId**(`«destructured»`): `Promise`<`IResponseWithSync`<`SubscriptionInfo`\>\>
 
 Get user subscription.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: subscription</li></ul>
 
@@ -118,17 +110,17 @@ Get user subscription.<br>Other detail info: <ul><li><i>Required permission</i>:
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `billingAccount`: `undefined` \| ``null`` \| { paymentProvider?: "WALLET" \| "XSOLLA" \| "ADYEN" \| "STRIPE" \| "CHECKOUT" \| "ALIPAY" \| "WXPAY" \| "PAYPAL" \| null \| undefined; paymentMethod?: string \| null \| undefined; additionalData?: { ...; } \| ... 1 more ... \| undefined; } ; `chargeStatus`: ``"CHARGED"`` \| ``"NEVER"`` \| ``"SETUP"`` \| ``"RECURRING_CHARGING"`` \| ``"CHARGE_FAILED"`` ; `chargedCycles`: `undefined` \| ``null`` \| `number` ; `createdAt`: `string` ; `currency`: `undefined` \| ``null`` \| { namespace: string; currencyCode: string; currencySymbol: string; currencyType: "REAL" \| "VIRTUAL"; decimals: number; } ; `currentCycle`: `undefined` \| ``null`` \| `number` ; `currentPeriodEnd`: `undefined` \| ``null`` \| `string` ; `currentPeriodStart`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `end`: `undefined` \| ``null`` \| `string` ; `entitlements`: `undefined` \| ``null`` \| { endDate?: string \| null \| undefined; storeId?: string \| null \| undefined; itemId?: string \| null \| undefined; startDate?: string \| null \| undefined; stackable?: boolean \| null \| undefined; ... 8 more ...; clazz: "APP" \| ... 5 more ... \| "ENTITLEMENT"; }[] ; `firstSubscribe`: `undefined` \| ``null`` \| `boolean` ; `id`: `string` ; `inFixedCycleTrial`: `boolean` ; `inFixedFreeDays`: `boolean` ; `itemId`: `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `language`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `nextBillingDate`: `undefined` \| ``null`` \| `string` ; `paid`: `undefined` \| ``null`` \| `boolean` ; `paymentFlowRequired`: `boolean` ; `paymentOrderNo`: `undefined` \| ``null`` \| `string` ; `paymentStationUrl`: `undefined` \| ``null`` \| `string` ; `price`: `undefined` \| ``null`` \| `number` ; `recurring`: { cycle: "WEEKLY" \| "MONTHLY" \| "QUARTERLY" \| "YEARLY"; fixedFreeDays: number; fixedTrialCycles: number; graceDays: number; } = Recurring; `region`: `undefined` \| ``null`` \| `string` ; `retryAttempted`: `undefined` \| ``null`` \| `number` ; `returnUrl`: `undefined` \| ``null`` \| `string` ; `sandbox`: `undefined` \| ``null`` \| `boolean` ; `sku`: `undefined` \| ``null`` \| `string` ; `source`: `undefined` \| ``null`` \| `string` ; `start`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INIT"`` \| ``"CANCELLED"`` \| ``"EXPIRED"`` ; `subscribedAt`: `undefined` \| ``null`` \| `string` ; `subscribedBy`: `undefined` \| ``null`` \| ``"USER"`` \| ``"PLATFORM"`` ; `title`: `undefined` \| ``null`` \| `string` ; `trialPrice`: `undefined` \| ``null`` \| `number` ; `trialedCycles`: `undefined` \| ``null`` \| `number` ; `unsubscribeReason`: `undefined` \| ``null`` \| `string` ; `unsubscribedAt`: `undefined` \| ``null`` \| `string` ; `updatedAt`: `string` ; `userId`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`SubscriptionInfo`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/SubscriptionApi.ts#L34)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L34)
 
 ___
 
 ### getUserSubscriptions
 
-▸ **getUserSubscriptions**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: { language?: string \| null \| undefined; description?: string \| null \| undefined; title?: string \| null \| undefined; sku?: string \| null \| undefined; price?: number \| null \| undefined; ... 37 more ...; paymentFlowRequired: boolean; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+▸ **getUserSubscriptions**(`«destructured»`): `Promise`<`IResponseWithSync`<`SubscriptionPagingSlicedResult`\>\>
 
 Query user subscriptions.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)</li><li><i>Returns</i>: paginated subscription</li></ul>
 
@@ -149,17 +141,17 @@ Query user subscriptions.<br>Other detail info: <ul><li><i>Required permission</
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: { language?: string \| null \| undefined; description?: string \| null \| undefined; title?: string \| null \| undefined; sku?: string \| null \| undefined; price?: number \| null \| undefined; ... 37 more ...; paymentFlowRequired: boolean; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+`Promise`<`IResponseWithSync`<`SubscriptionPagingSlicedResult`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/SubscriptionApi.ts#L21)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:21](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L21)
 
 ___
 
 ### updateUserSubscriptionPaymentMethod
 
-▸ **updateUserSubscriptionPaymentMethod**(`«destructured»`): `Promise`<`IResponse`<{ `billingAccount`: `undefined` \| ``null`` \| { paymentProvider?: "WALLET" \| "XSOLLA" \| "ADYEN" \| "STRIPE" \| "CHECKOUT" \| "ALIPAY" \| "WXPAY" \| "PAYPAL" \| null \| undefined; paymentMethod?: string \| null \| undefined; additionalData?: { ...; } \| ... 1 more ... \| undefined; } ; `chargeStatus`: ``"CHARGED"`` \| ``"NEVER"`` \| ``"SETUP"`` \| ``"RECURRING_CHARGING"`` \| ``"CHARGE_FAILED"`` ; `chargedCycles`: `undefined` \| ``null`` \| `number` ; `createdAt`: `string` ; `currency`: `undefined` \| ``null`` \| { namespace: string; currencyCode: string; currencySymbol: string; currencyType: "REAL" \| "VIRTUAL"; decimals: number; } ; `currentCycle`: `undefined` \| ``null`` \| `number` ; `currentPeriodEnd`: `undefined` \| ``null`` \| `string` ; `currentPeriodStart`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `end`: `undefined` \| ``null`` \| `string` ; `entitlements`: `undefined` \| ``null`` \| { endDate?: string \| null \| undefined; storeId?: string \| null \| undefined; itemId?: string \| null \| undefined; startDate?: string \| null \| undefined; stackable?: boolean \| null \| undefined; ... 8 more ...; clazz: "APP" \| ... 5 more ... \| "ENTITLEMENT"; }[] ; `firstSubscribe`: `undefined` \| ``null`` \| `boolean` ; `id`: `string` ; `inFixedCycleTrial`: `boolean` ; `inFixedFreeDays`: `boolean` ; `itemId`: `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `language`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `nextBillingDate`: `undefined` \| ``null`` \| `string` ; `paid`: `undefined` \| ``null`` \| `boolean` ; `paymentFlowRequired`: `boolean` ; `paymentOrderNo`: `undefined` \| ``null`` \| `string` ; `paymentStationUrl`: `undefined` \| ``null`` \| `string` ; `price`: `undefined` \| ``null`` \| `number` ; `recurring`: { cycle: "WEEKLY" \| "MONTHLY" \| "QUARTERLY" \| "YEARLY"; fixedFreeDays: number; fixedTrialCycles: number; graceDays: number; } = Recurring; `region`: `undefined` \| ``null`` \| `string` ; `retryAttempted`: `undefined` \| ``null`` \| `number` ; `returnUrl`: `undefined` \| ``null`` \| `string` ; `sandbox`: `undefined` \| ``null`` \| `boolean` ; `sku`: `undefined` \| ``null`` \| `string` ; `source`: `undefined` \| ``null`` \| `string` ; `start`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INIT"`` \| ``"CANCELLED"`` \| ``"EXPIRED"`` ; `subscribedAt`: `undefined` \| ``null`` \| `string` ; `subscribedBy`: `undefined` \| ``null`` \| ``"USER"`` \| ``"PLATFORM"`` ; `title`: `undefined` \| ``null`` \| `string` ; `trialPrice`: `undefined` \| ``null`` \| `number` ; `trialedCycles`: `undefined` \| ``null`` \| `number` ; `unsubscribeReason`: `undefined` \| ``null`` \| `string` ; `unsubscribedAt`: `undefined` \| ``null`` \| `string` ; `updatedAt`: `string` ; `userId`: `string`  }\>\>
+▸ **updateUserSubscriptionPaymentMethod**(`«destructured»`): `Promise`<`IResponse`<`SubscriptionInfo`\>\>
 
 Request to change a subscription billing account, this will guide user to payment station. The actual change will happen at the 0 payment notification successfully handled.<br>Only ACTIVE USER subscription with real currency billing account can be changed.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=4 (UPDATE)</li><li><i>Returns</i>: updated subscription</li></ul>
 
@@ -173,8 +165,8 @@ Request to change a subscription billing account, this will guide user to paymen
 
 #### Returns
 
-`Promise`<`IResponse`<{ `billingAccount`: `undefined` \| ``null`` \| { paymentProvider?: "WALLET" \| "XSOLLA" \| "ADYEN" \| "STRIPE" \| "CHECKOUT" \| "ALIPAY" \| "WXPAY" \| "PAYPAL" \| null \| undefined; paymentMethod?: string \| null \| undefined; additionalData?: { ...; } \| ... 1 more ... \| undefined; } ; `chargeStatus`: ``"CHARGED"`` \| ``"NEVER"`` \| ``"SETUP"`` \| ``"RECURRING_CHARGING"`` \| ``"CHARGE_FAILED"`` ; `chargedCycles`: `undefined` \| ``null`` \| `number` ; `createdAt`: `string` ; `currency`: `undefined` \| ``null`` \| { namespace: string; currencyCode: string; currencySymbol: string; currencyType: "REAL" \| "VIRTUAL"; decimals: number; } ; `currentCycle`: `undefined` \| ``null`` \| `number` ; `currentPeriodEnd`: `undefined` \| ``null`` \| `string` ; `currentPeriodStart`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `end`: `undefined` \| ``null`` \| `string` ; `entitlements`: `undefined` \| ``null`` \| { endDate?: string \| null \| undefined; storeId?: string \| null \| undefined; itemId?: string \| null \| undefined; startDate?: string \| null \| undefined; stackable?: boolean \| null \| undefined; ... 8 more ...; clazz: "APP" \| ... 5 more ... \| "ENTITLEMENT"; }[] ; `firstSubscribe`: `undefined` \| ``null`` \| `boolean` ; `id`: `string` ; `inFixedCycleTrial`: `boolean` ; `inFixedFreeDays`: `boolean` ; `itemId`: `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `language`: `undefined` \| ``null`` \| `string` ; `namespace`: `string` ; `nextBillingDate`: `undefined` \| ``null`` \| `string` ; `paid`: `undefined` \| ``null`` \| `boolean` ; `paymentFlowRequired`: `boolean` ; `paymentOrderNo`: `undefined` \| ``null`` \| `string` ; `paymentStationUrl`: `undefined` \| ``null`` \| `string` ; `price`: `undefined` \| ``null`` \| `number` ; `recurring`: { cycle: "WEEKLY" \| "MONTHLY" \| "QUARTERLY" \| "YEARLY"; fixedFreeDays: number; fixedTrialCycles: number; graceDays: number; } = Recurring; `region`: `undefined` \| ``null`` \| `string` ; `retryAttempted`: `undefined` \| ``null`` \| `number` ; `returnUrl`: `undefined` \| ``null`` \| `string` ; `sandbox`: `undefined` \| ``null`` \| `boolean` ; `sku`: `undefined` \| ``null`` \| `string` ; `source`: `undefined` \| ``null`` \| `string` ; `start`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INIT"`` \| ``"CANCELLED"`` \| ``"EXPIRED"`` ; `subscribedAt`: `undefined` \| ``null`` \| `string` ; `subscribedBy`: `undefined` \| ``null`` \| ``"USER"`` \| ``"PLATFORM"`` ; `title`: `undefined` \| ``null`` \| `string` ; `trialPrice`: `undefined` \| ``null`` \| `number` ; `trialedCycles`: `undefined` \| ``null`` \| `number` ; `unsubscribeReason`: `undefined` \| ``null`` \| `string` ; `unsubscribedAt`: `undefined` \| ``null`` \| `string` ; `updatedAt`: `string` ; `userId`: `string`  }\>\>
+`Promise`<`IResponse`<`SubscriptionInfo`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/SubscriptionApi.ts:63](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/SubscriptionApi.ts#L63)
+[packages/sdk/src/api/platform/SubscriptionApi.ts:63](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/SubscriptionApi.ts#L63)

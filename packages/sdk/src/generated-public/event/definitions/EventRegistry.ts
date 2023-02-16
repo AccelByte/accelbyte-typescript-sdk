@@ -12,4 +12,4 @@ export const EventRegistry = z.object({
   UX: z.number().int()
 })
 
-export type EventRegistry = z.TypeOf<typeof EventRegistry>
+export interface EventRegistry extends z.TypeOf<typeof EventRegistry> {}

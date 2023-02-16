@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ClientUpdateSecretRequest = z.object({ NewSecret: z.string() })
 
-export type ClientUpdateSecretRequest = z.TypeOf<typeof ClientUpdateSecretRequest>
+export interface ClientUpdateSecretRequest extends z.TypeOf<typeof ClientUpdateSecretRequest> {}

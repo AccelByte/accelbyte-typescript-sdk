@@ -11,4 +11,4 @@ export const ClientPayload = z.object({
   RedirectUri: z.string().nullish()
 })
 
-export type ClientPayload = z.TypeOf<typeof ClientPayload>
+export interface ClientPayload extends z.TypeOf<typeof ClientPayload> {}

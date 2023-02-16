@@ -16,4 +16,4 @@ export const ClientCreateRequest = z.object({
   TwoFactorEnabled: z.boolean()
 })
 
-export type ClientCreateRequest = z.TypeOf<typeof ClientCreateRequest>
+export interface ClientCreateRequest extends z.TypeOf<typeof ClientCreateRequest> {}

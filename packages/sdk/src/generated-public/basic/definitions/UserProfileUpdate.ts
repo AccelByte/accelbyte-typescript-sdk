@@ -18,4 +18,4 @@ export const UserProfileUpdate = z.object({
   zipCode: z.string().nullish()
 })
 
-export type UserProfileUpdate = z.TypeOf<typeof UserProfileUpdate>
+export interface UserProfileUpdate extends z.TypeOf<typeof UserProfileUpdate> {}

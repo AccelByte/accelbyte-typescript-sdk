@@ -14,4 +14,4 @@ export const Image = z.object({
   smallImageUrl: z.string()
 })
 
-export type Image = z.TypeOf<typeof Image>
+export interface Image extends z.TypeOf<typeof Image> {}

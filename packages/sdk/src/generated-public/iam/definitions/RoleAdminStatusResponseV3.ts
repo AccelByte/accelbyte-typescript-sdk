@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RoleAdminStatusResponseV3 = z.object({ adminRole: z.boolean() })
 
-export type RoleAdminStatusResponseV3 = z.TypeOf<typeof RoleAdminStatusResponseV3>
+export interface RoleAdminStatusResponseV3 extends z.TypeOf<typeof RoleAdminStatusResponseV3> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const V3ClientUpdateSecretRequest = z.object({ newSecret: z.string() })
 
-export type V3ClientUpdateSecretRequest = z.TypeOf<typeof V3ClientUpdateSecretRequest>
+export interface V3ClientUpdateSecretRequest extends z.TypeOf<typeof V3ClientUpdateSecretRequest> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const AdditionalData = z.object({ cardSummary: z.string().nullish() })
 
-export type AdditionalData = z.TypeOf<typeof AdditionalData>
+export interface AdditionalData extends z.TypeOf<typeof AdditionalData> {}

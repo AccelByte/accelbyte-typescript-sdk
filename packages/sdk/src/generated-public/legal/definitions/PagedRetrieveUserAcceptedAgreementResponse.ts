@@ -12,4 +12,4 @@ export const PagedRetrieveUserAcceptedAgreementResponse = z.object({
   paging: Paging.nullish()
 })
 
-export type PagedRetrieveUserAcceptedAgreementResponse = z.TypeOf<typeof PagedRetrieveUserAcceptedAgreementResponse>
+export interface PagedRetrieveUserAcceptedAgreementResponse extends z.TypeOf<typeof PagedRetrieveUserAcceptedAgreementResponse> {}

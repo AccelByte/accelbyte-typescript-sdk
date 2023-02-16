@@ -29,4 +29,4 @@ export const CodeInfo = z.object({
   updatedAt: z.string()
 })
 
-export type CodeInfo = z.TypeOf<typeof CodeInfo>
+export interface CodeInfo extends z.TypeOf<typeof CodeInfo> {}

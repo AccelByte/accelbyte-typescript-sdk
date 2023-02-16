@@ -8,4 +8,4 @@ import { ItemPurchaseConditionValidateResult } from './ItemPurchaseConditionVali
 
 export const ItemPurchaseConditionValidateResultArray = z.array(ItemPurchaseConditionValidateResult)
 
-export type ItemPurchaseConditionValidateResultArray = z.TypeOf<typeof ItemPurchaseConditionValidateResultArray>
+export interface ItemPurchaseConditionValidateResultArray extends z.TypeOf<typeof ItemPurchaseConditionValidateResultArray> {}

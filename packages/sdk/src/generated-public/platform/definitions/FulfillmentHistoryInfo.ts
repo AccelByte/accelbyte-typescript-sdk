@@ -27,4 +27,4 @@ export const FulfillmentHistoryInfo = z.object({
   updatedAt: z.string()
 })
 
-export type FulfillmentHistoryInfo = z.TypeOf<typeof FulfillmentHistoryInfo>
+export interface FulfillmentHistoryInfo extends z.TypeOf<typeof FulfillmentHistoryInfo> {}

@@ -12,4 +12,4 @@ export const UserVerificationRequestV3 = z.object({
   validateOnly: z.boolean().nullish()
 })
 
-export type UserVerificationRequestV3 = z.TypeOf<typeof UserVerificationRequestV3>
+export interface UserVerificationRequestV3 extends z.TypeOf<typeof UserVerificationRequestV3> {}

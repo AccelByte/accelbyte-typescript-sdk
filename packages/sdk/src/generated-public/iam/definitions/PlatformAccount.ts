@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PlatformAccount = z.object({ namespace: z.string(), platformId: z.string().nullish(), platformUserId: z.string() })
 
-export type PlatformAccount = z.TypeOf<typeof PlatformAccount>
+export interface PlatformAccount extends z.TypeOf<typeof PlatformAccount> {}

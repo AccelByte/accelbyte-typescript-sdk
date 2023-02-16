@@ -12,4 +12,4 @@ export const DiffStatusReport = z.object({
   baseUrls: z.array(z.string()).nullish()
 })
 
-export type DiffStatusReport = z.TypeOf<typeof DiffStatusReport>
+export interface DiffStatusReport extends z.TypeOf<typeof DiffStatusReport> {}

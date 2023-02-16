@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const ADtoObjectForOrderCreationOptions = z.object({ skipPriceValidation: z.boolean().nullish() })
+export const Achievement = z.object({ id: z.string().nullish(), value: z.number().int().nullish() })
 
-export type ADtoObjectForOrderCreationOptions = z.TypeOf<typeof ADtoObjectForOrderCreationOptions>
+export interface Achievement extends z.TypeOf<typeof Achievement> {}

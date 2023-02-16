@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EventPayload = z.object({ payload: z.record(z.any()).nullish() })
 
-export type EventPayload = z.TypeOf<typeof EventPayload>
+export interface EventPayload extends z.TypeOf<typeof EventPayload> {}

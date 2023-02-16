@@ -12,4 +12,4 @@ export const PlatformDomainUpdateRequest = z.object({
   roleId: z.string()
 })
 
-export type PlatformDomainUpdateRequest = z.TypeOf<typeof PlatformDomainUpdateRequest>
+export interface PlatformDomainUpdateRequest extends z.TypeOf<typeof PlatformDomainUpdateRequest> {}

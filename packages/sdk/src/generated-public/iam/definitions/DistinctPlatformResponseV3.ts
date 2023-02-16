@@ -8,4 +8,4 @@ import { DistinctLinkedPlatformV3 } from './DistinctLinkedPlatformV3'
 
 export const DistinctPlatformResponseV3 = z.object({ platforms: z.array(DistinctLinkedPlatformV3) })
 
-export type DistinctPlatformResponseV3 = z.TypeOf<typeof DistinctPlatformResponseV3>
+export interface DistinctPlatformResponseV3 extends z.TypeOf<typeof DistinctPlatformResponseV3> {}

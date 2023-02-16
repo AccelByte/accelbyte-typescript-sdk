@@ -13,4 +13,4 @@ export const RevokeResult = z.object({
   status: z.enum(['SKIPPED', 'COMPLETED']).nullish()
 })
 
-export type RevokeResult = z.TypeOf<typeof RevokeResult>
+export interface RevokeResult extends z.TypeOf<typeof RevokeResult> {}

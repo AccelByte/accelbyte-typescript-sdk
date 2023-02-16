@@ -14,4 +14,4 @@ export const CreateBasePolicyRequestV2 = z.object({
   tags: z.array(z.string()).nullish()
 })
 
-export type CreateBasePolicyRequestV2 = z.TypeOf<typeof CreateBasePolicyRequestV2>
+export interface CreateBasePolicyRequestV2 extends z.TypeOf<typeof CreateBasePolicyRequestV2> {}

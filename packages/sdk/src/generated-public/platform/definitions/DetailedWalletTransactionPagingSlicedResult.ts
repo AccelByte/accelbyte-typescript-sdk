@@ -12,4 +12,4 @@ export const DetailedWalletTransactionPagingSlicedResult = z.object({
   paging: Paging.nullish()
 })
 
-export type DetailedWalletTransactionPagingSlicedResult = z.TypeOf<typeof DetailedWalletTransactionPagingSlicedResult>
+export interface DetailedWalletTransactionPagingSlicedResult extends z.TypeOf<typeof DetailedWalletTransactionPagingSlicedResult> {}

@@ -5,11 +5,15 @@
  */
 import { z } from 'zod'
 
-export const AvailableComparisonObject = z.object({
+export const Predicate = z.object({
+  name: z.string().nullish(),
+  predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate']).nullish(),
   comparison: z
     .enum(['is', 'isNot', 'isGreaterThan', 'isGreaterThanOrEqual', 'isLessThan', 'isLessThanOrEqual', 'includes', 'excludes'])
     .nullish(),
-  text: z.string().nullish()
+  anyOf: z.number().int().nullish(),
+  values: z.array(z.string()).nullish(),
+  value: z.string().nullish()
 })
 
-export type AvailableComparisonObject = z.TypeOf<typeof AvailableComparisonObject>
+export interface Predicate extends z.TypeOf<typeof Predicate> {}

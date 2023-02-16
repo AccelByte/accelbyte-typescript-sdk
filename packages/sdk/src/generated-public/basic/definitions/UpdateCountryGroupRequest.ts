@@ -8,4 +8,4 @@ import { CountryObject } from './CountryObject'
 
 export const UpdateCountryGroupRequest = z.object({ countryGroupName: z.string().nullish(), countries: z.array(CountryObject).nullish() })
 
-export type UpdateCountryGroupRequest = z.TypeOf<typeof UpdateCountryGroupRequest>
+export interface UpdateCountryGroupRequest extends z.TypeOf<typeof UpdateCountryGroupRequest> {}

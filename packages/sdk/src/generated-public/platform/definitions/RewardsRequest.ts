@@ -14,4 +14,4 @@ export const RewardsRequest = z.object({
   origin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
 })
 
-export type RewardsRequest = z.TypeOf<typeof RewardsRequest>
+export interface RewardsRequest extends z.TypeOf<typeof RewardsRequest> {}

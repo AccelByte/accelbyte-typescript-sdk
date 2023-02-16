@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const VersionNode = z.object({ buildId: z.string().nullish(), distance: z.number().int().nullish() })
 
-export type VersionNode = z.TypeOf<typeof VersionNode>
+export interface VersionNode extends z.TypeOf<typeof VersionNode> {}

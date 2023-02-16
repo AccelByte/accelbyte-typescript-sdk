@@ -12,4 +12,4 @@ export const GoogleIapConfigInfo = z.object({
   p12FileName: z.string().nullish()
 })
 
-export type GoogleIapConfigInfo = z.TypeOf<typeof GoogleIapConfigInfo>
+export interface GoogleIapConfigInfo extends z.TypeOf<typeof GoogleIapConfigInfo> {}

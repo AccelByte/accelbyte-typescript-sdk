@@ -72,4 +72,4 @@ export const ItemInfo = z.object({
   localExt: z.record(z.any()).nullish()
 })
 
-export type ItemInfo = z.TypeOf<typeof ItemInfo>
+export interface ItemInfo extends z.TypeOf<typeof ItemInfo> {}

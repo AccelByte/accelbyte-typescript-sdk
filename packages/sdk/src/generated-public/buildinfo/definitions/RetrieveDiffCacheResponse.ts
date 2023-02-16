@@ -12,4 +12,4 @@ export const RetrieveDiffCacheResponse = z.object({
   diffCaches: z.array(DiffCacheObject)
 })
 
-export type RetrieveDiffCacheResponse = z.TypeOf<typeof RetrieveDiffCacheResponse>
+export interface RetrieveDiffCacheResponse extends z.TypeOf<typeof RetrieveDiffCacheResponse> {}

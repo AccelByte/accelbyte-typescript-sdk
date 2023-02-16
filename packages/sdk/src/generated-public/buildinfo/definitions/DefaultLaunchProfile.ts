@@ -11,4 +11,4 @@ export const DefaultLaunchProfile = z.object({
   defaultRedirectURI: z.string().nullish()
 })
 
-export type DefaultLaunchProfile = z.TypeOf<typeof DefaultLaunchProfile>
+export interface DefaultLaunchProfile extends z.TypeOf<typeof DefaultLaunchProfile> {}

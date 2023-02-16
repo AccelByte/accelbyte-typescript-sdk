@@ -12,4 +12,4 @@ export const TransactionAmountDetails = z.object({
   expireAt: z.string().nullish()
 })
 
-export type TransactionAmountDetails = z.TypeOf<typeof TransactionAmountDetails>
+export interface TransactionAmountDetails extends z.TypeOf<typeof TransactionAmountDetails> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CategoryUpdate = z.object({ localizationDisplayNames: z.record(z.string()) })
 
-export type CategoryUpdate = z.TypeOf<typeof CategoryUpdate>
+export interface CategoryUpdate extends z.TypeOf<typeof CategoryUpdate> {}

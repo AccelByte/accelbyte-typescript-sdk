@@ -13,4 +13,4 @@ export const PlayStationReconcileResult = z.object({
   status: z.enum(['VERIFIED', 'FULFILLED', 'FAILED']).nullish()
 })
 
-export type PlayStationReconcileResult = z.TypeOf<typeof PlayStationReconcileResult>
+export interface PlayStationReconcileResult extends z.TypeOf<typeof PlayStationReconcileResult> {}

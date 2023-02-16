@@ -14,4 +14,4 @@ export const BuildDeletionData = z.object({
   deletedAt: z.string().nullish()
 })
 
-export type BuildDeletionData = z.TypeOf<typeof BuildDeletionData>
+export interface BuildDeletionData extends z.TypeOf<typeof BuildDeletionData> {}

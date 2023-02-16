@@ -11,4 +11,4 @@ export const ConsumeItem = z.object({
   itemIdentityType: z.enum(['ITEM_ID', 'ITEM_SKU']).nullish()
 })
 
-export type ConsumeItem = z.TypeOf<typeof ConsumeItem>
+export interface ConsumeItem extends z.TypeOf<typeof ConsumeItem> {}

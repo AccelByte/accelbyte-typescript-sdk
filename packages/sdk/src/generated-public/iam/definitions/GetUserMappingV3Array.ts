@@ -8,4 +8,4 @@ import { GetUserMappingV3 } from './GetUserMappingV3'
 
 export const GetUserMappingV3Array = z.array(GetUserMappingV3)
 
-export type GetUserMappingV3Array = z.TypeOf<typeof GetUserMappingV3Array>
+export interface GetUserMappingV3Array extends z.TypeOf<typeof GetUserMappingV3Array> {}

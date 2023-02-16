@@ -20,4 +20,4 @@ export const CreateUserRequestV4 = z.object({
   username: z.string()
 })
 
-export type CreateUserRequestV4 = z.TypeOf<typeof CreateUserRequestV4>
+export interface CreateUserRequestV4 extends z.TypeOf<typeof CreateUserRequestV4> {}

@@ -15,4 +15,4 @@ export const TokenIntrospectResponse = z.object({
   sub: z.string().nullish()
 })
 
-export type TokenIntrospectResponse = z.TypeOf<typeof TokenIntrospectResponse>
+export interface TokenIntrospectResponse extends z.TypeOf<typeof TokenIntrospectResponse> {}

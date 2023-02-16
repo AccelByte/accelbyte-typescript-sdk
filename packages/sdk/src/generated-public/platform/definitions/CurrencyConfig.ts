@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CurrencyConfig = z.object({ currencySymbol: z.string() })
 
-export type CurrencyConfig = z.TypeOf<typeof CurrencyConfig>
+export interface CurrencyConfig extends z.TypeOf<typeof CurrencyConfig> {}

@@ -13,4 +13,4 @@ export const RequestHistory = z.object({
   responseBody: z.record(z.any()).nullish()
 })
 
-export type RequestHistory = z.TypeOf<typeof RequestHistory>
+export interface RequestHistory extends z.TypeOf<typeof RequestHistory> {}

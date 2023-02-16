@@ -12,4 +12,4 @@ export const RegisteredDomain = z.object({
   roleId: z.string()
 })
 
-export type RegisteredDomain = z.TypeOf<typeof RegisteredDomain>
+export interface RegisteredDomain extends z.TypeOf<typeof RegisteredDomain> {}

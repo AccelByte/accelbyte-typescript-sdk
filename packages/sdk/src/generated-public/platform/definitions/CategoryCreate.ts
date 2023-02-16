@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CategoryCreate = z.object({ categoryPath: z.string(), localizationDisplayNames: z.record(z.string()) })
 
-export type CategoryCreate = z.TypeOf<typeof CategoryCreate>
+export interface CategoryCreate extends z.TypeOf<typeof CategoryCreate> {}

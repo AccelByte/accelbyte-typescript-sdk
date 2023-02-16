@@ -9,4 +9,4 @@ import { UserSearchByPlatformIdResult } from './UserSearchByPlatformIdResult'
 
 export const SearchUsersByPlatformIdResponse = z.object({ Data: z.array(UserSearchByPlatformIdResult), Paging: Pagination })
 
-export type SearchUsersByPlatformIdResponse = z.TypeOf<typeof SearchUsersByPlatformIdResponse>
+export interface SearchUsersByPlatformIdResponse extends z.TypeOf<typeof SearchUsersByPlatformIdResponse> {}

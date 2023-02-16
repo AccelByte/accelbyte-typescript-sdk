@@ -8,4 +8,4 @@ import { PlatformDlcEntry } from './PlatformDlcEntry'
 
 export const PlatformDlcConfigInfo = z.object({ data: z.array(PlatformDlcEntry).nullish() })
 
-export type PlatformDlcConfigInfo = z.TypeOf<typeof PlatformDlcConfigInfo>
+export interface PlatformDlcConfigInfo extends z.TypeOf<typeof PlatformDlcConfigInfo> {}

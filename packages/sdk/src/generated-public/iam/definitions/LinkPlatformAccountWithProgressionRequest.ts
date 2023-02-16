@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const LinkPlatformAccountWithProgressionRequest = z.object({ chosenNamespaces: z.array(z.string()), requestId: z.string() })
 
-export type LinkPlatformAccountWithProgressionRequest = z.TypeOf<typeof LinkPlatformAccountWithProgressionRequest>
+export interface LinkPlatformAccountWithProgressionRequest extends z.TypeOf<typeof LinkPlatformAccountWithProgressionRequest> {}

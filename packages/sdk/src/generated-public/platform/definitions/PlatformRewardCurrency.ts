@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PlatformRewardCurrency = z.object({ namespace: z.string(), currencyCode: z.string() })
 
-export type PlatformRewardCurrency = z.TypeOf<typeof PlatformRewardCurrency>
+export interface PlatformRewardCurrency extends z.TypeOf<typeof PlatformRewardCurrency> {}

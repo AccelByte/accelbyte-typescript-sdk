@@ -14,4 +14,4 @@ export const AppleIapReceipt = z.object({
   language: z.string().nullish()
 })
 
-export type AppleIapReceipt = z.TypeOf<typeof AppleIapReceipt>
+export interface AppleIapReceipt extends z.TypeOf<typeof AppleIapReceipt> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ListEmailAddressRequest = z.object({ listEmailAddressRequest: z.array(z.string()) })
 
-export type ListEmailAddressRequest = z.TypeOf<typeof ListEmailAddressRequest>
+export interface ListEmailAddressRequest extends z.TypeOf<typeof ListEmailAddressRequest> {}

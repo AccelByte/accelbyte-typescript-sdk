@@ -56,4 +56,4 @@ export const SubscriptionInfo = z.object({
   updatedAt: z.string()
 })
 
-export type SubscriptionInfo = z.TypeOf<typeof SubscriptionInfo>
+export interface SubscriptionInfo extends z.TypeOf<typeof SubscriptionInfo> {}

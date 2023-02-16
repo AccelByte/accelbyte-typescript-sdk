@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ADtoObjectForOrderCreationOptions } from './ADtoObjectForOrderCreationOptions'
 import { CurrencySummary } from './CurrencySummary'
 import { ItemSnapshot } from './ItemSnapshot'
+import { OrderCreationOptions } from './OrderCreationOptions'
 
 export const Order = z.object({
   rvn: z.number().int().nullish(),
@@ -31,7 +31,7 @@ export const Order = z.object({
       'DELETED'
     ])
     .nullish(),
-  creationOptions: ADtoObjectForOrderCreationOptions.nullish(),
+  creationOptions: OrderCreationOptions.nullish(),
   sandbox: z.boolean().nullish(),
   itemId: z.string().nullish(),
   quantity: z.number().int().nullish(),
@@ -70,4 +70,4 @@ export const Order = z.object({
   subtotalPrice: z.number().int().nullish()
 })
 
-export type Order = z.TypeOf<typeof Order>
+export interface Order extends z.TypeOf<typeof Order> {}

@@ -11,4 +11,4 @@ export const RevokeItem = z.object({
   origin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
 })
 
-export type RevokeItem = z.TypeOf<typeof RevokeItem>
+export interface RevokeItem extends z.TypeOf<typeof RevokeItem> {}

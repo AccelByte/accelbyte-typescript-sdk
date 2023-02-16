@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ItemId = z.object({ itemId: z.string(), sku: z.string().nullish(), status: z.enum(['ACTIVE', 'INACTIVE']).nullish() })
 
-export type ItemId = z.TypeOf<typeof ItemId>
+export interface ItemId extends z.TypeOf<typeof ItemId> {}

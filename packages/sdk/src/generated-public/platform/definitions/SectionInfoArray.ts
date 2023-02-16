@@ -8,4 +8,4 @@ import { SectionInfo } from './SectionInfo'
 
 export const SectionInfoArray = z.array(SectionInfo)
 
-export type SectionInfoArray = z.TypeOf<typeof SectionInfoArray>
+export interface SectionInfoArray extends z.TypeOf<typeof SectionInfoArray> {}

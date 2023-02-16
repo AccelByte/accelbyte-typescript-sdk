@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CountryLocationResponse = z.object({ city: z.string(), countryCode: z.string(), countryName: z.string(), state: z.string() })
 
-export type CountryLocationResponse = z.TypeOf<typeof CountryLocationResponse>
+export interface CountryLocationResponse extends z.TypeOf<typeof CountryLocationResponse> {}

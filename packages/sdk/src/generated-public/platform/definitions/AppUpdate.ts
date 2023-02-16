@@ -53,4 +53,4 @@ export const AppUpdate = z.object({
   releaseDate: z.string().nullish()
 })
 
-export type AppUpdate = z.TypeOf<typeof AppUpdate>
+export interface AppUpdate extends z.TypeOf<typeof AppUpdate> {}

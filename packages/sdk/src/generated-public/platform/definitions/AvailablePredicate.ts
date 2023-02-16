@@ -4,13 +4,13 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AvailableComparisonObject } from './AvailableComparisonObject'
+import { AvailableComparison } from './AvailableComparison'
 
-export const AvailablePredicateObject = z.object({
+export const AvailablePredicate = z.object({
   predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate']).nullish(),
-  availableComparisons: z.array(AvailableComparisonObject).nullish(),
+  availableComparisons: z.array(AvailableComparison).nullish(),
   valueType: z.enum(['List', 'Number', 'String']).nullish(),
   showAnyOf: z.boolean().nullish()
 })
 
-export type AvailablePredicateObject = z.TypeOf<typeof AvailablePredicateObject>
+export interface AvailablePredicate extends z.TypeOf<typeof AvailablePredicate> {}

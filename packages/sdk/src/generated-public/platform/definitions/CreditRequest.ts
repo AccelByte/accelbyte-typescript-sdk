@@ -15,4 +15,4 @@ export const CreditRequest = z.object({
   origin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
 })
 
-export type CreditRequest = z.TypeOf<typeof CreditRequest>
+export interface CreditRequest extends z.TypeOf<typeof CreditRequest> {}

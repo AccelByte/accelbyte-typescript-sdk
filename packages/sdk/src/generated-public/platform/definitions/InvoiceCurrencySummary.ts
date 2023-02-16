@@ -14,4 +14,4 @@ export const InvoiceCurrencySummary = z.object({
   salesVolume: z.number().int()
 })
 
-export type InvoiceCurrencySummary = z.TypeOf<typeof InvoiceCurrencySummary>
+export interface InvoiceCurrencySummary extends z.TypeOf<typeof InvoiceCurrencySummary> {}

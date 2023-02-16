@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const GetUserMapping = z.object({ Namespace: z.string(), UserId: z.string() })
 
-export type GetUserMapping = z.TypeOf<typeof GetUserMapping>
+export interface GetUserMapping extends z.TypeOf<typeof GetUserMapping> {}

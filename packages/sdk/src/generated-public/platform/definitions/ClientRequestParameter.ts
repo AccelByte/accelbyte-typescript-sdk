@@ -12,4 +12,4 @@ export const ClientRequestParameter = z.object({
   currencyCode: z.string().nullish()
 })
 
-export type ClientRequestParameter = z.TypeOf<typeof ClientRequestParameter>
+export interface ClientRequestParameter extends z.TypeOf<typeof ClientRequestParameter> {}

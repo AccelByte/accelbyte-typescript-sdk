@@ -13,4 +13,4 @@ export const Country = z.object({
   Namespace: z.string()
 })
 
-export type Country = z.TypeOf<typeof Country>
+export interface Country extends z.TypeOf<typeof Country> {}

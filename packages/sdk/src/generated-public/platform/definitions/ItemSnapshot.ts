@@ -58,4 +58,4 @@ export const ItemSnapshot = z.object({
   lootBoxConfig: LootBoxConfig.nullish()
 })
 
-export type ItemSnapshot = z.TypeOf<typeof ItemSnapshot>
+export interface ItemSnapshot extends z.TypeOf<typeof ItemSnapshot> {}

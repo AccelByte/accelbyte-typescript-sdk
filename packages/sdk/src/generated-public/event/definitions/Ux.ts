@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const Ux = z.object({ Description: z.string(), UX: z.number().int() })
 
-export type Ux = z.TypeOf<typeof Ux>
+export interface Ux extends z.TypeOf<typeof Ux> {}

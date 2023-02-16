@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const Equ8Config = z.object({ namespace: z.string().nullish(), apiKey: z.string().nullish() })
 
-export type Equ8Config = z.TypeOf<typeof Equ8Config>
+export interface Equ8Config extends z.TypeOf<typeof Equ8Config> {}

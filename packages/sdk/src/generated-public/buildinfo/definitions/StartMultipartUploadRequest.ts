@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const StartMultipartUploadRequest = z.object({ hash: z.string(), contentLength: z.number().int(), partSize: z.number().int() })
 
-export type StartMultipartUploadRequest = z.TypeOf<typeof StartMultipartUploadRequest>
+export interface StartMultipartUploadRequest extends z.TypeOf<typeof StartMultipartUploadRequest> {}

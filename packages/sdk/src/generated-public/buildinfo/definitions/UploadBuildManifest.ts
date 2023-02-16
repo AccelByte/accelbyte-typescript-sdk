@@ -18,4 +18,4 @@ export const UploadBuildManifest = z.object({
   files: z.array(FileManifest).nullish()
 })
 
-export type UploadBuildManifest = z.TypeOf<typeof UploadBuildManifest>
+export interface UploadBuildManifest extends z.TypeOf<typeof UploadBuildManifest> {}

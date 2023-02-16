@@ -8,4 +8,4 @@ import { PredicateValidateResult } from './PredicateValidateResult'
 
 export const ConditionGroupValidateResult = z.object({ predicateValidateResults: z.array(PredicateValidateResult).nullish() })
 
-export type ConditionGroupValidateResult = z.TypeOf<typeof ConditionGroupValidateResult>
+export interface ConditionGroupValidateResult extends z.TypeOf<typeof ConditionGroupValidateResult> {}

@@ -11,4 +11,4 @@ export const ConditionMatchResult = z.object({
   notMatchReason: z.string().nullish()
 })
 
-export type ConditionMatchResult = z.TypeOf<typeof ConditionMatchResult>
+export interface ConditionMatchResult extends z.TypeOf<typeof ConditionMatchResult> {}

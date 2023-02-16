@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:58](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L58)
+[packages/sdk/src/api/iam/TwoFA.ts:58](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L58)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L49)
+[packages/sdk/src/api/iam/TwoFA.ts:49](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L49)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:107](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L107)
+[packages/sdk/src/api/iam/TwoFA.ts:107](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L107)
 
 ___
 
@@ -90,24 +90,24 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L85)
+[packages/sdk/src/api/iam/TwoFA.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L85)
 
 ___
 
 ### enable2FABackupCodes
 
-▸ **enable2FABackupCodes**(): `Promise`<`IResponse`<{ `generatedAt`: `number` ; `invalidCodes`: `undefined` \| ``null`` \| `string`[] ; `validCodes`: `undefined` \| ``null`` \| `string`[]  }\>\>
+▸ **enable2FABackupCodes**(): `Promise`<`IResponse`<`BackupCodesResponseV4`\>\>
 
 <p>This method is used to enable 2FA backup codes.</p>
 <p>This method Requires valid user access token</p>
 
 #### Returns
 
-`Promise`<`IResponse`<{ `generatedAt`: `number` ; `invalidCodes`: `undefined` \| ``null`` \| `string`[] ; `validCodes`: `undefined` \| ``null`` \| `string`[]  }\>\>
+`Promise`<`IResponse`<`BackupCodesResponseV4`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:31](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L31)
+[packages/sdk/src/api/iam/TwoFA.ts:31](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L31)
 
 ___
 
@@ -127,30 +127,30 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:103](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L103)
+[packages/sdk/src/api/iam/TwoFA.ts:103](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L103)
 
 ___
 
 ### generateBackupCodes
 
-▸ **generateBackupCodes**(): `Promise`<`IResponse`<{ `generatedAt`: `number` ; `invalidCodes`: `undefined` \| ``null`` \| `string`[] ; `validCodes`: `undefined` \| ``null`` \| `string`[]  }\>\>
+▸ **generateBackupCodes**(): `Promise`<`IResponse`<`BackupCodesResponseV4`\>\>
 
 <p>This method is used to enable 2FA backup codes.</p>
 <p>This method Requires valid user access token</p>
 
 #### Returns
 
-`Promise`<`IResponse`<{ `generatedAt`: `number` ; `invalidCodes`: `undefined` \| ``null`` \| `string`[] ; `validCodes`: `undefined` \| ``null`` \| `string`[]  }\>\>
+`Promise`<`IResponse`<`BackupCodesResponseV4`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:40](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L40)
+[packages/sdk/src/api/iam/TwoFA.ts:40](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L40)
 
 ___
 
 ### generateSecretKey
 
-▸ **generateSecretKey**(): `Promise`<`IResponse`<{ `secretKey`: `string` ; `uri`: `string`  }\>\>
+▸ **generateSecretKey**(): `Promise`<`IResponse`<`AuthenticatorKeyResponseV4`\>\>
 
 <p>This method is used to generate a secret key for 3rd-party authenticator app.
 A QR code URI is also returned so that frontend can generate QR code image.</p>
@@ -158,17 +158,17 @@ A QR code URI is also returned so that frontend can generate QR code image.</p>
 
 #### Returns
 
-`Promise`<`IResponse`<{ `secretKey`: `string` ; `uri`: `string`  }\>\>
+`Promise`<`IResponse`<`AuthenticatorKeyResponseV4`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:95](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L95)
+[packages/sdk/src/api/iam/TwoFA.ts:95](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L95)
 
 ___
 
 ### getBackupCode
 
-▸ **getBackupCode**(): `Promise`<`IResponseWithSync`<{ `generatedAt`: `number` ; `invalidCodes`: `undefined` \| ``null`` \| `string`[] ; `validCodes`: `undefined` \| ``null`` \| `string`[]  }\>\>
+▸ **getBackupCode**(): `Promise`<`IResponseWithSync`<`BackupCodesResponseV4`\>\>
 
 <p>This method is used to get 8-digits backup codes.
 Each code is a one-time code and will be deleted once used.</p>
@@ -176,28 +176,28 @@ Each code is a one-time code and will be deleted once used.</p>
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `generatedAt`: `number` ; `invalidCodes`: `undefined` \| ``null`` \| `string`[] ; `validCodes`: `undefined` \| ``null`` \| `string`[]  }\>\>
+`Promise`<`IResponseWithSync`<`BackupCodesResponseV4`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L22)
+[packages/sdk/src/api/iam/TwoFA.ts:22](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L22)
 
 ___
 
 ### getEnabledMethods
 
-▸ **getEnabledMethods**(): `Promise`<`IResponseWithSync`<{ `default`: `string` ; `enabled`: `string`[]  }\>\>
+▸ **getEnabledMethods**(): `Promise`<`IResponseWithSync`<`EnabledFactorsResponseV4`\>\>
 
 <p>This method is used to get user enabled factors.</p>
 <p>This method Requires valid user access token</p>
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `default`: `string` ; `enabled`: `string`[]  }\>\>
+`Promise`<`IResponseWithSync`<`EnabledFactorsResponseV4`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:67](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L67)
+[packages/sdk/src/api/iam/TwoFA.ts:67](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L67)
 
 ___
 
@@ -211,7 +211,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:99](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L99)
+[packages/sdk/src/api/iam/TwoFA.ts:99](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L99)
 
 ___
 
@@ -234,4 +234,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/TwoFA.ts:76](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/TwoFA.ts#L76)
+[packages/sdk/src/api/iam/TwoFA.ts:76](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/TwoFA.ts#L76)

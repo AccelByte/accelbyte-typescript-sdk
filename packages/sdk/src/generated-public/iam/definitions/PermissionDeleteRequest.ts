@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PermissionDeleteRequest = z.object({ Action: z.number().int(), Resource: z.string() })
 
-export type PermissionDeleteRequest = z.TypeOf<typeof PermissionDeleteRequest>
+export interface PermissionDeleteRequest extends z.TypeOf<typeof PermissionDeleteRequest> {}

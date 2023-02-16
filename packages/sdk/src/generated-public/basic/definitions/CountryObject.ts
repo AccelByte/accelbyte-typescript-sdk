@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CountryObject = z.object({ code: z.string().nullish(), name: z.string().nullish() })
 
-export type CountryObject = z.TypeOf<typeof CountryObject>
+export interface CountryObject extends z.TypeOf<typeof CountryObject> {}

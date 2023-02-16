@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RoleManagerV3 = z.object({ displayName: z.string(), namespace: z.string(), userId: z.string() })
 
-export type RoleManagerV3 = z.TypeOf<typeof RoleManagerV3>
+export interface RoleManagerV3 extends z.TypeOf<typeof RoleManagerV3> {}

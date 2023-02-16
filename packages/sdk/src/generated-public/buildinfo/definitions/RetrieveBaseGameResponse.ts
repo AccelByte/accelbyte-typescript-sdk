@@ -8,4 +8,4 @@ import { SimpleLatestBaseGame } from './SimpleLatestBaseGame'
 
 export const RetrieveBaseGameResponse = z.object({ appId: z.string().nullish(), baseGames: z.array(SimpleLatestBaseGame).nullish() })
 
-export type RetrieveBaseGameResponse = z.TypeOf<typeof RetrieveBaseGameResponse>
+export interface RetrieveBaseGameResponse extends z.TypeOf<typeof RetrieveBaseGameResponse> {}

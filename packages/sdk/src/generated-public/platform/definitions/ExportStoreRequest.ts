@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ExportStoreRequest = z.object({ itemIds: z.array(z.string()).nullish() })
 
-export type ExportStoreRequest = z.TypeOf<typeof ExportStoreRequest>
+export interface ExportStoreRequest extends z.TypeOf<typeof ExportStoreRequest> {}

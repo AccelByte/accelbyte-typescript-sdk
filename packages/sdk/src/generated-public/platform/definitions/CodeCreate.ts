@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CodeCreate = z.object({ quantity: z.number().int() })
 
-export type CodeCreate = z.TypeOf<typeof CodeCreate>
+export interface CodeCreate extends z.TypeOf<typeof CodeCreate> {}

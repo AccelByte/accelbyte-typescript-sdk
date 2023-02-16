@@ -14,4 +14,4 @@ export const StoreBackupInfo = z.object({
   updatedAt: z.string()
 })
 
-export type StoreBackupInfo = z.TypeOf<typeof StoreBackupInfo>
+export interface StoreBackupInfo extends z.TypeOf<typeof StoreBackupInfo> {}

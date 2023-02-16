@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ValidUserIdResponseV4 = z.object({ exists: z.boolean(), userId: z.string() })
 
-export type ValidUserIdResponseV4 = z.TypeOf<typeof ValidUserIdResponseV4>
+export interface ValidUserIdResponseV4 extends z.TypeOf<typeof ValidUserIdResponseV4> {}

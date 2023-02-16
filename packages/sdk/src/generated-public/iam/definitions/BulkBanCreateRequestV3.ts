@@ -14,4 +14,4 @@ export const BulkBanCreateRequestV3 = z.object({
   userIds: z.array(z.string())
 })
 
-export type BulkBanCreateRequestV3 = z.TypeOf<typeof BulkBanCreateRequestV3>
+export interface BulkBanCreateRequestV3 extends z.TypeOf<typeof BulkBanCreateRequestV3> {}

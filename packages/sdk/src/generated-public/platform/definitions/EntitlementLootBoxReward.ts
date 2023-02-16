@@ -11,4 +11,4 @@ export const EntitlementLootBoxReward = z.object({
   count: z.number().int().nullish()
 })
 
-export type EntitlementLootBoxReward = z.TypeOf<typeof EntitlementLootBoxReward>
+export interface EntitlementLootBoxReward extends z.TypeOf<typeof EntitlementLootBoxReward> {}

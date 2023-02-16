@@ -8,4 +8,4 @@ import { IapItemEntry } from './IapItemEntry'
 
 export const IapItemConfigUpdate = z.object({ data: z.array(IapItemEntry).nullish() })
 
-export type IapItemConfigUpdate = z.TypeOf<typeof IapItemConfigUpdate>
+export interface IapItemConfigUpdate extends z.TypeOf<typeof IapItemConfigUpdate> {}

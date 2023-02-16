@@ -14,4 +14,4 @@ export const UserSearchResult = z.object({
   UserId: z.string()
 })
 
-export type UserSearchResult = z.TypeOf<typeof UserSearchResult>
+export interface UserSearchResult extends z.TypeOf<typeof UserSearchResult> {}

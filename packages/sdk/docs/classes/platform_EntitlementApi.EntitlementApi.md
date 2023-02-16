@@ -18,7 +18,7 @@
 
 ### claimEntitlement
 
-▸ **claimEntitlement**(`«destructured»`): `Promise`<`IResponse`<{ `appId`: `undefined` \| ``null`` \| `string` ; `appType`: `undefined` \| ``null`` \| ``"GAME"`` \| ``"SOFTWARE"`` \| ``"DLC"`` \| ``"DEMO"`` ; `clazz`: ``"APP"`` \| ``"CODE"`` \| ``"SUBSCRIPTION"`` \| ``"MEDIA"`` \| ``"OPTIONBOX"`` \| ``"LOOTBOX"`` \| ``"ENTITLEMENT"`` ; `createdAt`: `string` ; `endDate`: `undefined` \| ``null`` \| `string` ; `features`: `undefined` \| ``null`` \| `string`[] ; `grantedAt`: `string` ; `grantedCode`: `undefined` \| ``null`` \| `string` ; `id`: `string` ; `itemId`: `string` ; `itemNamespace`: `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `name`: `string` ; `namespace`: `string` ; `replayed`: `undefined` \| ``null`` \| `boolean` ; `requestId`: `undefined` \| ``null`` \| `string` ; `rewards`: `undefined` \| ``null`` \| { itemId?: string \| null \| undefined; itemSku?: string \| null \| undefined; count?: number \| null \| undefined; }[] ; `sku`: `undefined` \| ``null`` \| `string` ; `source`: ``"REWARD"`` \| ``"PURCHASE"`` \| ``"IAP"`` \| ``"PROMOTION"`` \| ``"ACHIEVEMENT"`` \| ``"REFERRAL_BONUS"`` \| ``"REDEEM_CODE"`` \| ``"GIFT"`` \| ``"OTHER"`` ; `stackable`: `undefined` \| ``null`` \| `boolean` ; `startDate`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"CONSUMED"`` \| ``"REVOKED"`` ; `storeId`: `undefined` \| ``null`` \| `string` ; `type`: ``"DURABLE"`` \| ``"CONSUMABLE"`` ; `updatedAt`: `string` ; `useCount`: `undefined` \| ``null`` \| `number` ; `userId`: `string`  }\>\>
+▸ **claimEntitlement**(`«destructured»`): `Promise`<`IResponse`<`EntitlementDecrementResult`\>\>
 
 Consume user entitlement. If the entitlement useCount is 0, the status will be CONSUMED. Client should pass item id in options if entitlement clazz is OPTIONBOX<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=4 (UPDATE)</li><li><i>Returns</i>: consumed entitlement</li></ul>
 
@@ -27,26 +27,23 @@ Consume user entitlement. If the entitlement useCount is 0, the status will be C
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `data` | `Object` |
-| › `data.options` | `undefined` \| ``null`` \| `string`[] |
-| › `data.requestId` | `undefined` \| ``null`` \| `string` |
-| › `data.useCount` | `undefined` \| ``null`` \| `number` |
+| › `data` | `EntitlementDecrement` |
 | › `entitlementId` | `string` |
 | › `userId` | `string` |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `appId`: `undefined` \| ``null`` \| `string` ; `appType`: `undefined` \| ``null`` \| ``"GAME"`` \| ``"SOFTWARE"`` \| ``"DLC"`` \| ``"DEMO"`` ; `clazz`: ``"APP"`` \| ``"CODE"`` \| ``"SUBSCRIPTION"`` \| ``"MEDIA"`` \| ``"OPTIONBOX"`` \| ``"LOOTBOX"`` \| ``"ENTITLEMENT"`` ; `createdAt`: `string` ; `endDate`: `undefined` \| ``null`` \| `string` ; `features`: `undefined` \| ``null`` \| `string`[] ; `grantedAt`: `string` ; `grantedCode`: `undefined` \| ``null`` \| `string` ; `id`: `string` ; `itemId`: `string` ; `itemNamespace`: `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `name`: `string` ; `namespace`: `string` ; `replayed`: `undefined` \| ``null`` \| `boolean` ; `requestId`: `undefined` \| ``null`` \| `string` ; `rewards`: `undefined` \| ``null`` \| { itemId?: string \| null \| undefined; itemSku?: string \| null \| undefined; count?: number \| null \| undefined; }[] ; `sku`: `undefined` \| ``null`` \| `string` ; `source`: ``"REWARD"`` \| ``"PURCHASE"`` \| ``"IAP"`` \| ``"PROMOTION"`` \| ``"ACHIEVEMENT"`` \| ``"REFERRAL_BONUS"`` \| ``"REDEEM_CODE"`` \| ``"GIFT"`` \| ``"OTHER"`` ; `stackable`: `undefined` \| ``null`` \| `boolean` ; `startDate`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"CONSUMED"`` \| ``"REVOKED"`` ; `storeId`: `undefined` \| ``null`` \| `string` ; `type`: ``"DURABLE"`` \| ``"CONSUMABLE"`` ; `updatedAt`: `string` ; `useCount`: `undefined` \| ``null`` \| `number` ; `userId`: `string`  }\>\>
+`Promise`<`IResponse`<`EntitlementDecrementResult`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:62](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/EntitlementApi.ts#L62)
+[packages/sdk/src/api/platform/EntitlementApi.ts:62](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L62)
 
 ___
 
 ### getEntitlementByAppId
 
-▸ **getEntitlementByAppId**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `appId`: `undefined` \| ``null`` \| `string` ; `appType`: `undefined` \| ``null`` \| ``"GAME"`` \| ``"SOFTWARE"`` \| ``"DLC"`` \| ``"DEMO"`` ; `endDate`: `undefined` \| ``null`` \| `string` ; `grantedAt`: `string` ; `itemId`: `undefined` \| ``null`` \| `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `namespace`: `string` ; `sku`: `undefined` \| ``null`` \| `string` ; `startDate`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"CONSUMED"`` \| ``"REVOKED"`` ; `storeId`: `undefined` \| ``null`` \| `string` ; `userId`: `string`  }\>\>
+▸ **getEntitlementByAppId**(`«destructured»`): `Promise`<`IResponseWithSync`<`AppEntitlementInfo`\>\>
 
 Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
 
@@ -60,17 +57,17 @@ Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required perm
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `appId`: `undefined` \| ``null`` \| `string` ; `appType`: `undefined` \| ``null`` \| ``"GAME"`` \| ``"SOFTWARE"`` \| ``"DLC"`` \| ``"DEMO"`` ; `endDate`: `undefined` \| ``null`` \| `string` ; `grantedAt`: `string` ; `itemId`: `undefined` \| ``null`` \| `string` ; `itemSnapshot`: `undefined` \| ``null`` \| { createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; ... 29 more ...; region: string; } ; `namespace`: `string` ; `sku`: `undefined` \| ``null`` \| `string` ; `startDate`: `undefined` \| ``null`` \| `string` ; `status`: ``"ACTIVE"`` \| ``"INACTIVE"`` \| ``"CONSUMED"`` \| ``"REVOKED"`` ; `storeId`: `undefined` \| ``null`` \| `string` ; `userId`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`AppEntitlementInfo`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/EntitlementApi.ts#L20)
+[packages/sdk/src/api/platform/EntitlementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L20)
 
 ___
 
 ### getEntitlementByItemIds
 
-▸ **getEntitlementByItemIds**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `itemId`: `undefined` \| ``null`` \| `string` ; `owned`: `boolean`  }[]\>\>
+▸ **getEntitlementByItemIds**(`«destructured»`): `Promise`<`IResponseWithSync`<`EntitlementOwnershipArray`\>\>
 
 Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
 
@@ -85,17 +82,17 @@ Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Requi
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `itemId`: `undefined` \| ``null`` \| `string` ; `owned`: `boolean`  }[]\>\>
+`Promise`<`IResponseWithSync`<`EntitlementOwnershipArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:55](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/EntitlementApi.ts#L55)
+[packages/sdk/src/api/platform/EntitlementApi.ts:55](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L55)
 
 ___
 
 ### getEntitlementOwnerShip
 
-▸ **getEntitlementOwnerShip**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `owned`: `boolean`  }\>\>
+▸ **getEntitlementOwnerShip**(`«destructured»`): `Promise`<`IResponseWithSync`<`Ownership`\>\>
 
 Exists any user active entitlement of specified itemIds, skus and appIds<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
 
@@ -112,17 +109,17 @@ Exists any user active entitlement of specified itemIds, skus and appIds<p>Other
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `owned`: `boolean`  }\>\>
+`Promise`<`IResponseWithSync`<`Ownership`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/EntitlementApi.ts#L42)
+[packages/sdk/src/api/platform/EntitlementApi.ts:42](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L42)
 
 ___
 
 ### getEntitlements
 
-▸ **getEntitlements**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: `undefined` \| ``null`` \| { appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; endDate?: string \| null \| undefined; sku?: string \| null \| undefined; storeId?: string \| ... 1 more ... \| undefined; ... 18 more ...; source: "REWARD" \| ... 7 more ... \| "OTHER"; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+▸ **getEntitlements**(`«destructured»`): `Promise`<`IResponseWithSync`<`EntitlementPagingSlicedResult`\>\>
 
 Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement list</li></ul>
 
@@ -131,13 +128,13 @@ Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Req
 | Name | Type |
 | :------ | :------ |
 | `«destructured»` | `Object` |
-| › `queryParams` | `undefined` \| { `appType?`: ``"GAME"`` \| ``"SOFTWARE"`` \| ``"DLC"`` \| ``"DEMO"`` ; `entitlementClazz?`: ``"APP"`` \| ``"CODE"`` \| ``"SUBSCRIPTION"`` \| ``"MEDIA"`` \| ``"OPTIONBOX"`` \| ``"LOOTBOX"`` \| ``"ENTITLEMENT"`` ; `entitlementName?`: ``null`` \| `string` ; `features?`: `string`[] ; `itemId?`: `string`[] ; `limit?`: `number` ; `offset?`: `number`  } |
+| › `queryParams` | `undefined` \| { `appType?`: ``"GAME"`` \| ``"SOFTWARE"`` \| ``"DLC"`` \| ``"DEMO"`` ; `entitlementClazz?`: ``"APP"`` \| ``"ENTITLEMENT"`` \| ``"CODE"`` \| ``"SUBSCRIPTION"`` \| ``"MEDIA"`` \| ``"OPTIONBOX"`` \| ``"LOOTBOX"`` ; `entitlementName?`: ``null`` \| `string` ; `features?`: `string`[] ; `itemId?`: `string`[] ; `limit?`: `number` ; `offset?`: `number`  } |
 | › `userId` | `string` |
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: `undefined` \| ``null`` \| { appId?: string \| null \| undefined; appType?: "GAME" \| "SOFTWARE" \| "DLC" \| "DEMO" \| null \| undefined; endDate?: string \| null \| undefined; sku?: string \| null \| undefined; storeId?: string \| ... 1 more ... \| undefined; ... 18 more ...; source: "REWARD" \| ... 7 more ... \| "OTHER"; }[] ; `paging`: `undefined` \| ``null`` \| { next?: string \| null \| undefined; previous?: string \| null \| undefined; }  }\>\>
+`Promise`<`IResponseWithSync`<`EntitlementPagingSlicedResult`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/EntitlementApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/EntitlementApi.ts#L29)
+[packages/sdk/src/api/platform/EntitlementApi.ts:29](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/EntitlementApi.ts#L29)

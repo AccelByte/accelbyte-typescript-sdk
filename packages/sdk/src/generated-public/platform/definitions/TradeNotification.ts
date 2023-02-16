@@ -63,4 +63,4 @@ export const TradeNotification = z.object({
   additionalData: AdditionalData.nullish()
 })
 
-export type TradeNotification = z.TypeOf<typeof TradeNotification>
+export interface TradeNotification extends z.TypeOf<typeof TradeNotification> {}

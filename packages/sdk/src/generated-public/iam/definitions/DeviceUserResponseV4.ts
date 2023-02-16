@@ -13,4 +13,4 @@ export const DeviceUserResponseV4 = z.object({
   userId: z.string()
 })
 
-export type DeviceUserResponseV4 = z.TypeOf<typeof DeviceUserResponseV4>
+export interface DeviceUserResponseV4 extends z.TypeOf<typeof DeviceUserResponseV4> {}

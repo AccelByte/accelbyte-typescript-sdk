@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ResetPasswordRequest = z.object({ Code: z.string(), LoginID: z.string(), NewPassword: z.string() })
 
-export type ResetPasswordRequest = z.TypeOf<typeof ResetPasswordRequest>
+export interface ResetPasswordRequest extends z.TypeOf<typeof ResetPasswordRequest> {}

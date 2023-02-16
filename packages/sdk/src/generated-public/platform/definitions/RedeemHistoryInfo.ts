@@ -17,4 +17,4 @@ export const RedeemHistoryInfo = z.object({
   redeemedAt: z.string().nullish()
 })
 
-export type RedeemHistoryInfo = z.TypeOf<typeof RedeemHistoryInfo>
+export interface RedeemHistoryInfo extends z.TypeOf<typeof RedeemHistoryInfo> {}

@@ -15,4 +15,4 @@ export const GenericQueryPayload = z.object({
   version: z.number().int()
 })
 
-export type GenericQueryPayload = z.TypeOf<typeof GenericQueryPayload>
+export interface GenericQueryPayload extends z.TypeOf<typeof GenericQueryPayload> {}

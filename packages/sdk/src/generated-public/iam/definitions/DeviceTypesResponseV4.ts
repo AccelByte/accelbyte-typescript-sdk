@@ -8,4 +8,4 @@ import { DeviceTypeResponseV4 } from './DeviceTypeResponseV4'
 
 export const DeviceTypesResponseV4 = z.object({ data: z.array(DeviceTypeResponseV4) })
 
-export type DeviceTypesResponseV4 = z.TypeOf<typeof DeviceTypesResponseV4>
+export interface DeviceTypesResponseV4 extends z.TypeOf<typeof DeviceTypesResponseV4> {}

@@ -12,4 +12,4 @@ export const CountryAgeRestriction = z.object({
   Enable: z.boolean()
 })
 
-export type CountryAgeRestriction = z.TypeOf<typeof CountryAgeRestriction>
+export interface CountryAgeRestriction extends z.TypeOf<typeof CountryAgeRestriction> {}

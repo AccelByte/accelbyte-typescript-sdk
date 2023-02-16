@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const FulfillCodeRequest = z.object({ code: z.string(), region: z.string().nullish(), language: z.string().nullish() })
 
-export type FulfillCodeRequest = z.TypeOf<typeof FulfillCodeRequest>
+export interface FulfillCodeRequest extends z.TypeOf<typeof FulfillCodeRequest> {}

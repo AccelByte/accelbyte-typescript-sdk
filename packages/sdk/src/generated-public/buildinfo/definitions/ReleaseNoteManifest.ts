@@ -13,4 +13,4 @@ export const ReleaseNoteManifest = z.object({
   releaseNoteLocalizations: z.array(ReleaseNoteLocalizationDto)
 })
 
-export type ReleaseNoteManifest = z.TypeOf<typeof ReleaseNoteManifest>
+export interface ReleaseNoteManifest extends z.TypeOf<typeof ReleaseNoteManifest> {}

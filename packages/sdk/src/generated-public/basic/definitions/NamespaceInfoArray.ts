@@ -8,4 +8,4 @@ import { NamespaceInfo } from './NamespaceInfo'
 
 export const NamespaceInfoArray = z.array(NamespaceInfo)
 
-export type NamespaceInfoArray = z.TypeOf<typeof NamespaceInfoArray>
+export interface NamespaceInfoArray extends z.TypeOf<typeof NamespaceInfoArray> {}

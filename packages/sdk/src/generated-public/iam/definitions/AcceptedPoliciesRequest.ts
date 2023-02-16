@@ -12,4 +12,4 @@ export const AcceptedPoliciesRequest = z.object({
   policyVersionId: z.string()
 })
 
-export type AcceptedPoliciesRequest = z.TypeOf<typeof AcceptedPoliciesRequest>
+export interface AcceptedPoliciesRequest extends z.TypeOf<typeof AcceptedPoliciesRequest> {}

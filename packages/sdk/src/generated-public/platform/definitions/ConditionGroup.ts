@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PredicateObject } from './PredicateObject'
+import { Predicate } from './Predicate'
 
-export const ConditionGroup = z.object({ predicates: z.array(PredicateObject).nullish(), operator: z.enum(['and', 'or']).nullish() })
+export const ConditionGroup = z.object({ predicates: z.array(Predicate).nullish(), operator: z.enum(['and', 'or']).nullish() })
 
-export type ConditionGroup = z.TypeOf<typeof ConditionGroup>
+export interface ConditionGroup extends z.TypeOf<typeof ConditionGroup> {}

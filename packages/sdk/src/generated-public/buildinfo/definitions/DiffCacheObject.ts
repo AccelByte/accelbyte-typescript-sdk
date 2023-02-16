@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const DiffCacheObject = z.object({ filePath: z.string(), diffFile: z.string(), url: z.string() })
 
-export type DiffCacheObject = z.TypeOf<typeof DiffCacheObject>
+export interface DiffCacheObject extends z.TypeOf<typeof DiffCacheObject> {}

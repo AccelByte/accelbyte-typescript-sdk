@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const SendRegisterVerificationCodeRequest = z.object({ emailAddress: z.string(), languageTag: z.string().nullish() })
 
-export type SendRegisterVerificationCodeRequest = z.TypeOf<typeof SendRegisterVerificationCodeRequest>
+export interface SendRegisterVerificationCodeRequest extends z.TypeOf<typeof SendRegisterVerificationCodeRequest> {}

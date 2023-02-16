@@ -8,4 +8,4 @@ import { RoleMemberV3 } from './RoleMemberV3'
 
 export const RoleMembersRequestV3 = z.object({ members: z.array(RoleMemberV3) })
 
-export type RoleMembersRequestV3 = z.TypeOf<typeof RoleMembersRequestV3>
+export interface RoleMembersRequestV3 extends z.TypeOf<typeof RoleMembersRequestV3> {}

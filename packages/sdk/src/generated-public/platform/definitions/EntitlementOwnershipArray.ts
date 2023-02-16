@@ -8,4 +8,4 @@ import { EntitlementOwnership } from './EntitlementOwnership'
 
 export const EntitlementOwnershipArray = z.array(EntitlementOwnership)
 
-export type EntitlementOwnershipArray = z.TypeOf<typeof EntitlementOwnershipArray>
+export interface EntitlementOwnershipArray extends z.TypeOf<typeof EntitlementOwnershipArray> {}

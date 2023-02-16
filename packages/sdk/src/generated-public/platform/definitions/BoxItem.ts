@@ -12,4 +12,4 @@ export const BoxItem = z.object({
   count: z.number().int().nullish()
 })
 
-export type BoxItem = z.TypeOf<typeof BoxItem>
+export interface BoxItem extends z.TypeOf<typeof BoxItem> {}

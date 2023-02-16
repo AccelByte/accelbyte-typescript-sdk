@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const Description = z.object({ 'en-US': z.string(), 'zh-CN': z.string() })
 
-export type Description = z.TypeOf<typeof Description>
+export interface Description extends z.TypeOf<typeof Description> {}

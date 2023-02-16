@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CleanerConfigObject = z.object({ graceTime: z.string().nullish() })
 
-export type CleanerConfigObject = z.TypeOf<typeof CleanerConfigObject>
+export interface CleanerConfigObject extends z.TypeOf<typeof CleanerConfigObject> {}

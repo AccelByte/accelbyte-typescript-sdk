@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const SendVerificationLinkRequest = z.object({ languageTag: z.string().nullish() })
 
-export type SendVerificationLinkRequest = z.TypeOf<typeof SendVerificationLinkRequest>
+export interface SendVerificationLinkRequest extends z.TypeOf<typeof SendVerificationLinkRequest> {}

@@ -8,4 +8,4 @@ import { PaginationV3 } from './PaginationV3'
 
 export const RoleNamesResponseV3 = z.object({ data: z.array(z.string()), paging: PaginationV3 })
 
-export type RoleNamesResponseV3 = z.TypeOf<typeof RoleNamesResponseV3>
+export interface RoleNamesResponseV3 extends z.TypeOf<typeof RoleNamesResponseV3> {}

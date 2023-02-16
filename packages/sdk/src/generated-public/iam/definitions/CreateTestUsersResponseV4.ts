@@ -8,4 +8,4 @@ import { CreateTestUserResponseV4 } from './CreateTestUserResponseV4'
 
 export const CreateTestUsersResponseV4 = z.object({ data: z.array(CreateTestUserResponseV4) })
 
-export type CreateTestUsersResponseV4 = z.TypeOf<typeof CreateTestUsersResponseV4>
+export interface CreateTestUsersResponseV4 extends z.TypeOf<typeof CreateTestUsersResponseV4> {}

@@ -18,7 +18,7 @@ export const HierarchicalCategoryInfo: z.ZodType<HierarchicalCategoryInfo> = z.l
   })
 )
 
-export type HierarchicalCategoryInfo = {
+export interface HierarchicalCategoryInfo {
   namespace: string
   parentCategoryPath: string
   categoryPath: string

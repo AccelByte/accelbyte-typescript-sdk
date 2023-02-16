@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UpdatePolicyVersionRequest = z.object({ displayVersion: z.string(), description: z.string(), isCommitted: z.boolean() })
 
-export type UpdatePolicyVersionRequest = z.TypeOf<typeof UpdatePolicyVersionRequest>
+export interface UpdatePolicyVersionRequest extends z.TypeOf<typeof UpdatePolicyVersionRequest> {}

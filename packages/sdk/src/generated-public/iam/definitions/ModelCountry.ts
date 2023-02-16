@@ -12,4 +12,4 @@ export const ModelCountry = z.object({
   Enable: z.boolean()
 })
 
-export type ModelCountry = z.TypeOf<typeof ModelCountry>
+export interface ModelCountry extends z.TypeOf<typeof ModelCountry> {}

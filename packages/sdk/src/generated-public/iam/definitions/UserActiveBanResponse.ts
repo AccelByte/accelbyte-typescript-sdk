@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserActiveBanResponse = z.object({ Ban: z.string(), BanId: z.string(), EndDate: z.string() })
 
-export type UserActiveBanResponse = z.TypeOf<typeof UserActiveBanResponse>
+export interface UserActiveBanResponse extends z.TypeOf<typeof UserActiveBanResponse> {}

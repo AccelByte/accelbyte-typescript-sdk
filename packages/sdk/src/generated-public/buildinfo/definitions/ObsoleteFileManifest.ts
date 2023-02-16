@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ObsoleteFileManifest = z.object({ path: z.string().nullish() })
 
-export type ObsoleteFileManifest = z.TypeOf<typeof ObsoleteFileManifest>
+export interface ObsoleteFileManifest extends z.TypeOf<typeof ObsoleteFileManifest> {}

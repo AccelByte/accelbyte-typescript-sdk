@@ -8,4 +8,4 @@ import { ValidationDetailPublic } from './ValidationDetailPublic'
 
 export const InputValidationDataPublic = z.object({ field: z.string(), validation: ValidationDetailPublic })
 
-export type InputValidationDataPublic = z.TypeOf<typeof InputValidationDataPublic>
+export interface InputValidationDataPublic extends z.TypeOf<typeof InputValidationDataPublic> {}

@@ -16,4 +16,4 @@ export const RevocationResult = z.object({
   entitlementRevocations: z.array(EntitlementRevocation).nullish()
 })
 
-export type RevocationResult = z.TypeOf<typeof RevocationResult>
+export interface RevocationResult extends z.TypeOf<typeof RevocationResult> {}

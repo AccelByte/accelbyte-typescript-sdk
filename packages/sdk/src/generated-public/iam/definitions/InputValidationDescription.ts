@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const InputValidationDescription = z.object({ language: z.string(), message: z.array(z.string()) })
 
-export type InputValidationDescription = z.TypeOf<typeof InputValidationDescription>
+export interface InputValidationDescription extends z.TypeOf<typeof InputValidationDescription> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TicketAcquireRequest = z.object({ count: z.number().int(), orderNo: z.string() })
 
-export type TicketAcquireRequest = z.TypeOf<typeof TicketAcquireRequest>
+export interface TicketAcquireRequest extends z.TypeOf<typeof TicketAcquireRequest> {}

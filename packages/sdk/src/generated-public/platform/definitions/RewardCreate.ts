@@ -17,4 +17,4 @@ export const RewardCreate = z.object({
   namespaceExpression: z.string().nullish()
 })
 
-export type RewardCreate = z.TypeOf<typeof RewardCreate>
+export interface RewardCreate extends z.TypeOf<typeof RewardCreate> {}

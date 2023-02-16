@@ -13,4 +13,4 @@ export const AchievementInfo = z.object({
   progression: z.record(z.any()).nullish()
 })
 
-export type AchievementInfo = z.TypeOf<typeof AchievementInfo>
+export interface AchievementInfo extends z.TypeOf<typeof AchievementInfo> {}

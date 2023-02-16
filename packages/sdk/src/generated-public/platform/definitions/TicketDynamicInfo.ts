@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TicketDynamicInfo = z.object({ availableSaleCount: z.number().int() })
 
-export type TicketDynamicInfo = z.TypeOf<typeof TicketDynamicInfo>
+export interface TicketDynamicInfo extends z.TypeOf<typeof TicketDynamicInfo> {}

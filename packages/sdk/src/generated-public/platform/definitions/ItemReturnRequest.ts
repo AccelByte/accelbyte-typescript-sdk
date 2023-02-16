@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ItemReturnRequest = z.object({ orderNo: z.string() })
 
-export type ItemReturnRequest = z.TypeOf<typeof ItemReturnRequest>
+export interface ItemReturnRequest extends z.TypeOf<typeof ItemReturnRequest> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const FilterJson = z.object({ bits: z.array(z.number().int()), k: z.number().int(), m: z.number().int() })
 
-export type FilterJson = z.TypeOf<typeof FilterJson>
+export interface FilterJson extends z.TypeOf<typeof FilterJson> {}

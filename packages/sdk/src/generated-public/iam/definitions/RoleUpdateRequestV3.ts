@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RoleUpdateRequestV3 = z.object({ deletable: z.boolean().nullish(), isWildcard: z.boolean(), roleName: z.string() })
 
-export type RoleUpdateRequestV3 = z.TypeOf<typeof RoleUpdateRequestV3>
+export interface RoleUpdateRequestV3 extends z.TypeOf<typeof RoleUpdateRequestV3> {}

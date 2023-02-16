@@ -12,4 +12,4 @@ export const CountryGroupObject = z.object({
   countries: z.array(CountryObject).nullish()
 })
 
-export type CountryGroupObject = z.TypeOf<typeof CountryGroupObject>
+export interface CountryGroupObject extends z.TypeOf<typeof CountryGroupObject> {}

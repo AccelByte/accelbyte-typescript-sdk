@@ -19,4 +19,4 @@ export const UserProfileAdmin = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']).nullish()
 })
 
-export type UserProfileAdmin = z.TypeOf<typeof UserProfileAdmin>
+export interface UserProfileAdmin extends z.TypeOf<typeof UserProfileAdmin> {}

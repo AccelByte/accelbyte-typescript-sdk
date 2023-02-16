@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CommitDiffCacheRequest = z.object({ sourceBuildId: z.string().nullish(), destinationBuildId: z.string().nullish() })
 
-export type CommitDiffCacheRequest = z.TypeOf<typeof CommitDiffCacheRequest>
+export interface CommitDiffCacheRequest extends z.TypeOf<typeof CommitDiffCacheRequest> {}

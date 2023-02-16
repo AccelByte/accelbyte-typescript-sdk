@@ -21,4 +21,4 @@ export const ErrorResponse = z.object({
   userBan: UserBan.nullish()
 })
 
-export type ErrorResponse = z.TypeOf<typeof ErrorResponse>
+export interface ErrorResponse extends z.TypeOf<typeof ErrorResponse> {}

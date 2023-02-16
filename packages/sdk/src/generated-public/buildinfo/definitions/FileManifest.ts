@@ -17,4 +17,4 @@ export const FileManifest = z.object({
   uploadStatus: z.string().nullish()
 })
 
-export type FileManifest = z.TypeOf<typeof FileManifest>
+export interface FileManifest extends z.TypeOf<typeof FileManifest> {}

@@ -8,4 +8,4 @@ import { AgentType } from './AgentType'
 
 export const MultipleAgentType = z.object({ AgentTypes: z.array(AgentType) })
 
-export type MultipleAgentType = z.TypeOf<typeof MultipleAgentType>
+export interface MultipleAgentType extends z.TypeOf<typeof MultipleAgentType> {}

@@ -8,4 +8,4 @@ import { InvoiceCurrencySummary } from './InvoiceCurrencySummary'
 
 export const InvoiceSummary = z.object({ totalSalesVolume: z.number().int(), invoiceCurrencySummary: z.array(InvoiceCurrencySummary) })
 
-export type InvoiceSummary = z.TypeOf<typeof InvoiceSummary>
+export interface InvoiceSummary extends z.TypeOf<typeof InvoiceSummary> {}

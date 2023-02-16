@@ -9,4 +9,4 @@ import { UserLinkedPlatformV3 } from './UserLinkedPlatformV3'
 
 export const UserLinkedPlatformsResponseV3 = z.object({ data: z.array(UserLinkedPlatformV3), paging: PaginationV3 })
 
-export type UserLinkedPlatformsResponseV3 = z.TypeOf<typeof UserLinkedPlatformsResponseV3>
+export interface UserLinkedPlatformsResponseV3 extends z.TypeOf<typeof UserLinkedPlatformsResponseV3> {}

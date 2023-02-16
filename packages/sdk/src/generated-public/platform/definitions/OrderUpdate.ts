@@ -22,4 +22,4 @@ export const OrderUpdate = z.object({
   statusReason: z.string()
 })
 
-export type OrderUpdate = z.TypeOf<typeof OrderUpdate>
+export interface OrderUpdate extends z.TypeOf<typeof OrderUpdate> {}

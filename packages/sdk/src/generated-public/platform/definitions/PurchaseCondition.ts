@@ -8,4 +8,4 @@ import { ConditionGroup } from './ConditionGroup'
 
 export const PurchaseCondition = z.object({ conditionGroups: z.array(ConditionGroup).nullish() })
 
-export type PurchaseCondition = z.TypeOf<typeof PurchaseCondition>
+export interface PurchaseCondition extends z.TypeOf<typeof PurchaseCondition> {}

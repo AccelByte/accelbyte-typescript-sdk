@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const XblDlcSyncRequest = z.object({ xstsToken: z.string().nullish() })
 
-export type XblDlcSyncRequest = z.TypeOf<typeof XblDlcSyncRequest>
+export interface XblDlcSyncRequest extends z.TypeOf<typeof XblDlcSyncRequest> {}

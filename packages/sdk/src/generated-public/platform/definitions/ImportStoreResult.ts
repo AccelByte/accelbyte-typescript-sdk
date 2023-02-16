@@ -13,4 +13,4 @@ export const ImportStoreResult = z.object({
   errors: z.array(ImportStoreError).nullish()
 })
 
-export type ImportStoreResult = z.TypeOf<typeof ImportStoreResult>
+export interface ImportStoreResult extends z.TypeOf<typeof ImportStoreResult> {}

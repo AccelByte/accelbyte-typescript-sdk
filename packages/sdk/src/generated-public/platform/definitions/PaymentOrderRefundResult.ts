@@ -29,4 +29,4 @@ export const PaymentOrderRefundResult = z.object({
   refundedTime: z.string().nullish()
 })
 
-export type PaymentOrderRefundResult = z.TypeOf<typeof PaymentOrderRefundResult>
+export interface PaymentOrderRefundResult extends z.TypeOf<typeof PaymentOrderRefundResult> {}

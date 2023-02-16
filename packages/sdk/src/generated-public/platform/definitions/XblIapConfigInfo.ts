@@ -12,4 +12,4 @@ export const XblIapConfigInfo = z.object({
   password: z.string().nullish()
 })
 
-export type XblIapConfigInfo = z.TypeOf<typeof XblIapConfigInfo>
+export interface XblIapConfigInfo extends z.TypeOf<typeof XblIapConfigInfo> {}

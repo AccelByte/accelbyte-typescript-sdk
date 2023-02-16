@@ -13,4 +13,4 @@ export const JwtBanV3 = z.object({
   targetedNamespace: z.string()
 })
 
-export type JwtBanV3 = z.TypeOf<typeof JwtBanV3>
+export interface JwtBanV3 extends z.TypeOf<typeof JwtBanV3> {}

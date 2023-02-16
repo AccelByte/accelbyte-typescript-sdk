@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const GrantSubscriptionDaysRequest = z.object({ grantDays: z.number().int(), reason: z.string().nullish() })
 
-export type GrantSubscriptionDaysRequest = z.TypeOf<typeof GrantSubscriptionDaysRequest>
+export interface GrantSubscriptionDaysRequest extends z.TypeOf<typeof GrantSubscriptionDaysRequest> {}

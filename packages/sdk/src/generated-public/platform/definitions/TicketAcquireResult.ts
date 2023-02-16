@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TicketAcquireResult = z.object({ values: z.array(z.string()).nullish() })
 
-export type TicketAcquireResult = z.TypeOf<typeof TicketAcquireResult>
+export interface TicketAcquireResult extends z.TypeOf<typeof TicketAcquireResult> {}

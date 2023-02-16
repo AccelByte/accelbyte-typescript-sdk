@@ -13,4 +13,4 @@ export const UpdateLocalizedPolicyVersionRequest = z.object({
   description: z.string().nullish()
 })
 
-export type UpdateLocalizedPolicyVersionRequest = z.TypeOf<typeof UpdateLocalizedPolicyVersionRequest>
+export interface UpdateLocalizedPolicyVersionRequest extends z.TypeOf<typeof UpdateLocalizedPolicyVersionRequest> {}

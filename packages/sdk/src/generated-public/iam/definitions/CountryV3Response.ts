@@ -12,4 +12,4 @@ export const CountryV3Response = z.object({
   enable: z.boolean()
 })
 
-export type CountryV3Response = z.TypeOf<typeof CountryV3Response>
+export interface CountryV3Response extends z.TypeOf<typeof CountryV3Response> {}

@@ -8,4 +8,4 @@ import { InputValidationData } from './InputValidationData'
 
 export const InputValidationsResponse = z.object({ data: z.array(InputValidationData), version: z.number().int() })
 
-export type InputValidationsResponse = z.TypeOf<typeof InputValidationsResponse>
+export interface InputValidationsResponse extends z.TypeOf<typeof InputValidationsResponse> {}

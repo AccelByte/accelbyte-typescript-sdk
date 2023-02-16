@@ -9,4 +9,4 @@ import { UserPersonalData } from './UserPersonalData'
 
 export const UserPersonalDataResponse = z.object({ Data: z.array(UserPersonalData), Paging: Pagination })
 
-export type UserPersonalDataResponse = z.TypeOf<typeof UserPersonalDataResponse>
+export interface UserPersonalDataResponse extends z.TypeOf<typeof UserPersonalDataResponse> {}

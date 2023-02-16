@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserPlatformInfo = z.object({ platformId: z.string(), platformUserId: z.string(), userId: z.string() })
 
-export type UserPlatformInfo = z.TypeOf<typeof UserPlatformInfo>
+export interface UserPlatformInfo extends z.TypeOf<typeof UserPlatformInfo> {}

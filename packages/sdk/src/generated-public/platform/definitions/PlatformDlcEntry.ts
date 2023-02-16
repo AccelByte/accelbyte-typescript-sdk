@@ -10,4 +10,4 @@ export const PlatformDlcEntry = z.object({
   platformDlcIdMap: z.record(z.string()).nullish()
 })
 
-export type PlatformDlcEntry = z.TypeOf<typeof PlatformDlcEntry>
+export interface PlatformDlcEntry extends z.TypeOf<typeof PlatformDlcEntry> {}

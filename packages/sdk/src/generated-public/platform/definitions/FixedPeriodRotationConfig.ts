@@ -12,4 +12,4 @@ export const FixedPeriodRotationConfig = z.object({
   itemCount: z.number().int().nullish()
 })
 
-export type FixedPeriodRotationConfig = z.TypeOf<typeof FixedPeriodRotationConfig>
+export interface FixedPeriodRotationConfig extends z.TypeOf<typeof FixedPeriodRotationConfig> {}

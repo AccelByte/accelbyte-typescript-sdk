@@ -16,4 +16,4 @@ export const CreditRevocation = z.object({
   reason: z.string().nullish()
 })
 
-export type CreditRevocation = z.TypeOf<typeof CreditRevocation>
+export interface CreditRevocation extends z.TypeOf<typeof CreditRevocation> {}

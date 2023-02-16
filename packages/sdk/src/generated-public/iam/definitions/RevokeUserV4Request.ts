@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RevokeUserV4Request = z.object({ namespace: z.string(), userId: z.string() })
 
-export type RevokeUserV4Request = z.TypeOf<typeof RevokeUserV4Request>
+export interface RevokeUserV4Request extends z.TypeOf<typeof RevokeUserV4Request> {}

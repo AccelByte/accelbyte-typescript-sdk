@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ItemPurchaseConditionValidateRequest = z.object({ itemIds: z.array(z.string()).nullish() })
 
-export type ItemPurchaseConditionValidateRequest = z.TypeOf<typeof ItemPurchaseConditionValidateRequest>
+export interface ItemPurchaseConditionValidateRequest extends z.TypeOf<typeof ItemPurchaseConditionValidateRequest> {}

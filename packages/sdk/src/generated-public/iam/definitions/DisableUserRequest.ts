@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const DisableUserRequest = z.object({ Reason: z.string().nullish() })
 
-export type DisableUserRequest = z.TypeOf<typeof DisableUserRequest>
+export interface DisableUserRequest extends z.TypeOf<typeof DisableUserRequest> {}

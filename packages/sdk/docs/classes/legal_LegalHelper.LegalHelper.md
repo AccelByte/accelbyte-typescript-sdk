@@ -34,7 +34,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `policies` | { `basePolicyId`: `string` ; `baseUrls`: `undefined` \| ``null`` \| `string`[] ; `countryCode`: `string` ; `countryGroupCode`: `undefined` \| ``null`` \| `string` ; `createdAt`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `id`: `string` ; `isDefaultOpted`: `boolean` ; `isDefaultSelection`: `boolean` ; `isMandatory`: `boolean` ; `namespace`: `string` ; `policyName`: `string` ; `policyType`: `string` ; `policyVersions`: `undefined` \| ``null`` \| { status?: string \| null \| undefined; createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; description?: string \| null \| undefined; publishedDate?: string \| null \| undefined; ... 4 more ...; isInEffect: boolean; }[] ; `readableId`: `undefined` \| ``null`` \| `string` ; `shouldNotifyOnUpdate`: `boolean` ; `tags`: `undefined` \| ``null`` \| `string`[] ; `updatedAt`: `undefined` \| ``null`` \| `string`  }[] |
+| `policies` | `RetrievePolicyPublicResponse`[] |
 | `namespace` | `string` |
 
 #### Returns
@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:30](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/legal/LegalHelper.ts#L30)
+[packages/sdk/src/api/legal/LegalHelper.ts:30](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/legal/LegalHelper.ts#L30)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/legal/LegalHelper.ts#L56)
+[packages/sdk/src/api/legal/LegalHelper.ts:56](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/legal/LegalHelper.ts#L56)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `eligibilities?` | ``null`` \| { `baseUrls`: `undefined` \| ``null`` \| `string`[] ; `countryCode`: `string` ; `countryGroupCode`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `isAccepted`: `boolean` ; `isMandatory`: `boolean` ; `namespace`: `string` ; `policyId`: `string` ; `policyName`: `string` ; `policyType`: `string` ; `policyVersions`: `undefined` \| ``null`` \| { status?: string \| null \| undefined; createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; description?: string \| null \| undefined; publishedDate?: string \| null \| undefined; ... 4 more ...; isInEffect: boolean; }[] ; `readableId`: `undefined` \| ``null`` \| `string`  }[] |
+| `eligibilities?` | ``null`` \| `RetrieveUserEligibilitiesResponseArray` |
 
 #### Returns
 
@@ -84,44 +84,44 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/legal/LegalHelper.ts#L85)
+[packages/sdk/src/api/legal/LegalHelper.ts:85](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/legal/LegalHelper.ts#L85)
 
 ___
 
 ### getAcceptedPolicies
 
-▸ `Static` **getAcceptedPolicies**(`eligibilities`): { `isAccepted`: `boolean` ; `localizedPolicyVersionId`: `string` ; `policyId`: `string` ; `policyVersionId`: `string`  }[]
+▸ `Static` **getAcceptedPolicies**(`eligibilities`): `AcceptedPoliciesRequest`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `eligibilities` | { `baseUrls`: `undefined` \| ``null`` \| `string`[] ; `countryCode`: `string` ; `countryGroupCode`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `isAccepted`: `boolean` ; `isMandatory`: `boolean` ; `namespace`: `string` ; `policyId`: `string` ; `policyName`: `string` ; `policyType`: `string` ; `policyVersions`: `undefined` \| ``null`` \| { status?: string \| null \| undefined; createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; description?: string \| null \| undefined; publishedDate?: string \| null \| undefined; ... 4 more ...; isInEffect: boolean; }[] ; `readableId`: `undefined` \| ``null`` \| `string`  }[] |
+| `eligibilities` | `RetrieveUserEligibilitiesResponseArray` |
 
 #### Returns
 
-{ `isAccepted`: `boolean` ; `localizedPolicyVersionId`: `string` ; `policyId`: `string` ; `policyVersionId`: `string`  }[]
+`AcceptedPoliciesRequest`[]
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:64](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/legal/LegalHelper.ts#L64)
+[packages/sdk/src/api/legal/LegalHelper.ts:64](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/legal/LegalHelper.ts#L64)
 
 ___
 
 ### getUnsignedPolicies
 
-▸ `Static` **getUnsignedPolicies**(`userEligibilities`): { `baseUrls`: `undefined` \| ``null`` \| `string`[] ; `countryCode`: `string` ; `countryGroupCode`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `isAccepted`: `boolean` ; `isMandatory`: `boolean` ; `namespace`: `string` ; `policyId`: `string` ; `policyName`: `string` ; `policyType`: `string` ; `policyVersions`: `undefined` \| ``null`` \| { status?: string \| null \| undefined; createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; description?: string \| null \| undefined; publishedDate?: string \| null \| undefined; ... 4 more ...; isInEffect: boolean; }[] ; `readableId`: `undefined` \| ``null`` \| `string`  }[]
+▸ `Static` **getUnsignedPolicies**(`userEligibilities`): `RetrieveUserEligibilitiesResponseArray`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `userEligibilities` | { `baseUrls`: `undefined` \| ``null`` \| `string`[] ; `countryCode`: `string` ; `countryGroupCode`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `isAccepted`: `boolean` ; `isMandatory`: `boolean` ; `namespace`: `string` ; `policyId`: `string` ; `policyName`: `string` ; `policyType`: `string` ; `policyVersions`: `undefined` \| ``null`` \| { status?: string \| null \| undefined; createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; description?: string \| null \| undefined; publishedDate?: string \| null \| undefined; ... 4 more ...; isInEffect: boolean; }[] ; `readableId`: `undefined` \| ``null`` \| `string`  }[] |
+| `userEligibilities` | `RetrieveUserEligibilitiesResponseArray` |
 
 #### Returns
 
-{ `baseUrls`: `undefined` \| ``null`` \| `string`[] ; `countryCode`: `string` ; `countryGroupCode`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `isAccepted`: `boolean` ; `isMandatory`: `boolean` ; `namespace`: `string` ; `policyId`: `string` ; `policyName`: `string` ; `policyType`: `string` ; `policyVersions`: `undefined` \| ``null`` \| { status?: string \| null \| undefined; createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; description?: string \| null \| undefined; publishedDate?: string \| null \| undefined; ... 4 more ...; isInEffect: boolean; }[] ; `readableId`: `undefined` \| ``null`` \| `string`  }[]
+`RetrieveUserEligibilitiesResponseArray`
 
 #### Defined in
 
-[packages/sdk/src/api/legal/LegalHelper.ts:16](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/legal/LegalHelper.ts#L16)
+[packages/sdk/src/api/legal/LegalHelper.ts:16](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/legal/LegalHelper.ts#L16)

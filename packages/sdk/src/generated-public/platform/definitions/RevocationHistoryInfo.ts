@@ -24,4 +24,4 @@ export const RevocationHistoryInfo = z.object({
   updatedAt: z.string().nullish()
 })
 
-export type RevocationHistoryInfo = z.TypeOf<typeof RevocationHistoryInfo>
+export interface RevocationHistoryInfo extends z.TypeOf<typeof RevocationHistoryInfo> {}

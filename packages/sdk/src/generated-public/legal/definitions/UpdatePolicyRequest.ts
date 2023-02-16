@@ -14,4 +14,4 @@ export const UpdatePolicyRequest = z.object({
   isDefaultOpted: z.boolean()
 })
 
-export type UpdatePolicyRequest = z.TypeOf<typeof UpdatePolicyRequest>
+export interface UpdatePolicyRequest extends z.TypeOf<typeof UpdatePolicyRequest> {}

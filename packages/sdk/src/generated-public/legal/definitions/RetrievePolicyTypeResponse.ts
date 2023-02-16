@@ -14,4 +14,4 @@ export const RetrievePolicyTypeResponse = z.object({
   isNeedDocument: z.boolean()
 })
 
-export type RetrievePolicyTypeResponse = z.TypeOf<typeof RetrievePolicyTypeResponse>
+export interface RetrievePolicyTypeResponse extends z.TypeOf<typeof RetrievePolicyTypeResponse> {}

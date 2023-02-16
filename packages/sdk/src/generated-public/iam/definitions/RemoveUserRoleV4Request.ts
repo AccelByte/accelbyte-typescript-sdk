@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RemoveUserRoleV4Request = z.object({ assignedNamespaces: z.array(z.string()), roleId: z.string() })
 
-export type RemoveUserRoleV4Request = z.TypeOf<typeof RemoveUserRoleV4Request>
+export interface RemoveUserRoleV4Request extends z.TypeOf<typeof RemoveUserRoleV4Request> {}

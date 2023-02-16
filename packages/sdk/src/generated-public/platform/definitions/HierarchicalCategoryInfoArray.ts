@@ -8,4 +8,4 @@ import { HierarchicalCategoryInfo } from './HierarchicalCategoryInfo'
 
 export const HierarchicalCategoryInfoArray = z.array(HierarchicalCategoryInfo)
 
-export type HierarchicalCategoryInfoArray = z.TypeOf<typeof HierarchicalCategoryInfoArray>
+export interface HierarchicalCategoryInfoArray extends z.TypeOf<typeof HierarchicalCategoryInfoArray> {}

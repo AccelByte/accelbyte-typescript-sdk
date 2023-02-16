@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const NamespaceStatusUpdate = z.object({ status: z.enum(['ACTIVE', 'INACTIVE']) })
 
-export type NamespaceStatusUpdate = z.TypeOf<typeof NamespaceStatusUpdate>
+export interface NamespaceStatusUpdate extends z.TypeOf<typeof NamespaceStatusUpdate> {}

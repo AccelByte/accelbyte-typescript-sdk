@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const GoogleReceiptResolveResult = z.object({ needConsume: z.boolean().nullish() })
 
-export type GoogleReceiptResolveResult = z.TypeOf<typeof GoogleReceiptResolveResult>
+export interface GoogleReceiptResolveResult extends z.TypeOf<typeof GoogleReceiptResolveResult> {}

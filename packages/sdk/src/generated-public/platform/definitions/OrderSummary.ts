@@ -8,4 +8,4 @@ import { CurrencySummary } from './CurrencySummary'
 
 export const OrderSummary = z.object({ currency: CurrencySummary.nullish(), ext: z.record(z.any()).nullish(), free: z.boolean().nullish() })
 
-export type OrderSummary = z.TypeOf<typeof OrderSummary>
+export interface OrderSummary extends z.TypeOf<typeof OrderSummary> {}

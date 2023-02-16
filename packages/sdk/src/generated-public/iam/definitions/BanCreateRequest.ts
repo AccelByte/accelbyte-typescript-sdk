@@ -13,4 +13,4 @@ export const BanCreateRequest = z.object({
   skipNotif: z.boolean()
 })
 
-export type BanCreateRequest = z.TypeOf<typeof BanCreateRequest>
+export interface BanCreateRequest extends z.TypeOf<typeof BanCreateRequest> {}

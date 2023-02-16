@@ -15,4 +15,4 @@ export const PersonalData = z.object({
   UserID: z.string()
 })
 
-export type PersonalData = z.TypeOf<typeof PersonalData>
+export interface PersonalData extends z.TypeOf<typeof PersonalData> {}

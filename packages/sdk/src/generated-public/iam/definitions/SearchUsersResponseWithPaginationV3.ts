@@ -13,4 +13,4 @@ export const SearchUsersResponseWithPaginationV3 = z.object({
   totalData: z.number().int()
 })
 
-export type SearchUsersResponseWithPaginationV3 = z.TypeOf<typeof SearchUsersResponseWithPaginationV3>
+export interface SearchUsersResponseWithPaginationV3 extends z.TypeOf<typeof SearchUsersResponseWithPaginationV3> {}

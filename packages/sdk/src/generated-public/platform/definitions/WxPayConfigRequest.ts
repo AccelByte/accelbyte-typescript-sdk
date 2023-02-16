@@ -12,4 +12,4 @@ export const WxPayConfigRequest = z.object({
   returnUrl: z.string().nullish()
 })
 
-export type WxPayConfigRequest = z.TypeOf<typeof WxPayConfigRequest>
+export interface WxPayConfigRequest extends z.TypeOf<typeof WxPayConfigRequest> {}

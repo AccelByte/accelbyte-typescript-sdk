@@ -9,4 +9,4 @@ import { SubscriptionActivityInfo } from './SubscriptionActivityInfo'
 
 export const SubscriptionActivityPagingSlicedResult = z.object({ data: z.array(SubscriptionActivityInfo), paging: Paging.nullish() })
 
-export type SubscriptionActivityPagingSlicedResult = z.TypeOf<typeof SubscriptionActivityPagingSlicedResult>
+export interface SubscriptionActivityPagingSlicedResult extends z.TypeOf<typeof SubscriptionActivityPagingSlicedResult> {}

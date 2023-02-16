@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const Subscribable = z.object({ subscribable: z.boolean() })
 
-export type Subscribable = z.TypeOf<typeof Subscribable>
+export interface Subscribable extends z.TypeOf<typeof Subscribable> {}

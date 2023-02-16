@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const XblIapConfigRequest = z.object({ relyingPartyCert: z.string() })
 
-export type XblIapConfigRequest = z.TypeOf<typeof XblIapConfigRequest>
+export interface XblIapConfigRequest extends z.TypeOf<typeof XblIapConfigRequest> {}

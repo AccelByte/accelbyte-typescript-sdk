@@ -16,7 +16,7 @@
 
 ### acceptLegalPolicies
 
-▸ **acceptLegalPolicies**(`acceptAgreements`): `Promise`<`IResponse`<{ `comply`: `boolean` ; `ext`: `undefined` \| ``null`` \| `Record`<`string`, `any`\> ; `proceed`: `boolean`  }\>\>
+▸ **acceptLegalPolicies**(`acceptAgreements`): `Promise`<`IResponse`<`AcceptAgreementResponse`\>\>
 
 Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
 
@@ -24,31 +24,31 @@ Accepts many legal policy versions all at once. Supply with localized version po
 
 | Name | Type |
 | :------ | :------ |
-| `acceptAgreements` | { `isAccepted`: `boolean` ; `isNeedToSendEventMarketing`: `undefined` \| ``null`` \| `boolean` ; `localizedPolicyVersionId`: `string` ; `policyId`: `string` ; `policyVersionId`: `string`  }[] |
+| `acceptAgreements` | `AcceptAgreementRequest`[] |
 
 #### Returns
 
-`Promise`<`IResponse`<{ `comply`: `boolean` ; `ext`: `undefined` \| ``null`` \| `Record`<`string`, `any`\> ; `proceed`: `boolean`  }\>\>
+`Promise`<`IResponse`<`AcceptAgreementResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/legal/AgreementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/legal/AgreementApi.ts#L20)
+[packages/sdk/src/api/legal/AgreementApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/legal/AgreementApi.ts#L20)
 
 ___
 
 ### getAgreements
 
-▸ **getAgreements**(): `Promise`<`IResponseWithSync`<{ `countryCode`: `undefined` \| ``null`` \| `string` ; `createdAt`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `id`: `string` ; `isAccepted`: `undefined` \| ``null`` \| `boolean` ; `localizedPolicyVersion`: `undefined` \| ``null`` \| { contentType?: string \| null \| undefined; status?: string \| null \| undefined; createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; description?: string \| null \| undefined; ... 6 more ...; isDefaultSelection: boolean; } ; `namespace`: `undefined` \| ``null`` \| `string` ; `policyId`: `undefined` \| ``null`` \| `string` ; `policyName`: `undefined` \| ``null`` \| `string` ; `policyType`: `undefined` \| ``null`` \| `string` ; `signingDate`: `undefined` \| ``null`` \| `string` ; `updatedAt`: `undefined` \| ``null`` \| `string` ; `userId`: `undefined` \| ``null`` \| `string`  }[]\>\>
+▸ **getAgreements**(): `Promise`<`IResponseWithSync`<`RetrieveAcceptedAgreementResponseArray`\>\>
 
 Retrieve accepted Legal Agreements.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `countryCode`: `undefined` \| ``null`` \| `string` ; `createdAt`: `undefined` \| ``null`` \| `string` ; `description`: `undefined` \| ``null`` \| `string` ; `displayVersion`: `undefined` \| ``null`` \| `string` ; `id`: `string` ; `isAccepted`: `undefined` \| ``null`` \| `boolean` ; `localizedPolicyVersion`: `undefined` \| ``null`` \| { contentType?: string \| null \| undefined; status?: string \| null \| undefined; createdAt?: string \| null \| undefined; updatedAt?: string \| null \| undefined; description?: string \| null \| undefined; ... 6 more ...; isDefaultSelection: boolean; } ; `namespace`: `undefined` \| ``null`` \| `string` ; `policyId`: `undefined` \| ``null`` \| `string` ; `policyName`: `undefined` \| ``null`` \| `string` ; `policyType`: `undefined` \| ``null`` \| `string` ; `signingDate`: `undefined` \| ``null`` \| `string` ; `updatedAt`: `undefined` \| ``null`` \| `string` ; `userId`: `undefined` \| ``null`` \| `string`  }[]\>\>
+`Promise`<`IResponseWithSync`<`RetrieveAcceptedAgreementResponseArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/legal/AgreementApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/legal/AgreementApi.ts#L27)
+[packages/sdk/src/api/legal/AgreementApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/legal/AgreementApi.ts#L27)
 
 ___
 
@@ -62,7 +62,7 @@ Change marketing preference consent.<br>Other detail info: <ul><li><i>Required p
 
 | Name | Type |
 | :------ | :------ |
-| `acceptAgreements` | { `isAccepted`: `boolean` ; `isNeedToSendEventMarketing`: `undefined` \| ``null`` \| `boolean` ; `localizedPolicyVersionId`: `string` ; `policyId`: `string` ; `policyVersionId`: `string`  }[] |
+| `acceptAgreements` | `AcceptAgreementRequest`[] |
 
 #### Returns
 
@@ -70,4 +70,4 @@ Change marketing preference consent.<br>Other detail info: <ul><li><i>Required p
 
 #### Defined in
 
-[packages/sdk/src/api/legal/AgreementApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/legal/AgreementApi.ts#L34)
+[packages/sdk/src/api/legal/AgreementApi.ts:34](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/legal/AgreementApi.ts#L34)

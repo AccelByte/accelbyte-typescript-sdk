@@ -13,4 +13,4 @@ export const ItemPurchaseConditionValidateResult = z.object({
   validateDetails: z.array(ConditionGroupValidateResult).nullish()
 })
 
-export type ItemPurchaseConditionValidateResult = z.TypeOf<typeof ItemPurchaseConditionValidateResult>
+export interface ItemPurchaseConditionValidateResult extends z.TypeOf<typeof ItemPurchaseConditionValidateResult> {}

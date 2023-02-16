@@ -13,4 +13,4 @@ export const ImportStoreError = z.object({
   errors: z.array(ImportErrorDetails).nullish()
 })
 
-export type ImportStoreError = z.TypeOf<typeof ImportStoreError>
+export interface ImportStoreError extends z.TypeOf<typeof ImportStoreError> {}

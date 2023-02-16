@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const AvatarSyncRequestV4 = z.object({ avatarUrl: z.string(), updatedAt: z.number().int() })
 
-export type AvatarSyncRequestV4 = z.TypeOf<typeof AvatarSyncRequestV4>
+export interface AvatarSyncRequestV4 extends z.TypeOf<typeof AvatarSyncRequestV4> {}

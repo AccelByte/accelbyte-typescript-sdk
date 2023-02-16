@@ -15,4 +15,5 @@ export const UpgradeHeadlessAccountWithVerificationCodeRequestV3 = z.object({
   validateOnly: z.boolean().nullish()
 })
 
-export type UpgradeHeadlessAccountWithVerificationCodeRequestV3 = z.TypeOf<typeof UpgradeHeadlessAccountWithVerificationCodeRequestV3>
+export interface UpgradeHeadlessAccountWithVerificationCodeRequestV3
+  extends z.TypeOf<typeof UpgradeHeadlessAccountWithVerificationCodeRequestV3> {}

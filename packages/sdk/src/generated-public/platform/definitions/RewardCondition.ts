@@ -13,4 +13,4 @@ export const RewardCondition = z.object({
   rewardItems: z.array(RewardItem).nullish()
 })
 
-export type RewardCondition = z.TypeOf<typeof RewardCondition>
+export interface RewardCondition extends z.TypeOf<typeof RewardCondition> {}

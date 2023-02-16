@@ -18,4 +18,4 @@ export const RoleV3 = z.object({
   roleName: z.string()
 })
 
-export type RoleV3 = z.TypeOf<typeof RoleV3>
+export interface RoleV3 extends z.TypeOf<typeof RoleV3> {}

@@ -15,7 +15,7 @@
 
 ### getCountries
 
-▸ **getCountries**(`lang?`): `Promise`<`IResponseWithSync`<{ `code`: `undefined` \| ``null`` \| `string` ; `name`: `undefined` \| ``null`` \| `string`  }[]\>\>
+▸ **getCountries**(`lang?`): `Promise`<`IResponseWithSync`<`CountryObjectArray`\>\>
 
 List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
 
@@ -27,11 +27,11 @@ List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list<
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `code`: `undefined` \| ``null`` \| `string` ; `name`: `undefined` \| ``null`` \| `string`  }[]\>\>
+`Promise`<`IResponseWithSync`<`CountryObjectArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/basic/MiscApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/basic/MiscApi.ts#L19)
+[packages/sdk/src/api/basic/MiscApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/basic/MiscApi.ts#L19)
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/basic/MiscApi.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/basic/MiscApi.ts#L23)
+[packages/sdk/src/api/basic/MiscApi.ts:23](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/basic/MiscApi.ts#L23)

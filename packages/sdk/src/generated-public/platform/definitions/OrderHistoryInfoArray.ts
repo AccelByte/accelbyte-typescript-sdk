@@ -8,4 +8,4 @@ import { OrderHistoryInfo } from './OrderHistoryInfo'
 
 export const OrderHistoryInfoArray = z.array(OrderHistoryInfo)
 
-export type OrderHistoryInfoArray = z.TypeOf<typeof OrderHistoryInfoArray>
+export interface OrderHistoryInfoArray extends z.TypeOf<typeof OrderHistoryInfoArray> {}

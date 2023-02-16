@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserRolesV4Response = z.object({ assignedNamespaces: z.array(z.string()), roleId: z.string(), roleName: z.string() })
 
-export type UserRolesV4Response = z.TypeOf<typeof UserRolesV4Response>
+export interface UserRolesV4Response extends z.TypeOf<typeof UserRolesV4Response> {}

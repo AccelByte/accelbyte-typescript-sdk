@@ -15,30 +15,30 @@
 
 ### getCurrencies
 
-▸ **getCurrencies**(): `Promise`<`IResponseWithSync`<{ `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `currencyType`: ``"REAL"`` \| ``"VIRTUAL"`` ; `decimals`: `number` ; `localizationDescriptions`: `undefined` \| ``null`` \| `Record`<`string`, `string`\> ; `namespace`: `string` ; `updatedAt`: `string`  }[]\>\>
+▸ **getCurrencies**(): `Promise`<`IResponseWithSync`<`CurrencyInfoArray`\>\>
 
 List currencies of a namespace.<br>Other detail info: <ul><li><i>Returns</i>: Currency List</li></ul>
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `currencyType`: ``"REAL"`` \| ``"VIRTUAL"`` ; `decimals`: `number` ; `localizationDescriptions`: `undefined` \| ``null`` \| `Record`<`string`, `string`\> ; `namespace`: `string` ; `updatedAt`: `string`  }[]\>\>
+`Promise`<`IResponseWithSync`<`CurrencyInfoArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/CurrencyApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/CurrencyApi.ts#L20)
+[packages/sdk/src/api/platform/CurrencyApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/CurrencyApi.ts#L20)
 
 ___
 
 ### getCurrencyMap
 
-▸ **getCurrencyMap**(): `Promise`<{ `error`: `IResponseError` ; `onSync`: (`syncedData`: (`_`: `IResponse`<{ `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `currencyType`: ``"REAL"`` \| ``"VIRTUAL"`` ; `decimals`: `number` ; `localizationDescriptions`: `undefined` \| ``null`` \| `Record`<`string`, `string`\> ; `namespace`: `string` ; `updatedAt`: `string`  }[]\>) => `void`) => `void` ; `response`: ``null``  } \| { `error`: ``null`` = result.error; `value`: `Map`<`string`, { `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `currencyType`: ``"REAL"`` \| ``"VIRTUAL"`` ; `decimals`: `number` ; `localizationDescriptions`: `undefined` \| ``null`` \| `Record`<`string`, `string`\> ; `namespace`: `string` ; `updatedAt`: `string`  }\>  }\>
+▸ **getCurrencyMap**(): `Promise`<{ `error`: `IResponseError` ; `onSync`: (`syncedData`: (`_`: `IResponse`<`CurrencyInfoArray`\>) => `void`) => `void` ; `response`: ``null``  } \| { `error`: ``null`` = result.error; `value`: `Map`<`string`, `CurrencyInfo`\>  }\>
 
 Get the currencies list and convert into a map of currency code and the currency itself
 
 #### Returns
 
-`Promise`<{ `error`: `IResponseError` ; `onSync`: (`syncedData`: (`_`: `IResponse`<{ `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `currencyType`: ``"REAL"`` \| ``"VIRTUAL"`` ; `decimals`: `number` ; `localizationDescriptions`: `undefined` \| ``null`` \| `Record`<`string`, `string`\> ; `namespace`: `string` ; `updatedAt`: `string`  }[]\>) => `void`) => `void` ; `response`: ``null``  } \| { `error`: ``null`` = result.error; `value`: `Map`<`string`, { `createdAt`: `string` ; `currencyCode`: `string` ; `currencySymbol`: `string` ; `currencyType`: ``"REAL"`` \| ``"VIRTUAL"`` ; `decimals`: `number` ; `localizationDescriptions`: `undefined` \| ``null`` \| `Record`<`string`, `string`\> ; `namespace`: `string` ; `updatedAt`: `string`  }\>  }\>
+`Promise`<{ `error`: `IResponseError` ; `onSync`: (`syncedData`: (`_`: `IResponse`<`CurrencyInfoArray`\>) => `void`) => `void` ; `response`: ``null``  } \| { `error`: ``null`` = result.error; `value`: `Map`<`string`, `CurrencyInfo`\>  }\>
 
 #### Defined in
 
-[packages/sdk/src/api/platform/CurrencyApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/platform/CurrencyApi.ts#L27)
+[packages/sdk/src/api/platform/CurrencyApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/platform/CurrencyApi.ts#L27)

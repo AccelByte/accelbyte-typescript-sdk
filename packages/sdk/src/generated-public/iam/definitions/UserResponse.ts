@@ -38,4 +38,4 @@ export const UserResponse = z.object({
   XUID: z.string().nullish()
 })
 
-export type UserResponse = z.TypeOf<typeof UserResponse>
+export interface UserResponse extends z.TypeOf<typeof UserResponse> {}

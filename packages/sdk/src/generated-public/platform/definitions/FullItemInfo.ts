@@ -67,4 +67,4 @@ export const FullItemInfo = z.object({
   lootBoxConfig: LootBoxConfig.nullish()
 })
 
-export type FullItemInfo = z.TypeOf<typeof FullItemInfo>
+export interface FullItemInfo extends z.TypeOf<typeof FullItemInfo> {}

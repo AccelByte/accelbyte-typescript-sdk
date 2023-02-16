@@ -26,4 +26,4 @@ export const ValidationDetail = z.object({
   specialCharacters: z.array(z.string())
 })
 
-export type ValidationDetail = z.TypeOf<typeof ValidationDetail>
+export interface ValidationDetail extends z.TypeOf<typeof ValidationDetail> {}

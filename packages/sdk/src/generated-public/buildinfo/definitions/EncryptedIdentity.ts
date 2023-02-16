@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EncryptedIdentity = z.object({ data: z.string().nullish() })
 
-export type EncryptedIdentity = z.TypeOf<typeof EncryptedIdentity>
+export interface EncryptedIdentity extends z.TypeOf<typeof EncryptedIdentity> {}

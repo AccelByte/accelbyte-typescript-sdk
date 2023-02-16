@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UpgradeHeadlessAccountRequest = z.object({ LoginID: z.string(), Password: z.string() })
 
-export type UpgradeHeadlessAccountRequest = z.TypeOf<typeof UpgradeHeadlessAccountRequest>
+export interface UpgradeHeadlessAccountRequest extends z.TypeOf<typeof UpgradeHeadlessAccountRequest> {}

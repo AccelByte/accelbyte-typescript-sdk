@@ -12,4 +12,4 @@ export const UserUpdateRequest = z.object({
   LanguageTag: z.string().nullish()
 })
 
-export type UserUpdateRequest = z.TypeOf<typeof UserUpdateRequest>
+export interface UserUpdateRequest extends z.TypeOf<typeof UserUpdateRequest> {}

@@ -11,4 +11,4 @@ export const PreCheckUploadRequest = z.object({
   destinationFilePath: z.string().nullish()
 })
 
-export type PreCheckUploadRequest = z.TypeOf<typeof PreCheckUploadRequest>
+export interface PreCheckUploadRequest extends z.TypeOf<typeof PreCheckUploadRequest> {}

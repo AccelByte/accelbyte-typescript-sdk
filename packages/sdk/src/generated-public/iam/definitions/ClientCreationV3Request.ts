@@ -28,4 +28,4 @@ export const ClientCreationV3Request = z.object({
   twoFactorEnabled: z.boolean().nullish()
 })
 
-export type ClientCreationV3Request = z.TypeOf<typeof ClientCreationV3Request>
+export interface ClientCreationV3Request extends z.TypeOf<typeof ClientCreationV3Request> {}

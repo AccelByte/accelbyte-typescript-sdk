@@ -9,4 +9,4 @@ import { Pagination } from './Pagination'
 
 export const DeviceBannedResponseV4 = z.object({ data: z.array(DeviceBanResponseV4), paging: Pagination })
 
-export type DeviceBannedResponseV4 = z.TypeOf<typeof DeviceBannedResponseV4>
+export interface DeviceBannedResponseV4 extends z.TypeOf<typeof DeviceBannedResponseV4> {}

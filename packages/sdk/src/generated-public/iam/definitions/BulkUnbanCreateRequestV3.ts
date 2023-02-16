@@ -8,4 +8,4 @@ import { UserUnbanCreateRequestV3 } from './UserUnbanCreateRequestV3'
 
 export const BulkUnbanCreateRequestV3 = z.object({ bans: z.array(UserUnbanCreateRequestV3).nullish() })
 
-export type BulkUnbanCreateRequestV3 = z.TypeOf<typeof BulkUnbanCreateRequestV3>
+export interface BulkUnbanCreateRequestV3 extends z.TypeOf<typeof BulkUnbanCreateRequestV3> {}

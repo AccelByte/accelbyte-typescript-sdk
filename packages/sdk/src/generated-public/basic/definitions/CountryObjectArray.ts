@@ -8,4 +8,4 @@ import { CountryObject } from './CountryObject'
 
 export const CountryObjectArray = z.array(CountryObject)
 
-export type CountryObjectArray = z.TypeOf<typeof CountryObjectArray>
+export interface CountryObjectArray extends z.TypeOf<typeof CountryObjectArray> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RecurringChargeResult = z.object({ triggered: z.boolean(), code: z.string().nullish(), detail: z.string().nullish() })
 
-export type RecurringChargeResult = z.TypeOf<typeof RecurringChargeResult>
+export interface RecurringChargeResult extends z.TypeOf<typeof RecurringChargeResult> {}

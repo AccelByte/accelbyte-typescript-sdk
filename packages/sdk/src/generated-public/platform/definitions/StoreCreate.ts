@@ -14,4 +14,4 @@ export const StoreCreate = z.object({
   defaultLanguage: z.string().nullish()
 })
 
-export type StoreCreate = z.TypeOf<typeof StoreCreate>
+export interface StoreCreate extends z.TypeOf<typeof StoreCreate> {}

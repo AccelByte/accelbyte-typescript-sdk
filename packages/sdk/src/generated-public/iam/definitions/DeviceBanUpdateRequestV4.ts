@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const DeviceBanUpdateRequestV4 = z.object({ enabled: z.boolean() })
 
-export type DeviceBanUpdateRequestV4 = z.TypeOf<typeof DeviceBanUpdateRequestV4>
+export interface DeviceBanUpdateRequestV4 extends z.TypeOf<typeof DeviceBanUpdateRequestV4> {}

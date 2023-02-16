@@ -15,4 +15,4 @@ export const SteamSyncRequest = z.object({
   currencyCode: z.string().nullish()
 })
 
-export type SteamSyncRequest = z.TypeOf<typeof SteamSyncRequest>
+export interface SteamSyncRequest extends z.TypeOf<typeof SteamSyncRequest> {}

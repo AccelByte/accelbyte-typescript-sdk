@@ -8,4 +8,4 @@ import { BoxItem } from './BoxItem'
 
 export const OptionBoxConfig = z.object({ boxItems: z.array(BoxItem).nullish() })
 
-export type OptionBoxConfig = z.TypeOf<typeof OptionBoxConfig>
+export interface OptionBoxConfig extends z.TypeOf<typeof OptionBoxConfig> {}

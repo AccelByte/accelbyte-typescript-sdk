@@ -8,4 +8,4 @@ import { PlayStationReconcileResult } from './PlayStationReconcileResult'
 
 export const PlayStationReconcileResultArray = z.array(PlayStationReconcileResult)
 
-export type PlayStationReconcileResultArray = z.TypeOf<typeof PlayStationReconcileResultArray>
+export interface PlayStationReconcileResultArray extends z.TypeOf<typeof PlayStationReconcileResultArray> {}

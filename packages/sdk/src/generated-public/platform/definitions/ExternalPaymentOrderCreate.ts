@@ -32,4 +32,4 @@ export const ExternalPaymentOrderCreate = z.object({
   targetUserId: z.string()
 })
 
-export type ExternalPaymentOrderCreate = z.TypeOf<typeof ExternalPaymentOrderCreate>
+export interface ExternalPaymentOrderCreate extends z.TypeOf<typeof ExternalPaymentOrderCreate> {}

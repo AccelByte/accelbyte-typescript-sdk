@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const Customization = z.object({ settings: z.string().nullish() })
 
-export type Customization = z.TypeOf<typeof Customization>
+export interface Customization extends z.TypeOf<typeof Customization> {}

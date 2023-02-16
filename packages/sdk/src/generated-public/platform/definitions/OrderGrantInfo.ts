@@ -9,4 +9,4 @@ import { EntitlementSummary } from './EntitlementSummary'
 
 export const OrderGrantInfo = z.object({ entitlements: z.array(EntitlementSummary).nullish(), credits: z.array(CreditSummary).nullish() })
 
-export type OrderGrantInfo = z.TypeOf<typeof OrderGrantInfo>
+export interface OrderGrantInfo extends z.TypeOf<typeof OrderGrantInfo> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RoleUpdateRequest = z.object({ RoleName: z.string() })
 
-export type RoleUpdateRequest = z.TypeOf<typeof RoleUpdateRequest>
+export interface RoleUpdateRequest extends z.TypeOf<typeof RoleUpdateRequest> {}

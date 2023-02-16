@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ServicePluginConfigInfo = z.object({ namespace: z.string().nullish(), grpcServerAddress: z.string().nullish() })
 
-export type ServicePluginConfigInfo = z.TypeOf<typeof ServicePluginConfigInfo>
+export interface ServicePluginConfigInfo extends z.TypeOf<typeof ServicePluginConfigInfo> {}

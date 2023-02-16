@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const CurrencyUpdate = z.object({ localizationDescriptions: z.record(z.string()).nullish() })
 
-export type CurrencyUpdate = z.TypeOf<typeof CurrencyUpdate>
+export interface CurrencyUpdate extends z.TypeOf<typeof CurrencyUpdate> {}

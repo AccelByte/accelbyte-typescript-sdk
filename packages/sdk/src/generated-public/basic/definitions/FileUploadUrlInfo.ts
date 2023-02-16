@@ -12,4 +12,4 @@ export const FileUploadUrlInfo = z.object({
   contentType: z.string().nullish()
 })
 
-export type FileUploadUrlInfo = z.TypeOf<typeof FileUploadUrlInfo>
+export interface FileUploadUrlInfo extends z.TypeOf<typeof FileUploadUrlInfo> {}

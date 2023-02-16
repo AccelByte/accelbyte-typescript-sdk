@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ADtoObjectForOrderCreationOptions } from './ADtoObjectForOrderCreationOptions'
 import { CurrencySummary } from './CurrencySummary'
 import { ItemSnapshot } from './ItemSnapshot'
+import { OrderCreationOptions } from './OrderCreationOptions'
 
 export const OrderInfo = z.object({
   orderNo: z.string(),
@@ -18,7 +18,7 @@ export const OrderInfo = z.object({
   quantity: z.number().int(),
   price: z.number().int(),
   discountedPrice: z.number().int(),
-  creationOptions: ADtoObjectForOrderCreationOptions.nullish(),
+  creationOptions: OrderCreationOptions.nullish(),
   paymentProvider: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']).nullish(),
   paymentMethod: z.string().nullish(),
   tax: z.number().int().nullish(),
@@ -61,4 +61,4 @@ export const OrderInfo = z.object({
   updatedAt: z.string()
 })
 
-export type OrderInfo = z.TypeOf<typeof OrderInfo>
+export interface OrderInfo extends z.TypeOf<typeof OrderInfo> {}

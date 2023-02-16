@@ -11,4 +11,4 @@ export const BackupCodesResponseV4 = z.object({
   validCodes: z.array(z.string()).nullish()
 })
 
-export type BackupCodesResponseV4 = z.TypeOf<typeof BackupCodesResponseV4>
+export interface BackupCodesResponseV4 extends z.TypeOf<typeof BackupCodesResponseV4> {}

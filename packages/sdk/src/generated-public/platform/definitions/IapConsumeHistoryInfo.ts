@@ -21,4 +21,4 @@ export const IapConsumeHistoryInfo = z.object({
   clientRequestParameter: ClientRequestParameter.nullish()
 })
 
-export type IapConsumeHistoryInfo = z.TypeOf<typeof IapConsumeHistoryInfo>
+export interface IapConsumeHistoryInfo extends z.TypeOf<typeof IapConsumeHistoryInfo> {}

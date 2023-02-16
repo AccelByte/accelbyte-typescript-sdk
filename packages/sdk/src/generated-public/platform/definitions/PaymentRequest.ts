@@ -10,4 +10,4 @@ export const PaymentRequest = z.object({
   walletPlatform: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Nintendo', 'Other']).nullish()
 })
 
-export type PaymentRequest = z.TypeOf<typeof PaymentRequest>
+export interface PaymentRequest extends z.TypeOf<typeof PaymentRequest> {}

@@ -12,4 +12,4 @@ export const RedeemableItem = z.object({
   extraSubscriptionDays: z.number().int().nullish()
 })
 
-export type RedeemableItem = z.TypeOf<typeof RedeemableItem>
+export interface RedeemableItem extends z.TypeOf<typeof RedeemableItem> {}

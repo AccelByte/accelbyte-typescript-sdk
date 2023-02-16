@@ -11,4 +11,4 @@ export const RevokeCurrency = z.object({
   balanceOrigin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
 })
 
-export type RevokeCurrency = z.TypeOf<typeof RevokeCurrency>
+export interface RevokeCurrency extends z.TypeOf<typeof RevokeCurrency> {}

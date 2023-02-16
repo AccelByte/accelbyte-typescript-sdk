@@ -8,4 +8,4 @@ import { DurableEntitlementRevocationConfig } from './DurableEntitlementRevocati
 
 export const EntitlementRevocationConfig = z.object({ durable: DurableEntitlementRevocationConfig.nullish() })
 
-export type EntitlementRevocationConfig = z.TypeOf<typeof EntitlementRevocationConfig>
+export interface EntitlementRevocationConfig extends z.TypeOf<typeof EntitlementRevocationConfig> {}

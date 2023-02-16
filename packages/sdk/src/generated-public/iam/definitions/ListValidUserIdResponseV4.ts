@@ -8,4 +8,4 @@ import { ValidUserIdResponseV4 } from './ValidUserIdResponseV4'
 
 export const ListValidUserIdResponseV4 = z.object({ data: z.array(ValidUserIdResponseV4) })
 
-export type ListValidUserIdResponseV4 = z.TypeOf<typeof ListValidUserIdResponseV4>
+export interface ListValidUserIdResponseV4 extends z.TypeOf<typeof ListValidUserIdResponseV4> {}

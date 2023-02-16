@@ -8,4 +8,4 @@ import { JwkKey } from './JwkKey'
 
 export const JwkSet = z.object({ keys: z.array(JwkKey) })
 
-export type JwkSet = z.TypeOf<typeof JwkSet>
+export interface JwkSet extends z.TypeOf<typeof JwkSet> {}

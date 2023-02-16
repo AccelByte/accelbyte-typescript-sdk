@@ -11,4 +11,4 @@ export const EntitlementDecrement = z.object({
   requestId: z.string().nullish()
 })
 
-export type EntitlementDecrement = z.TypeOf<typeof EntitlementDecrement>
+export interface EntitlementDecrement extends z.TypeOf<typeof EntitlementDecrement> {}

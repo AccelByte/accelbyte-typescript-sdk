@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RetrieveUserEligibilitiesIndirectResponse = z.object({ isComply: z.boolean() })
 
-export type RetrieveUserEligibilitiesIndirectResponse = z.TypeOf<typeof RetrieveUserEligibilitiesIndirectResponse>
+export interface RetrieveUserEligibilitiesIndirectResponse extends z.TypeOf<typeof RetrieveUserEligibilitiesIndirectResponse> {}

@@ -9,4 +9,4 @@ import { RedeemHistoryInfo } from './RedeemHistoryInfo'
 
 export const RedeemHistoryPagingSlicedResult = z.object({ data: z.array(RedeemHistoryInfo), paging: Paging.nullish() })
 
-export type RedeemHistoryPagingSlicedResult = z.TypeOf<typeof RedeemHistoryPagingSlicedResult>
+export interface RedeemHistoryPagingSlicedResult extends z.TypeOf<typeof RedeemHistoryPagingSlicedResult> {}

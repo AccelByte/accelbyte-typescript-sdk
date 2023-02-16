@@ -12,4 +12,4 @@ export const ViewUpdate = z.object({
   localizations: z.record(Localization).nullish()
 })
 
-export type ViewUpdate = z.TypeOf<typeof ViewUpdate>
+export interface ViewUpdate extends z.TypeOf<typeof ViewUpdate> {}

@@ -21,4 +21,4 @@ export const AdyenConfig = z.object({
   dropInSettings: z.string().nullish()
 })
 
-export type AdyenConfig = z.TypeOf<typeof AdyenConfig>
+export interface AdyenConfig extends z.TypeOf<typeof AdyenConfig> {}

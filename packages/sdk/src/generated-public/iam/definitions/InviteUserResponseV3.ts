@@ -8,4 +8,4 @@ import { UserInvitationV3 } from './UserInvitationV3'
 
 export const InviteUserResponseV3 = z.object({ data: z.array(UserInvitationV3) })
 
-export type InviteUserResponseV3 = z.TypeOf<typeof InviteUserResponseV3>
+export interface InviteUserResponseV3 extends z.TypeOf<typeof InviteUserResponseV3> {}

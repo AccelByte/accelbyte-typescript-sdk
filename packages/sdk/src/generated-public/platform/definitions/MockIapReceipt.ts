@@ -13,4 +13,4 @@ export const MockIapReceipt = z.object({
   language: z.string().nullish()
 })
 
-export type MockIapReceipt = z.TypeOf<typeof MockIapReceipt>
+export interface MockIapReceipt extends z.TypeOf<typeof MockIapReceipt> {}

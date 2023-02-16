@@ -8,4 +8,4 @@ import { Ux } from './Ux'
 
 export const MultipleUx = z.object({ UX: z.array(Ux) })
 
-export type MultipleUx = z.TypeOf<typeof MultipleUx>
+export interface MultipleUx extends z.TypeOf<typeof MultipleUx> {}

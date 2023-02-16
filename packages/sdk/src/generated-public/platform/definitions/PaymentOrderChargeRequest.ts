@@ -11,4 +11,4 @@ export const PaymentOrderChargeRequest = z.object({
   extTxId: z.string().nullish()
 })
 
-export type PaymentOrderChargeRequest = z.TypeOf<typeof PaymentOrderChargeRequest>
+export interface PaymentOrderChargeRequest extends z.TypeOf<typeof PaymentOrderChargeRequest> {}

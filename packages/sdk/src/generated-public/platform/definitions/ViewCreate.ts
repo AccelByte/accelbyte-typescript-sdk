@@ -8,4 +8,4 @@ import { Localization } from './Localization'
 
 export const ViewCreate = z.object({ name: z.string(), displayOrder: z.number().int(), localizations: z.record(Localization) })
 
-export type ViewCreate = z.TypeOf<typeof ViewCreate>
+export interface ViewCreate extends z.TypeOf<typeof ViewCreate> {}

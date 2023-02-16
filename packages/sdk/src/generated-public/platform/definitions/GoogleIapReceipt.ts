@@ -16,4 +16,4 @@ export const GoogleIapReceipt = z.object({
   language: z.string().nullish()
 })
 
-export type GoogleIapReceipt = z.TypeOf<typeof GoogleIapReceipt>
+export interface GoogleIapReceipt extends z.TypeOf<typeof GoogleIapReceipt> {}

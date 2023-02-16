@@ -14,4 +14,4 @@ export const SteamIapConfig = z.object({
   appId: z.string().nullish()
 })
 
-export type SteamIapConfig = z.TypeOf<typeof SteamIapConfig>
+export interface SteamIapConfig extends z.TypeOf<typeof SteamIapConfig> {}

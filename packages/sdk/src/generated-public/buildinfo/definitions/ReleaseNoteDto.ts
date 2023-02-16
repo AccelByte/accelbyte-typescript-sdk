@@ -17,4 +17,4 @@ export const ReleaseNoteDto = z.object({
   updatedAt: z.string().nullish()
 })
 
-export type ReleaseNoteDto = z.TypeOf<typeof ReleaseNoteDto>
+export interface ReleaseNoteDto extends z.TypeOf<typeof ReleaseNoteDto> {}

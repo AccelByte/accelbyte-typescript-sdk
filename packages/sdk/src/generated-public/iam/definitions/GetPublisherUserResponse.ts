@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const GetPublisherUserResponse = z.object({ Namespace: z.string(), UserId: z.string() })
 
-export type GetPublisherUserResponse = z.TypeOf<typeof GetPublisherUserResponse>
+export interface GetPublisherUserResponse extends z.TypeOf<typeof GetPublisherUserResponse> {}

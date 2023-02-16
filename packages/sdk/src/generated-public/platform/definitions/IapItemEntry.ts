@@ -11,4 +11,4 @@ export const IapItemEntry = z.object({
   platformProductIdMap: z.record(z.string()).nullish()
 })
 
-export type IapItemEntry = z.TypeOf<typeof IapItemEntry>
+export interface IapItemEntry extends z.TypeOf<typeof IapItemEntry> {}

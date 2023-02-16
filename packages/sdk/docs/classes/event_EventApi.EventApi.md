@@ -14,7 +14,7 @@
 
 ### getAccountHistoryByUserId
 
-▸ **getAccountHistoryByUserId**(`«destructured»`): `Promise`<`IResponseWithSync`<{ `data`: { payload?: Record<string, any\> \| null \| undefined; name: string; namespace: string; clientId: string; userId: string; version: number; id: string; sessionId: string; timestamp: string; traceId: string; }[] ; `paging`: { first?: string \| null \| undefined; last?: string \| null \| undefined; next?: string \| null \| undefined; previous?: string \| null \| undefined; } = Paging }\>\>
+▸ **getAccountHistoryByUserId**(`«destructured»`): `Promise`<`IResponseWithSync`<`EventResponseV2`\>\>
 
 <p>Available Type: </p>
      <ul>
@@ -42,8 +42,8 @@
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `data`: { payload?: Record<string, any\> \| null \| undefined; name: string; namespace: string; clientId: string; userId: string; version: number; id: string; sessionId: string; timestamp: string; traceId: string; }[] ; `paging`: { first?: string \| null \| undefined; last?: string \| null \| undefined; next?: string \| null \| undefined; previous?: string \| null \| undefined; } = Paging }\>\>
+`Promise`<`IResponseWithSync`<`EventResponseV2`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/event/EventApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/event/EventApi.ts#L28)
+[packages/sdk/src/api/event/EventApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/event/EventApi.ts#L28)

@@ -11,4 +11,4 @@ export const UploadLocalizedPolicyVersionAttachmentResponse = z.object({
   attachmentUploadUrl: z.string().nullish()
 })
 
-export type UploadLocalizedPolicyVersionAttachmentResponse = z.TypeOf<typeof UploadLocalizedPolicyVersionAttachmentResponse>
+export interface UploadLocalizedPolicyVersionAttachmentResponse extends z.TypeOf<typeof UploadLocalizedPolicyVersionAttachmentResponse> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const DebitRequest = z.object({ amount: z.number().int(), reason: z.string().nullish() })
 
-export type DebitRequest = z.TypeOf<typeof DebitRequest>
+export interface DebitRequest extends z.TypeOf<typeof DebitRequest> {}

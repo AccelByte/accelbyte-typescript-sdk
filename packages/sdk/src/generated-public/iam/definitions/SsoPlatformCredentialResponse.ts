@@ -18,4 +18,4 @@ export const SsoPlatformCredentialResponse = z.object({
   truncatedApiKey: z.string()
 })
 
-export type SsoPlatformCredentialResponse = z.TypeOf<typeof SsoPlatformCredentialResponse>
+export interface SsoPlatformCredentialResponse extends z.TypeOf<typeof SsoPlatformCredentialResponse> {}

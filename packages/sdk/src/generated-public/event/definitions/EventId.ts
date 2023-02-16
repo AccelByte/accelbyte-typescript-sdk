@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EventId = z.object({ Description: z.string(), EventID: z.number().int() })
 
-export type EventId = z.TypeOf<typeof EventId>
+export interface EventId extends z.TypeOf<typeof EventId> {}

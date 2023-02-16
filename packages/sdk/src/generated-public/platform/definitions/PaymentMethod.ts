@@ -11,4 +11,4 @@ export const PaymentMethod = z.object({
   enableTax: z.string().nullish()
 })
 
-export type PaymentMethod = z.TypeOf<typeof PaymentMethod>
+export interface PaymentMethod extends z.TypeOf<typeof PaymentMethod> {}

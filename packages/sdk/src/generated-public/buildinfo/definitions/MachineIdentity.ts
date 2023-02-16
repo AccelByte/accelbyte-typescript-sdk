@@ -11,4 +11,4 @@ export const MachineIdentity = z.object({
   requestDate: z.string().nullish()
 })
 
-export type MachineIdentity = z.TypeOf<typeof MachineIdentity>
+export interface MachineIdentity extends z.TypeOf<typeof MachineIdentity> {}

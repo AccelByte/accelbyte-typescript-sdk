@@ -8,4 +8,4 @@ import { EventLevel } from './EventLevel'
 
 export const MultipleEventLevel = z.object({ EventLevel: z.array(EventLevel) })
 
-export type MultipleEventLevel = z.TypeOf<typeof MultipleEventLevel>
+export interface MultipleEventLevel extends z.TypeOf<typeof MultipleEventLevel> {}

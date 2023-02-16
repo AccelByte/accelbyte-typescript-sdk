@@ -12,4 +12,4 @@ export const FulfillmentScriptEvalTestRequest = z.object({
   script: z.string()
 })
 
-export type FulfillmentScriptEvalTestRequest = z.TypeOf<typeof FulfillmentScriptEvalTestRequest>
+export interface FulfillmentScriptEvalTestRequest extends z.TypeOf<typeof FulfillmentScriptEvalTestRequest> {}

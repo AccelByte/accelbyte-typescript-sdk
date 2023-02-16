@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const GameTokenCodeResponse = z.object({ code: z.string() })
 
-export type GameTokenCodeResponse = z.TypeOf<typeof GameTokenCodeResponse>
+export interface GameTokenCodeResponse extends z.TypeOf<typeof GameTokenCodeResponse> {}

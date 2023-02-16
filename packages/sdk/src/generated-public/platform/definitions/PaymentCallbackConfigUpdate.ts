@@ -11,4 +11,4 @@ export const PaymentCallbackConfigUpdate = z.object({
   dryRun: z.boolean().nullish()
 })
 
-export type PaymentCallbackConfigUpdate = z.TypeOf<typeof PaymentCallbackConfigUpdate>
+export interface PaymentCallbackConfigUpdate extends z.TypeOf<typeof PaymentCallbackConfigUpdate> {}

@@ -13,4 +13,4 @@ export const XblReconcileResult = z.object({
   iapOrderStatus: z.enum(['VERIFIED', 'FULFILLED', 'FAILED']).nullish()
 })
 
-export type XblReconcileResult = z.TypeOf<typeof XblReconcileResult>
+export interface XblReconcileResult extends z.TypeOf<typeof XblReconcileResult> {}

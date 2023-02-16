@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserDataUrl = z.object({ URL: z.string() })
 
-export type UserDataUrl = z.TypeOf<typeof UserDataUrl>
+export interface UserDataUrl extends z.TypeOf<typeof UserDataUrl> {}

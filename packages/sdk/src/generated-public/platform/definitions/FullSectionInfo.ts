@@ -29,4 +29,4 @@ export const FullSectionInfo = z.object({
   displayOrder: z.number().int().nullish()
 })
 
-export type FullSectionInfo = z.TypeOf<typeof FullSectionInfo>
+export interface FullSectionInfo extends z.TypeOf<typeof FullSectionInfo> {}

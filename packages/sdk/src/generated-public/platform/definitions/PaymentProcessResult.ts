@@ -12,4 +12,4 @@ export const PaymentProcessResult = z.object({
   reason: z.string().nullish()
 })
 
-export type PaymentProcessResult = z.TypeOf<typeof PaymentProcessResult>
+export interface PaymentProcessResult extends z.TypeOf<typeof PaymentProcessResult> {}

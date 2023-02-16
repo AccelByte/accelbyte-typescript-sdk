@@ -12,4 +12,4 @@ export const ValidationErrorEntity = z.object({
   errors: z.array(FieldValidationError).nullish()
 })
 
-export type ValidationErrorEntity = z.TypeOf<typeof ValidationErrorEntity>
+export interface ValidationErrorEntity extends z.TypeOf<typeof ValidationErrorEntity> {}

@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const SteamAchievementRequest = z.object({ id: z.string().nullish(), value: z.number().int().nullish() })
+export const OrderCreationOptions = z.object({ skipPriceValidation: z.boolean().nullish() })
 
-export type SteamAchievementRequest = z.TypeOf<typeof SteamAchievementRequest>
+export interface OrderCreationOptions extends z.TypeOf<typeof OrderCreationOptions> {}

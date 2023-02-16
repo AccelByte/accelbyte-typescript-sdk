@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TestResult = z.object({ success: z.boolean(), msg: z.string().nullish() })
 
-export type TestResult = z.TypeOf<typeof TestResult>
+export interface TestResult extends z.TypeOf<typeof TestResult> {}

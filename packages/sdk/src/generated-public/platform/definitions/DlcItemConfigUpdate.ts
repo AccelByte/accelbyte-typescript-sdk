@@ -8,4 +8,4 @@ import { DlcItem } from './DlcItem'
 
 export const DlcItemConfigUpdate = z.object({ data: z.array(DlcItem).nullish() })
 
-export type DlcItemConfigUpdate = z.TypeOf<typeof DlcItemConfigUpdate>
+export interface DlcItemConfigUpdate extends z.TypeOf<typeof DlcItemConfigUpdate> {}

@@ -11,4 +11,4 @@ export const SendVerificationCodeRequestV3 = z.object({
   languageTag: z.string().nullish()
 })
 
-export type SendVerificationCodeRequestV3 = z.TypeOf<typeof SendVerificationCodeRequestV3>
+export interface SendVerificationCodeRequestV3 extends z.TypeOf<typeof SendVerificationCodeRequestV3> {}

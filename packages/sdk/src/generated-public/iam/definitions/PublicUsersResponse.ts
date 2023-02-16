@@ -8,4 +8,4 @@ import { PublicUserResponse } from './PublicUserResponse'
 
 export const PublicUsersResponse = z.object({ Users: z.array(PublicUserResponse).nullish() })
 
-export type PublicUsersResponse = z.TypeOf<typeof PublicUsersResponse>
+export interface PublicUsersResponse extends z.TypeOf<typeof PublicUsersResponse> {}

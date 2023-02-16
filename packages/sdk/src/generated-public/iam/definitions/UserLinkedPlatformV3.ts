@@ -17,4 +17,4 @@ export const UserLinkedPlatformV3 = z.object({
   userId: z.string()
 })
 
-export type UserLinkedPlatformV3 = z.TypeOf<typeof UserLinkedPlatformV3>
+export interface UserLinkedPlatformV3 extends z.TypeOf<typeof UserLinkedPlatformV3> {}

@@ -12,4 +12,4 @@ export const TaxResult = z.object({
   state: z.string().nullish()
 })
 
-export type TaxResult = z.TypeOf<typeof TaxResult>
+export interface TaxResult extends z.TypeOf<typeof TaxResult> {}

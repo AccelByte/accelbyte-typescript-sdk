@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PingResultResponse = z.object({ resp: z.string().nullish() })
 
-export type PingResultResponse = z.TypeOf<typeof PingResultResponse>
+export interface PingResultResponse extends z.TypeOf<typeof PingResultResponse> {}

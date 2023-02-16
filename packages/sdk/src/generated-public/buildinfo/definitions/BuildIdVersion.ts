@@ -16,4 +16,4 @@ export const BuildIdVersion = z.object({
   updatedTime: z.string().nullish()
 })
 
-export type BuildIdVersion = z.TypeOf<typeof BuildIdVersion>
+export interface BuildIdVersion extends z.TypeOf<typeof BuildIdVersion> {}

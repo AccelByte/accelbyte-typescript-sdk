@@ -14,7 +14,7 @@
 
 ### getDiffCache
 
-▸ **getDiffCache**(`sourceBuildId`, `destinationBuildId`): `Promise`<`IResponseWithSync`<{ `baseUrls`: `string`[] ; `diffCaches`: { url: string; filePath: string; diffFile: string; }[] ; `summaryFile`: `string`  }\>\>
+▸ **getDiffCache**(`sourceBuildId`, `destinationBuildId`): `Promise`<`IResponseWithSync`<`RetrieveDiffCacheResponse`\>\>
 
 This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
 
@@ -27,8 +27,8 @@ This API is used to retrieve detailed diff cache.<br/>The response will contains
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `baseUrls`: `string`[] ; `diffCaches`: { url: string; filePath: string; diffFile: string; }[] ; `summaryFile`: `string`  }\>\>
+`Promise`<`IResponseWithSync`<`RetrieveDiffCacheResponse`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/CachingApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/buildInfo/CachingApi.ts#L19)
+[packages/sdk/src/api/buildInfo/CachingApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/buildInfo/CachingApi.ts#L19)

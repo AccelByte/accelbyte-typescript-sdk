@@ -16,4 +16,4 @@ export const RevokeEntry = z.object({
   quantity: z.number().int().nullish()
 })
 
-export type RevokeEntry = z.TypeOf<typeof RevokeEntry>
+export interface RevokeEntry extends z.TypeOf<typeof RevokeEntry> {}

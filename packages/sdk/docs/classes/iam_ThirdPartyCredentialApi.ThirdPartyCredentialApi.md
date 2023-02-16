@@ -14,14 +14,14 @@
 
 ### getThirdPartyPlatformInfo
 
-▸ **getThirdPartyPlatformInfo**(): `Promise`<`IResponseWithSync`<{ `AppId`: `string` ; `ClientId`: `string` ; `Environment`: `string` ; `IsActive`: `boolean` ; `PlatformId`: `string` ; `PlatformName`: `string`  }[]\>\>
+▸ **getThirdPartyPlatformInfo**(): `Promise`<`IResponseWithSync`<`PublicThirdPartyPlatformInfoArray`\>\>
 
 This is the Public API to Get All Active 3rd Platform Credential.
 
 #### Returns
 
-`Promise`<`IResponseWithSync`<{ `AppId`: `string` ; `ClientId`: `string` ; `Environment`: `string` ; `IsActive`: `boolean` ; `PlatformId`: `string` ; `PlatformName`: `string`  }[]\>\>
+`Promise`<`IResponseWithSync`<`PublicThirdPartyPlatformInfoArray`\>\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/ThirdPartyCredentialApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/57827c8/packages/sdk/src/api/iam/ThirdPartyCredentialApi.ts#L19)
+[packages/sdk/src/api/iam/ThirdPartyCredentialApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/d43c233/packages/sdk/src/api/iam/ThirdPartyCredentialApi.ts#L19)

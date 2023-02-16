@@ -29,4 +29,4 @@ export const ClientV3Response = z.object({
   twoFactorEnabled: z.boolean()
 })
 
-export type ClientV3Response = z.TypeOf<typeof ClientV3Response>
+export interface ClientV3Response extends z.TypeOf<typeof ClientV3Response> {}

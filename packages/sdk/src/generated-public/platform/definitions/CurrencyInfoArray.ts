@@ -8,4 +8,4 @@ import { CurrencyInfo } from './CurrencyInfo'
 
 export const CurrencyInfoArray = z.array(CurrencyInfo)
 
-export type CurrencyInfoArray = z.TypeOf<typeof CurrencyInfoArray>
+export interface CurrencyInfoArray extends z.TypeOf<typeof CurrencyInfoArray> {}

@@ -9,4 +9,4 @@ import { Pagination } from './Pagination'
 
 export const ListDeletionDataResponse = z.object({ Data: z.array(DeletionData), Paging: Pagination })
 
-export type ListDeletionDataResponse = z.TypeOf<typeof ListDeletionDataResponse>
+export interface ListDeletionDataResponse extends z.TypeOf<typeof ListDeletionDataResponse> {}

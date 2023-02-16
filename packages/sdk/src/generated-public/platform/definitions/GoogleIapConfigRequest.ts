@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const GoogleIapConfigRequest = z.object({ applicationName: z.string(), serviceAccountId: z.string() })
 
-export type GoogleIapConfigRequest = z.TypeOf<typeof GoogleIapConfigRequest>
+export interface GoogleIapConfigRequest extends z.TypeOf<typeof GoogleIapConfigRequest> {}

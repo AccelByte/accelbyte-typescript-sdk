@@ -26,4 +26,4 @@ export const TokenResponse = z.object({
   user_id: z.string()
 })
 
-export type TokenResponse = z.TypeOf<typeof TokenResponse>
+export interface TokenResponse extends z.TypeOf<typeof TokenResponse> {}

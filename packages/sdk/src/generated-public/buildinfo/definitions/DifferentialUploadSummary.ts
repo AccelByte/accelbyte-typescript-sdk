@@ -14,4 +14,4 @@ export const DifferentialUploadSummary = z.object({
   status: z.number().int().nullish()
 })
 
-export type DifferentialUploadSummary = z.TypeOf<typeof DifferentialUploadSummary>
+export interface DifferentialUploadSummary extends z.TypeOf<typeof DifferentialUploadSummary> {}

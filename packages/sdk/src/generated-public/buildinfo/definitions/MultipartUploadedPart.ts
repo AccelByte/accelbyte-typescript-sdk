@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const MultipartUploadedPart = z.object({ partNumber: z.number().int(), etag: z.string() })
 
-export type MultipartUploadedPart = z.TypeOf<typeof MultipartUploadedPart>
+export interface MultipartUploadedPart extends z.TypeOf<typeof MultipartUploadedPart> {}

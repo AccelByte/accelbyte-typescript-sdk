@@ -17,4 +17,4 @@ export const CurrencyWallet = z.object({
   totalTimeLimitedBalance: z.number().int().nullish()
 })
 
-export type CurrencyWallet = z.TypeOf<typeof CurrencyWallet>
+export interface CurrencyWallet extends z.TypeOf<typeof CurrencyWallet> {}

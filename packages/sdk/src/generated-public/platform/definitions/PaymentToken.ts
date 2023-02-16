@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const PaymentToken = z.object({ token: z.string().nullish() })
 
-export type PaymentToken = z.TypeOf<typeof PaymentToken>
+export interface PaymentToken extends z.TypeOf<typeof PaymentToken> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const BlockDownloadUrlsRequest = z.object({ uuids: z.array(z.string()) })
 
-export type BlockDownloadUrlsRequest = z.TypeOf<typeof BlockDownloadUrlsRequest>
+export interface BlockDownloadUrlsRequest extends z.TypeOf<typeof BlockDownloadUrlsRequest> {}

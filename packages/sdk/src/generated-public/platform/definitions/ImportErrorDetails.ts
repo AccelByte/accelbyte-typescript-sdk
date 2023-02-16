@@ -11,4 +11,4 @@ export const ImportErrorDetails = z.object({
   messageVariables: z.record(z.string()).nullish()
 })
 
-export type ImportErrorDetails = z.TypeOf<typeof ImportErrorDetails>
+export interface ImportErrorDetails extends z.TypeOf<typeof ImportErrorDetails> {}

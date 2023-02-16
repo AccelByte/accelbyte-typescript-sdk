@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const AddUserRoleV4Request = z.object({ assignedNamespaces: z.array(z.string()), roleId: z.string() })
 
-export type AddUserRoleV4Request = z.TypeOf<typeof AddUserRoleV4Request>
+export interface AddUserRoleV4Request extends z.TypeOf<typeof AddUserRoleV4Request> {}

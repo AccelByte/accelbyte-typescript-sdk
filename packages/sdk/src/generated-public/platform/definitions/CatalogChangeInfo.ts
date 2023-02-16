@@ -28,4 +28,4 @@ export const CatalogChangeInfo = z.object({
   updatedAt: z.string()
 })
 
-export type CatalogChangeInfo = z.TypeOf<typeof CatalogChangeInfo>
+export interface CatalogChangeInfo extends z.TypeOf<typeof CatalogChangeInfo> {}

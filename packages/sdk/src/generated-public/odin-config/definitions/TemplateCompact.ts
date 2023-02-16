@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TemplateCompact = z.object({ namespace: z.string(), template: z.string() })
 
-export type TemplateCompact = z.TypeOf<typeof TemplateCompact>
+export interface TemplateCompact extends z.TypeOf<typeof TemplateCompact> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserBanRequest = z.object({ userIds: z.array(z.string()), actionId: z.number().int(), comment: z.string().nullish() })
 
-export type UserBanRequest = z.TypeOf<typeof UserBanRequest>
+export interface UserBanRequest extends z.TypeOf<typeof UserBanRequest> {}

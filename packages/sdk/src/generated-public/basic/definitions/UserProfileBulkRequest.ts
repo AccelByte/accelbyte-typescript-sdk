@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserProfileBulkRequest = z.object({ userIds: z.array(z.string()).nullish() })
 
-export type UserProfileBulkRequest = z.TypeOf<typeof UserProfileBulkRequest>
+export interface UserProfileBulkRequest extends z.TypeOf<typeof UserProfileBulkRequest> {}

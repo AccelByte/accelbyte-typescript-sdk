@@ -25,4 +25,4 @@ export const RetrieveLocalizedPolicyVersionPublicResponse = z.object({
   policy: PolicyObject
 })
 
-export type RetrieveLocalizedPolicyVersionPublicResponse = z.TypeOf<typeof RetrieveLocalizedPolicyVersionPublicResponse>
+export interface RetrieveLocalizedPolicyVersionPublicResponse extends z.TypeOf<typeof RetrieveLocalizedPolicyVersionPublicResponse> {}

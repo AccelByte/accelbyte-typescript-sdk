@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const WebLinkingResponse = z.object({ third_party_url: z.string() })
 
-export type WebLinkingResponse = z.TypeOf<typeof WebLinkingResponse>
+export interface WebLinkingResponse extends z.TypeOf<typeof WebLinkingResponse> {}

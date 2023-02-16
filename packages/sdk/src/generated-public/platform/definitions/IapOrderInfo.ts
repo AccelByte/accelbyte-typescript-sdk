@@ -31,4 +31,4 @@ export const IapOrderInfo = z.object({
   currencyCode: z.string().nullish()
 })
 
-export type IapOrderInfo = z.TypeOf<typeof IapOrderInfo>
+export interface IapOrderInfo extends z.TypeOf<typeof IapOrderInfo> {}

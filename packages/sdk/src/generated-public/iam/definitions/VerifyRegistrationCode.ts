@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const VerifyRegistrationCode = z.object({ code: z.string(), emailAddress: z.string() })
 
-export type VerifyRegistrationCode = z.TypeOf<typeof VerifyRegistrationCode>
+export interface VerifyRegistrationCode extends z.TypeOf<typeof VerifyRegistrationCode> {}

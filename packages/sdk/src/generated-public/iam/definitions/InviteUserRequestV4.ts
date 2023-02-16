@@ -13,4 +13,4 @@ export const InviteUserRequestV4 = z.object({
   roleId: z.string()
 })
 
-export type InviteUserRequestV4 = z.TypeOf<typeof InviteUserRequestV4>
+export interface InviteUserRequestV4 extends z.TypeOf<typeof InviteUserRequestV4> {}

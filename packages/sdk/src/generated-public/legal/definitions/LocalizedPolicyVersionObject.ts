@@ -20,4 +20,4 @@ export const LocalizedPolicyVersionObject = z.object({
   isDefaultSelection: z.boolean()
 })
 
-export type LocalizedPolicyVersionObject = z.TypeOf<typeof LocalizedPolicyVersionObject>
+export interface LocalizedPolicyVersionObject extends z.TypeOf<typeof LocalizedPolicyVersionObject> {}

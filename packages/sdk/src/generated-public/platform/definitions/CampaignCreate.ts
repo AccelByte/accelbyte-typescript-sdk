@@ -22,4 +22,4 @@ export const CampaignCreate = z.object({
   items: z.array(RedeemableItem).nullish()
 })
 
-export type CampaignCreate = z.TypeOf<typeof CampaignCreate>
+export interface CampaignCreate extends z.TypeOf<typeof CampaignCreate> {}

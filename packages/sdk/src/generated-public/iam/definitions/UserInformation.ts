@@ -16,4 +16,4 @@ export const UserInformation = z.object({
   XUID: z.string().nullish()
 })
 
-export type UserInformation = z.TypeOf<typeof UserInformation>
+export interface UserInformation extends z.TypeOf<typeof UserInformation> {}

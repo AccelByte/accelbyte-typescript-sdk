@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const EmailUpdateRequestV4 = z.object({ code: z.string(), emailAddress: z.string() })
 
-export type EmailUpdateRequestV4 = z.TypeOf<typeof EmailUpdateRequestV4>
+export interface EmailUpdateRequestV4 extends z.TypeOf<typeof EmailUpdateRequestV4> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ADtoObjectForEqu8UserBanStatus = z.object({ userId: z.string().nullish(), expires: z.string().nullish() })
 
-export type ADtoObjectForEqu8UserBanStatus = z.TypeOf<typeof ADtoObjectForEqu8UserBanStatus>
+export interface ADtoObjectForEqu8UserBanStatus extends z.TypeOf<typeof ADtoObjectForEqu8UserBanStatus> {}

@@ -1,6 +1,14 @@
+### 0.2.0-beta.1 - 2023-02-15
+
+- Release Web SDK as a Beta Version
+
+### 0.1.1-alpha.63 - 2023-02-15
+
+- Update codegen to emit `interface` instead of `type` when inferring Zod type
+
 ### 0.1.1-alpha.62 - 2023-02-08
 
-- Allow simplication when passing configs to widgetOptions in SdkWidget
+- Allow simplification when passing configs to widgetOptions in SdkWidget
 
 ### 0.1.1-alpha.61 - 2023-02-07
 

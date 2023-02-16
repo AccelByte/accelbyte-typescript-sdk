@@ -21,4 +21,4 @@ export const AppEntitlementInfo = z.object({
   itemSnapshot: ItemSnapshot.nullish()
 })
 
-export type AppEntitlementInfo = z.TypeOf<typeof AppEntitlementInfo>
+export interface AppEntitlementInfo extends z.TypeOf<typeof AppEntitlementInfo> {}

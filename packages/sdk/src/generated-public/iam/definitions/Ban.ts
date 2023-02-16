@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const Ban = z.object({ Ban: z.string(), Description: z.string() })
 
-export type Ban = z.TypeOf<typeof Ban>
+export interface Ban extends z.TypeOf<typeof Ban> {}

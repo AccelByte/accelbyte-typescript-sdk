@@ -9,4 +9,4 @@ import { PaymentProviderConfigInfo } from './PaymentProviderConfigInfo'
 
 export const PaymentProviderConfigPagingSlicedResult = z.object({ data: z.array(PaymentProviderConfigInfo), paging: Paging.nullish() })
 
-export type PaymentProviderConfigPagingSlicedResult = z.TypeOf<typeof PaymentProviderConfigPagingSlicedResult>
+export interface PaymentProviderConfigPagingSlicedResult extends z.TypeOf<typeof PaymentProviderConfigPagingSlicedResult> {}

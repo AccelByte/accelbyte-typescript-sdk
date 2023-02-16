@@ -8,4 +8,4 @@ import { Config } from './Config'
 
 export const Template = z.object({ configs: z.record(Config), namespace: z.string(), template: z.string(), version: z.number().int() })
 
-export type Template = z.TypeOf<typeof Template>
+export interface Template extends z.TypeOf<typeof Template> {}

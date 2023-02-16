@@ -12,4 +12,4 @@ export const NotificationProcessResult = z.object({
   severity: z.number().int().nullish()
 })
 
-export type NotificationProcessResult = z.TypeOf<typeof NotificationProcessResult>
+export interface NotificationProcessResult extends z.TypeOf<typeof NotificationProcessResult> {}

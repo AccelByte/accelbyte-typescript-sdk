@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const Error = z.object({ errorCode: z.number().int(), errorMessage: z.string() })
 
-export type Error = z.TypeOf<typeof Error>
+export interface Error extends z.TypeOf<typeof Error> {}

@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const SectionItem = z.object({ id: z.string(), sku: z.string().nullish() })
 
-export type SectionItem = z.TypeOf<typeof SectionItem>
+export interface SectionItem extends z.TypeOf<typeof SectionItem> {}

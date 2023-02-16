@@ -20,4 +20,4 @@ export const UserBanResponseV3 = z.object({
   userId: z.string()
 })
 
-export type UserBanResponseV3 = z.TypeOf<typeof UserBanResponseV3>
+export interface UserBanResponseV3 extends z.TypeOf<typeof UserBanResponseV3> {}

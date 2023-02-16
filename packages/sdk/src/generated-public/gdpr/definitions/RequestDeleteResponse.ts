@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const RequestDeleteResponse = z.object({ Namespace: z.string(), UserID: z.string() })
 
-export type RequestDeleteResponse = z.TypeOf<typeof RequestDeleteResponse>
+export interface RequestDeleteResponse extends z.TypeOf<typeof RequestDeleteResponse> {}

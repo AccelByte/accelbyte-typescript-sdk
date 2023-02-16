@@ -12,4 +12,4 @@ export const Recurring = z.object({
   graceDays: z.number().int()
 })
 
-export type Recurring = z.TypeOf<typeof Recurring>
+export interface Recurring extends z.TypeOf<typeof Recurring> {}

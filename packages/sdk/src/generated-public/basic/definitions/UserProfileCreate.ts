@@ -17,4 +17,4 @@ export const UserProfileCreate = z.object({
   timeZone: z.string().nullish()
 })
 
-export type UserProfileCreate = z.TypeOf<typeof UserProfileCreate>
+export interface UserProfileCreate extends z.TypeOf<typeof UserProfileCreate> {}

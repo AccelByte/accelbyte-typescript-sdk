@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const BannedByV3 = z.object({ displayName: z.string(), userId: z.string() })
 
-export type BannedByV3 = z.TypeOf<typeof BannedByV3>
+export interface BannedByV3 extends z.TypeOf<typeof BannedByV3> {}

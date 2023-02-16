@@ -39,4 +39,4 @@ export const ThirdPartyLoginPlatformCredentialResponse = z.object({
   scopes: z.array(z.string()).nullish()
 })
 
-export type ThirdPartyLoginPlatformCredentialResponse = z.TypeOf<typeof ThirdPartyLoginPlatformCredentialResponse>
+export interface ThirdPartyLoginPlatformCredentialResponse extends z.TypeOf<typeof ThirdPartyLoginPlatformCredentialResponse> {}

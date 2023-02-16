@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ADtoForUnbanUserApiCall = z.object({ userIds: z.array(z.string()), comment: z.string().nullish() })
 
-export type ADtoForUnbanUserApiCall = z.TypeOf<typeof ADtoForUnbanUserApiCall>
+export interface ADtoForUnbanUserApiCall extends z.TypeOf<typeof ADtoForUnbanUserApiCall> {}

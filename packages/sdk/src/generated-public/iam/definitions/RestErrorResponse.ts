@@ -11,4 +11,4 @@ export const RestErrorResponse = z.object({
   messageVariables: z.record(z.string()).nullish()
 })
 
-export type RestErrorResponse = z.TypeOf<typeof RestErrorResponse>
+export interface RestErrorResponse extends z.TypeOf<typeof RestErrorResponse> {}

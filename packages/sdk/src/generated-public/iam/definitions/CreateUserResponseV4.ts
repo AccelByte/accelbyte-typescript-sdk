@@ -16,4 +16,4 @@ export const CreateUserResponseV4 = z.object({
   username: z.string()
 })
 
-export type CreateUserResponseV4 = z.TypeOf<typeof CreateUserResponseV4>
+export interface CreateUserResponseV4 extends z.TypeOf<typeof CreateUserResponseV4> {}

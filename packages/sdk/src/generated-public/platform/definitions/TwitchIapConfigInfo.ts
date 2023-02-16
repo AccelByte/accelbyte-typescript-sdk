@@ -12,4 +12,4 @@ export const TwitchIapConfigInfo = z.object({
   organizationId: z.string().nullish()
 })
 
-export type TwitchIapConfigInfo = z.TypeOf<typeof TwitchIapConfigInfo>
+export interface TwitchIapConfigInfo extends z.TypeOf<typeof TwitchIapConfigInfo> {}

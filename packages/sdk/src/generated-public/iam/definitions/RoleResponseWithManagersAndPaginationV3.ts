@@ -9,4 +9,4 @@ import { RoleResponseWithManagersV3 } from './RoleResponseWithManagersV3'
 
 export const RoleResponseWithManagersAndPaginationV3 = z.object({ data: z.array(RoleResponseWithManagersV3), paging: PaginationV3 })
 
-export type RoleResponseWithManagersAndPaginationV3 = z.TypeOf<typeof RoleResponseWithManagersAndPaginationV3>
+export interface RoleResponseWithManagersAndPaginationV3 extends z.TypeOf<typeof RoleResponseWithManagersAndPaginationV3> {}

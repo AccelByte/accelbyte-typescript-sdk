@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const SteamDlcSyncRequest = z.object({ steamId: z.string(), appId: z.string().nullish() })
 
-export type SteamDlcSyncRequest = z.TypeOf<typeof SteamDlcSyncRequest>
+export interface SteamDlcSyncRequest extends z.TypeOf<typeof SteamDlcSyncRequest> {}

@@ -8,4 +8,4 @@ import { PurchaseCondition } from './PurchaseCondition'
 
 export const PurchaseConditionUpdate = z.object({ purchaseCondition: PurchaseCondition.nullish() })
 
-export type PurchaseConditionUpdate = z.TypeOf<typeof PurchaseConditionUpdate>
+export interface PurchaseConditionUpdate extends z.TypeOf<typeof PurchaseConditionUpdate> {}

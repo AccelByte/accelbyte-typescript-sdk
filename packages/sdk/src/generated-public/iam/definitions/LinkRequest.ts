@@ -25,4 +25,4 @@ export const LinkRequest = z.object({
   status: z.string()
 })
 
-export type LinkRequest = z.TypeOf<typeof LinkRequest>
+export interface LinkRequest extends z.TypeOf<typeof LinkRequest> {}

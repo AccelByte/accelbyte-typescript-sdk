@@ -8,4 +8,4 @@ import { PlatformReward } from './PlatformReward'
 
 export const DlcItem = z.object({ id: z.string().nullish(), rewards: z.array(PlatformReward).nullish() })
 
-export type DlcItem = z.TypeOf<typeof DlcItem>
+export interface DlcItem extends z.TypeOf<typeof DlcItem> {}

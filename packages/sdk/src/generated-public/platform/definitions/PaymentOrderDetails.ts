@@ -17,4 +17,4 @@ export const PaymentOrderDetails = z.object({
   charging: z.boolean()
 })
 
-export type PaymentOrderDetails = z.TypeOf<typeof PaymentOrderDetails>
+export interface PaymentOrderDetails extends z.TypeOf<typeof PaymentOrderDetails> {}

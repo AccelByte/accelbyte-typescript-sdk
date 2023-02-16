@@ -19,4 +19,4 @@ export const UpdateBasePolicyResponse = z.object({
   tags: z.array(z.string()).nullish()
 })
 
-export type UpdateBasePolicyResponse = z.TypeOf<typeof UpdateBasePolicyResponse>
+export interface UpdateBasePolicyResponse extends z.TypeOf<typeof UpdateBasePolicyResponse> {}

@@ -23,4 +23,4 @@ export const DiffPatchRequest = z.object({
   diffFileUrl: z.string().nullish()
 })
 
-export type DiffPatchRequest = z.TypeOf<typeof DiffPatchRequest>
+export interface DiffPatchRequest extends z.TypeOf<typeof DiffPatchRequest> {}

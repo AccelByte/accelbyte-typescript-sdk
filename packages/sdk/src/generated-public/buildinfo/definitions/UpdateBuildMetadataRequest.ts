@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UpdateBuildMetadataRequest = z.object({ launchArguments: z.string().nullish() })
 
-export type UpdateBuildMetadataRequest = z.TypeOf<typeof UpdateBuildMetadataRequest>
+export interface UpdateBuildMetadataRequest extends z.TypeOf<typeof UpdateBuildMetadataRequest> {}

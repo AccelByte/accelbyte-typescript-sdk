@@ -13,4 +13,4 @@ export const RevocationConfigInfo = z.object({
   wallet: WalletRevocationConfig.nullish()
 })
 
-export type RevocationConfigInfo = z.TypeOf<typeof RevocationConfigInfo>
+export interface RevocationConfigInfo extends z.TypeOf<typeof RevocationConfigInfo> {}

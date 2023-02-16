@@ -26,4 +26,4 @@ export const SectionInfo = z.object({
   localExt: z.record(z.any()).nullish()
 })
 
-export type SectionInfo = z.TypeOf<typeof SectionInfo>
+export interface SectionInfo extends z.TypeOf<typeof SectionInfo> {}

@@ -14,4 +14,4 @@ export const PaymentOrderNotifySimulation = z.object({
   salesTax: z.number().int().nullish()
 })
 
-export type PaymentOrderNotifySimulation = z.TypeOf<typeof PaymentOrderNotifySimulation>
+export interface PaymentOrderNotifySimulation extends z.TypeOf<typeof PaymentOrderNotifySimulation> {}

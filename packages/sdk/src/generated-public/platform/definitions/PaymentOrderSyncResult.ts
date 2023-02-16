@@ -8,4 +8,4 @@ import { PaymentOrder } from './PaymentOrder'
 
 export const PaymentOrderSyncResult = z.object({ paymentOrders: z.array(PaymentOrder).nullish(), nextEvaluatedKey: z.string().nullish() })
 
-export type PaymentOrderSyncResult = z.TypeOf<typeof PaymentOrderSyncResult>
+export interface PaymentOrderSyncResult extends z.TypeOf<typeof PaymentOrderSyncResult> {}

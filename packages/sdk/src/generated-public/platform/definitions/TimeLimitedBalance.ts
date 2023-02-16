@@ -11,4 +11,4 @@ export const TimeLimitedBalance = z.object({
   expireAt: z.string().nullish()
 })
 
-export type TimeLimitedBalance = z.TypeOf<typeof TimeLimitedBalance>
+export interface TimeLimitedBalance extends z.TypeOf<typeof TimeLimitedBalance> {}

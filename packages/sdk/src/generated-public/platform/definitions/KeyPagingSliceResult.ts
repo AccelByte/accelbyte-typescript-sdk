@@ -9,4 +9,4 @@ import { Paging } from './Paging'
 
 export const KeyPagingSliceResult = z.object({ data: z.array(KeyInfo), paging: Paging.nullish() })
 
-export type KeyPagingSliceResult = z.TypeOf<typeof KeyPagingSliceResult>
+export interface KeyPagingSliceResult extends z.TypeOf<typeof KeyPagingSliceResult> {}

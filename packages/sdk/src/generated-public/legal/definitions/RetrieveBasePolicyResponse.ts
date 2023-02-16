@@ -20,4 +20,4 @@ export const RetrieveBasePolicyResponse = z.object({
   policyTypeId: z.string().nullish()
 })
 
-export type RetrieveBasePolicyResponse = z.TypeOf<typeof RetrieveBasePolicyResponse>
+export interface RetrieveBasePolicyResponse extends z.TypeOf<typeof RetrieveBasePolicyResponse> {}

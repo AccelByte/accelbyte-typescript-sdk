@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const OwnershipToken = z.object({ ownershipToken: z.string().nullish() })
 
-export type OwnershipToken = z.TypeOf<typeof OwnershipToken>
+export interface OwnershipToken extends z.TypeOf<typeof OwnershipToken> {}

@@ -14,4 +14,4 @@ export const SubscribeRequest = z.object({
   returnUrl: z.string().nullish()
 })
 
-export type SubscribeRequest = z.TypeOf<typeof SubscribeRequest>
+export interface SubscribeRequest extends z.TypeOf<typeof SubscribeRequest> {}

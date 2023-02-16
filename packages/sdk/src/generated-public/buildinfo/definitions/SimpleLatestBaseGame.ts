@@ -11,4 +11,4 @@ export const SimpleLatestBaseGame = z.object({
   latestVersion: z.string().nullish()
 })
 
-export type SimpleLatestBaseGame = z.TypeOf<typeof SimpleLatestBaseGame>
+export interface SimpleLatestBaseGame extends z.TypeOf<typeof SimpleLatestBaseGame> {}

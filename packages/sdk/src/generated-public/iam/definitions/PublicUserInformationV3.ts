@@ -13,4 +13,4 @@ export const PublicUserInformationV3 = z.object({
   userName: z.string()
 })
 
-export type PublicUserInformationV3 = z.TypeOf<typeof PublicUserInformationV3>
+export interface PublicUserInformationV3 extends z.TypeOf<typeof PublicUserInformationV3> {}

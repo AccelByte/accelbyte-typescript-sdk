@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ADtoObjectForOrderCreationOptions } from './ADtoObjectForOrderCreationOptions'
+import { OrderCreationOptions } from './OrderCreationOptions'
 
 export const AdminOrderCreate = z.object({
   itemId: z.string(),
@@ -18,8 +18,8 @@ export const AdminOrderCreate = z.object({
   ext: z.record(z.any()).nullish(),
   sandbox: z.boolean().nullish(),
   platform: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Nintendo', 'Other']).nullish(),
-  options: ADtoObjectForOrderCreationOptions.nullish(),
+  options: OrderCreationOptions.nullish(),
   currencyNamespace: z.string().nullish()
 })
 
-export type AdminOrderCreate = z.TypeOf<typeof AdminOrderCreate>
+export interface AdminOrderCreate extends z.TypeOf<typeof AdminOrderCreate> {}

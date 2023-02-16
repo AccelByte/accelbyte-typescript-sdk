@@ -79,4 +79,4 @@ export const PaymentOrder = z.object({
   subtotalPrice: z.number().int().nullish()
 })
 
-export type PaymentOrder = z.TypeOf<typeof PaymentOrder>
+export interface PaymentOrder extends z.TypeOf<typeof PaymentOrder> {}

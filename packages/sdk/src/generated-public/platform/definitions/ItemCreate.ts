@@ -59,4 +59,4 @@ export const ItemCreate = z.object({
   lootBoxConfig: LootBoxConfig.nullish()
 })
 
-export type ItemCreate = z.TypeOf<typeof ItemCreate>
+export interface ItemCreate extends z.TypeOf<typeof ItemCreate> {}

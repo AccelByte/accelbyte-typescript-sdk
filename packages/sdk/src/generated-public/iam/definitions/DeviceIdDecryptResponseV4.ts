@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const DeviceIdDecryptResponseV4 = z.object({ deviceId: z.string() })
 
-export type DeviceIdDecryptResponseV4 = z.TypeOf<typeof DeviceIdDecryptResponseV4>
+export interface DeviceIdDecryptResponseV4 extends z.TypeOf<typeof DeviceIdDecryptResponseV4> {}

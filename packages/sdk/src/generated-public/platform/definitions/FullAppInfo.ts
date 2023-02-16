@@ -55,4 +55,4 @@ export const FullAppInfo = z.object({
   releaseDate: z.string().nullish()
 })
 
-export type FullAppInfo = z.TypeOf<typeof FullAppInfo>
+export interface FullAppInfo extends z.TypeOf<typeof FullAppInfo> {}

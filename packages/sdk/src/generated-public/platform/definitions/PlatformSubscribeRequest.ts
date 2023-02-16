@@ -14,4 +14,4 @@ export const PlatformSubscribeRequest = z.object({
   language: z.string().nullish()
 })
 
-export type PlatformSubscribeRequest = z.TypeOf<typeof PlatformSubscribeRequest>
+export interface PlatformSubscribeRequest extends z.TypeOf<typeof PlatformSubscribeRequest> {}

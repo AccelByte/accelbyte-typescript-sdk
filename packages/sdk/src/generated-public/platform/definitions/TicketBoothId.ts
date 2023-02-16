@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const TicketBoothId = z.object({ id: z.string(), type: z.enum(['CAMPAIGN', 'KEYGROUP']) })
 
-export type TicketBoothId = z.TypeOf<typeof TicketBoothId>
+export interface TicketBoothId extends z.TypeOf<typeof TicketBoothId> {}

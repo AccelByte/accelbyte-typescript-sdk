@@ -8,4 +8,4 @@ import { Config } from './Config'
 
 export const Configs = z.record(Config)
 
-export type Configs = z.TypeOf<typeof Configs>
+export interface Configs extends z.TypeOf<typeof Configs> {}

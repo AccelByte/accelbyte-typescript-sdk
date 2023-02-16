@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const FulfillmentScriptCreate = z.object({ grantDays: z.string().nullish() })
 
-export type FulfillmentScriptCreate = z.TypeOf<typeof FulfillmentScriptCreate>
+export interface FulfillmentScriptCreate extends z.TypeOf<typeof FulfillmentScriptCreate> {}

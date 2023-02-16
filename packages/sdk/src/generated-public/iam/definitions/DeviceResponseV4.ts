@@ -15,4 +15,4 @@ export const DeviceResponseV4 = z.object({
   lastLoginTime: z.number().int()
 })
 
-export type DeviceResponseV4 = z.TypeOf<typeof DeviceResponseV4>
+export interface DeviceResponseV4 extends z.TypeOf<typeof DeviceResponseV4> {}

@@ -18,4 +18,4 @@ export const PlatformWallet = z.object({
   id: z.string().nullish()
 })
 
-export type PlatformWallet = z.TypeOf<typeof PlatformWallet>
+export interface PlatformWallet extends z.TypeOf<typeof PlatformWallet> {}

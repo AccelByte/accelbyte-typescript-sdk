@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const UserZipCodeUpdate = z.object({ zipCode: z.string() })
 
-export type UserZipCodeUpdate = z.TypeOf<typeof UserZipCodeUpdate>
+export interface UserZipCodeUpdate extends z.TypeOf<typeof UserZipCodeUpdate> {}

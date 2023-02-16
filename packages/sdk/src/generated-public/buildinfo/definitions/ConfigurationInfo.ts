@@ -7,4 +7,4 @@ import { z } from 'zod'
 
 export const ConfigurationInfo = z.object({ entitlementValidation: z.boolean() })
 
-export type ConfigurationInfo = z.TypeOf<typeof ConfigurationInfo>
+export interface ConfigurationInfo extends z.TypeOf<typeof ConfigurationInfo> {}

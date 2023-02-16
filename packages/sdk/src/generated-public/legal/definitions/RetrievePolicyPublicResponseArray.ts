@@ -8,4 +8,4 @@ import { RetrievePolicyPublicResponse } from './RetrievePolicyPublicResponse'
 
 export const RetrievePolicyPublicResponseArray = z.array(RetrievePolicyPublicResponse)
 
-export type RetrievePolicyPublicResponseArray = z.TypeOf<typeof RetrievePolicyPublicResponseArray>
+export interface RetrievePolicyPublicResponseArray extends z.TypeOf<typeof RetrievePolicyPublicResponseArray> {}

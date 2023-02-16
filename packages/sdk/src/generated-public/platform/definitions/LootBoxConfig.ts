@@ -12,4 +12,4 @@ export const LootBoxConfig = z.object({
   rollFunction: z.enum(['DEFAULT', 'CUSTOM']).nullish()
 })
 
-export type LootBoxConfig = z.TypeOf<typeof LootBoxConfig>
+export interface LootBoxConfig extends z.TypeOf<typeof LootBoxConfig> {}

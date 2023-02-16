@@ -13,4 +13,4 @@ export const BuildInfoPii = z.object({
   identity: MachineIdentity.nullish()
 })
 
-export type BuildInfoPii = z.TypeOf<typeof BuildInfoPii>
+export interface BuildInfoPii extends z.TypeOf<typeof BuildInfoPii> {}

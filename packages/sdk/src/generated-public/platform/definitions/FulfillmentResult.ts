@@ -16,4 +16,4 @@ export const FulfillmentResult = z.object({
   subscriptionSummaries: z.array(SubscriptionSummary).nullish()
 })
 
-export type FulfillmentResult = z.TypeOf<typeof FulfillmentResult>
+export interface FulfillmentResult extends z.TypeOf<typeof FulfillmentResult> {}
