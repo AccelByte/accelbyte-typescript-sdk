@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -161,7 +161,7 @@ export class UserAuthorization {
 
     const data: Parameters<OAuth20$['postIamV3OauthToken']>[0] = {
       grant_type: 'authorization_code',
-      code: code,
+      code,
       code_verifier: codeVerifier,
       client_id: this.options.clientId,
       redirect_uri: this.options.redirectURI
@@ -182,9 +182,8 @@ export class UserAuthorization {
     const doesMFADataExist = Validate.safeParse(errorResponse.data, MFADataResponse)
     if (!doesMFADataExist) return
 
-    // eslint-disable-next-line camelcase
-    const { mfa_token, factors, default_factor, email } = errorResponse.data
-    const result = { mfaToken: mfa_token, factors, defaultFactor: default_factor, email }
+    const { mfa_token: mfaToken, factors, default_factor: defaultFactor, email } = errorResponse.data
+    const result = { mfaToken, factors, defaultFactor, email }
     if (BrowserHelper.isOnBrowser()) {
       localStorage.setItem(MFA_DATA_STORAGE_KEY, JSON.stringify(result))
     }
@@ -353,7 +352,7 @@ const AuthorizationCodeExchangeState = z.object({
   path: z.string().optional()
 })
 
-type AuthorizationCodeExchangeState = z.infer<typeof AuthorizationCodeExchangeState>
+interface AuthorizationCodeExchangeState extends z.infer<typeof AuthorizationCodeExchangeState> {}
 
 class AuthorizationCodeExchangeStateHelper {
   static fromPath(path: string): AuthorizationCodeExchangeState {

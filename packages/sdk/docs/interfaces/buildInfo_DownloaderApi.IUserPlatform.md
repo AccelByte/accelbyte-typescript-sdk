@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:15](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L15)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:15](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L15)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/DownloaderApi.ts:14](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L14)
+[packages/sdk/src/api/buildInfo/DownloaderApi.ts:14](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/buildInfo/DownloaderApi.ts#L14)

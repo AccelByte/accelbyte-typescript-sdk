@@ -1,3 +1,7 @@
+### 0.2.0-beta.2 - 2023-02-16
+
+- Further refactor SDK to use `interface` to prevent auto-expansion of types in Visual Studio Code
+
 ### 0.2.0-beta.1 - 2023-02-15
 
 - Release Web SDK as a Beta Version

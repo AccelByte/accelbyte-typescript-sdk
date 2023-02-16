@@ -30,4 +30,4 @@ Get all namespaces.<br>Other detail info: <ul><li><i>Required permission</i>: lo
 
 #### Defined in
 
-[packages/sdk/src/api/basic/NamespaceApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/basic/NamespaceApi.ts#L19)
+[packages/sdk/src/api/basic/NamespaceApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/basic/NamespaceApi.ts#L19)

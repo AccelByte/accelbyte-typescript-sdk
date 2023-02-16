@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,7 +10,7 @@ export const MFADataResponse = z.object({
   factors: z.array(z.string()),
   default_factor: z.string()
 })
-export type MFADataResponse = z.infer<typeof MFADataResponse>
+export interface MFADataResponse extends z.infer<typeof MFADataResponse> {}
 
 export interface Verify2FAParam {
   factor: string | null
@@ -29,4 +29,4 @@ export const AuthenticatorSecretKey = z.object({
   secretKey: z.string(),
   uri: z.string()
 })
-export type AuthenticatorSecretKey = z.infer<typeof AuthenticatorSecretKey>
+export interface AuthenticatorSecretKey extends z.infer<typeof AuthenticatorSecretKey> {}

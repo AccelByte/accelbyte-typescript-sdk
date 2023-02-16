@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -27,20 +27,20 @@ export const GlobalStyleConfig = z.object({
     fonts: FontConfigs
   })
 })
-export type GlobalStyleConfig = z.infer<typeof GlobalStyleConfig>
+export interface GlobalStyleConfig extends z.infer<typeof GlobalStyleConfig> {}
 
 export const SocialLinkConfig = z.object({
   url: z.string(),
   platform: z.string(),
   apps: z.array(z.string())
 })
-export type SocialLinkConfig = z.infer<typeof SocialLinkConfig>
+export interface SocialLinkConfig extends z.infer<typeof SocialLinkConfig> {}
 
 export const TemplateInfoConfig = z.object({
   draft: z.string(),
   published: z.string()
 })
-export type TemplateInfoConfig = z.infer<typeof TemplateInfoConfig>
+export interface TemplateInfoConfig extends z.infer<typeof TemplateInfoConfig> {}
 
 export enum TemplateConfig {
   SINGLE = 'single-game',
@@ -163,7 +163,7 @@ export const PlayerPortalFeatureFlagsConfig = z.object({
    **/
   isNewsV2Visible: z.boolean().default(false)
 })
-export type PlayerPortalFeatureFlagsConfig = z.infer<typeof PlayerPortalFeatureFlagsConfig>
+export interface PlayerPortalFeatureFlagsConfig extends z.infer<typeof PlayerPortalFeatureFlagsConfig> {}
 
 export const DiscoveryConfigData = z.object({
   ppTemplateInfo: Config.merge(
@@ -268,4 +268,4 @@ export const DiscoveryConfigData = z.object({
   )
 })
 
-export type DiscoveryConfigData = z.infer<typeof DiscoveryConfigData>
+export interface DiscoveryConfigData extends z.infer<typeof DiscoveryConfigData> {}

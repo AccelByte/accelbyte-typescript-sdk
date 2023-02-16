@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:301](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L301)
+[packages/sdk/src/api/iam/UserAuthorization.ts:300](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L300)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:271](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L271)
+[packages/sdk/src/api/iam/UserAuthorization.ts:270](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L270)
 
 ___
 
@@ -74,13 +74,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:223](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L223)
+[packages/sdk/src/api/iam/UserAuthorization.ts:222](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L222)
 
 ___
 
 ### exchangeAuthorizationCode
 
-▸ **exchangeAuthorizationCode**(`«destructured»`): `Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<`TokenWithDeviceCookieResponseV3`\> = loginResult.response; `returnPath`: `any`  }\>
+▸ **exchangeAuthorizationCode**(`«destructured»`): `Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` ; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any`  } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<`TokenWithDeviceCookieResponseV3`\> = loginResult.response; `returnPath`: `any`  }\>
 
 #### Parameters
 
@@ -93,11 +93,11 @@ ___
 
 #### Returns
 
-`Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<`TokenWithDeviceCookieResponseV3`\> = loginResult.response; `returnPath`: `any`  }\>
+`Promise`<``null`` \| { `mfaData`: `undefined` \| { `defaultFactor`: `any` ; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any`  } = loginResult.mfaData; `response`: ``null`` \| `IDataStatus`<`TokenWithDeviceCookieResponseV3`\> = loginResult.response; `returnPath`: `any`  }\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:234](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L234)
+[packages/sdk/src/api/iam/UserAuthorization.ts:233](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L233)
 
 ___
 
@@ -116,13 +116,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:324](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L324)
+[packages/sdk/src/api/iam/UserAuthorization.ts:323](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L323)
 
 ___
 
 ### getMfaDataFromError
 
-▸ **getMfaDataFromError**(`errorResponse`): `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token }
+▸ **getMfaDataFromError**(`errorResponse`): `undefined` \| { `defaultFactor`: `any` ; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any`  }
 
 #### Parameters
 
@@ -132,11 +132,11 @@ ___
 
 #### Returns
 
-`undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token }
+`undefined` \| { `defaultFactor`: `any` ; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any`  }
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:181](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L181)
+[packages/sdk/src/api/iam/UserAuthorization.ts:181](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L181)
 
 ___
 
@@ -150,13 +150,13 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:194](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L194)
+[packages/sdk/src/api/iam/UserAuthorization.ts:193](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L193)
 
 ___
 
 ### loginWithAuthorizationCode
 
-▸ **loginWithAuthorizationCode**(`«destructured»`): `Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: `IDataStatus`<`TokenWithDeviceCookieResponseV3`\>  }\>
+▸ **loginWithAuthorizationCode**(`«destructured»`): `Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` ; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any`  } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` ; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any`  } ; `response`: `IDataStatus`<`TokenWithDeviceCookieResponseV3`\>  }\>
 
 <p>This method supports grant type:</p><ol>
      <li>Grant Type == <code>authorization_code</code>:<br />
@@ -244,11 +244,11 @@ ___
 
 #### Returns
 
-`Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` = default\_factor; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any` = mfa\_token } ; `response`: `IDataStatus`<`TokenWithDeviceCookieResponseV3`\>  }\>
+`Promise`<{ `error`: `IResponseError` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` ; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any`  } ; `response`: ``null``  } \| { `error`: ``null`` ; `mfaData`: `undefined` \| { `defaultFactor`: `any` ; `email`: `any` ; `factors`: `any` ; `mfaToken`: `any`  } ; `response`: `IDataStatus`<`TokenWithDeviceCookieResponseV3`\>  }\>
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:147](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L147)
+[packages/sdk/src/api/iam/UserAuthorization.ts:147](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L147)
 
 ___
 
@@ -268,7 +268,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:203](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L203)
+[packages/sdk/src/api/iam/UserAuthorization.ts:202](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L202)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:328](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L328)
+[packages/sdk/src/api/iam/UserAuthorization.ts:327](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L327)
 
 ___
 
@@ -296,4 +296,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/iam/UserAuthorization.ts:199](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/UserAuthorization.ts#L199)
+[packages/sdk/src/api/iam/UserAuthorization.ts:198](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/iam/UserAuthorization.ts#L198)

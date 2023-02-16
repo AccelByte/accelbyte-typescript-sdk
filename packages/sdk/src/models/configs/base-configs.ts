@@ -25,7 +25,7 @@ export const BackgroundOverlay = z.object({
   /** Number between 0-100. The bigger, the more solid the color will be. */
   opacity: z.number().min(0).max(100)
 })
-export type BackgroundOverlay = z.infer<typeof BackgroundOverlay>
+export interface BackgroundOverlay extends z.infer<typeof BackgroundOverlay> {}
 
 export const LogoVariantConfig = z.object({
   /** The index of the image located in the `companyLogo` inside the discovery configs. */
@@ -44,7 +44,7 @@ export const ColorConfig = z.object({
     a: z.number()
   })
 })
-export type ColorConfig = z.infer<typeof ColorConfig>
+export interface ColorConfig extends z.infer<typeof ColorConfig> {}
 
 export const ColorConfigs = z.object({
   background: ColorConfig,
@@ -54,7 +54,7 @@ export const ColorConfigs = z.object({
   secondary: ColorConfig,
   text: ColorConfig
 })
-export type ColorConfigs = z.infer<typeof ColorConfigs>
+export interface ColorConfigs extends z.infer<typeof ColorConfigs> {}
 
 export const FontConfigs = z.object({
   /**
@@ -72,7 +72,7 @@ export const FontConfigs = z.object({
   /** The public URL of the font, if you want to use custom font. */
   customTitleFontUrl: z.string()
 })
-export type FontConfigs = z.infer<typeof FontConfigs>
+export interface FontConfigs extends z.infer<typeof FontConfigs> {}
 
 export const PageConfig = z.object({
   templatePreview: z.string().optional(),
@@ -90,4 +90,4 @@ export const PageConfig = z.object({
     fonts: FontConfigs
   })
 })
-export type PageConfig = z.infer<typeof PageConfig>
+export interface PageConfig extends z.infer<typeof PageConfig> {}

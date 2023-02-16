@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -61,13 +61,13 @@ const CodeChallengeStoredState = z.object({
   csrf: z.string(),
   codeVerifier: z.string()
 })
-type CodeChallengeStoredState = z.infer<typeof CodeChallengeStoredState>
+interface CodeChallengeStoredState extends z.infer<typeof CodeChallengeStoredState> {}
 
 const CodeChallengeSentState = z.object({
   csrf: z.string().uuid(),
   payload: z.nullable(z.string())
 })
-type CodeChallengeSentState = z.infer<typeof CodeChallengeSentState>
+interface CodeChallengeSentState extends z.infer<typeof CodeChallengeSentState> {}
 
 const base64URLEncode = (code: cryptoJs.lib.WordArray) => {
   return cryptoJs.enc.Base64.stringify(code).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')

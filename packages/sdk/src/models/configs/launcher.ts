@@ -23,4 +23,4 @@ export const LauncherPageConfig = PageConfig.extend({
     backgroundOverlay: BackgroundOverlay
   })
 })
-export type LauncherPageConfig = z.infer<typeof LauncherPageConfig>
+export interface LauncherPageConfig extends z.infer<typeof LauncherPageConfig> {}

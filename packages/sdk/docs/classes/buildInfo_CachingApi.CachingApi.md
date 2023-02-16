@@ -31,4 +31,4 @@ This API is used to retrieve detailed diff cache.<br/>The response will contains
 
 #### Defined in
 
-[packages/sdk/src/api/buildInfo/CachingApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/buildInfo/CachingApi.ts#L19)
+[packages/sdk/src/api/buildInfo/CachingApi.ts:19](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/buildInfo/CachingApi.ts#L19)

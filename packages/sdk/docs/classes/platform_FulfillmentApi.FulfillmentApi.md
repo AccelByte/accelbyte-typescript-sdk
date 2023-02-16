@@ -32,4 +32,4 @@ Redeem campaign code.<br>Other detail info: <ul><li><i>Required permission</i>: 
 
 #### Defined in
 
-[packages/sdk/src/api/platform/FulfillmentApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/platform/FulfillmentApi.ts#L20)
+[packages/sdk/src/api/platform/FulfillmentApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/c50fb74/packages/sdk/src/api/platform/FulfillmentApi.ts#L20)

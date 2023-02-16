@@ -18,7 +18,7 @@ export const PlayerPortalHomepageConfig = z.object({
   redirectionURL: z.string(),
   siteBrandURL: z.string()
 })
-export type PlayerPortalHomepageConfig = z.infer<typeof PlayerPortalHomepageConfig>
+export interface PlayerPortalHomepageConfig extends z.infer<typeof PlayerPortalHomepageConfig> {}
 
 export enum PlayerPortalFooterIDs {
   COPYRIGHT = 'copyright',
@@ -35,12 +35,12 @@ export const PlayerPortalFooterConfigLink = z.object({
   name: z.string(),
   link: z.string()
 })
-export type PlayerPortalFooterConfigLink = z.infer<typeof PlayerPortalFooterConfigLink>
+export interface PlayerPortalFooterConfigLink extends z.infer<typeof PlayerPortalFooterConfigLink> {}
 
 export const PlayerPortalFooterConfig = z.object({
   links: z.array(PlayerPortalFooterConfigLink)
 })
-export type PlayerPortalFooterConfig = z.infer<typeof PlayerPortalFooterConfig>
+export interface PlayerPortalFooterConfig extends z.infer<typeof PlayerPortalFooterConfig> {}
 
 export enum PlayerPortalHomepageKeys {
   IS_DISABLED = 'isDisabled',
@@ -88,4 +88,4 @@ export const PlayerPortalConfigData = z.object({
     })
   )
 })
-export type PlayerPortalConfigData = z.infer<typeof PlayerPortalConfigData>
+export interface PlayerPortalConfigData extends z.infer<typeof PlayerPortalConfigData> {}
