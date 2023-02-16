@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Run the command below:
 
 ```bash
 npm run dev
@@ -10,4 +10,4 @@ npm run dev
 yarn dev
 ```
 
-And open the url in your browser http://localhost:3000/
+And open the link http://localhost:3030/

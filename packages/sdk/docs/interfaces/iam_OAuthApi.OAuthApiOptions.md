@@ -18,4 +18,4 @@
 
 #### Defined in
 
-[packages/sdk/src/api/iam/OAuthApi.ts:17](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/iam/OAuthApi.ts#L17)
+[packages/sdk/src/api/iam/OAuthApi.ts:17](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/iam/OAuthApi.ts#L17)

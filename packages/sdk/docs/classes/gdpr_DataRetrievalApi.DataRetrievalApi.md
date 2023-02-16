@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L36)
+[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:36](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L36)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L20)
+[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L20)
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L28)
+[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:28](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L28)
 
 ___
 
@@ -116,4 +116,4 @@ ___
 
 #### Defined in
 
-[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:44](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L44)
+[packages/sdk/src/api/gdpr/DataRetrievalApi.ts:44](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/gdpr/DataRetrievalApi.ts#L44)

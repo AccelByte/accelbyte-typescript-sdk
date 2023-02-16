@@ -25,7 +25,7 @@ List currencies of a namespace.<br>Other detail info: <ul><li><i>Returns</i>: Cu
 
 #### Defined in
 
-[packages/sdk/src/api/platform/CurrencyApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/CurrencyApi.ts#L20)
+[packages/sdk/src/api/platform/CurrencyApi.ts:20](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/platform/CurrencyApi.ts#L20)
 
 ___
 
@@ -41,4 +41,4 @@ Get the currencies list and convert into a map of currency code and the currency
 
 #### Defined in
 
-[packages/sdk/src/api/platform/CurrencyApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/36ddeb4/packages/sdk/src/api/platform/CurrencyApi.ts#L27)
+[packages/sdk/src/api/platform/CurrencyApi.ts:27](https://github.com/AccelByte/accelbyte-web-sdk/blob/24d660a/packages/sdk/src/api/platform/CurrencyApi.ts#L27)
