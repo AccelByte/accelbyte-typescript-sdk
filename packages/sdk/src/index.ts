@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,7 +13,7 @@ export * from './api/iam/IamHelper'
 export * from './api/iam/InputValidationApi'
 export * from './api/iam/InputValidationHelper'
 export * from './api/iam/UserApi'
-export * from './api/iam/UserAuthorization'
+export * from './api/iam/UserAuthorizationApi'
 export * from './api/legal/LegalHelper'
 export * from './api/legal/PoliciesApi'
 export * from './api/platform/PaymentApi'

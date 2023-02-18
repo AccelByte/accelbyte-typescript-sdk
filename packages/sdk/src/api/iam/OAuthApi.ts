@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 /* eslint-disable camelcase */
 import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { MFA_DATA_STORAGE_KEY } from '@accelbyte/sdk/api/iam/UserAuthorization'
+import { MFA_DATA_STORAGE_KEY } from '@accelbyte/sdk/api/iam/UserAuthorizationApi'
 import { OAuth20$ } from '@accelbyte/sdk/generated-public/iam/OAuth20$'
 import { OAuth20Extension$ } from '@accelbyte/sdk/generated-public/iam/OAuth20Extension$'
 import { Request2FAEmailCode, Verify2FAParam } from '@accelbyte/sdk/models/TwoFA'

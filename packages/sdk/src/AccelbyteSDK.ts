@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -18,7 +18,7 @@ import { OAuthApi } from '@accelbyte/sdk/api/iam/OAuthApi'
 import { ThirdPartyCredentialApi } from '@accelbyte/sdk/api/iam/ThirdPartyCredentialApi'
 import { TwoFA } from '@accelbyte/sdk/api/iam/TwoFA'
 import { UserApi } from '@accelbyte/sdk/api/iam/UserApi'
-import { UserAuthorization } from '@accelbyte/sdk/api/iam/UserAuthorization'
+import { UserAuthorizationApi } from '@accelbyte/sdk/api/iam/UserAuthorizationApi'
 import { AgreementApi } from '@accelbyte/sdk/api/legal/AgreementApi'
 import { EligibilitiesApi } from '@accelbyte/sdk/api/legal/EligibilitiesApi'
 import { LocalizedPolicyVersionsApi } from '@accelbyte/sdk/api/legal/LocalizedPolicyVersionsApi'
@@ -39,7 +39,7 @@ export type Overrides = { config?: SDKRequestConfig; cache?: boolean }
 
 export interface AccelbyteSDK {
   IAM: {
-    UserAuthorization(overrides?: Overrides): UserAuthorization
+    UserAuthorization(overrides?: Overrides): UserAuthorizationApi
     User(overrides?: Overrides): UserApi
     OAuth(overrides?: Overrides): OAuthApi
     InputValidation(overrides?: Overrides): InputValidationsApi

@@ -18,7 +18,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "doc": "typedoc --plugin typedoc-plugin-markdown --out docs src/api",
+    "doc__deprecated": "typedoc --plugin typedoc-plugin-markdown --out docs src/api",
     "build": "rollup -c rollup.config.mjs",
     "build:dts": "rollup -c rollup.dts.config.mjs",
     "postbuild": "yarn build:dts && rimraf dist/types",
@@ -39,8 +39,6 @@
     "rollup": "3.8.1",
     "rollup-plugin-dts": "5.1.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
-    "typedoc": "0.23.20",
-    "typedoc-plugin-markdown": "^3.13.6",
     "typescript": "4.6.4",
     "vitest": "0.25.1"
   },

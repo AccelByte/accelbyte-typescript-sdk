@@ -56,7 +56,7 @@ export class LoginErrorUnknown extends Error {}
 
 export class LoginErrorUnmatchedState extends Error {}
 
-export class UserAuthorization {
+export class UserAuthorizationApi {
   /**
    * @internal
    */
