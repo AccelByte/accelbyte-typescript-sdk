@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,9 +14,9 @@ export class InputValidationsApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * <p>No role required</p>
-   *    <p>This method is to get list of input validation configuration.</p>
-   *    <p><code>regex</code> parameter will be returned if <code>isCustomRegex</code> is true. Otherwise, it will be empty.</p>
+   * No role required
+   *    This method is to get list of input validation configuration.
+   *    `regex` parameter will be returned if `isCustomRegex` is true. Otherwise, it will be empty.
    *
    */
   getValidations = (languageCode?: string | null, defaultOnEmpty?: boolean | null) => {

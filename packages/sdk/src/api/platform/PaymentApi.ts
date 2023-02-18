@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,21 +17,25 @@ export class PaymentApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=2 (READ)</li><li><i>Returns</i>: Payment account list</li></ul>
+   * Get payment accounts.\
+   * Returns: Payment account list
    */
   getPaymentAccounts = (userId: string) => {
     return this.newInstance().fetchNsUsersByUseridPaymentAccounts(userId)
   }
 
   /**
-   * Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=8 (DELETE)</li><li><i>Returns</i>:</li></ul>
+   * Delete payment account.
+   *
+   * Other detail info:
    */
   deletePaymentAccount = ({ userId, type, id }: { userId: string; type: string; id: string }) => {
     return this.newInstance().deleteNsUsersByUseridPaymentAccountsByTypeById(userId, type, id)
   }
 
   /**
-   * Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment order details</li></ul>
+   * Get payment order info.
+   * Returns: Payment order details
    */
   getPaymentInfo = (paymentOrderNo: string) => {
     return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentOrdersByPaymentordernoInfo(
@@ -40,7 +44,8 @@ export class PaymentApi {
   }
 
   /**
-   * Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><li><i>Returns</i>: Payment process result</li></ul>
+   * Do payment(For now, this only support checkout.com).
+   * Returns: Payment process result
    */
   processPaymentOrder = (
     paymentOrderNo: string,
@@ -55,7 +60,8 @@ export class PaymentApi {
   }
 
   /**
-   * Get payment provider public config, at current only Strip provide public config.<br>Other detail info: <ul><li><i>Returns</i>: Public config</li></ul>
+   * Get payment provider public config, at current only Strip provide public config.
+   * Returns: Public config
    */
   getPaymentProviderPublicConfig = (
     paymentProvider: Parameters<PaymentStation$['fetchNsPaymentPublicconfig']>[0]['paymentProvider'],
@@ -70,7 +76,8 @@ export class PaymentApi {
   }
 
   /**
-   * Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: Payment order paid result</li></ul>
+   * Check payment order paid status.
+   * Returns: Payment order paid result
    */
   getPaymentOrderStatus = (paymentOrderNo: string) => {
     return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentOrdersByPaymentordernoStatus(
@@ -79,14 +86,16 @@ export class PaymentApi {
   }
 
   /**
-   * Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment method list</li></ul>
+   * Get payment methods.
+   * Returns: Payment method list
    */
   getPaymentMethods = (paymentOrderNo: string | null) => {
     return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentMethods({ paymentOrderNo })
   }
 
   /**
-   * Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i>Returns</i>: tax result</li></ul>
+   * Check and get a payment order's should pay tax.
+   * Returns: tax result
    */
   getPaymentTax = (
     paymentProvider: Parameters<PaymentStation$['fetchNsPaymentTax']>[0]['paymentProvider'],
@@ -101,7 +110,8 @@ export class PaymentApi {
   }
 
   /**
-   * Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link</li></ul>
+   * Get payment url.
+   * Returns: Get payment link
    */
   createPaymentUrl = (data: PaymentUrlCreate) => {
     return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).postNsPaymentLink(data)

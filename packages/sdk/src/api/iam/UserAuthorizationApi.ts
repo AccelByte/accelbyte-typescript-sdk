@@ -68,81 +68,81 @@ export class UserAuthorizationApi {
   ) {}
 
   /**
-   * <p>This method supports grant type:</p><ol>
-   *      <li>Grant Type == <code>authorization_code</code>:<br />
+   * This method supports grant type:
+   *      - Grant Type == `authorization_code`:
    *        &nbsp;&nbsp;&nbsp; It generates the user token by given the authorization
    *        code which generated in "/iam/v3/authenticate" API response. It should also pass
    *        in the redirect_uri, which should be the same as generating the
    *        authorization code request.
-   *      </li>
-   *      <li>Grant Type == <code>password</code>:<br />
+   *
+   *      - Grant Type == `password`:
    *        &nbsp;&nbsp;&nbsp; The grant type to use for authenticating a user, whether it's by email / username and password combination
    *        or through platform.
-   *      </li>
-   *      <li>Grant Type == <code>refresh_token</code>:<br />
+   *
+   *      - Grant Type == `refresh_token`:
    *        &nbsp;&nbsp;&nbsp; Used to get a new access token for a valid refresh token.
-   *      </li>
-   *      <li>Grant Type == <code>client_credentials</code>:<br />
+   *
+   *      - Grant Type == `client_credentials`:
    *        &nbsp;&nbsp;&nbsp; It generates a token by checking the client credentials provided through Authorization header.
-   *      </li></ol>
-   *      <h2>Access Token Content</h2>
-   *      <p>Following is the access token’s content:</p>
-   *      <ul>
-   *      <li>
-   *        <p><strong>namespace</strong>. It is the namespace the token was generated from.</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>display_name</strong>. The display name of the sub. It is empty if the token is generated from the client credential</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>roles</strong>. The sub’s roles. It is empty if the token is generated from the client credential</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>namespace_roles</strong>. The sub’s roles scoped to namespace. Improvement from roles, which make the role scoped to specific namespace instead of global to publisher namespace</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>permissions</strong>. The sub or aud’ permissions</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>bans</strong>. The sub’s list of bans. It is used by the IAM client for validating the token.</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>jflgs</strong>. It stands for Justice Flags. It is a special flag used for storing additional status information regarding the sub. It is implemented as a bit mask. Following explains what each bit represents:</p>
-   *      <ul>
-   *        <li><p>1: Email Address Verified</p></li>
-   *        <li><p>2: Phone Number Verified</p></li>
-   *        <li><p>4: Anonymous</p></li>
-   *        <li><p>8: Suspicious Login</p></li>
-   *      </ul>
-   *      </li>
-   *      <li>
-   *        <p><strong>aud</strong>. The aud is the targeted resource server.</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>iat</strong>. The time the token issues at. It is in Epoch time format</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>exp</strong>. The time the token expires. It is in Epoch time format</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>client_id</strong>. The UserID. The sub is omitted if the token is generated from client credential</p>
-   *      </li>
-   *      <li>
-   *        <p><strong>scope</strong>. The scope of the access request, expressed as a list of space-delimited, case-sensitive strings</p>
-   *      </li>
-   *      </ul>
-   *      <h2>Bans</h2>
-   *      <p>The JWT contains user's active bans with its expiry date. List of ban types can be obtained from /bans.</p>
-   *      <h2>Device Cookie Validation</h2>
-   *      <p><i><b>For grant type "password" only</b></i></p>
-   *      <p>Device Cookie is used to protect the user account from brute force login attack, <a target="_blank" href="https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies">more detail from OWASP<a>.</p>
-   *      <p>This method will read device cookie from request header <b>Auth-Trust-Id</b>. If device cookie not found, it will generate a new one and set it into response body <b>auth_trust_id</b> when successfully login.</p>
-   *      <h2>Track Login History</h2>
-   *      <p>This method will track login history to detect suspicious login activity, please provide <b>Device-Id</b> (alphanumeric) in request header parameter otherwise it will set to "unknown".</p>
-   *      <p>Align with General Data Protection Regulation in Europe, user login history will be kept within 28 days by default"</p>
-   *             <h2>2FA remember device</h2>
-   *             <p>To remember device for 2FA, should provide cookie: device_token or header: Device-Token</p>
-   *      <p>action code: 10703
+   *      ##Access Token Content
+   *      Following is the access token’s content:
+   *
+   *      -
+   *        __namespace__. It is the namespace the token was generated from.
+   *
+   *      -
+   *        __display_name__. The display name of the sub. It is empty if the token is generated from the client credential
+   *
+   *      -
+   *        __roles__. The sub’s roles. It is empty if the token is generated from the client credential
+   *
+   *      -
+   *        __namespace_roles__. The sub’s roles scoped to namespace. Improvement from roles, which make the role scoped to specific namespace instead of global to publisher namespace
+   *
+   *      -
+   *        __permissions__. The sub or aud’ permissions
+   *
+   *      -
+   *        __bans__. The sub’s list of bans. It is used by the IAM client for validating the token.
+   *
+   *      -
+   *        __jflgs__. It stands for Justice Flags. It is a special flag used for storing additional status information regarding the sub. It is implemented as a bit mask. Following explains what each bit represents:
+   *
+   *        - 1: Email Address Verified
+   *        - 2: Phone Number Verified
+   *        - 4: Anonymous
+   *        - 8: Suspicious Login
+   *
+   *
+   *      -
+   *        __aud__. The aud is the targeted resource server.
+   *
+   *      -
+   *        __iat__. The time the token issues at. It is in Epoch time format
+   *
+   *      -
+   *        __exp__. The time the token expires. It is in Epoch time format
+   *
+   *      -
+   *        __client_id__. The UserID. The sub is omitted if the token is generated from client credential
+   *
+   *      -
+   *        __scope__. The scope of the access request, expressed as a list of space-delimited, case-sensitive strings
+   *
+   *
+   *      ##Bans
+   *      The JWT contains user's active bans with its expiry date. List of ban types can be obtained from /bans.
+   *      ##Device Cookie Validation
+   *      __For grant type "password" only__
+   *      Device Cookie is used to protect the user account from brute force login attack,
+   *      [more detail from OWASP](https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies)
+   *      This method will read device cookie from request header __Auth-Trust-Id__. If device cookie not found, it will generate a new one and set it into response body __auth_trust_id__ when successfully login.
+   *      ##Track Login History
+   *      This method will track login history to detect suspicious login activity, please provide __Device-Id__ (alphanumeric) in request header parameter otherwise it will set to "unknown".
+   *      Align with General Data Protection Regulation in Europe, user login history will be kept within 28 days by default"
+   *             ##2FA remember device
+   *             To remember device for 2FA, should provide cookie: device_token or header: Device-Token
+   *      action code: 10703
    */
   loginWithAuthorizationCode = async ({ code, codeVerifier }: { code: string; codeVerifier: string }) => {
     const deviceId = SdkDevice.getDeviceId()

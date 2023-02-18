@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,14 +22,21 @@ export class DownloaderApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string) {}
 
   /**
-   * This API is used to get simple build manifest that contains list of current build in various platform.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
+   * This API is used to get simple build manifest that contains list of current build in various platform.
+   * Other detail info:
+   * - _Required permission_: login user
+   * - _Returns_: build manifest
    */
   getAvailableBuilds(appId: string) {
     return this.newInstance().fetchNsAvailablebuildsByAppid(appId)
   }
 
   /**
-   * This API is used to get build manifest of release version of the application.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
+   * This API is used to get build manifest of release version of the application.
+   *
+   * Other detail info:
+   * - _Required permission_: login user
+   * - _Returns_: build manifest
    */
   getBuildManifest(appId: string, platformId: string) {
     const axios = Network.create({ ...this.conf, timeout: 1800000 })
@@ -37,7 +44,10 @@ export class DownloaderApi {
   }
 
   /**
-   * This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * This API is used to retrieve detailed diff cache.
+   * The response will contains list of diff cache files along with its download url.
+   *
+   * - _Required permission_: login user
    */
   getDiffCache(sourceBuildId: string, destinationBuildId: string) {
     return new Caching$(Network.create(this.conf), this.namespace, false).fetchNsDiffCacheSourceBySourcebuildidDestByDestinationbuildid(

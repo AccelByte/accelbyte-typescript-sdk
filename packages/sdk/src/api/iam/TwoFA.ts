@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,9 +14,9 @@ export class TwoFA {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * <p>This method is used to get 8-digits backup codes.
-   * Each code is a one-time code and will be deleted once used.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to get 8-digits backup codes.
+   * Each code is a one-time code and will be deleted once used.
+   * This method Requires valid user access token
    *
    */
   getBackupCode = () => {
@@ -24,8 +24,8 @@ export class TwoFA {
   }
 
   /**
-   * <p>This method is used to enable 2FA backup codes.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to enable 2FA backup codes.
+   * This method Requires valid user access token
    *
    */
   enable2FABackupCodes = () => {
@@ -33,8 +33,8 @@ export class TwoFA {
   }
 
   /**
-   * <p>This method is used to enable 2FA backup codes.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to enable 2FA backup codes.
+   * This method Requires valid user access token
    *
    */
   generateBackupCodes = () => {
@@ -42,8 +42,8 @@ export class TwoFA {
   }
 
   /**
-   * <p>This method is used to enable 2FA backup codes.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to enable 2FA backup codes.
+   * This method Requires valid user access token
    *
    */
   disableBackupCodes = () => {
@@ -51,8 +51,8 @@ export class TwoFA {
   }
 
   /**
-   * <p>This method is used to disable 2FA authenticator.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to disable 2FA authenticator.
+   * This method Requires valid user access token
    *
    */
   disableAuthenticator = () => {
@@ -60,8 +60,8 @@ export class TwoFA {
   }
 
   /**
-   * <p>This method is used to get user enabled factors.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to get user enabled factors.
+   * This method Requires valid user access token
    *
    */
   getEnabledMethods = () => {
@@ -69,8 +69,8 @@ export class TwoFA {
   }
 
   /**
-   * <p>This method is used to make 2FA factor default.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to make 2FA factor default.
+   * This method Requires valid user access token
    *
    */
   set2FAAsDefault = (factor: string) => {
@@ -78,8 +78,8 @@ export class TwoFA {
   }
 
   /**
-   * <p>This method is used to enable 2FA authenticator.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to enable 2FA authenticator.
+   * This method Requires valid user access token
    *
    */
   enable2FAAuthenticator = (code: string) => {
@@ -87,9 +87,9 @@ export class TwoFA {
   }
 
   /**
-   * <p>This method is used to generate a secret key for 3rd-party authenticator app.
-   * A QR code URI is also returned so that frontend can generate QR code image.</p>
-   * <p>This method Requires valid user access token</p>
+   * This method is used to generate a secret key for 3rd-party authenticator app.
+   * A QR code URI is also returned so that frontend can generate QR code image.
+   * This method Requires valid user access token
    *
    */
   generateSecretKey = () => {

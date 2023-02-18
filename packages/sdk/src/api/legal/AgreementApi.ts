@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,21 +15,24 @@ export class AgreementApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.
+   * - _Required permission_: login user
    */
   acceptLegalPolicies(acceptAgreements: AcceptAgreementRequest[]) {
     return this.newInstance().postPublicAgreementsPolicies(acceptAgreements)
   }
 
   /**
-   * Retrieve accepted Legal Agreements.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Retrieve accepted Legal Agreements.
+   * - _Required permission_: login user
    */
   getAgreements() {
     return this.newInstance().fetchPublicAgreementsPolicies()
   }
 
   /**
-   * Change marketing preference consent.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Change marketing preference consent.
+   * - _Required permission_: login user
    */
   updateMarketingPreferences(acceptAgreements: AcceptAgreementRequest[]) {
     return this.newInstance().patchPublicAgreementsLocalizedPolicyVersionsPreferences(acceptAgreements)

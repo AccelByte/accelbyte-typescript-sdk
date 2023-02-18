@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -59,24 +59,21 @@ export class UserApi {
 
   /**
    * Required valid user authorization
-   * <p>The verification code is sent to email address</p>
-   * <p>Available contexts for use : </p>
-   * <ol>
-   *  <li>
-   *    <strong>UserAccountRegistration</strong>
-   *    <p>a context type used for verifying email address in user account registration. It returns 409 if the email address already verified.
-   *    <strong><em>It is the default context if the Context field is empty</em></strong></p>
-   *  </li>
-   *  <li>
-   *    <strong>UpdateEmailAddress</strong>
-   *    <p>a context type used for verify user before updating email address.(Without email address verified checking)</p>
-   *  </li>
-   *  <li><strong>upgradeHeadlessAccount</strong>
-   *    <p>The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account.
-   *    If this context used, IAM rejects the request if the email address is already used by others by returning HTTP Status Code 409.</p>
-   *  </li>
-   * </ol>
-   * <p>action code: 10116</p>
+   * The verification code is sent to email address
+   * Available contexts for use :
+   *  -
+   *    __UserAccountRegistration__
+   *    a context type used for verifying email address in user account registration. It returns 409 if the email address already verified.
+   *    __It is the default context if the Context field is empty__
+   *
+   *  -
+   *    __UpdateEmailAddress__
+   *    a context type used for verify user before updating email address.(Without email address verified checking)
+   *
+   *  - __upgradeHeadlessAccount__
+   *    The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account.
+   *    If this context used, IAM rejects the request if the email address is already used by others by returning HTTP Status Code 409.
+   * action code: 10116
    *
    */
   requestVerificationCode = (data: SendVerificationCodeRequestV3) => {
@@ -84,11 +81,11 @@ export class UserApi {
   }
 
   /**
-   * <p>Will consume code if validateOnly is set false</p>
-   * <p>Required valid user authorization</p>
-   * <p>Redeems a verification code sent to a user to verify the user's contact address is correct</p>
-   * <p>Available ContactType : <b>email</b></p>
-   * <p>action code: 10107</p>
+   * Will consume code if validateOnly is set false
+   * Required valid user authorization
+   * Redeems a verification code sent to a user to verify the user's contact address is correct
+   * Available ContactType : __email__
+   * action code: 10107
    *
    */
   verifyCode = (data: UserVerificationRequestV3) => {
@@ -96,20 +93,20 @@ export class UserApi {
   }
 
   /**
-   * <p>If validateOnly is set false, consume code and upgrade headless account and automatically verified the email address if it is succeeded</p>
+   * If validateOnly is set false, consume code and upgrade headless account and automatically verified the email address if it is succeeded
    * Require valid user access token.
-   *        <p>The method upgrades a headless account by linking the headless account with the email address and the password.
-   * By upgrading the headless account into a full account, the user could use the email address and password for using Justice IAM. </p>
-   *        <p>The method is a shortcut for upgrading a headless account and verifying the email address in one call.
-   * In order to get a verification code for the method, please check the send verification code method.</p>
-   *        <p>This method also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done.<br/>
+   *        The method upgrades a headless account by linking the headless account with the email address and the password.
+   * By upgrading the headless account into a full account, the user could use the email address and password for using Justice IAM.
+   *        The method is a shortcut for upgrading a headless account and verifying the email address in one call.
+   * In order to get a verification code for the method, please check the send verification code method.
+   *        This method also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done.
    *  Supported user data fields :
-   *  <ul>
-   *    <li>displayName</li>
-   *    <li>dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29</li>
-   *    <li>country : format ISO3166-1 alpha-2 two letter, e.g. US</li>
-   *  </ul>
-   *        <br>action code : 10124</p>
+   *
+   *    - displayName
+   *    - dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29
+   *    - country : format ISO3166-1 alpha-2 two letter, e.g. US
+   *
+   *        action code : 10124
    */
   upgradeHeadlessAccount = (data: UpgradeHeadlessAccountWithVerificationCodeRequestV3) => {
     return this.newInstance().postV3NsUsersMeHeadlessCodeVerify(data)
@@ -119,17 +116,16 @@ export class UserApi {
    * Require valid user access token.
    *          The method upgrades a headless account by linking the headless account with the email address, username, and password.
    *      By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM.
-   *          <br>
+   *
    *      The method is a shortcut for upgrading a headless account and verifying the email address in one call.
-   *      In order to get a verification code for the method, please check the <a href="#operations-Users-PublicSendVerificationCodeV3">send verification code method</a>.
-   *          <br>
+   *
    *      This method also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done.
    *      Supported user data fields:
-   *        <ul>
-   *          <li>displayName</li>
-   *          <li>dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29</li>
-   *          <li>country : format ISO3166-1 alpha-2 two letter, e.g. US</li>
-   *        </ul>
+   *
+   *          - displayName
+   *          - dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29
+   *          - country : format ISO3166-1 alpha-2 two letter, e.g. US
+   *
    *          action code : 10124
    */
   upgradeHeadlessAccountV4 = (data: UpgradeHeadlessAccountWithVerificationCodeRequestV4) => {
@@ -137,8 +133,8 @@ export class UserApi {
   }
 
   /**
-   * <p>This method retrieves platform accounts linked to user. Required valid user authorization.
-   *          <br>action code: 10128 </p>
+   * This method retrieves platform accounts linked to user. Required valid user authorization.
+   *          action code: 10128
    */
   getUserLinkedPlatform = (userId: string) => {
     return this.newInstance().fetchV3NsUsersByUseridPlatforms(userId)
@@ -146,29 +142,29 @@ export class UserApi {
 
   /**
    * Required valid user authorization.
-   *    <p><br><b>Prerequisite:</b>
+   *    __Prerequisite:__
    *    Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables).
-   *      <h2>Supported platforms:</h2>
-   *      <ul>
-   *        <li><strong>steam</strong>: The ticket’s value is the authentication code returned by Steam.</li>
-   *        <li><strong>steamopenid</strong>: Steam's user authentication method using OpenID 2.0. The ticket's value is URL generated by Steam on web authentication</li>
-   *        <li><strong>facebook</strong>: The ticket’s value is the authorization code returned by Facebook OAuth</li>
-   *        <li><strong>google</strong>: The ticket’s value is the authorization code returned by Google OAuth</li>
-   *        <li><strong>oculus</strong>: The ticket’s value is a string composed of Oculus's user ID and the nonce separated by a colon (:).</li>
-   *        <li><strong>twitch</strong>: The ticket’s value is the authorization code returned by Twitch OAuth.</li>
-   *        <li><strong>android</strong>: The ticket's value is the Android’s device ID</li>
-   *        <li><strong>ios</strong>: The ticket's value is the iOS’s device ID.</li>
-   *        <li><strong>apple</strong>: The ticket’s value is the authorization code returned by Apple OAuth.</li>
-   *        <li><strong>device</strong>: Every device that doesn't run Android and iOS is categorized as a device platform. The ticket's value is the device’s ID.</li>
-   *        <li><strong>discord</strong>: The ticket’s value is the authorization code returned by Discord OAuth.</li>
-   *        <li><strong>ps4web</strong>: The ticket’s value is the authorization code returned by PSN OAuth.</li>
-   *        <li><strong>xblweb</strong>: The ticket’s value is the authorization code returned by XBox Live OAuth.</li>
-   *        <li><strong>awscognito</strong>: The ticket’s value is the aws cognito access token (JWT).</li>
-   *        <li><strong>epicgames</strong>: The ticket’s value is an access-token obtained from Epicgames EOS Account Service.</li>
-   *        <li><strong>nintendo</strong>: The ticket’s value is the authorization code(id_token) returned by Nintendo OAuth.</li>
-   *        <li><strong>stadia</strong>: The ticket’s value is a JWT Token, which can be obtained after calling the Stadia SDK's function.</li>
-   *      </ul>
-   *    <br>action code : 10144
+   *      ##Supported platforms:
+   *
+   *        - __steam__: The ticket’s value is the authentication code returned by Steam.
+   *        - __steamopenid__: Steam's user authentication method using OpenID 2.0. The ticket's value is URL generated by Steam on web authentication
+   *        - __facebook__: The ticket’s value is the authorization code returned by Facebook OAuth
+   *        - __google__: The ticket’s value is the authorization code returned by Google OAuth
+   *        - __oculus__: The ticket’s value is a string composed of Oculus's user ID and the nonce separated by a colon (:).
+   *        - __twitch__: The ticket’s value is the authorization code returned by Twitch OAuth.
+   *        - __android__: The ticket's value is the Android’s device ID
+   *        - __ios__: The ticket's value is the iOS’s device ID.
+   *        - __apple__: The ticket’s value is the authorization code returned by Apple OAuth.
+   *        - __device__: Every device that doesn't run Android and iOS is categorized as a device platform. The ticket's value is the device’s ID.
+   *        - __discord__: The ticket’s value is the authorization code returned by Discord OAuth.
+   *        - __ps4web__: The ticket’s value is the authorization code returned by PSN OAuth.
+   *        - __xblweb__: The ticket’s value is the authorization code returned by XBox Live OAuth.
+   *        - __awscognito__: The ticket’s value is the aws cognito access token (JWT).
+   *        - __epicgames__: The ticket’s value is an access-token obtained from Epicgames EOS Account Service.
+   *        - __nintendo__: The ticket’s value is the authorization code(id_token) returned by Nintendo OAuth.
+   *        - __stadia__: The ticket’s value is a JWT Token, which can be obtained after calling the Stadia SDK's function.
+   *
+   *    action code : 10144
    */
   linkAccountToPlatform = ({ platformId, data }: { platformId: string; data: { ticket: string | null; redirectUri?: string | null } }) => {
     return this.newInstance().postV3NsUsersMePlatformsByPlatformid(platformId, data)
@@ -182,7 +178,7 @@ export class UserApi {
   }
 
   /**
-   * It is going to be <strong>DEPRECATED</strong>.
+   * It is going to be __DEPRECATED__.
    * Update Platform Account relation to current User Account.
    * Note: Game progression data (statistics, reward, etc) associated with previous User Account will not be
    * transferred. If the data is tight to game user ID, the user will have the game progression data.
@@ -194,32 +190,32 @@ export class UserApi {
 
   /**
    * Required valid user authorization.
-   *      <h2>Supported platforms:</h2>
-   *      <ul>
-   *        <li><strong>steam</strong></li>
-   *        <li><strong>steamopenid</strong></li>
-   *        <li><strong>facebook</strong></li>
-   *        <li><strong>google</strong></li>
-   *        <li><strong>oculus</strong></li>
-   *        <li><strong>twitch</strong></li>
-   *        <li><strong>android</strong></li>
-   *        <li><strong>ios</strong></li>
-   *        <li><strong>apple</strong></li>
-   *        <li><strong>device</strong></li>
-   *        <li><strong>discord</strong></li>
-   *        <li><strong>awscognito</strong></li>
-   *        <li><strong>epicgames</strong></li>
-   *        <li><strong>nintendo</strong></li>
-   *        <li><strong>stadia</strong></li>
-   *      </ul>
-   *      <p>Unlink user's account from a specific platform. 'justice' platform might have multiple accounts from different namespaces linked.
-   *      <br><i>platformNamespace</i> need to be specified when the platform ID is 'justice'.
-   *      <br>
-   *      <br>Unlink user's account from justice platform will enable password token grant and password update.
-   *      <br>
-   *      <br>If you want to unlink user's account in a game namespace, you have to specify <i>platformNamespace</i> to that game namespace.
-   *      <br>
-   *      <br>action code : 10121 </p>
+   *      ##Supported platforms:
+   *
+   *        - __steam__
+   *        - __steamopenid__
+   *        - __facebook__
+   *        - __google__
+   *        - __oculus__
+   *        - __twitch__
+   *        - __android__
+   *        - __ios__
+   *        - __apple__
+   *        - __device__
+   *        - __discord__
+   *        - __awscognito__
+   *        - __epicgames__
+   *        - __nintendo__
+   *        - __stadia__
+   *
+   *      Unlink user's account from a specific platform. 'justice' platform might have multiple accounts from different namespaces linked.
+   *      _platformNamespace_ need to be specified when the platform ID is 'justice'.
+   *
+   *      Unlink user's account from justice platform will enable password token grant and password update.
+   *
+   *      If you want to unlink user's account in a game namespace, you have to specify _platformNamespace_ to that game namespace.
+   *
+   *      action code : 10121
    */
   unLinkAccountFromPlatform = ({ platformId, data }: { platformId: string; data: UnlinkUserPlatformRequest }) => {
     return this.newInstance().deleteV3NsUsersMePlatformsByPlatformid(platformId, data)
@@ -269,8 +265,6 @@ export class UserApi {
    * If it already been used, will response 409.
    *
    * If it is available, we will send a verification code to this email address.
-   * This code can be verified by this <a href="#operations-Users-PublicVerifyRegistrationCode">method</a>.
-   *
    */
   requestNewUserVerificationCode(data: SendRegisterVerificationCodeRequest) {
     return this.newInstance().postV3NsUsersCodeRequest(data)
@@ -278,19 +272,19 @@ export class UserApi {
 
   /**
    * Create a new user with unique email address and username.
-   *    <p>
-   *    <b>Required attributes:</b>
+   *
+   *    __Required attributes:__
    *    - authType: possible value is EMAILPASSWD
    *    - emailAddress: Please refer to the rule from /v3/public/inputValidations API.
    *    - username: Please refer to the rule from /v3/public/inputValidations API.
    *    - password: Please refer to the rule from /v3/public/inputValidations API.
    *    - country: ISO3166-1 alpha-2 two letter, e.g. US.
    *    - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date.
-   *    <br/>
-   *    <b>Not required attributes:</b>
+   *
+   *    __Not required attributes:__
    *    - displayName: Please refer to the rule from /v3/public/inputValidations API.
-   *    </p>
-   *    <p>This method support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.</p>
+   *
+   *    This method support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    *
    */
   createUser(data: CreateUserRequestV4) {
@@ -298,9 +292,9 @@ export class UserApi {
   }
 
   /**
-   * <p>This method retrieves platform accounts linked to user.
-   *          <br>It will query all linked platform accounts and result will be distinct & grouped, same platform we will pick oldest linked one.
-   *          <br>Required valid user authorization.</p>
+   * This method retrieves platform accounts linked to user.
+   *          It will query all linked platform accounts and result will be distinct & grouped, same platform we will pick oldest linked one.
+   *          Required valid user authorization.
    */
   getUserDistinctLinkedPlatform(userId: string) {
     return this.newInstance().fetchV3NsUsersByUseridDistinctPlatforms(userId)
@@ -308,7 +302,7 @@ export class UserApi {
 
   /**
    * Required valid user authorization.
-   *      <p>Unlink user's account from for all third platforms. </p>
+   *      Unlink user's account from for all third platforms.
    */
   unLinkAccountFromPlatformDistinct(platformId: string) {
     return this.newInstance().deleteV3NsUsersMePlatformsByPlatformidAll(platformId)
@@ -316,8 +310,8 @@ export class UserApi {
 
   /**
    * Required valid user authorization
-   * <p>The verification link is sent to email address</p>
-   * <p>It will not send request if user email is already verified</p>
+   * The verification link is sent to email address
+   * It will not send request if user email is already verified
    *
    */
   sendVerificationLink(languageTag: string) {
@@ -325,15 +319,15 @@ export class UserApi {
   }
 
   /**
-   * <p>This method retrieves platform accounts linked to user. Required valid user authorization.
-   *          <br>action code: 10128 </p>
+   * This method retrieves platform accounts linked to user. Required valid user authorization.
+   *          action code: 10128
    */
   getLinkedAccount(userId: string) {
     return this.newInstance().fetchV3NsUsersByUseridPlatforms(userId)
   }
 
   /**
-   * Note:<br>
+   * Note:
    * 1. My account should be full account
    * 2. My account not linked to request headless account's third platform.
    */
@@ -342,7 +336,7 @@ export class UserApi {
   }
 
   /**
-   * Note:<br>
+   * Note:
    * 1. My account should be full account
    * 2. My account not linked to headless account's third platform.
    */

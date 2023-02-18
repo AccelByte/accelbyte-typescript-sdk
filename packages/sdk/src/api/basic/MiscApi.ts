@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,7 +14,8 @@ export class MiscApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
+   * List countries.
+   * - _Returns_: country code list
    */
   getCountries = (lang?: string) => {
     return this.newInstance().fetchV1NsMiscCountries({ lang })

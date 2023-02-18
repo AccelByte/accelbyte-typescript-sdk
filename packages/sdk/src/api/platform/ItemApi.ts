@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -21,14 +21,16 @@ export class ItemApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * This API is used to get item by appId.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with that appId</li></ul>
+   * This API is used to get item by appId.
+   * Returns: the item with that appId
    */
   getItemByAppId({ ...queryParams }: { storeId?: string; appId: string; language?: string; region?: string }) {
     return this.newInstance().fetchNsItemsByAppId(queryParams)
   }
 
   /**
-   * Get item dynamic data for a published item.<br>Other detail info: <ul><li><i>Returns</i>: item dynamic data</li></ul>
+   * Get item dynamic data for a published item.
+   * Returns: item dynamic data
    */
   getItemByItemIdDynamic(itemId: string) {
     return this.newInstance().fetchNsItemsByItemidDynamic(itemId)
@@ -43,7 +45,8 @@ export class ItemApi {
   }
 
   /**
-   * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
+   * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.
+   * Returns: the list of items
    */
   getItemsByItemIds({ queryParams }: { queryParams: QueryParamsItemIds }) {
     return this.newInstance().fetchNsItemsLocaleByIds(queryParams)
@@ -70,14 +73,16 @@ export class ItemApi {
   }
 
   /**
-   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: item data</li></ul>
+   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.
+   * Returns: item data
    */
   getItemsByItemIdLocale({ itemId, queryParams }: { itemId: string; queryParams?: Parameters<Item$['fetchNsItemsByItemidLocale']>[1] }) {
     return this.newInstance().fetchNsItemsByItemidLocale(itemId, queryParams)
   }
 
   /**
-   * This API is used to get an app in locale. If app not exist in specific region, default region app will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Returns</i>: app data</li></ul>
+   * This API is used to get an app in locale. If app not exist in specific region, default region app will return.
+   * Returns: app data
    */
   getAppInfoByItemId({ itemId, queryParams }: { itemId: string; queryParams?: QueryParams }) {
     return this.newInstance().fetchNsItemsByItemidAppLocale(itemId, queryParams)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,14 +14,17 @@ export class DlcApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string) {}
 
   /**
-   * Retrieve the list of DLC available on specific game. Use game's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: list of DLC</li></ul>
+   * Retrieve the list of DLC available on specific game. Use game's appId to query.
+   *
+   * - _Returns_: list of DLC
    */
   getLatestDLCByGameAppId(appId: string) {
     return this.newInstance().fetchNsDlcsLatestByGameAppIdByAppid(appId)
   }
 
   /**
-   * Retrieve the list of DLC available on specific game. Use DLC's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: appId of game and list of its builds by platformId</li></ul>
+   * Retrieve the list of DLC available on specific game. Use DLC's appId to query.
+   * - _Returns_: appId of game and list of its builds by platformId
    */
   getBaseGamesByDlcAppId(dlcAppId: string) {
     return this.newInstance().fetchNsAppsLatestByDlcAppIdByDlcappid(dlcAppId)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,7 +14,11 @@ export class CachingApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string) {}
 
   /**
-   * This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * This API is used to retrieve detailed diff cache.
+   * The response will contains list of diff cache files along with its download url.
+   *
+   * Other detail info:
+   * - _Required permission_: login user
    */
   getDiffCache(sourceBuildId: string, destinationBuildId: string) {
     return this.newInstance().fetchNsDiffCacheSourceBySourcebuildidDestByDestinationbuildid(sourceBuildId, destinationBuildId)

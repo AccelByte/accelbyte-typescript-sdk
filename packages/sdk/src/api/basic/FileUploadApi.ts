@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,7 +16,8 @@ export class FileUploadApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string) {}
 
   /**
-   * Generate an upload URL. It's valid for 10 minutes.<br/>Other detail info: <ul><li><i>Required permission</i>: resource = <b>"NAMESPACE:{namespace}:FILEUPLOAD"</b>, action=1 <b>(CREATE)</b></li><li><i>Action code</i>: 11101</li><li><i>Returns</i>: URL data</li></ul>
+   * Generate an upload URL. It's valid for 10 minutes.
+   * Returns: URL data
    */
   generateFolderUploadFileUrl = ({
     folder,

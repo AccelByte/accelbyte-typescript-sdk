@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,16 +14,15 @@ export class EventApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * <p>Available Type: </p>
-   *      <ul>
-   *        <li>email</li>
-   *        <li>password</li>
-   *        <li>displayname</li>
-   *        <li>dateofbirth</li>
-   *        <li>country</li>
-   *        <li>language</li>
-   *      </ul>
-   *      <p>Requires a valid user access token</p>
+   * Available Type:
+   *        - email
+   *        - password
+   *        - displayname
+   *        - dateofbirth
+   *        - country
+   *        - language
+   *
+   *      Requires a valid user access token
    */
   getAccountHistoryByUserId = ({
     userId,

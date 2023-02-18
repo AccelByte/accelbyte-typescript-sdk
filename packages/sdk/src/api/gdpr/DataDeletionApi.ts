@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,24 +14,24 @@ export class DataDeletionApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * <p>Fetch the status to check whether or not a user's account is on a deletion status</p>
-   * <p>Requires valid user access token</p>
+   * Fetch the status to check whether or not a user's account is on a deletion status
+   * Requires valid user access token
    */
   getGdprDeletionStatus(userId: string) {
     return this.newInstance().fetchGdprNsUsersByUseridDeletionsStatus(userId)
   }
 
   /**
-   * <p>Request an account's deletion</p>
-   * <p>Requires valid user access token and password
+   * Request an account's deletion
+   * Requires valid user access token and password
    */
   requestAccountDeletion({ userId, data }: { userId: string; data: { password: string | null } }) {
     return this.newInstance().postGdprNsUsersByUseridDeletions(userId, data)
   }
 
   /**
-   * <p>Cancel a deletion request</p>
-   * <p>Requires valid user access token</p>
+   * Cancel a deletion request
+   * Requires valid user access token
    */
   cancelAccountDeletion(userId: string) {
     return this.newInstance().deleteGdprNsUsersByUseridDeletions(userId)

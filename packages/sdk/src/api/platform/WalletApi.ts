@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,14 +15,20 @@ export class WalletApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * get my wallet by currency code and namespace.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li><li><i>Path's namespace</i> : <ul>   <li>can be filled with <b>publisher namespace</b> in order to get <b>publisher user wallet</b></li>   <li>can be filled with <b>game namespace</b> in order to get <b>game user wallet</b></li>   </ul></li></ul>
+   * get my wallet by currency code and namespace.
+   *
+   * Returns: wallet info
+   * Path's namespace:
+   *  - can be filled with __publisher namespace__ in order to get __publisher user wallet__
+   *  - can be filled with __game namespace__ in order to get __game user wallet__
    */
   getUserMeWallet = (currencyCode: string) => {
     return this.newInstance().fetchNsUsersMeWalletsByCurrencycode(currencyCode)
   }
 
   /**
-   * get a wallet by currency code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li></ul>
+   * Get a wallet by currency code.
+   * Returns: wallet info
    */
   getWalletByUserId = (userId: string, currencyCode: string) => {
     return this.newInstance().fetchNsUsersByUseridWalletsByCurrencycode(userId, currencyCode)

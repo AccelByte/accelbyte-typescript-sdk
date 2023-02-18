@@ -36,12 +36,10 @@ export class OAuthApi {
   }
 
   /**
-   * <p>This method is used to remove <b>access_token</b>, <b>refresh_token</b> from cookie and revoke token from usage.</p>
-   *    <p>Supported methods:</p>
-   *      <ul>
-   *        <li>VerifyToken to verify token from header</li>
-   *        <li>AddTokenToRevocationList to revoke token with TTL</li>
-   *      </ul>
+   * This method is used to remove __access_token__, __refresh_token__ from cookie and revoke token from usage.
+   *    Supported methods:
+   *        - VerifyToken to verify token from header
+   *        - AddTokenToRevocationList to revoke token with TTL
    */
   logout = () => {
     const axios = Network.create({
@@ -54,8 +52,8 @@ export class OAuthApi {
   }
 
   /**
-   * <p>This method revokes a token.</p>
-   *           <p>This method requires authorized requests header with Basic Authentication from client that establish the token.</p><br>action code: 10706
+   * This method revokes a token.
+   *           This method requires authorized requests header with Basic Authentication from client that establish the token.action code: 10706
    */
   revoke = ({ token }: { token: string }) => {
     const axios = Network.create({
@@ -70,10 +68,10 @@ export class OAuthApi {
   }
 
   /**
-   * Verify 2FA code<br/>
-   * <p>This method is used for verifying 2FA code.</p>
-   *          <h2>2FA remember device</h2>
-   *          <p>To remember device for 2FA, should provide cookie: device_token or header: Device-Token</p>
+   * Verify 2FA code
+   * This method is used for verifying 2FA code.
+   *          ##2FA remember device
+   *          To remember device for 2FA, should provide cookie: device_token or header: Device-Token
    *
    */
   verify2FA = async ({ factor, code, mfaToken = null, rememberDevice }: Verify2FAParam) => {
@@ -92,28 +90,27 @@ export class OAuthApi {
   }
 
   /**
-   * <p>This method get country location based on the request.</p>
+   * This method get country location based on the request.
    */
   getCurrentLocationCountry = () => {
     return this.newOAuth20Extension().fetchIamV3LocationCountry()
   }
 
   /**
-   * Retrieve User Third Party Platform Token<br/>
-   * <p>
+   * Retrieve User Third Party Platform Token
+   *
    * This method used for retrieving third party platform token for user that login using third party,
    * if user have not link requested platform in game namespace, will try to retrieving third party platform token from publisher namespace.
    * Passing platform group name or it's member will return same access token that can be used across the platform members.
-   * </p>
-   * <p>The third party platform and platform group covered for this is:</p>
-   * <ul>
-   *  <li>(psn) ps4web</li>
-   *  <li>(psn) ps4</li>
-   *  <li>(psn) ps5</li>
-   *  <li>epicgames</li>
-   *  <li>twitch</li>
-   *  <li>awscognito</li>
-   * </ul>
+   *
+   * The third party platform and platform group covered for this is:
+   *  - (psn) ps4web
+   *  - (psn) ps4
+   *  - (psn) ps5
+   *  - epicgames
+   *  - twitch
+   *  - awscognito
+   *
    */
   getThirdPartyPlatformToken = (userId: string, platformId: string) => {
     return this.newInstance().fetchV3OauthUsersByUseridPlatformsByPlatformidPlatformToken(userId, platformId)
@@ -122,12 +119,13 @@ export class OAuthApi {
   /**
    * This method is being used to authenticate a user account and perform platform link.
    * It validates user's email / username and password.
-   * If user already enable 2FA, then invoke <i>/mfa/verify</i> using <b>mfa_token</b> from this method response.
+   * If user already enable 2FA, then invoke _/mfa/verify_ using __mfa_token__ from this method response.
    *
-   * <h2>Device Cookie Validation</h2>
+   * ##Device Cookie Validation
    *
-   * Device Cookie is used to protect the user account from brute force login attack, <a target="_blank" href="https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies">more detail from OWASP<a>.
-   * This method will read device cookie from cookie <b>auth-trust-id</b>. If device cookie not found, it will generate a new one and set it into cookie when successfully authenticate.
+   * Device Cookie is used to protect the user account from brute force login attack,
+   * [more detail from OWASP](https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies).
+   * This method will read device cookie from cookie __auth-trust-id__. If device cookie not found, it will generate a new one and set it into cookie when successfully authenticate.
    *
    */
   authenticateWithLink = (data: {
@@ -154,7 +152,7 @@ export class OAuthApi {
   /**
    * This method is being used to generate user's token by one time link code.
    * It require publisher ClientID
-   * It required a code which can be generated from <strong>/iam/v3/link/code/request</strong>.<br>
+   * It required a code which can be generated from __/iam/v3/link/code/request__.
    *
    */
   exchangeTokenByOneTimeLinkCode(data: { oneTimeLinkCode: string | null; client_id: string | null }) {

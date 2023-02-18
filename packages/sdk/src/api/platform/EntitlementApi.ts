@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,7 +15,7 @@ export class EntitlementApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user app entitlement by appId.
    */
   getEntitlementByAppId({ userId, appId }: { userId: string; appId: string }) {
     return this.newInstance().fetchNsUsersByUseridEntitlementsByAppId(userId, {
@@ -24,7 +24,8 @@ export class EntitlementApi {
   }
 
   /**
-   * Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement list</li></ul>
+   * Query user entitlements for a specific user.
+   * Returns: entitlement list
    */
   getEntitlements({
     userId,
@@ -37,7 +38,7 @@ export class EntitlementApi {
   }
 
   /**
-   * Exists any user active entitlement of specified itemIds, skus and appIds<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Exists any user active entitlement of specified itemIds, skus and appIds
    */
   getEntitlementOwnerShip({
     userId,
@@ -50,14 +51,15 @@ export class EntitlementApi {
   }
 
   /**
-   * Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user entitlement ownership by itemIds.
    */
   getEntitlementByItemIds({ userId, queryParams }: { userId: string; queryParams?: { ids?: string[] } }) {
     return this.newInstance().fetchNsUsersByUseridEntitlementsOwnershipByItemIds(userId, queryParams)
   }
 
   /**
-   * Consume user entitlement. If the entitlement useCount is 0, the status will be CONSUMED. Client should pass item id in options if entitlement clazz is OPTIONBOX<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=4 (UPDATE)</li><li><i>Returns</i>: consumed entitlement</li></ul>
+   * Consume user entitlement. If the entitlement useCount is 0, the status will be CONSUMED. Client should pass item id in options if entitlement clazz is OPTIONBOX
+   * Returns: consumed entitlement
    */
   claimEntitlement({ userId, entitlementId, data }: { userId: string; entitlementId: string; data: EntitlementDecrement }) {
     return this.newInstance().putNsUsersByUseridEntitlementsByEntitlementidDecrement(userId, entitlementId, data)
