@@ -14,10 +14,11 @@ export class InputValidationsApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * GET [/iam/v3/public/inputValidations](api)
+   *
    * No role required
    *    This method is to get list of input validation configuration.
    *    `regex` parameter will be returned if `isCustomRegex` is true. Otherwise, it will be empty.
-   *
    */
   getValidations = (languageCode?: string | null, defaultOnEmpty?: boolean | null) => {
     const queryParams = { languageCode, defaultOnEmpty }

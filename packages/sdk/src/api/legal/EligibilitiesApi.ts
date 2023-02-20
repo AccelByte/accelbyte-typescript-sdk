@@ -14,10 +14,13 @@ export class EligibilitiesApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * Retrieve the active policies and its conformance status by user.This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.Other detail info:
-   * - _Required permission_: login user
+   * GET [/agreement/public/eligibilities/namespaces/{namespace}](api)
+   *
+   * Retrieve the active policies and its conformance status by user.This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.
+   *
+   * _Required permission_: login user
    */
-  getUserEligibilities() {
+  getUserEligibilities = () => {
     return this.newInstance().fetchPublicEligibilitiesNamespacesByNamespace()
   }
 

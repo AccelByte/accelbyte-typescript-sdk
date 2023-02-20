@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,6 +14,8 @@ export class ThirdPartyCredentialApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * GET [/iam/v3/public/namespaces/{namespace}/platforms/clients/active](api)
+   *
    * This is the Public API to Get All Active 3rd Platform Credential.
    */
   getThirdPartyPlatformInfo = () => {

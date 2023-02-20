@@ -15,7 +15,10 @@ export class CurrencyApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * GET [/platform/public/namespaces/{namespace}/currencies](api)
+   *
    * List currencies of a namespace.
+   *
    * Returns: Currency List
    */
   getCurrencies = () => {
@@ -24,6 +27,8 @@ export class CurrencyApi {
 
   /**
    * Get the currencies list and convert into a map of currency code and the currency itself
+   *
+   * @internal
    */
   getCurrencyMap = async () => {
     const result = await this.getCurrencies()

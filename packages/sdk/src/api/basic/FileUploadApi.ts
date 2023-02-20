@@ -16,6 +16,8 @@ export class FileUploadApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string) {}
 
   /**
+   * POST [/basic/v1/public/namespaces/{namespace}/folders/{folder}/files](api)
+   *
    * Generate an upload URL. It's valid for 10 minutes.
    * Returns: URL data
    */

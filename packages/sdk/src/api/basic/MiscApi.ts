@@ -14,13 +14,19 @@ export class MiscApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * List countries.
-   * - _Returns_: country code list
+   * GET [/basic/v1/public/namespaces/{namespace}/misc/countries](api)
+   *
+   * _Returns_: country code list
    */
   getCountries = (lang?: string) => {
     return this.newInstance().fetchV1NsMiscCountries({ lang })
   }
 
+  /**
+   * GET [/basic/v1/public/namespaces/{namespace}/misc/languages](api)
+   *
+   * _Returns_: language list
+   */
   getLanguages = () => {
     return this.newInstance().fetchV1NsMiscLanguages()
   }

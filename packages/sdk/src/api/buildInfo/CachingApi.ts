@@ -14,13 +14,14 @@ export class CachingApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string) {}
 
   /**
+   * GET [/buildinfo/public/namespaces/{namespace}/diff/cache/source/{sourceBuildId}/dest/{destinationBuildId}](api)
+   *
    * This API is used to retrieve detailed diff cache.
    * The response will contains list of diff cache files along with its download url.
    *
-   * Other detail info:
-   * - _Required permission_: login user
+   * _Required permission_: login user
    */
-  getDiffCache(sourceBuildId: string, destinationBuildId: string) {
+  getDiffCache = (sourceBuildId: string, destinationBuildId: string) => {
     return this.newInstance().fetchNsDiffCacheSourceBySourcebuildidDestByDestinationbuildid(sourceBuildId, destinationBuildId)
   }
 

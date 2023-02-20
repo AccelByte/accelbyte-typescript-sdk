@@ -15,7 +15,10 @@ export class FulfillmentApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * Redeem campaign code.
+   * POST [/platform/public/namespaces/{namespace}/users/{userId}/fulfillment/code](api)
+   *
+   * Redeem campaign code
+   *
    * Returns: fulfillment result
    */
   redeemCode = ({ userId, data }: { userId: string; data: FulfillCodeRequest }) => {

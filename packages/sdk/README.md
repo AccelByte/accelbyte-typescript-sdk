@@ -1,6 +1,6 @@
 # AccelByte Web SDK
 
-This folder contains the source code of the AccelByte Web SDK. For full documentation open [github.com/AccelByte/accelbyte-web-sdk](https://github.com/AccelByte/accelbyte-web-sdk)
+This folder contains the source code of the [github.com/AccelByte/accelbyte-web-sdk](https://github.com/AccelByte/accelbyte-web-sdk). For full documentation and live playground open [AccelByte Web SDK](https://demo.accelbyte.io/web-sdk-playground/)
 
 ## Key directories
 
@@ -8,6 +8,3 @@ This folder contains the source code of the AccelByte Web SDK. For full document
 - [src](https://github.com/AccelByte/accelbyte-web-sdk/tree/main/packages/sdk/src): The source files of the AccelByte Web SDK.
 - [test](https://github.com/AccelByte/accelbyte-web-sdk/tree/main/packages/sdk/test): The test files of the AccelByte Web SDK.
 
-## Web SDK Playground
-
-Live test the Accelbyte Web SDK in the [Web SDK Playground](https://demo.accelbyte.io/web-sdk-playground/).

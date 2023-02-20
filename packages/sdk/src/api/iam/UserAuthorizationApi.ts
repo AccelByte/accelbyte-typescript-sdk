@@ -68,6 +68,8 @@ export class UserAuthorizationApi {
   ) {}
 
   /**
+   * POST: [/iam/v3/oauth/token](api)
+   *
    * This method supports grant type:
    *      - Grant Type == `authorization_code`:
    *        &nbsp;&nbsp;&nbsp; It generates the user token by given the authorization
@@ -178,6 +180,9 @@ export class UserAuthorizationApi {
     return { ...result, mfaData }
   }
 
+  /**
+   * @internal
+   */
   getMfaDataFromError = (errorResponse: AxiosResponse) => {
     const doesMFADataExist = Validate.safeParse(errorResponse.data, MFADataResponse)
     if (!doesMFADataExist) return
@@ -190,16 +195,25 @@ export class UserAuthorizationApi {
     return result
   }
 
+  /**
+   * @internal
+   */
   getMfaDataFromStorage = () => {
     const storedMFAData = BrowserHelper.isOnBrowser() && localStorage.getItem(MFA_DATA_STORAGE_KEY)
     return storedMFAData ? JSON.parse(storedMFAData) : null
   }
 
+  /**
+   * @internal
+   */
   removeMfaDataFromStorage = () => {
     localStorage.removeItem(MFA_DATA_STORAGE_KEY)
   }
 
-  matchReceivedState(maybeSentState: string): MatchReceivedStateResult {
+  /**
+   * @internal
+   */
+  matchReceivedState = (maybeSentState: string): MatchReceivedStateResult => {
     const sentStateResult = CodeChallenge.parseSentState(maybeSentState)
     if (sentStateResult.error) return { error: sentStateResult.error, result: null }
 
@@ -219,6 +233,9 @@ export class UserAuthorizationApi {
     }
   }
 
+  /**
+   * @internal
+   */
   deduceLoginError = (error: string) => {
     switch (error) {
       case LoginErrorParam.Enum.login_session_expired:
@@ -267,6 +284,11 @@ export class UserAuthorizationApi {
     }
   }
 
+  /**
+   * GET [/iam/v3/oauth/authorize](api)
+   *
+   * Creates a URL to be used for Login, Register, Link to existing account or Twitch Link
+   */
   createLoginURL = (returnPath?: string | null, targetAuthPage?: string, oneTimeLinkCode?: string): string => {
     const { verifier, challenge } = CodeChallenge.generateChallenge()
     const csrf = CodeChallenge.generateCsrf()
@@ -297,6 +319,11 @@ export class UserAuthorizationApi {
     return url.toString()
   }
 
+  /**
+   * GET [/iam/v3/oauth/authorize](api)
+   *
+   * Creates a URL to be used for password recovery
+   */
   createForgotPasswordURL = (): string => {
     const { verifier, challenge } = CodeChallenge.generateChallenge()
     const csrf = CodeChallenge.generateCsrf()
@@ -320,10 +347,16 @@ export class UserAuthorizationApi {
     return url.toString()
   }
 
+  /**
+   * @internal
+   */
   getCodeChallenge = () => {
     return CodeChallenge.generateChallenge()
   }
 
+  /**
+   * @internal
+   */
   refreshToken = (): Promise<Partial<TokenWithDeviceCookieResponseV3> | false> => {
     const { clientId, refreshToken } = this.options
     if (DesktopChecker.isDesktopApp()) {
@@ -332,6 +365,9 @@ export class UserAuthorizationApi {
     return refreshWithLock({ axiosConfig: this.conf, clientId })
   }
 
+  /**
+   * @internal
+   */
   private getSearchParams = (sentState, challenge): URLSearchParams => {
     const searchParams = new URLSearchParams()
     searchParams.append('response_type', 'code')

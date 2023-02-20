@@ -2,9 +2,9 @@
 
 ## Note
 
-***The Web SDK and associated SDK Widgets are currently undergoing Alpha testing. If you would like to participate in the Alpha test, we encourage you to reach out to your assigned DPM resource before making use of these solutions.***
+***The Web SDK and associated Web Widgets are currently undergoing Alpha testing. If you would like to participate in the Alpha test, we encourage you to reach out to your assigned DPM resource before making use of these solutions.***
 
-AccelByte Web SDK is a JavaScript library enabling the building of web applications using AccelByte API services. The library is
+[AccelByte Web SDK](https://demo.accelbyte.io/web-sdk-playground/) is a JavaScript library enabling the building of web applications using AccelByte API services. The library is
 platform-agnostic and can be consumed in a browser or in a server environment.
 
 AccelByte SDK is built with TypeScript and uses runtime type-checking validations.

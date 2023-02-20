@@ -14,9 +14,10 @@ export class NamespaceApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * GET [/basic/v1/public/namespaces](api)
+   *
    * Get all namespaces.
    *
-   * Other detail info:
    * - _Required permission_: login user
    * - _Action code_: 11303
    * - _Returns_: list of namespaces

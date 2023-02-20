@@ -1,3 +1,7 @@
+### 0.2.0-beta.5 - 2023-02-19
+
+- Updated documentation
+
 ### 0.2.0-beta.4 - 2023-02-17
 
 - Updated comments replacing all markups with markdowns

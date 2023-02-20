@@ -15,9 +15,12 @@ export class WalletApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * GET [/platform/public/namespaces/{namespace}/users/me/wallets/{currencyCode}](api)
+   *
    * get my wallet by currency code and namespace.
    *
    * Returns: wallet info
+   *
    * Path's namespace:
    *  - can be filled with __publisher namespace__ in order to get __publisher user wallet__
    *  - can be filled with __game namespace__ in order to get __game user wallet__
@@ -27,7 +30,10 @@ export class WalletApi {
   }
 
   /**
+   * GET [/platform/public/namespaces/{namespace}/users/{userId}/wallets/{currencyCode}](api)
+   *
    * Get a wallet by currency code.
+   *
    * Returns: wallet info
    */
   getWalletByUserId = (userId: string, currencyCode: string) => {
@@ -36,6 +42,7 @@ export class WalletApi {
 
   /**
    * get a map of wallet represented by its currency code
+   * @internal
    */
   getWalletMap = async ({ userId, currencyCodes }: { userId: string; currencyCodes: string[] }) => {
     try {

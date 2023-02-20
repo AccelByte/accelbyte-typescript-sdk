@@ -14,19 +14,24 @@ export class DlcApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string) {}
 
   /**
+   * GET [/buildinfo/public/namespaces/{namespace}/dlcs/latest/byGameAppId/{appId}](api)
+   *
    * Retrieve the list of DLC available on specific game. Use game's appId to query.
    *
-   * - _Returns_: list of DLC
+   * _Returns_: list of DLC
    */
-  getLatestDLCByGameAppId(appId: string) {
+  getLatestDLCByGameAppId = (appId: string) => {
     return this.newInstance().fetchNsDlcsLatestByGameAppIdByAppid(appId)
   }
 
   /**
+   * GET [/buildinfo/public/namespaces/{namespace}/apps/latest/byDLCAppId/{dlcAppId}](api)
+   *
    * Retrieve the list of DLC available on specific game. Use DLC's appId to query.
-   * - _Returns_: appId of game and list of its builds by platformId
+   *
+   * _Returns_: appId of game and list of its builds by platformId
    */
-  getBaseGamesByDlcAppId(dlcAppId: string) {
+  getBaseGamesByDlcAppId = (dlcAppId: string) => {
     return this.newInstance().fetchNsAppsLatestByDlcAppIdByDlcappid(dlcAppId)
   }
 

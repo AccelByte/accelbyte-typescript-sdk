@@ -21,7 +21,6 @@ import { UsersV4$ } from '@accelbyte/sdk/generated-public/iam/UsersV4$'
 import { ReadyPlayerMe } from '@accelbyte/sdk/models/ReadyPlayerMe'
 import { Network } from '@accelbyte/sdk/utils/Network'
 import { Validate } from '@accelbyte/sdk/utils/Validate'
-import { z } from 'zod'
 
 export class UserApi {
   /**
@@ -30,20 +29,26 @@ export class UserApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * get currently logged in user
+   * GET [/iam/v3/public/users/me](api)
+   *
+   * get currently logged-in user
    */
   getCurrentUser = () => {
     return this.newInstance().fetchIamV3PublicUsersMe()
   }
 
   /**
-   * update current user
+   * PATCH [/iam/v3/public/namespaces/{namespace}/users/me](api)
+   *
+   * Update current user
    */
   updateUserMe = (data: UserUpdateRequestV3) => {
     return this.newInstance().patchV3NsUsersMe(data)
   }
 
   /**
+   * PUT [/iam/v4/public/namespaces/{namespace}/users/me/email](api)
+   *
    * update current user's email
    */
   updateEmailMe = (data: EmailUpdateRequestV4) => {
@@ -51,6 +56,8 @@ export class UserApi {
   }
 
   /**
+   * PUT [/iam/v3/public/namespaces/{namespace}/users/me/password](api)
+   *
    * update current user's password
    */
   updatePasswordMe = (data: UserPasswordUpdateV3Request) => {
@@ -58,6 +65,8 @@ export class UserApi {
   }
 
   /**
+   * POST [/iam/v3/public/namespaces/{namespace}/users/me/code/request](api)
+   *
    * Required valid user authorization
    * The verification code is sent to email address
    * Available contexts for use :
@@ -81,6 +90,8 @@ export class UserApi {
   }
 
   /**
+   * POST [/iam/v3/public/namespaces/{namespace}/users/me/code/verify](api)
+   *
    * Will consume code if validateOnly is set false
    * Required valid user authorization
    * Redeems a verification code sent to a user to verify the user's contact address is correct
@@ -93,6 +104,8 @@ export class UserApi {
   }
 
   /**
+   * POST [/iam/v3/public/namespaces/{namespace}/users/me/headless/code/verify](api)
+   *
    * If validateOnly is set false, consume code and upgrade headless account and automatically verified the email address if it is succeeded
    * Require valid user access token.
    *        The method upgrades a headless account by linking the headless account with the email address and the password.
@@ -113,6 +126,8 @@ export class UserApi {
   }
 
   /**
+   * POST [/iam/v4/public/namespaces/{namespace}/users/me/headless/code/verify](api)
+   *
    * Require valid user access token.
    *          The method upgrades a headless account by linking the headless account with the email address, username, and password.
    *      By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM.
@@ -133,14 +148,18 @@ export class UserApi {
   }
 
   /**
+   * GET [/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms](api)
+   *
    * This method retrieves platform accounts linked to user. Required valid user authorization.
-   *          action code: 10128
+   * action code: 10128
    */
   getUserLinkedPlatform = (userId: string) => {
     return this.newInstance().fetchV3NsUsersByUseridPlatforms(userId)
   }
 
   /**
+   * POST [/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}](api)
+   *
    * Required valid user authorization.
    *    __Prerequisite:__
    *    Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables).
@@ -171,6 +190,8 @@ export class UserApi {
   }
 
   /**
+   * GET [/iam/v3/public/namespaces/{namespace}/requests/{requestId}/async/status](api)
+   *
    * Get the linking status between a third-party platform to a user
    */
   getLinkRequestStatus = (requestId: string) => {
@@ -178,17 +199,19 @@ export class UserApi {
   }
 
   /**
+   * @internal
    * It is going to be __DEPRECATED__.
    * Update Platform Account relation to current User Account.
    * Note: Game progression data (statistics, reward, etc) associated with previous User Account will not be
    * transferred. If the data is tight to game user ID, the user will have the game progression data.
-   *
    */
   linkPlatformToUserAccount = ({ userId, data }: { userId: string; data: LinkPlatformAccountRequest }) => {
     return this.newInstance().postV3NsUsersByUseridPlatformsLink(userId, data)
   }
 
   /**
+   * DELETE [/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}](api)
+   *
    * Required valid user authorization.
    *      ##Supported platforms:
    *
@@ -222,6 +245,8 @@ export class UserApi {
   }
 
   /**
+   * GET [/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/web/link](api)
+   *
    * This method is used to generate third party login page which will redirected to establish method.
    */
   getThirdPartyURL = ({
@@ -235,6 +260,8 @@ export class UserApi {
   }
 
   /**
+   * GET [/iam/v3/public/namespaces/{namespace}/agerestrictions/countries/{countryCode}](api)
+   *
    * Get age restriction by country code. It will always get by publisher namespace
    */
   getAgeRestrictionByCountry = (countryCode: string) => {
@@ -242,35 +269,32 @@ export class UserApi {
   }
 
   /**
-   * Render 2D Avatar via readyplayer.me (https://docs.readyplayer.me/ready-player-me/avatars/2d-avatars/render-api)
+   * Render 2D Avatar via readyplayer.me POST [](https://docs.readyplayer.me/ready-player-me/avatars/2d-avatars/render-api)
+   * @internal
    */
-  renderImageFromGlbModel(data: { model: string; scene: string }) {
+  renderImageFromGlbModel = (data: { model: string; scene: string }) => {
     const axios = Network.create({
       ...this.conf
     })
     return Validate.responseType(() => axios.post('https://render.readyplayer.me/render', data), ReadyPlayerMe)
   }
 
-  // TODO: evaluate the use of this method. It looks too generic for a function that should notify game SDK
-  notifyGameSDK(url: string) {
-    const axios = Network.create({
-      ...this.conf
-    })
-    return Validate.responseType(() => axios.get(url), z.string())
-  }
-
   /**
+   * POST [/iam/v3/public/namespaces/{namespace}/users/code/request](api)
+   *
    * This method will validate the request's email address.
    *
    * If it already been used, will response 409.
    *
    * If it is available, we will send a verification code to this email address.
    */
-  requestNewUserVerificationCode(data: SendRegisterVerificationCodeRequest) {
+  requestNewUserVerificationCode = (data: SendRegisterVerificationCodeRequest) => {
     return this.newInstance().postV3NsUsersCodeRequest(data)
   }
 
   /**
+   * POST [/iam/v4/public/namespaces/{namespace}/users](api)
+   *
    * Create a new user with unique email address and username.
    *
    *    __Required attributes:__
@@ -287,60 +311,71 @@ export class UserApi {
    *    This method support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    *
    */
-  createUser(data: CreateUserRequestV4) {
+  createUser = (data: CreateUserRequestV4) => {
     return this.newInstance4().postV4NsUsers(data)
   }
 
   /**
+   * GET [/iam/v3/public/namespaces/{namespace}/users/{userId}/distinctPlatforms](api)
+   *
    * This method retrieves platform accounts linked to user.
    *          It will query all linked platform accounts and result will be distinct & grouped, same platform we will pick oldest linked one.
    *          Required valid user authorization.
    */
-  getUserDistinctLinkedPlatform(userId: string) {
+  getUserDistinctLinkedPlatform = (userId: string) => {
     return this.newInstance().fetchV3NsUsersByUseridDistinctPlatforms(userId)
   }
 
   /**
+   * DELETE [/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/all](api)
+   *
    * Required valid user authorization.
    *      Unlink user's account from for all third platforms.
    */
-  unLinkAccountFromPlatformDistinct(platformId: string) {
+  unLinkAccountFromPlatformDistinct = (platformId: string) => {
     return this.newInstance().deleteV3NsUsersMePlatformsByPlatformidAll(platformId)
   }
 
   /**
+   * POST [/iam/v3/public/users/me/verify_link/request](api)
+   *
    * Required valid user authorization
    * The verification link is sent to email address
    * It will not send request if user email is already verified
-   *
    */
-  sendVerificationLink(languageTag: string) {
+  sendVerificationLink = (languageTag: string) => {
     return this.newInstance().postIamV3PublicUsersMeVerifyLinkRequest({ languageTag })
   }
 
   /**
+   * GET [/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms](api)
+   *
    * This method retrieves platform accounts linked to user. Required valid user authorization.
    *          action code: 10128
    */
-  getLinkedAccount(userId: string) {
+  getLinkedAccount = (userId: string) => {
     return this.newInstance().fetchV3NsUsersByUseridPlatforms(userId)
   }
 
   /**
+   * GET [/iam/v3/public/users/me/headless/link/conflict](api)
+   *
    * Note:
    * 1. My account should be full account
    * 2. My account not linked to request headless account's third platform.
    */
-  getLinkAccountByOneTimeCodeConflict(params: { oneTimeLinkCode: string | null }) {
+  getLinkAccountByOneTimeCodeConflict = (params: { oneTimeLinkCode: string | null }) => {
     return this.newInstance().fetchIamV3PublicUsersMeHeadlessLinkConflict(params)
   }
 
   /**
+   * POST [/iam/v3/public/users/me/headless/linkWithProgression](api)
+   *
    * Note:
    * 1. My account should be full account
    * 2. My account not linked to headless account's third platform.
    */
-  linkWithProgression(data: LinkHeadlessAccountRequest) {
+  linkWithProgression = (data: LinkHeadlessAccountRequest) => {
     return this.newInstance().postIamV3PublicUsersMeHeadlessLinkWithProgression(data)
   }
 

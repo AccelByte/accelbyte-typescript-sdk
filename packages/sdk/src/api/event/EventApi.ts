@@ -14,6 +14,8 @@ export class EventApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * GET [/event/v2/public/namespaces/{namespace}/users/{userId}/edithistory](api)
+   *
    * Available Type:
    *        - email
    *        - password
@@ -22,7 +24,7 @@ export class EventApi {
    *        - country
    *        - language
    *
-   *      Requires a valid user access token
+   * _Requires a valid user access token_
    */
   getAccountHistoryByUserId = ({
     userId,

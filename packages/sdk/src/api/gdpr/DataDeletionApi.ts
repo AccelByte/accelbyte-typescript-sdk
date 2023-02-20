@@ -14,26 +14,35 @@ export class DataDeletionApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * GET [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions/status](api)
+   *
    * Fetch the status to check whether or not a user's account is on a deletion status
-   * Requires valid user access token
+   *
+   * _Requires a valid user access token_
    */
-  getGdprDeletionStatus(userId: string) {
+  getGdprDeletionStatus = (userId: string) => {
     return this.newInstance().fetchGdprNsUsersByUseridDeletionsStatus(userId)
   }
 
   /**
+   * POST [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](api)
+   *
    * Request an account's deletion
-   * Requires valid user access token and password
+   *
+   * _Requires a valid user access token and password_
    */
-  requestAccountDeletion({ userId, data }: { userId: string; data: { password: string | null } }) {
+  requestAccountDeletion = ({ userId, data }: { userId: string; data: { password: string | null } }) => {
     return this.newInstance().postGdprNsUsersByUseridDeletions(userId, data)
   }
 
   /**
+   * DELETE [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](api)
+   *
    * Cancel a deletion request
-   * Requires valid user access token
+   *
+   * _Requires a valid user access token_
    */
-  cancelAccountDeletion(userId: string) {
+  cancelAccountDeletion = (userId: string) => {
     return this.newInstance().deleteGdprNsUsersByUseridDeletions(userId)
   }
 

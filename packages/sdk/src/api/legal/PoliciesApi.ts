@@ -14,7 +14,9 @@ export class PoliciesApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * Retrieve all active latest policies based on a namespace and country.Other detail info:
+   * GET [/agreement/public/policies/namespaces/{namespace}/countries/{countryCode}](api)
+   *
+   * Retrieve all active latest policies based on a namespace and country.
    *
    * - _Leave the policyType empty if you want to be responded with all policy type_
    * - _Fill the tags if you want to filter the responded policy by tags_
@@ -28,32 +30,31 @@ export class PoliciesApi {
    * - Query: alwaysIncludeDefault: true
    * - Response: Document 1 (UA), Document 2 (US), Document 3 (US)
    */
-  // TODO cpmmented -> docgen fix above to valid HTML
-  fetchPoliciesByCountry({
+  fetchPoliciesByCountry = ({
     countryCode,
     queryParams
   }: {
     countryCode: string
     queryParams: Parameters<Policies$['fetchPublicPoliciesNamespacesByNamespaceCountriesByCountrycode']>[1]
-  }) {
+  }) => {
     return this.newInstance().fetchPublicPoliciesNamespacesByNamespaceCountriesByCountrycode(countryCode, queryParams)
   }
 
   /**
-   * Retrieve all active latest policies based on country from all namespaces.
-   * Other detail info:
+   * GET [/agreement/public/policies/countries/{countryCode}](api)
    *
+   * Retrieve all active latest policies based on country from all namespaces.
    * - _Leave the policyType empty if you want to be responded with all policy type_
    * - _Fill the tags if you want to filter the responded policy by tags_
    * - _Fill the defaultOnEmpty with true if you want to be responded with default country-specific policy if your requested country is not exist_
    */
-  fetchAllPoliciesByCountry({
+  fetchAllPoliciesByCountry = ({
     countryCode,
     queryParams
   }: {
     countryCode: string
     queryParams?: Parameters<Policies$['fetchPublicPoliciesCountriesByCountrycode']>[1]
-  }) {
+  }) => {
     return this.newInstance().fetchPublicPoliciesCountriesByCountrycode(countryCode, queryParams)
   }
 

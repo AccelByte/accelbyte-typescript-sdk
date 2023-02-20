@@ -16,6 +16,8 @@ export class UserProfileApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * GET [/basic/v1/public/namespaces/{namespace}/users/me/profiles](api)
+   *
    * Get my profile
    *
    * __Client with user token can get user profile in target namespace__
@@ -25,6 +27,8 @@ export class UserProfileApi {
   }
 
   /**
+   * POST [/basic/v1/public/namespaces/{namespace}/users/me/profiles](api)
+   *
    * Create my profile.
    *
    * __Client with user token can create user profile in target namespace__
@@ -34,6 +38,8 @@ export class UserProfileApi {
   }
 
   /**
+   * PUT [/basic/v1/public/namespaces/{namespace}/users/me/profiles](api)
+   *
    * Update my profile.
    * Updates user profile in the target namespace. If token's namespace doesn't match the target namespace, the service automatically maps the token's user ID into the user ID in the target namespace. The method returns the updated user profile on a successful call.
    */
@@ -42,6 +48,8 @@ export class UserProfileApi {
   }
 
   /**
+   * PUT [/basic/v1/public/namespaces/{namespace}/users/{userId}/profiles/customAttributes](api)
+   *
    * Update partially custom attributes tied to user id.
    * _Returns_: Updated custom attributes
    */

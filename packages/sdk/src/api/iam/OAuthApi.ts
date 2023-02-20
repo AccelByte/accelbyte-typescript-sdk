@@ -31,11 +31,13 @@ export class OAuthApi {
   /**
    * @internal
    */
-  newOAuth20Extension() {
+  newOAuth20Extension = () => {
     return new OAuth20Extension$(Network.create(this.conf), this.namespace, this.cache)
   }
 
   /**
+   * POST [/iam/v3/logout](api)
+   *
    * This method is used to remove __access_token__, __refresh_token__ from cookie and revoke token from usage.
    *    Supported methods:
    *        - VerifyToken to verify token from header
@@ -52,6 +54,8 @@ export class OAuthApi {
   }
 
   /**
+   * POST [/iam/v3/oauth/revoke](api)
+   *
    * This method revokes a token.
    *           This method requires authorized requests header with Basic Authentication from client that establish the token.action code: 10706
    */
@@ -68,6 +72,8 @@ export class OAuthApi {
   }
 
   /**
+   * POST [/iam/v3/oauth/mfa/verify](api)
+   *
    * Verify 2FA code
    * This method is used for verifying 2FA code.
    *          ##2FA remember device
@@ -83,6 +89,9 @@ export class OAuthApi {
     return result.response
   }
 
+  /**
+   * POST [/iam/v3/oauth/mfa/code](api)
+   */
   request2FAEmailCode = async ({ mfaToken = null, factor }: Request2FAEmailCode) => {
     const result = await this.newInstance().postIamV3OauthMfaCode({ mfaToken, clientId: this.options.clientId, factor })
     if (result.error) throw result.error
@@ -90,6 +99,8 @@ export class OAuthApi {
   }
 
   /**
+   * GET [/iam/v3/location/country](api)
+   *
    * This method get country location based on the request.
    */
   getCurrentLocationCountry = () => {
@@ -97,6 +108,8 @@ export class OAuthApi {
   }
 
   /**
+   * GET [/iam/v3/oauth/namespaces/{namespace}/users/{userId}/platforms/{platformId}/platformToken](api)
+   *
    * Retrieve User Third Party Platform Token
    *
    * This method used for retrieving third party platform token for user that login using third party,
@@ -117,6 +130,8 @@ export class OAuthApi {
   }
 
   /**
+   * POST [/iam/v3/authenticateWithLink](api)
+   *
    * This method is being used to authenticate a user account and perform platform link.
    * It validates user's email / username and password.
    * If user already enable 2FA, then invoke _/mfa/verify_ using __mfa_token__ from this method response.
@@ -139,23 +154,25 @@ export class OAuthApi {
   }
 
   /**
+   * POST [/iam/v3/link/code/validate](api)
+   *
    * This method is being used to validate one time link code.
    * It require a valid user token.
    * Should specify the target platform id and current user should already linked to this platform.
    * Current user should be a headless account.
-   *
    */
-  validateOneTimeLinkCode(data: { oneTimeLinkCode: string | null }) {
+  validateOneTimeLinkCode = (data: { oneTimeLinkCode: string | null }) => {
     return this.newOAuth20Extension().postIamV3LinkCodeValidate(data)
   }
 
   /**
+   * POST [/iam/v3/link/token/exchange](api)
+   *
    * This method is being used to generate user's token by one time link code.
    * It require publisher ClientID
    * It required a code which can be generated from __/iam/v3/link/code/request__.
-   *
    */
-  exchangeTokenByOneTimeLinkCode(data: { oneTimeLinkCode: string | null; client_id: string | null }) {
+  exchangeTokenByOneTimeLinkCode = (data: { oneTimeLinkCode: string | null; client_id: string | null }) => {
     return this.newOAuth20Extension().postIamV3LinkTokenExchange(data)
   }
 

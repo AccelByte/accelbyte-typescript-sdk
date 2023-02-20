@@ -15,26 +15,35 @@ export class AgreementApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
+   * POST [/agreement/public/agreements/policies](api)
+   *
    * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.
-   * - _Required permission_: login user
+   *
+   * _Required permission_: login user
    */
-  acceptLegalPolicies(acceptAgreements: AcceptAgreementRequest[]) {
+  acceptLegalPolicies = (acceptAgreements: AcceptAgreementRequest[]) => {
     return this.newInstance().postPublicAgreementsPolicies(acceptAgreements)
   }
 
   /**
+   * GET [/agreement/public/agreements/policies](api)
+   *
    * Retrieve accepted Legal Agreements.
-   * - _Required permission_: login user
+   *
+   * _Required permission_: login user
    */
-  getAgreements() {
+  getAgreements = () => {
     return this.newInstance().fetchPublicAgreementsPolicies()
   }
 
   /**
-   * Change marketing preference consent.
-   * - _Required permission_: login user
+   * PATCH [/agreement/public/agreements/localized-policy-versions/preferences](api)
+   *
+   * Change marketing preference consent
+   *
+   * _Required permission_: login user
    */
-  updateMarketingPreferences(acceptAgreements: AcceptAgreementRequest[]) {
+  updateMarketingPreferences = (acceptAgreements: AcceptAgreementRequest[]) => {
     return this.newInstance().patchPublicAgreementsLocalizedPolicyVersionsPreferences(acceptAgreements)
   }
 

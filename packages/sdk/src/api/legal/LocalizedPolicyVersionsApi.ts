@@ -14,9 +14,11 @@ export class LocalizedPolicyVersionsApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.Other detail info:
+   * GET [/agreement/public/localized-policy-versions/{localizedPolicyVersionId}](api)
+   *
+   * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.
    */
-  fetchLocalizedPolicyVersionById(localizedPolicyVersionId: string) {
+  fetchLocalizedPolicyVersionById = (localizedPolicyVersionId: string) => {
     return this.newInstance().fetchPublicLocalizedPolicyVersionsByLocalizedpolicyversionid(localizedPolicyVersionId)
   }
 

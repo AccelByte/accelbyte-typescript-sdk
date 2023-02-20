@@ -17,25 +17,31 @@ export class PaymentApi {
   constructor(private readonly conf: SDKRequestConfig, private readonly namespace: string, private cache = false) {}
 
   /**
-   * Get payment accounts.\
-   * Returns: Payment account list
+   * GET [/platform/public/namespaces/{namespace}/users/{userId}/payment/accounts](api)
+   *
+   * Get payment accounts.
+   *
+   * Returns: Payment account list `PaymentAccountArray`
    */
   getPaymentAccounts = (userId: string) => {
     return this.newInstance().fetchNsUsersByUseridPaymentAccounts(userId)
   }
 
   /**
-   * Delete payment account.
+   * DELETE [/platform/public/namespaces/{namespace}/users/{userId}/payment/accounts/{type}/{id}](api)
    *
-   * Other detail info:
+   * Delete payment account.
    */
   deletePaymentAccount = ({ userId, type, id }: { userId: string; type: string; id: string }) => {
     return this.newInstance().deleteNsUsersByUseridPaymentAccountsByTypeById(userId, type, id)
   }
 
   /**
+   * GET [/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/info](api)
+   *
    * Get payment order info.
-   * Returns: Payment order details
+   *
+   * Returns: Payment order details `PaymentOrderDetails`
    */
   getPaymentInfo = (paymentOrderNo: string) => {
     return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentOrdersByPaymentordernoInfo(
@@ -44,7 +50,10 @@ export class PaymentApi {
   }
 
   /**
+   * POST [/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/pay](api)
+   *
    * Do payment(For now, this only support checkout.com).
+   *
    * Returns: Payment process result
    */
   processPaymentOrder = (
@@ -60,7 +69,10 @@ export class PaymentApi {
   }
 
   /**
+   * GET [/platform/public/namespaces/{namespace}/payment/publicconfig](api)
+   *
    * Get payment provider public config, at current only Strip provide public config.
+   *
    * Returns: Public config
    */
   getPaymentProviderPublicConfig = (
@@ -76,7 +88,10 @@ export class PaymentApi {
   }
 
   /**
+   * GET [/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/status](api)
+   *
    * Check payment order paid status.
+   *
    * Returns: Payment order paid result
    */
   getPaymentOrderStatus = (paymentOrderNo: string) => {
@@ -94,7 +109,10 @@ export class PaymentApi {
   }
 
   /**
+   * GET [/platform/public/namespaces/{namespace}/payment/methods](api)
+   *
    * Check and get a payment order's should pay tax.
+   *
    * Returns: tax result
    */
   getPaymentTax = (
@@ -110,7 +128,10 @@ export class PaymentApi {
   }
 
   /**
+   * POST [/platform/public/namespaces/{namespace}/payment/link](api)
+   *
    * Get payment url.
+   *
    * Returns: Get payment link
    */
   createPaymentUrl = (data: PaymentUrlCreate) => {
