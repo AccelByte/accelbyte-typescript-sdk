@@ -1,0 +1,6 @@
+# Development files.
+src/
+
+# Config files.
+*.config.*
+tsconfig.*

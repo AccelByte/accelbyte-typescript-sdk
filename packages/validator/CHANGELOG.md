@@ -1,3 +1,7 @@
+### 0.2.0-beta.0 - 2023-02-20
+
+- Enable tree-shaking for @accelbyte/validator
+
 ### 0.1.1-alpha.57 - 2023-02-15
 
 - Export validateSeasonPassCode

@@ -14,8 +14,13 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import typescript from '@rollup/plugin-typescript'
 import alias from '@rollup/plugin-alias'
 import { writeFileSync, readFileSync } from 'fs'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 const CONFIG = JSON.parse(readFileSync('./tsconfig.build.json', 'utf-8'))
+
+const packageJson = JSON.parse(readFileSync(path.resolve('./package.json'), 'utf-8'))
+// We need to exclude these because we don't want them bundled since they'll be installed anyway when we do `npm install`.
+const packageJsonDependencies = Object.keys(packageJson.dependencies)
 
 /**
  *
@@ -30,6 +35,7 @@ function createConfig(config, isBrowser) {
     output: config.output,
     plugins: [
       peerDepsExternal(),
+      visualizer(),
       alias({
         entries: {
           '@accelbyte/validator': path.resolve('./src')
@@ -39,6 +45,9 @@ function createConfig(config, isBrowser) {
       commonjs(),
       typescript({
         tsconfig: './tsconfig.build.json',
+        declaration: false,
+        declarationDir: undefined,
+        outDir: undefined,
         sourceMap: true
       }),
       json({
@@ -50,7 +59,8 @@ function createConfig(config, isBrowser) {
       if (warning.code !== 'CIRCULAR_DEPENDENCY') {
         throw new Error(warning.message)
       }
-    }
+    },
+    external: packageJsonDependencies
   }
 
   return opts
@@ -63,13 +73,14 @@ export default async function createConfigs() {
       input: './src/index.ts',
       output: [
         {
-          file: path.join(CONFIG.compilerOptions.outDir, 'index.es.js'),
+          dir: path.join(CONFIG.compilerOptions.outDir, 'es'),
           format: 'es',
+          preserveModules: true,
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'
         },
         {
-          file: path.join(CONFIG.compilerOptions.outDir, 'index.js'),
+          dir: path.join(CONFIG.compilerOptions.outDir, 'cjs'),
           format: 'cjs',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'

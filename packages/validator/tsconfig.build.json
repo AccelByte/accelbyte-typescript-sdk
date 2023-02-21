@@ -48,7 +48,7 @@
         "../validator/src/*"
       ]
     },
-    "declarationDir": "types",
+    "declarationDir": "dist",
     "outDir": "dist",
     "rootDir": "src"
   },
