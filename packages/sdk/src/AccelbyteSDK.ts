@@ -36,6 +36,7 @@ import { LogLevel } from '@accelbyte/sdk/constants/BuildInfoApp'
 import { Method } from 'axios'
 
 export type Overrides = { config?: SDKRequestConfig; cache?: boolean }
+export type ServiceVersion = { name: string; version: string | undefined; buildDate: string }
 
 export interface AccelbyteSDK {
   IAM: {
@@ -45,17 +46,20 @@ export interface AccelbyteSDK {
     InputValidation(overrides?: Overrides): InputValidationsApi
     ThirdPartyCredential(overrides?: Overrides): ThirdPartyCredentialApi
     TwoFA(overrides?: Overrides): TwoFA
+    version: ServiceVersion
   }
   BuildInfo: {
     Downloader(overrides?: Overrides): DownloaderApi
     DLC(overrides?: Overrides): DlcApi
     Caching(overrides?: Overrides): CachingApi
+    version: ServiceVersion
   }
   Basic: {
     Misc(overrides?: Overrides): MiscApi
     UserProfile(overrides?: Overrides): UserProfileApi
     FileUpload(overrides?: Overrides): FileUploadApi
     Namespace(overrides?: Overrides): NamespaceApi
+    version: ServiceVersion
   }
   Platform: {
     Currency(overrides?: Overrides): CurrencyApi
@@ -66,23 +70,29 @@ export interface AccelbyteSDK {
     Payment(overrides?: Overrides): PaymentApi
     Subscription(overrides?: Overrides): SubscriptionApi
     Wallet(overrides?: Overrides): WalletApi
+    version: ServiceVersion
   }
   Legal: {
     Eligibilities(overrides?: Overrides): EligibilitiesApi
     Policies(overrides?: Overrides): PoliciesApi
     Agreement(overrides?: Overrides): AgreementApi
     LocalizedPolicyVersions(overrides?: Overrides): LocalizedPolicyVersionsApi
+    version: ServiceVersion
   }
   GDPR: {
     DataDeletion(overrides?: Overrides): DataDeletionApi
     DataRetrieval(overrides?: Overrides): DataRetrievalApi
+    version: ServiceVersion
   }
   Event: {
     Event(overrides?: Overrides): EventApi
+    version: ServiceVersion
   }
   AccelbyteConfig: {
     PublicTemplate<ConfigKeysEnum extends string>(overrides?: Overrides): PublicTemplateApi<ConfigKeysEnum>
+    version: ServiceVersion
   }
+  version: () => void
 
   refreshTokens(newAccessToken: string | undefined | null, newRefreshToken?: string | undefined | null)
 }

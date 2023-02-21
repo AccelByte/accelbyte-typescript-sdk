@@ -6,7 +6,7 @@
 import cryptoJs from 'crypto-js'
 import * as uuid from 'uuid'
 import { z } from 'zod'
-import { BrowserHelper } from './BrowserHelper'
+import { UrlHelper } from '@accelbyte/sdk'
 
 export class CodeChallenge {
   //
@@ -15,13 +15,13 @@ export class CodeChallenge {
   }
 
   static save = (codeVerifier: any) => {
-    if (BrowserHelper.isOnBrowser()) {
+    if (UrlHelper.isOnBrowser()) {
       localStorage.setItem('pp:pkce:cd', stringifyStoredState(codeVerifier))
     }
   }
 
   static clear = () => {
-    if (BrowserHelper.isOnBrowser()) {
+    if (UrlHelper.isOnBrowser()) {
       localStorage.removeItem('pp:pkce:cd')
     }
   }

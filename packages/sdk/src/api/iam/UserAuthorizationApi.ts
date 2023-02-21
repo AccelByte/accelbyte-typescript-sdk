@@ -8,7 +8,6 @@ import { TokenWithDeviceCookieResponseV3 } from '@accelbyte/sdk/generated-public
 import { OAuth20$ } from '@accelbyte/sdk/generated-public/iam/OAuth20$'
 import { doRefreshSession, refreshWithLock } from '@accelbyte/sdk/interceptors/AuthInterceptors'
 import { MFADataResponse } from '@accelbyte/sdk/models/TwoFA'
-import { BrowserHelper } from '@accelbyte/sdk/utils/BrowserHelper'
 import { CodeChallenge } from '@accelbyte/sdk/utils/CodeChallenge'
 import { DesktopChecker } from '@accelbyte/sdk/utils/DesktopChecker'
 import { Network } from '@accelbyte/sdk/utils/Network'
@@ -189,7 +188,7 @@ export class UserAuthorizationApi {
 
     const { mfa_token: mfaToken, factors, default_factor: defaultFactor, email } = errorResponse.data
     const result = { mfaToken, factors, defaultFactor, email }
-    if (BrowserHelper.isOnBrowser()) {
+    if (UrlHelper.isOnBrowser()) {
       localStorage.setItem(MFA_DATA_STORAGE_KEY, JSON.stringify(result))
     }
     return result
@@ -199,7 +198,7 @@ export class UserAuthorizationApi {
    * @internal
    */
   getMfaDataFromStorage = () => {
-    const storedMFAData = BrowserHelper.isOnBrowser() && localStorage.getItem(MFA_DATA_STORAGE_KEY)
+    const storedMFAData = UrlHelper.isOnBrowser() && localStorage.getItem(MFA_DATA_STORAGE_KEY)
     return storedMFAData ? JSON.parse(storedMFAData) : null
   }
 

@@ -6,7 +6,6 @@ test/
 # Config files.
 *.config.*
 tsconfig.*
-typedoc.json
 
 # Version files.
 version.json

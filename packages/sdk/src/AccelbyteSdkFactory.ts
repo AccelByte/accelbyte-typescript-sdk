@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,6 +10,14 @@ import { injectErrorInterceptors } from '@accelbyte/sdk/interceptors/ErrorInterc
 import { AccelbyteSDK, Overrides, SDKEvents, SDKOptions, SDKRequestConfig } from './AccelbyteSDK'
 import buildInfo from './buildInfo.json'
 import { Logger } from './utils/Logger'
+import BasicVersion from '@accelbyte/sdk/generated-public/basic/Version'
+import BuildinfoVersion from '@accelbyte/sdk/generated-public/buildinfo/Version'
+import EventVersion from '@accelbyte/sdk/generated-public/event/Version'
+import GdprVersion from '@accelbyte/sdk/generated-public/gdpr/Version'
+import IamVersion from '@accelbyte/sdk/generated-public/iam/Version'
+import LegalVersion from '@accelbyte/sdk/generated-public/legal/Version'
+import OdinConfigVersion from '@accelbyte/sdk/generated-public/odin-config/Version'
+import PlatformVersion from '@accelbyte/sdk/generated-public/platform/Version'
 
 /**
  * This is the main SDK class
@@ -70,18 +78,21 @@ class AccelbyteSDKFactory {
           ApiFactory.inputValidationApi(this.config, this.options.namespace, this.override(overrides)),
         ThirdPartyCredential: (overrides?: Overrides) =>
           ApiFactory.thirdPartyCredentialApi(this.config, this.options.namespace, this.override(overrides)),
-        TwoFA: (overrides?: Overrides) => ApiFactory.twoFA(this.config, this.options.namespace, this.override(overrides))
+        TwoFA: (overrides?: Overrides) => ApiFactory.twoFA(this.config, this.options.namespace, this.override(overrides)),
+        version: IamVersion
       },
       BuildInfo: {
         Downloader: (overrides?: Overrides) => ApiFactory.downloaderApi(this.config, this.options.namespace, this.override(overrides)),
         Caching: (overrides?: Overrides) => ApiFactory.cachingApi(this.config, this.options.namespace, this.override(overrides)),
-        DLC: (overrides?: Overrides) => ApiFactory.dlcApi(this.config, this.options.namespace, this.override(overrides))
+        DLC: (overrides?: Overrides) => ApiFactory.dlcApi(this.config, this.options.namespace, this.override(overrides)),
+        version: BuildinfoVersion
       },
       Basic: {
         Misc: (overrides?: Overrides) => ApiFactory.miscApi(this.config, this.options.namespace, this.override(overrides)),
         UserProfile: (overrides?: Overrides) => ApiFactory.userProfileApi(this.config, this.options.namespace, this.override(overrides)),
         FileUpload: (overrides?: Overrides) => ApiFactory.fileUploadApi(this.config, this.options.namespace, this.override(overrides)),
-        Namespace: (overrides?: Overrides) => ApiFactory.namespaceApi(this.config, this.options.namespace, this.override(overrides))
+        Namespace: (overrides?: Overrides) => ApiFactory.namespaceApi(this.config, this.options.namespace, this.override(overrides)),
+        version: BasicVersion
       },
       Platform: {
         Currency: (overrides?: Overrides) => ApiFactory.currencyApi(this.config, this.options.namespace, this.override(overrides)),
@@ -91,7 +102,8 @@ class AccelbyteSDKFactory {
         Order: (overrides?: Overrides) => ApiFactory.orderApi(this.config, this.options.namespace, this.override(overrides)),
         Payment: (overrides?: Overrides) => ApiFactory.paymentApi(this.config, this.options.namespace, this.override(overrides)),
         Subscription: (overrides?: Overrides) => ApiFactory.subscriptionApi(this.config, this.options.namespace, this.override(overrides)),
-        Wallet: (overrides?: Overrides) => ApiFactory.walletApi(this.config, this.options.namespace, this.override(overrides))
+        Wallet: (overrides?: Overrides) => ApiFactory.walletApi(this.config, this.options.namespace, this.override(overrides)),
+        version: PlatformVersion
       },
       Legal: {
         Eligibilities: (overrides?: Overrides) =>
@@ -99,18 +111,32 @@ class AccelbyteSDKFactory {
         Agreement: (overrides?: Overrides) => ApiFactory.agreementApi(this.config, this.options.namespace, this.override(overrides)),
         Policies: (overrides?: Overrides) => ApiFactory.policiesApi(this.config, this.options.namespace, this.override(overrides)),
         LocalizedPolicyVersions: (overrides?: Overrides) =>
-          ApiFactory.localizedPolicyVersionsApi(this.config, this.options.namespace, this.override(overrides))
+          ApiFactory.localizedPolicyVersionsApi(this.config, this.options.namespace, this.override(overrides)),
+        version: LegalVersion
       },
       GDPR: {
         DataDeletion: (overrides?: Overrides) => ApiFactory.dataDeletionApi(this.config, this.options.namespace, this.override(overrides)),
-        DataRetrieval: (overrides?: Overrides) => ApiFactory.dataRetrievalApi(this.config, this.options.namespace, this.override(overrides))
+        DataRetrieval: (overrides?: Overrides) =>
+          ApiFactory.dataRetrievalApi(this.config, this.options.namespace, this.override(overrides)),
+        version: GdprVersion
       },
       Event: {
-        Event: (overrides?: Overrides) => ApiFactory.eventApi(this.config, this.options.namespace, this.override(overrides))
+        Event: (overrides?: Overrides) => ApiFactory.eventApi(this.config, this.options.namespace, this.override(overrides)),
+        version: EventVersion
       },
       AccelbyteConfig: {
         PublicTemplate: (overrides?: Overrides) =>
-          ApiFactory.publicTemplateApi(this.config, this.options.namespace, this.override(overrides))
+          ApiFactory.publicTemplateApi(this.config, this.options.namespace, this.override(overrides)),
+        version: OdinConfigVersion
+      },
+      version: () => {
+        console.log('IamVersion: ', IamVersion.version)
+        console.log('BuildinfoVersion: ', BuildinfoVersion.version)
+        console.log('BasicVersion: ', BasicVersion.version)
+        console.log('PlatformVersion: ', PlatformVersion.version)
+        console.log('LegalVersion: ', LegalVersion.version)
+        console.log('GdprVersion: ', GdprVersion.version)
+        console.log('EventVersion: ', EventVersion.version)
       }
     }
   }

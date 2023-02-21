@@ -8,6 +8,7 @@ import { z } from 'zod'
 export const EntitlementSummary = z.object({
   id: z.string(),
   namespace: z.string(),
+  name: z.string().nullish(),
   userId: z.string(),
   clazz: z.enum(['APP', 'ENTITLEMENT', 'CODE', 'SUBSCRIPTION', 'MEDIA', 'OPTIONBOX', 'LOOTBOX']),
   type: z.enum(['DURABLE', 'CONSUMABLE']),

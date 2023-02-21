@@ -1,3 +1,15 @@
+### 0.2.0-beta.8 - 2023-02-21
+
+- Adds Version info to each service 
+
+### 0.2.0-beta.7 - 2023-02-21
+
+- Code-generated Web SDK with the latest swagger specs
+
+### 0.2.0-beta.6 - 2023-02-20
+
+- Add DesktopChecker to the entry index
+
 ### 0.2.0-beta.5 - 2023-02-19
 
 - Updated documentation
