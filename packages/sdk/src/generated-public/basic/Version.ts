@@ -4,4 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 
-export default { name: 'justice-basic-service', version: '2.6.0', buildDate: '2023-02-21T19:51:38.655Z' }
+export default {
+  title: '-',
+  name: 'justice-basic-service',
+  version: '2.6.0',
+  buildDate: '2023-02-21T23:52:43.996Z'
+}

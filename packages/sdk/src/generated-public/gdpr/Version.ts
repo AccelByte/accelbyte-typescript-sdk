@@ -4,4 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 
-export default { name: 'justice-gdpr-service', version: '1.19.1', buildDate: '2023-02-21T19:51:38.692Z' }
+export default {
+  title: '-',
+  name: 'justice-gdpr-service',
+  version: '1.19.1',
+  buildDate: '2023-02-21T23:52:43.996Z'
+}

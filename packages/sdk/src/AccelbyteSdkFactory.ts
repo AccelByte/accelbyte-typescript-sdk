@@ -18,6 +18,7 @@ import IamVersion from '@accelbyte/sdk/generated-public/iam/Version'
 import LegalVersion from '@accelbyte/sdk/generated-public/legal/Version'
 import OdinConfigVersion from '@accelbyte/sdk/generated-public/odin-config/Version'
 import PlatformVersion from '@accelbyte/sdk/generated-public/platform/Version'
+import { Network } from '@accelbyte/sdk/utils/Network'
 
 /**
  * This is the main SDK class
@@ -137,6 +138,17 @@ class AccelbyteSDKFactory {
         console.log('LegalVersion: ', LegalVersion.version)
         console.log('GdprVersion: ', GdprVersion.version)
         console.log('EventVersion: ', EventVersion.version)
+
+        const axiosInstance = Network.create(this.config)
+        axiosInstance
+          .get('https://development.accelbyte.io/iam/version')
+          .then(res => {
+            console.log('-- axiosInstance res', res)
+            console.log('-- current ver', IamVersion)
+          })
+          .catch(err => {
+            console.log('-- axiosInstance err', err)
+          })
       }
     }
   }

@@ -4,4 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 
-export default { name: 'justice-event-log-service', version: undefined, buildDate: '2023-02-21T19:51:38.687Z' }
+export default {
+  title: '-',
+  name: 'justice-event-log-service',
+  version: undefined,
+  buildDate: '2023-02-21T23:52:43.996Z'
+}

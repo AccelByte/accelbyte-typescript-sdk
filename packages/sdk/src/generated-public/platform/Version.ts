@@ -4,4 +4,4 @@
  * and restrictions contact your company contract manager.
  */
 
-export default { name: 'justice-platform-service', version: '4.24.0', buildDate: '2023-02-21T19:51:38.742Z' }
+export default { title: '-', name: 'justice-platform-service', version: '4.24.0', buildDate: '2023-02-21T23:43:05.402Z' }

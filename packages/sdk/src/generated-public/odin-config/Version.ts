@@ -4,4 +4,4 @@
  * and restrictions contact your company contract manager.
  */
 
-export default { name: 'config-service-app', version: 'dev', buildDate: '2023-02-21T19:51:38.691Z' }
+export default { title: '-', name: 'config-service-app', version: 'dev', buildDate: '2023-02-21T23:43:05.354Z' }

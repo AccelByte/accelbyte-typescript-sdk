@@ -1,13 +1,9 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 export class UrlHelper {
-  static isOnBrowser = () => {
-    return typeof window !== 'undefined' && window.document
-  }
-
   static isCompleteURLString = (urlString: string) => {
     try {
       const url = new URL(urlString)

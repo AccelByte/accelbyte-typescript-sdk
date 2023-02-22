@@ -36,7 +36,7 @@ import { LogLevel } from '@accelbyte/sdk/constants/BuildInfoApp'
 import { Method } from 'axios'
 
 export type Overrides = { config?: SDKRequestConfig; cache?: boolean }
-export type ServiceVersion = { name: string; version: string | undefined; buildDate: string }
+export type ServiceVersion = { title: string; name: string; version: string | undefined; buildDate: string }
 
 export interface AccelbyteSDK {
   IAM: {

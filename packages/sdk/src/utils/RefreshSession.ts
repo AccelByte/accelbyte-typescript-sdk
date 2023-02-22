@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
+import { BrowserHelper } from '@accelbyte/sdk/utils/BrowserHelper'
 import { AxiosRequestConfig } from 'axios'
-import { UrlHelper } from '@accelbyte/sdk'
 
 export class RefreshSession {
   // --
   static KEY = 'RefreshSession.lock'
 
   static isLocked = (): boolean => {
-    if (!UrlHelper.isOnBrowser()) return false
+    if (!BrowserHelper.isOnBrowser()) return false
     const lockStatus = localStorage.getItem(RefreshSession.KEY)
     if (!lockStatus) {
       return false
@@ -24,12 +24,12 @@ export class RefreshSession {
   }
 
   static lock = (expiry: number) => {
-    if (!UrlHelper.isOnBrowser()) return
+    if (!BrowserHelper.isOnBrowser()) return
     localStorage.setItem(RefreshSession.KEY, `${new Date().getTime() + expiry}`)
   }
 
   static unlock = () => {
-    if (!UrlHelper.isOnBrowser()) return
+    if (!BrowserHelper.isOnBrowser()) return
     localStorage.removeItem(RefreshSession.KEY)
   }
 

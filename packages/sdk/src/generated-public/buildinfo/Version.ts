@@ -4,4 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 
-export default { name: 'justice-buildinfo-service', version: '3.28.2', buildDate: '2023-02-21T19:51:38.678Z' }
+export default {
+  title: '-',
+  name: 'justice-buildinfo-service',
+  version: '3.28.2',
+  buildDate: '2023-02-21T23:52:43.996Z'
+}
