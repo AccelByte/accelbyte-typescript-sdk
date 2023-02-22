@@ -1,4 +1,4 @@
-### 0.2.0-beta.11 - 2023-02-22
+### 0.2.0-beta.13 - 2023-02-22
 
 - Enable tree-shaking for @accelbyte/sdk
 - Change TwoFA to TwoFAApi and InputValidationApi to InputValidationsApi
