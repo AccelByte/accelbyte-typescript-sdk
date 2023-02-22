@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk@0.2.0-beta.4":
-  version "0.2.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.2.0-beta.4.tgz#0c0e3851e0cd27d74b49497f1f587f6e96ad09b9"
-  integrity sha512-9jm93+ghZY5IjennavAXVUMf62+0dV530J9UThFxQJ2KigtQhD+VKioyf99UvymYlc4MZ9DpRHHit6k0v9cwBg==
+"@accelbyte/sdk@0.2.0-beta.12":
+  version "0.2.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.2.0-beta.12.tgz#e519d9fab95cd66030f8ba5d71bbe6910017ddfe"
+  integrity sha512-OGZCOOtLTgXfqvQwg04zbFipl0aa20h9uFkSlgNATpu//pEtHclnJKle4kQGb3mi7bJf/u+SnKkZUXjEr4eLew==
   dependencies:
     axios "0.27.2"
     buffer "6.0.3"
