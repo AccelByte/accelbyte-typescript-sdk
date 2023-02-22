@@ -32,7 +32,6 @@ import { OrderApi } from '@accelbyte/sdk/api/platform/OrderApi'
 import { PaymentApi } from '@accelbyte/sdk/api/platform/PaymentApi'
 import { SubscriptionApi } from '@accelbyte/sdk/api/platform/SubscriptionApi'
 import { WalletApi } from '@accelbyte/sdk/api/platform/WalletApi'
-import { LogLevel } from '@accelbyte/sdk/constants/BuildInfoApp'
 import { Method } from 'axios'
 
 export type Overrides = { config?: SDKRequestConfig; cache?: boolean }
@@ -105,7 +104,6 @@ export interface SDKOptions {
 
   // Optional args
   cache?: boolean
-  loglevel?: keyof typeof LogLevel
 }
 
 export interface SDKEvents {

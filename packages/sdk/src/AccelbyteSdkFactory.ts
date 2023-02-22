@@ -4,11 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { ApiFactory } from '@accelbyte/sdk/ApiFactory'
-import { LogLevel } from '@accelbyte/sdk/constants/BuildInfoApp'
 import { injectAuthInterceptors } from '@accelbyte/sdk/interceptors/AuthInterceptors'
 import { injectErrorInterceptors } from '@accelbyte/sdk/interceptors/ErrorInterceptor'
 import { AccelbyteSDK, Overrides, SDKEvents, SDKOptions, SDKRequestConfig } from './AccelbyteSDK'
-import buildInfo from './buildInfo.json'
 import { Logger } from './utils/Logger'
 import BasicVersion from '@accelbyte/sdk/generated-public/basic/Version'
 import BuildinfoVersion from '@accelbyte/sdk/generated-public/buildinfo/Version'
@@ -42,7 +40,6 @@ class AccelbyteSDKFactory {
 
   constructor(options: SDKOptions, config?: SDKRequestConfig, events?: SDKEvents) {
     this.options = {
-      loglevel: 'INFO',
       cache: false,
       ...options
     }
@@ -57,9 +54,7 @@ class AccelbyteSDKFactory {
         ...config?.headers
       }
     }
-    if (options.loglevel === LogLevel.DEBUG) {
-      Logger.info('Accelbyte-SDK initialized with config', this.config)
-    }
+    // Logger.info('Accelbyte-SDK initialized with config', this.config)
   }
 
   init(): AccelbyteSDK {
@@ -143,7 +138,7 @@ class AccelbyteSDKFactory {
         axiosInstance
           .get('https://development.accelbyte.io/iam/version')
           .then(res => {
-            console.log('-- axiosInstance res', res)
+            console.log('-- axiosInstance res', res.data)
             console.log('-- current ver', IamVersion)
           })
           .catch(err => {
@@ -185,13 +180,8 @@ class AccelbyteSDKFactory {
 }
 
 const sdkInit = ({ options, config, onEvents }: { options: SDKOptions; config?: SDKRequestConfig; onEvents?: SDKEvents }): AccelbyteSDK => {
-  if (options.loglevel === LogLevel.DEBUG) {
-    Logger.info('Accelbyte-SDK instantiated:', options)
-  }
+  Logger.info('Accelbyte-SDK instantiated:', options)
   const sdkFactory = new AccelbyteSDKFactory(options, config, onEvents)
-  if (options.loglevel === LogLevel.DEBUG) {
-    Logger.info(`Accelbyte-SDK version: ${buildInfo.version} \nBuild: ${buildInfo.build} \nTimestamp: ${new Date(buildInfo.timestamp)}`)
-  }
   return sdkFactory.init()
 }
 

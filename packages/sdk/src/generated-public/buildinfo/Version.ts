@@ -5,8 +5,8 @@
  */
 
 export default {
-  title: '-',
+  title: 'buildinfo',
   name: 'justice-buildinfo-service',
   version: '3.28.2',
-  buildDate: '2023-02-21T23:52:43.996Z'
+  buildDate: '2023-02-22T00:53:23.199Z'
 }

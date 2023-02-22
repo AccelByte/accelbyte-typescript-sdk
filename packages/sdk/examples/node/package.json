@@ -8,7 +8,7 @@
     "link:stop": "yarn unlink @accelbyte/sdk && yarn install --force"
   },
   "dependencies": {
-    "@accelbyte/sdk": "0.2.0-beta.5",
+    "@accelbyte/sdk": "0.2.0-beta.12",
     "dotenv": "16.0.3"
   }
 }

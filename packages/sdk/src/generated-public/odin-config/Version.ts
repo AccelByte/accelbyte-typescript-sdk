@@ -4,4 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 
-export default { title: '-', name: 'config-service-app', version: 'dev', buildDate: '2023-02-21T23:43:05.354Z' }
+export default {
+  title: 'odin-config',
+  name: 'config-service-app',
+  version: 'dev',
+  buildDate: '2023-02-22T00:53:23.199Z'
+}

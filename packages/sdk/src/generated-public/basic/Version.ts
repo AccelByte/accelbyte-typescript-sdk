@@ -5,8 +5,8 @@
  */
 
 export default {
-  title: '-',
+  title: 'basic',
   name: 'justice-basic-service',
   version: '2.6.0',
-  buildDate: '2023-02-21T23:52:43.996Z'
+  buildDate: '2023-02-22T00:53:23.199Z'
 }
