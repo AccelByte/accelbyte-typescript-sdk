@@ -17,7 +17,7 @@ import { DataRetrievalApi } from '@accelbyte/sdk/api/gdpr/DataRetrievalApi'
 import { InputValidationsApi } from '@accelbyte/sdk/api/iam/InputValidationsApi'
 import { OAuthApi } from '@accelbyte/sdk/api/iam/OAuthApi'
 import { ThirdPartyCredentialApi } from '@accelbyte/sdk/api/iam/ThirdPartyCredentialApi'
-import { TwoFA } from '@accelbyte/sdk/api/iam/TwoFA'
+import { TwoFAApi } from '@accelbyte/sdk/api/iam/TwoFAApi'
 import { UserApi } from '@accelbyte/sdk/api/iam/UserApi'
 import { UserAuthorizationApi } from '@accelbyte/sdk/api/iam/UserAuthorizationApi'
 import { AgreementApi } from '@accelbyte/sdk/api/legal/AgreementApi'
@@ -79,7 +79,7 @@ export class ApiFactory {
     })
   }
 
-  static inputValidationApi(config: SDKRequestConfig, namespace: string, overrides?: { config?: SDKRequestConfig; cache?: boolean }) {
+  static inputValidationsApi(config: SDKRequestConfig, namespace: string, overrides?: { config?: SDKRequestConfig; cache?: boolean }) {
     const conf = ApiFactory.mergedConfigs(config, overrides)
     return new InputValidationsApi(conf, namespace)
   }
@@ -89,9 +89,9 @@ export class ApiFactory {
     return new ThirdPartyCredentialApi(conf, namespace, overrides?.cache)
   }
 
-  static twoFA(config: SDKRequestConfig, namespace: string, overrides?: { config?: SDKRequestConfig; cache?: boolean }) {
+  static twoFAApi(config: SDKRequestConfig, namespace: string, overrides?: { config?: SDKRequestConfig; cache?: boolean }) {
     const conf = ApiFactory.mergedConfigs(config, overrides)
-    return new TwoFA(conf, namespace)
+    return new TwoFAApi(conf, namespace)
   }
 
   static downloaderApi(config: SDKRequestConfig, namespace: string, overrides?: { config?: SDKRequestConfig }) {

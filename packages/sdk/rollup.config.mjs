@@ -13,17 +13,30 @@ import resolve from '@rollup/plugin-node-resolve'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import typescript from '@rollup/plugin-typescript'
 import alias from '@rollup/plugin-alias'
-import { writeFileSync, readFileSync } from 'fs'
+import { writeFileSync, readFileSync, statSync } from 'fs'
 
 const CONFIG = JSON.parse(readFileSync('./tsconfig.build.json', 'utf-8'))
+
+const packageJson = JSON.parse(readFileSync(path.resolve('./package.json'), 'utf-8'))
+// We need to exclude these because we don't want them bundled since they'll be installed anyway when we do `npm install`.
+const packageJsonDependencies = Object.keys(packageJson.dependencies)
+
+// TODO: adjust build flow so that it fits these conditions:
+//
+// 1. @accelbyte/validator doesn't need to be built first
+// 2. @#accelbyte/validator isn't included in the @accelbyte/sdk bundle
+try {
+  statSync(path.resolve('../validator/dist'))
+} catch (_err) {
+  console.error('Error: please build @accelbyte/validator first before building @accelbyte/sdk')
+}
 
 /**
  *
  * @param {import('rollup').RollupOptions} config
- * @param {boolean} isBrowser
  * @returns
  */
-function createConfig(config, isBrowser) {
+function createConfig(config) {
   /** @type {import('rollup').RollupOptions} */
   const opts = {
     input: config.input,
@@ -32,14 +45,16 @@ function createConfig(config, isBrowser) {
       peerDepsExternal(),
       alias({
         entries: {
-          '@accelbyte/sdk': path.resolve('./src'),
-          '@accelbyte/validator': path.resolve('../validator/src')
+          '@accelbyte/sdk': path.resolve('./src')
         }
       }),
-      resolve({ jsnext: true, preferBuiltins: true, browser: isBrowser }),
+      resolve({ jsnext: true, preferBuiltins: true }),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.build.json',
+        declaration: false,
+        declarationDir: undefined,
+        outDir: undefined,
         sourceMap: true
       }),
       json({
@@ -51,7 +66,8 @@ function createConfig(config, isBrowser) {
       if (warning.code !== 'CIRCULAR_DEPENDENCY') {
         throw new Error(warning.message)
       }
-    }
+    },
+    external: [...packageJsonDependencies, /node_modules\/lodash/, /node_modules\/validator/]
   }
 
   return opts
@@ -60,35 +76,31 @@ function createConfig(config, isBrowser) {
 export default async function createConfigs() {
   return [
     // Browser module, DO NOT comment this.
-    // The output is ESM and the `isBrowser: true` indicates that it will resolve dependencies compatible for browser,
-    // so that it could work in non-SSR and non-Node environments.
-    createConfig(
-      {
-        input: './src/index.browser.ts',
-        output: {
-          file: path.join(CONFIG.compilerOptions.outDir, 'index.browser.es.js'),
-          format: 'es',
-          sourcemap: true,
-          assetFileNames: '[name]-[hash][extname]'
-        }
-      },
-      true
-    ),
+    // The output is ESM, contains browser polyfills (window.Buffer) so that it could work in non-SSR and non-Node environments.
+    createConfig({
+      input: './src/index.browser.ts',
+      output: {
+        dir: path.join(CONFIG.compilerOptions.outDir, 'es/browser'),
+        format: 'es',
+        preserveModules: true,
+        sourcemap: true,
+        assetFileNames: '[name]-[hash][extname]'
+      }
+    }),
 
     // ESM and CJS Modules, for Node.js (can also run in SSR).
-    // The `isBrowser: false` indicates that it will resolve dependencies compatible for Node.js,
-    // so that it could work in SSR and Node environments.
     createConfig({
       input: './src/index.node.ts',
       output: [
         {
-          file: path.join(CONFIG.compilerOptions.outDir, 'index.node.es.js'),
+          dir: path.join(CONFIG.compilerOptions.outDir, 'es/node'),
           format: 'es',
+          preserveModules: true,
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'
         },
         {
-          file: path.join(CONFIG.compilerOptions.outDir, 'index.node.js'),
+          file: path.join(CONFIG.compilerOptions.outDir, 'cjs/node/index.js'),
           format: 'cjs',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'

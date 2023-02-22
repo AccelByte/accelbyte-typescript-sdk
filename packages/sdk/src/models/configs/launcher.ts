@@ -4,7 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BackgroundOverlay, PageConfig } from './base-configs'
+import { Config } from '@accelbyte/sdk/generated-public/odin-config/definitions/Config'
+import { BackgroundOverlay, LogoVariantConfig, PageConfig } from './base-configs'
 
 export const LauncherPageConfig = PageConfig.extend({
   loginPage: z.object({
@@ -24,3 +25,24 @@ export const LauncherPageConfig = PageConfig.extend({
   })
 })
 export interface LauncherPageConfig extends z.infer<typeof LauncherPageConfig> {}
+
+export const LauncherConfigData = z.object({
+  pageConfig: Config.merge(
+    z.object({
+      data: LauncherPageConfig
+    })
+  ),
+  launcherUpdateUrl: Config.merge(
+    z.object({
+      data: z.object({
+        value: z.string()
+      })
+    })
+  ),
+  logoVariant: Config.merge(
+    z.object({
+      data: LogoVariantConfig
+    })
+  )
+})
+export interface LauncherConfigData extends z.infer<typeof LauncherConfigData> {}

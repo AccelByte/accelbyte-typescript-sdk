@@ -7,7 +7,7 @@ import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
 import { UsersV4$ } from '@accelbyte/sdk/generated-public/iam/UsersV4$'
 import { Network } from '@accelbyte/sdk/utils/Network'
 
-export class TwoFA {
+export class TwoFAApi {
   /**
    * @internal
    */

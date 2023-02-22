@@ -40,14 +40,10 @@
         "../../accelbyte-web-sdk/packages/sdk/src/*"
       ],
       "@accelbyte/validator": [
-        "../validator/src",
-        "../../accelbyte-web-sdk/packages/validator/src"
+        "../validator/src"
       ],
       "@accelbyte/error-translator": [
         "../error-translator/src"
-      ],
-      "@accelbyte/validator/*": [
-        "../../accelbyte-web-sdk/packages/validator/src/*"
       ]
     },
     "declarationDir": "types",

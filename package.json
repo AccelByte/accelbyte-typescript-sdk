@@ -1,8 +1,8 @@
 {
   "name": "accelbyte-web-sdk",
   "workspaces": [
-    "packages/sdk",
     "packages/validator",
+    "packages/sdk",
     "packages/widgets-demo"
   ],
   "private": true,

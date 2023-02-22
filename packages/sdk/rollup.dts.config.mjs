@@ -9,9 +9,11 @@ import dts from 'rollup-plugin-dts'
 import path from 'path'
 import { readFileSync } from 'fs'
 
-const CONFIG = JSON.parse(readFileSync('./tsconfig.build.json', 'utf-8'))
-const DIST_DIR = path.join(process.cwd(), CONFIG.compilerOptions.outDir)
-const PATH_TO_INPUT = path.join(DIST_DIR, CONFIG.compilerOptions.declarationDir, 'sdk/src/index.d.ts')
+const PATH_TO_INPUT = path.join(process.cwd(), 'src/index.ts')
+
+const packageJson = JSON.parse(readFileSync(path.resolve('./package.json'), 'utf-8'))
+// We need to exclude these because we don't want them bundled since they'll be installed anyway when we do `npm install`.
+const packageJsonDependencies = Object.keys(packageJson.dependencies)
 
 /** @type {import('rollup').RollupOptions} */
 const opts = {
@@ -22,7 +24,8 @@ const opts = {
       format: 'es'
     }
   ],
-  plugins: [dts()]
+  plugins: [dts()],
+  external: [...packageJsonDependencies, /node_modules\/lodash/, /node_modules\/validator/]
 }
 
 export default opts

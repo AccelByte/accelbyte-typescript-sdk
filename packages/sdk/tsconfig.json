@@ -38,14 +38,10 @@
         "./src/*"
       ],
       "@accelbyte/validator": [
-        "../validator/src",
-        "../validator/src/index.ts"
+        "../validator/src"
       ],
       "@accelbyte/error-translator": [
         "../error-translator/src"
-      ],
-      "@accelbyte/validator/*": [
-        "../validator/src/*"
       ]
     },
     "declarationDir": ".",

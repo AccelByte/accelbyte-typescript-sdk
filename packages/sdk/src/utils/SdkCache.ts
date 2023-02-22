@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { IDataStatus, IResponse, IResponseWithSync } from '@accelbyte/sdk/utils/Validate'
-import _ from 'lodash-core'
+import isEqual from 'lodash/isEqual'
 
 const logEnabled = false
 
@@ -88,7 +88,7 @@ export class SdkCache {
         return res
       }
       const newData = onSyncResponse.response?.data
-      if (!_.isEqual(this.cacheStrategy.get(key), newData)) {
+      if (!isEqual(this.cacheStrategy.get(key), newData)) {
         this.cacheStrategy.set(key, newData)
         const res = {
           response: { data: newData, status: 200 },

@@ -1037,11 +1037,6 @@ local-pkg@^0.4.2:
   resolved "https://registry.yarnpkg.com/local-pkg/-/local-pkg-0.4.3.tgz#0ff361ab3ae7f1c19113d9bb97b98b905dbc4963"
   integrity sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==
 
-lodash-core@4.17.19:
-  version "4.17.19"
-  resolved "https://registry.yarnpkg.com/lodash-core/-/lodash-core-4.17.19.tgz#df745a9469e175af058fd8a4acab3199f0f5b908"
-  integrity sha512-FpSbOooU9HcASpL7oJ/ZQGxR7oGzeqlVe1M/iAhnUMTk7eMJBkszS5tUPZCnRtNGPWe8ChswdByFTzW58iGQEQ==
-
 lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"

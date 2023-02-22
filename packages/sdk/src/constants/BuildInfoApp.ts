@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -51,3 +51,8 @@ export const AvailablePlatform: PlatformMatchMap[] = [
     targetPlatform: [BUILDINFO_PLATFORM_ID.WIN64, BUILDINFO_PLATFORM_ID.WINDOWS, BUILDINFO_PLATFORM_ID.WIN32]
   }
 ]
+
+export enum LogLevel {
+  'DEBUG' = 'DEBUG',
+  'INFO' = 'INFO'
+}
