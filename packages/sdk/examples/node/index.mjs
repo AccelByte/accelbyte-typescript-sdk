@@ -8,8 +8,7 @@ const SDK_CONFIG = {
   baseURL: 'https://demo.accelbyte.io',
   clientId: '77f88506b6174c3ea4d925f5b4096ce8',
   namespace: 'accelbyte',
-  redirectURI: 'http://localhost:3030',
-  log: 'DEBUG'
+  redirectURI: 'http://localhost:3030'
 }
 
 const sdk = Accelbyte.SDK({
@@ -21,36 +20,37 @@ main()
 
 async function main() {
   console.info(SDK_CONFIG)
+  console.log('SDK service versions:')
+  console.log(sdk.IAM.version)
+  console.log(sdk.Legal.version)
+  console.log(sdk.Basic.version)
 
-  console.log(sdk.version())
+  console.log(sdk.IAM.UserAuthorization().createLoginURL())
 
+  const listDiscoveryConfigs = await sdk.AccelbyteConfig.PublicTemplate().getDiscoveryTemplateConfigs()
 
-  // console.log(sdk.IAM.UserAuthorization().createLoginURL())
+  console.info('List of discovery configs:')
+  console.info(JSON.stringify(listDiscoveryConfigs))
 
-  // const listDiscoveryConfigs = await sdk.AccelbyteConfig.PublicTemplate().getDiscoveryTemplateConfigs()
-  //
-  // console.info('List of discovery configs:')
-  // console.info(JSON.stringify(listDiscoveryConfigs))
-  //
-  // const listOfCurrencies = await sdk.Platform.Currency().getCurrencies()
-  // const listOfItems = await sdk.Platform.Item().fetchItemsByCriteria({})
-  //
-  // console.info('List of namespaces:')
-  // console.info(JSON.stringify(listOfCurrencies))
-  //
-  // console.info('List of items:')
-  // console.info(JSON.stringify(listOfItems))
-  //
-  // // These require authentication and we can't use it right away.
-  // // Ensure that you have logged in (have cookies) or pass the access token to the `Authorization` header.
-  // const listOfNamespaces = sdk.Basic.Namespace({
-  //   config: {
-  //     headers: {
-  //       Authorization: `Bearer <replace-this-with-access-token>`
-  //     }
-  //   }
-  // }).getNamespaces()
-  //
-  // console.info('List of namespaces:')
-  // console.info(JSON.stringify(listOfNamespaces))
+  const listOfCurrencies = await sdk.Platform.Currency().getCurrencies()
+  const listOfItems = await sdk.Platform.Item().fetchItemsByCriteria({})
+
+  console.info('List of namespaces:')
+  console.info(JSON.stringify(listOfCurrencies))
+
+  console.info('List of items:')
+  console.info(JSON.stringify(listOfItems))
+
+  // These require authentication and we can't use it right away.
+  // Ensure that you have logged in (have cookies) or pass the access token to the `Authorization` header.
+  const listOfNamespaces = sdk.Basic.Namespace({
+    config: {
+      headers: {
+        Authorization: `Bearer <replace-this-with-access-token>`
+      }
+    }
+  }).getNamespaces()
+
+  console.info('List of namespaces:')
+  console.info(JSON.stringify(listOfNamespaces))
 }

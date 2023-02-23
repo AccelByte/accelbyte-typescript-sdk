@@ -91,7 +91,6 @@ export interface AccelbyteSDK {
     PublicTemplate<ConfigKeysEnum extends string>(overrides?: Overrides): PublicTemplateApi<ConfigKeysEnum>
     version: ServiceVersion
   }
-  version: () => void
 
   refreshTokens(newAccessToken: string | undefined | null, newRefreshToken?: string | undefined | null)
 }

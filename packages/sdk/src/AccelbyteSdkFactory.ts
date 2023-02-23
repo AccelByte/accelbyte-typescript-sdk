@@ -32,6 +32,15 @@ import { Network } from '@accelbyte/sdk/utils/Network'
  * ----------------
  */
 
+interface ServiceVersion {
+  title: string
+  version: string | undefined
+  name: string
+  buildDate: string
+}
+
+const TIMEOUT_TO_DIAGNOSTICS = 1000 // 1 sec
+
 class AccelbyteSDKFactory {
   private readonly options: SDKOptions
   private readonly events: SDKEvents | undefined
@@ -62,6 +71,8 @@ class AccelbyteSDKFactory {
 
     injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.getRefreshToken)
     injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
+
+    setTimeout(() => this.doVersionDiagnostics, TIMEOUT_TO_DIAGNOSTICS)
 
     return {
       refreshTokens: (accessToken, refreshToken) => this.refreshTokensImpl(accessToken, refreshToken),
@@ -124,56 +135,49 @@ class AccelbyteSDKFactory {
         PublicTemplate: (overrides?: Overrides) =>
           ApiFactory.publicTemplateApi(this.config, this.options.namespace, this.override(overrides)),
         version: OdinConfigVersion
-      },
-      version: () => {
-        // const vv = [IamVersion, BuildinfoVersion, BasicVersion, PlatformVersion, GdprVersion, EventVersion]
-        // console.log('SDK', vv)
-
-        // this.compare(IamVersion)
-        // this.compare(BuildinfoVersion)
-        // this.compare(BasicVersion)
-        // this.compare(PlatformVersion)
-        // this.compare(GdprVersion)
-        // this.compare(EventVersion)
-
-        // let URL1 = "https://www.something.com"
-        // let URL2 = "https://www.something1.com"
-        // let URL3 = "https://www.something2.com"
-
-        const mapServices = {
-          [IamVersion.name]: IamVersion,
-          [BuildinfoVersion.name]: BuildinfoVersion,
-          [PlatformVersion.name]: PlatformVersion,
-          [GdprVersion.name]: GdprVersion,
-          [EventVersion.name]: EventVersion
-        }
-
-        const req = service => Network.create(this.config).get(`/${service.title}/version`)
-
-        console.log('------ GET SERVICE VERSIONS ')
-
-        Promise.all([req(IamVersion), req(BuildinfoVersion), req(BasicVersion)]).then(values => {
-          values.map(res => {
-            console.log(res.data)
-            const service: any = [mapServices[res.data.name]]
-            if (service?.version !== res.data.version) {
-              console.log(`WARN: SDK(${service.title}) v${service.version} doesn't match service version ${res.data.version}`)
-            }
-          })
-        })
       }
     }
   }
 
-  // private compare = service => {
-  //   Network.create(this.config)
-  //     .get(`/${service.title}/version`)
-  //     .then(res => {
-  //       if (service.version !== res.data.version) {
-  //         console.log(`WARN: SDK(${service.title}) v${service.version} doesn't match service version ${res.data.version}`)
-  //       }
-  //     })
-  // }
+  /**
+   * Diagnose all services by comparing them with the sdk codegen versions and raise a WARN log if mismatch
+   */
+  private doVersionDiagnostics = () => {
+    const mapServices = {
+      [IamVersion.name]: IamVersion,
+      [BuildinfoVersion.name]: BuildinfoVersion,
+      [PlatformVersion.name]: PlatformVersion,
+      [GdprVersion.name]: GdprVersion,
+      [EventVersion.name]: EventVersion
+    }
+    /* Call /<service-name>/version to pull service version
+      GET https://development.accelbyte.io/iam/version
+      {
+        "buildDate": "2023-02-22T04:12:23+00:00",
+        "gitHash": "abc",
+        "name": "justice-iam-service",
+        "realm": "dev",
+        "version": "5.28.0"
+      }
+     */
+    const axiosRequest = service_ => Network.create(this.config).get(`/${service_.title}/version`)
+    Promise.all([
+      axiosRequest(IamVersion),
+      axiosRequest(BuildinfoVersion),
+      axiosRequest(BasicVersion),
+      axiosRequest(PlatformVersion),
+      axiosRequest(GdprVersion),
+      axiosRequest(EventVersion)
+    ]).then(values => {
+      values.forEach(res => {
+        const remoteService = res.data
+        const sdkService: ServiceVersion = mapServices[remoteService.name]
+        if (sdkService?.version !== remoteService.version) {
+          console.log(`WARN: SDK(${sdkService.title}) v${sdkService.version} doesn't match service version ${remoteService.version}`)
+        }
+      })
+    })
+  }
 
   private getRefreshToken = (): string | undefined => this.refreshToken
 
