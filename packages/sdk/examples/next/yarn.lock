@@ -2,21 +2,37 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk@0.2.0-beta.4":
-  version "0.2.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.2.0-beta.4.tgz#0c0e3851e0cd27d74b49497f1f587f6e96ad09b9"
-  integrity sha512-9jm93+ghZY5IjennavAXVUMf62+0dV530J9UThFxQJ2KigtQhD+VKioyf99UvymYlc4MZ9DpRHHit6k0v9cwBg==
+"@accelbyte/sdk@0.2.0-beta.13":
+  version "0.2.0-beta.13"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.2.0-beta.13.tgz#3252713ca151f6609346bafd8134858337b4740e"
+  integrity sha512-1knFE+mqXNOpvhsOhx3TqxBGOZ7orxvqspvciBxPGpw4Zs7wGbC0u/dwxKfv72or36fu3sNS/ZwenWSGn6TP3A==
   dependencies:
+    "@accelbyte/validator" "0.2.0-beta.0"
     axios "0.27.2"
     buffer "6.0.3"
     crypto-js "4.1.1"
-    lodash-core "4.17.19"
     nanoid "3.1.31"
     platform "1.3.6"
     query-string "7.1.1"
     uuid "8.3.2"
     validator "13.7.0"
     zod "3.17.3"
+
+"@accelbyte/validator@0.2.0-beta.0":
+  version "0.2.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.0-beta.0.tgz#c1bca175ef0da0139eedc9438182bd88c7112de4"
+  integrity sha512-JWADInWpK2dVmERvMpASnCp7cAhIQMrq2YZkqMN8LnSA0w9lAttK3Tkr5QlgvFoPqTZR81hZXgZwbKN10Hdz7w==
+  dependencies:
+    naughty-words "1.2.0"
+    xregexp "5.1.0"
+
+"@babel/runtime-corejs3@^7.14.9":
+  version "7.21.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.21.0.tgz#6e4939d9d9789ff63e2dc58e88f13a3913a24eba"
+  integrity sha512-TDD4UJzos3JJtM+tHX+w2Uc+KWj7GV+VKKFdMVd2Rx8sdA19hcc3P3AHFYd5LVOw+pYuSd5lICC3gm52B6Rwxw==
+  dependencies:
+    core-js-pure "^3.25.1"
+    regenerator-runtime "^0.13.11"
 
 "@next/env@13.0.7":
   version "13.0.7"
@@ -174,6 +190,11 @@ combined-stream@^1.0.8:
   dependencies:
     delayed-stream "~1.0.0"
 
+core-js-pure@^3.25.1:
+  version "3.28.0"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.28.0.tgz#4ef2888475b6c856ef6f5aeef8b4f618b76ad048"
+  integrity sha512-DSOVleA9/v3LNj/vFxAPfUHttKTzrB2RXhAPvR5TPXn4vrra3Z2ssytvRyt8eruJwAfwAiFADEbrjcRdcvPLQQ==
+
 crypto-js@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
@@ -223,11 +244,6 @@ ieee754@^1.2.1:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-lodash-core@4.17.19:
-  version "4.17.19"
-  resolved "https://registry.yarnpkg.com/lodash-core/-/lodash-core-4.17.19.tgz#df745a9469e175af058fd8a4acab3199f0f5b908"
-  integrity sha512-FpSbOooU9HcASpL7oJ/ZQGxR7oGzeqlVe1M/iAhnUMTk7eMJBkszS5tUPZCnRtNGPWe8ChswdByFTzW58iGQEQ==
-
 loose-envify@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
@@ -256,6 +272,11 @@ nanoid@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
+
+naughty-words@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/naughty-words/-/naughty-words-1.2.0.tgz#255f60bad94b430fb1216d05a3f4eec3e1061d64"
+  integrity sha512-0iadX6fN+3NsfvIRtWmmpEX9VsoIQ6n9FwyIxmew9w5yzFNqMgs/Ky0eAC/z5xXSHtqlVoByiovdROikwH9SXQ==
 
 next@13.0.7:
   version "13.0.7"
@@ -326,6 +347,11 @@ react@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
 
+regenerator-runtime@^0.13.11:
+  version "0.13.11"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
+  integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
+
 scheduler@^0.23.0:
   version "0.23.0"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.23.0.tgz#ba8041afc3d30eb206a487b6b384002e4e61fdfe"
@@ -374,6 +400,13 @@ validator@13.7.0:
   version "13.7.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
   integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
+
+xregexp@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/xregexp/-/xregexp-5.1.0.tgz#c87e7ae5ffa5fdc520f898a467dcba02b0d391e9"
+  integrity sha512-PynwUWtXnSZr8tpQlDPMZfPTyv78EYuA4oI959ukxcQ0a9O/lvndLVKy5wpImzzA26eMxpZmnAXJYiQA13AtWA==
+  dependencies:
+    "@babel/runtime-corejs3" "^7.14.9"
 
 zod@3.17.3:
   version "3.17.3"

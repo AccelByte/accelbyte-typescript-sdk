@@ -1,3 +1,7 @@
+### 0.2.0-beta.17 - 2023-02-23
+
+- Add `.js` extensions to the validator and lodash imports
+
 ### 0.2.0-beta.16 - 2023-02-22
 
 - Add Runtime Checking for Service Versions
@@ -6,6 +10,7 @@
 
 - Enable tree-shaking for @accelbyte/sdk
 - Change TwoFA to TwoFAApi and InputValidationApi to InputValidationsApi
+- Add "sideEffects": false in package.json
 
 ### 0.2.0-beta.10 - 2023-02-21
 

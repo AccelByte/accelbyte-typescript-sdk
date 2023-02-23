@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2021. AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2021-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 
-import isEmpty from 'validator/lib/isEmpty'
-import matches from 'validator/lib/matches'
+import isEmpty from 'validator/lib/isEmpty.js'
+import matches from 'validator/lib/matches.js'
 import { z } from 'zod'
 import { CommonValidationErrorType } from './constant/errorType'
 import { MAX_SHORT_TEXT_LENGTH } from './constant/numbers'

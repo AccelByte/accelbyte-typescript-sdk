@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "test": "node index.mjs",
+    "test": "node index.js",
+    "test:mjs": "node --es-module-specifier-resolution=node index.mjs",
     "link:start": "yarn link @accelbyte/sdk",
     "link:stop": "yarn unlink @accelbyte/sdk && yarn install --force"
   },
