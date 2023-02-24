@@ -1,3 +1,7 @@
+### 0.2.0-beta.20 - 2023-02-24
+
+- Fix SDK not emitting CommonJS bundle as `.cjs` extension
+
 ### 0.2.0-beta.19 - 2023-02-24
 
 - Fix Widgets emitting invalid `validator` URL in the bundle
