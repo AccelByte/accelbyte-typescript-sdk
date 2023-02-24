@@ -8,5 +8,5 @@ export default {
   title: 'event',
   name: 'justice-event-log-service',
   version: undefined,
-  buildDate: '2023-02-22T00:53:23.199Z'
+  buildDate: '2023-02-23T10:27:01.168Z'
 }

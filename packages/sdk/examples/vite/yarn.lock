@@ -2,15 +2,16 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk@0.2.0-beta.13":
-  version "0.2.0-beta.13"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.2.0-beta.13.tgz#3252713ca151f6609346bafd8134858337b4740e"
-  integrity sha512-1knFE+mqXNOpvhsOhx3TqxBGOZ7orxvqspvciBxPGpw4Zs7wGbC0u/dwxKfv72or36fu3sNS/ZwenWSGn6TP3A==
+"@accelbyte/sdk@0.2.0-beta.20":
+  version "0.2.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-0.2.0-beta.20.tgz#7ae3195ee467a920422d307c142c1c2db5bd140d"
+  integrity sha512-phwB+uGHoOidD6+V/60/5oJilnpmAIk/bF9eLb6drkqzo0mfehrFi3muLJdhBtgDRrV/attzPJgMNcRf8UCWOw==
   dependencies:
-    "@accelbyte/validator" "0.2.0-beta.0"
+    "@accelbyte/validator" "0.2.0-beta.2"
     axios "0.27.2"
     buffer "6.0.3"
     crypto-js "4.1.1"
+    lodash "4.17.21"
     nanoid "3.1.31"
     platform "1.3.6"
     query-string "7.1.1"
@@ -18,10 +19,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/validator@0.2.0-beta.0":
-  version "0.2.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.0-beta.0.tgz#c1bca175ef0da0139eedc9438182bd88c7112de4"
-  integrity sha512-JWADInWpK2dVmERvMpASnCp7cAhIQMrq2YZkqMN8LnSA0w9lAttK3Tkr5QlgvFoPqTZR81hZXgZwbKN10Hdz7w==
+"@accelbyte/validator@0.2.0-beta.2":
+  version "0.2.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.0-beta.2.tgz#b0c858cee77e4e175e617091db1514084673d146"
+  integrity sha512-Jq5SlGC3j7ltv4hNUI3mRHx5PLa26ERs9ZJpyl2DrCQRfpeG0LjF6Mr8KYz68X6iu/FNpk8IOoOp/V6XtvJlzQ==
   dependencies:
     naughty-words "1.2.0"
     xregexp "5.1.0"
@@ -665,6 +666,11 @@ json5@^2.2.1:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.2.tgz#64471c5bdcc564c18f7c1d4df2e2297f2457c5ab"
   integrity sha512-46Tk9JiOL2z7ytNQWFLpj99RZkVgeHf87yGQKsIkaPz1qSH9UczKH1rO7K3wgRselo0tYMUNfecYpm/p1vC7tQ==
+
+lodash@4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 loose-envify@^1.1.0:
   version "1.4.0"

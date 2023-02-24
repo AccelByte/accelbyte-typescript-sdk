@@ -1,3 +1,11 @@
+### 0.2.0-beta.22 - 2023-02-24
+
+- Add url in Entitlement comments for the docgen
+
+### 0.2.0-beta.21 - 2023-02-24
+
+- Set `oldEmailAdress` in `UserResponseV3` as nullish
+
 ### 0.2.0-beta.20 - 2023-02-24
 
 - Fix SDK not emitting CommonJS bundle as `.cjs` extension
