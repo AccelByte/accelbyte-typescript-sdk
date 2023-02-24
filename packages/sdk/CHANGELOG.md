@@ -1,4 +1,4 @@
-### 0.2.0-beta.22 - 2023-02-24
+### 0.2.0-beta.23 - 2023-02-24
 
 - Add url in Entitlement comments for the docgen
 
