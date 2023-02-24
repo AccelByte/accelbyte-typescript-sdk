@@ -72,7 +72,7 @@ class AccelbyteSDKFactory {
     injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.getRefreshToken)
     injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
 
-    setTimeout(() => this.doVersionDiagnostics, TIMEOUT_TO_DIAGNOSTICS)
+    setTimeout(() => this.doVersionDiagnostics(), TIMEOUT_TO_DIAGNOSTICS)
 
     return {
       refreshTokens: (accessToken, refreshToken) => this.refreshTokensImpl(accessToken, refreshToken),
@@ -146,6 +146,7 @@ class AccelbyteSDKFactory {
     const mapServices = {
       [IamVersion.name]: IamVersion,
       [BuildinfoVersion.name]: BuildinfoVersion,
+      [BasicVersion.name]: BasicVersion,
       [PlatformVersion.name]: PlatformVersion,
       [GdprVersion.name]: GdprVersion,
       [EventVersion.name]: EventVersion
@@ -173,7 +174,7 @@ class AccelbyteSDKFactory {
         const remoteService = res.data
         const sdkService: ServiceVersion = mapServices[remoteService.name]
         if (sdkService?.version !== remoteService.version) {
-          console.log(`WARN: SDK(${sdkService.title}) v${sdkService.version} doesn't match service version ${remoteService.version}`)
+          console.warn(`WARN: SDK(${sdkService.title}) v${sdkService.version} doesn't match service version ${remoteService.version}`)
         }
       })
     })

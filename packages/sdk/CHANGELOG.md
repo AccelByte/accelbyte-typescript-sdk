@@ -1,3 +1,11 @@
+### 0.2.0-beta.19 - 2023-02-24
+
+- Fix Widgets emitting invalid `validator` URL in the bundle
+
+### 0.2.0-beta.18 - 2023-02-23
+
+- Fix diagnostics not being called and throwing unexpected error
+
 ### 0.2.0-beta.17 - 2023-02-23
 
 - Add `.js` extensions to the validator and lodash imports
