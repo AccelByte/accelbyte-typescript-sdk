@@ -26,8 +26,6 @@ export class EntitlementApi {
   }
 
   /**
-   * GET [/platform/public/namespaces/{namespace}/users/{userId}/entitlements](api)
-   *
    * Query user entitlements for a specific user.
    * Returns: entitlement list
    */
@@ -42,8 +40,6 @@ export class EntitlementApi {
   }
 
   /**
-   * GET [/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/any](api)
-   *
    * Exists any user active entitlement of specified itemIds, skus and appIds
    */
   getEntitlementOwnerShip = ({
@@ -57,8 +53,6 @@ export class EntitlementApi {
   }
 
   /**
-   * GET [/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemIds](api)
-   *
    * Get user entitlement ownership by itemIds.
    */
   getEntitlementByItemIds = ({ userId, queryParams }: { userId: string; queryParams?: { ids?: string[] } }) => {
@@ -66,8 +60,6 @@ export class EntitlementApi {
   }
 
   /**
-   * PUT [/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/decrement](api)
-   *
    * Consume user entitlement. If the entitlement useCount is 0, the status will be CONSUMED. Client should pass item id in options if entitlement clazz is OPTIONBOX
    * Returns: consumed entitlement
    */

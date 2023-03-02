@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2020-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2020. AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 
 import * as naughtyWords from 'naughty-words'
-import isEmpty from 'validator/lib/isEmpty.js'
+import isEmpty from 'validator/lib/isEmpty'
 import { z } from 'zod'
 import enExtra from './constant/badWords/en.json'
 import { CommonValidationErrorType } from './constant/errorType'

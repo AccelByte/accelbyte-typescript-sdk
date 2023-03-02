@@ -25,7 +25,7 @@ const opts = {
     }
   ],
   plugins: [dts()],
-  external: [...packageJsonDependencies, /validator\/lib/, /lodash\//]
+  external: [...packageJsonDependencies, /node_modules\/lodash/, /node_modules\/validator/]
 }
 
 export default opts

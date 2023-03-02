@@ -25,7 +25,7 @@ export const UserResponseV3 = z.object({
   namespace: z.string(),
   namespaceRoles: z.array(NamespaceRole).nullish(),
   newEmailAddress: z.string().nullish(),
-  oldEmailAddress: z.string().nullish(),
+  oldEmailAddress: z.string(),
   permissions: z.array(UserPermissionsResponseV3),
   phoneNumber: z.string().nullish(),
   phoneVerified: z.boolean(),

@@ -1,0 +1,13 @@
+{
+  "json": "docs/api.json",
+  "readme": "none",
+  "entryPoints": ["./src/api", "src/AccelbyteSDK.ts", "src/constants/BuildInfoApp.ts"],
+  "entryPointStrategy": "expand",
+  "cleanOutputDir": true,
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"],
+  "tsconfig": "./tsconfig.json",
+  "exclude": ["**/*.test.(ts|tsx)", "scripts"],
+  "excludeInternal": true,
+  "excludePrivate": true
+}

@@ -9,7 +9,7 @@ export const InviteUserRequestV4 = z.object({
   assignedNamespaces: z.array(z.string()),
   emailAddresses: z.array(z.string()),
   isAdmin: z.boolean(),
-  namespace: z.string().nullish(),
+  namespace: z.string(),
   roleId: z.string()
 })
 

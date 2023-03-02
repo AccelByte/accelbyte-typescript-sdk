@@ -19,7 +19,7 @@ export const RetrieveLocalizedPolicyVersionResponse = z.object({
   attachmentVersionIdentifier: z.string().nullish(),
   description: z.string().nullish(),
   policyVersion: PolicyVersionObject,
-  policy: PolicyObject.nullish()
+  policy: PolicyObject
 })
 
 export interface RetrieveLocalizedPolicyVersionResponse extends z.TypeOf<typeof RetrieveLocalizedPolicyVersionResponse> {}

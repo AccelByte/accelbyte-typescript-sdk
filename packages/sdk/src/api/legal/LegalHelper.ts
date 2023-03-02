@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,7 +10,7 @@ import { RetrieveUserEligibilitiesResponse } from '@accelbyte/sdk/generated-publ
 import { RetrieveUserEligibilitiesResponseArray } from '@accelbyte/sdk/generated-public/legal/definitions/RetrieveUserEligibilitiesResponseArray'
 import { DisplayedPolicy } from '@accelbyte/sdk/models/Legal'
 import { UrlHelper } from '@accelbyte/sdk/utils/UrlHelper'
-import isURL from 'validator/lib/isURL.js'
+import isURL from 'validator/lib/isURL'
 
 export class LegalHelper {
   static getUnsignedPolicies = (userEligibilities: RetrieveUserEligibilitiesResponseArray): RetrieveUserEligibilitiesResponseArray => {

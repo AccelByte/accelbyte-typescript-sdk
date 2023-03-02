@@ -6,7 +6,7 @@
 /**
  * DON'T EDIT THIS FILE, it is AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AppleIapReceipt } from './definitions/AppleIapReceipt'
@@ -14,7 +14,6 @@ import { EpicGamesReconcileRequest } from './definitions/EpicGamesReconcileReque
 import { EpicGamesReconcileResultArray } from './definitions/EpicGamesReconcileResultArray'
 import { GoogleIapReceipt } from './definitions/GoogleIapReceipt'
 import { GoogleReceiptResolveResult } from './definitions/GoogleReceiptResolveResult'
-import { IapItemConfigInfo } from './definitions/IapItemConfigInfo'
 import { PlayStationMultiServiceLabelsReconcileRequest } from './definitions/PlayStationMultiServiceLabelsReconcileRequest'
 import { PlayStationReconcileRequest } from './definitions/PlayStationReconcileRequest'
 import { PlayStationReconcileResultArray } from './definitions/PlayStationReconcileResultArray'
@@ -96,25 +95,6 @@ export class Iap$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * Get iap item config.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=2 (READ)</li></ul>
-   */
-  fetchNsUsersByUseridIapItem<T = IapItemConfigInfo>(userId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/item'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, IapItemConfigInfo)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

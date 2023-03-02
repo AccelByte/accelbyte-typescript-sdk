@@ -1,11 +1,3 @@
-### 0.2.0-beta.2 - 2023-02-23
-
-- Add `.js` extensions to the validator imports
-
-### 0.2.0-beta.1 - 2023-02-22
-
-- Add "sideEffects": false in package.json
-
 ### 0.2.0-beta.0 - 2023-02-20
 
 - Enable tree-shaking for @accelbyte/validator

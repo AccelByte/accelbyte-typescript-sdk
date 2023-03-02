@@ -11,7 +11,7 @@ export const RetrievePolicyVersionResponse = z.object({
   createdAt: z.string().nullish(),
   updatedAt: z.string().nullish(),
   displayVersion: z.string(),
-  policyId: z.string().nullish(),
+  policyId: z.string(),
   description: z.string().nullish(),
   status: z.string().nullish(),
   publishedDate: z.string().nullish(),

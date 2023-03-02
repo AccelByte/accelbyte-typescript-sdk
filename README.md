@@ -7,10 +7,9 @@
 [AccelByte Web SDK](https://demo.accelbyte.io/web-sdk-playground/) is a JavaScript library enabling the building of web applications using AccelByte API services. The library is
 platform-agnostic and can be consumed in a browser or in a server environment.
 
-### Type-safety
-Built with TypeScript and strict by design, the SDK goes above and beyond and enforces runtime type-checking validations. This allows trusting the AccelByte service type definitions.
+AccelByte SDK is built with TypeScript and uses runtime type-checking validations.
 
-Below is the list of the AccelByte service APIs the library supports:
+Below is the list of AccelByte service APIs the library supports:
 
 1. [IAM](https://docs.accelbyte.io/api-endpoints.html#access)
 2. [Monetization](https://docs.accelbyte.io/api-endpoints.html#monetization)
@@ -34,7 +33,7 @@ yarn add @accelbyte/sdk
 
 * **ES Modules** - The SDK currently supports ES Modules format only, please [set type property in Package.json to module](https://nodejs.org/api/packages.html#type)
 * **Yarn** - We like `yarn`. While `npm` may work, it is not supported and may be unstable.
-* **TypeScript** - The SDK has full TypeScript support, and it should be preferred over vanilla JavaScript.
+* **TypeScript** - The SDK has full TypeScript support, and it should be preferred over vanilla JavaScript. https://typestrong.org/ts-node/
 
 ## Usage
 

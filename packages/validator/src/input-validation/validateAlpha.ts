@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2019-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2019. AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 
-import isAlpha from 'validator/lib/isAlpha.js'
-import isEmpty from 'validator/lib/isEmpty.js'
-import isLowercase from 'validator/lib/isLowercase.js'
-import isUppercase from 'validator/lib/isUppercase.js'
+import isAlpha from 'validator/lib/isAlpha'
+import isEmpty from 'validator/lib/isEmpty'
+import isLowercase from 'validator/lib/isLowercase'
+import isUppercase from 'validator/lib/isUppercase'
 
 import { z } from 'zod'
 import { CommonValidationErrorType, ThrownErrorType } from './constant/errorType'

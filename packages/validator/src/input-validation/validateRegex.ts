@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2021-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2021. AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 
-import matches from 'validator/lib/matches.js'
+import matches from 'validator/lib/matches'
 import XRegExp from 'xregexp'
 import { z } from 'zod'
 import { CommonValidationErrorType } from './constant/errorType'

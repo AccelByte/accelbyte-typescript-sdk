@@ -101,8 +101,6 @@ export class PaymentApi {
   }
 
   /**
-   * GET [/platform/public/namespaces/{namespace}/payment/methods](api)
-   *
    * Get payment methods.
    * Returns: Payment method list
    */
