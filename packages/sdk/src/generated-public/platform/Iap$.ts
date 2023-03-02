@@ -6,7 +6,7 @@
 /**
  * DON'T EDIT THIS FILE, it is AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AppleIapReceipt } from './definitions/AppleIapReceipt'
@@ -14,17 +14,49 @@ import { EpicGamesReconcileRequest } from './definitions/EpicGamesReconcileReque
 import { EpicGamesReconcileResultArray } from './definitions/EpicGamesReconcileResultArray'
 import { GoogleIapReceipt } from './definitions/GoogleIapReceipt'
 import { GoogleReceiptResolveResult } from './definitions/GoogleReceiptResolveResult'
+import { IapItemMappingInfo } from './definitions/IapItemMappingInfo'
 import { PlayStationMultiServiceLabelsReconcileRequest } from './definitions/PlayStationMultiServiceLabelsReconcileRequest'
 import { PlayStationReconcileRequest } from './definitions/PlayStationReconcileRequest'
 import { PlayStationReconcileResultArray } from './definitions/PlayStationReconcileResultArray'
 import { SteamSyncRequest } from './definitions/SteamSyncRequest'
 import { TwitchSyncRequest } from './definitions/TwitchSyncRequest'
+import { TwitchSyncResultArray } from './definitions/TwitchSyncResultArray'
 import { XblReconcileRequest } from './definitions/XblReconcileRequest'
 import { XblReconcileResultArray } from './definitions/XblReconcileResultArray'
 
 export class Iap$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+
+  /**
+   * Get iap item mapping.<br>Other detail info: <ul></ul>
+   */
+  fetchNsIapItemMapping<T = IapItemMappingInfo>(queryParams?: {
+    platform?: 'APPLE' | 'GOOGLE' | 'PLAYSTATION' | 'STEAM' | 'XBOX' | 'STADIA' | 'EPICGAMES' | 'TWITCH'
+  }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/iap/item/mapping'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, IapItemMappingInfo)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Sync my game twitch drops entitlements.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:IAP, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
+   */
+  putNsUsersMeIapTwitchSync<T = TwitchSyncResultArray>(data: TwitchSyncRequest): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/me/iap/twitch/sync'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, TwitchSyncResultArray)
+  }
 
   /**
    * Sync steam inventory's items.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>

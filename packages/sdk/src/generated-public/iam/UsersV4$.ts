@@ -16,6 +16,8 @@ import { CreateUserRequestV4 } from './definitions/CreateUserRequestV4'
 import { CreateUserResponseV4 } from './definitions/CreateUserResponseV4'
 import { EmailUpdateRequestV4 } from './definitions/EmailUpdateRequestV4'
 import { EnabledFactorsResponseV4 } from './definitions/EnabledFactorsResponseV4'
+import { InviteUserResponseV3 } from './definitions/InviteUserResponseV3'
+import { PublicInviteUserRequestV4 } from './definitions/PublicInviteUserRequestV4'
 import { UpgradeHeadlessAccountRequestV4 } from './definitions/UpgradeHeadlessAccountRequestV4'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from './definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4'
 import { UserCreateFromInvitationRequestV4 } from './definitions/UserCreateFromInvitationRequestV4'
@@ -390,5 +392,25 @@ export class UsersV4$ {
     })
 
     return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode.
+   * It will return error if the service multi tenant mode is set to false.
+   *
+   * Request body details:
+   * - emailAddress: email address of the user to be invited
+   * - namespace: new namespace of the user to be created
+   * - namespaceDisplayName: display name of the new namespace
+   *
+   * The invited users will also be assigned with "User" role by default.
+   *
+   */
+  postIamV4PublicUsersInvite<T = InviteUserResponseV3>(data: PublicInviteUserRequestV4): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/users/invite'
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, InviteUserResponseV3)
   }
 }

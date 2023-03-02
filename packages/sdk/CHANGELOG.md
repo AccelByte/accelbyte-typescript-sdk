@@ -1,7 +1,44 @@
-### 0.2.0-beta.11 - 2023-02-22
+### 0.2.0-beta.25 - 2023-02-28
+
+- Updated SDK with latest swaggers
+
+### 0.2.0-beta.24 - 2023-02-27
+
+- Hide Web SDK log showing config
+
+### 0.2.0-beta.23 - 2023-02-24
+
+- Add url in Entitlement comments for the docgen
+
+### 0.2.0-beta.21 - 2023-02-24
+
+- Set `oldEmailAdress` in `UserResponseV3` as nullish
+
+### 0.2.0-beta.20 - 2023-02-24
+
+- Fix SDK not emitting CommonJS bundle as `.cjs` extension
+
+### 0.2.0-beta.19 - 2023-02-24
+
+- Fix Widgets emitting invalid `validator` URL in the bundle
+
+### 0.2.0-beta.18 - 2023-02-23
+
+- Fix diagnostics not being called and throwing unexpected error
+
+### 0.2.0-beta.17 - 2023-02-23
+
+- Add `.js` extensions to the validator and lodash imports
+
+### 0.2.0-beta.16 - 2023-02-22
+
+- Add Runtime Checking for Service Versions
+
+### 0.2.0-beta.13 - 2023-02-22
 
 - Enable tree-shaking for @accelbyte/sdk
 - Change TwoFA to TwoFAApi and InputValidationApi to InputValidationsApi
+- Add "sideEffects": false in package.json
 
 ### 0.2.0-beta.10 - 2023-02-21
 

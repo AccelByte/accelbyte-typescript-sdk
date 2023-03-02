@@ -67,7 +67,7 @@ function createConfig(config) {
         throw new Error(warning.message)
       }
     },
-    external: [...packageJsonDependencies, /node_modules\/lodash/, /node_modules\/validator/]
+    external: [...packageJsonDependencies, /validator\/lib/, /lodash\//]
   }
 
   return opts
@@ -100,7 +100,7 @@ export default async function createConfigs() {
           assetFileNames: '[name]-[hash][extname]'
         },
         {
-          file: path.join(CONFIG.compilerOptions.outDir, 'cjs/node/index.js'),
+          file: path.join(CONFIG.compilerOptions.outDir, 'cjs/node/index.cjs'),
           format: 'cjs',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'

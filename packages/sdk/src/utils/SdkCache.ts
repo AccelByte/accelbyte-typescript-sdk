@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { IDataStatus, IResponse, IResponseWithSync } from '@accelbyte/sdk/utils/Validate'
-import isEqual from 'lodash/isEqual'
+import isEqual from 'lodash/isEqual.js'
 
 const logEnabled = false
 

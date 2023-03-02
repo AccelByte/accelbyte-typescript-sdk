@@ -20,6 +20,10 @@ main()
 
 async function main() {
   console.info(SDK_CONFIG)
+  console.log('SDK service versions:')
+  console.log(sdk.IAM.version)
+  console.log(sdk.Legal.version)
+  console.log(sdk.Basic.version)
 
   console.log(sdk.IAM.UserAuthorization().createLoginURL())
 

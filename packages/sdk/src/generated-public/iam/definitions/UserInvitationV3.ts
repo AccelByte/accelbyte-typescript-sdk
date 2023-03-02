@@ -10,7 +10,8 @@ export const UserInvitationV3 = z.object({
   email: z.string(),
   expiredAt: z.string(),
   id: z.string().nullish(),
-  namespace: z.string(),
+  namespace: z.string().nullish(),
+  namespaceDisplayName: z.string().nullish(),
   roles: z.array(NamespaceRole)
 })
 
