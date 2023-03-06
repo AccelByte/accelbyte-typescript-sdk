@@ -17,7 +17,7 @@ export class Section$ {
   /**
    * This API is used to list active section contents.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:STORE, action=2 (READ)</li><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store sections)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store sections)</li><li><i>Returns</i>: active section contents</li></ul>
    */
-  fetchNsUsersByUseridSections<T = SectionInfoArray>(
+  fetchSections_ByUserId<T = SectionInfoArray>(
     userId: string,
     queryParams?: { storeId?: string | null; viewId?: string | null; region?: string | null; language?: string | null }
   ): Promise<IResponseWithSync<T>> {

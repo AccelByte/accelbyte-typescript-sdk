@@ -15,23 +15,14 @@ export class EventV2$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>Available Type: </p>
-   * 			<ul>
-   * 				<li>email</li>
-   * 				<li>password</li>
-   * 				<li>displayname</li>
-   * 				<li>dateofbirth</li>
-   * 				<li>country</li>
-   * 				<li>language</li>
-   * 			</ul>
-   * 			<p>Requires a valid user access token</p>
+   * <p>Requires valid user access token</p>
    */
-  fetchEventV2NsUsersByUseridEdithistory<T = EventResponseV2>(
+  fetchEvent_ByUserId<T = EventResponseV2>(
     userId: string,
-    queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; type?: string | null }
+    queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; eventName?: string | null }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/edithistory'
+    const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/event'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -46,14 +37,23 @@ export class EventV2$ {
   }
 
   /**
-   * <p>Requires valid user access token</p>
+   * <p>Available Type: </p>
+   * 			<ul>
+   * 				<li>email</li>
+   * 				<li>password</li>
+   * 				<li>displayname</li>
+   * 				<li>dateofbirth</li>
+   * 				<li>country</li>
+   * 				<li>language</li>
+   * 			</ul>
+   * 			<p>Requires a valid user access token</p>
    */
-  fetchEventV2NsUsersByUseridEvent<T = EventResponseV2>(
+  fetchEdithistory_ByUserId<T = EventResponseV2>(
     userId: string,
-    queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; eventName?: string | null }
+    queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; type?: string | null }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/event'
+    const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/edithistory'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })

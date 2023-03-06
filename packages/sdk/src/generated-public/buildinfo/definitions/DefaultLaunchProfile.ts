@@ -8,7 +8,8 @@ import { z } from 'zod'
 export const DefaultLaunchProfile = z.object({
   defaultEntryPoint: z.string().nullish(),
   defaultClientId: z.string().nullish(),
-  defaultRedirectURI: z.string().nullish()
+  defaultRedirectURI: z.string().nullish(),
+  defaultNamespace: z.string().nullish()
 })
 
 export interface DefaultLaunchProfile extends z.TypeOf<typeof DefaultLaunchProfile> {}

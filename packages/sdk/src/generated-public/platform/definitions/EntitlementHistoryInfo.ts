@@ -8,7 +8,7 @@ import { z } from 'zod'
 export const EntitlementHistoryInfo = z.object({
   entitlementId: z.string(),
   namespace: z.string(),
-  action: z.enum(['GRANT', 'UPDATE', 'DECREMENT', 'REVOKE', 'DISABLE', 'ENABLE']),
+  action: z.enum(['GRANT', 'UPDATE', 'DECREMENT', 'REVOKE', 'DISABLE', 'ENABLE', 'SELL_BACK']),
   operator: z.string(),
   userId: z.string(),
   useCount: z.number().int().nullish(),

@@ -17,7 +17,7 @@ export const AppEntitlementInfo = z.object({
   startDate: z.string().nullish(),
   endDate: z.string().nullish(),
   grantedAt: z.string(),
-  status: z.enum(['ACTIVE', 'INACTIVE', 'CONSUMED', 'REVOKED']),
+  status: z.enum(['ACTIVE', 'INACTIVE', 'CONSUMED', 'REVOKED', 'SOLD']),
   itemSnapshot: ItemSnapshot.nullish()
 })
 

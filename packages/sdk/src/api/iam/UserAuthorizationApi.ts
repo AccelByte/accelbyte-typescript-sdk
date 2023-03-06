@@ -161,14 +161,14 @@ export class UserAuthorizationApi {
     }
     const axios = Network.create(config)
 
-    const data: Parameters<OAuth20$['postIamV3OauthToken']>[0] = {
+    const data: Parameters<OAuth20$['postOauthToken']>[0] = {
       grant_type: 'authorization_code',
       code,
       code_verifier: codeVerifier,
       client_id: this.options.clientId,
       redirect_uri: this.options.redirectURI
     }
-    const result = await new OAuth20$(axios, this.namespace, this.cache).postIamV3OauthToken(data)
+    const result = await new OAuth20$(axios, this.namespace, this.cache).postOauthToken(data)
     // const result = await OAuth20$.postIamV3OauthToken(axios, data)
 
     const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse

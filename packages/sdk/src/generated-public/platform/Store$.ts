@@ -17,7 +17,7 @@ export class Store$ {
   /**
    * This API is used to list all stores in a namespace.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store)</li><li><i>Returns</i>: the list of stores</li></ul>
    */
-  fetchNsStores<T = StoreInfoArray>(): Promise<IResponseWithSync<T>> {
+  fetchStores<T = StoreInfoArray>(): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/stores'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

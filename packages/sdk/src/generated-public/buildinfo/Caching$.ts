@@ -17,7 +17,7 @@ export class Caching$ {
   /**
    * This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
    */
-  fetchNsDiffCacheSourceBySourcebuildidDestByDestinationbuildid<T = RetrieveDiffCacheResponse>(
+  fetchDestCacheDiff_BySourceBuildId_ByDestinationBuildId<T = RetrieveDiffCacheResponse>(
     sourceBuildId: string,
     destinationBuildId: string
   ): Promise<IResponseWithSync<T>> {

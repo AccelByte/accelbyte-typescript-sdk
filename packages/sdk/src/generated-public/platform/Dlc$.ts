@@ -20,35 +20,9 @@ export class Dlc$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Sync steam dlc.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
-   */
-  putNsUsersByUseridDlcSteamSync(userId: string, data: SteamDlcSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/steam/sync'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * Sync Xbox inventory's dlc items.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
-   */
-  putNsUsersByUseridDlcXblSync(userId: string, data: XblDlcSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/xbl/sync'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
    * Synchronize with dlc entitlements in PSN Store.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putNsUsersByUseridDlcPsnSync(userId: string, data: PlayStationDlcSyncRequest): Promise<IResponse<unknown>> {
+  updateDlcPsnSync_ByUserId(userId: string, data: PlayStationDlcSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/psn/sync'
       .replace('{namespace}', this.namespace)
@@ -59,9 +33,35 @@ export class Dlc$ {
   }
 
   /**
+   * Sync Xbox inventory's dlc items.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
+   */
+  updateDlcXblSync_ByUserId(userId: string, data: XblDlcSyncRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/xbl/sync'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * Sync steam dlc.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
+   */
+  updateDlcSteamSync_ByUserId(userId: string, data: SteamDlcSyncRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/steam/sync'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
    * Sync epic games dlc items.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putNsUsersByUseridDlcEpicgamesSync(userId: string, data: EpicGamesDlcSyncRequest): Promise<IResponse<unknown>> {
+  updateDlcEpicgameSync_ByUserId(userId: string, data: EpicGamesDlcSyncRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/epicgames/sync'
       .replace('{namespace}', this.namespace)
@@ -74,7 +74,7 @@ export class Dlc$ {
   /**
    * Synchronize with dlc entitlements in PSN Store with multiple service labels.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putNsUsersByUseridDlcPsnSyncMultiServiceLabels(
+  updateDlcPsnSyncMultiServiceLabel_ByUserId(
     userId: string,
     data: PlayStationDlcSyncMultiServiceLabelsRequest
   ): Promise<IResponse<unknown>> {

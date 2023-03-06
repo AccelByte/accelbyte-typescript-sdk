@@ -24,7 +24,7 @@ export class PaymentApi {
    * Returns: Payment account list `PaymentAccountArray`
    */
   getPaymentAccounts = (userId: string) => {
-    return this.newInstance().fetchNsUsersByUseridPaymentAccounts(userId)
+    return this.newInstance().fetchPaymentAccounts_ByUserId(userId)
   }
 
   /**
@@ -33,7 +33,7 @@ export class PaymentApi {
    * Delete payment account.
    */
   deletePaymentAccount = ({ userId, type, id }: { userId: string; type: string; id: string }) => {
-    return this.newInstance().deleteNsUsersByUseridPaymentAccountsByTypeById(userId, type, id)
+    return this.newInstance().deletePaymentAccount_ByUserId_ByType_ById(userId, type, id)
   }
 
   /**
@@ -44,9 +44,7 @@ export class PaymentApi {
    * Returns: Payment order details `PaymentOrderDetails`
    */
   getPaymentInfo = (paymentOrderNo: string) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentOrdersByPaymentordernoInfo(
-      paymentOrderNo
-    )
+    return this.newPSInstance().fetchInfoPayment_ByPaymentOrderNo(paymentOrderNo)
   }
 
   /**
@@ -59,13 +57,9 @@ export class PaymentApi {
   processPaymentOrder = (
     paymentOrderNo: string,
     data: PaymentToken,
-    queryParams: Parameters<PaymentStation$['postNsPaymentOrdersByPaymentordernoPay']>[2]
+    queryParams: Parameters<PaymentStation$['createPayPayment_ByPaymentOrderNo']>[2]
   ) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).postNsPaymentOrdersByPaymentordernoPay(
-      paymentOrderNo,
-      data,
-      queryParams
-    )
+    return this.newPSInstance().createPayPayment_ByPaymentOrderNo(paymentOrderNo, data, queryParams)
   }
 
   /**
@@ -76,11 +70,11 @@ export class PaymentApi {
    * Returns: Public config
    */
   getPaymentProviderPublicConfig = (
-    paymentProvider: Parameters<PaymentStation$['fetchNsPaymentPublicconfig']>[0]['paymentProvider'],
+    paymentProvider: Parameters<PaymentStation$['fetchPaymentPublicconfig']>[0]['paymentProvider'],
     region: string | null,
     sandbox?: boolean | null
   ) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentPublicconfig({
+    return this.newPSInstance().fetchPaymentPublicconfig({
       paymentProvider,
       region,
       sandbox
@@ -95,9 +89,7 @@ export class PaymentApi {
    * Returns: Payment order paid result
    */
   getPaymentOrderStatus = (paymentOrderNo: string) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentOrdersByPaymentordernoStatus(
-      paymentOrderNo
-    )
+    return this.newPSInstance().fetchStatusPayment_ByPaymentOrderNo(paymentOrderNo)
   }
 
   /**
@@ -107,7 +99,7 @@ export class PaymentApi {
    * Returns: Payment method list
    */
   getPaymentMethods = (paymentOrderNo: string | null) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentMethods({ paymentOrderNo })
+    return this.newPSInstance().fetchPaymentMethods({ paymentOrderNo })
   }
 
   /**
@@ -118,11 +110,11 @@ export class PaymentApi {
    * Returns: tax result
    */
   getPaymentTax = (
-    paymentProvider: Parameters<PaymentStation$['fetchNsPaymentTax']>[0]['paymentProvider'],
+    paymentProvider: Parameters<PaymentStation$['fetchPaymentTax']>[0]['paymentProvider'],
     paymentOrderNo: string | null,
     zipCode?: string | null
   ) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).fetchNsPaymentTax({
+    return this.newPSInstance().fetchPaymentTax({
       paymentProvider,
       paymentOrderNo,
       zipCode
@@ -137,10 +129,14 @@ export class PaymentApi {
    * Returns: Get payment link
    */
   createPaymentUrl = (data: PaymentUrlCreate) => {
-    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache).postNsPaymentLink(data)
+    return this.newPSInstance().createPaymentLink(data)
   }
 
   private newInstance() {
     return new PaymentAccount$(Network.create(this.conf), this.namespace, this.cache)
+  }
+
+  private newPSInstance() {
+    return new PaymentStation$(Network.create(this.conf), this.namespace, this.cache)
   }
 }

@@ -21,7 +21,7 @@ export class EligibilitiesApi {
    * _Required permission_: login user
    */
   getUserEligibilities = () => {
-    return this.newInstance().fetchPublicEligibilitiesNamespacesByNamespace()
+    return this.newInstance().fetchEligibility_ByNamespace()
   }
 
   private newInstance() {

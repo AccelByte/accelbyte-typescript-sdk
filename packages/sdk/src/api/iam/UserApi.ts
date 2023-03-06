@@ -34,7 +34,7 @@ export class UserApi {
    * get currently logged-in user
    */
   getCurrentUser = () => {
-    return this.newInstance().fetchIamV3PublicUsersMe()
+    return this.newInstance().fetchUsersMe()
   }
 
   /**
@@ -43,7 +43,7 @@ export class UserApi {
    * Update current user
    */
   updateUserMe = (data: UserUpdateRequestV3) => {
-    return this.newInstance().patchV3NsUsersMe(data)
+    return this.newInstance().patchUserMe(data)
   }
 
   /**
@@ -52,7 +52,7 @@ export class UserApi {
    * update current user's email
    */
   updateEmailMe = (data: EmailUpdateRequestV4) => {
-    return this.newInstance4().putV4NsUsersMeEmail(data)
+    return this.newInstance4().updateUserMeEmail(data)
   }
 
   /**
@@ -61,7 +61,7 @@ export class UserApi {
    * update current user's password
    */
   updatePasswordMe = (data: UserPasswordUpdateV3Request) => {
-    return this.newInstance().putV3NsUsersMePassword(data)
+    return this.newInstance().updateUserMePassword(data)
   }
 
   /**
@@ -86,7 +86,7 @@ export class UserApi {
    *
    */
   requestVerificationCode = (data: SendVerificationCodeRequestV3) => {
-    return this.newInstance().postV3NsUsersMeCodeRequest(data)
+    return this.newInstance().createUserMeCodeRequest(data)
   }
 
   /**
@@ -100,7 +100,7 @@ export class UserApi {
    *
    */
   verifyCode = (data: UserVerificationRequestV3) => {
-    return this.newInstance().postV3NsUsersMeCodeVerify(data)
+    return this.newInstance().createUserMeCodeVerify(data)
   }
 
   /**
@@ -122,7 +122,7 @@ export class UserApi {
    *        action code : 10124
    */
   upgradeHeadlessAccount = (data: UpgradeHeadlessAccountWithVerificationCodeRequestV3) => {
-    return this.newInstance().postV3NsUsersMeHeadlessCodeVerify(data)
+    return this.newInstance().createUserMeHeadlesCodeVerify(data)
   }
 
   /**
@@ -144,7 +144,7 @@ export class UserApi {
    *          action code : 10124
    */
   upgradeHeadlessAccountV4 = (data: UpgradeHeadlessAccountWithVerificationCodeRequestV4) => {
-    return this.newInstance4().postV4NsUsersMeHeadlessCodeVerify(data)
+    return this.newInstance4().createUserMeHeadlesCodeVerify(data)
   }
 
   /**
@@ -154,7 +154,7 @@ export class UserApi {
    * action code: 10128
    */
   getUserLinkedPlatform = (userId: string) => {
-    return this.newInstance().fetchV3NsUsersByUseridPlatforms(userId)
+    return this.newInstance().fetchPlatforms_ByUserId(userId)
   }
 
   /**
@@ -186,7 +186,7 @@ export class UserApi {
    *    action code : 10144
    */
   linkAccountToPlatform = ({ platformId, data }: { platformId: string; data: { ticket: string | null; redirectUri?: string | null } }) => {
-    return this.newInstance().postV3NsUsersMePlatformsByPlatformid(platformId, data)
+    return this.newInstance().postUserMePlatform_ByPlatformId(platformId, data)
   }
 
   /**
@@ -195,7 +195,7 @@ export class UserApi {
    * Get the linking status between a third-party platform to a user
    */
   getLinkRequestStatus = (requestId: string) => {
-    return this.newInstance().fetchV3NsRequestsByRequestidAsyncStatus(requestId)
+    return this.newInstance().fetchAsyncStatus_ByRequestId(requestId)
   }
 
   /**
@@ -206,7 +206,7 @@ export class UserApi {
    * transferred. If the data is tight to game user ID, the user will have the game progression data.
    */
   linkPlatformToUserAccount = ({ userId, data }: { userId: string; data: LinkPlatformAccountRequest }) => {
-    return this.newInstance().postV3NsUsersByUseridPlatformsLink(userId, data)
+    return this.newInstance().createPlatformLink_ByUserId(userId, data)
   }
 
   /**
@@ -241,7 +241,7 @@ export class UserApi {
    *      action code : 10121
    */
   unLinkAccountFromPlatform = ({ platformId, data }: { platformId: string; data: UnlinkUserPlatformRequest }) => {
-    return this.newInstance().deleteV3NsUsersMePlatformsByPlatformid(platformId, data)
+    return this.newInstance().deleteUserMePlatform_ByPlatformId(platformId, data)
   }
 
   /**
@@ -256,7 +256,7 @@ export class UserApi {
     platformId: string
     queryParams?: { clientId?: string | null; redirectUri?: string | null }
   }) => {
-    return this.newInstance().fetchV3NsUsersMePlatformsByPlatformidWebLink(platformId, queryParams)
+    return this.newInstance().fetchWebLinkMeUsers_ByPlatformId(platformId, queryParams)
   }
 
   /**
@@ -265,7 +265,7 @@ export class UserApi {
    * Get age restriction by country code. It will always get by publisher namespace
    */
   getAgeRestrictionByCountry = (countryCode: string) => {
-    return this.newInstance().fetchV3NsAgerestrictionsCountriesByCountrycode(countryCode)
+    return this.newInstance().fetchAgerestrictionCountry_ByCountryCode(countryCode)
   }
 
   /**
@@ -289,7 +289,7 @@ export class UserApi {
    * If it is available, we will send a verification code to this email address.
    */
   requestNewUserVerificationCode = (data: SendRegisterVerificationCodeRequest) => {
-    return this.newInstance().postV3NsUsersCodeRequest(data)
+    return this.newInstance().createUserCodeRequest(data)
   }
 
   /**
@@ -312,7 +312,7 @@ export class UserApi {
    *
    */
   createUser = (data: CreateUserRequestV4) => {
-    return this.newInstance4().postV4NsUsers(data)
+    return this.newInstance4().createUser(data)
   }
 
   /**
@@ -323,7 +323,7 @@ export class UserApi {
    *          Required valid user authorization.
    */
   getUserDistinctLinkedPlatform = (userId: string) => {
-    return this.newInstance().fetchV3NsUsersByUseridDistinctPlatforms(userId)
+    return this.newInstance().fetchDistinctPlatforms_ByUserId(userId)
   }
 
   /**
@@ -333,7 +333,7 @@ export class UserApi {
    *      Unlink user's account from for all third platforms.
    */
   unLinkAccountFromPlatformDistinct = (platformId: string) => {
-    return this.newInstance().deleteV3NsUsersMePlatformsByPlatformidAll(platformId)
+    return this.newInstance().deleteAllMeUser_ByPlatformId(platformId)
   }
 
   /**
@@ -344,7 +344,7 @@ export class UserApi {
    * It will not send request if user email is already verified
    */
   sendVerificationLink = (languageTag: string) => {
-    return this.newInstance().postIamV3PublicUsersMeVerifyLinkRequest({ languageTag })
+    return this.newInstance().createUserMeVerifyLinkRequest({ languageTag })
   }
 
   /**
@@ -354,7 +354,7 @@ export class UserApi {
    *          action code: 10128
    */
   getLinkedAccount = (userId: string) => {
-    return this.newInstance().fetchV3NsUsersByUseridPlatforms(userId)
+    return this.newInstance().fetchPlatforms_ByUserId(userId)
   }
 
   /**
@@ -365,7 +365,7 @@ export class UserApi {
    * 2. My account not linked to request headless account's third platform.
    */
   getLinkAccountByOneTimeCodeConflict = (params: { oneTimeLinkCode: string | null }) => {
-    return this.newInstance().fetchIamV3PublicUsersMeHeadlessLinkConflict(params)
+    return this.newInstance().fetchUsersMeHeadlessLinkConflict(params)
   }
 
   /**
@@ -376,7 +376,7 @@ export class UserApi {
    * 2. My account not linked to headless account's third platform.
    */
   linkWithProgression = (data: LinkHeadlessAccountRequest) => {
-    return this.newInstance().postIamV3PublicUsersMeHeadlessLinkWithProgression(data)
+    return this.newInstance().createUserMeHeadlesLinkWithProgression(data)
   }
 
   /**

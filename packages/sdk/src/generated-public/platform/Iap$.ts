@@ -31,7 +31,7 @@ export class Iap$ {
   /**
    * Get iap item mapping.<br>Other detail info: <ul></ul>
    */
-  fetchNsIapItemMapping<T = IapItemMappingInfo>(queryParams?: {
+  fetchIapItemMapping<T = IapItemMappingInfo>(queryParams?: {
     platform?: 'APPLE' | 'GOOGLE' | 'PLAYSTATION' | 'STEAM' | 'XBOX' | 'STADIA' | 'EPICGAMES' | 'TWITCH'
   }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -50,7 +50,7 @@ export class Iap$ {
   /**
    * Sync my game twitch drops entitlements.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:IAP, action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putNsUsersMeIapTwitchSync<T = TwitchSyncResultArray>(data: TwitchSyncRequest): Promise<IResponse<T>> {
+  updateUserMeIapTwitchSync<T = TwitchSyncResultArray>(data: TwitchSyncRequest): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/me/iap/twitch/sync'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
@@ -59,54 +59,9 @@ export class Iap$ {
   }
 
   /**
-   * Sync steam inventory's items.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
-   */
-  putNsUsersByUseridIapSteamSync(userId: string, data: SteamSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/steam/sync'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * Verify apple iap receipt and fulfill item.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
-   */
-  putNsUsersByUseridIapAppleReceipt(userId: string, data: AppleIapReceipt): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/apple/receipt'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * Synchronize with entitlements in PSN Store with multiple service labels.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
-   */
-  putNsUsersByUseridIapPsnSyncMultiServiceLabels<T = PlayStationReconcileResultArray>(
-    userId: string,
-    data: PlayStationMultiServiceLabelsReconcileRequest
-  ): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync/multiServiceLabels'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, PlayStationReconcileResultArray)
-  }
-
-  /**
    * Synchronize with entitlements in PSN Store.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
    */
-  putNsUsersByUseridIapPsnSync<T = PlayStationReconcileResultArray>(
-    userId: string,
-    data: PlayStationReconcileRequest
-  ): Promise<IResponse<T>> {
+  updateIapPsnSync_ByUserId<T = PlayStationReconcileResultArray>(userId: string, data: PlayStationReconcileRequest): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync'
       .replace('{namespace}', this.namespace)
@@ -117,35 +72,9 @@ export class Iap$ {
   }
 
   /**
-   * Sync twitch drops entitlements.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
-   */
-  putNsUsersByUseridIapTwitchSync(userId: string, data: TwitchSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/twitch/sync'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * Verify google iap receipt and fulfill item.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
-   */
-  putNsUsersByUseridIapGoogleReceipt<T = GoogleReceiptResolveResult>(userId: string, data: GoogleIapReceipt): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/google/receipt'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, GoogleReceiptResolveResult)
-  }
-
-  /**
    * Sync Xbox inventory's items.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putNsUsersByUseridIapXblSync<T = XblReconcileResultArray>(userId: string, data: XblReconcileRequest): Promise<IResponse<T>> {
+  updateIapXblSync_ByUserId<T = XblReconcileResultArray>(userId: string, data: XblReconcileRequest): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/xbl/sync'
       .replace('{namespace}', this.namespace)
@@ -156,9 +85,48 @@ export class Iap$ {
   }
 
   /**
+   * Sync steam inventory's items.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
+   */
+  updateIapSteamSync_ByUserId(userId: string, data: SteamSyncRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/steam/sync'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * Sync twitch drops entitlements.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
+   */
+  updateIapTwitchSync_ByUserId(userId: string, data: TwitchSyncRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/twitch/sync'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * Verify apple iap receipt and fulfill item.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
+   */
+  updateIapAppleReceipt_ByUserId(userId: string, data: AppleIapReceipt): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/apple/receipt'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
    * Sync epic games inventory's items.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
    */
-  putNsUsersByUseridIapEpicgamesSync<T = EpicGamesReconcileResultArray>(
+  updateIapEpicgameSync_ByUserId<T = EpicGamesReconcileResultArray>(
     userId: string,
     data: EpicGamesReconcileRequest
   ): Promise<IResponse<T>> {
@@ -169,5 +137,34 @@ export class Iap$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, EpicGamesReconcileResultArray)
+  }
+
+  /**
+   * Verify google iap receipt and fulfill item.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: </li></ul>
+   */
+  updateIapGoogleReceipt_ByUserId<T = GoogleReceiptResolveResult>(userId: string, data: GoogleIapReceipt): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/google/receipt'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, GoogleReceiptResolveResult)
+  }
+
+  /**
+   * Synchronize with entitlements in PSN Store with multiple service labels.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:IAP", action=4 (UPDATE)</li><li><i>Returns</i>: result of synchronization</li></ul>
+   */
+  updateIapPsnSyncMultiServiceLabel_ByUserId<T = PlayStationReconcileResultArray>(
+    userId: string,
+    data: PlayStationMultiServiceLabelsReconcileRequest
+  ): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync/multiServiceLabels'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, PlayStationReconcileResultArray)
   }
 }

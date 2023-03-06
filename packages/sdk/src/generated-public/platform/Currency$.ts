@@ -17,7 +17,7 @@ export class Currency$ {
   /**
    * List currencies of a namespace.<br>Other detail info: <ul><li><i>Returns</i>: Currency List</li></ul>
    */
-  fetchNsCurrencies<T = CurrencyInfoArray>(queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' }): Promise<IResponseWithSync<T>> {
+  fetchCurrencies<T = CurrencyInfoArray>(queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/currencies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

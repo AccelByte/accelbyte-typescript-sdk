@@ -23,7 +23,7 @@ export class NamespaceApi {
    * - _Returns_: list of namespaces
    */
   getNamespaces = (activeOnly?: boolean | null) => {
-    return this.newInstance().fetchV1PublicNamespaces({ activeOnly })
+    return this.newInstance().fetchNamespaces({ activeOnly })
   }
 
   private newInstance() {

@@ -14,7 +14,7 @@ export class StaticConfigs$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
-  fetchV1NsStaticConfigsByConfig<T = Config>(config: string): Promise<IResponseWithSync<T>> {
+  fetchStaticConfig_ByConfig<T = Config>(config: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/public/namespaces/{namespace}/staticConfigs/{config}'
       .replace('{namespace}', this.namespace)

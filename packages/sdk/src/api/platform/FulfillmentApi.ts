@@ -22,7 +22,7 @@ export class FulfillmentApi {
    * Returns: fulfillment result
    */
   redeemCode = ({ userId, data }: { userId: string; data: FulfillCodeRequest }) => {
-    return this.newInstance().postNsUsersByUseridFulfillmentCode(userId, data)
+    return this.newInstance().createFulfillmentCode_ByUserId(userId, data)
   }
 
   private newInstance() {

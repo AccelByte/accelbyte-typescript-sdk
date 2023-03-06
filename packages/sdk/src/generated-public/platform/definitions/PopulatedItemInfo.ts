@@ -11,6 +11,7 @@ import { OptionBoxConfig } from './OptionBoxConfig'
 import { PurchaseCondition } from './PurchaseCondition'
 import { Recurring } from './Recurring'
 import { RegionDataItem } from './RegionDataItem'
+import { SaleConfig } from './SaleConfig'
 
 export const PopulatedItemInfo = z.object({
   title: z.string(),
@@ -70,6 +71,8 @@ export const PopulatedItemInfo = z.object({
   optionBoxConfig: OptionBoxConfig.nullish(),
   lootBoxConfig: LootBoxConfig.nullish(),
   fresh: z.boolean().nullish(),
+  sellable: z.boolean().nullish(),
+  saleConfig: SaleConfig.nullish(),
   items: z.array(BundledItemInfo).nullish(),
   localExt: z.record(z.any()).nullish()
 })

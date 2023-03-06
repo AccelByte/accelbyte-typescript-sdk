@@ -20,6 +20,22 @@ export class OAuth20Extension$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
+   * <p>This endpoint is used to remove <b>access_token</b>, <b>refresh_token</b> from cookie and revoke token from usage.</p>
+   * 		<p>Supported methods:</p>
+   * 			<ul>
+   * 				<li>VerifyToken to verify token from header</li>
+   * 				<li>AddTokenToRevocationList to revoke token with TTL</li>
+   * 			</ul>
+   */
+  createLogout(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/logout'
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
    * This endpoint is being used to authenticate a user account.
    * It validates user's email / username and password.
    * Deactivated or login-banned users are unable to login.
@@ -32,7 +48,7 @@ export class OAuth20Extension$ {
    *
    * Action code: 10801
    */
-  postIamV3Authenticate(data: {
+  postAuthenticate(data: {
     user_name: string | null
     password: string | null
     request_id: string | null
@@ -51,25 +67,13 @@ export class OAuth20Extension$ {
   }
 
   /**
-   * This endpoint is being used to authenticate a user account and perform platform link.
-   * It validates user's email / username and password.
-   * If user already enable 2FA, then invoke <i>/mfa/verify</i> using <b>mfa_token</b> from this endpoint response.
-   *
-   * <h2>Device Cookie Validation</h2>
-   *
-   * Device Cookie is used to protect the user account from brute force login attack, <a target="_blank" href="https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies">more detail from OWASP<a>.
-   * This endpoint will read device cookie from cookie <b>auth-trust-id</b>. If device cookie not found, it will generate a new one and set it into cookie when successfully authenticate.
-   *
+   * <p>This endpoint is being used to create headless account after 3rd platform authenticated, and response token .
+   * 					The 'linkingToken' in request body is received from "/platforms/{platformId}/token"
+   * 					when 3rd platform account is not linked to justice account yet.'</p>
    */
-  postIamV3AuthenticateWithLink<T = TokenResponseV3>(data: {
-    username: string | null
-    password: string | null
-    linkingToken: string | null
-    client_id: string | null
-    extend_exp?: boolean | null
-  }): Promise<IResponse<T>> {
+  postHeadlesToken<T = TokenResponseV3>(data: { linkingToken: string | null; extend_exp?: boolean | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/authenticateWithLink'
+    const url = '/iam/v3/headless/token'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
       ...params,
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
@@ -79,19 +83,37 @@ export class OAuth20Extension$ {
   }
 
   /**
-   * <p>This endpoint is being used to create headless account after 3rd platform authenticated, and response token .
-   * 					The 'linkingToken' in request body is received from "/platforms/{platformId}/token"
-   * 					when 3rd platform account is not linked to justice account yet.'</p>
+   * <p>This endpoint is being used to generate publisher user's game token.<br>
+   * 		It require basic header with ClientID and Secret, it should match the ClientID when call <strong>/iam/v3/namespace/{namespace}/token/request</strong><br>
+   * 		It required a code which can be generated from <strong>/iam/v3/namespace/{namespace}/token/request</strong>.<br>
+   * 		</p>
    */
-  postIamV3HeadlessToken<T = TokenResponseV3>(data: { linkingToken: string | null; extend_exp?: boolean | null }): Promise<IResponse<T>> {
+  postTokenExchange<T = TokenResponseV3>(data: { code: string | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/headless/token'
+    const url = '/iam/v3/token/exchange'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
       ...params,
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
     return Validate.responseType(() => resultPromise, TokenResponseV3)
+  }
+
+  /**
+   * <p>This endpoint get country location based on the request.</p>
+   */
+  fetchLocationCountry<T = CountryLocationResponse>(): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/location/country'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, CountryLocationResponse)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -125,7 +147,7 @@ export class OAuth20Extension$ {
    * 			</ul>
    * 		</p>
    */
-  postIamV3LinkCodeRequest<T = OneTimeLinkingCodeResponse>(data: { platformId: string | null }): Promise<IResponse<T>> {
+  postLinkCodeRequest<T = OneTimeLinkingCodeResponse>(data: { platformId: string | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/link/code/request'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -139,7 +161,7 @@ export class OAuth20Extension$ {
   /**
    * <p>This endpoint is being used to validate one time link code.<br></p>
    */
-  postIamV3LinkCodeValidate<T = OneTimeLinkingCodeValidationResponse>(data: { oneTimeLinkCode: string | null }): Promise<IResponse<T>> {
+  postLinkCodeValidate<T = OneTimeLinkingCodeValidationResponse>(data: { oneTimeLinkCode: string | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/link/code/validate'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -156,10 +178,7 @@ export class OAuth20Extension$ {
    * 		It required a code which can be generated from <strong>/iam/v3/link/code/request</strong>.<br>
    * 		</p>
    */
-  postIamV3LinkTokenExchange<T = TokenResponseV3>(data: {
-    oneTimeLinkCode: string | null
-    client_id: string | null
-  }): Promise<IResponse<T>> {
+  postLinkTokenExchange<T = TokenResponseV3>(data: { oneTimeLinkCode: string | null; client_id: string | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/link/token/exchange'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -171,36 +190,31 @@ export class OAuth20Extension$ {
   }
 
   /**
-   * <p>This endpoint get country location based on the request.</p>
+   * This endpoint is being used to authenticate a user account and perform platform link.
+   * It validates user's email / username and password.
+   * If user already enable 2FA, then invoke <i>/mfa/verify</i> using <b>mfa_token</b> from this endpoint response.
+   *
+   * <h2>Device Cookie Validation</h2>
+   *
+   * Device Cookie is used to protect the user account from brute force login attack, <a target="_blank" href="https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies">more detail from OWASP<a>.
+   * This endpoint will read device cookie from cookie <b>auth-trust-id</b>. If device cookie not found, it will generate a new one and set it into cookie when successfully authenticate.
+   *
    */
-  fetchIamV3LocationCountry<T = CountryLocationResponse>(): Promise<IResponseWithSync<T>> {
+  postAuthenticateWithLink<T = TokenResponseV3>(data: {
+    username: string | null
+    password: string | null
+    linkingToken: string | null
+    client_id: string | null
+    extend_exp?: boolean | null
+  }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/location/country'
-    const resultPromise = this.axiosInstance.get(url, { params })
+    const url = '/iam/v3/authenticateWithLink'
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
 
-    const res = () => Validate.responseType(() => resultPromise, CountryLocationResponse)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * <p>This endpoint is used to remove <b>access_token</b>, <b>refresh_token</b> from cookie and revoke token from usage.</p>
-   * 		<p>Supported methods:</p>
-   * 			<ul>
-   * 				<li>VerifyToken to verify token from header</li>
-   * 				<li>AddTokenToRevocationList to revoke token with TTL</li>
-   * 			</ul>
-   */
-  postIamV3Logout(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/logout'
-    const resultPromise = this.axiosInstance.post(url, null, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
+    return Validate.responseType(() => resultPromise, TokenResponseV3)
   }
 
   /**
@@ -211,7 +225,7 @@ export class OAuth20Extension$ {
    * 		It response a code and it can be consumed by <strong>/iam/v3/token/exchange</strong>
    * 		</p>
    */
-  postV3NamespaceByNamespaceTokenRequest<T = GameTokenCodeResponse>(data: { client_id: string | null }): Promise<IResponse<T>> {
+  postTokenRequest<T = GameTokenCodeResponse>(data: { client_id: string | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/namespace/{namespace}/token/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -250,7 +264,7 @@ export class OAuth20Extension$ {
    *           as previously defined on authorize request parameter <code>redirect_uri</code>
    *           </ul> action code : 10709
    */
-  fetchV3PlatformsByPlatformidAuthenticate(
+  fetchAuthenticate_ByPlatformId(
     platformId: string,
     queryParams: {
       state: string | null
@@ -279,22 +293,5 @@ export class OAuth20Extension$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * <p>This endpoint is being used to generate publisher user's game token.<br>
-   * 		It require basic header with ClientID and Secret, it should match the ClientID when call <strong>/iam/v3/namespace/{namespace}/token/request</strong><br>
-   * 		It required a code which can be generated from <strong>/iam/v3/namespace/{namespace}/token/request</strong>.<br>
-   * 		</p>
-   */
-  postIamV3TokenExchange<T = TokenResponseV3>(data: { code: string | null }): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/token/exchange'
-    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
-      ...params,
-      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
-    })
-
-    return Validate.responseType(() => resultPromise, TokenResponseV3)
   }
 }

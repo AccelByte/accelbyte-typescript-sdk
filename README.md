@@ -1,24 +1,10 @@
 # AccelByte Web SDK
 
-## Note
-
-***The Web SDK and associated Web Widgets are currently undergoing Alpha testing. If you would like to participate in the Alpha test, we encourage you to reach out to your assigned DPM resource before making use of these solutions.***
-
 [AccelByte Web SDK](https://demo.accelbyte.io/web-sdk-playground/) is a JavaScript library enabling the building of web applications using AccelByte API services. The library is
 platform-agnostic and can be consumed in a browser or in a server environment.
 
 ### Type-safety
 Built with TypeScript and strict by design, the SDK goes above and beyond and enforces runtime type-checking validations. This allows trusting the AccelByte service type definitions.
-
-Below is the list of the AccelByte service APIs the library supports:
-
-1. [IAM](https://docs.accelbyte.io/api-endpoints.html#access)
-2. [Monetization](https://docs.accelbyte.io/api-endpoints.html#monetization)
-3. [Basic](https://docs.accelbyte.io/api-endpoints.html#basic)
-4. [Build Info](https://docs.accelbyte.io/api-endpoints.html#distribution)
-5. [GDPR](https://docs.accelbyte.io/api-endpoints.html#access)
-6. [Event](https://docs.accelbyte.io/api-endpoints.html#access)
-7. [Legal](https://docs.accelbyte.io/api-endpoints.html#access)
 
 # Getting started
 
@@ -89,16 +75,32 @@ const currencies = await sdk.Platform.Currency().getCurrencyMap()
 console.log('Currencies:', currencies, '\n')
 
 // Retrieve legal policies
-const policies = await sdk.Legal.Policies().fetchAllPoliciesByCountry({countryCode: 'Bulgaria'})
+const policies = await sdk.Legal.Policies().fetchAllPoliciesByCountry({countryCode: 'Germany'})
 console.log('Policies:', policies, '\n')
 ```
 
-# AccelByte Web SDK Widgets
-In addition to the Accelbyte Web SDK, the library provides an extension called [SDK Widgets](https://www.npmjs.com/package/@accelbyte/widgets) allowing the creation of SDK UI components. AccelByte Web SDK Widgets is a UI library consisting of a set of JavaScript React components that can be embedded inside a browser. These components have the same appearance and business functionality as the AccelByte Player Portal.
+## AccelByte APIs
 
-## NPM installation
+Web SDK supports the following AccelByte service APIs:
 
-To npm install the SDK Widgets execute
+1. [IAM](https://docs.accelbyte.io/api-endpoints.html#access)
+2. [Monetization](https://docs.accelbyte.io/api-endpoints.html#monetization)
+3. [Basic](https://docs.accelbyte.io/api-endpoints.html#basic)
+4. [Build Info](https://docs.accelbyte.io/api-endpoints.html#distribution)
+5. [GDPR](https://docs.accelbyte.io/api-endpoints.html#access)
+6. [Event](https://docs.accelbyte.io/api-endpoints.html#access)
+7. [Legal](https://docs.accelbyte.io/api-endpoints.html#access)
+
+# AccelByte Web Widgets
+In addition to the Accelbyte Web SDK, the library provides an extension called [Web Widgets](https://www.npmjs.com/package/@accelbyte/widgets) allowing the creation of SDK UI components. AccelByte Web Widgets is a UI library consisting of a set of JavaScript React components that can be embedded inside a browser. These components have the same appearance and business functionality as the AccelByte Player Portal.
+
+## Note
+
+***The Web Widgets are currently undergoing Alpha testing. If you would like to participate in the Alpha test, we encourage you to reach out to your assigned DPM resource before making use of these solutions.***
+
+## Installation
+
+To npm install the Web Widgets execute
 
 ```shell
 yarn add @accelbyte/widgets

@@ -27,9 +27,9 @@ export class SubscriptionApi {
     queryParams
   }: {
     userId: string
-    queryParams?: Parameters<Subscription$['fetchNsUsersByUseridSubscriptions']>[1]
+    queryParams?: Parameters<Subscription$['fetchSubscriptions_ByUserId']>[1]
   }) => {
-    return this.newInstance().fetchNsUsersByUseridSubscriptions(userId, queryParams)
+    return this.newInstance().fetchSubscriptions_ByUserId(userId, queryParams)
   }
 
   /**
@@ -40,7 +40,7 @@ export class SubscriptionApi {
    * Returns: subscription
    */
   getUserSubscriptionBySubscriptionId = ({ userId, subscriptionId }: { userId: string; subscriptionId: string }) => {
-    return this.newInstance().fetchNsUsersByUseridSubscriptionsBySubscriptionid(userId, subscriptionId)
+    return this.newInstance().fetchSubscription_ByUserId_BySubscriptionId(userId, subscriptionId)
   }
 
   /**
@@ -54,7 +54,7 @@ export class SubscriptionApi {
    * Returns: created subscription
    */
   createSubscription = ({ userId, data }: { userId: string; data: SubscribeRequest }) => {
-    return this.newInstance().postNsUsersByUseridSubscriptions(userId, data)
+    return this.newInstance().createSubscription_ByUserId(userId, data)
   }
 
   /**
@@ -73,7 +73,7 @@ export class SubscriptionApi {
     subscriptionId: string
     queryParams?: { excludeFree?: boolean | null; offset?: number; limit?: number }
   }) => {
-    return this.newInstance().fetchNsUsersByUseridSubscriptionsBySubscriptionidHistory(userId, subscriptionId, queryParams)
+    return this.newInstance().fetchHistory_ByUserId_BySubscriptionId(userId, subscriptionId, queryParams)
   }
 
   /**
@@ -86,7 +86,7 @@ export class SubscriptionApi {
    * Returns: updated subscription
    */
   updateUserSubscriptionPaymentMethod = ({ userId, subscriptionId }: { userId: string; subscriptionId: string }) => {
-    return this.newInstance().putNsUsersByUseridSubscriptionsBySubscriptionidBillingAccount(userId, subscriptionId)
+    return this.newInstance().updateBillingAccount_ByUserId_BySubscriptionId(userId, subscriptionId)
   }
 
   /**
@@ -99,7 +99,7 @@ export class SubscriptionApi {
    * Returns: cancelled subscription
    */
   cancelUserSubscription = ({ userId, subscriptionId, data }: { userId: string; subscriptionId: string; data: CancelRequest }) => {
-    return this.newInstance().putNsUsersByUseridSubscriptionsBySubscriptionidCancel(userId, subscriptionId, data)
+    return this.newInstance().updateCancel_ByUserId_BySubscriptionId(userId, subscriptionId, data)
   }
 
   private newInstance() {

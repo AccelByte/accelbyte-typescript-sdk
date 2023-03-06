@@ -77,8 +77,8 @@ export class OrderApi {
   updatedAt
 }</pre>
    */
-  getOrderList = ({ userId, queryParams }: { userId: string; queryParams?: Parameters<Order$['fetchNsUsersByUseridOrders']>[1] }) => {
-    return this.newInstance().fetchNsUsersByUseridOrders(userId, queryParams)
+  getOrderList = ({ userId, queryParams }: { userId: string; queryParams?: Parameters<Order$['fetchOrders_ByUserId']>[1] }) => {
+    return this.newInstance().fetchOrders_ByUserId(userId, queryParams)
   }
 
   /**
@@ -89,7 +89,7 @@ export class OrderApi {
    * Returns: `OrderInfo`
    */
   getOrderByOrderNo = ({ userId, orderNo }: { userId: string; orderNo: string }) => {
-    return this.newInstance().fetchNsUsersByUseridOrdersByOrderno(userId, orderNo)
+    return this.newInstance().fetchOrder_ByUserId_ByOrderNo(userId, orderNo)
   }
 
   /**
@@ -100,7 +100,7 @@ export class OrderApi {
    * Returns: cancelled `OrderInfo`
    */
   cancelOrder = ({ userId, orderNo }: { userId: string; orderNo: string }) => {
-    return this.newInstance().putNsUsersByUseridOrdersByOrdernoCancel(userId, orderNo)
+    return this.newInstance().updateCancel_ByUserId_ByOrderNo(userId, orderNo)
   }
 
   /**
@@ -112,7 +112,7 @@ export class OrderApi {
    * Returns: created `OrderInfo`
    */
   createOrder = ({ userId, data }: { userId: string; data: OrderCreate }) => {
-    return this.newInstance().postNsUsersByUseridOrders(userId, data)
+    return this.newInstance().createOrder_ByUserId(userId, data)
   }
 
   /**

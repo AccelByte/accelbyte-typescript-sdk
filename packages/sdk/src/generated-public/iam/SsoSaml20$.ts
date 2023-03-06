@@ -22,7 +22,7 @@ export class SsoSaml20$ {
    *           as previously defined on authentication request SAML
    *           </ul>
    */
-  postV3SsoSamlPlatformsByPlatformidAuthenticate(
+  postAuthenticateSamlSso_ByPlatformId(
     platformId: string,
     queryParams: { state: string | null; code?: string | null; error?: string | null }
   ): Promise<IResponse<unknown>> {

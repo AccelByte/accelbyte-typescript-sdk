@@ -20,7 +20,7 @@ export class EntitlementApi {
    * Get user app entitlement by appId.
    */
   getEntitlementByAppId = ({ userId, appId }: { userId: string; appId: string }) => {
-    return this.newInstance().fetchNsUsersByUseridEntitlementsByAppId(userId, {
+    return this.newInstance().fetchEntitlementsByAppId_ByUserId(userId, {
       appId
     })
   }
@@ -36,9 +36,9 @@ export class EntitlementApi {
     queryParams
   }: {
     userId: string
-    queryParams: Parameters<Entitlement$['fetchNsUsersByUseridEntitlements']>[1]
+    queryParams: Parameters<Entitlement$['fetchEntitlements_ByUserId']>[1]
   }) => {
-    return this.newInstance().fetchNsUsersByUseridEntitlements(userId, queryParams)
+    return this.newInstance().fetchEntitlements_ByUserId(userId, queryParams)
   }
 
   /**
@@ -53,7 +53,7 @@ export class EntitlementApi {
     userId: string
     queryParams: { itemIds?: string[]; appIds?: string[]; skus?: string[] }
   }) => {
-    return this.newInstance().fetchNsUsersByUseridEntitlementsOwnershipAny(userId, queryParams)
+    return this.newInstance().fetchEntitlementsOwnershipAny_ByUserId(userId, queryParams)
   }
 
   /**
@@ -62,7 +62,7 @@ export class EntitlementApi {
    * Get user entitlement ownership by itemIds.
    */
   getEntitlementByItemIds = ({ userId, queryParams }: { userId: string; queryParams?: { ids?: string[] } }) => {
-    return this.newInstance().fetchNsUsersByUseridEntitlementsOwnershipByItemIds(userId, queryParams)
+    return this.newInstance().fetchEntitlementsOwnershipByItemIds_ByUserId(userId, queryParams)
   }
 
   /**
@@ -72,7 +72,7 @@ export class EntitlementApi {
    * Returns: consumed entitlement
    */
   claimEntitlement = ({ userId, entitlementId, data }: { userId: string; entitlementId: string; data: EntitlementDecrement }) => {
-    return this.newInstance().putNsUsersByUseridEntitlementsByEntitlementidDecrement(userId, entitlementId, data)
+    return this.newInstance().updateDecrement_ByUserId_ByEntitlementId(userId, entitlementId, data)
   }
 
   private newInstance() {

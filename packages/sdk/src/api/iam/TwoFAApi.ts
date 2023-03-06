@@ -22,7 +22,7 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   getBackupCode = () => {
-    return this.newInstance().fetchV4NsUsersMeMfaBackupCode()
+    return this.newInstance().fetchUsersMeMfaBackupCode()
   }
 
   /**
@@ -33,7 +33,7 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   enable2FABackupCodes = () => {
-    return this.newInstance().postV4NsUsersMeMfaBackupCodeEnable()
+    return this.newInstance().createUserMeMfaBackupCodeEnable()
   }
 
   /**
@@ -44,7 +44,7 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   generateBackupCodes = () => {
-    return this.newInstance().postV4NsUsersMeMfaBackupCode()
+    return this.newInstance().createUserMeMfaBackupCode()
   }
 
   /**
@@ -55,7 +55,7 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   disableBackupCodes = () => {
-    return this.newInstance().deleteV4NsUsersMeMfaBackupCodeDisable()
+    return this.newInstance().deleteUserMeMfaBackupCodeDisable()
   }
 
   /**
@@ -66,7 +66,7 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   disableAuthenticator = () => {
-    return this.newInstance().deleteV4NsUsersMeMfaAuthenticatorDisable()
+    return this.newInstance().deleteUserMeMfaAuthenticatorDisable()
   }
 
   /**
@@ -77,7 +77,7 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   getEnabledMethods = () => {
-    return this.newInstance().fetchV4NsUsersMeMfaFactor()
+    return this.newInstance().fetchUsersMeMfaFactor()
   }
 
   /**
@@ -88,7 +88,7 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   set2FAAsDefault = (factor: string) => {
-    return this.newInstance().postV4NsUsersMeMfaFactor({ factor })
+    return this.newInstance().postUserMeMfaFactor({ factor })
   }
 
   /**
@@ -99,7 +99,7 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   enable2FAAuthenticator = (code: string) => {
-    return this.newInstance().postV4NsUsersMeMfaAuthenticatorEnable({ code })
+    return this.newInstance().postUserMeMfaAuthenticatorEnable({ code })
   }
 
   /**
@@ -111,28 +111,28 @@ export class TwoFAApi {
    * _Requires a valid user access token_
    */
   generateSecretKey = () => {
-    return this.newInstance().postV4NsUsersMeMfaAuthenticatorKey()
+    return this.newInstance().createUserMeMfaAuthenticatorKey()
   }
 
   /**
    * POST [/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/code](api)
    */
   requestEmailCode = () => {
-    return this.newInstance().postV4NsUsersMeMfaEmailCode()
+    return this.newInstance().createUserMeMfaEmailCode()
   }
 
   /**
    * POST [/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/enable](api)
    */
   enableEmailMethod = (code: string) => {
-    return this.newInstance().postV4NsUsersMeMfaEmailEnable({ code })
+    return this.newInstance().postUserMeMfaEmailEnable({ code })
   }
 
   /**
    * POST [/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/disable](api)
    */
   disableEmailMethod = () => {
-    return this.newInstance().postV4NsUsersMeMfaEmailDisable()
+    return this.newInstance().createUserMeMfaEmailDisable()
   }
 
   private newInstance() {

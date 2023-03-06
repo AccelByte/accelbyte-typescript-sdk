@@ -17,7 +17,7 @@ export class View$ {
   /**
    * This API is used to get all views.<p>Other detail info: <ul><li><i>Required permission</i>: resource=NAMESPACE:{namespace}:USER:{userId}:STORE, action=2 (READ)</li><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store views)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store views)</li><li><i>Returns</i>: all views</li></ul>
    */
-  fetchNsUsersByUseridViews<T = ViewInfoArray>(
+  fetchViews_ByUserId<T = ViewInfoArray>(
     userId: string,
     queryParams?: { storeId?: string | null; language?: string | null }
   ): Promise<IResponseWithSync<T>> {

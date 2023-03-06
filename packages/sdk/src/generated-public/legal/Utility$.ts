@@ -17,7 +17,7 @@ export class Utility$ {
   /**
    * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:LEGAL", action=2 (READ)</li></ul>
    */
-  fetchPublicReadiness<T = LegalReadinessStatusResponse>(): Promise<IResponseWithSync<T>> {
+  fetchReadiness<T = LegalReadinessStatusResponse>(): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/public/readiness'
     const resultPromise = this.axiosInstance.get(url, { params })

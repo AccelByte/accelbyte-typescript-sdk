@@ -27,7 +27,7 @@ export class ItemApi {
    * Returns: the item with that appId
    */
   getItemByAppId = ({ ...queryParams }: { storeId?: string; appId: string; language?: string; region?: string }) => {
-    return this.newInstance().fetchNsItemsByAppId(queryParams)
+    return this.newInstance().fetchItemsByAppId(queryParams)
   }
 
   /**
@@ -38,7 +38,7 @@ export class ItemApi {
    * Returns: item dynamic data
    */
   getItemByItemIdDynamic = (itemId: string) => {
-    return this.newInstance().fetchNsItemsByItemidDynamic(itemId)
+    return this.newInstance().fetchDynamic_ByItemId(itemId)
   }
 
   /**
@@ -47,9 +47,9 @@ export class ItemApi {
   fetchItemsByCriteria = ({
     queryParams
   }: {
-    queryParams?: Parameters<Item$['fetchNsItemsByCriteria']>[0]
+    queryParams?: Parameters<Item$['fetchItemsByCriteria']>[0]
   }): Promise<IResponseWithSync<ItemPagingSlicedResult>> => {
-    return this.newInstance().fetchNsItemsByCriteria(queryParams)
+    return this.newInstance().fetchItemsByCriteria(queryParams)
   }
 
   /**
@@ -60,29 +60,8 @@ export class ItemApi {
    * Returns: the list of items
    */
   getItemsByItemIds = ({ queryParams }: { queryParams: QueryParamsItemIds }) => {
-    return this.newInstance().fetchNsItemsLocaleByIds(queryParams)
+    return this.newInstance().fetchItemsLocaleByIds(queryParams)
   }
-
-  // TODO if not used, delete below
-  // /**
-  //  * Fetch the items and convert it into a map of `itemId` and its item info
-  //  */
-  // fetchAvailableItemInfoMap = async ({ queryParams }: { queryParams: QueryParamsItemIds }) => {
-  //   const result = await this.getItemsByItemIds({ queryParams })
-  //   if (result.response) {
-  //     return {
-  //       error: null,
-  //       value: result.response.data.reduce((map: Map<string, ItemInfo>, availableItemInfo) => {
-  //         const { itemId } = availableItemInfo
-  //         if (itemId) {
-  //           map.set(itemId, availableItemInfo)
-  //         }
-  //         return map
-  //       }, new Map())
-  //     }
-  //   }
-  //   return result
-  // }
 
   /**
    * GET [/platform/public/namespaces/{namespace}/items/{itemId}/locale](api)
@@ -91,14 +70,8 @@ export class ItemApi {
    *
    * Returns: item data
    */
-  getItemsByItemIdLocale = ({
-    itemId,
-    queryParams
-  }: {
-    itemId: string
-    queryParams?: Parameters<Item$['fetchNsItemsByItemidLocale']>[1]
-  }) => {
-    return this.newInstance().fetchNsItemsByItemidLocale(itemId, queryParams)
+  getItemsByItemIdLocale = ({ itemId, queryParams }: { itemId: string; queryParams?: Parameters<Item$['fetchLocale_ByItemId']>[1] }) => {
+    return this.newInstance().fetchLocale_ByItemId(itemId, queryParams)
   }
 
   /**
@@ -109,7 +82,7 @@ export class ItemApi {
    * Returns: app data
    */
   getAppInfoByItemId = ({ itemId, queryParams }: { itemId: string; queryParams?: QueryParams }) => {
-    return this.newInstance().fetchNsItemsByItemidAppLocale(itemId, queryParams)
+    return this.newInstance().fetchAppLocale_ByItemId(itemId, queryParams)
   }
 
   /**
@@ -118,7 +91,7 @@ export class ItemApi {
    * This API is used to validate user item purchase condition
    */
   validatePurchaseCondition = (data: ItemPurchaseConditionValidateRequest) => {
-    return this.newInstance().postNsItemsPurchaseConditionsValidate(data)
+    return this.newInstance().createItemPurchaseConditionValidate(data)
   }
 
   private newInstance() {

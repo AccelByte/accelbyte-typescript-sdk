@@ -8,7 +8,20 @@ import { z } from 'zod'
 export const CreditRequest = z.object({
   amount: z.number().int(),
   source: z
-    .enum(['PURCHASE', 'IAP', 'PROMOTION', 'ACHIEVEMENT', 'REFERRAL_BONUS', 'REDEEM_CODE', 'REWARD', 'GIFT', 'REFUND', 'DLC', 'OTHER'])
+    .enum([
+      'PURCHASE',
+      'IAP',
+      'PROMOTION',
+      'ACHIEVEMENT',
+      'REFERRAL_BONUS',
+      'REDEEM_CODE',
+      'REWARD',
+      'GIFT',
+      'REFUND',
+      'DLC',
+      'OTHER',
+      'SELL_BACK'
+    ])
     .nullish(),
   expireAt: z.string().nullish(),
   reason: z.string().nullish(),

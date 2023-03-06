@@ -53,59 +53,11 @@ export class Users$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Get age restriction by country code. It will always get by publisher namespace
+   * <p>Require valid user authorization<br>Get my user data<br>action code : 10147 </p>
    */
-  fetchV3NsAgerestrictionsCountriesByCountrycode<T = CountryV3Response>(countryCode: string): Promise<IResponseWithSync<T>> {
+  fetchUsersMe<T = UserResponseV3>(): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/agerestrictions/countries/{countryCode}'
-      .replace('{namespace}', this.namespace)
-      .replace('{countryCode}', countryCode)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, CountryV3Response)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * List User ID By Platform User ID
-   * This endpoint intended to list game user ID from the given namespace
-   * This endpoint return list of user ID by given platform ID and list of platform user ID
-   *
-   * <strong>nintendo platform user ID</strong>: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
-   *
-   */
-  postV3NsPlatformsByPlatformidUsers<T = UserPlatforms>(platformId: string, data: PlatformUserIdRequest): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/platforms/{platformId}/users'
-      .replace('{namespace}', this.namespace)
-      .replace('{platformId}', platformId)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, UserPlatforms)
-  }
-
-  /**
-   * Get User By Platform User ID
-   *
-   * This endpoint return user information by given platform ID and platform user ID
-   *
-   * <strong>nintendo platform user ID</strong>: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
-   *
-   */
-  fetchV3NsPlatformsByPlatformidUsersByPlatformuserid<T = UserResponseV3>(
-    platformId: string,
-    platformUserId: string
-  ): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId}'
-      .replace('{namespace}', this.namespace)
-      .replace('{platformId}', platformId)
-      .replace('{platformUserId}', platformUserId)
+    const url = '/iam/v3/public/users/me'
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, UserResponseV3)
@@ -117,17 +69,12 @@ export class Users$ {
     return SdkCache.withCache(cacheKey, res)
   }
 
-  /**
-   * This endpoint is used to get linking status.
-   */
-  fetchV3NsRequestsByRequestidAsyncStatus<T = LinkRequest>(requestId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/requests/{requestId}/async/status'
-      .replace('{namespace}', this.namespace)
-      .replace('{requestId}', requestId)
+  fetchUsersVerifyLinkVerify(queryParams?: { code?: string | null }): Promise<IResponseWithSync<unknown>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v3/public/users/verify_link/verify'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, LinkRequest)
+    const res = () => Validate.responseType(() => resultPromise, z.unknown())
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -142,7 +89,7 @@ export class Users$ {
    * 			The query length should greater than 1，otherwise will not query the database. The default limit value is 100</p>
    * 			<br>action code : 10132
    */
-  fetchV3NsUsers<T = PublicUserInformationResponseV3>(queryParams?: {
+  fetchUsers<T = PublicUserInformationResponseV3>(queryParams?: {
     query?: string | null
     by?: string | null
     limit?: string | null
@@ -171,12 +118,190 @@ export class Users$ {
    * 		<p>Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.</p>
    * 		<p>This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.</p>
    */
-  postV3NsUsers<T = UserCreateResponseV3>(data: UserCreateRequestV3): Promise<IResponse<T>> {
+  createUser<T = UserCreateResponseV3>(data: UserCreateRequestV3): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, UserCreateResponseV3)
+  }
+
+  /**
+   * Required valid user authorization
+   * <p>The verification link is sent to email address</p>
+   * <p>It will not send request if user email is already verified</p>
+   *
+   */
+  createUserMeVerifyLinkRequest(data: SendVerificationLinkRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/users/me/verify_link/request'
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p>Requires valid user access token </p>
+   * <br><p>This Endpoint support update user based on given data. <b>Single request can update single field or multi fields.</b></p>
+   * <p>Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl}</p>
+   * <p>Country use ISO3166-1 alpha-2 two letter, e.g. US.</p>
+   * <p>Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.</p>
+   * <br><b>Several case of updating email address</b>
+   * <ul><li>User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.</li>
+   * <li>User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. </li>
+   * <li>User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. </li>
+   * <br><b>Important notes:</b>
+   * <br><p>This endpoint provides support for client that doesn't have PATCH support, i.e. UE4 before v4.23 released.
+   * <br>If the client support PATCH method, use [PATCH] /iam/v3/public/namespaces/{namespace}/users/me instead</p><br>
+   * <p>action code : 10103 </p>
+   */
+  updateUserMe<T = UserResponseV3>(data: UserUpdateRequestV3): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, UserResponseV3)
+  }
+
+  /**
+   * <p>Requires valid user access token </p>
+   * <br><p>This Endpoint support update user based on given data. <b>Single request can update single field or multi fields.</b></p>
+   * <p>Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl}</p>
+   * <p>Country use ISO3166-1 alpha-2 two letter, e.g. US.</p>
+   * <p>Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.</p>
+   * <br><b>Several case of updating email address</b>
+   * <ul><li>User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.</li>
+   * <li>User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. </li>
+   * <li>User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. </li>
+   * <p>action code : 10103 </p>
+   */
+  patchUserMe<T = UserResponseV3>(data: UserUpdateRequestV3): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, UserResponseV3)
+  }
+
+  /**
+   * Note:<br>
+   * 1. My account should be full account
+   * 2. My account not linked to request headless account's third platform.
+   *
+   * After client resolving the conflict, it will call endpoint <b>/iam/v3/public/users/me/headless/linkWithProgression [POST]</p>
+   *
+   */
+  fetchUsersMeHeadlessLinkConflict<T = GetLinkHeadlessAccountConflictResponse>(queryParams: {
+    oneTimeLinkCode: string | null
+  }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v3/public/users/me/headless/link/conflict'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, GetLinkHeadlessAccountConflictResponse)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * <p>action code: 10105</p>
+   */
+  createUserReset(data: ResetPasswordRequestV3): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/reset'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p><strong>Special note for publisher-game scenario:</strong>
+   * Game Client should provide game namespace path parameter and Publisher
+   * Client should provide publisher namespace path parameter. </p>
+   * <p>The password reset code will be sent to the publisher account's email address. </p>
+   * <p>action code : 10104 </p>
+   *
+   */
+  createUserForgot(data: ForgotPasswordRequestV3): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/forgot'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p>This endpoint retrieve user attributes. action code: 10129</p>
+   */
+  fetchUser_ByUserId<T = PublicUserResponseV3>(userId: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, PublicUserResponseV3)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Note:<br>
+   * 1. My account should be full account
+   * 2. My account not linked to headless account's third platform.
+   */
+  createUserMeHeadlesLinkWithProgression(data: LinkHeadlessAccountRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/users/me/headless/linkWithProgression'
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p>Notes:</p>
+   * 		<ul>
+   * 			<li>This endpoint bulk get users' basic info by userId, max allowed 100 at a time</li>
+   * 			<li>If namespace is game, will search by game user Id, other wise will search by publisher namespace</li>
+   * 			<li><strong>Result will include displayName(if it exists)</strong></li>
+   * 		</ul>
+   *
+   */
+  createUserBulkBasic<T = ListBulkUserResponse>(data: UserIDsRequest): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/bulk/basic'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, ListBulkUserResponse)
+  }
+
+  /**
+   * <p>Verify the registration code</p>
+   *
+   */
+  createUserCodeVerify(data: VerifyRegistrationCode): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/code/verify'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * Required valid user authorization. <br> action code: 10107
+   */
+  updateUserMePassword(data: UserPasswordUpdateV3Request): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me/password'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
   }
 
   /**
@@ -192,7 +317,7 @@ export class Users$ {
    * 	- Account Not Available : 204 (no content)
    *
    */
-  fetchV3NsUsersAvailability(queryParams: { field: string | null; query: string | null }): Promise<IResponseWithSync<unknown>> {
+  fetchUsersAvailability(queryParams: { field: string | null; query: string | null }): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/availability'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -207,23 +332,6 @@ export class Users$ {
   }
 
   /**
-   * <p>Notes:</p>
-   * 		<ul>
-   * 			<li>This endpoint bulk get users' basic info by userId, max allowed 100 at a time</li>
-   * 			<li>If namespace is game, will search by game user Id, other wise will search by publisher namespace</li>
-   * 			<li><strong>Result will include displayName(if it exists)</strong></li>
-   * 		</ul>
-   *
-   */
-  postV3NsUsersBulkBasic<T = ListBulkUserResponse>(data: UserIDsRequest): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/bulk/basic'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, ListBulkUserResponse)
-  }
-
-  /**
    * This endpoint will validate the request's email address.
    *
    * If it already been used, will response 409.
@@ -232,7 +340,7 @@ export class Users$ {
    * This code can be verified by this <a href="#operations-Users-PublicVerifyRegistrationCode">endpoint</a>.
    *
    */
-  postV3NsUsersCodeRequest(data: SendRegisterVerificationCodeRequest): Promise<IResponse<unknown>> {
+  createUserCodeRequest(data: SendRegisterVerificationCodeRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/code/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -241,38 +349,180 @@ export class Users$ {
   }
 
   /**
-   * <p>Verify the registration code</p>
+   * Required valid user authorization.
+   * 		<p>Notes:</p>
+   * 		<ul>
+   * 			<li>This endpoint retrieve the first page of the data if after and before parameters is empty</li>
+   * 			<li><strong>The pagination is not working yet</strong></li>
+   * 		</ul>
    *
    */
-  postV3NsUsersCodeVerify(data: VerifyRegistrationCode): Promise<IResponse<unknown>> {
+  fetchBans_ByUserId<T = GetUserBanV3Response>(
+    userId: string,
+    queryParams?: { activeOnly?: boolean | null; limit?: number; before?: string | null; after?: string | null }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/bans'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, GetUserBanV3Response)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * <p>Will consume code if validateOnly is set false</p>
+   * <p>Required valid user authorization</p>
+   * <p>Redeems a verification code sent to a user to verify the user's contact address is correct</p>
+   * <p>Available ContactType : <b>email</b></p>
+   * <p>action code: 10107</p>
+   *
+   */
+  createUserMeCodeVerify(data: UserVerificationRequestV3): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/code/verify'.replace('{namespace}', this.namespace)
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me/code/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown())
   }
 
   /**
-   * <p><strong>Special note for publisher-game scenario:</strong>
-   * Game Client should provide game namespace path parameter and Publisher
-   * Client should provide publisher namespace path parameter. </p>
-   * <p>The password reset code will be sent to the publisher account's email address. </p>
-   * <p>action code : 10104 </p>
+   * Required valid user authorization
+   * <p>The verification code is sent to email address</p>
+   * <p>Available contexts for use : </p>
+   * <ol>
+   * 	<li>
+   * 		<strong>UserAccountRegistration</strong>
+   * 		<p>a context type used for verifying email address in user account registration. It returns 409 if the email address already verified.
+   * 		<strong><em>It is the default context if the Context field is empty</em></strong></p>
+   * 	</li>
+   * 	<li>
+   * 		<strong>UpdateEmailAddress</strong>
+   * 		<p>a context type used for verify user before updating email address.(Without email address verified checking)</p>
+   * 	</li>
+   * 	<li><strong>upgradeHeadlessAccount</strong>
+   * 		<p>The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account.
+   * 		If this context used, IAM rejects the request if the email address is already used by others by returning HTTP Status Code 409.</p>
+   * 	</li>
+   * </ol>
+   * <p>action code: 10116</p>
    *
    */
-  postV3NsUsersForgot(data: ForgotPasswordRequestV3): Promise<IResponse<unknown>> {
+  createUserMeCodeRequest(data: SendVerificationCodeRequestV3): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/forgot'.replace('{namespace}', this.namespace)
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me/code/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * This endpoint is used to validate the user password. Required valid user authorization and valid user ID.
+   * 		<p>Notes:</p>
+   * 		<ul>
+   * 			<li>This endpoint validate the user password by specifying the userId and password</li>
+   * 		</ul>
+   *
+   */
+  postValidate_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/validate'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p>This endpoint retrieves platform accounts linked to user. Required valid user authorization.
+   * 					<br>action code: 10128 </p>
+   */
+  fetchPlatforms_ByUserId<T = UserLinkedPlatformsResponseV3>(
+    userId: string,
+    queryParams?: { limit?: number; after?: string | null; before?: string | null }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, UserLinkedPlatformsResponseV3)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * <p>Required permissions 'NAMESPACE:{namespace}:USER:{userId}:PUBLISHER [READ].</p>
+   * 	<p><strong>Restriction:</strong>
+   * 		Path Parameter <strong>namespace</strong> can be provided only with game namespace</p>
+   */
+  fetchPublisher_ByUserId<T = GetPublisherUserV3Response>(userId: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/publisher'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, GetPublisherUserV3Response)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * <p>Require valid user authorization<br>action code : 10124 </p>
+   */
+  createUserMeHeadlesVerify<T = UserResponseV3>(data: UpgradeHeadlessAccountV3Request): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me/headless/verify'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, UserResponseV3)
+  }
+
+  /**
+   * <p>This endpoint retrieves user info and linked platform accounts.
+   * 					Required permissions 'NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]'</p>
+   */
+  fetchInformation_ByUserId<T = UserInformationV3>(userId: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/information'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, UserInformationV3)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
    * Endpoint to validate user invitation. When not found, it could also means the invitation has expired.
    *
    */
-  fetchV3NsUsersInviteByInvitationid<T = UserInvitationV3>(invitationId: string): Promise<IResponseWithSync<T>> {
+  fetchUserInvite_ByInvitationId<T = UserInvitationV3>(invitationId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/invite/{invitationId}'
       .replace('{namespace}', this.namespace)
@@ -300,7 +550,7 @@ export class Users$ {
    * Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.
    *
    */
-  postV3NsUsersInviteByInvitationid<T = UserCreateResponseV3>(
+  createUserInvite_ByInvitationId<T = UserCreateResponseV3>(
     invitationId: string,
     data: UserCreateFromInvitationRequestV3
   ): Promise<IResponse<T>> {
@@ -314,89 +564,35 @@ export class Users$ {
   }
 
   /**
-   * <p>Requires valid user access token </p>
-   * <br><p>This Endpoint support update user based on given data. <b>Single request can update single field or multi fields.</b></p>
-   * <p>Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl}</p>
-   * <p>Country use ISO3166-1 alpha-2 two letter, e.g. US.</p>
-   * <p>Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.</p>
-   * <br><b>Several case of updating email address</b>
-   * <ul><li>User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.</li>
-   * <li>User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. </li>
-   * <li>User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. </li>
-   * <br><b>Important notes:</b>
-   * <br><p>This endpoint provides support for client that doesn't have PATCH support, i.e. UE4 before v4.23 released.
-   * <br>If the client support PATCH method, use [PATCH] /iam/v3/public/namespaces/{namespace}/users/me instead</p><br>
-   * <p>action code : 10103 </p>
-   */
-  putV3NsUsersMe<T = UserResponseV3>(data: UserUpdateRequestV3): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, UserResponseV3)
-  }
-
-  /**
-   * <p>Requires valid user access token </p>
-   * <br><p>This Endpoint support update user based on given data. <b>Single request can update single field or multi fields.</b></p>
-   * <p>Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl}</p>
-   * <p>Country use ISO3166-1 alpha-2 two letter, e.g. US.</p>
-   * <p>Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.</p>
-   * <br><b>Several case of updating email address</b>
-   * <ul><li>User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.</li>
-   * <li>User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. </li>
-   * <li>User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. </li>
-   * <p>action code : 10103 </p>
-   */
-  patchV3NsUsersMe<T = UserResponseV3>(data: UserUpdateRequestV3): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.patch(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, UserResponseV3)
-  }
-
-  /**
-   * Required valid user authorization
-   * <p>The verification code is sent to email address</p>
-   * <p>Available contexts for use : </p>
-   * <ol>
-   * 	<li>
-   * 		<strong>UserAccountRegistration</strong>
-   * 		<p>a context type used for verifying email address in user account registration. It returns 409 if the email address already verified.
-   * 		<strong><em>It is the default context if the Context field is empty</em></strong></p>
-   * 	</li>
-   * 	<li>
-   * 		<strong>UpdateEmailAddress</strong>
-   * 		<p>a context type used for verify user before updating email address.(Without email address verified checking)</p>
-   * 	</li>
-   * 	<li><strong>upgradeHeadlessAccount</strong>
-   * 		<p>The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account.
-   * 		If this context used, IAM rejects the request if the email address is already used by others by returning HTTP Status Code 409.</p>
-   * 	</li>
-   * </ol>
-   * <p>action code: 10116</p>
+   * List User ID By Platform User ID
+   * This endpoint intended to list game user ID from the given namespace
+   * This endpoint return list of user ID by given platform ID and list of platform user ID
+   *
+   * <strong>nintendo platform user ID</strong>: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    *
    */
-  postV3NsUsersMeCodeRequest(data: SendVerificationCodeRequestV3): Promise<IResponse<unknown>> {
+  createUser_ByPlatformId<T = UserPlatforms>(platformId: string, data: PlatformUserIdRequest): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/me/code/request'.replace('{namespace}', this.namespace)
+    const url = '/iam/v3/public/namespaces/{namespace}/platforms/{platformId}/users'
+      .replace('{namespace}', this.namespace)
+      .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown())
+    return Validate.responseType(() => resultPromise, UserPlatforms)
   }
 
   /**
-   * <p>Will consume code if validateOnly is set false</p>
-   * <p>Required valid user authorization</p>
-   * <p>Redeems a verification code sent to a user to verify the user's contact address is correct</p>
-   * <p>Available ContactType : <b>email</b></p>
-   * <p>action code: 10107</p>
+   * It is going to be <strong>DEPRECATED</strong>.
+   * Update Platform Account relation to current User Account.
+   * Note: Game progression data (statistics, reward, etc) associated with previous User Account will not be
+   * transferred. If the data is tight to game user ID, the user will have the game progression data.
    *
    */
-  postV3NsUsersMeCodeVerify(data: UserVerificationRequestV3): Promise<IResponse<unknown>> {
+  createPlatformLink_ByUserId(userId: string, data: LinkPlatformAccountRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/me/code/verify'.replace('{namespace}', this.namespace)
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/link'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown())
@@ -418,7 +614,7 @@ export class Users$ {
    * 	</ul>
    *      	<br>action code : 10124</p>
    */
-  postV3NsUsersMeHeadlessCodeVerify<T = UserResponseV3>(data: UpgradeHeadlessAccountWithVerificationCodeRequestV3): Promise<IResponse<T>> {
+  createUserMeHeadlesCodeVerify<T = UserResponseV3>(data: UpgradeHeadlessAccountWithVerificationCodeRequestV3): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/headless/code/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -427,39 +623,25 @@ export class Users$ {
   }
 
   /**
-   * <p>Require valid user authorization<br>action code : 10124 </p>
+   * Required valid user authorization.<p>Notes for this endpoint: </p> <ul><li>This endpoint retrieve the first page of the data if `after` and `before` parameters is empty.</li><li>The maximum value of the limit is 100 and the minimum value of the limit is 1.</li><li>This endpoint retrieve the next page of the data if we provide `after` parameters with valid Unix timestamp.</li><li>This endpoint retrieve the previous page of the data if we provide `before` parameter with valid data Unix timestamp.</li><ul>
    */
-  postV3NsUsersMeHeadlessVerify<T = UserResponseV3>(data: UpgradeHeadlessAccountV3Request): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/me/headless/verify'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, UserResponseV3)
-  }
-
-  /**
-   * Required valid user authorization. <br> action code: 10107
-   */
-  putV3NsUsersMePassword(data: UserPasswordUpdateV3Request): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/me/password'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * Create Justice User from Publisher User information. It will check first if Justice User on target namespace already exist.
-   *
-   */
-  postV3NsUsersMePlatformsJusticeByTargetnamespace<T = CreateJusticeUserResponse>(targetNamespace: string): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/justice/{targetNamespace}'
+  fetchLoginsHistories_ByUserId<T = LoginHistoriesResponse>(
+    userId: string,
+    queryParams?: { before?: number; after?: number; limit?: number }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/logins/histories'
       .replace('{namespace}', this.namespace)
-      .replace('{targetNamespace}', targetNamespace)
-    const resultPromise = this.axiosInstance.post(url, null, { params })
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.responseType(() => resultPromise, CreateJusticeUserResponse)
+    const res = () => Validate.responseType(() => resultPromise, LoginHistoriesResponse)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -487,7 +669,7 @@ export class Users$ {
    * 			</ul>
    * 		<br>action code : 10144
    */
-  postV3NsUsersMePlatformsByPlatformid(
+  postUserMePlatform_ByPlatformId(
     platformId: string,
     data: { ticket: string | null; redirectUri?: string | null }
   ): Promise<IResponse<unknown>> {
@@ -531,7 +713,7 @@ export class Users$ {
    * 			<br>
    * 			<br>action code : 10121 </p>
    */
-  deleteV3NsUsersMePlatformsByPlatformid(platformId: string, data: UnlinkUserPlatformRequest): Promise<IResponse<unknown>> {
+  deleteUserMePlatform_ByPlatformId(platformId: string, data: UnlinkUserPlatformRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}'
       .replace('{namespace}', this.namespace)
@@ -542,10 +724,70 @@ export class Users$ {
   }
 
   /**
+   * <p>This endpoint retrieves platform accounts linked to user.
+   * 					<br>It will query all linked platform accounts and result will be distinct & grouped, same platform we will pick oldest linked one.
+   * 					<br>Required valid user authorization.</p>
+   */
+  fetchDistinctPlatforms_ByUserId<T = DistinctPlatformResponseV3>(userId: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/distinctPlatforms'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, DistinctPlatformResponseV3)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This endpoint gets list justice platform account by providing publisher namespace and publisher userID</br>
+   * <p>Requires valid user access token </p></br>
+   */
+  fetchPlatformsJustice_ByUserId<T = GetUserMappingV3Array>(userId: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/justice'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, GetUserMappingV3Array)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This endpoint is used to get linking status.
+   */
+  fetchAsyncStatus_ByRequestId<T = LinkRequest>(requestId: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/requests/{requestId}/async/status'
+      .replace('{namespace}', this.namespace)
+      .replace('{requestId}', requestId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, LinkRequest)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * Required valid user authorization.
    * 			<p>Unlink user's account from for all third platforms. </p>
    */
-  deleteV3NsUsersMePlatformsByPlatformidAll(platformId: string): Promise<IResponse<unknown>> {
+  deleteAllMeUser_ByPlatformId(platformId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/all'
       .replace('{namespace}', this.namespace)
@@ -585,7 +827,7 @@ export class Users$ {
    * 			</ul>
    *
    */
-  postV3NsUsersMePlatformsByPlatformidForce(platformId: string, data: { ticket: string | null }): Promise<IResponse<unknown>> {
+  postForceMeUser_ByPlatformId(platformId: string, data: { ticket: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/force'
       .replace('{namespace}', this.namespace)
@@ -599,9 +841,28 @@ export class Users$ {
   }
 
   /**
+   * Get age restriction by country code. It will always get by publisher namespace
+   */
+  fetchAgerestrictionCountry_ByCountryCode<T = CountryV3Response>(countryCode: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/agerestrictions/countries/{countryCode}'
+      .replace('{namespace}', this.namespace)
+      .replace('{countryCode}', countryCode)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, CountryV3Response)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * This endpoint is used to generate third party login page which will redirected to establish endpoint.
    */
-  fetchV3NsUsersMePlatformsByPlatformidWebLink<T = WebLinkingResponse>(
+  fetchWebLinkMeUsers_ByPlatformId<T = WebLinkingResponse>(
     platformId: string,
     queryParams?: { clientId?: string | null; redirectUri?: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -621,216 +882,12 @@ export class Users$ {
   }
 
   /**
-   * This endpoint is used by third party to redirect the code for the purpose of linking the account third party to IAM account.
-   */
-  fetchV3NsUsersMePlatformsByPlatformidWebLinkEstablish(
-    platformId: string,
-    queryParams: { state: string | null }
-  ): Promise<IResponseWithSync<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/web/link/establish'
-      .replace('{namespace}', this.namespace)
-      .replace('{platformId}', platformId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, z.unknown())
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * <p>action code: 10105</p>
-   */
-  postV3NsUsersReset(data: ResetPasswordRequestV3): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/reset'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * <p>This endpoint retrieve user attributes. action code: 10129</p>
-   */
-  fetchV3NsUsersByUserid<T = PublicUserResponseV3>(userId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, PublicUserResponseV3)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Required valid user authorization.
-   * 		<p>Notes:</p>
-   * 		<ul>
-   * 			<li>This endpoint retrieve the first page of the data if after and before parameters is empty</li>
-   * 			<li><strong>The pagination is not working yet</strong></li>
-   * 		</ul>
-   *
-   */
-  fetchV3NsUsersByUseridBans<T = GetUserBanV3Response>(
-    userId: string,
-    queryParams?: { activeOnly?: boolean | null; limit?: number; before?: string | null; after?: string | null }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/bans'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, GetUserBanV3Response)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * <p>This endpoint retrieves platform accounts linked to user.
-   * 					<br>It will query all linked platform accounts and result will be distinct & grouped, same platform we will pick oldest linked one.
-   * 					<br>Required valid user authorization.</p>
-   */
-  fetchV3NsUsersByUseridDistinctPlatforms<T = DistinctPlatformResponseV3>(userId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/distinctPlatforms'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, DistinctPlatformResponseV3)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * <p>This endpoint retrieves user info and linked platform accounts.
-   * 					Required permissions 'NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]'</p>
-   */
-  fetchV3NsUsersByUseridInformation<T = UserInformationV3>(userId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/information'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, UserInformationV3)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Required valid user authorization.<p>Notes for this endpoint: </p> <ul><li>This endpoint retrieve the first page of the data if `after` and `before` parameters is empty.</li><li>The maximum value of the limit is 100 and the minimum value of the limit is 1.</li><li>This endpoint retrieve the next page of the data if we provide `after` parameters with valid Unix timestamp.</li><li>This endpoint retrieve the previous page of the data if we provide `before` parameter with valid data Unix timestamp.</li><ul>
-   */
-  fetchV3NsUsersByUseridLoginsHistories<T = LoginHistoriesResponse>(
-    userId: string,
-    queryParams?: { before?: number; after?: number; limit?: number }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/logins/histories'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, LoginHistoriesResponse)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * <p>This endpoint retrieves platform accounts linked to user. Required valid user authorization.
-   * 					<br>action code: 10128 </p>
-   */
-  fetchV3NsUsersByUseridPlatforms<T = UserLinkedPlatformsResponseV3>(
-    userId: string,
-    queryParams?: { limit?: number; after?: string | null; before?: string | null }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, UserLinkedPlatformsResponseV3)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * This endpoint gets list justice platform account by providing publisher namespace and publisher userID</br>
-   * <p>Requires valid user access token </p></br>
-   */
-  fetchV3NsUsersByUseridPlatformsJustice<T = GetUserMappingV3Array>(userId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/justice'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, GetUserMappingV3Array)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * It is going to be <strong>DEPRECATED</strong>.
-   * Update Platform Account relation to current User Account.
-   * Note: Game progression data (statistics, reward, etc) associated with previous User Account will not be
-   * transferred. If the data is tight to game user ID, the user will have the game progression data.
-   *
-   */
-  postV3NsUsersByUseridPlatformsLink(userId: string, data: LinkPlatformAccountRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/link'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
    * Force update other account's Platform Account relation to current User Account. <br>
    * This endpoint can transfer progression from 3rd platform binding account's to current account.
    * This endpoint need the same requestID which also used in <a href="#operations-Users-PublicGetAsyncStatus">Get link status</a>.
    *
    */
-  postV3NsUsersByUseridPlatformsLinkWithProgression(
-    userId: string,
-    data: LinkPlatformAccountWithProgressionRequest
-  ): Promise<IResponse<unknown>> {
+  createPlatformLinkWithProgression_ByUserId(userId: string, data: LinkPlatformAccountWithProgressionRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/linkWithProgression'
       .replace('{namespace}', this.namespace)
@@ -841,53 +898,33 @@ export class Users$ {
   }
 
   /**
-   * <p>Required permissions 'NAMESPACE:{namespace}:USER:{userId}:PUBLISHER [READ].</p>
-   * 	<p><strong>Restriction:</strong>
-   * 		Path Parameter <strong>namespace</strong> can be provided only with game namespace</p>
-   */
-  fetchV3NsUsersByUseridPublisher<T = GetPublisherUserV3Response>(userId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/publisher'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, GetPublisherUserV3Response)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * This endpoint is used to validate the user password. Required valid user authorization and valid user ID.
-   * 		<p>Notes:</p>
-   * 		<ul>
-   * 			<li>This endpoint validate the user password by specifying the userId and password</li>
-   * 		</ul>
+   * Create Justice User from Publisher User information. It will check first if Justice User on target namespace already exist.
    *
    */
-  postV3NsUsersByUseridValidate(userId: string, data: { password: string | null }): Promise<IResponse<unknown>> {
+  createUserMePlatformJustice_ByTargetNamespace<T = CreateJusticeUserResponse>(targetNamespace: string): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/validate'
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/justice/{targetNamespace}'
       .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
-      ...params,
-      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
-    })
+      .replace('{targetNamespace}', targetNamespace)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown())
+    return Validate.responseType(() => resultPromise, CreateJusticeUserResponse)
   }
 
   /**
-   * <p>Require valid user authorization<br>Get my user data<br>action code : 10147 </p>
+   * Get User By Platform User ID
+   *
+   * This endpoint return user information by given platform ID and platform user ID
+   *
+   * <strong>nintendo platform user ID</strong>: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   *
    */
-  fetchIamV3PublicUsersMe<T = UserResponseV3>(): Promise<IResponseWithSync<T>> {
+  fetchUser_ByPlatformId_ByPlatformUserId<T = UserResponseV3>(platformId: string, platformUserId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/users/me'
+    const url = '/iam/v3/public/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{platformId}', platformId)
+      .replace('{platformUserId}', platformUserId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, UserResponseV3)
@@ -900,59 +937,16 @@ export class Users$ {
   }
 
   /**
-   * Note:<br>
-   * 1. My account should be full account
-   * 2. My account not linked to request headless account's third platform.
-   *
-   * After client resolving the conflict, it will call endpoint <b>/iam/v3/public/users/me/headless/linkWithProgression [POST]</p>
-   *
+   * This endpoint is used by third party to redirect the code for the purpose of linking the account third party to IAM account.
    */
-  fetchIamV3PublicUsersMeHeadlessLinkConflict<T = GetLinkHeadlessAccountConflictResponse>(queryParams: {
-    oneTimeLinkCode: string | null
-  }): Promise<IResponseWithSync<T>> {
+  fetchWebLinkEstablishMeUsers_ByPlatformId(
+    platformId: string,
+    queryParams: { state: string | null }
+  ): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/iam/v3/public/users/me/headless/link/conflict'
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, GetLinkHeadlessAccountConflictResponse)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Note:<br>
-   * 1. My account should be full account
-   * 2. My account not linked to headless account's third platform.
-   */
-  postIamV3PublicUsersMeHeadlessLinkWithProgression(data: LinkHeadlessAccountRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/users/me/headless/linkWithProgression'
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * Required valid user authorization
-   * <p>The verification link is sent to email address</p>
-   * <p>It will not send request if user email is already verified</p>
-   *
-   */
-  postIamV3PublicUsersMeVerifyLinkRequest(data: SendVerificationLinkRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/users/me/verify_link/request'
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  fetchIamV3PublicUsersVerifyLinkVerify(queryParams?: { code?: string | null }): Promise<IResponseWithSync<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/iam/v3/public/users/verify_link/verify'
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/web/link/establish'
+      .replace('{namespace}', this.namespace)
+      .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, z.unknown())

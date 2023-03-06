@@ -50,7 +50,8 @@ export class OAuthApi {
     })
     localStorage.removeItem(MFA_DATA_STORAGE_KEY)
     SdkCache.clearCache()
-    return new OAuth20Extension$(axios, this.namespace, this.cache).postIamV3Logout()
+    // TODO
+    return new OAuth20Extension$(axios, this.namespace, this.cache).createLogout()
   }
 
   /**
@@ -68,7 +69,7 @@ export class OAuthApi {
       }
     })
     SdkCache.clearCache()
-    return new OAuth20$(axios, this.namespace, this.cache).postIamV3OauthRevoke({ token })
+    return new OAuth20$(axios, this.namespace, this.cache).postOauthRevoke({ token })
   }
 
   /**
@@ -82,7 +83,7 @@ export class OAuthApi {
    */
   verify2FA = async ({ factor, code, mfaToken = null, rememberDevice }: Verify2FAParam) => {
     Network.setDeviceTokenCookie()
-    const result = await this.newInstance().postIamV3OauthMfaVerify({ factor, code, rememberDevice, mfaToken })
+    const result = await this.newInstance().postOauthMfaVerify({ factor, code, rememberDevice, mfaToken })
     if (result.error) throw result.error
     Network.removeDeviceTokenCookie()
     localStorage.removeItem(MFA_DATA_STORAGE_KEY)
@@ -93,7 +94,7 @@ export class OAuthApi {
    * POST [/iam/v3/oauth/mfa/code](api)
    */
   request2FAEmailCode = async ({ mfaToken = null, factor }: Request2FAEmailCode) => {
-    const result = await this.newInstance().postIamV3OauthMfaCode({ mfaToken, clientId: this.options.clientId, factor })
+    const result = await this.newInstance().postOauthMfaCode({ mfaToken, clientId: this.options.clientId, factor })
     if (result.error) throw result.error
     return result.response
   }
@@ -104,7 +105,7 @@ export class OAuthApi {
    * This method get country location based on the request.
    */
   getCurrentLocationCountry = () => {
-    return this.newOAuth20Extension().fetchIamV3LocationCountry()
+    return this.newOAuth20Extension().fetchLocationCountry()
   }
 
   /**
@@ -126,7 +127,7 @@ export class OAuthApi {
    *
    */
   getThirdPartyPlatformToken = (userId: string, platformId: string) => {
-    return this.newInstance().fetchV3OauthUsersByUseridPlatformsByPlatformidPlatformToken(userId, platformId)
+    return this.newInstance().fetchPlatformTokenOauth_ByUserId_ByPlatformId(userId, platformId)
   }
 
   /**
@@ -150,7 +151,7 @@ export class OAuthApi {
     client_id: string | null
     extend_exp?: boolean | null
   }) => {
-    return this.newOAuth20Extension().postIamV3AuthenticateWithLink(data)
+    return this.newOAuth20Extension().postAuthenticateWithLink(data)
   }
 
   /**
@@ -162,7 +163,7 @@ export class OAuthApi {
    * Current user should be a headless account.
    */
   validateOneTimeLinkCode = (data: { oneTimeLinkCode: string | null }) => {
-    return this.newOAuth20Extension().postIamV3LinkCodeValidate(data)
+    return this.newOAuth20Extension().postLinkCodeValidate(data)
   }
 
   /**
@@ -173,7 +174,7 @@ export class OAuthApi {
    * It required a code which can be generated from __/iam/v3/link/code/request__.
    */
   exchangeTokenByOneTimeLinkCode = (data: { oneTimeLinkCode: string | null; client_id: string | null }) => {
-    return this.newOAuth20Extension().postIamV3LinkTokenExchange(data)
+    return this.newOAuth20Extension().postLinkTokenExchange(data)
   }
 
   private newInstance() {

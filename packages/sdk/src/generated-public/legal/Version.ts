@@ -8,5 +8,5 @@ export default {
   title: 'legal',
   name: 'justice-legal-service',
   version: '1.27.1',
-  buildDate: '2023-02-28T18:46:13.173Z'
+  buildDate: '2023-03-06T00:54:38.710Z'
 }

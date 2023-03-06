@@ -19,7 +19,7 @@ export class MiscApi {
    * _Returns_: country code list
    */
   getCountries = (lang?: string) => {
-    return this.newInstance().fetchV1NsMiscCountries({ lang })
+    return this.newInstance().fetchMiscCountries({ lang })
   }
 
   /**
@@ -28,7 +28,7 @@ export class MiscApi {
    * _Returns_: language list
    */
   getLanguages = () => {
-    return this.newInstance().fetchV1NsMiscLanguages()
+    return this.newInstance().fetchMiscLanguages()
   }
 
   private newInstance() {

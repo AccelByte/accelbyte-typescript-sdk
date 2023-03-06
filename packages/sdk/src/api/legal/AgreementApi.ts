@@ -22,7 +22,7 @@ export class AgreementApi {
    * _Required permission_: login user
    */
   acceptLegalPolicies = (acceptAgreements: AcceptAgreementRequest[]) => {
-    return this.newInstance().postPublicAgreementsPolicies(acceptAgreements)
+    return this.newInstance().createAgreementPolicy(acceptAgreements)
   }
 
   /**
@@ -33,7 +33,7 @@ export class AgreementApi {
    * _Required permission_: login user
    */
   getAgreements = () => {
-    return this.newInstance().fetchPublicAgreementsPolicies()
+    return this.newInstance().fetchAgreementsPolicies()
   }
 
   /**
@@ -44,7 +44,7 @@ export class AgreementApi {
    * _Required permission_: login user
    */
   updateMarketingPreferences = (acceptAgreements: AcceptAgreementRequest[]) => {
-    return this.newInstance().patchPublicAgreementsLocalizedPolicyVersionsPreferences(acceptAgreements)
+    return this.newInstance().patchAgreementLocalizedPolicyVersionPreference(acceptAgreements)
   }
 
   private newInstance() {

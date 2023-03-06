@@ -17,16 +17,14 @@ export class Category$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This API is used to get child categories by category path.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: list of child categories data</li></ul>
+   * This API is used to get root categories.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: root category data</li></ul>
    */
-  fetchNsCategoriesByCategorypathChildren<T = CategoryInfoArray>(
-    categoryPath: string,
-    queryParams?: { storeId?: string | null; language?: string | null }
-  ): Promise<IResponseWithSync<T>> {
+  fetchCategories<T = CategoryInfoArray>(queryParams?: {
+    storeId?: string | null
+    language?: string | null
+  }): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/categories/{categoryPath}/children'
-      .replace('{namespace}', this.namespace)
-      .replace('{categoryPath}', categoryPath)
+    const url = '/platform/public/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, CategoryInfoArray)
@@ -39,9 +37,29 @@ export class Category$ {
   }
 
   /**
+   * This API is used to download store's structured categories.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store content)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store content)</li><li><i>Returns</i>: structured categories</li></ul>
+   */
+  fetchCategoriesDownload<T = HierarchicalCategoryInfoArray>(queryParams?: {
+    storeId?: string | null
+    language?: string | null
+  }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/categories/download'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, HierarchicalCategoryInfoArray)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * This API is used to get category by category path.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1 (CREATE)(user with this permission can view draft store category)</li><li><i>Returns</i>: category data</li></ul>
    */
-  fetchNsCategoriesByCategorypath<T = CategoryInfo>(
+  fetchCategory_ByCategoryPath<T = CategoryInfo>(
     categoryPath: string,
     queryParams?: { storeId?: string | null; language?: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -61,34 +79,14 @@ export class Category$ {
   }
 
   /**
-   * This API is used to get root categories.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: root category data</li></ul>
+   * This API is used to get child categories by category path.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: list of child categories data</li></ul>
    */
-  fetchNsCategories<T = CategoryInfoArray>(queryParams?: {
-    storeId?: string | null
-    language?: string | null
-  }): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, CategoryInfoArray)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * This API is used to get descendant categories by category path.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: list of descendant categories data</li></ul>
-   */
-  fetchNsCategoriesByCategorypathDescendants<T = CategoryInfoArray>(
+  fetchChildren_ByCategoryPath<T = CategoryInfoArray>(
     categoryPath: string,
-    queryParams?: { language?: string | null; storeId?: string | null }
+    queryParams?: { storeId?: string | null; language?: string | null }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/categories/{categoryPath}/descendants'
+    const url = '/platform/public/namespaces/{namespace}/categories/{categoryPath}/children'
       .replace('{namespace}', this.namespace)
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -103,17 +101,19 @@ export class Category$ {
   }
 
   /**
-   * This API is used to download store's structured categories.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store content)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store content)</li><li><i>Returns</i>: structured categories</li></ul>
+   * This API is used to get descendant categories by category path.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store category)</li><li><i>Returns</i>: list of descendant categories data</li></ul>
    */
-  fetchNsCategoriesDownload<T = HierarchicalCategoryInfoArray>(queryParams?: {
-    storeId?: string | null
-    language?: string | null
-  }): Promise<IResponseWithSync<T>> {
+  fetchDescendants_ByCategoryPath<T = CategoryInfoArray>(
+    categoryPath: string,
+    queryParams?: { language?: string | null; storeId?: string | null }
+  ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/categories/download'.replace('{namespace}', this.namespace)
+    const url = '/platform/public/namespaces/{namespace}/categories/{categoryPath}/descendants'
+      .replace('{namespace}', this.namespace)
+      .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, HierarchicalCategoryInfoArray)
+    const res = () => Validate.responseType(() => resultPromise, CategoryInfoArray)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

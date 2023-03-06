@@ -22,7 +22,7 @@ export class CurrencyApi {
    * Returns: Currency List
    */
   getCurrencies = () => {
-    return this.newInstance().fetchNsCurrencies()
+    return this.newInstance().fetchCurrencies()
   }
 
   /**

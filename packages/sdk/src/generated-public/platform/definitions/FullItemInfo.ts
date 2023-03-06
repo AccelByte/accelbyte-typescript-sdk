@@ -11,6 +11,7 @@ import { OptionBoxConfig } from './OptionBoxConfig'
 import { PurchaseCondition } from './PurchaseCondition'
 import { Recurring } from './Recurring'
 import { RegionDataItem } from './RegionDataItem'
+import { SaleConfig } from './SaleConfig'
 
 export const FullItemInfo = z.object({
   itemId: z.string(),
@@ -64,7 +65,9 @@ export const FullItemInfo = z.object({
   updatedAt: z.string(),
   purchaseCondition: PurchaseCondition.nullish(),
   optionBoxConfig: OptionBoxConfig.nullish(),
-  lootBoxConfig: LootBoxConfig.nullish()
+  lootBoxConfig: LootBoxConfig.nullish(),
+  sellable: z.boolean().nullish(),
+  saleConfig: SaleConfig.nullish()
 })
 
 export interface FullItemInfo extends z.TypeOf<typeof FullItemInfo> {}

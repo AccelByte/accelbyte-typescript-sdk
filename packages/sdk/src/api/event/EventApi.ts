@@ -39,7 +39,7 @@ export class EventApi {
       type?: string | null
     }
   }) => {
-    return this.newInstance().fetchEventV2NsUsersByUseridEdithistory(userId, queryParams)
+    return this.newInstance().fetchEdithistory_ByUserId(userId, queryParams)
   }
 
   private newInstance() {

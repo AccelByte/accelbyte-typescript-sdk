@@ -3,14 +3,7 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import {
-  AccountInterceptorsWidget,
-  AccountRoutesWidget,
-  EcommerceInterceptorsWidget,
-  EcommerceRoutesWidget,
-  ErrorRoutesWidget,
-  LoginWidget
-} from '@accelbyte/widgets'
+import { AccountRoutesWidget, EcommerceRoutesWidget, ErrorRoutesWidget, LoginWidget } from '@accelbyte/widgets'
 import React from 'react'
 import { NavLink, Route, Switch } from 'react-router-dom'
 import '@accelbyte/widgets/dist/style.css'
@@ -39,8 +32,8 @@ export function ConsumerApp() {
 
       <main id="content">
         <Switch>
-          {AccountInterceptorsWidget()}
-          {EcommerceInterceptorsWidget()}
+          {/* {AccountInterceptorsWidget()} */}
+          {/* {EcommerceInterceptorsWidget()} */}
 
           <Route exact key="Home" path="/" render={() => <Home />} />
           <Route exact key="News" path="/news" render={() => <News />} />

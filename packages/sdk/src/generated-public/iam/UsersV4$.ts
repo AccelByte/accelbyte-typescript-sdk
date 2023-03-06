@@ -30,29 +30,23 @@ export class UsersV4$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Create a test user and not send verification code email
-   * 		<p>
-   * 		<b>Required attributes:</b>
-   * 		- verified: this new user is verified or not
-   * 		- authType: possible value is EMAILPASSWD
-   * 		- emailAddress: Please refer to the rule from /v3/public/inputValidations API.
-   * 		- username: Please refer to the rule from /v3/public/inputValidations API.
-   * 		- password: Please refer to the rule from /v3/public/inputValidations API.
-   * 		- country: ISO3166-1 alpha-2 two letter, e.g. US.
-   * 		- dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date.
-   * 		<br/>
-   * 		<b>Not required attributes:</b>
-   * 		- displayName: Please refer to the rule from /v3/public/inputValidations API.
-   * 		</p>
-   * 		<p>This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.</p>
+   * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode.
+   * It will return error if the service multi tenant mode is set to false.
+   *
+   * Request body details:
+   * - emailAddress: email address of the user to be invited
+   * - namespace: new namespace of the user to be created
+   * - namespaceDisplayName: display name of the new namespace
+   *
+   * The invited users will also be assigned with "User" role by default.
    *
    */
-  postV4NsTestUsers<T = CreateUserResponseV4>(data: CreateTestUserRequestV4): Promise<IResponse<T>> {
+  createUserInvite<T = InviteUserResponseV3>(data: PublicInviteUserRequestV4): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/test_users'.replace('{namespace}', this.namespace)
+    const url = '/iam/v4/public/users/invite'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, CreateUserResponseV4)
+    return Validate.responseType(() => resultPromise, InviteUserResponseV3)
   }
 
   /**
@@ -72,12 +66,206 @@ export class UsersV4$ {
    * 		<p>This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.</p>
    *
    */
-  postV4NsUsers<T = CreateUserResponseV4>(data: CreateUserRequestV4): Promise<IResponse<T>> {
+  createUser<T = CreateUserResponseV4>(data: CreateUserRequestV4): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, CreateUserResponseV4)
+  }
+
+  /**
+   * <p>Requires valid user access token </p>
+   * <br><p>This Endpoint support update user based on given data. <b>Single request can update single field or multi fields.</b></p>
+   * <p>Supported field {country, displayName, languageTag, dateOfBirth}</p>
+   * <p>Country use ISO3166-1 alpha-2 two letter, e.g. US.</p>
+   * <p>Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.</p>
+   * <br><b>Several case of updating email address</b>
+   * <p>action code : 10103 </p>
+   */
+  patchUserMe<T = UserResponseV3>(data: UserUpdateRequestV3): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, UserResponseV3)
+  }
+
+  /**
+   * Create a test user and not send verification code email
+   * 		<p>
+   * 		<b>Required attributes:</b>
+   * 		- verified: this new user is verified or not
+   * 		- authType: possible value is EMAILPASSWD
+   * 		- emailAddress: Please refer to the rule from /v3/public/inputValidations API.
+   * 		- username: Please refer to the rule from /v3/public/inputValidations API.
+   * 		- password: Please refer to the rule from /v3/public/inputValidations API.
+   * 		- country: ISO3166-1 alpha-2 two letter, e.g. US.
+   * 		- dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date.
+   * 		<br/>
+   * 		<b>Not required attributes:</b>
+   * 		- displayName: Please refer to the rule from /v3/public/inputValidations API.
+   * 		</p>
+   * 		<p>This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.</p>
+   *
+   */
+  createTestUser<T = CreateUserResponseV4>(data: CreateTestUserRequestV4): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/test_users'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, CreateUserResponseV4)
+  }
+
+  /**
+   * <p>The endpoint to update my email address. </p>
+   * <p>It requires a verification code from <pre>/users/me/code/request</pre> with <b>UpdateEmailAddress</b> context.</p>
+   *
+   */
+  updateUserMeEmail(data: EmailUpdateRequestV4): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/email'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p>(Only for test)This endpoint is used to remove trusted device.</p>
+   * <p>This endpoint Requires valid user access token</p><br/>
+   * <p>This endpoint Requires device_token in cookie</p>
+   *
+   */
+  deleteUserMeMfaDevice(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/device'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p>This endpoint is used to get user enabled factors.</p>
+   * <p>This endpoint Requires valid user access token</p>
+   *
+   */
+  fetchUsersMeMfaFactor<T = EnabledFactorsResponseV4>(): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/factor'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, EnabledFactorsResponseV4)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * <p>This endpoint is used to make 2FA factor default.</p>
+   * <p>This endpoint Requires valid user access token</p>
+   *
+   */
+  postUserMeMfaFactor(data: { factor: string | null }): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/factor'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p>This endpoint is used to get 8-digits backup codes.
+   * Each code is a one-time code and will be deleted once used.</p>
+   * <p>This endpoint Requires valid user access token</p>
+   *
+   */
+  fetchUsersMeMfaBackupCode<T = BackupCodesResponseV4>(): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, BackupCodesResponseV4)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * <p>This endpoint is used to generate 8-digits backup codes.
+   * Each code is a one-time code and will be deleted once used.</p>
+   * <p>This endpoint Requires valid user access token</p>
+   *
+   */
+  createUserMeMfaBackupCode<T = BackupCodesResponseV4>(): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return Validate.responseType(() => resultPromise, BackupCodesResponseV4)
+  }
+
+  /**
+   * <p>This endpoint is used to send email code.</p>
+   * <p>This endpoint Requires valid user access token</p>
+   *
+   */
+  createUserMeMfaEmailCode(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/code'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * Require valid user authorization
+   * 			Upgrade headless account to full account without verifying email address. Client does not need to provide verification code which sent to email address.
+   * 			<br>action code : 10124 </p>
+   */
+  createUserMeHeadlesVerify<T = UserResponseV4>(data: UpgradeHeadlessAccountRequestV4): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/headless/verify'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, UserResponseV4)
+  }
+
+  /**
+   * <p>This endpoint is used to enable 2FA email.</p>
+   * <p>This endpoint Requires valid user access token</p>
+   *
+   */
+  postUserMeMfaEmailEnable(data: { code: string | null }): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/enable'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
+  }
+
+  /**
+   * <p>This endpoint is used to disable 2FA email.</p>
+   * <p>This endpoint Requires valid user access token</p>
+   *
+   */
+  createUserMeMfaEmailDisable(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/disable'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown())
   }
 
   /**
@@ -100,7 +288,7 @@ export class UsersV4$ {
    * - username: Please refer to the rule from /v3/public/inputValidations API.
    *
    */
-  postV4NsUsersInviteByInvitationid<T = CreateUserResponseV4>(
+  createUserInvite_ByInvitationId<T = CreateUserResponseV4>(
     invitationId: string,
     data: UserCreateFromInvitationRequestV4
   ): Promise<IResponse<T>> {
@@ -111,36 +299,6 @@ export class UsersV4$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, CreateUserResponseV4)
-  }
-
-  /**
-   * <p>Requires valid user access token </p>
-   * <br><p>This Endpoint support update user based on given data. <b>Single request can update single field or multi fields.</b></p>
-   * <p>Supported field {country, displayName, languageTag, dateOfBirth}</p>
-   * <p>Country use ISO3166-1 alpha-2 two letter, e.g. US.</p>
-   * <p>Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.</p>
-   * <br><b>Several case of updating email address</b>
-   * <p>action code : 10103 </p>
-   */
-  patchV4NsUsersMe<T = UserResponseV3>(data: UserUpdateRequestV3): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.patch(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, UserResponseV3)
-  }
-
-  /**
-   * <p>The endpoint to update my email address. </p>
-   * <p>It requires a verification code from <pre>/users/me/code/request</pre> with <b>UpdateEmailAddress</b> context.</p>
-   *
-   */
-  putV4NsUsersMeEmail(data: EmailUpdateRequestV4): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/email'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
   }
 
   /**
@@ -160,7 +318,7 @@ export class UsersV4$ {
    * 				</ul>
    *         	action code : 10124
    */
-  postV4NsUsersMeHeadlessCodeVerify<T = UserResponseV4>(data: UpgradeHeadlessAccountWithVerificationCodeRequestV4): Promise<IResponse<T>> {
+  createUserMeHeadlesCodeVerify<T = UserResponseV4>(data: UpgradeHeadlessAccountWithVerificationCodeRequestV4): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/headless/code/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -169,54 +327,12 @@ export class UsersV4$ {
   }
 
   /**
-   * Require valid user authorization
-   * 			Upgrade headless account to full account without verifying email address. Client does not need to provide verification code which sent to email address.
-   * 			<br>action code : 10124 </p>
-   */
-  postV4NsUsersMeHeadlessVerify<T = UserResponseV4>(data: UpgradeHeadlessAccountRequestV4): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/headless/verify'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, UserResponseV4)
-  }
-
-  /**
-   * <p>This endpoint is used to disable 2FA authenticator.</p>
-   * <p>This endpoint Requires valid user access token</p>
-   *
-   */
-  deleteV4NsUsersMeMfaAuthenticatorDisable(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/disable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.delete(url, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * <p>This endpoint is used to enable 2FA authenticator.</p>
-   * <p>This endpoint Requires valid user access token</p>
-   *
-   */
-  postV4NsUsersMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/enable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
-      ...params,
-      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
-    })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
    * <p>This endpoint is used to generate a secret key for 3rd-party authenticator app.
    * A QR code URI is also returned so that frontend can generate QR code image.</p>
    * <p>This endpoint Requires valid user access token</p>
    *
    */
-  postV4NsUsersMeMfaAuthenticatorKey<T = AuthenticatorKeyResponseV4>(): Promise<IResponse<T>> {
+  createUserMeMfaAuthenticatorKey<T = AuthenticatorKeyResponseV4>(): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/key'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
@@ -225,34 +341,13 @@ export class UsersV4$ {
   }
 
   /**
-   * <p>This endpoint is used to get 8-digits backup codes.
-   * Each code is a one-time code and will be deleted once used.</p>
+   * <p>This endpoint is used to enable 2FA backup codes.</p>
    * <p>This endpoint Requires valid user access token</p>
    *
    */
-  fetchV4NsUsersMeMfaBackupCode<T = BackupCodesResponseV4>(): Promise<IResponseWithSync<T>> {
+  createUserMeMfaBackupCodeEnable<T = BackupCodesResponseV4>(): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, BackupCodesResponseV4)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * <p>This endpoint is used to generate 8-digits backup codes.
-   * Each code is a one-time code and will be deleted once used.</p>
-   * <p>This endpoint Requires valid user access token</p>
-   *
-   */
-  postV4NsUsersMeMfaBackupCode<T = BackupCodesResponseV4>(): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode'.replace('{namespace}', this.namespace)
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/enable'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, BackupCodesResponseV4)
@@ -263,7 +358,7 @@ export class UsersV4$ {
    * <p>This endpoint Requires valid user access token</p>
    *
    */
-  deleteV4NsUsersMeMfaBackupCodeDisable(): Promise<IResponse<unknown>> {
+  deleteUserMeMfaBackupCodeDisable(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/disable'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
@@ -276,7 +371,7 @@ export class UsersV4$ {
    * <p>This endpoint Requires valid user access token</p>
    *
    */
-  fetchV4NsUsersMeMfaBackupCodeDownload(): Promise<IResponseWithSync<unknown>> {
+  fetchUsersMeMfaBackupCodeDownload(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/download'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -291,126 +386,31 @@ export class UsersV4$ {
   }
 
   /**
-   * <p>This endpoint is used to enable 2FA backup codes.</p>
+   * <p>This endpoint is used to enable 2FA authenticator.</p>
    * <p>This endpoint Requires valid user access token</p>
    *
    */
-  postV4NsUsersMeMfaBackupCodeEnable<T = BackupCodesResponseV4>(): Promise<IResponse<T>> {
+  postUserMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/enable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, null, { params })
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/enable'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
 
-    return Validate.responseType(() => resultPromise, BackupCodesResponseV4)
+    return Validate.responseType(() => resultPromise, z.unknown())
   }
 
   /**
-   * <p>(Only for test)This endpoint is used to remove trusted device.</p>
-   * <p>This endpoint Requires valid user access token</p><br/>
-   * <p>This endpoint Requires device_token in cookie</p>
+   * <p>This endpoint is used to disable 2FA authenticator.</p>
+   * <p>This endpoint Requires valid user access token</p>
    *
    */
-  deleteV4NsUsersMeMfaDevice(): Promise<IResponse<unknown>> {
+  deleteUserMeMfaAuthenticatorDisable(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/device'.replace('{namespace}', this.namespace)
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/disable'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * <p>This endpoint is used to send email code.</p>
-   * <p>This endpoint Requires valid user access token</p>
-   *
-   */
-  postV4NsUsersMeMfaEmailCode(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/code'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, null, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * <p>This endpoint is used to disable 2FA email.</p>
-   * <p>This endpoint Requires valid user access token</p>
-   *
-   */
-  postV4NsUsersMeMfaEmailDisable(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/disable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, null, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * <p>This endpoint is used to enable 2FA email.</p>
-   * <p>This endpoint Requires valid user access token</p>
-   *
-   */
-  postV4NsUsersMeMfaEmailEnable(data: { code: string | null }): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/enable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
-      ...params,
-      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
-    })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * <p>This endpoint is used to get user enabled factors.</p>
-   * <p>This endpoint Requires valid user access token</p>
-   *
-   */
-  fetchV4NsUsersMeMfaFactor<T = EnabledFactorsResponseV4>(): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/factor'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, EnabledFactorsResponseV4)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * <p>This endpoint is used to make 2FA factor default.</p>
-   * <p>This endpoint Requires valid user access token</p>
-   *
-   */
-  postV4NsUsersMeMfaFactor(data: { factor: string | null }): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/factor'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
-      ...params,
-      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
-    })
-
-    return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode.
-   * It will return error if the service multi tenant mode is set to false.
-   *
-   * Request body details:
-   * - emailAddress: email address of the user to be invited
-   * - namespace: new namespace of the user to be created
-   * - namespaceDisplayName: display name of the new namespace
-   *
-   * The invited users will also be assigned with "User" role by default.
-   *
-   */
-  postIamV4PublicUsersInvite<T = InviteUserResponseV3>(data: PublicInviteUserRequestV4): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v4/public/users/invite'
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, InviteUserResponseV3)
   }
 }

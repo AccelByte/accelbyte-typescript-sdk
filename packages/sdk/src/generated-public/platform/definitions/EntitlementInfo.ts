@@ -11,7 +11,7 @@ export const EntitlementInfo = z.object({
   namespace: z.string(),
   clazz: z.enum(['APP', 'ENTITLEMENT', 'CODE', 'SUBSCRIPTION', 'MEDIA', 'OPTIONBOX', 'LOOTBOX']),
   type: z.enum(['DURABLE', 'CONSUMABLE']),
-  status: z.enum(['ACTIVE', 'INACTIVE', 'CONSUMED', 'REVOKED']),
+  status: z.enum(['ACTIVE', 'INACTIVE', 'CONSUMED', 'REVOKED', 'SOLD']),
   appId: z.string().nullish(),
   appType: z.enum(['GAME', 'SOFTWARE', 'DLC', 'DEMO']).nullish(),
   sku: z.string().nullish(),

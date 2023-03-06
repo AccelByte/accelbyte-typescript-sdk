@@ -30,7 +30,7 @@ export class DownloaderApi {
    * - _Returns_: build manifest
    */
   getAvailableBuilds = (appId: string) => {
-    return this.newInstance().fetchNsAvailablebuildsByAppid(appId)
+    return this.newInstance().fetchAvailablebuild_ByAppId(appId)
   }
 
   /**
@@ -43,7 +43,7 @@ export class DownloaderApi {
    */
   getBuildManifest = (appId: string, platformId: string) => {
     const axios = Network.create({ ...this.conf, timeout: 1800000 })
-    return new Downloader$(axios, this.namespace, false).fetchNsV2UpdategameByAppidByPlatformid(appId, platformId)
+    return new Downloader$(axios, this.namespace, false).fetchUpdategame_ByAppId_ByPlatformId(appId, platformId)
   }
 
   /**
@@ -55,7 +55,7 @@ export class DownloaderApi {
    * - _Required permission_: login user
    */
   getDiffCache = (sourceBuildId: string, destinationBuildId: string) => {
-    return new Caching$(Network.create(this.conf), this.namespace, false).fetchNsDiffCacheSourceBySourcebuildidDestByDestinationbuildid(
+    return new Caching$(Network.create(this.conf), this.namespace, false).fetchDestCacheDiff_BySourceBuildId_ByDestinationBuildId(
       sourceBuildId,
       destinationBuildId
     )

@@ -22,31 +22,9 @@ export class Item$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This API is used to get an app in locale. If app not exist in specific region, default region app will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Returns</i>: app data</li></ul>
-   */
-  fetchNsItemsByItemidAppLocale<T = AppInfo>(
-    itemId: string,
-    queryParams?: { storeId?: string | null; region?: string | null; language?: string | null }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/items/{itemId}/app/locale'
-      .replace('{namespace}', this.namespace)
-      .replace('{itemId}', itemId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, AppInfo)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
    * This API is used to get the item by sku.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with sku</li></ul>
    */
-  fetchNsItemsBySku<T = ItemInfo>(queryParams: {
+  fetchItemsBySku<T = ItemInfo>(queryParams: {
     storeId?: string | null
     sku: string | null
     language?: string | null
@@ -68,7 +46,7 @@ export class Item$ {
   /**
    * This API is used to search items by keyword in title, description and long description, It's language constrained, also if item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
    */
-  fetchNsItemsSearch<T = ItemPagingSlicedResult>(queryParams: {
+  fetchItemsSearch<T = ItemPagingSlicedResult>(queryParams: {
     storeId?: string | null
     language: string | null
     keyword: string | null
@@ -104,7 +82,7 @@ export class Item$ {
   /**
    * This API is used to get item by appId.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with that appId</li></ul>
    */
-  fetchNsItemsByAppId<T = ItemInfo>(queryParams: {
+  fetchItemsByAppId<T = ItemInfo>(queryParams: {
     storeId?: string | null
     appId: string | null
     language?: string | null
@@ -124,31 +102,9 @@ export class Item$ {
   }
 
   /**
-   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: item data</li></ul>
-   */
-  fetchNsItemsByItemidLocale<T = PopulatedItemInfo>(
-    itemId: string,
-    queryParams?: { storeId?: string | null; region?: string | null; language?: string | null; populateBundle?: boolean | null }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/items/{itemId}/locale'
-      .replace('{namespace}', this.namespace)
-      .replace('{itemId}', itemId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, PopulatedItemInfo)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
    * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
    */
-  fetchNsItemsByCriteria<T = ItemPagingSlicedResult>(queryParams?: {
+  fetchItemsByCriteria<T = ItemPagingSlicedResult>(queryParams?: {
     storeId?: string | null
     language?: string | null
     region?: string | null
@@ -188,41 +144,9 @@ export class Item$ {
   }
 
   /**
-   * Get item dynamic data for a published item.<br>Other detail info: <ul><li><i>Returns</i>: item dynamic data</li></ul>
-   */
-  fetchNsItemsByItemidDynamic<T = ItemDynamicDataInfo>(itemId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/items/{itemId}/dynamic'
-      .replace('{namespace}', this.namespace)
-      .replace('{itemId}', itemId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, ItemDynamicDataInfo)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * This API is used to validate user item purchase condition
-   */
-  postNsItemsPurchaseConditionsValidate<T = ItemPurchaseConditionValidateResultArray>(
-    data: ItemPurchaseConditionValidateRequest
-  ): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/items/purchase/conditions/validate'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, ItemPurchaseConditionValidateResultArray)
-  }
-
-  /**
    * This API is used to bulk get locale items. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Returns</i>: the list of items info</li></ul>
    */
-  fetchNsItemsLocaleByIds<T = ItemInfoArray>(queryParams: {
+  fetchItemsLocaleByIds<T = ItemInfoArray>(queryParams: {
     storeId?: string | null
     itemIds: string | null
     region?: string | null
@@ -239,5 +163,81 @@ export class Item$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: item data</li></ul>
+   */
+  fetchLocale_ByItemId<T = PopulatedItemInfo>(
+    itemId: string,
+    queryParams?: { storeId?: string | null; region?: string | null; language?: string | null; populateBundle?: boolean | null }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/items/{itemId}/locale'
+      .replace('{namespace}', this.namespace)
+      .replace('{itemId}', itemId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, PopulatedItemInfo)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Get item dynamic data for a published item.<br>Other detail info: <ul><li><i>Returns</i>: item dynamic data</li></ul>
+   */
+  fetchDynamic_ByItemId<T = ItemDynamicDataInfo>(itemId: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/items/{itemId}/dynamic'
+      .replace('{namespace}', this.namespace)
+      .replace('{itemId}', itemId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, ItemDynamicDataInfo)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This API is used to get an app in locale. If app not exist in specific region, default region app will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Returns</i>: app data</li></ul>
+   */
+  fetchAppLocale_ByItemId<T = AppInfo>(
+    itemId: string,
+    queryParams?: { storeId?: string | null; region?: string | null; language?: string | null }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/items/{itemId}/app/locale'
+      .replace('{namespace}', this.namespace)
+      .replace('{itemId}', itemId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, AppInfo)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This API is used to validate user item purchase condition
+   */
+  createItemPurchaseConditionValidate<T = ItemPurchaseConditionValidateResultArray>(
+    data: ItemPurchaseConditionValidateRequest
+  ): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/items/purchase/conditions/validate'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, ItemPurchaseConditionValidateResultArray)
   }
 }

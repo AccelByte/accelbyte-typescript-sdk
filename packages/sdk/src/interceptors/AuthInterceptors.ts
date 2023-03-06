@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -45,7 +45,7 @@ const refreshSession = ({ axiosConfig, refreshToken, clientId }: RefreshArgs) =>
   } as const
 
   const oauth20 = new OAuth20$(axios, 'NAMESPACE-NOT-REQUIRED', false)
-  return oauth20.postIamV3OauthToken(payload)
+  return oauth20.postOauthToken(payload)
 }
 
 // Return Promise<true> if refresh in any tab is successful;
@@ -93,7 +93,7 @@ export const doRefreshSession =
     if (DesktopChecker.isDesktopApp() && !axiosConfig.withCredentials && !refreshToken) {
       return false
     }
-    const result = await refreshSession({ axiosConfig: axiosConfig, clientId, refreshToken })
+    const result = await refreshSession({ axiosConfig, clientId, refreshToken })
     if (result.error) {
       return false
     }

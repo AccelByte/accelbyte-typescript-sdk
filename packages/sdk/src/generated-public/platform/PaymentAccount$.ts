@@ -18,7 +18,7 @@ export class PaymentAccount$ {
   /**
    * Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=2 (READ)</li><li><i>Returns</i>: Payment account list</li></ul>
    */
-  fetchNsUsersByUseridPaymentAccounts<T = PaymentAccountArray>(userId: string): Promise<IResponseWithSync<T>> {
+  fetchPaymentAccounts_ByUserId<T = PaymentAccountArray>(userId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/payment/accounts'
       .replace('{namespace}', this.namespace)
@@ -37,7 +37,7 @@ export class PaymentAccount$ {
   /**
    * Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=8 (DELETE)</li><li><i>Returns</i>:</li></ul>
    */
-  deleteNsUsersByUseridPaymentAccountsByTypeById(userId: string, type: string, id: string): Promise<IResponse<unknown>> {
+  deletePaymentAccount_ByUserId_ByType_ById(userId: string, type: string, id: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/payment/accounts/{type}/{id}'
       .replace('{namespace}', this.namespace)

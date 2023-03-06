@@ -18,7 +18,7 @@ export class Roles$ {
   /**
    *  <br>This endpoint is used to get all non-admin role.  <br> <p>action code: 10418</p>
    */
-  fetchIamV3PublicRoles<T = RoleNamesResponseV3>(queryParams?: {
+  fetchRoles<T = RoleNamesResponseV3>(queryParams?: {
     limit?: number
     after?: string | null
     before?: string | null
@@ -40,7 +40,7 @@ export class Roles$ {
   /**
    *  <br>This endpoint is used to get non-admin role based on specify roleId.  <br>action code : 10417
    */
-  fetchV3PublicRolesByRoleid<T = RoleResponse>(roleId: string): Promise<IResponseWithSync<T>> {
+  fetchRole_ByRoleId<T = RoleResponse>(roleId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })

@@ -26,7 +26,7 @@ export class WalletApi {
    *  - can be filled with __game namespace__ in order to get __game user wallet__
    */
   getUserMeWallet = (currencyCode: string) => {
-    return this.newInstance().fetchNsUsersMeWalletsByCurrencycode(currencyCode)
+    return this.newInstance().fetchUserMeWallet_ByCurrencyCode(currencyCode)
   }
 
   /**
@@ -37,7 +37,7 @@ export class WalletApi {
    * Returns: wallet info
    */
   getWalletByUserId = (userId: string, currencyCode: string) => {
-    return this.newInstance().fetchNsUsersByUseridWalletsByCurrencycode(userId, currencyCode)
+    return this.newInstance().fetchWallet_ByUserId_ByCurrencyCode(userId, currencyCode)
   }
 
   /**

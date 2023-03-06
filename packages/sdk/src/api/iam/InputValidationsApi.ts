@@ -22,7 +22,7 @@ export class InputValidationsApi {
    */
   getValidations = (languageCode?: string | null, defaultOnEmpty?: boolean | null) => {
     const queryParams = { languageCode, defaultOnEmpty }
-    return this.newInstance().fetchIamV3PublicInputValidations(queryParams)
+    return this.newInstance().fetchInputValidations(queryParams)
   }
 
   private newInstance() {

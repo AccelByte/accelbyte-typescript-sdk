@@ -22,7 +22,7 @@ export class CachingApi {
    * _Required permission_: login user
    */
   getDiffCache = (sourceBuildId: string, destinationBuildId: string) => {
-    return this.newInstance().fetchNsDiffCacheSourceBySourcebuildidDestByDestinationbuildid(sourceBuildId, destinationBuildId)
+    return this.newInstance().fetchDestCacheDiff_BySourceBuildId_ByDestinationBuildId(sourceBuildId, destinationBuildId)
   }
 
   private newInstance() {

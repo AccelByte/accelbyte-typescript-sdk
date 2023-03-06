@@ -17,7 +17,7 @@ export class LocalizedPolicyVersions$ {
   /**
    * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.<br>Other detail info: <ul></ul>
    */
-  fetchPublicLocalizedPolicyVersionsByLocalizedpolicyversionid<T = RetrieveLocalizedPolicyVersionPublicResponse>(
+  fetchLocalizedPolicyVersion_ByLocalizedPolicyVersionId<T = RetrieveLocalizedPolicyVersionPublicResponse>(
     localizedPolicyVersionId: string
   ): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig

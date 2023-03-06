@@ -19,7 +19,7 @@ export class Misc$ {
   /**
    * Get server time
    */
-  fetchV1PublicMiscTime<T = RetrieveTimeResponse>(): Promise<IResponseWithSync<T>> {
+  fetchMiscTime<T = RetrieveTimeResponse>(): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/misc/time'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -34,14 +34,14 @@ export class Misc$ {
   }
 
   /**
-   * List time zones.<br>Other detail info: <ul><li><i>Returns</i>: time zones</li></ul>
+   * List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
    */
-  fetchV1NsMiscTimezones(): Promise<IResponseWithSync<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/basic/v1/public/namespaces/{namespace}/misc/timezones'.replace('{namespace}', this.namespace)
+  fetchMiscCountries<T = CountryObjectArray>(queryParams?: { lang?: string | null }): Promise<IResponseWithSync<T>> {
+    const params = { lang: 'en', ...queryParams } as SDKRequestConfig
+    const url = '/basic/v1/public/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, z.unknown())
+    const res = () => Validate.responseType(() => resultPromise, CountryObjectArray)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -53,7 +53,7 @@ export class Misc$ {
   /**
    * List languages.<br>Other detail info: <ul><li><i>Returns</i>: language list</li></ul>
    */
-  fetchV1NsMiscLanguages(): Promise<IResponseWithSync<unknown>> {
+  fetchMiscLanguages(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/misc/languages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -68,14 +68,14 @@ export class Misc$ {
   }
 
   /**
-   * List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
+   * List time zones.<br>Other detail info: <ul><li><i>Returns</i>: time zones</li></ul>
    */
-  fetchV1NsMiscCountries<T = CountryObjectArray>(queryParams?: { lang?: string | null }): Promise<IResponseWithSync<T>> {
-    const params = { lang: 'en', ...queryParams } as SDKRequestConfig
-    const url = '/basic/v1/public/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
+  fetchMiscTimezones(): Promise<IResponseWithSync<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/basic/v1/public/namespaces/{namespace}/misc/timezones'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, CountryObjectArray)
+    const res = () => Validate.responseType(() => resultPromise, z.unknown())
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

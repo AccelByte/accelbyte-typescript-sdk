@@ -7,6 +7,7 @@ import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
 import { UserProfilePrivateCreate } from '@accelbyte/sdk/generated-public/basic/definitions/UserProfilePrivateCreate'
 import { UserProfilePrivateUpdate } from '@accelbyte/sdk/generated-public/basic/definitions/UserProfilePrivateUpdate'
 import { UserProfile$ } from '@accelbyte/sdk/generated-public/basic/UserProfile$'
+import { UserProfileUpdate } from '@accelbyte/sdk/generated-public/basic/definitions/UserProfileUpdate'
 import { Network } from '@accelbyte/sdk/utils/Network'
 
 export class UserProfileApi {
@@ -23,7 +24,7 @@ export class UserProfileApi {
    * __Client with user token can get user profile in target namespace__
    */
   getUsersMeProfiles = () => {
-    return this.newInstance().fetchV1NsUsersMeProfiles()
+    return this.newInstance().fetchUsersMeProfiles()
   }
 
   /**
@@ -34,7 +35,7 @@ export class UserProfileApi {
    * __Client with user token can create user profile in target namespace__
    */
   createUserMeProfile = (data: UserProfilePrivateCreate) => {
-    return this.newInstance().postV1NsUsersMeProfiles(data)
+    return this.newInstance().createUserMeProfile(data)
   }
 
   /**
@@ -44,7 +45,7 @@ export class UserProfileApi {
    * Updates user profile in the target namespace. If token's namespace doesn't match the target namespace, the service automatically maps the token's user ID into the user ID in the target namespace. The method returns the updated user profile on a successful call.
    */
   updateUserMeProfile = (data: UserProfilePrivateUpdate) => {
-    return this.newInstance().putV1NsUsersMeProfiles(data)
+    return this.newInstance().updateUserMeProfile(data)
   }
 
   /**
@@ -54,7 +55,17 @@ export class UserProfileApi {
    * _Returns_: Updated custom attributes
    */
   updateUserCustomAttributes = (userId: string, data: any) => {
-    return this.newInstance().putV1NsUsersByUseridProfilesCustomAttributes(userId, data)
+    return this.newInstance().updateProfileCustomAttribute_ByUserId(userId, data)
+  }
+
+  /**
+   * PUT [/basic/v1/admin/namespaces/{namespace}/users/{userId}/profiles](api)
+   *
+   * Update user profile.
+   * _Returns_: Updated user profile
+   */
+  updateUserProfile = (userId: string, data: UserProfileUpdate) => {
+    return this.newInstance().updateProfile_ByUserId(userId, data)
   }
 
   private newInstance() {

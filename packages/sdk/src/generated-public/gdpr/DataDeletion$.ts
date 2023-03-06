@@ -19,7 +19,7 @@ export class DataDeletion$ {
   /**
    * <p>Requires valid user access token and password
    */
-  postGdprNsUsersByUseridDeletions<T = RequestDeleteResponse>(userId: string, data: { password: string | null }): Promise<IResponse<T>> {
+  postDeletion_ByUserId<T = RequestDeleteResponse>(userId: string, data: { password: string | null }): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/deletions'
       .replace('{namespace}', this.namespace)
@@ -35,7 +35,7 @@ export class DataDeletion$ {
   /**
    * <p>Requires valid user access token</p>
    */
-  deleteGdprNsUsersByUseridDeletions(userId: string): Promise<IResponse<unknown>> {
+  deleteDeletion_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/deletions'
       .replace('{namespace}', this.namespace)
@@ -48,7 +48,7 @@ export class DataDeletion$ {
   /**
    * <p>Requires valid user access token</p>
    */
-  fetchGdprNsUsersByUseridDeletionsStatus<T = DeletionStatus>(userId: string): Promise<IResponseWithSync<T>> {
+  fetchDeletionsStatus_ByUserId<T = DeletionStatus>(userId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/deletions/status'
       .replace('{namespace}', this.namespace)

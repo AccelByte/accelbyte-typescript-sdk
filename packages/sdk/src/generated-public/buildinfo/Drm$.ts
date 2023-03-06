@@ -18,7 +18,7 @@ export class Drm$ {
   /**
    * This API is used to get encrypted userId and machineId for entitled user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:BUILDINFO", action=2 (READ)</li><li><i>Returns</i>: data field containing encrypted userId and machineId separated by comma</li></ul>
    */
-  fetchNsDrmlicenseEncrypt<T = EncryptedIdentity>(queryParams: {
+  fetchDrmlicenseEncrypt<T = EncryptedIdentity>(queryParams: {
     appId: string | null
     machineId: string | null
   }): Promise<IResponseWithSync<T>> {
@@ -38,7 +38,7 @@ export class Drm$ {
   /**
    * This API is used to get public key.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:BUILDINFO", action=2 (READ)</li><li><i>Returns</i>: url to download the key</li></ul>
    */
-  fetchNsDrmlicenseRetrievePublicKey<T = PublicKeyPresignedUrl>(): Promise<IResponseWithSync<T>> {
+  fetchDrmlicenseRetrievePublicKey<T = PublicKeyPresignedUrl>(): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/drmlicense/retrievePublicKey'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

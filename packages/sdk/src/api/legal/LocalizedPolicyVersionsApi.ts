@@ -19,7 +19,7 @@ export class LocalizedPolicyVersionsApi {
    * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.
    */
   fetchLocalizedPolicyVersionById = (localizedPolicyVersionId: string) => {
-    return this.newInstance().fetchPublicLocalizedPolicyVersionsByLocalizedpolicyversionid(localizedPolicyVersionId)
+    return this.newInstance().fetchLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
   }
 
   private newInstance() {

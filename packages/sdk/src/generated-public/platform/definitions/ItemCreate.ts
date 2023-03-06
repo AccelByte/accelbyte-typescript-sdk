@@ -10,6 +10,7 @@ import { LootBoxConfig } from './LootBoxConfig'
 import { OptionBoxConfig } from './OptionBoxConfig'
 import { Recurring } from './Recurring'
 import { RegionDataItem } from './RegionDataItem'
+import { SaleConfig } from './SaleConfig'
 
 export const ItemCreate = z.object({
   itemType: z.enum([
@@ -56,7 +57,9 @@ export const ItemCreate = z.object({
   clazz: z.string().nullish(),
   ext: z.record(z.any()).nullish(),
   optionBoxConfig: OptionBoxConfig.nullish(),
-  lootBoxConfig: LootBoxConfig.nullish()
+  lootBoxConfig: LootBoxConfig.nullish(),
+  sellable: z.boolean().nullish(),
+  saleConfig: SaleConfig.nullish()
 })
 
 export interface ItemCreate extends z.TypeOf<typeof ItemCreate> {}

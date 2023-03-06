@@ -23,28 +23,9 @@ export class PaymentStation$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: Payment order paid result</li></ul>
-   */
-  fetchNsPaymentOrdersByPaymentordernoStatus<T = PaymentOrderPaidResult>(paymentOrderNo: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/status'
-      .replace('{namespace}', this.namespace)
-      .replace('{paymentOrderNo}', paymentOrderNo)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, PaymentOrderPaidResult)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
    * Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i>Returns</i>: tax result</li></ul>
    */
-  fetchNsPaymentTax<T = TaxResult>(queryParams: {
+  fetchPaymentTax<T = TaxResult>(queryParams: {
     paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
     paymentOrderNo: string | null
     zipCode?: string | null
@@ -63,38 +44,42 @@ export class PaymentStation$ {
   }
 
   /**
-   * Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><li><i>Returns</i>: Payment process result</li></ul>
+   * Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link</li></ul>
    */
-  postNsPaymentOrdersByPaymentordernoPay<T = PaymentProcessResult>(
-    paymentOrderNo: string,
-    data: PaymentToken,
-    queryParams?: {
-      paymentProvider?: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
-      zipCode?: string | null
-    }
-  ): Promise<IResponse<T>> {
-    const params = { paymentProvider: 'CHECKOUT', ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/pay'
-      .replace('{namespace}', this.namespace)
-      .replace('{paymentOrderNo}', paymentOrderNo)
+  createPaymentLink<T = PaymentUrl>(data: PaymentUrlCreate): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/payment/link'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, PaymentProcessResult)
+    return Validate.responseType(() => resultPromise, PaymentUrl)
   }
 
   /**
-   * Get payment provider public config, at current only Strip provide public config.<br>Other detail info: <ul><li><i>Returns</i>: Public config</li></ul>
+   * Get qrcode.<br>Other detail info: <ul><li><i>Returns</i>: QRCode image stream</li></ul>
    */
-  fetchNsPaymentPublicconfig(queryParams: {
-    paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
-    region: string | null
-    sandbox?: boolean | null
-  }): Promise<IResponseWithSync<unknown>> {
+  fetchPaymentQrcode(queryParams: { code: string | null }): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/payment/publicconfig'.replace('{namespace}', this.namespace)
+    const url = '/platform/public/namespaces/{namespace}/payment/qrcode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, z.unknown())
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment method list</li></ul>
+   */
+  fetchPaymentMethods<T = PaymentMethodArray>(queryParams: { paymentOrderNo: string | null }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/payment/methods'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, PaymentMethodArray)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -108,7 +93,7 @@ export class PaymentStation$ {
    *
    * When the shopper has completed the payment you will receive a successful AUTHORISATION.</li><li>RECEIVED: Inform the shopper that you've received their order, and are waiting for the payment to clear.</li><li>UNKNOWN: An error occurred during the payment processing.</li><li>FAILED: Shopper paid failed because of various reasons.</li></ul></td></tr><tr><td>reason</td><td>String</td><td>No</td><td>payment status reason</td></tr></table>Other detail info: <ul><li><i>xsolla</i>: parameters 'user_id', 'foreinginvoice', 'invoice_id' and 'status' will be automatically added to the link</li><li><i>adyen</i>: https://docs.adyen.com/developers/checkout/web-sdk</li></ul>
    */
-  fetchNsPaymentReturnurl(queryParams: {
+  fetchPaymentReturnurl(queryParams: {
     returnUrl: string | null
     orderNo: string | null
     paymentOrderNo: string | null
@@ -139,14 +124,18 @@ export class PaymentStation$ {
   }
 
   /**
-   * Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment method list</li></ul>
+   * Get payment provider public config, at current only Strip provide public config.<br>Other detail info: <ul><li><i>Returns</i>: Public config</li></ul>
    */
-  fetchNsPaymentMethods<T = PaymentMethodArray>(queryParams: { paymentOrderNo: string | null }): Promise<IResponseWithSync<T>> {
+  fetchPaymentPublicconfig(queryParams: {
+    paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
+    region: string | null
+    sandbox?: boolean | null
+  }): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/payment/methods'.replace('{namespace}', this.namespace)
+    const url = '/platform/public/namespaces/{namespace}/payment/publicconfig'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, PaymentMethodArray)
+    const res = () => Validate.responseType(() => resultPromise, z.unknown())
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -156,9 +145,29 @@ export class PaymentStation$ {
   }
 
   /**
+   * Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><li><i>Returns</i>: Payment process result</li></ul>
+   */
+  createPayPayment_ByPaymentOrderNo<T = PaymentProcessResult>(
+    paymentOrderNo: string,
+    data: PaymentToken,
+    queryParams?: {
+      paymentProvider?: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
+      zipCode?: string | null
+    }
+  ): Promise<IResponse<T>> {
+    const params = { paymentProvider: 'CHECKOUT', ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/pay'
+      .replace('{namespace}', this.namespace)
+      .replace('{paymentOrderNo}', paymentOrderNo)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, PaymentProcessResult)
+  }
+
+  /**
    * Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment order details</li></ul>
    */
-  fetchNsPaymentOrdersByPaymentordernoInfo<T = PaymentOrderDetails>(paymentOrderNo: string): Promise<IResponseWithSync<T>> {
+  fetchInfoPayment_ByPaymentOrderNo<T = PaymentOrderDetails>(paymentOrderNo: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/info'
       .replace('{namespace}', this.namespace)
@@ -175,30 +184,21 @@ export class PaymentStation$ {
   }
 
   /**
-   * Get qrcode.<br>Other detail info: <ul><li><i>Returns</i>: QRCode image stream</li></ul>
+   * Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: Payment order paid result</li></ul>
    */
-  fetchNsPaymentQrcode(queryParams: { code: string | null }): Promise<IResponseWithSync<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/payment/qrcode'.replace('{namespace}', this.namespace)
+  fetchStatusPayment_ByPaymentOrderNo<T = PaymentOrderPaidResult>(paymentOrderNo: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/status'
+      .replace('{namespace}', this.namespace)
+      .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, z.unknown())
+    const res = () => Validate.responseType(() => resultPromise, PaymentOrderPaidResult)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link</li></ul>
-   */
-  postNsPaymentLink<T = PaymentUrl>(data: PaymentUrlCreate): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/payment/link'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, PaymentUrl)
   }
 }

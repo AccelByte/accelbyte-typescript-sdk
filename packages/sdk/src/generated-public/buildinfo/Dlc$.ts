@@ -20,7 +20,7 @@ export class Dlc$ {
   /**
    * This API is used to retrieve DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
    */
-  fetchNsDlcByBuildidLink<T = RetrieveDependencyLinkResponse>(buildId: string): Promise<IResponseWithSync<T>> {
+  fetchLink_ByBuildId<T = RetrieveDependencyLinkResponse>(buildId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/dlc/{buildId}/link'
       .replace('{namespace}', this.namespace)
@@ -37,16 +37,16 @@ export class Dlc$ {
   }
 
   /**
-   * Retrieve the list of DLC available on specific game. Use DLC's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: appId of game and list of its builds by platformId</li></ul>
+   * This API is used to retrieve compatibility of specific DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
    */
-  fetchNsAppsLatestByDlcAppIdByDlcappid<T = RetrieveBaseGameResponseArray>(dlcAppId: string): Promise<IResponseWithSync<T>> {
+  fetchCompatibility_ByBuildId<T = RetrieveDependencyCompatibilityResponse>(buildId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/buildinfo/public/namespaces/{namespace}/apps/latest/byDLCAppId/{dlcAppId}'
+    const url = '/buildinfo/public/namespaces/{namespace}/dlc/{buildId}/compatibility'
       .replace('{namespace}', this.namespace)
-      .replace('{dlcAppId}', dlcAppId)
+      .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, RetrieveBaseGameResponseArray)
+    const res = () => Validate.responseType(() => resultPromise, RetrieveDependencyCompatibilityResponse)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -58,7 +58,7 @@ export class Dlc$ {
   /**
    * Retrieve the list of DLC available on specific game. Use game's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: list of DLC</li></ul>
    */
-  fetchNsDlcsLatestByGameAppIdByAppid<T = RetrieveLatestDlcResponseArray>(appId: string): Promise<IResponseWithSync<T>> {
+  fetchDlcLatestByGameAppId_ByAppId<T = RetrieveLatestDlcResponseArray>(appId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/dlcs/latest/byGameAppId/{appId}'
       .replace('{namespace}', this.namespace)
@@ -75,16 +75,16 @@ export class Dlc$ {
   }
 
   /**
-   * This API is used to retrieve compatibility of specific DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Retrieve the list of DLC available on specific game. Use DLC's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: appId of game and list of its builds by platformId</li></ul>
    */
-  fetchNsDlcByBuildidCompatibility<T = RetrieveDependencyCompatibilityResponse>(buildId: string): Promise<IResponseWithSync<T>> {
+  fetchAppLatestByDlcAppId_ByDlcAppId<T = RetrieveBaseGameResponseArray>(dlcAppId: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
-    const url = '/buildinfo/public/namespaces/{namespace}/dlc/{buildId}/compatibility'
+    const url = '/buildinfo/public/namespaces/{namespace}/apps/latest/byDLCAppId/{dlcAppId}'
       .replace('{namespace}', this.namespace)
-      .replace('{buildId}', buildId)
+      .replace('{dlcAppId}', dlcAppId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, RetrieveDependencyCompatibilityResponse)
+    const res = () => Validate.responseType(() => resultPromise, RetrieveBaseGameResponseArray)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

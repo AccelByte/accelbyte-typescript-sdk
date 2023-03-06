@@ -21,7 +21,7 @@ export class DlcApi {
    * _Returns_: list of DLC
    */
   getLatestDLCByGameAppId = (appId: string) => {
-    return this.newInstance().fetchNsDlcsLatestByGameAppIdByAppid(appId)
+    return this.newInstance().fetchDlcLatestByGameAppId_ByAppId(appId)
   }
 
   /**
@@ -32,7 +32,7 @@ export class DlcApi {
    * _Returns_: appId of game and list of its builds by platformId
    */
   getBaseGamesByDlcAppId = (dlcAppId: string) => {
-    return this.newInstance().fetchNsAppsLatestByDlcAppIdByDlcappid(dlcAppId)
+    return this.newInstance().fetchAppLatestByDlcAppId_ByDlcAppId(dlcAppId)
   }
 
   private newInstance() {

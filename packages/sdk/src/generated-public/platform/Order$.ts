@@ -21,7 +21,7 @@ export class Order$ {
   /**
    * Query user orders.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: get order</li></ul>
    */
-  fetchNsUsersByUseridOrders<T = OrderPagingSlicedResult>(
+  fetchOrders_ByUserId<T = OrderPagingSlicedResult>(
     userId: string,
     queryParams?: {
       itemId?: string | null
@@ -59,7 +59,7 @@ export class Order$ {
   /**
    * Create an order. The result contains the checkout link and payment token. User with permission SANDBOX will create sandbox order that not real paid for xsolla/alipay and not validate price for wxpay.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=1 (CREATE)</li><li><i>Optional permission(user with this permission will create sandbox order)</i>: resource="SANDBOX", action=1 (CREATE)</li><li>It will be forbidden while the user is banned: ORDER_INITIATE or ORDER_AND_PAYMENT</li><li><i>Returns</i>: created order</li></ul>
    */
-  postNsUsersByUseridOrders<T = OrderInfo>(userId: string, data: OrderCreate): Promise<IResponse<T>> {
+  createOrder_ByUserId<T = OrderInfo>(userId: string, data: OrderCreate): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders'
       .replace('{namespace}', this.namespace)
@@ -72,7 +72,7 @@ export class Order$ {
   /**
    * Get user order.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: get order</li></ul>
    */
-  fetchNsUsersByUseridOrdersByOrderno<T = OrderInfo>(userId: string, orderNo: string): Promise<IResponseWithSync<T>> {
+  fetchOrder_ByUserId_ByOrderNo<T = OrderInfo>(userId: string, orderNo: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}'
       .replace('{namespace}', this.namespace)
@@ -90,29 +90,9 @@ export class Order$ {
   }
 
   /**
-   * Download user order receipt by orderNo.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: order receipt pdf</li></ul>
-   */
-  fetchNsUsersByUseridOrdersByOrdernoReceiptPdf(userId: string, orderNo: string): Promise<IResponseWithSync<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/receipt.pdf'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-      .replace('{orderNo}', orderNo)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, z.unknown())
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
    * Cancel user order.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=4 (UPDATE)</li><li><i>Returns</i>: cancelled order</li></ul>
    */
-  putNsUsersByUseridOrdersByOrdernoCancel<T = OrderInfo>(userId: string, orderNo: string): Promise<IResponse<T>> {
+  updateCancel_ByUserId_ByOrderNo<T = OrderInfo>(userId: string, orderNo: string): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/cancel'
       .replace('{namespace}', this.namespace)
@@ -126,7 +106,7 @@ export class Order$ {
   /**
    * Get user order histories.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: get order history</li></ul>
    */
-  fetchNsUsersByUseridOrdersByOrdernoHistory<T = OrderHistoryInfoArray>(userId: string, orderNo: string): Promise<IResponseWithSync<T>> {
+  fetchHistory_ByUserId_ByOrderNo<T = OrderHistoryInfoArray>(userId: string, orderNo: string): Promise<IResponseWithSync<T>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/history'
       .replace('{namespace}', this.namespace)
@@ -135,6 +115,26 @@ export class Order$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, OrderHistoryInfoArray)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Download user order receipt by orderNo.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ORDER", action=2 (READ)</li><li><i>Returns</i>: order receipt pdf</li></ul>
+   */
+  fetchReceiptPdf_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponseWithSync<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/receipt.pdf'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{orderNo}', orderNo)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, z.unknown())
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

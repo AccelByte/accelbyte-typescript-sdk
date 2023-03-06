@@ -15,6 +15,8 @@ import { EntitlementDecrementResult } from './definitions/EntitlementDecrementRe
 import { EntitlementInfo } from './definitions/EntitlementInfo'
 import { EntitlementOwnershipArray } from './definitions/EntitlementOwnershipArray'
 import { EntitlementPagingSlicedResult } from './definitions/EntitlementPagingSlicedResult'
+import { EntitlementSoldRequest } from './definitions/EntitlementSoldRequest'
+import { EntitlementSoldResult } from './definitions/EntitlementSoldResult'
 import { Ownership } from './definitions/Ownership'
 import { OwnershipToken } from './definitions/OwnershipToken'
 import { TimedOwnership } from './definitions/TimedOwnership'
@@ -24,14 +26,74 @@ export class Entitlement$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Get my app entitlement ownership by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace app entitlement ownership</b></li></ul></li></ul>
+   * Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement list</li></ul>
    */
-  fetchNsUsersMeEntitlementsOwnershipByAppId<T = Ownership>(queryParams: { appId: string | null }): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byAppId'.replace('{namespace}', this.namespace)
+  fetchEntitlements_ByUserId<T = EntitlementPagingSlicedResult>(
+    userId: string,
+    queryParams?: {
+      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+      appType?: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'
+      entitlementName?: string | null
+      itemId?: string[]
+      features?: string[]
+      offset?: number
+      limit?: number
+    }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, Ownership)
+    const res = () => Validate.responseType(() => resultPromise, EntitlementPagingSlicedResult)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Get user entitlement by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   */
+  fetchEntitlementsBySku_ByUserId<T = EntitlementInfo>(
+    userId: string,
+    queryParams: {
+      sku: string | null
+      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+    }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/bySku'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, EntitlementInfo)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   */
+  fetchEntitlementsByAppId_ByUserId<T = AppEntitlementInfo>(
+    userId: string,
+    queryParams: { appId: string | null }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppId'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, AppEntitlementInfo)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -43,7 +105,7 @@ export class Entitlement$ {
   /**
    * Exists any my active entitlement of specified itemIds, skus and appIds<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchNsUsersMeEntitlementsOwnershipAny<T = Ownership>(queryParams?: {
+  fetchUsersMeEntitlementsOwnershipAny<T = Ownership>(queryParams?: {
     itemIds?: string[]
     appIds?: string[]
     skus?: string[]
@@ -62,37 +124,22 @@ export class Entitlement$ {
   }
 
   /**
-   * Get my entitlement ownership by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
+   * Get user entitlement by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchNsUsersMeEntitlementsOwnershipBySku<T = TimedOwnership>(queryParams: {
-    sku: string | null
-    entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
-  }): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/bySku'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, TimedOwnership)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
+  fetchEntitlementsByItemId_ByUserId<T = EntitlementInfo>(
+    userId: string,
+    queryParams: {
+      itemId: string | null
+      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
     }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Get my entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
-   */
-  fetchNsUsersMeEntitlementsOwnershipByItemId<T = TimedOwnership>(queryParams: {
-    itemId: string | null
-    entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
-  }): Promise<IResponseWithSync<T>> {
+  ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byItemId'.replace('{namespace}', this.namespace)
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byItemId'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, TimedOwnership)
+    const res = () => Validate.responseType(() => resultPromise, EntitlementInfo)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -133,7 +180,7 @@ export class Entitlement$ {
    * }
    * </code></pre><b>if there's no active entitlement for the specific params, the entitlements section will be omitted</b>.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchNsUsersMeEntitlementsOwnershipToken<T = OwnershipToken>(queryParams?: {
+  fetchUsersMeEntitlementsOwnershipToken<T = OwnershipToken>(queryParams?: {
     itemIds?: string[]
     appIds?: string[]
     skus?: string[]
@@ -152,9 +199,88 @@ export class Entitlement$ {
   }
 
   /**
+   * Query app entitlements by appType.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: app entitlement pagination</li></ul>
+   */
+  fetchEntitlementsByAppType_ByUserId<T = AppEntitlementPagingSlicedResult>(
+    userId: string,
+    queryParams: { appType: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'; offset?: number; limit?: number }
+  ): Promise<IResponseWithSync<T>> {
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppType'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, AppEntitlementPagingSlicedResult)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Get my entitlement ownership by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
+   */
+  fetchUsersMeEntitlementsOwnershipBySku<T = TimedOwnership>(queryParams: {
+    sku: string | null
+    entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+  }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/bySku'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, TimedOwnership)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Get my app entitlement ownership by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace app entitlement ownership</b></li></ul></li></ul>
+   */
+  fetchUsersMeEntitlementsOwnershipByAppId<T = Ownership>(queryParams: { appId: string | null }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byAppId'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, Ownership)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Get my entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
+   */
+  fetchUsersMeEntitlementsOwnershipByItemId<T = TimedOwnership>(queryParams: {
+    itemId: string | null
+    entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+  }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byItemId'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, TimedOwnership)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * Exists any user active entitlement of specified itemIds, skus and appIds<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchNsUsersByUseridEntitlementsOwnershipAny<T = Ownership>(
+  fetchEntitlementsOwnershipAny_ByUserId<T = Ownership>(
     userId: string,
     queryParams?: { itemIds?: string[]; appIds?: string[]; skus?: string[] }
   ): Promise<IResponseWithSync<T>> {
@@ -174,44 +300,17 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user entitlement.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement</li></ul>
    */
-  fetchNsUsersByUseridEntitlementsOwnershipByItemId<T = TimedOwnership>(
-    userId: string,
-    queryParams: {
-      itemId: string | null
-      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
-    }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemId'
+  fetchEntitlement_ByUserId_ByEntitlementId<T = EntitlementInfo>(userId: string, entitlementId: string): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, TimedOwnership)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
-   */
-  fetchNsUsersByUseridEntitlementsByAppId<T = AppEntitlementInfo>(
-    userId: string,
-    queryParams: { appId: string | null }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppId'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, AppEntitlementInfo)
+    const res = () => Validate.responseType(() => resultPromise, EntitlementInfo)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -223,7 +322,7 @@ export class Entitlement$ {
   /**
    * Get user entitlement ownership by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchNsUsersByUseridEntitlementsOwnershipBySku<T = TimedOwnership>(
+  fetchEntitlementsOwnershipBySku_ByUserId<T = TimedOwnership>(
     userId: string,
     queryParams: {
       sku: string | null
@@ -246,109 +345,9 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
-   */
-  fetchNsUsersByUseridEntitlementsOwnershipByItemIds<T = EntitlementOwnershipArray>(
-    userId: string,
-    queryParams?: { ids?: string[] }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemIds'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, EntitlementOwnershipArray)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement list</li></ul>
-   */
-  fetchNsUsersByUseridEntitlements<T = EntitlementPagingSlicedResult>(
-    userId: string,
-    queryParams?: {
-      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
-      appType?: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'
-      entitlementName?: string | null
-      itemId?: string[]
-      features?: string[]
-      offset?: number
-      limit?: number
-    }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, EntitlementPagingSlicedResult)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Get user entitlement by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
-   */
-  fetchNsUsersByUseridEntitlementsByItemId<T = EntitlementInfo>(
-    userId: string,
-    queryParams: {
-      itemId: string | null
-      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
-    }
-  ): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byItemId'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, EntitlementInfo)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Get user entitlement.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement</li></ul>
-   */
-  fetchNsUsersByUseridEntitlementsByEntitlementid<T = EntitlementInfo>(
-    userId: string,
-    entitlementId: string
-  ): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-      .replace('{entitlementId}', entitlementId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, EntitlementInfo)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
    * Get user app entitlement ownership by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchNsUsersByUseridEntitlementsOwnershipByAppId<T = Ownership>(
+  fetchEntitlementsOwnershipByAppId_ByUserId<T = Ownership>(
     userId: string,
     queryParams: { appId: string | null }
   ): Promise<IResponseWithSync<T>> {
@@ -368,22 +367,22 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchNsUsersByUseridEntitlementsBySku<T = EntitlementInfo>(
+  fetchEntitlementsOwnershipByItemId_ByUserId<T = TimedOwnership>(
     userId: string,
     queryParams: {
-      sku: string | null
+      itemId: string | null
       entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
     }
   ): Promise<IResponseWithSync<T>> {
     const params = { ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/bySku'
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemId'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, EntitlementInfo)
+    const res = () => Validate.responseType(() => resultPromise, TimedOwnership)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -393,31 +392,49 @@ export class Entitlement$ {
   }
 
   /**
-   * Query app entitlements by appType.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: app entitlement pagination</li></ul>
+   * Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
    */
-  fetchNsUsersByUseridEntitlementsByAppType<T = AppEntitlementPagingSlicedResult>(
+  fetchEntitlementsOwnershipByItemIds_ByUserId<T = EntitlementOwnershipArray>(
     userId: string,
-    queryParams: { appType: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'; offset?: number; limit?: number }
+    queryParams?: { ids?: string[] }
   ): Promise<IResponseWithSync<T>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
-    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppType'
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemIds'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, AppEntitlementPagingSlicedResult)
+    const res = () => Validate.responseType(() => resultPromise, EntitlementOwnershipArray)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Sell user entitlement. If the entitlement is consumable, useCount is 0, the status will be CONSUMED. If the entitlement is durable, the status will be SOLD. Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=4 (UPDATE)</li><li><i>Returns</i>: entitlement</li></ul>
+   */
+  updateSell_ByUserId_ByEntitlementId<T = EntitlementSoldResult>(
+    userId: string,
+    entitlementId: string,
+    data: EntitlementSoldRequest
+  ): Promise<IResponse<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/sell'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{entitlementId}', entitlementId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, EntitlementSoldResult)
   }
 
   /**
    * Consume user entitlement. If the entitlement useCount is 0, the status will be CONSUMED. Client should pass item id in options if entitlement clazz is OPTIONBOX<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=4 (UPDATE)</li><li><i>Returns</i>: consumed entitlement</li></ul>
    */
-  putNsUsersByUseridEntitlementsByEntitlementidDecrement<T = EntitlementDecrementResult>(
+  updateDecrement_ByUserId_ByEntitlementId<T = EntitlementDecrementResult>(
     userId: string,
     entitlementId: string,
     data: EntitlementDecrement

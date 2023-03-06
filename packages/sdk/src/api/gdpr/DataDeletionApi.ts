@@ -21,7 +21,7 @@ export class DataDeletionApi {
    * _Requires a valid user access token_
    */
   getGdprDeletionStatus = (userId: string) => {
-    return this.newInstance().fetchGdprNsUsersByUseridDeletionsStatus(userId)
+    return this.newInstance().fetchDeletionsStatus_ByUserId(userId)
   }
 
   /**
@@ -32,7 +32,7 @@ export class DataDeletionApi {
    * _Requires a valid user access token and password_
    */
   requestAccountDeletion = ({ userId, data }: { userId: string; data: { password: string | null } }) => {
-    return this.newInstance().postGdprNsUsersByUseridDeletions(userId, data)
+    return this.newInstance().postDeletion_ByUserId(userId, data)
   }
 
   /**
@@ -43,7 +43,7 @@ export class DataDeletionApi {
    * _Requires a valid user access token_
    */
   cancelAccountDeletion = (userId: string) => {
-    return this.newInstance().deleteGdprNsUsersByUseridDeletions(userId)
+    return this.newInstance().deleteDeletion_ByUserId(userId)
   }
 
   private newInstance() {

@@ -8,6 +8,7 @@ import { LootBoxConfig } from './LootBoxConfig'
 import { OptionBoxConfig } from './OptionBoxConfig'
 import { Recurring } from './Recurring'
 import { RegionDataItem } from './RegionDataItem'
+import { SaleConfig } from './SaleConfig'
 
 export const ItemSnapshot = z.object({
   itemId: z.string(),
@@ -55,7 +56,9 @@ export const ItemSnapshot = z.object({
   createdAt: z.string().nullish(),
   updatedAt: z.string().nullish(),
   optionBoxConfig: OptionBoxConfig.nullish(),
-  lootBoxConfig: LootBoxConfig.nullish()
+  lootBoxConfig: LootBoxConfig.nullish(),
+  sellable: z.boolean().nullish(),
+  saleConfig: SaleConfig.nullish()
 })
 
 export interface ItemSnapshot extends z.TypeOf<typeof ItemSnapshot> {}

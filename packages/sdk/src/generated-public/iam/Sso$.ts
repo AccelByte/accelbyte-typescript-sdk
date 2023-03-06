@@ -14,7 +14,7 @@ export class Sso$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
-  fetchV3SsoByPlatformid(platformId: string, queryParams?: { payload?: string | null }): Promise<IResponseWithSync<unknown>> {
+  fetchSso_ByPlatformId(platformId: string, queryParams?: { payload?: string | null }): Promise<IResponseWithSync<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/sso/{platformId}'.replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -35,7 +35,7 @@ export class Sso$ {
    * - discourse
    *
    */
-  postV3SsoByPlatformidLogout(platformId: string): Promise<IResponse<unknown>> {
+  createLogout_ByPlatformId(platformId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/sso/{platformId}/logout'.replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.post(url, null, { params })

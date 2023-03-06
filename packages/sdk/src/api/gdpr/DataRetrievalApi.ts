@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
-import { DataRetrieval$ } from '@accelbyte/sdk/generated-public/gdpr/DataRetrieval$'
 import { Network } from '@accelbyte/sdk/utils/Network'
+import { DataRetrieval$ } from '@accelbyte/sdk/generated-public/gdpr/DataRetrieval$'
 
 export class DataRetrievalApi {
   /**
@@ -21,7 +21,7 @@ export class DataRetrievalApi {
    * _Requires a valid user access token_
    */
   getGdprDataRequestList = ({ userId, queryParams }: { userId: string; queryParams?: { limit?: number; offset?: number } }) => {
-    return this.newInstance().fetchGdprNsUsersByUseridRequests(userId, queryParams)
+    return this.newInstance().fetchRequests_ByUserId(userId, queryParams)
   }
 
   /**
@@ -32,7 +32,7 @@ export class DataRetrievalApi {
    * _Requires a valid user access token_
    */
   requestGdprData = ({ userId, data }: { userId: string; data: { password: string | null } }) => {
-    return this.newInstance().postGdprNsUsersByUseridRequests(userId, data)
+    return this.newInstance().postRequest_ByUserId(userId, data)
   }
 
   /**
@@ -43,7 +43,7 @@ export class DataRetrievalApi {
    * _Requires a valid user access token_
    */
   cancelGdprDataRequest = ({ userId, requestDate }: { userId: string; requestDate: string }) => {
-    return this.newInstance().deleteGdprNsUsersByUseridRequestsByRequestdate(userId, requestDate)
+    return this.newInstance().deleteRequest_ByUserId_ByRequestDate(userId, requestDate)
   }
 
   /**
@@ -62,7 +62,7 @@ export class DataRetrievalApi {
     requestDate: string
     data: { password: string | null }
   }) => {
-    return this.newInstance().postGdprNsUsersByUseridRequestsByRequestdateGenerate(userId, requestDate, data)
+    return this.newInstance().postGenerate_ByUserId_ByRequestDate(userId, requestDate, data)
   }
 
   private newInstance() {

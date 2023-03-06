@@ -1,3 +1,15 @@
+### 1.0.1 - 2023-03-05
+
+- Updated method names using natural language
+
+### 1.0.0 - 2023-03-03
+
+- Initial 1.0.0 release 
+
+### 0.2.0-beta.26 - 2023-03-03
+
+- add new endpoint `updateUserProfile` endpoint to `UserProfile` public web sdk
+
 ### 0.2.0-beta.25 - 2023-02-28
 
 - Updated SDK with latest swaggers

@@ -15,11 +15,13 @@ export class ThirdPartyCredential$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This is the Public API to Get All Active 3rd Platform Credential.
+   * This is the Public API to Get All Active OIDC Platform Credential By Client ID
    */
-  fetchV3NsPlatformsClientsActive<T = PublicThirdPartyPlatformInfoArray>(): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/platforms/clients/active'.replace('{namespace}', this.namespace)
+  fetchPlatformsClientsOidc<T = PublicThirdPartyPlatformInfoArray>(queryParams: {
+    clientId: string | null
+  }): Promise<IResponseWithSync<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/platforms/clients/oidc'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, PublicThirdPartyPlatformInfoArray)
@@ -32,13 +34,11 @@ export class ThirdPartyCredential$ {
   }
 
   /**
-   * This is the Public API to Get All Active OIDC Platform Credential By Client ID
+   * This is the Public API to Get All Active 3rd Platform Credential.
    */
-  fetchV3NsPlatformsClientsOidc<T = PublicThirdPartyPlatformInfoArray>(queryParams: {
-    clientId: string | null
-  }): Promise<IResponseWithSync<T>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/platforms/clients/oidc'.replace('{namespace}', this.namespace)
+  fetchPlatformsClientsActive<T = PublicThirdPartyPlatformInfoArray>(): Promise<IResponseWithSync<T>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/platforms/clients/active'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, PublicThirdPartyPlatformInfoArray)

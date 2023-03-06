@@ -20,7 +20,7 @@ export class InputValidations$ {
    * 		<p><code>regex</code> parameter will be returned if <code>isCustomRegex</code> is true. Otherwise, it will be empty.</p>
    *
    */
-  fetchIamV3PublicInputValidations<T = InputValidationsPublicResponse>(queryParams?: {
+  fetchInputValidations<T = InputValidationsPublicResponse>(queryParams?: {
     languageCode?: string | null
     defaultOnEmpty?: boolean | null
   }): Promise<IResponseWithSync<T>> {
