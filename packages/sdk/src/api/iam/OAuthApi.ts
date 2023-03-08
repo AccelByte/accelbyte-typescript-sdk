@@ -50,7 +50,6 @@ export class OAuthApi {
     })
     localStorage.removeItem(MFA_DATA_STORAGE_KEY)
     SdkCache.clearCache()
-    // TODO
     return new OAuth20Extension$(axios, this.namespace, this.cache).createLogout()
   }
 

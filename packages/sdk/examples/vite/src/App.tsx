@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -55,10 +55,10 @@ export default App
 // composing components.
 function Collapsible(props: { title: string; json: any }) {
   return (
-    <details>
+    <details id={'toogle' + props.title}>
       <summary>{props.title}</summary>
 
-      <pre>{JSON.stringify(props.json, null, 2)}</pre>
+      <pre id={props.title}>{JSON.stringify(props.json, null, 2)}</pre>
     </details>
   )
 }

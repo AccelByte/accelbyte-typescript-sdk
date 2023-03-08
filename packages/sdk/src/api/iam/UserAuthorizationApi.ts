@@ -68,7 +68,7 @@ export class UserAuthorizationApi {
   ) {}
 
   /**
-   * POST: [/iam/v3/oauth/token](api)
+   * POST [/iam/v3/oauth/token](api)
    *
    * This method supports grant type:
    *      - Grant Type == `authorization_code`:

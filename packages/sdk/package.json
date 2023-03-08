@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "author": "AccelByte Inc",
   "license": "AccelByte License",
   "main": "./dist/cjs/node/index.cjs",
@@ -22,9 +22,12 @@
     "build": "rollup -c rollup.config.mjs",
     "build:dts": "rollup -c rollup.dts.config.mjs",
     "postbuild": "yarn build:dts && rimraf dist/types",
-    "test": "vitest"
+    "test": "yarn test:unit",
+    "test:unit": "vitest",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "1.28.0",
     "@rollup/plugin-alias": "4.0.2",
     "@rollup/plugin-commonjs": "20.0.0",
     "@rollup/plugin-json": "4.1.0",

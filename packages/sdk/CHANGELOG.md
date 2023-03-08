@@ -1,3 +1,11 @@
+### 1.0.3 - 2023-03-08
+
+- Fix SDK Build is failing with disabling e2e test from test script
+
+### 1.0.2 - 2023-03-07
+
+- Set `price` in `RegionDataItem` as nullish
+
 ### 1.0.1 - 2023-03-05
 
 - Updated method names using natural language

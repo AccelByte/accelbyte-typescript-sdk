@@ -6,7 +6,7 @@
 import { z } from 'zod'
 
 export const RegionDataItem = z.object({
-  price: z.number().int(),
+  price: z.number().int().nullish(),
   discountPercentage: z.number().int().nullish(),
   discountAmount: z.number().int().nullish(),
   discountedPrice: z.number().int().nullish(),
