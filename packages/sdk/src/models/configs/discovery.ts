@@ -115,11 +115,11 @@ export const PlayerPortalFeatureFlagsConfig = z.object({
    **/
   isPersonalDataVisible: z.boolean().default(true),
   /**
-   * Determines whether "Privacy Records" menu in Accounts page is visible or not.
+   * Determines whether "Legal Agreements" menu in Accounts page is visible or not.
    *
    * Defaults to `true`.
    **/
-  isPrivacyRecordsVisible: z.boolean().default(true),
+  isLegalAgreementsVisible: z.boolean().default(true),
   /**
    * Determines whether "Purchased Items" menu in Accounts page is visible or not.
    *
