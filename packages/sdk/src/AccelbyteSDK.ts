@@ -33,6 +33,7 @@ import { PaymentApi } from '@accelbyte/sdk/api/platform/PaymentApi'
 import { SubscriptionApi } from '@accelbyte/sdk/api/platform/SubscriptionApi'
 import { WalletApi } from '@accelbyte/sdk/api/platform/WalletApi'
 import { Method } from 'axios'
+import { IAPApi } from './api/platform/IAPApi'
 
 export type Overrides = { config?: SDKRequestConfig; cache?: boolean }
 export type ServiceVersion = { title: string; name: string; version: string | undefined; buildDate: string }
@@ -69,6 +70,7 @@ export interface AccelbyteSDK {
     Payment(overrides?: Overrides): PaymentApi
     Subscription(overrides?: Overrides): SubscriptionApi
     Wallet(overrides?: Overrides): WalletApi
+    IAP(overrides?: Overrides): IAPApi
     version: ServiceVersion
   }
   Legal: {

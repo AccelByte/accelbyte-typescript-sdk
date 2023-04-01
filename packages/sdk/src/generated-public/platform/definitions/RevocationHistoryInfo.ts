@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { CreditRevocation } from './CreditRevocation'
 import { EntitlementRevocation } from './EntitlementRevocation'
 import { ItemRevocation } from './ItemRevocation'
+import { RevocationError } from './RevocationError'
 import { RevokeEntry } from './RevokeEntry'
 
 export const RevocationHistoryInfo = z.object({
@@ -20,8 +21,10 @@ export const RevocationHistoryInfo = z.object({
   itemRevocations: z.array(ItemRevocation).nullish(),
   creditRevocations: z.array(CreditRevocation).nullish(),
   entitlementRevocations: z.array(EntitlementRevocation).nullish(),
+  revocationErrors: z.array(RevocationError).nullish(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish()
+  updatedAt: z.string().nullish(),
+  transactionId: z.string().nullish()
 })
 
 export interface RevocationHistoryInfo extends z.TypeOf<typeof RevocationHistoryInfo> {}

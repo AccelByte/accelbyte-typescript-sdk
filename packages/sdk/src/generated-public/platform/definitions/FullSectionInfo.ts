@@ -12,8 +12,8 @@ import { SectionItem } from './SectionItem'
 export const FullSectionInfo = z.object({
   sectionId: z.string(),
   namespace: z.string(),
-  viewId: z.string(),
-  viewName: z.string(),
+  viewId: z.string().nullish(),
+  viewName: z.string().nullish(),
   name: z.string(),
   localizations: z.record(Localization),
   active: z.boolean(),

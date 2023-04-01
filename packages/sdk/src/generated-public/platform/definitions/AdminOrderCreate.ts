@@ -14,6 +14,7 @@ export const AdminOrderCreate = z.object({
   currencyCode: z.string(),
   region: z.string(),
   language: z.string().nullish(),
+  sectionId: z.string().nullish(),
   returnUrl: z.string().nullish(),
   ext: z.record(z.any()).nullish(),
   sandbox: z.boolean().nullish(),

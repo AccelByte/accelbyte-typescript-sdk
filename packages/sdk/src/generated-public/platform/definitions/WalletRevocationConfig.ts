@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export const WalletRevocationConfig = z.object({
   enabled: z.boolean().nullish(),
-  strategy: z.enum(['REVOKE_OR_REPORT', 'ALWAYS_REVOKE']).nullish()
+  strategy: z.enum(['REVOKE_OR_REPORT', 'ALWAYS_REVOKE', 'CUSTOM']).nullish()
 })
 
 export interface WalletRevocationConfig extends z.TypeOf<typeof WalletRevocationConfig> {}

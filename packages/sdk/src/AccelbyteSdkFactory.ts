@@ -109,6 +109,7 @@ class AccelbyteSDKFactory {
         Payment: (overrides?: Overrides) => ApiFactory.paymentApi(this.config, this.options.namespace, this.override(overrides)),
         Subscription: (overrides?: Overrides) => ApiFactory.subscriptionApi(this.config, this.options.namespace, this.override(overrides)),
         Wallet: (overrides?: Overrides) => ApiFactory.walletApi(this.config, this.options.namespace, this.override(overrides)),
+        IAP: (overrides?: Overrides) => ApiFactory.iapApi(this.config, this.options.namespace, this.override(overrides)),
         version: PlatformVersion
       },
       Legal: {

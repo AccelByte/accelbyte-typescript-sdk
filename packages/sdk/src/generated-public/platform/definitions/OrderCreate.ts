@@ -13,6 +13,7 @@ export const OrderCreate = z.object({
   currencyCode: z.string(),
   region: z.string().nullish(),
   language: z.string().nullish(),
+  sectionId: z.string().nullish(),
   returnUrl: z.string().nullish(),
   ext: z.record(z.any()).nullish()
 })

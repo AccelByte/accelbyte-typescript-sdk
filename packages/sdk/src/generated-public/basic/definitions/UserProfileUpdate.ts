@@ -15,6 +15,7 @@ export const UserProfileUpdate = z.object({
   timeZone: z.string().nullish(),
   dateOfBirth: z.string().nullish(),
   customAttributes: z.record(z.any()).nullish(),
+  privateCustomAttributes: z.record(z.any()).nullish(),
   zipCode: z.string().nullish()
 })
 

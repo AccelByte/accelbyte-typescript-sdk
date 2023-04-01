@@ -1,3 +1,16 @@
+### 1.1.1 - 2023-03-31
+
+- Updated SDK to latest swaggers
+
+### 1.1.0 - 2023-03-28
+
+- Change `IamHelper.currentUserCanOrder` to `IamHelper.isUserBanned`
+
+### 1.0.4 - 2023-03-16
+
+- Fix SDK types and build not being proper for Remix build
+- Add namespace and clientId on twitch game config
+
 ### 1.0.3 - 2023-03-08
 
 - Fix SDK Build is failing with disabling e2e test from test script
@@ -91,6 +104,7 @@
 ### 0.1.1-alpha.63 - 2023-02-15
 
 - Update codegen to emit `interface` instead of `type` when inferring Zod type
+- Move twitch drop configs fetching logic to SdkWidget
 
 ### 0.1.1-alpha.62 - 2023-02-08
 

@@ -43,6 +43,7 @@ export const ItemUpdate = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']).nullish(),
   listable: z.boolean().nullish(),
   purchasable: z.boolean().nullish(),
+  isSectionExclusive: z.boolean().nullish(),
   sku: z.string().nullish(),
   regionData: z.record(z.array(RegionDataItem)).nullish(),
   itemIds: z.array(z.string()).nullish(),

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 AccelByte Inc. All Rights Reserved.
+ * Copyright (c) 2021-2023 AccelByte Inc. All Rights Reserved.
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  *
@@ -24,7 +24,11 @@ const opts = {
       format: 'es'
     }
   ],
-  plugins: [dts()],
+  plugins: [
+    dts({
+      tsconfig: 'tsconfig.build.json'
+    })
+  ],
   external: [...packageJsonDependencies, /validator\/lib/, /lodash\//]
 }
 

@@ -11,7 +11,7 @@ export const PaymentProviderConfigInfo = z.object({
   region: z.string(),
   aggregate: z.enum(['XSOLLA', 'ADYEN']).nullish(),
   specials: z.array(z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL'])).nullish(),
-  paymentMerchantConfigId: z.string(),
+  paymentMerchantConfigId: z.string().nullish(),
   taxJarEnabled: z.boolean().nullish(),
   taxJarApiToken: z.string().nullish(),
   sandboxTaxJarApiToken: z.string().nullish(),

@@ -251,12 +251,14 @@ export class UserApi {
    */
   getThirdPartyURL = ({
     platformId,
+    namespace,
     queryParams
   }: {
     platformId: string
+    namespace?: string
     queryParams?: { clientId?: string | null; redirectUri?: string | null }
   }) => {
-    return this.newInstance().fetchWebLinkMeUsers_ByPlatformId(platformId, queryParams)
+    return this.newInstance(namespace).fetchWebLinkMeUsers_ByPlatformId(platformId, queryParams)
   }
 
   /**
@@ -380,10 +382,28 @@ export class UserApi {
   }
 
   /**
+   * POST [/iam/v3/public/namespaces/{namespace}/users/me/platforms/justice/{targetNamespace}](api)
+   *
+   * This method is to create a game namespace user
+   *
+   */
+  createPlatformGameNamespace = (targetNamespace: string) => {
+    return this.newInstance().createUserMePlatformJustice_ByTargetNamespace(targetNamespace)
+  }
+
+  /**
+   * GET [/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/{platformUserId}](api)
+   *
+   */
+  getLinkedAccountbyPlatformUserId = (platformId: string, platformUserId: string) => {
+    return this.newInstance().fetchUser_ByPlatformId_ByPlatformUserId(platformId, platformUserId)
+  }
+
+  /**
    * @internal
    */
-  newInstance() {
-    return new Users$(Network.create(this.conf), this.namespace, this.cache)
+  newInstance(namespace?: string) {
+    return new Users$(Network.create(this.conf), namespace || this.namespace, this.cache)
   }
 
   /**

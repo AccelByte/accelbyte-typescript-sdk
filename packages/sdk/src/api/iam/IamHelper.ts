@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -45,17 +45,17 @@ export class IamHelper {
     return EligibleUser.safeParse(user).success
   }
 
-  static currentUserCanOrder(user: UserResponseV3 | null): boolean {
+  static isUserBanned(user: UserResponseV3 | null): boolean {
     const parsed = EligibleUser.safeParse(user)
     if (parsed.success) {
       const now = new Date().getTime()
       return (
         parsed.data.bans.find(
           (ban: UserActiveBanResponseV3) => ban.ban === BanType.enum.ORDER_AND_PAYMENT && new Date(ban.endDate).getTime() > now
-        ) === undefined
+        ) !== undefined
       )
     }
 
-    return true
+    return false
   }
 }

@@ -72,6 +72,7 @@ export const ItemInfo = z.object({
   fresh: z.boolean().nullish(),
   sellable: z.boolean().nullish(),
   saleConfig: SaleConfig.nullish(),
+  sectionExclusive: z.boolean().nullish(),
   localExt: z.record(z.any()).nullish()
 })
 

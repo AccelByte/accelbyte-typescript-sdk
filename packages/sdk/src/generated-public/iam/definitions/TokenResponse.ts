@@ -11,6 +11,7 @@ import { Permission } from './Permission'
 export const TokenResponse = z.object({
   access_token: z.string(),
   bans: z.array(JwtBanV3),
+  device_id: z.string().nullish(),
   display_name: z.string(),
   expires_in: z.number().int(),
   is_comply: z.boolean().nullish(),

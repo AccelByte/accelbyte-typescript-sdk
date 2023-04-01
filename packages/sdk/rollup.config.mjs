@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 AccelByte Inc. All Rights Reserved.
+ * Copyright (c) 2021-2023 AccelByte Inc. All Rights Reserved.
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  *
@@ -60,7 +60,7 @@ function createConfig(config) {
       json({
         compact: true
       }),
-      declarationRewritePlugin()
+      changelogUpdater()
     ],
     onwarn: warning => {
       if (warning.code !== 'CIRCULAR_DEPENDENCY') {
@@ -82,7 +82,6 @@ export default async function createConfigs() {
       output: {
         dir: path.join(CONFIG.compilerOptions.outDir, 'es/browser'),
         format: 'es',
-        preserveModules: true,
         sourcemap: true,
         assetFileNames: '[name]-[hash][extname]'
       }
@@ -95,7 +94,6 @@ export default async function createConfigs() {
         {
           dir: path.join(CONFIG.compilerOptions.outDir, 'es/node'),
           format: 'es',
-          preserveModules: true,
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'
         },
@@ -109,59 +107,10 @@ export default async function createConfigs() {
     })
   ]
 }
-
-// Local plugins.
-// This is a custom plugin to rewrite the declaration files.
-// Read more about the "hooks" of Rollup, visit https://rollupjs.org/guide/en/#output-generation-hooks.
-const ACTUAL_ANCHOR = nixifyPath(path.join(process.cwd(), CONFIG.compilerOptions.outDir))
-const IMPORT_ANCHOR = /@accelbyte\/(sdk|validator)/g
-const IMPORT_REGEX = /@accelbyte\/(sdk|validator)(\/\w+)*/g
-
-function declarationRewritePlugin() {
+function changelogUpdater() {
   return {
     name: 'declaration-imports-rewriter-plugin',
-    generateBundle(_opts, bundle, _isWrite) {
-      const fileNames = Object.keys(bundle)
-      // Iterate all bundled files.
-      for (let i = 0; i < fileNames.length; i += 1) {
-        const fileName = fileNames[i]
-        // Full filesystem path.
-        const fullPathToFile = nixifyPath(path.join(ACTUAL_ANCHOR, fileName))
-        // Normalize the full path. This is because we might have `declarationDir`
-        // in `tsconfig.build.json`. If we don't normalize it, then the imports will be referring
-        // to incorrect paths.
-        const anchorPath = fullPathToFile.slice(0, fullPathToFile.indexOf('src/') + 'src/'.length)
-
-        // If it is a declaration file, then we replace "@accelbyte/sdk" with ".".
-        if (fileName.endsWith('.d.ts')) {
-          // Example `fileName`: accelbyte-web-sdk/packages/sdk/src/generated/platform/definitions/WalletPagingSlicedResult.d.ts.
-          // Example `importSource`: @accelbyte/sdk/utils/Network.
-          // Here, we want to rewrite all imports inside `fileName` so that it's relative instead of absolute,
-          // because in bundled files, we assume we are no longer in the justice-odin monorepo ecosystem.
-          const file = bundle[fileName]
-
-          /** @type {string} */
-          let source = file.source
-          const imports = source.match(IMPORT_REGEX)
-
-          if (imports) {
-            const deduped = Array.from(new Set(imports))
-            for (const match of deduped) {
-              // Replace the imports with the relative paths.
-              const actualPath = match.replace(IMPORT_ANCHOR, anchorPath)
-              let relativePath = nixifyPath(path.relative(path.dirname(fullPathToFile), actualPath))
-              // Add relative indicator so it doesn't try to resolve from `node_modules`.
-              if (!relativePath.startsWith('.')) {
-                relativePath = `./${relativePath}`
-              }
-              source = source.replace(new RegExp(match, 'g'), relativePath)
-            }
-          }
-
-          // Rewrite the source.
-          file.source = source
-        }
-      }
+    generateBundle(_opts, _bundle, _isWrite) {
       updateVersionFromChangelog()
     }
   }
@@ -175,8 +124,4 @@ function updateVersionFromChangelog() {
     packageJson.version = version
   }
   writeFileSync(path.resolve('./package.json'), JSON.stringify(packageJson, null, 2))
-}
-
-function nixifyPath(p) {
-  return p.replace(/\\/g, '/')
 }

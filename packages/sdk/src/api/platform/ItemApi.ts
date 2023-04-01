@@ -64,6 +64,8 @@ export class ItemApi {
   }
 
   /**
+   * @deprecated The naming implicates that there will be more than 1 result, but the result is only 1. Prefer to use `getItemByItemIdLocale` instead.
+   *
    * GET [/platform/public/namespaces/{namespace}/items/{itemId}/locale](api)
    *
    * This API is used to get an item in locale. If item not exist in specific region, default region item will return.
@@ -71,6 +73,17 @@ export class ItemApi {
    * Returns: item data
    */
   getItemsByItemIdLocale = ({ itemId, queryParams }: { itemId: string; queryParams?: Parameters<Item$['fetchLocale_ByItemId']>[1] }) => {
+    return this.newInstance().fetchLocale_ByItemId(itemId, queryParams)
+  }
+
+  /**
+   * GET [/platform/public/namespaces/{namespace}/items/{itemId}/locale](api)
+   *
+   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.
+   *
+   * Returns: item data
+   */
+  getItemByItemIdLocale = ({ itemId, queryParams }: { itemId: string; queryParams?: Parameters<Item$['fetchLocale_ByItemId']>[1] }) => {
     return this.newInstance().fetchLocale_ByItemId(itemId, queryParams)
   }
 
@@ -94,7 +107,16 @@ export class ItemApi {
     return this.newInstance().createItemPurchaseConditionValidate(data)
   }
 
-  private newInstance() {
-    return new Item$(Network.create(this.conf), this.namespace, this.cache)
+  /**
+   * GET [/platform/public/namespaces/{namespace}/items/bySku](api)
+   *
+   * This API is used to get Item Info by SKU
+   */
+  getItemDetailBySku = (data: { sku: string }, namespace?: string) => {
+    return this.newInstance(namespace).fetchItemsBySku(data)
+  }
+
+  private newInstance(namespace?: string) {
+    return new Item$(Network.create(this.conf), namespace || this.namespace, this.cache)
   }
 }

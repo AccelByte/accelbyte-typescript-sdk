@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const UsersAgreementsRequest = z.object({ userIds: z.array(z.string()) })
+export const UsersAgreementsRequest = z.object({ userIds: z.array(z.string()), currentPublishedOnly: z.boolean().nullish() })
 
 export interface UsersAgreementsRequest extends z.TypeOf<typeof UsersAgreementsRequest> {}

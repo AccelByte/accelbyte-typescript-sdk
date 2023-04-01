@@ -4,8 +4,12 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { ConsumableEntitlementRevocationConfig } from './ConsumableEntitlementRevocationConfig'
 import { DurableEntitlementRevocationConfig } from './DurableEntitlementRevocationConfig'
 
-export const EntitlementRevocationConfig = z.object({ durable: DurableEntitlementRevocationConfig.nullish() })
+export const EntitlementRevocationConfig = z.object({
+  durable: DurableEntitlementRevocationConfig.nullish(),
+  consumable: ConsumableEntitlementRevocationConfig.nullish()
+})
 
 export interface EntitlementRevocationConfig extends z.TypeOf<typeof EntitlementRevocationConfig> {}

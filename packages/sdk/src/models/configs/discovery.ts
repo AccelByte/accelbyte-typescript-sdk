@@ -161,7 +161,20 @@ export const PlayerPortalFeatureFlagsConfig = z.object({
    *
    * Defaults to `false`.
    **/
-  isNewsV2Visible: z.boolean().default(false)
+  isNewsV2Visible: z.boolean().default(false),
+  /**
+   * Determines whether the "Twitch Drop" feature is enable or not.
+   *
+   * Defaults to `true`.
+   **/
+  isTwitchDropEnabled: z.boolean().default(true),
+  /**
+   * Determines whether the "Legal" feature is enable or not.
+   * When there is mandatory Legal published, this feature flag will be ignored
+   *
+   * Defaults to `true`.
+   **/
+  isLegalEnabled: z.boolean().default(true)
 })
 export interface PlayerPortalFeatureFlagsConfig extends z.infer<typeof PlayerPortalFeatureFlagsConfig> {}
 
@@ -187,6 +200,11 @@ export const DiscoveryConfigData = z.object({
     })
   ),
   paymentTemplateInfo: Config.merge(
+    z.object({
+      data: TemplateInfoConfig
+    })
+  ),
+  twitchDropTemplateInfo: Config.merge(
     z.object({
       data: TemplateInfoConfig
     })

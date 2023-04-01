@@ -12,6 +12,8 @@ export const EntitlementHistoryInfo = z.object({
   operator: z.string(),
   userId: z.string(),
   useCount: z.number().int().nullish(),
+  useCountChange: z.number().int().nullish(),
+  reason: z.string().nullish(),
   createdAt: z.string(),
   updatedAt: z.string()
 })

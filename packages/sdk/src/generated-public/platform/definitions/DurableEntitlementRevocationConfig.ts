@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export const DurableEntitlementRevocationConfig = z.object({
   enabled: z.boolean().nullish(),
-  strategy: z.enum(['REVOKE_OR_REPORT']).nullish()
+  strategy: z.enum(['REVOKE_OR_REPORT', 'CUSTOM']).nullish()
 })
 
 export interface DurableEntitlementRevocationConfig extends z.TypeOf<typeof DurableEntitlementRevocationConfig> {}

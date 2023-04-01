@@ -13,7 +13,6 @@ import { UserProfileCreate } from './definitions/UserProfileCreate'
 import { UserProfileInfo } from './definitions/UserProfileInfo'
 import { UserProfilePrivateCreate } from './definitions/UserProfilePrivateCreate'
 import { UserProfilePrivateInfo } from './definitions/UserProfilePrivateInfo'
-import { UserProfilePrivateUpdate } from './definitions/UserProfilePrivateUpdate'
 import { UserProfilePublicInfo } from './definitions/UserProfilePublicInfo'
 import { UserProfilePublicInfoArray } from './definitions/UserProfilePublicInfoArray'
 import { UserProfileStatusUpdate } from './definitions/UserProfileStatusUpdate'
@@ -73,7 +72,7 @@ export class UserProfile$ {
   /**
    * Update my profile.<br>Updates user profile in the target namespace (namespace in the path). If token's namespace doesn't match the target namespace, the service automatically maps the token's user ID into the user ID in the target namespace. The endpoint returns the updated user profile on a successful call.<br>Other detail info: <ul><li><i>Required permission</i>: resource=<b>"NAMESPACE:{namespace}:PROFILE"</b>, action=4 <b>(UPDATE)</b></li><li><i>Action code</i>: 11402</li><li><i>Returns</i>: user profile</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to update <b>publisher user profile</b></li><li>can be filled with <b>game namespace</b> in order to update <b>game user profile</b></li></ul></li><li><i>Language</i> : allowed format: en, en-US</li><li><i>Timezone</i> : IANA time zone, e.g. Asia/Shanghai</li></ul>
    */
-  updateUserMeProfile<T = UserProfilePrivateInfo>(data: UserProfilePrivateUpdate): Promise<IResponse<T>> {
+  updateUserMeProfile<T = UserProfilePrivateInfo>(data: UserProfileUpdate): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/me/profiles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })

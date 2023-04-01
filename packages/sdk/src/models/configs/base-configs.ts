@@ -90,4 +90,12 @@ export const PageConfig = z.object({
     fonts: FontConfigs
   })
 })
+
 export interface PageConfig extends z.infer<typeof PageConfig> {}
+
+export const BackgroundConfig = z.object({
+  background: z.string(),
+  backgroundOverlay: BackgroundOverlay
+})
+
+export interface BackgroundConfig extends z.TypeOf<typeof BackgroundConfig> {}

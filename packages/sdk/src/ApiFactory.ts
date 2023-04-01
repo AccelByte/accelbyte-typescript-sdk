@@ -33,6 +33,7 @@ import { OrderApi } from '@accelbyte/sdk/api/platform/OrderApi'
 import { PaymentApi } from '@accelbyte/sdk/api/platform/PaymentApi'
 import { SubscriptionApi } from '@accelbyte/sdk/api/platform/SubscriptionApi'
 import { WalletApi } from '@accelbyte/sdk/api/platform/WalletApi'
+import { IAPApi } from './api/platform/IAPApi'
 
 export class ApiFactory {
   static mergedConfigs = (config: SDKRequestConfig, overrides?: { config?: SDKRequestConfig; cache?: boolean }) => {
@@ -211,5 +212,10 @@ export class ApiFactory {
   static publicTemplateApi(config: SDKRequestConfig, namespace: string, overrides?: { config?: SDKRequestConfig; cache?: boolean }) {
     const conf = ApiFactory.mergedConfigs(config, overrides)
     return new PublicTemplateApi(conf, namespace, overrides?.cache)
+  }
+
+  static iapApi(config: SDKRequestConfig, namespace: string, overrides?: { config?: SDKRequestConfig; cache?: boolean }) {
+    const conf = ApiFactory.mergedConfigs(config, overrides)
+    return new IAPApi(conf, namespace, overrides?.cache)
   }
 }

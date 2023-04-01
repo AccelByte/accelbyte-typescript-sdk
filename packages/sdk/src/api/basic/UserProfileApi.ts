@@ -5,7 +5,6 @@
  */
 import { SDKRequestConfig } from '@accelbyte/sdk/AccelbyteSDK'
 import { UserProfilePrivateCreate } from '@accelbyte/sdk/generated-public/basic/definitions/UserProfilePrivateCreate'
-import { UserProfilePrivateUpdate } from '@accelbyte/sdk/generated-public/basic/definitions/UserProfilePrivateUpdate'
 import { UserProfile$ } from '@accelbyte/sdk/generated-public/basic/UserProfile$'
 import { UserProfileUpdate } from '@accelbyte/sdk/generated-public/basic/definitions/UserProfileUpdate'
 import { Network } from '@accelbyte/sdk/utils/Network'
@@ -44,7 +43,7 @@ export class UserProfileApi {
    * Update my profile.
    * Updates user profile in the target namespace. If token's namespace doesn't match the target namespace, the service automatically maps the token's user ID into the user ID in the target namespace. The method returns the updated user profile on a successful call.
    */
-  updateUserMeProfile = (data: UserProfilePrivateUpdate) => {
+  updateUserMeProfile = (data: UserProfileUpdate) => {
     return this.newInstance().updateUserMeProfile(data)
   }
 

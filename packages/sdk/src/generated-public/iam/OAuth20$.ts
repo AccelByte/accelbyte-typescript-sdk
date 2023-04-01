@@ -433,6 +433,7 @@ export class OAuth20$ {
       device_id?: string | null
       createHeadless?: boolean | null
       macAddress?: string | null
+      skipSetCookie?: boolean | null
     }
   ): Promise<IResponse<T>> {
     const params = {} as SDKRequestConfig

@@ -7,10 +7,10 @@ import { z } from 'zod'
 import { Localization } from './Localization'
 
 export const ImportStoreItemInfo = z.object({
-  itemId: z.string(),
-  name: z.string(),
+  itemId: z.string().nullish(),
+  name: z.string().nullish(),
   sku: z.string().nullish(),
-  categoryPath: z.string(),
+  categoryPath: z.string().nullish(),
   itemType: z.enum([
     'APP',
     'COINS',

@@ -73,6 +73,7 @@ export const BundledItemInfo = z.object({
   sellable: z.boolean().nullish(),
   saleConfig: SaleConfig.nullish(),
   bundledQty: z.number().int().nullish(),
+  sectionExclusive: z.boolean().nullish(),
   localExt: z.record(z.any()).nullish()
 })
 

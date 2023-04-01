@@ -12,7 +12,7 @@ export const WalletTransactionInfo = z.object({
   namespace: z.string(),
   userId: z.string(),
   operator: z.string(),
-  walletAction: z.enum(['CREDIT', 'PAYMENT', 'DEBIT']),
+  walletAction: z.enum(['CREDIT', 'PAYMENT', 'DEBIT']).nullish(),
   currencyCode: z.string(),
   balanceSource: z.string().nullish(),
   transactionAmountDetails: z.array(TransactionAmountDetails).nullish(),

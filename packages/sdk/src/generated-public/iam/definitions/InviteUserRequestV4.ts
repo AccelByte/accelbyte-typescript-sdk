@@ -10,7 +10,7 @@ export const InviteUserRequestV4 = z.object({
   emailAddresses: z.array(z.string()),
   isAdmin: z.boolean(),
   namespace: z.string().nullish(),
-  roleId: z.string()
+  roleId: z.string().nullish()
 })
 
 export interface InviteUserRequestV4 extends z.TypeOf<typeof InviteUserRequestV4> {}

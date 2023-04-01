@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -88,14 +88,14 @@ describe('currentUserIsEligible', () => {
   })
 })
 
-describe('currentUserCanOrder', () => {
+describe('isUserBanned', () => {
   test('null input', () => {
-    expect(IamHelper.currentUserCanOrder(null)).toBe(true)
+    expect(IamHelper.isUserBanned(null)).toBe(false)
   })
 
-  test('cannot order because of banned', () => {
+  test('user is banned', () => {
     expect(
-      IamHelper.currentUserCanOrder({
+      IamHelper.isUserBanned({
         ...USER,
         bans: [
           {
@@ -105,12 +105,12 @@ describe('currentUserCanOrder', () => {
           }
         ]
       })
-    ).toBe(false)
+    ).toBe(true)
   })
 
-  test('can order, ban expired', () => {
+  test('user was banned', () => {
     expect(
-      IamHelper.currentUserCanOrder({
+      IamHelper.isUserBanned({
         ...USER,
         bans: [
           {
@@ -120,10 +120,10 @@ describe('currentUserCanOrder', () => {
           }
         ]
       })
-    ).toBe(true)
+    ).toBe(false)
   })
 
-  test('can order, no ban', () => {
-    expect(IamHelper.currentUserCanOrder(USER)).toBe(true)
+  test('user is clean of bans', () => {
+    expect(IamHelper.isUserBanned(USER)).toBe(false)
   })
 })

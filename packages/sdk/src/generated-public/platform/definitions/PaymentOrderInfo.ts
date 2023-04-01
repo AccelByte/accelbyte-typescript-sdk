@@ -18,7 +18,7 @@ export const PaymentOrderInfo = z.object({
   extUserId: z.string().nullish(),
   sandbox: z.boolean(),
   price: z.number().int(),
-  paymentProvider: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']),
+  paymentProvider: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']).nullish(),
   paymentMethod: z.string().nullish(),
   region: z.string().nullish(),
   language: z.string().nullish(),

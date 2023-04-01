@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const UpdateUserStatusRequest = z.object({ enabled: z.boolean(), reason: z.string() })
+export const UpdateUserStatusRequest = z.object({ enabled: z.boolean(), reason: z.string().nullish() })
 
 export interface UpdateUserStatusRequest extends z.TypeOf<typeof UpdateUserStatusRequest> {}

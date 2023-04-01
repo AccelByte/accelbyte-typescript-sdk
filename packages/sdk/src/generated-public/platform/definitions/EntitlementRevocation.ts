@@ -13,7 +13,8 @@ export const EntitlementRevocation = z.object({
   itemSku: z.string().nullish(),
   revocationStrategy: z.string().nullish(),
   skipped: z.boolean().nullish(),
-  reason: z.string().nullish()
+  reason: z.string().nullish(),
+  customRevocation: z.record(z.any()).nullish()
 })
 
 export interface EntitlementRevocation extends z.TypeOf<typeof EntitlementRevocation> {}

@@ -1,9 +1,8 @@
 /*
- * Copyright (c) 2019-2022. AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2019-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-
 export * from './Validation'
 export * from './validateSecretKey'
 export * from './validateAlpha'
@@ -51,4 +50,5 @@ export * from './validateStatisticCode'
 export * from './validateDockerImageVersion'
 export * from './validateForbiddenWords'
 export * from './validateImageName'
+export * from './validateAlreadyUsed'
 export * from './validateSeasonPassCode'

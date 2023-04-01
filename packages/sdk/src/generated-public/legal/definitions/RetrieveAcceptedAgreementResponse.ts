@@ -14,6 +14,7 @@ export const RetrieveAcceptedAgreementResponse = z.object({
   policyId: z.string().nullish(),
   policyType: z.string().nullish(),
   policyName: z.string().nullish(),
+  tags: z.array(z.string()).nullish(),
   displayVersion: z.string().nullish(),
   namespace: z.string().nullish(),
   countryCode: z.string().nullish(),

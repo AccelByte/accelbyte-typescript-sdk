@@ -13,7 +13,8 @@ export const CreditRevocation = z.object({
   status: z.enum(['SUCCESS', 'FAIL']).nullish(),
   revocationStrategy: z.string().nullish(),
   skipped: z.boolean().nullish(),
-  reason: z.string().nullish()
+  reason: z.string().nullish(),
+  customRevocation: z.record(z.any()).nullish()
 })
 
 export interface CreditRevocation extends z.TypeOf<typeof CreditRevocation> {}

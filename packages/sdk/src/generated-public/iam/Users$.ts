@@ -25,7 +25,6 @@ import { ListBulkUserResponse } from './definitions/ListBulkUserResponse'
 import { LoginHistoriesResponse } from './definitions/LoginHistoriesResponse'
 import { PlatformUserIdRequest } from './definitions/PlatformUserIdRequest'
 import { PublicUserInformationResponseV3 } from './definitions/PublicUserInformationResponseV3'
-import { PublicUserResponseV3 } from './definitions/PublicUserResponseV3'
 import { ResetPasswordRequestV3 } from './definitions/ResetPasswordRequestV3'
 import { SendRegisterVerificationCodeRequest } from './definitions/SendRegisterVerificationCodeRequest'
 import { SendVerificationCodeRequestV3 } from './definitions/SendVerificationCodeRequestV3'
@@ -232,23 +231,6 @@ export class Users$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown())
-  }
-
-  /**
-   * <p>This endpoint retrieve user attributes. action code: 10129</p>
-   */
-  fetchUser_ByUserId<T = PublicUserResponseV3>(userId: string): Promise<IResponseWithSync<T>> {
-    const params = {} as SDKRequestConfig
-    const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, PublicUserResponseV3)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -489,9 +471,14 @@ export class Users$ {
 
   /**
    * <p>Require valid user authorization<br>action code : 10124 </p>
+   * 			<p>if set NeedVerificationCode = true, IAM will send verification code into email</p>
+   * 			<p>user can use that verification code to verify user through /iam/v3/public/namespaces/{namespace}/users/me/code/verify
    */
-  createUserMeHeadlesVerify<T = UserResponseV3>(data: UpgradeHeadlessAccountV3Request): Promise<IResponse<T>> {
-    const params = {} as SDKRequestConfig
+  createUserMeHeadlesVerify<T = UserResponseV3>(
+    data: UpgradeHeadlessAccountV3Request,
+    queryParams?: { needVerificationCode?: boolean | null }
+  ): Promise<IResponse<T>> {
+    const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/headless/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
