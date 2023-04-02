@@ -2,5 +2,8 @@
   "name": "@accelbyte/widgets-demo",
   "version": "0.0.0",
   "author": "AccelByte Inc",
-  "license": "AccelByte License"
+  "license": "AccelByte License",
+  "scripts": {
+    "clean": "rm -rf dist && rm -rf node_modules"
+  }
 }

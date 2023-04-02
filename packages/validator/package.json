@@ -10,7 +10,8 @@
     "build": "yarn build:js && yarn build:types",
     "build:js": "rollup -c rollup.config.mjs",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
-    "test": "echo 'Not implemented yet'"
+    "test": "echo 'Not implemented yet'",
+    "clean": "rm -rf dist && rm -rf node_modules"
   },
   "engines": {
     "node": ">=16"
