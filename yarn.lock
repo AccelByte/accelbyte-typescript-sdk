@@ -510,9 +510,9 @@ cookie@^0.4.2:
   integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
 
 core-js-pure@^3.25.1:
-  version "3.29.1"
-  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.29.1.tgz#1be6ca2b8772f6b4df7fc4621743286e676c6162"
-  integrity sha512-4En6zYVi0i0XlXHVz/bi6l1XDjCqkKRq765NXuX+SnaIatlE96Odt5lMLjdxUiNI1v9OXI5DSLWYPlmTfkTktg==
+  version "3.30.0"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.30.0.tgz#41b6c42e5f363bd53d79999bd35093b17e42e1bf"
+  integrity sha512-+2KbMFGeBU0ln/csoPqTe0i/yfHbrd2EUhNMObsGtXMKS/RTtlkYyi+/3twLcevbgNR0yM/r0Psa3TEoQRpFMQ==
 
 crypto-js@4.1.1:
   version "4.1.1"

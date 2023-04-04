@@ -28,7 +28,7 @@
     "test": "yarn test:unit",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
-    "clean": "rm -rf dist && rm -rf node_modules"
+    "clean": "npx rimraf dist && npx rimraf node_modules"
   },
   "devDependencies": {
     "@playwright/test": "1.28.0",

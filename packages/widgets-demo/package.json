@@ -4,6 +4,6 @@
   "author": "AccelByte Inc",
   "license": "AccelByte License",
   "scripts": {
-    "clean": "rm -rf dist && rm -rf node_modules"
+    "clean": "npx rimraf dist && npx rimraf node_modules"
   }
 }

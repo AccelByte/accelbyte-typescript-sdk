@@ -11,7 +11,7 @@
     "build:js": "rollup -c rollup.config.mjs",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
     "test": "echo 'Not implemented yet'",
-    "clean": "rm -rf dist && rm -rf node_modules"
+    "clean": "npx rimraf dist && npx rimraf node_modules"
   },
   "engines": {
     "node": ">=16"
