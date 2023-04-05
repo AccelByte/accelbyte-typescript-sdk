@@ -1,3 +1,7 @@
+### 1.1.2 - 2023-04-05
+
+- Set `scope`, `refresh_expires_in`, and `refresh_token` in `TokenResponsesV3` as nullish
+
 ### 1.1.1 - 2023-03-31
 
 - Updated SDK to latest swaggers

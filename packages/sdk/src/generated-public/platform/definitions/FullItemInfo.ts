@@ -32,6 +32,7 @@ export const FullItemInfo = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']),
   listable: z.boolean().nullish(),
   purchasable: z.boolean().nullish(),
+  sectionExclusive: z.boolean().nullish(),
   itemType: z.enum([
     'APP',
     'COINS',

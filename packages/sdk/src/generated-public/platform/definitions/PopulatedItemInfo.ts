@@ -32,6 +32,7 @@ export const PopulatedItemInfo = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']),
   listable: z.boolean().nullish(),
   purchasable: z.boolean().nullish(),
+  sectionExclusive: z.boolean().nullish(),
   itemType: z.enum([
     'APP',
     'COINS',
@@ -74,7 +75,6 @@ export const PopulatedItemInfo = z.object({
   sellable: z.boolean().nullish(),
   saleConfig: SaleConfig.nullish(),
   items: z.array(BundledItemInfo).nullish(),
-  sectionExclusive: z.boolean().nullish(),
   localExt: z.record(z.any()).nullish()
 })
 

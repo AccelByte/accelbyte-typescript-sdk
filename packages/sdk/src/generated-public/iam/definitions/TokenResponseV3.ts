@@ -20,10 +20,10 @@ export const TokenResponseV3 = z.object({
   permissions: z.array(PermissionV3),
   platform_id: z.string().nullish(),
   platform_user_id: z.string().nullish(),
-  refresh_expires_in: z.number().int(),
-  refresh_token: z.string(),
+  refresh_expires_in: z.number().int().nullish(),
+  refresh_token: z.string().nullish(),
   roles: z.array(z.string()).nullish(),
-  scope: z.string(),
+  scope: z.string().nullish(),
   token_type: z.string(),
   user_id: z.string(),
   xuid: z.string().nullish()

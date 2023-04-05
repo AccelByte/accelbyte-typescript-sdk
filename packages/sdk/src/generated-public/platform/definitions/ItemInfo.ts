@@ -31,6 +31,7 @@ export const ItemInfo = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']),
   listable: z.boolean().nullish(),
   purchasable: z.boolean().nullish(),
+  sectionExclusive: z.boolean().nullish(),
   itemType: z.enum([
     'APP',
     'COINS',
@@ -72,7 +73,6 @@ export const ItemInfo = z.object({
   fresh: z.boolean().nullish(),
   sellable: z.boolean().nullish(),
   saleConfig: SaleConfig.nullish(),
-  sectionExclusive: z.boolean().nullish(),
   localExt: z.record(z.any()).nullish()
 })
 

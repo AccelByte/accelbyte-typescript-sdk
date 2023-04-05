@@ -41,7 +41,7 @@ export const ItemCreate = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']),
   listable: z.boolean().nullish(),
   purchasable: z.boolean().nullish(),
-  isSectionExclusive: z.boolean().nullish(),
+  sectionExclusive: z.boolean().nullish(),
   sku: z.string().nullish(),
   images: z.array(Image).nullish(),
   thumbnailUrl: z.string().nullish(),

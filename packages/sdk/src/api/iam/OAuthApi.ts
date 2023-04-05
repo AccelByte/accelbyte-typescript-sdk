@@ -352,6 +352,16 @@ export class OAuthApi {
     return this.newInstance().postOauthToken(data)
   }
 
+  /**
+   * POST [/iam/v3/oauth/verify](api)
+   *
+   * This endpoint requires all requests to have Authorization header set with Basic access authentication constructed from client id and client secret.
+   *
+   */
+  verifyAccessToken = (data: { token: string | null }) => {
+    return this.newInstance().postOauthVerify(data)
+  }
+
   private newInstance() {
     return new OAuth20$(Network.create(this.conf), this.namespace, this.cache)
   }

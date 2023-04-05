@@ -31,6 +31,7 @@ export const BundledItemInfo = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']),
   listable: z.boolean().nullish(),
   purchasable: z.boolean().nullish(),
+  sectionExclusive: z.boolean().nullish(),
   itemType: z.enum([
     'APP',
     'COINS',
@@ -73,7 +74,6 @@ export const BundledItemInfo = z.object({
   sellable: z.boolean().nullish(),
   saleConfig: SaleConfig.nullish(),
   bundledQty: z.number().int().nullish(),
-  sectionExclusive: z.boolean().nullish(),
   localExt: z.record(z.any()).nullish()
 })
 
