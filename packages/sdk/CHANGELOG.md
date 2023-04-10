@@ -1,3 +1,7 @@
+### 1.1.3 - 2023-04-06
+
+- Add PaymentConfigData to the list of configs
+
 ### 1.1.2 - 2023-04-05
 
 - Set `scope`, `refresh_expires_in`, and `refresh_token` in `TokenResponsesV3` as nullish
