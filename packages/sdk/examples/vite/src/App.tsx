@@ -5,25 +5,22 @@
  */
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { getSdkTestValues } from './Sdk'
+import { exchangeAuthorizationCode, getSdkTestValues, login } from './Sdk'
 
 function App() {
   const [responses, setResponses] = useState<any>(null)
-  useEffect(() => {
-    let ignore = false
 
+  useEffect(() => {
     async function initialize() {
       setResponses(null)
-      if (!ignore) {
-        setResponses(await getSdkTestValues())
-      }
+      setResponses(await getSdkTestValues())
     }
 
     initialize()
+  }, [])
 
-    return () => {
-      ignore = true
-    }
+  useEffect(() => {
+    exchangeAuthorizationCode()
   }, [])
 
   return (
@@ -36,6 +33,12 @@ function App() {
           </p>
         </div>
       </div>
+
+      {!responses?.currentUser?.response?.data && (
+        <div>
+          <button onClick={login}>Login</button>
+        </div>
+      )}
 
       {responses === null ? (
         'No responses yet'

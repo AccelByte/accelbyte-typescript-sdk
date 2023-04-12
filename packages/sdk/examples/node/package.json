@@ -9,7 +9,7 @@
     "link:stop": "yarn unlink @accelbyte/sdk && yarn install --force"
   },
   "dependencies": {
-    "@accelbyte/sdk": "0.2.0-beta.20",
+    "@accelbyte/sdk": "1.1.3",
     "dotenv": "16.0.3"
   }
 }
