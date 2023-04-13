@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3030",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "link:start": "yarn link @accelbyte/sdk",
-    "link:stop": "yarn unlink @accelbyte/sdk && yarn install --force"
+    "lint": "next lint"
   },
   "dependencies": {
     "@accelbyte/sdk": "1.1.3",

@@ -1,3 +1,7 @@
+### 0.2.0-beta.3 - 2023-04-12
+
+- Display-name validation causing browser to become unresponsive
+
 ### 0.2.0-beta.2 - 2023-02-23
 
 - Add `.js` extensions to the validator imports

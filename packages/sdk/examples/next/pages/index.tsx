@@ -3,16 +3,17 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { Accelbyte, CurrencyInfo, DiscoveryConfigData, ItemPagingSlicedResult, UserResponseV3 } from '@accelbyte/sdk'
+import { exchangeAuthorizationCode, login } from '~/sdk'
+
 import styles from '../styles/Home.module.css'
 
-import { Accelbyte, CurrencyInfo, DiscoveryConfigData, ItemPagingSlicedResult, NamespaceInfo } from '@accelbyte/sdk'
-
 const SDK_CONFIG = {
-  baseURL: 'https://demo.accelbyte.io',
+  baseURL: 'http://localhost:3030/api',
   clientId: '77f88506b6174c3ea4d925f5b4096ce8',
   namespace: 'accelbyte',
   redirectURI: 'http://localhost:3030'
@@ -23,39 +24,35 @@ const sdk = Accelbyte.SDK({
 })
 
 interface TestSdkReturnType {
-  loginURL: string
-  listDiscoveryConfigs: DiscoveryConfigData | undefined
-  listOfCurrencies: CurrencyInfo[] | undefined
-  listOfItems: ItemPagingSlicedResult | undefined
-  listOfNamespaces: NamespaceInfo[] | undefined
+  currentUser: UserResponseV3 | null | undefined
+  listDiscoveryConfigs: DiscoveryConfigData | null | undefined
+  listOfCurrencies: CurrencyInfo[] | null | undefined
+  listOfItems: ItemPagingSlicedResult | null | undefined
 }
 
-export const getServerSideProps: GetServerSideProps<{ data: TestSdkReturnType }> = async () => {
-  const [listDiscoveryConfigs, listOfCurrencies, listOfItems, listOfNamespaces] = await Promise.all([
+export const getServerSideProps: GetServerSideProps<{ data: TestSdkReturnType }> = async ({ req }) => {
+  const accessToken = req.cookies.access_token
+  const [currentUser, listDiscoveryConfigs, listOfCurrencies, listOfItems] = await Promise.all([
+    sdk.IAM.User({
+      config: {
+        headers: {
+          authorization: `Bearer ${accessToken}`
+        }
+      }
+    }).getCurrentUser(),
     sdk.AccelbyteConfig.PublicTemplate().getDiscoveryTemplateConfigs(),
 
     sdk.Platform.Currency().getCurrencies(),
-    sdk.Platform.Item().fetchItemsByCriteria({}),
-
-    // These require authentication and we can't use it right away.
-    // Ensure that you have logged in (have cookies) or pass the access token to the `Authorization` header.
-    sdk.Basic.Namespace({
-      config: {
-        headers: {
-          Authorization: `Bearer <replace-this-with-access-token>`
-        }
-      }
-    }).getNamespaces()
+    sdk.Platform.Item().fetchItemsByCriteria({})
   ])
 
   return {
     props: {
       data: {
-        loginURL: sdk.IAM.UserAuthorization().createLoginURL(),
-        listDiscoveryConfigs: listDiscoveryConfigs.response?.data,
-        listOfCurrencies: listOfCurrencies.response?.data,
-        listOfItems: listOfItems.response?.data,
-        listOfNamespaces: listOfNamespaces.response?.data || null
+        currentUser: currentUser.response?.data || null,
+        listDiscoveryConfigs: listDiscoveryConfigs.response?.data || null,
+        listOfCurrencies: listOfCurrencies.response?.data || null,
+        listOfItems: listOfItems.response?.data || null
       }
     }
   }
@@ -63,6 +60,18 @@ export const getServerSideProps: GetServerSideProps<{ data: TestSdkReturnType }>
 
 // Page.
 export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  useEffect(() => {
+    async function exchange() {
+      const result = await exchangeAuthorizationCode(sdk, window.location.href)
+      if (result) {
+        // Reload so we can re-fetch the `currentUser` from the server side.
+        window.location.reload()
+      }
+    }
+
+    exchange()
+  }, [])
+
   return (
     <>
       <Head>
@@ -86,6 +95,12 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
             </a>
           </div>
         </div>
+
+        {!data?.currentUser && (
+          <div>
+            <button onClick={() => login(sdk)}>Log in</button>
+          </div>
+        )}
 
         <div className={styles.responses} id="response">
           {Object.keys(data).map(key => (

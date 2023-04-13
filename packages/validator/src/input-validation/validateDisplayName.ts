@@ -9,7 +9,7 @@ import matches from 'validator/lib/matches.js'
 import XRegExp from 'xregexp'
 import { z } from 'zod'
 import { CommonValidationErrorType } from './constant/errorType'
-import { MAX_DISPLAY_NAME_LENGTH } from './constant/numbers'
+import { MAX_DISPLAY_NAME_LENGTH, MIN_DISPLAY_NAME_LENGTH } from './constant/numbers'
 import { validateLength, ValidateLengthErrorType } from './validateLength'
 
 export const ValidateDisplayNameErrorType = z.enum([...ValidateLengthErrorType.options, CommonValidationErrorType.enum.invalidFormat])
@@ -20,6 +20,7 @@ export interface ValidateDisplayNameOptions {
   isRequired?: boolean
   strictlyAllowSpecialCharacters?: boolean
   maxLength?: number
+  minLength?: number
 }
 
 /**
@@ -34,6 +35,7 @@ export interface ValidateDisplayNameOptions {
  * @default isRequired true
  * @default strictlyAllowSpecialCharacters true
  * @default maxLength MAX_DISPLAY_NAME_LENGTH
+ * @default minLength MIN_DISPLAY_NAME_LENGTH
  */
 export const validateDisplayName = (
   value: string,
@@ -41,10 +43,13 @@ export const validateDisplayName = (
     allowUnicode = false,
     isRequired = true,
     strictlyAllowSpecialCharacters = true,
-    maxLength = MAX_DISPLAY_NAME_LENGTH
+    maxLength = MAX_DISPLAY_NAME_LENGTH,
+    minLength = MIN_DISPLAY_NAME_LENGTH
   }: ValidateDisplayNameOptions = {}
 ) => {
-  const REGEX = "^[a-zA-Z0-9]+(([',. -][a-zA-Z0-9])?[a-zA-Z0-9]*)*$"
+  const LETTER_OR_DIGIT = '[a-zA-Z0-9]'
+  const ALLOWED_SPECIAL_CHARACTERS = "[',. -]"
+  const REGEX = `^${LETTER_OR_DIGIT}+(${ALLOWED_SPECIAL_CHARACTERS}${LETTER_OR_DIGIT}+)*$`
 
   if (isEmpty(value)) {
     if (!isRequired) {
@@ -74,6 +79,7 @@ export const validateDisplayName = (
   }
 
   return validateLength(value, {
-    max: maxLength
+    max: maxLength,
+    min: minLength
   })
 }

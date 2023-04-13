@@ -12,15 +12,15 @@ function App() {
 
   useEffect(() => {
     async function initialize() {
+      // Exchange authorization code first, so that by the time we fetch the stuff, we already have the cookie.
+      await exchangeAuthorizationCode()
+
+      // After that, fetch the stuff.
       setResponses(null)
       setResponses(await getSdkTestValues())
     }
 
     initialize()
-  }, [])
-
-  useEffect(() => {
-    exchangeAuthorizationCode()
   }, [])
 
   return (
@@ -36,7 +36,7 @@ function App() {
 
       {!responses?.currentUser?.response?.data && (
         <div>
-          <button onClick={login}>Login</button>
+          <button onClick={login}>Log in</button>
         </div>
       )}
 

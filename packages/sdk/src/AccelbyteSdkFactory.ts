@@ -162,7 +162,7 @@ class AccelbyteSDKFactory {
       }
      */
     const axiosRequest = service_ => Network.create(this.config).get(`/${service_.title}/version`)
-    Promise.all([
+    Promise.allSettled([
       axiosRequest(IamVersion),
       axiosRequest(BuildinfoVersion),
       axiosRequest(BasicVersion),
@@ -171,7 +171,13 @@ class AccelbyteSDKFactory {
       axiosRequest(EventVersion)
     ]).then(values => {
       values.forEach(res => {
-        const remoteService = res.data
+        // Skip processing rejected requests.
+        if (res.status === 'rejected') {
+          console.error(res.reason)
+          return
+        }
+
+        const remoteService = res.value.data
         const sdkService: ServiceVersion = mapServices[remoteService.name]
         if (sdkService?.version !== remoteService.version) {
           console.warn(`WARN: SDK(${sdkService.title}) v${sdkService.version} doesn't match service version ${remoteService.version}`)

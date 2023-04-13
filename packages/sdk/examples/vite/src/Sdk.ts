@@ -7,7 +7,7 @@
 import { Accelbyte } from '@accelbyte/sdk'
 
 const SDK_CONFIG = {
-  baseURL: window.location.origin + '/api',
+  baseURL: 'http://localhost:3030/api',
   clientId: '77f88506b6174c3ea4d925f5b4096ce8',
   namespace: 'accelbyte',
   redirectURI: 'http://localhost:3030'
@@ -42,12 +42,12 @@ export function login() {
 export async function exchangeAuthorizationCode() {
   const searchParams = new URL(window.location.href).searchParams
   const { code, error, state } = Object.fromEntries(searchParams.entries())
+  if (!code) return
 
   try {
     await sdk.IAM.UserAuthorization().exchangeAuthorizationCode({ code, error, state })
+    window.history.pushState({}, '', window.location.origin)
   } catch (err) {
     console.error(err)
   }
-
-  window.history.pushState({}, '', window.location.origin)
 }

@@ -19,10 +19,6 @@ export default () => {
           rewrite: path => {
             return path.replace(/^\/api/, '')
           }
-        },
-        '/cache': {
-          target: 'https://demo.accelbyte.io',
-          changeOrigin: true
         }
       }
     }
