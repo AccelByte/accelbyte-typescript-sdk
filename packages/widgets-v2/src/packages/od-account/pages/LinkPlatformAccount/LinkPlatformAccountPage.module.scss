@@ -1,0 +1,96 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+:local {
+  .linkPlatformAccountPage {
+    @apply flex min-h-screen items-center justify-center bg-[color:rgb(var(--od-rgba-background))] p-4;
+    .languageSelector {
+      @apply relative float-right mr-2 mt-8;
+    }
+    .linkPlatformAccountContainer {
+      @apply my-32 w-full max-w-md;
+      .headlessAccountContainerForm {
+        @apply mt-8 w-full bg-[color:rgb(var(--od-rgba-card))];
+        border-radius: 4px;
+        .contentWrapper {
+          @apply p-6;
+
+          .title {
+            font-weight: 500;
+            margin-bottom: 6px;
+          }
+          .titleDescription {
+            line-height: 20px;
+            margin-bottom: 0;
+          }
+        }
+        .formWrapper {
+          @apply px-6 pb-5;
+          .alert {
+            margin-bottom: 16px;
+            margin-top: -8px;
+          }
+          hr {
+            margin-bottom: 24px;
+            border-color: $gray-80;
+          }
+          :global {
+            .tabs {
+              display: flex;
+            }
+            .tab {
+              display: block;
+              flex-grow: 1;
+              text-align: center;
+            }
+          }
+        }
+
+        .bottomSection {
+          padding-bottom: 24px;
+          .loginWithAccelByteAccount {
+            @apply text-[color:rgb(var(--od-rgb-text))];
+            text-align: center;
+            font-family: $body-font;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 24px;
+
+            a {
+              @apply text-[color:rgb(var(--od-rgb-primary))];
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      .formTabs {
+        font-family: $body-font;
+        padding: 10px 16px;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      div[data-id='tooltip'] {
+        margin-left: 14px;
+        margin-top: -24px;
+      }
+    }
+
+    &.desktop {
+      .languageSelector {
+        @apply mt-14;
+      }
+      select {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .languageSelector {
+    @apply flex justify-end;
+  }
+}

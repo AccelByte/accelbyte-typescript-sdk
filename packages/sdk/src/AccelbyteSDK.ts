@@ -3,143 +3,93 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { FileUploadApi } from '@accelbyte/sdk/api/basic/FileUploadApi'
-import { MiscApi } from '@accelbyte/sdk/api/basic/MiscApi'
-import { NamespaceApi } from '@accelbyte/sdk/api/basic/NamespaceApi'
-import { UserProfileApi } from '@accelbyte/sdk/api/basic/UserProfileApi'
-import { CachingApi } from '@accelbyte/sdk/api/buildInfo/CachingApi'
-import { DlcApi } from '@accelbyte/sdk/api/buildInfo/DlcApi'
-import { DownloaderApi } from '@accelbyte/sdk/api/buildInfo/DownloaderApi'
-import { EventApi } from '@accelbyte/sdk/api/event/EventApi'
-import { DataDeletionApi } from '@accelbyte/sdk/api/gdpr/DataDeletionApi'
-import { DataRetrievalApi } from '@accelbyte/sdk/api/gdpr/DataRetrievalApi'
-import { InputValidationsApi } from '@accelbyte/sdk/api/iam/InputValidationsApi'
-import { OAuthApi } from '@accelbyte/sdk/api/iam/OAuthApi'
-import { ThirdPartyCredentialApi } from '@accelbyte/sdk/api/iam/ThirdPartyCredentialApi'
-import { TwoFAApi } from '@accelbyte/sdk/api/iam/TwoFAApi'
-import { UserApi } from '@accelbyte/sdk/api/iam/UserApi'
-import { UserAuthorizationApi } from '@accelbyte/sdk/api/iam/UserAuthorizationApi'
-import { AgreementApi } from '@accelbyte/sdk/api/legal/AgreementApi'
-import { EligibilitiesApi } from '@accelbyte/sdk/api/legal/EligibilitiesApi'
-import { LocalizedPolicyVersionsApi } from '@accelbyte/sdk/api/legal/LocalizedPolicyVersionsApi'
-import { PoliciesApi } from '@accelbyte/sdk/api/legal/PoliciesApi'
-import { PublicTemplateApi } from '@accelbyte/sdk/api/accelbyteconfig/PublicTemplateApi'
-import { CurrencyApi } from '@accelbyte/sdk/api/platform/CurrencyApi'
-import { EntitlementApi } from '@accelbyte/sdk/api/platform/EntitlementApi'
-import { FulfillmentApi } from '@accelbyte/sdk/api/platform/FulfillmentApi'
-import { ItemApi } from '@accelbyte/sdk/api/platform/ItemApi'
-import { OrderApi } from '@accelbyte/sdk/api/platform/OrderApi'
-import { PaymentApi } from '@accelbyte/sdk/api/platform/PaymentApi'
-import { SubscriptionApi } from '@accelbyte/sdk/api/platform/SubscriptionApi'
-import { WalletApi } from '@accelbyte/sdk/api/platform/WalletApi'
-import { Method } from 'axios'
-import { IAPApi } from './api/platform/IAPApi'
 
-export type Overrides = { config?: SDKRequestConfig; cache?: boolean }
-export type ServiceVersion = { title: string; name: string; version: string | undefined; buildDate: string }
+import { SDKEvents, SDKOptions, SDKRequestConfig } from './Types'
+import { injectErrorInterceptors } from './interceptors/ErrorInterceptor'
+import { injectAuthInterceptors } from './interceptors/AuthInterceptors'
+import { ApiUtils } from './utils/ApiUtils'
+
+/**
+ * This is the main SDK
+ */
 
 export interface AccelbyteSDK {
-  IAM: {
-    UserAuthorization(overrides?: Overrides): UserAuthorizationApi
-    User(overrides?: Overrides): UserApi
-    OAuth(overrides?: Overrides): OAuthApi
-    InputValidations(overrides?: Overrides): InputValidationsApi
-    ThirdPartyCredential(overrides?: Overrides): ThirdPartyCredentialApi
-    TwoFA(overrides?: Overrides): TwoFAApi
-    version: ServiceVersion
+  refreshTokens: (accessToken: string | undefined | null, refreshToken?: string | undefined | null) => void
+  assembly: () => {
+    config: SDKRequestConfig<any>
+    namespace: string
+    clientId: string
+    redirectURI: string
+    baseURL: string
+    cache: boolean | undefined
   }
-  BuildInfo: {
-    Downloader(overrides?: Overrides): DownloaderApi
-    DLC(overrides?: Overrides): DlcApi
-    Caching(overrides?: Overrides): CachingApi
-    version: ServiceVersion
-  }
-  Basic: {
-    Misc(overrides?: Overrides): MiscApi
-    UserProfile(overrides?: Overrides): UserProfileApi
-    FileUpload(overrides?: Overrides): FileUploadApi
-    Namespace(overrides?: Overrides): NamespaceApi
-    version: ServiceVersion
-  }
-  Platform: {
-    Currency(overrides?: Overrides): CurrencyApi
-    Entitlement(overrides?: Overrides): EntitlementApi
-    Fulfillment(overrides?: Overrides): FulfillmentApi
-    Item(overrides?: Overrides): ItemApi
-    Order(overrides?: Overrides): OrderApi
-    Payment(overrides?: Overrides): PaymentApi
-    Subscription(overrides?: Overrides): SubscriptionApi
-    Wallet(overrides?: Overrides): WalletApi
-    IAP(overrides?: Overrides): IAPApi
-    version: ServiceVersion
-  }
-  Legal: {
-    Eligibilities(overrides?: Overrides): EligibilitiesApi
-    Policies(overrides?: Overrides): PoliciesApi
-    Agreement(overrides?: Overrides): AgreementApi
-    LocalizedPolicyVersions(overrides?: Overrides): LocalizedPolicyVersionsApi
-    version: ServiceVersion
-  }
-  GDPR: {
-    DataDeletion(overrides?: Overrides): DataDeletionApi
-    DataRetrieval(overrides?: Overrides): DataRetrievalApi
-    version: ServiceVersion
-  }
-  Event: {
-    Event(overrides?: Overrides): EventApi
-    version: ServiceVersion
-  }
-  AccelbyteConfig: {
-    PublicTemplate<ConfigKeysEnum extends string>(overrides?: Overrides): PublicTemplateApi<ConfigKeysEnum>
-    version: ServiceVersion
-  }
-
-  refreshTokens(newAccessToken: string | undefined | null, newRefreshToken?: string | undefined | null)
 }
 
-export interface SDKOptions {
-  clientId: string
-  redirectURI: string
-  baseURL: string
-  namespace: string
+class AccelbyteSDKImpl {
+  private readonly options: SDKOptions
+  private readonly events: SDKEvents | undefined
+  private config: SDKRequestConfig
+  private refreshToken: string | undefined
 
-  // Optional args
-  cache?: boolean
+  constructor(options: SDKOptions, config?: SDKRequestConfig, events?: SDKEvents) {
+    this.options = {
+      cache: false,
+      ...options
+    }
+    this.events = events
+    this.config = {
+      timeout: 60000,
+      baseURL: options.baseURL,
+      withCredentials: true,
+      ...config,
+      headers: {
+        'Content-Type': 'application/json',
+        ...config?.headers
+      }
+    }
+  }
+
+  init() {
+    const { baseURL, clientId } = this.options
+
+    injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.getRefreshToken)
+    injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
+
+    // TODO reintegrate doVersionDiagnostics later on
+    // setTimeout(() => this.doVersionDiagnostics(), TIMEOUT_TO_DIAGNOSTICS)
+
+    return {
+      refreshTokens: (accessToken, refreshToken?) => this.refreshTokensImpl(accessToken, refreshToken),
+      assembly: () => {
+        return {
+          config: this.config,
+          namespace: this.options.namespace,
+          clientId: this.options.clientId,
+          redirectURI: this.options.redirectURI,
+          baseURL: this.options.baseURL,
+          cache: this.options.cache !== undefined ? this.options.cache : false
+        }
+      }
+    }
+  }
+
+  private getRefreshToken = (): string | undefined => this.refreshToken
+
+  private getConfig = () => this.config
+
+  private refreshTokensImpl = (accessToken, refreshToken?) => {
+    if (refreshToken) {
+      this.refreshToken = refreshToken
+    }
+    const configOverride = { headers: { Authorization: accessToken ? `Bearer ${accessToken}` : '' } }
+    this.config = ApiUtils.mergedConfigs(this.config, { config: configOverride })
+  }
 }
 
-export interface SDKEvents {
-  onSessionExpired?: () => void
-  onGetUserSession?: (accessToken: string, refreshToken: string) => void
-  onUserEligibilityChange?: () => void
-  onError?: (error: SDKError) => void
+const sdkInit = ({ options, config, onEvents }: { options: SDKOptions; config?: SDKRequestConfig; onEvents?: SDKEvents }): AccelbyteSDK => {
+  const sdkFactory = new AccelbyteSDKImpl(options, config, onEvents)
+  return sdkFactory.init()
 }
 
-// This is high level strict types taken from the AxiosRequestConfig implementation
-export interface SDKRequestConfig<D = any> {
-  // AxiosRequestConfig
-  url?: string
-  method?: Method | string
-  baseURL?: string
-  headers?: Record<string, string | number | boolean>
-  params?: any
-  paramsSerializer?: (params: any) => string
-  data?: D
-  timeout?: number
-  timeoutErrorMessage?: string
-  signal?: AbortSignal
-  // `withCredentials` indicates whether or not cross-site Access-Control requests should be made using credentials
-  // withCredentials:true will automatically send the cookie to the client-side
-  withCredentials?: boolean // default true
-}
-
-// The actual implementation is AxiosError
-class SDKError extends Error {
-  // AxiosError
-  // message?: string
-  // config: AxiosRequestConfig<D>;
-  code?: string
-  request?: any
-  response?: any // AxiosResponse<T, D>
-  isAxiosError: boolean | undefined
-  status?: string
-}
+// ts-prune-ignore-next
+export const Accelbyte = { SDK: sdkInit }

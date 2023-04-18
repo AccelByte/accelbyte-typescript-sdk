@@ -1,0 +1,29 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.twitchPageLayout {
+  :global {
+    .formWrapper {
+      @apply mx-auto mt-8 p-4 w-full rounded bg-gray-100;
+      max-width: 360px;
+
+      .icon {
+        @apply flex justify-center p-4;
+      }
+
+      .instructionMessage {
+        @apply mb-4 text-center;
+      }
+    }
+
+    .languageSelector {
+      @apply fixed top-0 right-0 mt-8 mr-8;
+    }
+
+    .headerLogoContainer {
+      @apply flex flex-col mt-32;
+    }
+  }
+}

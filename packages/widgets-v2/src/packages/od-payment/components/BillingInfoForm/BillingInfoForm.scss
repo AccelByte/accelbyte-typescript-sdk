@@ -1,0 +1,48 @@
+/*!
+ * Copyright (c) 2021-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+.billing-info-form {
+  box-sizing: border-box;
+  flex-flow: column;
+  display: flex;
+  padding: 0 20px;
+  height: 100%;
+  flex: 1;
+
+  label {
+    @apply block text-sm leading-normal tracking-wide text-[color:rgb(var(--od-rgb-text))];
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    &.error {
+      .form-control,
+      .form-control:focus {
+        @apply border-red-60;
+      }
+    }
+  }
+
+  .save-checkbox {
+    @apply flex items-center;
+    > .checkbox {
+      @apply mr-4;
+    }
+  }
+
+  .error-message {
+    @apply text-red-40 text-xs;
+    letter-spacing: 0.2px;
+    line-height: 16px;
+    margin-top: 8px;
+  }
+
+  .button {
+    @apply mt-8 w-full;
+  }
+}

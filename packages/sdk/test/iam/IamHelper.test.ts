@@ -3,9 +3,8 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { IamHelper } from '@accelbyte/sdk/api/iam/IamHelper'
+import { IamHelper, BanType } from '@accelbyte/sdk-iam'
 import { describe, expect, test } from 'vitest'
-import { BanType } from '@accelbyte/sdk/models/UserTypes'
 import { USER } from './TestConstants'
 
 describe('currentUserIsHeadlessAccount', () => {

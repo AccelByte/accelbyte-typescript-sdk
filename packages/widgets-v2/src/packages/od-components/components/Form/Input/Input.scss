@@ -1,0 +1,59 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.input {
+  @apply rounded w-full pl-2 py-1 border border-[color:rgb(var(--od-rgb-text,0.45))] bg-[color:rgb(var(--od-rgba-background))] text-sm pr-2 outline-none;
+  
+  &::placeholder {
+    @apply text-[color:rgb(var(--od-rgb-text),0.45)];
+  }
+}
+
+.selectorInputContainer {
+  @apply flex;
+  .inputContainer {
+    @apply flex flex-row-reverse items-center;
+    .selectorInput {
+      @apply rounded pl-2 py-1 border border-[color:rgb(var(--od-rgb-text,0.45))] bg-[color:rgb(var(--od-rgba-background))] text-sm pr-8 cursor-pointer;
+    }
+
+    .chevron {
+      @apply absolute mr-2 text-[color:rgb(var(--od-rgba-text))];
+    }
+  }
+}
+
+.optionContainer {
+  @apply absolute bg-[color:rgb(var(--od-rgba-background))] shadow-md rounded max-h-96 overflow-y-auto mt-1 transition-all;
+  &.open {
+    @apply h-fit;
+  }
+
+  &.closed {
+    @apply h-0;
+  }
+
+  .placeholder {
+    @apply bg-[color:rgb(var(--od-rgba-background))] text-[color:rgb(var(--od-rgb-text,0.45))] px-4 py-2 transition-all;
+  }
+
+  .option {
+    @apply bg-[color:rgb(var(--od-rgba-background))] hover:bg-[color:rgb(var(--od-rgba-primary))] cursor-pointer px-4 py-2 transition-all text-[color:rgb(var(--od-rgba-text))];
+    &.selected {
+      @apply bg-[color:rgb(var(--od-rgba-primary))];
+    }
+  }
+}
+
+.directoryPicker {
+  @apply flex flex-row-reverse items-center cursor-text;
+  .directoryPickerInput {
+    @apply rounded w-full pl-2 py-1 border border-[color:rgb(var(--od-rgb-text,0.45))] bg-[color:rgb(var(--od-rgba-background))] text-sm pr-8 outline-0;
+  }
+
+  .folder {
+    @apply absolute mr-2 text-[color:rgb(var(--od-rgba-text))];
+  }
+}

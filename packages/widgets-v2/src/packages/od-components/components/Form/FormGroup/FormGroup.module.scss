@@ -1,0 +1,67 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+$form-group-margin-bottom: 24px;
+
+.vertical {
+  @apply flex flex-col;
+
+  .formGroup {
+    margin-bottom: $form-group-margin-bottom;
+  }
+}
+
+.horizontal {
+  @apply flex flex-row;
+
+  .formGroup {
+    @apply mb-0;
+  }
+}
+
+.formGroup {
+  @apply flex flex-col justify-start items-start relative border-none min-w-0;
+  margin-bottom: $form-group-margin-bottom;
+}
+
+:global {
+  .formGroup.hasError {
+    .inputGroup {
+      @apply border-red-60;
+    }
+
+    .inputLabel {
+      @apply text-red-60;
+    }
+  }
+}
+
+.formGroupLabel {
+  @apply mb-2;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+}
+
+.formGroupError {
+  @apply text-red-60;
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.formGroupInfo {
+  @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  word-break: break-word;
+}
+
+.formGroupMarginBottom {
+  margin-bottom: $form-group-margin-bottom;
+}

@@ -1,0 +1,44 @@
+/*!
+ * Copyright (c) 2021-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+.qrCodeHandler {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+
+  .qrCodeWrapper {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+    margin: auto 0;
+
+    .qrCodeBox {
+      @apply bg-neutral-0;
+      margin: 0 auto;
+      padding: 16px 16px 8px 16px;
+      min-width: 150px;
+      max-width: 265px;
+      width: 100%;
+      box-sizing: border-box;
+
+      img {
+        margin: auto;
+        width: 100%;
+      }
+
+      .description {
+        @apply text-sm text-gray-d1;
+        letter-spacing: 0.1px;
+        line-height: 22px;
+        margin-top: 8px;
+      }
+    }
+    .statusCheck {
+      margin-top: 24px;
+      text-align: center;
+    }
+  }
+}

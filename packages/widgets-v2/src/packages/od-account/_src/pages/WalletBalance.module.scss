@@ -1,0 +1,34 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.walletBalance {
+  :global {
+    .label {
+      @apply uppercase text-[color:rgb(var(--od-rgb-text),0.65)] text-xs leading-5;
+    }
+
+    .balanceSection {
+      @apply flex flex-row flex-nowrap items-center mt-2;
+      .loading {
+        @apply inline;
+      }
+
+      .balance {
+        @apply flex-grow text-2xl leading-7 text-blue-30;
+      }
+
+      .plusSign {
+        @apply flex flex-row items-center justify-center text-[color:rgb(var(--od-rgba-text))] bg-blue-50 w-5 h-5 rounded-sm no-underline;
+      }
+
+      .errorContainer {
+        @apply text-xs;
+        > * {
+          @apply block;
+        }
+      }
+    }
+  }
+}

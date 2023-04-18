@@ -1,0 +1,87 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+.twitchDropLayout {
+  @include bg-overlay(twitchDrop);
+
+  p,
+  h1,
+  h2 {
+    @apply m-0;
+  }
+
+  @apply text-md font-body flex flex-col items-center text-center text-[color:rgb(var(--od-rgb-text))];
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: rgb(var(--od-rgba-background));
+  flex-grow: 1;
+
+  .twitchDropLayout__errorContainer {
+    @apply flex flex-col items-end justify-end pt-6 pb-5;
+    min-height: 145px;
+  }
+
+  .twitchDropLayout__logo {
+    @apply mb-10 flex items-center justify-center;
+
+    img {
+      width: 256px;
+      height: 54px;
+      object-position: center;
+      object-fit: contain;
+    }
+  }
+
+  .twitchDropLayout__empty {
+    @apply mt-36 mb-10;
+  }
+
+  .twitchDropLayout__languageSelector {
+    @apply fixed top-0 right-0 mt-8 mr-8;
+  }
+
+  .twitchDropLayout__titleContainer {
+    @apply mb-10;
+
+    .twitchDropLayout__title {
+      @apply flex justify-center text-3xl font-medium;
+    }
+  }
+
+  .button {
+    @apply py-4 font-medium uppercase;
+    min-width: 282px;
+  }
+
+  &.linkLayout {
+    .twitchDropLayout__innerContainer {
+      @apply w-96;
+
+      .twitchCard {
+        @apply p-6;
+      }
+
+      [role='alert'] {
+        @apply m-0 w-full text-left;
+
+        div {
+          @apply items-center;
+        }
+      }
+    }
+  }
+
+  &.reclaimLayout {
+    .twitchDropLayout__innerContainer {
+      @apply w-5/12;
+
+      .twitchCard {
+        @apply p-6 w-full;
+      }
+
+    }
+  }
+}

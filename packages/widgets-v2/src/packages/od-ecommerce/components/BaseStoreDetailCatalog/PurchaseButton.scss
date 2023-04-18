@@ -1,0 +1,57 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.purchaseButtonSpinner {
+  @apply ml-2;
+}
+
+.purchaseButtonContainer {
+  @apply relative;
+  .purchaseButton {
+    @apply uppercase items-center w-full;
+
+    > * {
+      @apply grow shrink;
+    }
+
+    .arrow {
+      @apply inline-block ml-4 grow-0 shrink-0;
+      svg {
+        height: 18px;
+        width: 18px;
+      }
+    }
+  }
+
+  .purchaseDropdown {
+    @apply block absolute top-full right-0 z-0 opacity-0 p-[7px];
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform-origin: top right;
+    transform: scaleX(0) scaleY(0);
+
+    &.open {
+      @apply opacity-100;
+      transform: scaleX(1) scaleY(1);
+    }
+
+    .purchaseDropdownOption {
+      @apply bg-black cursor-pointer text-sm font-normal min-w-[192px] py-[10px] px-[26px];
+
+      > * {
+        @apply ml-2;
+      }
+
+      &:hover {
+        @apply bg-gray-90;
+      }
+    }
+
+    &:after {
+      @apply rounded-b h-1 block;
+      content: ' ';
+      background: black;
+    }
+  }
+}

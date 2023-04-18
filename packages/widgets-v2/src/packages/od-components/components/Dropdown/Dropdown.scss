@@ -1,0 +1,56 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.dropdown {
+  @apply flex;
+  
+  .dropdownContainer {
+    @apply relative bg-[color:rgb(var(--od-rgba-background))] rounded;
+
+    .dropdownLabel {
+      @apply text-[color:rgb(var(--od-rgba-text))] flex items-center rounded-sm ml-auto
+      disabled:opacity-70 disabled:cursor-not-allowed;
+      color: rgb(var(--od-rgba-text))
+    }
+
+    .icon {
+      @apply p-2 text-2sm;
+    }
+
+    .label {
+      @apply pl-1 pr-2 flex-grow text-xs text-left;
+    }
+
+    .arrow {
+      @apply text-sm px-1 self-stretch flex items-center;
+    }
+
+    .dropdownList {
+      @apply min-w-full rounded border-[1px];
+      background: rgb(var(--od-rgba-card));
+      border-color: rgb(var(--od-rgba-text));
+
+      .item {
+        @apply text-[color:rgb(var(--od-rgba-text))] block text-2sm leading-none whitespace-nowrap;
+
+        &:hover {
+          @apply bg-[color:rgb(var(--od-rgba-primary))];
+        }
+
+        &:first-child {
+          @apply rounded-t;
+        }
+        &:last-child {
+          @apply rounded-b;
+        }
+        a,
+        .nonLink {
+          color: inherit;
+          @apply block cursor-pointer p-3;
+        }
+      }
+    }
+  }
+}

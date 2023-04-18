@@ -9,8 +9,9 @@ import { resolve } from 'path'
 export default defineConfig({
   resolve: {
     alias: {
-      '@accelbyte/sdk': resolve('./src'),
-      '@accelbyte/validator': resolve('../validator/src')
+      '@accelbyte/validator': resolve('../validator/src'),
+      '@accelbyte/sdk-iam': resolve('../sdk-iam/src'),
+      '@accelbyte/sdk-legal': resolve('../sdk-legal/src')
     }
   },
   test: {

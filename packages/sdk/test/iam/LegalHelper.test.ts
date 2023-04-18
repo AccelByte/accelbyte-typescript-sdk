@@ -1,14 +1,11 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 
-import { LegalHelper } from '@accelbyte/sdk/api/legal/LegalHelper'
+import { LegalHelper, RetrievePolicyPublicResponse, RetrieveUserEligibilitiesResponseArray } from '@accelbyte/sdk-legal'
 import { describe, expect, test } from 'vitest'
-
-import { RetrievePolicyPublicResponse } from '@accelbyte/sdk/generated-public/legal/definitions/RetrievePolicyPublicResponse'
-import { RetrieveUserEligibilitiesResponseArray } from '@accelbyte/sdk/generated-public/legal/definitions/RetrieveUserEligibilitiesResponseArray'
 
 import EligibilitiesJSON from '../fixtures/policies/eligibilities.json'
 import PoliciesJSON from '../fixtures/policies/policies.json'

@@ -1,0 +1,107 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.itemDetailPage {
+  @apply w-full;
+
+  h2 {
+    @apply text-3xl font-semibold;
+  }
+
+  .bannerContainer {
+    .bannerUpperSpace {
+      .breadcrumb {
+        @apply hidden md:block;
+      }
+    }
+  }
+
+  .headerAlert {
+    :first-child {
+      @apply mx-auto rounded-none;
+    }
+  }
+
+  .availableBundleContainer {
+    @apply container mx-auto mt-12;
+
+    h2 {
+      @apply p-4;
+    }
+  }
+
+  .error {
+    @apply flex h-full items-center justify-center;
+  }
+
+  .requirementsDesktop {
+    @apply hidden;
+    @screen md {
+      @apply block;
+    }
+  }
+
+  .requirementsMobile {
+    @apply block p-4;
+    @screen md {
+      @apply hidden;
+    }
+  }
+
+  .itemDetailContent {
+    @apply container mx-auto mt-[80px] mb-[60px] flex flex-col
+    items-stretch justify-center
+    md:flex-row md:items-start;
+
+    section + section {
+      @apply mt-[80px];
+    }
+  }
+
+  .storeContainer {
+    @apply container mx-auto;
+
+    h2 {
+      @apply p-4;
+    }
+
+    .noItem {
+      @apply my-16 text-center;
+    }
+  }
+
+  @screen md {
+    .description,
+    .detailWidget {
+      @apply flex flex-shrink
+      flex-grow flex-col items-stretch
+      p-4 md:p-0;
+    }
+
+    .description {
+      @apply mr-9 basis-[calc(2*100%/3)];
+    }
+
+    .detailWidget {
+      .catalogTitleWidget {
+        @apply rounded-t-[4px];
+      }
+
+      .protruded {
+        @apply my-0 -mx-[5px];
+      }
+
+      .requiredApp {
+        @apply flex flex-col flex-nowrap items-start justify-start;
+      }
+
+      @apply mr-9 basis-[calc(1*100%/3)];
+    }
+
+    .inAppStore {
+      @apply mb-20;
+    }
+  }
+}

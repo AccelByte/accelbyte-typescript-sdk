@@ -1,0 +1,20 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.catalogTitleWidget {
+  padding: 24px;
+  background: #131313;
+  font-weight: 600;
+
+  .tag {
+    @apply px-1 text-xs bg-blue-50 rounded mb-1 inline-block;
+  }
+
+  .title {
+    font-family: $heading-font;
+    font-size: 20px;
+    line-height: 36px;
+  }
+}

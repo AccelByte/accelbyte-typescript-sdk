@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -39,12 +39,12 @@ export type IResponseWithSync<D> =
 
 export class Validate {
   //
-  static responseType<D>(networkCall: () => Promise<AxiosResponse<D>>, Codec: z.ZodType<D>) {
+  static responseType<D>(networkCall: () => Promise<AxiosResponse<D>>, Codec: z.ZodType<D>, modelName: string) {
     return wrapNetworkCallSafely<D>(async () => {
       const response = await networkCall()
       const decodeResult = Codec.safeParse(response.data)
       if (!decodeResult.success) {
-        throw new DecodeError(decodeResult.error, response)
+        throw new DecodeError({ error: decodeResult.error, response, modelName })
       }
       return response
     })
@@ -77,8 +77,10 @@ async function wrapNetworkCallSafely<D>(networkCallFunction: () => Promise<Axios
 }
 
 export class DecodeError extends Error {
-  constructor(error: ZodError, response: AxiosResponse) {
-    super(error.stack)
-    Logger.error(`url "${response.config.url}", data "${JSON.stringify(response.data, null, 2)}"`, error.stack || error.toString())
+  constructor({ error, response, modelName }: { error: ZodError; response: AxiosResponse; modelName: string }) {
+    const msg = `response from url "${response.config.url}" doesn't match model "${modelName}"`
+    super(msg)
+
+    Logger.error(msg, error)
   }
 }

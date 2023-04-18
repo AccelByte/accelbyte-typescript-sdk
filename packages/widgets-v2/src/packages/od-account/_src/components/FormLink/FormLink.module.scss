@@ -1,0 +1,19 @@
+/*!
+ *
+ *  * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved.
+ *  * This is licensed software from AccelByte Inc, for limitations
+ *  * and restrictions contact your company contract manager.
+ *
+ */
+
+.formLinkContainer {
+  @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+  margin-top: 24px;
+  font-size: $fontSize--s;
+  display: flex;
+  justify-content: center;
+
+  .promptText {
+    @apply mr-1;
+  }
+}

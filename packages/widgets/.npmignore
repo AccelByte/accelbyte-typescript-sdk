@@ -1,0 +1,13 @@
+# Development files.
+src/
+scripts/
+types/
+
+# Config files.
+*.config.*
+tsconfig.*
+
+# I guess this is from `rollup-plugin-visualizer`.
+stats.html
+
+CHANGELOG.md

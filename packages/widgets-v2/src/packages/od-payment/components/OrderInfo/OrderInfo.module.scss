@@ -1,0 +1,46 @@
+/*!
+ * Copyright (c) 2021-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+.orderInfo {
+  @apply mb-[24px] box-border flex flex-col border-0 border-b border-solid border-[color:rgb(var(--od-rgb-text),0.2)] text-sm;
+
+  .listGroup {
+    dl {
+      &:not(:first-child) {
+        margin-top: 12px;
+      }
+      &:not(:last-child) {
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  .row {
+    margin: 16px 0;
+    display: flex;
+    flex-direction: row;
+    dt {
+      text-align: left;
+      flex: 1;
+    }
+    dd {
+      text-align: right;
+      margin: 0;
+    }
+  }
+
+  .totalRow {
+    @apply text-[color:rgb(var(--od-rgb-primary),1)] brightness-200;
+    @extend .row;
+    font-weight: 500;
+  }
+
+  .separator {
+    @apply border-0 border-b border-dashed border-[color:rgb(var(--od-rgb-text),0.2)];
+    display: inline-block;
+    width: 100%;
+  }
+}

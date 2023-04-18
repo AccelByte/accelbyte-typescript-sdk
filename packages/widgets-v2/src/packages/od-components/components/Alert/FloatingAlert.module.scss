@@ -1,0 +1,66 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.floatingAlert {
+  border-left-width: 2px;
+  @apply py-2 px-3 text-gray-90 border-l border-gray-90;
+  @apply bg-gray-l3;
+  @apply flex items-center;
+
+  .messageContainer {
+    @apply flex items-start text-2sm;
+    .icon {
+      @apply pr-2 text-sm;
+    }
+  }
+
+  .close {
+    @apply text-lg ml-2 cursor-pointer;
+  }
+
+  &.success {
+    @apply bg-green-20 text-green-60 border-green-60;
+    .close {
+      @apply text-green-60;
+    }
+  }
+
+  &.danger {
+    @apply bg-red-20 text-red-60 border-red-60;
+    .close {
+      @apply text-red-60;
+    }
+  }
+
+  &.info {
+    @apply bg-blue-20 text-gray-90 border-blue-60;
+    .close {
+      @apply text-blue-60;
+    }
+  }
+
+  &.warning {
+    @apply bg-yellow-20 text-yellow-60 border-yellow-60;
+    .close {
+      @apply text-yellow-60;
+    }
+  }
+
+  &.help {
+    @apply bg-purple-l3 text-purple-60 border-purple-60;
+    .close {
+      @apply text-purple-60;
+    }
+  }
+}
+
+.message {
+  @apply text-sm leading-6 mt-[1px];
+  letter-spacing: 0.02em;
+
+  a {
+    @apply text-blue-60;
+  }
+}

@@ -1,0 +1,65 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.twitchFormContainer {
+  :global {
+    h3 {
+      @apply my-4 text-center;
+    }
+
+    .alert {
+      @apply mb-4;
+    }
+
+    .instructionMessage {
+      @apply text-center;
+    }
+
+    .userInfoContainer {
+      @apply flex flex-row w-full rounded bg-gray-80 border-gray-70 my-4 p-4;
+
+      .profileImageContainer {
+        @apply mr-4 my-auto;
+
+        .profileImage {
+          @apply h-12 w-12;
+        }
+      }
+
+      .displayNameAndEmail {
+        @apply overflow-hidden;
+
+        .displayName,
+        .email {
+          @apply truncate;
+        }
+
+        .displayName {
+          @apply font-bold text-[color:rgb(var(--od-rgba-text))];
+        }
+      }
+    }
+
+    .logoutContainer {
+      @apply mb-4;
+
+      .btnLogout {
+        @apply text-red-60;
+      }
+    }
+
+    .btnTwitch {
+      @apply w-full bg-platform-twitch;
+
+      .btnItemContainer {
+        @apply w-full flex justify-start items-center;
+
+        .btnText {
+          @apply flex-1;
+        }
+      }
+    }
+  }
+}

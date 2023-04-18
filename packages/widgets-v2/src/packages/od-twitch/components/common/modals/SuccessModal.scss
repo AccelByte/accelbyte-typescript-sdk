@@ -1,0 +1,113 @@
+/* 
+ * Copyright (c) 2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.twitchDropPage__successModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(var(--od-rgba-background));
+
+  &.multipleGame {
+    background-color: black;
+  }
+
+  &.inPreview {
+    max-height: unset;
+    height: auto;
+    padding-top: 30px;
+  }
+
+  > div {
+    @apply items-center;
+  }
+
+  h2 {
+    @apply m-0 mb-6 text-lg;
+  }
+
+  i {
+    @apply mb-6;
+  }
+
+  p {
+    @apply m-0 mb-6 text-center;
+  }
+
+  .dropsClaimed {
+    @apply flex justify-center;
+    max-height: 58vh;
+    overflow-x: hidden;
+
+    .cardTwitch {
+      @apply rounded-sm;
+      min-width: 180px;
+      background-color: rgb(var(--od-rgba-card));
+    }
+  }
+
+  .twitchDropLayout__title {
+    @apply flex justify-center text-3xl font-medium;
+  }
+}
+
+.twitchDropLayout__logo {
+  @apply mb-10 flex items-center justify-center;
+
+  img {
+    width: 256px;
+    height: 54px;
+    object-position: center;
+    object-fit: contain;
+  }
+}
+
+.twitchDropLayout__logo {
+  @apply mb-10 flex items-center justify-center;
+
+  img {
+    width: 256px;
+    height: 54px;
+    object-position: center;
+    object-fit: contain;
+  }
+}
+
+.containertwitch {
+  @apply w-full text-center;
+}
+
+.closeButton {
+  @apply fixed;
+  top: 2%;
+  right: 2%;
+}
+
+@media screen and (max-width: 1920px) {
+  .listContainer {
+    @apply m-auto py-8;
+    width: 55%;
+    
+    &.inPreview {
+      @apply w-full py-11;
+    }
+  }
+}
+
+@media screen and (min-width: 1921px) {
+  .listContainer {
+    @apply m-auto w-5/12 py-8;
+
+    &.inPreview {
+      @apply w-9/12 py-11;
+    }
+  }
+}

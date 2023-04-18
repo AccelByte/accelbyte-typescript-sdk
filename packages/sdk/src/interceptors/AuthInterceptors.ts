@@ -3,12 +3,11 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { TokenWithDeviceCookieResponseV3 } from '@accelbyte/sdk/generated-public/iam/definitions/TokenWithDeviceCookieResponseV3'
-import { OAuth20$ } from '@accelbyte/sdk/generated-public/iam/OAuth20$'
-import { DesktopChecker } from '@accelbyte/sdk/utils/DesktopChecker'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import { injectRequestInterceptors, injectResponseInterceptors, Network } from '../utils/Network'
 import { RefreshSession } from '../utils/RefreshSession'
+import { OAuth20$, TokenWithDeviceCookieResponseV3 } from './AuthInterceptorDeps'
+import { DesktopChecker } from '../utils/DesktopChecker'
 
 const REFRESH_EXPIRY = 1000
 const REFRESH_EXPIRY_UPDATE_RATE = 500

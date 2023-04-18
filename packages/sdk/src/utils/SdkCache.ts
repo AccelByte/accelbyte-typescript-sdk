@@ -3,8 +3,8 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { IDataStatus, IResponse, IResponseWithSync } from '@accelbyte/sdk/utils/Validate'
 import isEqual from 'lodash/isEqual.js'
+import { IDataStatus, IResponse, IResponseWithSync } from './Validate'
 
 const logEnabled = false
 

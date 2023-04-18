@@ -1,0 +1,132 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.catalogItemBanner {
+  @apply relative flex w-full flex-col p-8;
+  height: 469px;
+  overflow: hidden;
+
+  :global {
+    .banner-video-wrapper {
+      position: relative;
+      padding-top: 56.25%;
+      height: 100%;
+      width: 100%;
+    }
+
+    .media {
+      @apply absolute inset-0 h-full w-full object-cover;
+
+      &.overlay {
+        @apply z-20;
+      }
+    }
+
+    .react-player {
+      top: 0;
+      height: 100% !important;
+      width: 300% !important;
+      transform: translate(-32%, 10%);
+    }
+
+    .bannerContainer {
+      @apply flex h-full flex-col items-stretch justify-end;
+
+      @screen md {
+        @apply py-12;
+        padding-left: 120px;
+        padding-right: 120px;
+        height: 712px;
+      }
+
+      .bannerUpperSpace {
+        @apply flex-grow;
+      }
+
+      .bannerContent {
+        @apply text-center;
+
+        .bannerTitle {
+          @apply m-0;
+
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 28px;
+
+          @screen md {
+            font-size: 42px;
+            line-height: 64px;
+          }
+        }
+
+        .bannerDescription {
+          font-size: 14px;
+          line-height: 20px;
+
+          @screen md {
+            font-size: 18px;
+            line-height: 28px;
+          }
+        }
+      }
+    }
+
+    @screen md {
+      @apply py-12;
+      padding-left: 120px;
+      padding-right: 120px;
+      height: 712px;
+    }
+
+    :local(.separator) {
+      @apply mt-8 inline-block w-px;
+      height: 40px;
+      background: #757575;
+      @screen md {
+        @apply mt-12;
+      }
+    }
+
+    @screen sm {
+      .react-player {
+        top: 0;
+        height: 125% !important;
+        width: 200% !important;
+        transform: translateX(-25%);
+      }
+    }
+
+    @screen md {
+      .banner-video-wrapper {
+        margin-top: -90px;
+      }
+
+      .react-player {
+        top: 0;
+        height: 150% !important;
+        width: 280% !important;
+        transform: translateX(-32%);
+      }
+    }
+
+    @screen lg {
+      .react-player {
+        top: 0;
+        height: 150% !important;
+        width: 200% !important;
+        transform: translateX(-25%);
+      }
+    }
+
+    @screen xl {
+      .react-player {
+        top: 0;
+        height: 140% !important;
+        width: 150% !important;
+        transform: translate(-13%, -20%);
+      }
+    }
+  }
+}

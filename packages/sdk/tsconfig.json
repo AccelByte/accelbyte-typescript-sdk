@@ -31,17 +31,41 @@
     "newLine": "crlf",
     "baseUrl": ".",
     "paths": {
-      "@accelbyte/sdk": [
-        "./src"
-      ],
-      "@accelbyte/sdk/*": [
-        "./src/*"
-      ],
       "@accelbyte/validator": [
         "../validator/src"
       ],
       "@accelbyte/error-translator": [
         "../error-translator/src"
+      ],
+      "@accelbyte/sdk/*": [
+        "./src/*"
+      ],
+      "@accelbyte/sdk": [
+        "./src"
+      ],
+      "@accelbyte/sdk-basic": [
+        "../sdk-basic/src"
+      ],
+      "@accelbyte/sdk-buildinfo": [
+        "../sdk-buildinfo/src"
+      ],
+      "@accelbyte/sdk-event": [
+        "../sdk-event/src"
+      ],
+      "@accelbyte/sdk-gdpr": [
+        "../sdk-gdpr/src"
+      ],
+      "@accelbyte/sdk-iam": [
+        "../sdk-iam/src"
+      ],
+      "@accelbyte/sdk-legal": [
+        "../sdk-legal/src"
+      ],
+      "@accelbyte/sdk-odinconfig": [
+        "../sdk-odinconfig/src"
+      ],
+      "@accelbyte/sdk-platform": [
+        "../sdk-platform/src"
       ]
     },
     "declarationDir": ".",

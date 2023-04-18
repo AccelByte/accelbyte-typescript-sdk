@@ -1,0 +1,249 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.banner {
+  @apply relative w-full;
+
+  .bannerError {
+    @apply absolute inset-0 flex items-center justify-center text-center;
+
+    .errorContainer {
+      @apply container mx-auto my-8;
+    }
+  }
+
+  .bannerGradient {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 20%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  @screen md {
+    .bannerGradient {
+      background: linear-gradient(89.6deg, rgba(0, 0, 0, 0.64) 24.23%, rgba(0, 0, 0, 0) 56.48%);
+    }
+  }
+
+  .bannerPriceContainer {
+    @apply flex flex-col items-start mb-2;
+  }
+
+  .bannerPrice {
+    @apply flex items-center;
+    font-family: $heading-font;
+
+    .finalPrice {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 21px;
+
+    }
+
+    .virtual {
+      @apply text-blue-30;
+    }
+
+    .priceStrikethrough {
+      @apply text-red-40;
+    }
+
+    .beforeDiscount {
+      @apply ml-2 text-gray-10;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 19px;
+    }
+
+    .discountPercentage {
+      @apply ml-2 p-1 bg-[color:rgb(var(--od-rgb-text),0.25)] rounded-sm;
+      font-family: $body-font;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+    }
+  }
+
+  .bannerItemContainer {
+    @apply absolute inset-0 flex flex-col justify-center z-20;
+  }
+
+  .bannerDetail {
+    @apply absolute mx-8 text-[color:rgb(var(--od-rgba-text))] cursor-pointer;
+    right: 0;
+    bottom: 4.5rem;
+    left: 0;
+
+    .title {
+      @apply mb-2;
+      font-family: $heading-font;
+      font-size: 42px;
+      font-weight: 600;
+      line-height: 64px;
+      text-shadow: 2px 2px 10px black;
+    }
+
+    .description {
+      @apply mb-4;
+      font-size: 18px;
+      line-height: 28px;
+      max-width: 600px;
+      text-shadow: 2px 2px 10px black;
+    }
+
+    .price {
+      @apply mb-4;
+    }
+
+    .discount {
+      margin-left: 0.625rem;
+      text-shadow: 2px 2px 10px black;
+    }
+
+    .ctaButton {
+      @apply py-3 px-4 uppercase;
+    }
+  }
+
+  @screen md {
+    .bannerDetail {
+      @apply flex flex-col justify-center inset-0 items-start;
+      margin: 0 7.5rem;
+
+      .title {
+        font-size: 2.625rem;
+      }
+
+      .description {
+        @apply text-lg;
+      }
+    }
+  }
+
+  .pagination {
+    @apply absolute w-full flex justify-center z-20;
+    bottom: 1.875rem;
+
+    .carouselBullet {
+      @apply bg-white w-2 h-2 mx-2 rounded cursor-pointer;
+      transition: width 0.3s ease;
+
+      &.active {
+        width: 1.875rem;
+      }
+    }
+  }
+
+  .arrowLeftButton {
+    @apply absolute top-0 left-0 w-20 hidden z-20 md:block focus:outline-none;
+
+    .arrowIconContainer {
+      @apply mx-4 flex justify-center;
+
+      .arrowIcon {
+        svg {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    &:hover {
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.512) 15%, rgba(0, 0, 0, 0) 96.87%);
+
+      .arrowIcon {
+        svg {
+          @apply opacity-100;
+        }
+      }
+    }
+  }
+
+  .arrowRightButton {
+    @apply absolute top-0 right-0 w-20 hidden z-20 md:block focus:outline-none;
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0.512) 15%, rgba(0, 0, 0, 0) 96.87%);
+
+    .arrowIconContainer {
+      @apply mx-4 flex justify-center;
+
+      .arrowIcon {
+        svg {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    &:hover {
+      background: linear-gradient(270deg, rgba(0, 0, 0, 0.6) 18%, rgba(0, 0, 0, 0) 96.87%);
+
+      .arrowIcon {
+        svg {
+          @apply opacity-100;
+        }
+      }
+    }
+  }
+}
+
+.react-player {
+  @apply h-full absolute inset-0 object-cover w-full;
+  top: 0;
+  height: 100% !important;
+  width: 897px !important;
+  transform: translateX(-25%);
+}
+
+.bannerImage {
+  @apply h-full absolute inset-0 object-cover w-full;
+  &-preload {
+    @apply h-full absolute inset-0 bg-neutral-120 w-full flex justify-center items-center;
+  }
+}
+
+.bannerHeight {
+  @apply relative overflow-hidden;
+  height: 29.375rem;
+}
+
+@screen sm {
+  .react-player {
+    top: 0;
+    height: 100% !important;
+    width: 1440px !important;
+    transform: translateX(-25%);
+  }
+}
+
+@screen md {
+  .bannerHeight {
+    height: 44.5rem;
+  }
+
+  .react-player {
+    top: 0;
+    height: 100% !important;
+    width: 1920px !important;
+    transform: translateX(-25%);
+  }
+}
+
+@screen lg {
+  .react-player {
+    transform: translateX(-17%);
+  }
+}
+
+@screen xl {
+  .banner-video-wrapper {
+    position: relative;
+    padding-top: 56.25%;
+    height: 100%;
+    width: 100%;
+  }
+
+  .react-player {
+    top: 0;
+    left: 0;
+    height: 100% !important;
+    width: 100% !important;
+    transform: translateX(0%);
+  }
+}

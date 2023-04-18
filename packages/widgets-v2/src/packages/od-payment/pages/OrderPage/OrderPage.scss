@@ -1,0 +1,12 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.orderDetailPage {
+  @apply w-full bg-cover bg-fixed bg-center bg-no-repeat py-6 px-0;
+
+  @screen md {
+    @apply flex flex-col py-12 px-[120px];
+  }
+}

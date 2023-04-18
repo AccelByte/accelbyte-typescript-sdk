@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.paymentBox {
+  .errorContainer {
+    @apply container mx-auto my-8;
+  }
+
+  .orderCard {
+    @apply flex flex-grow flex-col rounded bg-[color:rgb(var(--od-rgb-card))];
+  }
+
+  .orderContent {
+    @apply m-auto flex w-[480px] flex-grow flex-col;
+
+    .orderHeader {
+      @apply p-5 text-xl font-medium leading-6 text-[color:rgb(var(--od-rgba-text))];
+      letter-spacing: 0.01em;
+    }
+
+    .orderExpire {
+      @apply p-5;
+
+      svg {
+        display: inline-block !important;
+      }
+    }
+  }
+
+  .paymentSection {
+    @apply flex flex-shrink-0 flex-grow flex-col items-stretch;
+
+    .paymentStation {
+      @apply min-h-[520px] w-full border-0;
+    }
+
+    .btnContainer {
+      @apply p-4 md:hidden;
+
+      .btnCancel {
+        @apply mt-4 flex w-full md:items-center;
+      }
+    }
+
+    @screen md {
+      .paymentStation {
+        @apply min-h-[78vh];
+      }
+    }
+  }
+
+  .btnCancel {
+    @apply mt-4 hidden w-full border-0 md:flex md:items-center;
+  }
+}
+
+.orderDialog {
+  @screen md {
+    @apply max-w-[400px];
+  }
+
+  .errorContainer {
+    @apply my-8;
+  }
+
+  .orderCancellationDialogFooter {
+    .btnContainer {
+      @apply flex justify-end gap-2;
+    }
+  }
+}

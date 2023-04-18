@@ -1,0 +1,46 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.paymentMethodsPage {
+  .alert {
+    @apply mb-4;
+  }
+
+  .paymentAccountsTable {
+    @apply relative;
+    table {
+      @apply w-full text-sm text-[color:rgb(var(--od-rgb-text),0.65)];
+      tr {
+        th {
+          @apply text-left py-2 px-0 font-normal;
+        }
+
+        td {
+          @apply text-left py-4 px-0;
+
+          &:first-child {
+            @apply text-[color:rgb(var(--od-rgba-text))];
+          }
+
+          button {
+            @apply text-blue-40;
+          }
+        }
+
+        .id {
+          @apply pl-4;
+        }
+
+        .name {
+          @apply pr-[30px];
+        }
+      }
+    }
+
+    .noData {
+      @apply m-8 text-center text-[color:rgb(var(--od-rgb-text),0.65)];
+    }
+  }
+}

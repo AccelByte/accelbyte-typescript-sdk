@@ -1,0 +1,66 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.catalogOptionboxItemList {
+  :global {
+    @apply mb-6;
+
+    .catalogHeading {
+      @apply mb-6 font-semibold leading-9;
+      font-size: $font-size-h1;
+    }
+
+    .catalogList {
+      @apply flex flex-wrap;
+
+      .catalogItem {
+        @apply mb-4 flex h-20 flex-grow text-[color:rgb(var(--od-rgba-text))];
+
+        &:hover {
+          @apply bg-black no-underline;
+          transform: scale(1.02);
+          -webkit-font-smoothing: subpixel-antialiased;
+        }
+
+        .catalogItemImage {
+          @apply h-auto w-[115px] flex-shrink-0;
+
+          img {
+            @apply w-full;
+          }
+        }
+
+        .catalogItemDetail {
+          @apply flex-grow pl-4 pr-4;
+
+          .catalogItemHeading {
+            @apply max-h-12 overflow-hidden text-ellipsis leading-6;
+            font-size: $font-size-h5;
+          }
+
+          .catalogItemType {
+            @apply uppercase leading-4 text-[color:rgb(var(--od-rgb-text),0.65)];
+            font-size: $font-size-h6;
+          }
+
+          .catalogItemQty {
+            font-size: $font-size-h6;
+            color: $gray-20;
+          }
+        }
+      }
+    }
+
+    @screen lg {
+      .catalogList {
+        .catalogItem {
+          @apply mr-4;
+          flex-basis: calc(50% - 16px);
+          max-width: calc(50% - 16px);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+ .linkedAccountsPage {
+  table {
+    @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+    thead {
+      @apply border-gray-80 border-b font-normal;
+      font-size: $font-size-h5;
+      line-height: 15px;
+
+      th {
+        @apply pt-1 pr-0 pb-[10px] pl-0;
+      }
+    }
+
+    tbody {
+      font-size: $font-size-h5;
+      line-height: 20px;
+
+      tr {
+        @apply border-gray-80 border-b;
+        td {
+          @apply py-3 px-0 align-middle;
+        }
+      }
+
+      .platform {
+        @apply text-[color:rgb(var(--od-rgba-text))];
+        svg {
+          @apply h-8 w-8;
+        }
+      }
+
+      .display-name {
+        color: $gray-50;
+      }
+
+      .action {
+        @apply cursor-pointer font-medium text-[color:rgb(var(--od-rgba-text))] text-[color:rgb(var(--od-rgba-text))] no-underline;
+        line-height: 1.2;
+      }
+    }
+  }
+
+  .connectButtonPlatform {
+    @apply mt-8 flex items-center py-3 px-4 uppercase;
+  }
+}
+
+.titleContainer {
+  @apply font-medium;
+  font-family: $body-font;
+  line-height: 1;
+}
+
+.dialogPlatformBodyText {
+  @apply min-w-[250px] text-[color:rgb(var(--od-rgb-text),0.65)];
+  font-size: $font-size-h5;
+  line-height: 1.5;
+}
+
+.dialogPlatformList {
+  @apply mt-6;
+
+  .platformBox {
+    @apply bg-gray-d1 mb-3 flex items-center justify-between py-2 px-3 font-medium no-underline;
+
+    &:not(.disabled) {
+      @apply cursor-pointer;
+    }
+
+    &:not(:last-child) {
+      @apply mb-2;
+    }
+
+    .spinner {
+      @apply h-5 w-5;
+      circle {
+        stroke-width: 3px;
+      }
+    }
+  }
+}
+
+.LinkedAccountsAlert.twitch-alert {
+  background-color: rgb(var(--violet-10));
+  border: 1px solid rgb(var(--violet-30));
+
+  svg,
+  span,
+  a,
+  path {
+    color: rgb(var(--violet-50));
+    fill: rgb(var(--violet-50));
+  }
+
+  span {
+    @apply font-semibold;
+  }
+
+  a {
+    @apply font-bold;
+    text-decoration: underline;
+  }
+}

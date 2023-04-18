@@ -1,0 +1,183 @@
+/*
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+ .buttonSocial {
+  font-family: var(--od-font-body);
+  font-size: 16px;
+  font-weight: 500;
+  appearance: none;
+  outline: none;
+  border: none;
+  margin-top: 4px;
+  background-color: rgb(var(--od-rgb-primary));
+  color: #ffff;
+  height: 40px;
+  width: 40px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.24);
+  position: relative;
+  border-radius: 4px;
+
+  &.fullWidth {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 4px;
+  }
+
+  &:focus {
+    border: 3px solid rgb(var(--od-rgb-primary));
+  }
+
+  &:active {
+    background-color: rgb(var(--od-rgb-primary));
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #4d4d4d;
+    color: #9e9e9e;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .loading {
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin: 4px auto;
+    border: 2px solid transparent;
+    border-top-color: rgb(var(--od-rgb-primary));
+    border-radius: 14px;
+    animation: spin 1s linear infinite;
+  }
+
+  &.twitter {
+    background-color: #1da1f2;
+    padding: 0 10px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #56b5ef;
+    }
+  }
+
+  &.google {
+    background-color: #ffffff;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.24), 0px 0px 1px rgba(0, 0, 0, 0.12);
+    color: $black;
+
+    &:hover {
+      background-color: #ffffff;
+      color: rgba(#000, 0.7);
+
+      img {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &.facebook {
+    background-color: #4267b2;
+
+    &:hover {
+      background-color: #5979bb;
+    }
+  }
+
+  &.steam,
+  &.steamopenid {
+    background-color: #000000;
+    border: 1px solid #262626;
+    box-sizing: border-box;
+
+    &:hover {
+      background-color: #1a1a1a;
+    }
+  }
+
+  &.epicgames,
+  &.apple,
+  &.oidc {
+    background-color: #ffffff;
+    border: 1px solid #262626;
+    box-sizing: border-box;
+    color: $black;
+
+    img {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:hover {
+      color: rgba($black, 0.7);
+
+      img {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &.ps4web,
+  &.ps4 {
+    background-color: #003087;
+
+    &:hover {
+      background-color: #043fab;
+    }
+  }
+
+  &.live,
+  &.xblweb {
+    background-color: #107c10;
+
+    &:hover {
+      background-color: #209420;
+    }
+  }
+
+  &.azuresaml {
+    background-color: #2f2f2f;
+
+    &:hover {
+      background-color: #414141;
+    }
+  }
+
+  &.twitch {
+    background-color: #6441a4;
+
+    &:hover {
+      background-color: #9146ff;
+    }
+  }
+
+  &.discord {
+    background-color: #5865f2;
+
+    &:hover {
+      background-color: #7a84f3;
+    }
+  }
+
+  img {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

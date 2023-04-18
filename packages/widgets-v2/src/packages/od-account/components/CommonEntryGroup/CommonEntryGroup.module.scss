@@ -1,0 +1,25 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+.commonEntryGroup {
+  @apply w-full flex flex-col;
+  @screen md {
+    @apply flex-row;
+  }
+  .commonEntryGroupLabel {
+    @apply text-[color:rgb(var(--od-rgb-text),0.65)] text-xs;
+
+    @screen md {
+      @apply flex w-1/3 justify-end pr-5 mt-2 mb-2 text-base;
+    }
+  }
+
+  .commonEntryGroupInput {
+    @screen md {
+      @apply flex w-2/3;
+    }
+  }
+}

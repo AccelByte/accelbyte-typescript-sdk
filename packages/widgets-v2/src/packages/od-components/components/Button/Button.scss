@@ -1,0 +1,257 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+ .button {
+  @apply py-2 px-6 transition-all cursor-pointer rounded flex flex-row justify-center items-center;
+
+  &.disabled {
+    @apply cursor-not-allowed;
+  }
+
+  &.fullWidth {
+    @apply w-full;
+  }
+
+  &.flat {
+    &.primary {
+      @apply border rounded disabled:brightness-50;
+      background-color: rgb(var(--od-rgba-primary));
+      border-color: rgb(var(--od-rgba-primary));
+      color: rgb(var(--od-rgba-text));
+
+      &:not([disabled]) {
+        &:hover {
+          @apply saturate-150;
+          background-color: rgb(var(--od-rgba-primary));
+          border-color: rgb(var(--od-rgba-primary));
+        }
+      }
+    }
+
+    &.secondary {
+      @apply border rounded disabled:brightness-50;
+      background-color: rgb(var(--od-rgba-secondary));
+      border-color: rgb(var(--od-rgba-secondary));
+      color: rgb(var(--od-rgba-text));
+
+      &:not([disabled]) {
+        &:hover {
+          @apply saturate-150;
+          background-color: rgb(var(--od-rgba-secondary));
+          border-color: rgb(var(--od-rgba-secondary));
+        }
+      }
+    }
+
+    &.white {
+      @apply bg-neutral-0 text-branding-60 border rounded border-neutral-0
+      hover:bg-periwinkle-20 hover:border-periwinkle-20
+      disabled:opacity-50;
+    }
+
+    &.dark {
+      @apply bg-dark-60 text-[color:rgb(var(--od-rgba-text))] border rounded border-dark-60
+      hover:bg-dark-80 hover:border-dark-60
+      disabled:opacity-50;
+    }
+  }
+
+  &.outlined {
+    &.primary {
+      @apply border rounded bg-transparent disabled:brightness-50;
+
+      border-color: rgb(var(--od-rgba-primary));
+      color: rgb(var(--od-rgba-primary));
+
+      &:not([disabled]) {
+        &:hover {
+          @apply saturate-150;
+          border-color: rgb(var(--od-rgba-primary));
+          color: rgb(var(--od-rgba-primary));
+        }
+      }
+    }
+
+    &.secondary {
+      @apply border rounded bg-transparent disabled:brightness-50;
+
+      border-color: rgb(var(--od-rgba-secondary));
+      color: rgb(var(--od-rgba-secondary));
+
+      &:not([disabled]) {
+        &:hover {
+          @apply saturate-150;
+          border-color: rgb(var(--od-rgba-secondary));
+          color: rgb(var(--od-rgba-secondary));
+        }
+      }
+    }
+
+    &.white {
+      @apply text-[color:rgb(var(--od-rgba-text))] border rounded border-neutral-0 bg-transparent
+      hover:bg-neutral-0 hover:text-branding-60
+      disabled:opacity-50;
+    }
+
+    &.dark {
+      @apply text-dark-60 border rounded border-dark-60 bg-transparent
+      hover:bg-dark-60 hover:text-[color:rgb(var(--od-rgba-text))]
+      disabled:opacity-50;
+    }
+
+    &.text {
+      @apply border rounded text-[color:rgb(var(--od-rgba-text))] border-[color:rgb(var(--od-rgba-text))];
+
+      &:disabled {
+        @apply text-[color:rgb(var(--neutral-80))] border-[color:rgb(var(--neutral-80))];
+      }
+
+      &:not([disabled]) {
+        &:hover {
+          filter: brightness(85%)
+        }
+      }
+    }
+  }
+
+  &.text {
+    &.primary {
+      @apply bg-transparent rounded border-transparent disabled:brightness-50;
+
+      color: rgb(var(--od-rgba-primary));
+
+      &:not([disabled]) {
+        &:hover {
+          @apply saturate-150;
+          color: rgb(var(--od-rgba-primary));
+        }
+      }
+    }
+
+    &.secondary {
+      @apply bg-transparent rounded border-transparent disabled:brightness-50;
+
+      color: rgb(var(--od-rgba-secondary));
+
+      &:not([disabled]) {
+        &:hover {
+          @apply bg-[color:rgb(var(--od-rgba-card))] brightness-110;
+          color: rgb(var(--od-rgba-secondary));
+        }
+      }
+    }
+
+    &.primaryWhite {
+      @apply text-[color:rgb(var(--od-rgba-text))] bg-transparent rounded border-transparent
+      hover:bg-branding-60 hover:bg-opacity-20
+      disabled:text-branding-10;
+    }
+
+    &.white {
+      @apply text-[color:rgb(var(--od-rgb-text))] bg-transparent rounded border-transparent
+      hover:bg-transparent hover:text-[color:rgb(var(--od-rgb-text),0.85)]
+      disabled:opacity-50;
+    }
+
+    &.dark {
+      @apply text-dark-60 bg-transparent rounded border-transparent
+      hover:bg-dark-60 hover:text-[color:rgb(var(--od-rgba-text))]
+      disabled:opacity-50;
+    }
+  }
+
+  &.plain {
+    @apply p-0 inline-flex;
+
+    &.hasOutline:focus {
+      outline: dotted;
+      outline-width: 1px;
+    }
+
+    &:not(.hasOutline):focus {
+      outline: none;
+    }
+
+    &.primary {
+      @apply bg-transparent border-transparent disabled:brightness-50;
+      color: rgb(var(--od-rgba-primary));
+
+      &:not([disabled]) {
+        &:hover {
+          @apply brightness-75;
+          color: rgb(var(--od-rgba-primary));
+        }
+      }
+    }
+
+    &.secondary {
+      @apply bg-transparent border-transparent disabled:brightness-50;
+
+      color: rgb(var(--od-rgba-secondary));
+
+      &:not([disabled]) {
+        &:hover {
+          @apply brightness-75;
+          color: rgb(var(--od-rgba-secondary));
+        }
+      }
+    }
+
+    &.primaryWhite {
+      @apply text-[color:rgb(var(--od-rgba-text))] bg-transparent border-transparent disabled:text-branding-10;
+    }
+
+    &.white {
+      @apply text-[color:rgb(var(--od-rgba-text))] bg-transparent border-transparent
+      hover:text-branding-60 disabled:opacity-50;
+    }
+
+    &.dark {
+      @apply text-dark-60 bg-transparent border-transparent
+      hover:text-[color:rgb(var(--od-rgba-text))] disabled:opacity-50;
+    }
+
+    &.text {
+      @apply text-[color:rgb(var(--od-rgba-text))] bg-transparent border-transparent;
+
+      &:disabled {
+        @apply text-[color:rgb(var(--neutral-80))];
+      }
+
+      &:not([disabled]) {
+        &:hover {
+          filter: brightness(85%)
+        }
+      }
+    }
+  }
+
+  &.extraSmall {
+    @apply text-xs;
+  }
+
+  &.small {
+    @apply text-sm;
+  }
+
+  &.medium {
+    @apply text-md;
+  }
+
+  &.large {
+    @apply text-lg;
+  }
+
+  &.extraLarge {
+    @apply text-xl;
+  }
+
+  .inlineLoader {
+    @apply mr-3;
+    .iconContainer {
+      @apply p-0 text-lg;
+    }
+  }
+}

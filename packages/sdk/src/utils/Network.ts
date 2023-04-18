@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { SdkDevice } from '@accelbyte/sdk/utils/SdkDevice'
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import qs from 'query-string'
+import { SdkDevice } from './SdkDevice'
 
 type EjectId = number
 

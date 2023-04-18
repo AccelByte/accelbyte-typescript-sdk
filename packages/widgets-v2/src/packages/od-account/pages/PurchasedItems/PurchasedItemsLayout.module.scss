@@ -1,0 +1,28 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+.purchasedItemsHeader {
+  border: none;
+  padding-bottom: 0;
+}
+
+.sidebarContainer {
+  @apply mx-auto block flex-nowrap items-start md:flex md:flex-row;
+
+  :global {
+    .sidebar {
+      @apply w-[200px];
+    }
+
+    .navigationDesktop {
+      @apply flex flex-col flex-nowrap items-stretch;
+    }
+
+    .purchasedItemsContainer {
+      @apply w-full md:ml-6;
+    }
+  }
+}

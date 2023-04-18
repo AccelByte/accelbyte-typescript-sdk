@@ -1,0 +1,38 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+.storeEntry {
+  @apply container mx-auto px-2;
+  min-height: 800px;
+
+  :global {
+    .storeEntryTitle {
+      padding-top: 80px;
+      padding-bottom: 32px;
+      font-family: $heading-font;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      text-align: center;
+    }
+
+    .gridContainer {
+      margin-top: 22px;
+      .gridContainerLoading {
+        min-height: 400px;
+      }
+    }
+
+    .tab {
+      @apply text-[color:rgb(var(--od-rgba-text))];
+
+      .icon {
+        @apply m-2;
+      }
+    }
+  }
+}

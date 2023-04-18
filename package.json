@@ -1,10 +1,22 @@
 {
   "name": "accelbyte-web-sdk",
   "workspaces": [
-    "packages/validator",
     "packages/sdk",
-    "packages/widgets-demo"
+    "packages/widgets-demo",
+    "packages/sdk-basic",
+    "packages/sdk-buildinfo",
+    "packages/sdk-event",
+    "packages/sdk-gdpr",
+    "packages/sdk-iam",
+    "packages/sdk-legal",
+    "packages/sdk-platform",
+    "packages/widgets",
+    "packages/widgets-v2",
+    "packages/examples"
   ],
   "private": true,
-  "repository": "https://github.com/AccelByte/accelbyte-web-sdk"
+  "repository": "https://github.com/AccelByte/accelbyte-web-sdk",
+  "excludedPackagesFromNpmPublish": [
+    "packages/sdk-odinconfig"
+  ]
 }

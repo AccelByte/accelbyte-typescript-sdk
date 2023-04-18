@@ -1,3 +1,17 @@
+### 1.2.2 - 2023-04-18
+
+- Fix build for Yarn berry
+- Fixed examples
+- Removed sdk assembly allowing cache attribute
+
+### 1.2.1 - 2023-04-17
+
+- Improve DecodeError message
+
+### 1.2.0 - 2023-04-12
+
+- Modularize SDK into individual service sdks
+
 ### 1.1.3 - 2023-04-06
 
 - Add PaymentConfigData to the list of configs

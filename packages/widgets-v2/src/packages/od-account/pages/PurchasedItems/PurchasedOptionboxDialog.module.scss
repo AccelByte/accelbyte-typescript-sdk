@@ -1,0 +1,79 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.purchasedOptionboxDialog {
+  min-width: 764px;
+  min-height: 343px;
+
+  :global {
+    .titleContainer {
+      .title {
+        @apply text-xl font-medium text-[color:rgb(var(--od-rgba-text))] mt-4;
+      }
+
+      .titleDescription {
+        @apply text-[color:rgb(var(--od-rgb-text),0.65)] font-normal text-xs;
+      }
+    }
+
+    .itemSelection {
+      @apply my-6;
+      .item {
+        cursor: pointer;
+        .itemImage {
+          @apply relative box-border border-2 border-transparent;
+          width: 157px;
+          height: 109px;
+          img {
+            @apply object-cover object-center w-full h-full;
+          }
+          .selectedMark {
+            @apply invisible absolute bg-blue-50;
+            top: -1px;
+            right: -1px;
+            padding: 6px;
+            border-radius: 2px;
+          }
+
+          .ownedLabel {
+            @apply absolute bg-gray-70 text-[color:rgb(var(--od-rgba-text))] font-normal uppercase invisible;
+            font-size: 10px;
+            top: 8px;
+            left: 8px;
+            padding: 4px 8px;
+            border-radius: 54px;
+          }
+        }
+
+        .itemName {
+          @apply mt-3 text-[color:rgb(var(--od-rgba-text))] font-medium text-xs;
+        }
+
+        &.owned {
+          .ownedLabel {
+            @apply visible;
+          }
+        }
+
+        &.selected {
+          .selectedMark {
+            @apply visible;
+          }
+          .itemImage{
+            @apply border-2 border-blue-50;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dialogFooter {
+  @apply flex justify-end;
+
+  .btnClose {
+    @apply border border-gray-80 uppercase;
+  }
+}

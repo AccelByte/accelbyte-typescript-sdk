@@ -1,0 +1,50 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+$animation-duration: 0.6s;
+
+@keyframes:local(loadingBarIconAnimation) {
+  0% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(2);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+}
+
+.loadingBarIcon {
+  position: relative;
+  display: inline-flex;
+  height: 24px;
+  width: 24px;
+
+  .bar {
+    background: rgba(white, 0.2);
+    height: 50%;
+    width: calc(100% / 3);
+    margin: 0px calc(100% / 6);
+    animation: loadingBarIconAnimation 0.6s ease 0s infinite;
+  }
+
+  .bar:nth-child(1) {
+    animation-delay: calc(0.6 / 4 * 1s);
+    margin-left: 0px;
+  }
+
+  .bar:nth-child(2) {
+    animation-delay: calc(0.6 / 4 * 2s);
+  }
+
+  .bar:nth-child(3) {
+    animation-delay: calc(0.6 / 4 * 3s);
+    margin-right: 0px;
+  }
+}

@@ -1,0 +1,42 @@
+/*
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+
+.__react_component_tooltip.popover-container {
+  &.hide-mobile {
+    @media only screen and (max-width: 640px) {
+      display: none;
+    }
+  }
+  max-width: 320px;
+  &.place-right {
+    margin-left: 16px;
+  }
+
+  ul {
+    list-style: disc;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.popover-mobile {
+  @media only screen and (min-width: 640px) {
+    display: none;
+  }
+}
+
+.__react_component_tooltip.place-right::after {
+  border-right-color: rgb(var(--od-rgb-primary));
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+
+.popover {
+  @apply text-xs;
+
+  background: rgb(var(--od-rgba-primary));
+  color: rgb(var(--od-rgba-text));
+}

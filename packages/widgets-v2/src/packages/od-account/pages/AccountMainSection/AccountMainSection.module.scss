@@ -1,0 +1,17 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.accountMainSection {
+  @apply m-auto rounded bg-gray-100 bg-opacity-70 mb-5 w-full;
+
+  .mainHeader {
+    border-bottom: 1px solid;
+    @apply border-gray-70 flex items-center text-xl font-medium py-5 px-6;
+  }
+
+  .mainBody {
+    @apply py-4 px-6;
+  }
+}

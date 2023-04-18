@@ -1,0 +1,72 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.accountDeletionPage {
+  :global {
+    .mainBody {
+      @apply w-full;
+
+      .alert {
+        @apply my-6;
+      }
+
+      .warningDeleteAccountMessage {
+        @apply text-[color:rgb(var(--od-rgb-text),0.65)] text-sm leading-6 max-w-2xl;
+
+        .bottom {
+          @apply mt-6;
+        }
+      }
+
+      .downloadPersonalDataContainer {
+        @apply flex items-start flex-grow mt-3;
+
+        .icon {
+          @apply w-12 h-auto;
+        }
+
+        .messageContainer {
+          @apply flex flex-col ml-5 items-start;
+
+          p {
+            @apply text-sm mt-1;
+
+            &.downloadAccount {
+              @apply text-[color:rgb(var(--od-rgba-text))];
+            }
+
+            &.savePersonalData {
+              @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+            }
+          }
+
+          .btnDownload {
+            @apply text-sm text-blue-40 mt-3;
+          }
+        }
+      }
+
+      .formPassword {
+        @apply my-12;
+
+        .passwordLabel {
+          @apply text-sm text-[color:rgb(var(--od-rgba-text))];
+        }
+
+        .passwordInput {
+          @apply md:max-w-xs mt-4;
+        }
+
+        .btnDelete {
+          @apply mt-6 uppercase;
+
+          .spinner {
+            @apply mr-2;
+          }
+        }
+      }
+    }
+  }
+}

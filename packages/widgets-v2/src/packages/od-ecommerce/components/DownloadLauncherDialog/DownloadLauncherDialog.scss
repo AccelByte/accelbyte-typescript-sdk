@@ -1,0 +1,28 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.downloadLauncherDialog {
+  @apply mx-6 max-w-[460px];
+
+  .message {
+    @apply text-sm text-[color:rgb(var(--od-rgb-text),0.65)];
+
+    &.bottom {
+      @apply mt-4;
+    }
+  }
+
+  .dialogFooter {
+    @apply flex justify-end items-center;
+
+    .btnCancel {
+      @apply mr-2 uppercase;
+    }
+  }
+
+  @screen md {
+    @apply mx-0;
+  }
+}

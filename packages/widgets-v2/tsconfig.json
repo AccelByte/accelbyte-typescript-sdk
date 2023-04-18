@@ -1,0 +1,133 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "ESNext"
+    ],
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "types": [
+      "vite/client",
+      "node",
+      "../../../packages/od-shared/src/types/global"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "target": "ES6",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "newLine": "crlf",
+    "baseUrl": ".",
+    "paths": {
+      "@accelbyte/validator": [
+        "../validator/src"
+      ],
+      "@accelbyte/error-translator": [
+        "../error-translator/src"
+      ],
+      "@accelbyte/sdk/*": [
+        "../sdk/src/*"
+      ],
+      "@accelbyte/sdk": [
+        "../sdk/src"
+      ],
+      "@accelbyte/sdk-basic": [
+        "../sdk-basic/src"
+      ],
+      "@accelbyte/sdk-buildinfo": [
+        "../sdk-buildinfo/src"
+      ],
+      "@accelbyte/sdk-event": [
+        "../sdk-event/src"
+      ],
+      "@accelbyte/sdk-gdpr": [
+        "../sdk-gdpr/src"
+      ],
+      "@accelbyte/sdk-iam": [
+        "../sdk-iam/src"
+      ],
+      "@accelbyte/sdk-legal": [
+        "../sdk-legal/src"
+      ],
+      "@accelbyte/sdk-odinconfig": [
+        "../sdk-odinconfig/src"
+      ],
+      "@accelbyte/sdk-platform": [
+        "../sdk-platform/src"
+      ],
+      "~/*": [
+        "./src/*"
+      ],
+      "@od-assets/*": [
+        "../../../packages/od-assets/src/*"
+      ],
+      "@od-shared/*": [
+        "../../../packages/od-shared/src/*"
+      ],
+      "@od-state/*": [
+        "../../../packages/od-state/src/*"
+      ],
+      "@od-components/*": [
+        "./src/packages/od-components/*"
+      ],
+      "@od-player-portal/*": [
+        "./src/packages/od-player-portal/*"
+      ],
+      "@od-account/*": [
+        "./src/packages/od-account/*"
+      ],
+      "@od-payment/*": [
+        "./src/packages/od-payment/*"
+      ],
+      "@od-ecommerce/*": [
+        "./src/packages/od-ecommerce/*"
+      ],
+      "@od-legal/*": [
+        "./src/packages/od-legal/*"
+      ],
+      "@od-twitch/*": [
+        "./src/packages/od-twitch/*"
+      ],
+      "seed/*": [
+        "../../../packages/od-shared/seed/*"
+      ],
+      "@od-medium-serde": [
+        "../../../packages/od-medium-serde/src"
+      ],
+      "react-router-dom": [
+        "./src/packages/od-components/components/WidgetLink/index.tsx"
+      ]
+    },
+    "alwaysStrict": true,
+    "declarationMap": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src",
+    "types",
+    "scripts",
+    "storybook"
+  ],
+  "exclude": [
+    "*.cjs",
+    "node_modules",
+    "../../../packages/od-shared/src/Ctx.ts",
+    "src/packages/od-account/_src/**",
+    "src/packages/od-ecommerce/_src",
+    "src/packages/od-payment/_src"
+  ]
+}

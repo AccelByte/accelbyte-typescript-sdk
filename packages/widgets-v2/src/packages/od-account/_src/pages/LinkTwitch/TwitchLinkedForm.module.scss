@@ -1,0 +1,24 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.twitchLinkedForm {
+  @apply mb-4;
+
+  h3 {
+    @apply my-4 text-center;
+  }
+
+  .icon {
+    @apply flex justify-center p-4;
+  }
+
+  .instructionMessage {
+    @apply mb-4 text-center;
+  }
+
+  .btnGoToInventory {
+    @apply w-full;
+  }
+}

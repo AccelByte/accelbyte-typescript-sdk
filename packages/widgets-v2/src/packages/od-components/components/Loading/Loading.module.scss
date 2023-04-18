@@ -1,0 +1,38 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.loading {
+  @apply flex w-full flex-auto flex-col flex-nowrap items-center justify-center;
+
+  &.tall {
+    min-height: 80vh;
+  }
+
+  &.medium {
+    min-height: 40vh;
+  }
+
+  &.fullScreen {
+    @apply flex h-full w-full items-center justify-center;
+  }
+
+  &.overlay {
+    @apply bg-dark-120;
+  }
+
+  &.transparent {
+    @apply bg-opacity-60;
+  }
+
+  .spinner {
+    @apply h-14 w-14 animate-spin rounded-[50%] border-2 border-solid border-[color:rgb(var(--od-rgb-primary),0.45)] border-t-[color:rgb(var(--od-rgb-primary),1)];
+  }
+}
+
+.children {
+  @apply font-body container flex items-center justify-center;
+  margin-top: 24px;
+  color: rgb(var(--od-rgba-secondary));
+}

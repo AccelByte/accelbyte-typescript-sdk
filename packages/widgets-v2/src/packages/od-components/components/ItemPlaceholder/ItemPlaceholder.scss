@@ -1,0 +1,24 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.itemPlaceholder {
+  @apply bg-gray-90 m-auto mb-2 h-6 w-40 overflow-hidden rounded;
+
+  &::before {
+    @apply relative top-0 left-[-80px] block h-full w-20;
+    content: '';
+    background: linear-gradient(270deg, transparent 0%, #1e1e1e 50.74%, transparent 100%);
+    animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes load {
+    from {
+      @apply left-[-80px];
+    }
+    to {
+      @apply left-full;
+    }
+  }
+}

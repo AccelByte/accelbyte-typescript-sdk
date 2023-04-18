@@ -1,0 +1,142 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.personalDataPage {
+  .pagination a {
+    @apply p-0 text-blue-40 text-sm;
+    background: none;
+  }
+
+  table {
+    @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+    thead {
+      @apply border-b border-gray-80 text-xs font-normal leading-4;
+
+      th {
+        @apply pt-1 pb-2 px-0;
+      }
+    }
+
+    tbody {
+      @apply text-sm leading-5;
+
+      tr {
+        td {
+          @apply align-middle py-6 px-0;
+        }
+      }
+
+      .date {
+        @apply text-[color:rgb(var(--od-rgba-text))];
+      }
+
+      .tableRow {
+        @apply border-gray-80 border-solid border-b;
+        &:last-child {
+          border: none;
+        }
+
+        .statusContainer {
+          @apply flex items-center;
+
+          .statusIcon {
+            @apply mr-2;
+          }
+        }
+      }
+    }
+  }
+
+  .formSection {
+    @apply border-b border-solid border-gray-80 pb-[22px] mb-12;
+
+    .guideText {
+      @apply text-[color:rgb(var(--od-rgb-text),0.65)] text-sm leading-normal max-w-[643px];
+      font-family: $body-font;
+      letter-spacing: 0.02em;
+    }
+
+    .guideHeading {
+      @apply text-[color:rgb(var(--od-rgba-text))] uppercase font-medium mt-2 mb-4 text-base;
+      font-family: $body-font;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .formTextTitle {
+      @apply text-sm mb-2 mt-6;
+    }
+
+    .form {
+      @apply flex flex-col max-w-[478px];
+
+      @screen lg {
+        @apply flex-row;
+      }
+
+      .inputRedeem {
+        @apply mr-2 mb-[22px];
+
+        @screen lg {
+          @apply mb-0;
+        }
+      }
+
+      .buttonSendRequest {
+        @apply uppercase ml-2 text-xs leading-3 font-bold py-3 px-4 w-[171px] h-fit;
+        letter-spacing: 0.09em;
+      }
+    }
+
+    .alertContainer {
+      @apply mt-6 mb-0;
+    }
+  }
+
+  .fileSection {
+    .loadingContainer {
+      @apply flex;
+
+      .loading {
+        @apply m-auto;
+      }
+    }
+
+    .title {
+      font-family: $body-font text-base uppercase block mb-6;
+      line-height: 1;
+    }
+
+    table {
+      @apply w-full;
+
+      th {
+        @apply text-left;
+      }
+
+      .btnDownload {
+        @apply cursor-pointer text-blue-40;
+      }
+
+      .btnCancel {
+        @apply cursor-pointer;
+
+        &.disabled {
+          @apply cursor-not-allowed text-gray-70;
+        }
+      }
+    }
+
+    .pagination {
+      @apply flex justify-center mt-4;
+    }
+
+    .noData {
+      @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+      font-family: $body-font;
+      line-height: 1;
+    }
+  }
+}

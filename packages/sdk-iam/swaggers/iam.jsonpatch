@@ -1,0 +1,199 @@
+[
+  {
+    "op": "add",
+    "path": "/paths/~1iam~1v3~1platforms~1{platformId}~1authenticate/get/responses/302/headers",
+    "value": {
+      "Location": {
+        "description": "The Location header",
+        "type": "string"
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/paths/~1iam~1v3~1authenticate/post/responses/302/headers",
+    "value": {
+      "Location": {
+        "description": "The Location header",
+        "type": "string"
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/paths/~1iam~1v3~1sso~1saml~1platforms~1{platformId}~1authenticate/post/responses/302/headers",
+    "value": {
+      "Location": {
+        "description": "The Location header",
+        "type": "string"
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/paths/~1iam~1v3~1oauth~1authorize/get/responses/302/headers",
+    "value": {
+      "Location": {
+        "description": "The Location header",
+        "type": "string"
+      }
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/oauthmodel.TokenResponseV3/required",
+    "value": [
+      "access_token",
+      "expires_in",
+      "token_type",
+      "permissions",
+      "user_id",
+      "display_name",
+      "namespace"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/oauthmodel.TokenWithDeviceCookieResponseV3/required",
+    "value": [
+      "scope",
+      "namespace",
+      "token_type",
+      "permissions",
+      "access_token",
+      "expires_in"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1iam~1v2~1public~1namespaces~1{namespace}~1countries~1{countryCode}~1agerestrictions/get/responses/200/schema",
+    "value": {
+      "$ref": "#/definitions/accountcommon.CountryAgeRestriction"
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/model.UserResponseV3/required",
+    "value": [
+      "authType",
+      "bans",
+      "country",
+      "createdAt",
+      "displayName",
+      "deletionStatus",
+      "emailVerified",
+      "enabled",
+      "lastDateOfBirthChangedTime",
+      "lastEnabledChangedTime",
+      "emailAddress",
+      "namespace",
+      "permissions",
+      "phoneVerified",
+      "roles",
+      "userId"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/model.UserVerificationRequestV3/required",
+    "value": [
+       "code",
+       "contactType",
+       "languageTag"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/account.upgradeHeadlessAccountWithVerificationCodeRequestV4/required",
+    "value": [
+      "emailAddress",
+      "username",
+      "password",
+      "reachMinimumAge",
+      "code"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/model.UpgradeHeadlessAccountWithVerificationCodeRequestV3/required",
+    "value": [
+      "emailAddress",
+      "password",
+      "code"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/account.createUserRequestV4/required",
+    "value": [
+      "reachMinimumAge",
+       "authType",
+       "displayName",
+       "emailAddress",
+       "username",
+       "password",
+       "country",
+       "code"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1iam~1v3~1public~1namespaces~1{namespace}~1users~1me/patch/responses/200/schema",
+    "value": {
+      "$ref": "#/definitions/model.UserResponseV3"
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/model.BackupCodesResponseV4/required",
+    "value": [
+      "generatedAt"
+    ]
+  },
+  {
+    "op": "add",
+    "path": "/paths/~1iam~1v4~1public~1namespaces~1{namespace}~1users~1me~1mfa~1authenticator~1enable/post/consumes",
+    "value": [
+      "application/x-www-form-urlencoded"
+    ]
+  },
+  {
+    "op": "add",
+    "path": "/paths/~1iam~1v4~1public~1namespaces~1{namespace}~1users~1me~1mfa~1factor/post/consumes",
+    "value": [
+      "application/x-www-form-urlencoded"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/model.AccountProgressionInfo/required",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/model.ThirdPartyLoginPlatformCredentialResponse/required",
+    "value": [
+      "AppId",
+      "ClientId",
+      "Namespace",
+      "PlatformId",
+      "PlatformName",
+      "RedirectUri",
+      "Secret",
+      "Environment",
+      "OrganizationId",
+      "IsActive",
+      "GenericOauthFlow",
+      "FederationMetadataURL",
+      "ACSURL",
+      "AWSCognitoRegion",
+      "AWSCognitoUserPool",
+      "KeyID",
+      "TeamID",
+      "JWKSEndpoint",
+      "Issuer",
+      "TokenAuthenticationType",
+      "registeredDomains"
+    ]
+  }
+]

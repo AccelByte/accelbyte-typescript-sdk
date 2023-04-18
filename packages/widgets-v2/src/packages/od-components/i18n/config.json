@@ -1,0 +1,11 @@
+{
+  "languageCodes": [
+    "en-US",
+    "zh-CN"
+  ],
+  "languageCodesTranslation": {
+    "en-US": "English (US)"
+  },
+  "defaultLanguage": "en-US",
+  "fallbackLanguage": "en-US"
+}

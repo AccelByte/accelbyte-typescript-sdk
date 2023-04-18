@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -7,10 +7,11 @@ import { afterAll, afterEach, beforeAll, expect, test } from 'vitest'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
-import { MFADataResponse } from '@accelbyte/sdk/models/TwoFA'
 import tokenExchange from '../fixtures/authorization/token-exchange.json'
 import { TEST_BASE_URL, TEST_CLIENT_ID, TEST_REDIRECT_URI, TEST_SDK } from '../test-utils'
+import { MFADataResponse, IamUserAuthorizationClient } from '@accelbyte/sdk-iam'
 
+// TODO: Move the IAM Test Part to SDK-IAM
 const server = setupServer(
   rest.post(`${TEST_BASE_URL}/iam/v3/oauth/token`, async (req, res, ctx) => {
     const text = await req.text()
@@ -37,7 +38,11 @@ const server = setupServer(
     }
 
     if (code === 'test-code-refresh') {
-      const json = { ...tokenExchange, access_token: 'test-access-token-refresh', refresh_token: 'test-refresh-token-refresh' }
+      const json = {
+        ...tokenExchange,
+        access_token: 'test-access-token-refresh',
+        refresh_token: 'test-refresh-token-refresh'
+      }
       return res(ctx.json(json))
     }
 
@@ -60,10 +65,10 @@ afterEach(() => {
 // Clean up after the tests are finished.
 afterAll(() => server.close())
 
-const IAM = TEST_SDK.IAM
+const IAM = new IamUserAuthorizationClient(TEST_SDK)
 
 test('Create login URL', async () => {
-  let loginUrl = IAM.UserAuthorization().createLoginURL('/')
+  let loginUrl = IAM.createLoginURL('/')
   let searchParams = new URL(loginUrl).searchParams
 
   expect(searchParams.get('response_type')).toBe('code')
@@ -76,7 +81,7 @@ test('Create login URL', async () => {
   expect(searchParams.get('target_auth_page')).toBeNull()
 
   // With target auth page.
-  loginUrl = IAM.UserAuthorization().createLoginURL('/', '/auth/invitation/hello')
+  loginUrl = IAM.createLoginURL('/', '/auth/invitation/hello')
   searchParams = new URL(loginUrl).searchParams
 
   expect(searchParams.get('response_type')).toBe('code')
@@ -90,7 +95,7 @@ test('Create login URL', async () => {
 })
 
 test('Create forgot password URL', async () => {
-  const loginUrl = IAM.UserAuthorization().createForgotPasswordURL()
+  const loginUrl = IAM.createForgotPasswordURL()
   const searchParams = new URL(loginUrl).searchParams
 
   expect(searchParams.get('response_type')).toBe('code')
@@ -105,14 +110,14 @@ test('Create forgot password URL', async () => {
 
 test('Exchange token', async () => {
   // Generate login URL, which saves the state into the local storage.
-  const loginUrl = IAM.UserAuthorization().createLoginURL('/')
+  const loginUrl = IAM.createLoginURL('/')
   const searchParams = new URL(loginUrl).searchParams
 
   expect(searchParams.get('state')).not.toBeNull()
   const loginState = searchParams.get('state')!
 
   // Exchange code, using the state we save in the local storage.
-  const result = await IAM.UserAuthorization().exchangeAuthorizationCode({
+  const result = await IAM.exchangeAuthorizationCode({
     code: 'test-code',
     error: undefined,
     state: loginState
@@ -124,7 +129,7 @@ test('Exchange token', async () => {
 
 test('Exchange token, with email 2FA', async () => {
   // Generate login URL, which saves the state into the local storage.
-  const loginUrl = IAM.UserAuthorization().createLoginURL('/')
+  const loginUrl = IAM.createLoginURL('/')
   const searchParams = new URL(loginUrl).searchParams
 
   expect(searchParams.get('state')).not.toBeNull()
@@ -133,7 +138,7 @@ test('Exchange token, with email 2FA', async () => {
   // Exchange code, using the state we save in the local storage.
   // What we're testing here is that, we want to make sure if the API is able to process
   // if the API asks for 2FA.
-  const result = await IAM.UserAuthorization().exchangeAuthorizationCode({
+  const result = await IAM.exchangeAuthorizationCode({
     code: 'test-code-mfa',
     error: undefined,
     state: loginState
@@ -150,21 +155,21 @@ test('Exchange token, with email 2FA', async () => {
 
 test('Refresh token', async () => {
   // Generate login URL, which saves the state into the local storage.
-  const loginUrl = IAM.UserAuthorization().createLoginURL('/')
+  const loginUrl = IAM.createLoginURL('/')
   const searchParams = new URL(loginUrl).searchParams
 
   expect(searchParams.get('state')).not.toBeNull()
   const loginState = searchParams.get('state')!
 
   // Exchange code, using the state we save in the local storage.
-  await IAM.UserAuthorization().exchangeAuthorizationCode({
+  await IAM.exchangeAuthorizationCode({
     code: 'test-code-refresh',
     error: undefined,
     state: loginState
   })
 
   // Now try refresh the code.
-  const result = await TEST_SDK.IAM.UserAuthorization().refreshToken()
+  const result = await IAM.refreshToken()
 
   if (typeof result === 'boolean') throw new Error(`response cannot be boolean`)
 

@@ -1,0 +1,197 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+:local {
+  .linkNewAccountContainerForm {
+    .contentWrapper {
+      @apply pb-6;
+    }
+
+    .formWrapper {
+      .alert {
+        @apply mb-4 -mt-2;
+      }
+
+      hr {
+        @apply border-gray-80 mb-6;
+      }
+    }
+
+    .title {
+      @apply mb-2 text-center font-bold;
+      font-size: 18px;
+    }
+
+    .description {
+      @apply max-w-xl whitespace-normal break-words text-center text-[color:rgb(var(--od-rgb-text),0.65)];
+      font-size: 14px;
+      line-height: 150%;
+
+      strong {
+        color: $white;
+      }
+    }
+
+    .resendCode {
+      @apply max-w-xl font-normal text-[color:rgb(var(--od-rgb-text),0.65)];
+      font-size: 14px;
+      line-height: 24px;
+
+      > span {
+        @apply text-blue-40;
+        cursor: pointer;
+      }
+    }
+
+    .label {
+      @apply flex w-full justify-between text-[color:rgb(var(--od-rgb-text),0.65)];
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .input {
+      @apply max-w-md;
+      margin-bottom: 4px;
+    }
+
+    .agreementList {
+      @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.02em;
+
+      .agreementItem {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .text {
+          margin-left: 8px;
+          font-size: 12px;
+
+          a {
+            @apply text-blue-40;
+            cursor: pointer;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+
+    :global {
+      .passwordValidation {
+        @apply mt-2 w-full font-normal text-[color:rgb(var(--od-rgb-text),0.65)];
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.02em;
+
+        i {
+          @apply mr-4;
+
+          svg {
+            @apply inline-block;
+          }
+        }
+
+        ul {
+          @apply list-outside list-none;
+          li {
+            @apply flex flex-row;
+            margin-bottom: 8px;
+          }
+
+          .flexCol {
+            @apply mb-0 flex flex-col;
+          }
+
+          ul {
+            @apply ml-5 mr-1;
+
+            li {
+              @apply flex flex-row;
+              margin-bottom: 8px;
+            }
+          }
+        }
+      }
+
+      .passwordMismatch {
+        @apply pb-5;
+      }
+
+      .tabs {
+        @apply mb-5 flex flex-row;
+        .tab {
+          @apply w-1/2 py-4;
+          text-align: center;
+          border-bottom: 2px solid #262626;
+          cursor: pointer;
+
+          &.active {
+            border-bottom: 2px solid rgb(var(--od-rgba-primary));
+          }
+        }
+      }
+
+      .select {
+        @apply mb-5 flex max-w-md max-w-md items-center;
+        width: 100%;
+
+        select {
+          @apply p-2;
+        }
+      }
+
+      .datePicker {
+        @apply flex max-w-md;
+        & > div {
+          &:first-child {
+            flex-grow: 2;
+          }
+
+          &:nth-child(2) {
+            flex-grow: 1;
+          }
+
+          &:last-child {
+            flex-grow: 2;
+          }
+        }
+
+        width: 100%;
+
+        select {
+          @apply p-2;
+          width: 112px;
+        }
+      }
+
+      .changePage {
+        @apply flex items-center justify-center py-2 font-normal text-[color:rgb(var(--od-rgb-text),0.65)];
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: 0.02em;
+
+        > span {
+          @apply text-blue-40;
+          cursor: pointer;
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+
+  div[data-id='tooltip'] {
+    margin-left: 350px;
+    margin-top: -24px;
+  }
+}
+
+:global {
+  .backContainer {
+    @apply mt-4 flex flex-row justify-center;
+  }
+}

@@ -1,0 +1,21 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.gameDetailInfo {
+  @apply bg-gray-d1 p-6;
+
+  .infoWrapper {
+    @apply mb-6;
+  }
+
+  .infoTitle {
+    @apply text-[color:rgb(var(--od-rgb-text),0.65)] mb-0 text-xs block;
+    font-family: $body-font;
+  }
+
+  .infoContent {
+    @apply text-[color:rgb(var(--od-rgba-text))] text-xs block;
+  }
+}

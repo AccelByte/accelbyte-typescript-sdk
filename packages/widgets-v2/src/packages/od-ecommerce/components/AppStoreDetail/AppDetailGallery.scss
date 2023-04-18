@@ -1,0 +1,96 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.appDetailGalleryContainer {
+  @apply bg-gray-100;
+
+  .galleryDesktop {
+    @apply hidden gap-2;
+    height: 128px;
+
+    .galleryWithSlider {
+      @apply relative w-full;
+    }
+
+    .sliderContainer {
+      @apply absolute inset-0;
+    }
+
+    .imageContainer {
+      @apply relative cursor-pointer focus:outline-none;
+
+      img,
+      video {
+        @apply object-cover;
+        width: 288px;
+        height: 128px;
+      }
+
+      .overlayImage {
+        @apply absolute inset-0 w-full h-full;
+
+        &:hover {
+          @apply bg-gray-100;
+          opacity: 0.64;
+        }
+      }
+    }
+
+    .btnPrev,
+    .btnNext {
+      @apply absolute top-0 bottom-0 z-20 flex items-center focus:outline-none text-[color:rgb(var(--od-rgb-secondary))];
+    }
+
+    .btnPrev {
+      @apply left-0;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.64) 41.41%, rgba(0, 0, 0, 0) 97.92%);
+    }
+
+    .btnNext {
+      @apply right-0;
+      background: linear-gradient(270deg, rgba(0, 0, 0, 0.64) 41.41%, rgba(0, 0, 0, 0) 97.92%);
+    }
+
+    @screen md {
+      @apply flex;
+    }
+  }
+
+  .galleryMobile {
+    @apply flex flex-wrap relative;
+
+    .imageContainer {
+      @apply w-1/2 relative cursor-pointer;
+
+      img,
+      video {
+        @apply h-auto w-full object-cover;
+        min-height: 80px;
+        max-height: 128px;
+      }
+
+      .overlayImage {
+        @apply absolute inset-0 w-full h-full;
+
+        &:hover {
+          @apply bg-gray-100;
+          opacity: 0.64;
+        }
+      }
+    }
+
+    .btnSeeMore {
+      @apply absolute w-1/2 bottom-0 right-0 flex items-center justify-center text-xs font-medium px-12 text-center cursor-pointer;
+      height: 50%;
+      min-height: 80px;
+      max-height: 128px;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+    }
+
+    @screen md {
+      @apply hidden;
+    }
+  }
+}

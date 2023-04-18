@@ -1,0 +1,67 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+:global {
+  .dialogOverlay {
+    @apply fixed w-full h-full
+    top-0 left-0 flex flex-col
+    items-center justify-start;
+    background-color: rgb(var(--od-rgba-overlay));
+    overflow: auto;
+    z-index: 1000;
+  }
+
+  .dialog {
+    @apply flex flex-col items-stretch text-[color:rgb(var(--od-rgb-text))];
+    background: transparent;
+    display: flex;
+    flex-flow: column nowrap;
+    border-radius: 8px;
+    margin: 10vh 0;
+    overflow-y: auto;
+
+    @media (max-width: 1366px) {
+      margin: auto 0;
+    }
+
+    .dialogHeader {
+      @apply bg-[color:rgb(var(--od-rgba-card))] brightness-95 flex flex-row flex-nowrap items-center;
+      align-items: stretch;
+      padding: 32px 32px 16px 32px;
+
+      .titleContainer {
+        @apply flex-grow text-[color:rgb(var(--od-rgba-text))];
+        font-size: 20px;
+        font-weight: 500;
+      }
+
+      .closeButtonContainer {
+        padding-left: 32px;
+
+        button {
+          background: none;
+          font-size: 25px;
+          line-height: 1;
+
+          i {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    :local(.dialogBody) {
+      @apply bg-[color:rgb(var(--od-rgba-card))] brightness-95;
+      padding: 16px 32px 32px 32px;
+    }
+
+    :local(.dialogFooter) {
+      @apply bg-[color:rgb(var(--od-rgba-card))];
+      padding: 16px 32px;
+    }
+
+    @include scroll-style;
+  }
+}

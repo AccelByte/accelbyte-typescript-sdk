@@ -3,7 +3,7 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { Accelbyte } from '../src/AccelbyteSdkFactory'
+import { Accelbyte } from '@accelbyte/sdk'
 
 export const TEST_BASE_URL = 'http://localhost:3000'
 export const TEST_NAMESPACE = 'test'

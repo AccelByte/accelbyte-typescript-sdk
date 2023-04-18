@@ -1,0 +1,175 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+.footer {
+  @apply absolute bottom-0 w-full;
+  flex-shrink: 0;
+  height: 0;
+
+  .topSection {
+    @apply flex flex-col items-center bg-[color:rgb(var(--od-rgb-card))] py-8;
+
+    .logoContainer {
+      @apply flex items-center justify-center;
+
+      .logo {
+        width: 128px;
+        height: 48px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-position: center;
+          object-fit: contain;
+        }
+      }
+    }
+
+    .loginButtonContainer {
+      > a,
+      button {
+        @apply text-[color:rgb(var(--od-rgba-text))];
+        text-decoration: none;
+        padding: 0 24px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .navLink {
+      @apply flex flex-wrap justify-center md:mt-0 md:flex-grow;
+      font-family: $heading-font;
+      margin-top: 1.75rem;
+
+      > a {
+        @apply mx-4 text-[color:rgb(var(--od-rgba-text))] no-underline;
+        font-size: 14px;
+        line-height: 19px;
+
+        &:hover {
+          @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+        }
+      }
+    }
+
+    .socialMediaLink {
+      @apply flex flex-row justify-end md:mt-0;
+      margin-top: 2.25rem;
+
+      > a {
+        @apply mx-3;
+
+        svg path {
+          fill: rgb(var(--od-rgba-text));
+        }
+
+        &:hover {
+          svg path {
+            opacity: 0.65;
+          }
+        }
+      }
+    }
+  }
+
+  .bottomSection {
+    @apply flex flex-col items-center px-6;
+    padding-top: 2.125rem;
+    padding-bottom: 2.475rem;
+
+    .languageSelector {
+      @apply flex flex-row items-center;
+
+      select {
+        @apply text-[color:rgb(var(--od-rgb-text),0.65)];
+        font-size: 0.688rem;
+        background-color: unset;
+
+        option {
+          @apply bg-[color:rgb(var(--od-rgb-card))] text-[color:rgb(var(--od-rgb-text))];
+        }
+      }
+
+      i svg {
+        @apply mr-2;
+        fill: rgba(var(--od-rgb-text), 0.65);
+      }
+    }
+
+    .linkAndCopyright {
+      @apply flex flex-col flex-wrap items-center justify-end
+      md:flex-row;
+      .copyright,
+      .links,
+      .divider {
+        @apply break-all text-center text-[color:rgb(var(--od-rgb-text),0.65)] md:text-right;
+        font-size: 0.688rem;
+      }
+
+      .copyright {
+        @apply mb-2 md:mb-0;
+      }
+
+      .divider {
+        @apply hidden px-[10px] md:flex;
+      }
+
+      .links {
+        @apply flex gap-[10px];
+        a {
+          @apply text-[color:rgb(var(--od-rgb-text),0.65)] hover:text-[color:rgb(var(--od-rgb-text))];
+        }
+      }
+    }
+  }
+}
+
+@screen md {
+  .footer {
+    .topSection {
+      @apply flex-row;
+      padding: 2.25rem 4.5rem;
+
+      .logoContainer {
+        @apply flex w-1/4 items-center justify-center;
+      }
+
+      .navLink {
+        @apply mt-0 w-screen text-center;
+
+        > a {
+          @apply text-sm;
+        }
+      }
+
+      .socialMediaLink {
+        @apply mt-0 flex w-1/4 flex-row;
+      }
+    }
+
+    .bottomSection {
+      @apply flex-row justify-between;
+      padding: 1.688rem 4.5rem 1.563rem 3.5rem;
+
+      .languageSelector {
+        @apply mr-5;
+      }
+
+      .link {
+        @apply mt-0 flex-grow;
+
+        > a {
+          margin: 0 1.25rem;
+        }
+      }
+
+      .copyright {
+        @apply m-0;
+      }
+    }
+  }
+}

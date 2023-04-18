@@ -55,28 +55,29 @@ const sdk = await Accelbyte.SDK({
 })
 ```
 
-Sample usage of the AccelByte services using the Web SDK:
+Web SDK sample usage of the AccelByte services:
 
 ```typescript
-console.log('Accelbyte SDK', sdk, '\n')
+import { Accelbyte } from "@accelbyte/sdk"
+import { Iam, IamUserAuthorizationClient } from "@accelbyte/sdk-iam"
+import { Platform } from "@accelbyte/sdk-platform"
+import { Basic } from "@accelbyte/sdk-basic"
+import { Legal } from "@accelbyte/sdk-legal"
 
 // Login to IAM
-const token = await sdk.IAM.UserAuthorization().loginWithAuthorizationCode({code, codeVerifier})
+const token = await new IamUserAuthorizationClient(sdk).loginWithAuthorizationCode({code, codeVerifier})
 
 // And retrieve the user object
-const user = await sdk.IAM.User().getCurrentUser()
+const currentUser = await Iam.UsersApi(sdk).getUsersMe()
+
+// Retrieve the user profile
+const userProfile = await Basic.UserProfileApi(sdk).getUsersMeProfiles()
 
 // Retrieve store items
-const items = await sdk.Platform.Item().fetchItemsByCriteria({ queryParams: { appType: 'GAME' } })
-console.log('Items:', items, items?.response?.data, '\n')
-
-// Retrieve store currencies
-const currencies = await sdk.Platform.Currency().getCurrencyMap()
-console.log('Currencies:', currencies, '\n')
+const items = await Platform.ItemApi(sdk).getItemsByCriteria({ queryParams: { appType: 'GAME' } })
 
 // Retrieve legal policies
-const policies = await sdk.Legal.Policies().fetchAllPoliciesByCountry({countryCode: 'Germany'})
-console.log('Policies:', policies, '\n')
+const policies = await Legal.Policies().getPolicyCountry_ByCountryCode('US')
 ```
 
 ## AccelByte APIs
