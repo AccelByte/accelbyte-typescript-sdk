@@ -11909,7 +11909,7 @@
     },
     "/iam/v3/link/token/exchange": {
       "post": {
-        "description": "\u003cp\u003eThis endpoint is being used to generate user's token by one time link code.\u003cbr\u003e\n\t\tIt require publisher ClientID\u003cbr\u003e\n\t\tIt required a code which can be generated from \u003cstrong\u003e/iam/v3/link/code/request\u003c/strong\u003e.\u003cbr\u003e\n\t\t\u003c/p\u003e",
+        "description": "\u003cp\u003eThis endpoint is being used to generate user's token by one time link code.\u003cbr\u003e\n\t\tIt require publisher ClientID\u003cbr\u003e\n\t\tIt required a code which can be generated from \u003cstrong\u003e/iam/v3/link/code/request\u003c/strong\u003e.\u003cbr\u003e\n\t\t\u003c/p\u003e\n\t\t\u003cp\u003eThis endpoint support creating transient token by utilizing \u003cstrong\u003eisTransient\u003c/strong\u003e param:\n\t\t\u003cbr\u003e\u003cstrong\u003eisTransient=true\u003c/strong\u003e will generate a transient token with a short Time Expiration and without a refresh token\n\t\t\u003cbr\u003e\u003cstrong\u003eisTransient=false\u003c/strong\u003e will consume the one-time code and generate the access token with a refresh token.\u003c/p\u003e",
         "consumes": ["application/x-www-form-urlencoded"],
         "produces": ["application/json"],
         "tags": ["OAuth2.0 - Extension"],
@@ -11929,6 +11929,13 @@
             "name": "client_id",
             "in": "formData",
             "required": true
+          },
+          {
+            "type": "boolean",
+            "default": false,
+            "description": "will produce transient token ",
+            "name": "isTransient",
+            "in": "formData"
           }
         ],
         "responses": {
@@ -24053,8 +24060,12 @@
       }
     },
     "model.UpdateUserDeletionStatusRequest": {
-      "required": ["enabled"],
+      "required": ["enabled", "deletionDate"],
       "properties": {
+        "deletionDate": {
+          "type": "integer",
+          "format": "int64"
+        },
         "enabled": {
           "type": "boolean"
         }
@@ -24805,6 +24816,9 @@
           "type": "string",
           "format": "date-time"
         },
+        "deletionDate": {
+          "type": "string"
+        },
         "deletionStatus": {
           "type": "boolean"
         },
@@ -25065,22 +25079,22 @@
     },
     "model.ValidationDetail": {
       "required": [
-        "regex",
-        "maxLength",
-        "minLength",
-        "maxRepeatingSpecialCharacter",
-        "specialCharacterLocation",
-        "allowLetter",
-        "specialCharacters",
         "blockedWord",
-        "maxRepeatingAlphaNum",
-        "letterCase",
+        "isCustomRegex",
         "allowDigit",
         "allowSpace",
         "allowUnicode",
+        "specialCharacters",
+        "regex",
         "minCharType",
+        "specialCharacterLocation",
+        "maxRepeatingAlphaNum",
+        "letterCase",
+        "allowLetter",
         "allowAllSpecialCharacters",
-        "isCustomRegex",
+        "minLength",
+        "maxLength",
+        "maxRepeatingSpecialCharacter",
         "description"
       ],
       "properties": {
@@ -25153,22 +25167,22 @@
     },
     "model.ValidationDetailPublic": {
       "required": [
-        "regex",
-        "maxLength",
+        "letterCase",
         "allowLetter",
-        "specialCharacters",
-        "minLength",
+        "maxRepeatingAlphaNum",
+        "maxLength",
         "maxRepeatingSpecialCharacter",
+        "allowAllSpecialCharacters",
+        "minLength",
+        "isCustomRegex",
+        "blockedWord",
+        "minCharType",
         "specialCharacterLocation",
         "allowDigit",
         "allowSpace",
         "allowUnicode",
-        "blockedWord",
-        "maxRepeatingAlphaNum",
-        "letterCase",
-        "minCharType",
-        "allowAllSpecialCharacters",
-        "isCustomRegex",
+        "specialCharacters",
+        "regex",
         "description"
       ],
       "properties": {
@@ -25639,7 +25653,7 @@
       }
     },
     "oauthmodel.TokenWithDeviceCookieResponseV3": {
-      "required": ["token_type", "roles", "permissions", "bans", "namespace_roles", "scope", "expires_in", "access_token", "namespace"],
+      "required": ["roles", "namespace_roles", "token_type", "permissions", "bans", "access_token", "expires_in", "namespace", "scope"],
       "properties": {
         "access_token": {
           "type": "string"

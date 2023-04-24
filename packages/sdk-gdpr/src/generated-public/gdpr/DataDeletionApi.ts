@@ -19,6 +19,9 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * <p>Requires valid user access token and password
+   */
   async function postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<RequestDeleteResponse> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache)
     const resp = await $.postDeletion_ByUserId(userId, data)
@@ -26,6 +29,9 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * <p>Requires valid user access token</p>
+   */
   async function deleteDeletion_ByUserId(userId: string): Promise<unknown> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache)
     const resp = await $.deleteDeletion_ByUserId(userId)
@@ -33,6 +39,9 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * <p>Requires valid user access token</p>
+   */
   async function getDeletionsStatus_ByUserId(userId: string): Promise<DeletionStatus> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getDeletionsStatus_ByUserId(userId)

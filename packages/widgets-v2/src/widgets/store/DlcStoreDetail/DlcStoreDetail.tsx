@@ -74,7 +74,7 @@ export function DlcStoreDetail({ itemId, previewMode }: Props) {
   // Purchase information.
   const {
     state: { prepurchaseInformation },
-    mutations: { prepareOrderProcess }
+    mutations: { prepareOrderProcess, resetState: resetOrderProcess }
   } = useOrderProcess()
   const {
     state: { pendingOrders }
@@ -106,6 +106,12 @@ export function DlcStoreDetail({ itemId, previewMode }: Props) {
 
     fetchDlcInformation({ dlcItem: dlcLocale, user, country, language })
   }, [dlcLocale, user, language])
+
+  useEffect(() => {
+    return () => {
+      resetOrderProcess()
+    }
+  }, [])
 
   const isSingleGame = discoveryConfigsState.isSingleGame
   const { baseApp, appInfo, isBaseAppOwned, dlcInformationError, dlcInformationFetchStatus } = dlcInfoState

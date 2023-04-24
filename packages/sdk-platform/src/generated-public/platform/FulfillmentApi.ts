@@ -19,6 +19,9 @@ export function FulfillmentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * Redeem campaign code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:FULFILLMENT", action=1 (CREATED)</li><li><i>Returns</i>: fulfillment result</li></ul>
+   */
   async function createFulfillmentCode_ByUserId(userId: string, data: FulfillCodeRequest): Promise<FulfillmentResult> {
     const $ = new Fulfillment$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createFulfillmentCode_ByUserId(userId, data)

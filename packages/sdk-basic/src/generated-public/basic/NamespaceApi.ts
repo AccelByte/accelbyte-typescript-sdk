@@ -19,6 +19,9 @@ export function NamespaceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * Get all namespaces.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Action code</i>: 11303</li><li><i>Returns</i>: list of namespaces</li></ul>
+   */
   async function getNamespaces(queryParams?: { activeOnly?: boolean | null }): Promise<NamespaceInfoArray> {
     const $ = new Namespace$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getNamespaces(queryParams)
@@ -26,6 +29,9 @@ export function NamespaceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Get namespace info related publisher namespace.<br>Other detail info: <ul><li><i>Required permission</i>: resource=<b>"NAMESPACE:{namespace}:NAMESPACE"</b>, action=2 <b>(READ)</b></li><li><i>Action code</i>: 11305</li><li><i>Returns</i>: Namespace info related publisher namespace</li></ul>
+   */
   async function getPublisher(): Promise<NamespacePublisherInfo> {
     const $ = new Namespace$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getPublisher()

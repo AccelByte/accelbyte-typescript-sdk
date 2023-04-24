@@ -69,7 +69,7 @@ export function BundleStoreDetail({ itemId }: Props) {
   // Purchase information.
   const {
     state: { prepurchaseInformation },
-    mutations: { prepareOrderProcess }
+    mutations: { prepareOrderProcess, resetState: resetOrderProcess }
   } = useOrderProcess()
   const {
     state: { pendingOrders }
@@ -99,8 +99,14 @@ export function BundleStoreDetail({ itemId }: Props) {
   useEffect(() => {
     if (!bundleLocale) return
 
-    fetchBundleContents({ bundleItem: bundleLocale, country, language })
+    fetchBundleContents({ itemIds: bundleLocale.itemIds || [bundleLocale.itemId], baseAppId: bundleLocale.baseAppId, country, language })
   }, [bundleLocale, country, language])
+
+  useEffect(() => {
+    return () => {
+      resetOrderProcess()
+    }
+  }, [])
 
   const isSingleGame = discoveryConfigsState.isSingleGame
   const { baseApp, bundleInfoError, bundleInfoFetchStatus, items: itemsInBundle } = bundleInfoState

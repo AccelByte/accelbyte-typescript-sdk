@@ -9,6 +9,8 @@ export const BoxItem = z.object({
   itemId: z.string().nullish(),
   itemSku: z.string().nullish(),
   itemType: z.string().nullish(),
+  duration: z.number().int().nullish(),
+  endDate: z.string().nullish(),
   count: z.number().int().nullish()
 })
 

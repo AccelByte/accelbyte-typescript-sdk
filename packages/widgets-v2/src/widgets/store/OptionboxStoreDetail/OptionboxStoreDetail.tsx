@@ -69,7 +69,7 @@ export function OptionboxStoreDetail({ itemId }: Props) {
   // Purchase information.
   const {
     state: { prepurchaseInformation },
-    mutations: { prepareOrderProcess }
+    mutations: { prepareOrderProcess, resetState: resetOrderProcess }
   } = useOrderProcess()
   const {
     state: { pendingOrders }
@@ -99,8 +99,15 @@ export function OptionboxStoreDetail({ itemId }: Props) {
   useEffect(() => {
     if (!optionboxLocale) return
 
-    fetchBundleContents({ bundleItem: optionboxLocale, country, language })
+    const boxItemIds = optionboxLocale.optionBoxConfig?.boxItems?.filter(({ itemId }) => !!itemId).map(({ itemId }) => itemId as string)
+    fetchBundleContents({ itemIds: boxItemIds || [], country, language })
   }, [optionboxLocale, country, language])
+
+  useEffect(() => {
+    return () => {
+      resetOrderProcess()
+    }
+  }, [])
 
   const { bundleInfoError, bundleInfoFetchStatus, items: itemsInOptionbox } = optionboxInfoState
 

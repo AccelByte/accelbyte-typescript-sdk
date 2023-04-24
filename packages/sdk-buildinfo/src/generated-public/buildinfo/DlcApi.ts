@@ -21,6 +21,9 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * This API is used to retrieve DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   */
   async function getLink_ByBuildId(buildId: string): Promise<RetrieveDependencyLinkResponse> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getLink_ByBuildId(buildId)
@@ -28,6 +31,9 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * This API is used to retrieve compatibility of specific DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   */
   async function getCompatibility_ByBuildId(buildId: string): Promise<RetrieveDependencyCompatibilityResponse> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getCompatibility_ByBuildId(buildId)
@@ -35,6 +41,9 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Retrieve the list of DLC available on specific game. Use game's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: list of DLC</li></ul>
+   */
   async function getDlcLatestByGameAppId_ByAppId(appId: string): Promise<RetrieveLatestDlcResponseArray> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getDlcLatestByGameAppId_ByAppId(appId)
@@ -42,6 +51,9 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Retrieve the list of DLC available on specific game. Use DLC's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: appId of game and list of its builds by platformId</li></ul>
+   */
   async function getAppLatestByDlcAppId_ByDlcAppId(dlcAppId: string): Promise<RetrieveBaseGameResponseArray> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getAppLatestByDlcAppId_ByDlcAppId(dlcAppId)

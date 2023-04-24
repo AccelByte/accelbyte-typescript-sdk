@@ -1280,8 +1280,11 @@
       }
     },
     "models.DeletionStatus": {
-      "required": ["UserID", "DisplayName", "Status", "DeletionStatus"],
+      "required": ["UserID", "DisplayName", "Status", "DeletionStatus", "DeletionDate"],
       "properties": {
+        "DeletionDate": {
+          "type": "string"
+        },
         "DeletionStatus": {
           "type": "boolean"
         },

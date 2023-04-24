@@ -18,6 +18,9 @@ export function UtilityApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:LEGAL", action=2 (READ)</li></ul>
+   */
   async function getReadiness(): Promise<LegalReadinessStatusResponse> {
     const $ = new Utility$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getReadiness()

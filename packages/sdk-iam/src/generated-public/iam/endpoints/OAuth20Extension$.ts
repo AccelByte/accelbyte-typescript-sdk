@@ -125,9 +125,13 @@ export class OAuth20Extension$ {
   }
 
   /**
-   * <p>This endpoint is being used to generate user's token by one time link code.<br> It require publisher ClientID<br> It required a code which can be generated from <strong>/iam/v3/link/code/request</strong>.<br> </p>
+   * <p>This endpoint is being used to generate user's token by one time link code.<br> It require publisher ClientID<br> It required a code which can be generated from <strong>/iam/v3/link/code/request</strong>.<br> </p> <p>This endpoint support creating transient token by utilizing <strong>isTransient</strong> param: <br><strong>isTransient=true</strong> will generate a transient token with a short Time Expiration and without a refresh token <br><strong>isTransient=false</strong> will consume the one-time code and generate the access token with a refresh token.</p>
    */
-  postLinkTokenExchange(data: { oneTimeLinkCode: string | null; client_id: string | null }): Promise<IResponse<TokenResponseV3>> {
+  postLinkTokenExchange(data: {
+    oneTimeLinkCode: string | null
+    client_id: string | null
+    isTransient?: boolean | null
+  }): Promise<IResponse<TokenResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/link/token/exchange'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {

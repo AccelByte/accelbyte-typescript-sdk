@@ -1,6 +1,6 @@
 # AccelByte Web SDK
 
-[AccelByte Web SDK](https://demo.accelbyte.io/web-sdk-playground/) is a JavaScript library enabling the building of web applications using AccelByte API services. The library is
+[AccelByte Web SDK](https://development.accelbyte.io/web-sdk-playground/) is a JavaScript library enabling the building of web applications using AccelByte API services. The library is
 platform-agnostic and can be consumed in a browser or in a server environment.
 
 ### Type-safety
@@ -14,11 +14,13 @@ To install the library execute the following command.
 
 ```shell
 yarn add @accelbyte/sdk
+yarn add @accelbyte/sdk-iam
+yarn add @accelbyte/sdk-basic // etc
 ```
 
 ## Prerequisites
 
-* **ES Modules** - The SDK currently supports ES Modules format only, please [set type property in Package.json to module](https://nodejs.org/api/packages.html#type)
+* **ES Modules** - The SDK currently supports ES Modules format only, to enable ESM in Node, please [set type property in Package.json to module](https://nodejs.org/api/packages.html#type) or follow [these steps](https://nodejs.org/api/esm.html#enabling)
 * **Yarn** - We like `yarn`. While `npm` may work, it is not supported and may be unstable.
 * **TypeScript** - The SDK has full TypeScript support, and it should be preferred over vanilla JavaScript.
 
@@ -67,7 +69,7 @@ import { Legal } from "@accelbyte/sdk-legal"
 // Login to IAM
 const token = await new IamUserAuthorizationClient(sdk).loginWithAuthorizationCode({code, codeVerifier})
 
-// And retrieve the user object
+// Retrieve the user object
 const currentUser = await Iam.UsersApi(sdk).getUsersMe()
 
 // Retrieve the user profile
@@ -115,4 +117,4 @@ yarn --cwd packages/sdk test
 
 ## Web SDK Playground
 
-In addition, there is a [Playground web application](https://demo.accelbyte.io/web-sdk-playground/) allowing to live test the Web SDK. 
+In addition, there is a [Playground web application](https://development.accelbyte.io/web-sdk-playground/) allowing to live test the Web SDK. 

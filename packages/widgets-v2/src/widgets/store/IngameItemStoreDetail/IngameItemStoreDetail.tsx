@@ -69,7 +69,7 @@ export function IngameItemStoreDetail({ itemId }: Props) {
   // Purchase information.
   const {
     state: { prepurchaseInformation },
-    mutations: { prepareOrderProcess }
+    mutations: { prepareOrderProcess, resetState: resetOrderProcess }
   } = useOrderProcess()
   const {
     state: { pendingOrders }
@@ -101,6 +101,12 @@ export function IngameItemStoreDetail({ itemId }: Props) {
 
     fetchBaseApp({ baseAppId: ingameItemLocale.baseAppId, country, language })
   }, [ingameItemLocale?.baseAppId, country, language])
+
+  useEffect(() => {
+    return () => {
+      resetOrderProcess()
+    }
+  }, [])
 
   const isSingleGame = discoveryConfigsState.isSingleGame
   const { baseApp, baseAppError, baseAppFetchStatus } = baseAppState

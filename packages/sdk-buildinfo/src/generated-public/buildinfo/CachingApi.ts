@@ -18,6 +18,9 @@ export function CachingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   */
   async function getDestCacheDiff_BySourceBuildId_ByDestinationBuildId(
     sourceBuildId: string,
     destinationBuildId: string

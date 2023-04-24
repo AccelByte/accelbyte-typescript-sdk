@@ -8,6 +8,6 @@ import { FetchStatus } from '~/constants/fetch-statuses'
 
 export class FetchUtils {
   static isMatchStatus = (statuses: FetchStatus[], expected: FetchStatus) => {
-    return statuses.every(status => status === expected)
+    return statuses.some(status => status === expected)
   }
 }

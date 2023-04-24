@@ -12,6 +12,7 @@ import { Trans } from 'react-i18next'
 import { useHistory } from '~/hooks/routes/useHistory'
 import { PrepurchaseInformation } from '~/hooks/platform/useOrderProcess'
 import { OrderInfo } from '@accelbyte/sdk-platform'
+import { useRoutes } from '~/hooks/routes/useRoutes'
 
 interface Props {
   user?: UserResponseV3 | null
@@ -24,13 +25,14 @@ export function PurchaseAlert({ user, isPreviewMode, prepurchaseInformation, pen
   const {
     state: { location }
   } = useHistory()
+  const { state: routes } = useRoutes()
 
   if (isPreviewMode || !location) return null
 
   const isItemOwned = !!(user && prepurchaseInformation?.itemOwnership?.owned)
   const isItemUnavailable = PurchaseHelper.purchaseUnavailable(prepurchaseInformation?.purchaseConstraint)
   const hasPendingOrder = pendingOrders && pendingOrders.length > 0
-  const isStorePage = location.pathname.includes('store')
+  const isStorePage = location.pathname.includes(routes.store.index.link)
 
   if (hasPendingOrder && isStorePage) {
     return (

@@ -168,32 +168,5 @@
     "op": "replace",
     "path": "/definitions/model.AccountProgressionInfo/required",
     "value": []
-  },
-  {
-    "op": "replace",
-    "path": "/definitions/model.ThirdPartyLoginPlatformCredentialResponse/required",
-    "value": [
-      "AppId",
-      "ClientId",
-      "Namespace",
-      "PlatformId",
-      "PlatformName",
-      "RedirectUri",
-      "Secret",
-      "Environment",
-      "OrganizationId",
-      "IsActive",
-      "GenericOauthFlow",
-      "FederationMetadataURL",
-      "ACSURL",
-      "AWSCognitoRegion",
-      "AWSCognitoUserPool",
-      "KeyID",
-      "TeamID",
-      "JWKSEndpoint",
-      "Issuer",
-      "TokenAuthenticationType",
-      "registeredDomains"
-    ]
   }
 ]

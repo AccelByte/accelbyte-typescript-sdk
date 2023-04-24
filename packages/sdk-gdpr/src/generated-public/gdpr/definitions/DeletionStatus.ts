@@ -6,6 +6,7 @@
 import { z } from 'zod'
 
 export const DeletionStatus = z.object({
+  DeletionDate: z.string(),
   DeletionStatus: z.boolean(),
   DisplayName: z.string(),
   ExecutionDate: z.string().nullish(),

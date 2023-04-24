@@ -124,7 +124,7 @@ export const BaseStoreDetailCatalog = ({
     state: { currencyMap }
   } = useCurrencyMap()
 
-  const itemIsOwned = isItemOwned(prepurchaseInformation?.baseAppOwnership)
+  const itemIsOwned = isItemOwned(prepurchaseInformation?.itemOwnership)
 
   // Handlers.
   const onOrderCreated = (order: OrderInfo) => {

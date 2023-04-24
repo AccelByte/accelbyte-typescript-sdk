@@ -98,7 +98,7 @@ export function AppStoreDetail({ itemId, previewOptions }: Props) {
   // Purchase information.
   const {
     state: { prepurchaseInformation },
-    mutations: { prepareOrderProcess }
+    mutations: { prepareOrderProcess, resetState: resetOrderProcess }
   } = useOrderProcess()
   const {
     state: { pendingOrders }
@@ -131,6 +131,12 @@ export function AppStoreDetail({ itemId, previewOptions }: Props) {
 
     prepareOrderProcess({ item: itemLocale, userId: user?.userId, currencyMap })
   }, [itemLocale, user?.userId, currencyMap])
+
+  useEffect(() => {
+    return () => {
+      resetOrderProcess()
+    }
+  }, [])
 
   const error = itemLocaleError || appInfoError
   const isFetching = FetchUtils.isMatchStatus([appInfoFetchStatus, itemLocaleFetchStatus], FetchStatus.FETCHING)

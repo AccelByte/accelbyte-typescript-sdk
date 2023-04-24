@@ -19,6 +19,9 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * Get server time
+   */
   async function getMiscTime(): Promise<RetrieveTimeResponse> {
     const $ = new Misc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getMiscTime()
@@ -26,6 +29,9 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
+   */
   async function getMiscCountries(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
     const $ = new Misc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getMiscCountries(queryParams)
@@ -33,6 +39,9 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * List languages.<br>Other detail info: <ul><li><i>Returns</i>: language list</li></ul>
+   */
   async function getMiscLanguages(): Promise<unknown> {
     const $ = new Misc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getMiscLanguages()
@@ -40,6 +49,9 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * List time zones.<br>Other detail info: <ul><li><i>Returns</i>: time zones</li></ul>
+   */
   async function getMiscTimezones(): Promise<unknown> {
     const $ = new Misc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getMiscTimezones()

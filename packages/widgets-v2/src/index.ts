@@ -69,6 +69,7 @@ export { OptionboxStoreDetail } from './widgets/store/OptionboxStoreDetail/Optio
 export { AppStore, SingleGameAppStore } from './packages/od-ecommerce/components/AppStore/AppStore'
 export { CodeStore } from './packages/od-ecommerce/components/CodeStore/CodeStore'
 export { BundleStore, SingleGameBundleStore } from './packages/od-ecommerce/components/BundleStore/BundleStore'
+export { SingleInGameItemsStore } from './packages/od-ecommerce/components/InGameItems/InGameItemsStore'
 export { OptionboxStore, SingleGameOptionboxStore } from './packages/od-ecommerce/components/OptionboxStore/OptionboxStore'
 
 // Payment widgets.

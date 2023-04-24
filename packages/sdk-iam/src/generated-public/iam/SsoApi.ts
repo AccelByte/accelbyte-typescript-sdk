@@ -24,6 +24,9 @@ export function SsoApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Logout user's session on platform that logged in using SSO. Supported platforms: - discourse
+   */
   async function createLogout_ByPlatformId(platformId: string): Promise<unknown> {
     const $ = new Sso$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createLogout_ByPlatformId(platformId)

@@ -18,6 +18,9 @@ export function ThirdPartyCredentialApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * This is the Public API to Get All Active OIDC Platform Credential By Client ID
+   */
   async function getPlatformsClientsOidc(queryParams: { clientId: string | null }): Promise<PublicThirdPartyPlatformInfoArray> {
     const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getPlatformsClientsOidc(queryParams)
@@ -25,6 +28,9 @@ export function ThirdPartyCredentialApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * This is the Public API to Get All Active 3rd Platform Credential.
+   */
   async function getPlatformsClientsActive(): Promise<PublicThirdPartyPlatformInfoArray> {
     const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getPlatformsClientsActive()

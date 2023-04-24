@@ -66,7 +66,8 @@ function usePaymentInfo() {
         setState(oldState => ({
           ...oldState,
           paymentInfo: nextPaymentInfo,
-          paymentInfoError: nextPaymentInfoError
+          paymentInfoError: nextPaymentInfoError,
+          paymentInfoFetchStatus: FetchStatus.IDLE
         }))
       }
     },
@@ -79,6 +80,12 @@ function usePaymentInfo() {
       let nextPaymentMethodsError: PaymentInfoState['paymentMethodsError'] = null
 
       try {
+        setState(oldState => ({
+          ...oldState,
+          paymentMethodsError: null,
+          paymentMethodsFetchStatus: FetchStatus.FETCHING
+        }))
+
         nextPaymentMethods = await Platform.PaymentStationApi(sdk).getPaymentMethods({ paymentOrderNo: orderNo })
 
         return { data: nextPaymentMethods }

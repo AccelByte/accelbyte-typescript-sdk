@@ -20,6 +20,9 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * <p>Requires valid user access token</p>
+   */
   async function getRequests_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
@@ -30,6 +33,9 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * <p>Requires valid user access token</p>
+   */
   async function postRequest_ByUserId(userId: string, data: { password: string | null }): Promise<DataRetrievalResponse> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache)
     const resp = await $.postRequest_ByUserId(userId, data)
@@ -37,6 +43,9 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * <p>Requires valid user access token</p>
+   */
   async function deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<unknown> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache)
     const resp = await $.deleteRequest_ByUserId_ByRequestDate(userId, requestDate)
@@ -44,6 +53,9 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * <p>Requires valid user access token</p>
+   */
   async function postGenerate_ByUserId_ByRequestDate(
     userId: string,
     requestDate: string,

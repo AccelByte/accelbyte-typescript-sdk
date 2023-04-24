@@ -63,13 +63,15 @@ function useBundleInformation() {
 
   const fetchBundleContents = useCallback(
     async ({
-      bundleItem,
+      baseAppId,
+      itemIds,
       country,
       language
     }: {
       language?: string
       country?: string
-      bundleItem: ItemInfo
+      baseAppId?: string | null
+      itemIds: string[]
     }): Promise<HookDataReturns<Pick<StoreDetailBundlesState, 'baseApp' | 'items'> | null>> => {
       let nextItemsInBundle: StoreDetailBundlesState['items'] = null
       let nextBaseApp: StoreDetailBundlesState['baseApp'] = null
@@ -78,15 +80,13 @@ function useBundleInformation() {
       try {
         setState(oldState => ({ ...oldState, bundleInfoFetchStatus: FetchStatus.FETCHING, bundleInfoError: null }))
 
-        const bundleItemIds = bundleItem?.itemIds || [bundleItem.itemId]
         const bundleItemsResult = await Platform.ItemApi(sdk).getItemsLocaleByIds({
           language,
           region: country,
-          itemIds: bundleItemIds.toString()
+          itemIds: itemIds.toString()
         })
 
         nextItemsInBundle = bundleItemsResult
-        const baseAppId = bundleItem?.baseAppId
         if (baseAppId) {
           nextBaseApp = bundleItemsResult.find((item: ItemInfo) => baseAppId === item.appId) || null
 

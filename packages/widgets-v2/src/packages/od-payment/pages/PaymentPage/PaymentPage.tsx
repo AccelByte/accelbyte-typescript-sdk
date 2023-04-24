@@ -202,7 +202,7 @@ export function PaymentPage({ orderNo, isOnlyShowCloseButton, onClosePaymentDial
     if (!order || !userId) return
 
     const result = await cancelAllPendingOrders([order], userId)
-    if (!result.data) {
+    if (!result.error) {
       updateState({
         currentlyOpenDialog: CancellationDialogType.enum.CANCELLATION_SUCCESS
       })
@@ -388,7 +388,7 @@ export function PaymentPage({ orderNo, isOnlyShowCloseButton, onClosePaymentDial
   }
 
   return (
-    <div className="paymentBox">
+    <div className="paymentBox h-full">
       {currentlyOpenDialog === PaymentDialogType.enum.PAYMENT_NEED_MORE_PROCESSING_TIME && (
         <PaymentStatusNeedMoreTimeProcessedDialog onClose={redirect} />
       )}
@@ -410,7 +410,11 @@ export function PaymentPage({ orderNo, isOnlyShowCloseButton, onClosePaymentDial
       {currentlyOpenDialog === CancellationDialogType.enum.CANCELLATION_SUCCESS && renderCancellationNotice()}
       {currentlyOpenDialog === CancellationDialogType.enum.CANCELLATION_PROMPT && renderCancellationDialog()}
 
-      {isFetching && <Loading />}
+      {isFetching && (
+        <div className="flex h-full items-center justify-center">
+          <Loading />
+        </div>
+      )}
 
       {!isFetching && (
         <>

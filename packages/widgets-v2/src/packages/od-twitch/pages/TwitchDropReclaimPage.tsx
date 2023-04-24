@@ -63,6 +63,7 @@ export function TwitchDropReclaimPage({ displayName, validateStatus, retryStatus
     const gameNamespace = sessionStorage.getItem(gameNamespaceKey)
     const gameClientId = sessionStorage.getItem(gameClientIdKey)
     const gameName = sessionStorage.getItem(gameNameKey)
+
     if (gameId && gameNamespace && gameName && gameClientId) {
       setSavedSelectedGameId(gameId)
       setSavedSelectedGameNamespace(gameNamespace)
@@ -76,6 +77,12 @@ export function TwitchDropReclaimPage({ displayName, validateStatus, retryStatus
       if (validateStatus) {
         setStep(Step.VALIDATE)
       }
+
+      if (retryStatus && !retryState) {
+        if (validateStatus === TwitchDropValidateStatus.SUCCESS) {
+          claim(gameNamespace, gameId, gameClientId, gameName, true)
+        }
+      }
     }
 
     if (step === Step.VALIDATE) {
@@ -83,13 +90,6 @@ export function TwitchDropReclaimPage({ displayName, validateStatus, retryStatus
         setStep(Step.CLAIM)
       } else if (validateStatus === TwitchDropValidateStatus.FAILED) {
         setStep(Step.INCORRECT_TWITCH_ACCOUNT)
-      }
-    }
-
-    // TODO: need a better conditonal logic here
-    if (retryStatus && !retryState) {
-      if (validateStatus === TwitchDropValidateStatus.SUCCESS) {
-        claim(savedSelectedGameNamespace, savedSelectedGameId, savedClientId, savedSelectedGameName, true)
       }
     }
   }, [step, validateStatus, listDropItems, retryStatus])

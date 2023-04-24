@@ -19,6 +19,9 @@ export function DrmApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * This API is used to get encrypted userId and machineId for entitled user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:BUILDINFO", action=2 (READ)</li><li><i>Returns</i>: data field containing encrypted userId and machineId separated by comma</li></ul>
+   */
   async function getDrmlicenseEncrypt(queryParams: { appId: string | null; machineId: string | null }): Promise<EncryptedIdentity> {
     const $ = new Drm$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getDrmlicenseEncrypt(queryParams)
@@ -26,6 +29,9 @@ export function DrmApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * This API is used to get public key.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:BUILDINFO", action=2 (READ)</li><li><i>Returns</i>: url to download the key</li></ul>
+   */
   async function getDrmlicenseRetrievePublicKey(): Promise<PublicKeyPresignedUrl> {
     const $ = new Drm$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getDrmlicenseRetrievePublicKey()

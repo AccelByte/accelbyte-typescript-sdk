@@ -15,6 +15,7 @@ export const UserResponseV3 = z.object({
   country: z.string(),
   createdAt: z.string(),
   dateOfBirth: z.string().nullish(),
+  deletionDate: z.string().nullish(),
   deletionStatus: z.boolean(),
   displayName: z.string(),
   emailAddress: z.string(),

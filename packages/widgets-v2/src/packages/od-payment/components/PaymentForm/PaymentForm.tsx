@@ -113,7 +113,11 @@ const PaymentForm$ = () => {
     FetchStatus.FETCHING
   )
   if (isLoading) {
-    return <Loading />
+    return (
+      <div className="flex min-h-[300px] items-center justify-center">
+        <Loading />
+      </div>
+    )
   }
 
   if (paymentStep === PaymentStep.enum.PAYMENT) {

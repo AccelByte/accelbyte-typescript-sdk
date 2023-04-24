@@ -18,6 +18,9 @@ export function LocalizedPolicyVersionsWithNamespaceApi(sdk: AccelbyteSDK, args?
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.<br>Other detail info: <ul></ul>
+   */
   async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
   ): Promise<RetrieveLocalizedPolicyVersionPublicResponse> {

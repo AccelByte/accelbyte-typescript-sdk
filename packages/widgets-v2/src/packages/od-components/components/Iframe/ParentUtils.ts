@@ -34,26 +34,31 @@ export class ParentUtils {
       const messageData = this.getMessageDataOrThrowError(message, iframeData.iframeChannelId)
       this.iframeMessageHandler(messageData, iframeData)
     } catch (error) {
-      console.error(`${error} The message is ignored`)
+      console.error(`onMessageReceived: The message is ignored`, error)
     }
   }
 
   static getMessageDataOrThrowError = (message: MessageEvent, iframeChannelId: string): MessageData => {
-    const messageData = JSON.parse(message.data) as MessageData
+    try {
+      const messageData = JSON.parse(message.data) as MessageData
 
-    if (messageData.channel !== iframeChannelId) {
-      throw new Error('Unrecognized source. The channel is not from Odin.')
+      if (messageData.channel !== iframeChannelId) {
+        throw new Error('Unrecognized source. The channel is not from Odin.')
+      }
+
+      if (!MessageDataType[messageData.messageType]) {
+        throw new Error('Unrecognized message type.')
+      }
+
+      if (!this.validateMessageData(messageData.data, MessageDataType[messageData.messageType])) {
+        throw new Error('Unrecognized data type.')
+      }
+
+      return messageData
+    } catch (err) {
+      // message.data is not JSON object
+      return message.data
     }
-
-    if (!MessageDataType[messageData.messageType]) {
-      throw new Error('Unrecognized message type.')
-    }
-
-    if (!this.validateMessageData(messageData.data, MessageDataType[messageData.messageType])) {
-      throw new Error('Unrecognized data type.')
-    }
-
-    return messageData
   }
 
   static validateMessageData<MessageDataType>(data: unknown, codec: z.ZodType<MessageDataType>) {

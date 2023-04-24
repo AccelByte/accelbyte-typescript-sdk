@@ -6,7 +6,12 @@
 
 import React from 'react'
 import { TwitchDropPage } from '@od-twitch/pages/TwitchDropPage'
+import { PrivateWidget } from '~/packages/od-account/components/PrivateWidget'
 
 export function TwitchDropWidget() {
-  return <TwitchDropPage />
+  return (
+    <PrivateWidget>
+      <TwitchDropPage />
+    </PrivateWidget>
+  )
 }

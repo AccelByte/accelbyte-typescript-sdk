@@ -17,7 +17,7 @@ import { TwitchDropHooks } from '../hooks/TwitchDropHooks'
 import { useHistory } from '~/hooks/routes/useHistory'
 import { useSdk, useSdkOptions } from '~/hooks/useSdk'
 import { FetchStatus } from '~/constants/fetch-statuses'
-import { LinkRequest, IamUserAuthorizationClient, IamOAuthClient, Iam } from '@accelbyte/sdk-iam'
+import { LinkRequest, IamOAuthClient, Iam } from '@accelbyte/sdk-iam'
 
 export interface TwitchDropPageProps {
   className?: string
@@ -61,22 +61,7 @@ export const TwitchDropPage = (props: TwitchDropPageProps) => {
   }
 
   useEffect(() => {
-    if (!user) {
-      tryLogin()
-      return
-    }
-
-    const twitchAuthToken = getTwitchAuthToken()
-    if (twitchAuthToken) {
-      exchangeTwitchAuthTokenToABToken(twitchAuthToken)
-    }
-
-    const requestId = getRequestId()
-    if (requestId && !twitchAuthToken) {
-      requestStatus(requestId)
-    }
-
-    if (!linkedTwitchAccount) {
+    if (!linkedTwitchAccount && user?.userId) {
       fetchLinkedTwitchAccount(user.userId)
     }
 
@@ -90,73 +75,78 @@ export const TwitchDropPage = (props: TwitchDropPageProps) => {
     updateState({ validateStatus })
   }, [historyState.location.search])
 
-  const exchangeTwitchAuthTokenToABToken = async authCode => {
-    if (authCode && user) {
-      try {
-        updateState({ isExchangingToken: true })
+  useEffect(() => {
+    const twitchAuthToken = getTwitchAuthToken()
+    if (twitchAuthToken && user?.userId) {
+      exchangeTwitchAuthTokenToABToken(twitchAuthToken, user?.userId)
+    }
 
-        const clientId = sessionStorage.getItem(gameClientIdKey) || ''
-        const sdkAssemblyConf = sdk.assembly().config
-        const result = await IamOAuthClient.exchangeTokenOauthByPlatformId(
-          LinkedPlatformId.Enum.twitch,
-          clientId,
-          {
-            platform_token: authCode,
-            client_id: clientId,
-            createHeadless: false,
-            skipSetCookie: true
-          },
-          sdkAssemblyConf
-        )
+    const requestId = getRequestId()
+    if (requestId && !twitchAuthToken) {
+      requestStatus(requestId)
+    }
+  }, [user?.userId, historyState.location.search])
 
-        if (result.error) throw result.error
+  const exchangeTwitchAuthTokenToABToken = async (authCode: string, publisherUserId: string) => {
+    try {
+      updateState({ isExchangingToken: true })
 
-        let userId = ''
-        if (result.response.data.namespace === sdkOptions.namespace) {
-          userId = result.response.data.user_id
-        } else {
-          if (result.response.data.platform_user_id) {
-            const linkedAccountResult = await Iam.UsersApi(sdk).getUser_ByPlatformId_ByPlatformUserId(
-              LinkedPlatformId.Enum.twitch,
-              result.response.data.platform_user_id
-            )
-            userId = linkedAccountResult.userId
-          }
+      const clientId = sessionStorage.getItem(gameClientIdKey) || ''
+      const sdkAssemblyConf = sdk.assembly().config
+      const result = await IamOAuthClient.exchangeTokenOauthByPlatformId(
+        LinkedPlatformId.Enum.twitch,
+        clientId,
+        {
+          platform_token: authCode,
+          client_id: clientId,
+          createHeadless: false,
+          skipSetCookie: true
+        },
+        sdkAssemblyConf
+      )
+
+      if (result.error) throw result.error
+
+      let userId = ''
+      if (result.response.data.namespace === sdkOptions.namespace) {
+        userId = result.response.data.user_id
+      } else {
+        if (result.response.data.platform_user_id) {
+          const linkedAccountResult = await Iam.UsersApi(sdk).getUser_ByPlatformId_ByPlatformUserId(
+            LinkedPlatformId.Enum.twitch,
+            result.response.data.platform_user_id
+          )
+          userId = linkedAccountResult.userId
         }
-
-        updateState({
-          validateStatus: userId === user.userId ? TwitchDropValidateStatus.SUCCESS : TwitchDropValidateStatus.FAILED,
-          retryStatus: true
-        })
-      } catch (error) {
-        updateState({
-          validateStatus: TwitchDropValidateStatus.FAILED
-        })
-      } finally {
-        updateState({ isExchangingToken: false })
-        historyState.replace(getPathname())
       }
+
+      updateState({
+        validateStatus: userId === publisherUserId ? TwitchDropValidateStatus.SUCCESS : TwitchDropValidateStatus.FAILED,
+        retryStatus: true
+      })
+    } catch (error) {
+      updateState({
+        validateStatus: TwitchDropValidateStatus.FAILED
+      })
+    } finally {
+      updateState({ isExchangingToken: false })
+      historyState.replace(getPathname())
     }
   }
 
   const isReclaim = () => {
     // TODO: Need to delere the state after redirection is updated
-    const searchParams = new URLSearchParams(location.search)
+    const searchParams = new URLSearchParams(historyState.location.search)
     return searchParams.get('step') === 'reclaim' || searchParams.get('state') === 'reclaim'
   }
 
-  const tryLogin = () => {
-    const loginURL = new IamUserAuthorizationClient(sdk).createLoginURL(historyState.location.pathname + historyState.location.search)
-    window.location.replace(loginURL)
-  }
-
   const getTwitchAuthToken = (): string | null => {
-    const searchParams = new URLSearchParams(location.search)
+    const searchParams = new URLSearchParams(historyState.location.search)
     return searchParams.get('code')
   }
 
   const getRequestId = (): string | null => {
-    const searchParams = new URLSearchParams(location.search)
+    const searchParams = new URLSearchParams(historyState.location.search)
     return searchParams.get('requestId')
   }
 

@@ -18,6 +18,9 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * <p>No role required</p> <p>This endpoint is to get list of input validation configuration.</p> <p><code>regex</code> parameter will be returned if <code>isCustomRegex</code> is true. Otherwise, it will be empty.</p>
+   */
   async function getInputValidations(queryParams?: {
     languageCode?: string | null
     defaultOnEmpty?: boolean | null

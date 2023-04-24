@@ -1,14 +1,20 @@
+### 0.2.0-beta.21 - 2023-04-19
+
+- Fix inside The Option Box item display wrong item
+- Fix click Cancel Order button doesn't cancel the transaction
+- Fix User will be failed to claim a reward after finishing Twitch Authorization
+
 ### 0.2.0-beta.20 - 2023-04-17
 
 - Bump SDK versions
 
 ### 0.2.0-beta.19 - 2023-04-17
 
-- CW-2471 - Some store detail can't be accessed due to error Minified React error
-- CW-2450 - Get Launcher button still displayed on the header even though it's disabled from Feature Flag
-- CW-2450 - See account history in My Profile page redirect user to error page if display name or email or password changed
+- Some store detail can't be accessed due to error Minified React error
+- Get Launcher button still displayed on the header even though it's disabled from Feature Flag
+- See account history in My Profile page redirect user to error page if display name or email or password changed
 - Adjust alignment of AccountDeletionSuccessWidget
-- CW-2458 - See account history in My Profile page redirect user to error page if display name or email or password changed
+- See account history in My Profile page redirect user to error page if display name or email or password changed
 
 ### 0.2.0-beta.18 - 2023-04-10
 

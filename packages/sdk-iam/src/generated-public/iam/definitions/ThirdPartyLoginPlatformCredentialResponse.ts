@@ -35,7 +35,7 @@ export const ThirdPartyLoginPlatformCredentialResponse = z.object({
   TokenEndpoint: z.string().nullish(),
   UserInfoEndpoint: z.string().nullish(),
   UserInfoHTTPMethod: z.string().nullish(),
-  registeredDomains: z.array(RegisteredDomain),
+  registeredDomains: z.array(RegisteredDomain).nullish(),
   scopes: z.array(z.string()).nullish()
 })
 

@@ -152,11 +152,12 @@ const App = ({ sdkOptions, widgetOptions, onInitializeSDK, children, history, ro
 
     const userInit = async () => {
       try {
-        const searchParams = new URLSearchParams(window.location.search)
-        const code = searchParams.get('code')
+        // TODO: revisit this because it causing twitch drop page return to login if there is code search params
+        // const searchParams = new URLSearchParams(window.location.search)
+        // const code = searchParams.get('code')
 
         // Skip if there is code in search params
-        if (code) return
+        // if (code) return
 
         await fetchAllUserInformation()
       } finally {

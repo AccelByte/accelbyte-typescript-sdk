@@ -69,7 +69,7 @@ export function CodeStoreDetail({ itemId }: Props) {
   // Purchase information.
   const {
     state: { prepurchaseInformation },
-    mutations: { prepareOrderProcess }
+    mutations: { prepareOrderProcess, resetState: resetOrderProcess }
   } = useOrderProcess()
   const {
     state: { pendingOrders }
@@ -99,8 +99,14 @@ export function CodeStoreDetail({ itemId }: Props) {
   useEffect(() => {
     if (!codeLocale) return
 
-    fetchBundleContents({ bundleItem: codeLocale, country, language })
+    fetchBundleContents({ itemIds: codeLocale.itemIds || [codeLocale.itemId], baseAppId: codeLocale.baseAppId, country, language })
   }, [codeLocale, country, language])
+
+  useEffect(() => {
+    return () => {
+      resetOrderProcess()
+    }
+  }, [])
 
   const { baseApp, bundleInfoError, bundleInfoFetchStatus } = bundleInfoState
 

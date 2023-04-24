@@ -2,14 +2,29 @@
   "name": "accelbyte-web-sdk",
   "workspaces": [
     "packages/sdk",
-    "packages/widgets-demo",
+    "packages/sdk-achievement",
     "packages/sdk-basic",
     "packages/sdk-buildinfo",
+    "packages/sdk-chat",
+    "packages/sdk-cloudsave",
+    "packages/sdk-differ",
+    "packages/sdk-dsmcontroller",
     "packages/sdk-event",
+    "packages/sdk-gametelemetry",
     "packages/sdk-gdpr",
+    "packages/sdk-groups",
     "packages/sdk-iam",
+    "packages/sdk-leaderboard",
     "packages/sdk-legal",
+    "packages/sdk-lobby",
+    "packages/sdk-matchmaking",
+    "packages/sdk-odinconfig",
     "packages/sdk-platform",
+    "packages/sdk-qosmanager",
+    "packages/sdk-session",
+    "packages/sdk-sessionbrowser",
+    "packages/sdk-statistics",
+    "packages/sdk-ugc",
     "packages/widgets",
     "packages/widgets-v2",
     "packages/examples"
@@ -17,6 +32,9 @@
   "private": true,
   "repository": "https://github.com/AccelByte/accelbyte-web-sdk",
   "excludedPackagesFromNpmPublish": [
-    "packages/sdk-odinconfig"
+    "packages/sdk-odinconfig",
+    "packages/codegen",
+    "packages/validator",
+    "packages/error-translator"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-buildinfo",
-  "version": "1.3284.3",
+  "version": "1.3284.9",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

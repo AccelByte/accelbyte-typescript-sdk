@@ -1,0 +1,192 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Justice Differ Service",
+    "title": "JusticeDiffer"
+  },
+  "paths": {
+    "/differ/namespaces/{namespace}/diff": {
+      "post": {
+        "description": "\u003cp\u003ePerform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.\u003c/p\u003e\u003cp\u003eEvery request is registered into the queue first, and will be processed by the available Differ.\u003c/p\u003e\u003cp\u003eThe \u003cb\u003epriority\u003c/b\u003e flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.\u003c/p\u003e\u003cbr/\u003e\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]\u003c/code\u003e and scope \u003ccode\u003epublishing\u003c/code\u003e\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Diff Calculation"],
+        "summary": "Perform diff from buildId A to buildId B",
+        "operationId": "PerformLateDiff",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the build",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dto.LateDiffRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/differ/namespaces/{namespace}/ping": {
+      "get": {
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Diff Calculation"],
+        "summary": "Ping this diff",
+        "operationId": "Ping",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the build",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.PingResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/differ/v2/namespaces/{namespace}/diff": {
+      "post": {
+        "description": "\u003cp\u003ePerform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.\u003c/p\u003e\u003cp\u003eThe Diffs calculation will be parallelized between the available Differ instances.\u003c/p\u003e\u003cp\u003eThe \u003cb\u003epriority\u003c/b\u003e flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.\u003c/p\u003e\u003cbr/\u003e\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]\u003c/code\u003e and scope \u003ccode\u003epublishing\u003c/code\u003e\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Diff Calculation"],
+        "summary": "Perform diff from buildId A to buildId B",
+        "operationId": "PerformLateDiffV2",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the build",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dto.LateDiffRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "dto.LateDiffRequest": {
+      "required": ["namespace", "sourceBuildId", "destinationBuildId"],
+      "properties": {
+        "destinationBuildId": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "boolean"
+        },
+        "sourceBuildId": {
+          "type": "string"
+        }
+      }
+    },
+    "dto.PingResponse": {
+      "required": ["resp"],
+      "properties": {
+        "resp": {
+          "type": "string"
+        }
+      }
+    },
+    "response.Error": {
+      "required": ["errorCode", "errorMessage"],
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "authorization": []
+    }
+  ]
+}

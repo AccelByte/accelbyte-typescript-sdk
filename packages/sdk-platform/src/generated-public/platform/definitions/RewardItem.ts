@@ -8,7 +8,8 @@ import { z } from 'zod'
 export const RewardItem = z.object({
   itemId: z.string().nullish(),
   quantity: z.number().int().nullish(),
-  duration: z.number().int().nullish()
+  duration: z.number().int().nullish(),
+  endDate: z.string().nullish()
 })
 
 export interface RewardItem extends z.TypeOf<typeof RewardItem> {}

@@ -18,6 +18,9 @@ export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * <p>Requires valid user access token</p>
+   */
   async function getEvent_ByUserId(
     userId: string,
     queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; eventName?: string | null }
@@ -28,6 +31,9 @@ export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * <p>Available Type: </p> <ul> <li>email</li> <li>password</li> <li>displayname</li> <li>dateofbirth</li> <li>country</li> <li>language</li> </ul> <p>Requires a valid user access token</p>
+   */
   async function getEdithistory_ByUserId(
     userId: string,
     queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; type?: string | null }

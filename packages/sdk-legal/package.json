@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-legal",
-  "version": "1.1282.6",
+  "version": "1.1282.12",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@accelbyte/sdk": "1.2.2",
-    "@accelbyte/sdk-iam": "1.5320.5",
+    "@accelbyte/sdk-iam": "1.5320.14",
     "@accelbyte/validator": "0.2.0-beta.4",
     "axios": "0.27.2",
     "buffer": "6.0.3",

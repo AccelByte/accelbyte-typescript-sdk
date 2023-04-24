@@ -98,8 +98,7 @@ export default async function createConfigs() {
           assetFileNames: '[name]-[hash][extname]'
         },
         {
-          dir: path.join(CONFIG.compilerOptions.outDir, 'cjs/node'),
-          // file: path.join(CONFIG.compilerOptions.outDir, 'cjs/node/index.cjs'),
+          file: path.join(CONFIG.compilerOptions.outDir, 'cjs/node/index.cjs'),
           format: 'cjs',
           sourcemap: true,
           assetFileNames: '[name]-[hash][extname]'

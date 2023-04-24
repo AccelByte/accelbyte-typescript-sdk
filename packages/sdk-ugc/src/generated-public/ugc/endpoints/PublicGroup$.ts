@@ -1,0 +1,127 @@
+/*
+ * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+/**
+ * AUTO GENERATED
+ */
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { AxiosInstance } from 'axios'
+import { z } from 'zod'
+import { CreateGroupRequest } from '../definitions/CreateGroupRequest'
+import { CreateGroupResponse } from '../definitions/CreateGroupResponse'
+import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse'
+import { PaginatedGroupResponse } from '../definitions/PaginatedGroupResponse'
+
+export class PublicGroup$ {
+  // @ts-ignore
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+
+  /**
+   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]</b>.
+   */
+  getGroups_ByUserId(
+    userId: string,
+    queryParams?: { limit?: number; offset?: number }
+  ): Promise<IResponseWithSync<PaginatedGroupResponse>> {
+    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, PaginatedGroupResponse, 'PaginatedGroupResponse')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]
+   */
+  createGroup_ByUserId(userId: string, data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+  }
+
+  /**
+   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]</b>.
+   */
+  getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponseWithSync<CreateGroupResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE] replace group name and contents with new ones
+   */
+  updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+  }
+
+  /**
+   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   */
+  deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]</b>.
+   */
+  getContents_ByUserId_ByGroupId(
+    userId: string,
+    groupId: string,
+    queryParams?: { limit?: number; offset?: number }
+  ): Promise<IResponseWithSync<PaginatedContentDownloadResponse>> {
+    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+}

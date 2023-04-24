@@ -76,6 +76,10 @@ export function useOrderProcess() {
     mutations: { refreshWallet }
   } = useWallet()
 
+  const resetState = useCallback(() => {
+    setState(DEFAULT_STATE)
+  }, [])
+
   const prepareOrderProcess = useCallback(
     async ({
       item,
@@ -207,6 +211,7 @@ export function useOrderProcess() {
   return {
     state,
     mutations: {
+      resetState,
       prepareOrderProcess,
       purchase,
       onOrderCreatedHook,

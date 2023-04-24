@@ -1,0 +1,719 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Justice Config Service",
+    "title": "config-service-app",
+    "version": "0.14.0"
+  },
+  "paths": {
+    "/odin-config/v1/admin/namespaces/{namespace}/templates": {
+      "get": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Retrieve templates",
+        "operationId": "AdminTemplatesGet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/servicelogic.TemplateCompact"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e. Note that the \u003ccode\u003edata\u003c/code\u003e field of each config MUST be an object. Please ensure that config-level fields such as \u003ccode\u003eupdatedAt\u003c/code\u003e, \u003ccode\u003eformat\u003c/code\u003e, and \u003ccode\u003eversion\u003c/code\u003eare located on the config-level and not inside the \u003ccode\u003econfig.data\u003c/code\u003e field to reduce confusion.\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Create template",
+        "operationId": "AdminTemplateCreate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Template"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Template"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/cache": {
+      "get": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Get template config on redis cache",
+        "operationId": "AdminGetCache",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "template name",
+            "name": "template",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.CacheResult"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e. Note that the \u003ccode\u003edata\u003c/code\u003e field of each config MUST be an object. Please ensure that config-level fields such as \u003ccode\u003eupdatedAt\u003c/code\u003e, \u003ccode\u003eformat\u003c/code\u003e, and \u003ccode\u003eversion\u003c/code\u003eare located on the config-level and not inside the \u003ccode\u003econfig.data\u003c/code\u003e field to reduce confusion.\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Revalidate template config redis cache",
+        "operationId": "AdminRevalidateCache",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "template name",
+            "name": "template",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/configs": {
+      "get": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Retrieve template configs",
+        "operationId": "AdminTemplateConfigsGet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "template name",
+            "name": "template",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Configs"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e. Note that the \u003ccode\u003edata\u003c/code\u003e field of each config MUST be an object. Please ensure that config-level fields such as \u003ccode\u003eupdatedAt\u003c/code\u003e, \u003ccode\u003eformat\u003c/code\u003e, and \u003ccode\u003eversion\u003c/code\u003eare located on the config-level and not inside the \u003ccode\u003econfig.data\u003c/code\u003e field to reduce confusion.\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Create template config",
+        "operationId": "AdminTemplateConfigCreate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "template name",
+            "name": "template",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Config"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Config"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/configs/{config}": {
+      "get": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Retrieve specific template config",
+        "operationId": "AdminTemplateConfigGet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "template name",
+            "name": "template",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "config name",
+            "name": "config",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Config"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e. Note that the \u003ccode\u003edata\u003c/code\u003e field of each config MUST be an object. Please ensure that config-level fields such as \u003ccode\u003eupdatedAt\u003c/code\u003e, \u003ccode\u003eformat\u003c/code\u003e, and \u003ccode\u003eversion\u003c/code\u003eare located on the config-level and not inside the \u003ccode\u003econfig.data\u003c/code\u003e field to reduce confusion.\u003c/p\u003e",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Update specific template config",
+        "operationId": "AdminTemplateConfigUpdate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "template name",
+            "name": "template",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "config name",
+            "name": "config",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Config"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Config"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/odin-config/v1/public/namespaces/{namespace}/staticConfigs/{config}": {
+      "get": {
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Static Configs"],
+        "summary": "Retrieve static config",
+        "operationId": "PublicStaticConfigGet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "Config name. Available ones are launcherUpdateUrl.",
+            "name": "config",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Config"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/odin-config/v1/public/namespaces/{namespace}/templates/default/configs": {
+      "get": {
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Compatibility Configs"],
+        "summary": "This is used only by older launchers for updating to the newest one.",
+        "operationId": "PublicCompatConfigGetConfigs",
+        "deprecated": true,
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Configs"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/odin-config/v1/public/namespaces/{namespace}/templates/template-discovery/configs": {
+      "get": {
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Compatibility Configs"],
+        "summary": "This is used only by older launchers for updating to the newest one.",
+        "operationId": "PublicCompatConfigGetTemplateDiscoveryConfigs",
+        "deprecated": true,
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Configs"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/odin-config/v1/public/namespaces/{namespace}/templates/{template}/configs": {
+      "get": {
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Retrieve template configs",
+        "operationId": "PublicTemplateConfigsGet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "template name",
+            "name": "template",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Configs"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/odin-config/v1/public/namespaces/{namespace}/templates/{template}/configs/{config}": {
+      "get": {
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Templates"],
+        "summary": "Retrieve specific template config",
+        "operationId": "PublicTemplateConfigGet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the user",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "template name",
+            "name": "template",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "config name",
+            "name": "config",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/servicelogic.Config"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "response.Error": {
+      "required": ["errorCode", "errorMessage"],
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "servicelogic.CacheResult": {
+      "required": ["content"],
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "servicelogic.Config": {
+      "required": ["name", "data", "format", "updatedAt", "version"],
+      "properties": {
+        "data": {
+          "type": "object",
+          "x-nullable": false
+        },
+        "format": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "name": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": false
+        }
+      }
+    },
+    "servicelogic.Configs": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/servicelogic.Config"
+      }
+    },
+    "servicelogic.Template": {
+      "required": ["namespace", "template", "configs", "version"],
+      "properties": {
+        "configs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/servicelogic.Config"
+          },
+          "x-nullable": false
+        },
+        "namespace": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "template": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": false
+        }
+      }
+    },
+    "servicelogic.TemplateCompact": {
+      "required": ["namespace", "template"],
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "template": {
+          "type": "string",
+          "x-nullable": false
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "authorization": []
+    }
+  ]
+}
