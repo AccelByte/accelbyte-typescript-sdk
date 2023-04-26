@@ -1649,8 +1649,6 @@
     "HomePage.newsFeed.title",
     "InGameItemDetailPage.itemNotAvailable",
     "LinkPlatformAccountPage.loginWithCurrentAccount",
-    "LinkPlatformAccountPage.tab.linkExistingAccount",
-    "LinkPlatformAccountPage.tab.linkNewAccount",
     "LinkedAccountPage.linkAccount.platform.default.name",
     "LinkedAccountPage.networkError.message",
     "LinkedAccountsPage.problemClaimingTwitchDrops",
@@ -1781,11 +1779,6 @@
     "linkPlatformAccountPage.LinkExistingAccount.EmailFormError.lessThanLengthLimit",
     "loginPage.info",
     "loginPage.title",
-    "password.strength.level.fair",
-    "password.strength.level.strong",
-    "password.strength.level.veryStrong",
-    "password.strength.level.veryWeak",
-    "password.strength.level.weak",
     "serviceWorker.updateAvailable"
   ]
 }

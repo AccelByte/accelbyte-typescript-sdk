@@ -93,19 +93,19 @@ export class InputGroupPassword extends React.Component<InputGroupPasswordProps,
   renderStrengthMeter = () => {
     const { hasStrengthMeter, passwordStrengthMeterDataQa } = this.props
     const { passwordStrengthScore } = this.state
-    const strengtLevelText = this.getStrengthLevelBasedOnScore(passwordStrengthScore)
+    const strengthLevelText = this.getStrengthLevelBasedOnScore(passwordStrengthScore)
     if (!hasStrengthMeter || passwordStrengthScore === null) return
 
     return (
       <div className={styles.passwordStrengthMeter}>
-        <div className={classNames('strengthMeterBar', strengtLevelText)} data-qa-id={passwordStrengthMeterDataQa?.bars}>
+        <div className={classNames('strengthMeterBar', strengthLevelText)} data-qa-id={passwordStrengthMeterDataQa?.bars}>
           {PASSWORD_STRENGTH_METER.options.map((strengthLevel, index) => (
             <div key={`bar-${strengthLevel}`} className={classNames('bar', { fill: index <= passwordStrengthScore })} />
           ))}
         </div>
         <span className="text-xs text-[color:rgb(var(--od-rgb-text),0.65)]">{t('password.strength.label')}</span>
-        <span className={classNames('strengthMeterLevel', strengtLevelText)} data-qa-id={passwordStrengthMeterDataQa?.strengthText}>
-          {t(`password.strength.level.${strengtLevelText}`)}
+        <span className={classNames('strengthMeterLevel', strengthLevelText)} data-qa-id={passwordStrengthMeterDataQa?.strengthText}>
+          {generatePasswordStrengthText(strengthLevelText)}
         </span>
       </div>
     )
@@ -141,5 +141,23 @@ export class InputGroupPassword extends React.Component<InputGroupPasswordProps,
         {hasStrengthMeter && this.renderStrengthMeter()}
       </>
     )
+  }
+}
+
+// Helper functions.
+function generatePasswordStrengthText(level: string) {
+  switch (level) {
+    case 'fair':
+      return t('password.strength.level.fair')
+    case 'strong':
+      return t('password.strength.level.strong')
+    case 'veryStrong':
+      return t('password.strength.level.veryStrong')
+    case 'veryWeak':
+      return t('password.strength.level.veryWeak')
+    case 'weak':
+      return t('password.strength.level.weak')
+    default:
+      return ''
   }
 }

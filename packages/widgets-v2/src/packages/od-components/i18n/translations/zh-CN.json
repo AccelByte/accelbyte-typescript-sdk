@@ -916,7 +916,7 @@
   "ProductKeyDialog.title": "产品密钥详细信息",
   "PromptLegalPage.accept": "接受",
   "PromptLegalPage.decline": "下降",
-  "PromptLegalPage.description": "<0>我们正在更新AccelByte协议和政策，以便更清楚地向您收集哪些数据，收集数据以及使用方式。</0> <1>以下协议和政策已更新:</1>",
+  "PromptLegalPage.description": "<0>我们更新了我们的用户协议和政策，以更好地解释我们从您那里收集了哪些数据、我们收集这些数据的原因以及这些数据的使用方式。</0><1>以下条款已更新：</1>",
   "PromptLegalPage.notes": "<0>点击“接受”按钮即表示您同意我们更新的法律文件。 请花几分钟时间阅读并理解它们。</0>",
   "PromptLegalPage.readMore": "阅读更多",
   "PromptLegalPage.title": "新协议和政策",
@@ -1627,8 +1627,6 @@
     "HomePage.newsFeed.title",
     "InGameItemDetailPage.itemNotAvailable",
     "LinkPlatformAccountPage.loginWithCurrentAccount",
-    "LinkPlatformAccountPage.tab.linkExistingAccount",
-    "LinkPlatformAccountPage.tab.linkNewAccount",
     "LinkedAccountPage.linkAccount.platform.default.name",
     "LinkedAccountPage.networkError.message",
     "LoginPage.email.label",
@@ -1753,11 +1751,6 @@
     "linkPlatformAccountPage.LinkExistingAccount.EmailFormError.empty",
     "linkPlatformAccountPage.LinkExistingAccount.EmailFormError.lessThanLengthLimit",
     "loginPage.info",
-    "loginPage.title",
-    "password.strength.level.fair",
-    "password.strength.level.strong",
-    "password.strength.level.veryStrong",
-    "password.strength.level.veryWeak",
-    "password.strength.level.weak"
+    "loginPage.title"
   ]
 }

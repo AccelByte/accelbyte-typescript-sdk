@@ -181,7 +181,7 @@ export const LinkPlatformAccountPage = ({ isPreviewMode, selectedTab: selectedTa
                           : {}
                       }
                       key={tab}>
-                      {t(`LinkPlatformAccountPage.tab.${tab}`)}
+                      {generateTabName(tab)}
                     </span>
                   ))}
                 </Tabs>
@@ -244,4 +244,16 @@ export const LinkPlatformAccountPage = ({ isPreviewMode, selectedTab: selectedTa
       </div>
     </>
   )
+}
+
+// Helper functions.
+function generateTabName(tabName: string) {
+  switch (tabName) {
+    case 'linkExistingAccount':
+      return t('LinkPlatformAccountPage.tab.linkExistingAccount')
+    case 'linkNewAccount':
+      return t('LinkPlatformAccountPage.tab.linkNewAccount')
+    default:
+      return ''
+  }
 }
