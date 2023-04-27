@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { IapConsumeHistoryInfo } from './IapConsumeHistoryInfo'
-import { Paging } from './Paging'
+import { IapConsumeHistoryInfo } from './IapConsumeHistoryInfo.js'
+import { Paging } from './Paging.js'
 
 export const IapConsumeHistoryPagingSlicedResult = z.object({ data: z.array(IapConsumeHistoryInfo), paging: Paging.nullish() })
 

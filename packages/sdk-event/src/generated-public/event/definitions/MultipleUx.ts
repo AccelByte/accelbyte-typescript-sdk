@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Ux } from './Ux'
+import { Ux } from './Ux.js'
 
 export const MultipleUx = z.object({ UX: z.array(Ux) })
 

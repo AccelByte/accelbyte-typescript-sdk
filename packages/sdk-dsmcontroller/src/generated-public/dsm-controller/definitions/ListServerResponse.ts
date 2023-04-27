@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PagingCursor } from './PagingCursor'
-import { Server } from './Server'
+import { PagingCursor } from './PagingCursor.js'
+import { Server } from './Server.js'
 
 export const ListServerResponse = z.object({ paging: PagingCursor, servers: z.array(Server) })
 

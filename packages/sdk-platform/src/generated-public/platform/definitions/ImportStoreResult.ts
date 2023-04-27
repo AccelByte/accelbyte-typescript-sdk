@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ImportStoreError } from './ImportStoreError'
-import { StoreInfo } from './StoreInfo'
+import { ImportStoreError } from './ImportStoreError.js'
+import { StoreInfo } from './StoreInfo.js'
 
 export const ImportStoreResult = z.object({
   success: z.boolean().nullish(),

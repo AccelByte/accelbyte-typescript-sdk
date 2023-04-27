@@ -28,9 +28,14 @@ interface TestSdkReturnType {
   listOfItems: ItemPagingSlicedResult | null | undefined
 }
 
+const getPromiseSettledResult = <T,>(result: PromiseSettledResult<T>) => {
+  if (result.status === 'rejected') return null
+  return result.value || null
+}
+
 export const getServerSideProps: GetServerSideProps<{ data: TestSdkReturnType }> = async ({ req }) => {
   const accessToken = req.cookies.access_token
-  const [currentUser, listOfCurrencies, listOfItems] = await Promise.all([
+  const [currentUser, listOfCurrencies, listOfItems] = await Promise.allSettled([
     Iam.UsersApi(sdk, {
       config: {
         headers: {
@@ -46,9 +51,9 @@ export const getServerSideProps: GetServerSideProps<{ data: TestSdkReturnType }>
   return {
     props: {
       data: {
-        currentUser: currentUser || null,
-        listOfCurrencies: listOfCurrencies || null,
-        listOfItems: listOfItems || null
+        currentUser: getPromiseSettledResult(currentUser),
+        listOfCurrencies: getPromiseSettledResult(listOfCurrencies),
+        listOfItems: getPromiseSettledResult(listOfItems)
       }
     }
   }

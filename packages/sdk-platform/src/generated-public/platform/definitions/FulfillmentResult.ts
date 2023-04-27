@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreditSummary } from './CreditSummary'
-import { EntitlementSummary } from './EntitlementSummary'
-import { SubscriptionSummary } from './SubscriptionSummary'
+import { CreditSummary } from './CreditSummary.js'
+import { EntitlementSummary } from './EntitlementSummary.js'
+import { SubscriptionSummary } from './SubscriptionSummary.js'
 
 export const FulfillmentResult = z.object({
   namespace: z.string(),

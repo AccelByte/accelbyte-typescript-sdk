@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { FulfillCodeRequest } from './definitions/FulfillCodeRequest'
-import { Fulfillment$ } from './endpoints/Fulfillment$'
-import { FulfillmentResult } from './definitions/FulfillmentResult'
+import { FulfillCodeRequest } from './definitions/FulfillCodeRequest.js'
+import { Fulfillment$ } from './endpoints/Fulfillment$.js'
+import { FulfillmentResult } from './definitions/FulfillmentResult.js'
 
 export function FulfillmentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

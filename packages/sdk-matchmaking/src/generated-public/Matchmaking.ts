@@ -7,11 +7,11 @@
  * AUTO GENERATED
  */
 
-import { BackfillApi } from './matchmaking/BackfillApi'
-import { RuleSetsApi } from './matchmaking/RuleSetsApi'
-import { MatchPoolsApi } from './matchmaking/MatchPoolsApi'
-import { MatchTicketsApi } from './matchmaking/MatchTicketsApi'
-import { MatchFunctionsApi } from './matchmaking/MatchFunctionsApi'
+import { BackfillApi } from './matchmaking/BackfillApi.js'
+import { RuleSetsApi } from './matchmaking/RuleSetsApi.js'
+import { MatchPoolsApi } from './matchmaking/MatchPoolsApi.js'
+import { MatchTicketsApi } from './matchmaking/MatchTicketsApi.js'
+import { MatchFunctionsApi } from './matchmaking/MatchFunctionsApi.js'
 
 const apis = {
   BackfillApi,

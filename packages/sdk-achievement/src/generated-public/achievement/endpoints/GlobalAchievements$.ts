@@ -9,9 +9,9 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { PaginatedContributorResponse } from '../definitions/PaginatedContributorResponse'
-import { PaginatedGlobalAchievementResponse } from '../definitions/PaginatedGlobalAchievementResponse'
-import { PaginatedUserContributionResponse } from '../definitions/PaginatedUserContributionResponse'
+import { PaginatedContributorResponse } from '../definitions/PaginatedContributorResponse.js'
+import { PaginatedGlobalAchievementResponse } from '../definitions/PaginatedGlobalAchievementResponse.js'
+import { PaginatedUserContributionResponse } from '../definitions/PaginatedUserContributionResponse.js'
 
 export class GlobalAchievements$ {
   // @ts-ignore

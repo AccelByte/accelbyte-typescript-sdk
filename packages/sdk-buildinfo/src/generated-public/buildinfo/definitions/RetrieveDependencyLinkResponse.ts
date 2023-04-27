@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DependencyObject } from './DependencyObject'
+import { DependencyObject } from './DependencyObject.js'
 
 export const RetrieveDependencyLinkResponse = z.object({
   appId: z.string().nullish(),

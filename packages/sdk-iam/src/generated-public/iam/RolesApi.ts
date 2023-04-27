@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { RoleNamesResponseV3 } from './definitions/RoleNamesResponseV3'
-import { RoleResponse } from './definitions/RoleResponse'
-import { Roles$ } from './endpoints/Roles$'
+import { RoleNamesResponseV3 } from './definitions/RoleNamesResponseV3.js'
+import { RoleResponse } from './definitions/RoleResponse.js'
+import { Roles$ } from './endpoints/Roles$.js'
 
 export function RolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

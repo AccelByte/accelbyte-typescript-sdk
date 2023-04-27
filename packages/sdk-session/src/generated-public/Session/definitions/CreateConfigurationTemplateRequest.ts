@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { NativeSessionSetting } from './NativeSessionSetting'
+import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const CreateConfigurationTemplateRequest = z.object({
   NativeSessionSetting,

@@ -834,6 +834,12 @@
               "$ref": "#/definitions/response.Error"
             }
           },
+          "422": {
+            "description": "invalid game version",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -3760,6 +3766,61 @@
         }
       }
     },
+    "/dsmcontroller/namespaces/{namespace}/sessions/{sessionID}/cancel": {
+      "delete": {
+        "description": "Required permission: NAMESPACE:{namespace}:DSM:SESSION [DELETE]\n\nRequired scope: social\n\nThis endpoint is intended to be called by game session manager (matchmaker, lobby, etc.) to cancel a temporary dedicated server. The dedicated server cannot be canceled unless the status is CREATING",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Session"],
+        "summary": "Cancel session of a Temporary DS",
+        "operationId": "CancelSession",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace of the game",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "session ID",
+            "name": "sessionID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DS creation successfully canceled"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "session not found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "422": {
+            "description": "session cannot be canceled",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
     "/dsmcontroller/public/provider/default": {
       "get": {
         "description": "This endpoints returns the default provider.",
@@ -3985,17 +4046,17 @@
     },
     "models.CreateDeploymentOverrideRequest": {
       "required": [
+        "game_version",
         "regions",
         "region_overrides",
-        "use_buffer_percent",
-        "game_version",
-        "enable_region_overrides",
-        "min_count",
         "max_count",
-        "buffer_count",
         "buffer_percent",
+        "configuration",
+        "enable_region_overrides",
+        "buffer_count",
+        "use_buffer_percent",
         "unlimited",
-        "configuration"
+        "min_count"
       ],
       "properties": {
         "buffer_count": {
@@ -4052,17 +4113,17 @@
     },
     "models.CreateDeploymentRequest": {
       "required": [
+        "buffer_percent",
         "game_version",
         "regions",
         "region_overrides",
-        "use_buffer_percent",
+        "max_count",
         "unlimited",
+        "min_count",
         "configuration",
         "enable_region_overrides",
-        "min_count",
-        "max_count",
         "buffer_count",
-        "buffer_percent",
+        "use_buffer_percent",
         "allow_version_override",
         "overrides"
       ],
@@ -4227,7 +4288,7 @@
       }
     },
     "models.CreateRegionOverrideRequest": {
-      "required": ["min_count", "max_count", "buffer_count", "buffer_percent", "use_buffer_percent", "unlimited"],
+      "required": ["buffer_percent", "use_buffer_percent", "unlimited", "min_count", "max_count", "buffer_count"],
       "properties": {
         "buffer_count": {
           "type": "integer",
@@ -4495,12 +4556,12 @@
         "configuration",
         "region_overrides",
         "enable_region_overrides",
-        "max_count",
         "buffer_count",
         "buffer_percent",
         "use_buffer_percent",
         "unlimited",
-        "min_count"
+        "min_count",
+        "max_count"
       ],
       "properties": {
         "buffer_count": {
@@ -4558,17 +4619,17 @@
     "models.DeploymentConfigOverride": {
       "required": [
         "name",
-        "min_count",
-        "game_version",
         "regions",
         "configuration",
-        "region_overrides",
+        "enable_region_overrides",
+        "buffer_count",
+        "buffer_percent",
+        "min_count",
+        "game_version",
+        "max_count",
         "use_buffer_percent",
         "unlimited",
-        "enable_region_overrides",
-        "max_count",
-        "buffer_count",
-        "buffer_percent"
+        "region_overrides"
       ],
       "properties": {
         "buffer_count": {
@@ -4633,17 +4694,17 @@
         "createdAt",
         "updatedAt",
         "modifiedBy",
-        "max_count",
+        "game_version",
+        "regions",
+        "configuration",
+        "enable_region_overrides",
         "buffer_count",
         "buffer_percent",
-        "enable_region_overrides",
-        "configuration",
+        "min_count",
+        "max_count",
         "region_overrides",
         "use_buffer_percent",
         "unlimited",
-        "min_count",
-        "game_version",
-        "regions",
         "allow_version_override",
         "overrides"
       ],
@@ -5177,7 +5238,7 @@
       }
     },
     "models.PodCountConfigOverride": {
-      "required": ["name", "unlimited", "min_count", "max_count", "buffer_count", "buffer_percent", "use_buffer_percent"],
+      "required": ["name", "buffer_percent", "use_buffer_percent", "unlimited", "min_count", "max_count", "buffer_count"],
       "properties": {
         "buffer_count": {
           "type": "integer",
@@ -5550,12 +5611,12 @@
         "configuration",
         "enable_region_overrides",
         "session_timeout",
-        "use_buffer_percent",
-        "unlimited",
         "min_count",
         "max_count",
         "buffer_count",
-        "buffer_percent"
+        "buffer_percent",
+        "use_buffer_percent",
+        "unlimited"
       ],
       "properties": {
         "buffer_count": {
@@ -5610,12 +5671,12 @@
         "extendable_session",
         "allow_version_override",
         "session_timeout",
+        "buffer_count",
+        "buffer_percent",
         "use_buffer_percent",
         "unlimited",
         "min_count",
-        "max_count",
-        "buffer_count",
-        "buffer_percent"
+        "max_count"
       ],
       "properties": {
         "allow_version_override": {
@@ -5699,7 +5760,7 @@
       }
     },
     "models.UpdateRegionOverrideRequest": {
-      "required": ["use_buffer_percent", "unlimited", "min_count", "max_count", "buffer_count", "buffer_percent"],
+      "required": ["min_count", "max_count", "buffer_count", "buffer_percent", "use_buffer_percent", "unlimited"],
       "properties": {
         "buffer_count": {
           "type": "integer",

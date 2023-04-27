@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { TwitchSyncResult } from './TwitchSyncResult'
+import { TwitchSyncResult } from './TwitchSyncResult.js'
 
 export const TwitchSyncResultArray = z.array(TwitchSyncResult)
 

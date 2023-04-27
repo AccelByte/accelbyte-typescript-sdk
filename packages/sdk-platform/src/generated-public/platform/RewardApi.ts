@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Reward$ } from './endpoints/Reward$'
-import { RewardInfo } from './definitions/RewardInfo'
-import { RewardPagingSlicedResult } from './definitions/RewardPagingSlicedResult'
+import { Reward$ } from './endpoints/Reward$.js'
+import { RewardInfo } from './definitions/RewardInfo.js'
+import { RewardPagingSlicedResult } from './definitions/RewardPagingSlicedResult.js'
 
 export function RewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

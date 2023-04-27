@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BlockedPlayerData } from './BlockedPlayerData'
+import { BlockedPlayerData } from './BlockedPlayerData.js'
 
 export const GetAllPlayerBlockedUsersResponse = z.object({ data: z.array(BlockedPlayerData) })
 

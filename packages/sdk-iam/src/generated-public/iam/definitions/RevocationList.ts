@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { FilterJson } from './FilterJson'
-import { UserRevocationListRecord } from './UserRevocationListRecord'
+import { FilterJson } from './FilterJson.js'
+import { UserRevocationListRecord } from './UserRevocationListRecord.js'
 
 export const RevocationList = z.object({ revoked_tokens: FilterJson, revoked_users: z.array(UserRevocationListRecord) })
 

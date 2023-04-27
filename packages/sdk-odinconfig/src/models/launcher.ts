@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BackgroundOverlay, LogoVariantConfig, PageConfig } from '../models/base-configs'
-import { Config } from '../generated-public/odin-config/definitions/Config'
+import { BackgroundOverlay, LogoVariantConfig, PageConfig } from '../models/base-configs.js'
+import { Config } from '../generated-public/odin-config/definitions/Config.js'
 
 export const LauncherPageConfig = PageConfig.extend({
   loginPage: z.object({

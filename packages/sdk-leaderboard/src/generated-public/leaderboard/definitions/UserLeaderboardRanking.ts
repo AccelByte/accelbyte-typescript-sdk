@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserRankingResponseDetail } from './UserRankingResponseDetail'
+import { UserRankingResponseDetail } from './UserRankingResponseDetail.js'
 
 export const UserLeaderboardRanking = z.object({
   allTime: UserRankingResponseDetail,

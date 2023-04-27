@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EventLevel } from './EventLevel'
+import { EventLevel } from './EventLevel.js'
 
 export const MultipleEventLevel = z.object({ EventLevel: z.array(EventLevel) })
 

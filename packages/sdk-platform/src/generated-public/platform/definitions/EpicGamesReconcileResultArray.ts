@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EpicGamesReconcileResult } from './EpicGamesReconcileResult'
+import { EpicGamesReconcileResult } from './EpicGamesReconcileResult.js'
 
 export const EpicGamesReconcileResultArray = z.array(EpicGamesReconcileResult)
 

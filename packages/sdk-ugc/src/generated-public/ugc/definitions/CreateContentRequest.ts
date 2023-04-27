@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PreviewMetadata } from './PreviewMetadata'
+import { PreviewMetadata } from './PreviewMetadata.js'
 
 export const CreateContentRequest = z.object({
   customAttributes: z.record(z.any()).nullish(),

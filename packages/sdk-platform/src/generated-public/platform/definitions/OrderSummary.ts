@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CurrencySummary } from './CurrencySummary'
+import { CurrencySummary } from './CurrencySummary.js'
 
 export const OrderSummary = z.object({ currency: CurrencySummary.nullish(), ext: z.record(z.any()).nullish(), free: z.boolean().nullish() })
 

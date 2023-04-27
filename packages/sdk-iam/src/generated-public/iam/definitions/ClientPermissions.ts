@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ClientPermission } from './ClientPermission'
+import { ClientPermission } from './ClientPermission.js'
 
 export const ClientPermissions = z.object({ Permissions: z.array(ClientPermission) })
 

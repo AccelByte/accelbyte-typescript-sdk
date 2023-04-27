@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ListRuleSetsResponse } from './definitions/ListRuleSetsResponse'
-import { RuleSetPayload } from './definitions/RuleSetPayload'
-import { RuleSets$ } from './endpoints/RuleSets$'
+import { ListRuleSetsResponse } from './definitions/ListRuleSetsResponse.js'
+import { RuleSetPayload } from './definitions/RuleSetPayload.js'
+import { RuleSets$ } from './endpoints/RuleSets$.js'
 
 export function RuleSetsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Paging } from './Paging'
-import { StatCycleInfo } from './StatCycleInfo'
+import { Paging } from './Paging.js'
+import { StatCycleInfo } from './StatCycleInfo.js'
 
 export const StatCyclePagingSlicedResult = z.object({ data: z.array(StatCycleInfo), paging: Paging.nullish() })
 

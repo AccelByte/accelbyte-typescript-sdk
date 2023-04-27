@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreatorOverviewResponse } from './CreatorOverviewResponse'
-import { PagingCursor } from './PagingCursor'
+import { CreatorOverviewResponse } from './CreatorOverviewResponse.js'
+import { PagingCursor } from './PagingCursor.js'
 
 export const PaginatedCreatorOverviewResponse = z.object({ data: z.array(CreatorOverviewResponse), paging: PagingCursor })
 

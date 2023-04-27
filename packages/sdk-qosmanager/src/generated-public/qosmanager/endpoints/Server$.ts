@@ -9,7 +9,7 @@
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { HeartbeatRequest } from '../definitions/HeartbeatRequest'
+import { HeartbeatRequest } from '../definitions/HeartbeatRequest.js'
 
 export class Server$ {
   // @ts-ignore

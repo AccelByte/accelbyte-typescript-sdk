@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Section$ } from './endpoints/Section$'
-import { SectionInfoArray } from './definitions/SectionInfoArray'
+import { Section$ } from './endpoints/Section$.js'
+import { SectionInfoArray } from './definitions/SectionInfoArray.js'
 
 export function SectionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserUnbanCreateRequestV3 } from './UserUnbanCreateRequestV3'
+import { UserUnbanCreateRequestV3 } from './UserUnbanCreateRequestV3.js'
 
 export const BulkUnbanCreateRequestV3 = z.object({ bans: z.array(UserUnbanCreateRequestV3).nullish() })
 

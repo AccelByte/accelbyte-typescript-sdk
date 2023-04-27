@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlatformDlcEntry } from './PlatformDlcEntry'
+import { PlatformDlcEntry } from './PlatformDlcEntry.js'
 
 export const PlatformDlcConfigUpdate = z.object({ data: z.array(PlatformDlcEntry).nullish() })
 

@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { MatchTicketRequest } from './definitions/MatchTicketRequest'
-import { MatchTicketResponse } from './definitions/MatchTicketResponse'
-import { MatchTicketStatus } from './definitions/MatchTicketStatus'
-import { MatchTickets$ } from './endpoints/MatchTickets$'
+import { MatchTicketRequest } from './definitions/MatchTicketRequest.js'
+import { MatchTicketResponse } from './definitions/MatchTicketResponse.js'
+import { MatchTicketStatus } from './definitions/MatchTicketStatus.js'
+import { MatchTickets$ } from './endpoints/MatchTickets$.js'
 
 export function MatchTicketsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

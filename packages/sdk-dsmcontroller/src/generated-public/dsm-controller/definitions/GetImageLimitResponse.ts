@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GetImageLimitResponseData } from './GetImageLimitResponseData'
+import { GetImageLimitResponseData } from './GetImageLimitResponseData.js'
 
 export const GetImageLimitResponse = z.object({ data: GetImageLimitResponseData })
 

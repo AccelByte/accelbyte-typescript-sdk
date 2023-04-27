@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GetUsersPresenceResponse } from './definitions/GetUsersPresenceResponse'
-import { Presence$ } from './endpoints/Presence$'
+import { GetUsersPresenceResponse } from './definitions/GetUsersPresenceResponse.js'
+import { Presence$ } from './endpoints/Presence$.js'
 
 export function PresenceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GameSession } from './GameSession'
-import { PagingCursor } from './PagingCursor'
+import { GameSession } from './GameSession.js'
+import { PagingCursor } from './PagingCursor.js'
 
 export const ActiveMatchmakingGameResponse = z.object({ pagination: PagingCursor, sessions: z.array(GameSession) })
 

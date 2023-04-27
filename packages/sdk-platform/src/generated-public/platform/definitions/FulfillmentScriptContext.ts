@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ItemInfo } from './ItemInfo'
-import { OrderSummary } from './OrderSummary'
+import { ItemInfo } from './ItemInfo.js'
+import { OrderSummary } from './OrderSummary.js'
 
 export const FulfillmentScriptContext = z.object({
   namespace: z.string(),

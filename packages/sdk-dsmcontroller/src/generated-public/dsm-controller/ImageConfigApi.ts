@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GetImageDetailResponse } from './definitions/GetImageDetailResponse'
-import { GetImageLimitResponse } from './definitions/GetImageLimitResponse'
-import { ImageConfig$ } from './endpoints/ImageConfig$'
+import { GetImageDetailResponse } from './definitions/GetImageDetailResponse.js'
+import { GetImageLimitResponse } from './definitions/GetImageLimitResponse.js'
+import { ImageConfig$ } from './endpoints/ImageConfig$.js'
 
 export function ImageConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

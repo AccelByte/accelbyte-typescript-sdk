@@ -7,9 +7,9 @@
  * AUTO GENERATED
  */
 
-import { PartyApi } from './Session/PartyApi'
-import { GameSessionApi } from './Session/GameSessionApi'
-import { PlayerApi } from './Session/PlayerApi'
+import { PartyApi } from './Session/PartyApi.js'
+import { GameSessionApi } from './Session/GameSessionApi.js'
+import { PlayerApi } from './Session/PlayerApi.js'
 
 const apis = {
   PartyApi,

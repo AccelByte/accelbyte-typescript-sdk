@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "Justice Basic Service",
-    "version": "2.9.0",
+    "version": "2.9.1",
     "title": "justice-basic-service",
     "contact": { "name": "Engineering Team at AccelByte", "url": "https://accelbyte.io", "email": "engineering@accelbyte.io" }
   },

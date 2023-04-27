@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CategoryHook } from './CategoryHook'
+import { CategoryHook } from './CategoryHook.js'
 
 export const UpdateInboxCategoryRequest = z.object({
   enabled: z.boolean(),

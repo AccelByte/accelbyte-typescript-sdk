@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { GetAllLeaderboardConfigsPublicResp } from '../definitions/GetAllLeaderboardConfigsPublicResp'
-import { LeaderboardConfigReq } from '../definitions/LeaderboardConfigReq'
+import { GetAllLeaderboardConfigsPublicResp } from '../definitions/GetAllLeaderboardConfigsPublicResp.js'
+import { LeaderboardConfigReq } from '../definitions/LeaderboardConfigReq.js'
 
 export class LeaderboardConfiguration$ {
   // @ts-ignore

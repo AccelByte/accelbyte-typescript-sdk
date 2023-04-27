@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { StatCycleInfo } from './StatCycleInfo'
+import { StatCycleInfo } from './StatCycleInfo.js'
 
 export const BulkStatCycleResult = z.object({ data: z.array(StatCycleInfo) })
 

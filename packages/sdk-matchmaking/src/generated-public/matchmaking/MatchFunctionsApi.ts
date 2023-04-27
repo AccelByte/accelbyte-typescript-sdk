@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ListMatchFunctionsResponse } from './definitions/ListMatchFunctionsResponse'
-import { MatchFunctionConfig } from './definitions/MatchFunctionConfig'
-import { MatchFunctionRequest } from './definitions/MatchFunctionRequest'
-import { MatchFunctions$ } from './endpoints/MatchFunctions$'
+import { ListMatchFunctionsResponse } from './definitions/ListMatchFunctionsResponse.js'
+import { MatchFunctionConfig } from './definitions/MatchFunctionConfig.js'
+import { MatchFunctionRequest } from './definitions/MatchFunctionRequest.js'
+import { MatchFunctions$ } from './endpoints/MatchFunctions$.js'
 
 export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

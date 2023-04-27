@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PatchImageRecord } from './PatchImageRecord'
+import { PatchImageRecord } from './PatchImageRecord.js'
 
 export const ListImagePatchesResponse = z.object({ images: z.array(PatchImageRecord) })
 

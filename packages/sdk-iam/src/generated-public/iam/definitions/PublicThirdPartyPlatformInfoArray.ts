@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PublicThirdPartyPlatformInfo } from './PublicThirdPartyPlatformInfo'
+import { PublicThirdPartyPlatformInfo } from './PublicThirdPartyPlatformInfo.js'
 
 export const PublicThirdPartyPlatformInfoArray = z.array(PublicThirdPartyPlatformInfo)
 

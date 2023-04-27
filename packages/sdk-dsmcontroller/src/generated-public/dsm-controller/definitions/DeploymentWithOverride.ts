@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DeploymentConfigOverride } from './DeploymentConfigOverride'
-import { PodCountConfigOverride } from './PodCountConfigOverride'
+import { DeploymentConfigOverride } from './DeploymentConfigOverride.js'
+import { PodCountConfigOverride } from './PodCountConfigOverride.js'
 
 export const DeploymentWithOverride = z.object({
   allow_version_override: z.boolean(),

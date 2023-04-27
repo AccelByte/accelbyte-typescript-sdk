@@ -8,18 +8,18 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CreateTemplateRequest } from './definitions/CreateTemplateRequest'
-import { CreateTopicRequest } from './definitions/CreateTopicRequest'
-import { FreeFormNotificationRequest } from './definitions/FreeFormNotificationRequest'
-import { Notification$ } from './endpoints/Notification$'
-import { NotificationTopicResponse } from './definitions/NotificationTopicResponse'
-import { NotificationWithTemplateRequest } from './definitions/NotificationWithTemplateRequest'
-import { TemplateLocalization } from './definitions/TemplateLocalization'
-import { TemplateLocalizationResponse } from './definitions/TemplateLocalizationResponse'
-import { TemplateResponseArray } from './definitions/TemplateResponseArray'
-import { TopicByNamespacesResponse } from './definitions/TopicByNamespacesResponse'
-import { UpdateTemplateRequest } from './definitions/UpdateTemplateRequest'
-import { UpdateTopicRequest } from './definitions/UpdateTopicRequest'
+import { CreateTemplateRequest } from './definitions/CreateTemplateRequest.js'
+import { CreateTopicRequest } from './definitions/CreateTopicRequest.js'
+import { FreeFormNotificationRequest } from './definitions/FreeFormNotificationRequest.js'
+import { Notification$ } from './endpoints/Notification$.js'
+import { NotificationTopicResponse } from './definitions/NotificationTopicResponse.js'
+import { NotificationWithTemplateRequest } from './definitions/NotificationWithTemplateRequest.js'
+import { TemplateLocalization } from './definitions/TemplateLocalization.js'
+import { TemplateLocalizationResponse } from './definitions/TemplateLocalizationResponse.js'
+import { TemplateResponseArray } from './definitions/TemplateResponseArray.js'
+import { TopicByNamespacesResponse } from './definitions/TopicByNamespacesResponse.js'
+import { UpdateTemplateRequest } from './definitions/UpdateTemplateRequest.js'
+import { UpdateTopicRequest } from './definitions/UpdateTopicRequest.js'
 
 export function NotificationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

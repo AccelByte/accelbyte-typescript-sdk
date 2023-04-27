@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AllocationEvent } from './AllocationEvent'
-import { StatusHistory } from './StatusHistory'
+import { AllocationEvent } from './AllocationEvent.js'
+import { StatusHistory } from './StatusHistory.js'
 
 export const Server = z.object({
   allocation_events: z.array(AllocationEvent),

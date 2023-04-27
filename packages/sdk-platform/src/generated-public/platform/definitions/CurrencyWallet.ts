@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { WalletInfo } from './WalletInfo'
+import { WalletInfo } from './WalletInfo.js'
 
 export const CurrencyWallet = z.object({
   namespace: z.string(),

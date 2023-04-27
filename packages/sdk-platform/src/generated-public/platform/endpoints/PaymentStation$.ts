@@ -9,14 +9,14 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { PaymentMethodArray } from '../definitions/PaymentMethodArray'
-import { PaymentOrderDetails } from '../definitions/PaymentOrderDetails'
-import { PaymentOrderPaidResult } from '../definitions/PaymentOrderPaidResult'
-import { PaymentProcessResult } from '../definitions/PaymentProcessResult'
-import { PaymentToken } from '../definitions/PaymentToken'
-import { PaymentUrl } from '../definitions/PaymentUrl'
-import { PaymentUrlCreate } from '../definitions/PaymentUrlCreate'
-import { TaxResult } from '../definitions/TaxResult'
+import { PaymentMethodArray } from '../definitions/PaymentMethodArray.js'
+import { PaymentOrderDetails } from '../definitions/PaymentOrderDetails.js'
+import { PaymentOrderPaidResult } from '../definitions/PaymentOrderPaidResult.js'
+import { PaymentProcessResult } from '../definitions/PaymentProcessResult.js'
+import { PaymentToken } from '../definitions/PaymentToken.js'
+import { PaymentUrl } from '../definitions/PaymentUrl.js'
+import { PaymentUrlCreate } from '../definitions/PaymentUrlCreate.js'
+import { TaxResult } from '../definitions/TaxResult.js'
 
 export class PaymentStation$ {
   // @ts-ignore

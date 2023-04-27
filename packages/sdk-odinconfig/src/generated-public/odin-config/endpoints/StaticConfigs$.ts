@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { Config } from '../definitions/Config'
+import { Config } from '../definitions/Config.js'
 
 export class StaticConfigs$ {
   // @ts-ignore

@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { GetAllPlayerBlockedByUsersResponse } from '../definitions/GetAllPlayerBlockedByUsersResponse'
-import { GetAllPlayerBlockedUsersResponse } from '../definitions/GetAllPlayerBlockedUsersResponse'
+import { GetAllPlayerBlockedByUsersResponse } from '../definitions/GetAllPlayerBlockedByUsersResponse.js'
+import { GetAllPlayerBlockedUsersResponse } from '../definitions/GetAllPlayerBlockedUsersResponse.js'
 
 export class Player$ {
   // @ts-ignore

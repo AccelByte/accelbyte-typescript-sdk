@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EventV2 } from './EventV2'
-import { Paging } from './Paging'
+import { EventV2 } from './EventV2.js'
+import { Paging } from './Paging.js'
 
 export const EventResponseV2 = z.object({ data: z.array(EventV2), paging: Paging })
 

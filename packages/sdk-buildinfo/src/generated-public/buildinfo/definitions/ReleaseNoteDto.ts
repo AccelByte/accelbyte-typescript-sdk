@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ReleaseNoteLocalizationDto } from './ReleaseNoteLocalizationDto'
+import { ReleaseNoteLocalizationDto } from './ReleaseNoteLocalizationDto.js'
 
 export const ReleaseNoteDto = z.object({
   namespace: z.string(),

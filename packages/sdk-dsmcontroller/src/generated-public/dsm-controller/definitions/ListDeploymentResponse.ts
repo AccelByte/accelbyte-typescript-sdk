@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DeploymentWithOverride } from './DeploymentWithOverride'
-import { PagingCursor } from './PagingCursor'
+import { DeploymentWithOverride } from './DeploymentWithOverride.js'
+import { PagingCursor } from './PagingCursor.js'
 
 export const ListDeploymentResponse = z.object({ deployments: z.array(DeploymentWithOverride), paging: PagingCursor })
 

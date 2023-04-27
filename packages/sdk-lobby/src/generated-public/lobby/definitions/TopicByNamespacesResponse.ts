@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { NotificationTopicResponse } from './NotificationTopicResponse'
+import { NotificationTopicResponse } from './NotificationTopicResponse.js'
 
 export const TopicByNamespacesResponse = z.object({
   first: z.string(),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CurrencySummary } from './CurrencySummary'
+import { CurrencySummary } from './CurrencySummary.js'
 
 export const InvoiceCurrencySummary = z.object({
   currency: CurrencySummary,

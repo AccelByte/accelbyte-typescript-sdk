@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { NamespaceInfoArray } from '../definitions/NamespaceInfoArray'
-import { NamespacePublisherInfo } from '../definitions/NamespacePublisherInfo'
+import { NamespaceInfoArray } from '../definitions/NamespaceInfoArray.js'
+import { NamespacePublisherInfo } from '../definitions/NamespacePublisherInfo.js'
 
 export class Namespace$ {
   // @ts-ignore

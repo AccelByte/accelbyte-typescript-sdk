@@ -8,7 +8,7 @@
       "url": "https://accelbyte.io",
       "email": "engineering@accelbyte.io"
     },
-    "version": "3.6.5"
+    "version": "3.7.0"
   },
   "paths": {
     "/cloudsave/v1/admin/namespaces/{namespace}/concurrent/records/{key}": {

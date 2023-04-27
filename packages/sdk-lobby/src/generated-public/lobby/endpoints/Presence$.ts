@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { GetUsersPresenceResponse } from '../definitions/GetUsersPresenceResponse'
+import { GetUsersPresenceResponse } from '../definitions/GetUsersPresenceResponse.js'
 
 export class Presence$ {
   // @ts-ignore

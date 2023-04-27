@@ -9,10 +9,10 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ArchiveLeaderboardSignedUrlResponseArray } from '../definitions/ArchiveLeaderboardSignedUrlResponseArray'
-import { GetLeaderboardRankingResp } from '../definitions/GetLeaderboardRankingResp'
-import { GetPublicLeaderboardRankingResponse } from '../definitions/GetPublicLeaderboardRankingResponse'
-import { UserRankingResponse } from '../definitions/UserRankingResponse'
+import { ArchiveLeaderboardSignedUrlResponseArray } from '../definitions/ArchiveLeaderboardSignedUrlResponseArray.js'
+import { GetLeaderboardRankingResp } from '../definitions/GetLeaderboardRankingResp.js'
+import { GetPublicLeaderboardRankingResponse } from '../definitions/GetPublicLeaderboardRankingResponse.js'
+import { UserRankingResponse } from '../definitions/UserRankingResponse.js'
 
 export class LeaderboardData$ {
   // @ts-ignore

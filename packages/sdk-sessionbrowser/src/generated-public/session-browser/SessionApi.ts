@@ -8,17 +8,17 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AddPlayerRequest } from './definitions/AddPlayerRequest'
-import { AddPlayerResponse } from './definitions/AddPlayerResponse'
-import { CreateSessionRequest } from './definitions/CreateSessionRequest'
-import { JoinGameSessionRequest } from './definitions/JoinGameSessionRequest'
-import { RecentPlayerQueryResponse } from './definitions/RecentPlayerQueryResponse'
-import { Session$ } from './endpoints/Session$'
-import { SessionByUserIDsResponse } from './definitions/SessionByUserIDsResponse'
-import { SessionQueryResponse } from './definitions/SessionQueryResponse'
-import { SessionResponse } from './definitions/SessionResponse'
-import { UpdateSessionRequest } from './definitions/UpdateSessionRequest'
-import { UpdateSettingsRequest } from './definitions/UpdateSettingsRequest'
+import { AddPlayerRequest } from './definitions/AddPlayerRequest.js'
+import { AddPlayerResponse } from './definitions/AddPlayerResponse.js'
+import { CreateSessionRequest } from './definitions/CreateSessionRequest.js'
+import { JoinGameSessionRequest } from './definitions/JoinGameSessionRequest.js'
+import { RecentPlayerQueryResponse } from './definitions/RecentPlayerQueryResponse.js'
+import { Session$ } from './endpoints/Session$.js'
+import { SessionByUserIDsResponse } from './definitions/SessionByUserIDsResponse.js'
+import { SessionQueryResponse } from './definitions/SessionQueryResponse.js'
+import { SessionResponse } from './definitions/SessionResponse.js'
+import { UpdateSessionRequest } from './definitions/UpdateSessionRequest.js'
+import { UpdateSettingsRequest } from './definitions/UpdateSettingsRequest.js'
 
 export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { HeartbeatRequest } from './definitions/HeartbeatRequest'
-import { Server$ } from './endpoints/Server$'
+import { HeartbeatRequest } from './definitions/HeartbeatRequest.js'
+import { Server$ } from './endpoints/Server$.js'
 
 export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

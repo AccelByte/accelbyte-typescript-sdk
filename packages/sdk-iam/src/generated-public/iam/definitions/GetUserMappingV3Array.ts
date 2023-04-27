@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GetUserMappingV3 } from './GetUserMappingV3'
+import { GetUserMappingV3 } from './GetUserMappingV3.js'
 
 export const GetUserMappingV3Array = z.array(GetUserMappingV3)
 

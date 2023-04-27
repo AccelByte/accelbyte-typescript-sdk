@@ -8,14 +8,14 @@
  */
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { AppInfo } from '../definitions/AppInfo'
-import { ItemDynamicDataInfo } from '../definitions/ItemDynamicDataInfo'
-import { ItemInfo } from '../definitions/ItemInfo'
-import { ItemInfoArray } from '../definitions/ItemInfoArray'
-import { ItemPagingSlicedResult } from '../definitions/ItemPagingSlicedResult'
-import { ItemPurchaseConditionValidateRequest } from '../definitions/ItemPurchaseConditionValidateRequest'
-import { ItemPurchaseConditionValidateResultArray } from '../definitions/ItemPurchaseConditionValidateResultArray'
-import { PopulatedItemInfo } from '../definitions/PopulatedItemInfo'
+import { AppInfo } from '../definitions/AppInfo.js'
+import { ItemDynamicDataInfo } from '../definitions/ItemDynamicDataInfo.js'
+import { ItemInfo } from '../definitions/ItemInfo.js'
+import { ItemInfoArray } from '../definitions/ItemInfoArray.js'
+import { ItemPagingSlicedResult } from '../definitions/ItemPagingSlicedResult.js'
+import { ItemPurchaseConditionValidateRequest } from '../definitions/ItemPurchaseConditionValidateRequest.js'
+import { ItemPurchaseConditionValidateResultArray } from '../definitions/ItemPurchaseConditionValidateResultArray.js'
+import { PopulatedItemInfo } from '../definitions/PopulatedItemInfo.js'
 
 export class Item$ {
   // @ts-ignore

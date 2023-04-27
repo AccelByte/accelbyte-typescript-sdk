@@ -9,8 +9,8 @@
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { CountryObjectArray } from '../definitions/CountryObjectArray'
-import { RetrieveTimeResponse } from '../definitions/RetrieveTimeResponse'
+import { CountryObjectArray } from '../definitions/CountryObjectArray.js'
+import { RetrieveTimeResponse } from '../definitions/RetrieveTimeResponse.js'
 
 export class Misc$ {
   // @ts-ignore

@@ -4,11 +4,11 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreatorFollowState } from './CreatorFollowState'
-import { LikeState } from './LikeState'
-import { PayloadUrl } from './PayloadUrl'
-import { PreviewUrl } from './PreviewUrl'
-import { ScreenshotResponse } from './ScreenshotResponse'
+import { CreatorFollowState } from './CreatorFollowState.js'
+import { LikeState } from './LikeState.js'
+import { PayloadUrl } from './PayloadUrl.js'
+import { PreviewUrl } from './PreviewUrl.js'
+import { ScreenshotResponse } from './ScreenshotResponse.js'
 
 export const ContentDownloadResponse = z.object({
   channelId: z.string(),

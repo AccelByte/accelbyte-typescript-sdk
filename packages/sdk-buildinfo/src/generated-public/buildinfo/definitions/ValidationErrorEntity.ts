@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { FieldValidationError } from './FieldValidationError'
+import { FieldValidationError } from './FieldValidationError.js'
 
 export const ValidationErrorEntity = z.object({
   errorCode: z.number().int(),

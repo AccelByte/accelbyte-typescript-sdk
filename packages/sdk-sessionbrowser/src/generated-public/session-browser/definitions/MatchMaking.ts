@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MatchingAlly } from './MatchingAlly'
+import { MatchingAlly } from './MatchingAlly.js'
 
 export const MatchMaking = z.object({
   channel: z.string(),

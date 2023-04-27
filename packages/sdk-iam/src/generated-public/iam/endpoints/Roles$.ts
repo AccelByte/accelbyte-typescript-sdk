@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { RoleNamesResponseV3 } from '../definitions/RoleNamesResponseV3'
-import { RoleResponse } from '../definitions/RoleResponse'
+import { RoleNamesResponseV3 } from '../definitions/RoleNamesResponseV3.js'
+import { RoleResponse } from '../definitions/RoleResponse.js'
 
 export class Roles$ {
   // @ts-ignore

@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { RewardInfo } from '../definitions/RewardInfo'
-import { RewardPagingSlicedResult } from '../definitions/RewardPagingSlicedResult'
+import { RewardInfo } from '../definitions/RewardInfo.js'
+import { RewardPagingSlicedResult } from '../definitions/RewardPagingSlicedResult.js'
 
 export class Reward$ {
   // @ts-ignore

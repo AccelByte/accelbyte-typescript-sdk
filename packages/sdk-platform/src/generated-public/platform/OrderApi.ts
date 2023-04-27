@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Order$ } from './endpoints/Order$'
-import { OrderCreate } from './definitions/OrderCreate'
-import { OrderHistoryInfoArray } from './definitions/OrderHistoryInfoArray'
-import { OrderInfo } from './definitions/OrderInfo'
-import { OrderPagingSlicedResult } from './definitions/OrderPagingSlicedResult'
+import { Order$ } from './endpoints/Order$.js'
+import { OrderCreate } from './definitions/OrderCreate.js'
+import { OrderHistoryInfoArray } from './definitions/OrderHistoryInfoArray.js'
+import { OrderInfo } from './definitions/OrderInfo.js'
+import { OrderPagingSlicedResult } from './definitions/OrderPagingSlicedResult.js'
 
 export function OrderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

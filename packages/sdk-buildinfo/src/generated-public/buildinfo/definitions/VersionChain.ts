@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { VersionNode } from './VersionNode'
+import { VersionNode } from './VersionNode.js'
 
 export const VersionChain = z.object({
   appId: z.string().nullish(),

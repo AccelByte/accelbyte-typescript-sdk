@@ -8,12 +8,12 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Attribute } from './definitions/Attribute'
-import { GameProfile$ } from './endpoints/GameProfile$'
-import { GameProfileHeaderArray } from './definitions/GameProfileHeaderArray'
-import { GameProfileInfo } from './definitions/GameProfileInfo'
-import { GameProfileRequest } from './definitions/GameProfileRequest'
-import { UserGameProfilesArray } from './definitions/UserGameProfilesArray'
+import { Attribute } from './definitions/Attribute.js'
+import { GameProfile$ } from './endpoints/GameProfile$.js'
+import { GameProfileHeaderArray } from './definitions/GameProfileHeaderArray.js'
+import { GameProfileInfo } from './definitions/GameProfileInfo.js'
+import { GameProfileRequest } from './definitions/GameProfileRequest.js'
+import { UserGameProfilesArray } from './definitions/UserGameProfilesArray.js'
 
 export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreditSummary } from './CreditSummary'
-import { EntitlementInfo } from './EntitlementInfo'
+import { CreditSummary } from './CreditSummary.js'
+import { EntitlementInfo } from './EntitlementInfo.js'
 
 export const EntitlementSoldResult = z.object({
   requestId: z.string().nullish(),

@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AddDownloadCountResponse } from './definitions/AddDownloadCountResponse'
-import { PublicDownloadCountLegacy$ } from './endpoints/PublicDownloadCountLegacy$'
+import { AddDownloadCountResponse } from './definitions/AddDownloadCountResponse.js'
+import { PublicDownloadCount$ } from './endpoints/PublicDownloadCount$.js'
 
-export function PublicDownloadCountLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PublicDownloadCountApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
@@ -22,7 +22,7 @@ export function PublicDownloadCountLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * Requires valid user token
    */
   async function createDownloadcount_ByContentId(contentId: string): Promise<AddDownloadCountResponse> {
-    const $ = new PublicDownloadCountLegacy$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicDownloadCount$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createDownloadcount_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data

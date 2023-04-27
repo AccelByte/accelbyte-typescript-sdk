@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Paging } from './Paging'
-import { PaymentProviderConfigInfo } from './PaymentProviderConfigInfo'
+import { Paging } from './Paging.js'
+import { PaymentProviderConfigInfo } from './PaymentProviderConfigInfo.js'
 
 export const PaymentProviderConfigPagingSlicedResult = z.object({ data: z.array(PaymentProviderConfigInfo), paging: Paging.nullish() })
 

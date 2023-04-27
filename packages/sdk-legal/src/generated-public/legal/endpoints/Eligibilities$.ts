@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { RetrieveUserEligibilitiesIndirectResponse } from '../definitions/RetrieveUserEligibilitiesIndirectResponse'
-import { RetrieveUserEligibilitiesResponseArray } from '../definitions/RetrieveUserEligibilitiesResponseArray'
+import { RetrieveUserEligibilitiesIndirectResponse } from '../definitions/RetrieveUserEligibilitiesIndirectResponse.js'
+import { RetrieveUserEligibilitiesResponseArray } from '../definitions/RetrieveUserEligibilitiesResponseArray.js'
 
 export class Eligibilities$ {
   // @ts-ignore

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ContentDownloadResponse } from './ContentDownloadResponse'
-import { PagingCursor } from './PagingCursor'
+import { ContentDownloadResponse } from './ContentDownloadResponse.js'
+import { PagingCursor } from './PagingCursor.js'
 
 export const PaginatedContentDownloadResponse = z.object({ data: z.array(ContentDownloadResponse), paging: PagingCursor })
 

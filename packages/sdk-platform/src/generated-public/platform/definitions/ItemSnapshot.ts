@@ -4,11 +4,11 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { LootBoxConfig } from './LootBoxConfig'
-import { OptionBoxConfig } from './OptionBoxConfig'
-import { Recurring } from './Recurring'
-import { RegionDataItem } from './RegionDataItem'
-import { SaleConfig } from './SaleConfig'
+import { LootBoxConfig } from './LootBoxConfig.js'
+import { OptionBoxConfig } from './OptionBoxConfig.js'
+import { Recurring } from './Recurring.js'
+import { RegionDataItem } from './RegionDataItem.js'
+import { SaleConfig } from './SaleConfig.js'
 
 export const ItemSnapshot = z.object({
   itemId: z.string(),

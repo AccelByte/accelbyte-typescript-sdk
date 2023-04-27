@@ -29,6 +29,9 @@
   ],
   "private": true,
   "repository": "https://github.com/AccelByte/accelbyte-web-sdk",
+  "devDependencies": {
+    "semver": "7.5.0"
+  },
   "excludedPackagesFromNpmPublish": [
     "packages/sdk-odinconfig"
   ]

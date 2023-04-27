@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { FailedBanUnbanUserV3 } from './FailedBanUnbanUserV3'
-import { UserBanResponseV3 } from './UserBanResponseV3'
+import { FailedBanUnbanUserV3 } from './FailedBanUnbanUserV3.js'
+import { UserBanResponseV3 } from './UserBanResponseV3.js'
 
 export const ListBulkUserBanResponseV3 = z.object({ failedBans: z.array(FailedBanUnbanUserV3), successBans: z.array(UserBanResponseV3) })
 

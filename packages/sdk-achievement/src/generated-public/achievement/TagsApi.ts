@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PaginatedTagResponse } from './definitions/PaginatedTagResponse'
-import { Tags$ } from './endpoints/Tags$'
+import { PaginatedTagResponse } from './definitions/PaginatedTagResponse.js'
+import { Tags$ } from './endpoints/Tags$.js'
 
 export function TagsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

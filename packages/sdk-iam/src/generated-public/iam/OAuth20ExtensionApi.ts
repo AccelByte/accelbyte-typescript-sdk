@@ -8,12 +8,12 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CountryLocationResponse } from './definitions/CountryLocationResponse'
-import { GameTokenCodeResponse } from './definitions/GameTokenCodeResponse'
-import { OAuth20Extension$ } from './endpoints/OAuth20Extension$'
-import { OneTimeLinkingCodeResponse } from './definitions/OneTimeLinkingCodeResponse'
-import { OneTimeLinkingCodeValidationResponse } from './definitions/OneTimeLinkingCodeValidationResponse'
-import { TokenResponseV3 } from './definitions/TokenResponseV3'
+import { CountryLocationResponse } from './definitions/CountryLocationResponse.js'
+import { GameTokenCodeResponse } from './definitions/GameTokenCodeResponse.js'
+import { OAuth20Extension$ } from './endpoints/OAuth20Extension$.js'
+import { OneTimeLinkingCodeResponse } from './definitions/OneTimeLinkingCodeResponse.js'
+import { OneTimeLinkingCodeValidationResponse } from './definitions/OneTimeLinkingCodeValidationResponse.js'
+import { TokenResponseV3 } from './definitions/TokenResponseV3.js'
 
 export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

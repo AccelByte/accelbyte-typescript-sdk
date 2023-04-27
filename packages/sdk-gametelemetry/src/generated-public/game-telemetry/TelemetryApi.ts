@@ -8,7 +8,7 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Telemetry$ } from './endpoints/Telemetry$'
+import { Telemetry$ } from './endpoints/Telemetry$.js'
 
 export function TelemetryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

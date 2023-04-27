@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { LootBoxReward } from './LootBoxReward'
+import { LootBoxReward } from './LootBoxReward.js'
 
 export const LootBoxConfig = z.object({
   rewardCount: z.number().int().nullish(),

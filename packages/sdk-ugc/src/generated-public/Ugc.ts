@@ -7,34 +7,28 @@
  * AUTO GENERATED
  */
 
-import { PublicTagApi } from './ugc/PublicTagApi'
-import { PublicTypeApi } from './ugc/PublicTypeApi'
-import { PublicCreatorApi } from './ugc/PublicCreatorApi'
-import { PublicContentLegacyApi } from './ugc/PublicContentLegacyApi'
-import { PublicContentV2Api } from './ugc/PublicContentV2Api'
-import { PublicLikeLegacyApi } from './ugc/PublicLikeLegacyApi'
-import { PublicFollowApi } from './ugc/PublicFollowApi'
-import { PublicGroupApi } from './ugc/PublicGroupApi'
-import { AnonymizationApi } from './ugc/AnonymizationApi'
-import { PublicChannelApi } from './ugc/PublicChannelApi'
-import { PublicLikeV2Api } from './ugc/PublicLikeV2Api'
-import { PublicDownloadCountV2Api } from './ugc/PublicDownloadCountV2Api'
-import { PublicDownloadCountLegacyApi } from './ugc/PublicDownloadCountLegacyApi'
+import { PublicTagApi } from './ugc/PublicTagApi.js'
+import { PublicTypeApi } from './ugc/PublicTypeApi.js'
+import { PublicCreatorApi } from './ugc/PublicCreatorApi.js'
+import { PublicContentApi } from './ugc/PublicContentApi.js'
+import { PublicLikeApi } from './ugc/PublicLikeApi.js'
+import { PublicFollowApi } from './ugc/PublicFollowApi.js'
+import { PublicGroupApi } from './ugc/PublicGroupApi.js'
+import { AnonymizationApi } from './ugc/AnonymizationApi.js'
+import { PublicChannelApi } from './ugc/PublicChannelApi.js'
+import { PublicDownloadCountApi } from './ugc/PublicDownloadCountApi.js'
 
 const apis = {
   PublicTagApi,
   PublicTypeApi,
   PublicCreatorApi,
-  PublicContentLegacyApi,
-  PublicContentV2Api,
-  PublicLikeLegacyApi,
+  PublicContentApi,
+  PublicLikeApi,
   PublicFollowApi,
   PublicGroupApi,
   AnonymizationApi,
   PublicChannelApi,
-  PublicLikeV2Api,
-  PublicDownloadCountV2Api,
-  PublicDownloadCountLegacyApi
+  PublicDownloadCountApi
 }
 
 export const Ugc = apis

@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlatformReward } from './PlatformReward'
-import { RevocationResult } from './RevocationResult'
-import { RevokeResult } from './RevokeResult'
+import { PlatformReward } from './PlatformReward.js'
+import { RevocationResult } from './RevocationResult.js'
+import { RevokeResult } from './RevokeResult.js'
 
 export const DlcRecord = z.object({
   id: z.string().nullish(),

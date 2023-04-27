@@ -5,8 +5,8 @@
  */
 
 import { z } from 'zod'
-import { BackgroundConfig, PageConfig } from '../models/base-configs'
-import { Config } from '../generated-public/odin-config/definitions/Config'
+import { BackgroundConfig, PageConfig } from '../models/base-configs.js'
+import { Config } from '../generated-public/odin-config/definitions/Config.js'
 
 export const GameListKeys = z.enum(['gameId', 'gameName', 'namespace', 'clientId'])
 export type TGameListKeys = z.infer<typeof GameListKeys>

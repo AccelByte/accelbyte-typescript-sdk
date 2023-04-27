@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Pagination } from './Pagination'
-import { UserPoint } from './UserPoint'
+import { Pagination } from './Pagination.js'
+import { UserPoint } from './UserPoint.js'
 
 export const GetLeaderboardRankingResp = z.object({ data: z.array(UserPoint), paging: Pagination })
 

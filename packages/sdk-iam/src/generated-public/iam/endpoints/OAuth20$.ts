@@ -9,13 +9,13 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { JwkSet } from '../definitions/JwkSet'
-import { RevocationList } from '../definitions/RevocationList'
-import { TokenIntrospectResponse } from '../definitions/TokenIntrospectResponse'
-import { TokenResponse } from '../definitions/TokenResponse'
-import { TokenResponseV3 } from '../definitions/TokenResponseV3'
-import { TokenThirdPartyResponse } from '../definitions/TokenThirdPartyResponse'
-import { TokenWithDeviceCookieResponseV3 } from '../definitions/TokenWithDeviceCookieResponseV3'
+import { JwkSet } from '../definitions/JwkSet.js'
+import { RevocationList } from '../definitions/RevocationList.js'
+import { TokenIntrospectResponse } from '../definitions/TokenIntrospectResponse.js'
+import { TokenResponse } from '../definitions/TokenResponse.js'
+import { TokenResponseV3 } from '../definitions/TokenResponseV3.js'
+import { TokenThirdPartyResponse } from '../definitions/TokenThirdPartyResponse.js'
+import { TokenWithDeviceCookieResponseV3 } from '../definitions/TokenWithDeviceCookieResponseV3.js'
 
 export class OAuth20$ {
   // @ts-ignore

@@ -1,3 +1,19 @@
+### 2.0.0 - 2023-04-27
+
+- Bump from script
+
+### 2.0.0-experimental.0 - 2023-04-27
+
+- Bump from script
+
+### 1.2.4-experimental.0 - 2023-04-27
+
+- Bump from script
+
+### 1.2.3 - 2023-04-26
+
+- Bump axios
+
 ### 1.2.2 - 2023-04-18
 
 - Fix build for Yarn berry

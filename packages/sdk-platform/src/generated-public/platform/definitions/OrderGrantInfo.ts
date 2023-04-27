@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreditSummary } from './CreditSummary'
-import { EntitlementSummary } from './EntitlementSummary'
+import { CreditSummary } from './CreditSummary.js'
+import { EntitlementSummary } from './EntitlementSummary.js'
 
 export const OrderGrantInfo = z.object({ entitlements: z.array(EntitlementSummary).nullish(), credits: z.array(CreditSummary).nullish() })
 

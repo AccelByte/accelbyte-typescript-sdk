@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DefaultLaunchProfile } from './DefaultLaunchProfile'
-import { FileManifest } from './FileManifest'
+import { DefaultLaunchProfile } from './DefaultLaunchProfile.js'
+import { FileManifest } from './FileManifest.js'
 
 export const UploadBuildManifest = z.object({
   appId: z.string().nullish(),

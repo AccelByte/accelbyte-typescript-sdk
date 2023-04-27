@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { EncryptedIdentity } from '../definitions/EncryptedIdentity'
-import { PublicKeyPresignedUrl } from '../definitions/PublicKeyPresignedUrl'
+import { EncryptedIdentity } from '../definitions/EncryptedIdentity.js'
+import { PublicKeyPresignedUrl } from '../definitions/PublicKeyPresignedUrl.js'
 
 export class Drm$ {
   // @ts-ignore

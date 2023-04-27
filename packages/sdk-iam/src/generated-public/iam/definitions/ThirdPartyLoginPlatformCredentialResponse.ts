@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { NetflixCertificates } from './NetflixCertificates'
-import { RegisteredDomain } from './RegisteredDomain'
+import { NetflixCertificates } from './NetflixCertificates.js'
+import { RegisteredDomain } from './RegisteredDomain.js'
 
 export const ThirdPartyLoginPlatformCredentialResponse = z.object({
   ACSURL: z.string(),

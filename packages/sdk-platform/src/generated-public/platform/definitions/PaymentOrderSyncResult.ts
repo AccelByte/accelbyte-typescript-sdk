@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PaymentOrder } from './PaymentOrder'
+import { PaymentOrder } from './PaymentOrder.js'
 
 export const PaymentOrderSyncResult = z.object({ paymentOrders: z.array(PaymentOrder).nullish(), nextEvaluatedKey: z.string().nullish() })
 

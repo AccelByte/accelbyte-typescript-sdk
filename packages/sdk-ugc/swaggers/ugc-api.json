@@ -8,7 +8,7 @@
       "url": "https://accelbyte.io",
       "email": "engineering@accelbyte.io"
     },
-    "version": "2.10.1"
+    "version": "2.10.2"
   },
   "paths": {
     "/ugc/v1/admin/namespaces/{namespace}/channels": {
@@ -3165,7 +3165,7 @@
         "description": "Requires valid user token.\n\nFor advance tag filtering supports \u0026 as AND operator and | as OR operator and parentheses () for priority. e.g: \n\n\u003ccode\u003etags=red\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026animal\u003c/code\u003e\n\n\u003ccode\u003etags=red|animal\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026animal|wild\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026(animal|wild)\u003c/code\u003e\n\nThe precedence of logical operator is AND \u003e OR, so if no parentheses, AND logical operator will be executed first.\n\nAllowed character for operand: alphanumeric, underscore \u003ccode\u003e_\u003c/code\u003e and dash \u003ccode\u003e-\u003c/code\u003e\n\nAllowed character for operator: \u003ccode\u003e\u0026\u003c/code\u003e \u003ccode\u003e|\u003c/code\u003e \u003ccode\u003e(\u003c/code\u003e \u003ccode\u003e)\u003c/code\u003e\n\n\u003cb\u003ePlease note that value of tags query param should be URL encoded\u003c/b\u003e",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Search contents specific to a channel",
         "operationId": "SearchChannelSpecificContent",
         "parameters": [
@@ -3289,7 +3289,7 @@
         "description": "Public user can access without token or if token specified, requires valid user token.\n\nFor advance tag filtering supports \u0026 as AND operator and | as OR operator and parentheses () for priority. e.g: \n\n\u003ccode\u003etags=red\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026animal\u003c/code\u003e\n\n\u003ccode\u003etags=red|animal\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026animal|wild\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026(animal|wild)\u003c/code\u003e\n\nThe precedence of logical operator is AND \u003e OR, so if no parentheses, AND logical operator will be executed first.\n\nAllowed character for operand: alphanumeric, underscore \u003ccode\u003e_\u003c/code\u003e and dash \u003ccode\u003e-\u003c/code\u003e\n\nAllowed character for operator: \u003ccode\u003e\u0026\u003c/code\u003e \u003ccode\u003e|\u003c/code\u003e \u003ccode\u003e(\u003c/code\u003e \u003ccode\u003e)\u003c/code\u003e\n\n\u003cb\u003ePlease note that value of tags query param should be URL encoded\u003c/b\u003e",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Search contents",
         "operationId": "PublicSearchContent",
         "parameters": [
@@ -3406,7 +3406,7 @@
         "description": "Maximum requested Ids: 100.\n\t\t\tPublic user can access without token or if token specified, requires valid user token",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Get contents by content Ids ",
         "operationId": "PublicGetContentBulk",
         "parameters": [
@@ -3521,7 +3521,7 @@
         "description": "Requires valid user token.\n\nFor advance tag filtering supports \u0026 as AND operator and | as OR operator and parentheses () for priority. e.g: \n\n\u003ccode\u003etags=red\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026animal\u003c/code\u003e\n\n\u003ccode\u003etags=red|animal\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026animal|wild\u003c/code\u003e\n\n\u003ccode\u003etags=red\u0026(animal|wild)\u003c/code\u003e\n\nThe precedence of logical operator is AND \u003e OR, so if no parentheses, AND logical operator will be executed first.\n\nAllowed character for operand: alphanumeric, underscore \u003ccode\u003e_\u003c/code\u003e and dash \u003ccode\u003e-\u003c/code\u003e\n\nAllowed character for operator: \u003ccode\u003e\u0026\u003c/code\u003e \u003ccode\u003e|\u003c/code\u003e \u003ccode\u003e(\u003c/code\u003e \u003ccode\u003e)\u003c/code\u003e\n\n\u003cb\u003ePlease note that value of tags query param should be URL encoded\u003c/b\u003e",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Like (Legacy)"],
+        "tags": ["[Public] Like"],
         "summary": "Get liked contents",
         "operationId": "GetLikedContent",
         "parameters": [
@@ -3626,7 +3626,7 @@
         "description": "Public user can access without token or if token specified, requires valid user token",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Get content by sharecode",
         "operationId": "PublicDownloadContentByShareCode",
         "parameters": [
@@ -3678,7 +3678,7 @@
         "description": "Public user can access without token or if token specified, requires valid user token",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Get user specific content",
         "operationId": "PublicDownloadContentByContentID",
         "parameters": [
@@ -3730,7 +3730,7 @@
         "description": "Requires valid user token",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Download Count (Legacy)"],
+        "tags": ["[Public] Download Count"],
         "summary": "Add unique download count to a content",
         "operationId": "AddDownloadCount",
         "parameters": [
@@ -3788,7 +3788,7 @@
         "description": "Requires valid user token",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Like (Legacy)"],
+        "tags": ["[Public] Like"],
         "summary": "Update like/unlike status to a content",
         "operationId": "UpdateContentLikeStatus",
         "parameters": [
@@ -3848,7 +3848,7 @@
         "description": "\u003cp\u003eRequires valid user token\u003c/p\u003e\u003cp\u003e\u003cb\u003eNOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content\u003c/b\u003e\u003c/p\u003e",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Get content preview",
         "operationId": "PublicDownloadContentPreview",
         "parameters": [
@@ -4498,7 +4498,7 @@
         "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u003c/b\u003e.\\n \n\t\t\tAll request body are required except preview, tags and customAttributes.\n\t\t\t",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Upload content to a channel",
         "operationId": "CreateContentDirect",
         "deprecated": true,
@@ -4566,7 +4566,7 @@
         "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u003c/b\u003e.\\n \n\t\t\t\tAll request body are required except payload, preview, tags, contentType and customAttributes.\n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the S3 presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\t\u003cbr\u003e\u003cp\u003e\u003cb\u003eNOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content\u003c/b\u003e\u003c/p\u003e",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Upload content to S3 bucket",
         "operationId": "CreateContentS3",
         "parameters": [
@@ -4633,7 +4633,7 @@
         "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u003c/b\u003e.\n\t\t\t\tAll request body are required except payload, preview, tags, contentType, updateContentFile and customAttributes.\n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the S3 presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tTo update content's file, set \u003ccode\u003eupdateContentFile\u003c/code\u003e to \u003ccode\u003etrue\u003c/code\u003e and upload the file using URL in \u003ccode\u003epayloadURL.url\u003c/code\u003e in response body. \n\t\t\t\t\u003cbr\u003e\u003cp\u003e\u003cb\u003eNOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content\u003c/b\u003e\u003c/p\u003e",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Update content to S3 bucket",
         "operationId": "UpdateContentS3",
         "parameters": [
@@ -4713,7 +4713,7 @@
         "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u003c/b\u003e.\\n \n\t\t\t\tAll request body are required except preview, tags and customAttributes.\n\t\t\t\t",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Update content to a channel",
         "operationId": "UpdateContentDirect",
         "deprecated": true,
@@ -4792,7 +4792,7 @@
         "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u003c/b\u003e.",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Delete content",
         "operationId": "DeleteContent",
         "parameters": [
@@ -4855,7 +4855,7 @@
         "description": "Public user can access without token or if token specified, required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u003c/b\u003e.",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Get user's generated contents",
         "operationId": "PublicGetUserContent",
         "parameters": [
@@ -4968,7 +4968,7 @@
         "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u003c/b\u003e.\\n \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Update screenshot of content",
         "operationId": "UpdateScreenshots",
         "parameters": [
@@ -5039,7 +5039,7 @@
         "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u003c/b\u003e.\\n \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png. \\n\n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Upload screenshots for content",
         "operationId": "UploadContentScreenshot",
         "parameters": [
@@ -5106,7 +5106,7 @@
         "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u003c/b\u003e.\n\t\t\t\t",
         "consumes": ["application/json", "application/octet-stream"],
         "produces": ["application/json"],
-        "tags": ["[Public] Content (Legacy)"],
+        "tags": ["[Public] Content"],
         "summary": "Delete screenshots content",
         "operationId": "DeleteContentScreenshot",
         "parameters": [
@@ -5842,1196 +5842,6 @@
           }
         }
       }
-    },
-    "/ugc/v2/admin/namespaces/{namespace}/channels/{channelId}/contents": {
-      "post": {
-        "description": "Required permission \u003cb\u003eADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u003c/b\u003e.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "tags": ["[Admin] Content V2"],
-        "summary": "Create a content",
-        "operationId": "AdminCreateContentV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "channel ID",
-            "name": "channelId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.AdminContentRequestV2"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/models.CreateContentResponseV2"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/channels/{channelId}/contents": {
-      "get": {
-        "description": "Public user can access without token or if token specified, requires valid user token",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "List contents specific to a channel",
-        "operationId": "PublicGetContentByChannelID",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "channel ID",
-            "name": "channelId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "integer",
-            "default": 1000,
-            "description": "number of content per page",
-            "name": "limit",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "default": 0,
-            "description": "the offset number to retrieve",
-            "name": "offset",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.PaginatedContentDownloadResponseV2"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/contents": {
-      "get": {
-        "description": "\nFor advance tag filtering supports \u0026 as AND operator and | as OR operator and parentheses () for priority. e.g:\n\n\u003ccode\u003etags=red\u003c/code\u003e\n\u003ccode\u003etags=red\u0026animal\u003c/code\u003e\n\u003ccode\u003etags=red|animal\u003c/code\u003e\n\u003ccode\u003etags=red\u0026animal|wild\u003c/code\u003e\n\u003ccode\u003etags=red\u0026(animal|wild)\u003c/code\u003e\n\nThe precedence of logical operator is AND \u003e OR, so if no parentheses, AND logical operator will be executed first.\n\nAllowed character for operand: alphanumeric, underscore \u003ccode\u003e_\u003c/code\u003e and dash \u003ccode\u003e-\u003c/code\u003e\nAllowed character for operator: \u003ccode\u003e\u0026\u003c/code\u003e \u003ccode\u003e|\u003c/code\u003e \u003ccode\u003e(\u003c/code\u003e \u003ccode\u003e)\u003c/code\u003e\n\n\u003cb\u003ePlease note that value of tags query param should be URL encoded\u003c/b\u003e",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "List contents",
-        "operationId": "PublicListContentV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "filter by content name",
-            "name": "name",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "description": "filter by content type",
-            "name": "type",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "description": "filter by content subType",
-            "name": "subType",
-            "in": "query"
-          },
-          {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv",
-            "description": "content tag",
-            "name": "tags",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "default": 1000,
-            "description": "number of content per page",
-            "name": "limit",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "default": 0,
-            "description": "the offset number to retrieve",
-            "name": "offset",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003edownload, download:desc, download:asc\u003c/li\u003e\n\u003cli\u003elike, like:desc, like:asc\u003c/li\u003e\n\u003cli\u003ename, name:desc, name:asc\u003c/li\u003e\n\u003c/ul\u003e",
-            "name": "sortBy",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.PaginatedContentDownloadResponseV2"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/contents/bulk": {
-      "post": {
-        "description": "Maximum requested Ids: 100.\n\t\t\tPublic user can access without token or if token specified, requires valid user token",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Get contents by content Ids ",
-        "operationId": "PublicBulkGetContentByIDV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.PublicGetContentBulkRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/models.ContentDownloadResponseV2"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/contents/sharecodes/{shareCode}": {
-      "get": {
-        "description": "Public user can access without token or if token specified, requires valid user token",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Get content by sharecode",
-        "operationId": "PublicGetContentByShareCodeV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content sharecode",
-            "name": "shareCode",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.ContentDownloadResponseV2"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/contents/{contentId}": {
-      "get": {
-        "description": "Public user can access without token or if token specified, requires valid user token",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Get content by content ID",
-        "operationId": "PublicGetContentByIDV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.ContentDownloadResponseV2"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloadcount": {
-      "post": {
-        "description": "Requires valid user token",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Download Count V2"],
-        "summary": "Add unique download count to a content",
-        "operationId": "AddDownloadCountV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.AddDownloadCountResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloader": {
-      "get": {
-        "description": "This endpoint will only display the list of users who performed add download count from v2 endpoint.",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Download Count V2"],
-        "summary": "List content downloader",
-        "operationId": "ListContentDownloader",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "default": 20,
-            "description": "number of content per page",
-            "name": "limit",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "default": 0,
-            "description": "the offset number to retrieve",
-            "name": "offset",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "default": "createdTime:desc",
-            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
-            "name": "sortBy",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.PaginatedContentDownloaderResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/like": {
-      "get": {
-        "description": "This endpoint will only display the list of users who performed like from v2 endpoint.",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Like V2"],
-        "summary": "Retrieve list of user that like specified content.",
-        "operationId": "ListContentLike",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "integer",
-            "default": 20,
-            "description": "maximum result of data",
-            "name": "limit",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "default": 0,
-            "description": "offset",
-            "name": "offset",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "default": "createdTime:desc",
-            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
-            "name": "sortBy",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.PaginatedContentLikersResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      },
-      "put": {
-        "description": "Requires valid user token",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Like V2"],
-        "summary": "Update like/unlike status to a content",
-        "operationId": "UpdateContentLikeStatusV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.ContentLikeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.ContentLikeResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents": {
-      "post": {
-        "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u003c/b\u003e.",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Create a content",
-        "operationId": "PublicCreateContentV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "channel ID",
-            "name": "channelId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.ContentRequestV2"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/models.CreateContentResponseV2"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}": {
-      "delete": {
-        "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u003c/b\u003e.",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Delete content",
-        "operationId": "PublicDeleteContentV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "channel ID",
-            "name": "channelId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      },
-      "patch": {
-        "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u003c/b\u003e.",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Update content",
-        "operationId": "PublicUpdateContentV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "channel ID",
-            "name": "channelId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.UpdateContentRequestV2"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.ContentDownloadResponseV2"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}/uploadUrl": {
-      "patch": {
-        "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u003c/b\u003e.",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Generate content upload URL",
-        "operationId": "PublicGenerateContentUploadURL",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "channel ID",
-            "name": "channelId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.GenerateContentUploadURLRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.GenerateContentUploadURLResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/users/{userId}/contents": {
-      "get": {
-        "description": "Public user can access without token or if token specified, required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u003c/b\u003e.",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Get content by user ID",
-        "operationId": "PublicGetContentByUserIDV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "integer",
-            "default": 1000,
-            "description": "number of content per page",
-            "name": "limit",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "default": 0,
-            "description": "the offset number to retrieve",
-            "name": "offset",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.PaginatedContentDownloadResponseV2"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/users/{userId}/contents/{contentId}/screenshots": {
-      "put": {
-        "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u003c/b\u003e. \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Update screenshot of content",
-        "operationId": "UpdateScreenshotsV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.UpdateScreenshotRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/models.UpdateScreenshotResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u003c/b\u003e. \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png.\n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Upload screenshots for content",
-        "operationId": "UploadContentScreenshotV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.CreateScreenshotRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/models.CreateScreenshotResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
-    },
-    "/ugc/v2/public/namespaces/{namespace}/users/{userId}/contents/{contentId}/screenshots/{screenshotId}": {
-      "delete": {
-        "description": "Required permission \u003cb\u003eNAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u003c/b\u003e.\n\t\t\t\t",
-        "consumes": ["application/json", "application/octet-stream"],
-        "produces": ["application/json"],
-        "tags": ["[Public] Content V2"],
-        "summary": "Delete screenshots content",
-        "operationId": "DeleteContentScreenshotV2",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the game",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "content ID",
-            "name": "contentId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "screenshot ID",
-            "name": "screenshotId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "user ID",
-            "name": "userId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -7039,39 +5849,6 @@
       "required": ["contentId"],
       "properties": {
         "contentId": {
-          "type": "string"
-        }
-      }
-    },
-    "models.AdminContentRequestV2": {
-      "required": ["name"],
-      "properties": {
-        "contentType": {
-          "description": "S3 content type",
-          "type": "string"
-        },
-        "customAttributes": {
-          "type": "object"
-        },
-        "fileExtension": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "shareCode": {
-          "type": "string"
-        },
-        "subType": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "type": {
           "type": "string"
         }
       }
@@ -7280,123 +6057,6 @@
         }
       }
     },
-    "models.ContentDownloadResponseV2": {
-      "required": [
-        "createdTime",
-        "id",
-        "namespace",
-        "channelId",
-        "userId",
-        "name",
-        "shareCode",
-        "isHidden",
-        "isOfficial",
-        "tags",
-        "likeCount",
-        "creatorFollowState",
-        "downloadCount"
-      ],
-      "properties": {
-        "channelId": {
-          "type": "string"
-        },
-        "createdTime": {
-          "type": "string"
-        },
-        "creatorFollowState": {
-          "$ref": "#/definitions/models.CreatorFollowState"
-        },
-        "customAttributes": {
-          "type": "object"
-        },
-        "downloadCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "fileExtension": {
-          "type": "string"
-        },
-        "groups": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string"
-        },
-        "isHidden": {
-          "type": "boolean"
-        },
-        "isOfficial": {
-          "type": "boolean"
-        },
-        "likeCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "likeState": {
-          "$ref": "#/definitions/models.LikeState"
-        },
-        "name": {
-          "type": "string"
-        },
-        "namespace": {
-          "type": "string"
-        },
-        "payloadURL": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/models.PayloadURL"
-          }
-        },
-        "screenshots": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/models.ScreenshotResponse"
-          }
-        },
-        "shareCode": {
-          "type": "string"
-        },
-        "subType": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "type": {
-          "type": "string"
-        },
-        "updatedTime": {
-          "type": "string"
-        },
-        "userId": {
-          "type": "string"
-        }
-      }
-    },
-    "models.ContentDownloaderResponse": {
-      "required": ["namespace", "contentId", "downloadedBy", "createdTime"],
-      "properties": {
-        "contentId": {
-          "type": "string"
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "downloadedBy": {
-          "type": "string"
-        },
-        "namespace": {
-          "type": "string"
-        }
-      }
-    },
     "models.ContentLikeRequest": {
       "required": ["likeStatus"],
       "properties": {
@@ -7416,56 +6076,8 @@
         }
       }
     },
-    "models.ContentLikersResponse": {
-      "required": ["namespace", "contentId", "likedBy", "createdTime"],
-      "properties": {
-        "contentId": {
-          "type": "string"
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "likedBy": {
-          "type": "string"
-        },
-        "namespace": {
-          "type": "string"
-        }
-      }
-    },
-    "models.ContentRequestV2": {
-      "required": ["name"],
-      "properties": {
-        "contentType": {
-          "description": "S3 content type",
-          "type": "string"
-        },
-        "customAttributes": {
-          "type": "object"
-        },
-        "fileExtension": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "subType": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
     "models.CreateContentRequest": {
-      "required": ["subType", "preview", "tags", "name", "type", "payload"],
+      "required": ["tags", "name", "type", "subType", "preview", "payload"],
       "properties": {
         "customAttributes": {
           "type": "object"
@@ -7498,7 +6110,7 @@
       }
     },
     "models.CreateContentRequestS3": {
-      "required": ["tags", "name", "type", "subType", "preview"],
+      "required": ["name", "type", "subType", "preview", "tags"],
       "properties": {
         "contentType": {
           "type": "string"
@@ -7608,84 +6220,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/models.PreviewURL"
-          }
-        },
-        "shareCode": {
-          "type": "string"
-        },
-        "subType": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "type": {
-          "type": "string"
-        },
-        "updatedTime": {
-          "type": "string"
-        },
-        "userId": {
-          "type": "string"
-        }
-      }
-    },
-    "models.CreateContentResponseV2": {
-      "required": [
-        "createdTime",
-        "id",
-        "namespace",
-        "parentNamespace",
-        "channelId",
-        "userId",
-        "name",
-        "shareCode",
-        "isOfficial",
-        "isHidden",
-        "tags"
-      ],
-      "properties": {
-        "channelId": {
-          "type": "string"
-        },
-        "contentType": {
-          "description": "S3 content type",
-          "type": "string"
-        },
-        "createdTime": {
-          "type": "string"
-        },
-        "customAttributes": {
-          "type": "object"
-        },
-        "fileExtension": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "isHidden": {
-          "type": "boolean"
-        },
-        "isOfficial": {
-          "type": "boolean"
-        },
-        "name": {
-          "type": "string"
-        },
-        "namespace": {
-          "type": "string"
-        },
-        "parentNamespace": {
-          "type": "string"
-        },
-        "payloadURL": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/models.PayloadURL"
           }
         },
         "shareCode": {
@@ -7907,32 +6441,6 @@
         }
       }
     },
-    "models.GenerateContentUploadURLRequest": {
-      "properties": {
-        "contentType": {
-          "description": "S3 content type",
-          "type": "string"
-        },
-        "fileExtension": {
-          "type": "string"
-        }
-      }
-    },
-    "models.GenerateContentUploadURLResponse": {
-      "required": ["url"],
-      "properties": {
-        "contentType": {
-          "description": "S3 content type",
-          "type": "string"
-        },
-        "fileExtension": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        }
-      }
-    },
     "models.GetContentPreviewResponse": {
       "required": ["preview"],
       "properties": {
@@ -7971,48 +6479,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/models.ContentDownloadResponse"
-          }
-        },
-        "paging": {
-          "$ref": "#/definitions/models.PagingCursor"
-        }
-      }
-    },
-    "models.PaginatedContentDownloadResponseV2": {
-      "required": ["data", "paging"],
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/models.ContentDownloadResponseV2"
-          }
-        },
-        "paging": {
-          "$ref": "#/definitions/models.PagingCursor"
-        }
-      }
-    },
-    "models.PaginatedContentDownloaderResponse": {
-      "required": ["data", "paging"],
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/models.ContentDownloaderResponse"
-          }
-        },
-        "paging": {
-          "$ref": "#/definitions/models.PagingCursor"
-        }
-      }
-    },
-    "models.PaginatedContentLikersResponse": {
-      "required": ["data", "paging"],
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/models.ContentLikersResponse"
           }
         },
         "paging": {
@@ -8215,7 +6681,7 @@
       }
     },
     "models.UpdateContentRequest": {
-      "required": ["preview", "tags", "name", "type", "subType", "payload", "fileExtension", "contentType", "updateContentFile"],
+      "required": ["name", "type", "subType", "preview", "tags", "payload", "fileExtension", "contentType", "updateContentFile"],
       "properties": {
         "contentType": {
           "type": "string"
@@ -8253,28 +6719,6 @@
         },
         "updateContentFile": {
           "type": "boolean"
-        }
-      }
-    },
-    "models.UpdateContentRequestV2": {
-      "properties": {
-        "customAttributes": {
-          "type": "object"
-        },
-        "name": {
-          "type": "string"
-        },
-        "subType": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "type": {
-          "type": "string"
         }
       }
     },

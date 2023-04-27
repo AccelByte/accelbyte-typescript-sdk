@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { HierarchicalCategoryInfo } from './HierarchicalCategoryInfo'
+import { HierarchicalCategoryInfo } from './HierarchicalCategoryInfo.js'
 
 export const HierarchicalCategoryInfoArray = z.array(HierarchicalCategoryInfo)
 

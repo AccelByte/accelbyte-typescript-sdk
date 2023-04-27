@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ClientRequestParameter } from './ClientRequestParameter'
-import { ConsumeItem } from './ConsumeItem'
-import { RequestHistory } from './RequestHistory'
+import { ClientRequestParameter } from './ClientRequestParameter.js'
+import { ConsumeItem } from './ConsumeItem.js'
+import { RequestHistory } from './RequestHistory.js'
 
 export const IapConsumeHistoryInfo = z.object({
   id: z.string().nullish(),

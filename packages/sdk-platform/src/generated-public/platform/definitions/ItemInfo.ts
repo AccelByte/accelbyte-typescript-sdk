@@ -4,13 +4,13 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Image } from './Image'
-import { LootBoxConfig } from './LootBoxConfig'
-import { OptionBoxConfig } from './OptionBoxConfig'
-import { PurchaseCondition } from './PurchaseCondition'
-import { Recurring } from './Recurring'
-import { RegionDataItem } from './RegionDataItem'
-import { SaleConfig } from './SaleConfig'
+import { Image } from './Image.js'
+import { LootBoxConfig } from './LootBoxConfig.js'
+import { OptionBoxConfig } from './OptionBoxConfig.js'
+import { PurchaseCondition } from './PurchaseCondition.js'
+import { Recurring } from './Recurring.js'
+import { RegionDataItem } from './RegionDataItem.js'
+import { SaleConfig } from './SaleConfig.js'
 
 export const ItemInfo = z.object({
   title: z.string(),

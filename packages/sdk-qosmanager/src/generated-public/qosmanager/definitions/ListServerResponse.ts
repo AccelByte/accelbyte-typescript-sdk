@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Server } from './Server'
+import { Server } from './Server.js'
 
 export const ListServerResponse = z.object({ servers: z.array(Server) })
 

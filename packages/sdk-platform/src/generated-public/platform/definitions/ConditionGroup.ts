@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Predicate } from './Predicate'
+import { Predicate } from './Predicate.js'
 
 export const ConditionGroup = z.object({ predicates: z.array(Predicate).nullish(), operator: z.enum(['and', 'or']).nullish() })
 

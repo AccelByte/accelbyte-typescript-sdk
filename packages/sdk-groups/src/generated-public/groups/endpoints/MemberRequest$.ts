@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { GetMemberRequestsListResponseV1 } from '../definitions/GetMemberRequestsListResponseV1'
+import { GetMemberRequestsListResponseV1 } from '../definitions/GetMemberRequestsListResponseV1.js'
 
 export class MemberRequest$ {
   // @ts-ignore

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ConditionGroupValidateResult } from './ConditionGroupValidateResult'
+import { ConditionGroupValidateResult } from './ConditionGroupValidateResult.js'
 
 export const ItemPurchaseConditionValidateResult = z.object({
   itemId: z.string().nullish(),

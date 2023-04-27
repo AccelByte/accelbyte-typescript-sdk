@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserLinkedPlatform } from './UserLinkedPlatform'
+import { UserLinkedPlatform } from './UserLinkedPlatform.js'
 
 export const UserSearchResult = z.object({
   DisplayName: z.string(),

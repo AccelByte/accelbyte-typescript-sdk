@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BulkGetGameRecordRequest } from './definitions/BulkGetGameRecordRequest'
-import { BulkGetGameRecordResponse } from './definitions/BulkGetGameRecordResponse'
-import { GameRecordRequest } from './definitions/GameRecordRequest'
-import { GameRecordResponse } from './definitions/GameRecordResponse'
-import { PublicGameRecord$ } from './endpoints/PublicGameRecord$'
+import { BulkGetGameRecordRequest } from './definitions/BulkGetGameRecordRequest.js'
+import { BulkGetGameRecordResponse } from './definitions/BulkGetGameRecordResponse.js'
+import { GameRecordRequest } from './definitions/GameRecordRequest.js'
+import { GameRecordResponse } from './definitions/GameRecordResponse.js'
+import { PublicGameRecord$ } from './endpoints/PublicGameRecord$.js'
 
 export function PublicGameRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

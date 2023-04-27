@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 
-import { DownloaderApi } from './buildinfo/DownloaderApi'
-import { DlcApi } from './buildinfo/DlcApi'
-import { DrmApi } from './buildinfo/DrmApi'
-import { CachingApi } from './buildinfo/CachingApi'
+import { DownloaderApi } from './buildinfo/DownloaderApi.js'
+import { DlcApi } from './buildinfo/DlcApi.js'
+import { DrmApi } from './buildinfo/DrmApi.js'
+import { CachingApi } from './buildinfo/CachingApi.js'
 
 const apis = {
   DownloaderApi,

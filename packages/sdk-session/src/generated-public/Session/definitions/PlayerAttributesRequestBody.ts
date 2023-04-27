@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserPlatformInfo } from './UserPlatformInfo'
+import { UserPlatformInfo } from './UserPlatformInfo.js'
 
 export const PlayerAttributesRequestBody = z.object({
   crossplayEnabled: z.boolean(),

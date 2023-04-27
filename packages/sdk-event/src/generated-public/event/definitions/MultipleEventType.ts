@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EventType } from './EventType'
+import { EventType } from './EventType.js'
 
 export const MultipleEventType = z.object({ EventType: z.array(EventType) })
 

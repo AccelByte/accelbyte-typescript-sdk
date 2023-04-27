@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PolicyObject } from './PolicyObject'
+import { PolicyObject } from './PolicyObject.js'
 
 export const RetrieveBasePolicyResponse = z.object({
   id: z.string(),

@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { DataRetrieval$ } from './endpoints/DataRetrieval$'
-import { DataRetrievalResponse } from './definitions/DataRetrievalResponse'
-import { UserDataUrl } from './definitions/UserDataUrl'
-import { UserPersonalDataResponse } from './definitions/UserPersonalDataResponse'
+import { DataRetrieval$ } from './endpoints/DataRetrieval$.js'
+import { DataRetrievalResponse } from './definitions/DataRetrievalResponse.js'
+import { UserDataUrl } from './definitions/UserDataUrl.js'
+import { UserPersonalDataResponse } from './definitions/UserPersonalDataResponse.js'
 
 export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

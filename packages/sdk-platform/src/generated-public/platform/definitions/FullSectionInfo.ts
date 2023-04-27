@@ -4,10 +4,10 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { FixedPeriodRotationConfig } from './FixedPeriodRotationConfig'
-import { ItemNaming } from './ItemNaming'
-import { Localization } from './Localization'
-import { SectionItem } from './SectionItem'
+import { FixedPeriodRotationConfig } from './FixedPeriodRotationConfig.js'
+import { ItemNaming } from './ItemNaming.js'
+import { Localization } from './Localization.js'
+import { SectionItem } from './SectionItem.js'
 
 export const FullSectionInfo = z.object({
   sectionId: z.string(),

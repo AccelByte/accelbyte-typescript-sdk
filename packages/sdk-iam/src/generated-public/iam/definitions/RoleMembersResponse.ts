@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RoleMember } from './RoleMember'
+import { RoleMember } from './RoleMember.js'
 
 export const RoleMembersResponse = z.object({ Members: z.array(RoleMember) })
 

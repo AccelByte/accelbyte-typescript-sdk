@@ -9,11 +9,11 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { Attribute } from '../definitions/Attribute'
-import { GameProfileHeaderArray } from '../definitions/GameProfileHeaderArray'
-import { GameProfileInfo } from '../definitions/GameProfileInfo'
-import { GameProfileRequest } from '../definitions/GameProfileRequest'
-import { UserGameProfilesArray } from '../definitions/UserGameProfilesArray'
+import { Attribute } from '../definitions/Attribute.js'
+import { GameProfileHeaderArray } from '../definitions/GameProfileHeaderArray.js'
+import { GameProfileInfo } from '../definitions/GameProfileInfo.js'
+import { GameProfileRequest } from '../definitions/GameProfileRequest.js'
+import { UserGameProfilesArray } from '../definitions/UserGameProfilesArray.js'
 
 export class GameProfile$ {
   // @ts-ignore

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreatorFollowState } from './CreatorFollowState'
+import { CreatorFollowState } from './CreatorFollowState.js'
 
 export const CreatorResponse = z.object({
   creatorFollowState: CreatorFollowState,

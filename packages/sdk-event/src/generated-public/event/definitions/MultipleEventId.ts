@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EventId } from './EventId'
+import { EventId } from './EventId.js'
 
 export const MultipleEventId = z.object({ EventIDs: z.array(EventId) })
 

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlatformAccount } from './PlatformAccount'
+import { PlatformAccount } from './PlatformAccount.js'
 
 export const UserWithPlatformAccounts = z.object({ linkedPlatforms: z.array(PlatformAccount), namespace: z.string(), userId: z.string() })
 

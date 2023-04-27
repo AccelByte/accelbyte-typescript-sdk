@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Paging } from './Paging'
-import { RedeemHistoryInfo } from './RedeemHistoryInfo'
+import { Paging } from './Paging.js'
+import { RedeemHistoryInfo } from './RedeemHistoryInfo.js'
 
 export const RedeemHistoryPagingSlicedResult = z.object({ data: z.array(RedeemHistoryInfo), paging: Paging.nullish() })
 

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Team } from './Team'
+import { Team } from './Team.js'
 
 export const UpdateGameSessionRequest = z.object({
   attributes: z.record(z.any()),

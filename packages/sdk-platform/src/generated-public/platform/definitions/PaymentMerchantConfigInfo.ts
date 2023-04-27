@@ -4,14 +4,14 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AdyenConfig } from './AdyenConfig'
-import { AliPayConfig } from './AliPayConfig'
-import { CheckoutConfig } from './CheckoutConfig'
-import { PayPalConfig } from './PayPalConfig'
-import { StripeConfig } from './StripeConfig'
-import { WxPayConfigInfo } from './WxPayConfigInfo'
-import { XsollaConfig } from './XsollaConfig'
-import { XsollaPaywallConfig } from './XsollaPaywallConfig'
+import { AdyenConfig } from './AdyenConfig.js'
+import { AliPayConfig } from './AliPayConfig.js'
+import { CheckoutConfig } from './CheckoutConfig.js'
+import { PayPalConfig } from './PayPalConfig.js'
+import { StripeConfig } from './StripeConfig.js'
+import { WxPayConfigInfo } from './WxPayConfigInfo.js'
+import { XsollaConfig } from './XsollaConfig.js'
+import { XsollaPaywallConfig } from './XsollaPaywallConfig.js'
 
 export const PaymentMerchantConfigInfo = z.object({
   id: z.string(),

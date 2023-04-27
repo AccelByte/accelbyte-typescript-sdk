@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 
-import { GroupMemberApi } from './groups/GroupMemberApi'
-import { GroupRolesApi } from './groups/GroupRolesApi'
-import { GroupApi } from './groups/GroupApi'
-import { MemberRequestApi } from './groups/MemberRequestApi'
+import { GroupMemberApi } from './groups/GroupMemberApi.js'
+import { GroupRolesApi } from './groups/GroupRolesApi.js'
+import { GroupApi } from './groups/GroupApi.js'
+import { MemberRequestApi } from './groups/MemberRequestApi.js'
 
 const apis = {
   GroupMemberApi,

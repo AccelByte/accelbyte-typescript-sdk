@@ -8,8 +8,8 @@
  */
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { FulfillCodeRequest } from '../definitions/FulfillCodeRequest'
-import { FulfillmentResult } from '../definitions/FulfillmentResult'
+import { FulfillCodeRequest } from '../definitions/FulfillCodeRequest.js'
+import { FulfillmentResult } from '../definitions/FulfillmentResult.js'
 
 export class Fulfillment$ {
   // @ts-ignore

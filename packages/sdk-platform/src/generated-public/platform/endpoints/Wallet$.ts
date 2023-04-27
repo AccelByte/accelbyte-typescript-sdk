@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { PlatformWallet } from '../definitions/PlatformWallet'
-import { WalletTransactionPagingSlicedResult } from '../definitions/WalletTransactionPagingSlicedResult'
+import { PlatformWallet } from '../definitions/PlatformWallet.js'
+import { WalletTransactionPagingSlicedResult } from '../definitions/WalletTransactionPagingSlicedResult.js'
 
 export class Wallet$ {
   // @ts-ignore

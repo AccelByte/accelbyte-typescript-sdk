@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Config } from './definitions/Config'
-import { StaticConfigs$ } from './endpoints/StaticConfigs$'
+import { Config } from './definitions/Config.js'
+import { StaticConfigs$ } from './endpoints/StaticConfigs$.js'
 
 export function StaticConfigsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

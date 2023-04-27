@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ContentDownloadResponse } from './ContentDownloadResponse'
+import { ContentDownloadResponse } from './ContentDownloadResponse.js'
 
 export const ContentDownloadResponseArray = z.array(ContentDownloadResponse)
 

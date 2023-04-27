@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ArchiveLeaderboardSignedUrlResponse } from './ArchiveLeaderboardSignedUrlResponse'
+import { ArchiveLeaderboardSignedUrlResponse } from './ArchiveLeaderboardSignedUrlResponse.js'
 
 export const ArchiveLeaderboardSignedUrlResponseArray = z.array(ArchiveLeaderboardSignedUrlResponse)
 

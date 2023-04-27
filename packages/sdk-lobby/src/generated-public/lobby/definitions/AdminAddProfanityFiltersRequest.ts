@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AdminAddProfanityFiltersFilterRequest } from './AdminAddProfanityFiltersFilterRequest'
+import { AdminAddProfanityFiltersFilterRequest } from './AdminAddProfanityFiltersFilterRequest.js'
 
 export const AdminAddProfanityFiltersRequest = z.object({ filters: z.array(AdminAddProfanityFiltersFilterRequest) })
 

@@ -8,14 +8,14 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ChatMessageResponseArray } from './definitions/ChatMessageResponseArray'
-import { MuteUserRequest } from './definitions/MuteUserRequest'
-import { PublicBanTopicMembersRequest } from './definitions/PublicBanTopicMembersRequest'
-import { PublicBanTopicMembersResponse } from './definitions/PublicBanTopicMembersResponse'
-import { PublicUnbanTopicMembersRequest } from './definitions/PublicUnbanTopicMembersRequest'
-import { PublicUnbanTopicMembersResponse } from './definitions/PublicUnbanTopicMembersResponse'
-import { Topic$ } from './endpoints/Topic$'
-import { UnmuteUserRequest } from './definitions/UnmuteUserRequest'
+import { ChatMessageResponseArray } from './definitions/ChatMessageResponseArray.js'
+import { MuteUserRequest } from './definitions/MuteUserRequest.js'
+import { PublicBanTopicMembersRequest } from './definitions/PublicBanTopicMembersRequest.js'
+import { PublicBanTopicMembersResponse } from './definitions/PublicBanTopicMembersResponse.js'
+import { PublicUnbanTopicMembersRequest } from './definitions/PublicUnbanTopicMembersRequest.js'
+import { PublicUnbanTopicMembersResponse } from './definitions/PublicUnbanTopicMembersResponse.js'
+import { Topic$ } from './endpoints/Topic$.js'
+import { UnmuteUserRequest } from './definitions/UnmuteUserRequest.js'
 
 export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

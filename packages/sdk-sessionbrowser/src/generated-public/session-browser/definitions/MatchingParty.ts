@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MatchAttributes } from './MatchAttributes'
-import { PartyMember } from './PartyMember'
+import { MatchAttributes } from './MatchAttributes.js'
+import { PartyMember } from './PartyMember.js'
 
 export const MatchingParty = z.object({
   match_attributes: MatchAttributes,

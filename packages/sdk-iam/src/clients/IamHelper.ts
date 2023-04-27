@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 
-import { UserResponseV3 } from '../generated-public/iam/definitions/UserResponseV3'
-import { BanType, EligibleUser } from '../models/UserTypes'
-import { UserActiveBanResponseV3 } from '../generated-public/iam/definitions/UserActiveBanResponseV3'
+import { UserResponseV3 } from '../generated-public/iam/definitions/UserResponseV3.js'
+import { BanType, EligibleUser } from '../models/UserTypes.js'
+import { UserActiveBanResponseV3 } from '../generated-public/iam/definitions/UserActiveBanResponseV3.js'
 
 export class IamHelper {
   static getAuthorizationCodeParams(urlSearchParams: string) {

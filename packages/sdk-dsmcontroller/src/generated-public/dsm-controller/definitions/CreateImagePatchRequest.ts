@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UploaderFlag } from './UploaderFlag'
+import { UploaderFlag } from './UploaderFlag.js'
 
 export const CreateImagePatchRequest = z.object({
   artifactPath: z.string(),

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Pagination } from './Pagination'
-import { TagResponse } from './TagResponse'
+import { Pagination } from './Pagination.js'
+import { TagResponse } from './TagResponse.js'
 
 export const PaginatedTagResponse = z.object({ data: z.array(TagResponse), paging: Pagination })
 

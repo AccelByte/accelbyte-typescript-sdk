@@ -8,13 +8,13 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BillingHistoryPagingSlicedResult } from './definitions/BillingHistoryPagingSlicedResult'
-import { CancelRequest } from './definitions/CancelRequest'
-import { Subscribable } from './definitions/Subscribable'
-import { SubscribeRequest } from './definitions/SubscribeRequest'
-import { Subscription$ } from './endpoints/Subscription$'
-import { SubscriptionInfo } from './definitions/SubscriptionInfo'
-import { SubscriptionPagingSlicedResult } from './definitions/SubscriptionPagingSlicedResult'
+import { BillingHistoryPagingSlicedResult } from './definitions/BillingHistoryPagingSlicedResult.js'
+import { CancelRequest } from './definitions/CancelRequest.js'
+import { Subscribable } from './definitions/Subscribable.js'
+import { SubscribeRequest } from './definitions/SubscribeRequest.js'
+import { Subscription$ } from './endpoints/Subscription$.js'
+import { SubscriptionInfo } from './definitions/SubscriptionInfo.js'
+import { SubscriptionPagingSlicedResult } from './definitions/SubscriptionPagingSlicedResult.js'
 
 export function SubscriptionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

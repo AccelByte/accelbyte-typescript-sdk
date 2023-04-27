@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Policies$ } from './endpoints/Policies$'
-import { RetrievePolicyPublicResponseArray } from './definitions/RetrievePolicyPublicResponseArray'
+import { Policies$ } from './endpoints/Policies$.js'
+import { RetrievePolicyPublicResponseArray } from './definitions/RetrievePolicyPublicResponseArray.js'
 
 export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

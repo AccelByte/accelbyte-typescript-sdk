@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Pagination } from './Pagination'
-import { UserResponse } from './UserResponse'
+import { Pagination } from './Pagination.js'
+import { UserResponse } from './UserResponse.js'
 
 export const GetAdminUsersResponse = z.object({ Data: z.array(UserResponse), Paging: Pagination })
 

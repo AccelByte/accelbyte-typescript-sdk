@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ValidationDetailPublic } from './ValidationDetailPublic'
+import { ValidationDetailPublic } from './ValidationDetailPublic.js'
 
 export const InputValidationDataPublic = z.object({ field: z.string(), validation: ValidationDetailPublic })
 

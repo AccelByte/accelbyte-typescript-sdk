@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { RetrievePolicyPublicResponseArray } from '../definitions/RetrievePolicyPublicResponseArray'
+import { RetrievePolicyPublicResponseArray } from '../definitions/RetrievePolicyPublicResponseArray.js'
 
 export class Policies$ {
   // @ts-ignore

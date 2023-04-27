@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ResponseDeleteBulkGameSessions } from './ResponseDeleteBulkGameSessions'
+import { ResponseDeleteBulkGameSessions } from './ResponseDeleteBulkGameSessions.js'
 
 export const DeleteBulkGameSessionsApiResponse = z.object({ failed: z.array(ResponseDeleteBulkGameSessions), success: z.array(z.string()) })
 

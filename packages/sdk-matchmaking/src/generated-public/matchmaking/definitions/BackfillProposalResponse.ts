@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Team } from './Team'
-import { Ticket } from './Ticket'
+import { Team } from './Team.js'
+import { Ticket } from './Ticket.js'
 
 export const BackfillProposalResponse = z.object({
   backfillTicketID: z.string().nullish(),

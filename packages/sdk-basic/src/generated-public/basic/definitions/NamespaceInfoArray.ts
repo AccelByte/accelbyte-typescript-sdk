@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { NamespaceInfo } from './NamespaceInfo'
+import { NamespaceInfo } from './NamespaceInfo.js'
 
 export const NamespaceInfoArray = z.array(NamespaceInfo)
 

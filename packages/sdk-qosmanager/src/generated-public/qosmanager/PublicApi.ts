@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ListServerResponse } from './definitions/ListServerResponse'
-import { Public$ } from './endpoints/Public$'
+import { ListServerResponse } from './definitions/ListServerResponse.js'
+import { Public$ } from './endpoints/Public$.js'
 
 export function PublicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

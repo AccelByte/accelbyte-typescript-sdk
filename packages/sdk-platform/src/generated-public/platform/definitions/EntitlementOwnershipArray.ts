@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EntitlementOwnership } from './EntitlementOwnership'
+import { EntitlementOwnership } from './EntitlementOwnership.js'
 
 export const EntitlementOwnershipArray = z.array(EntitlementOwnership)
 

@@ -9,9 +9,9 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ListMatchFunctionsResponse } from '../definitions/ListMatchFunctionsResponse'
-import { MatchFunctionConfig } from '../definitions/MatchFunctionConfig'
-import { MatchFunctionRequest } from '../definitions/MatchFunctionRequest'
+import { ListMatchFunctionsResponse } from '../definitions/ListMatchFunctionsResponse.js'
+import { MatchFunctionConfig } from '../definitions/MatchFunctionConfig.js'
+import { MatchFunctionRequest } from '../definitions/MatchFunctionRequest.js'
 
 export class MatchFunctions$ {
   // @ts-ignore

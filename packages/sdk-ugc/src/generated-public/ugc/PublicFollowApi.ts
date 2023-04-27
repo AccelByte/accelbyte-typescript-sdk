@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PaginatedContentDownloadResponse } from './definitions/PaginatedContentDownloadResponse'
-import { PaginatedCreatorOverviewResponse } from './definitions/PaginatedCreatorOverviewResponse'
-import { PublicFollow$ } from './endpoints/PublicFollow$'
-import { UserFollowRequest } from './definitions/UserFollowRequest'
-import { UserFollowResponse } from './definitions/UserFollowResponse'
+import { PaginatedContentDownloadResponse } from './definitions/PaginatedContentDownloadResponse.js'
+import { PaginatedCreatorOverviewResponse } from './definitions/PaginatedCreatorOverviewResponse.js'
+import { PublicFollow$ } from './endpoints/PublicFollow$.js'
+import { UserFollowRequest } from './definitions/UserFollowRequest.js'
+import { UserFollowResponse } from './definitions/UserFollowResponse.js'
 
 export function PublicFollowApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

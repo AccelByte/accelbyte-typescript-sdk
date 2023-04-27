@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ConflictedUserPlatformAccounts } from './ConflictedUserPlatformAccounts'
+import { ConflictedUserPlatformAccounts } from './ConflictedUserPlatformAccounts.js'
 
 export const ErrorResponseWithConflictedUserPlatformAccounts = z.object({
   errorCode: z.number().int(),

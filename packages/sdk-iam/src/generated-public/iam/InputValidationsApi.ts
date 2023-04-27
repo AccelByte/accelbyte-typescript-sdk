@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { InputValidations$ } from './endpoints/InputValidations$'
-import { InputValidationsPublicResponse } from './definitions/InputValidationsPublicResponse'
+import { InputValidations$ } from './endpoints/InputValidations$.js'
+import { InputValidationsPublicResponse } from './definitions/InputValidationsPublicResponse.js'
 
 export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

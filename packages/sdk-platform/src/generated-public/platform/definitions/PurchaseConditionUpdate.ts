@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PurchaseCondition } from './PurchaseCondition'
+import { PurchaseCondition } from './PurchaseCondition.js'
 
 export const PurchaseConditionUpdate = z.object({ purchaseCondition: PurchaseCondition.nullish() })
 

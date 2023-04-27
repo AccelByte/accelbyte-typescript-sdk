@@ -9,12 +9,12 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { BulkGetPlayerRecordResponse } from '../definitions/BulkGetPlayerRecordResponse'
-import { BulkGetPlayerRecordsRequest } from '../definitions/BulkGetPlayerRecordsRequest'
-import { BulkUserIDsRequest } from '../definitions/BulkUserIDsRequest'
-import { ListPlayerRecordKeysResponse } from '../definitions/ListPlayerRecordKeysResponse'
-import { PlayerRecordRequest } from '../definitions/PlayerRecordRequest'
-import { PlayerRecordResponse } from '../definitions/PlayerRecordResponse'
+import { BulkGetPlayerRecordResponse } from '../definitions/BulkGetPlayerRecordResponse.js'
+import { BulkGetPlayerRecordsRequest } from '../definitions/BulkGetPlayerRecordsRequest.js'
+import { BulkUserIDsRequest } from '../definitions/BulkUserIDsRequest.js'
+import { ListPlayerRecordKeysResponse } from '../definitions/ListPlayerRecordKeysResponse.js'
+import { PlayerRecordRequest } from '../definitions/PlayerRecordRequest.js'
+import { PlayerRecordResponse } from '../definitions/PlayerRecordResponse.js'
 
 export class PublicPlayerRecord$ {
   // @ts-ignore

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EntitlementGrantResult } from './EntitlementGrantResult'
+import { EntitlementGrantResult } from './EntitlementGrantResult.js'
 
 export const BulkEntitlementGrantResult = z.object({
   successList: z.array(EntitlementGrantResult).nullish(),

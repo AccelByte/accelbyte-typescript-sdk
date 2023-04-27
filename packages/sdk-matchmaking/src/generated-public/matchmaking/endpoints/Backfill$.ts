@@ -9,12 +9,12 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { BackFillAcceptRequest } from '../definitions/BackFillAcceptRequest'
-import { BackFillCreateRequest } from '../definitions/BackFillCreateRequest'
-import { BackFillRejectRequest } from '../definitions/BackFillRejectRequest'
-import { BackfillCreateResponse } from '../definitions/BackfillCreateResponse'
-import { BackfillGetResponse } from '../definitions/BackfillGetResponse'
-import { BackfillProposalResponse } from '../definitions/BackfillProposalResponse'
+import { BackFillAcceptRequest } from '../definitions/BackFillAcceptRequest.js'
+import { BackFillCreateRequest } from '../definitions/BackFillCreateRequest.js'
+import { BackFillRejectRequest } from '../definitions/BackFillRejectRequest.js'
+import { BackfillCreateResponse } from '../definitions/BackfillCreateResponse.js'
+import { BackfillGetResponse } from '../definitions/BackfillGetResponse.js'
+import { BackfillProposalResponse } from '../definitions/BackfillProposalResponse.js'
 
 export class Backfill$ {
   // @ts-ignore

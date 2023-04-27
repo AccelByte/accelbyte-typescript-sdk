@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PartySessionResponse } from './PartySessionResponse'
+import { PartySessionResponse } from './PartySessionResponse.js'
 
 export const PartySessionResponseArray = z.array(PartySessionResponse)
 

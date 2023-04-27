@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EntitlementLootBoxReward } from './EntitlementLootBoxReward'
-import { ItemSnapshot } from './ItemSnapshot'
+import { EntitlementLootBoxReward } from './EntitlementLootBoxReward.js'
+import { ItemSnapshot } from './ItemSnapshot.js'
 
 export const EntitlementDecrementResult = z.object({
   id: z.string(),

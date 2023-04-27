@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GlobalStatItemInfo } from './definitions/GlobalStatItemInfo'
-import { GlobalStatItemPagingSlicedResult } from './definitions/GlobalStatItemPagingSlicedResult'
-import { GlobalStatistic$ } from './endpoints/GlobalStatistic$'
+import { GlobalStatItemInfo } from './definitions/GlobalStatItemInfo.js'
+import { GlobalStatItemPagingSlicedResult } from './definitions/GlobalStatItemPagingSlicedResult.js'
+import { GlobalStatistic$ } from './endpoints/GlobalStatistic$.js'
 
 export function GlobalStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

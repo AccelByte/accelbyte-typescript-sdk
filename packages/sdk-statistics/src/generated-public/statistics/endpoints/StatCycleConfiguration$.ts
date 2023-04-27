@@ -8,10 +8,10 @@
  */
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { BulkStatCycleRequest } from '../definitions/BulkStatCycleRequest'
-import { BulkStatCycleResult } from '../definitions/BulkStatCycleResult'
-import { StatCycleInfo } from '../definitions/StatCycleInfo'
-import { StatCyclePagingSlicedResult } from '../definitions/StatCyclePagingSlicedResult'
+import { BulkStatCycleRequest } from '../definitions/BulkStatCycleRequest.js'
+import { BulkStatCycleResult } from '../definitions/BulkStatCycleResult.js'
+import { StatCycleInfo } from '../definitions/StatCycleInfo.js'
+import { StatCyclePagingSlicedResult } from '../definitions/StatCyclePagingSlicedResult.js'
 
 export class StatCycleConfiguration$ {
   // @ts-ignore

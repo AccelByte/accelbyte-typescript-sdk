@@ -7,11 +7,11 @@
  * AUTO GENERATED
  */
 
-import { MiscApi } from './basic/MiscApi'
-import { NamespaceApi } from './basic/NamespaceApi'
-import { UserProfileApi } from './basic/UserProfileApi'
-import { FileUploadApi } from './basic/FileUploadApi'
-import { UserActionApi } from './basic/UserActionApi'
+import { MiscApi } from './basic/MiscApi.js'
+import { NamespaceApi } from './basic/NamespaceApi.js'
+import { UserProfileApi } from './basic/UserProfileApi.js'
+import { FileUploadApi } from './basic/FileUploadApi.js'
+import { UserActionApi } from './basic/UserActionApi.js'
 
 const apis = {
   MiscApi,

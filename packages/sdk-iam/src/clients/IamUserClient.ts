@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { AccelbyteSDK, ApiArgs, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { ReadyPlayerMe } from '../models/ReadyPlayerMe'
-import { Users$ } from '../generated-public/iam/endpoints/Users$'
+import { ReadyPlayerMe } from '../models/ReadyPlayerMe.js'
+import { Users$ } from '../generated-public/iam/endpoints/Users$.js'
 
 /**
  * @deprecated, this is original *Api class

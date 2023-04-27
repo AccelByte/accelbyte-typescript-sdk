@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserProfilePublicInfo } from './UserProfilePublicInfo'
+import { UserProfilePublicInfo } from './UserProfilePublicInfo.js'
 
 export const UserProfilePublicInfoArray = z.array(UserProfilePublicInfo)
 

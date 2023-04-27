@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { LoadIncomingFriendsWithTimeResponse } from './LoadIncomingFriendsWithTimeResponse'
+import { LoadIncomingFriendsWithTimeResponse } from './LoadIncomingFriendsWithTimeResponse.js'
 
 export const LoadIncomingFriendsWithTimeResponseArray = z.array(LoadIncomingFriendsWithTimeResponse)
 

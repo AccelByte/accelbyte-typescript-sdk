@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { TransactionAmountDetails } from './TransactionAmountDetails'
+import { TransactionAmountDetails } from './TransactionAmountDetails.js'
 
 export const WalletTransactionInfo = z.object({
   amount: z.number().int(),

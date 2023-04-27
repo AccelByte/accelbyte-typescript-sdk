@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ClaimSessionRequest } from './definitions/ClaimSessionRequest'
-import { CreateSessionRequest } from './definitions/CreateSessionRequest'
-import { Session$ } from './endpoints/Session$'
-import { SessionResponse } from './definitions/SessionResponse'
+import { ClaimSessionRequest } from './definitions/ClaimSessionRequest.js'
+import { CreateSessionRequest } from './definitions/CreateSessionRequest.js'
+import { Session$ } from './endpoints/Session$.js'
+import { SessionResponse } from './definitions/SessionResponse.js'
 
 export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
@@ -50,9 +50,20 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Required permission: NAMESPACE:{namespace}:DSM:SESSION [DELETE] Required scope: social This endpoint is intended to be called by game session manager (matchmaker, lobby, etc.) to cancel a temporary dedicated server. The dedicated server cannot be canceled unless the status is CREATING
+   */
+  async function deleteCancel_BySessionId(sessionID: string): Promise<unknown> {
+    const $ = new Session$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.deleteCancel_BySessionId(sessionID)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     createSession,
     createSessionClaim,
-    getSession_BySessionId
+    getSession_BySessionId,
+    deleteCancel_BySessionId
   }
 }

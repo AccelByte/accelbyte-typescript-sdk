@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RetrieveAcceptedAgreementResponse } from './RetrieveAcceptedAgreementResponse'
+import { RetrieveAcceptedAgreementResponse } from './RetrieveAcceptedAgreementResponse.js'
 
 export const UserAgreementsResponse = z.object({
   userId: z.string().nullish(),

@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Achievements$ } from './endpoints/Achievements$'
-import { PublicAchievementResponse } from './definitions/PublicAchievementResponse'
-import { PublicAchievementsResponse } from './definitions/PublicAchievementsResponse'
+import { Achievements$ } from './endpoints/Achievements$.js'
+import { PublicAchievementResponse } from './definitions/PublicAchievementResponse.js'
+import { PublicAchievementsResponse } from './definitions/PublicAchievementsResponse.js'
 
 export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

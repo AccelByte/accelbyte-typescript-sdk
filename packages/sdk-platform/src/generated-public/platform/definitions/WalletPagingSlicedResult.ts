@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Paging } from './Paging'
-import { WalletInfo } from './WalletInfo'
+import { Paging } from './Paging.js'
+import { WalletInfo } from './WalletInfo.js'
 
 export const WalletPagingSlicedResult = z.object({ data: z.array(WalletInfo), paging: Paging.nullish() })
 

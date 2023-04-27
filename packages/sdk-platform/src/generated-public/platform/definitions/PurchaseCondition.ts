@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ConditionGroup } from './ConditionGroup'
+import { ConditionGroup } from './ConditionGroup.js'
 
 export const PurchaseCondition = z.object({ conditionGroups: z.array(ConditionGroup).nullish() })
 

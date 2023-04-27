@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Pagination } from './Pagination'
-import { TopicMemberResponse } from './TopicMemberResponse'
+import { Pagination } from './Pagination.js'
+import { TopicMemberResponse } from './TopicMemberResponse.js'
 
 export const TopicMemberWithPaginationResponse = z.object({
   data: z.array(TopicMemberResponse),

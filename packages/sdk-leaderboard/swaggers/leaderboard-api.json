@@ -8,7 +8,7 @@
       "url": "https://accelbyte.io",
       "email": "engineering@accelbyte.io"
     },
-    "version": "2.20.1"
+    "version": "2.20.2"
   },
   "paths": {
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards": {
@@ -4237,7 +4237,7 @@
       }
     },
     "models.UserLeaderboardRanking": {
-      "required": ["weekly", "monthly", "allTime", "current", "userId", "daily", "leaderboardCode", "leaderboardName"],
+      "required": ["allTime", "current", "userId", "daily", "weekly", "monthly", "leaderboardCode", "leaderboardName"],
       "properties": {
         "allTime": {
           "$ref": "#/definitions/models.UserRankingResponseDetail"

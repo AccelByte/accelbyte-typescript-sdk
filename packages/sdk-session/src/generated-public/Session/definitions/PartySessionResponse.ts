@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PublicConfiguration } from './PublicConfiguration'
-import { UserResponse } from './UserResponse'
+import { PublicConfiguration } from './PublicConfiguration.js'
+import { UserResponse } from './UserResponse.js'
 
 export const PartySessionResponse = z.object({
   attributes: z.record(z.any()).nullish(),

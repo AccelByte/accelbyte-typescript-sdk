@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreditRequest } from './CreditRequest'
+import { CreditRequest } from './CreditRequest.js'
 
 export const BulkCreditRequest = z.object({
   currencyCode: z.string().nullish(),

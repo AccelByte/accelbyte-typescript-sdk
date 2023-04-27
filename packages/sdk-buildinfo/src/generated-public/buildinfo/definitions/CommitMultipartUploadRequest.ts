@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MultipartUploadedPart } from './MultipartUploadedPart'
+import { MultipartUploadedPart } from './MultipartUploadedPart.js'
 
 export const CommitMultipartUploadRequest = z.object({ parts: z.array(MultipartUploadedPart) })
 

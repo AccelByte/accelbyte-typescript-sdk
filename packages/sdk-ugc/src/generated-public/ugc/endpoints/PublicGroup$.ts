@@ -9,10 +9,10 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { CreateGroupRequest } from '../definitions/CreateGroupRequest'
-import { CreateGroupResponse } from '../definitions/CreateGroupResponse'
-import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse'
-import { PaginatedGroupResponse } from '../definitions/PaginatedGroupResponse'
+import { CreateGroupRequest } from '../definitions/CreateGroupRequest.js'
+import { CreateGroupResponse } from '../definitions/CreateGroupResponse.js'
+import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse.js'
+import { PaginatedGroupResponse } from '../definitions/PaginatedGroupResponse.js'
 
 export class PublicGroup$ {
   // @ts-ignore

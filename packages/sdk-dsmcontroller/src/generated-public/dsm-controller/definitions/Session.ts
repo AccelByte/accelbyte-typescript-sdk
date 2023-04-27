@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Server } from './Server'
+import { Server } from './Server.js'
 
 export const Session = z.object({ Server, id: z.string(), namespace: z.string(), provider: z.string(), region: z.string() })
 

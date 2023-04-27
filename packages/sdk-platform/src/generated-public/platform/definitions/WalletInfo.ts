@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { TimeLimitedBalance } from './TimeLimitedBalance'
+import { TimeLimitedBalance } from './TimeLimitedBalance.js'
 
 export const WalletInfo = z.object({
   id: z.string(),

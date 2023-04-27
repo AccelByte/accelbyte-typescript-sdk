@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { JwkKey } from './JwkKey'
+import { JwkKey } from './JwkKey.js'
 
 export const JwkSet = z.object({ keys: z.array(JwkKey) })
 

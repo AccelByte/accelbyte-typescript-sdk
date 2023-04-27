@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserStatItemInfo } from './UserStatItemInfo'
+import { UserStatItemInfo } from './UserStatItemInfo.js'
 
 export const UserStatItemInfoArray = z.array(UserStatItemInfo)
 

@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { UserStatCycleItemPagingSlicedResult } from '../definitions/UserStatCycleItemPagingSlicedResult'
+import { UserStatCycleItemPagingSlicedResult } from '../definitions/UserStatCycleItemPagingSlicedResult.js'
 
 export class UserStatisticCycle$ {
   // @ts-ignore

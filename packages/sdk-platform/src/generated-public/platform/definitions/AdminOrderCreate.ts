@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { OrderCreationOptions } from './OrderCreationOptions'
+import { OrderCreationOptions } from './OrderCreationOptions.js'
 
 export const AdminOrderCreate = z.object({
   itemId: z.string(),

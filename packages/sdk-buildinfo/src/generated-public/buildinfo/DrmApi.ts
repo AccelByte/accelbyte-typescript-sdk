@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Drm$ } from './endpoints/Drm$'
-import { EncryptedIdentity } from './definitions/EncryptedIdentity'
-import { PublicKeyPresignedUrl } from './definitions/PublicKeyPresignedUrl'
+import { Drm$ } from './endpoints/Drm$.js'
+import { EncryptedIdentity } from './definitions/EncryptedIdentity.js'
+import { PublicKeyPresignedUrl } from './definitions/PublicKeyPresignedUrl.js'
 
 export function DrmApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

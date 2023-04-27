@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BoxItem } from './BoxItem'
+import { BoxItem } from './BoxItem.js'
 
 export const LootBoxReward = z.object({
   name: z.string().nullish(),

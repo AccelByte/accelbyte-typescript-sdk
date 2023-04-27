@@ -9,10 +9,10 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ChannelResponse } from '../definitions/ChannelResponse'
-import { PaginatedGetChannelResponse } from '../definitions/PaginatedGetChannelResponse'
-import { PublicChannelRequest } from '../definitions/PublicChannelRequest'
-import { UpdateChannelRequest } from '../definitions/UpdateChannelRequest'
+import { ChannelResponse } from '../definitions/ChannelResponse.js'
+import { PaginatedGetChannelResponse } from '../definitions/PaginatedGetChannelResponse.js'
+import { PublicChannelRequest } from '../definitions/PublicChannelRequest.js'
+import { UpdateChannelRequest } from '../definitions/UpdateChannelRequest.js'
 
 export class PublicChannel$ {
   // @ts-ignore

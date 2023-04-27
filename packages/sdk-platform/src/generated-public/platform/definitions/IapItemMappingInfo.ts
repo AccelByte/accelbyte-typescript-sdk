@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { IapItemFlatEntry } from './IapItemFlatEntry'
+import { IapItemFlatEntry } from './IapItemFlatEntry.js'
 
 export const IapItemMappingInfo = z.object({ data: z.array(IapItemFlatEntry).nullish() })
 

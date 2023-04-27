@@ -9,13 +9,13 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ChatMessageResponseArray } from '../definitions/ChatMessageResponseArray'
-import { MuteUserRequest } from '../definitions/MuteUserRequest'
-import { PublicBanTopicMembersRequest } from '../definitions/PublicBanTopicMembersRequest'
-import { PublicBanTopicMembersResponse } from '../definitions/PublicBanTopicMembersResponse'
-import { PublicUnbanTopicMembersRequest } from '../definitions/PublicUnbanTopicMembersRequest'
-import { PublicUnbanTopicMembersResponse } from '../definitions/PublicUnbanTopicMembersResponse'
-import { UnmuteUserRequest } from '../definitions/UnmuteUserRequest'
+import { ChatMessageResponseArray } from '../definitions/ChatMessageResponseArray.js'
+import { MuteUserRequest } from '../definitions/MuteUserRequest.js'
+import { PublicBanTopicMembersRequest } from '../definitions/PublicBanTopicMembersRequest.js'
+import { PublicBanTopicMembersResponse } from '../definitions/PublicBanTopicMembersResponse.js'
+import { PublicUnbanTopicMembersRequest } from '../definitions/PublicUnbanTopicMembersRequest.js'
+import { PublicUnbanTopicMembersResponse } from '../definitions/PublicUnbanTopicMembersResponse.js'
+import { UnmuteUserRequest } from '../definitions/UnmuteUserRequest.js'
 
 export class Topic$ {
   // @ts-ignore

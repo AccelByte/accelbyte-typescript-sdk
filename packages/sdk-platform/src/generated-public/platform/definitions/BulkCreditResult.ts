@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreditResult } from './CreditResult'
+import { CreditResult } from './CreditResult.js'
 
 export const BulkCreditResult = z.object({
   successList: z.array(CreditResult).nullish(),

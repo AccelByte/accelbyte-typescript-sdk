@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AdditionalInfo } from './AdditionalInfo'
-import { Pagination } from './Pagination'
-import { UserAchievementResponse } from './UserAchievementResponse'
+import { AdditionalInfo } from './AdditionalInfo.js'
+import { Pagination } from './Pagination.js'
+import { UserAchievementResponse } from './UserAchievementResponse.js'
 
 export const PaginatedUserAchievementResponse = z.object({
   countInfo: AdditionalInfo,

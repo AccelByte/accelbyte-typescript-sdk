@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { InputValidationDataPublic } from './InputValidationDataPublic'
+import { InputValidationDataPublic } from './InputValidationDataPublic.js'
 
 export const InputValidationsPublicResponse = z.object({ data: z.array(InputValidationDataPublic), version: z.number().int() })
 

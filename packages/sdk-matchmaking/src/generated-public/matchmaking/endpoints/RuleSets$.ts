@@ -9,8 +9,8 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ListRuleSetsResponse } from '../definitions/ListRuleSetsResponse'
-import { RuleSetPayload } from '../definitions/RuleSetPayload'
+import { ListRuleSetsResponse } from '../definitions/ListRuleSetsResponse.js'
+import { RuleSetPayload } from '../definitions/RuleSetPayload.js'
 
 export class RuleSets$ {
   // @ts-ignore

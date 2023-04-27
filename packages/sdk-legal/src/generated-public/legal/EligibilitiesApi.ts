@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Eligibilities$ } from './endpoints/Eligibilities$'
-import { RetrieveUserEligibilitiesIndirectResponse } from './definitions/RetrieveUserEligibilitiesIndirectResponse'
-import { RetrieveUserEligibilitiesResponseArray } from './definitions/RetrieveUserEligibilitiesResponseArray'
+import { Eligibilities$ } from './endpoints/Eligibilities$.js'
+import { RetrieveUserEligibilitiesIndirectResponse } from './definitions/RetrieveUserEligibilitiesIndirectResponse.js'
+import { RetrieveUserEligibilitiesResponseArray } from './definitions/RetrieveUserEligibilitiesResponseArray.js'
 
 export function EligibilitiesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

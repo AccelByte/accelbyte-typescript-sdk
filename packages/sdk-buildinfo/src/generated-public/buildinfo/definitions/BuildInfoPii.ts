@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MachineIdentity } from './MachineIdentity'
+import { MachineIdentity } from './MachineIdentity.js'
 
 export const BuildInfoPii = z.object({
   createdAt: z.string().nullish(),

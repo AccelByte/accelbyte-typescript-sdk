@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MatchResultNotificationPayload } from './MatchResultNotificationPayload'
-import { RequestMatchingAlly } from './RequestMatchingAlly'
+import { MatchResultNotificationPayload } from './MatchResultNotificationPayload.js'
+import { RequestMatchingAlly } from './RequestMatchingAlly.js'
 
 export const MatchResult = z.object({
   game_mode: z.string(),

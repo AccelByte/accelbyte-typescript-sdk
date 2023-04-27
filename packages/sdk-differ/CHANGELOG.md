@@ -1,3 +1,11 @@
+### 1.0.8 - 2023-04-27
+
+- Bump from script
+
+### 1.0.8-experimental.0 - 2023-04-27
+
+- Bump from script
+
 ### 1.0.7 - 2023-04-20
 
 - code-generated update

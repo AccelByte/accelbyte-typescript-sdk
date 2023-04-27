@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GameSessionSetting } from './GameSessionSetting'
-import { Server } from './Server'
+import { GameSessionSetting } from './GameSessionSetting.js'
+import { Server } from './Server.js'
 
 export const CustomGameResponse = z.object({
   all_players: z.array(z.string()),

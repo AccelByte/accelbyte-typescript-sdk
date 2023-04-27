@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { TemplateContent } from './TemplateContent'
+import { TemplateContent } from './TemplateContent.js'
 
 export const TemplateLocalization = z.object({
   lastDraftAt: z.string(),

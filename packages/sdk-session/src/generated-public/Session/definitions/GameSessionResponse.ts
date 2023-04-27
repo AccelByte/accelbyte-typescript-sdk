@@ -4,10 +4,10 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DsInformationResponse } from './DsInformationResponse'
-import { PublicConfiguration } from './PublicConfiguration'
-import { Team } from './Team'
-import { UserResponse } from './UserResponse'
+import { DsInformationResponse } from './DsInformationResponse.js'
+import { PublicConfiguration } from './PublicConfiguration.js'
+import { Team } from './Team.js'
+import { UserResponse } from './UserResponse.js'
 
 export const GameSessionResponse = z.object({
   DSInformation: DsInformationResponse,

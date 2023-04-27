@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EntitlementRevokeResult } from './EntitlementRevokeResult'
+import { EntitlementRevokeResult } from './EntitlementRevokeResult.js'
 
 export const BulkEntitlementRevokeResult = z.object({
   successList: z.array(EntitlementRevokeResult).nullish(),

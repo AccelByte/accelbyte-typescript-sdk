@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Localization } from './Localization'
+import { Localization } from './Localization.js'
 
 export const TemplateResponse = z.object({ localizations: z.array(Localization), templateSlug: z.string() })
 

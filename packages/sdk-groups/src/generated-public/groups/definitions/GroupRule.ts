@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GroupRuleGroupCustomRule } from './GroupRuleGroupCustomRule'
-import { Rule } from './Rule'
+import { GroupRuleGroupCustomRule } from './GroupRuleGroupCustomRule.js'
+import { Rule } from './Rule.js'
 
 export const GroupRule = z.object({ groupCustomRule: GroupRuleGroupCustomRule, groupPredefinedRules: z.array(Rule) })
 

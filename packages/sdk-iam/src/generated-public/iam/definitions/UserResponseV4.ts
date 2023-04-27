@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserActiveBanResponseV4 } from './UserActiveBanResponseV4'
-import { UserPermissionsResponseV4 } from './UserPermissionsResponseV4'
+import { UserActiveBanResponseV4 } from './UserActiveBanResponseV4.js'
+import { UserPermissionsResponseV4 } from './UserPermissionsResponseV4.js'
 
 export const UserResponseV4 = z.object({
   authType: z.string(),

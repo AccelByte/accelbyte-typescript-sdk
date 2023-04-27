@@ -13,8 +13,8 @@ import {
 } from '@accelbyte/validator'
 import isEmpty from 'validator/lib/isEmpty.js'
 import { z } from 'zod'
-import { InputValidationDataPublic } from '../generated-public/iam/definitions/InputValidationDataPublic'
-import { ValidationDetailPublic } from '../generated-public/iam/definitions/ValidationDetailPublic'
+import { InputValidationDataPublic } from '../generated-public/iam/definitions/InputValidationDataPublic.js'
+import { ValidationDetailPublic } from '../generated-public/iam/definitions/ValidationDetailPublic.js'
 
 export const ValidateableInputField = z.enum(['username', 'displayName', 'password', 'email'])
 export type ValidateableInputField = z.infer<typeof ValidateableInputField>

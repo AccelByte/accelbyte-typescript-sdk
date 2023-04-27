@@ -8,13 +8,13 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BulkGetPlayerRecordResponse } from './definitions/BulkGetPlayerRecordResponse'
-import { BulkGetPlayerRecordsRequest } from './definitions/BulkGetPlayerRecordsRequest'
-import { BulkUserIDsRequest } from './definitions/BulkUserIDsRequest'
-import { ListPlayerRecordKeysResponse } from './definitions/ListPlayerRecordKeysResponse'
-import { PlayerRecordRequest } from './definitions/PlayerRecordRequest'
-import { PlayerRecordResponse } from './definitions/PlayerRecordResponse'
-import { PublicPlayerRecord$ } from './endpoints/PublicPlayerRecord$'
+import { BulkGetPlayerRecordResponse } from './definitions/BulkGetPlayerRecordResponse.js'
+import { BulkGetPlayerRecordsRequest } from './definitions/BulkGetPlayerRecordsRequest.js'
+import { BulkUserIDsRequest } from './definitions/BulkUserIDsRequest.js'
+import { ListPlayerRecordKeysResponse } from './definitions/ListPlayerRecordKeysResponse.js'
+import { PlayerRecordRequest } from './definitions/PlayerRecordRequest.js'
+import { PlayerRecordResponse } from './definitions/PlayerRecordResponse.js'
+import { PublicPlayerRecord$ } from './endpoints/PublicPlayerRecord$.js'
 
 export function PublicPlayerRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

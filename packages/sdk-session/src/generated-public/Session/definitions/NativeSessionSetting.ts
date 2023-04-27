@@ -5,6 +5,11 @@
  */
 import { z } from 'zod'
 
-export const NativeSessionSetting = z.object({ XboxSessionTemplateName: z.string() })
+export const NativeSessionSetting = z.object({
+  PSNServiceLabel: z.number().int(),
+  SessionTitle: z.string(),
+  XboxServiceConfigID: z.string(),
+  XboxSessionTemplateName: z.string()
+})
 
 export interface NativeSessionSetting extends z.TypeOf<typeof NativeSessionSetting> {}

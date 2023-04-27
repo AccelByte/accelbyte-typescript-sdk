@@ -3,8 +3,8 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { BasicBuildManifest } from '../generated-public/buildinfo/definitions/BasicBuildManifest'
-import { AvailablePlatform, PlatformMatchMap } from './BuildInfoApp'
+import { BasicBuildManifest } from '../generated-public/buildinfo/definitions/BasicBuildManifest.js'
+import { AvailablePlatform, PlatformMatchMap } from './BuildInfoApp.js'
 
 /**
  * @deprecated, this is the original *Api class

@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AppMessageDeclarationArray } from './definitions/AppMessageDeclarationArray'
-import { Messages$ } from './endpoints/Messages$'
+import { AppMessageDeclarationArray } from './definitions/AppMessageDeclarationArray.js'
+import { Messages$ } from './endpoints/Messages$.js'
 
 export function MessagesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

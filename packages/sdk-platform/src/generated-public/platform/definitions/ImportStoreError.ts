@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ImportErrorDetails } from './ImportErrorDetails'
-import { ImportStoreItemInfo } from './ImportStoreItemInfo'
+import { ImportErrorDetails } from './ImportErrorDetails.js'
+import { ImportStoreItemInfo } from './ImportStoreItemInfo.js'
 
 export const ImportStoreError = z.object({
   type: z.enum(['ITEM']).nullish(),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Permission } from './Permission'
+import { Permission } from './Permission.js'
 
 export const ClientCreationResponse = z.object({
   ClientId: z.string(),

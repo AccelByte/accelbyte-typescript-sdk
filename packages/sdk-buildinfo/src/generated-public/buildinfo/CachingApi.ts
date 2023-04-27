@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Caching$ } from './endpoints/Caching$'
-import { RetrieveDiffCacheResponse } from './definitions/RetrieveDiffCacheResponse'
+import { Caching$ } from './endpoints/Caching$.js'
+import { RetrieveDiffCacheResponse } from './definitions/RetrieveDiffCacheResponse.js'
 
 export function CachingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

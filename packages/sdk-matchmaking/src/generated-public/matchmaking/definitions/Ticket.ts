@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlayerData } from './PlayerData'
+import { PlayerData } from './PlayerData.js'
 
 export const Ticket = z.object({
   createdAt: z.string().nullish(),

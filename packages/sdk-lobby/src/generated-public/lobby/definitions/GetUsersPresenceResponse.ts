@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserPresence } from './UserPresence'
+import { UserPresence } from './UserPresence.js'
 
 export const GetUsersPresenceResponse = z.object({
   away: z.number().int(),

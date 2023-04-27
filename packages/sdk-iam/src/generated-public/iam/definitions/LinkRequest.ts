@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ErrorResponseWithConflictedUserPlatformAccounts } from './ErrorResponseWithConflictedUserPlatformAccounts'
+import { ErrorResponseWithConflictedUserPlatformAccounts } from './ErrorResponseWithConflictedUserPlatformAccounts.js'
 
 export const LinkRequest = z.object({
   client_id: z.string(),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MatchFunctionOverride } from './MatchFunctionOverride'
+import { MatchFunctionOverride } from './MatchFunctionOverride.js'
 
 export const MatchPoolConfig = z.object({
   auto_accept_backfill_proposal: z.boolean(),

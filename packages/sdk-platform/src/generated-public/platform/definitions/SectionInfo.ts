@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ItemInfo } from './ItemInfo'
+import { ItemInfo } from './ItemInfo.js'
 
 export const SectionInfo = z.object({
   title: z.string(),

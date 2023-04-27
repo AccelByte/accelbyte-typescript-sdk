@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { StatConfiguration$ } from './endpoints/StatConfiguration$'
-import { StatCreate } from './definitions/StatCreate'
-import { StatInfo } from './definitions/StatInfo'
+import { StatConfiguration$ } from './endpoints/StatConfiguration$.js'
+import { StatCreate } from './definitions/StatCreate.js'
+import { StatInfo } from './definitions/StatInfo.js'
 
 export function StatConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

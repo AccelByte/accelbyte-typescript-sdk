@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Paging } from './Paging'
-import { RetrieveUserAcceptedAgreementResponse } from './RetrieveUserAcceptedAgreementResponse'
+import { Paging } from './Paging.js'
+import { RetrieveUserAcceptedAgreementResponse } from './RetrieveUserAcceptedAgreementResponse.js'
 
 export const PagedRetrieveUserAcceptedAgreementResponse = z.object({
   data: z.array(RetrieveUserAcceptedAgreementResponse).nullish(),

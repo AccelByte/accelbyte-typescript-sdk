@@ -8,13 +8,13 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BackFillAcceptRequest } from './definitions/BackFillAcceptRequest'
-import { BackFillCreateRequest } from './definitions/BackFillCreateRequest'
-import { BackFillRejectRequest } from './definitions/BackFillRejectRequest'
-import { Backfill$ } from './endpoints/Backfill$'
-import { BackfillCreateResponse } from './definitions/BackfillCreateResponse'
-import { BackfillGetResponse } from './definitions/BackfillGetResponse'
-import { BackfillProposalResponse } from './definitions/BackfillProposalResponse'
+import { BackFillAcceptRequest } from './definitions/BackFillAcceptRequest.js'
+import { BackFillCreateRequest } from './definitions/BackFillCreateRequest.js'
+import { BackFillRejectRequest } from './definitions/BackFillRejectRequest.js'
+import { Backfill$ } from './endpoints/Backfill$.js'
+import { BackfillCreateResponse } from './definitions/BackfillCreateResponse.js'
+import { BackfillGetResponse } from './definitions/BackfillGetResponse.js'
+import { BackfillProposalResponse } from './definitions/BackfillProposalResponse.js'
 
 export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

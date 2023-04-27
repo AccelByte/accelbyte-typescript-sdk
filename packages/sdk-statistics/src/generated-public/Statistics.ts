@@ -7,13 +7,13 @@
  * AUTO GENERATED
  */
 
-import { GameProfileApi } from './statistics/GameProfileApi'
-import { StatConfigurationApi } from './statistics/StatConfigurationApi'
-import { StatCycleConfigurationApi } from './statistics/StatCycleConfigurationApi'
-import { UserStatisticApi } from './statistics/UserStatisticApi'
-import { GlobalStatisticApi } from './statistics/GlobalStatisticApi'
-import { SlotApi } from './statistics/SlotApi'
-import { UserStatisticCycleApi } from './statistics/UserStatisticCycleApi'
+import { GameProfileApi } from './statistics/GameProfileApi.js'
+import { StatConfigurationApi } from './statistics/StatConfigurationApi.js'
+import { StatCycleConfigurationApi } from './statistics/StatCycleConfigurationApi.js'
+import { UserStatisticApi } from './statistics/UserStatisticApi.js'
+import { GlobalStatisticApi } from './statistics/GlobalStatisticApi.js'
+import { SlotApi } from './statistics/SlotApi.js'
+import { UserStatisticCycleApi } from './statistics/UserStatisticCycleApi.js'
 
 const apis = {
   GameProfileApi,

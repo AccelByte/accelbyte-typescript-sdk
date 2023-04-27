@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { UserStatCycleItemPagingSlicedResult } from './definitions/UserStatCycleItemPagingSlicedResult'
-import { UserStatisticCycle$ } from './endpoints/UserStatisticCycle$'
+import { UserStatCycleItemPagingSlicedResult } from './definitions/UserStatCycleItemPagingSlicedResult.js'
+import { UserStatisticCycle$ } from './endpoints/UserStatisticCycle$.js'
 
 export function UserStatisticCycleApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

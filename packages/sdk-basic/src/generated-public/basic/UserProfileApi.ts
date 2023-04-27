@@ -8,17 +8,17 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { UserProfile$ } from './endpoints/UserProfile$'
-import { UserProfileCreate } from './definitions/UserProfileCreate'
-import { UserProfileInfo } from './definitions/UserProfileInfo'
-import { UserProfilePrivateCreate } from './definitions/UserProfilePrivateCreate'
-import { UserProfilePrivateInfo } from './definitions/UserProfilePrivateInfo'
-import { UserProfilePublicInfo } from './definitions/UserProfilePublicInfo'
-import { UserProfilePublicInfoArray } from './definitions/UserProfilePublicInfoArray'
-import { UserProfileStatusUpdate } from './definitions/UserProfileStatusUpdate'
-import { UserProfileUpdate } from './definitions/UserProfileUpdate'
-import { UserZipCode } from './definitions/UserZipCode'
-import { UserZipCodeUpdate } from './definitions/UserZipCodeUpdate'
+import { UserProfile$ } from './endpoints/UserProfile$.js'
+import { UserProfileCreate } from './definitions/UserProfileCreate.js'
+import { UserProfileInfo } from './definitions/UserProfileInfo.js'
+import { UserProfilePrivateCreate } from './definitions/UserProfilePrivateCreate.js'
+import { UserProfilePrivateInfo } from './definitions/UserProfilePrivateInfo.js'
+import { UserProfilePublicInfo } from './definitions/UserProfilePublicInfo.js'
+import { UserProfilePublicInfoArray } from './definitions/UserProfilePublicInfoArray.js'
+import { UserProfileStatusUpdate } from './definitions/UserProfileStatusUpdate.js'
+import { UserProfileUpdate } from './definitions/UserProfileUpdate.js'
+import { UserZipCode } from './definitions/UserZipCode.js'
+import { UserZipCodeUpdate } from './definitions/UserZipCodeUpdate.js'
 
 export function UserProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

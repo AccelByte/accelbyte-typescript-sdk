@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { IncomingFriendsWithTimeData } from './IncomingFriendsWithTimeData'
-import { Pagination } from './Pagination'
+import { IncomingFriendsWithTimeData } from './IncomingFriendsWithTimeData.js'
+import { Pagination } from './Pagination.js'
 
 export const LoadIncomingFriendsWithTimeResponse = z.object({ data: z.array(IncomingFriendsWithTimeData), paging: Pagination })
 

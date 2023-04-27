@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DictionaryChild } from './DictionaryChild'
+import { DictionaryChild } from './DictionaryChild.js'
 
 export const DictionaryWithChildren = z.object({
   falseNegatives: z.array(DictionaryChild).nullish(),

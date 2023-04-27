@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GameServer } from './GameServer'
+import { GameServer } from './GameServer.js'
 
 export const DsInformationResponse = z.object({
   RequestedAt: z.string(),

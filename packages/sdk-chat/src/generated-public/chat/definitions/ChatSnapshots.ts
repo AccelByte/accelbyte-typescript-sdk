@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ChatSnapshotMessage } from './ChatSnapshotMessage'
+import { ChatSnapshotMessage } from './ChatSnapshotMessage.js'
 
 export const ChatSnapshots = z.object({
   chatId: z.string(),

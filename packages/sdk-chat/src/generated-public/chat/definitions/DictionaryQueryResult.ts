@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DictionaryWithChildren } from './DictionaryWithChildren'
+import { DictionaryWithChildren } from './DictionaryWithChildren.js'
 
 export const DictionaryQueryResult = z.object({ data: z.array(DictionaryWithChildren), next: z.string(), previous: z.string() })
 

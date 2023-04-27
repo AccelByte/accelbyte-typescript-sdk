@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DebitResult } from './DebitResult'
+import { DebitResult } from './DebitResult.js'
 
 export const BulkDebitResult = z.object({
   successList: z.array(DebitResult).nullish(),

@@ -8,7 +8,7 @@
  */
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { FileUploadUrlInfo } from '../definitions/FileUploadUrlInfo'
+import { FileUploadUrlInfo } from '../definitions/FileUploadUrlInfo.js'
 
 export class FileUpload$ {
   // @ts-ignore

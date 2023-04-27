@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ValidationError } from './ValidationError'
+import { ValidationError } from './ValidationError.js'
 
 export const HttpValidationError = z.object({ detail: z.array(ValidationError).nullish() })
 

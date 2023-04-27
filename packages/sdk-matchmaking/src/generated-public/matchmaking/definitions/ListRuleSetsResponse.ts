@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MatchRuleSetNameData } from './MatchRuleSetNameData'
-import { Pagination } from './Pagination'
+import { MatchRuleSetNameData } from './MatchRuleSetNameData.js'
+import { Pagination } from './Pagination.js'
 
 export const ListRuleSetsResponse = z.object({ data: z.array(MatchRuleSetNameData), pagination: Pagination })
 

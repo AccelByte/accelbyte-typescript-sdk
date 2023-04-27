@@ -9,9 +9,9 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ClaimSessionRequest } from '../definitions/ClaimSessionRequest'
-import { CreateSessionRequest } from '../definitions/CreateSessionRequest'
-import { SessionResponse } from '../definitions/SessionResponse'
+import { ClaimSessionRequest } from '../definitions/ClaimSessionRequest.js'
+import { CreateSessionRequest } from '../definitions/CreateSessionRequest.js'
+import { SessionResponse } from '../definitions/SessionResponse.js'
 
 export class Session$ {
   // @ts-ignore
@@ -56,5 +56,18 @@ export class Session$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Required permission: NAMESPACE:{namespace}:DSM:SESSION [DELETE] Required scope: social This endpoint is intended to be called by game session manager (matchmaker, lobby, etc.) to cancel a temporary dedicated server. The dedicated server cannot be canceled unless the status is CREATING
+   */
+  deleteCancel_BySessionId(sessionID: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/dsmcontroller/namespaces/{namespace}/sessions/{sessionID}/cancel'
+      .replace('{namespace}', this.namespace)
+      .replace('{sessionID}', sessionID)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

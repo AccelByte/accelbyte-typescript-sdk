@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GameSessionSetting } from './GameSessionSetting'
-import { MatchMaking } from './MatchMaking'
-import { Server } from './Server'
+import { GameSessionSetting } from './GameSessionSetting.js'
+import { MatchMaking } from './MatchMaking.js'
+import { Server } from './Server.js'
 
 export const SessionResponse = z.object({
   all_players: z.array(z.string()),

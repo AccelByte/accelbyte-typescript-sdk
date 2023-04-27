@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RevokeCurrency } from './RevokeCurrency'
-import { RevokeEntitlement } from './RevokeEntitlement'
-import { RevokeItem } from './RevokeItem'
+import { RevokeCurrency } from './RevokeCurrency.js'
+import { RevokeEntitlement } from './RevokeEntitlement.js'
+import { RevokeItem } from './RevokeItem.js'
 
 export const RevokeEntry = z.object({
   type: z.enum(['ITEM', 'CURRENCY', 'ENTITLEMENT']).nullish(),

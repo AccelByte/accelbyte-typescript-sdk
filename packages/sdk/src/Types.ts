@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 
-import { Method } from 'axios'
+import { AxiosError, Method } from 'axios'
 
 export interface ApiArgs {
   config?: SDKRequestConfig
@@ -26,7 +26,7 @@ export interface SDKEvents {
   onSessionExpired?: () => void
   onGetUserSession?: (accessToken: string, refreshToken: string) => void
   onUserEligibilityChange?: () => void
-  onError?: (error: SDKError) => void
+  onError?: (error: AxiosError) => void
 }
 
 // This is high level strict types taken from the AxiosRequestConfig implementation
@@ -45,16 +45,4 @@ export interface SDKRequestConfig<D = any> {
   // `withCredentials` indicates whether or not cross-site Access-Control requests should be made using credentials
   // withCredentials:true will automatically send the cookie to the client-side
   withCredentials?: boolean // default true
-}
-
-// The actual implementation is AxiosError
-class SDKError extends Error {
-  // AxiosError
-  // message?: string
-  // config: AxiosRequestConfig<D>;
-  code?: string
-  request?: any
-  response?: any // AxiosResponse<T, D>
-  isAxiosError: boolean | undefined
-  status?: string
 }

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BulkStatOperationResult } from './BulkStatOperationResult'
+import { BulkStatOperationResult } from './BulkStatOperationResult.js'
 
 export const BulkStatOperationResultArray = z.array(BulkStatOperationResult)
 

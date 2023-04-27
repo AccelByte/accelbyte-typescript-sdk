@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DefaultLaunchProfile } from './DefaultLaunchProfile'
-import { FileManifest } from './FileManifest'
-import { ObsoleteFileManifest } from './ObsoleteFileManifest'
+import { DefaultLaunchProfile } from './DefaultLaunchProfile.js'
+import { FileManifest } from './FileManifest.js'
+import { ObsoleteFileManifest } from './ObsoleteFileManifest.js'
 
 export const BuildManifest = z.object({
   buildId: z.string().nullish(),

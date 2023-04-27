@@ -9,20 +9,20 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ContentDownloadResponse } from '../definitions/ContentDownloadResponse'
-import { ContentDownloadResponseArray } from '../definitions/ContentDownloadResponseArray'
-import { CreateContentResponse } from '../definitions/CreateContentResponse'
-import { CreateScreenshotRequest } from '../definitions/CreateScreenshotRequest'
-import { CreateScreenshotResponse } from '../definitions/CreateScreenshotResponse'
-import { GetContentPreviewResponse } from '../definitions/GetContentPreviewResponse'
-import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse'
-import { PublicCreateContentRequestS3 } from '../definitions/PublicCreateContentRequestS3'
-import { PublicGetContentBulkRequest } from '../definitions/PublicGetContentBulkRequest'
-import { UpdateContentRequest } from '../definitions/UpdateContentRequest'
-import { UpdateScreenshotRequest } from '../definitions/UpdateScreenshotRequest'
-import { UpdateScreenshotResponse } from '../definitions/UpdateScreenshotResponse'
+import { ContentDownloadResponse } from '../definitions/ContentDownloadResponse.js'
+import { ContentDownloadResponseArray } from '../definitions/ContentDownloadResponseArray.js'
+import { CreateContentResponse } from '../definitions/CreateContentResponse.js'
+import { CreateScreenshotRequest } from '../definitions/CreateScreenshotRequest.js'
+import { CreateScreenshotResponse } from '../definitions/CreateScreenshotResponse.js'
+import { GetContentPreviewResponse } from '../definitions/GetContentPreviewResponse.js'
+import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse.js'
+import { PublicCreateContentRequestS3 } from '../definitions/PublicCreateContentRequestS3.js'
+import { PublicGetContentBulkRequest } from '../definitions/PublicGetContentBulkRequest.js'
+import { UpdateContentRequest } from '../definitions/UpdateContentRequest.js'
+import { UpdateScreenshotRequest } from '../definitions/UpdateScreenshotRequest.js'
+import { UpdateScreenshotResponse } from '../definitions/UpdateScreenshotResponse.js'
 
-export class PublicContentLegacy$ {
+export class PublicContent$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 

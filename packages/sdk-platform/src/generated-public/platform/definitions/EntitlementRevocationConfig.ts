@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ConsumableEntitlementRevocationConfig } from './ConsumableEntitlementRevocationConfig'
-import { DurableEntitlementRevocationConfig } from './DurableEntitlementRevocationConfig'
+import { ConsumableEntitlementRevocationConfig } from './ConsumableEntitlementRevocationConfig.js'
+import { DurableEntitlementRevocationConfig } from './DurableEntitlementRevocationConfig.js'
 
 export const EntitlementRevocationConfig = z.object({
   durable: DurableEntitlementRevocationConfig.nullish(),

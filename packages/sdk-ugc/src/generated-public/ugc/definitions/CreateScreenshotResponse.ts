@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ScreenshotResponse } from './ScreenshotResponse'
+import { ScreenshotResponse } from './ScreenshotResponse.js'
 
 export const CreateScreenshotResponse = z.object({ screenshots: z.array(ScreenshotResponse) })
 

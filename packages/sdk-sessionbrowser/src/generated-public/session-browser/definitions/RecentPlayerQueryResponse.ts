@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RecentPlayerHistory } from './RecentPlayerHistory'
+import { RecentPlayerHistory } from './RecentPlayerHistory.js'
 
 export const RecentPlayerQueryResponse = z.object({ data: z.array(RecentPlayerHistory) })
 

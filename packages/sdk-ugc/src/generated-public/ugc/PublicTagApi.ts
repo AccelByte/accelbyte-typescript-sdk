@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PaginatedGetTagResponse } from './definitions/PaginatedGetTagResponse'
-import { PublicTag$ } from './endpoints/PublicTag$'
+import { PaginatedGetTagResponse } from './definitions/PaginatedGetTagResponse.js'
+import { PublicTag$ } from './endpoints/PublicTag$.js'
 
 export function PublicTagApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

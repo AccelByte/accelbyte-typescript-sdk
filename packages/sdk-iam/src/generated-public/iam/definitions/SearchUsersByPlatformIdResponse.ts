@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Pagination } from './Pagination'
-import { UserSearchByPlatformIdResult } from './UserSearchByPlatformIdResult'
+import { Pagination } from './Pagination.js'
+import { UserSearchByPlatformIdResult } from './UserSearchByPlatformIdResult.js'
 
 export const SearchUsersByPlatformIdResponse = z.object({ Data: z.array(UserSearchByPlatformIdResult), Paging: Pagination })
 

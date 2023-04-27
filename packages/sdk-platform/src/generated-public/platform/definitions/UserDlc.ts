@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DlcRecord } from './DlcRecord'
+import { DlcRecord } from './DlcRecord.js'
 
 export const UserDlc = z.object({
   rvn: z.number().int().nullish(),

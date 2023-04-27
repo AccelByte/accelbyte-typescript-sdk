@@ -9,11 +9,11 @@
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { EpicGamesDlcSyncRequest } from '../definitions/EpicGamesDlcSyncRequest'
-import { PlayStationDlcSyncMultiServiceLabelsRequest } from '../definitions/PlayStationDlcSyncMultiServiceLabelsRequest'
-import { PlayStationDlcSyncRequest } from '../definitions/PlayStationDlcSyncRequest'
-import { SteamDlcSyncRequest } from '../definitions/SteamDlcSyncRequest'
-import { XblDlcSyncRequest } from '../definitions/XblDlcSyncRequest'
+import { EpicGamesDlcSyncRequest } from '../definitions/EpicGamesDlcSyncRequest.js'
+import { PlayStationDlcSyncMultiServiceLabelsRequest } from '../definitions/PlayStationDlcSyncMultiServiceLabelsRequest.js'
+import { PlayStationDlcSyncRequest } from '../definitions/PlayStationDlcSyncRequest.js'
+import { SteamDlcSyncRequest } from '../definitions/SteamDlcSyncRequest.js'
+import { XblDlcSyncRequest } from '../definitions/XblDlcSyncRequest.js'
 
 export class Dlc$ {
   // @ts-ignore

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { SlotInfo } from './SlotInfo'
+import { SlotInfo } from './SlotInfo.js'
 
 export const SlotInfoArray = z.array(SlotInfo)
 

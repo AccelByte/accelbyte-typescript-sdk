@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Localization } from './Localization'
-import { Pagination } from './Pagination'
+import { Localization } from './Localization.js'
+import { Pagination } from './Pagination.js'
 
 export const GetAllNotificationTemplateSlugResp = z.object({ data: z.array(Localization), paging: Pagination })
 

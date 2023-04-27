@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Slot$ } from './endpoints/Slot$'
-import { SlotInfo } from './definitions/SlotInfo'
-import { SlotInfoArray } from './definitions/SlotInfoArray'
-import { SlotMetadataUpdate } from './definitions/SlotMetadataUpdate'
+import { Slot$ } from './endpoints/Slot$.js'
+import { SlotInfo } from './definitions/SlotInfo.js'
+import { SlotInfoArray } from './definitions/SlotInfoArray.js'
+import { SlotMetadataUpdate } from './definitions/SlotMetadataUpdate.js'
 
 export function SlotApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

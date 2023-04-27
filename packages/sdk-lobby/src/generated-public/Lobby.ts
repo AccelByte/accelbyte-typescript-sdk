@@ -7,12 +7,12 @@
  * AUTO GENERATED
  */
 
-import { MessagesApi } from './lobby/MessagesApi'
-import { FriendsApi } from './lobby/FriendsApi'
-import { NotificationApi } from './lobby/NotificationApi'
-import { PartyApi } from './lobby/PartyApi'
-import { PlayerApi } from './lobby/PlayerApi'
-import { PresenceApi } from './lobby/PresenceApi'
+import { MessagesApi } from './lobby/MessagesApi.js'
+import { FriendsApi } from './lobby/FriendsApi.js'
+import { NotificationApi } from './lobby/NotificationApi.js'
+import { PartyApi } from './lobby/PartyApi.js'
+import { PlayerApi } from './lobby/PlayerApi.js'
+import { PresenceApi } from './lobby/PresenceApi.js'
 
 const apis = {
   MessagesApi,

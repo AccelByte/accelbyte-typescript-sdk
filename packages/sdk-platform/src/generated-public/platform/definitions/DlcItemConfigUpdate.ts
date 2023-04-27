@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DlcItem } from './DlcItem'
+import { DlcItem } from './DlcItem.js'
 
 export const DlcItemConfigUpdate = z.object({ data: z.array(DlcItem).nullish() })
 

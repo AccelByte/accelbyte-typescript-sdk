@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RuleInformation } from './RuleInformation'
+import { RuleInformation } from './RuleInformation.js'
 
 export const UpdateGroupPredefinedRuleRequestV1 = z.object({ ruleDetail: z.array(RuleInformation) })
 

@@ -9,12 +9,12 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { BillingHistoryPagingSlicedResult } from '../definitions/BillingHistoryPagingSlicedResult'
-import { CancelRequest } from '../definitions/CancelRequest'
-import { Subscribable } from '../definitions/Subscribable'
-import { SubscribeRequest } from '../definitions/SubscribeRequest'
-import { SubscriptionInfo } from '../definitions/SubscriptionInfo'
-import { SubscriptionPagingSlicedResult } from '../definitions/SubscriptionPagingSlicedResult'
+import { BillingHistoryPagingSlicedResult } from '../definitions/BillingHistoryPagingSlicedResult.js'
+import { CancelRequest } from '../definitions/CancelRequest.js'
+import { Subscribable } from '../definitions/Subscribable.js'
+import { SubscribeRequest } from '../definitions/SubscribeRequest.js'
+import { SubscriptionInfo } from '../definitions/SubscriptionInfo.js'
+import { SubscriptionPagingSlicedResult } from '../definitions/SubscriptionPagingSlicedResult.js'
 
 export class Subscription$ {
   // @ts-ignore

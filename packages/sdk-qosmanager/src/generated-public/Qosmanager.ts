@@ -7,8 +7,8 @@
  * AUTO GENERATED
  */
 
-import { PublicApi } from './qosmanager/PublicApi'
-import { ServerApi } from './qosmanager/ServerApi'
+import { PublicApi } from './qosmanager/PublicApi.js'
+import { ServerApi } from './qosmanager/ServerApi.js'
 
 const apis = {
   PublicApi,

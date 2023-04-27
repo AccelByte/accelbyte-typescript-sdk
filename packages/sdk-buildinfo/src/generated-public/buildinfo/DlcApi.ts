@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Dlc$ } from './endpoints/Dlc$'
-import { RetrieveBaseGameResponseArray } from './definitions/RetrieveBaseGameResponseArray'
-import { RetrieveDependencyCompatibilityResponse } from './definitions/RetrieveDependencyCompatibilityResponse'
-import { RetrieveDependencyLinkResponse } from './definitions/RetrieveDependencyLinkResponse'
-import { RetrieveLatestDlcResponseArray } from './definitions/RetrieveLatestDlcResponseArray'
+import { Dlc$ } from './endpoints/Dlc$.js'
+import { RetrieveBaseGameResponseArray } from './definitions/RetrieveBaseGameResponseArray.js'
+import { RetrieveDependencyCompatibilityResponse } from './definitions/RetrieveDependencyCompatibilityResponse.js'
+import { RetrieveDependencyLinkResponse } from './definitions/RetrieveDependencyLinkResponse.js'
+import { RetrieveLatestDlcResponseArray } from './definitions/RetrieveLatestDlcResponseArray.js'
 
 export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

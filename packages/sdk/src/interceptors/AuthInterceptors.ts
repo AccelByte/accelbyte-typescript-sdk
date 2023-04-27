@@ -127,31 +127,32 @@ export const injectAuthInterceptors = (
       return response
     },
     async (error: AxiosError) => {
+      const { config, response } = error
+
       if (axios.isCancel(error)) {
         // expected case, exit
         throw error
-      } else {
-        const { config, response } = error
-        if (!response) {
-          console.error('injectResponseInterceptors net::ERR_INTERNET_DISCONNECTED')
+      }
+
+      if (!response) {
+        console.error('injectResponseInterceptors net::ERR_INTERNET_DISCONNECTED')
+      }
+
+      if (response?.status === 401) {
+        const { url } = config || {}
+        const axiosConfig = getSDKConfig()
+        const refreshToken = getRefreshToken ? getRefreshToken() : undefined
+
+        // expected business case, exit
+        // @ts-ignore
+        if (Object.values(LoginUrls).includes(url)) {
+          throw error
         }
 
-        if (response?.status === 401) {
-          const { url } = config
-          const axiosConfig = getSDKConfig()
-          const refreshToken = getRefreshToken ? getRefreshToken() : undefined
-
-          // expected business case, exit
-          // @ts-ignore
-          if (Object.values(LoginUrls).includes(url)) {
-            throw error
-          }
-
-          // need to lock on the desktop as well to prevent multiple token request
-          return refreshWithLock({ axiosConfig, clientId, refreshToken }).then(tokenResponse => {
-            return uponRefreshComplete(error, tokenResponse, onGetUserSession, onSessionExpired, axiosConfig, config)
-          })
-        }
+        // need to lock on the desktop as well to prevent multiple token request
+        return refreshWithLock({ axiosConfig, clientId, refreshToken }).then(tokenResponse => {
+          return uponRefreshComplete(error, tokenResponse, onGetUserSession, onSessionExpired, axiosConfig, config || {})
+        })
       }
 
       return Promise.reject(error)

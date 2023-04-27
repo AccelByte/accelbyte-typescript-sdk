@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlatformReward } from './PlatformReward'
+import { PlatformReward } from './PlatformReward.js'
 
 export const RewardsRequest = z.object({
   rewards: z.array(PlatformReward),

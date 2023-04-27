@@ -6,11 +6,11 @@
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, Network, SdkCache, SDKRequestConfig, CodeGenUtil, Validate } from '@accelbyte/sdk'
 import { Buffer } from 'buffer'
-import { OAuth20Extension$ } from '../generated-public/iam/endpoints/OAuth20Extension$'
-import { MFA_DATA_STORAGE_KEY } from './IamUserAuthorizationClient'
-import { OAuth20$ } from '../generated-public/iam/endpoints/OAuth20$'
-import { Request2FAEmailCode, Verify2FAParam } from '../models/TwoFA'
-import { TokenResponse } from '../generated-public/iam/definitions/TokenResponse'
+import { OAuth20Extension$ } from '../generated-public/iam/endpoints/OAuth20Extension$.js'
+import { MFA_DATA_STORAGE_KEY } from './IamUserAuthorizationClient.js'
+import { OAuth20$ } from '../generated-public/iam/endpoints/OAuth20$.js'
+import { Request2FAEmailCode, Verify2FAParam } from '../models/TwoFA.js'
+import { TokenResponse } from '../generated-public/iam/definitions/TokenResponse.js'
 
 export interface OAuthApiOptions {
   clientId: string

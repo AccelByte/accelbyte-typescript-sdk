@@ -8,14 +8,14 @@
  */
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { CancelInvitationGroupResponseV2 } from '../definitions/CancelInvitationGroupResponseV2'
-import { GetGroupMemberListResponseV1 } from '../definitions/GetGroupMemberListResponseV1'
-import { GetUserGroupInformationResponseV1 } from '../definitions/GetUserGroupInformationResponseV1'
-import { JoinGroupResponseV1 } from '../definitions/JoinGroupResponseV1'
-import { KickGroupMemberResponseV1 } from '../definitions/KickGroupMemberResponseV1'
-import { LeaveGroupResponseV1 } from '../definitions/LeaveGroupResponseV1'
-import { MemberRequestGroupResponseV1 } from '../definitions/MemberRequestGroupResponseV1'
-import { UserInvitationResponseV1 } from '../definitions/UserInvitationResponseV1'
+import { CancelInvitationGroupResponseV2 } from '../definitions/CancelInvitationGroupResponseV2.js'
+import { GetGroupMemberListResponseV1 } from '../definitions/GetGroupMemberListResponseV1.js'
+import { GetUserGroupInformationResponseV1 } from '../definitions/GetUserGroupInformationResponseV1.js'
+import { JoinGroupResponseV1 } from '../definitions/JoinGroupResponseV1.js'
+import { KickGroupMemberResponseV1 } from '../definitions/KickGroupMemberResponseV1.js'
+import { LeaveGroupResponseV1 } from '../definitions/LeaveGroupResponseV1.js'
+import { MemberRequestGroupResponseV1 } from '../definitions/MemberRequestGroupResponseV1.js'
+import { UserInvitationResponseV1 } from '../definitions/UserInvitationResponseV1.js'
 
 export class GroupMember$ {
   // @ts-ignore

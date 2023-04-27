@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Namespace$ } from './endpoints/Namespace$'
-import { NamespaceInfoArray } from './definitions/NamespaceInfoArray'
-import { NamespacePublisherInfo } from './definitions/NamespacePublisherInfo'
+import { Namespace$ } from './endpoints/Namespace$.js'
+import { NamespaceInfoArray } from './definitions/NamespaceInfoArray.js'
+import { NamespacePublisherInfo } from './definitions/NamespacePublisherInfo.js'
 
 export function NamespaceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

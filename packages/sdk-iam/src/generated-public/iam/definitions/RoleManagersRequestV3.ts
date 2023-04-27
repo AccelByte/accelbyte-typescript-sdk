@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RoleManagerV3 } from './RoleManagerV3'
+import { RoleManagerV3 } from './RoleManagerV3.js'
 
 export const RoleManagersRequestV3 = z.object({ managers: z.array(RoleManagerV3) })
 

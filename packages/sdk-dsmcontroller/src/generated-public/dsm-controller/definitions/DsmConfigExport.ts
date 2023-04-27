@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DeploymentWithOverride } from './DeploymentWithOverride'
-import { ImageRecord } from './ImageRecord'
-import { PodConfigRecord } from './PodConfigRecord'
+import { DeploymentWithOverride } from './DeploymentWithOverride.js'
+import { ImageRecord } from './ImageRecord.js'
+import { PodConfigRecord } from './PodConfigRecord.js'
 
 export const DsmConfigExport = z.object({
   claim_timeout: z.number().int(),

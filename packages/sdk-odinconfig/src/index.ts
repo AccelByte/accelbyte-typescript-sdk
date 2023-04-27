@@ -3,11 +3,11 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-export * from './all-public-imports'
-export * from './models/DiscoveryTemplate'
-export * from './models/base-configs'
-export * from './models/discovery'
-export * from './models/launcher'
-export * from './models/player-portal'
-export * from './models/twitch-drop'
-export * from './models/payment'
+export * from './all-public-imports.js'
+export * from './models/DiscoveryTemplate.js'
+export * from './models/base-configs.js'
+export * from './models/discovery.js'
+export * from './models/launcher.js'
+export * from './models/player-portal.js'
+export * from './models/twitch-drop.js'
+export * from './models/payment.js'

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { StatusHistory } from './StatusHistory'
+import { StatusHistory } from './StatusHistory.js'
 
 export const Server = z.object({
   allocation_id: z.string(),

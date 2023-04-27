@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UpdateGroupRequestV1CustomAttributes } from './UpdateGroupRequestV1CustomAttributes'
+import { UpdateGroupRequestV1CustomAttributes } from './UpdateGroupRequestV1CustomAttributes.js'
 
 export const UpdateGroupRequestV1 = z.object({
   customAttributes: UpdateGroupRequestV1CustomAttributes,

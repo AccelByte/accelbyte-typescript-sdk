@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GetAllLeaderboardConfigsPublicResp } from './definitions/GetAllLeaderboardConfigsPublicResp'
-import { LeaderboardConfigReq } from './definitions/LeaderboardConfigReq'
-import { LeaderboardConfiguration$ } from './endpoints/LeaderboardConfiguration$'
+import { GetAllLeaderboardConfigsPublicResp } from './definitions/GetAllLeaderboardConfigsPublicResp.js'
+import { LeaderboardConfigReq } from './definitions/LeaderboardConfigReq.js'
+import { LeaderboardConfiguration$ } from './endpoints/LeaderboardConfiguration$.js'
 
 export function LeaderboardConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

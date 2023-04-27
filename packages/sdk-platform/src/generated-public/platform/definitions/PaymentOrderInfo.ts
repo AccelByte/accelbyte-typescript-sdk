@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CurrencySummary } from './CurrencySummary'
-import { Transaction } from './Transaction'
+import { CurrencySummary } from './CurrencySummary.js'
+import { Transaction } from './Transaction.js'
 
 export const PaymentOrderInfo = z.object({
   paymentOrderNo: z.string(),

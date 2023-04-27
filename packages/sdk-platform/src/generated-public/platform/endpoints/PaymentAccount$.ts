@@ -9,7 +9,7 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { PaymentAccountArray } from '../definitions/PaymentAccountArray'
+import { PaymentAccountArray } from '../definitions/PaymentAccountArray.js'
 
 export class PaymentAccount$ {
   // @ts-ignore

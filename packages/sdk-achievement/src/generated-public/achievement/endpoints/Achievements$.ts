@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { PublicAchievementResponse } from '../definitions/PublicAchievementResponse'
-import { PublicAchievementsResponse } from '../definitions/PublicAchievementsResponse'
+import { PublicAchievementResponse } from '../definitions/PublicAchievementResponse.js'
+import { PublicAchievementsResponse } from '../definitions/PublicAchievementsResponse.js'
 
 export class Achievements$ {
   // @ts-ignore

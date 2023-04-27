@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { EventResponseV2 } from './definitions/EventResponseV2'
-import { EventV2$ } from './endpoints/EventV2$'
+import { EventResponseV2 } from './definitions/EventResponseV2.js'
+import { EventV2$ } from './endpoints/EventV2$.js'
 
 export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

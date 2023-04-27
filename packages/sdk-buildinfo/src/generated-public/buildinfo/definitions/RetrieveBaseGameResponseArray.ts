@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RetrieveBaseGameResponse } from './RetrieveBaseGameResponse'
+import { RetrieveBaseGameResponse } from './RetrieveBaseGameResponse.js'
 
 export const RetrieveBaseGameResponseArray = z.array(RetrieveBaseGameResponse)
 

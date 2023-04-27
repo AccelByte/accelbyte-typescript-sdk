@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Store$ } from './endpoints/Store$'
-import { StoreInfoArray } from './definitions/StoreInfoArray'
+import { Store$ } from './endpoints/Store$.js'
+import { StoreInfoArray } from './definitions/StoreInfoArray.js'
 
 export function StoreApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

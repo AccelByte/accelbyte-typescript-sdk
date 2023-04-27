@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { KeyInfo } from './KeyInfo'
-import { Paging } from './Paging'
+import { KeyInfo } from './KeyInfo.js'
+import { Paging } from './Paging.js'
 
 export const KeyPagingSliceResult = z.object({ data: z.array(KeyInfo), paging: Paging.nullish() })
 

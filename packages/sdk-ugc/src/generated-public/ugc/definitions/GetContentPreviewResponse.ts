@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PreviewUrl } from './PreviewUrl'
+import { PreviewUrl } from './PreviewUrl.js'
 
 export const GetContentPreviewResponse = z.object({ preview: z.string(), previewURL: PreviewUrl.nullish() })
 

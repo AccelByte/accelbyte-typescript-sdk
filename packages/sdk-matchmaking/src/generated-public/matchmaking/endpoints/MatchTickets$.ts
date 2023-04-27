@@ -9,9 +9,9 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { MatchTicketRequest } from '../definitions/MatchTicketRequest'
-import { MatchTicketResponse } from '../definitions/MatchTicketResponse'
-import { MatchTicketStatus } from '../definitions/MatchTicketStatus'
+import { MatchTicketRequest } from '../definitions/MatchTicketRequest.js'
+import { MatchTicketResponse } from '../definitions/MatchTicketResponse.js'
+import { MatchTicketStatus } from '../definitions/MatchTicketStatus.js'
 
 export class MatchTickets$ {
   // @ts-ignore

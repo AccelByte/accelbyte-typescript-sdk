@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CategoryInfo } from './CategoryInfo'
+import { CategoryInfo } from './CategoryInfo.js'
 
 export const CategoryInfoArray = z.array(CategoryInfo)
 

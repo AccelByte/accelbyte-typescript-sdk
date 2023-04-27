@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlatformUserInformation } from './PlatformUserInformation'
+import { PlatformUserInformation } from './PlatformUserInformation.js'
 
 export const UserInformation = z.object({
   Country: z.string(),

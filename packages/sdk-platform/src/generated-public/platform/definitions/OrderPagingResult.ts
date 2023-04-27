@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { OrderInfo } from './OrderInfo'
-import { Paging } from './Paging'
+import { OrderInfo } from './OrderInfo.js'
+import { Paging } from './Paging.js'
 
 export const OrderPagingResult = z.object({ data: z.array(OrderInfo), paging: Paging.nullish(), total: z.number().int().nullish() })
 

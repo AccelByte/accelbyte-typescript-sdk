@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BinaryUpload } from './BinaryUpload'
+import { BinaryUpload } from './BinaryUpload.js'
 
 export const ZsyncDiffRequest = z.object({
   namespace: z.string().nullish(),

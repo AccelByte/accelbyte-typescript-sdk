@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DiffCacheObject } from './DiffCacheObject'
+import { DiffCacheObject } from './DiffCacheObject.js'
 
 export const RetrieveDiffCacheResponse = z.object({
   summaryFile: z.string(),

@@ -9,10 +9,10 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { AssignRoleToMemberRequestV1 } from '../definitions/AssignRoleToMemberRequestV1'
-import { GetMemberRolesListResponseV1 } from '../definitions/GetMemberRolesListResponseV1'
-import { GetUserGroupInformationResponseV1 } from '../definitions/GetUserGroupInformationResponseV1'
-import { RemoveRoleFromMemberRequestV1 } from '../definitions/RemoveRoleFromMemberRequestV1'
+import { AssignRoleToMemberRequestV1 } from '../definitions/AssignRoleToMemberRequestV1.js'
+import { GetMemberRolesListResponseV1 } from '../definitions/GetMemberRolesListResponseV1.js'
+import { GetUserGroupInformationResponseV1 } from '../definitions/GetUserGroupInformationResponseV1.js'
+import { RemoveRoleFromMemberRequestV1 } from '../definitions/RemoveRoleFromMemberRequestV1.js'
 
 export class GroupRoles$ {
   // @ts-ignore

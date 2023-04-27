@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RequestMatchMember } from './RequestMatchMember'
+import { RequestMatchMember } from './RequestMatchMember.js'
 
 export const RequestMatchParty = z.object({
   party_attributes: z.record(z.any()),

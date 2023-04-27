@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ArchiveLeaderboardSignedUrlResponseArray } from './definitions/ArchiveLeaderboardSignedUrlResponseArray'
-import { GetLeaderboardRankingResp } from './definitions/GetLeaderboardRankingResp'
-import { GetPublicLeaderboardRankingResponse } from './definitions/GetPublicLeaderboardRankingResponse'
-import { LeaderboardData$ } from './endpoints/LeaderboardData$'
-import { UserRankingResponse } from './definitions/UserRankingResponse'
+import { ArchiveLeaderboardSignedUrlResponseArray } from './definitions/ArchiveLeaderboardSignedUrlResponseArray.js'
+import { GetLeaderboardRankingResp } from './definitions/GetLeaderboardRankingResp.js'
+import { GetPublicLeaderboardRankingResponse } from './definitions/GetPublicLeaderboardRankingResponse.js'
+import { LeaderboardData$ } from './endpoints/LeaderboardData$.js'
+import { UserRankingResponse } from './definitions/UserRankingResponse.js'
 
 export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

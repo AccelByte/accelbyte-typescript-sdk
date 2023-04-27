@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { GetImageDetailResponse } from '../definitions/GetImageDetailResponse'
-import { GetImageLimitResponse } from '../definitions/GetImageLimitResponse'
+import { GetImageDetailResponse } from '../definitions/GetImageDetailResponse.js'
+import { GetImageLimitResponse } from '../definitions/GetImageLimitResponse.js'
 
 export class ImageConfig$ {
   // @ts-ignore

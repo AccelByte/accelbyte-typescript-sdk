@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { CreatorResponse } from '../definitions/CreatorResponse'
-import { PaginatedCreatorOverviewResponse } from '../definitions/PaginatedCreatorOverviewResponse'
+import { CreatorResponse } from '../definitions/CreatorResponse.js'
+import { PaginatedCreatorOverviewResponse } from '../definitions/PaginatedCreatorOverviewResponse.js'
 
 export class PublicCreator$ {
   // @ts-ignore

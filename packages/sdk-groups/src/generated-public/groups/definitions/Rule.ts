@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RuleInformation } from './RuleInformation'
+import { RuleInformation } from './RuleInformation.js'
 
 export const Rule = z.object({ allowedAction: z.string(), ruleDetail: z.array(RuleInformation) })
 

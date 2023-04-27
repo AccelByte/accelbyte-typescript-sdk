@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 
-import { LeaderboardConfigurationApi } from './leaderboard/LeaderboardConfigurationApi'
-import { LeaderboardConfigurationV3Api } from './leaderboard/LeaderboardConfigurationV3Api'
-import { LeaderboardDataApi } from './leaderboard/LeaderboardDataApi'
-import { LeaderboardDataV3Api } from './leaderboard/LeaderboardDataV3Api'
+import { LeaderboardConfigurationApi } from './leaderboard/LeaderboardConfigurationApi.js'
+import { LeaderboardConfigurationV3Api } from './leaderboard/LeaderboardConfigurationV3Api.js'
+import { LeaderboardDataApi } from './leaderboard/LeaderboardDataApi.js'
+import { LeaderboardDataV3Api } from './leaderboard/LeaderboardDataV3Api.js'
 
 const apis = {
   LeaderboardConfigurationApi,

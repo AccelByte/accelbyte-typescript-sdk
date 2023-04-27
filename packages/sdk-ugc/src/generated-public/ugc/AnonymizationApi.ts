@@ -8,7 +8,7 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Anonymization$ } from './endpoints/Anonymization$'
+import { Anonymization$ } from './endpoints/Anonymization$.js'
 
 export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

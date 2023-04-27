@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Party } from './Party'
+import { Party } from './Party.js'
 
 export const Team = z.object({ parties: z.array(Party).nullish(), userIDs: z.array(z.string()).nullish() })
 

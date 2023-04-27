@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AcceptAgreementRequest } from './definitions/AcceptAgreementRequest'
-import { AcceptAgreementResponse } from './definitions/AcceptAgreementResponse'
-import { Agreement$ } from './endpoints/Agreement$'
-import { RetrieveAcceptedAgreementResponseArray } from './definitions/RetrieveAcceptedAgreementResponseArray'
+import { AcceptAgreementRequest } from './definitions/AcceptAgreementRequest.js'
+import { AcceptAgreementResponse } from './definitions/AcceptAgreementResponse.js'
+import { Agreement$ } from './endpoints/Agreement$.js'
+import { RetrieveAcceptedAgreementResponseArray } from './definitions/RetrieveAcceptedAgreementResponseArray.js'
 
 export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

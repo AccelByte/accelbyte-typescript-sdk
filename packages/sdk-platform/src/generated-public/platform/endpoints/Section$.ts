@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { SectionInfoArray } from '../definitions/SectionInfoArray'
+import { SectionInfoArray } from '../definitions/SectionInfoArray.js'
 
 export class Section$ {
   // @ts-ignore

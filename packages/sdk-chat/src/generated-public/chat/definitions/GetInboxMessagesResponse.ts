@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GetInboxMessagesResponseData } from './GetInboxMessagesResponseData'
+import { GetInboxMessagesResponseData } from './GetInboxMessagesResponseData.js'
 
 export const GetInboxMessagesResponse = z.object({ data: z.array(GetInboxMessagesResponseData), next: z.string(), previous: z.string() })
 

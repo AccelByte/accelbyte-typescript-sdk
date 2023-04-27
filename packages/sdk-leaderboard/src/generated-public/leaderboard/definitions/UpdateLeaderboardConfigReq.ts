@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DailyConfig } from './DailyConfig'
-import { MonthlyConfig } from './MonthlyConfig'
-import { WeeklyConfig } from './WeeklyConfig'
+import { DailyConfig } from './DailyConfig.js'
+import { MonthlyConfig } from './MonthlyConfig.js'
+import { WeeklyConfig } from './WeeklyConfig.js'
 
 export const UpdateLeaderboardConfigReq = z.object({
   daily: DailyConfig,

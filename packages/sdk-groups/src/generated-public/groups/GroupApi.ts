@@ -8,16 +8,16 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GetGroupListRequestV2 } from './definitions/GetGroupListRequestV2'
-import { GetGroupsListResponseV1 } from './definitions/GetGroupsListResponseV1'
-import { GetGroupsResponseV1 } from './definitions/GetGroupsResponseV1'
-import { Group$ } from './endpoints/Group$'
-import { GroupResponseV1 } from './definitions/GroupResponseV1'
-import { PublicCreateNewGroupRequestV1 } from './definitions/PublicCreateNewGroupRequestV1'
-import { UpdateGroupCustomAttributesRequestV1 } from './definitions/UpdateGroupCustomAttributesRequestV1'
-import { UpdateGroupCustomRuleRequestV1 } from './definitions/UpdateGroupCustomRuleRequestV1'
-import { UpdateGroupPredefinedRuleRequestV1 } from './definitions/UpdateGroupPredefinedRuleRequestV1'
-import { UpdateGroupRequestV1 } from './definitions/UpdateGroupRequestV1'
+import { GetGroupListRequestV2 } from './definitions/GetGroupListRequestV2.js'
+import { GetGroupsListResponseV1 } from './definitions/GetGroupsListResponseV1.js'
+import { GetGroupsResponseV1 } from './definitions/GetGroupsResponseV1.js'
+import { Group$ } from './endpoints/Group$.js'
+import { GroupResponseV1 } from './definitions/GroupResponseV1.js'
+import { PublicCreateNewGroupRequestV1 } from './definitions/PublicCreateNewGroupRequestV1.js'
+import { UpdateGroupCustomAttributesRequestV1 } from './definitions/UpdateGroupCustomAttributesRequestV1.js'
+import { UpdateGroupCustomRuleRequestV1 } from './definitions/UpdateGroupCustomRuleRequestV1.js'
+import { UpdateGroupPredefinedRuleRequestV1 } from './definitions/UpdateGroupPredefinedRuleRequestV1.js'
+import { UpdateGroupRequestV1 } from './definitions/UpdateGroupRequestV1.js'
 
 export function GroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

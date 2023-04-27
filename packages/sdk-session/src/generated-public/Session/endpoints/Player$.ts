@@ -9,8 +9,8 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { PlayerAttributesRequestBody } from '../definitions/PlayerAttributesRequestBody'
-import { PlayerAttributesResponseBody } from '../definitions/PlayerAttributesResponseBody'
+import { PlayerAttributesRequestBody } from '../definitions/PlayerAttributesRequestBody.js'
+import { PlayerAttributesResponseBody } from '../definitions/PlayerAttributesResponseBody.js'
 
 export class Player$ {
   // @ts-ignore

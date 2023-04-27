@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { RetrieveDiffCacheResponse } from '../definitions/RetrieveDiffCacheResponse'
+import { RetrieveDiffCacheResponse } from '../definitions/RetrieveDiffCacheResponse.js'
 
 export class Caching$ {
   // @ts-ignore

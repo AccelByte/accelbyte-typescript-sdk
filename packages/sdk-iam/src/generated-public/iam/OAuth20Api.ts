@@ -8,14 +8,14 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { JwkSet } from './definitions/JwkSet'
-import { OAuth20$ } from './endpoints/OAuth20$'
-import { RevocationList } from './definitions/RevocationList'
-import { TokenIntrospectResponse } from './definitions/TokenIntrospectResponse'
-import { TokenResponse } from './definitions/TokenResponse'
-import { TokenResponseV3 } from './definitions/TokenResponseV3'
-import { TokenThirdPartyResponse } from './definitions/TokenThirdPartyResponse'
-import { TokenWithDeviceCookieResponseV3 } from './definitions/TokenWithDeviceCookieResponseV3'
+import { JwkSet } from './definitions/JwkSet.js'
+import { OAuth20$ } from './endpoints/OAuth20$.js'
+import { RevocationList } from './definitions/RevocationList.js'
+import { TokenIntrospectResponse } from './definitions/TokenIntrospectResponse.js'
+import { TokenResponse } from './definitions/TokenResponse.js'
+import { TokenResponseV3 } from './definitions/TokenResponseV3.js'
+import { TokenThirdPartyResponse } from './definitions/TokenThirdPartyResponse.js'
+import { TokenWithDeviceCookieResponseV3 } from './definitions/TokenWithDeviceCookieResponseV3.js'
 
 export function OAuth20Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

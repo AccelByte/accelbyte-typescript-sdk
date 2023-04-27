@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { UserAction$ } from './endpoints/UserAction$'
-import { UserReportRequest } from './definitions/UserReportRequest'
+import { UserAction$ } from './endpoints/UserAction$.js'
+import { UserReportRequest } from './definitions/UserReportRequest.js'
 
 export function UserActionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

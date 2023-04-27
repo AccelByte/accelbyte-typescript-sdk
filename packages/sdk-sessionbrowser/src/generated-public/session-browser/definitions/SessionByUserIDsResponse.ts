@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GameSession } from './GameSession'
+import { GameSession } from './GameSession.js'
 
 export const SessionByUserIDsResponse = z.object({ data: z.array(GameSession) })
 

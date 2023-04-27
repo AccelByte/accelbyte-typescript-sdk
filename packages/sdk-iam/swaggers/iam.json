@@ -25079,22 +25079,22 @@
     },
     "model.ValidationDetail": {
       "required": [
-        "blockedWord",
-        "isCustomRegex",
-        "allowDigit",
-        "allowSpace",
-        "allowUnicode",
-        "specialCharacters",
         "regex",
         "minCharType",
         "specialCharacterLocation",
         "maxRepeatingAlphaNum",
         "letterCase",
-        "allowLetter",
-        "allowAllSpecialCharacters",
-        "minLength",
-        "maxLength",
         "maxRepeatingSpecialCharacter",
+        "isCustomRegex",
+        "maxLength",
+        "allowLetter",
+        "allowDigit",
+        "allowSpace",
+        "allowUnicode",
+        "allowAllSpecialCharacters",
+        "blockedWord",
+        "minLength",
+        "specialCharacters",
         "description"
       ],
       "properties": {
@@ -25167,22 +25167,22 @@
     },
     "model.ValidationDetailPublic": {
       "required": [
-        "letterCase",
-        "allowLetter",
         "maxRepeatingAlphaNum",
-        "maxLength",
-        "maxRepeatingSpecialCharacter",
-        "allowAllSpecialCharacters",
-        "minLength",
-        "isCustomRegex",
-        "blockedWord",
-        "minCharType",
+        "letterCase",
         "specialCharacterLocation",
-        "allowDigit",
+        "maxRepeatingSpecialCharacter",
+        "isCustomRegex",
         "allowSpace",
         "allowUnicode",
+        "allowAllSpecialCharacters",
+        "blockedWord",
+        "minLength",
+        "maxLength",
+        "allowLetter",
+        "allowDigit",
         "specialCharacters",
         "regex",
+        "minCharType",
         "description"
       ],
       "properties": {
@@ -25653,7 +25653,7 @@
       }
     },
     "oauthmodel.TokenWithDeviceCookieResponseV3": {
-      "required": ["roles", "namespace_roles", "token_type", "permissions", "bans", "access_token", "expires_in", "namespace", "scope"],
+      "required": ["token_type", "bans", "namespace", "namespace_roles", "access_token", "scope", "permissions", "roles", "expires_in"],
       "properties": {
         "access_token": {
           "type": "string"

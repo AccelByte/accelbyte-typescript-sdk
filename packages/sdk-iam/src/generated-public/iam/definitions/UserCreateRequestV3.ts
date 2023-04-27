@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AcceptedPoliciesRequest } from './AcceptedPoliciesRequest'
+import { AcceptedPoliciesRequest } from './AcceptedPoliciesRequest.js'
 
 export const UserCreateRequestV3 = z.object({
   PasswordMD5Sum: z.string().nullish(),

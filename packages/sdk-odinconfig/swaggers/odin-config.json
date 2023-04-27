@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Config Service",
     "title": "config-service-app",
-    "version": "0.14.0"
+    "version": "0.13.6"
   },
   "paths": {
     "/odin-config/v1/admin/namespaces/{namespace}/templates": {
@@ -88,13 +88,13 @@
       }
     },
     "/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/cache": {
-      "get": {
-        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e\u003c/p\u003e",
+      "delete": {
+        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e. Note that the \u003ccode\u003edata\u003c/code\u003e field of each config MUST be an object. Please ensure that config-level fields such as \u003ccode\u003eupdatedAt\u003c/code\u003e, \u003ccode\u003eformat\u003c/code\u003e, and \u003ccode\u003eversion\u003c/code\u003eare located on the config-level and not inside the \u003ccode\u003econfig.data\u003c/code\u003e field to reduce confusion.\u003c/p\u003e",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
-        "summary": "Get template config on redis cache",
-        "operationId": "AdminGetCache",
+        "summary": "Delete template config on redis cache",
+        "operationId": "AdminDeleteCache",
         "parameters": [
           {
             "type": "string",
@@ -115,54 +115,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/servicelogic.CacheResult"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:CONFIG\u003c/code\u003e. Note that the \u003ccode\u003edata\u003c/code\u003e field of each config MUST be an object. Please ensure that config-level fields such as \u003ccode\u003eupdatedAt\u003c/code\u003e, \u003ccode\u003eformat\u003c/code\u003e, and \u003ccode\u003eversion\u003c/code\u003eare located on the config-level and not inside the \u003ccode\u003econfig.data\u003c/code\u003e field to reduce confusion.\u003c/p\u003e",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "tags": ["Templates"],
-        "summary": "Revalidate template config redis cache",
-        "operationId": "AdminRevalidateCache",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "namespace of the user",
-            "name": "namespace",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "template name",
-            "name": "template",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
+              "$ref": "#/definitions/servicelogic.Config"
             }
           },
           "500": {
@@ -620,14 +573,6 @@
           "format": "int32"
         },
         "errorMessage": {
-          "type": "string"
-        }
-      }
-    },
-    "servicelogic.CacheResult": {
-      "required": ["content"],
-      "properties": {
-        "content": {
           "type": "string"
         }
       }

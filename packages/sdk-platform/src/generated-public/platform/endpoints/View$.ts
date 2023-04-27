@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { ViewInfoArray } from '../definitions/ViewInfoArray'
+import { ViewInfoArray } from '../definitions/ViewInfoArray.js'
 
 export class View$ {
   // @ts-ignore

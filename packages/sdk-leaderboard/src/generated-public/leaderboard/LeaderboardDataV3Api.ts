@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GetLeaderboardRankingResp } from './definitions/GetLeaderboardRankingResp'
-import { LeaderboardDataV3$ } from './endpoints/LeaderboardDataV3$'
-import { UserRankingResponseV3 } from './definitions/UserRankingResponseV3'
+import { GetLeaderboardRankingResp } from './definitions/GetLeaderboardRankingResp.js'
+import { LeaderboardDataV3$ } from './endpoints/LeaderboardDataV3$.js'
+import { UserRankingResponseV3 } from './definitions/UserRankingResponseV3.js'
 
 export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

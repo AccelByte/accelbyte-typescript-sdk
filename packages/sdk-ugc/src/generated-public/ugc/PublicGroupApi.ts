@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CreateGroupRequest } from './definitions/CreateGroupRequest'
-import { CreateGroupResponse } from './definitions/CreateGroupResponse'
-import { PaginatedContentDownloadResponse } from './definitions/PaginatedContentDownloadResponse'
-import { PaginatedGroupResponse } from './definitions/PaginatedGroupResponse'
-import { PublicGroup$ } from './endpoints/PublicGroup$'
+import { CreateGroupRequest } from './definitions/CreateGroupRequest.js'
+import { CreateGroupResponse } from './definitions/CreateGroupResponse.js'
+import { PaginatedContentDownloadResponse } from './definitions/PaginatedContentDownloadResponse.js'
+import { PaginatedGroupResponse } from './definitions/PaginatedGroupResponse.js'
+import { PublicGroup$ } from './endpoints/PublicGroup$.js'
 
 export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

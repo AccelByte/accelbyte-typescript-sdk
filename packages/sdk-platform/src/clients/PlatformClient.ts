@@ -4,10 +4,10 @@
  * and restrictions contact your company contract manager.
  */
 import { AccelbyteSDK } from '@accelbyte/sdk'
-import { WalletInfo } from '../generated-public/platform/definitions/WalletInfo'
-import { Platform } from '../generated-public/Platform'
-import { CurrencyInfo } from '../generated-public/platform/definitions/CurrencyInfo'
-import { ItemInfo } from '../generated-public/platform/definitions/ItemInfo'
+import { WalletInfo } from '../generated-public/platform/definitions/WalletInfo.js'
+import { Platform } from '../generated-public/Platform.js'
+import { CurrencyInfo } from '../generated-public/platform/definitions/CurrencyInfo.js'
+import { ItemInfo } from '../generated-public/platform/definitions/ItemInfo.js'
 
 /**
  */

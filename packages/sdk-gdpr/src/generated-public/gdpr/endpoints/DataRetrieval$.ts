@@ -9,9 +9,9 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { DataRetrievalResponse } from '../definitions/DataRetrievalResponse'
-import { UserDataUrl } from '../definitions/UserDataUrl'
-import { UserPersonalDataResponse } from '../definitions/UserPersonalDataResponse'
+import { DataRetrievalResponse } from '../definitions/DataRetrievalResponse.js'
+import { UserDataUrl } from '../definitions/UserDataUrl.js'
+import { UserPersonalDataResponse } from '../definitions/UserPersonalDataResponse.js'
 
 export class DataRetrieval$ {
   // @ts-ignore

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AchievementInfo } from './AchievementInfo'
+import { AchievementInfo } from './AchievementInfo.js'
 
 export const XblUserAchievements = z.object({ achievements: z.array(AchievementInfo).nullish() })
 

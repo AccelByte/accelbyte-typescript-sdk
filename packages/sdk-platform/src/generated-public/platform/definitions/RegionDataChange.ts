@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RegionDataItem } from './RegionDataItem'
+import { RegionDataItem } from './RegionDataItem.js'
 
 export const RegionDataChange = z.object({
   regionData: z.record(z.array(RegionDataItem)).nullish(),

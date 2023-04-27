@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 
-import { TelemetryApi } from './game-telemetry/TelemetryApi'
+import { TelemetryApi } from './game-telemetry/TelemetryApi.js'
 
 const apis = {
   TelemetryApi

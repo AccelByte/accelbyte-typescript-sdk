@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Order } from './Order'
+import { Order } from './Order.js'
 
 export const OrderSyncResult = z.object({ orders: z.array(Order).nullish(), nextEvaluatedKey: z.string().nullish() })
 

@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AppLocalization } from './AppLocalization'
-import { Requirement } from './Requirement'
-import { Slide } from './Slide'
+import { AppLocalization } from './AppLocalization.js'
+import { Requirement } from './Requirement.js'
+import { Slide } from './Slide.js'
 
 export const AppUpdate = z.object({
   carousel: z.array(Slide).nullish(),

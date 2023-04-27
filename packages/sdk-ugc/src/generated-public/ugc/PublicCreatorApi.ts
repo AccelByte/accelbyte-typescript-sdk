@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CreatorResponse } from './definitions/CreatorResponse'
-import { PaginatedCreatorOverviewResponse } from './definitions/PaginatedCreatorOverviewResponse'
-import { PublicCreator$ } from './endpoints/PublicCreator$'
+import { CreatorResponse } from './definitions/CreatorResponse.js'
+import { PaginatedCreatorOverviewResponse } from './definitions/PaginatedCreatorOverviewResponse.js'
+import { PublicCreator$ } from './endpoints/PublicCreator$.js'
 
 export function PublicCreatorApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -3,6 +3,6 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-export * from './all-public-imports'
-export * from './clients/LegalHelper'
-export * from './models/Legal'
+export * from './all-public-imports.js'
+export * from './clients/LegalHelper.js'
+export * from './models/Legal.js'

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GroupResponseV1 } from './GroupResponseV1'
+import { GroupResponseV1 } from './GroupResponseV1.js'
 
 export const GetGroupsResponseV1 = z.object({ data: z.array(GroupResponseV1) })
 

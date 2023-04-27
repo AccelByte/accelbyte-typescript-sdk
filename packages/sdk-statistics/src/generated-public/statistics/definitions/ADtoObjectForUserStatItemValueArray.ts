@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ADtoObjectForUserStatItemValue } from './ADtoObjectForUserStatItemValue'
+import { ADtoObjectForUserStatItemValue } from './ADtoObjectForUserStatItemValue.js'
 
 export const ADtoObjectForUserStatItemValueArray = z.array(ADtoObjectForUserStatItemValue)
 

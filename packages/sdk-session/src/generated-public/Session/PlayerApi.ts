@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Player$ } from './endpoints/Player$'
-import { PlayerAttributesRequestBody } from './definitions/PlayerAttributesRequestBody'
-import { PlayerAttributesResponseBody } from './definitions/PlayerAttributesResponseBody'
+import { Player$ } from './endpoints/Player$.js'
+import { PlayerAttributesRequestBody } from './definitions/PlayerAttributesRequestBody.js'
+import { PlayerAttributesResponseBody } from './definitions/PlayerAttributesResponseBody.js'
 
 export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

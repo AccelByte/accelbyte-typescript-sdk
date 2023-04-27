@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Localization } from './Localization'
+import { Localization } from './Localization.js'
 
 export const ViewUpdate = z.object({
   name: z.string(),

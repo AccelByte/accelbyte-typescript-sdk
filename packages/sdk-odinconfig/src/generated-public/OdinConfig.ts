@@ -7,8 +7,8 @@
  * AUTO GENERATED
  */
 
-import { StaticConfigsApi } from './odin-config/StaticConfigsApi'
-import { TemplatesApi } from './odin-config/TemplatesApi'
+import { StaticConfigsApi } from './odin-config/StaticConfigsApi.js'
+import { TemplatesApi } from './odin-config/TemplatesApi.js'
 
 const apis = {
   StaticConfigsApi,

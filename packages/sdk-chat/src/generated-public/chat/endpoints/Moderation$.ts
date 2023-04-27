@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { ChatSnapshots } from '../definitions/ChatSnapshots'
+import { ChatSnapshots } from '../definitions/ChatSnapshots.js'
 
 export class Moderation$ {
   // @ts-ignore

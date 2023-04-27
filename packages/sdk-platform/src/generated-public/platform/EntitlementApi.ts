@@ -8,19 +8,19 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AppEntitlementInfo } from './definitions/AppEntitlementInfo'
-import { AppEntitlementPagingSlicedResult } from './definitions/AppEntitlementPagingSlicedResult'
-import { Entitlement$ } from './endpoints/Entitlement$'
-import { EntitlementDecrement } from './definitions/EntitlementDecrement'
-import { EntitlementDecrementResult } from './definitions/EntitlementDecrementResult'
-import { EntitlementInfo } from './definitions/EntitlementInfo'
-import { EntitlementOwnershipArray } from './definitions/EntitlementOwnershipArray'
-import { EntitlementPagingSlicedResult } from './definitions/EntitlementPagingSlicedResult'
-import { EntitlementSoldRequest } from './definitions/EntitlementSoldRequest'
-import { EntitlementSoldResult } from './definitions/EntitlementSoldResult'
-import { Ownership } from './definitions/Ownership'
-import { OwnershipToken } from './definitions/OwnershipToken'
-import { TimedOwnership } from './definitions/TimedOwnership'
+import { AppEntitlementInfo } from './definitions/AppEntitlementInfo.js'
+import { AppEntitlementPagingSlicedResult } from './definitions/AppEntitlementPagingSlicedResult.js'
+import { Entitlement$ } from './endpoints/Entitlement$.js'
+import { EntitlementDecrement } from './definitions/EntitlementDecrement.js'
+import { EntitlementDecrementResult } from './definitions/EntitlementDecrementResult.js'
+import { EntitlementInfo } from './definitions/EntitlementInfo.js'
+import { EntitlementOwnershipArray } from './definitions/EntitlementOwnershipArray.js'
+import { EntitlementPagingSlicedResult } from './definitions/EntitlementPagingSlicedResult.js'
+import { EntitlementSoldRequest } from './definitions/EntitlementSoldRequest.js'
+import { EntitlementSoldResult } from './definitions/EntitlementSoldResult.js'
+import { Ownership } from './definitions/Ownership.js'
+import { OwnershipToken } from './definitions/OwnershipToken.js'
+import { TimedOwnership } from './definitions/TimedOwnership.js'
 
 export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

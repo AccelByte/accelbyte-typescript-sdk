@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlatformRewardCurrency } from './PlatformRewardCurrency'
-import { PlatformRewardItem } from './PlatformRewardItem'
+import { PlatformRewardCurrency } from './PlatformRewardCurrency.js'
+import { PlatformRewardItem } from './PlatformRewardItem.js'
 
 export const PlatformReward = z.object({
   type: z.enum(['ITEM', 'CURRENCY']).nullish(),

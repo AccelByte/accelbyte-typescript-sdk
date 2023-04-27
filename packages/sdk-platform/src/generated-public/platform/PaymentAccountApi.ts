@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PaymentAccount$ } from './endpoints/PaymentAccount$'
-import { PaymentAccountArray } from './definitions/PaymentAccountArray'
+import { PaymentAccount$ } from './endpoints/PaymentAccount$.js'
+import { PaymentAccountArray } from './definitions/PaymentAccountArray.js'
 
 export function PaymentAccountApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

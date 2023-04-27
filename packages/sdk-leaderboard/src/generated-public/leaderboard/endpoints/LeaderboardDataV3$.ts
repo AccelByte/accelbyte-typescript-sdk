@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { GetLeaderboardRankingResp } from '../definitions/GetLeaderboardRankingResp'
-import { UserRankingResponseV3 } from '../definitions/UserRankingResponseV3'
+import { GetLeaderboardRankingResp } from '../definitions/GetLeaderboardRankingResp.js'
+import { UserRankingResponseV3 } from '../definitions/UserRankingResponseV3.js'
 
 export class LeaderboardDataV3$ {
   // @ts-ignore

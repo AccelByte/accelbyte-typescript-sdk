@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RegisteredDomain } from './RegisteredDomain'
+import { RegisteredDomain } from './RegisteredDomain.js'
 
 export const PlatformDomainResponse = z.object({ registeredDomains: z.array(RegisteredDomain) })
 

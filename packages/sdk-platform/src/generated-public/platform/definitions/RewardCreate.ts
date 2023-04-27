@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RewardCondition } from './RewardCondition'
+import { RewardCondition } from './RewardCondition.js'
 
 export const RewardCreate = z.object({
   rewardCode: z.string(),

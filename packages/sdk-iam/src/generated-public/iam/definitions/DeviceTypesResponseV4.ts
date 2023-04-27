@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DeviceTypeResponseV4 } from './DeviceTypeResponseV4'
+import { DeviceTypeResponseV4 } from './DeviceTypeResponseV4.js'
 
 export const DeviceTypesResponseV4 = z.object({ data: z.array(DeviceTypeResponseV4) })
 

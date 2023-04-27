@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ValidUserIdResponseV4 } from './ValidUserIdResponseV4'
+import { ValidUserIdResponseV4 } from './ValidUserIdResponseV4.js'
 
 export const ListValidUserIdResponseV4 = z.object({ data: z.array(ValidUserIdResponseV4) })
 

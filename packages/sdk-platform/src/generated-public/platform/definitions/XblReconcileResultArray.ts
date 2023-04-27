@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { XblReconcileResult } from './XblReconcileResult'
+import { XblReconcileResult } from './XblReconcileResult.js'
 
 export const XblReconcileResultArray = z.array(XblReconcileResult)
 

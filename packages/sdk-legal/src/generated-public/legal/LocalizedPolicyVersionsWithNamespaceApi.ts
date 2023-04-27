@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { LocalizedPolicyVersionsWithNamespace$ } from './endpoints/LocalizedPolicyVersionsWithNamespace$'
-import { RetrieveLocalizedPolicyVersionPublicResponse } from './definitions/RetrieveLocalizedPolicyVersionPublicResponse'
+import { LocalizedPolicyVersionsWithNamespace$ } from './endpoints/LocalizedPolicyVersionsWithNamespace$.js'
+import { RetrieveLocalizedPolicyVersionPublicResponse } from './definitions/RetrieveLocalizedPolicyVersionPublicResponse.js'
 
 export function LocalizedPolicyVersionsWithNamespaceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

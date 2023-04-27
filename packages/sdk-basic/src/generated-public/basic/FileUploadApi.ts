@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { FileUpload$ } from './endpoints/FileUpload$'
-import { FileUploadUrlInfo } from './definitions/FileUploadUrlInfo'
+import { FileUpload$ } from './endpoints/FileUpload$.js'
+import { FileUploadUrlInfo } from './definitions/FileUploadUrlInfo.js'
 
 export function FileUploadApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

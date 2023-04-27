@@ -1,3 +1,19 @@
+### 1.2180.12 - 2023-04-27
+
+- Bump from script
+
+### 1.2180.12-experimental.1 - 2023-04-27
+
+- Bump from script
+
+### 1.2180.12-experimental.0 - 2023-04-27
+
+- Bump from script
+
+### 1.2180.11 - 2023-04-26
+
+- code-generated update
+
 ### 1.2171.10 - 2023-04-20
 
 - code-generated update

@@ -9,9 +9,9 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { AcceptAgreementRequest } from '../definitions/AcceptAgreementRequest'
-import { AcceptAgreementResponse } from '../definitions/AcceptAgreementResponse'
-import { RetrieveAcceptedAgreementResponseArray } from '../definitions/RetrieveAcceptedAgreementResponseArray'
+import { AcceptAgreementRequest } from '../definitions/AcceptAgreementRequest.js'
+import { AcceptAgreementResponse } from '../definitions/AcceptAgreementResponse.js'
+import { RetrieveAcceptedAgreementResponseArray } from '../definitions/RetrieveAcceptedAgreementResponseArray.js'
 
 export class Agreement$ {
   // @ts-ignore

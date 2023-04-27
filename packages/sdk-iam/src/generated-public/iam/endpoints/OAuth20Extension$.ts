@@ -9,11 +9,11 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { CountryLocationResponse } from '../definitions/CountryLocationResponse'
-import { GameTokenCodeResponse } from '../definitions/GameTokenCodeResponse'
-import { OneTimeLinkingCodeResponse } from '../definitions/OneTimeLinkingCodeResponse'
-import { OneTimeLinkingCodeValidationResponse } from '../definitions/OneTimeLinkingCodeValidationResponse'
-import { TokenResponseV3 } from '../definitions/TokenResponseV3'
+import { CountryLocationResponse } from '../definitions/CountryLocationResponse.js'
+import { GameTokenCodeResponse } from '../definitions/GameTokenCodeResponse.js'
+import { OneTimeLinkingCodeResponse } from '../definitions/OneTimeLinkingCodeResponse.js'
+import { OneTimeLinkingCodeValidationResponse } from '../definitions/OneTimeLinkingCodeValidationResponse.js'
+import { TokenResponseV3 } from '../definitions/TokenResponseV3.js'
 
 export class OAuth20Extension$ {
   // @ts-ignore

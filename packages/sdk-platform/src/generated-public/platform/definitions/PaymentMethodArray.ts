@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PaymentMethod } from './PaymentMethod'
+import { PaymentMethod } from './PaymentMethod.js'
 
 export const PaymentMethodArray = z.array(PaymentMethod)
 

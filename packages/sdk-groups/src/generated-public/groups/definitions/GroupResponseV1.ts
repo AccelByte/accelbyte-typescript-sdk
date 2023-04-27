@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GroupMember } from './GroupMember'
-import { GroupRuleResponseV1 } from './GroupRuleResponseV1'
+import { GroupMember } from './GroupMember.js'
+import { GroupRuleResponseV1 } from './GroupRuleResponseV1.js'
 
 export const GroupResponseV1 = z.object({
   configurationCode: z.string(),

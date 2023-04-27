@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CurrencySummary } from './CurrencySummary'
-import { ItemSnapshot } from './ItemSnapshot'
-import { OrderCreationOptions } from './OrderCreationOptions'
+import { CurrencySummary } from './CurrencySummary.js'
+import { ItemSnapshot } from './ItemSnapshot.js'
+import { OrderCreationOptions } from './OrderCreationOptions.js'
 
 export const OrderInfo = z.object({
   orderNo: z.string(),

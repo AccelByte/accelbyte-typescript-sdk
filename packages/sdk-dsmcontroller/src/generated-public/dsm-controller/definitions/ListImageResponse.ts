@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ImageRecord } from './ImageRecord'
-import { PagingCursor } from './PagingCursor'
+import { ImageRecord } from './ImageRecord.js'
+import { PagingCursor } from './PagingCursor.js'
 
 export const ListImageResponse = z.object({ images: z.array(ImageRecord), paging: PagingCursor })
 

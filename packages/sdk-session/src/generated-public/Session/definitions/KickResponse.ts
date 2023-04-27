@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserResponse } from './UserResponse'
+import { UserResponse } from './UserResponse.js'
 
 export const KickResponse = z.object({ leaderID: z.string(), members: z.array(UserResponse), partyID: z.string() })
 

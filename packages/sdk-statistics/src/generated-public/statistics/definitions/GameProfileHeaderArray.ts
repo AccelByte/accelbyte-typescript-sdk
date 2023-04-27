@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GameProfileHeader } from './GameProfileHeader'
+import { GameProfileHeader } from './GameProfileHeader.js'
 
 export const GameProfileHeaderArray = z.array(GameProfileHeader)
 

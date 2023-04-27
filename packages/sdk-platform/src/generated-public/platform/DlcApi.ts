@@ -8,12 +8,12 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Dlc$ } from './endpoints/Dlc$'
-import { EpicGamesDlcSyncRequest } from './definitions/EpicGamesDlcSyncRequest'
-import { PlayStationDlcSyncMultiServiceLabelsRequest } from './definitions/PlayStationDlcSyncMultiServiceLabelsRequest'
-import { PlayStationDlcSyncRequest } from './definitions/PlayStationDlcSyncRequest'
-import { SteamDlcSyncRequest } from './definitions/SteamDlcSyncRequest'
-import { XblDlcSyncRequest } from './definitions/XblDlcSyncRequest'
+import { Dlc$ } from './endpoints/Dlc$.js'
+import { EpicGamesDlcSyncRequest } from './definitions/EpicGamesDlcSyncRequest.js'
+import { PlayStationDlcSyncMultiServiceLabelsRequest } from './definitions/PlayStationDlcSyncMultiServiceLabelsRequest.js'
+import { PlayStationDlcSyncRequest } from './definitions/PlayStationDlcSyncRequest.js'
+import { SteamDlcSyncRequest } from './definitions/SteamDlcSyncRequest.js'
+import { XblDlcSyncRequest } from './definitions/XblDlcSyncRequest.js'
 
 export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

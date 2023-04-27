@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ItemSnapshot } from './ItemSnapshot'
+import { ItemSnapshot } from './ItemSnapshot.js'
 
 export const StackableEntitlementInfo = z.object({
   id: z.string(),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserGameProfiles } from './UserGameProfiles'
+import { UserGameProfiles } from './UserGameProfiles.js'
 
 export const UserGameProfilesArray = z.array(UserGameProfiles)
 

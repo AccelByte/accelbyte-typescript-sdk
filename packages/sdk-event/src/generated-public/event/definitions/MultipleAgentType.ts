@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AgentType } from './AgentType'
+import { AgentType } from './AgentType.js'
 
 export const MultipleAgentType = z.object({ AgentTypes: z.array(AgentType) })
 

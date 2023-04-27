@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PodCountConfigOverride } from './PodCountConfigOverride'
+import { PodCountConfigOverride } from './PodCountConfigOverride.js'
 
 export const DeploymentConfig = z.object({
   buffer_count: z.number().int(),

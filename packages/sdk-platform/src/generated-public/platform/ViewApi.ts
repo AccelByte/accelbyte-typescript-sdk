@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { View$ } from './endpoints/View$'
-import { ViewInfoArray } from './definitions/ViewInfoArray'
+import { View$ } from './endpoints/View$.js'
+import { ViewInfoArray } from './definitions/ViewInfoArray.js'
 
 export function ViewApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -8,9 +8,9 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { CategoryInfo } from '../definitions/CategoryInfo'
-import { CategoryInfoArray } from '../definitions/CategoryInfoArray'
-import { HierarchicalCategoryInfoArray } from '../definitions/HierarchicalCategoryInfoArray'
+import { CategoryInfo } from '../definitions/CategoryInfo.js'
+import { CategoryInfoArray } from '../definitions/CategoryInfoArray.js'
+import { HierarchicalCategoryInfoArray } from '../definitions/HierarchicalCategoryInfoArray.js'
 
 export class Category$ {
   // @ts-ignore

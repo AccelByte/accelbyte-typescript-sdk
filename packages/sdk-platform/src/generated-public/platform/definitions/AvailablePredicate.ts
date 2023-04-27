@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AvailableComparison } from './AvailableComparison'
+import { AvailableComparison } from './AvailableComparison.js'
 
 export const AvailablePredicate = z.object({
   predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate']).nullish(),

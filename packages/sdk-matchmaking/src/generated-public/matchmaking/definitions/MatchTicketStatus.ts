@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ProposedProposal } from './ProposedProposal'
+import { ProposedProposal } from './ProposedProposal.js'
 
 export const MatchTicketStatus = z.object({ matchFound: z.boolean(), proposedProposal: ProposedProposal.nullish(), sessionID: z.string() })
 

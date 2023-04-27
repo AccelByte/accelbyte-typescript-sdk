@@ -8,13 +8,13 @@
  */
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { BasicBuildManifestArray } from '../definitions/BasicBuildManifestArray'
-import { BlockDownloadUrls } from '../definitions/BlockDownloadUrls'
-import { BlockDownloadUrlsRequest } from '../definitions/BlockDownloadUrlsRequest'
-import { BuildAvailabilityArray } from '../definitions/BuildAvailabilityArray'
-import { BuildManifest } from '../definitions/BuildManifest'
-import { DiffStatusReport } from '../definitions/DiffStatusReport'
-import { VersionChain } from '../definitions/VersionChain'
+import { BasicBuildManifestArray } from '../definitions/BasicBuildManifestArray.js'
+import { BlockDownloadUrls } from '../definitions/BlockDownloadUrls.js'
+import { BlockDownloadUrlsRequest } from '../definitions/BlockDownloadUrlsRequest.js'
+import { BuildAvailabilityArray } from '../definitions/BuildAvailabilityArray.js'
+import { BuildManifest } from '../definitions/BuildManifest.js'
+import { DiffStatusReport } from '../definitions/DiffStatusReport.js'
+import { VersionChain } from '../definitions/VersionChain.js'
 
 export class Downloader$ {
   // @ts-ignore

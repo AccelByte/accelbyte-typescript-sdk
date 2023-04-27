@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { InputValidationDescription } from './InputValidationDescription'
+import { InputValidationDescription } from './InputValidationDescription.js'
 
 export const ValidationDetail = z.object({
   allowAllSpecialCharacters: z.boolean(),

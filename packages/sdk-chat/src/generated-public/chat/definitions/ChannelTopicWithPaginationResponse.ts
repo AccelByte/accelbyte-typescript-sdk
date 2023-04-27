@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ChannelTopicResponse } from './ChannelTopicResponse'
-import { Pagination } from './Pagination'
+import { ChannelTopicResponse } from './ChannelTopicResponse.js'
+import { Pagination } from './Pagination.js'
 
 export const ChannelTopicWithPaginationResponse = z.object({
   data: z.array(ChannelTopicResponse),

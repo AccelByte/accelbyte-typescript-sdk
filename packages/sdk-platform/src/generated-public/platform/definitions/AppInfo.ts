@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Requirement } from './Requirement'
-import { Slide } from './Slide'
+import { Requirement } from './Requirement.js'
+import { Slide } from './Slide.js'
 
 export const AppInfo = z.object({
   slogan: z.string().nullish(),

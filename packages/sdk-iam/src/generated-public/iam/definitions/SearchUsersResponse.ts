@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserSearchResult } from './UserSearchResult'
+import { UserSearchResult } from './UserSearchResult.js'
 
 export const SearchUsersResponse = z.object({ Data: z.array(UserSearchResult) })
 

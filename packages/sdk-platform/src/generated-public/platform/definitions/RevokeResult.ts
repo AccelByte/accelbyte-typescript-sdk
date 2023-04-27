@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlatformReward } from './PlatformReward'
-import { RevokeItemSummary } from './RevokeItemSummary'
+import { PlatformReward } from './PlatformReward.js'
+import { RevokeItemSummary } from './RevokeItemSummary.js'
 
 export const RevokeResult = z.object({
   reward: PlatformReward.nullish(),

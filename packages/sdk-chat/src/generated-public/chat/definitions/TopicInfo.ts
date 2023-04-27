@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { InfoMember } from './InfoMember'
+import { InfoMember } from './InfoMember.js'
 
 export const TopicInfo = z.object({
   createdAt: z.number().int(),

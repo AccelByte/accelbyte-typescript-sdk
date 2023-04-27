@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { SimpleUserPlatformInfoV3 } from './SimpleUserPlatformInfoV3'
+import { SimpleUserPlatformInfoV3 } from './SimpleUserPlatformInfoV3.js'
 
 export const DistinctLinkedPlatformV3 = z.object({
   details: z.array(SimpleUserPlatformInfoV3),

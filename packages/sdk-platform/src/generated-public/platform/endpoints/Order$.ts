@@ -9,10 +9,10 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { OrderCreate } from '../definitions/OrderCreate'
-import { OrderHistoryInfoArray } from '../definitions/OrderHistoryInfoArray'
-import { OrderInfo } from '../definitions/OrderInfo'
-import { OrderPagingSlicedResult } from '../definitions/OrderPagingSlicedResult'
+import { OrderCreate } from '../definitions/OrderCreate.js'
+import { OrderHistoryInfoArray } from '../definitions/OrderHistoryInfoArray.js'
+import { OrderInfo } from '../definitions/OrderInfo.js'
+import { OrderPagingSlicedResult } from '../definitions/OrderPagingSlicedResult.js'
 
 export class Order$ {
   // @ts-ignore

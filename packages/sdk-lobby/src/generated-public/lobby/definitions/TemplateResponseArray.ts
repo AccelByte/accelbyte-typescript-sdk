@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { TemplateResponse } from './TemplateResponse'
+import { TemplateResponse } from './TemplateResponse.js'
 
 export const TemplateResponseArray = z.array(TemplateResponse)
 

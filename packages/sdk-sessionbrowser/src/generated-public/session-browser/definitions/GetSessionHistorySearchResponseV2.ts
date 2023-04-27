@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GetSessionHistorySearchResponseItemV2 } from './GetSessionHistorySearchResponseItemV2'
-import { Pagination } from './Pagination'
+import { GetSessionHistorySearchResponseItemV2 } from './GetSessionHistorySearchResponseItemV2.js'
+import { Pagination } from './Pagination.js'
 
 export const GetSessionHistorySearchResponseV2 = z.object({ data: z.array(GetSessionHistorySearchResponseItemV2), pagination: Pagination })
 

@@ -5,12 +5,12 @@
  */
 import { UrlHelper } from '@accelbyte/sdk'
 import isURL from 'validator/lib/isURL.js'
-import { RetrieveUserEligibilitiesResponseArray } from '../generated-public/legal/definitions/RetrieveUserEligibilitiesResponseArray'
-import { DisplayedPolicy } from '../models/Legal'
-import { RetrievePolicyPublicResponse } from '../generated-public/legal/definitions/RetrievePolicyPublicResponse'
+import { RetrieveUserEligibilitiesResponseArray } from '../generated-public/legal/definitions/RetrieveUserEligibilitiesResponseArray.js'
+import { DisplayedPolicy } from '../models/Legal.js'
+import { RetrievePolicyPublicResponse } from '../generated-public/legal/definitions/RetrievePolicyPublicResponse.js'
 import { AcceptedPoliciesRequest } from '@accelbyte/sdk-iam'
-import { RetrieveUserEligibilitiesResponse } from '../generated-public/legal/definitions/RetrieveUserEligibilitiesResponse'
-import { PolicyVersionWithLocalizedVersionObject } from '../generated-public/legal/definitions/PolicyVersionWithLocalizedVersionObject'
+import { RetrieveUserEligibilitiesResponse } from '../generated-public/legal/definitions/RetrieveUserEligibilitiesResponse.js'
+import { PolicyVersionWithLocalizedVersionObject } from '../generated-public/legal/definitions/PolicyVersionWithLocalizedVersionObject.js'
 
 export class LegalHelper {
   static getUnsignedPolicies = (userEligibilities: RetrieveUserEligibilitiesResponseArray): RetrieveUserEligibilitiesResponseArray => {

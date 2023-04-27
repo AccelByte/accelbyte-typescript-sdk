@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DeletionData } from './DeletionData'
-import { Pagination } from './Pagination'
+import { DeletionData } from './DeletionData.js'
+import { Pagination } from './Pagination.js'
 
 export const ListDeletionDataResponse = z.object({ Data: z.array(DeletionData), Paging: Pagination })
 

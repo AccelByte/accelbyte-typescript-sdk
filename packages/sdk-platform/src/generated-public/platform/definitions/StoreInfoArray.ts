@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { StoreInfo } from './StoreInfo'
+import { StoreInfo } from './StoreInfo.js'
 
 export const StoreInfoArray = z.array(StoreInfo)
 

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CustomGameResponse } from './CustomGameResponse'
-import { PagingCursor } from './PagingCursor'
+import { CustomGameResponse } from './CustomGameResponse.js'
+import { PagingCursor } from './PagingCursor.js'
 
 export const ActiveCustomGameResponse = z.object({ pagination: PagingCursor, sessions: z.array(CustomGameResponse) })
 

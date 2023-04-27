@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DeploymentConfigOverride } from './DeploymentConfigOverride'
+import { DeploymentConfigOverride } from './DeploymentConfigOverride.js'
 
 export const OverrideConfig = z.object({ allow_version_override: z.boolean(), overrides: z.record(DeploymentConfigOverride) })
 

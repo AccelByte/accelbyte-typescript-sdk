@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RetrieveUserEligibilitiesResponse } from './RetrieveUserEligibilitiesResponse'
+import { RetrieveUserEligibilitiesResponse } from './RetrieveUserEligibilitiesResponse.js'
 
 export const RetrieveUserEligibilitiesResponseArray = z.array(RetrieveUserEligibilitiesResponse)
 

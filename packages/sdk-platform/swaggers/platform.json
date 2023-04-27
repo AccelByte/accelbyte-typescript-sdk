@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "Justice Platform Service",
-    "version": "4.28.0",
+    "version": "4.29.0",
     "title": "justice-platform-service",
     "contact": { "name": "Engineering Team at AccelByte", "url": "https://accelbyte.io", "email": "engineering@accelbyte.io" }
   },

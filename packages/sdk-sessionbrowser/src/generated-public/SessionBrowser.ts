@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 
-import { SessionApi } from './session-browser/SessionApi'
+import { SessionApi } from './session-browser/SessionApi.js'
 
 const apis = {
   SessionApi

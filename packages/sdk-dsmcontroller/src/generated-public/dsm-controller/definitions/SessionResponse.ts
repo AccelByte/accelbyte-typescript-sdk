@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Session } from './Session'
+import { Session } from './Session.js'
 
 export const SessionResponse = z.object({ session: Session })
 

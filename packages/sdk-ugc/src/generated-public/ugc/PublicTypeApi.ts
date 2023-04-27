@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PaginatedGetTypeResponse } from './definitions/PaginatedGetTypeResponse'
-import { PublicType$ } from './endpoints/PublicType$'
+import { PaginatedGetTypeResponse } from './definitions/PaginatedGetTypeResponse.js'
+import { PublicType$ } from './endpoints/PublicType$.js'
 
 export function PublicTypeApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

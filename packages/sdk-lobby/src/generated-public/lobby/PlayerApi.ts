@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GetAllPlayerBlockedByUsersResponse } from './definitions/GetAllPlayerBlockedByUsersResponse'
-import { GetAllPlayerBlockedUsersResponse } from './definitions/GetAllPlayerBlockedUsersResponse'
-import { Player$ } from './endpoints/Player$'
+import { GetAllPlayerBlockedByUsersResponse } from './definitions/GetAllPlayerBlockedByUsersResponse.js'
+import { GetAllPlayerBlockedUsersResponse } from './definitions/GetAllPlayerBlockedUsersResponse.js'
+import { Player$ } from './endpoints/Player$.js'
 
 export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

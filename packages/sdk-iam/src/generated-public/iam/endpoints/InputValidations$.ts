@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { InputValidationsPublicResponse } from '../definitions/InputValidationsPublicResponse'
+import { InputValidationsPublicResponse } from '../definitions/InputValidationsPublicResponse.js'
 
 export class InputValidations$ {
   // @ts-ignore

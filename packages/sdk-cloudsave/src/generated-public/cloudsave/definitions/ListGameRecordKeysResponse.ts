@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Pagination } from './Pagination'
+import { Pagination } from './Pagination.js'
 
 export const ListGameRecordKeysResponse = z.object({ data: z.array(z.string()), paging: Pagination })
 

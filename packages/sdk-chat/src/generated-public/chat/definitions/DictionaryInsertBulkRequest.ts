@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DictionaryInsertRequest } from './DictionaryInsertRequest'
+import { DictionaryInsertRequest } from './DictionaryInsertRequest.js'
 
 export const DictionaryInsertBulkRequest = z.object({ dictionaries: z.array(DictionaryInsertRequest) })
 

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserBaseInfo } from './UserBaseInfo'
+import { UserBaseInfo } from './UserBaseInfo.js'
 
 export const ListBulkUserResponse = z.object({ data: z.array(UserBaseInfo) })
 

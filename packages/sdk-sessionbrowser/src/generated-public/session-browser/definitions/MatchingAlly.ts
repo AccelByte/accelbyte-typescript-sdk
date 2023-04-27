@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MatchingParty } from './MatchingParty'
+import { MatchingParty } from './MatchingParty.js'
 
 export const MatchingAlly = z.object({ matching_parties: z.array(MatchingParty) })
 

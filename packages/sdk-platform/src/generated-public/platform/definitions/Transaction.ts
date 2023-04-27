@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AdditionalData } from './AdditionalData'
-import { CurrencySummary } from './CurrencySummary'
+import { AdditionalData } from './AdditionalData.js'
+import { CurrencySummary } from './CurrencySummary.js'
 
 export const Transaction = z.object({
   txId: z.string().nullish(),

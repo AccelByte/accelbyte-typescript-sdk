@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PublicThirdPartyPlatformInfoArray } from './definitions/PublicThirdPartyPlatformInfoArray'
-import { ThirdPartyCredential$ } from './endpoints/ThirdPartyCredential$'
+import { PublicThirdPartyPlatformInfoArray } from './definitions/PublicThirdPartyPlatformInfoArray.js'
+import { ThirdPartyCredential$ } from './endpoints/ThirdPartyCredential$.js'
 
 export function ThirdPartyCredentialApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GameSessionResponse } from './GameSessionResponse'
-import { Pagination } from './Pagination'
+import { GameSessionResponse } from './GameSessionResponse.js'
+import { Pagination } from './Pagination.js'
 
 export const GameSessionQueryResponse = z.object({ data: z.array(GameSessionResponse), paging: Pagination })
 

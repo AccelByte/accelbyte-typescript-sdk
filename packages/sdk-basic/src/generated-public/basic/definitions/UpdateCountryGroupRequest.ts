@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CountryObject } from './CountryObject'
+import { CountryObject } from './CountryObject.js'
 
 export const UpdateCountryGroupRequest = z.object({ countryGroupName: z.string().nullish(), countries: z.array(CountryObject).nullish() })
 

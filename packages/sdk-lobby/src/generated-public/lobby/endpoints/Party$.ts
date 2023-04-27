@@ -9,9 +9,9 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { PartyData } from '../definitions/PartyData'
-import { PartyPutCustomAttributesRequest } from '../definitions/PartyPutCustomAttributesRequest'
-import { PartyPutLimitSizeRequest } from '../definitions/PartyPutLimitSizeRequest'
+import { PartyData } from '../definitions/PartyData.js'
+import { PartyPutCustomAttributesRequest } from '../definitions/PartyPutCustomAttributesRequest.js'
+import { PartyPutLimitSizeRequest } from '../definitions/PartyPutLimitSizeRequest.js'
 
 export class Party$ {
   // @ts-ignore

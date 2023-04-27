@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GetMemberRequestsListResponseV1 } from './definitions/GetMemberRequestsListResponseV1'
-import { MemberRequest$ } from './endpoints/MemberRequest$'
+import { GetMemberRequestsListResponseV1 } from './definitions/GetMemberRequestsListResponseV1.js'
+import { MemberRequest$ } from './endpoints/MemberRequest$.js'
 
 export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

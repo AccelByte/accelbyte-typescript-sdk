@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { Config } from '../definitions/Config'
-import { Configs } from '../definitions/Configs'
+import { Config } from '../definitions/Config.js'
+import { Configs } from '../definitions/Configs.js'
 
 export class Templates$ {
   // @ts-ignore

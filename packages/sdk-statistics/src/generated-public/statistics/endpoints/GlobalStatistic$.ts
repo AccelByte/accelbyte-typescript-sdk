@@ -8,8 +8,8 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { GlobalStatItemInfo } from '../definitions/GlobalStatItemInfo'
-import { GlobalStatItemPagingSlicedResult } from '../definitions/GlobalStatItemPagingSlicedResult'
+import { GlobalStatItemInfo } from '../definitions/GlobalStatItemInfo.js'
+import { GlobalStatItemPagingSlicedResult } from '../definitions/GlobalStatItemPagingSlicedResult.js'
 
 export class GlobalStatistic$ {
   // @ts-ignore

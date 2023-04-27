@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BlockManifest } from './BlockManifest'
-import { ZsyncFileManifest } from './ZsyncFileManifest'
+import { BlockManifest } from './BlockManifest.js'
+import { ZsyncFileManifest } from './ZsyncFileManifest.js'
 
 export const DifferentialFileManifest = z.object({
   path: z.string().nullish(),

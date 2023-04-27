@@ -7,8 +7,8 @@
  * AUTO GENERATED
  */
 
-import { DataRetrievalApi } from './gdpr/DataRetrievalApi'
-import { DataDeletionApi } from './gdpr/DataDeletionApi'
+import { DataRetrievalApi } from './gdpr/DataRetrievalApi.js'
+import { DataDeletionApi } from './gdpr/DataDeletionApi.js'
 
 const apis = {
   DataRetrievalApi,

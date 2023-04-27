@@ -7,9 +7,9 @@
  * AUTO GENERATED
  */
 
-import { ChatApi } from './chat/ChatApi'
-import { TopicApi } from './chat/TopicApi'
-import { ModerationApi } from './chat/ModerationApi'
+import { ChatApi } from './chat/ChatApi.js'
+import { TopicApi } from './chat/TopicApi.js'
+import { ModerationApi } from './chat/ModerationApi.js'
 
 const apis = {
   ChatApi,

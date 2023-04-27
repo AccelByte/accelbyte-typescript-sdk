@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BanReasonV3 } from './BanReasonV3'
+import { BanReasonV3 } from './BanReasonV3.js'
 
 export const BanReasonsV3 = z.object({ reasons: z.array(BanReasonV3) })
 

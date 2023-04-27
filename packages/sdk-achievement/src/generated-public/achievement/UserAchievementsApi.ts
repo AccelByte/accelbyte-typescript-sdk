@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PaginatedUserAchievementResponse } from './definitions/PaginatedUserAchievementResponse'
-import { UserAchievements$ } from './endpoints/UserAchievements$'
+import { PaginatedUserAchievementResponse } from './definitions/PaginatedUserAchievementResponse.js'
+import { UserAchievements$ } from './endpoints/UserAchievements$.js'
 
 export function UserAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -7,12 +7,12 @@
  * AUTO GENERATED
  */
 
-import { UtilityApi } from './legal/UtilityApi'
-import { AgreementApi } from './legal/AgreementApi'
-import { PoliciesApi } from './legal/PoliciesApi'
-import { EligibilitiesApi } from './legal/EligibilitiesApi'
-import { LocalizedPolicyVersionsApi } from './legal/LocalizedPolicyVersionsApi'
-import { LocalizedPolicyVersionsWithNamespaceApi } from './legal/LocalizedPolicyVersionsWithNamespaceApi'
+import { UtilityApi } from './legal/UtilityApi.js'
+import { AgreementApi } from './legal/AgreementApi.js'
+import { PoliciesApi } from './legal/PoliciesApi.js'
+import { EligibilitiesApi } from './legal/EligibilitiesApi.js'
+import { LocalizedPolicyVersionsApi } from './legal/LocalizedPolicyVersionsApi.js'
+import { LocalizedPolicyVersionsWithNamespaceApi } from './legal/LocalizedPolicyVersionsWithNamespaceApi.js'
 
 const apis = {
   UtilityApi,

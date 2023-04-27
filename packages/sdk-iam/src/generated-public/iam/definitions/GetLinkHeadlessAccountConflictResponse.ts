@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AccountProgressionInfo } from './AccountProgressionInfo'
+import { AccountProgressionInfo } from './AccountProgressionInfo.js'
 
 export const GetLinkHeadlessAccountConflictResponse = z.object({
   currentAccount: AccountProgressionInfo.nullish(),

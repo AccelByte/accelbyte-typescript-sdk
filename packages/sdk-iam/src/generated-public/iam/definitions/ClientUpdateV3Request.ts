@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PermissionV3 } from './PermissionV3'
+import { PermissionV3 } from './PermissionV3.js'
 
 export const ClientUpdateV3Request = z.object({
   audiences: z.array(z.string()).nullish(),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PaginationV3 } from './PaginationV3'
+import { PaginationV3 } from './PaginationV3.js'
 
 export const LinkingHistoryResponseWithPaginationV3 = z.object({
   data: z.array(z.string()),

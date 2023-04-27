@@ -8,15 +8,15 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CancelInvitationGroupResponseV2 } from './definitions/CancelInvitationGroupResponseV2'
-import { GetGroupMemberListResponseV1 } from './definitions/GetGroupMemberListResponseV1'
-import { GetUserGroupInformationResponseV1 } from './definitions/GetUserGroupInformationResponseV1'
-import { GroupMember$ } from './endpoints/GroupMember$'
-import { JoinGroupResponseV1 } from './definitions/JoinGroupResponseV1'
-import { KickGroupMemberResponseV1 } from './definitions/KickGroupMemberResponseV1'
-import { LeaveGroupResponseV1 } from './definitions/LeaveGroupResponseV1'
-import { MemberRequestGroupResponseV1 } from './definitions/MemberRequestGroupResponseV1'
-import { UserInvitationResponseV1 } from './definitions/UserInvitationResponseV1'
+import { CancelInvitationGroupResponseV2 } from './definitions/CancelInvitationGroupResponseV2.js'
+import { GetGroupMemberListResponseV1 } from './definitions/GetGroupMemberListResponseV1.js'
+import { GetUserGroupInformationResponseV1 } from './definitions/GetUserGroupInformationResponseV1.js'
+import { GroupMember$ } from './endpoints/GroupMember$.js'
+import { JoinGroupResponseV1 } from './definitions/JoinGroupResponseV1.js'
+import { KickGroupMemberResponseV1 } from './definitions/KickGroupMemberResponseV1.js'
+import { LeaveGroupResponseV1 } from './definitions/LeaveGroupResponseV1.js'
+import { MemberRequestGroupResponseV1 } from './definitions/MemberRequestGroupResponseV1.js'
+import { UserInvitationResponseV1 } from './definitions/UserInvitationResponseV1.js'
 
 export function GroupMemberApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

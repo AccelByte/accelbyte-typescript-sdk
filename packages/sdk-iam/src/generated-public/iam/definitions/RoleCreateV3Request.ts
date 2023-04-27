@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PermissionV3 } from './PermissionV3'
-import { RoleManagerV3 } from './RoleManagerV3'
-import { RoleMemberV3 } from './RoleMemberV3'
+import { PermissionV3 } from './PermissionV3.js'
+import { RoleManagerV3 } from './RoleManagerV3.js'
+import { RoleMemberV3 } from './RoleMemberV3.js'
 
 export const RoleCreateV3Request = z.object({
   adminRole: z.boolean(),

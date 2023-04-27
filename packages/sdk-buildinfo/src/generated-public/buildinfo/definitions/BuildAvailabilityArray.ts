@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BuildAvailability } from './BuildAvailability'
+import { BuildAvailability } from './BuildAvailability.js'
 
 export const BuildAvailabilityArray = z.array(BuildAvailability)
 

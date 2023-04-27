@@ -9,9 +9,9 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { SlotInfo } from '../definitions/SlotInfo'
-import { SlotInfoArray } from '../definitions/SlotInfoArray'
-import { SlotMetadataUpdate } from '../definitions/SlotMetadataUpdate'
+import { SlotInfo } from '../definitions/SlotInfo.js'
+import { SlotInfoArray } from '../definitions/SlotInfoArray.js'
+import { SlotMetadataUpdate } from '../definitions/SlotMetadataUpdate.js'
 
 export class Slot$ {
   // @ts-ignore

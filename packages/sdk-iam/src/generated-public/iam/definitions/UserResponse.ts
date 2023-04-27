@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { NamespaceRole } from './NamespaceRole'
-import { Permission } from './Permission'
-import { UserActiveBanResponse } from './UserActiveBanResponse'
+import { NamespaceRole } from './NamespaceRole.js'
+import { Permission } from './Permission.js'
+import { UserActiveBanResponse } from './UserActiveBanResponse.js'
 
 export const UserResponse = z.object({
   AuthType: z.string(),

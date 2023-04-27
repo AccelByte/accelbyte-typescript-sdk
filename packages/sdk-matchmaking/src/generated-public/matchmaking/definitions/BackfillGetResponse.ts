@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Match } from './Match'
+import { Match } from './Match.js'
 
 export const BackfillGetResponse = z.object({
   createdAt: z.string().nullish(),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CurrencyInfo } from './CurrencyInfo'
+import { CurrencyInfo } from './CurrencyInfo.js'
 
 export const CurrencyInfoArray = z.array(CurrencyInfo)
 

@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Config } from './definitions/Config'
-import { Configs } from './definitions/Configs'
-import { Templates$ } from './endpoints/Templates$'
+import { Config } from './definitions/Config.js'
+import { Configs } from './definitions/Configs.js'
+import { Templates$ } from './endpoints/Templates$.js'
 
 export function TemplatesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

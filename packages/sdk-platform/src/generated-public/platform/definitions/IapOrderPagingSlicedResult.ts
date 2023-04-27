@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { IapOrderInfo } from './IapOrderInfo'
-import { Paging } from './Paging'
+import { IapOrderInfo } from './IapOrderInfo.js'
+import { Paging } from './Paging.js'
 
 export const IapOrderPagingSlicedResult = z.object({ data: z.array(IapOrderInfo), paging: Paging.nullish() })
 

@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { PaginatedGetTagResponse } from '../definitions/PaginatedGetTagResponse'
+import { PaginatedGetTagResponse } from '../definitions/PaginatedGetTagResponse.js'
 
 export class PublicTag$ {
   // @ts-ignore

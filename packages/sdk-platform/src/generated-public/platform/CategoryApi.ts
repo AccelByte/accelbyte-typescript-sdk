@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Category$ } from './endpoints/Category$'
-import { CategoryInfo } from './definitions/CategoryInfo'
-import { CategoryInfoArray } from './definitions/CategoryInfoArray'
-import { HierarchicalCategoryInfoArray } from './definitions/HierarchicalCategoryInfoArray'
+import { Category$ } from './endpoints/Category$.js'
+import { CategoryInfo } from './definitions/CategoryInfo.js'
+import { CategoryInfoArray } from './definitions/CategoryInfoArray.js'
+import { HierarchicalCategoryInfoArray } from './definitions/HierarchicalCategoryInfoArray.js'
 
 export function CategoryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

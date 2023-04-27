@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Config } from '../generated-public/odin-config/definitions/Config'
+import { Config } from '../generated-public/odin-config/definitions/Config.js'
 
 // Dev's note: using zod, unfortunately we can't have generics.
 // This is a "hack" so that we can have a safe typing for Config.

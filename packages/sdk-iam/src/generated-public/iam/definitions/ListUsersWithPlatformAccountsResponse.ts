@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PaginationV3 } from './PaginationV3'
-import { UserWithPlatformAccounts } from './UserWithPlatformAccounts'
+import { PaginationV3 } from './PaginationV3.js'
+import { UserWithPlatformAccounts } from './UserWithPlatformAccounts.js'
 
 export const ListUsersWithPlatformAccountsResponse = z.object({
   data: z.array(UserWithPlatformAccounts),

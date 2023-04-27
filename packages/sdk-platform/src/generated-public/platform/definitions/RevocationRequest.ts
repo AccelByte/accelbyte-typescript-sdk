@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RevokeEntry } from './RevokeEntry'
+import { RevokeEntry } from './RevokeEntry.js'
 
 export const RevocationRequest = z.object({
   revokeEntries: z.array(RevokeEntry).nullish(),

@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { PublicThirdPartyPlatformInfoArray } from '../definitions/PublicThirdPartyPlatformInfoArray'
+import { PublicThirdPartyPlatformInfoArray } from '../definitions/PublicThirdPartyPlatformInfoArray.js'
 
 export class ThirdPartyCredential$ {
   // @ts-ignore

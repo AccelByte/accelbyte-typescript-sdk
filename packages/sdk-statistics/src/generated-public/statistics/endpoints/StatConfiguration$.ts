@@ -8,8 +8,8 @@
  */
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { StatCreate } from '../definitions/StatCreate'
-import { StatInfo } from '../definitions/StatInfo'
+import { StatCreate } from '../definitions/StatCreate.js'
+import { StatInfo } from '../definitions/StatInfo.js'
 
 export class StatConfiguration$ {
   // @ts-ignore

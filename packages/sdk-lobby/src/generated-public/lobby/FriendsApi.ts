@@ -8,19 +8,19 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BulkAddFriendsRequest } from './definitions/BulkAddFriendsRequest'
-import { Friends$ } from './endpoints/Friends$'
-import { GetUserFriendsResponseArray } from './definitions/GetUserFriendsResponseArray'
-import { GetUserIncomingFriendsResponseArray } from './definitions/GetUserIncomingFriendsResponseArray'
-import { GetUserOutgoingFriendsResponseArray } from './definitions/GetUserOutgoingFriendsResponseArray'
-import { LoadIncomingFriendsWithTimeResponseArray } from './definitions/LoadIncomingFriendsWithTimeResponseArray'
-import { LoadOutgoingFriendsWithTimeResponseArray } from './definitions/LoadOutgoingFriendsWithTimeResponseArray'
-import { UserAcceptFriendRequest } from './definitions/UserAcceptFriendRequest'
-import { UserCancelFriendRequest } from './definitions/UserCancelFriendRequest'
-import { UserGetFriendshipStatusResponse } from './definitions/UserGetFriendshipStatusResponse'
-import { UserRejectFriendRequest } from './definitions/UserRejectFriendRequest'
-import { UserRequestFriendRequest } from './definitions/UserRequestFriendRequest'
-import { UserUnfriendRequest } from './definitions/UserUnfriendRequest'
+import { BulkAddFriendsRequest } from './definitions/BulkAddFriendsRequest.js'
+import { Friends$ } from './endpoints/Friends$.js'
+import { GetUserFriendsResponseArray } from './definitions/GetUserFriendsResponseArray.js'
+import { GetUserIncomingFriendsResponseArray } from './definitions/GetUserIncomingFriendsResponseArray.js'
+import { GetUserOutgoingFriendsResponseArray } from './definitions/GetUserOutgoingFriendsResponseArray.js'
+import { LoadIncomingFriendsWithTimeResponseArray } from './definitions/LoadIncomingFriendsWithTimeResponseArray.js'
+import { LoadOutgoingFriendsWithTimeResponseArray } from './definitions/LoadOutgoingFriendsWithTimeResponseArray.js'
+import { UserAcceptFriendRequest } from './definitions/UserAcceptFriendRequest.js'
+import { UserCancelFriendRequest } from './definitions/UserCancelFriendRequest.js'
+import { UserGetFriendshipStatusResponse } from './definitions/UserGetFriendshipStatusResponse.js'
+import { UserRejectFriendRequest } from './definitions/UserRejectFriendRequest.js'
+import { UserRequestFriendRequest } from './definitions/UserRequestFriendRequest.js'
+import { UserUnfriendRequest } from './definitions/UserUnfriendRequest.js'
 
 export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

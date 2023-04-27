@@ -8,12 +8,12 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ListMatchPoolsResponse } from './definitions/ListMatchPoolsResponse'
-import { MatchPool } from './definitions/MatchPool'
-import { MatchPoolConfig } from './definitions/MatchPoolConfig'
-import { MatchPools$ } from './endpoints/MatchPools$'
-import { PlayerMetricRecord } from './definitions/PlayerMetricRecord'
-import { TicketMetricResultRecord } from './definitions/TicketMetricResultRecord'
+import { ListMatchPoolsResponse } from './definitions/ListMatchPoolsResponse.js'
+import { MatchPool } from './definitions/MatchPool.js'
+import { MatchPoolConfig } from './definitions/MatchPoolConfig.js'
+import { MatchPools$ } from './endpoints/MatchPools$.js'
+import { PlayerMetricRecord } from './definitions/PlayerMetricRecord.js'
+import { TicketMetricResultRecord } from './definitions/TicketMetricResultRecord.js'
 
 export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

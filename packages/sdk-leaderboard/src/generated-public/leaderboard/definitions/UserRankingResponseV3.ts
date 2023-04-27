@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserCycleRankingResponseDetail } from './UserCycleRankingResponseDetail'
-import { UserRankingResponseDetailV3 } from './UserRankingResponseDetailV3'
+import { UserCycleRankingResponseDetail } from './UserCycleRankingResponseDetail.js'
+import { UserRankingResponseDetailV3 } from './UserRankingResponseDetailV3.js'
 
 export const UserRankingResponseV3 = z.object({
   allTime: UserRankingResponseDetailV3.nullish(),

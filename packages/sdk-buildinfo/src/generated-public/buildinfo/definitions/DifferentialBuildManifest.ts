@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DefaultLaunchProfile } from './DefaultLaunchProfile'
-import { DifferentialFileManifest } from './DifferentialFileManifest'
-import { ObsoleteFileManifest } from './ObsoleteFileManifest'
+import { DefaultLaunchProfile } from './DefaultLaunchProfile.js'
+import { DifferentialFileManifest } from './DifferentialFileManifest.js'
+import { ObsoleteFileManifest } from './ObsoleteFileManifest.js'
 
 export const DifferentialBuildManifest = z.object({
   buildId: z.string().nullish(),

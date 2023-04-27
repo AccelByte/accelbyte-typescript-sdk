@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { ListServerResponse } from '../definitions/ListServerResponse'
+import { ListServerResponse } from '../definitions/ListServerResponse.js'
 
 export class Public$ {
   // @ts-ignore

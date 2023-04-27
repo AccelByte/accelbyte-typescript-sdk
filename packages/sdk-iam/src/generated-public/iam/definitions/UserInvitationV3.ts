@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { NamespaceRole } from './NamespaceRole'
+import { NamespaceRole } from './NamespaceRole.js'
 
 export const UserInvitationV3 = z.object({
   email: z.string(),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 
-import { Order } from '../generated-public/platform/definitions/Order'
+import { Order } from '../generated-public/platform/definitions/Order.js'
 
 export const OrderStatus = Order.shape.status.unwrap().unwrap()
 // export const SubscriptionStatus = SubscriptionInfo.shape.status

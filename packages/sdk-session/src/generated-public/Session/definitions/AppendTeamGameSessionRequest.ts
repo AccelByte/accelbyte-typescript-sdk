@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PartyMembers } from './PartyMembers'
-import { Team } from './Team'
+import { PartyMembers } from './PartyMembers.js'
+import { Team } from './Team.js'
 
 export const AppendTeamGameSessionRequest = z.object({
   additionalMembers: z.array(PartyMembers),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserBan } from './UserBan'
+import { UserBan } from './UserBan.js'
 
 export const ErrorResponse = z.object({
   clientId: z.string().nullish(),

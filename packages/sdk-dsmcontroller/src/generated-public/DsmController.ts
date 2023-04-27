@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 
-import { PublicApi } from './dsm-controller/PublicApi'
-import { SessionApi } from './dsm-controller/SessionApi'
-import { ImageConfigApi } from './dsm-controller/ImageConfigApi'
-import { ServerApi } from './dsm-controller/ServerApi'
+import { PublicApi } from './dsm-controller/PublicApi.js'
+import { SessionApi } from './dsm-controller/SessionApi.js'
+import { ImageConfigApi } from './dsm-controller/ImageConfigApi.js'
+import { ServerApi } from './dsm-controller/ServerApi.js'
 
 const apis = {
   PublicApi,

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GetLeaderboardConfigResp } from './GetLeaderboardConfigResp'
-import { Pagination } from './Pagination'
+import { GetLeaderboardConfigResp } from './GetLeaderboardConfigResp.js'
+import { Pagination } from './Pagination.js'
 
 export const GetAllLeaderboardConfigsResp = z.object({ data: z.array(GetLeaderboardConfigResp), paging: Pagination })
 

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "Justice BuildInfo Service",
-    "version": "3.28.4",
+    "version": "3.28.5",
     "title": "justice-buildinfo-service",
     "contact": { "name": "Engineering Team at AccelByte", "url": "https://accelbyte.io", "email": "engineering@accelbyte.io" }
   },

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { AppMessageDeclaration } from './AppMessageDeclaration'
+import { AppMessageDeclaration } from './AppMessageDeclaration.js'
 
 export const AppMessageDeclarationArray = z.array(AppMessageDeclaration)
 

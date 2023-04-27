@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { OrderSummary } from './OrderSummary'
+import { OrderSummary } from './OrderSummary.js'
 
 export const FulfillmentRequest = z.object({
   storeId: z.string().nullish(),

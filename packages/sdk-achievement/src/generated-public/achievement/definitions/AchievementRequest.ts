@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Icon } from './Icon'
+import { Icon } from './Icon.js'
 
 export const AchievementRequest = z.object({
   achievementCode: z.string(),

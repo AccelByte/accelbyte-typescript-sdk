@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreateTestUserResponseV4 } from './CreateTestUserResponseV4'
+import { CreateTestUserResponseV4 } from './CreateTestUserResponseV4.js'
 
 export const CreateTestUsersResponseV4 = z.object({ data: z.array(CreateTestUserResponseV4) })
 

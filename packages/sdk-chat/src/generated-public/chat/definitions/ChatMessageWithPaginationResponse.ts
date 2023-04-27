@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ChatMessageResponse } from './ChatMessageResponse'
-import { Pagination } from './Pagination'
+import { ChatMessageResponse } from './ChatMessageResponse.js'
+import { Pagination } from './Pagination.js'
 
 export const ChatMessageWithPaginationResponse = z.object({
   data: z.array(ChatMessageResponse),

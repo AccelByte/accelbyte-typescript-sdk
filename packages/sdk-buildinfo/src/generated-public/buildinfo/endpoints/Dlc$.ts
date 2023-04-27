@@ -8,10 +8,10 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { RetrieveBaseGameResponseArray } from '../definitions/RetrieveBaseGameResponseArray'
-import { RetrieveDependencyCompatibilityResponse } from '../definitions/RetrieveDependencyCompatibilityResponse'
-import { RetrieveDependencyLinkResponse } from '../definitions/RetrieveDependencyLinkResponse'
-import { RetrieveLatestDlcResponseArray } from '../definitions/RetrieveLatestDlcResponseArray'
+import { RetrieveBaseGameResponseArray } from '../definitions/RetrieveBaseGameResponseArray.js'
+import { RetrieveDependencyCompatibilityResponse } from '../definitions/RetrieveDependencyCompatibilityResponse.js'
+import { RetrieveDependencyLinkResponse } from '../definitions/RetrieveDependencyLinkResponse.js'
+import { RetrieveLatestDlcResponseArray } from '../definitions/RetrieveLatestDlcResponseArray.js'
 
 export class Dlc$ {
   // @ts-ignore

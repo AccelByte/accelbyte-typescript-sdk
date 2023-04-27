@@ -4,11 +4,11 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BillingAccount } from './BillingAccount'
-import { CurrencySummary } from './CurrencySummary'
-import { EntitlementSummary } from './EntitlementSummary'
-import { ItemSnapshot } from './ItemSnapshot'
-import { Recurring } from './Recurring'
+import { BillingAccount } from './BillingAccount.js'
+import { CurrencySummary } from './CurrencySummary.js'
+import { EntitlementSummary } from './EntitlementSummary.js'
+import { ItemSnapshot } from './ItemSnapshot.js'
+import { Recurring } from './Recurring.js'
 
 export const SubscriptionInfo = z.object({
   id: z.string(),

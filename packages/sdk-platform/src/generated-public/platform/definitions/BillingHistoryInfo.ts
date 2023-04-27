@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BillingAccount } from './BillingAccount'
-import { CurrencySummary } from './CurrencySummary'
+import { BillingAccount } from './BillingAccount.js'
+import { CurrencySummary } from './CurrencySummary.js'
 
 export const BillingHistoryInfo = z.object({
   recurringOrderNo: z.string(),

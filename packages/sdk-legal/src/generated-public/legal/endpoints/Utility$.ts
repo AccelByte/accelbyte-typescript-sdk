@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { LegalReadinessStatusResponse } from '../definitions/LegalReadinessStatusResponse'
+import { LegalReadinessStatusResponse } from '../definitions/LegalReadinessStatusResponse.js'
 
 export class Utility$ {
   // @ts-ignore

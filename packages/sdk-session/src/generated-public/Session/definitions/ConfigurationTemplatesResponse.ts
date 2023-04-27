@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ConfigurationTemplateResponse } from './ConfigurationTemplateResponse'
-import { Pagination } from './Pagination'
+import { ConfigurationTemplateResponse } from './ConfigurationTemplateResponse.js'
+import { Pagination } from './Pagination.js'
 
 export const ConfigurationTemplatesResponse = z.object({ data: z.array(ConfigurationTemplateResponse), paging: Pagination })
 

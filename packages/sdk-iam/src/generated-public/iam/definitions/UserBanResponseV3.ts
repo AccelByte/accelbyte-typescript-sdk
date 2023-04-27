@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BannedByV3 } from './BannedByV3'
+import { BannedByV3 } from './BannedByV3.js'
 
 export const UserBanResponseV3 = z.object({
   ban: z.string(),

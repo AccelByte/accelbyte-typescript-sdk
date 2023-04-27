@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { SimpleLatestBaseGame } from './SimpleLatestBaseGame'
+import { SimpleLatestBaseGame } from './SimpleLatestBaseGame.js'
 
 export const RetrieveBaseGameResponse = z.object({ appId: z.string().nullish(), baseGames: z.array(SimpleLatestBaseGame).nullish() })
 

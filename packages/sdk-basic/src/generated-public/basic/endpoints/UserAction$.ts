@@ -9,7 +9,7 @@
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { UserReportRequest } from '../definitions/UserReportRequest'
+import { UserReportRequest } from '../definitions/UserReportRequest.js'
 
 export class UserAction$ {
   // @ts-ignore

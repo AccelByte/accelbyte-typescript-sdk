@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ItemPurchaseConditionValidateResult } from './ItemPurchaseConditionValidateResult'
+import { ItemPurchaseConditionValidateResult } from './ItemPurchaseConditionValidateResult.js'
 
 export const ItemPurchaseConditionValidateResultArray = z.array(ItemPurchaseConditionValidateResult)
 

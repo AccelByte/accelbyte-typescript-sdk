@@ -8,15 +8,15 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PaymentMethodArray } from './definitions/PaymentMethodArray'
-import { PaymentOrderDetails } from './definitions/PaymentOrderDetails'
-import { PaymentOrderPaidResult } from './definitions/PaymentOrderPaidResult'
-import { PaymentProcessResult } from './definitions/PaymentProcessResult'
-import { PaymentStation$ } from './endpoints/PaymentStation$'
-import { PaymentToken } from './definitions/PaymentToken'
-import { PaymentUrl } from './definitions/PaymentUrl'
-import { PaymentUrlCreate } from './definitions/PaymentUrlCreate'
-import { TaxResult } from './definitions/TaxResult'
+import { PaymentMethodArray } from './definitions/PaymentMethodArray.js'
+import { PaymentOrderDetails } from './definitions/PaymentOrderDetails.js'
+import { PaymentOrderPaidResult } from './definitions/PaymentOrderPaidResult.js'
+import { PaymentProcessResult } from './definitions/PaymentProcessResult.js'
+import { PaymentStation$ } from './endpoints/PaymentStation$.js'
+import { PaymentToken } from './definitions/PaymentToken.js'
+import { PaymentUrl } from './definitions/PaymentUrl.js'
+import { PaymentUrlCreate } from './definitions/PaymentUrlCreate.js'
+import { TaxResult } from './definitions/TaxResult.js'
 
 export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

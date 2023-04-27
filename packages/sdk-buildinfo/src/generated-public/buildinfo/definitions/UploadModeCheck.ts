@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { BuildManifest } from './BuildManifest'
+import { BuildManifest } from './BuildManifest.js'
 
 export const UploadModeCheck = z.object({ buildManifest: BuildManifest.nullish(), uploadDifferentialMode: z.boolean().nullish() })
 

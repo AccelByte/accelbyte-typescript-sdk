@@ -1248,7 +1248,7 @@
             "in": "query"
           },
           {
-            "enum": ["SESSION", "NORMAL", "PARTY"],
+            "enum": ["NORMAL", "PARTY", "SESSION"],
             "type": "string",
             "description": "topicSubType",
             "name": "topicSubType",
@@ -1353,7 +1353,7 @@
             "in": "query"
           },
           {
-            "enum": ["PARTY", "SESSION", "NORMAL"],
+            "enum": ["NORMAL", "PARTY", "SESSION"],
             "type": "string",
             "description": "topicSubType",
             "name": "topicSubType",
@@ -2566,7 +2566,7 @@
             "in": "query"
           },
           {
-            "enum": ["DRAFT", "SENT", "UNSENT"],
+            "enum": ["UNSENT", "DRAFT", "SENT"],
             "type": "string",
             "description": "message status",
             "name": "status",
@@ -2613,6 +2613,12 @@
             "type": "integer",
             "description": "limit",
             "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "anyof: createdAt:asc / createdAt:desc",
+            "name": "order",
             "in": "query"
           }
         ],
@@ -2803,7 +2809,7 @@
             "in": "query"
           },
           {
-            "enum": ["UNREAD", "READ"],
+            "enum": ["READ", "UNREAD"],
             "type": "string",
             "description": "message status",
             "name": "status",

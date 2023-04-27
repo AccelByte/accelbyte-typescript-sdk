@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PaginationV3 } from './PaginationV3'
-import { RoleManagerV3 } from './RoleManagerV3'
+import { PaginationV3 } from './PaginationV3.js'
+import { RoleManagerV3 } from './RoleManagerV3.js'
 
 export const RoleManagersResponsesV3 = z.object({ data: z.array(RoleManagerV3), paging: PaginationV3 })
 

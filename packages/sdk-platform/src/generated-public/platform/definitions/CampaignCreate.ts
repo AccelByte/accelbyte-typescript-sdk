@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RedeemableItem } from './RedeemableItem'
+import { RedeemableItem } from './RedeemableItem.js'
 
 export const CampaignCreate = z.object({
   type: z.enum(['REDEMPTION']).nullish(),

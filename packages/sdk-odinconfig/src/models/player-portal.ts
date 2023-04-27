@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Config } from '../generated-public/odin-config/definitions/Config'
-import { LogoVariantConfig, PageConfig } from '../models/base-configs'
+import { Config } from '../generated-public/odin-config/definitions/Config.js'
+import { LogoVariantConfig, PageConfig } from '../models/base-configs.js'
 
 export enum PlayerPortalHomePageKeys {
   IS_DISABLED = 'isDisabled',

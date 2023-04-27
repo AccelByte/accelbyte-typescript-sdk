@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DeleteBulkLeaderboardFailedResp } from './DeleteBulkLeaderboardFailedResp'
+import { DeleteBulkLeaderboardFailedResp } from './DeleteBulkLeaderboardFailedResp.js'
 
 export const DeleteBulkLeaderboardsResp = z.object({ failed: z.array(DeleteBulkLeaderboardFailedResp) })
 

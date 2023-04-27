@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PayloadUrl } from './PayloadUrl'
-import { PreviewUrl } from './PreviewUrl'
+import { PayloadUrl } from './PayloadUrl.js'
+import { PreviewUrl } from './PreviewUrl.js'
 
 export const CreateContentResponse = z.object({
   channelId: z.string(),

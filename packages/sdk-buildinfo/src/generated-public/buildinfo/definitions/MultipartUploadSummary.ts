@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MultipartUploadUrl } from './MultipartUploadUrl'
+import { MultipartUploadUrl } from './MultipartUploadUrl.js'
 
 export const MultipartUploadSummary = z.object({ uuid: z.string(), parts: z.array(MultipartUploadUrl) })
 

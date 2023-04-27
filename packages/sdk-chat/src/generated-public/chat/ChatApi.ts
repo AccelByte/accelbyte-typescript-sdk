@@ -8,7 +8,7 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Chat$ } from './endpoints/Chat$'
+import { Chat$ } from './endpoints/Chat$.js'
 
 export function ChatApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

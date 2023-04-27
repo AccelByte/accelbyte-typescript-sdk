@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DsmConfigRecord } from './DsmConfigRecord'
+import { DsmConfigRecord } from './DsmConfigRecord.js'
 
 export const ListConfigResponse = z.object({ configs: z.array(DsmConfigRecord) })
 

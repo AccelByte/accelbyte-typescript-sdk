@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AssignRoleToMemberRequestV1 } from './definitions/AssignRoleToMemberRequestV1'
-import { GetMemberRolesListResponseV1 } from './definitions/GetMemberRolesListResponseV1'
-import { GetUserGroupInformationResponseV1 } from './definitions/GetUserGroupInformationResponseV1'
-import { GroupRoles$ } from './endpoints/GroupRoles$'
-import { RemoveRoleFromMemberRequestV1 } from './definitions/RemoveRoleFromMemberRequestV1'
+import { AssignRoleToMemberRequestV1 } from './definitions/AssignRoleToMemberRequestV1.js'
+import { GetMemberRolesListResponseV1 } from './definitions/GetMemberRolesListResponseV1.js'
+import { GetUserGroupInformationResponseV1 } from './definitions/GetUserGroupInformationResponseV1.js'
+import { GroupRoles$ } from './endpoints/GroupRoles$.js'
+import { RemoveRoleFromMemberRequestV1 } from './definitions/RemoveRoleFromMemberRequestV1.js'
 
 export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

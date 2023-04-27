@@ -3,5 +3,5 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-export * from './all-public-imports'
-export * from './clients/BuildInfoApp'
+export * from './all-public-imports.js'
+export * from './clients/BuildInfoApp.js'

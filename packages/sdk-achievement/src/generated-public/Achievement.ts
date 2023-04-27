@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 
-import { TagsApi } from './achievement/TagsApi'
-import { AchievementsApi } from './achievement/AchievementsApi'
-import { GlobalAchievementsApi } from './achievement/GlobalAchievementsApi'
-import { UserAchievementsApi } from './achievement/UserAchievementsApi'
+import { TagsApi } from './achievement/TagsApi.js'
+import { AchievementsApi } from './achievement/AchievementsApi.js'
+import { GlobalAchievementsApi } from './achievement/GlobalAchievementsApi.js'
+import { UserAchievementsApi } from './achievement/UserAchievementsApi.js'
 
 const apis = {
   TagsApi,

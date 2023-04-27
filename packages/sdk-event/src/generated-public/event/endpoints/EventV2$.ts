@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { EventResponseV2 } from '../definitions/EventResponseV2'
+import { EventResponseV2 } from '../definitions/EventResponseV2.js'
 
 export class EventV2$ {
   // @ts-ignore

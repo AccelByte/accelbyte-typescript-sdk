@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserResponseV4 } from '../generated-public/iam/definitions/UserResponseV4'
+import { UserResponseV4 } from '../generated-public/iam/definitions/UserResponseV4.js'
 
 export const BanType = z.enum(['ORDER_AND_PAYMENT'])
 export type BanType = z.infer<typeof BanType>

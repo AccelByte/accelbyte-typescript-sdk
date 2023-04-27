@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PageConfig } from './base-configs'
-import { Config } from '../generated-public/odin-config/definitions/Config'
+import { PageConfig } from './base-configs.js'
+import { Config } from '../generated-public/odin-config/definitions/Config.js'
 
 export const PaymentConfigData = z.object({
   pageConfig: Config.merge(

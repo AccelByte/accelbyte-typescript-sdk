@@ -9,14 +9,14 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { DeregisterLocalServerRequest } from '../definitions/DeregisterLocalServerRequest'
-import { DsHeartbeatRequest } from '../definitions/DsHeartbeatRequest'
-import { RegisterLocalServerRequest } from '../definitions/RegisterLocalServerRequest'
-import { RegisterServerRequest } from '../definitions/RegisterServerRequest'
-import { Server } from '../definitions/Server'
-import { ServerDeploymentConfigSessionTimeoutResponse } from '../definitions/ServerDeploymentConfigSessionTimeoutResponse'
-import { ServerSessionResponse } from '../definitions/ServerSessionResponse'
-import { ShutdownServerRequest } from '../definitions/ShutdownServerRequest'
+import { DeregisterLocalServerRequest } from '../definitions/DeregisterLocalServerRequest.js'
+import { DsHeartbeatRequest } from '../definitions/DsHeartbeatRequest.js'
+import { RegisterLocalServerRequest } from '../definitions/RegisterLocalServerRequest.js'
+import { RegisterServerRequest } from '../definitions/RegisterServerRequest.js'
+import { Server } from '../definitions/Server.js'
+import { ServerDeploymentConfigSessionTimeoutResponse } from '../definitions/ServerDeploymentConfigSessionTimeoutResponse.js'
+import { ServerSessionResponse } from '../definitions/ServerSessionResponse.js'
+import { ShutdownServerRequest } from '../definitions/ShutdownServerRequest.js'
 
 export class Server$ {
   // @ts-ignore

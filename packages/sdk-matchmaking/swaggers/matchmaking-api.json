@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Match Service v2",
-    "version": "2.3.0"
+    "version": "2.3.1"
   },
   "paths": {
     "/healthz": {
@@ -1761,14 +1761,14 @@
     "api.MatchPool": {
       "required": [
         "name",
+        "backfill_ticket_expiration_seconds",
         "backfill_proposal_expiration_seconds",
         "auto_accept_backfill_proposal",
         "match_function",
         "match_function_override",
         "rule_set",
         "session_template",
-        "ticket_expiration_seconds",
-        "backfill_ticket_expiration_seconds"
+        "ticket_expiration_seconds"
       ],
       "properties": {
         "auto_accept_backfill_proposal": {

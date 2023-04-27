@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ChatMessageResponse } from './ChatMessageResponse'
+import { ChatMessageResponse } from './ChatMessageResponse.js'
 
 export const ChatMessageResponseArray = z.array(ChatMessageResponse)
 

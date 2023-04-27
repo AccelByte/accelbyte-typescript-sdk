@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { SessionPlayerHistory } from './SessionPlayerHistory'
-import { SessionPlayerJoining } from './SessionPlayerJoining'
+import { SessionPlayerHistory } from './SessionPlayerHistory.js'
+import { SessionPlayerJoining } from './SessionPlayerJoining.js'
 
 export const GetSessionHistorySearchResponseItemV2 = z.object({
   _id: z.string(),

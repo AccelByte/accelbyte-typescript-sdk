@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DistinctLinkedPlatformV3 } from './DistinctLinkedPlatformV3'
+import { DistinctLinkedPlatformV3 } from './DistinctLinkedPlatformV3.js'
 
 export const DistinctPlatformResponseV3 = z.object({ platforms: z.array(DistinctLinkedPlatformV3) })
 

@@ -8,14 +8,14 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BasicBuildManifestArray } from './definitions/BasicBuildManifestArray'
-import { BlockDownloadUrls } from './definitions/BlockDownloadUrls'
-import { BlockDownloadUrlsRequest } from './definitions/BlockDownloadUrlsRequest'
-import { BuildAvailabilityArray } from './definitions/BuildAvailabilityArray'
-import { BuildManifest } from './definitions/BuildManifest'
-import { DiffStatusReport } from './definitions/DiffStatusReport'
-import { Downloader$ } from './endpoints/Downloader$'
-import { VersionChain } from './definitions/VersionChain'
+import { BasicBuildManifestArray } from './definitions/BasicBuildManifestArray.js'
+import { BlockDownloadUrls } from './definitions/BlockDownloadUrls.js'
+import { BlockDownloadUrlsRequest } from './definitions/BlockDownloadUrlsRequest.js'
+import { BuildAvailabilityArray } from './definitions/BuildAvailabilityArray.js'
+import { BuildManifest } from './definitions/BuildManifest.js'
+import { DiffStatusReport } from './definitions/DiffStatusReport.js'
+import { Downloader$ } from './endpoints/Downloader$.js'
+import { VersionChain } from './definitions/VersionChain.js'
 
 export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

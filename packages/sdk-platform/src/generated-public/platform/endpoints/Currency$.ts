@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { CurrencyInfoArray } from '../definitions/CurrencyInfoArray'
+import { CurrencyInfoArray } from '../definitions/CurrencyInfoArray.js'
 
 export class Currency$ {
   // @ts-ignore

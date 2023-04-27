@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RolePermission } from './RolePermission'
+import { RolePermission } from './RolePermission.js'
 
 export const CreateMemberRoleRequestV1 = z.object({ memberRoleName: z.string(), memberRolePermissions: z.array(RolePermission) })
 

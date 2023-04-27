@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserWithLinkedPlatformAccounts } from './UserWithLinkedPlatformAccounts'
+import { UserWithLinkedPlatformAccounts } from './UserWithLinkedPlatformAccounts.js'
 
 export const ConflictedUserPlatformAccounts = z.object({
   platformUserID: z.string(),

@@ -8,16 +8,16 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AppendTeamGameSessionRequest } from './definitions/AppendTeamGameSessionRequest'
-import { CreateGameSessionRequest } from './definitions/CreateGameSessionRequest'
-import { GameSession$ } from './endpoints/GameSession$'
-import { GameSessionQueryResponse } from './definitions/GameSessionQueryResponse'
-import { GameSessionResponse } from './definitions/GameSessionResponse'
-import { GameSessionResponseArray } from './definitions/GameSessionResponseArray'
-import { MapStringInterface } from './definitions/MapStringInterface'
-import { SessionInviteRequest } from './definitions/SessionInviteRequest'
-import { UpdateGameSessionBackfillRequest } from './definitions/UpdateGameSessionBackfillRequest'
-import { UpdateGameSessionRequest } from './definitions/UpdateGameSessionRequest'
+import { AppendTeamGameSessionRequest } from './definitions/AppendTeamGameSessionRequest.js'
+import { CreateGameSessionRequest } from './definitions/CreateGameSessionRequest.js'
+import { GameSession$ } from './endpoints/GameSession$.js'
+import { GameSessionQueryResponse } from './definitions/GameSessionQueryResponse.js'
+import { GameSessionResponse } from './definitions/GameSessionResponse.js'
+import { GameSessionResponseArray } from './definitions/GameSessionResponseArray.js'
+import { MapStringInterface } from './definitions/MapStringInterface.js'
+import { SessionInviteRequest } from './definitions/SessionInviteRequest.js'
+import { UpdateGameSessionBackfillRequest } from './definitions/UpdateGameSessionBackfillRequest.js'
+import { UpdateGameSessionRequest } from './definitions/UpdateGameSessionRequest.js'
 
 export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

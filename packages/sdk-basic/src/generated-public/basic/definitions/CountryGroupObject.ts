@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CountryObject } from './CountryObject'
+import { CountryObject } from './CountryObject.js'
 
 export const CountryGroupObject = z.object({
   countryGroupCode: z.string().nullish(),

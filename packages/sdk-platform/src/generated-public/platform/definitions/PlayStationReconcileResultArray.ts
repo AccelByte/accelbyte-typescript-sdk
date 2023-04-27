@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlayStationReconcileResult } from './PlayStationReconcileResult'
+import { PlayStationReconcileResult } from './PlayStationReconcileResult.js'
 
 export const PlayStationReconcileResultArray = z.array(PlayStationReconcileResult)
 

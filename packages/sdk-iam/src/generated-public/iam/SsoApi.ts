@@ -8,7 +8,7 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Sso$ } from './endpoints/Sso$'
+import { Sso$ } from './endpoints/Sso$.js'
 
 export function SsoApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

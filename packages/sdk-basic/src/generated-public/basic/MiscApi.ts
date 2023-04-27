@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CountryObjectArray } from './definitions/CountryObjectArray'
-import { Misc$ } from './endpoints/Misc$'
-import { RetrieveTimeResponse } from './definitions/RetrieveTimeResponse'
+import { CountryObjectArray } from './definitions/CountryObjectArray.js'
+import { Misc$ } from './endpoints/Misc$.js'
+import { RetrieveTimeResponse } from './definitions/RetrieveTimeResponse.js'
 
 export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

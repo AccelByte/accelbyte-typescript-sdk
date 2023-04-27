@@ -8,11 +8,11 @@
  */
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { ContentLikeRequest } from '../definitions/ContentLikeRequest'
-import { ContentLikeResponse } from '../definitions/ContentLikeResponse'
-import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse'
+import { ContentLikeRequest } from '../definitions/ContentLikeRequest.js'
+import { ContentLikeResponse } from '../definitions/ContentLikeResponse.js'
+import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse.js'
 
-export class PublicLikeLegacy$ {
+export class PublicLike$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 

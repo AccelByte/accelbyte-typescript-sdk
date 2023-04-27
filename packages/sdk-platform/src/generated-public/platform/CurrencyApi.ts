@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Currency$ } from './endpoints/Currency$'
-import { CurrencyInfoArray } from './definitions/CurrencyInfoArray'
+import { Currency$ } from './endpoints/Currency$.js'
+import { CurrencyInfoArray } from './definitions/CurrencyInfoArray.js'
 
 export function CurrencyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Pagination } from './Pagination'
-import { UserContributionResponse } from './UserContributionResponse'
+import { Pagination } from './Pagination.js'
+import { UserContributionResponse } from './UserContributionResponse.js'
 
 export const PaginatedUserContributionResponse = z.object({ data: z.array(UserContributionResponse), paging: Pagination })
 

@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PlatformWallet } from './definitions/PlatformWallet'
-import { Wallet$ } from './endpoints/Wallet$'
-import { WalletTransactionPagingSlicedResult } from './definitions/WalletTransactionPagingSlicedResult'
+import { PlatformWallet } from './definitions/PlatformWallet.js'
+import { Wallet$ } from './endpoints/Wallet$.js'
+import { WalletTransactionPagingSlicedResult } from './definitions/WalletTransactionPagingSlicedResult.js'
 
 export function WalletApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

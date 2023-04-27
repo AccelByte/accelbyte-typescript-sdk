@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { GlobalAchievements$ } from './endpoints/GlobalAchievements$'
-import { PaginatedContributorResponse } from './definitions/PaginatedContributorResponse'
-import { PaginatedGlobalAchievementResponse } from './definitions/PaginatedGlobalAchievementResponse'
-import { PaginatedUserContributionResponse } from './definitions/PaginatedUserContributionResponse'
+import { GlobalAchievements$ } from './endpoints/GlobalAchievements$.js'
+import { PaginatedContributorResponse } from './definitions/PaginatedContributorResponse.js'
+import { PaginatedGlobalAchievementResponse } from './definitions/PaginatedGlobalAchievementResponse.js'
+import { PaginatedUserContributionResponse } from './definitions/PaginatedUserContributionResponse.js'
 
 export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

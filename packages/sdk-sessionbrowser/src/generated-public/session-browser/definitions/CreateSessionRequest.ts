@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GameSessionSetting } from './GameSessionSetting'
+import { GameSessionSetting } from './GameSessionSetting.js'
 
 export const CreateSessionRequest = z.object({
   game_session_setting: GameSessionSetting,

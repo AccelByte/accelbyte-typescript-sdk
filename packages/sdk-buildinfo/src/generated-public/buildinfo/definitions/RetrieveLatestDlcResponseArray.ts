@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RetrieveLatestDlcResponse } from './RetrieveLatestDlcResponse'
+import { RetrieveLatestDlcResponse } from './RetrieveLatestDlcResponse.js'
 
 export const RetrieveLatestDlcResponseArray = z.array(RetrieveLatestDlcResponse)
 

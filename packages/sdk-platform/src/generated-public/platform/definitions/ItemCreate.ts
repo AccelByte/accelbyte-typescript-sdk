@@ -4,13 +4,13 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Image } from './Image'
-import { Localization } from './Localization'
-import { LootBoxConfig } from './LootBoxConfig'
-import { OptionBoxConfig } from './OptionBoxConfig'
-import { Recurring } from './Recurring'
-import { RegionDataItemDto } from './RegionDataItemDto'
-import { SaleConfig } from './SaleConfig'
+import { Image } from './Image.js'
+import { Localization } from './Localization.js'
+import { LootBoxConfig } from './LootBoxConfig.js'
+import { OptionBoxConfig } from './OptionBoxConfig.js'
+import { Recurring } from './Recurring.js'
+import { RegionDataItemDto } from './RegionDataItemDto.js'
+import { SaleConfig } from './SaleConfig.js'
 
 export const ItemCreate = z.object({
   itemType: z.enum([

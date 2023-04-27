@@ -4,11 +4,11 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreditSummary } from './CreditSummary'
-import { EntitlementSummary } from './EntitlementSummary'
-import { ExtensionFulfillmentSummary } from './ExtensionFulfillmentSummary'
-import { FulfillmentError } from './FulfillmentError'
-import { FulfillmentItem } from './FulfillmentItem'
+import { CreditSummary } from './CreditSummary.js'
+import { EntitlementSummary } from './EntitlementSummary.js'
+import { ExtensionFulfillmentSummary } from './ExtensionFulfillmentSummary.js'
+import { FulfillmentError } from './FulfillmentError.js'
+import { FulfillmentItem } from './FulfillmentItem.js'
 
 export const FulfillmentHistoryInfo = z.object({
   id: z.string(),

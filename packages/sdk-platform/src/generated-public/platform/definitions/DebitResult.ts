@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DebitByCurrencyCodeRequest } from './DebitByCurrencyCodeRequest'
+import { DebitByCurrencyCodeRequest } from './DebitByCurrencyCodeRequest.js'
 
 export const DebitResult = z.object({
   userId: z.string().nullish(),

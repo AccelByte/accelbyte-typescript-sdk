@@ -7,22 +7,22 @@
  * AUTO GENERATED
  */
 
-import { StoreApi } from './platform/StoreApi'
-import { CategoryApi } from './platform/CategoryApi'
-import { CurrencyApi } from './platform/CurrencyApi'
-import { ItemApi } from './platform/ItemApi'
-import { PaymentStationApi } from './platform/PaymentStationApi'
-import { RewardApi } from './platform/RewardApi'
-import { IapApi } from './platform/IapApi'
-import { ViewApi } from './platform/ViewApi'
-import { OrderApi } from './platform/OrderApi'
-import { SectionApi } from './platform/SectionApi'
-import { DlcApi } from './platform/DlcApi'
-import { EntitlementApi } from './platform/EntitlementApi'
-import { SubscriptionApi } from './platform/SubscriptionApi'
-import { FulfillmentApi } from './platform/FulfillmentApi'
-import { PaymentAccountApi } from './platform/PaymentAccountApi'
-import { WalletApi } from './platform/WalletApi'
+import { StoreApi } from './platform/StoreApi.js'
+import { CategoryApi } from './platform/CategoryApi.js'
+import { CurrencyApi } from './platform/CurrencyApi.js'
+import { ItemApi } from './platform/ItemApi.js'
+import { PaymentStationApi } from './platform/PaymentStationApi.js'
+import { RewardApi } from './platform/RewardApi.js'
+import { IapApi } from './platform/IapApi.js'
+import { ViewApi } from './platform/ViewApi.js'
+import { OrderApi } from './platform/OrderApi.js'
+import { SectionApi } from './platform/SectionApi.js'
+import { DlcApi } from './platform/DlcApi.js'
+import { EntitlementApi } from './platform/EntitlementApi.js'
+import { SubscriptionApi } from './platform/SubscriptionApi.js'
+import { FulfillmentApi } from './platform/FulfillmentApi.js'
+import { PaymentAccountApi } from './platform/PaymentAccountApi.js'
+import { WalletApi } from './platform/WalletApi.js'
 
 const apis = {
   StoreApi,

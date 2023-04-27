@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GetUserOutgoingFriendsResponse } from './GetUserOutgoingFriendsResponse'
+import { GetUserOutgoingFriendsResponse } from './GetUserOutgoingFriendsResponse.js'
 
 export const GetUserOutgoingFriendsResponseArray = z.array(GetUserOutgoingFriendsResponse)
 

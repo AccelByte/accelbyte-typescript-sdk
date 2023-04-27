@@ -8,7 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { AppMessageDeclarationArray } from '../definitions/AppMessageDeclarationArray'
+import { AppMessageDeclarationArray } from '../definitions/AppMessageDeclarationArray.js'
 
 export class Messages$ {
   // @ts-ignore

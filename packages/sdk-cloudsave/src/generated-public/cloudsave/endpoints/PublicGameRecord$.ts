@@ -9,10 +9,10 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { BulkGetGameRecordRequest } from '../definitions/BulkGetGameRecordRequest'
-import { BulkGetGameRecordResponse } from '../definitions/BulkGetGameRecordResponse'
-import { GameRecordRequest } from '../definitions/GameRecordRequest'
-import { GameRecordResponse } from '../definitions/GameRecordResponse'
+import { BulkGetGameRecordRequest } from '../definitions/BulkGetGameRecordRequest.js'
+import { BulkGetGameRecordResponse } from '../definitions/BulkGetGameRecordResponse.js'
+import { GameRecordRequest } from '../definitions/GameRecordRequest.js'
+import { GameRecordResponse } from '../definitions/GameRecordResponse.js'
 
 export class PublicGameRecord$ {
   // @ts-ignore

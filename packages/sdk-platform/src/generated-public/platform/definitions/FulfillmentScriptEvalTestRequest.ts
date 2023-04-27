@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { FulfillmentScriptContext } from './FulfillmentScriptContext'
+import { FulfillmentScriptContext } from './FulfillmentScriptContext.js'
 
 export const FulfillmentScriptEvalTestRequest = z.object({
   type: z.enum(['grantDays']),

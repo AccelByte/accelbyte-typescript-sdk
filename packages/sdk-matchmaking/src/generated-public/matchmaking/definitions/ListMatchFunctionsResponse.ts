@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { MatchFunctionConfig } from './MatchFunctionConfig'
-import { Pagination } from './Pagination'
+import { MatchFunctionConfig } from './MatchFunctionConfig.js'
+import { Pagination } from './Pagination.js'
 
 export const ListMatchFunctionsResponse = z.object({
   configs: z.array(MatchFunctionConfig),

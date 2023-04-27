@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlayerRecordResponse } from './PlayerRecordResponse'
+import { PlayerRecordResponse } from './PlayerRecordResponse.js'
 
 export const BulkGetPlayerRecordResponse = z.object({ data: z.array(PlayerRecordResponse) })
 

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PolicyObject } from './PolicyObject'
-import { PolicyVersionObject } from './PolicyVersionObject'
+import { PolicyObject } from './PolicyObject.js'
+import { PolicyVersionObject } from './PolicyVersionObject.js'
 
 export const RetrieveLocalizedPolicyVersionResponse = z.object({
   id: z.string(),

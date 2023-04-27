@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { JwtBanV3 } from './JwtBanV3'
-import { NamespaceRole } from './NamespaceRole'
-import { Permission } from './Permission'
+import { JwtBanV3 } from './JwtBanV3.js'
+import { NamespaceRole } from './NamespaceRole.js'
+import { Permission } from './Permission.js'
 
 export const TokenResponse = z.object({
   access_token: z.string(),

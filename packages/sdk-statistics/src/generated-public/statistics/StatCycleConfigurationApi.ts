@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BulkStatCycleRequest } from './definitions/BulkStatCycleRequest'
-import { BulkStatCycleResult } from './definitions/BulkStatCycleResult'
-import { StatCycleConfiguration$ } from './endpoints/StatCycleConfiguration$'
-import { StatCycleInfo } from './definitions/StatCycleInfo'
-import { StatCyclePagingSlicedResult } from './definitions/StatCyclePagingSlicedResult'
+import { BulkStatCycleRequest } from './definitions/BulkStatCycleRequest.js'
+import { BulkStatCycleResult } from './definitions/BulkStatCycleResult.js'
+import { StatCycleConfiguration$ } from './endpoints/StatCycleConfiguration$.js'
+import { StatCycleInfo } from './definitions/StatCycleInfo.js'
+import { StatCyclePagingSlicedResult } from './definitions/StatCyclePagingSlicedResult.js'
 
 export function StatCycleConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

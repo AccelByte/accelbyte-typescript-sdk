@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EntitlementRevocationConfig } from './EntitlementRevocationConfig'
-import { WalletRevocationConfig } from './WalletRevocationConfig'
+import { EntitlementRevocationConfig } from './EntitlementRevocationConfig.js'
+import { WalletRevocationConfig } from './WalletRevocationConfig.js'
 
 export const RevocationConfigUpdate = z.object({
   entitlement: EntitlementRevocationConfig.nullish(),

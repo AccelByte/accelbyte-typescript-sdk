@@ -8,15 +8,15 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AppInfo } from './definitions/AppInfo'
-import { Item$ } from './endpoints/Item$'
-import { ItemDynamicDataInfo } from './definitions/ItemDynamicDataInfo'
-import { ItemInfo } from './definitions/ItemInfo'
-import { ItemInfoArray } from './definitions/ItemInfoArray'
-import { ItemPagingSlicedResult } from './definitions/ItemPagingSlicedResult'
-import { ItemPurchaseConditionValidateRequest } from './definitions/ItemPurchaseConditionValidateRequest'
-import { ItemPurchaseConditionValidateResultArray } from './definitions/ItemPurchaseConditionValidateResultArray'
-import { PopulatedItemInfo } from './definitions/PopulatedItemInfo'
+import { AppInfo } from './definitions/AppInfo.js'
+import { Item$ } from './endpoints/Item$.js'
+import { ItemDynamicDataInfo } from './definitions/ItemDynamicDataInfo.js'
+import { ItemInfo } from './definitions/ItemInfo.js'
+import { ItemInfoArray } from './definitions/ItemInfoArray.js'
+import { ItemPagingSlicedResult } from './definitions/ItemPagingSlicedResult.js'
+import { ItemPurchaseConditionValidateRequest } from './definitions/ItemPurchaseConditionValidateRequest.js'
+import { ItemPurchaseConditionValidateResultArray } from './definitions/ItemPurchaseConditionValidateResultArray.js'
+import { PopulatedItemInfo } from './definitions/PopulatedItemInfo.js'
 
 export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreditRevocation } from './CreditRevocation'
-import { EntitlementRevocation } from './EntitlementRevocation'
-import { ItemRevocation } from './ItemRevocation'
+import { CreditRevocation } from './CreditRevocation.js'
+import { EntitlementRevocation } from './EntitlementRevocation.js'
+import { ItemRevocation } from './ItemRevocation.js'
 
 export const RevocationResult = z.object({
   id: z.string(),

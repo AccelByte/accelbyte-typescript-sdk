@@ -3,13 +3,13 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { InternalAxiosRequestConfig, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import qs from 'query-string'
 import { SdkDevice } from './SdkDevice'
 
 type EjectId = number
 
-type RequestInterceptor = (config: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>
+type RequestInterceptor = (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>
 type ResponseInterceptor = (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
 type ErrorInterceptor = (error: AxiosError) => Promise<unknown> | unknown
 

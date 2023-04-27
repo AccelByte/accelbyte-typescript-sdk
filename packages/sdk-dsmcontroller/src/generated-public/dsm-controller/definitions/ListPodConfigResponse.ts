@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PagingCursor } from './PagingCursor'
-import { PodConfigRecord } from './PodConfigRecord'
+import { PagingCursor } from './PagingCursor.js'
+import { PodConfigRecord } from './PodConfigRecord.js'
 
 export const ListPodConfigResponse = z.object({ paging: PagingCursor, pod_configs: z.array(PodConfigRecord) })
 

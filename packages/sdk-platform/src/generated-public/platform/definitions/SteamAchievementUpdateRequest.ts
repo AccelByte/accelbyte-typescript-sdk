@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Achievement } from './Achievement'
+import { Achievement } from './Achievement.js'
 
 export const SteamAchievementUpdateRequest = z.object({ steamUserId: z.string().nullish(), achievements: z.array(Achievement).nullish() })
 

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { EntitlementGrant } from './EntitlementGrant'
+import { EntitlementGrant } from './EntitlementGrant.js'
 
 export const EntitlementGrantResult = z.object({
   userId: z.string().nullish(),

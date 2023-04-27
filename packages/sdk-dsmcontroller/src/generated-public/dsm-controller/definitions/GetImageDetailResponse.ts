@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ImageRecord } from './ImageRecord'
+import { ImageRecord } from './ImageRecord.js'
 
 export const GetImageDetailResponse = z.object({ data: ImageRecord })
 

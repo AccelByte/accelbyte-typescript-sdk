@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RegionDataChange } from './RegionDataChange'
+import { RegionDataChange } from './RegionDataChange.js'
 
 export const BulkRegionDataChangeRequest = z.object({ changes: z.array(RegionDataChange).nullish() })
 

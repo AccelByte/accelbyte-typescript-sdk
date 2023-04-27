@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 
-import { EventV2Api } from './event/EventV2Api'
+import { EventV2Api } from './event/EventV2Api.js'
 
 const apis = {
   EventV2Api

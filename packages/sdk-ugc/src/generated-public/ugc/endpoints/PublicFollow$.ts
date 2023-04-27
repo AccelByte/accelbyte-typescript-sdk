@@ -8,10 +8,10 @@
  */
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse'
-import { PaginatedCreatorOverviewResponse } from '../definitions/PaginatedCreatorOverviewResponse'
-import { UserFollowRequest } from '../definitions/UserFollowRequest'
-import { UserFollowResponse } from '../definitions/UserFollowResponse'
+import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse.js'
+import { PaginatedCreatorOverviewResponse } from '../definitions/PaginatedCreatorOverviewResponse.js'
+import { UserFollowRequest } from '../definitions/UserFollowRequest.js'
+import { UserFollowResponse } from '../definitions/UserFollowResponse.js'
 
 export class PublicFollow$ {
   // @ts-ignore

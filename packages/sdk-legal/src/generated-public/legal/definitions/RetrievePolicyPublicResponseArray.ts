@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { RetrievePolicyPublicResponse } from './RetrievePolicyPublicResponse'
+import { RetrievePolicyPublicResponse } from './RetrievePolicyPublicResponse.js'
 
 export const RetrievePolicyPublicResponseArray = z.array(RetrievePolicyPublicResponse)
 

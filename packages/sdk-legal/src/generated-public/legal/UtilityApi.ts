@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { LegalReadinessStatusResponse } from './definitions/LegalReadinessStatusResponse'
-import { Utility$ } from './endpoints/Utility$'
+import { LegalReadinessStatusResponse } from './definitions/LegalReadinessStatusResponse.js'
+import { Utility$ } from './endpoints/Utility$.js'
 
 export function UtilityApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

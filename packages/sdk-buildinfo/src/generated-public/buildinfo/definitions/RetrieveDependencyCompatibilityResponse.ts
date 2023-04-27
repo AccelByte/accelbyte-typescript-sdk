@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CompatibilityObject } from './CompatibilityObject'
+import { CompatibilityObject } from './CompatibilityObject.js'
 
 export const RetrieveDependencyCompatibilityResponse = z.object({
   appId: z.string().nullish(),

@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { DataDeletion$ } from './endpoints/DataDeletion$'
-import { DeletionStatus } from './definitions/DeletionStatus'
-import { RequestDeleteResponse } from './definitions/RequestDeleteResponse'
+import { DataDeletion$ } from './endpoints/DataDeletion$.js'
+import { DeletionStatus } from './definitions/DeletionStatus.js'
+import { RequestDeleteResponse } from './definitions/RequestDeleteResponse.js'
 
 export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

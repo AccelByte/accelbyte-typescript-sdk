@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { DeviceBanResponseV4 } from './DeviceBanResponseV4'
-import { Pagination } from './Pagination'
+import { DeviceBanResponseV4 } from './DeviceBanResponseV4.js'
+import { Pagination } from './Pagination.js'
 
 export const DeviceBannedResponseV4 = z.object({ data: z.array(DeviceBanResponseV4), paging: Pagination })
 

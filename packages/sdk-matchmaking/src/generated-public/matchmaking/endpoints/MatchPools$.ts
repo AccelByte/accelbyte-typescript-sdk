@@ -9,11 +9,11 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ListMatchPoolsResponse } from '../definitions/ListMatchPoolsResponse'
-import { MatchPool } from '../definitions/MatchPool'
-import { MatchPoolConfig } from '../definitions/MatchPoolConfig'
-import { PlayerMetricRecord } from '../definitions/PlayerMetricRecord'
-import { TicketMetricResultRecord } from '../definitions/TicketMetricResultRecord'
+import { ListMatchPoolsResponse } from '../definitions/ListMatchPoolsResponse.js'
+import { MatchPool } from '../definitions/MatchPool.js'
+import { MatchPoolConfig } from '../definitions/MatchPoolConfig.js'
+import { PlayerMetricRecord } from '../definitions/PlayerMetricRecord.js'
+import { TicketMetricResultRecord } from '../definitions/TicketMetricResultRecord.js'
 
 export class MatchPools$ {
   // @ts-ignore

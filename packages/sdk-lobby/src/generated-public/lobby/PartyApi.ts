@@ -8,10 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Party$ } from './endpoints/Party$'
-import { PartyData } from './definitions/PartyData'
-import { PartyPutCustomAttributesRequest } from './definitions/PartyPutCustomAttributesRequest'
-import { PartyPutLimitSizeRequest } from './definitions/PartyPutLimitSizeRequest'
+import { Party$ } from './endpoints/Party$.js'
+import { PartyData } from './definitions/PartyData.js'
+import { PartyPutCustomAttributesRequest } from './definitions/PartyPutCustomAttributesRequest.js'
+import { PartyPutLimitSizeRequest } from './definitions/PartyPutLimitSizeRequest.js'
 
 export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -9,7 +9,7 @@
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { ConcurrentRecordRequest } from '../definitions/ConcurrentRecordRequest'
+import { ConcurrentRecordRequest } from '../definitions/ConcurrentRecordRequest.js'
 
 export class ConcurrentRecord$ {
   // @ts-ignore

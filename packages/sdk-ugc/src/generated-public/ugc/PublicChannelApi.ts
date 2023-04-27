@@ -8,11 +8,11 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ChannelResponse } from './definitions/ChannelResponse'
-import { PaginatedGetChannelResponse } from './definitions/PaginatedGetChannelResponse'
-import { PublicChannel$ } from './endpoints/PublicChannel$'
-import { PublicChannelRequest } from './definitions/PublicChannelRequest'
-import { UpdateChannelRequest } from './definitions/UpdateChannelRequest'
+import { ChannelResponse } from './definitions/ChannelResponse.js'
+import { PaginatedGetChannelResponse } from './definitions/PaginatedGetChannelResponse.js'
+import { PublicChannel$ } from './endpoints/PublicChannel$.js'
+import { PublicChannelRequest } from './definitions/PublicChannelRequest.js'
+import { UpdateChannelRequest } from './definitions/UpdateChannelRequest.js'
 
 export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

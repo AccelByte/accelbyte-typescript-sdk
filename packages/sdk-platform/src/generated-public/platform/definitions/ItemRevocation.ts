@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { CreditRevocation } from './CreditRevocation'
-import { EntitlementRevocation } from './EntitlementRevocation'
+import { CreditRevocation } from './CreditRevocation.js'
+import { EntitlementRevocation } from './EntitlementRevocation.js'
 
 export const ItemRevocation: z.ZodType<ItemRevocation> = z.lazy(() =>
   z.object({

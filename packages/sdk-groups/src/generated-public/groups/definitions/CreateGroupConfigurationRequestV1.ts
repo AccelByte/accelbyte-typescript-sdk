@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Rule } from './Rule'
+import { Rule } from './Rule.js'
 
 export const CreateGroupConfigurationRequestV1 = z.object({
   allowMultiple: z.boolean(),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PlatformReward } from './PlatformReward'
+import { PlatformReward } from './PlatformReward.js'
 
 export const DlcItem = z.object({ id: z.string().nullish(), rewards: z.array(PlatformReward).nullish() })
 

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserKeyRequest } from './UserKeyRequest'
+import { UserKeyRequest } from './UserKeyRequest.js'
 
 export const BulkUserKeyRequest = z.object({ data: z.array(UserKeyRequest) })
 

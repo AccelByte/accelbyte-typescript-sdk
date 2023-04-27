@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ConcurrentRecord$ } from './endpoints/ConcurrentRecord$'
-import { ConcurrentRecordRequest } from './definitions/ConcurrentRecordRequest'
+import { ConcurrentRecord$ } from './endpoints/ConcurrentRecord$.js'
+import { ConcurrentRecordRequest } from './definitions/ConcurrentRecordRequest.js'
 
 export function ConcurrentRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

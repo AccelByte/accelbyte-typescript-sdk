@@ -8,8 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ChatSnapshots } from './definitions/ChatSnapshots'
-import { Moderation$ } from './endpoints/Moderation$'
+import { ChatSnapshots } from './definitions/ChatSnapshots.js'
+import { Moderation$ } from './endpoints/Moderation$.js'
 
 export function ModerationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

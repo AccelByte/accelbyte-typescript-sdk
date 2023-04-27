@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { NotificationTopicResponseV1 } from './NotificationTopicResponseV1'
-import { Pagination } from './Pagination'
+import { NotificationTopicResponseV1 } from './NotificationTopicResponseV1.js'
+import { Pagination } from './Pagination.js'
 
 export const GetAllNotificationTopicsResponse = z.object({ data: z.array(NotificationTopicResponseV1), paging: Pagination })
 

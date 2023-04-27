@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GroupRule } from './GroupRule'
+import { GroupRule } from './GroupRule.js'
 
 export const PublicCreateNewGroupRequestV1 = z.object({
   configurationCode: z.string(),

@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { FixedPeriodRotationConfig } from './FixedPeriodRotationConfig'
-import { Localization } from './Localization'
-import { SectionItem } from './SectionItem'
+import { FixedPeriodRotationConfig } from './FixedPeriodRotationConfig.js'
+import { Localization } from './Localization.js'
+import { SectionItem } from './SectionItem.js'
 
 export const SectionUpdate = z.object({
   name: z.string(),

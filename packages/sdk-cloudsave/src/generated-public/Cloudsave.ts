@@ -7,9 +7,9 @@
  * AUTO GENERATED
  */
 
-import { PublicGameRecordApi } from './cloudsave/PublicGameRecordApi'
-import { PublicPlayerRecordApi } from './cloudsave/PublicPlayerRecordApi'
-import { ConcurrentRecordApi } from './cloudsave/ConcurrentRecordApi'
+import { PublicGameRecordApi } from './cloudsave/PublicGameRecordApi.js'
+import { PublicPlayerRecordApi } from './cloudsave/PublicPlayerRecordApi.js'
+import { ConcurrentRecordApi } from './cloudsave/ConcurrentRecordApi.js'
 
 const apis = {
   PublicGameRecordApi,

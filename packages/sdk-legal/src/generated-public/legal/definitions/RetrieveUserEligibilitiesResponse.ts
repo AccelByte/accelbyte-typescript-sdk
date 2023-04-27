@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PolicyVersionWithLocalizedVersionObject } from './PolicyVersionWithLocalizedVersionObject'
+import { PolicyVersionWithLocalizedVersionObject } from './PolicyVersionWithLocalizedVersionObject.js'
 
 export const RetrieveUserEligibilitiesResponse = z.object({
   readableId: z.string().nullish(),
