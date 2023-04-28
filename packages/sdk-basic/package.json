@@ -5,6 +5,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "rimraf dist && tsc",
     "test": "echo ''",
