@@ -1,38 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Web Widgets example using Next.js
 
-## Getting Started
 
-First, run the development server:
+## How to Run
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+This folder should be ready to run without any changes as it is pointing to the [AccelByte's demo environment](https://demo.accelbyte.io) by default.
+
+```sh
+# Install the dependencies.
+yarn # npm install
+
+# Run Nextjs server:
+yarn dev # npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Open you browser at [http://localhost:3030](http://localhost:3030) to see the result. The example flow is:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. Login page
+2. Catalog page with the list of items
+3. Ability to click and see and purchase an item
+4. A Payment page is shown when `Pay` button is clicked
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+ ### Login Page
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The Login Page utilizes AccelByte [IAM password login flow](https://docs-preview.accelbyte.io/api-explorer/?api=IAM&path=/iam/v3/oauth/token&method=post) using `Grant Type password`
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Note, that the login page does not use Cookie, but localStorage. As such, this is considered Cross Site Scripting(XSS) vulnerable, thus care should be taken when embedding third party JavaScript files, as this may result in third party JS high-jacking the AccelByte `accessToken`. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+##### Login Curl example using `password` Grant Type
+    ```shell
+    curl --location 'https://demo.accelbyte.io/iam/v3/oauth/token' \
+         --header 'Content-Type: application/x-www-form-urlencoded' \
+         --header 'Authorization: Basic NzdmODg1MDZiNjE3NGMzZWE0ZDkyNWY1YjQwOTZjZTg6' \
+         --data 'password=<urlencoded-password>&username=<urlencoded-username>&grant_type=password&client_id=77f88506b6174c3ea4d925f5b4096ce8'
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+When the Login page complete the authentication, the IAM `accessToken` will be stored in browser localStorage, allowing to be utilized for the next pages
 
-## Deploy on Vercel
+### Catalog Page
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The Catalog Page utilizes [Platform items endpoint](https://docs-preview.accelbyte.io/api-explorer/?api=Platform%20Store&path=/public/namespaces/{namespace}/items/byCriteria&method=get)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```shell
+    curl --location 'https://demo.accelbyte.io/platform/public/namespaces/accelbyte/items/byCriteria?itemType=APP&limit=16&offset=0&sortBy=name%253Aasc%252CdisplayOrder%253Aasc' \
+    ```
+
+the actual Web Widget example is
+```javascript
+import { AppStore, StoreWidget } from '@accelbyte/widgets-v2'
+import { useRouter } from 'next/router'
+import React from 'react'
+
+export default function Apps() {
+  const router = useRouter()
+  const page = router.query.page ? Number(router.query.page) : 1
+
+  return <AppStore page={page} />
+}
+```
+
+
+### Payment Page
+
+The Payment Web Widget example is:
+
+```javascript
+import React from 'react'
+import { PaymentWidget } from '@accelbyte/widgets-v2'
+import { useRouter } from 'next/router'
+import { PlayerPortalRoutes } from '..'
+
+export default function OrderHistoryDetailPage() {
+    const router = useRouter()
+    const { orderNo } = router.query
+
+    if (!orderNo) {
+        return 'Not Found'
+    }
+
+    return <PaymentWidget namespace={'foundations'} paymentOrderNo={orderNo as string} redirectPath={PlayerPortalRoutes.home.link} />
+}
+```

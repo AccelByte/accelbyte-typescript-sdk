@@ -4,10 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 
+import { SingleInGameItemsStore } from '@accelbyte/widgets-v2'
 import React from 'react'
-import '~/styles/globals.css'
-import type { AppProps } from 'next/app'
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export default function IngameItemsStore() {
+  return <SingleInGameItemsStore baseItem={null} />
 }
