@@ -1,8 +1,9 @@
-/* 
- * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+/*
+ * Copyright (c) 2023 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -91,7 +92,7 @@ body {
 }
 
 body {
-  color: rbg(--foreground-rgb);
+  color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
       transparent,

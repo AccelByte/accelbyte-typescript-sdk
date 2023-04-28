@@ -114,6 +114,7 @@ export class IamUserAuthorizationClient {
     return { ...result, mfaData }
   }
 
+
   loginWithPasswordAuthorization = async ({ username, password }) => {
     const deviceId = SdkDevice.getDeviceId()
     const axios = Network.create({
@@ -142,6 +143,7 @@ export class IamUserAuthorizationClient {
     if (result.error && !mfaData?.mfaToken) throw result.error
     return { ...result, mfaData }
   }
+
 
   static getMfaDataFromError = (errorResponse: AxiosResponse) => {
     const doesMFADataExist = Validate.safeParse(errorResponse.data, MFADataResponse)

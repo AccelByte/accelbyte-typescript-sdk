@@ -1,3 +1,7 @@
+### 1.5320.20 - 2023-04-28
+
+- Added `loginWithPasswordAuthorization` method
+
 ### 1.5320.19 - 2023-04-27
 
 - Bump from script
