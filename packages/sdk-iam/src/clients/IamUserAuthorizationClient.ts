@@ -114,6 +114,35 @@ export class IamUserAuthorizationClient {
     return { ...result, mfaData }
   }
 
+  loginWithPasswordAuthorization = async ({ username, password }) => {
+    const deviceId = SdkDevice.getDeviceId()
+    const axios = Network.create({
+      ...this.conf,
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${this.options.clientId}:`).toString('base64')}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Device-Id': deviceId,
+        'Device-Name': platform.name ? platform.name.toString() : '',
+        'Device-Os': platform.os ? platform.os.toString() : '',
+        'Device-Type': SdkDevice.getType()
+      }
+    })
+
+    const data: Parameters<OAuth20$['postOauthToken']>[0] = {
+      password,
+      username,
+      grant_type: 'password',
+      client_id: this.options.clientId
+    }
+    const result = await new OAuth20$(axios, this.namespace, this.cache).postOauthToken(data)
+
+    const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse
+    const mfaData = IamUserAuthorizationClient.getMfaDataFromError(errorResponse)
+
+    if (result.error && !mfaData?.mfaToken) throw result.error
+    return { ...result, mfaData }
+  }
+
   static getMfaDataFromError = (errorResponse: AxiosResponse) => {
     const doesMFADataExist = Validate.safeParse(errorResponse.data, MFADataResponse)
     if (!doesMFADataExist) return
