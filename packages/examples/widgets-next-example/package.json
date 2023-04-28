@@ -12,7 +12,7 @@
   "dependencies": {
     "@accelbyte/sdk": "1.2.2",
     "@accelbyte/sdk-basic": "1.291.19",
-    "@accelbyte/sdk-iam": "1.5320.20",
+    "@accelbyte/sdk-iam": "1.5320.19",
     "@accelbyte/sdk-legal": "1.1290.13",
     "@accelbyte/sdk-platform": "1.4290.17",
     "@accelbyte/widgets-v2": "0.2.1-experimental.1",
