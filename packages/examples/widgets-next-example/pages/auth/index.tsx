@@ -10,11 +10,12 @@ import { loginWithPassword } from '~/sdk'
 import { Accelbyte } from '@accelbyte/sdk'
 import { saveToLocalSorage } from '../../helper/localStorage'
 import { useRouter } from 'next/router'
+import { CLIENT_ID } from '../constants'
 
 const sdk = Accelbyte.SDK({
   options: {
     baseURL: 'http://localhost:3030/api',
-    clientId: '77f88506b6174c3ea4d925f5b4096ce8',
+    clientId: CLIENT_ID,
     namespace: 'accelbyte',
     redirectURI: 'http://localhost:3030'
   }

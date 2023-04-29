@@ -26,7 +26,7 @@ Open you browser at [http://localhost:3030](http://localhost:3030) to see the re
 2. Catalog page with the list of items
 3. Ability to click and see and purchase an item
 4. A Payment page is shown when `Buy Now` button is clicked
-5. A Stripe payment station is shown allowing to complete the purchase
+5. A Checkout page is shown using Stripe payment station allowing to complete the purchase
 
  ### Login Page
 

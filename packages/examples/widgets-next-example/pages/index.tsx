@@ -13,11 +13,12 @@ import { useRouter } from 'next/router'
 import { AppStore, RouteUtils, SdkWidget, SingleGameStoreWrapper, SingleInGameItemsStore, StoreWidget } from '@accelbyte/widgets-v2'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import { CLIENT_ID } from './constants'
 
 const sdk = Accelbyte.SDK({
   options: {
     baseURL: 'http://localhost:3030/api',
-    clientId: '77f88506b6174c3ea4d925f5b4096ce8',
+    clientId: CLIENT_ID,
     namespace: 'accelbyte',
     redirectURI: 'http://localhost:3030'
   }
@@ -83,13 +84,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Welcome to Accelbyte NEXT JS</title>
+        <title>NEXT.JS Example Using Accelbyte Web Widgets and Web SDK</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <p>Welcome to Accelbyte NEXT JS</p>
+          <p>NEXT.JS Example Using Accelbyte Web Widgets and Web SDK</p>
           {isLoading ? (
             'loading ...'
           ) : (
@@ -100,7 +101,7 @@ export default function Home() {
                     <SdkWidget
                       sdkOptions={{
                         baseURL: 'http://localhost:3030/api',
-                        clientId: '77f88506b6174c3ea4d925f5b4096ce8',
+                        clientId: CLIENT_ID,
                         namespace: 'accelbyte',
                         redirectURI: 'http://localhost:3030'
                       }}
