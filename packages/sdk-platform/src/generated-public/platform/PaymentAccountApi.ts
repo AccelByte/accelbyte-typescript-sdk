@@ -19,7 +19,7 @@ export function PaymentAccountApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Get payment accounts.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=2 (READ)</li><li><i>Returns</i>: Payment account list</li></ul>
+   * Get payment accounts.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment account list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentAccounts_ByUserId(userId: string): Promise<PaymentAccountArray> {
     const $ = new PaymentAccount$(Network.create(requestConfig), namespace, cache)
@@ -29,7 +29,7 @@ export function PaymentAccountApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Delete payment account.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=8 (DELETE)</li><li><i>Returns</i>:</li></ul>
+   * Delete payment account.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;:&lt;/li&gt;&lt;/ul&gt;
    */
   async function deletePaymentAccount_ByUserId_ByType_ById(userId: string, type: string, id: string): Promise<unknown> {
     const $ = new PaymentAccount$(Network.create(requestConfig), namespace, cache)

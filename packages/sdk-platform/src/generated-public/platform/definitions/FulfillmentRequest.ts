@@ -7,21 +7,21 @@ import { z } from 'zod'
 import { OrderSummary } from './OrderSummary.js'
 
 export const FulfillmentRequest = z.object({
-  storeId: z.string().nullish(),
+  duration: z.number().int().nullish(),
+  endDate: z.string().nullish(),
   itemId: z.string().nullish(),
   itemSku: z.string().nullish(),
-  quantity: z.number().int(),
-  orderNo: z.string().nullish(),
+  language: z.string().nullish(),
   order: OrderSummary.nullish(),
+  orderNo: z.string().nullish(),
+  origin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish(),
+  quantity: z.number().int(),
+  region: z.string().nullish(),
   source: z
-    .enum(['PURCHASE', 'IAP', 'PROMOTION', 'ACHIEVEMENT', 'REFERRAL_BONUS', 'REDEEM_CODE', 'REWARD', 'GIFT', 'DLC', 'OTHER'])
+    .enum(['ACHIEVEMENT', 'DLC', 'GIFT', 'IAP', 'OTHER', 'PROMOTION', 'PURCHASE', 'REDEEM_CODE', 'REFERRAL_BONUS', 'REWARD'])
     .nullish(),
   startDate: z.string().nullish(),
-  endDate: z.string().nullish(),
-  duration: z.number().int().nullish(),
-  region: z.string().nullish(),
-  language: z.string().nullish(),
-  origin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
+  storeId: z.string().nullish()
 })
 
 export interface FulfillmentRequest extends z.TypeOf<typeof FulfillmentRequest> {}

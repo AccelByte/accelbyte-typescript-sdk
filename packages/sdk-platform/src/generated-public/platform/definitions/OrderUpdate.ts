@@ -7,17 +7,17 @@ import { z } from 'zod'
 
 export const OrderUpdate = z.object({
   status: z.enum([
-    'INIT',
-    'CHARGED',
     'CHARGEBACK',
     'CHARGEBACK_REVERSED',
+    'CHARGED',
+    'CLOSED',
+    'DELETED',
     'FULFILLED',
     'FULFILL_FAILED',
-    'REFUNDING',
+    'INIT',
     'REFUNDED',
-    'REFUND_FAILED',
-    'CLOSED',
-    'DELETED'
+    'REFUNDING',
+    'REFUND_FAILED'
   ]),
   statusReason: z.string()
 })

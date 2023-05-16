@@ -10,18 +10,18 @@ import { RevokeResult } from './RevokeResult.js'
 
 export const UserDlcRecord = z.object({
   id: z.string().nullish(),
+  namespace: z.string().nullish(),
   obtainedAt: z.string().nullish(),
-  rewards: z.array(PlatformReward).nullish(),
-  status: z.enum(['REVOKED', 'FULFILLED', 'REVOKE_FAILED']).nullish(),
-  revokedAt: z.string().nullish(),
-  transactionId: z.string().nullish(),
-  revokeResults: z.array(RevokeResult).nullish(),
+  platform: z.enum(['EPICGAMES', 'PSN', 'STEAM', 'XBOX']).nullish(),
   revocationResult: RevocationResult.nullish(),
+  revokeResults: z.array(RevokeResult).nullish(),
+  revokedAt: z.string().nullish(),
+  rewards: z.array(PlatformReward).nullish(),
   sources: z.array(z.string()).nullish(),
-  version: z.number().int().nullish(),
-  platform: z.enum(['PSN', 'STEAM', 'XBOX', 'EPICGAMES']).nullish(),
+  status: z.enum(['FULFILLED', 'REVOKED', 'REVOKE_FAILED']).nullish(),
+  transactionId: z.string().nullish(),
   userId: z.string().nullish(),
-  namespace: z.string().nullish()
+  version: z.number().int().nullish()
 })
 
 export interface UserDlcRecord extends z.TypeOf<typeof UserDlcRecord> {}

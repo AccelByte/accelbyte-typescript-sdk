@@ -19,6 +19,7 @@ export const StatInfo = z.object({
   setBy: z.enum(['CLIENT', 'SERVER']),
   tags: z.array(z.string()).nullish(),
   cycleIds: z.array(z.string()).nullish(),
+  isPublic: z.boolean(),
   createdAt: z.string(),
   updatedAt: z.string()
 })

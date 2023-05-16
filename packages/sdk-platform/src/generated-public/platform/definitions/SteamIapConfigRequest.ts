@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const SteamIapConfigRequest = z.object({ publisherAuthenticationKey: z.string().nullish(), appId: z.string() })
+export const SteamIapConfigRequest = z.object({ appId: z.string(), publisherAuthenticationKey: z.string().nullish() })
 
 export interface SteamIapConfigRequest extends z.TypeOf<typeof SteamIapConfigRequest> {}

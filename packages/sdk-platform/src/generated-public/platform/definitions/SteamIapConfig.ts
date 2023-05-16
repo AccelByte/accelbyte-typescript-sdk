@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const SteamIapConfig = z.object({
-  rvn: z.number().int().nullish(),
+  appId: z.string().nullish(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
   namespace: z.string().nullish(),
   publisherAuthenticationKey: z.string().nullish(),
-  appId: z.string().nullish()
+  rvn: z.number().int().nullish(),
+  updatedAt: z.string().nullish()
 })
 
 export interface SteamIapConfig extends z.TypeOf<typeof SteamIapConfig> {}

@@ -19,10 +19,10 @@ export class PublicCreator$ {
    * Public user can access without token or if token specified, requires valid user token
    */
   getUsers(queryParams?: {
-    sortby?: string | null
-    orderby?: string | null
     limit?: number
     offset?: number
+    orderby?: string | null
+    sortby?: string | null
   }): Promise<IResponseWithSync<PaginatedCreatorOverviewResponse>> {
     const params = { limit: 1000, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)

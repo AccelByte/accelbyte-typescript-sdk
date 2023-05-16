@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const RevokeCurrency = z.object({
-  namespace: z.string().nullish(),
+  balanceOrigin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish(),
   currencyCode: z.string().nullish(),
-  balanceOrigin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
+  namespace: z.string().nullish()
 })
 
 export interface RevokeCurrency extends z.TypeOf<typeof RevokeCurrency> {}

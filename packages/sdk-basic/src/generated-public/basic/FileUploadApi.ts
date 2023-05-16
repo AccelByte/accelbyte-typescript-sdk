@@ -19,7 +19,7 @@ export function FileUploadApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Generate an upload URL for user content. It's valid for 10 minutes.<br/>There are 2 kinds of storage limitation per user : maximum file count and maximum file size.<br/>The threshold of those limitations is different between upload category that is used.<br/>Other detail info: <ul><li><i>Required permission</i>: resource = <b>"NAMESPACE:{namespace}:USER:{userId}:FILEUPLOAD"</b>, action=1 <b>(CREATE)</b></li><li><i>Action code</i>: 11102</li><li><i>Default maximum file count per user</i>: 10 files</li><li><i>Default maximum file size per user</i>: 104857600 bytes</li><li><i>Returns</i>: URL data</li></ul>
+   * Generate an upload URL for user content. It&#39;s valid for 10 minutes.&lt;br/&gt;There are 2 kinds of storage limitation per user : maximum file count and maximum file size.&lt;br/&gt;The threshold of those limitations is different between upload category that is used.&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource = &lt;b&gt;&#34;NAMESPACE:{namespace}:USER:{userId}:FILEUPLOAD&#34;&lt;/b&gt;, action=1 &lt;b&gt;(CREATE)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11102&lt;/li&gt;&lt;li&gt;&lt;i&gt;Default maximum file count per user&lt;/i&gt;: 10 files&lt;/li&gt;&lt;li&gt;&lt;i&gt;Default maximum file size per user&lt;/i&gt;: 104857600 bytes&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: URL data&lt;/li&gt;&lt;/ul&gt;
    */
   async function createFile_ByUserId(
     userId: string,
@@ -32,7 +32,7 @@ export function FileUploadApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Generate an upload URL. It's valid for 10 minutes.<br/>Other detail info: <ul><li><i>Required permission</i>: resource = <b>"NAMESPACE:{namespace}:FILEUPLOAD"</b>, action=1 <b>(CREATE)</b></li><li><i>Action code</i>: 11101</li><li><i>Returns</i>: URL data</li></ul>
+   * Generate an upload URL. It&#39;s valid for 10 minutes.&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource = &lt;b&gt;&#34;NAMESPACE:{namespace}:FILEUPLOAD&#34;&lt;/b&gt;, action=1 &lt;b&gt;(CREATE)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11101&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: URL data&lt;/li&gt;&lt;/ul&gt;
    */
   async function createFile_ByFolder(folder: string, queryParams: { fileType: string | null }): Promise<FileUploadUrlInfo> {
     const $ = new FileUpload$(Network.create(requestConfig), namespace, cache)

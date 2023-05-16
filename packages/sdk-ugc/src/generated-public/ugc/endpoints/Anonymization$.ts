@@ -28,7 +28,7 @@ export class Anonymization$ {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}" [DELETE]
+   * Required permission NAMESPACE:{namespace}:USER:{userId}&#34; [DELETE]
    */
   deleteState_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -41,7 +41,7 @@ export class Anonymization$ {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]</b>
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
    */
   deleteChannel_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -54,7 +54,7 @@ export class Anonymization$ {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]</b>.
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
    */
   deleteContent_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

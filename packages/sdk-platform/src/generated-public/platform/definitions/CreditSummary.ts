@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const CreditSummary = z.object({
-  walletId: z.string(),
+  amount: z.number().int(),
+  currencyCode: z.string().nullish(),
   namespace: z.string(),
   userId: z.string(),
-  amount: z.number().int(),
-  currencyCode: z.string().nullish()
+  walletId: z.string()
 })
 
 export interface CreditSummary extends z.TypeOf<typeof CreditSummary> {}

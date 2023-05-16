@@ -22,7 +22,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>Get rankings in current week leaderboard.</p>
+   * &lt;p&gt;Get rankings in current week leaderboard.&lt;/p&gt;
    */
   async function getWeek_ByLeaderboardCode(
     leaderboardCode: string,
@@ -35,7 +35,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Get rankings in current month leaderboard.</p>
+   * &lt;p&gt;Get rankings in current month leaderboard.&lt;/p&gt;
    */
   async function getMonth_ByLeaderboardCode(
     leaderboardCode: string,
@@ -48,7 +48,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Get rankings in today leaderboard.</p>
+   * &lt;p&gt;Get rankings in today leaderboard.&lt;/p&gt;
    */
   async function getToday_ByLeaderboardCode(
     leaderboardCode: string,
@@ -61,7 +61,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Get rankings in current season leaderboard.</p>
+   * &lt;p&gt;Get rankings in current season leaderboard.&lt;/p&gt;
    */
   async function getSeason_ByLeaderboardCode(
     leaderboardCode: string,
@@ -74,7 +74,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  <p>Get rankings in an all time leaderboard.</p>
+   *  &lt;p&gt;Get rankings in an all time leaderboard.&lt;/p&gt;
    */
   async function getAlltime_ByLeaderboardCode(
     leaderboardCode: string,
@@ -100,7 +100,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  <p>Get signed url in an all time leaderboard that archived. NOTE: This will be a bulk endpoint to get sign url</p>
+   *  &lt;p&gt;Get signed url in an all time leaderboard that archived. NOTE: This will be a bulk endpoint to get sign url&lt;/p&gt;
    */
   async function getArchived_ByLeaderboardCode(
     leaderboardCode: string,
@@ -108,16 +108,6 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   ): Promise<ArchiveLeaderboardSignedUrlResponseArray> {
     const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getArchived_ByLeaderboardCode(leaderboardCode, queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
-  /**
-   * <p>Get user ranking in leaderboard</p>
-   */
-  async function getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<UserRankingResponse> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getUser_ByLeaderboardCode_ByUserId(leaderboardCode, userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -132,6 +122,16 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
+   */
+  async function getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<UserRankingResponse> {
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getUser_ByLeaderboardCode_ByUserId(leaderboardCode, userId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     getWeek_ByLeaderboardCode,
     getMonth_ByLeaderboardCode,
@@ -140,7 +140,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getAlltime_ByLeaderboardCode,
     getAlltime_ByLeaderboardCode_ByNS,
     getArchived_ByLeaderboardCode,
-    getUser_ByLeaderboardCode_ByUserId,
-    deleteUser_ByLeaderboardCode_ByUserId
+    deleteUser_ByLeaderboardCode_ByUserId,
+    getUser_ByLeaderboardCode_ByUserId
   }
 }

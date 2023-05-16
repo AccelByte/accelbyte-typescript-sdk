@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const PlatformSubscribeRequest = z.object({
-  itemId: z.string(),
   grantDays: z.number().int(),
-  source: z.string().nullish(),
+  itemId: z.string(),
+  language: z.string().nullish(),
   reason: z.string().nullish(),
   region: z.string().nullish(),
-  language: z.string().nullish()
+  source: z.string().nullish()
 })
 
 export interface PlatformSubscribeRequest extends z.TypeOf<typeof PlatformSubscribeRequest> {}

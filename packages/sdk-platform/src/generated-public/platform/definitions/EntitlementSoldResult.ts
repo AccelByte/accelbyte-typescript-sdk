@@ -8,10 +8,10 @@ import { CreditSummary } from './CreditSummary.js'
 import { EntitlementInfo } from './EntitlementInfo.js'
 
 export const EntitlementSoldResult = z.object({
-  requestId: z.string().nullish(),
-  replayed: z.boolean().nullish(),
   creditSummaries: z.array(CreditSummary).nullish(),
-  entitlementInfo: EntitlementInfo.nullish()
+  entitlementInfo: EntitlementInfo.nullish(),
+  replayed: z.boolean().nullish(),
+  requestId: z.string().nullish()
 })
 
 export interface EntitlementSoldResult extends z.TypeOf<typeof EntitlementSoldResult> {}

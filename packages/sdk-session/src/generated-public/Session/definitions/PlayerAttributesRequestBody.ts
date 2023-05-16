@@ -10,7 +10,8 @@ export const PlayerAttributesRequestBody = z.object({
   crossplayEnabled: z.boolean(),
   currentPlatform: z.string(),
   data: z.record(z.any()),
-  platforms: z.array(UserPlatformInfo)
+  platforms: z.array(UserPlatformInfo),
+  roles: z.array(z.string())
 })
 
 export interface PlayerAttributesRequestBody extends z.TypeOf<typeof PlayerAttributesRequestBody> {}

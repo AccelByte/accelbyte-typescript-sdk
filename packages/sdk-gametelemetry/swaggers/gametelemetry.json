@@ -1,0 +1,364 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "description": "This is analytics game telemetry to standardize avengers and justice telemetry",
+    "title": "Analytics Game Telemetry",
+    "version": "1.15.0"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/game-telemetry"
+  },
+  "securityDefinitions": {
+    "APIKeyCookie": {
+      "in": "header",
+      "name": "Cookie",
+      "type": "apiKey",
+      "x-keys": ["access_token"]
+    },
+    "HTTPBearer": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    },
+    "HasPermission": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "HasScope": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/game-telemetry/v1/admin/namespaces/{namespace}/events": {
+      "get": {
+        "operationId": "get_events_game_telemetry_v1_admin_namespaces__namespace__events_get",
+        "parameters": [
+          {
+            "default": "2023-03-10T10:16:09Z",
+            "description": "Start time of data to be queried. Default: Current time in UTC minus 1 day.",
+            "in": "query",
+            "name": "startTime",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": "2023-03-11T10:16:09Z",
+            "description": "End time of data to be queried. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endTime",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": 0,
+            "description": "Offset of response data number.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 100,
+            "description": "Limit of response data number.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Game telemetry EventId.",
+            "in": "query",
+            "name": "eventId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Game telemetry EventName.",
+            "in": "query",
+            "name": "eventName",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Game telemetry payload to be query. Format: [foo].[bar]:[keyword]. e.g: player.username:tom*",
+            "in": "query",
+            "name": "eventPayload",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {}
+          },
+          "422": {
+            "description": "Validation Error",
+            "schema": {
+              "$ref": "#/definitions/HTTPValidationError"
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          },
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Events",
+        "tags": ["telemetry"]
+      }
+    },
+    "/game-telemetry/v1/protected/events": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "This endpoint requires valid JWT token.\nThis endpoint does not require permission.\n\nThis endpoint send events into designated streaming pipeline and each request can contain single or multiple events.\n\u0026lt;p\u0026gt; Format of the event:\n\n- **EventNamespace (required)**: Namespace of the relevant game with domain name format.\n                \u0026lt;p\u0026gt; Only accept input with valid characters. Allowed characters: \u0026lt;b\u0026gt;Aa-Zz0-9_.-\u0026lt;/b\u0026gt; \u0026lt;p\u0026gt;\n                \u0026lt;p\u0026gt; It is encouraged to use alphanumeric only characters. \u0026lt;b\u0026gt;_.-\u0026lt;/b\u0026gt; will be deprecated soon \u0026lt;p\u0026gt;\n                \u0026lt;p\u0026gt; Example: accelbyte \u0026lt;/p\u0026gt;\n\n- **EventName (required)**: Name of the event.\n                \u0026lt;p\u0026gt; Only accept input with valid characters. Allowed characters: \u0026lt;b\u0026gt;Aa-Zz0-9_.-\u0026lt;/b\u0026gt; \u0026lt;p\u0026gt;\n                \u0026lt;p\u0026gt; It is encouraged to use alphanumeric only characters. \u0026lt;b\u0026gt;_.-\u0026lt;/b\u0026gt; will be deprecated soon \u0026lt;p\u0026gt;\n                \u0026lt;p\u0026gt; Example: player_killed, mission_accomplished \u0026lt;/p\u0026gt;\n\n- **Payload (required)**: An arbitrary json with the payload of the said event.\n                \u0026lt;p\u0026gt; Default maximum payload size is \u0026lt;b\u0026gt;1MB\u0026lt;/b\u0026gt; \u0026lt;p\u0026gt;",
+        "operationId": "protected_save_events_game_telemetry_v1_protected_events_post",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/TelemetryBody"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Cookie",
+            "required": false,
+            "type": "string",
+            "x-keys": ["access_token"],
+            "x-required": ["access_token"]
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "schema": {
+              "$ref": "#/definitions/HTTPValidationError"
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          },
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Protected Save Events",
+        "tags": ["Gametelemetry Operations"]
+      }
+    },
+    "/game-telemetry/v1/protected/steamIds/{steamId}/playtime": {
+      "get": {
+        "description": "This endpoint requires valid JWT token.\nThis endpoint does not require permission.\n\nThis endpoint retrieves player\u0026#39;s total playtime in Steam for a specific game (AppId) and store them in service\u0026#39;s cache.\n\nPlayers\u0026#39; Steam account must be set into public to enable the service fetch their total playtime data.",
+        "operationId": "protected_get_playtime_game_telemetry_v1_protected_steamIds__steamId__playtime_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "steamId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Cookie",
+            "required": false,
+            "type": "string",
+            "x-keys": ["access_token"],
+            "x-required": ["access_token"]
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "title": "Response Protected Get Playtime Game Telemetry V1 Protected Steamids  Steamid  Playtime Get",
+              "type": "object"
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "schema": {
+              "$ref": "#/definitions/HTTPValidationError"
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          },
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Protected Get Playtime",
+        "tags": ["Gametelemetry Operations"]
+      }
+    },
+    "/game-telemetry/v1/protected/steamIds/{steamId}/playtime/{playtime}": {
+      "put": {
+        "description": "This endpoint requires valid JWT token.\nThis endpoint does not require permission.\n\nThis endpoint update player\u0026#39;s total playtime in a specific game (AppId) from service\u0026#39;s cache.",
+        "operationId": "protected_update_playtime_game_telemetry_v1_protected_steamIds__steamId__playtime__playtime__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "steamId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "playtime",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Cookie",
+            "required": false,
+            "type": "string",
+            "x-keys": ["access_token"],
+            "x-required": ["access_token"]
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {}
+          },
+          "422": {
+            "description": "Validation Error",
+            "schema": {
+              "$ref": "#/definitions/HTTPValidationError"
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          },
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Protected Update Playtime",
+        "tags": ["Gametelemetry Operations"]
+      }
+    }
+  },
+  "definitions": {
+    "HTTPValidationError": {
+      "properties": {
+        "detail": {
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          },
+          "title": "Detail",
+          "type": "array"
+        }
+      },
+      "title": "HTTPValidationError",
+      "type": "object"
+    },
+    "TelemetryBody": {
+      "properties": {
+        "EventId": {
+          "description": "Adding this `EventID` field in the request body does not override the `EventID` generated by server which is saved in the data lake",
+          "title": "Eventid",
+          "type": "string",
+          "x-deprecated": true
+        },
+        "EventName": {
+          "title": "Eventname",
+          "type": "string"
+        },
+        "EventNamespace": {
+          "title": "Eventnamespace",
+          "type": "string"
+        },
+        "EventTimestamp": {
+          "description": "Adding this `EventTimestamp` field in the request body does not override the `EventTimestamp` generated by server which is saved in the data lake. To add specific timestamp of your telemetry data, please add a new subfield in the `payload` field",
+          "format": "date-time",
+          "title": "Eventtimestamp",
+          "type": "string",
+          "x-deprecated": true,
+          "x-nullable": true
+        },
+        "Payload": {
+          "title": "Payload",
+          "type": "object"
+        }
+      },
+      "required": ["EventName", "EventNamespace", "Payload"],
+      "title": "TelemetryBody",
+      "type": "object"
+    },
+    "ValidationError": {
+      "properties": {
+        "loc": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Location",
+          "type": "array"
+        },
+        "msg": {
+          "title": "Message",
+          "type": "string"
+        },
+        "type": {
+          "title": "Error Type",
+          "type": "string"
+        }
+      },
+      "required": ["loc", "msg", "type"],
+      "title": "ValidationError",
+      "type": "object"
+    }
+  },
+  "x-docs": {
+    "alias": "game-telemetry",
+    "host": "https://development.accelbyte.io",
+    "path": "/game-telemetry/openapi.json"
+  },
+  "x-version": {
+    "buildDate": "2023-01-13T08:45:30+00:00",
+    "gitHash": "fefcbb002d48578a52e2d7812b17157b7fec5ada",
+    "name": "analytics-game-telemetry",
+    "realm": "dev",
+    "rolesSeedingVersion": "0.0.3",
+    "version": "1.15.0"
+  }
+}

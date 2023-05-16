@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const PlayStationReconcileResult = z.object({
-  transactionId: z.string().nullish(),
-  psnItemId: z.string().nullish(),
   itemId: z.string().nullish(),
+  psnItemId: z.string().nullish(),
   sku: z.string().nullish(),
-  status: z.enum(['VERIFIED', 'FULFILLED', 'FAILED']).nullish()
+  status: z.enum(['FAILED', 'FULFILLED', 'VERIFIED']).nullish(),
+  transactionId: z.string().nullish()
 })
 
 export interface PlayStationReconcileResult extends z.TypeOf<typeof PlayStationReconcileResult> {}

@@ -8,15 +8,15 @@ import { AcceptedPoliciesRequest } from './AcceptedPoliciesRequest.js'
 
 export const CreateUserRequestV4 = z.object({
   acceptedPolicies: z.array(AcceptedPoliciesRequest).nullish(),
-  authType: z.string(),
-  code: z.string(),
+  authType: z.enum(['EMAILPASSWD']),
+  code: z.string().nullish(),
   country: z.string(),
   dateOfBirth: z.string().nullish(),
-  displayName: z.string(),
+  displayName: z.string().nullish(),
   emailAddress: z.string(),
-  password: z.string(),
+  password: z.string().nullish(),
   passwordMD5Sum: z.string().nullish(),
-  reachMinimumAge: z.boolean(),
+  reachMinimumAge: z.boolean().nullish(),
   username: z.string()
 })
 

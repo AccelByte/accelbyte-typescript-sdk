@@ -26,13 +26,13 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * This API is used to get the item by sku.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with sku</li></ul>
+   * This API is used to get the item by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the item with sku&lt;/li&gt;&lt;/ul&gt;
    */
   async function getItemsBySku(queryParams: {
-    storeId?: string | null
     sku: string | null
     language?: string | null
     region?: string | null
+    storeId?: string | null
   }): Promise<ItemInfo> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getItemsBySku(queryParams)
@@ -41,27 +41,27 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to search items by keyword in title, description and long description, It's language constrained, also if item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
+   * This API is used to search items by keyword in title, description and long description, It&#39;s language constrained, also if item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of items&lt;/li&gt;&lt;/ul&gt;
    */
   async function getItemsSearch(queryParams: {
-    storeId?: string | null
-    language: string | null
     keyword: string | null
+    language: string | null
     itemType?:
       | 'APP'
-      | 'COINS'
-      | 'INGAMEITEM'
       | 'BUNDLE'
       | 'CODE'
-      | 'SUBSCRIPTION'
-      | 'SEASON'
+      | 'COINS'
+      | 'EXTENSION'
+      | 'INGAMEITEM'
+      | 'LOOTBOX'
       | 'MEDIA'
       | 'OPTIONBOX'
-      | 'EXTENSION'
-      | 'LOOTBOX'
-    region?: string | null
-    offset?: number
+      | 'SEASON'
+      | 'SUBSCRIPTION'
     limit?: number
+    offset?: number
+    region?: string | null
+    storeId?: string | null
   }): Promise<ItemPagingSlicedResult> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getItemsSearch(queryParams)
@@ -70,13 +70,13 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get item by appId.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with that appId</li></ul>
+   * This API is used to get item by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the item with that appId&lt;/li&gt;&lt;/ul&gt;
    */
   async function getItemsByAppId(queryParams: {
-    storeId?: string | null
     appId: string | null
     language?: string | null
     region?: string | null
+    storeId?: string | null
   }): Promise<ItemInfo> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getItemsByAppId(queryParams)
@@ -85,33 +85,33 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
+   * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of items&lt;/li&gt;&lt;/ul&gt;
    */
   async function getItemsByCriteria(queryParams?: {
-    storeId?: string | null
-    language?: string | null
-    region?: string | null
+    appType?: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'
+    baseAppId?: string | null
     categoryPath?: string | null
+    features?: string | null
     includeSubCategoryItem?: boolean | null
     itemType?:
       | 'APP'
-      | 'COINS'
-      | 'INGAMEITEM'
       | 'BUNDLE'
       | 'CODE'
-      | 'SUBSCRIPTION'
-      | 'SEASON'
+      | 'COINS'
+      | 'EXTENSION'
+      | 'INGAMEITEM'
+      | 'LOOTBOX'
       | 'MEDIA'
       | 'OPTIONBOX'
-      | 'EXTENSION'
-      | 'LOOTBOX'
-    appType?: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'
-    baseAppId?: string | null
-    tags?: string | null
-    features?: string | null
-    offset?: number
+      | 'SEASON'
+      | 'SUBSCRIPTION'
+    language?: string | null
     limit?: number
-    sortBy?: string | null
+    offset?: number
+    region?: string | null
+    sortBy?: string[]
+    storeId?: string | null
+    tags?: string | null
   }): Promise<ItemPagingSlicedResult> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getItemsByCriteria(queryParams)
@@ -120,13 +120,13 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to bulk get locale items. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Returns</i>: the list of items info</li></ul>
+   * This API is used to bulk get locale items. If item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store items)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store items)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of items info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getItemsLocaleByIds(queryParams: {
-    storeId?: string | null
     itemIds: string | null
-    region?: string | null
     language?: string | null
+    region?: string | null
+    storeId?: string | null
   }): Promise<ItemInfoArray> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getItemsLocaleByIds(queryParams)
@@ -135,11 +135,11 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: item data</li></ul>
+   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getLocale_ByItemId(
     itemId: string,
-    queryParams?: { storeId?: string | null; region?: string | null; language?: string | null; populateBundle?: boolean | null }
+    queryParams?: { language?: string | null; populateBundle?: boolean | null; region?: string | null; storeId?: string | null }
   ): Promise<PopulatedItemInfo> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getLocale_ByItemId(itemId, queryParams)
@@ -148,7 +148,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get item dynamic data for a published item.<br>Other detail info: <ul><li><i>Returns</i>: item dynamic data</li></ul>
+   * Get item dynamic data for a published item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item dynamic data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getDynamic_ByItemId(itemId: string): Promise<ItemDynamicDataInfo> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
@@ -158,11 +158,11 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get an app in locale. If app not exist in specific region, default region app will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Returns</i>: app data</li></ul>
+   * This API is used to get an app in locale. If app not exist in specific region, default region app will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store app)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store app)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: app data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAppLocale_ByItemId(
     itemId: string,
-    queryParams?: { storeId?: string | null; region?: string | null; language?: string | null }
+    queryParams?: { language?: string | null; region?: string | null; storeId?: string | null }
   ): Promise<AppInfo> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getAppLocale_ByItemId(itemId, queryParams)

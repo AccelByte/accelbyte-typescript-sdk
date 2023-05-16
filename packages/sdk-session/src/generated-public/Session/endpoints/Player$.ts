@@ -17,7 +17,18 @@ export class Player$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Get player attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player's 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - currentPlatform : latest user game platform.
+   * Reset player attributes.
+   */
+  deleteUserMeAttribute(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Get player attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player&#39;s 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
    */
   getUsersMeAttributes(): Promise<IResponseWithSync<PlayerAttributesResponseBody>> {
     const params = {} as SDKRequestConfig
@@ -34,7 +45,7 @@ export class Player$ {
   }
 
   /**
-   * This API behaves to upsert player's attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player's 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - currentPlatform : latest user game platform.
+   * This API behaves to upsert player&#39;s attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player&#39;s 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
    */
   createUserMeAttribute(data: PlayerAttributesRequestBody): Promise<IResponse<PlayerAttributesResponseBody>> {
     const params = {} as SDKRequestConfig
@@ -42,16 +53,5 @@ export class Player$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, PlayerAttributesResponseBody, 'PlayerAttributesResponseBody')
-  }
-
-  /**
-   * Reset player attributes.
-   */
-  deleteUserMeAttribute(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.delete(url, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

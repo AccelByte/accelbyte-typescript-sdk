@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const FulfillmentItem = z.object({
-  storeId: z.string().nullish(),
+  extraSubscriptionDays: z.number().int().nullish(),
   itemId: z.string().nullish(),
+  itemName: z.string().nullish(),
   itemSku: z.string().nullish(),
   itemType: z
-    .enum(['APP', 'COINS', 'INGAMEITEM', 'BUNDLE', 'CODE', 'SUBSCRIPTION', 'SEASON', 'MEDIA', 'OPTIONBOX', 'EXTENSION', 'LOOTBOX'])
+    .enum(['APP', 'BUNDLE', 'CODE', 'COINS', 'EXTENSION', 'INGAMEITEM', 'LOOTBOX', 'MEDIA', 'OPTIONBOX', 'SEASON', 'SUBSCRIPTION'])
     .nullish(),
-  itemName: z.string().nullish(),
   quantity: z.number().int(),
-  extraSubscriptionDays: z.number().int().nullish()
+  storeId: z.string().nullish()
 })
 
 export interface FulfillmentItem extends z.TypeOf<typeof FulfillmentItem> {}

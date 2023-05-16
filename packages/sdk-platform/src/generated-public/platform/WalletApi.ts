@@ -20,7 +20,7 @@ export function WalletApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * get my wallet by currency code and namespace.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li><li><i>Path's namespace</i> : <ul> <li>can be filled with <b>publisher namespace</b> in order to get <b>publisher user wallet</b></li> <li>can be filled with <b>game namespace</b> in order to get <b>game user wallet</b></li> </ul></li></ul>
+   * get my wallet by currency code and namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;li&gt;&lt;i&gt;Path&#39;s namespace&lt;/i&gt; : &lt;ul&gt; &lt;li&gt;can be filled with &lt;b&gt;publisher namespace&lt;/b&gt; in order to get &lt;b&gt;publisher user wallet&lt;/b&gt;&lt;/li&gt; &lt;li&gt;can be filled with &lt;b&gt;game namespace&lt;/b&gt; in order to get &lt;b&gt;game user wallet&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   async function getUserMeWallet_ByCurrencyCode(currencyCode: string): Promise<PlatformWallet> {
     const $ = new Wallet$(Network.create(requestConfig), namespace, cache)
@@ -30,7 +30,7 @@ export function WalletApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * get a wallet by currency code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:WALLET", action=2 (READ)</li><li><i>Returns</i>: wallet info</li></ul>
+   * get a wallet by currency code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getWallet_ByUserId_ByCurrencyCode(userId: string, currencyCode: string): Promise<PlatformWallet> {
     const $ = new Wallet$(Network.create(requestConfig), namespace, cache)
@@ -40,12 +40,12 @@ export function WalletApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * List wallet transactions by currency code ordered by create time desc.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:WALLET", action=2 (READ)</li><li><i>Returns</i>: currency transaction info</li></ul>
+   * List wallet transactions by currency code ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency transaction info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getTransactions_ByUserId_ByCurrencyCode(
     userId: string,
     currencyCode: string,
-    queryParams?: { offset?: number; limit?: number }
+    queryParams?: { limit?: number; offset?: number }
   ): Promise<WalletTransactionPagingSlicedResult> {
     const $ = new Wallet$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getTransactions_ByUserId_ByCurrencyCode(userId, currencyCode, queryParams)

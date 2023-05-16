@@ -1,8 +1,8 @@
 [
   [
-    "groups",
-    "Groups",
-    "groups-api.json",
+    "group",
+    "Group",
+    "group.json",
     "https://development.accelbyte.io/group/apidocs/api.json"
   ]
 ]

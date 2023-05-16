@@ -7,18 +7,18 @@ import { z } from 'zod'
 import { ItemSnapshot } from './ItemSnapshot.js'
 
 export const AppEntitlementInfo = z.object({
-  namespace: z.string(),
   appId: z.string().nullish(),
-  appType: z.enum(['GAME', 'SOFTWARE', 'DLC', 'DEMO']).nullish(),
-  sku: z.string().nullish(),
-  userId: z.string(),
-  storeId: z.string().nullish(),
-  itemId: z.string().nullish(),
-  startDate: z.string().nullish(),
+  appType: z.enum(['DEMO', 'DLC', 'GAME', 'SOFTWARE']).nullish(),
   endDate: z.string().nullish(),
   grantedAt: z.string(),
-  status: z.enum(['ACTIVE', 'INACTIVE', 'CONSUMED', 'REVOKED', 'SOLD']),
-  itemSnapshot: ItemSnapshot.nullish()
+  itemId: z.string().nullish(),
+  itemSnapshot: ItemSnapshot.nullish(),
+  namespace: z.string(),
+  sku: z.string().nullish(),
+  startDate: z.string().nullish(),
+  status: z.enum(['ACTIVE', 'CONSUMED', 'INACTIVE', 'REVOKED', 'SOLD']),
+  storeId: z.string().nullish(),
+  userId: z.string()
 })
 
 export interface AppEntitlementInfo extends z.TypeOf<typeof AppEntitlementInfo> {}

@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const PaymentOrderDetails = z.object({
-  displayName: z.string().nullish(),
-  title: z.string(),
-  description: z.string().nullish(),
-  price: z.string(),
+  charging: z.boolean(),
   currencyCode: z.string(),
   currencySymbol: z.string(),
-  sandbox: z.boolean(),
+  description: z.string().nullish(),
+  displayName: z.string().nullish(),
+  price: z.string(),
   region: z.string().nullish(),
-  charging: z.boolean()
+  sandbox: z.boolean(),
+  title: z.string()
 })
 
 export interface PaymentOrderDetails extends z.TypeOf<typeof PaymentOrderDetails> {}

@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const EntitlementDecrement = z.object({
-  useCount: z.number().int().nullish(),
   options: z.array(z.string()).nullish(),
-  requestId: z.string().nullish()
+  requestId: z.string().nullish(),
+  useCount: z.number().int().nullish()
 })
 
 export interface EntitlementDecrement extends z.TypeOf<typeof EntitlementDecrement> {}

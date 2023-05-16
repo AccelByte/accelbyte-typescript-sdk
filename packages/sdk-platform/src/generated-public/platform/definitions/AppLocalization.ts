@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const AppLocalization = z.object({ slogan: z.string().nullish(), announcement: z.string().nullish() })
+export const AppLocalization = z.object({ announcement: z.string().nullish(), slogan: z.string().nullish() })
 
 export interface AppLocalization extends z.TypeOf<typeof AppLocalization> {}

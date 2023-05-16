@@ -1,0 +1,8 @@
+{
+  "buildDate": "2023-01-13T08:45:30+00:00",
+  "gitHash": "fefcbb002d48578a52e2d7812b17157b7fec5ada",
+  "name": "analytics-game-telemetry",
+  "realm": "dev",
+  "rolesSeedingVersion": "0.0.3",
+  "version": "1.15.0"
+}

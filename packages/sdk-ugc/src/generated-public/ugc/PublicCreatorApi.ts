@@ -23,10 +23,10 @@ export function PublicCreatorApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getUsers(queryParams?: {
-    sortby?: string | null
-    orderby?: string | null
     limit?: number
     offset?: number
+    orderby?: string | null
+    sortby?: string | null
   }): Promise<PaginatedCreatorOverviewResponse> {
     const $ = new PublicCreator$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getUsers(queryParams)

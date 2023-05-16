@@ -7,9 +7,9 @@ import { z } from 'zod'
 
 export const WxPayConfigInfo = z.object({
   appId: z.string().nullish(),
-  mchid: z.string().nullish(),
-  key: z.string().nullish(),
   certPath: z.string().nullish(),
+  key: z.string().nullish(),
+  mchid: z.string().nullish(),
   returnUrl: z.string().nullish()
 })
 

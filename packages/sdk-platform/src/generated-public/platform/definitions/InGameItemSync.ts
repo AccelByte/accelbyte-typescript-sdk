@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const InGameItemSync = z.object({ targetNamespace: z.string(), targetItemId: z.string(), categoryPath: z.string() })
+export const InGameItemSync = z.object({ categoryPath: z.string(), targetItemId: z.string(), targetNamespace: z.string() })
 
 export interface InGameItemSync extends z.TypeOf<typeof InGameItemSync> {}

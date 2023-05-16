@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const RetrievePolicyTypeResponse = z.object({
-  id: z.string(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
-  policyTypeName: z.string(),
   description: z.string().nullish(),
-  isNeedDocument: z.boolean()
+  id: z.string(),
+  isNeedDocument: z.boolean(),
+  policyTypeName: z.string(),
+  updatedAt: z.string().nullish()
 })
 
 export interface RetrievePolicyTypeResponse extends z.TypeOf<typeof RetrievePolicyTypeResponse> {}

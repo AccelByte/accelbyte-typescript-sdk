@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const NotificationProcessResult = z.object({
-  status: z.enum(['PROCESSED', 'ERROR', 'WARN', 'IGNORED']).nullish(),
   code: z.string().nullish(),
   customParam: z.record(z.any()).nullish(),
-  severity: z.number().int().nullish()
+  severity: z.number().int().nullish(),
+  status: z.enum(['ERROR', 'IGNORED', 'PROCESSED', 'WARN']).nullish()
 })
 
 export interface NotificationProcessResult extends z.TypeOf<typeof NotificationProcessResult> {}

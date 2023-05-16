@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { CreditResult } from './CreditResult.js'
 
 export const BulkCreditResult = z.object({
-  successList: z.array(CreditResult).nullish(),
   failList: z.array(CreditResult).nullish(),
-  status: z.enum(['SUCCESS', 'FAIL', 'PARTIAL_SUCCESS']).nullish()
+  status: z.enum(['FAIL', 'PARTIAL_SUCCESS', 'SUCCESS']).nullish(),
+  successList: z.array(CreditResult).nullish()
 })
 
 export interface BulkCreditResult extends z.TypeOf<typeof BulkCreditResult> {}

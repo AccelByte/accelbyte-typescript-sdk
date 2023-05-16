@@ -29,7 +29,7 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
-  async function getFriendsMe(queryParams?: { limit?: string | null; offset?: string | null }): Promise<GetUserFriendsResponseArray> {
+  async function getFriendsMe(queryParams?: { limit?: number; offset?: number }): Promise<GetUserFriendsResponseArray> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getFriendsMe(queryParams)
     if (resp.error) throw resp.error
@@ -110,7 +110,7 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : <code>NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]</code> with scope <code>social</code> <br>friends request in a namespace.
+   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;friends request in a namespace.
    */
   async function createAddBulkFriend_ByUserId(userId: string, data: BulkAddFriendsRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)

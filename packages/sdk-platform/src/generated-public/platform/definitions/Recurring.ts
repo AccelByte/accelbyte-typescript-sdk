@@ -6,7 +6,7 @@
 import { z } from 'zod'
 
 export const Recurring = z.object({
-  cycle: z.enum(['WEEKLY', 'MONTHLY', 'QUARTERLY', 'YEARLY']),
+  cycle: z.enum(['MONTHLY', 'QUARTERLY', 'WEEKLY', 'YEARLY']),
   fixedFreeDays: z.number().int(),
   fixedTrialCycles: z.number().int(),
   graceDays: z.number().int()

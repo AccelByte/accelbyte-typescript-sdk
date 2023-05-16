@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export const ConsumableEntitlementRevocationConfig = z.object({
   enabled: z.boolean().nullish(),
-  strategy: z.enum(['REVOKE_OR_REPORT', 'CUSTOM']).nullish()
+  strategy: z.enum(['CUSTOM', 'REVOKE_OR_REPORT']).nullish()
 })
 
 export interface ConsumableEntitlementRevocationConfig extends z.TypeOf<typeof ConsumableEntitlementRevocationConfig> {}

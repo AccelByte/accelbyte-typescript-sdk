@@ -8,10 +8,10 @@ import { PlatformRewardCurrency } from './PlatformRewardCurrency.js'
 import { PlatformRewardItem } from './PlatformRewardItem.js'
 
 export const PlatformReward = z.object({
-  type: z.enum(['ITEM', 'CURRENCY']).nullish(),
-  item: PlatformRewardItem.nullish(),
   currency: PlatformRewardCurrency.nullish(),
-  quantity: z.number().int().nullish()
+  item: PlatformRewardItem.nullish(),
+  quantity: z.number().int().nullish(),
+  type: z.enum(['CURRENCY', 'ITEM']).nullish()
 })
 
 export interface PlatformReward extends z.TypeOf<typeof PlatformReward> {}

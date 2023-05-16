@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const PaymentTaxConfigEdit = z.object({
-  taxJarEnabled: z.boolean().nullish(),
-  taxJarApiToken: z.string().nullish(),
   sandboxTaxJarApiToken: z.string().nullish(),
+  taxJarApiToken: z.string().nullish(),
+  taxJarEnabled: z.boolean().nullish(),
   taxJarProductCodesMapping: z.record(z.string()).nullish()
 })
 

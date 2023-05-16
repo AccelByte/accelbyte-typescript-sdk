@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { FulfillmentScriptContext } from './FulfillmentScriptContext.js'
 
 export const FulfillmentScriptEvalTestRequest = z.object({
-  type: z.enum(['grantDays']),
   context: FulfillmentScriptContext,
-  script: z.string()
+  script: z.string(),
+  type: z.enum(['grantDays'])
 })
 
 export interface FulfillmentScriptEvalTestRequest extends z.TypeOf<typeof FulfillmentScriptEvalTestRequest> {}

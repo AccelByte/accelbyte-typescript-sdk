@@ -6,26 +6,26 @@
 import { z } from 'zod'
 
 export const ItemNaming = z.object({
+  categoryPath: z.string().nullish(),
   itemId: z.string(),
-  namespace: z.string(),
   itemType: z.enum([
     'APP',
-    'COINS',
-    'INGAMEITEM',
     'BUNDLE',
     'CODE',
-    'SUBSCRIPTION',
-    'SEASON',
+    'COINS',
+    'EXTENSION',
+    'INGAMEITEM',
+    'LOOTBOX',
     'MEDIA',
     'OPTIONBOX',
-    'EXTENSION',
-    'LOOTBOX'
+    'SEASON',
+    'SUBSCRIPTION'
   ]),
-  sku: z.string().nullish(),
   name: z.string(),
-  categoryPath: z.string().nullish(),
-  status: z.enum(['ACTIVE', 'INACTIVE']).nullish(),
-  seasonType: z.enum(['PASS', 'TIER']).nullish()
+  namespace: z.string(),
+  seasonType: z.enum(['PASS', 'TIER']).nullish(),
+  sku: z.string().nullish(),
+  status: z.enum(['ACTIVE', 'INACTIVE']).nullish()
 })
 
 export interface ItemNaming extends z.TypeOf<typeof ItemNaming> {}

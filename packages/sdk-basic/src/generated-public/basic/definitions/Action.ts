@@ -6,13 +6,13 @@
 import { z } from 'zod'
 
 export const Action = z.object({
+  color: z.string().nullish(),
+  description: z.string().nullish(),
+  duration: z.number().int().nullish(),
+  icon: z.string().nullish(),
   id: z.number().int().nullish(),
   name: z.string().nullish(),
-  description: z.string().nullish(),
-  priority: z.number().int().nullish(),
-  duration: z.number().int().nullish(),
-  color: z.string().nullish(),
-  icon: z.string().nullish()
+  priority: z.number().int().nullish()
 })
 
 export interface Action extends z.TypeOf<typeof Action> {}

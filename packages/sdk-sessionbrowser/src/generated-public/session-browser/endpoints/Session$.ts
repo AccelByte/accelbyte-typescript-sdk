@@ -28,17 +28,17 @@ export class Session$ {
    */
   getGamesession(queryParams: {
     session_type: string | null
-    user_id?: string | null
     game_mode?: string | null
     game_version?: string | null
     joinable?: string | null
-    match_id?: string | null
+    limit?: number
     match_exist?: string | null
+    match_id?: string | null
+    offset?: number
     server_status?: string | null
-    offset?: string | null
-    limit?: string | null
+    user_id?: string | null
   }): Promise<IResponseWithSync<SessionQueryResponse>> {
-    const params = { limit: '25', ...queryParams } as SDKRequestConfig
+    const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -99,6 +99,19 @@ export class Session$ {
   }
 
   /**
+   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE] Required scope: social Delete the session (p2p) by session ID
+   */
+  deleteGamesession_BySessionId(sessionID: string): Promise<IResponse<SessionResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}'
+      .replace('{namespace}', this.namespace)
+      .replace('{sessionID}', sessionID)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
+  }
+
+  /**
    * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Get the session by session ID
    */
   getGamesession_BySessionId(sessionID: string): Promise<IResponseWithSync<SessionResponse>> {
@@ -126,19 +139,6 @@ export class Session$ {
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-  }
-
-  /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE] Required scope: social Delete the session (p2p) by session ID
-   */
-  deleteGamesession_BySessionId(sessionID: string): Promise<IResponse<SessionResponse>> {
-    const params = {} as SDKRequestConfig
-    const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}'
-      .replace('{namespace}', this.namespace)
-      .replace('{sessionID}', sessionID)
-    const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
   }

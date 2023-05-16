@@ -8,6 +8,7 @@ import { z } from 'zod'
 export const NativeSessionSetting = z.object({
   PSNServiceLabel: z.number().int(),
   SessionTitle: z.string(),
+  ShouldSync: z.boolean().nullish(),
   XboxServiceConfigID: z.string(),
   XboxSessionTemplateName: z.string()
 })

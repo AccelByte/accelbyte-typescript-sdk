@@ -1,0 +1,11 @@
+{
+  "description": "Justice Social Service",
+  "version": "2.6.0",
+  "title": "justice-social-service",
+  "contact": {
+    "name": "Engineering Team at AccelByte",
+    "url": "https://accelbyte.io",
+    "email": "engineering@accelbyte.io"
+  },
+  "gitHash": "2.6.0"
+}

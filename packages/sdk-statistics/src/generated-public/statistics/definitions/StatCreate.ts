@@ -16,7 +16,8 @@ export const StatCreate = z.object({
   setAsGlobal: z.boolean().nullish(),
   setBy: z.enum(['CLIENT', 'SERVER']),
   tags: z.array(z.string()).nullish(),
-  cycleIds: z.array(z.string()).nullish()
+  cycleIds: z.array(z.string()).nullish(),
+  isPublic: z.boolean().nullish()
 })
 
 export interface StatCreate extends z.TypeOf<typeof StatCreate> {}

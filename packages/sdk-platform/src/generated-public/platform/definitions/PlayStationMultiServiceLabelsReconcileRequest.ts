@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const PlayStationMultiServiceLabelsReconcileRequest = z.object({
-  productId: z.string().nullish(),
-  price: z.number().nullish(),
   currencyCode: z.string().nullish(),
+  price: z.number().nullish(),
+  productId: z.string().nullish(),
   serviceLabels: z.array(z.number().int()).nullish()
 })
 

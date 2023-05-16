@@ -7,24 +7,24 @@ import { z } from 'zod'
 import { Localization } from './Localization.js'
 
 export const ImportStoreItemInfo = z.object({
-  itemId: z.string().nullish(),
-  name: z.string().nullish(),
-  sku: z.string().nullish(),
   categoryPath: z.string().nullish(),
+  itemId: z.string().nullish(),
   itemType: z.enum([
     'APP',
-    'COINS',
-    'INGAMEITEM',
     'BUNDLE',
     'CODE',
-    'SUBSCRIPTION',
-    'SEASON',
+    'COINS',
+    'EXTENSION',
+    'INGAMEITEM',
+    'LOOTBOX',
     'MEDIA',
     'OPTIONBOX',
-    'EXTENSION',
-    'LOOTBOX'
+    'SEASON',
+    'SUBSCRIPTION'
   ]),
-  localizations: z.record(Localization)
+  localizations: z.record(Localization),
+  name: z.string().nullish(),
+  sku: z.string().nullish()
 })
 
 export interface ImportStoreItemInfo extends z.TypeOf<typeof ImportStoreItemInfo> {}

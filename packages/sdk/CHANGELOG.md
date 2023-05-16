@@ -1,3 +1,7 @@
+### 2.0.1 - 2023-05-02
+
+- Bump from script
+
 ### 2.0.0 - 2023-04-27
 
 - Bump from script

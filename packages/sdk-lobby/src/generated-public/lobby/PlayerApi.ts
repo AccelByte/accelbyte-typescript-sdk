@@ -20,7 +20,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required valid user authorization <br/> <br>load blocked players in a namespace based on user id <br/> Action Code: 50101
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;load blocked players in a namespace based on user id &lt;br/&gt; Action Code: 50101
    */
   async function getPlayerUsersMeBlocked(): Promise<GetAllPlayerBlockedUsersResponse> {
     const $ = new Player$(Network.create(requestConfig), namespace, cache)
@@ -30,7 +30,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required valid user authorization <br/> <br>load get players who blocked this player in a namespace based on user id <br/> Action Code: 50101
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;load get players who blocked this player in a namespace based on user id &lt;br/&gt; Action Code: 50101
    */
   async function getPlayerUsersMeBlockedBy(): Promise<GetAllPlayerBlockedByUsersResponse> {
     const $ = new Player$(Network.create(requestConfig), namespace, cache)

@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const ConfigInfo = z.object({
-  namespace: z.string().nullish(),
-  key: z.string().nullish(),
-  value: z.string().nullish(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish()
+  key: z.string().nullish(),
+  namespace: z.string().nullish(),
+  updatedAt: z.string().nullish(),
+  value: z.string().nullish()
 })
 
 export interface ConfigInfo extends z.TypeOf<typeof ConfigInfo> {}

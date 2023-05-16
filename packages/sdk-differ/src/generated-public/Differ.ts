@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 
-import { DiffCalculationApi } from './differ/DiffCalculationApi'
+import { DiffCalculationApi } from './differ/DiffCalculationApi.js'
 
 const apis = {
   DiffCalculationApi

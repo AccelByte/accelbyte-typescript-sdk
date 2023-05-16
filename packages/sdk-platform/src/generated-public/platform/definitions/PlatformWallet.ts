@@ -7,15 +7,15 @@ import { z } from 'zod'
 import { WalletInfo } from './WalletInfo.js'
 
 export const PlatformWallet = z.object({
-  namespace: z.string(),
-  userId: z.string(),
+  balance: z.number().int(),
   currencyCode: z.string(),
   currencySymbol: z.string(),
-  balance: z.number().int(),
-  walletInfos: z.array(WalletInfo).nullish(),
-  walletStatus: z.enum(['ACTIVE', 'INACTIVE']).nullish(),
+  id: z.string().nullish(),
+  namespace: z.string(),
   status: z.enum(['ACTIVE', 'INACTIVE']).nullish(),
-  id: z.string().nullish()
+  userId: z.string(),
+  walletInfos: z.array(WalletInfo).nullish(),
+  walletStatus: z.enum(['ACTIVE', 'INACTIVE']).nullish()
 })
 
 export interface PlatformWallet extends z.TypeOf<typeof PlatformWallet> {}

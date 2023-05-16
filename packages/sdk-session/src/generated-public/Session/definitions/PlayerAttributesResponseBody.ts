@@ -11,6 +11,7 @@ export const PlayerAttributesResponseBody = z.object({
   currentPlatform: z.string(),
   data: z.record(z.any()),
   platforms: z.array(UserPlatformInfo),
+  roles: z.array(z.string()),
   userID: z.string()
 })
 

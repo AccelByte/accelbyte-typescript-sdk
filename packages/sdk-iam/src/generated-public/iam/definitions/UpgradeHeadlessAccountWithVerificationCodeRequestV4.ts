@@ -12,7 +12,7 @@ export const UpgradeHeadlessAccountWithVerificationCodeRequestV4 = z.object({
   displayName: z.string().nullish(),
   emailAddress: z.string(),
   password: z.string(),
-  reachMinimumAge: z.boolean(),
+  reachMinimumAge: z.boolean().nullish(),
   username: z.string(),
   validateOnly: z.boolean().nullish()
 })

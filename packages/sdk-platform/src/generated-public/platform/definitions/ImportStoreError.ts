@@ -8,9 +8,9 @@ import { ImportErrorDetails } from './ImportErrorDetails.js'
 import { ImportStoreItemInfo } from './ImportStoreItemInfo.js'
 
 export const ImportStoreError = z.object({
-  type: z.enum(['ITEM']).nullish(),
+  errors: z.array(ImportErrorDetails).nullish(),
   item: ImportStoreItemInfo.nullish(),
-  errors: z.array(ImportErrorDetails).nullish()
+  type: z.enum(['ITEM']).nullish()
 })
 
 export interface ImportStoreError extends z.TypeOf<typeof ImportStoreError> {}

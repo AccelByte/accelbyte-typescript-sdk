@@ -18,7 +18,7 @@ export class Party$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required valid user authorization <br/> <br>load personal party data in a namespace based on Party ID <br/> Action Code: 50101
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;load personal party data in a namespace based on Party ID &lt;br/&gt; Action Code: 50101
    */
   getPartyParty_ByPartyId(partyId: string): Promise<IResponseWithSync<PartyData>> {
     const params = {} as SDKRequestConfig
@@ -37,7 +37,7 @@ export class Party$ {
   }
 
   /**
-   * Required valid user authorization <br/> <br>Set party limit, only party leader can call this endpoint.
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;Set party limit, only party leader can call this endpoint.
    */
   updateLimitParty_ByPartyId(partyId: string, data: PartyPutLimitSizeRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -50,7 +50,7 @@ export class Party$ {
   }
 
   /**
-   * Required valid user authorization <br/> <br>update party attributes in a namespace.
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;update party attributes in a namespace.
    */
   updateAttributeParty_ByPartyId(partyId: string, data: PartyPutCustomAttributesRequest): Promise<IResponse<PartyData>> {
     const params = {} as SDKRequestConfig

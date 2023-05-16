@@ -22,7 +22,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]</b>.
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
    */
   async function getGroups_ByUserId(userId: string, queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGroupResponse> {
     const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache)
@@ -42,7 +42,17 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]</b>.
+   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   */
+  async function deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<unknown> {
+    const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.deleteGroup_ByUserId_ByGroupId(userId, groupId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
    */
   async function getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<CreateGroupResponse> {
     const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache)
@@ -62,17 +72,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
-   */
-  async function deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<unknown> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.deleteGroup_ByUserId_ByGroupId(userId, groupId)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
-  /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]</b>.
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
    */
   async function getContents_ByUserId_ByGroupId(
     userId: string,
@@ -88,9 +88,9 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getGroups_ByUserId,
     createGroup_ByUserId,
+    deleteGroup_ByUserId_ByGroupId,
     getGroup_ByUserId_ByGroupId,
     updateGroup_ByUserId_ByGroupId,
-    deleteGroup_ByUserId_ByGroupId,
     getContents_ByUserId_ByGroupId
   }
 }

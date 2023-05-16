@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const ProfanityFilter = z.any()
+export const ProfanityFilter = z.object({ filter: z.string(), listName: z.string(), namespace: z.string(), note: z.string() })
 
 export interface ProfanityFilter extends z.TypeOf<typeof ProfanityFilter> {}

@@ -7,26 +7,26 @@ import { z } from 'zod'
 import { RedeemableItem } from './RedeemableItem.js'
 
 export const CodeInfo = z.object({
-  id: z.string(),
-  type: z.enum(['REDEMPTION']),
-  namespace: z.string(),
-  campaignId: z.string(),
-  value: z.string(),
-  maxRedeemCountPerCode: z.number().int(),
-  maxRedeemCountPerCodePerUser: z.number().int(),
-  maxRedeemCountPerCampaignPerUser: z.number().int(),
-  remainder: z.number().int(),
-  redeemedCount: z.number().int(),
-  status: z.enum(['ACTIVE', 'INACTIVE']),
-  redeemStart: z.string().nullish(),
-  redeemEnd: z.string().nullish(),
-  redeemType: z.enum(['ITEM']),
-  items: z.array(RedeemableItem).nullish(),
-  batchNo: z.number().int(),
   acquireOrderNo: z.string().nullish(),
   acquireUserId: z.string().nullish(),
+  batchNo: z.number().int(),
+  campaignId: z.string(),
   createdAt: z.string(),
-  updatedAt: z.string()
+  id: z.string(),
+  items: z.array(RedeemableItem).nullish(),
+  maxRedeemCountPerCampaignPerUser: z.number().int(),
+  maxRedeemCountPerCode: z.number().int(),
+  maxRedeemCountPerCodePerUser: z.number().int(),
+  namespace: z.string(),
+  redeemEnd: z.string().nullish(),
+  redeemStart: z.string().nullish(),
+  redeemType: z.enum(['ITEM']),
+  redeemedCount: z.number().int(),
+  remainder: z.number().int(),
+  status: z.enum(['ACTIVE', 'INACTIVE']),
+  type: z.enum(['REDEMPTION']),
+  updatedAt: z.string(),
+  value: z.string()
 })
 
 export interface CodeInfo extends z.TypeOf<typeof CodeInfo> {}

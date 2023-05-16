@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const ItemDynamicDataInfo = z.object({
+  availableCount: z.number().int(),
   itemId: z.string(),
   namespace: z.string(),
-  availableCount: z.number().int(),
   userAvailableCount: z.number().int(),
   userPurchaseLimit: z.number().int()
 })

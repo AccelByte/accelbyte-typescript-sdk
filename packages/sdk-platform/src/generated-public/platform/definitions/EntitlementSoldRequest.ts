@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const EntitlementSoldRequest = z.object({ useCount: z.number().int().nullish(), requestId: z.string().nullish() })
+export const EntitlementSoldRequest = z.object({ requestId: z.string().nullish(), useCount: z.number().int().nullish() })
 
 export interface EntitlementSoldRequest extends z.TypeOf<typeof EntitlementSoldRequest> {}

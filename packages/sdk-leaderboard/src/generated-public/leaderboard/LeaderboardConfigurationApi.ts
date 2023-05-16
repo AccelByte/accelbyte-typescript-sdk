@@ -20,13 +20,13 @@ export function LeaderboardConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>This endpoint return all leaderboard configurations</p>
+   * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
    */
   async function getLeaderboards(queryParams?: {
+    isArchived?: boolean | null
+    isDeleted?: boolean | null
     limit?: number
     offset?: number
-    isDeleted?: boolean | null
-    isArchived?: boolean | null
   }): Promise<GetAllLeaderboardConfigsPublicResp> {
     const $ = new LeaderboardConfiguration$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getLeaderboards(queryParams)
@@ -35,7 +35,7 @@ export function LeaderboardConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Public endpoint to create a new leaderboard. <p>Required permission 'NAMESPACE:{namespace}:LEADERBOARD [CREATE]'</p> <p><b>Fields :</b></p> <ul><li>LeaderboardConfig code must be lowercase and maximum length is 48 characters. <b>(required)</b>.</li> <li>Maximum length for leaderboard name is 128 characters. <b>(required)</b>.</li> <li>Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z<b>(required)</b>.</li> <li>Season period must be greater than 31 days.</li> <li>If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.</li> <li>Reset Date must be a number 1 - 31. Default is '1'.</li> <li>Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is '0'.</li> <li>Reset time must be <b>hours:minutes</b> in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.Default is '00:00'.</li> <li>Stat Code is related with statistic code in statistic service. <b>(required)</b>.</li> </ul>
+   * Public endpoint to create a new leaderboard. &lt;p&gt;Required permission &#39;NAMESPACE:{namespace}:LEADERBOARD [CREATE]&#39;&lt;/p&gt; &lt;p&gt;&lt;b&gt;Fields :&lt;/b&gt;&lt;/p&gt; &lt;ul&gt;&lt;li&gt;LeaderboardConfig code must be lowercase and maximum length is 48 characters. &lt;b&gt;(required)&lt;/b&gt;.&lt;/li&gt; &lt;li&gt;Maximum length for leaderboard name is 128 characters. &lt;b&gt;(required)&lt;/b&gt;.&lt;/li&gt; &lt;li&gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z&lt;b&gt;(required)&lt;/b&gt;.&lt;/li&gt; &lt;li&gt;Season period must be greater than 31 days.&lt;/li&gt; &lt;li&gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.&lt;/li&gt; &lt;li&gt;Reset Date must be a number 1 - 31. Default is &#39;1&#39;.&lt;/li&gt; &lt;li&gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is &#39;0&#39;.&lt;/li&gt; &lt;li&gt;Reset time must be &lt;b&gt;hours:minutes&lt;/b&gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.Default is &#39;00:00&#39;.&lt;/li&gt; &lt;li&gt;Stat Code is related with statistic code in statistic service. &lt;b&gt;(required)&lt;/b&gt;.&lt;/li&gt; &lt;/ul&gt;
    */
   async function createLeaderboard(data: LeaderboardConfigReq): Promise<LeaderboardConfigReq> {
     const $ = new LeaderboardConfiguration$(Network.create(requestConfig), namespace, cache)

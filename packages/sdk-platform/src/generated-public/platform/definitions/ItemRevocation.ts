@@ -9,47 +9,47 @@ import { EntitlementRevocation } from './EntitlementRevocation.js'
 
 export const ItemRevocation: z.ZodType<ItemRevocation> = z.lazy(() =>
   z.object({
+    creditRevocations: z.array(CreditRevocation).nullish(),
+    customRevocation: z.record(z.any()).nullish(),
+    entitlementRevocations: z.array(EntitlementRevocation).nullish(),
     itemId: z.string().nullish(),
+    itemRevocations: z.array(ItemRevocation).nullish(),
     itemSku: z.string().nullish(),
     itemType: z
-      .enum(['APP', 'COINS', 'INGAMEITEM', 'BUNDLE', 'CODE', 'SUBSCRIPTION', 'SEASON', 'MEDIA', 'OPTIONBOX', 'EXTENSION', 'LOOTBOX'])
+      .enum(['APP', 'BUNDLE', 'CODE', 'COINS', 'EXTENSION', 'INGAMEITEM', 'LOOTBOX', 'MEDIA', 'OPTIONBOX', 'SEASON', 'SUBSCRIPTION'])
       .nullish(),
-    status: z.enum(['SUCCESS', 'FAIL']).nullish(),
-    skipped: z.boolean().nullish(),
-    strategy: z.string().nullish(),
     quantity: z.number().int().nullish(),
     reason: z.string().nullish(),
-    itemRevocations: z.array(ItemRevocation).nullish(),
-    creditRevocations: z.array(CreditRevocation).nullish(),
-    entitlementRevocations: z.array(EntitlementRevocation).nullish(),
-    customRevocation: z.record(z.any()).nullish()
+    skipped: z.boolean().nullish(),
+    status: z.enum(['FAIL', 'SUCCESS']).nullish(),
+    strategy: z.string().nullish()
   })
 )
 
 export interface ItemRevocation {
+  creditRevocations?: CreditRevocation[] | null | undefined
+  customRevocation?: Record<string, any> | null | undefined
+  entitlementRevocations?: EntitlementRevocation[] | null | undefined
   itemId?: string | null | undefined
+  itemRevocations?: ItemRevocation[] | null | undefined
   itemSku?: string | null | undefined
   itemType?:
     | 'APP'
-    | 'COINS'
-    | 'INGAMEITEM'
     | 'BUNDLE'
     | 'CODE'
-    | 'SUBSCRIPTION'
-    | 'SEASON'
+    | 'COINS'
+    | 'EXTENSION'
+    | 'INGAMEITEM'
+    | 'LOOTBOX'
     | 'MEDIA'
     | 'OPTIONBOX'
-    | 'EXTENSION'
-    | 'LOOTBOX'
+    | 'SEASON'
+    | 'SUBSCRIPTION'
     | null
     | undefined
-  status?: 'SUCCESS' | 'FAIL' | null | undefined
-  skipped?: boolean | null | undefined
-  strategy?: string | null | undefined
   quantity?: number | null | undefined
   reason?: string | null | undefined
-  itemRevocations?: ItemRevocation[] | null | undefined
-  creditRevocations?: CreditRevocation[] | null | undefined
-  entitlementRevocations?: EntitlementRevocation[] | null | undefined
-  customRevocation?: Record<string, any> | null | undefined
+  skipped?: boolean | null | undefined
+  status?: 'FAIL' | 'SUCCESS' | null | undefined
+  strategy?: string | null | undefined
 }

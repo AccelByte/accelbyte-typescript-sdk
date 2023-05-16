@@ -8,10 +8,10 @@ import { ItemInfo } from './ItemInfo.js'
 import { OrderSummary } from './OrderSummary.js'
 
 export const FulfillmentScriptContext = z.object({
+  item: ItemInfo,
   namespace: z.string(),
-  source: z.enum(['PURCHASE', 'IAP', 'PROMOTION', 'ACHIEVEMENT', 'REFERRAL_BONUS', 'REDEEM_CODE', 'REWARD', 'GIFT', 'DLC', 'OTHER']),
   order: OrderSummary.nullish(),
-  item: ItemInfo
+  source: z.enum(['ACHIEVEMENT', 'DLC', 'GIFT', 'IAP', 'OTHER', 'PROMOTION', 'PURCHASE', 'REDEEM_CODE', 'REFERRAL_BONUS', 'REWARD'])
 })
 
 export interface FulfillmentScriptContext extends z.TypeOf<typeof FulfillmentScriptContext> {}

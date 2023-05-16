@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const DebitByCurrencyCodeRequest = z.object({
+  allowOverdraft: z.boolean().nullish(),
   amount: z.number().int(),
-  reason: z.string().nullish(),
-  balanceOrigin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish(),
-  allowOverdraft: z.boolean().nullish()
+  balanceOrigin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish(),
+  reason: z.string().nullish()
 })
 
 export interface DebitByCurrencyCodeRequest extends z.TypeOf<typeof DebitByCurrencyCodeRequest> {}

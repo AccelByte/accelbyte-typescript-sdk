@@ -15,15 +15,15 @@ export class Tags$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   getTags(queryParams?: {
-    name?: string | null
-    sortBy?: string | null
     limit?: number
+    name?: string | null
     offset?: number
+    sortBy?: string | null
   }): Promise<IResponseWithSync<PaginatedTagResponse>> {
-    const params = { sortBy: 'name:asc', limit: 10, ...queryParams } as SDKRequestConfig
+    const params = { limit: 10, sortBy: 'name:asc', ...queryParams } as SDKRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

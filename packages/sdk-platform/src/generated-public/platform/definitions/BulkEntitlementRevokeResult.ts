@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { EntitlementRevokeResult } from './EntitlementRevokeResult.js'
 
 export const BulkEntitlementRevokeResult = z.object({
-  successList: z.array(EntitlementRevokeResult).nullish(),
   failList: z.array(EntitlementRevokeResult).nullish(),
-  status: z.enum(['SUCCESS', 'FAIL', 'PARTIAL_SUCCESS']).nullish()
+  status: z.enum(['FAIL', 'PARTIAL_SUCCESS', 'SUCCESS']).nullish(),
+  successList: z.array(EntitlementRevokeResult).nullish()
 })
 
 export interface BulkEntitlementRevokeResult extends z.TypeOf<typeof BulkEntitlementRevokeResult> {}

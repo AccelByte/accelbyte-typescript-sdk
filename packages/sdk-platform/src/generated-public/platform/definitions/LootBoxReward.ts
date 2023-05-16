@@ -7,11 +7,11 @@ import { z } from 'zod'
 import { BoxItem } from './BoxItem.js'
 
 export const LootBoxReward = z.object({
-  name: z.string().nullish(),
-  type: z.enum(['REWARD', 'REWARD_GROUP', 'PROBABILITY_GROUP']).nullish(),
   lootBoxItems: z.array(BoxItem).nullish(),
-  weight: z.number().int().nullish(),
-  odds: z.number().nullish()
+  name: z.string().nullish(),
+  odds: z.number().nullish(),
+  type: z.enum(['PROBABILITY_GROUP', 'REWARD', 'REWARD_GROUP']).nullish(),
+  weight: z.number().int().nullish()
 })
 
 export interface LootBoxReward extends z.TypeOf<typeof LootBoxReward> {}

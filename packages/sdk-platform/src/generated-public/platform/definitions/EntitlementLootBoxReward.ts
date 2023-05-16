@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const EntitlementLootBoxReward = z.object({
+  count: z.number().int().nullish(),
   itemId: z.string().nullish(),
-  itemSku: z.string().nullish(),
-  count: z.number().int().nullish()
+  itemSku: z.string().nullish()
 })
 
 export interface EntitlementLootBoxReward extends z.TypeOf<typeof EntitlementLootBoxReward> {}

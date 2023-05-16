@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const PaymentOrderNotifySimulation = z.object({
-  paymentProvider: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']),
-  notifyType: z.enum(['CHARGE', 'REFUND']),
-  currencyCode: z.string(),
   amount: z.number().int().nullish(),
-  vat: z.number().int().nullish(),
-  salesTax: z.number().int().nullish()
+  currencyCode: z.string(),
+  notifyType: z.enum(['CHARGE', 'REFUND']),
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
+  salesTax: z.number().int().nullish(),
+  vat: z.number().int().nullish()
 })
 
 export interface PaymentOrderNotifySimulation extends z.TypeOf<typeof PaymentOrderNotifySimulation> {}

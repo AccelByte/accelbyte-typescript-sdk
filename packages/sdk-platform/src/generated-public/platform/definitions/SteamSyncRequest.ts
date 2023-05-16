@@ -6,13 +6,13 @@
 import { z } from 'zod'
 
 export const SteamSyncRequest = z.object({
-  steamId: z.string(),
   appId: z.string(),
-  region: z.string().nullish(),
+  currencyCode: z.string().nullish(),
   language: z.string().nullish(),
-  productId: z.string().nullish(),
   price: z.number().nullish(),
-  currencyCode: z.string().nullish()
+  productId: z.string().nullish(),
+  region: z.string().nullish(),
+  steamId: z.string()
 })
 
 export interface SteamSyncRequest extends z.TypeOf<typeof SteamSyncRequest> {}

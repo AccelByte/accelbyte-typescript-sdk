@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const ItemAcquireResult = z.object({ success: z.boolean(), maxCount: z.number().int() })
+export const ItemAcquireResult = z.object({ maxCount: z.number().int(), success: z.boolean() })
 
 export interface ItemAcquireResult extends z.TypeOf<typeof ItemAcquireResult> {}

@@ -8,8 +8,8 @@ import { EntitlementRevocationConfig } from './EntitlementRevocationConfig.js'
 import { WalletRevocationConfig } from './WalletRevocationConfig.js'
 
 export const RevocationConfigInfo = z.object({
-  namespace: z.string().nullish(),
   entitlement: EntitlementRevocationConfig.nullish(),
+  namespace: z.string().nullish(),
   wallet: WalletRevocationConfig.nullish()
 })
 

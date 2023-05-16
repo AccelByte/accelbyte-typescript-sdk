@@ -8,7 +8,7 @@ import { z } from 'zod'
 export const AccountProgressionInfo = z.object({
   displayName: z.string().nullish(),
   email: z.string().nullish(),
-  linkedGames: z.array(z.string()).nullish(),
+  linkedGames: z.array(z.string()),
   userName: z.string().nullish()
 })
 

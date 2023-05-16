@@ -6,24 +6,24 @@
 import { z } from 'zod'
 
 export const PaymentOrderChargeStatus = z.object({
+  charging: z.boolean().nullish(),
   status: z
     .enum([
-      'INIT',
       'AUTHORISED',
       'AUTHORISE_FAILED',
-      'CHARGED',
-      'CHARGE_FAILED',
-      'NOTIFICATION_OF_CHARGEBACK',
-      'REQUEST_FOR_INFORMATION',
       'CHARGEBACK',
       'CHARGEBACK_REVERSED',
-      'REFUNDING',
+      'CHARGED',
+      'CHARGE_FAILED',
+      'DELETED',
+      'INIT',
+      'NOTIFICATION_OF_CHARGEBACK',
       'REFUNDED',
+      'REFUNDING',
       'REFUND_FAILED',
-      'DELETED'
+      'REQUEST_FOR_INFORMATION'
     ])
-    .nullish(),
-  charging: z.boolean().nullish()
+    .nullish()
 })
 
 export interface PaymentOrderChargeStatus extends z.TypeOf<typeof PaymentOrderChargeStatus> {}

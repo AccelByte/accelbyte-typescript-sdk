@@ -21,6 +21,7 @@ export const TokenResponse = z.object({
   permissions: z.array(Permission),
   platform_id: z.string().nullish(),
   platform_user_id: z.string().nullish(),
+  refresh_expires_in: z.number().int().nullish(),
   refresh_token: z.string(),
   roles: z.array(z.string()),
   token_type: z.string(),

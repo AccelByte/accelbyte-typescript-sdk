@@ -22,6 +22,7 @@ export const GameServer = z.object({
   provider: z.string(),
   region: z.string(),
   session_id: z.string(),
+  source: z.string(),
   status: z.string()
 })
 

@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const ErrorEntity = z.object({
+  devStackTrace: z.string().nullish(),
   errorCode: z.number().int(),
   errorMessage: z.string(),
-  messageVariables: z.record(z.string()).nullish(),
-  devStackTrace: z.string().nullish()
+  messageVariables: z.record(z.string()).nullish()
 })
 
 export interface ErrorEntity extends z.TypeOf<typeof ErrorEntity> {}

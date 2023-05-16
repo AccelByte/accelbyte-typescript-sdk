@@ -6,21 +6,21 @@
 import { z } from 'zod'
 
 export const EntitlementSummary = z.object({
+  clazz: z.enum(['APP', 'CODE', 'ENTITLEMENT', 'LOOTBOX', 'MEDIA', 'OPTIONBOX', 'SUBSCRIPTION']),
+  createdAt: z.string(),
+  endDate: z.string().nullish(),
+  grantedCode: z.string().nullish(),
   id: z.string(),
-  namespace: z.string(),
+  itemId: z.string().nullish(),
   name: z.string().nullish(),
-  userId: z.string(),
-  clazz: z.enum(['APP', 'ENTITLEMENT', 'CODE', 'SUBSCRIPTION', 'MEDIA', 'OPTIONBOX', 'LOOTBOX']),
-  type: z.enum(['DURABLE', 'CONSUMABLE']),
+  namespace: z.string(),
   stackable: z.boolean().nullish(),
   stackedUseCount: z.number().int().nullish(),
-  storeId: z.string().nullish(),
-  itemId: z.string().nullish(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  grantedCode: z.string().nullish(),
   startDate: z.string().nullish(),
-  endDate: z.string().nullish()
+  storeId: z.string().nullish(),
+  type: z.enum(['CONSUMABLE', 'DURABLE']),
+  updatedAt: z.string(),
+  userId: z.string()
 })
 
 export interface EntitlementSummary extends z.TypeOf<typeof EntitlementSummary> {}

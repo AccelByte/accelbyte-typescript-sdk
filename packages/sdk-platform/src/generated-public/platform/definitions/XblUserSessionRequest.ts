@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const XblUserSessionRequest = z.object({
-  scid: z.string(),
-  sessionTemplateName: z.string(),
   gameSessionId: z.string(),
-  payload: z.record(z.any())
+  payload: z.record(z.any()),
+  scid: z.string(),
+  sessionTemplateName: z.string()
 })
 
 export interface XblUserSessionRequest extends z.TypeOf<typeof XblUserSessionRequest> {}

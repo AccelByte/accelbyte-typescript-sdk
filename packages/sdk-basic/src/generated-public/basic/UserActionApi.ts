@@ -19,7 +19,7 @@ export function UserActionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * This API is used to report a game user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ACTION", action=1 (CREATE)</li></ul>
+   * This API is used to report a game user.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ACTION&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function createActionReport_ByUserId(userId: string, data: UserReportRequest): Promise<unknown> {
     const $ = new UserAction$(Network.create(requestConfig), namespace, cache)

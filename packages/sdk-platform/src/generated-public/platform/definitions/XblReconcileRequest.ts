@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const XblReconcileRequest = z.object({
-  xstsToken: z.string().nullish(),
-  productId: z.string().nullish(),
+  currencyCode: z.string().nullish(),
   price: z.number().nullish(),
-  currencyCode: z.string().nullish()
+  productId: z.string().nullish(),
+  xstsToken: z.string().nullish()
 })
 
 export interface XblReconcileRequest extends z.TypeOf<typeof XblReconcileRequest> {}

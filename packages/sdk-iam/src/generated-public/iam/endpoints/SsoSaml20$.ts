@@ -15,7 +15,7 @@ export class SsoSaml20$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This endpoint authenticates user platform for SAML protocol. It validates user to its respective platforms. Deactivated or login-banned users are unable to login. <br> <h2>Supported platforms:</h2><ul> <li><strong>azure</strong></li>Microsoft login page will redirects to this endpoint after login success as previously defined on authentication request SAML </ul>
+   * This endpoint authenticates user platform for SAML protocol. It validates user to its respective platforms. Deactivated or login-banned users are unable to login. &lt;br&gt; &lt;h2&gt;Supported platforms:&lt;/h2&gt;&lt;ul&gt; &lt;li&gt;&lt;strong&gt;azure&lt;/strong&gt;&lt;/li&gt;Microsoft login page will redirects to this endpoint after login success as previously defined on authentication request SAML &lt;/ul&gt;
    */
   postAuthenticateSamlSso_ByPlatformId(
     platformId: string,

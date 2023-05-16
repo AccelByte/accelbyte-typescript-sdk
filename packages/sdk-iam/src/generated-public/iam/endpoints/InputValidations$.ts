@@ -15,11 +15,11 @@ export class InputValidations$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>No role required</p> <p>This endpoint is to get list of input validation configuration.</p> <p><code>regex</code> parameter will be returned if <code>isCustomRegex</code> is true. Otherwise, it will be empty.</p>
+   * &lt;p&gt;No role required&lt;/p&gt; &lt;p&gt;This endpoint is to get list of input validation configuration.&lt;/p&gt; &lt;p&gt;&lt;code&gt;regex&lt;/code&gt; parameter will be returned if &lt;code&gt;isCustomRegex&lt;/code&gt; is true. Otherwise, it will be empty.&lt;/p&gt;
    */
   getInputValidations(queryParams?: {
-    languageCode?: string | null
     defaultOnEmpty?: boolean | null
+    languageCode?: string | null
   }): Promise<IResponseWithSync<InputValidationsPublicResponse>> {
     const params = { defaultOnEmpty: true, ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/inputValidations'

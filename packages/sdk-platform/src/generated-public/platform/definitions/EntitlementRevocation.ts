@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const EntitlementRevocation = z.object({
+  customRevocation: z.record(z.any()).nullish(),
   entitlementId: z.string().nullish(),
-  status: z.enum(['SUCCESS', 'FAIL']).nullish(),
-  quantity: z.number().int().nullish(),
   itemId: z.string().nullish(),
   itemSku: z.string().nullish(),
+  quantity: z.number().int().nullish(),
+  reason: z.string().nullish(),
   revocationStrategy: z.string().nullish(),
   skipped: z.boolean().nullish(),
-  reason: z.string().nullish(),
-  customRevocation: z.record(z.any()).nullish()
+  status: z.enum(['FAIL', 'SUCCESS']).nullish()
 })
 
 export interface EntitlementRevocation extends z.TypeOf<typeof EntitlementRevocation> {}

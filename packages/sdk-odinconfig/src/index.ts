@@ -4,10 +4,5 @@
  * and restrictions contact your company contract manager.
  */
 export * from './all-public-imports.js'
-export * from './models/DiscoveryTemplate.js'
-export * from './models/base-configs.js'
-export * from './models/discovery.js'
-export * from './models/launcher.js'
-export * from './models/player-portal.js'
-export * from './models/twitch-drop.js'
-export * from './models/payment.js'
+export * from './models/support.js'
+export * from './custom/index.js'

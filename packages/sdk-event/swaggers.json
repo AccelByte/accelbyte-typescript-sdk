@@ -2,7 +2,7 @@
   [
     "event",
     "Event",
-    "event.json",
+    "eventlog.json",
     "https://development.accelbyte.io/event/apidocs/api.json"
   ]
 ]

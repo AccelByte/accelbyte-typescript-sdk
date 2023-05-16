@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { Localization } from './Localization.js'
 
 export const ViewUpdate = z.object({
-  name: z.string(),
   displayOrder: z.number().int().nullish(),
-  localizations: z.record(Localization).nullish()
+  localizations: z.record(Localization).nullish(),
+  name: z.string()
 })
 
 export interface ViewUpdate extends z.TypeOf<typeof ViewUpdate> {}

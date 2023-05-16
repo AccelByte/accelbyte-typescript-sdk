@@ -7,8 +7,8 @@ import { z } from 'zod'
 import { RewardItem } from './RewardItem.js'
 
 export const RewardCondition = z.object({
-  conditionName: z.string().nullish(),
   condition: z.string().nullish(),
+  conditionName: z.string().nullish(),
   eventName: z.string().nullish(),
   rewardItems: z.array(RewardItem).nullish()
 })

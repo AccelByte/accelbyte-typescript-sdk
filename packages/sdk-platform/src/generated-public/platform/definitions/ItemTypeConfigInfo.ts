@@ -6,25 +6,25 @@
 import { z } from 'zod'
 
 export const ItemTypeConfigInfo = z.object({
+  clazz: z.string().nullish(),
+  createdAt: z.string(),
+  dryRun: z.boolean().nullish(),
+  fulfillmentUrl: z.string(),
   id: z.string(),
   itemType: z.enum([
     'APP',
-    'COINS',
-    'INGAMEITEM',
     'BUNDLE',
     'CODE',
-    'SUBSCRIPTION',
-    'SEASON',
+    'COINS',
+    'EXTENSION',
+    'INGAMEITEM',
+    'LOOTBOX',
     'MEDIA',
     'OPTIONBOX',
-    'EXTENSION',
-    'LOOTBOX'
+    'SEASON',
+    'SUBSCRIPTION'
   ]),
-  clazz: z.string().nullish(),
-  fulfillmentUrl: z.string(),
   purchaseConditionUrl: z.string().nullish(),
-  dryRun: z.boolean().nullish(),
-  createdAt: z.string(),
   updatedAt: z.string()
 })
 

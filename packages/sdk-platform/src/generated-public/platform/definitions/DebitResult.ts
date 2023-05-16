@@ -7,10 +7,10 @@ import { z } from 'zod'
 import { DebitByCurrencyCodeRequest } from './DebitByCurrencyCodeRequest.js'
 
 export const DebitResult = z.object({
-  userId: z.string().nullish(),
   currencyCode: z.string().nullish(),
+  reason: z.string().nullish(),
   request: DebitByCurrencyCodeRequest.nullish(),
-  reason: z.string().nullish()
+  userId: z.string().nullish()
 })
 
 export interface DebitResult extends z.TypeOf<typeof DebitResult> {}

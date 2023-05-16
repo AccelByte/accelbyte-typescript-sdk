@@ -9,7 +9,7 @@ export const RevokeItemSummary = z.object({
   itemId: z.string().nullish(),
   itemSku: z.string().nullish(),
   itemType: z.string().nullish(),
-  revokeStatus: z.enum(['SKIPPED', 'COMPLETED']).nullish()
+  revokeStatus: z.enum(['COMPLETED', 'SKIPPED']).nullish()
 })
 
 export interface RevokeItemSummary extends z.TypeOf<typeof RevokeItemSummary> {}

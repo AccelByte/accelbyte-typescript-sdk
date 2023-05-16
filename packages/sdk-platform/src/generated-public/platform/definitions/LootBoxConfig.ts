@@ -9,7 +9,7 @@ import { LootBoxReward } from './LootBoxReward.js'
 export const LootBoxConfig = z.object({
   rewardCount: z.number().int().nullish(),
   rewards: z.array(LootBoxReward).nullish(),
-  rollFunction: z.enum(['DEFAULT', 'CUSTOM']).nullish()
+  rollFunction: z.enum(['CUSTOM', 'DEFAULT']).nullish()
 })
 
 export interface LootBoxConfig extends z.TypeOf<typeof LootBoxConfig> {}

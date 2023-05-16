@@ -15,11 +15,11 @@ export class EventV2$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   getEvent_ByUserId(
     userId: string,
-    queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; eventName?: string | null }
+    queryParams?: { endDate?: string | null; eventName?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
   ): Promise<IResponseWithSync<EventResponseV2>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/event'
@@ -37,11 +37,11 @@ export class EventV2$ {
   }
 
   /**
-   * <p>Available Type: </p> <ul> <li>email</li> <li>password</li> <li>displayname</li> <li>dateofbirth</li> <li>country</li> <li>language</li> </ul> <p>Requires a valid user access token</p>
+   * &lt;p&gt;Available Type: &lt;/p&gt; &lt;ul&gt; &lt;li&gt;email&lt;/li&gt; &lt;li&gt;password&lt;/li&gt; &lt;li&gt;displayname&lt;/li&gt; &lt;li&gt;dateofbirth&lt;/li&gt; &lt;li&gt;country&lt;/li&gt; &lt;li&gt;language&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Requires a valid user access token&lt;/p&gt;
    */
   getEdithistory_ByUserId(
     userId: string,
-    queryParams?: { pageSize?: number; startDate?: string | null; endDate?: string | null; offset?: number; type?: string | null }
+    queryParams?: { endDate?: string | null; offset?: number; pageSize?: number; startDate?: string | null; type?: string | null }
   ): Promise<IResponseWithSync<EventResponseV2>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/edithistory'

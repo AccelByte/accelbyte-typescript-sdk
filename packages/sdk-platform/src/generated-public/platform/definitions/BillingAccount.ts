@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { AdditionalData } from './AdditionalData.js'
 
 export const BillingAccount = z.object({
-  paymentProvider: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']).nullish(),
+  additionalData: AdditionalData.nullish(),
   paymentMethod: z.string().nullish(),
-  additionalData: AdditionalData.nullish()
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']).nullish()
 })
 
 export interface BillingAccount extends z.TypeOf<typeof BillingAccount> {}

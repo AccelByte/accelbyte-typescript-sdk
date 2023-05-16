@@ -6,17 +6,17 @@
 import { z } from 'zod'
 
 export const DetailedWalletTransactionInfo = z.object({
-  walletId: z.string(),
   amount: z.number().int(),
-  reason: z.string().nullish(),
-  namespace: z.string(),
-  userId: z.string(),
-  operator: z.string(),
-  walletAction: z.enum(['CREDIT', 'PAYMENT', 'DEBIT']).nullish(),
-  currencyCode: z.string(),
   balanceSource: z.string().nullish(),
   createdAt: z.string(),
-  updatedAt: z.string()
+  currencyCode: z.string(),
+  namespace: z.string(),
+  operator: z.string(),
+  reason: z.string().nullish(),
+  updatedAt: z.string(),
+  userId: z.string(),
+  walletAction: z.enum(['CREDIT', 'DEBIT', 'PAYMENT']).nullish(),
+  walletId: z.string()
 })
 
 export interface DetailedWalletTransactionInfo extends z.TypeOf<typeof DetailedWalletTransactionInfo> {}

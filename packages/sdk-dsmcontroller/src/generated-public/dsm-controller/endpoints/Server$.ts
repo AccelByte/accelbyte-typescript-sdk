@@ -11,6 +11,7 @@ import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DeregisterLocalServerRequest } from '../definitions/DeregisterLocalServerRequest.js'
 import { DsHeartbeatRequest } from '../definitions/DsHeartbeatRequest.js'
+import { ListServerResponse } from '../definitions/ListServerResponse.js'
 import { RegisterLocalServerRequest } from '../definitions/RegisterLocalServerRequest.js'
 import { RegisterServerRequest } from '../definitions/RegisterServerRequest.js'
 import { Server } from '../definitions/Server.js'
@@ -21,6 +22,23 @@ import { ShutdownServerRequest } from '../definitions/ShutdownServerRequest.js'
 export class Server$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+
+  /**
+   * Required permission: NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint lists all of dedicated servers in a namespace managed by this service. Parameter Offset and Count is Required
+   */
+  getServers(queryParams: { count: number; offset: number; region?: string | null }): Promise<IResponseWithSync<ListServerResponse>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/dsmcontroller/namespaces/{namespace}/servers'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, ListServerResponse, 'ListServerResponse')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
 
   /**
    * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social This endpoint is intended to be called by dedicated server to let DSM know that it is ready for use. This MUST be called by DS after it is ready to accept match data and incoming client connections. Upon successfully calling this endpoint, the dedicated server is listed under READY servers.```
@@ -34,7 +52,7 @@ export class Server$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social This endpoint is intended to be called by dedicated server to let DSM know that it is shutting down. Calling this will remove the server and session records from DB.Set 'kill_me' in request to 'true' if the DS cannot shut itself down.
+   * Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social This endpoint is intended to be called by dedicated server to let DSM know that it is shutting down. Calling this will remove the server and session records from DB.Set &#39;kill_me&#39; in request to &#39;true&#39; if the DS cannot shut itself down.
    */
   createServerShutdown(data: ShutdownServerRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -56,7 +74,7 @@ export class Server$ {
   }
 
   /**
-   * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social Use the alternative GET of the same endpoint to upgrade DS connection to DSM via websocket. This endpoint is intended to be called by local dedicated server to let DSM know that it is ready for use. Use local DS only for development purposes since DSM wouldn't be able to properly manage local DS in production. This MUST be called by DS after it is ready to accept match data and incoming client connections. Upon successfully calling this endpoint, the dedicated server is listed under READY local servers.```
+   * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social Use the alternative GET of the same endpoint to upgrade DS connection to DSM via websocket. This endpoint is intended to be called by local dedicated server to let DSM know that it is ready for use. Use local DS only for development purposes since DSM wouldn&#39;t be able to properly manage local DS in production. This MUST be called by DS after it is ready to accept match data and incoming client connections. Upon successfully calling this endpoint, the dedicated server is listed under READY local servers.```
    */
   createServerLocalRegister(data: RegisterLocalServerRequest): Promise<IResponse<Server>> {
     const params = {} as SDKRequestConfig

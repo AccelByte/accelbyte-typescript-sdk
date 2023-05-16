@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const PaymentCallbackConfigUpdate = z.object({
-  privateKey: z.string().nullish(),
+  dryRun: z.boolean().nullish(),
   notifyUrl: z.string().nullish(),
-  dryRun: z.boolean().nullish()
+  privateKey: z.string().nullish()
 })
 
 export interface PaymentCallbackConfigUpdate extends z.TypeOf<typeof PaymentCallbackConfigUpdate> {}

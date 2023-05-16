@@ -18,7 +18,7 @@ export class DataRetrieval$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   getRequests_ByUserId(
     userId: string,
@@ -40,7 +40,7 @@ export class DataRetrieval$ {
   }
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   postRequest_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<DataRetrievalResponse>> {
     const params = {} as SDKRequestConfig
@@ -56,32 +56,32 @@ export class DataRetrieval$ {
   }
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
-  deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<IResponse<unknown>> {
+  deleteRequest_ByUserId_ByRequestDate(requestDate: string, userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/requests/{requestDate}'
       .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
       .replace('{requestDate}', requestDate)
+      .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   postGenerate_ByUserId_ByRequestDate(
-    userId: string,
     requestDate: string,
+    userId: string,
     data: { password: string | null }
   ): Promise<IResponse<UserDataUrl>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/requests/{requestDate}/generate'
       .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
       .replace('{requestDate}', requestDate)
+      .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
       ...params,
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }

@@ -10,6 +10,7 @@ export const UserPresence = z.object({
   availability: z.string(),
   lastSeenAt: z.string(),
   namespace: z.string(),
+  platform: z.string(),
   userID: z.string()
 })
 

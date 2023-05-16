@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const PaymentOrderChargeRequest = z.object({
-  paymentProvider: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']),
+  extTxId: z.string().nullish(),
   paymentMethod: z.string().nullish(),
-  extTxId: z.string().nullish()
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA'])
 })
 
 export interface PaymentOrderChargeRequest extends z.TypeOf<typeof PaymentOrderChargeRequest> {}

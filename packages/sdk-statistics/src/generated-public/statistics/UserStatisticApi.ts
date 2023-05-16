@@ -42,6 +42,22 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Public list all statItems by pagination.<br>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>
+   */
+  async function getUsersMeStatitems(queryParams?: {
+    statCodes?: string | null
+    tags?: string | null
+    offset?: number
+    limit?: number
+    sortBy?: string | null
+  }): Promise<UserStatItemPagingSlicedResult> {
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getUsersMeStatitems(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Public bulk update multiple user's statitems value.<br>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:STATITEM", action=4 (UPDATE)</li><li><i>Returns</i>: bulk updated result</li></ul>
    */
   async function updateStatitemValueBulk(data: BulkUserStatItemInc[]): Promise<BulkStatOperationResultArray> {
@@ -107,9 +123,23 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Public list all statItems of user.<br>NOTE: <li>If stat code does not exist, will ignore this stat code.</li><li>If stat item does not exist, will return default value</li></ul>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>
    */
+  async function getUsersMeStatitemsValueBulk(queryParams?: {
+    statCodes?: string[]
+    tags?: string[]
+    additionalKey?: string | null
+  }): Promise<ADtoObjectForUserStatItemValueArray> {
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getUsersMeStatitemsValueBulk(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Public list all statItems of user.<br>NOTE: <li>If stat code does not exist, will ignore this stat code.</li><li>If stat item does not exist, will return default value</li></ul>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>
+   */
   async function getStatitemsValueBulk_ByUserId(
     userId: string,
-    queryParams?: { statCodes?: string[]; tags?: string[] }
+    queryParams?: { statCodes?: string[]; tags?: string[]; additionalKey?: string | null }
   ): Promise<ADtoObjectForUserStatItemValueArray> {
     const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getStatitemsValueBulk_ByUserId(userId, queryParams)
@@ -241,12 +271,14 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getStatitemsBulk,
+    getUsersMeStatitems,
     updateStatitemValueBulk,
     patchStatitemValueBulk,
     updateStatitemValueBulk_ByNS,
     getStatitems_ByUserId,
     updateStatitemValueResetBulk,
     createStatitemBulk_ByUserId,
+    getUsersMeStatitemsValueBulk,
     getStatitemsValueBulk_ByUserId,
     updateStatitemValueBulk_ByUserId,
     patchStatitemValueBulk_ByUserId,

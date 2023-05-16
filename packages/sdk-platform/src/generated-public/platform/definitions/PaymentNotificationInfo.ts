@@ -6,16 +6,16 @@
 import { z } from 'zod'
 
 export const PaymentNotificationInfo = z.object({
-  id: z.string(),
-  paymentOrderNo: z.string(),
-  externalId: z.string().nullish(),
-  namespace: z.string(),
-  notificationType: z.string(),
-  notification: z.record(z.any()),
-  status: z.enum(['PROCESSED', 'ERROR', 'WARN', 'IGNORED']),
-  notificationSource: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']),
-  statusReason: z.string().nullish(),
   createdAt: z.string(),
+  externalId: z.string().nullish(),
+  id: z.string(),
+  namespace: z.string(),
+  notification: z.record(z.any()),
+  notificationSource: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
+  notificationType: z.string(),
+  paymentOrderNo: z.string(),
+  status: z.enum(['ERROR', 'IGNORED', 'PROCESSED', 'WARN']),
+  statusReason: z.string().nullish(),
   updatedAt: z.string()
 })
 

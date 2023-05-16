@@ -11,7 +11,7 @@ import { PermissionV3 } from './PermissionV3.js'
 export const TokenResponseV3 = z.object({
   access_token: z.string(),
   bans: z.array(JwtBanV3).nullish(),
-  display_name: z.string(),
+  display_name: z.string().nullish(),
   expires_in: z.number().int(),
   is_comply: z.boolean().nullish(),
   jflgs: z.number().int().nullish(),
@@ -23,9 +23,9 @@ export const TokenResponseV3 = z.object({
   refresh_expires_in: z.number().int().nullish(),
   refresh_token: z.string().nullish(),
   roles: z.array(z.string()).nullish(),
-  scope: z.string().nullish(),
+  scope: z.string(),
   token_type: z.string(),
-  user_id: z.string(),
+  user_id: z.string().nullish(),
   xuid: z.string().nullish()
 })
 

@@ -6,16 +6,16 @@
 import { z } from 'zod'
 
 export const ViewInfo = z.object({
-  title: z.string(),
-  description: z.string().nullish(),
-  longDescription: z.string().nullish(),
-  viewId: z.string(),
-  namespace: z.string(),
-  name: z.string(),
-  displayOrder: z.number().int(),
   createdAt: z.string(),
+  description: z.string().nullish(),
+  displayOrder: z.number().int(),
+  localExt: z.record(z.any()).nullish(),
+  longDescription: z.string().nullish(),
+  name: z.string(),
+  namespace: z.string(),
+  title: z.string(),
   updatedAt: z.string(),
-  localExt: z.record(z.any()).nullish()
+  viewId: z.string()
 })
 
 export interface ViewInfo extends z.TypeOf<typeof ViewInfo> {}

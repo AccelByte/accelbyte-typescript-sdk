@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const RequestHistory = z.object({
-  status: z.enum(['PENDING', 'FAIL', 'SUCCESS']).nullish(),
   requestTime: z.string().nullish(),
+  responseBody: z.record(z.any()).nullish(),
   responseTime: z.string().nullish(),
-  statusCode: z.number().int().nullish(),
-  responseBody: z.record(z.any()).nullish()
+  status: z.enum(['FAIL', 'PENDING', 'SUCCESS']).nullish(),
+  statusCode: z.number().int().nullish()
 })
 
 export interface RequestHistory extends z.TypeOf<typeof RequestHistory> {}

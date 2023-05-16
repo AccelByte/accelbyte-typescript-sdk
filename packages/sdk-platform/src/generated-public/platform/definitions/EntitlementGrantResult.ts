@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { EntitlementGrant } from './EntitlementGrant.js'
 
 export const EntitlementGrantResult = z.object({
-  userId: z.string().nullish(),
   entitlementGrants: EntitlementGrant.nullish(),
-  reason: z.string().nullish()
+  reason: z.string().nullish(),
+  userId: z.string().nullish()
 })
 
 export interface EntitlementGrantResult extends z.TypeOf<typeof EntitlementGrantResult> {}

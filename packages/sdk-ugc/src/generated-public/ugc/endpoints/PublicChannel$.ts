@@ -19,7 +19,7 @@ export class PublicChannel$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]</b>
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]&lt;/b&gt;
    */
   getChannels_ByUserId(
     userId: string,
@@ -41,7 +41,7 @@ export class PublicChannel$ {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]</b>
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]&lt;/b&gt;
    */
   createChannel_ByUserId(userId: string, data: PublicChannelRequest): Promise<IResponse<ChannelResponse>> {
     const params = {} as SDKRequestConfig
@@ -54,21 +54,7 @@ export class PublicChannel$ {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]</b>
-   */
-  updateChannel_ByUserId_ByChannelId(userId: string, channelId: string, data: UpdateChannelRequest): Promise<IResponse<ChannelResponse>> {
-    const params = {} as SDKRequestConfig
-    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-      .replace('{channelId}', channelId)
-    const resultPromise = this.axiosInstance.put(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, ChannelResponse, 'ChannelResponse')
-  }
-
-  /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]</b>
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
    */
   deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -79,5 +65,19 @@ export class PublicChannel$ {
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]&lt;/b&gt;
+   */
+  updateChannel_ByUserId_ByChannelId(userId: string, channelId: string, data: UpdateChannelRequest): Promise<IResponse<ChannelResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{channelId}', channelId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, ChannelResponse, 'ChannelResponse')
   }
 }

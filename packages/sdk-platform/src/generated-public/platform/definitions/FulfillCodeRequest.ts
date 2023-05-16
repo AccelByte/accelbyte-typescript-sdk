@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const FulfillCodeRequest = z.object({ code: z.string(), region: z.string().nullish(), language: z.string().nullish() })
+export const FulfillCodeRequest = z.object({ code: z.string(), language: z.string().nullish(), region: z.string().nullish() })
 
 export interface FulfillCodeRequest extends z.TypeOf<typeof FulfillCodeRequest> {}

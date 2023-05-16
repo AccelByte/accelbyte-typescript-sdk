@@ -17,7 +17,20 @@ export class DataDeletion$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>Requires valid user access token and password
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   */
+  deleteDeletion_ByUserId(userId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/deletions'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * &lt;p&gt;Requires valid user access token and password
    */
   postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<RequestDeleteResponse>> {
     const params = {} as SDKRequestConfig
@@ -33,20 +46,7 @@ export class DataDeletion$ {
   }
 
   /**
-   * <p>Requires valid user access token</p>
-   */
-  deleteDeletion_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/deletions'
-      .replace('{namespace}', this.namespace)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.delete(url, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-  }
-
-  /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   getDeletionsStatus_ByUserId(userId: string): Promise<IResponseWithSync<DeletionStatus>> {
     const params = {} as SDKRequestConfig

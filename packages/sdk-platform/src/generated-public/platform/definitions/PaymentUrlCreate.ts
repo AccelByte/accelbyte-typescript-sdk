@@ -7,10 +7,10 @@ import { z } from 'zod'
 
 export const PaymentUrlCreate = z.object({
   paymentOrderNo: z.string(),
-  paymentProvider: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']),
-  zipCode: z.string().nullish(),
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
   returnUrl: z.string().nullish(),
-  ui: z.string().nullish()
+  ui: z.string().nullish(),
+  zipCode: z.string().nullish()
 })
 
 export interface PaymentUrlCreate extends z.TypeOf<typeof PaymentUrlCreate> {}

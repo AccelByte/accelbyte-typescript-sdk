@@ -7,16 +7,22 @@
  * AUTO GENERATED
  */
 
+import { DsmcOperationsApi } from './dsm-controller/DsmcOperationsApi.js'
 import { PublicApi } from './dsm-controller/PublicApi.js'
-import { SessionApi } from './dsm-controller/SessionApi.js'
-import { ImageConfigApi } from './dsm-controller/ImageConfigApi.js'
 import { ServerApi } from './dsm-controller/ServerApi.js'
+import { SessionApi } from './dsm-controller/SessionApi.js'
+import { PodConfigApi } from './dsm-controller/PodConfigApi.js'
+import { ImageConfigApi } from './dsm-controller/ImageConfigApi.js'
+import { DeploymentConfigApi } from './dsm-controller/DeploymentConfigApi.js'
 
 const apis = {
+  DsmcOperationsApi,
   PublicApi,
+  ServerApi,
   SessionApi,
+  PodConfigApi,
   ImageConfigApi,
-  ServerApi
+  DeploymentConfigApi
 }
 
 export const DsmController = apis

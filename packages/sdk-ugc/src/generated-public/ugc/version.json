@@ -1,0 +1,8 @@
+{
+  "buildDate": "2023-05-12T02:28:16+00:00",
+  "gitHash": "ba4860d3807aab131f7a545a9956d353e7df8687",
+  "name": "justice-ugc-service",
+  "realm": "dev",
+  "version": "2.11.0",
+  "version-roles-seeding": "0.0.13"
+}

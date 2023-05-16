@@ -7,23 +7,23 @@ import { z } from 'zod'
 import { ItemInfo } from './ItemInfo.js'
 
 export const SectionInfo = z.object({
-  title: z.string(),
-  description: z.string().nullish(),
-  longDescription: z.string().nullish(),
-  sectionId: z.string(),
-  namespace: z.string(),
-  viewId: z.string(),
-  name: z.string(),
   active: z.boolean(),
-  startDate: z.string(),
-  endDate: z.string(),
-  currentRotationItems: z.array(ItemInfo).nullish(),
-  currentRotationExpireAt: z.string().nullish(),
   createdAt: z.string(),
-  updatedAt: z.string(),
+  currentRotationExpireAt: z.string().nullish(),
+  currentRotationItems: z.array(ItemInfo).nullish(),
+  description: z.string().nullish(),
   displayOrder: z.number().int().nullish(),
+  endDate: z.string(),
   ext: z.record(z.any()).nullish(),
-  localExt: z.record(z.any()).nullish()
+  localExt: z.record(z.any()).nullish(),
+  longDescription: z.string().nullish(),
+  name: z.string(),
+  namespace: z.string(),
+  sectionId: z.string(),
+  startDate: z.string(),
+  title: z.string(),
+  updatedAt: z.string(),
+  viewId: z.string()
 })
 
 export interface SectionInfo extends z.TypeOf<typeof SectionInfo> {}

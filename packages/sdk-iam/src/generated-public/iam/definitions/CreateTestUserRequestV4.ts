@@ -8,7 +8,7 @@ import { AcceptedPoliciesRequest } from './AcceptedPoliciesRequest.js'
 
 export const CreateTestUserRequestV4 = z.object({
   acceptedPolicies: z.array(AcceptedPoliciesRequest).nullish(),
-  authType: z.string(),
+  authType: z.enum(['EMAILPASSWD']),
   country: z.string(),
   dateOfBirth: z.string(),
   displayName: z.string(),

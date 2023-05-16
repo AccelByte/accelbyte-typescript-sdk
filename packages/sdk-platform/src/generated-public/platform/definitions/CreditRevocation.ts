@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const CreditRevocation = z.object({
-  walletId: z.string().nullish(),
-  currencyCode: z.string().nullish(),
-  balanceOrigin: z.string().nullish(),
   amount: z.number().int().nullish(),
-  status: z.enum(['SUCCESS', 'FAIL']).nullish(),
+  balanceOrigin: z.string().nullish(),
+  currencyCode: z.string().nullish(),
+  customRevocation: z.record(z.any()).nullish(),
+  reason: z.string().nullish(),
   revocationStrategy: z.string().nullish(),
   skipped: z.boolean().nullish(),
-  reason: z.string().nullish(),
-  customRevocation: z.record(z.any()).nullish()
+  status: z.enum(['FAIL', 'SUCCESS']).nullish(),
+  walletId: z.string().nullish()
 })
 
 export interface CreditRevocation extends z.TypeOf<typeof CreditRevocation> {}

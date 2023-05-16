@@ -4,5 +4,4 @@
  * and restrictions contact your company contract manager.
  */
 export * from './all-public-imports.js'
-export * from './clients/Ecommerce.js'
-export * from './clients/PlatformClient.js'
+export * from './custom/index.js'

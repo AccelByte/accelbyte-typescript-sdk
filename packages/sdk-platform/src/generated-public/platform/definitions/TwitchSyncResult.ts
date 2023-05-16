@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const TwitchSyncResult = z.object({
-  transactionId: z.string().nullish(),
+  iapOrderStatus: z.enum(['FAILED', 'FULFILLED', 'VERIFIED']).nullish(),
   itemSku: z.string().nullish(),
-  iapOrderStatus: z.enum(['VERIFIED', 'FULFILLED', 'FAILED']).nullish()
+  transactionId: z.string().nullish()
 })
 
 export interface TwitchSyncResult extends z.TypeOf<typeof TwitchSyncResult> {}

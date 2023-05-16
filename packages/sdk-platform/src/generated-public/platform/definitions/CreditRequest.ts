@@ -7,25 +7,25 @@ import { z } from 'zod'
 
 export const CreditRequest = z.object({
   amount: z.number().int(),
+  expireAt: z.string().nullish(),
+  origin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish(),
+  reason: z.string().nullish(),
   source: z
     .enum([
-      'PURCHASE',
-      'IAP',
-      'PROMOTION',
       'ACHIEVEMENT',
-      'REFERRAL_BONUS',
-      'REDEEM_CODE',
-      'REWARD',
-      'GIFT',
-      'REFUND',
       'DLC',
+      'GIFT',
+      'IAP',
       'OTHER',
+      'PROMOTION',
+      'PURCHASE',
+      'REDEEM_CODE',
+      'REFERRAL_BONUS',
+      'REFUND',
+      'REWARD',
       'SELL_BACK'
     ])
-    .nullish(),
-  expireAt: z.string().nullish(),
-  reason: z.string().nullish(),
-  origin: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Twitch', 'Nintendo', 'System', 'Other']).nullish()
+    .nullish()
 })
 
 export interface CreditRequest extends z.TypeOf<typeof CreditRequest> {}

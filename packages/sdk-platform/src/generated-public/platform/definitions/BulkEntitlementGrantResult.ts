@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { EntitlementGrantResult } from './EntitlementGrantResult.js'
 
 export const BulkEntitlementGrantResult = z.object({
-  successList: z.array(EntitlementGrantResult).nullish(),
   failList: z.array(EntitlementGrantResult).nullish(),
-  status: z.enum(['SUCCESS', 'FAIL', 'PARTIAL_SUCCESS']).nullish()
+  status: z.enum(['FAIL', 'PARTIAL_SUCCESS', 'SUCCESS']).nullish(),
+  successList: z.array(EntitlementGrantResult).nullish()
 })
 
 export interface BulkEntitlementGrantResult extends z.TypeOf<typeof BulkEntitlementGrantResult> {}

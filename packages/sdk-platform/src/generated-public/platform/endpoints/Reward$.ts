@@ -16,7 +16,7 @@ export class Reward$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This API is used to get reward by reward code.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:REWARD", action=2 (READ)</li><li><i>Returns</i>: reward instance</li></ul>
+   * This API is used to get reward by reward code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward instance&lt;/li&gt;&lt;/ul&gt;
    */
   getRewardsByCode(queryParams: { rewardCode: string | null }): Promise<IResponseWithSync<RewardInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -33,7 +33,7 @@ export class Reward$ {
   }
 
   /**
-   * This API is used to get reward by reward Id.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:REWARD", action=2 (READ)</li><li><i>Returns</i>: reward instance</li></ul>
+   * This API is used to get reward by reward Id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward instance&lt;/li&gt;&lt;/ul&gt;
    */
   getReward_ByRewardId(rewardId: string): Promise<IResponseWithSync<RewardInfo>> {
     const params = {} as SDKRequestConfig
@@ -52,15 +52,15 @@ export class Reward$ {
   }
 
   /**
-   * This API is used to query rewards by criteria.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:REWARD", action=2 (READ)</li><li><i>Returns</i>: the list of rewards</li></ul>
+   * This API is used to query rewards by criteria.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of rewards&lt;/li&gt;&lt;/ul&gt;
    */
   getRewardsByCriteria(queryParams?: {
     eventTopic?: string | null
-    offset?: number
     limit?: number
-    sortBy?: string | null
+    offset?: number
+    sortBy?: string[]
   }): Promise<IResponseWithSync<RewardPagingSlicedResult>> {
-    const params = { limit: 20, sortBy: 'namespace:asc,rewardCode:asc', ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, sortBy: ['namespace:asc', 'rewardCode:asc'], ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/rewards/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

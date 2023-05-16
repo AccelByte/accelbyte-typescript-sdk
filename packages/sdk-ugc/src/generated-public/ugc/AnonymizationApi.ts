@@ -28,7 +28,7 @@ export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}" [DELETE]
+   * Required permission NAMESPACE:{namespace}:USER:{userId}&#34; [DELETE]
    */
   async function deleteState_ByUserId(userId: string): Promise<unknown> {
     const $ = new Anonymization$(Network.create(requestConfig), namespace, cache)
@@ -38,7 +38,7 @@ export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]</b>
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
    */
   async function deleteChannel_ByUserId(userId: string): Promise<unknown> {
     const $ = new Anonymization$(Network.create(requestConfig), namespace, cache)
@@ -48,7 +48,7 @@ export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]</b>.
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
    */
   async function deleteContent_ByUserId(userId: string): Promise<unknown> {
     const $ = new Anonymization$(Network.create(requestConfig), namespace, cache)

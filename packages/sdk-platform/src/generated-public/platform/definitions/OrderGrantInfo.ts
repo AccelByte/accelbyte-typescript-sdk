@@ -7,6 +7,6 @@ import { z } from 'zod'
 import { CreditSummary } from './CreditSummary.js'
 import { EntitlementSummary } from './EntitlementSummary.js'
 
-export const OrderGrantInfo = z.object({ entitlements: z.array(EntitlementSummary).nullish(), credits: z.array(CreditSummary).nullish() })
+export const OrderGrantInfo = z.object({ credits: z.array(CreditSummary).nullish(), entitlements: z.array(EntitlementSummary).nullish() })
 
 export interface OrderGrantInfo extends z.TypeOf<typeof OrderGrantInfo> {}

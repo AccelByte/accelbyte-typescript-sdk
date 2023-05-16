@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const FulfillmentScriptInfo = z.object({ id: z.string().nullish(), grantDays: z.string().nullish() })
+export const FulfillmentScriptInfo = z.object({ grantDays: z.string().nullish(), id: z.string().nullish() })
 
 export interface FulfillmentScriptInfo extends z.TypeOf<typeof FulfillmentScriptInfo> {}

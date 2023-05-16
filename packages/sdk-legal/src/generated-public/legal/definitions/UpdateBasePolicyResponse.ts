@@ -6,17 +6,17 @@
 import { z } from 'zod'
 
 export const UpdateBasePolicyResponse = z.object({
-  id: z.string(),
+  affectedClientIds: z.array(z.string()).nullish(),
+  affectedCountries: z.array(z.string()).nullish(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
+  description: z.string().nullish(),
+  globalPolicyName: z.string().nullish(),
+  id: z.string(),
   namespace: z.string().nullish(),
   policyId: z.string().nullish(),
+  tags: z.array(z.string()).nullish(),
   typeId: z.string().nullish(),
-  globalPolicyName: z.string().nullish(),
-  description: z.string().nullish(),
-  affectedCountries: z.array(z.string()).nullish(),
-  affectedClientIds: z.array(z.string()).nullish(),
-  tags: z.array(z.string()).nullish()
+  updatedAt: z.string().nullish()
 })
 
 export interface UpdateBasePolicyResponse extends z.TypeOf<typeof UpdateBasePolicyResponse> {}

@@ -7,9 +7,11 @@ import { z } from 'zod'
 import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const UpdateConfigurationTemplateRequest = z.object({
-  NativeSessionSetting,
+  NativeSessionSetting: NativeSessionSetting.nullish(),
   clientVersion: z.string(),
   deployment: z.string(),
+  dsSource: z.string(),
+  fallbackClaimKeys: z.array(z.string()),
   inactiveTimeout: z.number().int(),
   inviteTimeout: z.number().int(),
   joinability: z.string(),
@@ -17,6 +19,7 @@ export const UpdateConfigurationTemplateRequest = z.object({
   minPlayers: z.number().int(),
   name: z.string(),
   persistent: z.boolean(),
+  preferredClaimKeys: z.array(z.string()),
   requestedRegions: z.array(z.string()),
   textChat: z.boolean(),
   type: z.string()

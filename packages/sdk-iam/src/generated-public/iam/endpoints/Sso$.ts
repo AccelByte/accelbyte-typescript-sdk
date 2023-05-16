@@ -29,7 +29,7 @@ export class Sso$ {
   }
 
   /**
-   * Logout user's session on platform that logged in using SSO. Supported platforms: - discourse
+   * Logout user&#39;s session on platform that logged in using SSO. Supported platforms: - discourse
    */
   createLogout_ByPlatformId(platformId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

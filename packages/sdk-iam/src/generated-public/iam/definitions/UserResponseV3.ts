@@ -24,7 +24,7 @@ export const UserResponseV3 = z.object({
   lastDateOfBirthChangedTime: z.string(),
   lastEnabledChangedTime: z.string(),
   namespace: z.string(),
-  namespaceRoles: z.array(NamespaceRole).nullish(),
+  namespaceRoles: z.array(NamespaceRole),
   newEmailAddress: z.string().nullish(),
   oldEmailAddress: z.string().nullish(),
   permissions: z.array(UserPermissionsResponseV3),

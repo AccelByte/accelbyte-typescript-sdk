@@ -10,6 +10,7 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { DeregisterLocalServerRequest } from './definitions/DeregisterLocalServerRequest.js'
 import { DsHeartbeatRequest } from './definitions/DsHeartbeatRequest.js'
+import { ListServerResponse } from './definitions/ListServerResponse.js'
 import { RegisterLocalServerRequest } from './definitions/RegisterLocalServerRequest.js'
 import { RegisterServerRequest } from './definitions/RegisterServerRequest.js'
 import { Server } from './definitions/Server.js'
@@ -26,6 +27,16 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
+   * Required permission: NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint lists all of dedicated servers in a namespace managed by this service. Parameter Offset and Count is Required
+   */
+  async function getServers(queryParams: { count: number; offset: number; region?: string | null }): Promise<ListServerResponse> {
+    const $ = new Server$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getServers(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social This endpoint is intended to be called by dedicated server to let DSM know that it is ready for use. This MUST be called by DS after it is ready to accept match data and incoming client connections. Upon successfully calling this endpoint, the dedicated server is listed under READY servers.```
    */
   async function createServerRegister(data: RegisterServerRequest): Promise<Server> {
@@ -36,7 +47,7 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social This endpoint is intended to be called by dedicated server to let DSM know that it is shutting down. Calling this will remove the server and session records from DB.Set 'kill_me' in request to 'true' if the DS cannot shut itself down.
+   * Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social This endpoint is intended to be called by dedicated server to let DSM know that it is shutting down. Calling this will remove the server and session records from DB.Set &#39;kill_me&#39; in request to &#39;true&#39; if the DS cannot shut itself down.
    */
   async function createServerShutdown(data: ShutdownServerRequest): Promise<unknown> {
     const $ = new Server$(Network.create(requestConfig), namespace, cache)
@@ -56,7 +67,7 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social Use the alternative GET of the same endpoint to upgrade DS connection to DSM via websocket. This endpoint is intended to be called by local dedicated server to let DSM know that it is ready for use. Use local DS only for development purposes since DSM wouldn't be able to properly manage local DS in production. This MUST be called by DS after it is ready to accept match data and incoming client connections. Upon successfully calling this endpoint, the dedicated server is listed under READY local servers.```
+   * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social Use the alternative GET of the same endpoint to upgrade DS connection to DSM via websocket. This endpoint is intended to be called by local dedicated server to let DSM know that it is ready for use. Use local DS only for development purposes since DSM wouldn&#39;t be able to properly manage local DS in production. This MUST be called by DS after it is ready to accept match data and incoming client connections. Upon successfully calling this endpoint, the dedicated server is listed under READY local servers.```
    */
   async function createServerLocalRegister(data: RegisterLocalServerRequest): Promise<Server> {
     const $ = new Server$(Network.create(requestConfig), namespace, cache)
@@ -96,6 +107,7 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    getServers,
     createServerRegister,
     createServerShutdown,
     updateServerHeartbeat,

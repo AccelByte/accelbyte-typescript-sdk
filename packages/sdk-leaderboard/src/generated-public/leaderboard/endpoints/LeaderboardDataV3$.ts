@@ -16,7 +16,7 @@ export class LeaderboardDataV3$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>Get rankings in an all time leaderboard.</p>
+   * &lt;p&gt;Get rankings in an all time leaderboard.&lt;/p&gt;
    */
   getAlltime_ByLeaderboardCode(
     leaderboardCode: string,
@@ -38,7 +38,7 @@ export class LeaderboardDataV3$ {
   }
 
   /**
-   * <p>Get user ranking in leaderboard</p>
+   * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
   getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponseWithSync<UserRankingResponseV3>> {
     const params = {} as SDKRequestConfig
@@ -58,7 +58,7 @@ export class LeaderboardDataV3$ {
   }
 
   /**
-   * <p>Get rankings in cycle leaderboard.</p>
+   * &lt;p&gt;Get rankings in cycle leaderboard.&lt;/p&gt;
    */
   getCycle_ByLeaderboardCode_ByCycleId(
     leaderboardCode: string,

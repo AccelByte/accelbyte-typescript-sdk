@@ -10,6 +10,7 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ChatMessageResponseArray } from './definitions/ChatMessageResponseArray.js'
 import { MuteUserRequest } from './definitions/MuteUserRequest.js'
+import { MutedTopicResponseArray } from './definitions/MutedTopicResponseArray.js'
 import { PublicBanTopicMembersRequest } from './definitions/PublicBanTopicMembersRequest.js'
 import { PublicBanTopicMembersResponse } from './definitions/PublicBanTopicMembersResponse.js'
 import { PublicUnbanTopicMembersRequest } from './definitions/PublicUnbanTopicMembersRequest.js'
@@ -23,6 +24,16 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
+
+  /**
+   * get chat muted topics in a namespace.
+   */
+  async function getMuted(): Promise<MutedTopicResponseArray> {
+    const $ = new Topic$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getMuted()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * get chat list of topic in a namespace.
@@ -98,6 +109,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    getMuted,
     getTopic,
     updateMute_ByTopic,
     getChats_ByTopic,

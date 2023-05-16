@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const SubscribeRequest = z.object({
-  itemId: z.string(),
   currencyCode: z.string(),
-  source: z.string().nullish(),
-  region: z.string().nullish(),
+  itemId: z.string(),
   language: z.string().nullish(),
-  returnUrl: z.string().nullish()
+  region: z.string().nullish(),
+  returnUrl: z.string().nullish(),
+  source: z.string().nullish()
 })
 
 export interface SubscribeRequest extends z.TypeOf<typeof SubscribeRequest> {}

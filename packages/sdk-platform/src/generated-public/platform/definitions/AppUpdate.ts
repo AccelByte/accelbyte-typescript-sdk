@@ -11,27 +11,7 @@ import { Slide } from './Slide.js'
 export const AppUpdate = z.object({
   carousel: z.array(Slide).nullish(),
   developer: z.string().nullish(),
-  publisher: z.string().nullish(),
-  websiteUrl: z.string().nullish(),
   forumUrl: z.string().nullish(),
-  platforms: z.array(z.enum(['Windows', 'MacOS', 'Linux', 'IOS', 'Android'])).nullish(),
-  platformRequirements: z.record(z.array(Requirement)).nullish(),
-  localizations: z.record(AppLocalization).nullish(),
-  primaryGenre: z
-    .enum([
-      'Action',
-      'Adventure',
-      'Casual',
-      'FreeToPlay',
-      'Indie',
-      'MassivelyMultiplayer',
-      'Racing',
-      'RPG',
-      'Simulation',
-      'Sports',
-      'Strategy'
-    ])
-    .nullish(),
   genres: z
     .array(
       z.enum([
@@ -41,16 +21,36 @@ export const AppUpdate = z.object({
         'FreeToPlay',
         'Indie',
         'MassivelyMultiplayer',
-        'Racing',
         'RPG',
+        'Racing',
         'Simulation',
         'Sports',
         'Strategy'
       ])
     )
     .nullish(),
-  players: z.array(z.enum(['Single', 'Multi', 'CrossPlatformMulti', 'MMO', 'Coop', 'LocalCoop'])).nullish(),
-  releaseDate: z.string().nullish()
+  localizations: z.record(AppLocalization).nullish(),
+  platformRequirements: z.record(z.array(Requirement)).nullish(),
+  platforms: z.array(z.enum(['Android', 'IOS', 'Linux', 'MacOS', 'Windows'])).nullish(),
+  players: z.array(z.enum(['Coop', 'CrossPlatformMulti', 'LocalCoop', 'MMO', 'Multi', 'Single'])).nullish(),
+  primaryGenre: z
+    .enum([
+      'Action',
+      'Adventure',
+      'Casual',
+      'FreeToPlay',
+      'Indie',
+      'MassivelyMultiplayer',
+      'RPG',
+      'Racing',
+      'Simulation',
+      'Sports',
+      'Strategy'
+    ])
+    .nullish(),
+  publisher: z.string().nullish(),
+  releaseDate: z.string().nullish(),
+  websiteUrl: z.string().nullish()
 })
 
 export interface AppUpdate extends z.TypeOf<typeof AppUpdate> {}

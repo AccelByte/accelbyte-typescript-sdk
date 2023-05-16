@@ -6,13 +6,13 @@
 import { z } from 'zod'
 
 export const CurrencyInfo = z.object({
+  createdAt: z.string(),
   currencyCode: z.string(),
-  localizationDescriptions: z.record(z.string()).nullish(),
   currencySymbol: z.string(),
-  namespace: z.string(),
   currencyType: z.enum(['REAL', 'VIRTUAL']),
   decimals: z.number().int(),
-  createdAt: z.string(),
+  localizationDescriptions: z.record(z.string()).nullish(),
+  namespace: z.string(),
   updatedAt: z.string()
 })
 

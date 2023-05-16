@@ -1,0 +1,3114 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "contact": {
+      "email": "engineering@accelbyte.io",
+      "name": "Engineering Team at AccelByte",
+      "url": "https://accelbyte.io"
+    },
+    "description": "Justice Cloudsave Service",
+    "title": "justice-cloudsave-service",
+    "version": "3.7.0"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/cloudsave/apidocs"
+  },
+  "securityDefinitions": {
+    "HasPermission": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {
+        "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]",
+        "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:RECORD [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:RECORD [READ]",
+        "CLIENT []": "CLIENT []",
+        "NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]": "NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]",
+        "NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]": "NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]",
+        "NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]": "NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]",
+        "NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]": "NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]",
+        "NAMESPACE:{namespace}:PUBLIC:CLOUDSAVE:RECORD [READ]": "NAMESPACE:{namespace}:PUBLIC:CLOUDSAVE:RECORD [READ]",
+        "NAMESPACE:{namespace}:USER:*:PUBLIC:CLOUDSAVE:RECORD [READ]": "NAMESPACE:{namespace}:USER:*:PUBLIC:CLOUDSAVE:RECORD [READ]",
+        "NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]": "NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]",
+        "NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]": "NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]",
+        "NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]": "NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]",
+        "NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]": "NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]",
+        "NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]": "NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]",
+        "NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]": "NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]",
+        "NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [WRITE]": "NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [WRITE]"
+      },
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "HasScope": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {
+        "social": "social"
+      },
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/cloudsave/v1/admin/namespaces/{namespace}/concurrent/records/{key}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new game record or replace the existing game record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Parameters Notes \u0026lt;/h2\u0026gt;\n1. set_by (default: CLIENT, type: string)\n\tIndicate which party that could modify the game record.\n\tSERVER: record can be modified by server only.\n\tCLIENT: record can be modified by client and server.\n2. updatedAt (required: true)\n               Time format style: RFC3339\n3. value\n               Json\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;set_by\u0026#34;: \u0026#34;SERVER\u0026#34;,\n\t\t\u0026#34;value\u0026#34;: {},\n\t\t\u0026#34;updatedAt\u0026#34;: \u0026#34;2022-03-17T10:42:15.444Z\u0026#34;\n\t}\n\u0026lt;/pre\u0026gt;\n\n\u0026lt;h2\u0026gt;Optimistic Concurrency Control\u0026lt;/h2\u0026gt;\n\nThis endpoint implement optimistic concurrency control to avoid race condition.\nIf the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed)\nand client need to redo the operation (fetch data and do update).\nOtherwise, the server will process the request.\n",
+        "operationId": "adminPutGameRecordConcurrentHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminConcurrentRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record saved"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]", "CLIENT []"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace game record",
+        "tags": ["AdminConcurrentRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/records": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve list of records key by namespace",
+        "operationId": "listGameRecordsHandlerV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit",
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "key",
+            "in": "query",
+            "name": "query",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Retrieve list of records key by namespace",
+            "schema": {
+              "$ref": "#/definitions/models.ListGameRecordKeysResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Query game records",
+        "tags": ["AdminGameRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/records/{key}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nThis endpoints delete game record in namespace-level",
+        "operationId": "adminDeleteGameRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record deleted"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete game record",
+        "tags": ["AdminGameRecord"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nGet a record by its key in namespace-level.",
+        "operationId": "adminGetGameRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in namespace-level retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get game record",
+        "tags": ["AdminGameRecord"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new game record or append the existing game record.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample 1\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\nExample 2\n-\tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Record Metadata\u0026lt;/h2\u0026gt;\n\nMetadata allows user to define the behaviour of the record.\nMetadata can be defined in request body with field name \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;.\nWhen creating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the metadata value will use the default value.\nWhen updating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the existing metadata value will stay as is.\n\n\u0026lt;b\u0026gt;Metadata List:\u0026lt;/b\u0026gt;\n1.\tset_by (default: CLIENT, type: string)\n\tIndicate which party that could modify the game record.\n\tSERVER: record can be modified by server only.\n\tCLIENT: record can be modified by client and server.\n\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;__META\u0026#34;: {\n\t\t\t\u0026#34;set_by\u0026#34;: \u0026#34;SERVER\u0026#34;\n\t\t}\n\t\t...\n\t}\n\u0026lt;/pre\u0026gt;\n",
+        "operationId": "adminPostGameRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record in namespace-level saved",
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]", "CLIENT []"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or append game record",
+        "tags": ["AdminGameRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new game record or replace the existing game record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Record Metadata\u0026lt;/h2\u0026gt;\n\nMetadata allows user to define the behaviour of the record.\nMetadata can be defined in request body with field name \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;.\nWhen creating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the metadata value will use the default value.\nWhen updating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the existing metadata value will stay as is.\n\n\u0026lt;b\u0026gt;Metadata List:\u0026lt;/b\u0026gt;\n1.\tset_by (default: CLIENT, type: string)\n\tIndicate which party that could modify the game record.\n\tSERVER: record can be modified by server only.\n\tCLIENT: record can be modified by client and server.\n\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;__META\u0026#34;: {\n\t\t\t\u0026#34;set_by\u0026#34;: \u0026#34;SERVER\u0026#34;\n\t\t}\n\t\t...\n\t}\n\u0026lt;/pre\u0026gt;\n",
+        "operationId": "adminPutGameRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]", "CLIENT []"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace game record",
+        "tags": ["AdminGameRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/bulk/records/size": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\nBulk get player\u0026#39;s record size, max allowed 20 at a time, that can be\n\tretrieved using this endpoint.\n",
+        "operationId": "bulkGetPlayerRecordSizeHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkUserKeyRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerRecordSizeResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get player records size",
+        "tags": ["AdminPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/records": {
+      "get": {
+        "consumes": ["application/json"],
+        "deprecated": true,
+        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve list of player records key and userID under given namespace.",
+        "operationId": "listPlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "query, search player records by key or userID",
+            "in": "query",
+            "name": "query",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.ListPlayerRecordKeysResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Retrieve list of public player records",
+        "tags": ["AdminPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/concurrent/records/{key}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player record or replace the existing player record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Parameters Notes \u0026lt;/h2\u0026gt;\n1. set_by (default: CLIENT, type: string)\n\tIndicate which party that could modify the game record.\n\tSERVER: record can be modified by server only.\n\tCLIENT: record can be modified by client and server.\n2. updatedAt (required: true)\n               Time format style: RFC3339\n3. value\n               Json\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;set_by\u0026#34;: \u0026#34;SERVER\u0026#34;,\n\t\t\u0026#34;value\u0026#34;: {},\n\t\t\u0026#34;updatedAt\u0026#34;: \u0026#34;2022-03-17T10:42:15.444Z\u0026#34;\n\t}\n\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Optimistic Concurrency Control\u0026lt;/h2\u0026gt;\n\nThis endpoint implement optimistic concurrency control to avoid race condition.\nIf the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed)\nand client need to redo the operation (fetch data and do update).\nOtherwise, the server will process the request.\n",
+        "operationId": "adminPutPlayerRecordConcurrentHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminConcurrentRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record saved"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]", "CLIENT []"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace player private record",
+        "tags": ["AdminConcurrentRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/concurrent/records/{key}/public": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player public record or replace the existing player public record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Parameters Notes \u0026lt;/h2\u0026gt;\n1. set_by (default: CLIENT, type: string)\n\tIndicate which party that could modify the game record.\n\tSERVER: record can be modified by server only.\n\tCLIENT: record can be modified by client and server.\n2. updatedAt (required: true)\n               Time format style: RFC3339\n3. value\n               Json\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;set_by\u0026#34;: \u0026#34;SERVER\u0026#34;,\n\t\t\u0026#34;value\u0026#34;: {},\n\t\t\u0026#34;updatedAt\u0026#34;: \u0026#34;2022-03-17T10:42:15.444Z\u0026#34;\n\t}\n\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Optimistic Concurrency Control\u0026lt;/h2\u0026gt;\n\nThis endpoint implement optimistic concurrency control to avoid race condition.\nIf the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed)\nand client need to redo the operation (fetch data and do update).\nOtherwise, the server will process the request.\n",
+        "operationId": "adminPutPlayerPublicRecordConcurrentHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminConcurrentRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record saved"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]", "CLIENT []"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace player public record",
+        "tags": ["AdminConcurrentRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve list of player records key and userID under given namespace.",
+        "operationId": "AdminRetrievePlayerRecords",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.ListPlayerRecordKeysResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Query player records",
+        "tags": ["AdminPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nDelete a record (arbitrary JSON data) in user-level with given key.",
+        "operationId": "adminDeletePlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record in user-level saved"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete player record",
+        "tags": ["AdminPlayerRecord"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nGet a record in user-level (arbitrary JSON data) by its key.",
+        "operationId": "adminGetPlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in user-level retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player record",
+        "tags": ["AdminPlayerRecord"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player record or append the existing player record.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample 1\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\nExample 2\n-\tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Record Metadata\u0026lt;/h2\u0026gt;\n\nMetadata allows user to define the behaviour of the record.\nMetadata can be defined in request body with field name \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;.\nWhen creating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the metadata value will use the default value.\nWhen updating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the existing metadata value will stay as is.\n\n\u0026lt;b\u0026gt;Metadata List:\u0026lt;/b\u0026gt;\n1.\tset_by (default: CLIENT, type: string)\n\tIndicate which party that could modify the game record.\n\tSERVER: record can be modified by server only.\n\tCLIENT: record can be modified by client and server.\n2.\tis_public (default: false, type: bool)\n\tIndicate whether the player record is a public record or not.\n\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;__META\u0026#34;: {\n\t\t\t\u0026#34;set_by\u0026#34;: \u0026#34;SERVER\u0026#34;,\n\t\t\t\u0026#34;is_public\u0026#34;: true\n\t\t}\n\t\t...\n\t}\n\u0026lt;/pre\u0026gt;\n",
+        "operationId": "adminPostPlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record in user-level saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]", "CLIENT []"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or append player record",
+        "tags": ["AdminPlayerRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player record or replace the existing player record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Record Metadata\u0026lt;/h2\u0026gt;\n\nMetadata allows user to define the behaviour of the record.\nMetadata can be defined in request body with field name \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;.\nWhen creating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the metadata value will use the default value.\nWhen updating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the existing metadata value will stay as is.\n\n\u0026lt;b\u0026gt;Metadata List:\u0026lt;/b\u0026gt;\n1.\tset_by (default: CLIENT, type: string)\n\tIndicate which party that could modify the game record.\n\tSERVER: record can be modified by server only.\n\tCLIENT: record can be modified by client and server.\n2.\tis_public (default: false, type: bool)\n\tIndicate whether the player record is a public record or not.\n\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;__META\u0026#34;: {\n\t\t\t\u0026#34;set_by\u0026#34;: \u0026#34;SERVER\u0026#34;,\n\t\t\t\u0026#34;is_public\u0026#34;: true\n\t\t}\n\t\t...\n\t}\n\u0026lt;/pre\u0026gt;\n",
+        "operationId": "adminPutPlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in user-level saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]", "CLIENT []"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace player record",
+        "tags": ["AdminPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}/public": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [DELETE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\nDelete player public record.\n\n\n\u0026lt;h2\u0026gt;Warning: This endpoint is going to deprecate\u0026lt;/h2\u0026gt;\n\nThis endpoint is going to deprecate in the future please don\u0026#39;t use it.\n\nFor alternative, please use these endpoints:\n- \u0026lt;b\u0026gt;POST /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;PUT /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;DELETE /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt;\n",
+        "operationId": "adminDeletePlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record deleted"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete player public record",
+        "tags": ["AdminPlayerRecord"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nGet a record in user-level (arbitrary JSON data) by its key.",
+        "operationId": "adminGetPlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player public record",
+        "tags": ["AdminPlayerRecord"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player public record or append the existing player public record.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample 1\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\nExample 2\n-\tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Warning: This endpoint is going to deprecate\u0026lt;/h2\u0026gt;\n\nThis endpoint is going to deprecate in the future please don\u0026#39;t use it.\n\nFor alternative, please use these endpoints:\n- \u0026lt;b\u0026gt;POST /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;PUT /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;DELETE /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt;\n",
+        "operationId": "adminPostPlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record saved ",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or append player public record",
+        "tags": ["AdminPlayerRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player public record or replace the existing player public record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Warning: This endpoint is going to deprecate\u0026lt;/h2\u0026gt;\n\nThis endpoint is going to deprecate in the future please don\u0026#39;t use it.\n\nFor alternative, please use these endpoints:\n- \u0026lt;b\u0026gt;POST /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;PUT /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;DELETE /cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt;\n",
+        "operationId": "adminPutPlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in user-level saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace player public record",
+        "tags": ["AdminPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/records/{key}/size": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nGet a size of the player record ",
+        "operationId": "adminGetPlayerRecordSizeHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in user-level retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordSizeResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player record size",
+        "tags": ["AdminPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/concurrent/records/{key}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new game record or replace the existing game record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Optimistic Concurrency Control\u0026lt;/h2\u0026gt;\n\nThis endpoint implement optimistic concurrency control to avoid race condition.\nIf the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed)\nand client need to redo the operation (fetch data and do update).\nOtherwise, the server will process the request.\n",
+        "operationId": "putGameRecordConcurrentHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.ConcurrentRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record saved"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace game record",
+        "tags": ["ConcurrentRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/records/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nBulk get game records. Maximum key per request 20.",
+        "operationId": "getGameRecordsBulk",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetGameRecordRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetGameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get game records",
+        "tags": ["PublicGameRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/records/{key}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nDelete records by its key\n",
+        "operationId": "deleteGameRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record deleted"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete game record",
+        "tags": ["PublicGameRecord"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\nGet game record by its key.\n",
+        "operationId": "getGameRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get game record",
+        "tags": ["PublicGameRecord"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new game record or append the existing game record.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample 1\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\nExample 2\n-\tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n",
+        "operationId": "postGameRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or append game record",
+        "tags": ["PublicGameRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new game record or replace the existing game record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n",
+        "operationId": "putGameRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.GameRecordResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace game record",
+        "tags": ["PublicGameRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/bulk/records/{key}/public": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nBulk get other player\u0026#39;s record that is public by userIds, max allowed 20 at a time. Only record with \u0026lt;code\u0026gt;isPublic=true\u0026lt;/code\u0026gt; that can be\nretrieved using this endpoint.\n",
+        "operationId": "bulkGetPlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkUserIDsRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get player public records",
+        "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/me/records": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required valid user token\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve list of player records key under given namespace.",
+        "operationId": "RetrievePlayerRecords",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.ListPlayerRecordKeysResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Query player records key",
+        "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/me/records/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required valid user token\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve player record key and payload in bulk under given namespace.\n\nMaximum bulk key limit per request 20",
+        "operationId": "getPlayerRecordsBulkHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerRecordsRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player records bulk",
+        "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/me/records/{key}/public": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required valid user authorization\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nDelete player public record.\n\n\n\u0026lt;h2\u0026gt;Warning: This endpoint is going to deprecate\u0026lt;/h2\u0026gt;\n\nThis endpoint is going to deprecate in the future please don\u0026#39;t use it.\n\nFor alternative, please use these endpoints:\n- \u0026lt;b\u0026gt;POST /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;PUT /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;DELETE /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt;\n",
+        "operationId": "publicDeletePlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record deleted"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete player public record",
+        "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/concurrent/records/{key}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player record or replace the existing player record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Optimistic Concurrency Control\u0026lt;/h2\u0026gt;\n\nThis endpoint implement optimistic concurrency control to avoid race condition.\nIf the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed)\nand client need to redo the operation (fetch data and do update).\nOtherwise, the server will process the request.\n",
+        "operationId": "putPlayerRecordConcurrentHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.ConcurrentRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record saved"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace player private record",
+        "tags": ["ConcurrentRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/concurrent/records/{key}/public": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player public record or replace the existing player public record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Optimistic Concurrency Control\u0026lt;/h2\u0026gt;\n\nThis endpoint implement optimistic concurrency control to avoid race condition.\nIf the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed)\nand client need to redo the operation (fetch data and do update).\nOtherwise, the server will process the request.\n",
+        "operationId": "putPlayerPublicRecordConcurrentHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.ConcurrentRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record saved"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace player public record",
+        "tags": ["ConcurrentRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/records/public": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required valid user token with permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:*:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve list of other public player records key under given namespace.",
+        "operationId": "getOtherPlayerPublicRecordKeyHandlerV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.ListPlayerRecordKeysResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:*:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Query other player public record key",
+        "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/records/public/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required valid user token with permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:*:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve other player public record key and payload in bulk under given namespace.\n\nMaximum bulk key limit per request 20",
+        "operationId": "getOtherPlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerRecordsRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:*:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get other player public record bulk",
+        "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nDelete player record by its key.\nOnly user that own the player record could delete it.\n",
+        "operationId": "deletePlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record deleted"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18072\u003c/td\u003e\u003ctd\u003edelete action is forbidden on other user's record\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete player record",
+        "tags": ["PublicPlayerRecord"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nGet player record by its key.\n\u0026lt;b\u0026gt;Private Record:\u0026lt;/b\u0026gt; Only user that own the player record could retrieve it.",
+        "operationId": "getPlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID of record owner",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18023\u003c/td\u003e\u003ctd\u003eget action is forbidden on other user's record\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player record",
+        "tags": ["PublicPlayerRecord"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player record or append the existing player record.\nOnly user that own the existing player record could modify.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample 1\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\nExample 2\n-\tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Record Metadata\u0026lt;/h2\u0026gt;\n\nMetadata allows user to define the behaviour of the record.\nMetadata can be defined in request body with field name \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;.\nWhen creating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the metadata value will use the default value.\nWhen updating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the existing metadata value will stay as is.\n\n\u0026lt;b\u0026gt;Metadata List:\u0026lt;/b\u0026gt;\n1.\tis_public (default: false, type: bool)\n\tIndicate whether the player record is a public record or not.\n\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;__META\u0026#34;: {\n\t\t\t\u0026#34;is_public\u0026#34;: true\n\t\t}\n\t\t...\n\t}\n\u0026lt;/pre\u0026gt;\n",
+        "operationId": "postPlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID of record owner",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18035\u003c/td\u003e\u003ctd\u003epost action is forbidden on other user's record\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or append player record",
+        "tags": ["PublicPlayerRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player record or replace the existing player record.\nOnly user that own the existing player record could modify it.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Record Metadata\u0026lt;/h2\u0026gt;\n\nMetadata allows user to define the behaviour of the record.\nMetadata can be defined in request body with field name \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;.\nWhen creating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the metadata value will use the default value.\nWhen updating record, if \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; field is not defined, the existing metadata value will stay as is.\n\n\u0026lt;b\u0026gt;Metadata List:\u0026lt;/b\u0026gt;\n1.\tis_public (default: false, type: bool)\n\tIndicate whether the player record is a public record or not.\n\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;__META\u0026#34;: {\n\t\t\t\u0026#34;is_public\u0026#34;: true\n\t\t}\n\t\t...\n\t}\n\u0026lt;/pre\u0026gt;\n",
+        "operationId": "putPlayerRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18063\u003c/td\u003e\u003ctd\u003eput action is forbidden on other user's record\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace player record",
+        "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}/public": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nGet other player\u0026#39;s record that is public. Only record with \u0026lt;code\u0026gt;isPublic=true\u0026lt;/code\u0026gt; that can be\nretrieved using this endpoint.\n",
+        "operationId": "getPlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID of record owner",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player public record",
+        "tags": ["PublicPlayerRecord"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [WRITE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player public record or append the existing player public record.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample 1\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\nExample 2\n-\tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Warning: This endpoint is going to deprecate\u0026lt;/h2\u0026gt;\n\nThis endpoint is going to deprecate in the future please don\u0026#39;t use it.\n\nFor alternative, please use these endpoints:\n- \u0026lt;b\u0026gt;POST /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;PUT /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;DELETE /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt;\n",
+        "operationId": "postPlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [WRITE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or append player public record",
+        "tags": ["PublicPlayerRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new player public record or replace the existing player public record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Warning: This endpoint is going to deprecate\u0026lt;/h2\u0026gt;\n\nThis endpoint is going to deprecate in the future please don\u0026#39;t use it.\n\nFor alternative, please use these endpoints:\n- \u0026lt;b\u0026gt;POST /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;PUT /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt; and utilizing \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt; functionality\n- \u0026lt;b\u0026gt;DELETE /cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}\u0026lt;/b\u0026gt;\n",
+        "operationId": "putPlayerPublicRecordHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerRecordResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace player public record",
+        "tags": ["PublicPlayerRecord"]
+      }
+    }
+  },
+  "definitions": {
+    "models.AdminConcurrentRecordRequest": {
+      "properties": {
+        "set_by": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": ["set_by", "updatedAt", "value"]
+    },
+    "models.BulkGetGameRecordRequest": {
+      "properties": {
+        "keys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["keys"]
+    },
+    "models.BulkGetGameRecordResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.GameRecordResponse"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "models.BulkGetPlayerRecordResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.PlayerRecordResponse"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "models.BulkGetPlayerRecordSizeResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.PlayerRecordSizeResponse"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "models.BulkGetPlayerRecordsRequest": {
+      "properties": {
+        "keys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["keys"]
+    },
+    "models.BulkUserIDsRequest": {
+      "properties": {
+        "userIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["userIds"]
+    },
+    "models.BulkUserKeyRequest": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.UserKeyRequest"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "models.ConcurrentRecordRequest": {
+      "properties": {
+        "updatedAt": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": ["updatedAt", "value"]
+    },
+    "models.GameRecordRequest": {
+      "type": "object"
+    },
+    "models.GameRecordResponse": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "key": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "set_by": {
+          "default": "CLIENT",
+          "description": "Indicate which party that could modify the record",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": ["created_at", "key", "namespace", "updated_at", "value"]
+    },
+    "models.ListGameRecordKeysResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.ListPlayerRecordKeysResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.PlayerRecordKeyInfo"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.Pagination": {
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      },
+      "required": ["first", "last", "next", "previous"]
+    },
+    "models.PlayerRecordKeyInfo": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      },
+      "required": ["key", "user_id"]
+    },
+    "models.PlayerRecordRequest": {
+      "type": "object"
+    },
+    "models.PlayerRecordResponse": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "is_public": {
+          "default": false,
+          "description": "Indicate whether the player record is a public record or not",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "key": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "set_by": {
+          "default": "CLIENT",
+          "description": "Indicate which party that could modify the record",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": ["created_at", "is_public", "key", "namespace", "updated_at", "user_id", "value"]
+    },
+    "models.PlayerRecordSizeResponse": {
+      "properties": {
+        "current_size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "key": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "remaining_size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      },
+      "required": ["current_size", "key", "namespace", "remaining_size", "user_id"]
+    },
+    "models.ResponseError": {
+      "properties": {
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      },
+      "required": ["errorCode", "errorMessage"]
+    },
+    "models.UserKeyRequest": {
+      "properties": {
+        "keys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      },
+      "required": ["keys", "user_id"]
+    }
+  },
+  "x-docs": {
+    "alias": "cloudsave",
+    "host": "https://development.accelbyte.io",
+    "path": "/cloudsave/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2023-05-03T00:44:26+00:00",
+    "gitHash": "b68b67961ca861f4b68984bab92985cd1e54cc87",
+    "name": "justice-cloudsave-service",
+    "revisionID": "3.7.0",
+    "version": "3.7.0",
+    "version-roles-seeding": "0.0.3"
+  }
+}

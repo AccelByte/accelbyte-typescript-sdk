@@ -26,11 +26,11 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Check and get a payment order's should pay tax.<br>Other detail info: <ul><li><i>Returns</i>: tax result</li></ul>
+   * Check and get a payment order&#39;s should pay tax.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: tax result&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentTax(queryParams: {
-    paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
     paymentOrderNo: string | null
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     zipCode?: string | null
   }): Promise<TaxResult> {
     const $ = new PaymentStation$(Network.create(requestConfig), namespace, cache)
@@ -40,7 +40,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get payment url.<br>Other detail info: <ul><li><i>Returns</i>: Get payment link</li></ul>
+   * Get payment url.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Get payment link&lt;/li&gt;&lt;/ul&gt;
    */
   async function createPaymentLink(data: PaymentUrlCreate): Promise<PaymentUrl> {
     const $ = new PaymentStation$(Network.create(requestConfig), namespace, cache)
@@ -50,7 +50,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get qrcode.<br>Other detail info: <ul><li><i>Returns</i>: QRCode image stream</li></ul>
+   * Get qrcode.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: QRCode image stream&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentQrcode(queryParams: { code: string | null }): Promise<unknown> {
     const $ = new PaymentStation$(Network.create(requestConfig), namespace, cache)
@@ -60,7 +60,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get payment methods.<br>Other detail info: <ul><li><i>Returns</i>: Payment method list</li></ul>
+   * Get payment methods.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment method list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentMethods(queryParams: { paymentOrderNo: string | null }): Promise<PaymentMethodArray> {
     const $ = new PaymentStation$(Network.create(requestConfig), namespace, cache)
@@ -70,24 +70,24 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Normalize payment return url for payment provider<br>Payment response: <table><tr><td>Field</td><td>Type</td><td>Required</td><td>Description</td></tr><tr><td>orderNo</td><td>String</td><td>Yes</td><td>order no</td></tr><tr><td>paymentStatus</td><td>String</td><td>Yes</td><td><ul><li>DONE: The payment was successfully completed.</li><li>CANCELLED: The payment was cancelled by the shopper before completion, or the shopper returned to the merchant's site before completing the transaction.</li><li>PENDING: Inform the shopper that you've received their order, and are waiting for the payment to be completed. When the shopper has completed the payment you will receive a successful AUTHORISATION.</li><li>RECEIVED: Inform the shopper that you've received their order, and are waiting for the payment to clear.</li><li>UNKNOWN: An error occurred during the payment processing.</li><li>FAILED: Shopper paid failed because of various reasons.</li></ul></td></tr><tr><td>reason</td><td>String</td><td>No</td><td>payment status reason</td></tr></table>Other detail info: <ul><li><i>xsolla</i>: parameters 'user_id', 'foreinginvoice', 'invoice_id' and 'status' will be automatically added to the link</li><li><i>adyen</i>: https://docs.adyen.com/developers/checkout/web-sdk</li></ul>
+   * Normalize payment return url for payment provider&lt;br&gt;Payment response: &lt;table&gt;&lt;tr&gt;&lt;td&gt;Field&lt;/td&gt;&lt;td&gt;Type&lt;/td&gt;&lt;td&gt;Required&lt;/td&gt;&lt;td&gt;Description&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;orderNo&lt;/td&gt;&lt;td&gt;String&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;order no&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;paymentStatus&lt;/td&gt;&lt;td&gt;String&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;&lt;ul&gt;&lt;li&gt;DONE: The payment was successfully completed.&lt;/li&gt;&lt;li&gt;CANCELLED: The payment was cancelled by the shopper before completion, or the shopper returned to the merchant&#39;s site before completing the transaction.&lt;/li&gt;&lt;li&gt;PENDING: Inform the shopper that you&#39;ve received their order, and are waiting for the payment to be completed. When the shopper has completed the payment you will receive a successful AUTHORISATION.&lt;/li&gt;&lt;li&gt;RECEIVED: Inform the shopper that you&#39;ve received their order, and are waiting for the payment to clear.&lt;/li&gt;&lt;li&gt;UNKNOWN: An error occurred during the payment processing.&lt;/li&gt;&lt;li&gt;FAILED: Shopper paid failed because of various reasons.&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;reason&lt;/td&gt;&lt;td&gt;String&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;payment status reason&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;xsolla&lt;/i&gt;: parameters &#39;user_id&#39;, &#39;foreinginvoice&#39;, &#39;invoice_id&#39; and &#39;status&#39; will be automatically added to the link&lt;/li&gt;&lt;li&gt;&lt;i&gt;adyen&lt;/i&gt;: https://docs.adyen.com/developers/checkout/web-sdk&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentReturnurl(queryParams: {
-    returnUrl: string | null
     orderNo: string | null
     paymentOrderNo: string | null
-    paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
-    user_id?: string | null
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    returnUrl: string | null
+    PayerID?: string | null
     foreinginvoice?: string | null
     invoice_id?: string | null
-    status?: string | null
-    type?: string | null
-    token?: string | null
-    PayerID?: string | null
-    resultCode?: string | null
     payload?: string | null
-    sessionId?: string | null
     redirectResult?: string | null
+    resultCode?: string | null
+    sessionId?: string | null
+    status?: string | null
+    token?: string | null
+    type?: string | null
+    user_id?: string | null
   }): Promise<unknown> {
     const $ = new PaymentStation$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getPaymentReturnurl(queryParams)
@@ -96,10 +96,10 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get payment provider public config, at current only Strip provide public config.<br>Other detail info: <ul><li><i>Returns</i>: Public config</li></ul>
+   * Get payment provider public config, at current only Strip provide public config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Public config&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentPublicconfig(queryParams: {
-    paymentProvider: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     region: string | null
     sandbox?: boolean | null
   }): Promise<unknown> {
@@ -110,13 +110,13 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Do payment(For now, this only support checkout.com).<br>Other detail info: <ul><li><i>Returns</i>: Payment process result</li></ul>
+   * Do payment(For now, this only support checkout.com).&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment process result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createPayPayment_ByPaymentOrderNo(
     paymentOrderNo: string,
     data: PaymentToken,
     queryParams?: {
-      paymentProvider?: 'WALLET' | 'XSOLLA' | 'ADYEN' | 'STRIPE' | 'CHECKOUT' | 'ALIPAY' | 'WXPAY' | 'PAYPAL'
+      paymentProvider?: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
       zipCode?: string | null
     }
   ): Promise<PaymentProcessResult> {
@@ -127,7 +127,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get payment order info.<br>Other detail info: <ul><li><i>Returns</i>: Payment order details</li></ul>
+   * Get payment order info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment order details&lt;/li&gt;&lt;/ul&gt;
    */
   async function getInfoPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<PaymentOrderDetails> {
     const $ = new PaymentStation$(Network.create(requestConfig), namespace, cache)
@@ -137,7 +137,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Check payment order paid status.<br>Other detail info: <ul><li><i>Returns</i>: Payment order paid result</li></ul>
+   * Check payment order paid status.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment order paid result&lt;/li&gt;&lt;/ul&gt;
    */
   async function getStatusPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<PaymentOrderPaidResult> {
     const $ = new PaymentStation$(Network.create(requestConfig), namespace, cache)

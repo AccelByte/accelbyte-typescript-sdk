@@ -2,7 +2,7 @@
   [
     "game-telemetry",
     "Game Telemetry",
-    "game-telemetry-api.json",
+    "gametelemetry.json",
     "https://development.accelbyte.io/game-telemetry/openapi.json"
   ]
 ]

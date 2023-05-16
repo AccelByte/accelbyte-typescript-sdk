@@ -8,9 +8,9 @@ import { PlatformReward } from './PlatformReward.js'
 import { RevokeItemSummary } from './RevokeItemSummary.js'
 
 export const RevokeResult = z.object({
-  reward: PlatformReward.nullish(),
   revokeItemSummaries: z.array(RevokeItemSummary).nullish(),
-  status: z.enum(['SKIPPED', 'COMPLETED']).nullish()
+  reward: PlatformReward.nullish(),
+  status: z.enum(['COMPLETED', 'SKIPPED']).nullish()
 })
 
 export interface RevokeResult extends z.TypeOf<typeof RevokeResult> {}

@@ -9,8 +9,8 @@ export const CurrencySummary = z.object({
   currencyCode: z.string(),
   currencySymbol: z.string(),
   currencyType: z.enum(['REAL', 'VIRTUAL']),
-  namespace: z.string(),
-  decimals: z.number().int()
+  decimals: z.number().int(),
+  namespace: z.string()
 })
 
 export interface CurrencySummary extends z.TypeOf<typeof CurrencySummary> {}

@@ -20,15 +20,24 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function getAchievements(queryParams: {
-    tags?: string[]
-    sortBy?: string | null
     language: string | null
+    global?: boolean | null
     limit?: number
     offset?: number
-    global?: boolean | null
+    sortBy?:
+      | 'listOrder'
+      | 'listOrder:asc'
+      | 'listOrder:desc'
+      | 'createdAt'
+      | 'createdAt:asc'
+      | 'createdAt:desc'
+      | 'updatedAt'
+      | 'updatedAt:asc'
+      | 'updatedAt:desc'
+    tags?: string[]
   }): Promise<PublicAchievementsResponse> {
     const $ = new Achievements$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getAchievements(queryParams)
@@ -37,7 +46,7 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function getAchievement_ByAchievementCode(
     achievementCode: string,

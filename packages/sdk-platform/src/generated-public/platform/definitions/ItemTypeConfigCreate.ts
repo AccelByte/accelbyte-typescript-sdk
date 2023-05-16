@@ -6,23 +6,23 @@
 import { z } from 'zod'
 
 export const ItemTypeConfigCreate = z.object({
+  clazz: z.string().nullish(),
+  dryRun: z.boolean().nullish(),
+  fulfillmentUrl: z.string(),
   itemType: z.enum([
     'APP',
-    'COINS',
-    'INGAMEITEM',
     'BUNDLE',
     'CODE',
-    'SUBSCRIPTION',
-    'SEASON',
+    'COINS',
+    'EXTENSION',
+    'INGAMEITEM',
+    'LOOTBOX',
     'MEDIA',
     'OPTIONBOX',
-    'EXTENSION',
-    'LOOTBOX'
+    'SEASON',
+    'SUBSCRIPTION'
   ]),
-  clazz: z.string().nullish(),
-  fulfillmentUrl: z.string(),
-  purchaseConditionUrl: z.string().nullish(),
-  dryRun: z.boolean().nullish()
+  purchaseConditionUrl: z.string().nullish()
 })
 
 export interface ItemTypeConfigCreate extends z.TypeOf<typeof ItemTypeConfigCreate> {}

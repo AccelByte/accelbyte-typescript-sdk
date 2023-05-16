@@ -33,7 +33,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Request body details: - emailAddress: email address of the user to be invited - namespace: new namespace of the user to be created - namespaceDisplayName: display name of the new namespace The invited users will also be assigned with "User" role by default.
+   * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Request body details: - emailAddress: email address of the user to be invited - namespace: new namespace of the user to be created - namespaceDisplayName: display name of the new namespace The invited users will also be assigned with &#34;User&#34; role by default.
    */
   async function createUserInvite(data: PublicInviteUserRequestV4): Promise<InviteUserResponseV3> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -43,7 +43,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Create a new user with unique email address and username. <p> <b>Required attributes:</b> - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. <br/> <b>Not required attributes:</b> - displayName: Please refer to the rule from /v3/public/inputValidations API. </p> <p>This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.</p>
+   * Create a new user with unique email address and username. &lt;p&gt; &lt;b&gt;Required attributes:&lt;/b&gt; - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. &lt;br/&gt; &lt;b&gt;Not required attributes:&lt;/b&gt; - displayName: Please refer to the rule from /v3/public/inputValidations API. &lt;/p&gt; &lt;p&gt;This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.&lt;/p&gt;
    */
   async function createUser(data: CreateUserRequestV4): Promise<CreateUserResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -53,7 +53,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Requires valid user access token </p> <br><p>This Endpoint support update user based on given data. <b>Single request can update single field or multi fields.</b></p> <p>Supported field {country, displayName, languageTag, dateOfBirth}</p> <p>Country use ISO3166-1 alpha-2 two letter, e.g. US.</p> <p>Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.</p> <br><b>Several case of updating email address</b> <p>action code : 10103 </p>
+   * &lt;p&gt;Requires valid user access token &lt;/p&gt; &lt;br&gt;&lt;p&gt;This Endpoint support update user based on given data. &lt;b&gt;Single request can update single field or multi fields.&lt;/b&gt;&lt;/p&gt; &lt;p&gt;Supported field {country, displayName, languageTag, dateOfBirth}&lt;/p&gt; &lt;p&gt;Country use ISO3166-1 alpha-2 two letter, e.g. US.&lt;/p&gt; &lt;p&gt;Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.&lt;/p&gt; &lt;br&gt;&lt;b&gt;Several case of updating email address&lt;/b&gt; &lt;p&gt;action code : 10103 &lt;/p&gt;
    */
   async function patchUserMe(data: UserUpdateRequestV3): Promise<UserResponseV3> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -63,7 +63,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Create a test user and not send verification code email <p> <b>Required attributes:</b> - verified: this new user is verified or not - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. <br/> <b>Not required attributes:</b> - displayName: Please refer to the rule from /v3/public/inputValidations API. </p> <p>This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.</p>
+   * Create a test user and not send verification code email &lt;p&gt; &lt;b&gt;Required attributes:&lt;/b&gt; - verified: this new user is verified or not - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. &lt;br/&gt; &lt;b&gt;Not required attributes:&lt;/b&gt; - displayName: Please refer to the rule from /v3/public/inputValidations API. &lt;/p&gt; &lt;p&gt;This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.&lt;/p&gt;
    */
   async function createTestUser(data: CreateTestUserRequestV4): Promise<CreateUserResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -73,7 +73,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>The endpoint to update my email address. </p> <p>It requires a verification code from <pre>/users/me/code/request</pre> with <b>UpdateEmailAddress</b> context.</p>
+   * &lt;p&gt;The endpoint to update my email address. &lt;/p&gt; &lt;p&gt;It requires a verification code from &lt;pre&gt;/users/me/code/request&lt;/pre&gt; with &lt;b&gt;UpdateEmailAddress&lt;/b&gt; context.&lt;/p&gt;
    */
   async function updateUserMeEmail(data: EmailUpdateRequestV4): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -83,7 +83,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>(Only for test)This endpoint is used to remove trusted device.</p> <p>This endpoint Requires valid user access token</p><br/> <p>This endpoint Requires device_token in cookie</p>
+   * &lt;p&gt;(Only for test)This endpoint is used to remove trusted device.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;&lt;br/&gt; &lt;p&gt;This endpoint Requires device_token in cookie&lt;/p&gt;
    */
   async function deleteUserMeMfaDevice(): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -93,7 +93,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to get user enabled factors.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to get user enabled factors.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function getUsersMeMfaFactor(): Promise<EnabledFactorsResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -103,7 +103,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to make 2FA factor default.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to make 2FA factor default.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function postUserMeMfaFactor(data: { factor: string | null }): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -113,7 +113,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function getUsersMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -123,7 +123,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function createUserMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -133,7 +133,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to send email code.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to send email code.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function createUserMeMfaEmailCode(): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -143,7 +143,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Require valid user authorization Upgrade headless account to full account without verifying email address. Client does not need to provide verification code which sent to email address. <br>action code : 10124 </p>
+   * Require valid user authorization Upgrade headless account to full account without verifying email address. Client does not need to provide verification code which sent to email address. &lt;br&gt;action code : 10124 &lt;/p&gt;
    */
   async function createUserMeHeadlesVerify(data: UpgradeHeadlessAccountRequestV4): Promise<UserResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -153,7 +153,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to enable 2FA email.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to enable 2FA email.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function postUserMeMfaEmailEnable(data: { code: string | null }): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -163,7 +163,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to disable 2FA email.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to disable 2FA email.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function createUserMeMfaEmailDisable(): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -186,7 +186,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Require valid user access token. The endpoint upgrades a headless account by linking the headless account with the email address, username, and password. By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM. <br> The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the <a href="#operations-Users-PublicSendVerificationCodeV3">send verification code endpoint</a>. <br> This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done. Supported user data fields: <ul> <li>displayName</li> <li>dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29</li> <li>country : format ISO3166-1 alpha-2 two letter, e.g. US</li> </ul> action code : 10124
+   * Require valid user access token. The endpoint upgrades a headless account by linking the headless account with the email address, username, and password. By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM. &lt;br&gt; The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the &lt;a href=&#34;#operations-Users-PublicSendVerificationCodeV3&#34;&gt;send verification code endpoint&lt;/a&gt;. &lt;br&gt; This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done. Supported user data fields: &lt;ul&gt; &lt;li&gt;displayName&lt;/li&gt; &lt;li&gt;dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29&lt;/li&gt; &lt;li&gt;country : format ISO3166-1 alpha-2 two letter, e.g. US&lt;/li&gt; &lt;/ul&gt; action code : 10124
    */
   async function createUserMeHeadlesCodeVerify(data: UpgradeHeadlessAccountWithVerificationCodeRequestV4): Promise<UserResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -196,7 +196,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to generate a secret key for 3rd-party authenticator app. A QR code URI is also returned so that frontend can generate QR code image.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to generate a secret key for 3rd-party authenticator app. A QR code URI is also returned so that frontend can generate QR code image.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function createUserMeMfaAuthenticatorKey(): Promise<AuthenticatorKeyResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -206,7 +206,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to enable 2FA backup codes.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to enable 2FA backup codes.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function createUserMeMfaBackupCodeEnable(): Promise<BackupCodesResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -216,7 +216,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to enable 2FA backup codes.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to enable 2FA backup codes.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function deleteUserMeMfaBackupCodeDisable(): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -226,7 +226,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to download backup codes.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to download backup codes.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function getUsersMeMfaBackupCodeDownload(): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -236,7 +236,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to enable 2FA authenticator.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to enable 2FA authenticator.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function postUserMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
@@ -246,7 +246,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>This endpoint is used to disable 2FA authenticator.</p> <p>This endpoint Requires valid user access token</p>
+   * &lt;p&gt;This endpoint is used to disable 2FA authenticator.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
    */
   async function deleteUserMeMfaAuthenticatorDisable(): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)

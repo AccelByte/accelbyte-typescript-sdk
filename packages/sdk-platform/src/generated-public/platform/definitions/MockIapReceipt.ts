@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const MockIapReceipt = z.object({
-  type: z.enum(['APPLE', 'GOOGLE', 'PLAYSTATION', 'STEAM', 'XBOX', 'STADIA', 'EPICGAMES', 'TWITCH']),
-  productId: z.string(),
   itemIdentityType: z.enum(['ITEM_ID', 'ITEM_SKU']).nullish(),
+  language: z.string().nullish(),
+  productId: z.string(),
   region: z.string().nullish(),
-  language: z.string().nullish()
+  type: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX'])
 })
 
 export interface MockIapReceipt extends z.TypeOf<typeof MockIapReceipt> {}

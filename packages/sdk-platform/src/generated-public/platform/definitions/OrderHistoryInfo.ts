@@ -6,27 +6,27 @@
 import { z } from 'zod'
 
 export const OrderHistoryInfo = z.object({
-  orderNo: z.string(),
-  operator: z.string(),
   action: z.enum([
-    'INIT',
-    'CHARGED',
     'CHARGEBACK',
     'CHARGEBACK_REVERSED',
-    'FULFILLED',
-    'FULFILL_FAILED',
-    'REFUNDING',
-    'REFUNDED',
-    'REFUND_FAILED',
+    'CHARGED',
     'CLOSE',
     'DELETED',
+    'FULFILLED',
+    'FULFILL_FAILED',
+    'INIT',
+    'REFUNDED',
+    'REFUNDING',
+    'REFUND_FAILED',
     'SET_STATUS'
   ]),
-  reason: z.string().nullish(),
-  namespace: z.string(),
-  userId: z.string(),
   createdAt: z.string(),
-  updatedAt: z.string()
+  namespace: z.string(),
+  operator: z.string(),
+  orderNo: z.string(),
+  reason: z.string().nullish(),
+  updatedAt: z.string(),
+  userId: z.string()
 })
 
 export interface OrderHistoryInfo extends z.TypeOf<typeof OrderHistoryInfo> {}

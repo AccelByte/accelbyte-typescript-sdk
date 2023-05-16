@@ -8,6 +8,8 @@ import { z } from 'zod'
 export const PublicConfiguration = z.object({
   clientVersion: z.string(),
   deployment: z.string(),
+  dsSource: z.string().nullish(),
+  fallbackClaimKeys: z.array(z.string()).nullish(),
   inactiveTimeout: z.number().int(),
   inviteTimeout: z.number().int(),
   joinability: z.string(),
@@ -15,6 +17,7 @@ export const PublicConfiguration = z.object({
   minPlayers: z.number().int(),
   name: z.string(),
   persistent: z.boolean(),
+  preferredClaimKeys: z.array(z.string()).nullish(),
   requestedRegions: z.array(z.string()).nullish(),
   textChat: z.boolean(),
   type: z.string()

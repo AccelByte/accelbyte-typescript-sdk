@@ -10,7 +10,8 @@ export const StatUpdate = z.object({
   description: z.string().nullish(),
   tags: z.array(z.string()).nullish(),
   cycleIds: z.array(z.string()).nullish(),
-  defaultValue: z.number().nullish()
+  defaultValue: z.number().nullish(),
+  isPublic: z.boolean().nullish()
 })
 
 export interface StatUpdate extends z.TypeOf<typeof StatUpdate> {}

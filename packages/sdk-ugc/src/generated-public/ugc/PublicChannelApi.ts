@@ -22,7 +22,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]</b>
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]&lt;/b&gt;
    */
   async function getChannels_ByUserId(
     userId: string,
@@ -35,7 +35,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]</b>
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]&lt;/b&gt;
    */
   async function createChannel_ByUserId(userId: string, data: PublicChannelRequest): Promise<ChannelResponse> {
     const $ = new PublicChannel$(Network.create(requestConfig), namespace, cache)
@@ -45,7 +45,17 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]</b>
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   */
+  async function deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<unknown> {
+    const $ = new PublicChannel$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.deleteChannel_ByUserId_ByChannelId(userId, channelId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]&lt;/b&gt;
    */
   async function updateChannel_ByUserId_ByChannelId(
     userId: string,
@@ -58,20 +68,10 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
-  /**
-   * Required permission <b>NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]</b>
-   */
-  async function deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<unknown> {
-    const $ = new PublicChannel$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.deleteChannel_ByUserId_ByChannelId(userId, channelId)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
   return {
     getChannels_ByUserId,
     createChannel_ByUserId,
-    updateChannel_ByUserId_ByChannelId,
-    deleteChannel_ByUserId_ByChannelId
+    deleteChannel_ByUserId_ByChannelId,
+    updateChannel_ByUserId_ByChannelId
   }
 }

@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const IapItemFlatEntry = z.object({
-  platform: z.enum(['APPLE', 'GOOGLE', 'PLAYSTATION', 'STEAM', 'XBOX', 'STADIA', 'EPICGAMES', 'TWITCH']).nullish(),
-  itemIdentityType: z.enum(['ITEM_ID', 'ITEM_SKU']).nullish(),
   itemIdentity: z.string().nullish(),
+  itemIdentityType: z.enum(['ITEM_ID', 'ITEM_SKU']).nullish(),
+  platform: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX']).nullish(),
   platformProductId: z.string().nullish()
 })
 

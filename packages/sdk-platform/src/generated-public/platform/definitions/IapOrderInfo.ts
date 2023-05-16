@@ -8,27 +8,27 @@ import { CreditSummary } from './CreditSummary.js'
 import { EntitlementSummary } from './EntitlementSummary.js'
 
 export const IapOrderInfo = z.object({
-  iapOrderNo: z.string(),
-  namespace: z.string(),
-  userId: z.string(),
-  productId: z.string().nullish(),
-  receiptData: z.string().nullish(),
-  transactionId: z.string().nullish(),
-  status: z.enum(['VERIFIED', 'FULFILLED', 'FAILED']),
-  statusReason: z.string().nullish(),
-  region: z.string().nullish(),
-  language: z.string().nullish(),
-  quantity: z.number().int().nullish(),
-  sandbox: z.boolean().nullish(),
-  type: z.enum(['APPLE', 'GOOGLE', 'PLAYSTATION', 'STEAM', 'XBOX', 'STADIA', 'EPICGAMES', 'TWITCH']),
-  fulfilledTime: z.string().nullish(),
-  retryCount: z.number().int().nullish(),
-  entitlements: z.array(EntitlementSummary).nullish(),
-  credits: z.array(CreditSummary).nullish(),
   createdAt: z.string(),
-  updatedAt: z.string(),
+  credits: z.array(CreditSummary).nullish(),
+  currencyCode: z.string().nullish(),
+  entitlements: z.array(EntitlementSummary).nullish(),
+  fulfilledTime: z.string().nullish(),
+  iapOrderNo: z.string(),
+  language: z.string().nullish(),
+  namespace: z.string(),
   price: z.number().nullish(),
-  currencyCode: z.string().nullish()
+  productId: z.string().nullish(),
+  quantity: z.number().int().nullish(),
+  receiptData: z.string().nullish(),
+  region: z.string().nullish(),
+  retryCount: z.number().int().nullish(),
+  sandbox: z.boolean().nullish(),
+  status: z.enum(['FAILED', 'FULFILLED', 'VERIFIED']),
+  statusReason: z.string().nullish(),
+  transactionId: z.string().nullish(),
+  type: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX']),
+  updatedAt: z.string(),
+  userId: z.string()
 })
 
 export interface IapOrderInfo extends z.TypeOf<typeof IapOrderInfo> {}

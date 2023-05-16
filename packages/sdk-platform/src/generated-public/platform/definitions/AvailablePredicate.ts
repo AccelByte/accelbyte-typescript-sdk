@@ -7,10 +7,10 @@ import { z } from 'zod'
 import { AvailableComparison } from './AvailableComparison.js'
 
 export const AvailablePredicate = z.object({
-  predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate']).nullish(),
   availableComparisons: z.array(AvailableComparison).nullish(),
-  valueType: z.enum(['List', 'Number', 'String']).nullish(),
-  showAnyOf: z.boolean().nullish()
+  predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate']).nullish(),
+  showAnyOf: z.boolean().nullish(),
+  valueType: z.enum(['List', 'Number', 'String']).nullish()
 })
 
 export interface AvailablePredicate extends z.TypeOf<typeof AvailablePredicate> {}

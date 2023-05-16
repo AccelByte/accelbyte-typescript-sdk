@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const ServicePluginConfigInfo = z.object({ namespace: z.string().nullish(), grpcServerAddress: z.string().nullish() })
+export const ServicePluginConfigInfo = z.object({ grpcServerAddress: z.string().nullish(), namespace: z.string().nullish() })
 
 export interface ServicePluginConfigInfo extends z.TypeOf<typeof ServicePluginConfigInfo> {}

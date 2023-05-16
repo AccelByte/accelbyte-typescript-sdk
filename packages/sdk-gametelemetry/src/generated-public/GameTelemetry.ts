@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 
-import { TelemetryApi } from './game-telemetry/TelemetryApi.js'
+import { GametelemetryOperationsApi } from './game-telemetry/GametelemetryOperationsApi.js'
 
 const apis = {
-  TelemetryApi
+  GametelemetryOperationsApi
 }
 
 export const GameTelemetry = apis

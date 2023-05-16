@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const KeyGroupUpdate = z.object({
-  name: z.string(),
   description: z.string().nullish(),
-  tags: z.array(z.string()).nullish(),
-  status: z.enum(['ACTIVE', 'INACTIVE']).nullish()
+  name: z.string(),
+  status: z.enum(['ACTIVE', 'INACTIVE']).nullish(),
+  tags: z.array(z.string()).nullish()
 })
 
 export interface KeyGroupUpdate extends z.TypeOf<typeof KeyGroupUpdate> {}

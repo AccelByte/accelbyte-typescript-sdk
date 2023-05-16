@@ -26,18 +26,18 @@ export class Entitlement$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Query user entitlements for a specific user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement list</li></ul>
+   * Query user entitlements for a specific user.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement list&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlements_ByUserId(
     userId: string,
     queryParams?: {
-      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
-      appType?: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'
+      appType?: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'
+      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
       entitlementName?: string | null
-      itemId?: string[]
       features?: string[]
-      offset?: number
+      itemId?: string[]
       limit?: number
+      offset?: number
     }
   ): Promise<IResponseWithSync<EntitlementPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
@@ -56,13 +56,13 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user entitlement by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsBySku_ByUserId(
     userId: string,
     queryParams: {
       sku: string | null
-      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
     }
   ): Promise<IResponseWithSync<EntitlementInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -81,7 +81,7 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user app entitlement by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user app entitlement by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<IResponseWithSync<AppEntitlementInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -100,11 +100,11 @@ export class Entitlement$ {
   }
 
   /**
-   * Exists any my active entitlement of specified itemIds, skus and appIds<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Exists any my active entitlement of specified itemIds, skus and appIds&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getUsersMeEntitlementsOwnershipAny(queryParams?: {
-    itemIds?: string[]
     appIds?: string[]
+    itemIds?: string[]
     skus?: string[]
   }): Promise<IResponseWithSync<Ownership>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -121,13 +121,13 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user entitlement by itemId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsByItemId_ByUserId(
     userId: string,
     queryParams: {
       itemId: string | null
-      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
     }
   ): Promise<IResponseWithSync<EntitlementInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -146,11 +146,11 @@ export class Entitlement$ {
   }
 
   /**
-   * Gets an entitlement ownership token of specified itemIds, skus and appIds<p>The decoded ownership token header like below:<p><pre><code>{ "kid": "9fd4cd5f991cebe3323605cd12d3b8bfdfc73fa4", "typ": "JWT", "alg": "RS256" } </code></pre>That you can get the jwks by api <baseUrl>/platform/jwks, if the configured private key is same as IAM, <p>you can also get jwks from IAM endpoint. <p>The decoded ownership token payload like below:<p><pre><code>{ "namespace": "accelbyte", "entitlements": [ { "itemId": "4c1296291f604c199f7bb7f0ee02e5f8", "appType": null, "appId": null, "namespace": "accelbyte", "itemNamespace": "accelbyte", "sku": "prime-plus" }, { "itemId": "e8f4974cf45c4e1f8d4f0c6990c518bd", "appType": "GAME", "appId": "omeganebula", "namespace": "accelbyte", "itemNamespace": "accelbyte", "sku": "APPG005ON" } ], "sub": "66459eb6a4e44e6fb0040bd20c1079a5", "exp": 1619624360, "iat": 1619624060 } </code></pre><b>if there's no active entitlement for the specific params, the entitlements section will be omitted</b>.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Gets an entitlement ownership token of specified itemIds, skus and appIds&lt;p&gt;The decoded ownership token header like below:&lt;p&gt;&lt;pre&gt;&lt;code&gt;{ &#34;kid&#34;: &#34;9fd4cd5f991cebe3323605cd12d3b8bfdfc73fa4&#34;, &#34;typ&#34;: &#34;JWT&#34;, &#34;alg&#34;: &#34;RS256&#34; } &lt;/code&gt;&lt;/pre&gt;That you can get the jwks by api &lt;baseUrl&gt;/platform/jwks, if the configured private key is same as IAM, &lt;p&gt;you can also get jwks from IAM endpoint. &lt;p&gt;The decoded ownership token payload like below:&lt;p&gt;&lt;pre&gt;&lt;code&gt;{ &#34;namespace&#34;: &#34;accelbyte&#34;, &#34;entitlements&#34;: [ { &#34;itemId&#34;: &#34;4c1296291f604c199f7bb7f0ee02e5f8&#34;, &#34;appType&#34;: null, &#34;appId&#34;: null, &#34;namespace&#34;: &#34;accelbyte&#34;, &#34;itemNamespace&#34;: &#34;accelbyte&#34;, &#34;sku&#34;: &#34;prime-plus&#34; }, { &#34;itemId&#34;: &#34;e8f4974cf45c4e1f8d4f0c6990c518bd&#34;, &#34;appType&#34;: &#34;GAME&#34;, &#34;appId&#34;: &#34;omeganebula&#34;, &#34;namespace&#34;: &#34;accelbyte&#34;, &#34;itemNamespace&#34;: &#34;accelbyte&#34;, &#34;sku&#34;: &#34;APPG005ON&#34; } ], &#34;sub&#34;: &#34;66459eb6a4e44e6fb0040bd20c1079a5&#34;, &#34;exp&#34;: 1619624360, &#34;iat&#34;: 1619624060 } &lt;/code&gt;&lt;/pre&gt;&lt;b&gt;if there&#39;s no active entitlement for the specific params, the entitlements section will be omitted&lt;/b&gt;.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getUsersMeEntitlementsOwnershipToken(queryParams?: {
-    itemIds?: string[]
     appIds?: string[]
+    itemIds?: string[]
     skus?: string[]
   }): Promise<IResponseWithSync<OwnershipToken>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -167,11 +167,11 @@ export class Entitlement$ {
   }
 
   /**
-   * Query app entitlements by appType.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: app entitlement pagination</li></ul>
+   * Query app entitlements by appType.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: app entitlement pagination&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsByAppType_ByUserId(
     userId: string,
-    queryParams: { appType: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'; offset?: number; limit?: number }
+    queryParams: { appType: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'; limit?: number; offset?: number }
   ): Promise<IResponseWithSync<AppEntitlementPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppType'
@@ -189,11 +189,11 @@ export class Entitlement$ {
   }
 
   /**
-   * Get my entitlement ownership by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
+   * Get my entitlement ownership by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Path&#39;s namespace&lt;/i&gt; : &lt;ul&gt;&lt;li&gt;can be filled with &lt;b&gt;publisher namespace&lt;/b&gt; in order to get &lt;b&gt;publisher namespace entitlement ownership by sku&lt;/b&gt;&lt;/li&gt;&lt;li&gt;can be filled with &lt;b&gt;game namespace&lt;/b&gt; in order to get &lt;b&gt;game namespace entitlement ownership by sku&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   getUsersMeEntitlementsOwnershipBySku(queryParams: {
     sku: string | null
-    entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+    entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
   }): Promise<IResponseWithSync<TimedOwnership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/bySku'.replace('{namespace}', this.namespace)
@@ -209,7 +209,7 @@ export class Entitlement$ {
   }
 
   /**
-   * Get my app entitlement ownership by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace app entitlement ownership</b></li></ul></li></ul>
+   * Get my app entitlement ownership by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Path&#39;s namespace&lt;/i&gt; : &lt;ul&gt;&lt;li&gt;can be filled with &lt;b&gt;publisher namespace&lt;/b&gt; in order to get &lt;b&gt;publisher namespace app entitlement ownership&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   getUsersMeEntitlementsOwnershipByAppId(queryParams: { appId: string | null }): Promise<IResponseWithSync<Ownership>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -226,11 +226,11 @@ export class Entitlement$ {
   }
 
   /**
-   * Get my entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)</li><li><i>Path's namespace</i> : <ul><li>can be filled with <b>publisher namespace</b> in order to get <b>publisher namespace entitlement ownership by sku</b></li><li>can be filled with <b>game namespace</b> in order to get <b>game namespace entitlement ownership by sku</b></li></ul></li></ul>
+   * Get my entitlement ownership by itemId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Path&#39;s namespace&lt;/i&gt; : &lt;ul&gt;&lt;li&gt;can be filled with &lt;b&gt;publisher namespace&lt;/b&gt; in order to get &lt;b&gt;publisher namespace entitlement ownership by sku&lt;/b&gt;&lt;/li&gt;&lt;li&gt;can be filled with &lt;b&gt;game namespace&lt;/b&gt; in order to get &lt;b&gt;game namespace entitlement ownership by sku&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   getUsersMeEntitlementsOwnershipByItemId(queryParams: {
     itemId: string | null
-    entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+    entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
   }): Promise<IResponseWithSync<TimedOwnership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byItemId'.replace('{namespace}', this.namespace)
@@ -246,11 +246,11 @@ export class Entitlement$ {
   }
 
   /**
-   * Exists any user active entitlement of specified itemIds, skus and appIds<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Exists any user active entitlement of specified itemIds, skus and appIds&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsOwnershipAny_ByUserId(
     userId: string,
-    queryParams?: { itemIds?: string[]; appIds?: string[]; skus?: string[] }
+    queryParams?: { appIds?: string[]; itemIds?: string[]; skus?: string[] }
   ): Promise<IResponseWithSync<Ownership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/any'
@@ -268,7 +268,7 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li><li><i>Returns</i>: entitlement</li></ul>
+   * Get user entitlement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlement_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<IResponseWithSync<EntitlementInfo>> {
     const params = {} as SDKRequestConfig
@@ -288,13 +288,13 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement ownership by sku.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user entitlement ownership by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsOwnershipBySku_ByUserId(
     userId: string,
     queryParams: {
       sku: string | null
-      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
     }
   ): Promise<IResponseWithSync<TimedOwnership>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -313,7 +313,7 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user app entitlement ownership by appId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user app entitlement ownership by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsOwnershipByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<IResponseWithSync<Ownership>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -332,13 +332,13 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement ownership by itemId.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user entitlement ownership by itemId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsOwnershipByItemId_ByUserId(
     userId: string,
     queryParams: {
       itemId: string | null
-      entitlementClazz?: 'APP' | 'ENTITLEMENT' | 'CODE' | 'SUBSCRIPTION' | 'MEDIA' | 'OPTIONBOX' | 'LOOTBOX'
+      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
     }
   ): Promise<IResponseWithSync<TimedOwnership>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -357,7 +357,7 @@ export class Entitlement$ {
   }
 
   /**
-   * Get user entitlement ownership by itemIds.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=2 (READ)</li></ul>
+   * Get user entitlement ownership by itemIds.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getEntitlementsOwnershipByItemIds_ByUserId(
     userId: string,
@@ -379,7 +379,7 @@ export class Entitlement$ {
   }
 
   /**
-   * Sell user entitlement. If the entitlement is consumable, useCount is 0, the status will be CONSUMED. If the entitlement is durable, the status will be SOLD. Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=4 (UPDATE)</li><li><i>Returns</i>: entitlement</li></ul>
+   * Sell user entitlement. If the entitlement is consumable, useCount is 0, the status will be CONSUMED. If the entitlement is durable, the status will be SOLD. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   updateSell_ByUserId_ByEntitlementId(
     userId: string,
@@ -397,7 +397,7 @@ export class Entitlement$ {
   }
 
   /**
-   * Consume user entitlement. If the entitlement useCount is 0, the status will be CONSUMED. Client should pass item id in options if entitlement clazz is OPTIONBOX<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT", action=4 (UPDATE)</li><li><i>Returns</i>: consumed entitlement</li></ul>
+   * Consume user entitlement. If the entitlement useCount is 0, the status will be CONSUMED. Client should pass item id in options if entitlement clazz is OPTIONBOX&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: consumed entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   updateDecrement_ByUserId_ByEntitlementId(
     userId: string,

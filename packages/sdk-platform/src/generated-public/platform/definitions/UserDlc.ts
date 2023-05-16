@@ -7,14 +7,14 @@ import { z } from 'zod'
 import { DlcRecord } from './DlcRecord.js'
 
 export const UserDlc = z.object({
-  rvn: z.number().int().nullish(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
+  dlcs: z.array(DlcRecord).nullish(),
   id: z.string().nullish(),
-  userId: z.string().nullish(),
   namespace: z.string().nullish(),
-  platform: z.enum(['PSN', 'STEAM', 'XBOX', 'EPICGAMES']).nullish(),
-  dlcs: z.array(DlcRecord).nullish()
+  platform: z.enum(['EPICGAMES', 'PSN', 'STEAM', 'XBOX']).nullish(),
+  rvn: z.number().int().nullish(),
+  updatedAt: z.string().nullish(),
+  userId: z.string().nullish()
 })
 
 export interface UserDlc extends z.TypeOf<typeof UserDlc> {}

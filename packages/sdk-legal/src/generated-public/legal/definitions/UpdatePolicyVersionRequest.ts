@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const UpdatePolicyVersionRequest = z.object({ displayVersion: z.string(), description: z.string(), isCommitted: z.boolean() })
+export const UpdatePolicyVersionRequest = z.object({ description: z.string(), displayVersion: z.string(), isCommitted: z.boolean() })
 
 export interface UpdatePolicyVersionRequest extends z.TypeOf<typeof UpdatePolicyVersionRequest> {}

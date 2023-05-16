@@ -1,0 +1,4813 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "description": "Justice Session Service",
+    "title": "justice-session-service",
+    "version": "2.12.0"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/session/apidocs"
+  },
+  "securityDefinitions": {
+    "HasPermission": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {
+        "ADMIN:NAMESPACE:{namespace}:SESSION:GAME [READ]": "ADMIN:NAMESPACE:{namespace}:SESSION:GAME [READ]"
+      },
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "HasScope": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/healthz": {
+      "get": {
+        "operationId": "GetHealthcheckInfo",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/session/healthz": {
+      "get": {
+        "operationId": "GetHealthcheckInfoV1",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/session/v1/admin/dsconfigs/default": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get dsmc default configuration.",
+        "operationId": "adminGetDSMCConfigurationDefault",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.DefaultDSMCConfig"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get dsmc default configuration . Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]",
+        "tags": ["DSMC Default Configuration"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/alerts-configuration": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete configuration alert.",
+        "operationId": "adminDeleteConfigurationAlertV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete configuration alert Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [DELETE]",
+        "tags": ["Configuration Template"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get a configuration alert.",
+        "operationId": "adminGetConfigurationAlertV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigAlertResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get configuration alert. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]",
+        "tags": ["Configuration Template"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Create configuration alert\nconfiguration alert mandatory :\n- namespace\n- durationDays must be greater than 0\n",
+        "operationId": "adminCreateConfigurationAlertV1",
+        "parameters": [
+          {
+            "description": "Create configuration alert request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigAlertRequestCreate"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigAlertResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create configuration alert. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [UPDATE]",
+        "tags": ["Configuration Template"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Update configuration alert\nconfiguration alert mandatory :\n- namespace\n- durationDays must be greater than 0\n",
+        "operationId": "adminUpdateConfigurationAlertV1",
+        "parameters": [
+          {
+            "description": "Update configuration alert request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigAlertRequestCreate"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigAlertResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update configuration alert. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [UPDATE]",
+        "tags": ["Configuration Template"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/configuration": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Create template configuration to be applied across party and session.\nSession configuration mandatory :\n- name\n- joinability (example value : OPEN, CLOSED, INVITE_ONLY)\n- Type (example value : P2P, DS, NONE) if type empty, type will be assign to NONE\n- MinPlayers (must greather or equal 0)\n- MaxPlayers (must greather than 0)\n- InviteTimeout (must greather or equal 0) if InviteTimeout equal 0 will be use default DefaultTimeoutSecond (60s)\n- InactiveTimeout (must greather or equal 0) if InactiveTimeout equal 0 will be use default DefaultTimeoutSecond (60s)\n- Persistent Flag only can use with type DS (example value true or false)\n- If Persistent True the session always active even DS removing or terminate and Session will be request DS again until DS Ready or Busy.\n- To Stop Session Not request again to DS or want Delete Session can Delete Session using endpoint DELETE /session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}\n- If Persistent False the session will be inactive if all member left and DS terminate or removing\n- nativeSessionSetting:\n\t- XboxSessionTemplateName: the XBox session template name that correspondent to the AB session template, and is needed to define XBox session\u0026#39;s joinRestriction and maxMembersCount when doing the session sync.\n\t- XboxServiceConfigID: the XBox service configuration ID. \n\t- PSNServiceLabel: the PSN service label.\n\t- SessionTitle: the session title. In PSN, this will be used to define name of the session thats displayed on PlayStation system UI.\n\t- ShouldSync: to define whether the service needs to do session sync with native platform(s). Default: false (disabled).\n",
+        "operationId": "adminCreateConfigurationTemplateV1",
+        "parameters": [
+          {
+            "description": "Create configuration template request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateConfigurationTemplateRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigurationTemplateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create configuration template. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [CREATE]",
+        "tags": ["Configuration Template"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/configurations": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get all template configurations in specified namespace.",
+        "operationId": "adminGetAllConfigurationTemplatesV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Pagination limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Pagination offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigurationTemplatesResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get configuration templates. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]",
+        "tags": ["Configuration Template"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/configurations/{name}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete a template configuration.",
+        "operationId": "adminDeleteConfigurationTemplateV1",
+        "parameters": [
+          {
+            "description": "configuration name",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete configuration template. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [DELETE]",
+        "tags": ["Configuration Template"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get a template configuration.",
+        "operationId": "adminGetConfigurationTemplateV1",
+        "parameters": [
+          {
+            "description": "configuration name",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigurationTemplateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get configuration template. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]",
+        "tags": ["Configuration Template"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Update template configuration\nSession configuration mandatory :\n- name\n- joinability (example value : OPEN, CLOSED, INVITE_ONLY)\n- Type (example value : P2P, DS, NONE) if type empty, type will be assign to NONE\n- MinPlayers (must greather or equal 0)\n- MaxPlayers (must greather than 0)\n- InviteTimeout (must greather or equal 0) if InviteTimeout equal 0 will be use default DefaultTimeoutSecond (60s)\n- InactiveTimeout (must greather or equal 0) if InactiveTimeout equal 0 will be use default DefaultTimeoutSecond (60s)\n- Persistent Flag only can use with type DS (example value true or false)\n- If Persistent True the session always active even DS removing or terminate and Session will be request DS again until DS Ready or Busy.\n- To Stop Session Not request again to DS or want Delete Session can Delete Session using endpoint DELETE /session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}\n- If Persistent False the session will be inactive if all member left and DS terminate or removing\n- nativeSessionSetting:\n\t- XboxSessionTemplateName: the XBox session template name that correspondent to the AB session template, and is needed to define XBox session\u0026#39;s joinRestriction and maxMembersCount when doing the session sync.\n\t- XboxServiceConfigID: the XBox service configuration ID. \n\t- PSNServiceLabel: the PSN service label.\n\t- SessionTitle: the session title. In PSN, this will be used to define name of the session thats displayed on PlayStation system UI.\n\t- ShouldSync: to define whether the service needs to do session sync with native platform(s). Default: false (disabled).\n",
+        "operationId": "adminUpdateConfigurationTemplateV1",
+        "parameters": [
+          {
+            "description": "Update configuration template request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateConfigurationTemplateRequest"
+            }
+          },
+          {
+            "description": "configuration name",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigurationTemplateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update configuration template. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [UPDATE]",
+        "tags": ["Configuration Template"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/dsconfigs": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get a dsmc configuration.",
+        "operationId": "adminGetDSMCConfiguration",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.DSMConfigRecord"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get dsmc configuration . Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]",
+        "tags": ["Configuration Template"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/dsconfigs/sync": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "sync dsmc configuration.",
+        "operationId": "adminSyncDSMCConfiguration",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.DSMConfigRecord"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "sync dsmc configuration . Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]",
+        "tags": ["Configuration Template"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/gamesessions": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get all game sessions. Requires ADMIN:NAMESPACE:{namespace}:SESSION:GAME [READ]",
+        "operationId": "adminQueryGameSessions",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "configuration template name",
+            "in": "query",
+            "name": "configurationName",
+            "type": "string"
+          },
+          {
+            "description": "pod name of a dedicated server",
+            "in": "query",
+            "name": "dsPodName",
+            "type": "string"
+          },
+          {
+            "description": "beginning of game session creation time range in RFC 3339 format e.g. 2022-10-21T07:20:50Z",
+            "in": "query",
+            "name": "fromTime",
+            "type": "string"
+          },
+          {
+            "description": "game mode",
+            "in": "query",
+            "name": "gameMode",
+            "type": "string"
+          },
+          {
+            "description": "game session is Persistent. supported: TRUE, FALSE",
+            "in": "query",
+            "name": "isPersistent",
+            "type": "string"
+          },
+          {
+            "description": "game session is soft deleted. supported: TRUE, FALSE",
+            "in": "query",
+            "name": "isSoftDeleted",
+            "type": "string"
+          },
+          {
+            "description": "game session joinability to filter. joinability types: OPEN,CLOSED,INVITE_ONLY",
+            "in": "query",
+            "name": "joinability",
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Pagination limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "matchmaking pool",
+            "in": "query",
+            "name": "matchPool",
+            "type": "string"
+          },
+          {
+            "description": "member user ID",
+            "in": "query",
+            "name": "memberID",
+            "type": "string"
+          },
+          {
+            "default": 0,
+            "description": "Pagination offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "Order of the result. Supported: desc (default), asc",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "Order result by specific attribute. Supported: createdAt (default), updatedAt",
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          },
+          {
+            "description": "game session ID",
+            "in": "query",
+            "name": "sessionID",
+            "type": "string"
+          },
+          {
+            "description": "game session status to filter. supported status: NEED_TO_REQUEST,REQUESTED,AVAILABLE,FAILED_TO_REQUEST",
+            "in": "query",
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "description": "game session status to filter. supported status: NEED_TO_REQUEST,REQUESTED,AVAILABLE,FAILED_TO_REQUEST,UNKNOWN,ENDED",
+            "in": "query",
+            "name": "statusV2",
+            "type": "string"
+          },
+          {
+            "description": "end of game session creation time range in RFC 3339 format e.g. 2022-10-21T07:20:50Z",
+            "in": "query",
+            "name": "toTime",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionQueryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSION:GAME [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get all game sessions.",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/gamesessions/bulk": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete bulk game sessions.",
+        "operationId": "adminDeleteBulkGameSessions",
+        "parameters": [
+          {
+            "description": "Create Delete bulk gamesessions Request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.DeleteBulkGameSessionRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.DeleteBulkGameSessionsAPIResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete bulk game sessions. Requires ADMIN:NAMESPACE:{namespace}:SESSION:GAME [DELETE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/gamesessions/{sessionId}/members/{memberId}/status/{statusType}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Update a game session member status.",
+        "operationId": "adminUpdateGameSessionMember",
+        "parameters": [
+          {
+            "description": "member ID",
+            "in": "path",
+            "name": "memberId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "status type: INVITED, REJECTED, JOINED, LEFT. Lowercase status type param will be converted to uppercase.",
+            "in": "path",
+            "name": "statusType",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateGameSessionMemberStatusResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update status of a game session member. Requires ADMIN:NAMESPACE:{namespace}:SESSION:GAME [UPDATE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/parties": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Query parties.",
+        "operationId": "adminQueryParties",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Join type",
+            "in": "query",
+            "name": "joinability",
+            "type": "string"
+          },
+          {
+            "description": "Attribute key",
+            "in": "query",
+            "name": "key",
+            "type": "string"
+          },
+          {
+            "description": "Leader ID",
+            "in": "query",
+            "name": "leaderID",
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Pagination limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "Member ID",
+            "in": "query",
+            "name": "memberID",
+            "type": "string"
+          },
+          {
+            "description": "Member status",
+            "in": "query",
+            "name": "memberStatus",
+            "type": "string"
+          },
+          {
+            "default": 0,
+            "description": "Pagination offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "Order of the result. Supported: desc (default), asc",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "Order result by specific attribute. Supported: createdAt (default), updatedAt",
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          },
+          {
+            "description": "Attribute value",
+            "in": "query",
+            "name": "value",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartyQueryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query parties. Requires ADMIN:NAMESPACE:{namespace}:SESSION:PARTY [READ]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/users/attributes": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Admin get attributes of players.\n\nField descriptions:\n\t- userID           : user who owns the attributes.\n\t- crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false).\n\t- platforms        : list of the player\u0026#39;s 3rd party platform account information.\n\t\t- name   : platform name. supported platforms: STEAM, XBOX, PSN\n\t\t- userID : platform userID\n\t- data             : other data that the player wants to store.\n\t- currentPlatform  : latest user game platform.\n\t- roles\t\t\t   : user role for matchmaking role base support.\n",
+        "operationId": "adminQueryPlayerAttributes",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "comma-separated userIDs ",
+            "in": "query",
+            "name": "users",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.PlayerAttributesResponseBody"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query player attributes. Requires ADMIN:NAMESPACE:{namespace}:SESSION:PLAYER:{userId} [READ]",
+        "tags": ["Player"]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/users/{userId}/attributes": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Admin get attributes of a player.\n\nField descriptions:\n\t- userID           : user who owns the attributes.\n\t- crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false).\n\t- platforms        : list of the player\u0026#39;s 3rd party platform account information.\n\t\t- name   : platform name. supported platforms: STEAM, XBOX, PSN\n\t\t- userID : platform userID\n\t- data             : other data that the player wants to store.\n\t- currentPlatform  : latest user game platform.\n\t- roles\t\t\t   : user role for matchmaking role base support.\n",
+        "operationId": "adminGetPlayerAttributes",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PlayerAttributesResponseBody"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get player attributes. Requires ADMIN:NAMESPACE:{namespace}:SESSION:PLAYER:{userId} [READ]",
+        "tags": ["Player"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesession": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Create a game session.\n      Session configuration name is mandatory, this API will refer following values from the session template if they\u0026#39;re not provided in the request:\n   - type\n   - joinability\n   - minPlayers\n   - maxPlayers\n   - inviteTimeout\n   - inactiveTimeout\n   - dsSource\n\n      When the session type is a DS, a DS creation request will be sent if number of active players reaches session\u0026#39;s minPlayers.\n\nActive user is a user who present within the session, has status CONNECTED/JOINED.\n\n      Session service has several DSInformation status to track DS request to DSMC:\n   - NEED_TO_REQUEST: number of active players hasn\u0026#39;t reached session\u0026#39;s minPlayers therefore DS has not yet requested.\n   - REQUESTED: DS is being requested to DSMC.\n   - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY.\n   - FAILED_TO_REQUEST: DSMC fails to create the DS.\n\n      By default, DS requests are sent to DSMC, but if dsSource is set to \u0026#34;AMS\u0026#34;:\n         - A DS will be requested from AMS instead of DSMC.  \n         - The server will be chosen based on a set of claim keys, in order of preference, to match with fleets.\n         - The claim key list is built build from the preferredClaimKeys, fallbackClaimKeys, and clientVersion as follows: \n           [preferredClaimKeys.., clientVersion, fallbackClaimKeys...]\n",
+        "operationId": "createGameSession",
+        "parameters": [
+          {
+            "description": "Create game session request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateGameSessionRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create a game session. Requires NAMESPACE:{namespace}:SESSION:GAME [CREATE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Query game sessions. \n\nBy default, API will return a list of available game sessions (joinability: open).\nSession service has several DSInformation status to track DS request to DSMC:\n   - NEED_TO_REQUEST: number of active players hasn\u0026#39;t reached session\u0026#39;s minPlayers therefore DS has not yet requested.\n   - REQUESTED: DS is being requested to DSMC.\n   - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY.\n   - FAILED_TO_REQUEST: DSMC fails to create the DS.\n",
+        "operationId": "publicQueryGameSessions",
+        "parameters": [
+          {
+            "description": "a list of attributes to filter from available sessions",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionQueryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query game sessions",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions/servers/{podName}": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get game session detail by podname.\nSession service has several DSInformation status to track DS request to DSMC:\n   - NEED_TO_REQUEST: number of active players hasn\u0026#39;t reached session\u0026#39;s minPlayers therefore DS has not yet requested.\n   - REQUESTED: DS is being requested to DSMC.\n   - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY.\n   - FAILED_TO_REQUEST: DSMC fails to create the DS.\n",
+        "operationId": "getGameSessionByPodName",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Pod Name",
+            "in": "path",
+            "name": "podName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get game session detail. Requires NAMESPACE:{namespace}:SESSION:GAME [READ]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete a game session.",
+        "operationId": "deleteGameSession",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete a game session. Requires NAMESPACE:{namespace}:SESSION:GAME [DELETE]",
+        "tags": ["Game Session"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get game session detail.\nSession service has several DSInformation status to track DS request to DSMC:\n   - NEED_TO_REQUEST: number of active players hasn\u0026#39;t reached session\u0026#39;s minPlayers therefore DS has not yet requested.\n   - REQUESTED: DS is being requested to DSMC.\n   - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY.\n   - FAILED_TO_REQUEST: DSMC fails to create the DS.\n",
+        "operationId": "getGameSession",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get game session detail. Requires NAMESPACE:{namespace}:SESSION:GAME [READ]",
+        "tags": ["Game Session"]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "Update specified fields from game session data.",
+        "operationId": "patchUpdateGameSession",
+        "parameters": [
+          {
+            "description": "Update game session request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateGameSessionRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Patch update a game session. Requires NAMESPACE:{namespace}:SESSION:GAME [UPDATE]",
+        "tags": ["Game Session"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Updates a game session, this endpoint will override stored gamesession data.\n      To update only specified fields, please use following endpoint: \n  method : PATCH\n  API\t : /session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}\n\nTo update DS attributes (clientVersion, deployment, requestedRegions) it will only be applied only as long as no DS has been requested, otherwise ignored.\n      ",
+        "operationId": "updateGameSession",
+        "parameters": [
+          {
+            "description": "Update game session request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateGameSessionRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update a game session. Requires NAMESPACE:{namespace}:SESSION:GAME [UPDATE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/backfill": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Update game session backfill ticket id. Will override game session backfill ticket based on given request parameter",
+        "operationId": "updateGameSessionBackfillTicketID",
+        "parameters": [
+          {
+            "description": "Update game session backfill ticket id request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateGameSessionBackfillRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update game session backfill ticket id . Requires NAMESPACE:{namespace}:SESSION:GAME [UPDATE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/invite": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Invite a user to a game session.\nplatformID represents the native platform of the invitee. API will return the corresponding native platform\u0026#39;s userID.\nsupported platforms:\n\t- STEAM\n\t- XBOX\n\t- PSN\n",
+        "operationId": "publicGameSessionInvite",
+        "parameters": [
+          {
+            "description": "Session invite request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.SessionInviteRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Invite a user to a game session. Requires NAMESPACE:{namespace}:SESSION:GAME:PLAYER [CREATE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/join": {
+      "post": {
+        "description": "Join a game session.",
+        "operationId": "joinGameSession",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Join a game session. Requires NAMESPACE:{namespace}:SESSION:GAME:PLAYER [CREATE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/leave": {
+      "delete": {
+        "description": "Leave a game session.",
+        "operationId": "leaveGameSession",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Leave a game session. Requires NAMESPACE:{namespace}:SESSION:GAME:PLAYER [DELETE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/reject": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Reject a game session invitation.",
+        "operationId": "publicGameSessionReject",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Reject a game session invitation. Requires NAMESPACE:{namespace}:SESSION:GAME:PLAYER [DELETE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/teams": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Append new member or team to session",
+        "operationId": "appendTeamGameSession",
+        "parameters": [
+          {
+            "description": "Append new member or team to session",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.AppendTeamGameSessionRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "session ID",
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GameSessionResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Append new member or team to session. Requires NAMESPACE:{namespace}:SESSION:GAME [UPDATE]",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/users/me/join/code": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Join a party by code. The user can join a party as long as the code is valid",
+        "operationId": "publicPartyJoinCode",
+        "parameters": [
+          {
+            "description": "Party join by code request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.JoinByCodeRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Join a party by code. Requires NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [CREATE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/{partyId}": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get party details.",
+        "operationId": "publicGetParty",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get party details. Requires NAMESPACE:{namespace}:SESSION:PARTY [READ]",
+        "tags": ["Party"]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "Update specified fields from party data. Note: Join type can only be updated by the party\u0026#39;s leader.\n\t\t\t\nReserved attributes key:\n1. preference: used to store preference of the leader and it is non-replaceable to keep the initial behavior of \n\tthe session regardless the leader changes.\n2. NATIVESESSIONTITLE: used for session sync, to define name of session displayed on PlayStation system UI.\n",
+        "operationId": "publicPatchUpdateParty",
+        "parameters": [
+          {
+            "description": "Update party request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdatePartyRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Patch update a party. Requires NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]",
+        "tags": ["Party"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Updates party blob, this endpoint will override stored party data. \n\nJoin type can only be updated by the party\u0026#39;s leader.\nTo update only specified fields, please use following endpoint: \n  method : PATCH\n  API\t : /session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}\n\nReserved attributes key:\n1. preference: used to store preference of the leader and it is non-replaceable to keep the initial behavior of \n\tthe session regardless the leader changes.\n2. NATIVESESSIONTITLE: used for session sync, to define name of session displayed on PlayStation system UI.\n",
+        "operationId": "publicUpdateParty",
+        "parameters": [
+          {
+            "description": "Update party request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdatePartyRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update a party. Requires NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/{partyId}/code": {
+      "delete": {
+        "description": "Revoke code of the party. Only leader can revoke a code.",
+        "operationId": "publicRevokePartyCode",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Revoke party code. Requires NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]",
+        "tags": ["Party"]
+      },
+      "post": {
+        "description": "Generate a new code for the party. Only leader can generate a code.",
+        "operationId": "publicGeneratePartyCode",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Generate party code. Requires NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/{partyId}/invite": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Invite a user to a party.\nplatformID represents the native platform of the invitee. API will return the corresponding native platform\u0026#39;s userID.\nsupported platforms:\n\t- STEAM\n\t- XBOX\n\t- PSN\n",
+        "operationId": "publicPartyInvite",
+        "parameters": [
+          {
+            "description": "Party invite request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.SessionInviteRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Invite a user to a party. Requires NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [CREATE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/{partyId}/leader": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Promotes a party member to be a party leader. Only leader can promote a new leader.",
+        "operationId": "publicPromotePartyLeader",
+        "parameters": [
+          {
+            "description": "Promote leader request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.PromoteLeaderRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Promote new party leader. Requires NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/{partyId}/users/me/join": {
+      "post": {
+        "description": "Join a party. The user can either join a party they have been invited to, or any party with an \u0026#34;open\u0026#34; joinable setting.",
+        "operationId": "publicPartyJoin",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Join a party. Requires NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [CREATE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/{partyId}/users/me/leave": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Leave a party",
+        "operationId": "publicPartyLeave",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Leave a party. Requires NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [DELETE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/{partyId}/users/me/reject": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Reject a party invitation.",
+        "operationId": "publicPartyReject",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Reject a party invitation. Requires NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [DELETE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/parties/{partyId}/users/{userId}/kick": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Kick a player from a party. Requires invoker to be the party leader.",
+        "operationId": "publicPartyKick",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Party ID",
+            "in": "path",
+            "name": "partyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.KickResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Kick a player from a party. Requires NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [DELETE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/party": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "A join code will be autogenerated if the party is joinable. \nCreator will be removed from previous party (if any) and automatically join into the created party as a leader.\nParty members will be sent invitation to join the party.\n      Session configuration name is optional.\nDefault configuration name if empty:\n{\n\t\u0026#34;name\u0026#34;: \u0026#34;default\u0026#34;,\n\t\u0026#34;type\u0026#34;: \u0026#34;NONE\u0026#34;,\n\t\u0026#34;joinability\u0026#34;: \u0026#34;OPEN\u0026#34;,\n\t\u0026#34;minPlayers\u0026#34;: 1,\n\t\u0026#34;maxPlayers\u0026#34;: 8,\n\t\u0026#34;inviteTimeout\u0026#34;: 60,\n\t\u0026#34;inactiveTimeout\u0026#34;: 60,\n\t\u0026#34;textChat\u0026#34;: false\n}\n\nSupported platforms:\n      1. STEAM\n2. PSN\n3. XBOX\n\nReserved attributes key:\n1. preference: used to store preference of the leader and it is non-replaceable to keep the initial behavior of \n\tthe session regardless the leader changes.\n2. NATIVESESSIONTITLE: used for session sync, to define name of session displayed on PlayStation system UI.\n",
+        "operationId": "publicCreateParty",
+        "parameters": [
+          {
+            "description": "Create party request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreatePartyRequest"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PartySessionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create a party. Requires NAMESPACE:{namespace}:SESSION:PARTY [CREATE]",
+        "tags": ["Party"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/users/me/attributes": {
+      "delete": {
+        "description": "Reset player attributes.",
+        "operationId": "publicDeletePlayerAttributes",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Remove player attributes. Requires NAMESPACE:{namespace}:SESSION:PLAYER [DELETE]",
+        "tags": ["Player"]
+      },
+      "get": {
+        "description": "Get player attributes.\n\nField descriptions:\n\t- userID           : user who owns the attributes.\n\t- crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false).\n\t- platforms        : list of the player\u0026#39;s 3rd party platform account information.\n\t\t- name   : platform name. supported platforms: STEAM, XBOX, PSN\n\t\t- userID : platform userID\n\t- data             : other data that the player wants to store.\n\t- currentPlatform  : latest user game platform.\n\t- roles\t\t\t   : user role for matchmaking role base support.\n",
+        "operationId": "publicGetPlayerAttributes",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PlayerAttributesResponseBody"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get player attributes. Requires NAMESPACE:{namespace}:SESSION:PLAYER [READ]",
+        "tags": ["Player"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "This API behaves to upsert player\u0026#39;s attributes.\n\nField descriptions:\n\t- userID           : user who owns the attributes.\n\t- crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false).\n\t- platforms        : list of the player\u0026#39;s 3rd party platform account information.\n\t\t- name   : platform name. supported platforms: STEAM, XBOX, PSN\n\t\t- userID : platform userID\n\t- data             : other data that the player wants to store.\n\t- currentPlatform  : latest user game platform.\n\t- roles\t\t\t   : user role for matchmaking role base support.\n",
+        "operationId": "publicStorePlayerAttributes",
+        "parameters": [
+          {
+            "description": "Store player attributes",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.PlayerAttributesRequestBody"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.PlayerAttributesResponseBody"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Store player attributes. Requires NAMESPACE:{namespace}:SESSION:PLAYER [CREATE]",
+        "tags": ["Player"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/users/me/gamesessions": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Query user\u0026#39;s game sessions.\nBy default, API will return a list of user\u0026#39;s active game sessions (INVITED,JOINED,CONNECTED).\n\nSession service has several DSInformation status to track DS request to DSMC:\n   - NEED_TO_REQUEST: number of active players hasn\u0026#39;t reached session\u0026#39;s minPlayers therefore DS has not yet requested.\n   - REQUESTED: DS is being requested to DSMC.\n   - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY.\n   - FAILED_TO_REQUEST: DSMC fails to create the DS.\n",
+        "operationId": "publicQueryMyGameSessions",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Order of the result. Supported: desc (default), asc",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "Order result by specific attribute. Supported: createdAt (default), updatedAt",
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          },
+          {
+            "description": "game session status to filter. supported status: INVITED,JOINED,CONNECTED",
+            "in": "query",
+            "name": "status",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.GameSessionResponse"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query user's game sessions",
+        "tags": ["Game Session"]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/users/me/parties": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Query user\u0026#39;s parties. By default, API will return a list of user\u0026#39;s active parties.",
+        "operationId": "publicQueryMyParties",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Order of the result. Supported: desc (default), asc",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "Order result by specific attribute. Supported: createdAt (default), updatedAt",
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          },
+          {
+            "description": "user status to filter. supported status: INVITED,JOINED,CONNECTED",
+            "in": "query",
+            "name": "status",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.PartySessionResponse"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query my parties. Require valid JWT.",
+        "tags": ["Party"]
+      }
+    }
+  },
+  "definitions": {
+    "apimodels.AppendTeamGameSessionRequest": {
+      "properties": {
+        "additionalMembers": {
+          "items": {
+            "$ref": "#/definitions/models.PartyMembers"
+          },
+          "type": "array"
+        },
+        "proposedTeams": {
+          "items": {
+            "$ref": "#/definitions/models.Team"
+          },
+          "type": "array"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["additionalMembers", "proposedTeams", "version"]
+    },
+    "apimodels.ConfigAlertRequestCreate": {
+      "properties": {
+        "durationDays": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["durationDays"]
+    },
+    "apimodels.ConfigAlertResponse": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "durationDays": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": ["createdAt", "durationDays", "namespace", "updatedAt"]
+    },
+    "apimodels.ConfigurationTemplateResponse": {
+      "properties": {
+        "clientVersion": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "dsSource": {
+          "type": "string"
+        },
+        "fallbackClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "nativeSessionSetting": {
+          "$ref": "#/definitions/models.NativeSessionSetting"
+        },
+        "persistent": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "preferredClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requestedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "textChat": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientVersion",
+        "createdAt",
+        "deployment",
+        "dsSource",
+        "fallbackClaimKeys",
+        "inactiveTimeout",
+        "inviteTimeout",
+        "joinability",
+        "last",
+        "maxPlayers",
+        "minPlayers",
+        "name",
+        "namespace",
+        "persistent",
+        "preferredClaimKeys",
+        "textChat",
+        "type",
+        "updatedAt"
+      ]
+    },
+    "apimodels.ConfigurationTemplatesResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.ConfigurationTemplateResponse"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.CreateConfigurationTemplateRequest": {
+      "properties": {
+        "NativeSessionSetting": {
+          "$ref": "#/definitions/models.NativeSessionSetting"
+        },
+        "clientVersion": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "dsSource": {
+          "type": "string"
+        },
+        "fallbackClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "persistent": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "preferredClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requestedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "textChat": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientVersion",
+        "deployment",
+        "dsSource",
+        "fallbackClaimKeys",
+        "inactiveTimeout",
+        "inviteTimeout",
+        "joinability",
+        "maxPlayers",
+        "minPlayers",
+        "name",
+        "persistent",
+        "preferredClaimKeys",
+        "requestedRegions",
+        "textChat",
+        "type"
+      ]
+    },
+    "apimodels.CreateGameSessionRequest": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "backfillTicketID": {
+          "type": "string"
+        },
+        "clientVersion": {
+          "type": "string"
+        },
+        "configurationName": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "dsSource": {
+          "type": "string"
+        },
+        "fallbackClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "preferredClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requestedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "teams": {
+          "items": {
+            "$ref": "#/definitions/models.Team"
+          },
+          "type": "array"
+        },
+        "textChat": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "ticketIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "attributes",
+        "backfillTicketID",
+        "clientVersion",
+        "configurationName",
+        "deployment",
+        "dsSource",
+        "fallbackClaimKeys",
+        "inactiveTimeout",
+        "inviteTimeout",
+        "joinability",
+        "matchPool",
+        "maxPlayers",
+        "minPlayers",
+        "preferredClaimKeys",
+        "requestedRegions",
+        "serverName",
+        "teams",
+        "textChat",
+        "ticketIDs",
+        "type"
+      ]
+    },
+    "apimodels.CreatePartyRequest": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "configurationName": {
+          "type": "string"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/definitions/apimodels.RequestMember"
+          },
+          "type": "array"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "textChat": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "attributes",
+        "configurationName",
+        "inactiveTimeout",
+        "inviteTimeout",
+        "joinability",
+        "maxPlayers",
+        "members",
+        "minPlayers",
+        "textChat",
+        "type"
+      ]
+    },
+    "apimodels.DSInformationResponse": {
+      "properties": {
+        "RequestedAt": {
+          "type": "string"
+        },
+        "Server": {
+          "$ref": "#/definitions/models.GameServer"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "StatusV2": {
+          "type": "string"
+        }
+      },
+      "required": ["RequestedAt", "Status", "StatusV2"]
+    },
+    "apimodels.DeleteBulkGameSessionRequest": {
+      "properties": {
+        "ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["ids"]
+    },
+    "apimodels.DeleteBulkGameSessionsAPIResponse": {
+      "properties": {
+        "failed": {
+          "items": {
+            "$ref": "#/definitions/apimodels.ResponseDeleteBulkGameSessions"
+          },
+          "type": "array"
+        },
+        "success": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["failed", "success"]
+    },
+    "apimodels.GameSessionQueryResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.GameSessionResponse"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.GameSessionResponse": {
+      "properties": {
+        "DSInformation": {
+          "$ref": "#/definitions/apimodels.DSInformationResponse"
+        },
+        "attributes": {
+          "type": "object"
+        },
+        "backfillTicketID": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/apimodels.PublicConfiguration"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "expiredAt": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isFull": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "leaderID": {
+          "type": "string"
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/definitions/apimodels.UserResponse"
+          },
+          "type": "array"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "teams": {
+          "items": {
+            "$ref": "#/definitions/models.Team"
+          },
+          "type": "array"
+        },
+        "ticketIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "DSInformation",
+        "backfillTicketID",
+        "configuration",
+        "createdAt",
+        "createdBy",
+        "id",
+        "isActive",
+        "isFull",
+        "leaderID",
+        "matchPool",
+        "members",
+        "namespace",
+        "updatedAt",
+        "version"
+      ]
+    },
+    "apimodels.JoinByCodeRequest": {
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": ["code"]
+    },
+    "apimodels.KickResponse": {
+      "properties": {
+        "leaderID": {
+          "type": "string"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/definitions/apimodels.UserResponse"
+          },
+          "type": "array"
+        },
+        "partyID": {
+          "type": "string"
+        }
+      },
+      "required": ["leaderID", "members", "partyID"]
+    },
+    "apimodels.Pagination": {
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      },
+      "required": ["first", "last", "next", "previous"]
+    },
+    "apimodels.PartyQueryResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.PartySessionResponse"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.PartySessionResponse": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "code": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/apimodels.PublicConfiguration"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "expiredAt": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isFull": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "leaderID": {
+          "type": "string"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/definitions/apimodels.UserResponse"
+          },
+          "type": "array"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "configuration",
+        "createdAt",
+        "createdBy",
+        "id",
+        "isActive",
+        "isFull",
+        "leaderID",
+        "members",
+        "namespace",
+        "updatedAt",
+        "version"
+      ]
+    },
+    "apimodels.PlayerAttributesRequestBody": {
+      "properties": {
+        "crossplayEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "currentPlatform": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        },
+        "platforms": {
+          "items": {
+            "$ref": "#/definitions/models.UserPlatformInfo"
+          },
+          "type": "array"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["crossplayEnabled", "currentPlatform", "data", "platforms", "roles"]
+    },
+    "apimodels.PlayerAttributesResponseBody": {
+      "properties": {
+        "crossplayEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "currentPlatform": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        },
+        "platforms": {
+          "items": {
+            "$ref": "#/definitions/models.UserPlatformInfo"
+          },
+          "type": "array"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "userID": {
+          "type": "string"
+        }
+      },
+      "required": ["crossplayEnabled", "currentPlatform", "data", "platforms", "roles", "userID"]
+    },
+    "apimodels.PromoteLeaderRequest": {
+      "properties": {
+        "leaderID": {
+          "type": "string"
+        }
+      },
+      "required": ["leaderID"]
+    },
+    "apimodels.PublicConfiguration": {
+      "properties": {
+        "clientVersion": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "dsSource": {
+          "type": "string"
+        },
+        "fallbackClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "persistent": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "preferredClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requestedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "textChat": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientVersion",
+        "deployment",
+        "inactiveTimeout",
+        "inviteTimeout",
+        "joinability",
+        "maxPlayers",
+        "minPlayers",
+        "name",
+        "persistent",
+        "textChat",
+        "type"
+      ]
+    },
+    "apimodels.RequestMember": {
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "PlatformID": {
+          "type": "string"
+        },
+        "PlatformUserID": {
+          "type": "string"
+        }
+      },
+      "required": ["ID", "PlatformID", "PlatformUserID"]
+    },
+    "apimodels.ResponseDeleteBulkGameSessions": {
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["error", "id"]
+    },
+    "apimodels.SessionInviteRequest": {
+      "properties": {
+        "platformID": {
+          "type": "string"
+        },
+        "userID": {
+          "type": "string"
+        }
+      },
+      "required": ["platformID", "userID"]
+    },
+    "apimodels.UpdateConfigurationTemplateRequest": {
+      "properties": {
+        "NativeSessionSetting": {
+          "$ref": "#/definitions/models.NativeSessionSetting"
+        },
+        "clientVersion": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "dsSource": {
+          "type": "string"
+        },
+        "fallbackClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "persistent": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "preferredClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requestedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "textChat": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientVersion",
+        "deployment",
+        "dsSource",
+        "fallbackClaimKeys",
+        "inactiveTimeout",
+        "inviteTimeout",
+        "joinability",
+        "maxPlayers",
+        "minPlayers",
+        "name",
+        "persistent",
+        "preferredClaimKeys",
+        "requestedRegions",
+        "textChat",
+        "type"
+      ]
+    },
+    "apimodels.UpdateGameSessionBackfillRequest": {
+      "properties": {
+        "backfillTicketID": {
+          "type": "string"
+        }
+      },
+      "required": ["backfillTicketID"]
+    },
+    "apimodels.UpdateGameSessionMemberStatusResponse": {
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "statusV2": {
+          "type": "string"
+        }
+      },
+      "required": ["status", "statusV2"]
+    },
+    "apimodels.UpdateGameSessionRequest": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "backfillTicketID": {
+          "type": "string"
+        },
+        "clientVersion": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "fallbackClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "preferredClaimKeys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requestedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "teams": {
+          "items": {
+            "$ref": "#/definitions/models.Team"
+          },
+          "type": "array"
+        },
+        "ticketIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "attributes",
+        "backfillTicketID",
+        "clientVersion",
+        "deployment",
+        "fallbackClaimKeys",
+        "inactiveTimeout",
+        "inviteTimeout",
+        "joinability",
+        "matchPool",
+        "maxPlayers",
+        "minPlayers",
+        "preferredClaimKeys",
+        "requestedRegions",
+        "teams",
+        "ticketIDs",
+        "type",
+        "version"
+      ]
+    },
+    "apimodels.UpdatePartyRequest": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["attributes", "inactiveTimeout", "inviteTimeout", "joinability", "maxPlayers", "minPlayers", "type", "version"]
+    },
+    "apimodels.UserResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "platformID": {
+          "type": "string"
+        },
+        "platformUserID": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "statusV2": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "platformID", "platformUserID", "status", "statusV2", "updatedAt"]
+    },
+    "models.DSMConfigRecord": {
+      "properties": {
+        "claim_timeout": {
+          "format": "int32",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "creation_timeout": {
+          "format": "int32",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "namespace": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": ["claim_timeout", "createdAt", "creation_timeout", "namespace", "updatedAt"]
+    },
+    "models.DefaultDSMCConfig": {
+      "properties": {
+        "claim_timeout": {
+          "format": "int32",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "creation_timeout": {
+          "format": "int32",
+          "type": "integer",
+          "x-nullable": false
+        }
+      },
+      "required": ["claim_timeout", "creation_timeout"]
+    },
+    "models.GameServer": {
+      "properties": {
+        "alternate_ips": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "custom_attribute": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "game_version": {
+          "type": "string"
+        },
+        "image_version": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "is_override_game_version": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "last_update": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "pod_name": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ports": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "custom_attribute",
+        "deployment",
+        "game_version",
+        "image_version",
+        "ip",
+        "is_override_game_version",
+        "last_update",
+        "namespace",
+        "pod_name",
+        "port",
+        "ports",
+        "protocol",
+        "provider",
+        "region",
+        "session_id",
+        "source",
+        "status"
+      ]
+    },
+    "models.NativeSessionSetting": {
+      "properties": {
+        "PSNServiceLabel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "SessionTitle": {
+          "type": "string"
+        },
+        "ShouldSync": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "XboxServiceConfigID": {
+          "type": "string"
+        },
+        "XboxSessionTemplateName": {
+          "type": "string"
+        }
+      },
+      "required": ["PSNServiceLabel", "SessionTitle", "XboxServiceConfigID", "XboxSessionTemplateName"]
+    },
+    "models.PartyMembers": {
+      "properties": {
+        "partyID": {
+          "type": "string"
+        },
+        "userIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["partyID", "userIDs"]
+    },
+    "models.Team": {
+      "properties": {
+        "UserIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "parties": {
+          "items": {
+            "$ref": "#/definitions/models.PartyMembers"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["UserIDs"]
+    },
+    "models.UserPlatformInfo": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "userID": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "userID"]
+    },
+    "response.Error": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["attributes", "errorCode", "errorMessage", "message", "name"]
+    }
+  },
+  "x-docs": {
+    "alias": "session",
+    "host": "https://development.accelbyte.io",
+    "path": "/session/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2023-05-12T16:35:19+00:00",
+    "gitHash": "a835410b7fe55ffa06aa2dfadd2e844e8faa6f3d",
+    "rolesSeedingVersion": "0.0.16",
+    "version": "2.12.0"
+  }
+}

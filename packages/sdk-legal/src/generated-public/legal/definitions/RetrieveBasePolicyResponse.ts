@@ -7,17 +7,17 @@ import { z } from 'zod'
 import { PolicyObject } from './PolicyObject.js'
 
 export const RetrieveBasePolicyResponse = z.object({
-  id: z.string(),
+  affectedClientIds: z.array(z.string()).nullish(),
+  basePolicyName: z.string(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
+  description: z.string().nullish(),
+  id: z.string(),
   namespace: z.string(),
   policies: z.array(PolicyObject).nullish(),
-  basePolicyName: z.string(),
-  description: z.string().nullish(),
-  affectedClientIds: z.array(z.string()).nullish(),
-  tags: z.array(z.string()).nullish(),
+  policyTypeId: z.string().nullish(),
   policyTypeName: z.string().nullish(),
-  policyTypeId: z.string().nullish()
+  tags: z.array(z.string()).nullish(),
+  updatedAt: z.string().nullish()
 })
 
 export interface RetrieveBasePolicyResponse extends z.TypeOf<typeof RetrieveBasePolicyResponse> {}

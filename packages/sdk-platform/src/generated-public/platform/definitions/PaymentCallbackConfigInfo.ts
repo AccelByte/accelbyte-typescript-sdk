@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const PaymentCallbackConfigInfo = z.object({
+  dryRun: z.boolean().nullish(),
   namespace: z.string(),
-  privateKey: z.string().nullish(),
   notifyUrl: z.string().nullish(),
-  dryRun: z.boolean().nullish()
+  privateKey: z.string().nullish()
 })
 
 export interface PaymentCallbackConfigInfo extends z.TypeOf<typeof PaymentCallbackConfigInfo> {}

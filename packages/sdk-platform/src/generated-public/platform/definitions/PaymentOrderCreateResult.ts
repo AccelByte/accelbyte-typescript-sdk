@@ -6,27 +6,27 @@
 import { z } from 'zod'
 
 export const PaymentOrderCreateResult = z.object({
-  paymentOrderNo: z.string(),
+  createdTime: z.string(),
   namespace: z.string(),
-  targetNamespace: z.string().nullish(),
-  targetUserId: z.string().nullish(),
+  paymentOrderNo: z.string(),
+  paymentStationUrl: z.string().nullish(),
   status: z.enum([
-    'INIT',
     'AUTHORISED',
     'AUTHORISE_FAILED',
-    'CHARGED',
-    'CHARGE_FAILED',
-    'NOTIFICATION_OF_CHARGEBACK',
-    'REQUEST_FOR_INFORMATION',
     'CHARGEBACK',
     'CHARGEBACK_REVERSED',
-    'REFUNDING',
+    'CHARGED',
+    'CHARGE_FAILED',
+    'DELETED',
+    'INIT',
+    'NOTIFICATION_OF_CHARGEBACK',
     'REFUNDED',
+    'REFUNDING',
     'REFUND_FAILED',
-    'DELETED'
+    'REQUEST_FOR_INFORMATION'
   ]),
-  paymentStationUrl: z.string().nullish(),
-  createdTime: z.string()
+  targetNamespace: z.string().nullish(),
+  targetUserId: z.string().nullish()
 })
 
 export interface PaymentOrderCreateResult extends z.TypeOf<typeof PaymentOrderCreateResult> {}

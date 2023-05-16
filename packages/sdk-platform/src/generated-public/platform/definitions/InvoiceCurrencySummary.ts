@@ -8,10 +8,10 @@ import { CurrencySummary } from './CurrencySummary.js'
 
 export const InvoiceCurrencySummary = z.object({
   currency: CurrencySummary,
+  salesVolume: z.number().int(),
   subtotalPrice: z.number().int(),
-  totalTax: z.number().int(),
   totalPrice: z.number().int(),
-  salesVolume: z.number().int()
+  totalTax: z.number().int()
 })
 
 export interface InvoiceCurrencySummary extends z.TypeOf<typeof InvoiceCurrencySummary> {}

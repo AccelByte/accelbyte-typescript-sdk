@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const RedeemHistoryInfo = z.object({
-  id: z.string(),
-  namespace: z.string(),
-  userId: z.string(),
   campaignId: z.string(),
   code: z.string(),
-  orderNo: z.string().nullish(),
   createdAt: z.string(),
+  id: z.string(),
+  namespace: z.string(),
+  orderNo: z.string().nullish(),
+  redeemedAt: z.string().nullish(),
   updatedAt: z.string(),
-  redeemedAt: z.string().nullish()
+  userId: z.string()
 })
 
 export interface RedeemHistoryInfo extends z.TypeOf<typeof RedeemHistoryInfo> {}

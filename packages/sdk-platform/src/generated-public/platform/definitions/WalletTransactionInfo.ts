@@ -8,16 +8,16 @@ import { TransactionAmountDetails } from './TransactionAmountDetails.js'
 
 export const WalletTransactionInfo = z.object({
   amount: z.number().int(),
-  reason: z.string().nullish(),
-  namespace: z.string(),
-  userId: z.string(),
-  operator: z.string(),
-  walletAction: z.enum(['CREDIT', 'PAYMENT', 'DEBIT']).nullish(),
-  currencyCode: z.string(),
   balanceSource: z.string().nullish(),
-  transactionAmountDetails: z.array(TransactionAmountDetails).nullish(),
   createdAt: z.string(),
-  updatedAt: z.string()
+  currencyCode: z.string(),
+  namespace: z.string(),
+  operator: z.string(),
+  reason: z.string().nullish(),
+  transactionAmountDetails: z.array(TransactionAmountDetails).nullish(),
+  updatedAt: z.string(),
+  userId: z.string(),
+  walletAction: z.enum(['CREDIT', 'DEBIT', 'PAYMENT']).nullish()
 })
 
 export interface WalletTransactionInfo extends z.TypeOf<typeof WalletTransactionInfo> {}

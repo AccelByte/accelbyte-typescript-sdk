@@ -9,16 +9,16 @@ import { ConsumeItem } from './ConsumeItem.js'
 import { RequestHistory } from './RequestHistory.js'
 
 export const IapConsumeHistoryInfo = z.object({
+  clientRequestParameter: ClientRequestParameter.nullish(),
+  consumeItems: z.array(ConsumeItem).nullish(),
+  iapType: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX']).nullish(),
   id: z.string().nullish(),
   namespace: z.string().nullish(),
-  userId: z.string().nullish(),
-  status: z.enum(['PENDING', 'FAIL', 'SUCCESS']).nullish(),
-  iapType: z.enum(['APPLE', 'GOOGLE', 'PLAYSTATION', 'STEAM', 'XBOX', 'STADIA', 'EPICGAMES', 'TWITCH']).nullish(),
-  requestUrl: z.string().nullish(),
   requestBody: z.record(z.any()).nullish(),
   requestHistories: z.array(RequestHistory).nullish(),
-  consumeItems: z.array(ConsumeItem).nullish(),
-  clientRequestParameter: ClientRequestParameter.nullish()
+  requestUrl: z.string().nullish(),
+  status: z.enum(['FAIL', 'PENDING', 'SUCCESS']).nullish(),
+  userId: z.string().nullish()
 })
 
 export interface IapConsumeHistoryInfo extends z.TypeOf<typeof IapConsumeHistoryInfo> {}

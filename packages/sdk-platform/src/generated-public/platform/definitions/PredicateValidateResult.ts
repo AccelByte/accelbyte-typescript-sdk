@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const PredicateValidateResult = z.object({
-  predicateName: z.string().nullish(),
-  validated: z.boolean().nullish(),
   matched: z.array(z.string()).nullish(),
-  unmatched: z.array(z.string()).nullish()
+  predicateName: z.string().nullish(),
+  unmatched: z.array(z.string()).nullish(),
+  validated: z.boolean().nullish()
 })
 
 export interface PredicateValidateResult extends z.TypeOf<typeof PredicateValidateResult> {}

@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { InvoiceCurrencySummary } from './InvoiceCurrencySummary.js'
 
-export const InvoiceSummary = z.object({ totalSalesVolume: z.number().int(), invoiceCurrencySummary: z.array(InvoiceCurrencySummary) })
+export const InvoiceSummary = z.object({ invoiceCurrencySummary: z.array(InvoiceCurrencySummary), totalSalesVolume: z.number().int() })
 
 export interface InvoiceSummary extends z.TypeOf<typeof InvoiceSummary> {}

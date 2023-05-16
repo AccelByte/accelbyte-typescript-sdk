@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const EntitlementUpdate = z.object({
+  endDate: z.string().nullish(),
   nullFieldList: z.array(z.string()).nullish(),
-  status: z.enum(['ACTIVE', 'INACTIVE', 'CONSUMED', 'REVOKED', 'SOLD']).nullish(),
-  useCount: z.number().int().nullish(),
   startDate: z.string().nullish(),
-  endDate: z.string().nullish()
+  status: z.enum(['ACTIVE', 'CONSUMED', 'INACTIVE', 'REVOKED', 'SOLD']).nullish(),
+  useCount: z.number().int().nullish()
 })
 
 export interface EntitlementUpdate extends z.TypeOf<typeof EntitlementUpdate> {}

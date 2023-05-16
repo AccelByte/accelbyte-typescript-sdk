@@ -6,8 +6,8 @@
 import { z } from 'zod'
 
 export const RevocationError = z.object({
-  httpStatus: z.number().int().nullish(),
   code: z.number().int().nullish(),
+  httpStatus: z.number().int().nullish(),
   message: z.string().nullish()
 })
 

@@ -20,12 +20,12 @@ export function LeaderboardConfigurationV3Api(sdk: AccelbyteSDK, args?: ApiArgs)
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>This endpoint return all leaderboard configurations</p>
+   * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
    */
   async function getLeaderboards(queryParams?: {
+    isDeleted?: boolean | null
     limit?: number
     offset?: number
-    isDeleted?: boolean | null
   }): Promise<GetAllLeaderboardConfigsPublicRespV3> {
     const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getLeaderboards(queryParams)
@@ -34,7 +34,7 @@ export function LeaderboardConfigurationV3Api(sdk: AccelbyteSDK, args?: ApiArgs)
   }
 
   /**
-   * <p>This endpoint returns a leaderboard configuration</p>
+   * &lt;p&gt;This endpoint returns a leaderboard configuration&lt;/p&gt;
    */
   async function getLeaderboard_ByLeaderboardCode(leaderboardCode: string): Promise<GetLeaderboardConfigPublicRespV3> {
     const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, cache)

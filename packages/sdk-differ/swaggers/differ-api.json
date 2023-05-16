@@ -7,10 +7,16 @@
   "paths": {
     "/differ/namespaces/{namespace}/diff": {
       "post": {
-        "description": "\u003cp\u003ePerform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.\u003c/p\u003e\u003cp\u003eEvery request is registered into the queue first, and will be processed by the available Differ.\u003c/p\u003e\u003cp\u003eThe \u003cb\u003epriority\u003c/b\u003e flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.\u003c/p\u003e\u003cbr/\u003e\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]\u003c/code\u003e and scope \u003ccode\u003epublishing\u003c/code\u003e\u003c/p\u003e",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "tags": ["Diff Calculation"],
+        "description": "<p>Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.</p><p>Every request is registered into the queue first, and will be processed by the available Differ.</p><p>The <b>priority</b> flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.</p><br/><p>Required permission <code>ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]</code> and scope <code>publishing</code></p>",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Diff Calculation"
+        ],
         "summary": "Perform diff from buildId A to buildId B",
         "operationId": "PerformLateDiff",
         "parameters": [
@@ -57,9 +63,15 @@
     },
     "/differ/namespaces/{namespace}/ping": {
       "get": {
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "tags": ["Diff Calculation"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Diff Calculation"
+        ],
         "summary": "Ping this diff",
         "operationId": "Ping",
         "parameters": [
@@ -89,10 +101,16 @@
     },
     "/differ/v2/namespaces/{namespace}/diff": {
       "post": {
-        "description": "\u003cp\u003ePerform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.\u003c/p\u003e\u003cp\u003eThe Diffs calculation will be parallelized between the available Differ instances.\u003c/p\u003e\u003cp\u003eThe \u003cb\u003epriority\u003c/b\u003e flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.\u003c/p\u003e\u003cbr/\u003e\u003cp\u003eRequired permission \u003ccode\u003eADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]\u003c/code\u003e and scope \u003ccode\u003epublishing\u003c/code\u003e\u003c/p\u003e",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "tags": ["Diff Calculation"],
+        "description": "<p>Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.</p><p>The Diffs calculation will be parallelized between the available Differ instances.</p><p>The <b>priority</b> flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.</p><br/><p>Required permission <code>ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]</code> and scope <code>publishing</code></p>",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Diff Calculation"
+        ],
         "summary": "Perform diff from buildId A to buildId B",
         "operationId": "PerformLateDiffV2",
         "parameters": [
@@ -140,7 +158,11 @@
   },
   "definitions": {
     "dto.LateDiffRequest": {
-      "required": ["namespace", "sourceBuildId", "destinationBuildId"],
+      "required": [
+        "namespace",
+        "sourceBuildId",
+        "destinationBuildId"
+      ],
       "properties": {
         "destinationBuildId": {
           "type": "string"
@@ -157,7 +179,9 @@
       }
     },
     "dto.PingResponse": {
-      "required": ["resp"],
+      "required": [
+        "resp"
+      ],
       "properties": {
         "resp": {
           "type": "string"
@@ -165,7 +189,10 @@
       }
     },
     "response.Error": {
-      "required": ["errorCode", "errorMessage"],
+      "required": [
+        "errorCode",
+        "errorMessage"
+      ],
       "properties": {
         "errorCode": {
           "type": "integer",

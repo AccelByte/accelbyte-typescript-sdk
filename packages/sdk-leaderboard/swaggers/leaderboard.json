@@ -1,0 +1,5282 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "contact": {
+      "email": "engineering@accelbyte.io",
+      "name": "Engineering Team at AccelByte",
+      "url": "https://accelbyte.io"
+    },
+    "description": "Justice Leaderboard Service",
+    "title": "justice-leaderboard-service",
+    "version": "2.21.0"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/leaderboard/apidocs"
+  },
+  "securityDefinitions": {
+    "HasPermission": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {
+        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]",
+        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]",
+        "NAMESPACE:{namespace}:LEADERBOARD [CREATE]": "NAMESPACE:{namespace}:LEADERBOARD [CREATE]",
+        "NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]": "NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]"
+      },
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "HasScope": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint return all leaderboard configurations\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "getLeaderboardConfigurationsAdminV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "filter for archived leaderboard",
+            "in": "query",
+            "name": "isArchived",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "description": "filter for deleted leaderboard config",
+            "in": "query",
+            "name": "isDeleted",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetAllLeaderboardConfigsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "list all leaderboards by given namespace",
+        "tags": ["LeaderboardConfiguration"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;LeaderboardConfig code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.Default is \u0026#39;00:00\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
+        "operationId": "createLeaderboardConfigurationAdminV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.LeaderboardConfigReq"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.LeaderboardConfigReq"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "create new leaderboard",
+        "tags": ["LeaderboardConfiguration"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/archived": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Admin Get signed url in an all time leaderboard that archived. Notes: This will be a bulk endpoint to get sign url\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "AdminGetArchivedLeaderboardRankingDataV1Handler",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "list of leaderboard codes split by comma",
+            "in": "query",
+            "name": "leaderboardCodes",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "slug type of leaderboard",
+            "in": "query",
+            "name": "slug",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/models.ArchiveLeaderboardSignedURLResponse"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Admin Get signed url for archive all time leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Archive leaderboard ranking data for specified leaderboard codes. NOTE: This will remove all data of the leaderboard on every slug,\n\t\t\tremove the leaderboard code on stat mapping, and remove the leaderboard on the queue reset. This will be a bulk endpoint\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "CreateArchivedLeaderboardRankingDataV1Handler",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.ArchiveLeaderboardReq"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Archive a leadeboard data ranking",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/delete": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint delete multiple leaderboards configuration in one request\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "deleteBulkLeaderboardConfigurationAdminV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.DeleteBulkLeaderboardsReq"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.DeleteBulkLeaderboardsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "delete bulk leaderboards. response body will contains failed leaderboard with the reason why it's failed to delete",
+        "tags": ["LeaderboardConfiguration"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}": {
+      "delete": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint delete a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "deleteLeaderboardConfigurationAdminV1",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "delete leaderboard by leaderboardCode",
+        "tags": ["LeaderboardConfiguration"]
+      },
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint returns a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "getLeaderboardConfigurationAdminV1",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardConfigResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "get leaderboard by leaderboardCode",
+        "tags": ["LeaderboardConfiguration"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
+        "operationId": "updateLeaderboardConfigurationAdminV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.UpdateLeaderboardConfigReq"
+            }
+          },
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardConfigResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "update leaderboard by leaderboardCode",
+        "tags": ["LeaderboardConfiguration"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in an all time leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetAllTimeLeaderboardRankingAdminV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get all time leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/hard": {
+      "delete": {
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete leaderboard configuration and its data\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment, you might want to use \u0026lt;b\u0026gt;archive endpoint\u0026lt;/b\u0026gt; instead hard delete.\u0026lt;/p\u0026gt;",
+        "operationId": "hardDeleteLeaderboardAdminV1",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "hard delete leaderboard config and data by leaderboard code",
+        "tags": ["LeaderboardConfiguration"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/month": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in current month leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetCurrentMonthLeaderboardRankingAdminV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get current month leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/reset": {
+      "delete": {
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete user ranking by leaderboard code\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment.\u0026lt;/p\u0026gt;",
+        "operationId": "deleteUserRankingByLeaderboardCodeAdminV1",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "delete all user ranking by leaderboard code",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/season": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in current season leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetCurrentSeasonLeaderboardRankingAdminV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get current season leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/today": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in today leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetTodayLeaderboardRankingAdminV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get today leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete user ranking\nRequired permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
+        "operationId": "deleteUserRankingAdminV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID used for leaderboard entry",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete user ranking",
+        "tags": ["LeaderboardData"]
+      },
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "getUserRankingAdminV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.UserRankingResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get user ranking",
+        "tags": ["LeaderboardData"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Update user point in a leaderboard. This endpoint uses for test utility only.\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Required permission: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:USER:(userId):LEADERBOARD\u0026#34;, action=4 (UPDATE)\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Returns: user ranking\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
+        "operationId": "updateUserPointAdminV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.UpdateUserPointAdminV1Request"
+            }
+          },
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID, should follow UUID version 4 without hyphen",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.UpdateUserPointAdminV1Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update user point",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/week": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in current week leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetCurrentWeekLeaderboardRankingAdminV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get current week leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/users/{userId}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete user ranking across leaderboard\nRequired permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]\n\nRemove entry with provided userId from leaderboard.\n",
+        "operationId": "deleteUserRankingsAdminV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID used for leaderboard entry",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48. At least one leaderboard code MUST be provided",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "array"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete user ranking across leaderboard(s)",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/users/{userId}/anonymization/leaderboards": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;This API will delete specified user leaderboard\u0026lt;p\u0026gt;\n\u0026lt;p\u0026gt;Required permission\n\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]\u0026lt;/code\u0026gt;\n\u0026lt;/p\u0026gt; \n",
+        "operationId": "adminAnonymizeUserLeaderboardAdminV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID used for leaderboard entry",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Anonymize user's leaderboard",
+        "tags": ["Anonymization"]
+      }
+    },
+    "/leaderboard/v1/admin/namespaces/{namespace}/users/{userId}/leaderboards": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get user leaderboard rankings\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "getUserLeaderboardRankingsAdminV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetAllUserLeaderboardsResp"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get user rankings",
+        "tags": ["UserData"]
+      }
+    },
+    "/leaderboard/v1/public/namespaces/{namespace}/leaderboards": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;This endpoint return all leaderboard configurations\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "getLeaderboardConfigurationsPublicV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "filter for archived leaderboard",
+            "in": "query",
+            "name": "isArchived",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "description": "filter for deleted leaderboard config",
+            "in": "query",
+            "name": "isDeleted",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetAllLeaderboardConfigsPublicResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "list all leaderboards by given namespace",
+        "tags": ["LeaderboardConfiguration"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Public endpoint to create a new leaderboard.\n\n\u0026lt;p\u0026gt;Required permission \u0026#39;NAMESPACE:{namespace}:LEADERBOARD [CREATE]\u0026#39;\u0026lt;/p\u0026gt;\n\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;LeaderboardConfig code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.Default is \u0026#39;00:00\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\u0026lt;/ul\u0026gt;\n",
+        "operationId": "createLeaderboardConfigurationPublicV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.LeaderboardConfigReq"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.LeaderboardConfigReq"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:LEADERBOARD [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "create new leaderboard",
+        "tags": ["LeaderboardConfiguration"]
+      }
+    },
+    "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
+      "get": {
+        "description": "\t\u0026lt;p\u0026gt;Get rankings in an all time leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetAllTimeLeaderboardRankingPublicV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get all time leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/archived": {
+      "get": {
+        "description": "\t\u0026lt;p\u0026gt;Get signed url in an all time leaderboard that archived. NOTE: This will be a bulk endpoint to get sign url\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetArchivedLeaderboardRankingDataV1Handler",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "list of leaderboard codes split by comma",
+            "in": "query",
+            "name": "leaderboardCodes",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "slug type of leaderboard",
+            "in": "query",
+            "name": "slug",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/models.ArchiveLeaderboardSignedURLResponse"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get signed url for archive all time leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/month": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Get rankings in current month leaderboard.\u0026lt;/p\u0026gt;",
+        "operationId": "GetCurrentMonthLeaderboardRankingPublicV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get current month leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/season": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Get rankings in current season leaderboard.\u0026lt;/p\u0026gt;",
+        "operationId": "GetCurrentSeasonLeaderboardRankingPublicV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get current season leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/today": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Get rankings in today leaderboard.\u0026lt;/p\u0026gt;",
+        "operationId": "GetTodayLeaderboardRankingPublicV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get today leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete user ranking\nRequired permission: NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
+        "operationId": "deleteUserRankingPublicV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID used for leaderboard entry",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete user ranking",
+        "tags": ["LeaderboardData"]
+      },
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;",
+        "operationId": "getUserRankingPublicV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.UserRankingResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get user ranking",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/week": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Get rankings in current week leaderboard.\u0026lt;/p\u0026gt;",
+        "operationId": "GetCurrentWeekLeaderboardRankingPublicV1",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get current week leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v2/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/hidden": {
+      "get": {
+        "description": "Return hidden users on a leaderboard",
+        "operationId": "GetHiddenUsersV2",
+        "parameters": [
+          {
+            "description": "Leaderboard Code",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetHiddenUserResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get hidden users on a leaderboard",
+        "tags": ["UserVisibility"]
+      }
+    },
+    "/leaderboard/v2/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}/visibility": {
+      "get": {
+        "description": "User with false visibility status will have \u0026lt;b\u0026gt;hidden\u0026lt;/b\u0026gt; attribute set to true on it\u0026#39;s leaderboard entry",
+        "operationId": "GetUserVisibilityStatusV2",
+        "parameters": [
+          {
+            "description": "Leaderboard Code",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetUserVisibilityResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get user visibility status",
+        "tags": ["UserVisibility"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "User with false visibility status will have \u0026lt;b\u0026gt;hidden\u0026lt;/b\u0026gt; attribute  set to true on it\u0026#39;s leaderboard entry",
+        "operationId": "SetUserLeaderboardVisibilityStatusV2",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.SetUserVisibilityRequest"
+            }
+          },
+          {
+            "description": "Leaderboard Code",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetUserVisibilityResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Set user visibility status on a specific leaderboard code",
+        "tags": ["UserVisibility"]
+      }
+    },
+    "/leaderboard/v2/admin/namespaces/{namespace}/users/{userId}/visibility": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "User with false visibility status will have \u0026lt;b\u0026gt;hidden\u0026lt;/b\u0026gt; attribute  set to true on it\u0026#39;s leaderboard entry",
+        "operationId": "SetUserVisibilityStatusV2",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.SetUserVisibilityRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetUserVisibilityResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Set user visibility status on a all current leaderboard",
+        "tags": ["UserVisibility"]
+      }
+    },
+    "/leaderboard/v2/public/namespaces/{namespace}/leaderboards": {
+      "get": {
+        "description": "This endpoint return all leaderboard configurations",
+        "operationId": "GetLeaderboardConfigurationsPublicV2",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v2.GetAllLeaderboardConfigsPublicResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "list all leaderboards by given namespace",
+        "tags": ["LeaderboardConfiguration"]
+      }
+    },
+    "/leaderboard/v2/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
+      "get": {
+        "description": "Get rankings in an all time leaderboard.",
+        "operationId": "GetAllTimeLeaderboardRankingPublicV2",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v2.GetPublicLeaderboardRankingResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get all time leaderboard ranking data",
+        "tags": ["LeaderboardData"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint return all leaderboard configurations\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "getLeaderboardConfigurationsAdminV3",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "filter for deleted leaderboard config",
+            "in": "query",
+            "name": "isDeleted",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetAllLeaderboardConfigsRespV3"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "list all leaderboards by given namespace",
+        "tags": ["LeaderboardConfigurationV3"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]\u0026#39;\u0026lt;/p\u0026gt;\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;leaderboardCode: unique leaderboard config code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;name: leaderboard name, maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;description: leaderboard description, maximum length for leaderboard description is 2048 characters. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;iconURL: leaderboard icon image url. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;allTime: if true, all time leaderboard will be created. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;descending: leaderboard order. If true, the points will be sorted in descending order. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;statCode: Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;cycleIds: Statistic cycle ids that will be tracked in the leaderboard. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;/ul\u0026gt;",
+        "operationId": "createLeaderboardConfigurationAdminV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.LeaderboardConfigReqV3"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardConfigRespV3"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "create new leaderboard",
+        "tags": ["LeaderboardConfigurationV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/delete": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint delete multiple leaderboards configuration in one request\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "deleteBulkLeaderboardConfigurationAdminV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.DeleteBulkLeaderboardsReq"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.DeleteBulkLeaderboardsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "delete bulk leaderboards. response body will contains failed leaderboard with the reason why it's failed to delete",
+        "tags": ["LeaderboardConfigurationV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}": {
+      "delete": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint delete a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "deleteLeaderboardConfigurationAdminV3",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "delete leaderboard by leaderboardCode",
+        "tags": ["LeaderboardConfigurationV3"]
+      },
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint returns a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "getLeaderboardConfigurationAdminV3",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardConfigRespV3"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "get leaderboard by leaderboardCode",
+        "tags": ["LeaderboardConfigurationV3"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]\u0026#39;\u0026lt;/p\u0026gt;\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;leaderboardCode: unique leaderboard config code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;name: leaderboard name, maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;description: leaderboard description, maximum length for leaderboard description is 2048 characters. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;iconURL: leaderboard icon image url. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;allTime: if true, all time leaderboard will be created. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;descending: leaderboard order. If true, the points will be sorted in descending order. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;statCode: Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;cycleIds: Statistic cycle ids that will be tracked in the leaderboard. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;/ul\u0026gt;",
+        "operationId": "updateLeaderboardConfigurationAdminV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.UpdateLeaderboardConfigReqV3"
+            }
+          },
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardConfigRespV3"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "update leaderboard by leaderboardCode",
+        "tags": ["LeaderboardConfigurationV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in an all time leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetAllTimeLeaderboardRankingAdminV3",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get all time leaderboard ranking data",
+        "tags": ["LeaderboardDataV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/cycles/{cycleId}": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in cycle leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "GetCurrentCycleLeaderboardRankingAdminV3",
+        "parameters": [
+          {
+            "description": "the cycle id",
+            "in": "path",
+            "name": "cycleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get cycle leaderboard ranking data",
+        "tags": ["LeaderboardDataV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/hard": {
+      "delete": {
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete leaderboard configuration and its data\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment, you might want to use \u0026lt;b\u0026gt;archive endpoint\u0026lt;/b\u0026gt; instead hard delete.\u0026lt;/p\u0026gt;",
+        "operationId": "hardDeleteLeaderboardAdminV3",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "hard delete leaderboard config and data by leaderboard code",
+        "tags": ["LeaderboardConfigurationV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/reset": {
+      "delete": {
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete user ranking by leaderboard code\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment.\u0026lt;/p\u0026gt;",
+        "operationId": "deleteUserRankingByLeaderboardCodeAdminV3",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "delete all user ranking by leaderboard code",
+        "tags": ["LeaderboardDataV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/hidden": {
+      "get": {
+        "description": "Return hidden users on a leaderboard",
+        "operationId": "GetHiddenUsersV3",
+        "parameters": [
+          {
+            "description": "Leaderboard Code",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetHiddenUserResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get hidden users on a leaderboard",
+        "tags": ["UserVisibilityV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete user ranking\nRequired permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
+        "operationId": "deleteUserRankingAdminV3",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID used for leaderboard entry",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete user ranking",
+        "tags": ["LeaderboardDataV3"]
+      },
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "getUserRankingAdminV3",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.UserRankingResponseV3"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get user ranking",
+        "tags": ["LeaderboardDataV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}/visibility": {
+      "get": {
+        "description": "User with false visibility status will have \u0026lt;b\u0026gt;hidden\u0026lt;/b\u0026gt; attribute set to true on it\u0026#39;s leaderboard entry",
+        "operationId": "GetUserVisibilityStatusV3",
+        "parameters": [
+          {
+            "description": "Leaderboard Code",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetUserVisibilityResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get user visibility status",
+        "tags": ["UserVisibilityV3"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "User with false visibility status will have \u0026lt;b\u0026gt;hidden\u0026lt;/b\u0026gt; attribute  set to true on it\u0026#39;s leaderboard entry",
+        "operationId": "SetUserLeaderboardVisibilityV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.SetUserVisibilityRequest"
+            }
+          },
+          {
+            "description": "Leaderboard Code",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetUserVisibilityResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Set user visibility status on a specific leaderboard code",
+        "tags": ["UserVisibilityV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/users/{userId}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete user ranking across leaderboard\nRequired permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]\n\nRemove entry with provided userId from leaderboard.\n",
+        "operationId": "deleteUserRankingsAdminV3",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID used for leaderboard entry",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48. At least one leaderboard code MUST be provided",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "array"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete user ranking across leaderboard(s)",
+        "tags": ["LeaderboardDataV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/users/{userId}/leaderboards": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get user leaderboard rankings\u0026lt;/p\u0026gt;\n\t\t\t",
+        "operationId": "getUserLeaderboardRankingsAdminV3",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetAllUserLeaderboardsRespV3"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get user rankings",
+        "tags": ["UserDataV3"]
+      }
+    },
+    "/leaderboard/v3/admin/namespaces/{namespace}/users/{userId}/visibility": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "User with false visibility status will have \u0026lt;b\u0026gt;hidden\u0026lt;/b\u0026gt; attribute  set to true on it\u0026#39;s leaderboard entry",
+        "operationId": "SetUserVisibilityV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.SetUserVisibilityRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetUserVisibilityResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Set user visibility status on a all current leaderboard",
+        "tags": ["UserVisibilityV3"]
+      }
+    },
+    "/leaderboard/v3/public/namespaces/{namespace}/leaderboards": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;This endpoint return all leaderboard configurations\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "getLeaderboardConfigurationsPublicV3",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "filter for deleted leaderboard config",
+            "in": "query",
+            "name": "isDeleted",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetAllLeaderboardConfigsPublicRespV3"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "list all leaderboards by given namespace",
+        "tags": ["LeaderboardConfigurationV3"]
+      }
+    },
+    "/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;This endpoint returns a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "operationId": "getLeaderboardConfigurationPublicV3",
+        "parameters": [
+          {
+            "description": " human readable unique code to indentify leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardConfigPublicRespV3"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "get leaderboard by leaderboardCode",
+        "tags": ["LeaderboardConfigurationV3"]
+      }
+    },
+    "/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Get rankings in an all time leaderboard.\u0026lt;/p\u0026gt;",
+        "operationId": "GetAllTimeLeaderboardRankingPublicV3",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get all time leaderboard ranking data",
+        "tags": ["LeaderboardDataV3"]
+      }
+    },
+    "/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/cycles/{cycleId}": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Get rankings in cycle leaderboard.\u0026lt;/p\u0026gt;",
+        "operationId": "GetCurrentCycleLeaderboardRankingPublicV3",
+        "parameters": [
+          {
+            "description": "the cycle id",
+            "in": "path",
+            "name": "cycleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "size of displayed data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The start position that points to query data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetLeaderboardRankingResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get cycle leaderboard ranking data",
+        "tags": ["LeaderboardDataV3"]
+      }
+    },
+    "/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}": {
+      "get": {
+        "description": "\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;",
+        "operationId": "getUserRankingPublicV3",
+        "parameters": [
+          {
+            "description": "the human readable unique code to identify the leaderboard. Must be lowercase and maximum length is 48",
+            "in": "path",
+            "name": "leaderboardCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.UserRankingResponseV3"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get user ranking",
+        "tags": ["LeaderboardDataV3"]
+      }
+    }
+  },
+  "definitions": {
+    "models.ArchiveLeaderboardReq": {
+      "properties": {
+        "leaderboardCodes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "slug": {
+          "type": "string"
+        }
+      },
+      "required": ["leaderboardCodes", "limit", "slug"]
+    },
+    "models.ArchiveLeaderboardSignedURLResponse": {
+      "properties": {
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": ["leaderboardCode", "url"]
+    },
+    "models.DailyConfig": {
+      "properties": {
+        "resetTime": {
+          "type": "string"
+        }
+      },
+      "required": ["resetTime"]
+    },
+    "models.DeleteBulkLeaderboardFailedResp": {
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "leaderboardCode": {
+          "type": "string"
+        }
+      },
+      "required": ["error", "leaderboardCode"]
+    },
+    "models.DeleteBulkLeaderboardsReq": {
+      "properties": {
+        "leaderboardCodes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["leaderboardCodes"]
+    },
+    "models.DeleteBulkLeaderboardsResp": {
+      "properties": {
+        "failed": {
+          "items": {
+            "$ref": "#/definitions/models.DeleteBulkLeaderboardFailedResp"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["failed"]
+    },
+    "models.GetAllLeaderboardConfigsPublicResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.GetLeaderboardConfigPublicResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.GetAllLeaderboardConfigsPublicRespV3": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.GetLeaderboardConfigPublicRespV3"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.PaginationV3"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.GetAllLeaderboardConfigsResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.GetLeaderboardConfigResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.GetAllLeaderboardConfigsRespV3": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.GetLeaderboardConfigRespV3"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.PaginationV3"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.GetAllUserLeaderboardsResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.UserLeaderboardRanking"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.GetAllUserLeaderboardsRespV3": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.UserLeaderboardRankingV3"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.PaginationV3"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.GetHiddenUserResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.GetLeaderboardConfigPublicResp": {
+      "properties": {
+        "iconURL": {
+          "type": "string"
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statCode": {
+          "type": "string"
+        }
+      },
+      "required": ["iconURL", "leaderboardCode", "name", "statCode"]
+    },
+    "models.GetLeaderboardConfigPublicRespV3": {
+      "properties": {
+        "allTime": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "cycleIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "iconURL": {
+          "type": "string"
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statCode": {
+          "type": "string"
+        }
+      },
+      "required": ["allTime", "cycleIds", "iconURL", "leaderboardCode", "name", "statCode"]
+    },
+    "models.GetLeaderboardConfigResp": {
+      "properties": {
+        "daily": {
+          "$ref": "#/definitions/models.DailyConfig"
+        },
+        "deletedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "descending": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "iconURL": {
+          "type": "string"
+        },
+        "isArchived": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "monthly": {
+          "$ref": "#/definitions/models.MonthlyConfig"
+        },
+        "name": {
+          "type": "string"
+        },
+        "seasonPeriod": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "statCode": {
+          "type": "string"
+        },
+        "weekly": {
+          "$ref": "#/definitions/models.WeeklyConfig"
+        }
+      },
+      "required": [
+        "daily",
+        "descending",
+        "iconURL",
+        "isArchived",
+        "isDeleted",
+        "leaderboardCode",
+        "monthly",
+        "name",
+        "seasonPeriod",
+        "startTime",
+        "statCode",
+        "weekly"
+      ]
+    },
+    "models.GetLeaderboardConfigRespV3": {
+      "properties": {
+        "allTime": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "cycleIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "deletedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "descending": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "iconURL": {
+          "type": "string"
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statCode": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": ["allTime", "createdAt", "cycleIds", "descending", "isDeleted", "leaderboardCode", "name", "statCode", "updatedAt"]
+    },
+    "models.GetLeaderboardRankingResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.UserPoint"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.GetUserVisibilityResponse": {
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["namespace", "userId", "visibility"]
+    },
+    "models.LeaderboardConfigReq": {
+      "properties": {
+        "daily": {
+          "$ref": "#/definitions/models.DailyConfig"
+        },
+        "descending": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "iconURL": {
+          "type": "string"
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "monthly": {
+          "$ref": "#/definitions/models.MonthlyConfig"
+        },
+        "name": {
+          "type": "string"
+        },
+        "seasonPeriod": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "statCode": {
+          "type": "string"
+        },
+        "weekly": {
+          "$ref": "#/definitions/models.WeeklyConfig"
+        }
+      },
+      "required": [
+        "daily",
+        "descending",
+        "iconURL",
+        "leaderboardCode",
+        "monthly",
+        "name",
+        "seasonPeriod",
+        "startTime",
+        "statCode",
+        "weekly"
+      ]
+    },
+    "models.LeaderboardConfigReqV3": {
+      "properties": {
+        "allTime": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "cycleIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "descending": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "iconURL": {
+          "type": "string"
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statCode": {
+          "type": "string"
+        }
+      },
+      "required": ["allTime", "descending", "leaderboardCode", "name", "statCode"]
+    },
+    "models.MonthlyConfig": {
+      "properties": {
+        "resetDate": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "resetTime": {
+          "type": "string"
+        }
+      },
+      "required": ["resetDate", "resetTime"]
+    },
+    "models.Pagination": {
+      "properties": {
+        "First": {
+          "type": "string"
+        },
+        "Last": {
+          "type": "string"
+        },
+        "Next": {
+          "type": "string"
+        },
+        "Previous": {
+          "type": "string"
+        }
+      },
+      "required": ["First", "Last", "Next", "Previous"]
+    },
+    "models.PaginationV3": {
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      },
+      "required": ["first", "last", "next", "previous"]
+    },
+    "models.SetUserVisibilityRequest": {
+      "properties": {
+        "visibility": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["visibility"]
+    },
+    "models.UpdateLeaderboardConfigReq": {
+      "properties": {
+        "daily": {
+          "$ref": "#/definitions/models.DailyConfig"
+        },
+        "descending": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "iconURL": {
+          "type": "string"
+        },
+        "monthly": {
+          "$ref": "#/definitions/models.MonthlyConfig"
+        },
+        "name": {
+          "type": "string"
+        },
+        "seasonPeriod": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "statCode": {
+          "type": "string"
+        },
+        "weekly": {
+          "$ref": "#/definitions/models.WeeklyConfig"
+        }
+      },
+      "required": ["daily", "descending", "iconURL", "monthly", "name", "seasonPeriod", "startTime", "statCode", "weekly"]
+    },
+    "models.UpdateLeaderboardConfigReqV3": {
+      "properties": {
+        "allTime": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "cycleIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "descending": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "iconURL": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["allTime", "descending", "name"]
+    },
+    "models.UpdateUserPointAdminV1Request": {
+      "properties": {
+        "inc": {
+          "format": "double",
+          "type": "number"
+        },
+        "latestValue": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": ["inc", "latestValue"]
+    },
+    "models.UpdateUserPointAdminV1Response": {
+      "properties": {
+        "point": {
+          "format": "double",
+          "type": "number"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["point", "userId"]
+    },
+    "models.UserCycleRankingResponseDetail": {
+      "properties": {
+        "additionalData": {
+          "type": "object"
+        },
+        "cycleId": {
+          "type": "string"
+        },
+        "hidden": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "point": {
+          "format": "double",
+          "type": "number"
+        },
+        "rank": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": ["cycleId", "point", "rank"]
+    },
+    "models.UserLeaderboardRanking": {
+      "properties": {
+        "allTime": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        },
+        "current": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        },
+        "daily": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "leaderboardName": {
+          "type": "string"
+        },
+        "monthly": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "weekly": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        }
+      },
+      "required": ["allTime", "current", "daily", "leaderboardCode", "leaderboardName", "monthly", "userId", "weekly"]
+    },
+    "models.UserLeaderboardRankingV3": {
+      "properties": {
+        "allTime": {
+          "$ref": "#/definitions/models.UserRankingResponseDetailV3"
+        },
+        "cycles": {
+          "items": {
+            "$ref": "#/definitions/models.UserCycleRankingResponseDetail"
+          },
+          "type": "array"
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "leaderboardName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["cycles", "leaderboardCode", "leaderboardName", "userId"]
+    },
+    "models.UserPoint": {
+      "properties": {
+        "additionalData": {
+          "type": "object"
+        },
+        "hidden": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "point": {
+          "format": "double",
+          "type": "number"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["additionalData", "point", "userId"]
+    },
+    "models.UserRankingResponse": {
+      "properties": {
+        "allTime": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        },
+        "current": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        },
+        "daily": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        },
+        "monthly": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "weekly": {
+          "$ref": "#/definitions/models.UserRankingResponseDetail"
+        }
+      },
+      "required": ["allTime", "current", "daily", "monthly", "userId", "weekly"]
+    },
+    "models.UserRankingResponseDetail": {
+      "properties": {
+        "additionalData": {
+          "type": "object"
+        },
+        "hidden": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "point": {
+          "format": "double",
+          "type": "number"
+        },
+        "rank": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": ["additionalData", "point", "rank"]
+    },
+    "models.UserRankingResponseDetailV3": {
+      "properties": {
+        "additionalData": {
+          "type": "object"
+        },
+        "hidden": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "point": {
+          "format": "double",
+          "type": "number"
+        },
+        "rank": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": ["point", "rank"]
+    },
+    "models.UserRankingResponseV3": {
+      "properties": {
+        "allTime": {
+          "$ref": "#/definitions/models.UserRankingResponseDetailV3"
+        },
+        "cycles": {
+          "items": {
+            "$ref": "#/definitions/models.UserCycleRankingResponseDetail"
+          },
+          "type": "array"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["cycles", "userId"]
+    },
+    "models.WeeklyConfig": {
+      "properties": {
+        "resetDay": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "resetTime": {
+          "type": "string"
+        }
+      },
+      "required": ["resetDay", "resetTime"]
+    },
+    "response.ErrorResponse": {
+      "properties": {
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      },
+      "required": ["errorCode", "errorMessage"]
+    },
+    "v2.Entry": {
+      "properties": {
+        "additionalData": {
+          "type": "object"
+        },
+        "hidden": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "point": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": ["point"]
+    },
+    "v2.GetAllLeaderboardConfigsPublicResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/v2.GetLeaderboardConfigPublicResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/v2.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "v2.GetLeaderboardConfigPublicResp": {
+      "properties": {
+        "iconURL": {
+          "type": "string"
+        },
+        "leaderboardCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statCode": {
+          "type": "string"
+        }
+      },
+      "required": ["iconURL", "leaderboardCode", "name", "statCode"]
+    },
+    "v2.GetPublicLeaderboardRankingResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/v2.Entry"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/v2.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "v2.Pagination": {
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      },
+      "required": ["first", "last", "next", "previous"]
+    }
+  },
+  "x-docs": {
+    "alias": "leaderboard",
+    "host": "https://development.accelbyte.io",
+    "path": "/leaderboard/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2023-05-12T00:00:10+00:00",
+    "gitHash": "3f6fcb90d44bdc3b978bc0c46e8e4867598c6238",
+    "name": "justice-leaderboard-service",
+    "realm": "dev",
+    "version": "2.21.0",
+    "version-roles-seeding": "0.0.3"
+  }
+}

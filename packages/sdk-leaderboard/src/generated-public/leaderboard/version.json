@@ -1,0 +1,8 @@
+{
+  "buildDate": "2023-05-12T00:00:10+00:00",
+  "gitHash": "3f6fcb90d44bdc3b978bc0c46e8e4867598c6238",
+  "name": "justice-leaderboard-service",
+  "realm": "dev",
+  "version": "2.21.0",
+  "version-roles-seeding": "0.0.3"
+}

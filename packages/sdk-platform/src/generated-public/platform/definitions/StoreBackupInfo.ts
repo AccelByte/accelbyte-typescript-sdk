@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const StoreBackupInfo = z.object({
-  id: z.string(),
   autoBackup: z.boolean(),
+  createdAt: z.string(),
+  id: z.string(),
   name: z.string(),
   storeId: z.string(),
-  createdAt: z.string(),
   updatedAt: z.string()
 })
 

@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const ListViewInfo = z.object({
-  viewId: z.string(),
-  namespace: z.string(),
-  name: z.string(),
-  displayOrder: z.number().int(),
   createdAt: z.string(),
-  updatedAt: z.string()
+  displayOrder: z.number().int(),
+  name: z.string(),
+  namespace: z.string(),
+  updatedAt: z.string(),
+  viewId: z.string()
 })
 
 export interface ListViewInfo extends z.TypeOf<typeof ListViewInfo> {}

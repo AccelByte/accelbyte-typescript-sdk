@@ -20,7 +20,7 @@ export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>Get rankings in an all time leaderboard.</p>
+   * &lt;p&gt;Get rankings in an all time leaderboard.&lt;/p&gt;
    */
   async function getAlltime_ByLeaderboardCode(
     leaderboardCode: string,
@@ -33,7 +33,7 @@ export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Get user ranking in leaderboard</p>
+   * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
   async function getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<UserRankingResponseV3> {
     const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, cache)
@@ -43,7 +43,7 @@ export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Get rankings in cycle leaderboard.</p>
+   * &lt;p&gt;Get rankings in cycle leaderboard.&lt;/p&gt;
    */
   async function getCycle_ByLeaderboardCode_ByCycleId(
     leaderboardCode: string,

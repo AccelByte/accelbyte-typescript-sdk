@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const RevokeUseCountRequest = z.object({ useCount: z.number().int().nullish(), reason: z.string().nullish() })
+export const RevokeUseCountRequest = z.object({ reason: z.string().nullish(), useCount: z.number().int().nullish() })
 
 export interface RevokeUseCountRequest extends z.TypeOf<typeof RevokeUseCountRequest> {}

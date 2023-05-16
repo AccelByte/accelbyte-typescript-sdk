@@ -7,13 +7,13 @@ import { z } from 'zod'
 import { Localization } from './Localization.js'
 
 export const FullViewInfo = z.object({
-  viewId: z.string(),
-  namespace: z.string(),
-  name: z.string(),
+  createdAt: z.string(),
   displayOrder: z.number().int(),
   localizations: z.record(Localization),
-  createdAt: z.string(),
-  updatedAt: z.string()
+  name: z.string(),
+  namespace: z.string(),
+  updatedAt: z.string(),
+  viewId: z.string()
 })
 
 export interface FullViewInfo extends z.TypeOf<typeof FullViewInfo> {}

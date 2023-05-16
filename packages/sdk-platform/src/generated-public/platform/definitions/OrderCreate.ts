@@ -6,16 +6,16 @@
 import { z } from 'zod'
 
 export const OrderCreate = z.object({
-  itemId: z.string(),
-  quantity: z.number().int(),
-  price: z.number().int(),
-  discountedPrice: z.number().int(),
   currencyCode: z.string(),
-  region: z.string().nullish(),
+  discountedPrice: z.number().int(),
+  ext: z.record(z.any()).nullish(),
+  itemId: z.string(),
   language: z.string().nullish(),
-  sectionId: z.string().nullish(),
+  price: z.number().int(),
+  quantity: z.number().int(),
+  region: z.string().nullish(),
   returnUrl: z.string().nullish(),
-  ext: z.record(z.any()).nullish()
+  sectionId: z.string().nullish()
 })
 
 export interface OrderCreate extends z.TypeOf<typeof OrderCreate> {}

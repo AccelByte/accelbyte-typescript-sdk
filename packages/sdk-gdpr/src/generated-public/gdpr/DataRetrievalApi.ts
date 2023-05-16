@@ -21,7 +21,7 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   async function getRequests_ByUserId(
     userId: string,
@@ -34,7 +34,7 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   async function postRequest_ByUserId(userId: string, data: { password: string | null }): Promise<DataRetrievalResponse> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache)
@@ -44,25 +44,25 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
-  async function deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<unknown> {
+  async function deleteRequest_ByUserId_ByRequestDate(requestDate: string, userId: string): Promise<unknown> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.deleteRequest_ByUserId_ByRequestDate(userId, requestDate)
+    const resp = await $.deleteRequest_ByUserId_ByRequestDate(requestDate, userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   async function postGenerate_ByUserId_ByRequestDate(
-    userId: string,
     requestDate: string,
+    userId: string,
     data: { password: string | null }
   ): Promise<UserDataUrl> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.postGenerate_ByUserId_ByRequestDate(userId, requestDate, data)
+    const resp = await $.postGenerate_ByUserId_ByRequestDate(requestDate, userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }

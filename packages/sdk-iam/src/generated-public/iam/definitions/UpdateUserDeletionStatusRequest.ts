@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const UpdateUserDeletionStatusRequest = z.object({ deletionDate: z.number().int(), enabled: z.boolean() })
+export const UpdateUserDeletionStatusRequest = z.object({ deletionDate: z.number().int().nullish(), enabled: z.boolean() })
 
 export interface UpdateUserDeletionStatusRequest extends z.TypeOf<typeof UpdateUserDeletionStatusRequest> {}

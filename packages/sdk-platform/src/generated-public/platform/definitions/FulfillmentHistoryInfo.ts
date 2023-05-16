@@ -11,20 +11,20 @@ import { FulfillmentError } from './FulfillmentError.js'
 import { FulfillmentItem } from './FulfillmentItem.js'
 
 export const FulfillmentHistoryInfo = z.object({
+  code: z.string().nullish(),
+  createdAt: z.string(),
+  creditSummaries: z.array(CreditSummary).nullish(),
+  entitlementSummaries: z.array(EntitlementSummary).nullish(),
+  extensionFulfillmentSummaries: z.array(ExtensionFulfillmentSummary).nullish(),
+  fulfillItems: z.array(FulfillmentItem).nullish(),
+  fulfillmentError: FulfillmentError.nullish(),
+  grantedItemIds: z.array(z.string()).nullish(),
   id: z.string(),
   namespace: z.string(),
-  userId: z.string(),
   orderNo: z.string().nullish(),
-  code: z.string().nullish(),
-  fulfillItems: z.array(FulfillmentItem).nullish(),
-  grantedItemIds: z.array(z.string()).nullish(),
-  entitlementSummaries: z.array(EntitlementSummary).nullish(),
-  creditSummaries: z.array(CreditSummary).nullish(),
-  extensionFulfillmentSummaries: z.array(ExtensionFulfillmentSummary).nullish(),
-  status: z.enum(['SUCCESS', 'FAIL']),
-  fulfillmentError: FulfillmentError.nullish(),
-  createdAt: z.string(),
-  updatedAt: z.string()
+  status: z.enum(['FAIL', 'SUCCESS']),
+  updatedAt: z.string(),
+  userId: z.string()
 })
 
 export interface FulfillmentHistoryInfo extends z.TypeOf<typeof FulfillmentHistoryInfo> {}

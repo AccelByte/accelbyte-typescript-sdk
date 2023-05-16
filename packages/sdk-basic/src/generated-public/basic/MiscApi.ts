@@ -30,7 +30,7 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
+   * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscCountries(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
     const $ = new Misc$(Network.create(requestConfig), namespace, cache)
@@ -40,7 +40,7 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * List languages.<br>Other detail info: <ul><li><i>Returns</i>: language list</li></ul>
+   * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscLanguages(): Promise<unknown> {
     const $ = new Misc$(Network.create(requestConfig), namespace, cache)
@@ -50,7 +50,7 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * List time zones.<br>Other detail info: <ul><li><i>Returns</i>: time zones</li></ul>
+   * List time zones.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: time zones&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscTimezones(): Promise<unknown> {
     const $ = new Misc$(Network.create(requestConfig), namespace, cache)

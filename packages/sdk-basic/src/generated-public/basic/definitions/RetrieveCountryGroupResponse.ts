@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { CountryObject } from './CountryObject.js'
 
 export const RetrieveCountryGroupResponse = z.object({
+  countries: z.array(CountryObject).nullish(),
   countryGroupCode: z.string().nullish(),
-  countryGroupName: z.string().nullish(),
-  countries: z.array(CountryObject).nullish()
+  countryGroupName: z.string().nullish()
 })
 
 export interface RetrieveCountryGroupResponse extends z.TypeOf<typeof RetrieveCountryGroupResponse> {}

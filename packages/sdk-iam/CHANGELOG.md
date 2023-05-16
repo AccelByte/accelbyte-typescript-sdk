@@ -1,3 +1,43 @@
+### 1.5340.30-beta.0 - 2023-05-12
+
+- code-generated update
+
+### 1.5340.29 - 2023-05-09
+
+- code-generated update
+
+### 1.5330.28 - 2023-05-05
+
+- code-generated update
+
+### 1.5330.27 - 2023-05-05
+
+- code-generated update
+
+### 1.5330.26 - 2023-05-02
+
+- Bump from script
+
+### 1.5330.25 - 2023-05-02
+
+- code-generated update
+
+### 1.5330.24 - 2023-05-01
+
+- code-generated update
+
+### 1.5330.23 - 2023-05-01
+
+- code-generated update
+
+### 1.5330.22 - 2023-05-01
+
+- code-generated update
+
+### 1.5330.21 - 2023-05-01
+
+- code-generated update
+
 ### 1.5320.20 - 2023-04-28
 
 - Added `loginWithPasswordAuthorization` method

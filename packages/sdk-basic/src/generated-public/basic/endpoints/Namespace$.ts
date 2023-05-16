@@ -16,7 +16,7 @@ export class Namespace$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Get all namespaces.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Action code</i>: 11303</li><li><i>Returns</i>: list of namespaces</li></ul>
+   * Get all namespaces.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11303&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of namespaces&lt;/li&gt;&lt;/ul&gt;
    */
   getNamespaces(queryParams?: { activeOnly?: boolean | null }): Promise<IResponseWithSync<NamespaceInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -33,7 +33,7 @@ export class Namespace$ {
   }
 
   /**
-   * Get namespace info related publisher namespace.<br>Other detail info: <ul><li><i>Required permission</i>: resource=<b>"NAMESPACE:{namespace}:NAMESPACE"</b>, action=2 <b>(READ)</b></li><li><i>Action code</i>: 11305</li><li><i>Returns</i>: Namespace info related publisher namespace</li></ul>
+   * Get namespace info related publisher namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11305&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Namespace info related publisher namespace&lt;/li&gt;&lt;/ul&gt;
    */
   getPublisher(): Promise<IResponseWithSync<NamespacePublisherInfo>> {
     const params = {} as SDKRequestConfig

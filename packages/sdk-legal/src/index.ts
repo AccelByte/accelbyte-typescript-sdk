@@ -4,5 +4,4 @@
  * and restrictions contact your company contract manager.
  */
 export * from './all-public-imports.js'
-export * from './clients/LegalHelper.js'
-export * from './models/Legal.js'
+export * from './custom/index.js'

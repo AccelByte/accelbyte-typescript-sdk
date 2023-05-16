@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const TwitchIapConfigInfo = z.object({
-  namespace: z.string(),
   clientId: z.string().nullish(),
   clientSecret: z.string().nullish(),
+  namespace: z.string(),
   organizationId: z.string().nullish()
 })
 

@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const XblIapConfigInfo = z.object({
-  namespace: z.string(),
-  relyingPartyCert: z.string().nullish(),
   businessPartnerCertFileName: z.string().nullish(),
-  password: z.string().nullish()
+  namespace: z.string(),
+  password: z.string().nullish(),
+  relyingPartyCert: z.string().nullish()
 })
 
 export interface XblIapConfigInfo extends z.TypeOf<typeof XblIapConfigInfo> {}

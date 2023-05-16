@@ -8,8 +8,8 @@ import { z } from 'zod'
 export const PayPalConfig = z.object({
   clientID: z.string().nullish(),
   clientSecret: z.string().nullish(),
-  webHookId: z.string().nullish(),
-  returnUrl: z.string().nullish()
+  returnUrl: z.string().nullish(),
+  webHookId: z.string().nullish()
 })
 
 export interface PayPalConfig extends z.TypeOf<typeof PayPalConfig> {}

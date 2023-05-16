@@ -19,7 +19,7 @@ export class LeaderboardData$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>Get rankings in current week leaderboard.</p>
+   * &lt;p&gt;Get rankings in current week leaderboard.&lt;/p&gt;
    */
   getWeek_ByLeaderboardCode(
     leaderboardCode: string,
@@ -41,7 +41,7 @@ export class LeaderboardData$ {
   }
 
   /**
-   * <p>Get rankings in current month leaderboard.</p>
+   * &lt;p&gt;Get rankings in current month leaderboard.&lt;/p&gt;
    */
   getMonth_ByLeaderboardCode(
     leaderboardCode: string,
@@ -63,7 +63,7 @@ export class LeaderboardData$ {
   }
 
   /**
-   * <p>Get rankings in today leaderboard.</p>
+   * &lt;p&gt;Get rankings in today leaderboard.&lt;/p&gt;
    */
   getToday_ByLeaderboardCode(
     leaderboardCode: string,
@@ -85,7 +85,7 @@ export class LeaderboardData$ {
   }
 
   /**
-   * <p>Get rankings in current season leaderboard.</p>
+   * &lt;p&gt;Get rankings in current season leaderboard.&lt;/p&gt;
    */
   getSeason_ByLeaderboardCode(
     leaderboardCode: string,
@@ -107,7 +107,7 @@ export class LeaderboardData$ {
   }
 
   /**
-   *  <p>Get rankings in an all time leaderboard.</p>
+   *  &lt;p&gt;Get rankings in an all time leaderboard.&lt;/p&gt;
    */
   getAlltime_ByLeaderboardCode(
     leaderboardCode: string,
@@ -151,7 +151,7 @@ export class LeaderboardData$ {
   }
 
   /**
-   *  <p>Get signed url in an all time leaderboard that archived. NOTE: This will be a bulk endpoint to get sign url</p>
+   *  &lt;p&gt;Get signed url in an all time leaderboard that archived. NOTE: This will be a bulk endpoint to get sign url&lt;/p&gt;
    */
   getArchived_ByLeaderboardCode(
     leaderboardCode: string,
@@ -174,7 +174,21 @@ export class LeaderboardData$ {
   }
 
   /**
-   * <p>Get user ranking in leaderboard</p>
+   * Delete user ranking Required permission: NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE] Remove entry with provided userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
+   */
+  deleteUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{leaderboardCode}', leaderboardCode)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
   getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponseWithSync<UserRankingResponse>> {
     const params = {} as SDKRequestConfig
@@ -191,19 +205,5 @@ export class LeaderboardData$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * Delete user ranking Required permission: NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE] Remove entry with provided userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
-   */
-  deleteUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}'
-      .replace('{namespace}', this.namespace)
-      .replace('{leaderboardCode}', leaderboardCode)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.delete(url, { params })
-
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

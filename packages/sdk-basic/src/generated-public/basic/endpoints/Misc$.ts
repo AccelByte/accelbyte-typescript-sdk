@@ -34,7 +34,7 @@ export class Misc$ {
   }
 
   /**
-   * List countries.<br>Other detail info: <ul><li><i>Returns</i>: country code list</li></ul>
+   * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
    */
   getMiscCountries(queryParams?: { lang?: string | null }): Promise<IResponseWithSync<CountryObjectArray>> {
     const params = { lang: 'en', ...queryParams } as SDKRequestConfig
@@ -51,7 +51,7 @@ export class Misc$ {
   }
 
   /**
-   * List languages.<br>Other detail info: <ul><li><i>Returns</i>: language list</li></ul>
+   * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;
    */
   getMiscLanguages(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
@@ -68,7 +68,7 @@ export class Misc$ {
   }
 
   /**
-   * List time zones.<br>Other detail info: <ul><li><i>Returns</i>: time zones</li></ul>
+   * List time zones.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: time zones&lt;/li&gt;&lt;/ul&gt;
    */
   getMiscTimezones(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig

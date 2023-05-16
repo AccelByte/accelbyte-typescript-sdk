@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const PlatformWalletConfigInfo = z.object({
-  id: z.string().nullish(),
-  platform: z.string(),
-  namespace: z.string(),
   allowedBalanceOrigins: z.array(z.string()),
   createdAt: z.string().nullish(),
+  id: z.string().nullish(),
+  namespace: z.string(),
+  platform: z.string(),
   updatedAt: z.string().nullish()
 })
 

@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const StoreUpdate = z.object({
-  title: z.string(),
+  defaultLanguage: z.string().nullish(),
+  defaultRegion: z.string().nullish(),
   description: z.string().nullish(),
   supportedLanguages: z.array(z.string()).nullish(),
   supportedRegions: z.array(z.string()).nullish(),
-  defaultRegion: z.string().nullish(),
-  defaultLanguage: z.string().nullish()
+  title: z.string()
 })
 
 export interface StoreUpdate extends z.TypeOf<typeof StoreUpdate> {}

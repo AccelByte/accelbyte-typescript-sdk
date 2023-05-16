@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const SubscriptionSummary = z.object({
-  id: z.string(),
-  namespace: z.string(),
-  userId: z.string(),
-  itemId: z.string(),
-  sku: z.string().nullish(),
-  status: z.enum(['INIT', 'ACTIVE', 'CANCELLED', 'EXPIRED']),
-  currentPeriodStart: z.string().nullish(),
   currentPeriodEnd: z.string().nullish(),
-  subscribedBy: z.enum(['USER', 'PLATFORM']).nullish()
+  currentPeriodStart: z.string().nullish(),
+  id: z.string(),
+  itemId: z.string(),
+  namespace: z.string(),
+  sku: z.string().nullish(),
+  status: z.enum(['ACTIVE', 'CANCELLED', 'EXPIRED', 'INIT']),
+  subscribedBy: z.enum(['PLATFORM', 'USER']).nullish(),
+  userId: z.string()
 })
 
 export interface SubscriptionSummary extends z.TypeOf<typeof SubscriptionSummary> {}

@@ -2,7 +2,7 @@
   [
     "Session",
     "Session",
-    "session-api.json",
+    "session.json",
     "https://development.accelbyte.io/session/apidocs/api.json"
   ]
 ]

@@ -22,13 +22,13 @@ export class Item$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This API is used to get the item by sku.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with sku</li></ul>
+   * This API is used to get the item by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the item with sku&lt;/li&gt;&lt;/ul&gt;
    */
   getItemsBySku(queryParams: {
-    storeId?: string | null
     sku: string | null
     language?: string | null
     region?: string | null
+    storeId?: string | null
   }): Promise<IResponseWithSync<ItemInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/bySku'.replace('{namespace}', this.namespace)
@@ -44,27 +44,27 @@ export class Item$ {
   }
 
   /**
-   * This API is used to search items by keyword in title, description and long description, It's language constrained, also if item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
+   * This API is used to search items by keyword in title, description and long description, It&#39;s language constrained, also if item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of items&lt;/li&gt;&lt;/ul&gt;
    */
   getItemsSearch(queryParams: {
-    storeId?: string | null
-    language: string | null
     keyword: string | null
+    language: string | null
     itemType?:
       | 'APP'
-      | 'COINS'
-      | 'INGAMEITEM'
       | 'BUNDLE'
       | 'CODE'
-      | 'SUBSCRIPTION'
-      | 'SEASON'
+      | 'COINS'
+      | 'EXTENSION'
+      | 'INGAMEITEM'
+      | 'LOOTBOX'
       | 'MEDIA'
       | 'OPTIONBOX'
-      | 'EXTENSION'
-      | 'LOOTBOX'
-    region?: string | null
-    offset?: number
+      | 'SEASON'
+      | 'SUBSCRIPTION'
     limit?: number
+    offset?: number
+    region?: string | null
+    storeId?: string | null
   }): Promise<IResponseWithSync<ItemPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/search'.replace('{namespace}', this.namespace)
@@ -80,13 +80,13 @@ export class Item$ {
   }
 
   /**
-   * This API is used to get item by appId.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the item with that appId</li></ul>
+   * This API is used to get item by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the item with that appId&lt;/li&gt;&lt;/ul&gt;
    */
   getItemsByAppId(queryParams: {
-    storeId?: string | null
     appId: string | null
     language?: string | null
     region?: string | null
+    storeId?: string | null
   }): Promise<IResponseWithSync<ItemInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/byAppId'.replace('{namespace}', this.namespace)
@@ -102,35 +102,35 @@ export class Item$ {
   }
 
   /**
-   * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: the list of items</li></ul>
+   * This API is used to query items by criteria within a store. If item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of items&lt;/li&gt;&lt;/ul&gt;
    */
   getItemsByCriteria(queryParams?: {
-    storeId?: string | null
-    language?: string | null
-    region?: string | null
+    appType?: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'
+    baseAppId?: string | null
     categoryPath?: string | null
+    features?: string | null
     includeSubCategoryItem?: boolean | null
     itemType?:
       | 'APP'
-      | 'COINS'
-      | 'INGAMEITEM'
       | 'BUNDLE'
       | 'CODE'
-      | 'SUBSCRIPTION'
-      | 'SEASON'
+      | 'COINS'
+      | 'EXTENSION'
+      | 'INGAMEITEM'
+      | 'LOOTBOX'
       | 'MEDIA'
       | 'OPTIONBOX'
-      | 'EXTENSION'
-      | 'LOOTBOX'
-    appType?: 'GAME' | 'SOFTWARE' | 'DLC' | 'DEMO'
-    baseAppId?: string | null
-    tags?: string | null
-    features?: string | null
-    offset?: number
+      | 'SEASON'
+      | 'SUBSCRIPTION'
+    language?: string | null
     limit?: number
-    sortBy?: string | null
+    offset?: number
+    region?: string | null
+    sortBy?: string[]
+    storeId?: string | null
+    tags?: string | null
   }): Promise<IResponseWithSync<ItemPagingSlicedResult>> {
-    const params = { limit: 20, sortBy: 'name:asc,displayOrder:asc', ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, sortBy: ['name:asc', 'displayOrder:asc'], ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -144,13 +144,13 @@ export class Item$ {
   }
 
   /**
-   * This API is used to bulk get locale items. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store items)</li><li><i>Returns</i>: the list of items info</li></ul>
+   * This API is used to bulk get locale items. If item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store items)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store items)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of items info&lt;/li&gt;&lt;/ul&gt;
    */
   getItemsLocaleByIds(queryParams: {
-    storeId?: string | null
     itemIds: string | null
-    region?: string | null
     language?: string | null
+    region?: string | null
+    storeId?: string | null
   }): Promise<IResponseWithSync<ItemInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/locale/byIds'.replace('{namespace}', this.namespace)
@@ -166,11 +166,11 @@ export class Item$ {
   }
 
   /**
-   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store item)</li><li><i>Returns</i>: item data</li></ul>
+   * This API is used to get an item in locale. If item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
    */
   getLocale_ByItemId(
     itemId: string,
-    queryParams?: { storeId?: string | null; region?: string | null; language?: string | null; populateBundle?: boolean | null }
+    queryParams?: { language?: string | null; populateBundle?: boolean | null; region?: string | null; storeId?: string | null }
   ): Promise<IResponseWithSync<PopulatedItemInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/{itemId}/locale'
@@ -188,7 +188,7 @@ export class Item$ {
   }
 
   /**
-   * Get item dynamic data for a published item.<br>Other detail info: <ul><li><i>Returns</i>: item dynamic data</li></ul>
+   * Get item dynamic data for a published item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item dynamic data&lt;/li&gt;&lt;/ul&gt;
    */
   getDynamic_ByItemId(itemId: string): Promise<IResponseWithSync<ItemDynamicDataInfo>> {
     const params = {} as SDKRequestConfig
@@ -207,11 +207,11 @@ export class Item$ {
   }
 
   /**
-   * This API is used to get an app in locale. If app not exist in specific region, default region app will return.<p>Other detail info: <ul><li><i>Optional permission</i>: resource="PREVIEW", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Optional permission</i>: resource="SANDBOX", action=1(CREATE) (user with this permission can view draft store app)</li><li><i>Returns</i>: app data</li></ul>
+   * This API is used to get an app in locale. If app not exist in specific region, default region app will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store app)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store app)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: app data&lt;/li&gt;&lt;/ul&gt;
    */
   getAppLocale_ByItemId(
     itemId: string,
-    queryParams?: { storeId?: string | null; region?: string | null; language?: string | null }
+    queryParams?: { language?: string | null; region?: string | null; storeId?: string | null }
   ): Promise<IResponseWithSync<AppInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/{itemId}/app/locale'

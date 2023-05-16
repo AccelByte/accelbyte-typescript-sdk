@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const PaymentProcessResult = z.object({
-  success: z.boolean(),
   pending: z.boolean(),
+  reason: z.string().nullish(),
   redirectUrl: z.string().nullish(),
-  reason: z.string().nullish()
+  success: z.boolean()
 })
 
 export interface PaymentProcessResult extends z.TypeOf<typeof PaymentProcessResult> {}

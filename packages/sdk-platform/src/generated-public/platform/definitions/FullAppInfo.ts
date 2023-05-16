@@ -9,31 +9,9 @@ import { Requirement } from './Requirement.js'
 import { Slide } from './Slide.js'
 
 export const FullAppInfo = z.object({
-  itemId: z.string(),
-  namespace: z.string(),
   carousel: z.array(Slide).nullish(),
   developer: z.string().nullish(),
-  publisher: z.string().nullish(),
-  websiteUrl: z.string().nullish(),
   forumUrl: z.string().nullish(),
-  platforms: z.array(z.enum(['Windows', 'MacOS', 'Linux', 'IOS', 'Android'])).nullish(),
-  platformRequirements: z.record(z.array(Requirement)).nullish(),
-  localizations: z.record(AppLocalization).nullish(),
-  primaryGenre: z
-    .enum([
-      'Action',
-      'Adventure',
-      'Casual',
-      'FreeToPlay',
-      'Indie',
-      'MassivelyMultiplayer',
-      'Racing',
-      'RPG',
-      'Simulation',
-      'Sports',
-      'Strategy'
-    ])
-    .nullish(),
   genres: z
     .array(
       z.enum([
@@ -43,16 +21,38 @@ export const FullAppInfo = z.object({
         'FreeToPlay',
         'Indie',
         'MassivelyMultiplayer',
-        'Racing',
         'RPG',
+        'Racing',
         'Simulation',
         'Sports',
         'Strategy'
       ])
     )
     .nullish(),
-  players: z.array(z.enum(['Single', 'Multi', 'CrossPlatformMulti', 'MMO', 'Coop', 'LocalCoop'])).nullish(),
-  releaseDate: z.string().nullish()
+  itemId: z.string(),
+  localizations: z.record(AppLocalization).nullish(),
+  namespace: z.string(),
+  platformRequirements: z.record(z.array(Requirement)).nullish(),
+  platforms: z.array(z.enum(['Android', 'IOS', 'Linux', 'MacOS', 'Windows'])).nullish(),
+  players: z.array(z.enum(['Coop', 'CrossPlatformMulti', 'LocalCoop', 'MMO', 'Multi', 'Single'])).nullish(),
+  primaryGenre: z
+    .enum([
+      'Action',
+      'Adventure',
+      'Casual',
+      'FreeToPlay',
+      'Indie',
+      'MassivelyMultiplayer',
+      'RPG',
+      'Racing',
+      'Simulation',
+      'Sports',
+      'Strategy'
+    ])
+    .nullish(),
+  publisher: z.string().nullish(),
+  releaseDate: z.string().nullish(),
+  websiteUrl: z.string().nullish()
 })
 
 export interface FullAppInfo extends z.TypeOf<typeof FullAppInfo> {}

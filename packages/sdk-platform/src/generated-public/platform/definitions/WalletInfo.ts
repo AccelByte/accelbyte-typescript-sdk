@@ -7,19 +7,19 @@ import { z } from 'zod'
 import { TimeLimitedBalance } from './TimeLimitedBalance.js'
 
 export const WalletInfo = z.object({
-  id: z.string(),
-  namespace: z.string(),
-  userId: z.string(),
-  currencyCode: z.string(),
-  currencySymbol: z.string(),
   balance: z.number().int(),
   balanceOrigin: z.string(),
-  timeLimitedBalances: z.array(TimeLimitedBalance).nullish(),
   createdAt: z.string(),
-  updatedAt: z.string(),
+  currencyCode: z.string(),
+  currencySymbol: z.string(),
+  id: z.string(),
+  namespace: z.string(),
+  status: z.enum(['ACTIVE', 'INACTIVE']),
+  timeLimitedBalances: z.array(TimeLimitedBalance).nullish(),
   totalPermanentBalance: z.number().int().nullish(),
   totalTimeLimitedBalance: z.number().int().nullish(),
-  status: z.enum(['ACTIVE', 'INACTIVE'])
+  updatedAt: z.string(),
+  userId: z.string()
 })
 
 export interface WalletInfo extends z.TypeOf<typeof WalletInfo> {}

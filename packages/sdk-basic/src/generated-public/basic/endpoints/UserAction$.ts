@@ -16,7 +16,7 @@ export class UserAction$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This API is used to report a game user.<p>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:ACTION", action=1 (CREATE)</li></ul>
+   * This API is used to report a game user.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ACTION&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
    */
   createActionReport_ByUserId(userId: string, data: UserReportRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

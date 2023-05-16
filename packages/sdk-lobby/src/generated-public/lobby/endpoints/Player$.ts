@@ -16,7 +16,7 @@ export class Player$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required valid user authorization <br/> <br>load blocked players in a namespace based on user id <br/> Action Code: 50101
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;load blocked players in a namespace based on user id &lt;br/&gt; Action Code: 50101
    */
   getPlayerUsersMeBlocked(): Promise<IResponseWithSync<GetAllPlayerBlockedUsersResponse>> {
     const params = {} as SDKRequestConfig
@@ -33,7 +33,7 @@ export class Player$ {
   }
 
   /**
-   * Required valid user authorization <br/> <br>load get players who blocked this player in a namespace based on user id <br/> Action Code: 50101
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;load get players who blocked this player in a namespace based on user id &lt;br/&gt; Action Code: 50101
    */
   getPlayerUsersMeBlockedBy(): Promise<IResponseWithSync<GetAllPlayerBlockedByUsersResponse>> {
     const params = {} as SDKRequestConfig

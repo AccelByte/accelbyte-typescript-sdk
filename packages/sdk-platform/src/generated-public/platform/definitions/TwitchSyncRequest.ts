@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const TwitchSyncRequest = z.object({ gameId: z.string().nullish(), region: z.string().nullish(), language: z.string().nullish() })
+export const TwitchSyncRequest = z.object({ gameId: z.string().nullish(), language: z.string().nullish(), region: z.string().nullish() })
 
 export interface TwitchSyncRequest extends z.TypeOf<typeof TwitchSyncRequest> {}

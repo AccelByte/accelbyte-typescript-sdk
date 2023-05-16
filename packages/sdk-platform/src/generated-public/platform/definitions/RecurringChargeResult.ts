@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const RecurringChargeResult = z.object({ triggered: z.boolean(), code: z.string().nullish(), detail: z.string().nullish() })
+export const RecurringChargeResult = z.object({ code: z.string().nullish(), detail: z.string().nullish(), triggered: z.boolean() })
 
 export interface RecurringChargeResult extends z.TypeOf<typeof RecurringChargeResult> {}

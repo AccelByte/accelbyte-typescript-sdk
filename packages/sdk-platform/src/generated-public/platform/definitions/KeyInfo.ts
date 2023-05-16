@@ -6,16 +6,16 @@
 import { z } from 'zod'
 
 export const KeyInfo = z.object({
-  id: z.string(),
-  namespace: z.string(),
-  keyGroupId: z.string(),
-  value: z.string(),
-  status: z.enum(['ACTIVE', 'ACQUIRED']),
-  keyFile: z.string(),
   acquireOrderNo: z.string().nullish(),
   acquireUserId: z.string().nullish(),
   createdAt: z.string(),
-  updatedAt: z.string()
+  id: z.string(),
+  keyFile: z.string(),
+  keyGroupId: z.string(),
+  namespace: z.string(),
+  status: z.enum(['ACQUIRED', 'ACTIVE']),
+  updatedAt: z.string(),
+  value: z.string()
 })
 
 export interface KeyInfo extends z.TypeOf<typeof KeyInfo> {}

@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const FileUploadUrlInfo = z.object({
-  url: z.string().nullish(),
   accessUrl: z.string().nullish(),
+  contentType: z.string().nullish(),
   method: z.string().nullish(),
-  contentType: z.string().nullish()
+  url: z.string().nullish()
 })
 
 export interface FileUploadUrlInfo extends z.TypeOf<typeof FileUploadUrlInfo> {}

@@ -7,24 +7,24 @@ import { z } from 'zod'
 
 export const HierarchicalCategoryInfo: z.ZodType<HierarchicalCategoryInfo> = z.lazy(() =>
   z.object({
+    categoryPath: z.string(),
+    childCategories: z.array(HierarchicalCategoryInfo),
+    createdAt: z.string(),
+    displayName: z.string(),
     namespace: z.string(),
     parentCategoryPath: z.string(),
-    categoryPath: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-    displayName: z.string(),
-    childCategories: z.array(HierarchicalCategoryInfo),
-    root: z.boolean().nullish()
+    root: z.boolean().nullish(),
+    updatedAt: z.string()
   })
 )
 
 export interface HierarchicalCategoryInfo {
+  categoryPath: string
+  childCategories: HierarchicalCategoryInfo[]
+  createdAt: string
+  displayName: string
   namespace: string
   parentCategoryPath: string
-  categoryPath: string
-  createdAt: string
-  updatedAt: string
-  displayName: string
-  childCategories: HierarchicalCategoryInfo[]
   root?: boolean | null | undefined
+  updatedAt: string
 }

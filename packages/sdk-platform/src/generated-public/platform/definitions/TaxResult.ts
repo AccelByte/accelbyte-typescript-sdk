@@ -7,9 +7,9 @@ import { z } from 'zod'
 
 export const TaxResult = z.object({
   enableTax: z.boolean().nullish(),
-  tax: z.number().int().nullish(),
   formattedTax: z.string().nullish(),
-  state: z.string().nullish()
+  state: z.string().nullish(),
+  tax: z.number().int().nullish()
 })
 
 export interface TaxResult extends z.TypeOf<typeof TaxResult> {}

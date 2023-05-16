@@ -9,8 +9,8 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { LateDiffRequest } from '../definitions/LateDiffRequest'
-import { PingResponse } from '../definitions/PingResponse'
+import { LateDiffRequest } from '../definitions/LateDiffRequest.js'
+import { PingResponse } from '../definitions/PingResponse.js'
 
 export class DiffCalculation$ {
   // @ts-ignore

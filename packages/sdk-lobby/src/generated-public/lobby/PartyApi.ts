@@ -21,7 +21,7 @@ export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required valid user authorization <br/> <br>load personal party data in a namespace based on Party ID <br/> Action Code: 50101
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;load personal party data in a namespace based on Party ID &lt;br/&gt; Action Code: 50101
    */
   async function getPartyParty_ByPartyId(partyId: string): Promise<PartyData> {
     const $ = new Party$(Network.create(requestConfig), namespace, cache)
@@ -31,7 +31,7 @@ export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required valid user authorization <br/> <br>Set party limit, only party leader can call this endpoint.
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;Set party limit, only party leader can call this endpoint.
    */
   async function updateLimitParty_ByPartyId(partyId: string, data: PartyPutLimitSizeRequest): Promise<unknown> {
     const $ = new Party$(Network.create(requestConfig), namespace, cache)
@@ -41,7 +41,7 @@ export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required valid user authorization <br/> <br>update party attributes in a namespace.
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;update party attributes in a namespace.
    */
   async function updateAttributeParty_ByPartyId(partyId: string, data: PartyPutCustomAttributesRequest): Promise<PartyData> {
     const $ = new Party$(Network.create(requestConfig), namespace, cache)

@@ -10,23 +10,23 @@ import { Localization } from './Localization.js'
 import { SectionItem } from './SectionItem.js'
 
 export const FullSectionInfo = z.object({
-  sectionId: z.string(),
-  namespace: z.string(),
-  viewId: z.string().nullish(),
-  viewName: z.string().nullish(),
-  name: z.string(),
-  localizations: z.record(Localization),
   active: z.boolean(),
-  startDate: z.string(),
-  endDate: z.string(),
-  items: z.array(SectionItem).nullish(),
-  itemNamings: z.array(ItemNaming).nullish(),
   createdAt: z.string(),
-  updatedAt: z.string(),
-  rotationType: z.enum(['NONE', 'FIXED_PERIOD', 'CUSTOM']).nullish(),
-  fixedPeriodRotationConfig: FixedPeriodRotationConfig.nullish(),
+  displayOrder: z.number().int().nullish(),
+  endDate: z.string(),
   ext: z.record(z.any()).nullish(),
-  displayOrder: z.number().int().nullish()
+  fixedPeriodRotationConfig: FixedPeriodRotationConfig.nullish(),
+  itemNamings: z.array(ItemNaming).nullish(),
+  items: z.array(SectionItem).nullish(),
+  localizations: z.record(Localization),
+  name: z.string(),
+  namespace: z.string(),
+  rotationType: z.enum(['CUSTOM', 'FIXED_PERIOD', 'NONE']).nullish(),
+  sectionId: z.string(),
+  startDate: z.string(),
+  updatedAt: z.string(),
+  viewId: z.string().nullish(),
+  viewName: z.string().nullish()
 })
 
 export interface FullSectionInfo extends z.TypeOf<typeof FullSectionInfo> {}

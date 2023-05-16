@@ -7,18 +7,18 @@ import { z } from 'zod'
 import { PolicyVersionWithLocalizedVersionObject } from './PolicyVersionWithLocalizedVersionObject.js'
 
 export const RetrieveUserEligibilitiesResponse = z.object({
-  readableId: z.string().nullish(),
-  policyName: z.string(),
-  policyType: z.string(),
-  namespace: z.string(),
+  baseUrls: z.array(z.string()).nullish(),
   countryCode: z.string(),
   countryGroupCode: z.string().nullish(),
-  baseUrls: z.array(z.string()).nullish(),
-  policyVersions: z.array(PolicyVersionWithLocalizedVersionObject).nullish(),
   description: z.string().nullish(),
-  policyId: z.string(),
+  isAccepted: z.boolean(),
   isMandatory: z.boolean(),
-  isAccepted: z.boolean()
+  namespace: z.string(),
+  policyId: z.string(),
+  policyName: z.string(),
+  policyType: z.string(),
+  policyVersions: z.array(PolicyVersionWithLocalizedVersionObject).nullish(),
+  readableId: z.string().nullish()
 })
 
 export interface RetrieveUserEligibilitiesResponse extends z.TypeOf<typeof RetrieveUserEligibilitiesResponse> {}

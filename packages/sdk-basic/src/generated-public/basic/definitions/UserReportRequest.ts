@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const UserReportRequest = z.object({
-  userId: z.string(),
   category: z.string(),
-  subcategory: z.string().nullish(),
   description: z.string().nullish(),
-  gameSessionId: z.string().nullish()
+  gameSessionId: z.string().nullish(),
+  subcategory: z.string().nullish(),
+  userId: z.string()
 })
 
 export interface UserReportRequest extends z.TypeOf<typeof UserReportRequest> {}

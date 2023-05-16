@@ -9,11 +9,11 @@ import { EntitlementRevocation } from './EntitlementRevocation.js'
 import { ItemRevocation } from './ItemRevocation.js'
 
 export const RevocationResult = z.object({
-  id: z.string(),
-  status: z.enum(['SUCCESS', 'FAIL']),
-  itemRevocations: z.array(ItemRevocation).nullish(),
   creditRevocations: z.array(CreditRevocation).nullish(),
-  entitlementRevocations: z.array(EntitlementRevocation).nullish()
+  entitlementRevocations: z.array(EntitlementRevocation).nullish(),
+  id: z.string(),
+  itemRevocations: z.array(ItemRevocation).nullish(),
+  status: z.enum(['FAIL', 'SUCCESS'])
 })
 
 export interface RevocationResult extends z.TypeOf<typeof RevocationResult> {}

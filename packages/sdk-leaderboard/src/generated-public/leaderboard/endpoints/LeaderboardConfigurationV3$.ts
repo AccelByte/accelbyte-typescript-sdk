@@ -16,12 +16,12 @@ export class LeaderboardConfigurationV3$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>This endpoint return all leaderboard configurations</p>
+   * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
    */
   getLeaderboards(queryParams?: {
+    isDeleted?: boolean | null
     limit?: number
     offset?: number
-    isDeleted?: boolean | null
   }): Promise<IResponseWithSync<GetAllLeaderboardConfigsPublicRespV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
@@ -38,7 +38,7 @@ export class LeaderboardConfigurationV3$ {
   }
 
   /**
-   * <p>This endpoint returns a leaderboard configuration</p>
+   * &lt;p&gt;This endpoint returns a leaderboard configuration&lt;/p&gt;
    */
   getLeaderboard_ByLeaderboardCode(leaderboardCode: string): Promise<IResponseWithSync<GetLeaderboardConfigPublicRespV3>> {
     const params = {} as SDKRequestConfig

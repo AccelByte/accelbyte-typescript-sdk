@@ -8,8 +8,8 @@ import { ConditionGroupValidateResult } from './ConditionGroupValidateResult.js'
 
 export const ItemPurchaseConditionValidateResult = z.object({
   itemId: z.string().nullish(),
-  sku: z.string().nullish(),
   purchasable: z.boolean().nullish(),
+  sku: z.string().nullish(),
   validateDetails: z.array(ConditionGroupValidateResult).nullish()
 })
 

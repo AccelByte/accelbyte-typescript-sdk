@@ -7,8 +7,8 @@ import { z } from 'zod'
 import { EntitlementGrant } from './EntitlementGrant.js'
 
 export const BulkEntitlementGrantRequest = z.object({
-  userIds: z.array(z.string()).nullish(),
-  entitlementGrantList: z.array(EntitlementGrant).nullish()
+  entitlementGrantList: z.array(EntitlementGrant).nullish(),
+  userIds: z.array(z.string()).nullish()
 })
 
 export interface BulkEntitlementGrantRequest extends z.TypeOf<typeof BulkEntitlementGrantRequest> {}

@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-dsmcontroller",
-  "version": "1.625.13",
+  "version": "1.627.23",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",
@@ -14,7 +14,8 @@
     "cg:download": "yarn cg download-swaggers --config swaggers.json --swaggersOutput swaggers",
     "cg:generate": "rimraf src/generated-public && yarn cg generate-code --config swaggers.json --swaggersOutput swaggers --output src --snippetOutput ../../../apps/api-explorer-app/src",
     "cg": "ts-node ../codegen/src/cli.ts",
-    "codegen": "yarn cg:download && yarn cg:generate && yarn cg:prettify"
+    "cg-orig": "ts-node ../codegen/src/cli.ts",
+    "codegen": "yarn cg:generate && yarn cg:prettify"
   },
   "devDependencies": {
     "@types/crypto-js": "4.1.0",
@@ -24,8 +25,8 @@
     "typescript": "4.6.4"
   },
   "dependencies": {
-    "@accelbyte/sdk": "2.0.0",
-    "@accelbyte/validator": "0.2.1",
+    "@accelbyte/sdk": "2.0.1",
+    "@accelbyte/validator": "0.2.2",
     "axios": "1.3.6",
     "buffer": "6.0.3",
     "crypto-js": "4.1.1",

@@ -7,20 +7,20 @@ import { z } from 'zod'
 import { OrderCreationOptions } from './OrderCreationOptions.js'
 
 export const AdminOrderCreate = z.object({
-  itemId: z.string(),
-  quantity: z.number().int(),
-  price: z.number().int(),
-  discountedPrice: z.number().int(),
   currencyCode: z.string(),
-  region: z.string(),
-  language: z.string().nullish(),
-  sectionId: z.string().nullish(),
-  returnUrl: z.string().nullish(),
+  currencyNamespace: z.string().nullish(),
+  discountedPrice: z.number().int(),
   ext: z.record(z.any()).nullish(),
-  sandbox: z.boolean().nullish(),
-  platform: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Nintendo', 'Other']).nullish(),
+  itemId: z.string(),
+  language: z.string().nullish(),
   options: OrderCreationOptions.nullish(),
-  currencyNamespace: z.string().nullish()
+  platform: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'Xbox']).nullish(),
+  price: z.number().int(),
+  quantity: z.number().int(),
+  region: z.string(),
+  returnUrl: z.string().nullish(),
+  sandbox: z.boolean().nullish(),
+  sectionId: z.string().nullish()
 })
 
 export interface AdminOrderCreate extends z.TypeOf<typeof AdminOrderCreate> {}

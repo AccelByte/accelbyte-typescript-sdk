@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const Requirement = z.object({
+  additionals: z.string().nullish(),
+  directXVersion: z.string().nullish(),
+  diskSpace: z.string().nullish(),
+  graphics: z.string().nullish(),
   label: z.string(),
   osVersion: z.string().nullish(),
   processor: z.string().nullish(),
   ram: z.string().nullish(),
-  graphics: z.string().nullish(),
-  directXVersion: z.string().nullish(),
-  diskSpace: z.string().nullish(),
-  soundCard: z.string().nullish(),
-  additionals: z.string().nullish()
+  soundCard: z.string().nullish()
 })
 
 export interface Requirement extends z.TypeOf<typeof Requirement> {}

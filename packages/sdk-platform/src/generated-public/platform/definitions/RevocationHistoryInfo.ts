@@ -11,20 +11,20 @@ import { RevocationError } from './RevocationError.js'
 import { RevokeEntry } from './RevokeEntry.js'
 
 export const RevocationHistoryInfo = z.object({
-  id: z.string().nullish(),
-  namespace: z.string().nullish(),
-  userId: z.string().nullish(),
-  meta: z.record(z.any()).nullish(),
-  source: z.string().nullish(),
-  status: z.enum(['SUCCESS', 'FAIL']).nullish(),
-  revokeEntries: z.array(RevokeEntry).nullish(),
-  itemRevocations: z.array(ItemRevocation).nullish(),
+  createdAt: z.string().nullish(),
   creditRevocations: z.array(CreditRevocation).nullish(),
   entitlementRevocations: z.array(EntitlementRevocation).nullish(),
+  id: z.string().nullish(),
+  itemRevocations: z.array(ItemRevocation).nullish(),
+  meta: z.record(z.any()).nullish(),
+  namespace: z.string().nullish(),
   revocationErrors: z.array(RevocationError).nullish(),
-  createdAt: z.string().nullish(),
+  revokeEntries: z.array(RevokeEntry).nullish(),
+  source: z.string().nullish(),
+  status: z.enum(['FAIL', 'SUCCESS']).nullish(),
+  transactionId: z.string().nullish(),
   updatedAt: z.string().nullish(),
-  transactionId: z.string().nullish()
+  userId: z.string().nullish()
 })
 
 export interface RevocationHistoryInfo extends z.TypeOf<typeof RevocationHistoryInfo> {}

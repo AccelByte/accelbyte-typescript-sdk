@@ -20,17 +20,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>Requires valid user access token and password
-   */
-  async function postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<RequestDeleteResponse> {
-    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.postDeletion_ByUserId(userId, data)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
-  /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   async function deleteDeletion_ByUserId(userId: string): Promise<unknown> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache)
@@ -40,7 +30,17 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Requires valid user access token</p>
+   * &lt;p&gt;Requires valid user access token and password
+   */
+  async function postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<RequestDeleteResponse> {
+    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.postDeletion_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   async function getDeletionsStatus_ByUserId(userId: string): Promise<DeletionStatus> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache)
@@ -50,8 +50,8 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
-    postDeletion_ByUserId,
     deleteDeletion_ByUserId,
+    postDeletion_ByUserId,
     getDeletionsStatus_ByUserId
   }
 }

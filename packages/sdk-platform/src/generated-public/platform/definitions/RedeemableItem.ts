@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const RedeemableItem = z.object({
+  extraSubscriptionDays: z.number().int().nullish(),
   itemId: z.string(),
   itemName: z.string(),
-  quantity: z.number().int().nullish(),
-  extraSubscriptionDays: z.number().int().nullish()
+  quantity: z.number().int().nullish()
 })
 
 export interface RedeemableItem extends z.TypeOf<typeof RedeemableItem> {}

@@ -7,23 +7,23 @@ import { z } from 'zod'
 import { RedeemableItem } from './RedeemableItem.js'
 
 export const CampaignInfo = z.object({
-  id: z.string(),
-  type: z.enum(['REDEMPTION']),
-  namespace: z.string(),
-  name: z.string(),
-  description: z.string().nullish(),
-  tags: z.array(z.string()).nullish(),
-  status: z.enum(['ACTIVE', 'INACTIVE']),
-  redeemStart: z.string().nullish(),
-  redeemEnd: z.string().nullish(),
-  maxRedeemCountPerCode: z.number().int(),
-  maxRedeemCountPerCodePerUser: z.number().int(),
-  maxRedeemCountPerCampaignPerUser: z.number().int(),
-  maxSaleCount: z.number().int(),
-  redeemType: z.enum(['ITEM']),
-  items: z.array(RedeemableItem).nullish(),
   boothName: z.string(),
   createdAt: z.string(),
+  description: z.string().nullish(),
+  id: z.string(),
+  items: z.array(RedeemableItem).nullish(),
+  maxRedeemCountPerCampaignPerUser: z.number().int(),
+  maxRedeemCountPerCode: z.number().int(),
+  maxRedeemCountPerCodePerUser: z.number().int(),
+  maxSaleCount: z.number().int(),
+  name: z.string(),
+  namespace: z.string(),
+  redeemEnd: z.string().nullish(),
+  redeemStart: z.string().nullish(),
+  redeemType: z.enum(['ITEM']),
+  status: z.enum(['ACTIVE', 'INACTIVE']),
+  tags: z.array(z.string()).nullish(),
+  type: z.enum(['REDEMPTION']),
   updatedAt: z.string()
 })
 

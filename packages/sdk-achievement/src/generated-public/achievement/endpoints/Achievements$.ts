@@ -16,17 +16,26 @@ export class Achievements$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   getAchievements(queryParams: {
-    tags?: string[]
-    sortBy?: string | null
     language: string | null
+    global?: boolean | null
     limit?: number
     offset?: number
-    global?: boolean | null
+    sortBy?:
+      | 'listOrder'
+      | 'listOrder:asc'
+      | 'listOrder:desc'
+      | 'createdAt'
+      | 'createdAt:asc'
+      | 'createdAt:desc'
+      | 'updatedAt'
+      | 'updatedAt:asc'
+      | 'updatedAt:desc'
+    tags?: string[]
   }): Promise<IResponseWithSync<PublicAchievementsResponse>> {
-    const params = { sortBy: 'listOrder:asc', limit: 10, ...queryParams } as SDKRequestConfig
+    const params = { limit: 10, sortBy: 'listOrder:asc', ...queryParams } as SDKRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/achievements'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -40,7 +49,7 @@ export class Achievements$ {
   }
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   getAchievement_ByAchievementCode(
     achievementCode: string,
@@ -48,8 +57,8 @@ export class Achievements$ {
   ): Promise<IResponseWithSync<PublicAchievementResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/achievements/{achievementCode}'
-      .replace('{namespace}', this.namespace)
       .replace('{achievementCode}', achievementCode)
+      .replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, PublicAchievementResponse, 'PublicAchievementResponse')

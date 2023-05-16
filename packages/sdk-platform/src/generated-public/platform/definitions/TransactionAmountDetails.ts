@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const TransactionAmountDetails = z.object({
-  origin: z.string().nullish(),
   amount: z.number().int().nullish(),
-  walletId: z.string().nullish(),
-  expireAt: z.string().nullish()
+  expireAt: z.string().nullish(),
+  origin: z.string().nullish(),
+  walletId: z.string().nullish()
 })
 
 export interface TransactionAmountDetails extends z.TypeOf<typeof TransactionAmountDetails> {}

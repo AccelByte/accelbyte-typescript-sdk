@@ -7,17 +7,19 @@
  * AUTO GENERATED
  */
 
-import { MessagesApi } from './lobby/MessagesApi.js'
+import { LobbyOperationsApi } from './lobby/LobbyOperationsApi.js'
 import { FriendsApi } from './lobby/FriendsApi.js'
 import { NotificationApi } from './lobby/NotificationApi.js'
+import { AdminApi } from './lobby/AdminApi.js'
 import { PartyApi } from './lobby/PartyApi.js'
 import { PlayerApi } from './lobby/PlayerApi.js'
 import { PresenceApi } from './lobby/PresenceApi.js'
 
 const apis = {
-  MessagesApi,
+  LobbyOperationsApi,
   FriendsApi,
   NotificationApi,
+  AdminApi,
   PartyApi,
   PlayerApi,
   PresenceApi

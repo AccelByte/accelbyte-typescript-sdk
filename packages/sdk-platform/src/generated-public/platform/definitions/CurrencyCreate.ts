@@ -7,10 +7,10 @@ import { z } from 'zod'
 
 export const CurrencyCreate = z.object({
   currencyCode: z.string(),
-  localizationDescriptions: z.record(z.string()).nullish(),
   currencySymbol: z.string().nullish(),
   currencyType: z.enum(['REAL', 'VIRTUAL']).nullish(),
-  decimals: z.number().int().nullish()
+  decimals: z.number().int().nullish(),
+  localizationDescriptions: z.record(z.string()).nullish()
 })
 
 export interface CurrencyCreate extends z.TypeOf<typeof CurrencyCreate> {}

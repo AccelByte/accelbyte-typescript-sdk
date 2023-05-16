@@ -8,9 +8,9 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { DiffCalculation$ } from './endpoints/DiffCalculation$'
-import { LateDiffRequest } from './definitions/LateDiffRequest'
-import { PingResponse } from './definitions/PingResponse'
+import { DiffCalculation$ } from './endpoints/DiffCalculation$.js'
+import { LateDiffRequest } from './definitions/LateDiffRequest.js'
+import { PingResponse } from './definitions/PingResponse.js'
 
 export function DiffCalculationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()

@@ -7,10 +7,10 @@ import { z } from 'zod'
 import { CreditRequest } from './CreditRequest.js'
 
 export const CreditResult = z.object({
-  userId: z.string().nullish(),
-  currencyCode: z.string().nullish(),
   creditRequest: CreditRequest.nullish(),
-  reason: z.string().nullish()
+  currencyCode: z.string().nullish(),
+  reason: z.string().nullish(),
+  userId: z.string().nullish()
 })
 
 export interface CreditResult extends z.TypeOf<typeof CreditResult> {}

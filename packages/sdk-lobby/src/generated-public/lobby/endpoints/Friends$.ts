@@ -26,7 +26,7 @@ export class Friends$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
-  getFriendsMe(queryParams?: { limit?: string | null; offset?: string | null }): Promise<IResponseWithSync<GetUserFriendsResponseArray>> {
+  getFriendsMe(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetUserFriendsResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -158,7 +158,7 @@ export class Friends$ {
   }
 
   /**
-   * Required permission : <code>NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]</code> with scope <code>social</code> <br>friends request in a namespace.
+   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;friends request in a namespace.
    */
   createAddBulkFriend_ByUserId(userId: string, data: BulkAddFriendsRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

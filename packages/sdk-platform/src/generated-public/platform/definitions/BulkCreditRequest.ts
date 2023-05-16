@@ -7,8 +7,8 @@ import { z } from 'zod'
 import { CreditRequest } from './CreditRequest.js'
 
 export const BulkCreditRequest = z.object({
-  currencyCode: z.string().nullish(),
   creditRequest: CreditRequest.nullish(),
+  currencyCode: z.string().nullish(),
   userIds: z.array(z.string()).nullish()
 })
 

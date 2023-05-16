@@ -7,14 +7,14 @@ import { z } from 'zod'
 import { RewardCondition } from './RewardCondition.js'
 
 export const RewardUpdate = z.object({
-  rewardCode: z.string(),
   description: z.string().nullish(),
   eventTopic: z.string(),
-  rewardConditions: z.array(RewardCondition).nullish(),
   maxAwarded: z.number().int().nullish(),
   maxAwardedPerUser: z.number().int().nullish(),
-  userIdExpression: z.string().nullish(),
-  namespaceExpression: z.string().nullish()
+  namespaceExpression: z.string().nullish(),
+  rewardCode: z.string(),
+  rewardConditions: z.array(RewardCondition).nullish(),
+  userIdExpression: z.string().nullish()
 })
 
 export interface RewardUpdate extends z.TypeOf<typeof RewardUpdate> {}

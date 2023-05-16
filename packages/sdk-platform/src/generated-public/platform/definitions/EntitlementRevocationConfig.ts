@@ -8,8 +8,8 @@ import { ConsumableEntitlementRevocationConfig } from './ConsumableEntitlementRe
 import { DurableEntitlementRevocationConfig } from './DurableEntitlementRevocationConfig.js'
 
 export const EntitlementRevocationConfig = z.object({
-  durable: DurableEntitlementRevocationConfig.nullish(),
-  consumable: ConsumableEntitlementRevocationConfig.nullish()
+  consumable: ConsumableEntitlementRevocationConfig.nullish(),
+  durable: DurableEntitlementRevocationConfig.nullish()
 })
 
 export interface EntitlementRevocationConfig extends z.TypeOf<typeof EntitlementRevocationConfig> {}

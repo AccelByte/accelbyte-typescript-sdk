@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const Localization = z.object({
-  title: z.string(),
   description: z.string().nullish(),
+  localExt: z.record(z.any()).nullish(),
   longDescription: z.string().nullish(),
-  localExt: z.record(z.any()).nullish()
+  title: z.string()
 })
 
 export interface Localization extends z.TypeOf<typeof Localization> {}

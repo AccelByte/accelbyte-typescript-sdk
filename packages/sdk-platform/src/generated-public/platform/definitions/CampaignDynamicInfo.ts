@@ -7,10 +7,10 @@ import { z } from 'zod'
 
 export const CampaignDynamicInfo = z.object({
   availableSaleCount: z.number().int(),
-  quantity: z.number().int(),
-  saleCount: z.number().int(),
   lastBatchNo: z.number().int(),
-  remainder: z.number().int()
+  quantity: z.number().int(),
+  remainder: z.number().int(),
+  saleCount: z.number().int()
 })
 
 export interface CampaignDynamicInfo extends z.TypeOf<typeof CampaignDynamicInfo> {}

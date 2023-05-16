@@ -8,7 +8,7 @@ import { z } from 'zod'
 export const UserVerificationRequestV3 = z.object({
   code: z.string(),
   contactType: z.string(),
-  languageTag: z.string(),
+  languageTag: z.string().nullish(),
   validateOnly: z.boolean().nullish()
 })
 

@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export const AvailableComparison = z.object({
   comparison: z
-    .enum(['is', 'isNot', 'isGreaterThan', 'isGreaterThanOrEqual', 'isLessThan', 'isLessThanOrEqual', 'includes', 'excludes'])
+    .enum(['excludes', 'includes', 'is', 'isGreaterThan', 'isGreaterThanOrEqual', 'isLessThan', 'isLessThanOrEqual', 'isNot'])
     .nullish(),
   text: z.string().nullish()
 })

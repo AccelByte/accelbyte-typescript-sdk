@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { PaymentOrder } from './PaymentOrder.js'
 
-export const PaymentOrderSyncResult = z.object({ paymentOrders: z.array(PaymentOrder).nullish(), nextEvaluatedKey: z.string().nullish() })
+export const PaymentOrderSyncResult = z.object({ nextEvaluatedKey: z.string().nullish(), paymentOrders: z.array(PaymentOrder).nullish() })
 
 export interface PaymentOrderSyncResult extends z.TypeOf<typeof PaymentOrderSyncResult> {}

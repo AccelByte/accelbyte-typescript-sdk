@@ -11,6 +11,7 @@ import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ChatMessageResponseArray } from '../definitions/ChatMessageResponseArray.js'
 import { MuteUserRequest } from '../definitions/MuteUserRequest.js'
+import { MutedTopicResponseArray } from '../definitions/MutedTopicResponseArray.js'
 import { PublicBanTopicMembersRequest } from '../definitions/PublicBanTopicMembersRequest.js'
 import { PublicBanTopicMembersResponse } from '../definitions/PublicBanTopicMembersResponse.js'
 import { PublicUnbanTopicMembersRequest } from '../definitions/PublicUnbanTopicMembersRequest.js'
@@ -20,6 +21,23 @@ import { UnmuteUserRequest } from '../definitions/UnmuteUserRequest.js'
 export class Topic$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+
+  /**
+   * get chat muted topics in a namespace.
+   */
+  getMuted(): Promise<IResponseWithSync<MutedTopicResponseArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/chat/public/namespaces/{namespace}/muted'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, MutedTopicResponseArray, 'MutedTopicResponseArray')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
 
   /**
    * get chat list of topic in a namespace.

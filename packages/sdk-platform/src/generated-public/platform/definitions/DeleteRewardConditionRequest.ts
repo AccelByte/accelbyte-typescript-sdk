@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const DeleteRewardConditionRequest = z.object({ userId: z.string().nullish(), conditionName: z.string().nullish() })
+export const DeleteRewardConditionRequest = z.object({ conditionName: z.string().nullish(), userId: z.string().nullish() })
 
 export interface DeleteRewardConditionRequest extends z.TypeOf<typeof DeleteRewardConditionRequest> {}

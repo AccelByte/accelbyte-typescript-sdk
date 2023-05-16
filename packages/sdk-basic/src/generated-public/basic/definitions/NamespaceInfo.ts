@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const NamespaceInfo = z.object({
-  namespace: z.string(),
-  displayName: z.string(),
-  status: z.enum(['ACTIVE', 'INACTIVE', 'DELETED']).nullish(),
-  parentNamespace: z.string().nullish(),
   clientId: z.string().nullish(),
   createdAt: z.string().nullish(),
+  displayName: z.string(),
+  namespace: z.string(),
+  parentNamespace: z.string().nullish(),
+  status: z.enum(['ACTIVE', 'DELETED', 'INACTIVE']).nullish(),
   updatedAt: z.string().nullish()
 })
 

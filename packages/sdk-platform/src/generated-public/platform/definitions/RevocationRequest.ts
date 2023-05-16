@@ -7,10 +7,10 @@ import { z } from 'zod'
 import { RevokeEntry } from './RevokeEntry.js'
 
 export const RevocationRequest = z.object({
+  meta: z.record(z.any()).nullish(),
   revokeEntries: z.array(RevokeEntry).nullish(),
   source: z.enum(['DLC', 'ORDER', 'OTHER']).nullish(),
-  transactionId: z.string().nullish(),
-  meta: z.record(z.any()).nullish()
+  transactionId: z.string().nullish()
 })
 
 export interface RevocationRequest extends z.TypeOf<typeof RevocationRequest> {}

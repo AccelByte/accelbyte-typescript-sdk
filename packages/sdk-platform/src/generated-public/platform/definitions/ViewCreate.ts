@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { Localization } from './Localization.js'
 
-export const ViewCreate = z.object({ name: z.string(), displayOrder: z.number().int(), localizations: z.record(Localization) })
+export const ViewCreate = z.object({ displayOrder: z.number().int(), localizations: z.record(Localization), name: z.string() })
 
 export interface ViewCreate extends z.TypeOf<typeof ViewCreate> {}

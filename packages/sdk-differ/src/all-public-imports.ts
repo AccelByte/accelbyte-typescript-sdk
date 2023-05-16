@@ -3,9 +3,9 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-export * from './generated-public/differ/endpoints/DiffCalculation$'
-export * from './generated-public/differ/DiffCalculationApi'
-export * from './generated-public/Differ'
-export * from './generated-public/differ/definitions/LateDiffRequest'
-export * from './generated-public/differ/definitions/PingResponse'
-export * from './generated-public/differ/definitions/Error'
+export * from './generated-public/differ/endpoints/DiffCalculation$.js'
+export * from './generated-public/differ/DiffCalculationApi.js'
+export * from './generated-public/Differ.js'
+export * from './generated-public/differ/definitions/LateDiffRequest.js'
+export * from './generated-public/differ/definitions/PingResponse.js'
+export * from './generated-public/differ/definitions/Error.js'

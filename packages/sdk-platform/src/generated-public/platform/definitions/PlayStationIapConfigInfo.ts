@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const PlayStationIapConfigInfo = z.object({ namespace: z.string(), environment: z.string().nullish() })
+export const PlayStationIapConfigInfo = z.object({ environment: z.string().nullish(), namespace: z.string() })
 
 export interface PlayStationIapConfigInfo extends z.TypeOf<typeof PlayStationIapConfigInfo> {}

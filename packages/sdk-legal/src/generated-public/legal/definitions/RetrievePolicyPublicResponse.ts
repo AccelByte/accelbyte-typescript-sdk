@@ -7,24 +7,24 @@ import { z } from 'zod'
 import { PolicyVersionWithLocalizedVersionObject } from './PolicyVersionWithLocalizedVersionObject.js'
 
 export const RetrievePolicyPublicResponse = z.object({
-  id: z.string(),
-  createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
-  readableId: z.string().nullish(),
   basePolicyId: z.string(),
-  policyName: z.string(),
-  policyType: z.string(),
-  namespace: z.string(),
+  baseUrls: z.array(z.string()).nullish(),
   countryCode: z.string(),
   countryGroupCode: z.string().nullish(),
-  baseUrls: z.array(z.string()).nullish(),
-  shouldNotifyOnUpdate: z.boolean(),
-  policyVersions: z.array(PolicyVersionWithLocalizedVersionObject).nullish(),
+  createdAt: z.string().nullish(),
   description: z.string().nullish(),
-  tags: z.array(z.string()).nullish(),
-  isMandatory: z.boolean(),
+  id: z.string(),
   isDefaultOpted: z.boolean(),
-  isDefaultSelection: z.boolean()
+  isDefaultSelection: z.boolean(),
+  isMandatory: z.boolean(),
+  namespace: z.string(),
+  policyName: z.string(),
+  policyType: z.string(),
+  policyVersions: z.array(PolicyVersionWithLocalizedVersionObject).nullish(),
+  readableId: z.string().nullish(),
+  shouldNotifyOnUpdate: z.boolean(),
+  tags: z.array(z.string()).nullish(),
+  updatedAt: z.string().nullish()
 })
 
 export interface RetrievePolicyPublicResponse extends z.TypeOf<typeof RetrievePolicyPublicResponse> {}

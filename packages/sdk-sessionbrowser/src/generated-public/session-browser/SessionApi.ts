@@ -32,15 +32,15 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getGamesession(queryParams: {
     session_type: string | null
-    user_id?: string | null
     game_mode?: string | null
     game_version?: string | null
     joinable?: string | null
-    match_id?: string | null
+    limit?: number
     match_exist?: string | null
+    match_id?: string | null
+    offset?: number
     server_status?: string | null
-    offset?: string | null
-    limit?: string | null
+    user_id?: string | null
   }): Promise<SessionQueryResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getGamesession(queryParams)
@@ -79,6 +79,16 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE] Required scope: social Delete the session (p2p) by session ID
+   */
+  async function deleteGamesession_BySessionId(sessionID: string): Promise<SessionResponse> {
+    const $ = new Session$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.deleteGamesession_BySessionId(sessionID)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Get the session by session ID
    */
   async function getGamesession_BySessionId(sessionID: string): Promise<SessionResponse> {
@@ -94,16 +104,6 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function updateGamesession_BySessionId(sessionID: string, data: UpdateSessionRequest): Promise<SessionResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
     const resp = await $.updateGamesession_BySessionId(sessionID, data)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
-  /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE] Required scope: social Delete the session (p2p) by session ID
-   */
-  async function deleteGamesession_BySessionId(sessionID: string): Promise<SessionResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.deleteGamesession_BySessionId(sessionID)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -163,9 +163,9 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createGamesession,
     getGamesessionBulk,
     getRecentplayer_ByUserId,
+    deleteGamesession_BySessionId,
     getGamesession_BySessionId,
     updateGamesession_BySessionId,
-    deleteGamesession_BySessionId,
     createJoin_BySessionId,
     createPlayer_BySessionId,
     deleteLocald_BySessionId,

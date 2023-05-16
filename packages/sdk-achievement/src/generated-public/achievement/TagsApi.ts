@@ -19,13 +19,13 @@ export function TagsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function getTags(queryParams?: {
-    name?: string | null
-    sortBy?: string | null
     limit?: number
+    name?: string | null
     offset?: number
+    sortBy?: string | null
   }): Promise<PaginatedTagResponse> {
     const $ = new Tags$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getTags(queryParams)

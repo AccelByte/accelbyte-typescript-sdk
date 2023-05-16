@@ -8,37 +8,37 @@ import { AdditionalData } from './AdditionalData.js'
 import { CurrencySummary } from './CurrencySummary.js'
 
 export const Transaction = z.object({
-  txId: z.string().nullish(),
+  additionalData: AdditionalData.nullish(),
   amount: z.number().int().nullish(),
-  tax: z.number().int().nullish(),
-  vat: z.number().int().nullish(),
-  salesTax: z.number().int().nullish(),
-  paymentProviderFee: z.number().int().nullish(),
-  paymentMethodFee: z.number().int().nullish(),
   currency: CurrencySummary.nullish(),
+  extMessage: z.string().nullish(),
+  extStatusCode: z.string().nullish(),
+  extTxId: z.string().nullish(),
+  merchantId: z.string().nullish(),
+  notified: z.boolean().nullish(),
+  paymentMethod: z.string().nullish(),
+  paymentMethodFee: z.number().int().nullish(),
+  paymentProviderFee: z.number().int().nullish(),
+  provider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']).nullish(),
+  salesTax: z.number().int().nullish(),
+  status: z.enum(['FAILED', 'FINISHED']).nullish(),
+  tax: z.number().int().nullish(),
+  txEndTime: z.string().nullish(),
+  txId: z.string().nullish(),
   type: z
     .enum([
       'AUTHORISATION',
       'CHARGE',
-      'CHARGE_FAILED',
-      'NOTIFICATION_OF_CHARGEBACK',
-      'REQUEST_FOR_INFORMATION',
       'CHARGEBACK',
       'CHARGEBACK_REVERSED',
+      'CHARGE_FAILED',
+      'NOTIFICATION_OF_CHARGEBACK',
       'REFUND',
-      'REFUND_FAILED'
+      'REFUND_FAILED',
+      'REQUEST_FOR_INFORMATION'
     ])
     .nullish(),
-  status: z.enum(['FINISHED', 'FAILED']).nullish(),
-  provider: z.enum(['WALLET', 'XSOLLA', 'ADYEN', 'STRIPE', 'CHECKOUT', 'ALIPAY', 'WXPAY', 'PAYPAL']).nullish(),
-  paymentMethod: z.string().nullish(),
-  merchantId: z.string().nullish(),
-  extTxId: z.string().nullish(),
-  extStatusCode: z.string().nullish(),
-  extMessage: z.string().nullish(),
-  txEndTime: z.string().nullish(),
-  additionalData: AdditionalData.nullish(),
-  notified: z.boolean().nullish()
+  vat: z.number().int().nullish()
 })
 
 export interface Transaction extends z.TypeOf<typeof Transaction> {}

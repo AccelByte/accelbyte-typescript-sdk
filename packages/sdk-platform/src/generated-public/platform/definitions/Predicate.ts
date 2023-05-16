@@ -6,14 +6,14 @@
 import { z } from 'zod'
 
 export const Predicate = z.object({
+  anyOf: z.number().int().nullish(),
+  comparison: z
+    .enum(['excludes', 'includes', 'is', 'isGreaterThan', 'isGreaterThanOrEqual', 'isLessThan', 'isLessThanOrEqual', 'isNot'])
+    .nullish(),
   name: z.string().nullish(),
   predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate']).nullish(),
-  comparison: z
-    .enum(['is', 'isNot', 'isGreaterThan', 'isGreaterThanOrEqual', 'isLessThan', 'isLessThanOrEqual', 'includes', 'excludes'])
-    .nullish(),
-  anyOf: z.number().int().nullish(),
-  values: z.array(z.string()).nullish(),
-  value: z.string().nullish()
+  value: z.string().nullish(),
+  values: z.array(z.string()).nullish()
 })
 
 export interface Predicate extends z.TypeOf<typeof Predicate> {}

@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { DebitResult } from './DebitResult.js'
 
 export const BulkDebitResult = z.object({
-  successList: z.array(DebitResult).nullish(),
   failList: z.array(DebitResult).nullish(),
-  status: z.enum(['SUCCESS', 'FAIL', 'PARTIAL_SUCCESS']).nullish()
+  status: z.enum(['FAIL', 'PARTIAL_SUCCESS', 'SUCCESS']).nullish(),
+  successList: z.array(DebitResult).nullish()
 })
 
 export interface BulkDebitResult extends z.TypeOf<typeof BulkDebitResult> {}

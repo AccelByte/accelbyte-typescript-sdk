@@ -6,17 +6,17 @@
 import { z } from 'zod'
 
 export const StoreInfo = z.object({
-  storeId: z.string(),
-  namespace: z.string(),
-  title: z.string(),
+  createdAt: z.string(),
+  defaultLanguage: z.string(),
+  defaultRegion: z.string(),
   description: z.string().nullish(),
+  namespace: z.string(),
   published: z.boolean(),
+  publishedTime: z.string().nullish(),
+  storeId: z.string(),
   supportedLanguages: z.array(z.string()),
   supportedRegions: z.array(z.string()),
-  defaultRegion: z.string(),
-  defaultLanguage: z.string(),
-  publishedTime: z.string().nullish(),
-  createdAt: z.string(),
+  title: z.string(),
   updatedAt: z.string()
 })
 

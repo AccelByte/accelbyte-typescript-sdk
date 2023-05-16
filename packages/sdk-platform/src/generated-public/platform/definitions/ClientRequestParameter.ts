@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const ClientRequestParameter = z.object({
-  region: z.string().nullish(),
+  currencyCode: z.string().nullish(),
   language: z.string().nullish(),
   price: z.number().nullish(),
-  currencyCode: z.string().nullish()
+  region: z.string().nullish()
 })
 
 export interface ClientRequestParameter extends z.TypeOf<typeof ClientRequestParameter> {}

@@ -3,8 +3,8 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-export * from './generated-public/game-telemetry/endpoints/Telemetry$.js'
-export * from './generated-public/game-telemetry/TelemetryApi.js'
+export * from './generated-public/game-telemetry/endpoints/GametelemetryOperations$.js'
+export * from './generated-public/game-telemetry/GametelemetryOperationsApi.js'
 export * from './generated-public/GameTelemetry.js'
 export * from './generated-public/game-telemetry/definitions/HttpValidationError.js'
 export * from './generated-public/game-telemetry/definitions/TelemetryBody.js'

@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const ADtoObjectForEqu8UserStatus = z.object({
-  userId: z.string().nullish(),
-  actionId: z.number().int().nullish(),
   actionComment: z.string().nullish(),
-  when: z.string().nullish(),
-  expires: z.string().nullish()
+  actionId: z.number().int().nullish(),
+  expires: z.string().nullish(),
+  userId: z.string().nullish(),
+  when: z.string().nullish()
 })
 
 export interface ADtoObjectForEqu8UserStatus extends z.TypeOf<typeof ADtoObjectForEqu8UserStatus> {}

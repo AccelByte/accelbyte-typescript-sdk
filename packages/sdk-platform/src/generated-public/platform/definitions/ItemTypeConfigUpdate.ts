@@ -7,9 +7,9 @@ import { z } from 'zod'
 
 export const ItemTypeConfigUpdate = z.object({
   clazz: z.string().nullish(),
+  dryRun: z.boolean().nullish(),
   fulfillmentUrl: z.string(),
-  purchaseConditionUrl: z.string().nullish(),
-  dryRun: z.boolean().nullish()
+  purchaseConditionUrl: z.string().nullish()
 })
 
 export interface ItemTypeConfigUpdate extends z.TypeOf<typeof ItemTypeConfigUpdate> {}

@@ -6,13 +6,13 @@
 import { z } from 'zod'
 
 export const FullCategoryInfo = z.object({
-  namespace: z.string(),
-  parentCategoryPath: z.string(),
   categoryPath: z.string(),
   createdAt: z.string(),
-  updatedAt: z.string(),
   localizationDisplayNames: z.record(z.string()),
-  root: z.boolean().nullish()
+  namespace: z.string(),
+  parentCategoryPath: z.string(),
+  root: z.boolean().nullish(),
+  updatedAt: z.string()
 })
 
 export interface FullCategoryInfo extends z.TypeOf<typeof FullCategoryInfo> {}

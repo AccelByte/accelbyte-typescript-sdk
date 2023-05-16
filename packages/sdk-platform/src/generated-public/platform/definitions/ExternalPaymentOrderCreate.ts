@@ -6,30 +6,30 @@
 import { z } from 'zod'
 
 export const ExternalPaymentOrderCreate = z.object({
-  extOrderNo: z.string(),
-  sku: z.string().nullish(),
-  extUserId: z.string().nullish(),
-  price: z.number().int(),
-  title: z.string(),
-  description: z.string(),
-  itemType: z
-    .enum(['APP', 'COINS', 'INGAMEITEM', 'BUNDLE', 'CODE', 'SUBSCRIPTION', 'SEASON', 'MEDIA', 'OPTIONBOX', 'EXTENSION', 'LOOTBOX'])
-    .nullish(),
   currencyCode: z.string().nullish(),
   currencyNamespace: z.string().nullish(),
-  region: z.string().nullish(),
-  language: z.string().nullish(),
-  sandbox: z.boolean().nullish(),
-  returnUrl: z.string().nullish(),
-  notifyUrl: z.string().nullish(),
   customParameters: z.record(z.any()).nullish(),
-  subscriptionId: z.string().nullish(),
-  recurringPaymentOrderNo: z.string().nullish(),
-  omitNotification: z.boolean().nullish(),
+  description: z.string(),
+  extOrderNo: z.string(),
+  extUserId: z.string().nullish(),
+  itemType: z
+    .enum(['APP', 'BUNDLE', 'CODE', 'COINS', 'EXTENSION', 'INGAMEITEM', 'LOOTBOX', 'MEDIA', 'OPTIONBOX', 'SEASON', 'SUBSCRIPTION'])
+    .nullish(),
+  language: z.string().nullish(),
   metadata: z.record(z.string()).nullish(),
+  notifyUrl: z.string().nullish(),
+  omitNotification: z.boolean().nullish(),
   platform: z.string().nullish(),
+  price: z.number().int(),
+  recurringPaymentOrderNo: z.string().nullish(),
+  region: z.string().nullish(),
+  returnUrl: z.string().nullish(),
+  sandbox: z.boolean().nullish(),
+  sku: z.string().nullish(),
+  subscriptionId: z.string().nullish(),
   targetNamespace: z.string(),
-  targetUserId: z.string()
+  targetUserId: z.string(),
+  title: z.string()
 })
 
 export interface ExternalPaymentOrderCreate extends z.TypeOf<typeof ExternalPaymentOrderCreate> {}

@@ -7,14 +7,14 @@ import { z } from 'zod'
 import { WalletInfo } from './WalletInfo.js'
 
 export const CurrencyWallet = z.object({
-  namespace: z.string(),
-  userId: z.string(),
+  balance: z.number().int(),
   currencyCode: z.string(),
   currencySymbol: z.string(),
-  balance: z.number().int(),
-  walletInfos: z.array(WalletInfo).nullish(),
+  namespace: z.string(),
   totalPermanentBalance: z.number().int().nullish(),
-  totalTimeLimitedBalance: z.number().int().nullish()
+  totalTimeLimitedBalance: z.number().int().nullish(),
+  userId: z.string(),
+  walletInfos: z.array(WalletInfo).nullish()
 })
 
 export interface CurrencyWallet extends z.TypeOf<typeof CurrencyWallet> {}

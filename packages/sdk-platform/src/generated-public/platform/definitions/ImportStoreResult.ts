@@ -8,9 +8,9 @@ import { ImportStoreError } from './ImportStoreError.js'
 import { StoreInfo } from './StoreInfo.js'
 
 export const ImportStoreResult = z.object({
-  success: z.boolean().nullish(),
+  errors: z.array(ImportStoreError).nullish(),
   storeInfo: StoreInfo.nullish(),
-  errors: z.array(ImportStoreError).nullish()
+  success: z.boolean().nullish()
 })
 
 export interface ImportStoreResult extends z.TypeOf<typeof ImportStoreResult> {}

@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const AppleIapReceipt = z.object({
-  productId: z.string(),
-  transactionId: z.string(),
-  receiptData: z.string(),
   excludeOldTransactions: z.boolean().nullish(),
+  language: z.string().nullish(),
+  productId: z.string(),
+  receiptData: z.string(),
   region: z.string().nullish(),
-  language: z.string().nullish()
+  transactionId: z.string()
 })
 
 export interface AppleIapReceipt extends z.TypeOf<typeof AppleIapReceipt> {}

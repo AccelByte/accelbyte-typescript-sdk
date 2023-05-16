@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export const PaymentRequest = z.object({
   amount: z.number().int(),
-  walletPlatform: z.enum(['Playstation', 'Xbox', 'Steam', 'Epic', 'IOS', 'GooglePlay', 'Nintendo', 'Other']).nullish()
+  walletPlatform: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'Xbox']).nullish()
 })
 
 export interface PaymentRequest extends z.TypeOf<typeof PaymentRequest> {}

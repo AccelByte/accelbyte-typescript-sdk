@@ -9,17 +9,17 @@ import { Localization } from './Localization.js'
 import { SectionItem } from './SectionItem.js'
 
 export const SectionCreate = z.object({
-  name: z.string(),
-  localizations: z.record(Localization),
   active: z.boolean().nullish(),
-  startDate: z.string(),
-  endDate: z.string(),
-  items: z.array(SectionItem).nullish(),
-  viewId: z.string().nullish(),
   displayOrder: z.number().int().nullish(),
-  rotationType: z.enum(['NONE', 'FIXED_PERIOD', 'CUSTOM']).nullish(),
+  endDate: z.string(),
+  ext: z.record(z.any()).nullish(),
   fixedPeriodRotationConfig: FixedPeriodRotationConfig.nullish(),
-  ext: z.record(z.any()).nullish()
+  items: z.array(SectionItem).nullish(),
+  localizations: z.record(Localization),
+  name: z.string(),
+  rotationType: z.enum(['CUSTOM', 'FIXED_PERIOD', 'NONE']).nullish(),
+  startDate: z.string(),
+  viewId: z.string().nullish()
 })
 
 export interface SectionCreate extends z.TypeOf<typeof SectionCreate> {}

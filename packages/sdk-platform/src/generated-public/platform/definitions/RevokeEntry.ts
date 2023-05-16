@@ -9,11 +9,11 @@ import { RevokeEntitlement } from './RevokeEntitlement.js'
 import { RevokeItem } from './RevokeItem.js'
 
 export const RevokeEntry = z.object({
-  type: z.enum(['ITEM', 'CURRENCY', 'ENTITLEMENT']).nullish(),
-  item: RevokeItem.nullish(),
-  entitlement: RevokeEntitlement.nullish(),
   currency: RevokeCurrency.nullish(),
-  quantity: z.number().int().nullish()
+  entitlement: RevokeEntitlement.nullish(),
+  item: RevokeItem.nullish(),
+  quantity: z.number().int().nullish(),
+  type: z.enum(['CURRENCY', 'ENTITLEMENT', 'ITEM']).nullish()
 })
 
 export interface RevokeEntry extends z.TypeOf<typeof RevokeEntry> {}

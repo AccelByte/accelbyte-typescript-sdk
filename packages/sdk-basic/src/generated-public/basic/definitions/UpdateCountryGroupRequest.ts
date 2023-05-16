@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { CountryObject } from './CountryObject.js'
 
-export const UpdateCountryGroupRequest = z.object({ countryGroupName: z.string().nullish(), countries: z.array(CountryObject).nullish() })
+export const UpdateCountryGroupRequest = z.object({ countries: z.array(CountryObject).nullish(), countryGroupName: z.string().nullish() })
 
 export interface UpdateCountryGroupRequest extends z.TypeOf<typeof UpdateCountryGroupRequest> {}

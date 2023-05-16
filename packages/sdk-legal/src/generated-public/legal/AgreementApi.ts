@@ -21,7 +21,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Retrieve accepted Legal Agreements.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Retrieve accepted Legal Agreements.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAgreementsPolicies(): Promise<RetrieveAcceptedAgreementResponseArray> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, cache)
@@ -31,7 +31,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function createAgreementPolicy(data: AcceptAgreementRequest[]): Promise<AcceptAgreementResponse> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, cache)
@@ -41,7 +41,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.<br><br/>Available Extra Information to return: <br/><ul><li><b>userIds</b> : List of userId mapping (<b>IMPORTANT: GOING TO DEPRECATE</b>)</li></ul>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.&lt;br&gt;&lt;br/&gt;Available Extra Information to return: &lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;userIds&lt;/b&gt; : List of userId mapping (&lt;b&gt;IMPORTANT: GOING TO DEPRECATE&lt;/b&gt;)&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function createAgreementPolicyUser_ByUserId(userId: string, data: AcceptAgreementRequest[]): Promise<AcceptAgreementResponse> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, cache)
@@ -51,7 +51,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Change marketing preference consent.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Change marketing preference consent.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function patchAgreementLocalizedPolicyVersionPreference(data: AcceptAgreementRequest[]): Promise<unknown> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, cache)
@@ -61,7 +61,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Accepts a legal policy version. Supply with localized version policy id to accept an agreement.<br>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>
+   * Accepts a legal policy version. Supply with localized version policy id to accept an agreement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<unknown> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, cache)
@@ -71,16 +71,16 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <b>IMPORTANT: GOING TO DEPRECATE</b><br/><br/>Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.<br>Other detail info: <ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:LEGAL", action=1 (CREATE)</li></ul>
+   * &lt;b&gt;IMPORTANT: GOING TO DEPRECATE&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(
-    userId: string,
     countryCode: string,
     clientId: string,
+    userId: string,
     data: AcceptAgreementRequest[]
   ): Promise<AcceptAgreementResponse> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(userId, countryCode, clientId, data)
+    const resp = await $.createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(countryCode, clientId, userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }

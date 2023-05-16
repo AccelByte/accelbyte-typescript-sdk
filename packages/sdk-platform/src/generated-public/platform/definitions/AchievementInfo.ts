@@ -7,10 +7,10 @@ import { z } from 'zod'
 
 export const AchievementInfo = z.object({
   id: z.string().nullish(),
-  serviceConfigId: z.string().nullish(),
   name: z.string().nullish(),
   progressState: z.string().nullish(),
-  progression: z.record(z.any()).nullish()
+  progression: z.record(z.any()).nullish(),
+  serviceConfigId: z.string().nullish()
 })
 
 export interface AchievementInfo extends z.TypeOf<typeof AchievementInfo> {}

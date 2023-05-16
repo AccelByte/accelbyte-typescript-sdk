@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const PaymentOrderPaidResult = z.object({ success: z.boolean(), charging: z.boolean() })
+export const PaymentOrderPaidResult = z.object({ charging: z.boolean(), success: z.boolean() })
 
 export interface PaymentOrderPaidResult extends z.TypeOf<typeof PaymentOrderPaidResult> {}

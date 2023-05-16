@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const GoogleIapConfigInfo = z.object({
-  namespace: z.string(),
   applicationName: z.string().nullish(),
-  serviceAccountId: z.string().nullish(),
-  p12FileName: z.string().nullish()
+  namespace: z.string(),
+  p12FileName: z.string().nullish(),
+  serviceAccountId: z.string().nullish()
 })
 
 export interface GoogleIapConfigInfo extends z.TypeOf<typeof GoogleIapConfigInfo> {}

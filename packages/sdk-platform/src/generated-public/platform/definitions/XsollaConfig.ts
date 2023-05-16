@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const XsollaConfig = z.object({
+  apiKey: z.string().nullish(),
+  flowCompletionUrl: z.string().nullish(),
   merchantId: z.number().int().nullish(),
   projectId: z.number().int().nullish(),
-  projectSecretKey: z.string().nullish(),
-  apiKey: z.string().nullish(),
-  flowCompletionUrl: z.string().nullish()
+  projectSecretKey: z.string().nullish()
 })
 
 export interface XsollaConfig extends z.TypeOf<typeof XsollaConfig> {}

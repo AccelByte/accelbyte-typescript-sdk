@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const TimedOwnership = z.object({ owned: z.boolean(), endDate: z.string().nullish() })
+export const TimedOwnership = z.object({ endDate: z.string().nullish(), owned: z.boolean() })
 
 export interface TimedOwnership extends z.TypeOf<typeof TimedOwnership> {}

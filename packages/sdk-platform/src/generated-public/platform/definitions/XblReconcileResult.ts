@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const XblReconcileResult = z.object({
-  transactionId: z.string().nullish(),
-  xboxProductId: z.string().nullish(),
+  iapOrderStatus: z.enum(['FAILED', 'FULFILLED', 'VERIFIED']).nullish(),
   itemId: z.string().nullish(),
   sku: z.string().nullish(),
-  iapOrderStatus: z.enum(['VERIFIED', 'FULFILLED', 'FAILED']).nullish()
+  transactionId: z.string().nullish(),
+  xboxProductId: z.string().nullish()
 })
 
 export interface XblReconcileResult extends z.TypeOf<typeof XblReconcileResult> {}

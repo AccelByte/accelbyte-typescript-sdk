@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const FulfillmentScriptEvalTestResult = z.object({ result: z.record(z.any()).nullish(), errorStackTrace: z.string().nullish() })
+export const FulfillmentScriptEvalTestResult = z.object({ errorStackTrace: z.string().nullish(), result: z.record(z.any()).nullish() })
 
 export interface FulfillmentScriptEvalTestResult extends z.TypeOf<typeof FulfillmentScriptEvalTestResult> {}

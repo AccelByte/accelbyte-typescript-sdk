@@ -6,16 +6,16 @@
 import { z } from 'zod'
 
 export const EntitlementHistoryInfo = z.object({
+  action: z.enum(['DECREMENT', 'DISABLE', 'ENABLE', 'GRANT', 'REVOKE', 'SELL_BACK', 'UPDATE']),
+  createdAt: z.string(),
   entitlementId: z.string(),
   namespace: z.string(),
-  action: z.enum(['GRANT', 'UPDATE', 'DECREMENT', 'REVOKE', 'DISABLE', 'ENABLE', 'SELL_BACK']),
   operator: z.string(),
-  userId: z.string(),
+  reason: z.string().nullish(),
+  updatedAt: z.string(),
   useCount: z.number().int().nullish(),
   useCountChange: z.number().int().nullish(),
-  reason: z.string().nullish(),
-  createdAt: z.string(),
-  updatedAt: z.string()
+  userId: z.string()
 })
 
 export interface EntitlementHistoryInfo extends z.TypeOf<typeof EntitlementHistoryInfo> {}

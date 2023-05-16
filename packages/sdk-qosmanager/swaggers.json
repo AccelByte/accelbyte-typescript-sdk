@@ -2,7 +2,7 @@
   [
     "qosmanager",
     "QoS Manager",
-    "qosmanager-api.json",
+    "qosm.json",
     "https://development.accelbyte.io/qosm/apidocs/api.json"
   ]
 ]

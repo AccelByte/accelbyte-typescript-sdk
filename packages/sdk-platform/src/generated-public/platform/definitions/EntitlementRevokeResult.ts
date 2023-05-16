@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const EntitlementRevokeResult = z.object({
-  userId: z.string().nullish(),
   entitlementId: z.string().nullish(),
-  reason: z.string().nullish()
+  reason: z.string().nullish(),
+  userId: z.string().nullish()
 })
 
 export interface EntitlementRevokeResult extends z.TypeOf<typeof EntitlementRevokeResult> {}

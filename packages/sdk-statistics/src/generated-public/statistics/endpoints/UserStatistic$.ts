@@ -46,6 +46,29 @@ export class UserStatistic$ {
   }
 
   /**
+   * Public list all statItems by pagination.<br>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>
+   */
+  getUsersMeStatitems(queryParams?: {
+    statCodes?: string | null
+    tags?: string | null
+    offset?: number
+    limit?: number
+    sortBy?: string | null
+  }): Promise<IResponseWithSync<UserStatItemPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    const url = '/social/v1/public/namespaces/{namespace}/users/me/statitems'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, UserStatItemPagingSlicedResult, 'UserStatItemPagingSlicedResult')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * Public bulk update multiple user's statitems value.<br>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:STATITEM", action=4 (UPDATE)</li><li><i>Returns</i>: bulk updated result</li></ul>
    */
   updateStatitemValueBulk(data: BulkUserStatItemInc[]): Promise<IResponse<BulkStatOperationResultArray>> {
@@ -127,9 +150,30 @@ export class UserStatistic$ {
   /**
    * Public list all statItems of user.<br>NOTE: <li>If stat code does not exist, will ignore this stat code.</li><li>If stat item does not exist, will return default value</li></ul>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>
    */
+  getUsersMeStatitemsValueBulk(queryParams?: {
+    statCodes?: string[]
+    tags?: string[]
+    additionalKey?: string | null
+  }): Promise<IResponseWithSync<ADtoObjectForUserStatItemValueArray>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/social/v1/public/namespaces/{namespace}/users/me/statitems/value/bulk'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Public list all statItems of user.<br>NOTE: <li>If stat code does not exist, will ignore this stat code.</li><li>If stat item does not exist, will return default value</li></ul>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>
+   */
   getStatitemsValueBulk_ByUserId(
     userId: string,
-    queryParams?: { statCodes?: string[]; tags?: string[] }
+    queryParams?: { statCodes?: string[]; tags?: string[]; additionalKey?: string | null }
   ): Promise<IResponseWithSync<ADtoObjectForUserStatItemValueArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/users/{userId}/statitems/value/bulk'

@@ -6,26 +6,26 @@
 import { z } from 'zod'
 
 export const CatalogChangeInfo = z.object({
-  changeId: z.string(),
-  namespace: z.string(),
-  storeId: z.string(),
+  action: z.enum(['CREATE', 'DELETE', 'UPDATE']),
   categoryPath: z.string().nullish(),
+  changeId: z.string(),
+  createdAt: z.string(),
+  description: z.string().nullish(),
   itemId: z.string().nullish(),
   itemType: z
-    .enum(['APP', 'COINS', 'INGAMEITEM', 'BUNDLE', 'CODE', 'SUBSCRIPTION', 'SEASON', 'MEDIA', 'OPTIONBOX', 'EXTENSION', 'LOOTBOX'])
+    .enum(['APP', 'BUNDLE', 'CODE', 'COINS', 'EXTENSION', 'INGAMEITEM', 'LOOTBOX', 'MEDIA', 'OPTIONBOX', 'SEASON', 'SUBSCRIPTION'])
     .nullish(),
-  type: z.enum(['STORE', 'CATEGORY', 'ITEM', 'VIEW', 'SECTION']).nullish(),
-  title: z.string().nullish(),
-  sku: z.string().nullish(),
-  action: z.enum(['CREATE', 'UPDATE', 'DELETE']),
-  status: z.enum(['UNPUBLISHED', 'PUBLISHED']),
+  namespace: z.string(),
   publishedAt: z.string().nullish(),
-  description: z.string().nullish(),
-  selected: z.boolean(),
-  viewId: z.string().nullish(),
   sectionId: z.string().nullish(),
-  createdAt: z.string(),
-  updatedAt: z.string()
+  selected: z.boolean(),
+  sku: z.string().nullish(),
+  status: z.enum(['PUBLISHED', 'UNPUBLISHED']),
+  storeId: z.string(),
+  title: z.string().nullish(),
+  type: z.enum(['CATEGORY', 'ITEM', 'SECTION', 'STORE', 'VIEW']).nullish(),
+  updatedAt: z.string(),
+  viewId: z.string().nullish()
 })
 
 export interface CatalogChangeInfo extends z.TypeOf<typeof CatalogChangeInfo> {}

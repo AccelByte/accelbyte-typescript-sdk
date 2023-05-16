@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const Slide = z.object({
-  type: z.enum(['image', 'video']).nullish(),
-  videoSource: z.enum(['generic', 'youtube', 'vimeo']).nullish(),
-  url: z.string().nullish(),
   alt: z.string().nullish(),
+  previewUrl: z.string().nullish(),
   thumbnailUrl: z.string().nullish(),
-  previewUrl: z.string().nullish()
+  type: z.enum(['image', 'video']).nullish(),
+  url: z.string().nullish(),
+  videoSource: z.enum(['generic', 'vimeo', 'youtube']).nullish()
 })
 
 export interface Slide extends z.TypeOf<typeof Slide> {}

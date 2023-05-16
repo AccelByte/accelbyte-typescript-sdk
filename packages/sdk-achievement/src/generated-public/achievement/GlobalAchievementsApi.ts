@@ -21,15 +21,15 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p> <p>Note:</p> <p> Global achievement status value mean: <code>status = 1 (in progress)</code> and <code>status = 2 (unlocked)</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement status value mean: &lt;code&gt;status = 1 (in progress)&lt;/code&gt; and &lt;code&gt;status = 2 (unlocked)&lt;/code&gt;&lt;/p&gt;
    */
   async function getGlobalAchievements(queryParams?: {
-    status?: string | null
     achievementCodes?: string | null
-    tags?: string[]
     limit?: number
     offset?: number
     sortBy?: string | null
+    status?: string | null
+    tags?: string[]
   }): Promise<PaginatedGlobalAchievementResponse> {
     const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getGlobalAchievements(queryParams)
@@ -38,7 +38,7 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function getGlobalAchievements_ByUserId(
     userId: string,
@@ -51,7 +51,7 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p>
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function getContributorsGlobal_ByAchievementCode(
     achievementCode: string,
@@ -64,7 +64,7 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * <p>Required permission <code>NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]</code> and scope <code>social</code></p> <p>Note:</p> <p> Global achievement should be unlocked to claim the reward. Only contributor of global achievement are eligible for rewards
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement should be unlocked to claim the reward. Only contributor of global achievement are eligible for rewards
    */
   async function createClaimGlobal_ByUserId_ByAchievementCode(achievementCode: string, userId: string): Promise<unknown> {
     const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, cache)

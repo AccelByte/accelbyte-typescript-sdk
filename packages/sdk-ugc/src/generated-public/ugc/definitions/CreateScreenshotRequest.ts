@@ -4,11 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { CreateScreenshotRequestItem } from './CreateScreenshotRequestItem.js'
 
-export const CreateScreenshotRequest: z.ZodType<CreateScreenshotRequest> = z.lazy(() =>
-  z.object({ screenshots: z.array(CreateScreenshotRequest) })
-)
+export const CreateScreenshotRequest = z.object({ screenshots: z.array(CreateScreenshotRequestItem) })
 
-export interface CreateScreenshotRequest {
-  screenshots: CreateScreenshotRequest[]
-}
+export interface CreateScreenshotRequest extends z.TypeOf<typeof CreateScreenshotRequest> {}

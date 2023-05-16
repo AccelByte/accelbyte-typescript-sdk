@@ -9,9 +9,9 @@ export const Image = z.object({
   as: z.string().nullish(),
   caption: z.string().nullish(),
   height: z.number().int(),
-  width: z.number().int(),
   imageUrl: z.string(),
-  smallImageUrl: z.string()
+  smallImageUrl: z.string(),
+  width: z.number().int()
 })
 
 export interface Image extends z.TypeOf<typeof Image> {}
