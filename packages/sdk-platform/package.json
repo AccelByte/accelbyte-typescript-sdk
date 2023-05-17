@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-platform",
-  "version": "1.4300.31",
+  "version": "1.4300.30-beta.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

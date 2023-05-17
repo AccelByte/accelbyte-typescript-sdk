@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-matchmaking",
-  "version": "1.2241.31",
+  "version": "1.2241.30-beta.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

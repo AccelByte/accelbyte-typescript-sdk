@@ -57,8 +57,8 @@ export class Achievements$ {
   ): Promise<IResponseWithSync<PublicAchievementResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/achievements/{achievementCode}'
-      .replace('{achievementCode}', achievementCode)
       .replace('{namespace}', this.namespace)
+      .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, PublicAchievementResponse, 'PublicAchievementResponse')

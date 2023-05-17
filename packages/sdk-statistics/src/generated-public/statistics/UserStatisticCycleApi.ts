@@ -21,6 +21,19 @@ export function UserStatisticCycleApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * List user's statCycleItems by statCycle.<br>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat cycle items</li></ul>
    */
+  async function getStatCycleitemsMeUsers_ByCycleId(
+    cycleId: string,
+    queryParams?: { statCodes?: string | null; offset?: number; limit?: number; sortBy?: string | null }
+  ): Promise<UserStatCycleItemPagingSlicedResult> {
+    const $ = new UserStatisticCycle$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getStatCycleitemsMeUsers_ByCycleId(cycleId, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * List user's statCycleItems by statCycle.<br>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat cycle items</li></ul>
+   */
   async function getStatCycleitems_ByUserId_ByCycleId(
     userId: string,
     cycleId: string,
@@ -33,6 +46,7 @@ export function UserStatisticCycleApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    getStatCycleitemsMeUsers_ByCycleId,
     getStatCycleitems_ByUserId_ByCycleId
   }
 }

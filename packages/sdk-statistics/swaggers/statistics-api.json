@@ -2762,12 +2762,96 @@
         }
       }
     },
+    "/v1/public/namespaces/{namespace}/users/me/statCycles/{cycleId}/statCycleitems": {
+      "get": {
+        "tags": ["UserStatisticCycle"],
+        "summary": "List user's statCycleItems by statCycle",
+        "description": "List user's statCycleItems by statCycle.<br>Other detail info:<ul><li><i>Required permission</i>: resource=\"NAMESPACE:{namespace}:USER:{userId}:STATITEM\", action=2 (READ)</li><li><i>Returns</i>: stat cycle items</li></ul>",
+        "operationId": "publicListMyStatCycleItems",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "description": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cycleId",
+            "in": "path",
+            "description": "cycle id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "statCodes",
+            "in": "query",
+            "description": "comma separated stat codes",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 20,
+            "format": "int32"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "default is unsorted, allow values: [statCode, statCode:asc, statCode:desc, createdAt, createdAt:asc, createdAt:desc, updatedAt, updatedAt:asc, updatedAt:desc],and support sort group, eg: sortBy=statCode:asc,createdAt:desc.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserStatCycleItemPagingSlicedResult"
+            }
+          },
+          "404": {
+            "description": "<table><tr><td>ErrorCode</td><td>ErrorMessage</td></tr><tr><td>12245</td><td>Stat cycle [{id}] cannot be found in namespace [{namespace}]</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
+          "422": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20002</td><td>validation error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/ValidationErrorEntity"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "x-authorization": {
+          "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM",
+          "action": "2"
+        }
+      }
+    },
     "/v1/public/namespaces/{namespace}/users/me/statitems": {
       "get": {
         "tags": ["UserStatistic"],
         "summary": "Public list user's statItems",
         "description": "Public list all statItems by pagination.<br>Other detail info:<ul><li><i>Required permission</i>: resource=\"NAMESPACE:{namespace}:USER:{userId}:STATITEM\", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>",
-        "operationId": "publicQueryUserStatItems",
+        "operationId": "publicListMyStatItems",
         "produces": ["application/json"],
         "parameters": [
           {
@@ -2845,7 +2929,7 @@
         "tags": ["UserStatistic"],
         "summary": "Public list user's statItems",
         "description": "Public list all statItems of user.<br>NOTE: <li>If stat code does not exist, will ignore this stat code.</li><li>If stat item does not exist, will return default value</li></ul>Other detail info:<ul><li><i>Required permission</i>: resource=\"NAMESPACE:{namespace}:USER:{userId}:STATITEM\", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>",
-        "operationId": "publicQueryUserStatItems_1",
+        "operationId": "publicListAllMyStatItems",
         "produces": ["application/json"],
         "parameters": [
           {
@@ -3472,7 +3556,7 @@
         "tags": ["UserStatistic"],
         "summary": "Public list user's statItems",
         "description": "Public list all statItems of user.<br>NOTE: <li>If stat code does not exist, will ignore this stat code.</li><li>If stat item does not exist, will return default value</li></ul>Other detail info:<ul><li><i>Required permission</i>: resource=\"NAMESPACE:{namespace}:USER:{userId}:STATITEM\", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>",
-        "operationId": "publicQueryUserStatItems_3",
+        "operationId": "publicQueryUserStatItems_1",
         "produces": ["application/json"],
         "parameters": [
           {
@@ -3686,7 +3770,7 @@
         "tags": ["UserStatistic"],
         "summary": "Public list user's statItems",
         "description": "Public list all statItems by pagination.<br>Other detail info:<ul><li><i>Required permission</i>: resource=\"NAMESPACE:{namespace}:USER:{userId}:STATITEM\", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>",
-        "operationId": "publicQueryUserStatItems_2",
+        "operationId": "publicQueryUserStatItems",
         "produces": ["application/json"],
         "parameters": [
           {
@@ -4753,7 +4837,7 @@
         "tags": ["UserStatistic"],
         "summary": "Public list user's statItems",
         "description": "Public list all statItems of user.<br>NOTE: <li>If stat code does not exist, will ignore this stat code.</li><li>If stat item does not exist, will return default value</li></ul>Other detail info:<ul><li><i>Required permission</i>: resource=\"NAMESPACE:{namespace}:USER:{userId}:STATITEM\", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>",
-        "operationId": "publicQueryUserStatItems_4",
+        "operationId": "publicQueryUserStatItems_2",
         "produces": ["application/json"],
         "parameters": [
           {

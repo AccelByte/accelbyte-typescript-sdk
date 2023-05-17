@@ -66,9 +66,9 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement should be unlocked to claim the reward. Only contributor of global achievement are eligible for rewards
    */
-  async function createClaimGlobal_ByUserId_ByAchievementCode(achievementCode: string, userId: string): Promise<unknown> {
+  async function createClaimGlobal_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<unknown> {
     const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createClaimGlobal_ByUserId_ByAchievementCode(achievementCode, userId)
+    const resp = await $.createClaimGlobal_ByUserId_ByAchievementCode(userId, achievementCode)
     if (resp.error) throw resp.error
     return resp.response.data
   }

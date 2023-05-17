@@ -72,8 +72,8 @@ export class GlobalAchievements$ {
   ): Promise<IResponseWithSync<PaginatedContributorResponse>> {
     const params = { limit: 10, sortBy: 'contributedValue:desc', ...queryParams } as SDKRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/global/achievements/{achievementCode}/contributors'
-      .replace('{achievementCode}', achievementCode)
       .replace('{namespace}', this.namespace)
+      .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, PaginatedContributorResponse, 'PaginatedContributorResponse')
@@ -88,12 +88,12 @@ export class GlobalAchievements$ {
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement should be unlocked to claim the reward. Only contributor of global achievement are eligible for rewards
    */
-  createClaimGlobal_ByUserId_ByAchievementCode(achievementCode: string, userId: string): Promise<IResponse<unknown>> {
+  createClaimGlobal_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/users/{userId}/global/achievements/{achievementCode}/claim'
-      .replace('{achievementCode}', achievementCode)
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')

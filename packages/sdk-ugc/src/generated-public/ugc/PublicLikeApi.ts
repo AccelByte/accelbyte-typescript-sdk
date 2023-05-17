@@ -11,9 +11,9 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ContentLikeRequest } from './definitions/ContentLikeRequest.js'
 import { ContentLikeResponse } from './definitions/ContentLikeResponse.js'
 import { PaginatedContentDownloadResponse } from './definitions/PaginatedContentDownloadResponse.js'
-import { PublicLikeLegacy$ } from './endpoints/PublicLikeLegacy$.js'
+import { PublicLike$ } from './endpoints/PublicLike$.js'
 
-export function PublicLikeLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PublicLikeApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
@@ -34,7 +34,7 @@ export function PublicLikeLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     tags?: string[]
     type?: string | null
   }): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicLikeLegacy$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicLike$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getContentsLiked(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +44,7 @@ export function PublicLikeLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Requires valid user token
    */
   async function updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<ContentLikeResponse> {
-    const $ = new PublicLikeLegacy$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicLike$(Network.create(requestConfig), namespace, cache)
     const resp = await $.updateLike_ByContentId(contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data

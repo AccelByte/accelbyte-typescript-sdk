@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-lobby",
-  "version": "1.0.24",
+  "version": "1.0.23-beta.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

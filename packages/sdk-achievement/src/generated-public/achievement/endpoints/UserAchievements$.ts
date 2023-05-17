@@ -40,12 +40,12 @@ export class UserAchievements$ {
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
-  updateUnlock_ByUserId_ByAchievementCode(achievementCode: string, userId: string): Promise<IResponse<unknown>> {
+  updateUnlock_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/users/{userId}/achievements/{achievementCode}/unlock'
-      .replace('{achievementCode}', achievementCode)
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')

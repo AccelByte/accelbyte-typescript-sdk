@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-ugc",
-  "version": "1.2110.24",
+  "version": "1.2110.23-beta.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

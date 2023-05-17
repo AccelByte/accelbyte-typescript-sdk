@@ -6767,7 +6767,7 @@
   },
   "x-version": {
     "buildDate": "unknown",
-    "gitHash": "b6fb985a289b802a7eb7a376bf310b3ca54ed8f6",
+    "gitHash": "2e979a6f5f11863789089132a06e98026b1851d6",
     "name": "justice-dedicated-server-manager-controller-service",
     "revisionID": "6.2.7",
     "version": "6.2.7",

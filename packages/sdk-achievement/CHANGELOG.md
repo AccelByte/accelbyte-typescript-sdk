@@ -1,3 +1,7 @@
+### 1.2180.30-beta.1 - 2023-05-16
+
+- code-generated update
+
 ### 1.2180.30-beta.0 - 2023-05-12
 
 - code-generated update

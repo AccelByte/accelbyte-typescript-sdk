@@ -34,9 +34,9 @@ export function UserAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
-  async function updateUnlock_ByUserId_ByAchievementCode(achievementCode: string, userId: string): Promise<unknown> {
+  async function updateUnlock_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<unknown> {
     const $ = new UserAchievements$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.updateUnlock_ByUserId_ByAchievementCode(achievementCode, userId)
+    const resp = await $.updateUnlock_ByUserId_ByAchievementCode(userId, achievementCode)
     if (resp.error) throw resp.error
     return resp.response.data
   }

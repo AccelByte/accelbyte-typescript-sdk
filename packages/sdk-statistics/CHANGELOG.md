@@ -1,3 +1,7 @@
+### 1.260.25-beta.0 - 2023-05-16
+
+- code-generated update
+
 ### 1.260.24 - 2023-05-15
 
 - code-generated update

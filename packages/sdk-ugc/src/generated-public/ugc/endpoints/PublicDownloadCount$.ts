@@ -10,7 +10,7 @@ import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AddDownloadCountResponse } from '../definitions/AddDownloadCountResponse.js'
 
-export class PublicDownloadCountLegacy$ {
+export class PublicDownloadCount$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 

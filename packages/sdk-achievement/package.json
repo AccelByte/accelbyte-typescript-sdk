@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-achievement",
-  "version": "1.2180.30-beta.0",
+  "version": "1.2180.30-beta.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

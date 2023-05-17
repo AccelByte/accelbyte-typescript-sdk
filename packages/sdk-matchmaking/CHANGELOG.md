@@ -1,4 +1,8 @@
-### 1.2241.31 - 2023-05-15
+### 1.2241.30-beta.2 - 2023-05-16
+
+- code-generated update
+
+### 1.2241.30-beta.1 - 2023-05-15
 
 - code-generated update
 
