@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const BinaryUpload = z.object({
-  hash: z.string().nullish(),
-  contentMD5: z.string().nullish(),
+  blockSize: z.number().int().nullish(),
   contentLength: z.number().int().nullish(),
-  blockSize: z.number().int().nullish()
+  contentMD5: z.string().nullish(),
+  hash: z.string().nullish()
 })
 
 export interface BinaryUpload extends z.TypeOf<typeof BinaryUpload> {}

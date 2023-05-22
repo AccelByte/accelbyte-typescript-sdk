@@ -95,7 +95,7 @@ Web SDK supports the following AccelByte service APIs:
 7. [Legal](https://docs.accelbyte.io/api-endpoints.html#access)
 
 # AccelByte Web Widgets
-In addition to the Accelbyte Web SDK, the library provides an extension called [Web Widgets](https://www.npmjs.com/package/@accelbyte/widgets) allowing the creation of SDK UI components. AccelByte Web Widgets is a UI library consisting of a set of JavaScript React components that can be embedded inside a browser. These components have the same appearance and business functionality as the AccelByte Player Portal.
+In addition to the Accelbyte Web SDK, the library provides an extension called [Web Widgets](https://www.npmjs.com/package/@accelbyte/widgets-v2) allowing the creation of SDK UI components. AccelByte Web Widgets is a UI library consisting of a set of JavaScript React components that can be embedded inside a browser. These components have the same appearance and business functionality as the AccelByte Player Portal.
 
 ## Note
 
@@ -106,8 +106,10 @@ In addition to the Accelbyte Web SDK, the library provides an extension called [
 To npm install the Web Widgets execute
 
 ```shell
-yarn add @accelbyte/widgets
+yarn add @accelbyte/widgets-v2
 ```
+
+Example projects can be found in the [examples folder](./packages/examples), with the ones related to AccelByte Web Widgets having the prefix `widgets-`.
 
 ## Testing
 

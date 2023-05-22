@@ -8,15 +8,9 @@
     "/differ/namespaces/{namespace}/diff": {
       "post": {
         "description": "<p>Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.</p><p>Every request is registered into the queue first, and will be processed by the available Differ.</p><p>The <b>priority</b> flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.</p><br/><p>Required permission <code>ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]</code> and scope <code>publishing</code></p>",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "Diff Calculation"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Diff Calculation"],
         "summary": "Perform diff from buildId A to buildId B",
         "operationId": "PerformLateDiff",
         "parameters": [
@@ -63,15 +57,9 @@
     },
     "/differ/namespaces/{namespace}/ping": {
       "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "Diff Calculation"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Diff Calculation"],
         "summary": "Ping this diff",
         "operationId": "Ping",
         "parameters": [
@@ -102,15 +90,9 @@
     "/differ/v2/namespaces/{namespace}/diff": {
       "post": {
         "description": "<p>Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.</p><p>The Diffs calculation will be parallelized between the available Differ instances.</p><p>The <b>priority</b> flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.</p><br/><p>Required permission <code>ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]</code> and scope <code>publishing</code></p>",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "Diff Calculation"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Diff Calculation"],
         "summary": "Perform diff from buildId A to buildId B",
         "operationId": "PerformLateDiffV2",
         "parameters": [
@@ -158,11 +140,7 @@
   },
   "definitions": {
     "dto.LateDiffRequest": {
-      "required": [
-        "namespace",
-        "sourceBuildId",
-        "destinationBuildId"
-      ],
+      "required": ["namespace", "sourceBuildId", "destinationBuildId"],
       "properties": {
         "destinationBuildId": {
           "type": "string"
@@ -179,9 +157,7 @@
       }
     },
     "dto.PingResponse": {
-      "required": [
-        "resp"
-      ],
+      "required": ["resp"],
       "properties": {
         "resp": {
           "type": "string"
@@ -189,10 +165,7 @@
       }
     },
     "response.Error": {
-      "required": [
-        "errorCode",
-        "errorMessage"
-      ],
+      "required": ["errorCode", "errorMessage"],
       "properties": {
         "errorCode": {
           "type": "integer",

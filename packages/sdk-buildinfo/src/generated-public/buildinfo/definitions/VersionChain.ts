@@ -9,9 +9,9 @@ import { VersionNode } from './VersionNode.js'
 export const VersionChain = z.object({
   appId: z.string().nullish(),
   comparedBuildId: z.string().nullish(),
+  nextVersions: z.array(VersionNode).nullish(),
   platformId: z.string().nullish(),
-  previousVersions: z.array(VersionNode).nullish(),
-  nextVersions: z.array(VersionNode).nullish()
+  previousVersions: z.array(VersionNode).nullish()
 })
 
 export interface VersionChain extends z.TypeOf<typeof VersionChain> {}

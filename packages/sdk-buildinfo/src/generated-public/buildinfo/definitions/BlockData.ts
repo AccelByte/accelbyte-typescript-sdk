@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const BlockData = z.object({ uuid: z.string().nullish(), checksum: z.string().nullish(), blockSize: z.number().int().nullish() })
+export const BlockData = z.object({ blockSize: z.number().int().nullish(), checksum: z.string().nullish(), uuid: z.string().nullish() })
 
 export interface BlockData extends z.TypeOf<typeof BlockData> {}

@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const DiffStatusReport = z.object({
-  sourceBuildId: z.string().nullish(),
-  destinationBuildId: z.string().nullish(),
   available: z.boolean().nullish(),
-  baseUrls: z.array(z.string()).nullish()
+  baseUrls: z.array(z.string()).nullish(),
+  destinationBuildId: z.string().nullish(),
+  sourceBuildId: z.string().nullish()
 })
 
 export interface DiffStatusReport extends z.TypeOf<typeof DiffStatusReport> {}

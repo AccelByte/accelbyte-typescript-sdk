@@ -17,8 +17,8 @@ export class StaticConfigs$ {
   getStaticConfig_ByConfig(config: string): Promise<IResponseWithSync<Config>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/public/namespaces/{namespace}/staticConfigs/{config}'
-      .replace('{namespace}', this.namespace)
       .replace('{config}', config)
+      .replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, Config, 'Config')

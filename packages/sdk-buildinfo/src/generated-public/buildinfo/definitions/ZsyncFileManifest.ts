@@ -6,19 +6,19 @@
 import { z } from 'zod'
 
 export const ZsyncFileManifest = z.object({
-  zsyncVersion: z.string().nullish(),
-  uuid: z.string().nullish(),
-  filename: z.string().nullish(),
-  modifiedTime: z.string().nullish(),
   blockSize: z.number().int().nullish(),
-  length: z.number().int().nullish(),
-  seqMatches: z.number().int().nullish(),
-  weaksumLength: z.number().int().nullish(),
-  strongsumLength: z.number().int().nullish(),
-  url: z.string().nullish(),
-  fileChecksum: z.string().nullish(),
   checksum: z.string().nullish(),
-  uploadStatus: z.string().nullish()
+  fileChecksum: z.string().nullish(),
+  filename: z.string().nullish(),
+  length: z.number().int().nullish(),
+  modifiedTime: z.string().nullish(),
+  seqMatches: z.number().int().nullish(),
+  strongsumLength: z.number().int().nullish(),
+  uploadStatus: z.string().nullish(),
+  url: z.string().nullish(),
+  uuid: z.string().nullish(),
+  weaksumLength: z.number().int().nullish(),
+  zsyncVersion: z.string().nullish()
 })
 
 export interface ZsyncFileManifest extends z.TypeOf<typeof ZsyncFileManifest> {}

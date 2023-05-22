@@ -34,7 +34,7 @@ export class PublicGameRecord$ {
    */
   deleteRecord_ByKey(key: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
-    const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{key}', key).replace('{namespace}', this.namespace)
+    const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
@@ -45,7 +45,7 @@ export class PublicGameRecord$ {
    */
   getRecord_ByKey(key: string): Promise<IResponseWithSync<GameRecordResponse>> {
     const params = {} as SDKRequestConfig
-    const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{key}', key).replace('{namespace}', this.namespace)
+    const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, GameRecordResponse, 'GameRecordResponse')
@@ -62,7 +62,7 @@ export class PublicGameRecord$ {
    */
   createRecord_ByKey(key: string, data: GameRecordRequest): Promise<IResponse<GameRecordResponse>> {
     const params = {} as SDKRequestConfig
-    const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{key}', key).replace('{namespace}', this.namespace)
+    const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GameRecordResponse, 'GameRecordResponse')
@@ -73,7 +73,7 @@ export class PublicGameRecord$ {
    */
   updateRecord_ByKey(key: string, data: GameRecordRequest): Promise<IResponse<GameRecordResponse>> {
     const params = {} as SDKRequestConfig
-    const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{key}', key).replace('{namespace}', this.namespace)
+    const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GameRecordResponse, 'GameRecordResponse')

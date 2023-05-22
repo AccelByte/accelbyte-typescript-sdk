@@ -9,8 +9,8 @@ import { CompatibilityObject } from './CompatibilityObject.js'
 export const RetrieveDependencyCompatibilityResponse = z.object({
   appId: z.string().nullish(),
   buildId: z.string().nullish(),
-  version: z.string().nullish(),
-  compatibilities: z.array(CompatibilityObject).nullish()
+  compatibilities: z.array(CompatibilityObject).nullish(),
+  version: z.string().nullish()
 })
 
 export interface RetrieveDependencyCompatibilityResponse extends z.TypeOf<typeof RetrieveDependencyCompatibilityResponse> {}

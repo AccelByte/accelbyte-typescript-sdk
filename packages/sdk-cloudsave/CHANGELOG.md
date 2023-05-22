@@ -1,3 +1,11 @@
+### 1.370.24-beta.1 - 2023-05-18
+
+- code-generated update
+
+### 1.370.24-beta.0 - 2023-05-17
+
+- code-generated update
+
 ### 1.370.23 - 2023-05-09
 
 - code-generated update

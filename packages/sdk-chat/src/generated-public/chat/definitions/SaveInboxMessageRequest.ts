@@ -10,7 +10,7 @@ export const SaveInboxMessageRequest = z.object({
   expiredAt: z.number().int(),
   message: z.record(z.any()),
   scope: z.enum(['NAMESPACE', 'USER']),
-  status: z.enum(['SENT', 'DRAFT']),
+  status: z.enum(['DRAFT', 'SENT']),
   userIds: z.array(z.string())
 })
 

@@ -19,7 +19,7 @@ export class UserStatisticCycle$ {
    */
   getStatCycleitemsMeUsers_ByCycleId(
     cycleId: string,
-    queryParams?: { statCodes?: string | null; offset?: number; limit?: number; sortBy?: string | null }
+    queryParams?: { statCodes?: string[]; offset?: number; limit?: number; sortBy?: string | null }
   ): Promise<IResponseWithSync<UserStatCycleItemPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/users/me/statCycles/{cycleId}/statCycleitems'

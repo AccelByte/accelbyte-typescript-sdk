@@ -32,6 +32,7 @@
   background: white;
   border: none;
   padding: 10px 5px;
+  box-sizing: border-box;
 }
 
 .loginForm button {

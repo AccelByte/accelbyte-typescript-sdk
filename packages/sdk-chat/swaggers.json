@@ -1,8 +1,1 @@
-[
-  [
-    "chat",
-    "Chat",
-    "chat-api.json",
-    "https://development.accelbyte.io/chat/apidocs/api.json"
-  ]
-]
+[["chat", "Chat", "chat.json", "https://development.accelbyte.io/chat/apidocs/api.json"]]

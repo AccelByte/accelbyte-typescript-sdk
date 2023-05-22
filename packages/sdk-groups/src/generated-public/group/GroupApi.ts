@@ -187,9 +187,9 @@ export function GroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;Delete group predefined rule based on the allowed action. This endpoint will check the group ID of the user based on the access token and compare it with the group ID in path parameter. It will also check the member role of the user based on the access token&lt;/p&gt; &lt;p&gt;Action Code: 73309&lt;/p&gt;
    */
-  async function deleteRuleDefined_ByGroupId_ByAllowedAction(allowedAction: string, groupId: string): Promise<unknown> {
+  async function deleteRuleDefined_ByGroupId_ByAllowedAction(groupId: string, allowedAction: string): Promise<unknown> {
     const $ = new Group$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.deleteRuleDefined_ByGroupId_ByAllowedAction(allowedAction, groupId)
+    const resp = await $.deleteRuleDefined_ByGroupId_ByAllowedAction(groupId, allowedAction)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -198,12 +198,12 @@ export function GroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;Update predefined group rule. This endpoint will check the group ID of the user based on the access token and compare it with the group ID in path parameter. It will also check the member role of the user based on the access token&lt;/p&gt; &lt;p&gt;If the rule action is not defined in the group, it will be added immediately to the predefined group rule&lt;/p&gt; &lt;p&gt;Action Code: 73310&lt;/p&gt;
    */
   async function updateRuleDefined_ByGroupId_ByAllowedAction(
-    allowedAction: string,
     groupId: string,
+    allowedAction: string,
     data: UpdateGroupPredefinedRuleRequestV1
   ): Promise<GroupResponseV1> {
     const $ = new Group$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.updateRuleDefined_ByGroupId_ByAllowedAction(allowedAction, groupId, data)
+    const resp = await $.updateRuleDefined_ByGroupId_ByAllowedAction(groupId, allowedAction, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -211,9 +211,9 @@ export function GroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;Delete group predefined rule based on the allowed action. This endpoint will check the group ID of the user based on the access token and compare it with the group ID in path parameter. It will also check the member role of the user based on the access token&lt;/p&gt; &lt;p&gt;Action Code: 73309&lt;/p&gt;
    */
-  async function deleteRuleDefined_ByGroupId_ByAllowedAction_ByNS(allowedAction: string, groupId: string): Promise<unknown> {
+  async function deleteRuleDefined_ByGroupId_ByAllowedAction_ByNS(groupId: string, allowedAction: string): Promise<unknown> {
     const $ = new Group$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.deleteRuleDefined_ByGroupId_ByAllowedAction_ByNS(allowedAction, groupId)
+    const resp = await $.deleteRuleDefined_ByGroupId_ByAllowedAction_ByNS(groupId, allowedAction)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -222,12 +222,12 @@ export function GroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;Update predefined group rule. This endpoint will check the group ID of the user based on the access token and compare it with the group ID in path parameter. It will also check the member role of the user based on the access token&lt;/p&gt; &lt;p&gt;If the rule action is not defined in the group, it will be added immediately to the predefined group rule&lt;/p&gt; &lt;p&gt;Action Code: 73310&lt;/p&gt;
    */
   async function updateRuleDefined_ByGroupId_ByAllowedAction_ByNS(
-    allowedAction: string,
     groupId: string,
+    allowedAction: string,
     data: UpdateGroupPredefinedRuleRequestV1
   ): Promise<GroupResponseV1> {
     const $ = new Group$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.updateRuleDefined_ByGroupId_ByAllowedAction_ByNS(allowedAction, groupId, data)
+    const resp = await $.updateRuleDefined_ByGroupId_ByAllowedAction_ByNS(groupId, allowedAction, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }

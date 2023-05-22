@@ -1,8 +1,8 @@
 {
-  "buildDate": "2023-05-10T00:30:09+00:00",
-  "gitHash": "2d1ecbc0f65d14c80b432feb43d88ffcf76e4bbb",
+  "buildDate": "2023-05-16T11:12:36+00:00",
+  "gitHash": "61089c566ea67ebd46a7845bc96f613122417504",
   "name": "justice-session-browser-service",
-  "revisionID": "1.15.0",
-  "version": "1.15.0",
+  "revisionID": "1.15.1",
+  "version": "1.15.1",
   "version-roles-seeding": "0.0.3"
 }

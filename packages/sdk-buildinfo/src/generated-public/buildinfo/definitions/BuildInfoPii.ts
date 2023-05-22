@@ -8,9 +8,9 @@ import { MachineIdentity } from './MachineIdentity.js'
 
 export const BuildInfoPii = z.object({
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
+  identity: MachineIdentity.nullish(),
   machineId: z.string().nullish(),
-  identity: MachineIdentity.nullish()
+  updatedAt: z.string().nullish()
 })
 
 export interface BuildInfoPii extends z.TypeOf<typeof BuildInfoPii> {}

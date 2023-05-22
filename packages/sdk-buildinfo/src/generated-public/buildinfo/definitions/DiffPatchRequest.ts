@@ -6,21 +6,21 @@
 import { z } from 'zod'
 
 export const DiffPatchRequest = z.object({
-  namespace: z.string().nullish(),
-  sourceBuildId: z.string().nullish(),
   destinationBuildId: z.string().nullish(),
-  destinationControlFileUuid: z.string().nullish(),
   destinationControlFileChecksum: z.string().nullish(),
-  destinationFilePath: z.string().nullish(),
+  destinationControlFileUuid: z.string().nullish(),
   destinationFileChecksum: z.string().nullish(),
-  requestType: z.number().int().nullish(),
-  destinationMissingBytesFileUuid: z.string().nullish(),
-  topicArn: z.string().nullish(),
-  sourceFileUuid: z.string().nullish(),
-  sourceFileChecksum: z.string().nullish(),
+  destinationFilePath: z.string().nullish(),
   destinationMissingBytesFileChecksum: z.string().nullish(),
+  destinationMissingBytesFileUuid: z.string().nullish(),
+  diffFileUrl: z.string().nullish(),
   diffFileUuid: z.string().nullish(),
-  diffFileUrl: z.string().nullish()
+  namespace: z.string().nullish(),
+  requestType: z.number().int().nullish(),
+  sourceBuildId: z.string().nullish(),
+  sourceFileChecksum: z.string().nullish(),
+  sourceFileUuid: z.string().nullish(),
+  topicArn: z.string().nullish()
 })
 
 export interface DiffPatchRequest extends z.TypeOf<typeof DiffPatchRequest> {}

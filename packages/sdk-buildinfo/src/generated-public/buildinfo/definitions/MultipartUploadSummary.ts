@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { MultipartUploadUrl } from './MultipartUploadUrl.js'
 
-export const MultipartUploadSummary = z.object({ uuid: z.string(), parts: z.array(MultipartUploadUrl) })
+export const MultipartUploadSummary = z.object({ parts: z.array(MultipartUploadUrl), uuid: z.string() })
 
 export interface MultipartUploadSummary extends z.TypeOf<typeof MultipartUploadSummary> {}

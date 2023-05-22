@@ -19,6 +19,7 @@ export const UpdateChannelRequest = z.object({
   ruleSet: UpdateRuleset,
   sessionQueueTimeoutSeconds: z.number().int(),
   socialMatchmaking: z.boolean(),
+  ticket_observability_enable: z.boolean().nullish(),
   use_sub_gamemode: z.boolean()
 })
 

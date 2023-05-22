@@ -1,3 +1,7 @@
+### 1.292.67-beta.0 - 2023-05-17
+
+- code-generated update
+
 ### 1.292.66 - 2023-05-09
 
 - code-generated update

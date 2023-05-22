@@ -22,6 +22,7 @@ export const Channel = z.object({
   session_queue_timeout_seconds: z.number().int(),
   slug: z.string(),
   social_matchmaking: z.boolean(),
+  ticket_observability_enable: z.boolean().nullish(),
   updated_at: z.string(),
   use_sub_gamemode: z.boolean()
 })

@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const DifferentialUploadSummary = z.object({
-  presignedUrl: z.string().nullish(),
-  uuid: z.string().nullish(),
   destinationFileUuid: z.string().nullish(),
-  diffFileUuid: z.string().nullish(),
   diffFileUrl: z.string().nullish(),
-  status: z.number().int().nullish()
+  diffFileUuid: z.string().nullish(),
+  presignedUrl: z.string().nullish(),
+  status: z.number().int().nullish(),
+  uuid: z.string().nullish()
 })
 
 export interface DifferentialUploadSummary extends z.TypeOf<typeof DifferentialUploadSummary> {}

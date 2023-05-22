@@ -402,8 +402,8 @@ export class Users$ {
   getUserInvite_ByInvitationId(invitationId: string): Promise<IResponseWithSync<UserInvitationV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/invite/{invitationId}'
-      .replace('{invitationId}', invitationId)
       .replace('{namespace}', this.namespace)
+      .replace('{invitationId}', invitationId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, UserInvitationV3, 'UserInvitationV3')
@@ -421,8 +421,8 @@ export class Users$ {
   createUserInvite_ByInvitationId(invitationId: string, data: UserCreateFromInvitationRequestV3): Promise<IResponse<UserCreateResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/invite/{invitationId}'
-      .replace('{invitationId}', invitationId)
       .replace('{namespace}', this.namespace)
+      .replace('{invitationId}', invitationId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, UserCreateResponseV3, 'UserCreateResponseV3')
@@ -562,7 +562,7 @@ export class Users$ {
   }
 
   /**
-   * This endpoint is used to get linking status.
+   *  This endpoint is used to get linking status.&lt;/br&gt; This API need logged user and user can only request its own linking status.&#39;
    */
   getAsyncStatus_ByRequestId(requestId: string): Promise<IResponseWithSync<LinkRequest>> {
     const params = {} as SDKRequestConfig
@@ -615,8 +615,8 @@ export class Users$ {
   getAgerestrictionCountry_ByCountryCode(countryCode: string): Promise<IResponseWithSync<CountryV3Response>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/agerestrictions/countries/{countryCode}'
-      .replace('{countryCode}', countryCode)
       .replace('{namespace}', this.namespace)
+      .replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, CountryV3Response, 'CountryV3Response')

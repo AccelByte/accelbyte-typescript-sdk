@@ -2205,6 +2205,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "ticket_observability_enable": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "updated_at": {
           "type": "string"
         },
@@ -2292,6 +2296,10 @@
           "x-nullable": true,
           "x-omitempty": false
         },
+        "ticket_observability_enable": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "use_sub_gamemode": {
           "type": "boolean",
           "x-nullable": true,
@@ -2361,6 +2369,10 @@
           "type": "string"
         },
         "socialMatchmaking": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "ticket_observability_enable": {
           "type": "boolean",
           "x-omitempty": false
         },
@@ -2475,6 +2487,10 @@
           "type": "string"
         },
         "social_matchmaking": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "ticket_observability_enable": {
           "type": "boolean",
           "x-omitempty": false
         },
@@ -3111,6 +3127,10 @@
           "x-nullable": true,
           "x-omitempty": false
         },
+        "ticket_observability_enable": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "use_sub_gamemode": {
           "type": "boolean",
           "x-nullable": true,
@@ -3471,8 +3491,8 @@
     "path": "/matchmaking/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-05-12T10:54:52+00:00",
-    "gitHash": "82f0ff3e457bb104d62a2dc0df31a6946cba816c",
+    "buildDate": "2023-05-19T08:11:19+00:00",
+    "gitHash": "4ad8d473d40265ceeff1ff7eaaa9b3892e7b1c9d",
     "version": "2.24.1",
     "version-roles-seeding": "0.0.23"
   }

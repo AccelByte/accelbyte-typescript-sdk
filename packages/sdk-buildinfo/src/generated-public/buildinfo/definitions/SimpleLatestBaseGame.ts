@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const SimpleLatestBaseGame = z.object({
-  platformId: z.string().nullish(),
   latestBuildId: z.string().nullish(),
-  latestVersion: z.string().nullish()
+  latestVersion: z.string().nullish(),
+  platformId: z.string().nullish()
 })
 
 export interface SimpleLatestBaseGame extends z.TypeOf<typeof SimpleLatestBaseGame> {}

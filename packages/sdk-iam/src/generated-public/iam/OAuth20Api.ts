@@ -187,9 +187,9 @@ export function OAuth20Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Retrieve User Third Party Platform Token&lt;br/&gt; &lt;p&gt; This endpoint used for retrieving third party platform token for user that login using third party, if user have not link requested platform in game namespace, will try to retrieving third party platform token from publisher namespace. Passing platform group name or it&#39;s member will return same access token that can be used across the platform members. &lt;/p&gt; &lt;p&gt;The third party platform and platform group covered for this is:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;(psn) ps4web&lt;/li&gt; &lt;li&gt;(psn) ps4&lt;/li&gt; &lt;li&gt;(psn) ps5&lt;/li&gt; &lt;li&gt;epicgames&lt;/li&gt; &lt;li&gt;twitch&lt;/li&gt; &lt;li&gt;awscognito&lt;/li&gt; &lt;/ul&gt;
    */
-  async function getPlatformTokenOauth_ByUserId_ByPlatformId(platformId: string, userId: string): Promise<TokenThirdPartyResponse> {
+  async function getPlatformTokenOauth_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<TokenThirdPartyResponse> {
     const $ = new OAuth20$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getPlatformTokenOauth_ByUserId_ByPlatformId(platformId, userId)
+    const resp = await $.getPlatformTokenOauth_ByUserId_ByPlatformId(userId, platformId)
     if (resp.error) throw resp.error
     return resp.response.data
   }

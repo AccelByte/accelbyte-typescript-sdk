@@ -11,7 +11,7 @@ export const TopicLogItem = z.object({
   message: z.string(),
   senderId: z.string(),
   topicId: z.string(),
-  type: z.enum(['TOPIC_CREATE', 'TOPIC_JOIN', 'TOPIC_LEAVE', 'TOPIC_DELETE']),
+  type: z.enum(['TOPIC_CREATE', 'TOPIC_DELETE', 'TOPIC_JOIN', 'TOPIC_LEAVE']),
   userId: z.string()
 })
 

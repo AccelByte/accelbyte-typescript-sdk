@@ -38,7 +38,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * get chat list of topic in a namespace.
    */
-  async function getTopic(queryParams?: { topicType?: string | null; offset?: number; limit?: number }): Promise<ChatMessageResponseArray> {
+  async function getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<ChatMessageResponseArray> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getTopic(queryParams)
     if (resp.error) throw resp.error
@@ -46,7 +46,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code> <br>Mute user.
+   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Mute user.
    */
   async function updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<unknown> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
@@ -60,7 +60,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getChats_ByTopic(
     topic: string,
-    queryParams?: { startCreatedAt?: number; limit?: number; order?: string | null }
+    queryParams?: { limit?: number; order?: string | null; startCreatedAt?: number }
   ): Promise<ChatMessageResponseArray> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getChats_ByTopic(topic, queryParams)
@@ -69,7 +69,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code> <br>Unmute user.
+   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Unmute user.
    */
   async function updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<unknown> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
@@ -79,7 +79,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code> <br>ban topic members in a group topic.
+   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;ban topic members in a group topic.
    */
   async function createBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<PublicBanTopicMembersResponse> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
@@ -89,7 +89,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code> <br>unban topic members in a group topic.
+   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;unban topic members in a group topic.
    */
   async function createUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<PublicUnbanTopicMembersResponse> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
@@ -99,7 +99,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code> <br>Delete chat.
+   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Delete chat.
    */
   async function deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<unknown> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)

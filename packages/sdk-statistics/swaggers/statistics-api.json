@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "Justice Social Service",
-    "version": "2.6.0",
+    "version": "2.7.0",
     "title": "justice-social-service",
     "contact": {
       "name": "Engineering Team at AccelByte",
@@ -2787,9 +2787,13 @@
           {
             "name": "statCodes",
             "in": "query",
-            "description": "comma separated stat codes",
+            "description": "stat codes",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "offset",
@@ -2866,14 +2870,22 @@
             "in": "query",
             "description": "stat codes",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "tags",
             "in": "query",
             "description": "tags",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "offset",

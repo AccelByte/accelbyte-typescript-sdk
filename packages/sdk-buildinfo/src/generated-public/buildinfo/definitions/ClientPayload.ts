@@ -6,8 +6,8 @@
 import { z } from 'zod'
 
 export const ClientPayload = z.object({
-  Namespace: z.string().nullish(),
   ClientId: z.string().nullish(),
+  Namespace: z.string().nullish(),
   RedirectUri: z.string().nullish()
 })
 

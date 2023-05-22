@@ -7,22 +7,24 @@
 import React, { useState } from 'react'
 import styles from './../../styles/Login.module.css'
 import { loginWithPassword } from '~/sdk'
-import { Accelbyte } from '@accelbyte/sdk'
-import { saveToLocalSorage } from '../../helper/localStorage'
+import { saveToLocalStorage } from '../../helper/localStorage'
 import { useRouter } from 'next/router'
-import { CLIENT_ID } from '../constants'
+import { BASE_URL, CLIENT_ID, GAME_NAMESPACE, LOCAL_STORAGE_KEY, REDIRECT_URL } from '../constants'
+import { Accelbyte } from '@accelbyte/sdk'
+import useAuth from '../../hooks/useAuth'
 
 const sdk = Accelbyte.SDK({
   options: {
-    baseURL: 'http://localhost:3030/api',
+    baseURL: BASE_URL,
     clientId: CLIENT_ID,
-    namespace: 'accelbyte',
-    redirectURI: 'http://localhost:3030'
+    namespace: GAME_NAMESPACE,
+    redirectURI: REDIRECT_URL
   }
 })
 
 export default function Login() {
   const { push } = useRouter()
+  const { setAuth } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -37,9 +39,11 @@ export default function Login() {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     const response = await loginWithPassword(sdk, username, password)
-    if (response?.accessToken && response?.refreshToken) {
-      saveToLocalSorage('access_token', response.accessToken)
-      saveToLocalSorage('refresh_token', response.refreshToken)
+
+    if (response?.response?.data.refresh_token && response?.response?.data.access_token && response?.response?.data.namespace) {
+      saveToLocalStorage(LOCAL_STORAGE_KEY.Enum.access_token, response?.response?.data.access_token)
+      saveToLocalStorage(LOCAL_STORAGE_KEY.Enum.refresh_token, response?.response?.data.refresh_token)
+      setAuth({ userId: response?.response?.data.user_id })
       push('/')
     } else {
       setErrorMessage('Username or Password Error')
@@ -48,7 +52,7 @@ export default function Login() {
 
   return (
     <div className={styles.loginPage}>
-      <form action="" className={styles.loginForm} onSubmit={onSubmit}>
+      <form className={styles.loginForm} onSubmit={onSubmit}>
         <input name="username" type="text" value={username} onChange={onChangeUsername} placeholder="username" />
         <input name="password" type="password" value={password} onChange={onChangePassword} placeholder="password" />
         <button>Login</button>

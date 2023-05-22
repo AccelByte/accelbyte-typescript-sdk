@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const CalculateDiffCacheRequest = z.object({ sourceBuildId: z.string().nullish(), destinationBuildId: z.string().nullish() })
+export const CalculateDiffCacheRequest = z.object({ destinationBuildId: z.string().nullish(), sourceBuildId: z.string().nullish() })
 
 export interface CalculateDiffCacheRequest extends z.TypeOf<typeof CalculateDiffCacheRequest> {}

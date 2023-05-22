@@ -207,8 +207,8 @@ export class UsersV4$ {
   createUserInvite_ByInvitationId(invitationId: string, data: UserCreateFromInvitationRequestV4): Promise<IResponse<CreateUserResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/invite/{invitationId}'
-      .replace('{invitationId}', invitationId)
       .replace('{namespace}', this.namespace)
+      .replace('{invitationId}', invitationId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, CreateUserResponseV4, 'CreateUserResponseV4')

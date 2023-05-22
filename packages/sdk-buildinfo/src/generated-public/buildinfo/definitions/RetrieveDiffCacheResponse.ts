@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { DiffCacheObject } from './DiffCacheObject.js'
 
 export const RetrieveDiffCacheResponse = z.object({
-  summaryFile: z.string(),
   baseUrls: z.array(z.string()),
-  diffCaches: z.array(DiffCacheObject)
+  diffCaches: z.array(DiffCacheObject),
+  summaryFile: z.string()
 })
 
 export interface RetrieveDiffCacheResponse extends z.TypeOf<typeof RetrieveDiffCacheResponse> {}

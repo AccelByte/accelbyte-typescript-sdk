@@ -1,3 +1,7 @@
+### 1.2210.22-beta.2 - 2023-05-17
+
+- code-generated update
+
 ### 1.2210.22-beta.1 - 2023-05-15
 
 - code-generated update

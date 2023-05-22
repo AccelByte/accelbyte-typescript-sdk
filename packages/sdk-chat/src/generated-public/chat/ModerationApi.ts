@@ -19,7 +19,7 @@ export function ModerationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required group permission : <code> NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> <br>Get the chat snapshot
+   * Required group permission : &lt;code&gt; NAMESPACE:{namespace}:CHAT:TOPIC [READ]&lt;/code&gt; &lt;br&gt;Get the chat snapshot
    */
   async function getSnapshot_ByTopic_ByChatId(topic: string, chatId: string): Promise<ChatSnapshots> {
     const $ = new Moderation$(Network.create(requestConfig), namespace, cache)

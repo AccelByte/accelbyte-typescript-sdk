@@ -7,8 +7,8 @@ import { z } from 'zod'
 
 export const BuildAvailability = z.object({
   appId: z.string().nullish(),
-  platformId: z.string().nullish(),
-  available: z.boolean().nullish()
+  available: z.boolean().nullish(),
+  platformId: z.string().nullish()
 })
 
 export interface BuildAvailability extends z.TypeOf<typeof BuildAvailability> {}

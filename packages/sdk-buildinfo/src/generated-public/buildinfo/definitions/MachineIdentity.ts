@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const MachineIdentity = z.object({
-  userId: z.string().nullish(),
   machineId: z.string().nullish(),
-  requestDate: z.string().nullish()
+  requestDate: z.string().nullish(),
+  userId: z.string().nullish()
 })
 
 export interface MachineIdentity extends z.TypeOf<typeof MachineIdentity> {}

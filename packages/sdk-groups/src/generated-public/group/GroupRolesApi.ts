@@ -68,12 +68,12 @@ export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to remove role from group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
    */
   async function deleteMember_ByMemberRoleId_ByGroupId(
-    groupId: string,
     memberRoleId: string,
+    groupId: string,
     data: RemoveRoleFromMemberRequestV1
   ): Promise<unknown> {
     const $ = new GroupRoles$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.deleteMember_ByMemberRoleId_ByGroupId(groupId, memberRoleId, data)
+    const resp = await $.deleteMember_ByMemberRoleId_ByGroupId(memberRoleId, groupId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -82,12 +82,12 @@ export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&lt;/p&gt; &lt;p&gt;This endpoint is used to assign role to group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
    */
   async function createMember_ByMemberRoleId_ByGroupId(
-    groupId: string,
     memberRoleId: string,
+    groupId: string,
     data: AssignRoleToMemberRequestV1
   ): Promise<GetUserGroupInformationResponseV1> {
     const $ = new GroupRoles$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createMember_ByMemberRoleId_ByGroupId(groupId, memberRoleId, data)
+    const resp = await $.createMember_ByMemberRoleId_ByGroupId(memberRoleId, groupId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }

@@ -7,14 +7,14 @@ import { z } from 'zod'
 import { ReleaseNoteLocalizationDto } from './ReleaseNoteLocalizationDto.js'
 
 export const ReleaseNoteDto = z.object({
-  namespace: z.string(),
   appId: z.string(),
-  platformId: z.string(),
-  version: z.string(),
   baseUrls: z.array(z.string()),
-  releaseNoteLocalizations: z.array(ReleaseNoteLocalizationDto),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish()
+  namespace: z.string(),
+  platformId: z.string(),
+  releaseNoteLocalizations: z.array(ReleaseNoteLocalizationDto),
+  updatedAt: z.string().nullish(),
+  version: z.string()
 })
 
 export interface ReleaseNoteDto extends z.TypeOf<typeof ReleaseNoteDto> {}

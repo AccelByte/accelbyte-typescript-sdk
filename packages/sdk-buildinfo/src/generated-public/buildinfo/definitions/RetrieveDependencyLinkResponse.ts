@@ -9,8 +9,8 @@ import { DependencyObject } from './DependencyObject.js'
 export const RetrieveDependencyLinkResponse = z.object({
   appId: z.string().nullish(),
   buildId: z.string().nullish(),
-  version: z.string().nullish(),
-  dependencies: z.array(DependencyObject).nullish()
+  dependencies: z.array(DependencyObject).nullish(),
+  version: z.string().nullish()
 })
 
 export interface RetrieveDependencyLinkResponse extends z.TypeOf<typeof RetrieveDependencyLinkResponse> {}

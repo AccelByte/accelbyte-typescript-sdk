@@ -49,15 +49,11 @@
   "paths": {
     "/admin/namespaces/{namespace}/builds/{buildId}": {
       "get": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "Get Build Manifest",
         "description": "This API is used to get build manifest.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Build Manifest</li></ul>",
         "operationId": "getBuild",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -94,15 +90,11 @@
         ]
       },
       "delete": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Delete Build</s>",
         "description": "This API is used to delete build manifest. [DEPRECATED]<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=8 (DELETE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "deleteBuildManifest",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -139,15 +131,11 @@
     },
     "/admin/namespaces/{namespace}/retrievechunkbyhash/{hash}": {
       "get": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "Retrieve Chunk by Hash",
         "description": "This API is used to retrieve chunk by hash.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: chunk data</li></ul>",
         "operationId": "retrieveChunkByHash",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -186,15 +174,11 @@
     },
     "/admin/namespaces/{namespace}/setcurrentbuild/{buildId}": {
       "put": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "Set Current Build",
         "description": "This API is used to set current build as release version.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "setCurrentBuildByBuildId",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -244,15 +228,11 @@
     },
     "/admin/namespaces/{namespace}/builddeletion/{buildId}/retry": {
       "put": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Retry Failed Build Deletion</s>",
         "description": "This API is used to retry build deletion.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "retryBuildDeletion",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -294,15 +274,11 @@
     },
     "/admin/namespaces/{namespace}/setcurrentbuild/{appId}/{version}": {
       "put": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Set Current Build</s>",
         "description": "This API is used to set current build as release version. [DEPRECATED] <p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "setCurrentBuild",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -348,15 +324,11 @@
     },
     "/admin/namespaces/{namespace}/builds/byAppId": {
       "get": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "Get committed builds by appId",
         "description": "This API is used to get basic build manifests. Only committed build will be retrieved.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Basic Build Manifest</li></ul>",
         "operationId": "getBuildByAppId",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -399,15 +371,11 @@
     },
     "/admin/namespaces/{namespace}/builddeletion/{buildId}/cancel": {
       "delete": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Cancel Build Deletion</s>",
         "description": "This API is used to cancel build deletion.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=8 (DELETE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "cancelBuildDeletion",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -449,15 +417,11 @@
     },
     "/admin/namespaces/{namespace}/startbuildupload/{appId}/{version}": {
       "post": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Start Build Upload</s>",
         "description": "This API is used to start build upload. [DEPRECATED]<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: build id</li></ul>",
         "operationId": "startBuildUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -503,15 +467,11 @@
     },
     "/admin/namespaces/{namespace}/commitchunkupload/{hash}/{uuid}/{offset}": {
       "post": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Commit Chunk Upload</s>",
         "description": "This API is used to commit chunk that has been uploaded. [DEPRECATED]<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: chunk data</li></ul>",
         "operationId": "commitChunkUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -564,18 +524,12 @@
     },
     "/admin/namespaces/{namespace}/commitbuildmanifest": {
       "post": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Commit Build Manifest</s>",
         "description": "This API is used to commit build manifest. [DEPRECATED]<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "commitBuildManifest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -629,15 +583,11 @@
     },
     "/admin/namespaces/{namespace}/buildsdeletion/byAppId": {
       "get": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "Get builds deletion by appId",
         "description": "This API is used to get build deletion. Only deleted build will be retrieved.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: List of build deletion</li></ul>",
         "operationId": "getBuildDeletionByAppId",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -695,15 +645,11 @@
     },
     "/admin/namespaces/{namespace}/builds/byNamespace": {
       "get": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "Get committed builds by namespace",
         "description": "This API is used to get basic build manifests. Only committed build will be retrieved. <p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Basic Build Manifest</li></ul>",
         "operationId": "getBuildByNamespace",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -733,15 +679,11 @@
     },
     "/admin/namespaces/{namespace}/commitchunkupload/{hash}/{uuid}/{offset}/{blockSize}": {
       "post": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Commit Chunk Upload</s>",
         "description": "This API is used to commit chunk that has been uploaded. [DEPRECATED]<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: chunk data</li></ul>",
         "operationId": "commitChunkUploadWithSize",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -801,15 +743,11 @@
     },
     "/admin/namespaces/{namespace}/startchunkupload": {
       "post": {
-        "tags": [
-          "Uploader V1"
-        ],
+        "tags": ["Uploader V1"],
         "summary": "<s>Start Chunk Upload</s>",
         "description": "This API is used to start chunk upload and retrieve upload url. [DEPRECATED]<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: upload data</li></ul>",
         "operationId": "startChunkUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -851,15 +789,11 @@
     },
     "/admin/namespaces/{namespace}/diff/cache": {
       "post": {
-        "tags": [
-          "Caching"
-        ],
+        "tags": ["Caching"],
         "summary": "Save Diff Cache",
         "description": "This API is used to save detailed diff cache. Only used by differ. Not to be used directly.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:DIFFCACHE\", action=1 (CREATE)</li></ul>",
         "operationId": "createCache",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -889,15 +823,11 @@
         ]
       },
       "put": {
-        "tags": [
-          "Caching"
-        ],
+        "tags": ["Caching"],
         "summary": "Diff Cache Completion",
         "description": "This API is used to mark that the diff caching is complete and diff summary file uploaded to s3. Only used by differ. Not to be used directly.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:DIFFCACHE\", action=4 (UPDATE)</li></ul>",
         "operationId": "commitCache",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -929,15 +859,11 @@
     },
     "/admin/namespaces/{namespace}/diff/calculate": {
       "post": {
-        "tags": [
-          "Caching"
-        ],
+        "tags": ["Caching"],
         "summary": "Dispatch Diff Caching Request",
         "description": "This API is used to dispatch diff caching request.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:DIFFCACHE\", action=1 (CREATE)</li></ul>",
         "operationId": "cachingRequest",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -975,15 +901,11 @@
     },
     "/admin/namespaces/{namespace}/dlc/{buildId}/link": {
       "get": {
-        "tags": [
-          "DLC"
-        ],
+        "tags": ["DLC"],
         "summary": "Retrieve DLC Link",
         "description": "This API is used to retrieve DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li></ul>",
         "operationId": "retrieveDependencies",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1023,15 +945,11 @@
     },
     "/admin/namespaces/{namespace}/dlc/link": {
       "put": {
-        "tags": [
-          "DLC"
-        ],
+        "tags": ["DLC"],
         "summary": "Link DLC",
         "description": "This API is used to link DLC version(s) against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li></ul>",
         "operationId": "linkDependencies",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1069,18 +987,12 @@
     },
     "/admin/namespaces/{namespace}/builds/{buildId}/blocks/urls": {
       "post": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Generate Block Download URLs",
         "description": "This API is used to Generate Download URLs for the requested blocks inside the specified buildId.<br/>The download URL generation may returns Signed URL or Public URL, depends on service configurations.<br/><br/>Other detail info: <ul><li><i>Required permission (IAM Auth)</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Block Download URLs</li></ul>",
         "operationId": "adminGenerateBlocksDownloadUrls",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1134,18 +1046,12 @@
     },
     "/admin/namespaces/{namespace}/blocks/multipart": {
       "post": {
-        "tags": [
-          "Multipart Uploader"
-        ],
+        "tags": ["Multipart Uploader"],
         "summary": "Start Multipart File Upload",
         "description": "This API is used to <b>start multipart file upload</b>. The service will returns the list of presigned urls that will be used to upload the Parts.<br/>Make sure to upload the Parts in-order based on the presigned urls order.The size of each Part should above or equals to 5MB, except the last one.<br/><br/>Other detail info: <ul><li><i>Required permission (IAM Auth)</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: multipart upload summary</li></ul>",
         "operationId": "startMultipartFileUpload",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1186,9 +1092,7 @@
     },
     "/admin/namespaces/{namespace}/blocks/multipart/{hash}": {
       "delete": {
-        "tags": [
-          "Multipart Uploader"
-        ],
+        "tags": ["Multipart Uploader"],
         "summary": "Abort Multipart File Upload",
         "description": "This API is used to <b>abort multipart file upload</b>. The aborted multipart file upload cannot be continued again.<br/><br/>Other detail info: <ul><li><i>Required permission (IAM Auth)</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=8 (DELETE)</li></ul>",
         "operationId": "abortMultipartFileUpload",
@@ -1234,18 +1138,12 @@
         ]
       },
       "patch": {
-        "tags": [
-          "Multipart Uploader"
-        ],
+        "tags": ["Multipart Uploader"],
         "summary": "Commit Multipart File Upload",
         "description": "This API is used to <b>commit multipart file upload</b> to signal the upload completion.<br/>The request should contains list of PartNumber along with its ETag value. The list should be in-order.<br/><br/>Other detail info: <ul><li><i>Required permission (IAM Auth)</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: block manifest</li></ul>",
         "operationId": "commitMultipartFileUpload",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1304,9 +1202,7 @@
     },
     "/v2/admin/namespaces/{namespace}/blocks/multipart/{hash}": {
       "delete": {
-        "tags": [
-          "Multipart Uploader"
-        ],
+        "tags": ["Multipart Uploader"],
         "summary": "Abort Resumable Multipart File Upload",
         "description": "This API is used to <b>abort resumable multipart file upload</b>.<br/>The aborted multipart file upload cannot be continued again.<br/><br/>Other detail info: <ul><li><i>Required permission (IAM Auth)</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=8 (DELETE)</li></ul>",
         "operationId": "abortMultipartFileUpload_1",
@@ -1353,15 +1249,11 @@
         ]
       },
       "patch": {
-        "tags": [
-          "Multipart Uploader"
-        ],
+        "tags": ["Multipart Uploader"],
         "summary": "Commit Resumable Multipart File Upload",
         "description": "This API is used to <b>commit resumable multipart file upload</b> to signal the upload completion.<br/>If there's a missing Part that not uploaded yet, then the multipart file upload cannot be committed.<br/><br/>Other detail info: <ul><li><i>Required permission (IAM Auth)</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: block manifest</li></ul>",
         "operationId": "commitResumableMultipartFileUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1413,18 +1305,12 @@
     },
     "/v2/admin/namespaces/{namespace}/blocks/multipart": {
       "post": {
-        "tags": [
-          "Multipart Uploader"
-        ],
+        "tags": ["Multipart Uploader"],
         "summary": "Start Resumable Multipart File Upload",
         "description": "This API is used to <b>start resumable multipart file upload</b>.<br/>The service will returns the list of presigned urls that will be used to upload the Parts.<br/>If there's a missing Part in the presigned urls list, it indicates that the Part already uploaded previously, so it can be skipped.<br/>The size of each Part should above or equals to 5MB, except the last Part.<br/><br/>Other detail info: <ul><li><i>Required permission (IAM Auth)</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: multipart upload summary</li></ul>",
         "operationId": "startResumableMultipartFileUpload",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1471,18 +1357,12 @@
     },
     "/v2/admin/namespaces/{namespace}/blocks/multipart/{hash}/part": {
       "post": {
-        "tags": [
-          "Multipart Uploader"
-        ],
+        "tags": ["Multipart Uploader"],
         "summary": "Commit Resumable Multipart File Upload's Part",
         "description": "This API is used to <b>commit the Part of multipart upload</b>.<br/>The committed Part will be marked as completed, so in case the multipart file upload retries, it won't be included in the list of unuploaded parts.<br/><br/>Other detail info: <ul><li><i>Required permission (IAM Auth)</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: None</li></ul>",
         "operationId": "commitResumableMultipartFileUploadPart",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1542,18 +1422,12 @@
     },
     "/admin/namespaces/{namespace}/releasenote/manifest/get/{appId}/{platformId}": {
       "get": {
-        "tags": [
-          "Release Note"
-        ],
+        "tags": ["Release Note"],
         "summary": "Get release note manifest",
         "description": "This API is used to get release note manifest.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li></ul>",
         "operationId": "getReleaseNote",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1607,18 +1481,12 @@
     },
     "/admin/namespaces/{namespace}/releasenote/upload/start/{uploaderId}": {
       "post": {
-        "tags": [
-          "Release Note"
-        ],
+        "tags": ["Release Note"],
         "summary": "Start Release Note Upload",
         "description": "This API is used to start release note upload and get the presigned URL.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li></ul>",
         "operationId": "startReleaseNoteUpload",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1666,18 +1534,12 @@
     },
     "/admin/namespaces/{namespace}/releasenote/manifest/save/{uploadMode}": {
       "post": {
-        "tags": [
-          "Release Note"
-        ],
+        "tags": ["Release Note"],
         "summary": "Save release note manifest",
         "description": "This API is used to save release note manifest.<p>It will update the existing release note manifest if exist (based on namespace, appId, platformId and version).<br/>Otherwise, it will create a new release note manifest.<br/><br/><b>Upload Mode for existing release note manifest:</b><br/>0 = update, will merge the old localizations with the new localizations.<br/>1 = replace, will replace the old localizations with the new localizations.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li></ul>",
         "operationId": "saveReleaseNote",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1734,15 +1596,11 @@
     },
     "/admin/namespaces/{namespace}/releasenote/upload/commit/{hash}": {
       "patch": {
-        "tags": [
-          "Release Note"
-        ],
+        "tags": ["Release Note"],
         "summary": "Commit Release Note Upload",
         "description": "This API is used to commit release note file that has been uploaded to signal completion.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li></ul>",
         "operationId": "commitReleaseNoteUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1787,15 +1645,11 @@
     },
     "/admin/namespaces/{namespace}/v2/builds/{buildId}": {
       "get": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Get Build Manifest v2",
         "description": "This API is used to get build manifest for build uploaded with BuildInfo v2.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Build Manifest</li></ul>",
         "operationId": "getBuild_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1832,15 +1686,11 @@
         ]
       },
       "delete": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "<s>Delete Build v2</s>",
         "description": "This API is used to delete build manifest.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=8 (DELETE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "deleteBuildManifest_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1880,18 +1730,12 @@
         ]
       },
       "patch": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Edit Launch Arguments",
         "description": "This API is used to edit build's launchArgument.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: None</li></ul>",
         "operationId": "updateBuildMetadata",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -1936,15 +1780,11 @@
     },
     "/admin/namespaces/{namespace}/v2/setcurrentbuild/{appId}/{version}/{platformId}": {
       "put": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "<s>Set Current Build (v2)</s>",
         "description": "This API is used to set current build as release version.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "setCurrentBuild_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2004,15 +1844,11 @@
     },
     "/admin/namespaces/{namespace}/v2/commitzsyncfileupload/{buildId}/{hash}": {
       "patch": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Commit ZsyncFile Upload (v2)",
         "description": "This API is used to commit file that has been uploaded to signal completion.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: chunk data</li></ul>",
         "operationId": "commitZsyncFileUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2063,18 +1899,12 @@
     },
     "/admin/namespaces/{namespace}/v2/difftrigger/status/{value}": {
       "patch": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Toggle Diff Trigger Status",
         "description": "This API is used to toggle diff trigger status. Use 0 to turn off and 1 to turn on. Any values other than 0 will be regarded as 1.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li></ul>",
         "operationId": "toggleDiffTriggerStatus",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2105,15 +1935,11 @@
     },
     "/admin/namespaces/{namespace}/v2/startfileupload/{uploaderId}": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Start File Upload (v2)",
         "description": "This API is used to start file upload and retrieve upload url.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: upload data</li></ul>",
         "operationId": "startFileUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2161,15 +1987,11 @@
     },
     "/admin/namespaces/{namespace}/v2/commitzsyncfileupload/{buildId}/{hash}/{blockSize}": {
       "patch": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Commit Zsync File Upload v2",
         "description": "This API is used to commit chunk that has been uploaded.<p>Previous API:<ul><li>/v2/startzsyncfileupload</li></ul>Next API:<ul><li>/v2/startfileupload/{uploaderId}</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li></ul>",
         "operationId": "commitZsyncFileUploadWithSize",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2227,18 +2049,12 @@
     },
     "/admin/namespaces/{namespace}/v2/diff/start/{sourceBuildId}/{destinationBuildId}": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Start Diff Upload",
         "description": "This API is used to start diff manifest upload.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: UploadSummary</li></ul>",
         "operationId": "startDiffUpload",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2285,18 +2101,12 @@
     },
     "/admin/namespaces/{namespace}/v2/startbuildupload": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Start Build Upload v2",
         "description": "This API is used to start build upload.<p>Previous API:<ul><li>none</li></ul>Next API:<ul><li>/v2/startfileupload/{uploaderId}</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: build id</li></ul>",
         "operationId": "startBuildUpload_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2343,18 +2153,12 @@
     },
     "/admin/namespaces/{namespace}/v2/startbuildupload/{sourceBuildId}": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Start Build Upload v2",
         "description": "This API is used to start incremental build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn't yet set as latest).<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: build id</li></ul>",
         "operationId": "startBuildUpload_2",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2413,15 +2217,11 @@
     },
     "/admin/namespaces/{namespace}/v2/commitfileupload/{buildId}/{hash}": {
       "patch": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Commit File Upload (v2)",
         "description": "This API is used to commit file that has been uploaded to signal completion.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: chunk data</li></ul>",
         "operationId": "commitFileUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2472,15 +2272,11 @@
     },
     "/admin/namespaces/{namespace}/v2/startzsyncfileupload/{fileHash}": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Start ZsyncFile Upload (v2)",
         "description": "This API is used to start zsync control file upload and retrieve upload url.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: upload data</li></ul>",
         "operationId": "startZsyncFileUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2533,18 +2329,12 @@
     },
     "/admin/namespaces/{namespace}/v2/diff/signedurl/{sourceBuildId}/{destinationBuildId}": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Request Presigned Url for Diff Manifest Upload",
         "description": "Use this API to get the presigned url to upload the diff manifest.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: build id</li></ul>",
         "operationId": "requestPresignedUrlDiffUpload",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2597,15 +2387,11 @@
     },
     "/admin/namespaces/{namespace}/v2/dlc/byGameAppId": {
       "get": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Get committed DLC build by appId (v2)",
         "description": "This API is used to get basic DLC build manifests. Only committed build will be retrieved.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Basic Build Manifest</li></ul>",
         "operationId": "getDLCBuildByAppId",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2660,18 +2446,12 @@
     },
     "/admin/namespaces/{namespace}/v2/commitdlcbuildmanifest": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Commit DLC Build Manifest (v2)",
         "description": "This API is used to commit build manifest.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "commitDLCBuildManifest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2721,15 +2501,11 @@
     },
     "/admin/namespaces/{namespace}/v2/builds/byAppId": {
       "get": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Get committed builds by appId (v2)",
         "description": "This API is used to get basic build manifests. Only committed build will be retrieved.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Basic Build Manifest</li></ul>",
         "operationId": "getBuildByAppId_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2784,18 +2560,12 @@
     },
     "/admin/namespaces/{namespace}/v2/startdlcbuildupload": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Start DLC Build Upload",
         "description": "This API is used to start DLC build upload.<p>Previous API:<ul><li>none</li></ul>Next API:<ul><li>/v2/startfileupload/{uploaderId} for normal (non-differential) upload</li><li>/v3/prezsyncupload for differential upload</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: build id</li></ul>",
         "operationId": "startDLCBuildUpload",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2848,18 +2618,12 @@
     },
     "/admin/namespaces/{namespace}/v2/startdlcbuildupload/{sourceBuildId}": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Start DLC Build Upload",
         "description": "This API is used to start DLC build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn't yet set as latest).<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: build id</li></ul>",
         "operationId": "startDLCBuildUpload_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2918,18 +2682,12 @@
     },
     "/admin/namespaces/{namespace}/v2/diff/commit/{sourceBuildId}/{destinationBuildId}": {
       "patch": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Commit Diff Manifest",
         "description": "This API is used to commit diff manifest.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "commitDiffManifest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -2979,18 +2737,12 @@
     },
     "/admin/namespaces/{namespace}/v2/commitbuildmanifest": {
       "post": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Commit Build Manifest (v2)",
         "description": "This API is used to commit build manifest.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "commitBuildManifest_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3040,18 +2792,12 @@
     },
     "/admin/namespaces/{namespace}/v2/difftrigger/status": {
       "get": {
-        "tags": [
-          "Uploader V2"
-        ],
+        "tags": ["Uploader V2"],
         "summary": "Get Diff Trigger Status",
         "description": "This API is used to get diff trigger status.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li></ul>",
         "operationId": "getDiffTriggerStatus",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3078,15 +2824,11 @@
     },
     "/admin/namespaces/{namespace}/v3/commitmissingbytesfileupload/{hash}": {
       "patch": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Commit Missing Bytes File Upload (v3)",
         "description": "This API is used to commit missing bytes file that has been uploaded to S3.<p>Previous API:<ul><li>/v3/startzsyncfileupload</li></ul>Next API:<ul><li>/v3/startfileupload/{uploaderId}</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: chunk data</li></ul>",
         "operationId": "commitMissingBytesFileUploadWithSize",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3139,15 +2881,11 @@
     },
     "/admin/namespaces/{namespace}/v3/setcurrentbuild/{appId}/{version}/{platformId}": {
       "put": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Set Current Build v3",
         "description": "This API is used to set current build as release version. Every build set as current will be recorded in version history as chain of history.<p>Previous API:<ul><li>//TODO previous api</li></ul>Next API:<ul><li>none</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "setCurrentBuild_2",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3207,15 +2945,11 @@
     },
     "/admin/namespaces/{namespace}/v3/commitzsyncfileupload/{buildId}/{hash}": {
       "patch": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Commit ZsyncFile Upload v3",
         "description": "This API is used to commit file that has been uploaded to signal completion.<p>Mandatory fields for body: sourceBuildId, destinationBuildId, destinationFilePath, destinationFileChecksum, destinationControlFileUuid, destinationControlFileChecksumPrevious API:<ul><li>/v3/startzsyncfileupload</li></ul>Next API:<ul><li>/v3/startfileupload/{uploaderId} for normal (non-differential) upload</li><li>/v3/listendiffstatus for differential upload</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li></ul>",
         "operationId": "commitZsyncFileUpload_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3275,15 +3009,11 @@
     },
     "/admin/namespaces/{namespace}/v3/startfileupload/{uploaderId}": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Start File Upload v3",
         "description": "This API is used to start file upload, which in turn will response with presigned URL for upload target.<p>Previous API:<ul><li>/v3/startbuildupload in the case of normal (non-differential) upload</li><li>/v3/startbuildupload/{sourceBuildId} in the case of normal (non-differential) incremental upload</li><li>/v3/commitzsyncfileupload/{buildId}/{hash} in the case of differential upload</li><li>/v3/commitzsyncfileupload/{buildId}/{hash}/{blockSize} to also specify the blocksize in the case of differential upload</li></ul>Next API:<ul><li>/v3/commitfileupload//{buildId}/{hash}</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li></ul>",
         "operationId": "startFileUpload_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3331,15 +3061,11 @@
     },
     "/admin/namespaces/{namespace}/v3/commitzsyncfileupload/{buildId}/{hash}/{blockSize}": {
       "patch": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Commit Zsync File Upload v3",
         "description": "This API is used to commit chunk that has been uploaded. By commiting the file, it means flag the file as already uploaded.<p>Mandatory fields for body: sourceBuildId, destinationBuildId, destinationFilePath, destinationFileChecksum, destinationControlFileUuid, destinationControlFileChecksumPrevious API:<ul><li>/v3/startzsyncfileupload</li></ul>Next API:<ul><li>/v3/startfileupload/{uploaderId}</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li></ul>",
         "operationId": "commitZsyncFileUploadWithSize_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3405,18 +3131,12 @@
     },
     "/admin/namespaces/{namespace}/v3/startbuildupload": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Start Build Upload v3",
         "description": "This API is used to start build upload for v3 upload (Differential Upload). This endpoint is the startpoint of upload.<p>Previous API:<ul><li>none</li></ul>Next API:<ul><li>/v3/prezsyncupload</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: build id</li></ul>",
         "operationId": "startBuildUpload_3",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3463,18 +3183,12 @@
     },
     "/admin/namespaces/{namespace}/v3/startbuildupload/{sourceBuildId}": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Start Build Upload v3",
         "description": "This API is used to start build upload. This endpoint used for incremental build upload, where the developer update the files from existing build version (that hasn't yet set as latest).<p>Previous API:<ul><li>none</li></ul>Next API:<ul><li>/v3/prezsyncupload</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: build id</li></ul>",
         "operationId": "startBuildUpload_4",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3533,15 +3247,11 @@
     },
     "/admin/namespaces/{namespace}/v3/commitfileupload/{buildId}/{hash}": {
       "patch": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Commit File Upload v3",
         "description": "This API is used to commit file that has been uploaded to signal completion.<p>Previous API:<ul><li>/v3/startfileupload/{uploaderId}</li></ul>Next API:<ul><li>/v3/startzsyncfileupload/{fileHash} for non-differential (normal) upload</li><li>/v3/prezsyncupload for differential upload</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li></ul>",
         "operationId": "commitFileUpload_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3592,15 +3302,11 @@
     },
     "/admin/namespaces/{namespace}/v3/uploadmode/{appId}/{platformId}": {
       "get": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Get differential upload activation status",
         "description": "This API is used to see whether BuildUtil should upload in differential mode or normal mode.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Diff File Status Manifest</li></ul>",
         "operationId": "determineUploadMode",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3646,15 +3352,11 @@
     },
     "/admin/namespaces/{namespace}/v3/prezsyncupload": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Pre check differential upload",
         "description": "This API is used to check the diff status (not yet diff'ed, diff'ed, patched) of a file before upload its control file.<p>Previous API:<ul><li>/v3/startbuildupload</li><li>/v3/startbuildupload/{sourceBuildId}</li></ul>Next API:<ul><li>/v3/startzsyncfileupload/{fileHash}</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: upload data</li></ul>",
         "operationId": "preZsyncUpload",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3695,18 +3397,12 @@
     },
     "/admin/namespaces/{namespace}/v3/commitbuildmanifest/{sourceBuildId}": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Commit Build Manifest (v3)",
         "description": "This API is used to commit build manifest.<p>Previous API:<ul><li>/listenPatchStatus in case needs to patch file</li><li>/v3/commitzsyncfileupload/{buildId}/{hash} in case of normal non-differential upload</li><li>/v3/commitzsyncfileupload/{buildId}/{hash}/{blockSize} to also specify the blocksize in case of normal non-differential upload</li></ul>Next API:<ul><li>none</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=4 (UPDATE)</li><li><i>Returns</i>: none</li></ul>",
         "operationId": "commitBuildManifest_2",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3763,15 +3459,11 @@
     },
     "/admin/namespaces/{namespace}/v3/current/{appId}/{platformId}": {
       "get": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Get most current build",
         "description": "This API is used to the current build from particular appId. This is a utility API used by BuildUtil to determine whether there's an older build set as current. If it does, the BuildUtil will proceed the upload as differential upload.<p>Previous API:<ul><li>none</li></ul>Next API:<ul><li>none</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Diff File Status Manifest</li></ul>",
         "operationId": "getMostCurrentBuild",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3817,15 +3509,11 @@
     },
     "/admin/namespaces/{namespace}/v3/startzsyncfileupload/{fileHash}": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Start ZsyncFile Upload v3",
         "description": "This API is used to start zsync control file upload, which in turn will respond with presigned url for the upload target.<p>Mandatory fields for body: sourceBuildId, destinationBuildId, destinationFilePath, destinationFileChecksum, binaryUpload{contentMd5, contentLength, hash}Previous API:<ul><li>/v3/prezsyncupload</li></ul>Next API:<ul><li>/v3/commitzsyncfileupload/{buildId}/{hash}</li><li>/v3/commitzsyncfileupload/{buildId}/{hash}/{blockSize} to also specify the blocksize</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: upload data</li></ul>",
         "operationId": "startZsyncFileUpload_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3873,15 +3561,11 @@
     },
     "/admin/namespaces/{namespace}/v3/diff/status/{sourceBuildId}/{destinationBuildId}/{destinationFilePath}": {
       "get": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Get diff status manifest",
         "description": "This API is used to get diff status manifests.<p>Previous API:<ul><li>none</li></ul>Next API:<ul><li>none</li></ul>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Diff File Status Manifest</li></ul>",
         "operationId": "getDiffStatusOfFile",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3933,15 +3617,11 @@
     },
     "/public/namespaces/{namespace}/drmlicense/encrypt": {
       "get": {
-        "tags": [
-          "DRM"
-        ],
+        "tags": ["DRM"],
         "summary": "DRM License Encryption",
         "description": "This API is used to get encrypted userId and machineId for entitled user.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: data field containing encrypted userId and machineId separated by comma</li></ul>",
         "operationId": "license",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -3994,15 +3674,11 @@
     },
     "/public/namespaces/{namespace}/drmlicense/retrievePublicKey": {
       "get": {
-        "tags": [
-          "DRM"
-        ],
+        "tags": ["DRM"],
         "summary": "Retrieve Public Key",
         "description": "This API is used to get public key.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: url to download the key</li></ul>",
         "operationId": "retrieveKey",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4029,18 +3705,12 @@
     },
     "/admin/namespaces/{namespace}/listenPatchStatus": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Listen patch status",
         "description": "This API is used to listen patch status from source file and missing bytes file to destination file.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: diff status</li></ul>",
         "operationId": "listenPatchStatus",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4081,18 +3751,12 @@
     },
     "/admin/namespaces/{namespace}/listenDiffStatus": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Listen diff status",
         "description": "This API is used to listen diff status.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: diff status</li></ul>",
         "operationId": "listenDiffStatus",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4133,18 +3797,12 @@
     },
     "/admin/namespaces/{namespace}/patch/send": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Trigger patch request message",
         "description": "This API is used to send patch request to MQ.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: diff status</li></ul>",
         "operationId": "sendPatchRequestMessage",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4176,18 +3834,12 @@
     },
     "/admin/namespaces/{namespace}/diff/send": {
       "post": {
-        "tags": [
-          "Uploader V3"
-        ],
+        "tags": ["Uploader V3"],
         "summary": "Trigger diff request message",
         "description": "This API is used to send diff request to MQ.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=1 (CREATE)</li><li><i>Returns</i>: diff status</li></ul>",
         "operationId": "sendDiffRequestMessage",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4219,15 +3871,11 @@
     },
     "/admin/namespaces/{namespace}/gdpr/retrieve": {
       "get": {
-        "tags": [
-          "GDPR"
-        ],
+        "tags": ["GDPR"],
         "summary": "GDPR Compliant - Retrieve",
         "description": "This API is used to get all stored data that relates to supplied machineId.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: list of data related to machineId</li></ul>",
         "operationId": "gdprRetrievePii",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4267,15 +3915,11 @@
     },
     "/admin/namespaces/{namespace}/gdpr/remove": {
       "delete": {
-        "tags": [
-          "GDPR"
-        ],
+        "tags": ["GDPR"],
         "summary": "GDPR Compliant - Delete",
         "description": "This API is used to remove all stored data that relates to supplied machineId.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=8 (DELETE)</li><li><i>Returns</i>: list of data related to machineId</li></ul>",
         "operationId": "gdprRemovePii",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4315,18 +3959,12 @@
     },
     "/public/namespaces/{namespace}/builds/{buildId}/blocks/urls": {
       "post": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Generate Block Download URLs",
         "description": "This API is used to Generate Download URLs for the requested blocks inside the specified buildId.<br/>The download URL generation may returns Signed URL or Public URL, depends on service configurations.<br/>Before processing the URL generation, it will validate the user entitlement first, if not entitled then the request will be refused.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: Block Download URLs</li></ul>",
         "operationId": "generateBlocksDownloadUrls",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4386,15 +4024,11 @@
     },
     "/public/namespaces/{namespace}/bulkCheckLatest": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Check latest build existence",
         "description": "This API is used to check whether supplied list of appId has valid buildmanifest and at  least one of its build set as latest.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: list of build availability</li></ul>",
         "operationId": "checkLatestBuildExistence",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4434,15 +4068,11 @@
     },
     "/public/namespaces/{namespace}/updategame/{appId}/{version}": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "<s>Update game</s>",
         "description": "This API is used to get build manifest that contains file difference between requested version and release version. [DEPRECATED]<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>",
         "operationId": "updateGame",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4494,15 +4124,11 @@
     },
     "/public/namespaces/{namespace}/v2/updategame/{appId}/{version}/{platformId}": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Update game v2",
         "description": "This API is used to get build manifest. The binary diff will be calculated in the client side, while obsolete file list will be generated by server side.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>",
         "operationId": "updateGame_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4565,15 +4191,11 @@
     },
     "/public/namespaces/{namespace}/updategame/builds/{buildId}": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "<s>Update game</s>",
         "description": "This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and generate chunks difference and obsolete files list between two version. Only works for builds uploaded with BuildInfo v1 [DEPRECATED}<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>",
         "operationId": "updateGame_2",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4619,15 +4241,11 @@
     },
     "/public/namespaces/{namespace}/availablebuilds/{appId}": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Simple build manifest",
         "description": "This API is used to get simple build manifest that contains list of current build in various platform.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>",
         "operationId": "getSimpleManifest",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4675,15 +4293,11 @@
     },
     "/public/namespaces/{namespace}/diff/{sourceBuildId}/{destinationBuildId}": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Get Diff Status from Two Builds",
         "description": "This API fetch the diff status between two builds. The diff generated by diff wrapper and saved in the database. Return 404 if no diff found.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: Simple diff status containing where to fetch diff manifest</li></ul>",
         "operationId": "fetchDiffStatus",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4728,15 +4342,11 @@
     },
     "/public/namespaces/{namespace}/versionHistory": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Get version history",
         "description": "This API is used to get version history.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: version chain from specified build</li></ul>",
         "operationId": "versionHistory",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4783,15 +4393,11 @@
     },
     "/public/namespaces/{namespace}/updategame/{appId}": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "<s>Download game</s>",
         "description": "This API is used to get build manifest of release version of the application. [DEPRECATED]<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>",
         "operationId": "initialUpdateGame",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4837,15 +4443,11 @@
     },
     "/public/namespaces/{namespace}/v2/updategame/{appId}/{platformId}": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Download game v2",
         "description": "This API is used to get build manifest of release version of the application.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>",
         "operationId": "initialUpdateGame_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4902,15 +4504,11 @@
     },
     "/public/namespaces/{namespace}/v2/updategame/builds/{buildId}": {
       "get": {
-        "tags": [
-          "Downloader"
-        ],
+        "tags": ["Downloader"],
         "summary": "Update game v2",
         "description": "This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and obsolete files list between two version. Only works for builds uploaded with BuildInfo v2<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>",
         "operationId": "updateGameV2",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -4955,15 +4553,11 @@
     },
     "/public/namespaces/{namespace}/diff/cache/source/{sourceBuildId}/dest/{destinationBuildId}": {
       "get": {
-        "tags": [
-          "Caching"
-        ],
+        "tags": ["Caching"],
         "summary": "Retrieve Diff Cache",
         "description": "This API is used to retrieve detailed diff cache.<br/>The response will contains list of diff cache files along with its download url.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>",
         "operationId": "retrieveCache",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5010,15 +4604,11 @@
     },
     "/public/namespaces/{namespace}/dlc/{buildId}/link": {
       "get": {
-        "tags": [
-          "DLC"
-        ],
+        "tags": ["DLC"],
         "summary": "Retrieve DLC Link",
         "description": "This API is used to retrieve DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>",
         "operationId": "retrieveDependencies_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5058,15 +4648,11 @@
     },
     "/public/namespaces/{namespace}/apps/latest/byDLCAppId/{dlcAppId}": {
       "get": {
-        "tags": [
-          "DLC"
-        ],
+        "tags": ["DLC"],
         "summary": "Retrieve DLC by DLC AppId",
         "description": "Retrieve the list of DLC available on specific game. Use DLC's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: appId of game and list of its builds by platformId</li></ul>",
         "operationId": "latestBaseGameByDLC",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5110,15 +4696,11 @@
     },
     "/public/namespaces/{namespace}/dlcs/latest/byGameAppId/{appId}": {
       "get": {
-        "tags": [
-          "DLC"
-        ],
+        "tags": ["DLC"],
         "summary": "Retrieve DLC by Game AppId",
         "description": "Retrieve the list of DLC available on specific game. Use game's appId to query.<p>Other detail info: <ul><li><i>Returns</i>: list of DLC</li></ul>",
         "operationId": "latestDLCByAppId",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5150,15 +4732,11 @@
     },
     "/public/namespaces/{namespace}/dlc/{buildId}/compatibility": {
       "get": {
-        "tags": [
-          "DLC"
-        ],
+        "tags": ["DLC"],
         "summary": "Retrieve DLC Compatibility",
         "description": "This API is used to retrieve compatibility of specific DLC versions against the game version.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li></ul>",
         "operationId": "retrieveCompatibility",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5198,15 +4776,11 @@
     },
     "/admin/namespaces/{namespace}/cleanerConfigurations": {
       "get": {
-        "tags": [
-          "Utility"
-        ],
+        "tags": ["Utility"],
         "summary": "Get Buildinfo Cleaner Configurations",
         "description": "This API is used to retrieve grace period of buildinfo cleaner.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Buildinfo Grace Period Time</li></ul>",
         "operationId": "getBuildInfoCleanerConfiguration",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5228,15 +4802,11 @@
     },
     "/admin/namespaces/{namespace}/ping/differ": {
       "get": {
-        "tags": [
-          "Utility"
-        ],
+        "tags": ["Utility"],
         "summary": "Ping Differ",
         "description": "This API is used to manually checks the readiness of differ.<p>Other detail info: <ul><li><i>Returns</i>: ping result</li></ul>",
         "operationId": "pingDiffer",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5258,15 +4828,11 @@
     },
     "/admin/namespaces/{namespace}/configurations": {
       "get": {
-        "tags": [
-          "Utility"
-        ],
+        "tags": ["Utility"],
         "summary": "Get Configurations",
         "description": "This API is used to get the BuildInfo configurations.<br/><br/><b>1. Entitlement Validation</b><br/>Entitlement Validation is utilized in download and update game/application flow.<br/>It will check whether the user is entitled for the game/application or not through Justice Entitlement Service.<br/>If user is entitled, it will process the request, otherwise the request will rejected.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO:CONFIG\", action=2 (READ)</li><li><i>Returns</i>: Configuration Info</li></ul>",
         "operationId": "getConfiguration",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5290,18 +4856,12 @@
         ]
       },
       "patch": {
-        "tags": [
-          "Utility"
-        ],
+        "tags": ["Utility"],
         "summary": "Update Configurations",
         "description": "This API is used to update the BuildInfo configurations.<br/>This API support update configuration based on given data. Single request can update single field or multi fields.<br/><br/><b>1. Entitlement Validation</b><br/>Entitlement Validation is utilized in download and update game/application flow.<br/>It will check whether the user is entitled for the game/application or not through Justice Entitlement Service.<br/>If user is entitled, it will process the request, otherwise the request will rejected.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO:CONFIG\", action=4 (UPDATE)</li><li><i>Returns</i>: Configuration Info</li></ul>",
         "operationId": "updateConfiguration",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5335,15 +4895,11 @@
     },
     "/admin/namespaces/{namespace}/validateSDKConfig": {
       "get": {
-        "tags": [
-          "Utility"
-        ],
+        "tags": ["Utility"],
         "summary": "Check validity of clientId and redirectUri from SDK Config",
         "description": "This API is used to validate clientId and redirectUri from SDK Config.<p>Other detail info: <ul><li><i>Required permission</i>: resource=\"ADMIN:NAMESPACE:{namespace}:BUILDINFO\", action=2 (READ)</li><li><i>Returns</i>: Basic Build Manifest</li></ul>",
         "operationId": "getBuildByNamespace_1",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "namespace",
@@ -5589,10 +5145,7 @@
     },
     "ErrorEntity": {
       "type": "object",
-      "required": [
-        "errorCode",
-        "errorMessage"
-      ],
+      "required": ["errorCode", "errorMessage"],
       "properties": {
         "errorCode": {
           "type": "integer",
@@ -5695,10 +5248,7 @@
     },
     "ValidationErrorEntity": {
       "type": "object",
-      "required": [
-        "errorCode",
-        "errorMessage"
-      ],
+      "required": ["errorCode", "errorMessage"],
       "properties": {
         "errorCode": {
           "type": "integer",
@@ -5882,9 +5432,7 @@
     },
     "BlockDownloadUrls": {
       "type": "object",
-      "required": [
-        "urls"
-      ],
+      "required": ["urls"],
       "properties": {
         "urls": {
           "type": "object",
@@ -5898,9 +5446,7 @@
     },
     "BlockDownloadUrlsRequest": {
       "type": "object",
-      "required": [
-        "uuids"
-      ],
+      "required": ["uuids"],
       "properties": {
         "uuids": {
           "type": "array",
@@ -5914,10 +5460,7 @@
     },
     "MultipartUploadSummary": {
       "type": "object",
-      "required": [
-        "parts",
-        "uuid"
-      ],
+      "required": ["parts", "uuid"],
       "properties": {
         "uuid": {
           "type": "string",
@@ -5934,10 +5477,7 @@
     },
     "MultipartUploadUrl": {
       "type": "object",
-      "required": [
-        "partNumber",
-        "presignedUrl"
-      ],
+      "required": ["partNumber", "presignedUrl"],
       "properties": {
         "partNumber": {
           "type": "integer",
@@ -5952,11 +5492,7 @@
     },
     "StartMultipartUploadRequest": {
       "type": "object",
-      "required": [
-        "contentLength",
-        "hash",
-        "partSize"
-      ],
+      "required": ["contentLength", "hash", "partSize"],
       "properties": {
         "hash": {
           "type": "string",
@@ -5976,9 +5512,7 @@
     },
     "CommitMultipartUploadRequest": {
       "type": "object",
-      "required": [
-        "parts"
-      ],
+      "required": ["parts"],
       "properties": {
         "parts": {
           "type": "array",
@@ -5991,10 +5525,7 @@
     },
     "MultipartUploadedPart": {
       "type": "object",
-      "required": [
-        "etag",
-        "partNumber"
-      ],
+      "required": ["etag", "partNumber"],
       "properties": {
         "partNumber": {
           "type": "integer",
@@ -6009,14 +5540,7 @@
     },
     "ReleaseNoteDTO": {
       "type": "object",
-      "required": [
-        "appId",
-        "baseUrls",
-        "namespace",
-        "platformId",
-        "releaseNoteLocalizations",
-        "version"
-      ],
+      "required": ["appId", "baseUrls", "namespace", "platformId", "releaseNoteLocalizations", "version"],
       "properties": {
         "namespace": {
           "type": "string",
@@ -6061,10 +5585,7 @@
     },
     "ReleaseNoteLocalizationDTO": {
       "type": "object",
-      "required": [
-        "lang",
-        "uuid"
-      ],
+      "required": ["lang", "uuid"],
       "properties": {
         "lang": {
           "type": "string",
@@ -6079,12 +5600,7 @@
     },
     "ReleaseNoteManifest": {
       "type": "object",
-      "required": [
-        "appId",
-        "platformId",
-        "releaseNoteLocalizations",
-        "version"
-      ],
+      "required": ["appId", "platformId", "releaseNoteLocalizations", "version"],
       "properties": {
         "appId": {
           "type": "string",
@@ -6560,11 +6076,7 @@
     },
     "DiffCacheObject": {
       "type": "object",
-      "required": [
-        "diffFile",
-        "filePath",
-        "url"
-      ],
+      "required": ["diffFile", "filePath", "url"],
       "properties": {
         "filePath": {
           "type": "string",
@@ -6583,11 +6095,7 @@
     },
     "RetrieveDiffCacheResponse": {
       "type": "object",
-      "required": [
-        "baseUrls",
-        "diffCaches",
-        "summaryFile"
-      ],
+      "required": ["baseUrls", "diffCaches", "summaryFile"],
       "properties": {
         "summaryFile": {
           "type": "string",
@@ -6704,9 +6212,7 @@
     },
     "ConfigurationInfo": {
       "type": "object",
-      "required": [
-        "entitlementValidation"
-      ],
+      "required": ["entitlementValidation"],
       "properties": {
         "entitlementValidation": {
           "type": "boolean",

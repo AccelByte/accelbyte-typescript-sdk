@@ -9,17 +9,17 @@ import { DifferentialFileManifest } from './DifferentialFileManifest.js'
 import { ObsoleteFileManifest } from './ObsoleteFileManifest.js'
 
 export const DifferentialBuildManifest = z.object({
-  buildId: z.string().nullish(),
   appId: z.string().nullish(),
-  platformId: z.string().nullish(),
   appSize: z.number().int().nullish(),
   baseUrls: z.array(z.string()).nullish(),
-  releaseNoteUrls: z.array(z.string()).nullish(),
-  defaultLaunchProfile: DefaultLaunchProfile.nullish(),
+  buildId: z.string().nullish(),
   buildInfoVersion: z.string().nullish(),
+  defaultLaunchProfile: DefaultLaunchProfile.nullish(),
   displayVersion: z.string().nullish(),
   files: z.array(DifferentialFileManifest).nullish(),
-  obsoleteFiles: z.array(ObsoleteFileManifest).nullish()
+  obsoleteFiles: z.array(ObsoleteFileManifest).nullish(),
+  platformId: z.string().nullish(),
+  releaseNoteUrls: z.array(z.string()).nullish()
 })
 
 export interface DifferentialBuildManifest extends z.TypeOf<typeof DifferentialBuildManifest> {}

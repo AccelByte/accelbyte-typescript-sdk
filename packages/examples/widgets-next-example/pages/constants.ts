@@ -4,8 +4,12 @@
  * and restrictions contact your company contract manager.
  */
 
-// AGS Premium clientId
-export const CLIENT_ID = '77f88506b6174c3ea4d925f5b4096ce8'
+import { z } from 'zod'
 
-// AGS Starter clientId
-// export const CLIENT_ID = '874f2278398746119446a64c5a847e1a'
+export const LOCAL_STORAGE_KEY = z.enum(['access_token', 'refresh_token'])
+
+// AGS Starter config
+export const GAME_NAMESPACE = 'widget1game'
+export const CLIENT_ID = 'b248c5d080aa4c1daaf9f39d18e77500'
+export const BASE_URL = 'http://localhost:3030/api'
+export const REDIRECT_URL = 'http://localhost:3030'

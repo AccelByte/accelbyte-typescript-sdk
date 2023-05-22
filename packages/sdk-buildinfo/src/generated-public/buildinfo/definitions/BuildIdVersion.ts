@@ -7,12 +7,12 @@ import { z } from 'zod'
 
 export const BuildIdVersion = z.object({
   buildId: z.string().nullish(),
-  platformId: z.string().nullish(),
-  launchArguments: z.string().nullish(),
-  status: z.string().nullish(),
+  createdTime: z.string().nullish(),
   deleted: z.boolean().nullish(),
   displayVersion: z.string().nullish(),
-  createdTime: z.string().nullish(),
+  launchArguments: z.string().nullish(),
+  platformId: z.string().nullish(),
+  status: z.string().nullish(),
   updatedTime: z.string().nullish()
 })
 

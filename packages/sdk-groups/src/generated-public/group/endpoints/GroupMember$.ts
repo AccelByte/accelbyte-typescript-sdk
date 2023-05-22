@@ -85,8 +85,8 @@ export class GroupMember$ {
   createJoin_ByGroupId(groupId: string): Promise<IResponse<JoinGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/join'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, JoinGroupResponseV1, 'JoinGroupResponseV1')
@@ -111,8 +111,8 @@ export class GroupMember$ {
   createJoin_ByGroupId_ByNS(groupId: string): Promise<IResponse<JoinGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/join'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, JoinGroupResponseV1, 'JoinGroupResponseV1')
@@ -124,8 +124,8 @@ export class GroupMember$ {
   createLeave_ByGroupId(groupId: string): Promise<IResponse<LeaveGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/leave'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, LeaveGroupResponseV1, 'LeaveGroupResponseV1')
@@ -140,8 +140,8 @@ export class GroupMember$ {
   ): Promise<IResponseWithSync<GetGroupMemberListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/members'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, GetGroupMemberListResponseV1, 'GetGroupMemberListResponseV1')
@@ -185,8 +185,8 @@ export class GroupMember$ {
   createJoinCancel_ByGroupId(groupId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/join/cancel'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, MemberRequestGroupResponseV1, 'MemberRequestGroupResponseV1')
@@ -198,8 +198,8 @@ export class GroupMember$ {
   createInviteAccept_ByGroupId(groupId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/invite/accept'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, MemberRequestGroupResponseV1, 'MemberRequestGroupResponseV1')
@@ -211,8 +211,8 @@ export class GroupMember$ {
   createInviteReject_ByGroupId(groupId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/invite/reject'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, MemberRequestGroupResponseV1, 'MemberRequestGroupResponseV1')
@@ -224,8 +224,8 @@ export class GroupMember$ {
   createInviteAccept_ByGroupId_ByNS(groupId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/invite/accept'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, MemberRequestGroupResponseV1, 'MemberRequestGroupResponseV1')
@@ -237,8 +237,8 @@ export class GroupMember$ {
   createInviteReject_ByGroupId_ByNS(groupId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/invite/reject'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, MemberRequestGroupResponseV1, 'MemberRequestGroupResponseV1')
@@ -247,12 +247,12 @@ export class GroupMember$ {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:KICK [CREATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to kick group member.&lt;/p&gt; &lt;p&gt;Kick group member. This endpoint will check the member and group information, and also the role permission of the the user who accesses this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73409&lt;/p&gt;
    */
-  createKick_ByUserId_ByGroupId(groupId: string, userId: string): Promise<IResponse<KickGroupMemberResponseV1>> {
+  createKick_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<KickGroupMemberResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/kick'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, KickGroupMemberResponseV1, 'KickGroupMemberResponseV1')
@@ -261,12 +261,12 @@ export class GroupMember$ {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:INVITE [CREATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to invite specific user to the group.&lt;/p&gt; &lt;p&gt;invite specific user to the group. If specific user is already have the join request to the group, this endpoint will notify if this user already have join request that needs to be accepted / rejected&lt;/p&gt; &lt;p&gt;Invited user will receive notification through lobby.&lt;/p&gt; &lt;p&gt;Action Code: 73406&lt;/p&gt; &lt;br&gt; &lt;p&gt;memberRolePermissions example value :&lt;/p&gt; &lt;p&gt;&#34;action&#34;: 1&lt;/p&gt; &lt;p&gt;&#34;resourceName&#34;: &#34;GROUP:INVITE&#34;&lt;/p&gt; &lt;p&gt;The invited user will have a permission to invite another user to the group&lt;p/&gt;
    */
-  createInvite_ByUserId_ByGroupId(groupId: string, userId: string): Promise<IResponse<UserInvitationResponseV1>> {
+  createInvite_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<UserInvitationResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/invite'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, UserInvitationResponseV1, 'UserInvitationResponseV1')
@@ -275,12 +275,12 @@ export class GroupMember$ {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [READ]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to get user group status information.&lt;/p&gt; &lt;p&gt;get user group status information. This endpoint will check the member and group information, and also the role permission of the the user who accesses this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73409&lt;/p&gt;
    */
-  getStatus_ByUserId_ByGroupId(groupId: string, userId: string): Promise<IResponseWithSync<GetUserGroupInformationResponseV1>> {
+  getStatus_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponseWithSync<GetUserGroupInformationResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/status'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, GetUserGroupInformationResponseV1, 'GetUserGroupInformationResponseV1')
@@ -295,12 +295,12 @@ export class GroupMember$ {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:JOIN [CREATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to accept group join request.&lt;/p&gt; &lt;p&gt;Accept group join request. If specific user is not asked to join the specific group ID, it will show the the error to show if the user is not asked to join yet.&lt;/p&gt; &lt;p&gt;This endpoint will also check if the specific user is already joined to specific group&lt;/p&gt; &lt;p&gt;Action Code: 73407&lt;/p&gt;
    */
-  createJoinAccept_ByUserId_ByGroupId(groupId: string, userId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
+  createJoinAccept_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/join/accept'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, MemberRequestGroupResponseV1, 'MemberRequestGroupResponseV1')
@@ -309,12 +309,12 @@ export class GroupMember$ {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:JOIN [CREATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to reject group join request.&lt;/p&gt; &lt;p&gt;Reject group join request. If specific user is not asked to join the specific group ID, it will show the the error to show if the user is not asked to join yet.&lt;/p&gt; &lt;p&gt;This endpoint will also check if the specific user is already joined to specific group&lt;/p&gt; &lt;p&gt;Action Code: 73408&lt;/p&gt;
    */
-  createJoinReject_ByUserId_ByGroupId(groupId: string, userId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
+  createJoinReject_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<MemberRequestGroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/join/reject'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, MemberRequestGroupResponseV1, 'MemberRequestGroupResponseV1')
@@ -323,12 +323,12 @@ export class GroupMember$ {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:INVITE [DELETE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to cancel invitation group member.&lt;/p&gt; &lt;p&gt;cancel invitation group member. This endpoint will cancel invitation to specific user, and also the role permission of the the user who accesses this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73409&lt;/p&gt;
    */
-  createInviteCancel_ByUserId_ByGroupId(groupId: string, userId: string): Promise<IResponse<CancelInvitationGroupResponseV2>> {
+  createInviteCancel_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<CancelInvitationGroupResponseV2>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/invite/cancel'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, CancelInvitationGroupResponseV2, 'CancelInvitationGroupResponseV2')

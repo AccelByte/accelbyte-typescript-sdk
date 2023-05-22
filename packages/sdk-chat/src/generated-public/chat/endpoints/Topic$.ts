@@ -43,9 +43,9 @@ export class Topic$ {
    * get chat list of topic in a namespace.
    */
   getTopic(queryParams?: {
-    topicType?: string | null
-    offset?: number
     limit?: number
+    offset?: number
+    topicType?: string | null
   }): Promise<IResponseWithSync<ChatMessageResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
@@ -61,7 +61,7 @@ export class Topic$ {
   }
 
   /**
-   * Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code> <br>Mute user.
+   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Mute user.
    */
   updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -76,7 +76,7 @@ export class Topic$ {
    */
   getChats_ByTopic(
     topic: string,
-    queryParams?: { startCreatedAt?: number; limit?: number; order?: string | null }
+    queryParams?: { limit?: number; order?: string | null; startCreatedAt?: number }
   ): Promise<IResponseWithSync<ChatMessageResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
@@ -92,7 +92,7 @@ export class Topic$ {
   }
 
   /**
-   * Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code> <br>Unmute user.
+   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Unmute user.
    */
   updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -103,7 +103,7 @@ export class Topic$ {
   }
 
   /**
-   * Required permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code> <br>ban topic members in a group topic.
+   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;ban topic members in a group topic.
    */
   createBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<IResponse<PublicBanTopicMembersResponse>> {
     const params = {} as SDKRequestConfig
@@ -116,7 +116,7 @@ export class Topic$ {
   }
 
   /**
-   * Required permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code> <br>unban topic members in a group topic.
+   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;unban topic members in a group topic.
    */
   createUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<IResponse<PublicUnbanTopicMembersResponse>> {
     const params = {} as SDKRequestConfig
@@ -129,7 +129,7 @@ export class Topic$ {
   }
 
   /**
-   * Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code> <br>Delete chat.
+   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Delete chat.
    */
   deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

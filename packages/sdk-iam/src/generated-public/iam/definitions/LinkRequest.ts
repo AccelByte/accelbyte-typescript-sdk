@@ -22,7 +22,8 @@ export const LinkRequest = z.object({
   redirect_uri: z.string(),
   refreshToken: z.string().nullish(),
   request_id: z.string(),
-  status: z.string()
+  status: z.string(),
+  userID: z.string().nullish()
 })
 
 export interface LinkRequest extends z.TypeOf<typeof LinkRequest> {}

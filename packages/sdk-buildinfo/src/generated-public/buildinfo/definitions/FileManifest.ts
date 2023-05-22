@@ -8,13 +8,13 @@ import { BlockManifest } from './BlockManifest.js'
 import { ZsyncFileManifest } from './ZsyncFileManifest.js'
 
 export const FileManifest = z.object({
-  path: z.string().nullish(),
-  filesize: z.number().int().nullish(),
-  uuid: z.string().nullish(),
   blocks: z.array(BlockManifest).nullish(),
-  zsyncFile: ZsyncFileManifest.nullish(),
   checksum: z.string().nullish(),
-  uploadStatus: z.string().nullish()
+  filesize: z.number().int().nullish(),
+  path: z.string().nullish(),
+  uploadStatus: z.string().nullish(),
+  uuid: z.string().nullish(),
+  zsyncFile: ZsyncFileManifest.nullish()
 })
 
 export interface FileManifest extends z.TypeOf<typeof FileManifest> {}

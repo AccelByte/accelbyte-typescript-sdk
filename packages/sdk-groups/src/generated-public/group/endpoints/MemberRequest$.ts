@@ -57,8 +57,8 @@ export class MemberRequest$ {
   ): Promise<IResponseWithSync<GetMemberRequestsListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/join/request'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, GetMemberRequestsListResponseV1, 'GetMemberRequestsListResponseV1')
@@ -79,8 +79,8 @@ export class MemberRequest$ {
   ): Promise<IResponseWithSync<GetMemberRequestsListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/join/request'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, GetMemberRequestsListResponseV1, 'GetMemberRequestsListResponseV1')
@@ -101,8 +101,8 @@ export class MemberRequest$ {
   ): Promise<IResponseWithSync<GetMemberRequestsListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/invite/request'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, GetMemberRequestsListResponseV1, 'GetMemberRequestsListResponseV1')

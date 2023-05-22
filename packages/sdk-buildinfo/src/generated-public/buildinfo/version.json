@@ -1,11 +1,14 @@
 {
-  "description": "Justice BuildInfo Service",
+  "buildBy": "Gradle 6.9.1",
+  "buildDate": "2023-04-26T01:57:09+00:00",
+  "buildID": "3.28.5",
+  "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
+  "buildOS": "Linux amd64 5.13.0-1021-aws",
+  "gitBranchName": "unknown",
+  "gitHash": "386e64f9b5",
+  "gitTag": "3.28.5",
+  "name": "justice-buildinfo-service",
+  "realm": "dev",
   "version": "3.28.5",
-  "title": "justice-buildinfo-service",
-  "contact": {
-    "name": "Engineering Team at AccelByte",
-    "url": "https://accelbyte.io",
-    "email": "engineering@accelbyte.io"
-  },
-  "gitHash": "3.28.5"
+  "version-roles-seeding": "0.0.3"
 }

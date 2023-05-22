@@ -1,3 +1,7 @@
+### 1.1150.25-beta.0 - 2023-05-17
+
+- code-generated update
+
 ### 1.1150.24 - 2023-05-09
 
 - code-generated update

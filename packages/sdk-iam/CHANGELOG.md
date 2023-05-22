@@ -1,3 +1,15 @@
+### 1.5340.30-beta.3 - 2023-05-22
+
+- code-generated update
+
+### 1.5340.30-beta.2 - 2023-05-19
+
+- Update IAM Input Validator
+
+### 1.5340.30-beta.1 - 2023-05-17
+
+- code-generated update
+
 ### 1.5340.30-beta.0 - 2023-05-12
 
 - code-generated update

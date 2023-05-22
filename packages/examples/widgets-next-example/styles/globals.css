@@ -82,6 +82,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 html,
@@ -103,6 +104,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {

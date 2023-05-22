@@ -1,3 +1,19 @@
+### 1.0.20-beta.4 - 2023-05-22
+
+- code-generated update
+
+### 1.0.20-beta.3 - 2023-05-19
+
+- code-generated update
+
+### 1.0.20-beta.2 - 2023-05-17
+
+- code-generated update
+
+### 1.0.20-beta.1 - 2023-05-17
+
+- code-generated update
+
 ### 1.0.20-beta.0 - 2023-05-11
 
 - code-generated update

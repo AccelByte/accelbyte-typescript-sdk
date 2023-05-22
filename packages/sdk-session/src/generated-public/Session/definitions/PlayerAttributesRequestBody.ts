@@ -11,7 +11,7 @@ export const PlayerAttributesRequestBody = z.object({
   currentPlatform: z.string(),
   data: z.record(z.any()),
   platforms: z.array(UserPlatformInfo),
-  roles: z.array(z.string())
+  roles: z.array(z.string()).nullish()
 })
 
 export interface PlayerAttributesRequestBody extends z.TypeOf<typeof PlayerAttributesRequestBody> {}

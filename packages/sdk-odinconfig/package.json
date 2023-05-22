@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-odinconfig",
-  "version": "1.142.27",
+  "version": "1.142.28-beta.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",
@@ -14,7 +14,6 @@
     "cg:download": "yarn cg download-swaggers --config swaggers.json --swaggersOutput swaggers",
     "cg:generate": "rimraf src/generated-public && yarn cg generate-code --config swaggers.json --swaggersOutput swaggers --output src",
     "cg": "ts-node ../codegen/src/cli.ts",
-    "cg-orig": "ts-node ../codegen/src/cli.ts",
     "codegen": "yarn cg:generate && yarn cg:prettify"
   },
   "devDependencies": {

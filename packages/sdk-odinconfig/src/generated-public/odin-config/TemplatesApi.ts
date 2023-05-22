@@ -26,9 +26,9 @@ export function TemplatesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
-  async function getConfig_ByTemplate_ByConfig(template: string, config: string): Promise<Config> {
+  async function getConfig_ByTemplate_ByConfig(config: string, template: string): Promise<Config> {
     const $ = new Templates$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getConfig_ByTemplate_ByConfig(template, config)
+    const resp = await $.getConfig_ByTemplate_ByConfig(config, template)
     if (resp.error) throw resp.error
     return resp.response.data
   }

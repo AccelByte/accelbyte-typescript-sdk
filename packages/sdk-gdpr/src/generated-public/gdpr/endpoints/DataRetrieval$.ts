@@ -58,12 +58,12 @@ export class DataRetrieval$ {
   /**
    * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
-  deleteRequest_ByUserId_ByRequestDate(requestDate: string, userId: string): Promise<IResponse<unknown>> {
+  deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/requests/{requestDate}'
       .replace('{namespace}', this.namespace)
-      .replace('{requestDate}', requestDate)
       .replace('{userId}', userId)
+      .replace('{requestDate}', requestDate)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
@@ -73,15 +73,15 @@ export class DataRetrieval$ {
    * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   postGenerate_ByUserId_ByRequestDate(
-    requestDate: string,
     userId: string,
+    requestDate: string,
     data: { password: string | null }
   ): Promise<IResponse<UserDataUrl>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/requests/{requestDate}/generate'
       .replace('{namespace}', this.namespace)
-      .replace('{requestDate}', requestDate)
       .replace('{userId}', userId)
+      .replace('{requestDate}', requestDate)
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
       ...params,
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }

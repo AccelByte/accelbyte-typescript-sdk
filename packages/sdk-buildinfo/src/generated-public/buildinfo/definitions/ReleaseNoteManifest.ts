@@ -9,8 +9,8 @@ import { ReleaseNoteLocalizationDto } from './ReleaseNoteLocalizationDto.js'
 export const ReleaseNoteManifest = z.object({
   appId: z.string(),
   platformId: z.string(),
-  version: z.string(),
-  releaseNoteLocalizations: z.array(ReleaseNoteLocalizationDto)
+  releaseNoteLocalizations: z.array(ReleaseNoteLocalizationDto),
+  version: z.string()
 })
 
 export interface ReleaseNoteManifest extends z.TypeOf<typeof ReleaseNoteManifest> {}

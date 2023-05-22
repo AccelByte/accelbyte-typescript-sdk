@@ -84,8 +84,8 @@ export class Group$ {
   deleteGroup_ByGroupId(groupId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
@@ -97,8 +97,8 @@ export class Group$ {
   getGroup_ByGroupId(groupId: string): Promise<IResponseWithSync<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -116,8 +116,8 @@ export class Group$ {
   patchGroup_ByGroupId(groupId: string, data: UpdateGroupRequestV1): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -129,8 +129,8 @@ export class Group$ {
   updateGroup_ByGroupId(groupId: string, data: UpdateGroupRequestV1): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -142,8 +142,8 @@ export class Group$ {
   deleteGroup_ByGroupId_ByNS(groupId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
@@ -155,8 +155,8 @@ export class Group$ {
   patchGroup_ByGroupId_ByNS(groupId: string, data: UpdateGroupRequestV1): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -168,8 +168,8 @@ export class Group$ {
   updateGroup_ByGroupId_ByNS(groupId: string, data: UpdateGroupRequestV1): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -181,8 +181,8 @@ export class Group$ {
   updateRuleCustom_ByGroupId(groupId: string, data: UpdateGroupCustomRuleRequestV1): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/rules/custom'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -194,8 +194,8 @@ export class Group$ {
   updateRuleCustom_ByGroupId_ByNS(groupId: string, data: UpdateGroupCustomRuleRequestV1): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/rules/custom'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -207,8 +207,8 @@ export class Group$ {
   updateAttributeCustom_ByGroupId(groupId: string, data: UpdateGroupCustomAttributesRequestV1): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/attributes/custom'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -220,8 +220,8 @@ export class Group$ {
   updateAttributeCustom_ByGroupId_ByNS(groupId: string, data: UpdateGroupCustomAttributesRequestV1): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/attributes/custom'
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -230,12 +230,12 @@ export class Group$ {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;Delete group predefined rule based on the allowed action. This endpoint will check the group ID of the user based on the access token and compare it with the group ID in path parameter. It will also check the member role of the user based on the access token&lt;/p&gt; &lt;p&gt;Action Code: 73309&lt;/p&gt;
    */
-  deleteRuleDefined_ByGroupId_ByAllowedAction(allowedAction: string, groupId: string): Promise<IResponse<unknown>> {
+  deleteRuleDefined_ByGroupId_ByAllowedAction(groupId: string, allowedAction: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/rules/defined/{allowedAction}'
-      .replace('{allowedAction}', allowedAction)
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
+      .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
@@ -245,15 +245,15 @@ export class Group$ {
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;Update predefined group rule. This endpoint will check the group ID of the user based on the access token and compare it with the group ID in path parameter. It will also check the member role of the user based on the access token&lt;/p&gt; &lt;p&gt;If the rule action is not defined in the group, it will be added immediately to the predefined group rule&lt;/p&gt; &lt;p&gt;Action Code: 73310&lt;/p&gt;
    */
   updateRuleDefined_ByGroupId_ByAllowedAction(
-    allowedAction: string,
     groupId: string,
+    allowedAction: string,
     data: UpdateGroupPredefinedRuleRequestV1
   ): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/rules/defined/{allowedAction}'
-      .replace('{allowedAction}', allowedAction)
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
+      .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
@@ -262,12 +262,12 @@ export class Group$ {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;Delete group predefined rule based on the allowed action. This endpoint will check the group ID of the user based on the access token and compare it with the group ID in path parameter. It will also check the member role of the user based on the access token&lt;/p&gt; &lt;p&gt;Action Code: 73309&lt;/p&gt;
    */
-  deleteRuleDefined_ByGroupId_ByAllowedAction_ByNS(allowedAction: string, groupId: string): Promise<IResponse<unknown>> {
+  deleteRuleDefined_ByGroupId_ByAllowedAction_ByNS(groupId: string, allowedAction: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/rules/defined/{allowedAction}'
-      .replace('{allowedAction}', allowedAction)
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
+      .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
@@ -277,15 +277,15 @@ export class Group$ {
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;Update predefined group rule. This endpoint will check the group ID of the user based on the access token and compare it with the group ID in path parameter. It will also check the member role of the user based on the access token&lt;/p&gt; &lt;p&gt;If the rule action is not defined in the group, it will be added immediately to the predefined group rule&lt;/p&gt; &lt;p&gt;Action Code: 73310&lt;/p&gt;
    */
   updateRuleDefined_ByGroupId_ByAllowedAction_ByNS(
-    allowedAction: string,
     groupId: string,
+    allowedAction: string,
     data: UpdateGroupPredefinedRuleRequestV1
   ): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/groups/{groupId}/rules/defined/{allowedAction}'
-      .replace('{allowedAction}', allowedAction)
-      .replace('{groupId}', groupId)
       .replace('{namespace}', this.namespace)
+      .replace('{groupId}', groupId)
+      .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')

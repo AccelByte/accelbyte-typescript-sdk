@@ -13,7 +13,7 @@ export const GetInboxMessagesResponseData = z.object({
   message: z.record(z.any()),
   scope: z.enum(['NAMESPACE', 'USER']),
   senderId: z.string(),
-  status: z.enum(['SENT', 'DRAFT', 'UNSENT']),
+  status: z.enum(['DRAFT', 'SENT', 'UNSENT']),
   updatedAt: z.number().int(),
   userIds: z.array(z.string())
 })

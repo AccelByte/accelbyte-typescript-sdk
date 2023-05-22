@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const BlockManifest = z.object({
-  uuid: z.string().nullish(),
-  checksum: z.string().nullish(),
   blockSize: z.number().int().nullish(),
-  offset: z.number().int().nullish()
+  checksum: z.string().nullish(),
+  offset: z.number().int().nullish(),
+  uuid: z.string().nullish()
 })
 
 export interface BlockManifest extends z.TypeOf<typeof BlockManifest> {}

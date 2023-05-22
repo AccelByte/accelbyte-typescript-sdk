@@ -9,13 +9,13 @@ import { FileManifest } from './FileManifest.js'
 
 export const UploadBuildManifest = z.object({
   appId: z.string().nullish(),
-  platformId: z.string().nullish(),
-  gameAppId: z.string().nullish(),
   appType: z.string().nullish(),
   defaultLaunchProfile: DefaultLaunchProfile.nullish(),
-  launchArguments: z.string().nullish(),
   displayVersion: z.string().nullish(),
-  files: z.array(FileManifest).nullish()
+  files: z.array(FileManifest).nullish(),
+  gameAppId: z.string().nullish(),
+  launchArguments: z.string().nullish(),
+  platformId: z.string().nullish()
 })
 
 export interface UploadBuildManifest extends z.TypeOf<typeof UploadBuildManifest> {}

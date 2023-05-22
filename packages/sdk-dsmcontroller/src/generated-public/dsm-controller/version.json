@@ -1,8 +1,8 @@
 {
   "buildDate": "unknown",
-  "gitHash": "2e979a6f5f11863789089132a06e98026b1851d6",
+  "gitHash": "ed2295f5b70649a743d17a75ee3b9d03876cc57e",
   "name": "justice-dedicated-server-manager-controller-service",
-  "revisionID": "6.2.7",
-  "version": "6.2.7",
+  "revisionID": "6.3.0",
+  "version": "6.3.0",
   "version-roles-seeding": "0.0.3"
 }

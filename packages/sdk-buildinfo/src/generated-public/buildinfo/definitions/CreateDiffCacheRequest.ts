@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const CreateDiffCacheRequest = z.object({
-  sourceBuildId: z.string().nullish(),
   destinationBuildId: z.string().nullish(),
+  diffFile: z.string().nullish(),
   filePath: z.string().nullish(),
-  diffFile: z.string().nullish()
+  sourceBuildId: z.string().nullish()
 })
 
 export interface CreateDiffCacheRequest extends z.TypeOf<typeof CreateDiffCacheRequest> {}

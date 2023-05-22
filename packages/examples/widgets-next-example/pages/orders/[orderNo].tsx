@@ -4,18 +4,27 @@
  * and restrictions contact your company contract manager.
  */
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { PaymentWidget } from '@accelbyte/widgets-v2'
 import { useRouter } from 'next/router'
 import { PlayerPortalRoutes } from '..'
+import { GAME_NAMESPACE } from '../constants'
+import { NextPageWithLayout } from '../_app'
+import { Layout } from '../../components/Layout/Layout'
 
-export default function OrderHistoryDetailPage() {
+const OrderHistoryDetailPage: NextPageWithLayout = () => {
   const router = useRouter()
   const { orderNo } = router.query
 
   if (!orderNo) {
-    return 'Not Found'
+    return <div>Not Found</div>
   }
 
-  return <PaymentWidget namespace={'foundations'} paymentOrderNo={orderNo as string} redirectPath={PlayerPortalRoutes.home.link} />
+  return <PaymentWidget namespace={GAME_NAMESPACE} paymentOrderNo={orderNo as string} redirectPath={PlayerPortalRoutes.home.link} />
 }
+
+OrderHistoryDetailPage.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>
+}
+
+export default OrderHistoryDetailPage

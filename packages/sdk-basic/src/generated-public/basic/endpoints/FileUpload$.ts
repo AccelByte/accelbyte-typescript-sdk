@@ -36,8 +36,8 @@ export class FileUpload$ {
   createFile_ByFolder(folder: string, queryParams: { fileType: string | null }): Promise<IResponse<FileUploadUrlInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/folders/{folder}/files'
-      .replace('{folder}', folder)
       .replace('{namespace}', this.namespace)
+      .replace('{folder}', folder)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, FileUploadUrlInfo, 'FileUploadUrlInfo')

@@ -31,12 +31,12 @@ export class Templates$ {
     return SdkCache.withCache(cacheKey, res)
   }
 
-  getConfig_ByTemplate_ByConfig(template: string, config: string): Promise<IResponseWithSync<Config>> {
+  getConfig_ByTemplate_ByConfig(config: string, template: string): Promise<IResponseWithSync<Config>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/public/namespaces/{namespace}/templates/{template}/configs/{config}'
+      .replace('{config}', config)
       .replace('{namespace}', this.namespace)
       .replace('{template}', template)
-      .replace('{config}', config)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, Config, 'Config')

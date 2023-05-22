@@ -421,7 +421,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint is used to get linking status.
+   *  This endpoint is used to get linking status.&lt;/br&gt; This API need logged user and user can only request its own linking status.&#39;
    */
   async function getAsyncStatus_ByRequestId(requestId: string): Promise<LinkRequest> {
     const $ = new Users$(Network.create(requestConfig), namespace, cache)

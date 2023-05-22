@@ -8,13 +8,13 @@ import { BlockManifest } from './BlockManifest.js'
 import { ZsyncFileManifest } from './ZsyncFileManifest.js'
 
 export const DifferentialFileManifest = z.object({
-  path: z.string().nullish(),
-  filesize: z.number().int().nullish(),
-  uuid: z.string().nullish(),
   blocks: z.array(BlockManifest).nullish(),
-  zsyncFile: ZsyncFileManifest.nullish(),
   checksum: z.string().nullish(),
-  status: z.number().int().nullish()
+  filesize: z.number().int().nullish(),
+  path: z.string().nullish(),
+  status: z.number().int().nullish(),
+  uuid: z.string().nullish(),
+  zsyncFile: ZsyncFileManifest.nullish()
 })
 
 export interface DifferentialFileManifest extends z.TypeOf<typeof DifferentialFileManifest> {}

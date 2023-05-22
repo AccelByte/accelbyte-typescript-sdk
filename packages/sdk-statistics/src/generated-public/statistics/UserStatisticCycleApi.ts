@@ -23,7 +23,7 @@ export function UserStatisticCycleApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getStatCycleitemsMeUsers_ByCycleId(
     cycleId: string,
-    queryParams?: { statCodes?: string | null; offset?: number; limit?: number; sortBy?: string | null }
+    queryParams?: { statCodes?: string[]; offset?: number; limit?: number; sortBy?: string | null }
   ): Promise<UserStatCycleItemPagingSlicedResult> {
     const $ = new UserStatisticCycle$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getStatCycleitemsMeUsers_ByCycleId(cycleId, queryParams)

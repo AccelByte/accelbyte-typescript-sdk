@@ -6,12 +6,13 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['@accelbyte/widgets-v2'],
   reactStrictMode: true,
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://demo.accelbyte.io/:path*'
+        destination: 'https://widget1game.internal.gamingservices.accelbyte.io/:path*'
       }
     ]
   }

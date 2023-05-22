@@ -11,7 +11,7 @@ export const SaveInboxMessageResponse = z.object({
   id: z.string(),
   message: z.record(z.any()),
   scope: z.enum(['NAMESPACE', 'USER']),
-  status: z.enum(['SENT', 'DRAFT', 'UNSENT']),
+  status: z.enum(['DRAFT', 'SENT', 'UNSENT']),
   userIDs: z.array(z.string())
 })
 

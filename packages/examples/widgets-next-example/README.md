@@ -85,6 +85,48 @@ export default function Apps() {
 The Payment Web Widget example is:
 
 ```javascript
+// _app.js
+import { SdkWidget, RouteUtils } from '@accelbyte/widgets-v2'
+
+export const PlayerPortalRoutes = RouteUtils.createWidgetRoutes({})
+
+const location = useMemo(() => {
+return {
+  pathname: router.pathname,
+  search: new URLSearchParams(router.query as Record<string, string>).toString(),
+  state: undefined,
+  key: '',
+  hash: ''
+}
+}, [router.pathname, router.query])
+
+<SdkWidget
+  sdkOptions={sdk.assembly()}
+  Link={WidgetLink}
+  NavLink={WidgetLink}
+  history={{
+    // This is to support Next.js with a dynamic base path and make it similar to any other application.
+    // We need to remove the base path from location.pathname and add the base path when navigating.
+    location,
+    push: to => router.push(to),
+    replace: to => router.replace(to)
+  }}
+  sdkToken={{
+    accessToken: Ctx.getAppState().db.getAccessToken(),
+    refreshToken: Ctx.getAppState().db.getRefreshToken()
+  }}
+  sdkEvents={{
+    onGetUserSession(accessToken: string, refreshToken: string) {
+      Ctx.getAppState().refreshSession(accessToken, refreshToken)
+    }
+  }}
+  routes={PlayerPortalRoutes}>
+    <Component {...pageProps} />
+  </SdkWidget>
+
+```
+
+```javascript
 import React from 'react'
 import { PaymentWidget } from '@accelbyte/widgets-v2'
 import { useRouter } from 'next/router'

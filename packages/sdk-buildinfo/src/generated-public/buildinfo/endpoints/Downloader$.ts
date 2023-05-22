@@ -21,7 +21,7 @@ export class Downloader$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This API is used to get version history.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: version chain from specified build</li></ul>
+   * This API is used to get version history.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: version chain from specified build&lt;/li&gt;&lt;/ul&gt;
    */
   getVersionHistory(queryParams: { appId: string | null; comparedBuildId: string | null }): Promise<IResponseWithSync<VersionChain>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -38,7 +38,7 @@ export class Downloader$ {
   }
 
   /**
-   * This API is used to check whether supplied list of appId has valid buildmanifest and at least one of its build set as latest.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: list of build availability</li></ul>
+   * This API is used to check whether supplied list of appId has valid buildmanifest and at least one of its build set as latest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of build availability&lt;/li&gt;&lt;/ul&gt;
    */
   getBulkCheckLatest(queryParams: { appIds: string[] }): Promise<IResponseWithSync<BuildAvailabilityArray>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -55,7 +55,7 @@ export class Downloader$ {
   }
 
   /**
-   * This API is used to get simple build manifest that contains list of current build in various platform.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
+   * This API is used to get simple build manifest that contains list of current build in various platform.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getAvailablebuild_ByAppId(appId: string): Promise<IResponseWithSync<BasicBuildManifestArray>> {
     const params = {} as SDKRequestConfig
@@ -74,7 +74,7 @@ export class Downloader$ {
   }
 
   /**
-   * This API is used to Generate Download URLs for the requested blocks inside the specified buildId.<br/>The download URL generation may returns Signed URL or Public URL, depends on service configurations.<br/>Before processing the URL generation, it will validate the user entitlement first, if not entitled then the request will be refused.<br/><br/>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: Block Download URLs</li></ul>
+   * This API is used to Generate Download URLs for the requested blocks inside the specified buildId.&lt;br/&gt;The download URL generation may returns Signed URL or Public URL, depends on service configurations.&lt;br/&gt;Before processing the URL generation, it will validate the user entitlement first, if not entitled then the request will be refused.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Block Download URLs&lt;/li&gt;&lt;/ul&gt;
    */
   createBlockUrl_ByBuildId(buildId: string, data: BlockDownloadUrlsRequest): Promise<IResponse<BlockDownloadUrls>> {
     const params = {} as SDKRequestConfig
@@ -87,7 +87,7 @@ export class Downloader$ {
   }
 
   /**
-   * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and obsolete files list between two version. Only works for builds uploaded with BuildInfo v2<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
+   * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and obsolete files list between two version. Only works for builds uploaded with BuildInfo v2&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getUpdategameBuild_ByBuildId(buildId: string): Promise<IResponseWithSync<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -106,7 +106,7 @@ export class Downloader$ {
   }
 
   /**
-   * This API is used to get build manifest of release version of the application.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
+   * This API is used to get build manifest of release version of the application.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getUpdategame_ByAppId_ByPlatformId(appId: string, platformId: string): Promise<IResponseWithSync<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -126,7 +126,7 @@ export class Downloader$ {
   }
 
   /**
-   * This API fetch the diff status between two builds. The diff generated by diff wrapper and saved in the database. Return 404 if no diff found.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: Simple diff status containing where to fetch diff manifest</li></ul>
+   * This API fetch the diff status between two builds. The diff generated by diff wrapper and saved in the database. Return 404 if no diff found.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Simple diff status containing where to fetch diff manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getDiff_BySourceBuildId_ByDestinationBuildId(
     sourceBuildId: string,
@@ -149,7 +149,7 @@ export class Downloader$ {
   }
 
   /**
-   * This API is used to get build manifest. The binary diff will be calculated in the client side, while obsolete file list will be generated by server side.<p>Other detail info: <ul><li><i>Required permission</i>: login user</li><li><i>Returns</i>: build manifest</li></ul>
+   * This API is used to get build manifest. The binary diff will be calculated in the client side, while obsolete file list will be generated by server side.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getVersion_ByAppId_ByVersion_ByPlatformId(appId: string, version: string, platformId: string): Promise<IResponseWithSync<BuildManifest>> {
     const params = {} as SDKRequestConfig

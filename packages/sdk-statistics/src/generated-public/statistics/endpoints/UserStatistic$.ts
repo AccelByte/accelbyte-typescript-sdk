@@ -49,8 +49,8 @@ export class UserStatistic$ {
    * Public list all statItems by pagination.<br>Other detail info:<ul><li><i>Required permission</i>: resource="NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=2 (READ)</li><li><i>Returns</i>: stat items</li></ul>
    */
   getUsersMeStatitems(queryParams?: {
-    statCodes?: string | null
-    tags?: string | null
+    statCodes?: string[]
+    tags?: string[]
     offset?: number
     limit?: number
     sortBy?: string | null

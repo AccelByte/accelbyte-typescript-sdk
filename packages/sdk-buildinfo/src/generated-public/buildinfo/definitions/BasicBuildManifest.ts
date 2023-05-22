@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const BasicBuildManifest = z.object({
-  buildId: z.string().nullish(),
-  platformId: z.string().nullish(),
   appId: z.string().nullish(),
   appSize: z.number().int().nullish(),
-  displayVersion: z.string().nullish()
+  buildId: z.string().nullish(),
+  displayVersion: z.string().nullish(),
+  platformId: z.string().nullish()
 })
 
 export interface BasicBuildManifest extends z.TypeOf<typeof BasicBuildManifest> {}

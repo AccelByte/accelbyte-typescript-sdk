@@ -191,9 +191,9 @@ export function GroupMemberApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:KICK [CREATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to kick group member.&lt;/p&gt; &lt;p&gt;Kick group member. This endpoint will check the member and group information, and also the role permission of the the user who accesses this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73409&lt;/p&gt;
    */
-  async function createKick_ByUserId_ByGroupId(groupId: string, userId: string): Promise<KickGroupMemberResponseV1> {
+  async function createKick_ByUserId_ByGroupId(userId: string, groupId: string): Promise<KickGroupMemberResponseV1> {
     const $ = new GroupMember$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createKick_ByUserId_ByGroupId(groupId, userId)
+    const resp = await $.createKick_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -201,9 +201,9 @@ export function GroupMemberApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:INVITE [CREATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to invite specific user to the group.&lt;/p&gt; &lt;p&gt;invite specific user to the group. If specific user is already have the join request to the group, this endpoint will notify if this user already have join request that needs to be accepted / rejected&lt;/p&gt; &lt;p&gt;Invited user will receive notification through lobby.&lt;/p&gt; &lt;p&gt;Action Code: 73406&lt;/p&gt; &lt;br&gt; &lt;p&gt;memberRolePermissions example value :&lt;/p&gt; &lt;p&gt;&#34;action&#34;: 1&lt;/p&gt; &lt;p&gt;&#34;resourceName&#34;: &#34;GROUP:INVITE&#34;&lt;/p&gt; &lt;p&gt;The invited user will have a permission to invite another user to the group&lt;p/&gt;
    */
-  async function createInvite_ByUserId_ByGroupId(groupId: string, userId: string): Promise<UserInvitationResponseV1> {
+  async function createInvite_ByUserId_ByGroupId(userId: string, groupId: string): Promise<UserInvitationResponseV1> {
     const $ = new GroupMember$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createInvite_ByUserId_ByGroupId(groupId, userId)
+    const resp = await $.createInvite_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -211,9 +211,9 @@ export function GroupMemberApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP [READ]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to get user group status information.&lt;/p&gt; &lt;p&gt;get user group status information. This endpoint will check the member and group information, and also the role permission of the the user who accesses this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73409&lt;/p&gt;
    */
-  async function getStatus_ByUserId_ByGroupId(groupId: string, userId: string): Promise<GetUserGroupInformationResponseV1> {
+  async function getStatus_ByUserId_ByGroupId(userId: string, groupId: string): Promise<GetUserGroupInformationResponseV1> {
     const $ = new GroupMember$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getStatus_ByUserId_ByGroupId(groupId, userId)
+    const resp = await $.getStatus_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -221,9 +221,9 @@ export function GroupMemberApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:JOIN [CREATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to accept group join request.&lt;/p&gt; &lt;p&gt;Accept group join request. If specific user is not asked to join the specific group ID, it will show the the error to show if the user is not asked to join yet.&lt;/p&gt; &lt;p&gt;This endpoint will also check if the specific user is already joined to specific group&lt;/p&gt; &lt;p&gt;Action Code: 73407&lt;/p&gt;
    */
-  async function createJoinAccept_ByUserId_ByGroupId(groupId: string, userId: string): Promise<MemberRequestGroupResponseV1> {
+  async function createJoinAccept_ByUserId_ByGroupId(userId: string, groupId: string): Promise<MemberRequestGroupResponseV1> {
     const $ = new GroupMember$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createJoinAccept_ByUserId_ByGroupId(groupId, userId)
+    const resp = await $.createJoinAccept_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -231,9 +231,9 @@ export function GroupMemberApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:JOIN [CREATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to reject group join request.&lt;/p&gt; &lt;p&gt;Reject group join request. If specific user is not asked to join the specific group ID, it will show the the error to show if the user is not asked to join yet.&lt;/p&gt; &lt;p&gt;This endpoint will also check if the specific user is already joined to specific group&lt;/p&gt; &lt;p&gt;Action Code: 73408&lt;/p&gt;
    */
-  async function createJoinReject_ByUserId_ByGroupId(groupId: string, userId: string): Promise<MemberRequestGroupResponseV1> {
+  async function createJoinReject_ByUserId_ByGroupId(userId: string, groupId: string): Promise<MemberRequestGroupResponseV1> {
     const $ = new GroupMember$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createJoinReject_ByUserId_ByGroupId(groupId, userId)
+    const resp = await $.createJoinReject_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -241,9 +241,9 @@ export function GroupMemberApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:INVITE [DELETE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to cancel invitation group member.&lt;/p&gt; &lt;p&gt;cancel invitation group member. This endpoint will cancel invitation to specific user, and also the role permission of the the user who accesses this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73409&lt;/p&gt;
    */
-  async function createInviteCancel_ByUserId_ByGroupId(groupId: string, userId: string): Promise<CancelInvitationGroupResponseV2> {
+  async function createInviteCancel_ByUserId_ByGroupId(userId: string, groupId: string): Promise<CancelInvitationGroupResponseV2> {
     const $ = new GroupMember$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createInviteCancel_ByUserId_ByGroupId(groupId, userId)
+    const resp = await $.createInviteCancel_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data
   }

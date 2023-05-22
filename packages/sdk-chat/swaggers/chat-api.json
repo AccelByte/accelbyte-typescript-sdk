@@ -9,9 +9,7 @@
     "/chat": {
       "get": {
         "description": "This endpoint need valid user access token. No specific permission is required. Upgrade connection to websocket upon successful request.",
-        "tags": [
-          "chat"
-        ],
+        "tags": ["chat"],
         "summary": "Connect to chat server",
         "operationId": "connect",
         "responses": {
@@ -24,15 +22,9 @@
     "/chat/admin/namespaces/{namespace}/chats": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t<br>get chat history in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin get chat history",
         "operationId": "adminChatHistory",
         "parameters": [
@@ -149,15 +141,9 @@
     "/chat/admin/namespaces/{namespace}/topic": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t<br>get chat list of topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin get list of topic",
         "operationId": "adminTopicList",
         "parameters": [
@@ -225,15 +211,9 @@
       },
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]</code> with scope <code>social</code>\n\t\t\t<br>create new group topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "Use to create group. Only group admin can use this operation",
         "operationId": "adminCreateTopic",
         "parameters": [
@@ -266,15 +246,9 @@
     "/chat/admin/namespaces/{namespace}/topic/channel": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t\t<br>get channel chat list of topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin get list of channel topic",
         "operationId": "adminChannelTopicList",
         "parameters": [
@@ -341,15 +315,9 @@
     "/chat/admin/namespaces/{namespace}/topic/channel/summary": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t\t\t<br>get chat list of topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin get channel topic summary",
         "operationId": "adminChannelTopicSummary",
         "parameters": [
@@ -398,15 +366,9 @@
     "/chat/admin/namespaces/{namespace}/topic/log": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t\t<br>get chat log of topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin query topic log",
         "operationId": "adminQueryTopicLog",
         "parameters": [
@@ -507,15 +469,9 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}": {
       "put": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>update group topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "Use to update group information. Only group admin can use this operation",
         "operationId": "adminUpdateTopic",
         "parameters": [
@@ -553,15 +509,9 @@
       },
       "delete": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code>\n\t\t\t<br>delete topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "Use to delete group. Only group admin can use this operation",
         "operationId": "adminDeleteTopic",
         "parameters": [
@@ -593,15 +543,9 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}/ban-members": {
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>ban users in some topic. banned user not assigned to shard for channel topic, and cannot send and query chat.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admins ban user in group topic",
         "operationId": "adminBanTopicMembers",
         "parameters": [
@@ -665,15 +609,9 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}/channel": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t\t\t<br>get chat list of topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin get channel topic detail",
         "operationId": "adminChannelTopicInfo",
         "parameters": [
@@ -735,15 +673,9 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}/chats": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t<br>get chat history in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin get chat history",
         "operationId": "adminTopicChatHistory",
         "deprecated": true,
@@ -846,15 +778,9 @@
       },
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>send message to chat topic as system.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admins send chat to group topic",
         "operationId": "adminSendChat",
         "parameters": [
@@ -921,15 +847,9 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}/chats/{chatId}": {
       "delete": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code>\n\t\t\t\t<br>Delete chat.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admins delete chat",
         "operationId": "adminDeleteChat",
         "parameters": [
@@ -989,15 +909,9 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}/members": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t\t<br>get topic members.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin get topic member",
         "operationId": "adminTopicMembers",
         "parameters": [
@@ -1083,15 +997,9 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}/shards": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t\t<br>get shard list from topic.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin get shard list of topic",
         "operationId": "adminTopicShards",
         "parameters": [
@@ -1150,15 +1058,9 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}/unban-members": {
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>unban users in some topic.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admins unban user in group topic",
         "operationId": "adminUnbanTopicMembers",
         "parameters": [
@@ -1222,12 +1124,8 @@
     "/chat/admin/namespaces/{namespace}/topic/{topic}/user/{userId}": {
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>add new member for topic in a namespace.",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin add user to topic",
         "operationId": "adminAddTopicMember",
         "parameters": [
@@ -1272,15 +1170,9 @@
       },
       "delete": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>remove member from topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin remove user from topic",
         "operationId": "adminRemoveTopicMember",
         "parameters": [
@@ -1319,15 +1211,9 @@
     "/chat/admin/namespaces/{namespace}/topics": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t\t<br>get topics in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin query topics",
         "operationId": "adminQueryTopic",
         "parameters": [
@@ -1355,22 +1241,14 @@
             "in": "query"
           },
           {
-            "enum": [
-              "PERSONAL",
-              "GROUP"
-            ],
+            "enum": ["PERSONAL", "GROUP"],
             "type": "string",
             "description": "topicType",
             "name": "topicType",
             "in": "query"
           },
           {
-            "enum": [
-              "PARTY",
-              "SESSION",
-              "CLAN",
-              "NORMAL"
-            ],
+            "enum": ["NORMAL", "PARTY", "SESSION", "CLAN"],
             "type": "string",
             "description": "topicSubType",
             "name": "topicSubType",
@@ -1447,15 +1325,9 @@
     "/chat/admin/namespaces/{namespace}/users/{userId}/topics": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> with scope <code>social</code>\n\t\t\t\t<br>get user's topics in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "admin query user's topics",
         "operationId": "adminQueryUsersTopic",
         "parameters": [
@@ -1474,22 +1346,14 @@
             "required": true
           },
           {
-            "enum": [
-              "PERSONAL",
-              "GROUP"
-            ],
+            "enum": ["PERSONAL", "GROUP"],
             "type": "string",
             "description": "topicType",
             "name": "topicType",
             "in": "query"
           },
           {
-            "enum": [
-              "NORMAL",
-              "PARTY",
-              "SESSION",
-              "CLAN"
-            ],
+            "enum": ["NORMAL", "PARTY", "SESSION", "CLAN"],
             "type": "string",
             "description": "topicSubType",
             "name": "topicSubType",
@@ -1571,15 +1435,9 @@
     "/chat/public/namespaces/{namespace}/muted": {
       "get": {
         "description": "get chat muted topics in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "public get muted at topics",
         "operationId": "publicGetMutedTopics",
         "parameters": [
@@ -1631,15 +1489,9 @@
     "/chat/public/namespaces/{namespace}/topic": {
       "get": {
         "description": "get chat list of topic in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "public get list of topic",
         "operationId": "publicTopicList",
         "parameters": [
@@ -1709,15 +1561,9 @@
     "/chat/public/namespaces/{namespace}/topic/{topic}/ban-members": {
       "post": {
         "description": "Required permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>ban topic members in a group topic.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "public ban topic members in a group topic",
         "operationId": "publicBanTopicMembers",
         "parameters": [
@@ -1781,15 +1627,9 @@
     "/chat/public/namespaces/{namespace}/topic/{topic}/chats": {
       "get": {
         "description": "get chat history in a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "public get chat history",
         "operationId": "publicChatHistory",
         "parameters": [
@@ -1866,15 +1706,9 @@
     "/chat/public/namespaces/{namespace}/topic/{topic}/chats/{chatId}": {
       "delete": {
         "description": "Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code>\n\t\t\t\t<br>Delete chat.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "public delete chat",
         "operationId": "publicDeleteChat",
         "parameters": [
@@ -1934,15 +1768,9 @@
     "/chat/public/namespaces/{namespace}/topic/{topic}/mute": {
       "put": {
         "description": "Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code>\n\t\t\t\t<br>Mute user.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "public mute user in a topic",
         "operationId": "publicMuteUser",
         "parameters": [
@@ -2004,15 +1832,9 @@
     "/chat/public/namespaces/{namespace}/topic/{topic}/unban-members": {
       "post": {
         "description": "Required permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>unban topic members in a group topic.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "public unban topic members in a group topic",
         "operationId": "publicUnbanTopicMembers",
         "parameters": [
@@ -2076,15 +1898,9 @@
     "/chat/public/namespaces/{namespace}/topic/{topic}/unmute": {
       "put": {
         "description": "Required group permission : <code>NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]</code> with scope <code>social</code>\n\t\t\t\t<br>Unmute user.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "topic"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["topic"],
         "summary": "public unmute user in a topic",
         "operationId": "publicUnmuteUser",
         "parameters": [
@@ -2156,15 +1972,9 @@
     "/chat/v1/admin/config": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]</code> with scope <code>social</code>\n\t\t\t<br>get chat config of all namespaces.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "config"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["config"],
         "summary": "admin get all namespaces config",
         "operationId": "adminGetAllConfigV1",
         "responses": {
@@ -2210,15 +2020,9 @@
     "/chat/v1/admin/config/namespaces/{namespace}": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]</code> with scope <code>social</code>\n\t\t\t<br>get chat config of a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "config"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["config"],
         "summary": "admin get namespace config",
         "operationId": "adminGetConfigV1",
         "parameters": [
@@ -2271,15 +2075,9 @@
       },
       "put": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]</code> with scope <code>social</code>\n\t\t\t<br>update chat config of a namespace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "config"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["config"],
         "summary": "admin update namespace config",
         "operationId": "adminUpdateConfigV1",
         "parameters": [
@@ -2349,9 +2147,7 @@
     "/chat/v1/admin/config/namespaces/{namespace}/export": {
       "get": {
         "description": "\n\t\t\t\tRequired permission ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]\n\n\t\t\t\tRequired Scope: social\n\n\t\t\t\tExport chat configuration to a json file. The file can then be imported from the /import endpoint. \n\t\t\t",
-        "tags": [
-          "config"
-        ],
+        "tags": ["config"],
         "summary": "Export chat config to a json file.",
         "operationId": "ExportConfig",
         "parameters": [
@@ -2397,15 +2193,9 @@
     "/chat/v1/admin/config/namespaces/{namespace}/import": {
       "post": {
         "description": "\n\t\t\t\tRequired permission ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]\n\n\t\t\t\tRequired Scope: social\n\n\t\t\t\tImport config configuration from file. The existing configuration will be replaced.\n\t\t\t\tThe json file to import can be obtained from the /export endpoint. \n\t\t\t",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "config"
-        ],
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "tags": ["config"],
         "summary": "Import chat config from a json file.",
         "operationId": "ImportConfig",
         "parameters": [
@@ -2454,15 +2244,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/categories": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]</code> with scope <code>inbox</code><br>get inbox categories.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin get inbox categories",
         "operationId": "adminGetInboxCategories",
         "parameters": [
@@ -2512,15 +2296,9 @@
       },
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]</code> with scope <code>inbox</code><br>add inbox category.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "add inbox category",
         "operationId": "adminAddInboxCategory",
         "parameters": [
@@ -2577,15 +2355,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/categories/{category}": {
       "delete": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]</code> with scope <code>inbox</code><br>delete inbox category.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin delete inbox category",
         "operationId": "adminDeleteInboxCategory",
         "parameters": [
@@ -2636,15 +2408,9 @@
       },
       "patch": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [UPDATE]</code> with scope <code>inbox</code><br>update inbox category.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin update inbox category",
         "operationId": "adminUpdateInboxCategory",
         "parameters": [
@@ -2705,15 +2471,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/categories/{category}/schema.json": {
       "get": {
         "description": "Required permission : valid audience.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin get category schema",
         "operationId": "adminGetCategorySchema",
         "parameters": [
@@ -2775,15 +2535,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/message/{messageId}": {
       "delete": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]</code> with scope <code>inbox</code><br>delete inbox message.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin delete inbox message",
         "operationId": "adminDeleteInboxMessage",
         "parameters": [
@@ -2842,15 +2596,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]</code> with scope <code>inbox</code><br>get inbox messages.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin get inbox messages",
         "operationId": "adminGetInboxMessages",
         "parameters": [
@@ -2872,21 +2620,14 @@
             "in": "query"
           },
           {
-            "enum": [
-              "SENT",
-              "UNSENT",
-              "DRAFT"
-            ],
+            "enum": ["DRAFT", "SENT", "UNSENT"],
             "type": "string",
             "description": "message status",
             "name": "status",
             "in": "query"
           },
           {
-            "enum": [
-              "NAMESPACE",
-              "USER"
-            ],
+            "enum": ["NAMESPACE", "USER"],
             "type": "string",
             "description": "message scope",
             "name": "scope",
@@ -2970,15 +2711,9 @@
       },
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [CREATE]</code> with scope <code>inbox</code><br>save inbox message.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin save inbox message",
         "operationId": "adminSaveInboxMessage",
         "parameters": [
@@ -3035,15 +2770,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages/{inbox}/unsend": {
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]</code> with scope <code>inbox</code><br>unsend inbox message.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin unsend inbox message",
         "operationId": "adminUnsendInboxMessage",
         "parameters": [
@@ -3107,15 +2836,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages/{inbox}/users": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]</code> with scope <code>inbox</code><br>get inbox users.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin get inbox users",
         "operationId": "adminGetInboxUsers",
         "parameters": [
@@ -3140,10 +2863,7 @@
             "in": "query"
           },
           {
-            "enum": [
-              "READ",
-              "UNREAD"
-            ],
+            "enum": ["READ", "UNREAD"],
             "type": "string",
             "description": "message status",
             "name": "status",
@@ -3199,15 +2919,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages/{messageId}": {
       "patch": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]</code> with scope <code>inbox</code><br>update inbox message.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin update inbox message",
         "operationId": "adminUpdateInboxMessage",
         "parameters": [
@@ -3268,15 +2982,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages/{messageId}/send": {
       "post": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]</code> with scope <code>inbox</code><br>send inbox message.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin send inbox message",
         "operationId": "adminSendInboxMessage",
         "parameters": [
@@ -3340,15 +3048,9 @@
     "/chat/v1/admin/inbox/namespaces/{namespace}/stats": {
       "get": {
         "description": "Required permission : <code>ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]</code> with scope <code>inbox</code><br>get inbox stats.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "inbox"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["inbox"],
         "summary": "admin get inbox stats",
         "operationId": "adminGetInboxStats",
         "parameters": [
@@ -3407,15 +3109,9 @@
     "/chat/v1/admin/namespaces/{namespace}/snapshot/{chatId}": {
       "get": {
         "description": "Required permission : <code> ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [READ]</code> <br>Get the chat snapshot",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "moderation"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["moderation"],
         "summary": "admin get chat snapshot",
         "operationId": "adminGetChatSnapshot",
         "parameters": [
@@ -3475,15 +3171,9 @@
       },
       "delete": {
         "description": "Required permission : <code> ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [DELETE]</code> <br>Delete the chat snapshot",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "moderation"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["moderation"],
         "summary": "admin delete chat snapshot",
         "operationId": "adminDeleteChatSnapshot",
         "parameters": [
@@ -3542,15 +3232,9 @@
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary": {
       "get": {
         "description": "Required permission : <code> ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [READ]</code> <br>Query all profanity words.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "profanity"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["profanity"],
         "summary": "admin query profanity words",
         "operationId": "adminProfanityQuery",
         "parameters": [
@@ -3645,15 +3329,9 @@
       },
       "post": {
         "description": "Required permission : <code> ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [CREATE]</code> <br>Insert new word for profanity censor",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "profanity"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["profanity"],
         "summary": "admin insert new profanity words",
         "operationId": "adminProfanityCreate",
         "parameters": [
@@ -3717,15 +3395,9 @@
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/bulk": {
       "post": {
         "description": "Required permission : <code> ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [CREATE]</code> <br>Bulk insert new word for profanity censor",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "profanity"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["profanity"],
         "summary": "admin bulk insert new profanity words",
         "operationId": "adminProfanityCreateBulk",
         "parameters": [
@@ -3789,15 +3461,9 @@
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/group": {
       "get": {
         "description": "Required permission : <code> ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [READ]</code> <br>Get profanity words group.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "profanity"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["profanity"],
         "summary": "admin get profanity words group",
         "operationId": "adminProfanityGroup",
         "parameters": [
@@ -3861,15 +3527,9 @@
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/{id}": {
       "put": {
         "description": "Required permission : <code> ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [UPDATE]</code> <br>Update profanity word",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "profanity"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["profanity"],
         "summary": "admin update profanity word",
         "operationId": "adminProfanityUpdate",
         "parameters": [
@@ -3938,15 +3598,9 @@
       },
       "delete": {
         "description": "Required permission : <code> ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [DELETE]</code> <br>Delete profanity words.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "profanity"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["profanity"],
         "summary": "admin delete profanity words",
         "operationId": "adminProfanityDelete",
         "parameters": [
@@ -4005,12 +3659,8 @@
     "/chat/v1/messages": {
       "get": {
         "description": "get the list of messages.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "summary": "get service messages",
         "operationId": "publicGetMessages",
         "responses": {
@@ -4035,15 +3685,9 @@
     "/chat/v1/public/namespaces/{namespace}/topic/{topic}/snapshot/{chatId}": {
       "get": {
         "description": "Required group permission : <code> NAMESPACE:{namespace}:CHAT:TOPIC [READ]</code> <br>Get the chat snapshot",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "moderation"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["moderation"],
         "summary": "public get chat snapshot",
         "operationId": "publicGetChatSnapshot",
         "parameters": [
@@ -4122,9 +3766,7 @@
   },
   "definitions": {
     "api.AddMemberParams": {
-      "required": [
-        "isAdmin"
-      ],
+      "required": ["isAdmin"],
       "properties": {
         "isAdmin": {
           "type": "boolean"
@@ -4132,15 +3774,7 @@
       }
     },
     "api.CreateTopicParams": {
-      "required": [
-        "name",
-        "description",
-        "type",
-        "isJoinable",
-        "isChannel",
-        "members",
-        "admins"
-      ],
+      "required": ["name", "description", "type", "isJoinable", "isChannel", "members", "admins"],
       "properties": {
         "admins": {
           "type": "array",
@@ -4176,17 +3810,7 @@
       }
     },
     "api.CreateTopicResponse": {
-      "required": [
-        "namespace",
-        "description",
-        "topicId",
-        "name",
-        "type",
-        "isJoinable",
-        "isChannel",
-        "createdAt",
-        "createdBy"
-      ],
+      "required": ["namespace", "description", "topicId", "name", "type", "isJoinable", "isChannel", "createdAt", "createdBy"],
       "properties": {
         "createdAt": {
           "type": "integer",
@@ -4219,10 +3843,7 @@
       }
     },
     "api.MuteUserRequest": {
-      "required": [
-        "userId",
-        "duration"
-      ],
+      "required": ["userId", "duration"],
       "properties": {
         "duration": {
           "type": "integer",
@@ -4234,11 +3855,7 @@
       }
     },
     "api.MutedTopicResponse": {
-      "required": [
-        "topicId",
-        "expirationTime",
-        "remainingTime"
-      ],
+      "required": ["topicId", "expirationTime", "remainingTime"],
       "properties": {
         "expirationTime": {
           "type": "integer",
@@ -4254,9 +3871,7 @@
       }
     },
     "api.SendChatParams": {
-      "required": [
-        "message"
-      ],
+      "required": ["message"],
       "properties": {
         "message": {
           "type": "string"
@@ -4264,9 +3879,7 @@
       }
     },
     "api.UnmuteUserRequest": {
-      "required": [
-        "userId"
-      ],
+      "required": ["userId"],
       "properties": {
         "userId": {
           "type": "string"
@@ -4274,11 +3887,7 @@
       }
     },
     "api.UpdateTopicParams": {
-      "required": [
-        "name",
-        "description",
-        "isJoinable"
-      ],
+      "required": ["name", "description", "isJoinable"],
       "properties": {
         "description": {
           "type": "string"
@@ -4292,14 +3901,7 @@
       }
     },
     "log.AppMessageDeclaration": {
-      "required": [
-        "Code",
-        "CodeName",
-        "Text",
-        "Attributes",
-        "Section",
-        "Service"
-      ],
+      "required": ["Code", "CodeName", "Text", "Attributes", "Section", "Service"],
       "properties": {
         "Attributes": {
           "type": "array",
@@ -4325,11 +3927,7 @@
       }
     },
     "message.ActionAddUserToTopicResult": {
-      "required": [
-        "processed",
-        "topicId",
-        "userId"
-      ],
+      "required": ["processed", "topicId", "userId"],
       "properties": {
         "processed": {
           "type": "integer",
@@ -4344,10 +3942,7 @@
       }
     },
     "message.ActionDeleteTopicResult": {
-      "required": [
-        "processed",
-        "topicId"
-      ],
+      "required": ["processed", "topicId"],
       "properties": {
         "processed": {
           "type": "integer",
@@ -4359,13 +3954,7 @@
       }
     },
     "models.AddInboxCategoryRequest": {
-      "required": [
-        "name",
-        "expiresIn",
-        "sendNotification",
-        "saveInbox",
-        "enabled"
-      ],
+      "required": ["name", "expiresIn", "sendNotification", "saveInbox", "enabled"],
       "properties": {
         "enabled": {
           "type": "boolean"
@@ -4392,14 +3981,7 @@
       }
     },
     "models.AddInboxCategoryResponse": {
-      "required": [
-        "name",
-        "hook",
-        "expiresIn",
-        "sendNotification",
-        "saveInbox",
-        "enabled"
-      ],
+      "required": ["name", "hook", "expiresIn", "sendNotification", "saveInbox", "enabled"],
       "properties": {
         "enabled": {
           "type": "boolean"
@@ -4426,9 +4008,7 @@
       }
     },
     "models.BanTopicMemberParam": {
-      "required": [
-        "userIds"
-      ],
+      "required": ["userIds"],
       "properties": {
         "userIds": {
           "type": "array",
@@ -4439,9 +4019,7 @@
       }
     },
     "models.BanTopicMemberResult": {
-      "required": [
-        "userIds"
-      ],
+      "required": ["userIds"],
       "properties": {
         "userIds": {
           "type": "array",
@@ -4452,16 +4030,11 @@
       }
     },
     "models.CategoryHook": {
-      "required": [
-        "driver",
-        "params"
-      ],
+      "required": ["driver", "params"],
       "properties": {
         "driver": {
           "type": "string",
-          "enum": [
-            "KAFKA"
-          ]
+          "enum": ["KAFKA"]
         },
         "params": {
           "type": "string"
@@ -4524,10 +4097,7 @@
       }
     },
     "models.ChannelTopicSummaryResponse": {
-      "required": [
-        "totalChannel",
-        "totalShard"
-      ],
+      "required": ["totalChannel", "totalShard"],
       "properties": {
         "totalChannel": {
           "type": "integer",
@@ -4540,11 +4110,7 @@
       }
     },
     "models.ChannelTopicWithPaginationResponse": {
-      "required": [
-        "data",
-        "paging",
-        "totalData"
-      ],
+      "required": ["data", "paging", "totalData"],
       "properties": {
         "data": {
           "type": "array",
@@ -4562,14 +4128,7 @@
       }
     },
     "models.ChatMessageResponse": {
-      "required": [
-        "id",
-        "from",
-        "topicId",
-        "message",
-        "receivedAt",
-        "readAt"
-      ],
+      "required": ["id", "from", "topicId", "message", "receivedAt", "readAt"],
       "properties": {
         "from": {
           "type": "string"
@@ -4594,11 +4153,7 @@
       }
     },
     "models.ChatMessageWithPaginationResponse": {
-      "required": [
-        "data",
-        "paging",
-        "totalData"
-      ],
+      "required": ["data", "paging", "totalData"],
       "properties": {
         "data": {
           "type": "array",
@@ -4616,12 +4171,7 @@
       }
     },
     "models.ChatSnapshotMessage": {
-      "required": [
-        "chatId",
-        "senderId",
-        "message",
-        "createdAt"
-      ],
+      "required": ["chatId", "senderId", "message", "createdAt"],
       "properties": {
         "chatId": {
           "type": "string"
@@ -4639,16 +4189,7 @@
       }
     },
     "models.ChatSnapshots": {
-      "required": [
-        "chatId",
-        "topicId",
-        "ticketId",
-        "namespace",
-        "senderId",
-        "createdAt",
-        "messages",
-        "joinedTopics"
-      ],
+      "required": ["chatId", "topicId", "ticketId", "namespace", "senderId", "createdAt", "messages", "joinedTopics"],
       "properties": {
         "chatId": {
           "type": "string"
@@ -4836,9 +4377,7 @@
       }
     },
     "models.ConfigList": {
-      "required": [
-        "configs"
-      ],
+      "required": ["configs"],
       "properties": {
         "configs": {
           "type": "array",
@@ -4849,9 +4388,7 @@
       }
     },
     "models.ConfigRequest": {
-      "required": [
-        "spamMuteDuration"
-      ],
+      "required": ["spamMuteDuration"],
       "properties": {
         "chatRateLimitBurst": {
           "type": "integer",
@@ -4912,13 +4449,7 @@
       }
     },
     "models.Dictionary": {
-      "required": [
-        "id",
-        "namespace",
-        "word",
-        "wordType",
-        "parentId"
-      ],
+      "required": ["id", "namespace", "word", "wordType", "parentId"],
       "properties": {
         "id": {
           "type": "string"
@@ -4938,10 +4469,7 @@
       }
     },
     "models.DictionaryChild": {
-      "required": [
-        "id",
-        "word"
-      ],
+      "required": ["id", "word"],
       "properties": {
         "id": {
           "type": "string"
@@ -4952,10 +4480,7 @@
       }
     },
     "models.DictionaryGroup": {
-      "required": [
-        "name",
-        "count"
-      ],
+      "required": ["name", "count"],
       "properties": {
         "count": {
           "type": "integer",
@@ -4967,9 +4492,7 @@
       }
     },
     "models.DictionaryInsertBulkRequest": {
-      "required": [
-        "dictionaries"
-      ],
+      "required": ["dictionaries"],
       "properties": {
         "dictionaries": {
           "type": "array",
@@ -4980,12 +4503,7 @@
       }
     },
     "models.DictionaryInsertRequest": {
-      "required": [
-        "word",
-        "wordType",
-        "falsePositive",
-        "falseNegative"
-      ],
+      "required": ["word", "wordType", "falsePositive", "falseNegative"],
       "properties": {
         "falseNegative": {
           "type": "array",
@@ -5008,11 +4526,7 @@
       }
     },
     "models.DictionaryQueryResult": {
-      "required": [
-        "data",
-        "previous",
-        "next"
-      ],
+      "required": ["data", "previous", "next"],
       "properties": {
         "data": {
           "type": "array",
@@ -5029,12 +4543,7 @@
       }
     },
     "models.DictionaryUpdateRequest": {
-      "required": [
-        "word",
-        "wordType",
-        "falsePositive",
-        "falseNegative"
-      ],
+      "required": ["word", "wordType", "falsePositive", "falseNegative"],
       "properties": {
         "falseNegative": {
           "type": "array",
@@ -5057,13 +4566,7 @@
       }
     },
     "models.DictionaryWithChildren": {
-      "required": [
-        "id",
-        "namespace",
-        "word",
-        "wordType",
-        "parentId"
-      ],
+      "required": ["id", "namespace", "word", "wordType", "parentId"],
       "properties": {
         "falseNegatives": {
           "type": "array",
@@ -5095,13 +4598,7 @@
       }
     },
     "models.GetInboxCategoriesResponseItem": {
-      "required": [
-        "name",
-        "expiresIn",
-        "sendNotification",
-        "saveInbox",
-        "enabled"
-      ],
+      "required": ["name", "expiresIn", "sendNotification", "saveInbox", "enabled"],
       "properties": {
         "enabled": {
           "type": "boolean"
@@ -5128,11 +4625,7 @@
       }
     },
     "models.GetInboxMessagesResponse": {
-      "required": [
-        "data",
-        "previous",
-        "next"
-      ],
+      "required": ["data", "previous", "next"],
       "properties": {
         "data": {
           "type": "array",
@@ -5149,17 +4642,7 @@
       }
     },
     "models.GetInboxMessagesResponseData": {
-      "required": [
-        "id",
-        "senderId",
-        "message",
-        "status",
-        "scope",
-        "createdAt",
-        "updatedAt",
-        "expiredAt",
-        "userIds"
-      ],
+      "required": ["id", "senderId", "message", "status", "scope", "createdAt", "updatedAt", "expiredAt", "userIds"],
       "properties": {
         "category": {
           "type": "string"
@@ -5180,21 +4663,14 @@
         },
         "scope": {
           "type": "string",
-          "enum": [
-            "NAMESPACE",
-            "USER"
-          ]
+          "enum": ["NAMESPACE", "USER"]
         },
         "senderId": {
           "type": "string"
         },
         "status": {
           "type": "string",
-          "enum": [
-            "SENT",
-            "DRAFT",
-            "UNSENT"
-          ]
+          "enum": ["SENT", "DRAFT", "UNSENT"]
         },
         "updatedAt": {
           "type": "integer",
@@ -5209,9 +4685,7 @@
       }
     },
     "models.GetInboxStatsResponse": {
-      "required": [
-        "data"
-      ],
+      "required": ["data"],
       "properties": {
         "data": {
           "type": "array",
@@ -5222,11 +4696,7 @@
       }
     },
     "models.GetInboxUsersResponse": {
-      "required": [
-        "data",
-        "previous",
-        "next"
-      ],
+      "required": ["data", "previous", "next"],
       "properties": {
         "data": {
           "type": "array",
@@ -5243,12 +4713,7 @@
       }
     },
     "models.ImportConfigResponse": {
-      "required": [
-        "replacedConfigs",
-        "ignoredConfigs",
-        "failedConfigs",
-        "newConfigs"
-      ],
+      "required": ["replacedConfigs", "ignoredConfigs", "failedConfigs", "newConfigs"],
       "properties": {
         "failedConfigs": {
           "type": "array",
@@ -5280,12 +4745,7 @@
       "type": "object"
     },
     "models.MessageStats": {
-      "required": [
-        "id",
-        "messageStored",
-        "messageRead",
-        "notificationSent"
-      ],
+      "required": ["id", "messageStored", "messageRead", "notificationSent"],
       "properties": {
         "id": {
           "type": "string"
@@ -5305,10 +4765,7 @@
       }
     },
     "models.Pagination": {
-      "required": [
-        "previous",
-        "next"
-      ],
+      "required": ["previous", "next"],
       "properties": {
         "next": {
           "type": "string"
@@ -5319,9 +4776,7 @@
       }
     },
     "models.PublicBanTopicMembersRequest": {
-      "required": [
-        "userIDs"
-      ],
+      "required": ["userIDs"],
       "properties": {
         "userIDs": {
           "type": "array",
@@ -5332,9 +4787,7 @@
       }
     },
     "models.PublicBanTopicMembersResponse": {
-      "required": [
-        "userIDs"
-      ],
+      "required": ["userIDs"],
       "properties": {
         "userIDs": {
           "type": "array",
@@ -5345,9 +4798,7 @@
       }
     },
     "models.PublicUnbanTopicMembersRequest": {
-      "required": [
-        "userIDs"
-      ],
+      "required": ["userIDs"],
       "properties": {
         "userIDs": {
           "type": "array",
@@ -5358,9 +4809,7 @@
       }
     },
     "models.PublicUnbanTopicMembersResponse": {
-      "required": [
-        "userIDs"
-      ],
+      "required": ["userIDs"],
       "properties": {
         "userIDs": {
           "type": "array",
@@ -5371,14 +4820,7 @@
       }
     },
     "models.SaveInboxMessageRequest": {
-      "required": [
-        "category",
-        "message",
-        "status",
-        "scope",
-        "expiredAt",
-        "userIds"
-      ],
+      "required": ["category", "message", "status", "scope", "expiredAt", "userIds"],
       "properties": {
         "category": {
           "type": "string"
@@ -5392,17 +4834,11 @@
         },
         "scope": {
           "type": "string",
-          "enum": [
-            "NAMESPACE",
-            "USER"
-          ]
+          "enum": ["NAMESPACE", "USER"]
         },
         "status": {
           "type": "string",
-          "enum": [
-            "SENT",
-            "DRAFT"
-          ]
+          "enum": ["SENT", "DRAFT"]
         },
         "userIds": {
           "type": "array",
@@ -5413,15 +4849,7 @@
       }
     },
     "models.SaveInboxMessageResponse": {
-      "required": [
-        "id",
-        "category",
-        "message",
-        "status",
-        "scope",
-        "expiredAt",
-        "userIDs"
-      ],
+      "required": ["id", "category", "message", "status", "scope", "expiredAt", "userIDs"],
       "properties": {
         "category": {
           "type": "string"
@@ -5438,18 +4866,11 @@
         },
         "scope": {
           "type": "string",
-          "enum": [
-            "NAMESPACE",
-            "USER"
-          ]
+          "enum": ["NAMESPACE", "USER"]
         },
         "status": {
           "type": "string",
-          "enum": [
-            "SENT",
-            "DRAFT",
-            "UNSENT"
-          ]
+          "enum": ["SENT", "DRAFT", "UNSENT"]
         },
         "userIDs": {
           "type": "array",
@@ -5462,13 +4883,7 @@
     "models.SendInboxMessageRequest": {},
     "models.SendInboxMessageResponse": {},
     "models.TopicInfo": {
-      "required": [
-        "id",
-        "name",
-        "type",
-        "subType",
-        "createdAt"
-      ],
+      "required": ["id", "name", "type", "subType", "createdAt"],
       "properties": {
         "createdAt": {
           "type": "integer",
@@ -5499,15 +4914,7 @@
       }
     },
     "models.TopicLogItem": {
-      "required": [
-        "id",
-        "topicId",
-        "senderId",
-        "userId",
-        "message",
-        "type",
-        "createdAt"
-      ],
+      "required": ["id", "topicId", "senderId", "userId", "message", "type", "createdAt"],
       "properties": {
         "createdAt": {
           "type": "integer",
@@ -5527,12 +4934,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "TOPIC_CREATE",
-            "TOPIC_JOIN",
-            "TOPIC_LEAVE",
-            "TOPIC_DELETE"
-          ]
+          "enum": ["TOPIC_CREATE", "TOPIC_JOIN", "TOPIC_LEAVE", "TOPIC_DELETE"]
         },
         "userId": {
           "type": "string"
@@ -5540,10 +4942,7 @@
       }
     },
     "models.TopicLogWithPaginationResponse": {
-      "required": [
-        "data",
-        "paging"
-      ],
+      "required": ["data", "paging"],
       "properties": {
         "data": {
           "type": "array",
@@ -5557,12 +4956,7 @@
       }
     },
     "models.TopicMemberResponse": {
-      "required": [
-        "userId",
-        "isAdmin",
-        "isBanned",
-        "shardId"
-      ],
+      "required": ["userId", "isAdmin", "isBanned", "shardId"],
       "properties": {
         "isAdmin": {
           "type": "boolean"
@@ -5579,11 +4973,7 @@
       }
     },
     "models.TopicMemberWithPaginationResponse": {
-      "required": [
-        "data",
-        "paging",
-        "totalData"
-      ],
+      "required": ["data", "paging", "totalData"],
       "properties": {
         "data": {
           "type": "array",
@@ -5601,15 +4991,7 @@
       }
     },
     "models.TopicResponse": {
-      "required": [
-        "namespace",
-        "topicId",
-        "name",
-        "type",
-        "createdAt",
-        "createdBy",
-        "lastMessageAt"
-      ],
+      "required": ["namespace", "topicId", "name", "type", "createdAt", "createdBy", "lastMessageAt"],
       "properties": {
         "createdAt": {
           "type": "integer",
@@ -5637,9 +5019,7 @@
       }
     },
     "models.UnbanTopicMemberParam": {
-      "required": [
-        "userIds"
-      ],
+      "required": ["userIds"],
       "properties": {
         "userIds": {
           "type": "array",
@@ -5650,9 +5030,7 @@
       }
     },
     "models.UnbanTopicMemberResult": {
-      "required": [
-        "userIds"
-      ],
+      "required": ["userIds"],
       "properties": {
         "userIds": {
           "type": "array",
@@ -5663,9 +5041,7 @@
       }
     },
     "models.UnsendInboxMessageRequest": {
-      "required": [
-        "userIds"
-      ],
+      "required": ["userIds"],
       "properties": {
         "userIds": {
           "type": "array",
@@ -5677,13 +5053,7 @@
     },
     "models.UnsendInboxMessageResponse": {},
     "models.UpdateInboxCategoryRequest": {
-      "required": [
-        "hook",
-        "expiresIn",
-        "sendNotification",
-        "saveInbox",
-        "enabled"
-      ],
+      "required": ["hook", "expiresIn", "sendNotification", "saveInbox", "enabled"],
       "properties": {
         "enabled": {
           "type": "boolean"
@@ -5707,12 +5077,7 @@
       }
     },
     "models.UpdateInboxMessageRequest": {
-      "required": [
-        "message",
-        "scope",
-        "expiredAt",
-        "userIds"
-      ],
+      "required": ["message", "scope", "expiredAt", "userIds"],
       "properties": {
         "expiredAt": {
           "type": "integer",
@@ -5723,10 +5088,7 @@
         },
         "scope": {
           "type": "string",
-          "enum": [
-            "NAMESPACE",
-            "USER"
-          ]
+          "enum": ["NAMESPACE", "USER"]
         },
         "userIds": {
           "type": "array",
@@ -5737,11 +5099,7 @@
       }
     },
     "models.UserInbox": {
-      "required": [
-        "userId",
-        "readAt",
-        "keep"
-      ],
+      "required": ["userId", "readAt", "keep"],
       "properties": {
         "keep": {
           "type": "boolean"
@@ -5756,10 +5114,7 @@
       }
     },
     "response.Error": {
-      "required": [
-        "errorCode",
-        "errorMessage"
-      ],
+      "required": ["errorCode", "errorMessage"],
       "properties": {
         "errorCode": {
           "type": "integer",
@@ -5771,10 +5126,7 @@
       }
     },
     "restapi.ErrorResponseBody": {
-      "required": [
-        "ErrorCode",
-        "ErrorMessage"
-      ],
+      "required": ["ErrorCode", "ErrorMessage"],
       "properties": {
         "ErrorCode": {
           "type": "integer",
@@ -5786,9 +5138,7 @@
       }
     },
     "topic.InfoMember": {
-      "required": [
-        "userId"
-      ],
+      "required": ["userId"],
       "properties": {
         "leftAt": {
           "type": "integer",

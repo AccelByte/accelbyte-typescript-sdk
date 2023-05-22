@@ -7,11 +7,11 @@ import { z } from 'zod'
 
 export const BuildDeletionData = z.object({
   buildId: z.string().nullish(),
-  platformId: z.string().nullish(),
+  deletedAt: z.string().nullish(),
   deletionStatus: z.string().nullish(),
   displayVersion: z.string().nullish(),
-  requestedTime: z.string().nullish(),
-  deletedAt: z.string().nullish()
+  platformId: z.string().nullish(),
+  requestedTime: z.string().nullish()
 })
 
 export interface BuildDeletionData extends z.TypeOf<typeof BuildDeletionData> {}

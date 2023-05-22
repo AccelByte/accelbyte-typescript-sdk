@@ -46,9 +46,9 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
-  async function deleteRequest_ByUserId_ByRequestDate(requestDate: string, userId: string): Promise<unknown> {
+  async function deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<unknown> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.deleteRequest_ByUserId_ByRequestDate(requestDate, userId)
+    const resp = await $.deleteRequest_ByUserId_ByRequestDate(userId, requestDate)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -57,12 +57,12 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   async function postGenerate_ByUserId_ByRequestDate(
-    requestDate: string,
     userId: string,
+    requestDate: string,
     data: { password: string | null }
   ): Promise<UserDataUrl> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.postGenerate_ByUserId_ByRequestDate(requestDate, userId, data)
+    const resp = await $.postGenerate_ByUserId_ByRequestDate(userId, requestDate, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }

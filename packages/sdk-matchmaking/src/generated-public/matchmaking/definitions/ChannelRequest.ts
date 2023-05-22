@@ -20,6 +20,7 @@ export const ChannelRequest = z.object({
   rule_set: RuleSet,
   session_queue_timeout_seconds: z.number().int(),
   social_matchmaking: z.boolean().nullish(),
+  ticket_observability_enable: z.boolean().nullish(),
   use_sub_gamemode: z.boolean().nullish()
 })
 

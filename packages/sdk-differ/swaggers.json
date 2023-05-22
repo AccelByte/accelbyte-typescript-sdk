@@ -1,8 +1,1 @@
-[
-  [
-    "differ",
-    "Differ",
-    "differ-api.json",
-    "https://development.accelbyte.io/differ/apidocs/api.json"
-  ]
-]
+[["differ", "Differ", "differ.json", "https://development.accelbyte.io/differ/apidocs/api.json"]]
