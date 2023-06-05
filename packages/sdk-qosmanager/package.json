@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-qosmanager",
-  "version": "1.0.22-beta.0",
+  "version": "1.0.22-rc.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

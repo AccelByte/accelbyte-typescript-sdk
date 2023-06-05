@@ -11,7 +11,8 @@ export const StatUpdate = z.object({
   tags: z.array(z.string()).nullish(),
   cycleIds: z.array(z.string()).nullish(),
   defaultValue: z.number().nullish(),
-  isPublic: z.boolean().nullish()
+  isPublic: z.boolean().nullish(),
+  ignoreAdditionalDataOnValueRejected: z.boolean().nullish()
 })
 
 export interface StatUpdate extends z.TypeOf<typeof StatUpdate> {}

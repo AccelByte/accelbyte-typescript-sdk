@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-iam",
-  "version": "1.5340.30-beta.3",
+  "version": "1.600.30-rc.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

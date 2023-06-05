@@ -1,6 +1,7 @@
 {
-  "description": "Justice Differ Service",
-  "title": "JusticeDiffer",
-  "version": "",
-  "gitHash": ""
+  "buildDate": "2023-05-23T01:54:29+00:00",
+  "gitHash": "fa358e4193cb4177456955b48ffe893526872d99",
+  "name": "JusticeDiffer",
+  "realm": "staging",
+  "version": "1.25.3"
 }

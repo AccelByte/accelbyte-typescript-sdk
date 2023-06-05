@@ -4553,6 +4553,96 @@
       }
     },
     "/v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk": {
+      "get": {
+        "tags": ["UserStatistic"],
+        "summary": "Admin list user's statItems",
+        "description": "Admin list all statItems of user<br>NOTE: <li>If stat code does not exist, will ignore this stat code.</li><li>If stat item does not exist, will return default value</li></ul>Other detail info:<ul>+ *Required permission*: resource=ADMIN:NAMESPACE:{namespace}:STATITEM, action=2 (READ)\n<li><i>Returns</i>: stat items</li></ul>",
+        "operationId": "AdminListUsersStatItems",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "description": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "statCodes",
+            "in": "query",
+            "description": "stat codes",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "tags",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "additionalKey",
+            "in": "query",
+            "description": "additional key",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/A DTO object for user stat item value"
+              }
+            }
+          },
+          "400": {
+            "description": "<table><tr><td>ErrorCode</td><td>ErrorMessage</td></tr><tr><td>12223</td><td>Invalid stat codes in namespace [{namespace}]: [{statCodes}]</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
+          "404": {
+            "description": "<table><tr><td>ErrorCode</td><td>ErrorMessage</td></tr><tr><td>12243</td><td>Stats cannot be found in namespace [{namespace}]</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
+          "422": {
+            "description": "<table><tr><td>ErrorCode</td><td>ErrorMessage</td></tr><tr><td>20002</td><td>validation error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/ValidationErrorEntity"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "x-authorization": {
+          "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM",
+          "action": "2"
+        }
+      },
       "put": {
         "tags": ["UserStatistic"],
         "summary": "Bulk update user's statitems value",
@@ -6456,6 +6546,7 @@
       "required": [
         "createdAt",
         "defaultValue",
+        "ignoreAdditionalDataOnValueRejected",
         "incrementOnly",
         "isPublic",
         "name",
@@ -6522,6 +6613,9 @@
         "isPublic": {
           "type": "boolean"
         },
+        "ignoreAdditionalDataOnValueRejected": {
+          "type": "boolean"
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time"
@@ -6560,6 +6654,9 @@
           "format": "double"
         },
         "isPublic": {
+          "type": "boolean"
+        },
+        "ignoreAdditionalDataOnValueRejected": {
           "type": "boolean"
         }
       }
@@ -6631,6 +6728,9 @@
           }
         },
         "isPublic": {
+          "type": "boolean"
+        },
+        "ignoreAdditionalDataOnValueRejected": {
           "type": "boolean"
         }
       }

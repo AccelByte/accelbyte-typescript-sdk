@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Lobby Server",
     "title": "justice-lobby-server",
-    "version": "dev"
+    "version": "staging"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/lobby/apidocs"
+    "url": "https://stage.accelbyte.io/lobby/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -394,6 +394,66 @@
           }
         ],
         "summary": "get list of outgoing friends with requested time info",
+        "tags": ["friends", "public"]
+      }
+    },
+    "/friends/namespaces/{namespace}/me/platforms": {
+      "get": {
+        "operationId": "getUserFriendsWithPlatform",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.ListBulkUserPlatformsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseV1"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseV1"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseV1"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseV1"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseV1"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "get list of friends with platform data",
         "tags": ["friends", "public"]
       }
     },
@@ -3146,6 +3206,79 @@
           }
         ],
         "summary": "admin get number of players currently connected to the lobby.",
+        "tags": ["player"]
+      }
+    },
+    "/lobby/v1/admin/player/namespaces/{namespace}/users/bulk/blocked": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get blocked players data by bulk user ids in a namespace.",
+        "operationId": "adminGetBulkPlayerBlockedPlayersV1",
+        "parameters": [
+          {
+            "description": "list of blocked player request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.GetBulkAllPlayerBlockedUsersRequest"
+            }
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetBulkAllPlayerBlockedUsersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "admin get blocked players by bulk user ids",
         "tags": ["player"]
       }
     },
@@ -6647,6 +6780,17 @@
       },
       "required": ["friendId", "requestedAt"]
     },
+    "model.ListBulkUserPlatformsResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/model.UserWithPlatformInfo"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
     "model.LoadIncomingFriendsWithTimeResponse": {
       "properties": {
         "data": {
@@ -6958,6 +7102,20 @@
       },
       "required": ["code", "name"]
     },
+    "model.UserPlatformInfo": {
+      "properties": {
+        "platformDisplayName": {
+          "type": "string"
+        },
+        "platformName": {
+          "type": "string"
+        },
+        "platformUserId": {
+          "type": "string"
+        }
+      },
+      "required": ["platformDisplayName", "platformName", "platformUserId"]
+    },
     "model.UserRejectFriendRequest": {
       "properties": {
         "friendId": {
@@ -6984,6 +7142,29 @@
         }
       },
       "required": ["friendId"]
+    },
+    "model.UserWithPlatformInfo": {
+      "properties": {
+        "avatarUrl": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "platformInfos": {
+          "items": {
+            "$ref": "#/definitions/model.UserPlatformInfo"
+          },
+          "type": "array"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": ["avatarUrl", "displayName", "platformInfos", "userId"]
     },
     "models.AdminAddProfanityFilterIntoListRequest": {
       "properties": {
@@ -7384,6 +7565,31 @@
       },
       "required": ["attributes"]
     },
+    "models.GetBulkAllPlayerBlockedUsersRequest": {
+      "properties": {
+        "listBlockedUserId": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["listBlockedUserId"]
+    },
+    "models.GetBulkAllPlayerBlockedUsersResponse": {
+      "properties": {
+        "data": {
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/models.BlockedPlayerData"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        }
+      },
+      "required": ["data"]
+    },
     "models.GetConfigResponse": {
       "properties": {
         "apiKey": {
@@ -7606,15 +7812,15 @@
   },
   "x-docs": {
     "alias": "lobby",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/lobby/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-05-16T01:54:08+00:00",
-    "gitHash": "8b35a5fbf1a65d5b8fe0b11fb4ccf22f8d38a841",
+    "buildDate": "2023-05-31T06:02:04+00:00",
+    "gitHash": "d84bca5dfaccfc88fec1b44c2233dfbf76c0c908",
     "name": "justice-lobby-server",
-    "revisionID": "3.19.0",
-    "version": "3.19.0",
+    "revisionID": "3.21.0",
+    "version": "3.21.0",
     "version-justice": "3.45.0",
     "version-roles-seeding": "0.0.29"
   }

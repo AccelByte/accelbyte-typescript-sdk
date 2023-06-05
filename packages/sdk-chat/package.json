@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-chat",
-  "version": "1.0.20-beta.4",
+  "version": "1.0.20-rc.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

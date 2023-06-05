@@ -1,3 +1,7 @@
+### 1.600.30-rc.0 - 2023-05-25
+
+- code-generated update
+
 ### 1.5340.30-beta.3 - 2023-05-22
 
 - code-generated update

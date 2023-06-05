@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-statistics",
-  "version": "1.270.25-beta.2",
+  "version": "1.270.25-rc.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

@@ -13,6 +13,7 @@ import { Friends$ } from './endpoints/Friends$.js'
 import { GetUserFriendsResponseArray } from './definitions/GetUserFriendsResponseArray.js'
 import { GetUserIncomingFriendsResponseArray } from './definitions/GetUserIncomingFriendsResponseArray.js'
 import { GetUserOutgoingFriendsResponseArray } from './definitions/GetUserOutgoingFriendsResponseArray.js'
+import { ListBulkUserPlatformsResponse } from './definitions/ListBulkUserPlatformsResponse.js'
 import { LoadIncomingFriendsWithTimeResponseArray } from './definitions/LoadIncomingFriendsWithTimeResponseArray.js'
 import { LoadOutgoingFriendsWithTimeResponseArray } from './definitions/LoadOutgoingFriendsWithTimeResponseArray.js'
 import { UserAcceptFriendRequest } from './definitions/UserAcceptFriendRequest.js'
@@ -63,6 +64,13 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createFriendMeUnfriend(data: UserUnfriendRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createFriendMeUnfriend(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  async function getFriendsMePlatforms(): Promise<ListBulkUserPlatformsResponse> {
+    const $ = new Friends$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getFriendsMePlatforms()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -125,6 +133,7 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getFriendsMeIncoming,
     getFriendsMeOutgoing,
     createFriendMeUnfriend,
+    getFriendsMePlatforms,
     getFriendsMeIncomingTime,
     getFriendsMeOutgoingTime,
     createFriendMeRequestAccept,

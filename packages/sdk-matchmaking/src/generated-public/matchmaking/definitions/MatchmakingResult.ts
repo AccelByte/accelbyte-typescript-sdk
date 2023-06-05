@@ -13,6 +13,7 @@ export const MatchmakingResult = z.object({
   error_code: z.number().int(),
   error_message: z.string(),
   game_mode: z.string(),
+  is_mock: z.string(),
   joinable: z.boolean().nullish(),
   match_id: z.string(),
   matching_allies: z.array(MatchingAlly),

@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-groups",
-  "version": "1.2161.23-beta.1",
+  "version": "1.2162.23-rc.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

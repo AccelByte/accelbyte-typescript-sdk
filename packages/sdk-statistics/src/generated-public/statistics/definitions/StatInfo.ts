@@ -20,6 +20,7 @@ export const StatInfo = z.object({
   tags: z.array(z.string()).nullish(),
   cycleIds: z.array(z.string()).nullish(),
   isPublic: z.boolean(),
+  ignoreAdditionalDataOnValueRejected: z.boolean(),
   createdAt: z.string(),
   updatedAt: z.string()
 })

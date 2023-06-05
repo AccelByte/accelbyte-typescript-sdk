@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-odinconfig",
-  "version": "1.142.28-beta.0",
+  "version": "1.142.28-rc.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

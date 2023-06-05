@@ -3,12 +3,12 @@
   "info": {
     "description": "This is analytics game telemetry to standardize avengers and justice telemetry",
     "title": "Analytics Game Telemetry",
-    "version": "1.15.0"
+    "version": "1.17.2"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/game-telemetry"
+    "url": "https://stage.accelbyte.io/game-telemetry"
   },
   "securityDefinitions": {
     "APIKeyCookie": {
@@ -44,7 +44,7 @@
         "operationId": "get_events_game_telemetry_v1_admin_namespaces__namespace__events_get",
         "parameters": [
           {
-            "default": "2023-03-10T10:16:09Z",
+            "default": "2023-05-22T03:13:15Z",
             "description": "Start time of data to be queried. Default: Current time in UTC minus 1 day.",
             "in": "query",
             "name": "startTime",
@@ -52,7 +52,7 @@
             "type": "string"
           },
           {
-            "default": "2023-03-11T10:16:09Z",
+            "default": "2023-05-23T03:13:15Z",
             "description": "End time of data to be queried. Default: Current time in UTC.",
             "in": "query",
             "name": "endTime",
@@ -350,15 +350,15 @@
   },
   "x-docs": {
     "alias": "game-telemetry",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/game-telemetry/openapi.json"
   },
   "x-version": {
-    "buildDate": "2023-01-13T08:45:30+00:00",
-    "gitHash": "fefcbb002d48578a52e2d7812b17157b7fec5ada",
+    "buildDate": "2023-05-23T02:51:22+00:00",
+    "gitHash": "52c251907adbae0d6d44fbe46e1d12f15a762c58",
     "name": "analytics-game-telemetry",
-    "realm": "dev",
+    "realm": "staging",
     "rolesSeedingVersion": "0.0.3",
-    "version": "1.15.0"
+    "version": "1.17.2"
   }
 }

@@ -16,6 +16,7 @@ export const ConfigurationTemplateResponse = z.object({
   inviteTimeout: z.number().int(),
   joinability: z.string(),
   last: z.string(),
+  maxActiveSessions: z.number().int().nullish(),
   maxPlayers: z.number().int(),
   minPlayers: z.number().int(),
   name: z.string(),

@@ -13,6 +13,7 @@ export const GameSessionResponse = z.object({
   DSInformation: DsInformationResponse,
   attributes: z.record(z.any()).nullish(),
   backfillTicketID: z.string(),
+  code: z.string().nullish(),
   configuration: PublicConfiguration,
   createdAt: z.string(),
   createdBy: z.string(),

@@ -1,8 +1,8 @@
 {
-  "buildDate": "2023-05-19T02:47:25+00:00",
-  "gitHash": "371004ee063cc82ca905618484e6d13f5a310421",
+  "buildDate": "2023-05-23T02:03:08+00:00",
+  "gitHash": "5919ee879b7dba476b625114a43ca40565d162a4",
   "name": "justice-achievement-service",
-  "realm": "dev",
-  "version": "2.18.0",
+  "realm": "staging",
+  "version": "2.19.0",
   "version-roles-seeding": "0.0.19"
 }

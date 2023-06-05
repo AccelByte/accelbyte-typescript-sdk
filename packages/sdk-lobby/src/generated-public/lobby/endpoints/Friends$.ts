@@ -13,6 +13,7 @@ import { BulkAddFriendsRequest } from '../definitions/BulkAddFriendsRequest.js'
 import { GetUserFriendsResponseArray } from '../definitions/GetUserFriendsResponseArray.js'
 import { GetUserIncomingFriendsResponseArray } from '../definitions/GetUserIncomingFriendsResponseArray.js'
 import { GetUserOutgoingFriendsResponseArray } from '../definitions/GetUserOutgoingFriendsResponseArray.js'
+import { ListBulkUserPlatformsResponse } from '../definitions/ListBulkUserPlatformsResponse.js'
 import { LoadIncomingFriendsWithTimeResponseArray } from '../definitions/LoadIncomingFriendsWithTimeResponseArray.js'
 import { LoadOutgoingFriendsWithTimeResponseArray } from '../definitions/LoadOutgoingFriendsWithTimeResponseArray.js'
 import { UserAcceptFriendRequest } from '../definitions/UserAcceptFriendRequest.js'
@@ -85,6 +86,20 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  getFriendsMePlatforms(): Promise<IResponseWithSync<ListBulkUserPlatformsResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/friends/namespaces/{namespace}/me/platforms'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, ListBulkUserPlatformsResponse, 'ListBulkUserPlatformsResponse')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   getFriendsMeIncomingTime(): Promise<IResponseWithSync<LoadIncomingFriendsWithTimeResponseArray>> {

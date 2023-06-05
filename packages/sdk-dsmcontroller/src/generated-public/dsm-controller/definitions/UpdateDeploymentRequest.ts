@@ -11,7 +11,7 @@ export const UpdateDeploymentRequest = z.object({
   buffer_percent: z.number().int(),
   configuration: z.string(),
   enable_region_overrides: z.boolean(),
-  extendable_session: z.boolean(),
+  extendable_session: z.boolean().nullish(),
   game_version: z.string(),
   max_count: z.number().int(),
   min_count: z.number().int(),

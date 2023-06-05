@@ -11,6 +11,8 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Player$ } from './endpoints/Player$.js'
 import { PlayerAttributesRequestBody } from './definitions/PlayerAttributesRequestBody.js'
 import { PlayerAttributesResponseBody } from './definitions/PlayerAttributesResponseBody.js'
+import { PlayersCurrentPlatformRequest } from './definitions/PlayersCurrentPlatformRequest.js'
+import { PlayersCurrentPlatformResponse } from './definitions/PlayersCurrentPlatformResponse.js'
 
 export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
@@ -18,6 +20,16 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
+
+  /**
+   * Get bulk players current platform.
+   */
+  async function createUserBulkPlatform(data: PlayersCurrentPlatformRequest): Promise<PlayersCurrentPlatformResponse> {
+    const $ = new Player$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createUserBulkPlatform(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * Reset player attributes.
@@ -50,6 +62,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    createUserBulkPlatform,
     deleteUserMeAttribute,
     getUsersMeAttributes,
     createUserMeAttribute

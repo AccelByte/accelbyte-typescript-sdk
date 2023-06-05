@@ -8,12 +8,12 @@
     },
     "description": "Justice Group Service",
     "title": "justice-group-service",
-    "version": "2.16.1"
+    "version": "2.16.2"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/group/apidocs"
+    "url": "https://stage.accelbyte.io/group/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -6153,15 +6153,15 @@
   },
   "x-docs": {
     "alias": "group",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/group/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-05-11T09:21:54+00:00",
-    "gitHash": "f94d8e80ee9b832cf4269035aa82aba2dcfd726d",
+    "buildDate": "2023-05-23T02:03:40+00:00",
+    "gitHash": "ad8bb540aa7e09d073135c2ec638d485c7f5c67c",
     "name": "justice-group-service",
-    "realm": "dev",
-    "version": "2.16.1",
+    "realm": "staging",
+    "version": "2.16.2",
     "version-roles-seeding": "0.0.3"
   }
 }

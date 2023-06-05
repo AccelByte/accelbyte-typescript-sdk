@@ -14,6 +14,7 @@ import { CreateGameSessionRequest } from '../definitions/CreateGameSessionReques
 import { GameSessionQueryResponse } from '../definitions/GameSessionQueryResponse.js'
 import { GameSessionResponse } from '../definitions/GameSessionResponse.js'
 import { GameSessionResponseArray } from '../definitions/GameSessionResponseArray.js'
+import { JoinByCodeRequest } from '../definitions/JoinByCodeRequest.js'
 import { SessionInviteRequest } from '../definitions/SessionInviteRequest.js'
 import { UpdateGameSessionBackfillRequest } from '../definitions/UpdateGameSessionBackfillRequest.js'
 import { UpdateGameSessionRequest } from '../definitions/UpdateGameSessionRequest.js'
@@ -63,6 +64,17 @@ export class GameSession$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Join a session by code. The user can join a session as long as the code is valid
+   */
+  createGamesessionJoinCode(data: JoinByCodeRequest): Promise<IResponse<GameSessionResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/gamesessions/join/code'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
   }
 
   /**
@@ -119,6 +131,32 @@ export class GameSession$ {
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
+  }
+
+  /**
+   * Revoke code of the game session. Only leader can revoke a code.
+   */
+  deleteCode_BySessionId(sessionId: string): Promise<IResponse<GameSessionResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/code'
+      .replace('{namespace}', this.namespace)
+      .replace('{sessionId}', sessionId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
+  }
+
+  /**
+   * Generate a new code for the game session. Only leader can generate a code.
+   */
+  createCode_BySessionId(sessionId: string): Promise<IResponse<GameSessionResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/code'
+      .replace('{namespace}', this.namespace)
+      .replace('{sessionId}', sessionId)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
   }

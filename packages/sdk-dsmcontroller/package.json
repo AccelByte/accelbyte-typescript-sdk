@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-dsmcontroller",
-  "version": "1.630.24-beta.3",
+  "version": "1.632.24-rc.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",

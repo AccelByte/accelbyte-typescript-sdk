@@ -11,10 +11,23 @@ import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { PlayerAttributesRequestBody } from '../definitions/PlayerAttributesRequestBody.js'
 import { PlayerAttributesResponseBody } from '../definitions/PlayerAttributesResponseBody.js'
+import { PlayersCurrentPlatformRequest } from '../definitions/PlayersCurrentPlatformRequest.js'
+import { PlayersCurrentPlatformResponse } from '../definitions/PlayersCurrentPlatformResponse.js'
 
 export class Player$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+
+  /**
+   * Get bulk players current platform.
+   */
+  createUserBulkPlatform(data: PlayersCurrentPlatformRequest): Promise<IResponse<PlayersCurrentPlatformResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/users/bulk/platform'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, PlayersCurrentPlatformResponse, 'PlayersCurrentPlatformResponse')
+  }
 
   /**
    * Reset player attributes.

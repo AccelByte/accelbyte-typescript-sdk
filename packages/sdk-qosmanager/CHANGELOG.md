@@ -1,3 +1,7 @@
+### 1.0.22-rc.0 - 2023-05-25
+
+- code-generated update
+
 ### 1.0.22-beta.0 - 2023-05-17
 
 - code-generated update

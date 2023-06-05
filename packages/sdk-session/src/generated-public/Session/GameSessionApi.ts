@@ -14,6 +14,7 @@ import { GameSession$ } from './endpoints/GameSession$.js'
 import { GameSessionQueryResponse } from './definitions/GameSessionQueryResponse.js'
 import { GameSessionResponse } from './definitions/GameSessionResponse.js'
 import { GameSessionResponseArray } from './definitions/GameSessionResponseArray.js'
+import { JoinByCodeRequest } from './definitions/JoinByCodeRequest.js'
 import { SessionInviteRequest } from './definitions/SessionInviteRequest.js'
 import { UpdateGameSessionBackfillRequest } from './definitions/UpdateGameSessionBackfillRequest.js'
 import { UpdateGameSessionRequest } from './definitions/UpdateGameSessionRequest.js'
@@ -60,6 +61,16 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Join a session by code. The user can join a session as long as the code is valid
+   */
+  async function createGamesessionJoinCode(data: JoinByCodeRequest): Promise<GameSessionResponse> {
+    const $ = new GameSession$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createGamesessionJoinCode(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Delete a game session.
    */
   async function deleteGamesession_BySessionId(sessionId: string): Promise<unknown> {
@@ -95,6 +106,26 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function updateGamesession_BySessionId(sessionId: string, data: UpdateGameSessionRequest): Promise<GameSessionResponse> {
     const $ = new GameSession$(Network.create(requestConfig), namespace, cache)
     const resp = await $.updateGamesession_BySessionId(sessionId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Revoke code of the game session. Only leader can revoke a code.
+   */
+  async function deleteCode_BySessionId(sessionId: string): Promise<GameSessionResponse> {
+    const $ = new GameSession$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.deleteCode_BySessionId(sessionId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Generate a new code for the game session. Only leader can generate a code.
+   */
+  async function createCode_BySessionId(sessionId: string): Promise<GameSessionResponse> {
+    const $ = new GameSession$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createCode_BySessionId(sessionId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -173,10 +204,13 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createGamesession,
     createGamesession_ByNS,
     getUsersMeGamesessions,
+    createGamesessionJoinCode,
     deleteGamesession_BySessionId,
     getGamesession_BySessionId,
     patchGamesession_BySessionId,
     updateGamesession_BySessionId,
+    deleteCode_BySessionId,
+    createCode_BySessionId,
     createJoin_BySessionId,
     deleteLeave_BySessionId,
     createTeam_BySessionId,

@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-gdpr",
-  "version": "1.1231.33-beta.1",
+  "version": "1.200.33-rc.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",
