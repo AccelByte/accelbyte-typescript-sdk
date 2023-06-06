@@ -20,9 +20,12 @@
     "packages/sdk-matchmaking",
     "packages/sdk-odinconfig",
     "packages/sdk-platform",
+    "packages/sdk-reporting",
     "packages/sdk-qosmanager",
+    "packages/sdk-seasonpass",
     "packages/sdk-session",
     "packages/sdk-sessionbrowser",
+    "packages/sdk-social",
     "packages/sdk-statistics",
     "packages/sdk-ugc",
     "packages/examples"

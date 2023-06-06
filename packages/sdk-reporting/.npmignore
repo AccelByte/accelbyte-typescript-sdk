@@ -1,0 +1,18 @@
+# Development files.
+src/
+docs/
+test/
+swaggers/
+
+# Config files.
+*.config.*
+tsconfig.*
+typedoc.json
+swaggers.json
+
+# Version files.
+version.json
+.changelog.json
+
+CHANGELOG.md
+!dist/
