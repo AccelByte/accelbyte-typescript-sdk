@@ -15,12 +15,12 @@ import { UpdateRulesetSubGameModes } from './UpdateRulesetSubGameModes.js'
 export const UpdateRuleset = z.object({
   alliance: UpdateAllianceRule,
   alliance_flexing_rule: z.array(AllianceFlexingRule),
-  bucket_mmr_rule: BucketMmrRule,
+  bucket_mmr_rule: BucketMmrRule.nullish(),
   flexingRules: z.array(FlexingRule).nullish(),
   match_options: MatchOptionRule.nullish(),
   matchingRules: z.array(MatchingRule).nullish(),
   sub_game_modes: UpdateRulesetSubGameModes.nullish(),
-  use_newest_ticket_for_flexing: z.boolean()
+  use_newest_ticket_for_flexing: z.boolean().nullish()
 })
 
 export interface UpdateRuleset extends z.TypeOf<typeof UpdateRuleset> {}

@@ -20,6 +20,16 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
+   * &lt;p&gt;Requires valid user access token&lt;br&gt; This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use &lt;a href=&#39;#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest&#39;&gt;/gdpr/public/namespaces/{namespace}/users/{userId}/deletions&lt;/a&gt;
+   */
+  async function postUserMeDeletion(data: { platformId: string | null; platformToken: string | null }): Promise<RequestDeleteResponse> {
+    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.postUserMeDeletion(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   async function deleteDeletion_ByUserId(userId: string): Promise<unknown> {
@@ -50,6 +60,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    postUserMeDeletion,
     deleteDeletion_ByUserId,
     postDeletion_ByUserId,
     getDeletionsStatus_ByUserId

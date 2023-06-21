@@ -26,7 +26,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getChannels_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; name?: string | null; offset?: number }
   ): Promise<PaginatedGetChannelResponse> {
     const $ = new PublicChannel$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getChannels_ByUserId(userId, queryParams)

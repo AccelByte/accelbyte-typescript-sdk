@@ -8,7 +8,7 @@
     },
     "description": "Justice UGC Service",
     "title": "justice-ugc-service",
-    "version": "2.11.0"
+    "version": "2.11.1"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -2431,6 +2431,12 @@
             "type": "integer"
           },
           {
+            "description": "likes filter by channel name",
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          },
+          {
             "default": 0,
             "description": "the offset number to retrieve",
             "in": "query",
@@ -4709,6 +4715,12 @@
             "in": "query",
             "name": "limit",
             "type": "integer"
+          },
+          {
+            "description": "likes filter by channel name",
+            "in": "query",
+            "name": "name",
+            "type": "string"
           },
           {
             "default": 0,
@@ -7420,11 +7432,11 @@
     "path": "/ugc/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-05-10T03:14:08+00:00",
-    "gitHash": "fda0e5a3f15f03e00edc7ef956f950a4ea71efaf",
+    "buildDate": "2023-06-05T02:50:47+00:00",
+    "gitHash": "bbacffe64234cacca0b0e541438fa2303cafeb47",
     "name": "justice-ugc-service",
     "realm": "dev",
-    "version": "2.11.0",
+    "version": "2.11.1",
     "version-roles-seeding": "0.0.13"
   }
 }

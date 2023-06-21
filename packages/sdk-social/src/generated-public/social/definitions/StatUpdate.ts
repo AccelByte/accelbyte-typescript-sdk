@@ -9,6 +9,7 @@ export const StatUpdate = z.object({
   cycleIds: z.array(z.string()).nullish(),
   defaultValue: z.number().nullish(),
   description: z.string().nullish(),
+  ignoreAdditionalDataOnValueRejected: z.boolean().nullish(),
   isPublic: z.boolean().nullish(),
   name: z.string().nullish(),
   tags: z.array(z.string()).nullish()

@@ -23,7 +23,7 @@ export class LeaderboardData$ {
    */
   getWeek_ByLeaderboardCode(
     leaderboardCode: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/week'
@@ -45,7 +45,7 @@ export class LeaderboardData$ {
    */
   getMonth_ByLeaderboardCode(
     leaderboardCode: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/month'
@@ -67,7 +67,7 @@ export class LeaderboardData$ {
    */
   getToday_ByLeaderboardCode(
     leaderboardCode: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/today'
@@ -89,7 +89,7 @@ export class LeaderboardData$ {
    */
   getSeason_ByLeaderboardCode(
     leaderboardCode: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/season'
@@ -190,8 +190,12 @@ export class LeaderboardData$ {
   /**
    * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
-  getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponseWithSync<UserRankingResponse>> {
-    const params = {} as SDKRequestConfig
+  getUser_ByLeaderboardCode_ByUserId(
+    leaderboardCode: string,
+    userId: string,
+    queryParams?: { previousVersion?: number }
+  ): Promise<IResponseWithSync<UserRankingResponse>> {
+    const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)

@@ -2207,8 +2207,8 @@
     "path": "/event/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-04-26T01:52:12+00:00",
-    "gitHash": "89fe404cf31775652711a54b75bce82c16b5a232",
+    "buildDate": "2023-06-05T07:51:56+00:00",
+    "gitHash": "71c16d36dccb906ac88479e4551d801a7ff60ea0",
     "name": "justice-event-log-service",
     "realm": "dev",
     "version": "2.0.2",

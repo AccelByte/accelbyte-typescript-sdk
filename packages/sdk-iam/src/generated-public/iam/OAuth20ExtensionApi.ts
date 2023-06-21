@@ -52,7 +52,11 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;This endpoint is being used to create headless account after 3rd platform authenticated, and response token . The &#39;linkingToken&#39; in request body is received from &#34;/platforms/{platformId}/token&#34; when 3rd platform account is not linked to justice account yet.&#39;&lt;/p&gt;
    */
-  async function postHeadlesToken(data: { linkingToken: string | null; extend_exp?: boolean | null }): Promise<TokenResponseV3> {
+  async function postHeadlesToken(data: {
+    linkingToken: string | null
+    additionalData?: string | null
+    extend_exp?: boolean | null
+  }): Promise<TokenResponseV3> {
     const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache)
     const resp = await $.postHeadlesToken(data)
     if (resp.error) throw resp.error
@@ -62,7 +66,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;This endpoint is being used to generate publisher user&#39;s game token.&lt;br&gt; It require basic header with ClientID and Secret, it should match the ClientID when call &lt;strong&gt;/iam/v3/namespace/{namespace}/token/request&lt;/strong&gt;&lt;br&gt; It required a code which can be generated from &lt;strong&gt;/iam/v3/namespace/{namespace}/token/request&lt;/strong&gt;.&lt;br&gt; &lt;/p&gt;
    */
-  async function postTokenExchange(data: { code: string | null }): Promise<TokenResponseV3> {
+  async function postTokenExchange(data: { code: string | null; additionalData?: string | null }): Promise<TokenResponseV3> {
     const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache)
     const resp = await $.postTokenExchange(data)
     if (resp.error) throw resp.error
@@ -105,6 +109,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function postLinkTokenExchange(data: {
     client_id: string | null
     oneTimeLinkCode: string | null
+    additionalData?: string | null
     isTransient?: boolean | null
   }): Promise<TokenResponseV3> {
     const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache)

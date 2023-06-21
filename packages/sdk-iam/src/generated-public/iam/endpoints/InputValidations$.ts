@@ -8,6 +8,7 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
+import { InputValidationConfigVersion } from '../definitions/InputValidationConfigVersion.js'
 import { InputValidationsPublicResponse } from '../definitions/InputValidationsPublicResponse.js'
 
 export class InputValidations$ {
@@ -26,6 +27,23 @@ export class InputValidations$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, InputValidationsPublicResponse, 'InputValidationsPublicResponse')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * &lt;p&gt;This endpoint is to get input validation configuration by field.&lt;/p&gt;
+   */
+  getInputValidation_ByField(field: string): Promise<IResponseWithSync<InputValidationConfigVersion>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/inputValidations/{field}'.replace('{field}', field)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, InputValidationConfigVersion, 'InputValidationConfigVersion')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

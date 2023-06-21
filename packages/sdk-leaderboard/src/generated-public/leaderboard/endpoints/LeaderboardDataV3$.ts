@@ -6,8 +6,10 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
+import { BulkUserIDsRequest } from '../definitions/BulkUserIDsRequest.js'
+import { BulkUserRankingResponseV3 } from '../definitions/BulkUserRankingResponseV3.js'
 import { GetLeaderboardRankingResp } from '../definitions/GetLeaderboardRankingResp.js'
 import { UserRankingResponseV3 } from '../definitions/UserRankingResponseV3.js'
 
@@ -35,6 +37,19 @@ export class LeaderboardDataV3$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * &lt;p&gt;Bulk get users ranking in leaderboard, max allowed 20 userIDs at a time.&lt;/p&gt;
+   */
+  createUserBulk_ByLeaderboardCode(leaderboardCode: string, data: BulkUserIDsRequest): Promise<IResponse<BulkUserRankingResponseV3>> {
+    const params = {} as SDKRequestConfig
+    const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/bulk'
+      .replace('{namespace}', this.namespace)
+      .replace('{leaderboardCode}', leaderboardCode)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, BulkUserRankingResponseV3, 'BulkUserRankingResponseV3')
   }
 
   /**

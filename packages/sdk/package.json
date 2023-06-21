@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/node/index.cjs",
@@ -50,7 +50,7 @@
     "rollup-plugin-dts": "5.1.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "typescript": "4.6.4",
-    "vitest": "0.25.1"
+    "vitest": "0.31.1"
   },
   "dependencies": {
     "@accelbyte/validator": "0.2.2",

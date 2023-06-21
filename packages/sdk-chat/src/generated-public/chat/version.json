@@ -1,8 +1,8 @@
 {
-  "buildDate": "2023-05-31T05:31:03+00:00",
-  "gitHash": "5f2232aaf021eea0a51a52558e3dc5f0fbdac1fd",
+  "buildDate": "2023-06-08T02:37:36+00:00",
+  "gitHash": "7eb38e3f3c47ae79f2e4f27cc9a3a6740c4b6b26",
   "name": "justice-chat-service",
-  "revisionID": "0.4.2",
-  "version": "0.4.2",
+  "revisionID": "0.4.3",
+  "version": "0.4.3",
   "version-roles-seeding": "0.0.18"
 }

@@ -45,7 +45,8 @@ function createConfig(config) {
       peerDepsExternal(),
       alias({
         entries: {
-          '@accelbyte/sdk': path.resolve('./src')
+          '@accelbyte/sdk': path.resolve('./src'),
+          '~/iam-definitions': path.resolve('../sdk-iam/src/generated-public/iam/definitions')
         }
       }),
       resolve({ jsnext: true, preferBuiltins: true }),

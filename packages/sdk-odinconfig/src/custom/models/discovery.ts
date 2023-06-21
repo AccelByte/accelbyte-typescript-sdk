@@ -294,6 +294,13 @@ export const DiscoveryConfigData = z.object({
         value: z.string()
       })
     })
+  ),
+  launcherIcon: Config.merge(
+    z.object({
+      data: z.object({
+        value: z.string()
+      })
+    })
   )
 })
 

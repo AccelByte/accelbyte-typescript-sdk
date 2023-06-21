@@ -15,13 +15,13 @@ import { SubGameMode } from './SubGameMode.js'
 export const RuleSet = z.object({
   alliance: AllianceRule,
   alliance_flexing_rule: z.array(AllianceFlexingRule).nullish(),
-  bucket_mmr_rule: BucketMmrRule,
+  bucket_mmr_rule: BucketMmrRule.nullish(),
   flexing_rule: z.array(FlexingRule),
   match_options: MatchOptionRule,
   matching_rule: z.array(MatchingRule),
   rebalance_enable: z.boolean(),
   sub_game_modes: z.record(SubGameMode).nullish(),
-  use_newest_ticket_for_flexing: z.boolean()
+  use_newest_ticket_for_flexing: z.boolean().nullish()
 })
 
 export interface RuleSet extends z.TypeOf<typeof RuleSet> {}

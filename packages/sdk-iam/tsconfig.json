@@ -66,6 +66,9 @@
       ],
       "@accelbyte/sdk-platform": [
         "../sdk-platform/src"
+      ],
+      "~/iam-definitions/*": [
+        "./src/generated-public/iam/definitions/*"
       ]
     },
     "declarationDir": "dist/types",

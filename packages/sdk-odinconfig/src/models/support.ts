@@ -7,7 +7,7 @@
 import { z } from 'zod'
 
 export const KnowledgeBaseSettings = z.object({
-  isknowledgeBaseEnabled: z.boolean()
+  isKnowledgeBaseEnabled: z.boolean()
 })
 
 export interface KnowledgeBaseSettings extends z.TypeOf<typeof KnowledgeBaseSettings> {}

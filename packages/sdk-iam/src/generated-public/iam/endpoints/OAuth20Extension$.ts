@@ -54,7 +54,11 @@ export class OAuth20Extension$ {
   /**
    * &lt;p&gt;This endpoint is being used to create headless account after 3rd platform authenticated, and response token . The &#39;linkingToken&#39; in request body is received from &#34;/platforms/{platformId}/token&#34; when 3rd platform account is not linked to justice account yet.&#39;&lt;/p&gt;
    */
-  postHeadlesToken(data: { linkingToken: string | null; extend_exp?: boolean | null }): Promise<IResponse<TokenResponseV3>> {
+  postHeadlesToken(data: {
+    linkingToken: string | null
+    additionalData?: string | null
+    extend_exp?: boolean | null
+  }): Promise<IResponse<TokenResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/headless/token'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -68,7 +72,7 @@ export class OAuth20Extension$ {
   /**
    * &lt;p&gt;This endpoint is being used to generate publisher user&#39;s game token.&lt;br&gt; It require basic header with ClientID and Secret, it should match the ClientID when call &lt;strong&gt;/iam/v3/namespace/{namespace}/token/request&lt;/strong&gt;&lt;br&gt; It required a code which can be generated from &lt;strong&gt;/iam/v3/namespace/{namespace}/token/request&lt;/strong&gt;.&lt;br&gt; &lt;/p&gt;
    */
-  postTokenExchange(data: { code: string | null }): Promise<IResponse<TokenResponseV3>> {
+  postTokenExchange(data: { code: string | null; additionalData?: string | null }): Promise<IResponse<TokenResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/token/exchange'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -130,6 +134,7 @@ export class OAuth20Extension$ {
   postLinkTokenExchange(data: {
     client_id: string | null
     oneTimeLinkCode: string | null
+    additionalData?: string | null
     isTransient?: boolean | null
   }): Promise<IResponse<TokenResponseV3>> {
     const params = {} as SDKRequestConfig

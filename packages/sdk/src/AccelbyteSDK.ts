@@ -22,6 +22,7 @@ export interface AccelbyteSDK {
     redirectURI: string
     baseURL: string
     cache: boolean | undefined
+    refreshToken?: string
   }
 }
 
@@ -67,7 +68,8 @@ class AccelbyteSDKImpl {
           clientId: this.options.clientId,
           redirectURI: this.options.redirectURI,
           baseURL: this.options.baseURL,
-          cache: this.options.cache !== undefined ? this.options.cache : false
+          cache: this.options.cache !== undefined ? this.options.cache : false,
+          refreshToken: this.refreshToken
         }
       }
     }

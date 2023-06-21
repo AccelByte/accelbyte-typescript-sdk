@@ -4,6 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { AvatarConfig } from './AvatarConfig.js'
 import { ValidationDescription } from './ValidationDescription.js'
 
 export const Validation = z.object({
@@ -12,6 +13,7 @@ export const Validation = z.object({
   allowLetter: z.boolean(),
   allowSpace: z.boolean(),
   allowUnicode: z.boolean(),
+  avatarConfig: AvatarConfig.nullish(),
   blockedWord: z.array(z.string()),
   description: z.array(ValidationDescription),
   isCustomRegex: z.boolean(),

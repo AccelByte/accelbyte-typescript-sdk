@@ -17,6 +17,20 @@ export class DataDeletion$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
+   * &lt;p&gt;Requires valid user access token&lt;br&gt; This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use &lt;a href=&#39;#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest&#39;&gt;/gdpr/public/namespaces/{namespace}/users/{userId}/deletions&lt;/a&gt;
+   */
+  postUserMeDeletion(data: { platformId: string | null; platformToken: string | null }): Promise<IResponse<RequestDeleteResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/gdpr/public/users/me/deletions'
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
+  }
+
+  /**
    * &lt;p&gt;Requires valid user access token&lt;/p&gt;
    */
   deleteDeletion_ByUserId(userId: string): Promise<IResponse<unknown>> {

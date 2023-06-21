@@ -5,6 +5,10 @@
  */
 import { z } from 'zod'
 
-export const TokenThirdPartyLinkStatusResponse = z.object({ linked: z.boolean() })
+export const TokenThirdPartyLinkStatusResponse = z.object({
+  linked: z.boolean(),
+  platformToken: z.string().nullish(),
+  sandboxId: z.string().nullish()
+})
 
 export interface TokenThirdPartyLinkStatusResponse extends z.TypeOf<typeof TokenThirdPartyLinkStatusResponse> {}

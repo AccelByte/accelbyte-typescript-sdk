@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Config Service",
     "title": "config-service-app",
-    "version": "0.14.2"
+    "version": "0.14.3"
   },
   "paths": {
     "/odin-config/v1/admin/namespaces/{namespace}/templates": {

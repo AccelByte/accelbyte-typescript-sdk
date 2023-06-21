@@ -26,7 +26,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getWeek_ByLeaderboardCode(
     leaderboardCode: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetLeaderboardRankingResp> {
     const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getWeek_ByLeaderboardCode(leaderboardCode, queryParams)
@@ -39,7 +39,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getMonth_ByLeaderboardCode(
     leaderboardCode: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetLeaderboardRankingResp> {
     const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getMonth_ByLeaderboardCode(leaderboardCode, queryParams)
@@ -52,7 +52,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getToday_ByLeaderboardCode(
     leaderboardCode: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetLeaderboardRankingResp> {
     const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getToday_ByLeaderboardCode(leaderboardCode, queryParams)
@@ -65,7 +65,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getSeason_ByLeaderboardCode(
     leaderboardCode: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetLeaderboardRankingResp> {
     const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getSeason_ByLeaderboardCode(leaderboardCode, queryParams)
@@ -125,9 +125,13 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
-  async function getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<UserRankingResponse> {
+  async function getUser_ByLeaderboardCode_ByUserId(
+    leaderboardCode: string,
+    userId: string,
+    queryParams?: { previousVersion?: number }
+  ): Promise<UserRankingResponse> {
     const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getUser_ByLeaderboardCode_ByUserId(leaderboardCode, userId)
+    const resp = await $.getUser_ByLeaderboardCode_ByUserId(leaderboardCode, userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }

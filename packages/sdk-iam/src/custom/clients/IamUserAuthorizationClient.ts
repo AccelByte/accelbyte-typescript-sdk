@@ -48,7 +48,6 @@ interface UserAuthorizationOptions {
   clientId: string
   redirectURI: string
   baseURL: string
-  refreshToken?: string
 }
 
 export const LoginErrorParam = z.enum(['cancelled', 'login_session_expired'])
@@ -68,16 +67,15 @@ export class IamUserAuthorizationClient {
   cache
   options: UserAuthorizationOptions
 
-  constructor(sdk: AccelbyteSDK, args?: ApiArgs) {
-    const amb = sdk.assembly()
-    this.conf = amb.config
-    this.namespace = args?.namespace ? args?.namespace : amb.namespace
-    this.cache = args?.cache ? args?.cache : amb.cache
+  constructor(private sdk: AccelbyteSDK, args?: ApiArgs) {
+    const { config, namespace, cache, baseURL, clientId, redirectURI } = sdk.assembly()
+    this.conf = config
+    this.namespace = args?.namespace || namespace
+    this.cache = args?.cache || cache
     this.options = {
-      baseURL: amb.baseURL,
-      clientId: amb.clientId,
-      // refreshToken: amb.refreshToken,
-      redirectURI: amb.redirectURI
+      baseURL,
+      clientId,
+      redirectURI
     }
   }
 
@@ -289,7 +287,7 @@ export class IamUserAuthorizationClient {
    * @internal
    */
   refreshToken = (): Promise<Partial<TokenWithDeviceCookieResponseV3> | false> => {
-    const { clientId, refreshToken } = this.options
+    const { clientId, refreshToken } = this.sdk.assembly()
     if (DesktopChecker.isDesktopApp()) {
       return Promise.resolve().then(doRefreshSession({ axiosConfig: this.conf, clientId, refreshToken }))
     }

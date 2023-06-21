@@ -58,8 +58,7 @@
         "../sdk-gdpr/src"
       ],
       "@accelbyte/sdk-iam": [
-        "../sdk-iam/src",
-        "../../accelbyte-web-sdk/packages/sdk-iam/src"
+        "../sdk-iam/src"
       ],
       "@accelbyte/sdk-legal": [
         "../sdk-legal/src"
@@ -70,8 +69,8 @@
       "@accelbyte/sdk-platform": [
         "../sdk-platform/src"
       ],
-      "@accelbyte/sdk-iam/*": [
-        "../../accelbyte-web-sdk/packages/sdk-iam/src/*"
+      "~/iam-definitions/*": [
+        "../sdk-iam/src/generated-public/iam/definitions/*"
       ]
     },
     "declarationDir": "types",

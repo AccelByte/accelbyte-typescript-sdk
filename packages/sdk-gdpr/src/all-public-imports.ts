@@ -3,10 +3,10 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-export * from './generated-public/gdpr/endpoints/DataRetrieval$.js'
-export * from './generated-public/gdpr/DataRetrievalApi.js'
 export * from './generated-public/gdpr/endpoints/DataDeletion$.js'
 export * from './generated-public/gdpr/DataDeletionApi.js'
+export * from './generated-public/gdpr/endpoints/DataRetrieval$.js'
+export * from './generated-public/gdpr/DataRetrievalApi.js'
 export * from './generated-public/Gdpr.js'
 export * from './generated-public/gdpr/definitions/DataRetrievalResponse.js'
 export * from './generated-public/gdpr/definitions/DeletionData.js'

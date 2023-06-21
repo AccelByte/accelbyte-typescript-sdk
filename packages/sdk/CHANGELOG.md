@@ -1,3 +1,8 @@
+### 2.0.2 - 2023-05-22
+
+- Add TokenWithDeviceCookieResponseV3 on tsconfig path and rollup config alias entries
+- Bring back refreshToken on AccelbyteSDK assembly
+
 ### 2.0.1 - 2023-05-02
 
 - Bump from script
