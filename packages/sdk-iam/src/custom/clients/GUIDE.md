@@ -51,9 +51,9 @@ parameters, `code`, `state`, and `error` that can be taken from the location sea
 
 ```ts
 const searchParams = new URLSearchParams(location.search)
-const code = searchParams.get("code")
-const error = searchParams.get("error")
-const state = searchParams.get("state")
+const code = searchParams.get('code')
+const error = searchParams.get('error')
+const state = searchParams.get('state')
 ```
 
 The `code`, `state`, and `error` can then be used by the `exchangeAuthorizationCode` method. The error part can be
@@ -62,12 +62,12 @@ omitted as an argument if it needs to be handled separately.
 ```ts
 const userAuthorization = sdk.iam.userAuthorization()
 const exchangeResult = await userAuthorization.exchangeAuthorizationCode({
-    code,
-    error,
-    state,
+  code,
+  error,
+  state
 })
 if (!exchangeResult) {
-    return;
+  return
 }
 const { mfaData, returnPath } = exchangeResult
 ```

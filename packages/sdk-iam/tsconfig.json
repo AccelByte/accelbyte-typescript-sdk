@@ -71,8 +71,7 @@
         "./src/generated-public/iam/definitions/*"
       ]
     },
-    "declarationDir": "dist/types",
-    "outDir": "dist"
+    "outDir": "dist/es"
   },
   "include": [
     "src",

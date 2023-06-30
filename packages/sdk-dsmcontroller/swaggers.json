@@ -1,7 +1,7 @@
 [
   [
     "dsm-controller",
-    "DSM Controller",
+    "dsmcontroller",
     "dsmc.json",
     "https://development.accelbyte.io/dsmcontroller/apidocs/api.json"
   ]

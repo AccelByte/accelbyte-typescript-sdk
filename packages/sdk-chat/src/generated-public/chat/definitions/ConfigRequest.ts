@@ -11,6 +11,7 @@ export const ConfigRequest = z.object({
   concurrentUsersLimit: z.number().int().nullish(),
   enableManualTopicCreation: z.boolean().nullish(),
   enableProfanityFilter: z.boolean().nullish(),
+  filterAppName: z.string().nullish(),
   filterParam: z.string().nullish(),
   filterType: z.string().nullish(),
   generalRateLimitBurst: z.number().int().nullish(),

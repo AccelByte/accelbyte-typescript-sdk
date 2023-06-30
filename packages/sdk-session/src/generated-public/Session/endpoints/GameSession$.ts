@@ -15,6 +15,7 @@ import { GameSessionQueryResponse } from '../definitions/GameSessionQueryRespons
 import { GameSessionResponse } from '../definitions/GameSessionResponse.js'
 import { GameSessionResponseArray } from '../definitions/GameSessionResponseArray.js'
 import { JoinByCodeRequest } from '../definitions/JoinByCodeRequest.js'
+import { PromoteLeaderRequest } from '../definitions/PromoteLeaderRequest.js'
 import { SessionInviteRequest } from '../definitions/SessionInviteRequest.js'
 import { UpdateGameSessionBackfillRequest } from '../definitions/UpdateGameSessionBackfillRequest.js'
 import { UpdateGameSessionRequest } from '../definitions/UpdateGameSessionRequest.js'
@@ -35,7 +36,7 @@ export class GameSession$ {
   }
 
   /**
-   * Query game sessions. By default, API will return a list of available game sessions (joinability: open). Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS.
+   * Query game sessions. By default, API will return a list of available game sessions (joinability: open). Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS. query parameter \&#34;availability\&#34; to filter sessions&#39; availabillity: all: return all sessions regardless it&#39;s full full: only return active sessions default behavior (unset or else): return only available sessions (not full)
    */
   createGamesession_ByNS(): Promise<IResponse<GameSessionQueryResponse>> {
     const params = {} as SDKRequestConfig
@@ -230,6 +231,19 @@ export class GameSession$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Promote game session member to become the new game session leader. This API requires the NAMESPACE:{namespace}:SESSION:GAME [UPDATE] permission. This API can be operated by: - User (game session member) who is the current leader of the game session - Game Client - Dedicated Server (DS) This API will promote game session leader candidate with the following criteria: - Leader candidate is a member of the game session - Leader candidate has a &#34;CONNECTED&#34; or &#34;JOINED&#34; status - If the leader candidate is the current leader, then no promotion process is carried out
+   */
+  createLeader_BySessionId(sessionId: string, data: PromoteLeaderRequest): Promise<IResponse<GameSessionResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/leader'
+      .replace('{namespace}', this.namespace)
+      .replace('{sessionId}', sessionId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
   }
 
   /**

@@ -39,7 +39,7 @@ export class PodConfig$ {
    */
   deleteConfigPod_ByName(name: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
-    const url = '/dsmcontroller/namespaces/{namespace}/configs/pods/{name}'.replace('{name}', name).replace('{namespace}', this.namespace)
+    const url = '/dsmcontroller/namespaces/{namespace}/configs/pods/{name}'.replace('{namespace}', this.namespace).replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
@@ -50,7 +50,7 @@ export class PodConfig$ {
    */
   createConfigPod_ByName(name: string, data: CreatePodConfigRequest): Promise<IResponse<PodConfigRecord>> {
     const params = {} as SDKRequestConfig
-    const url = '/dsmcontroller/namespaces/{namespace}/configs/pods/{name}'.replace('{name}', name).replace('{namespace}', this.namespace)
+    const url = '/dsmcontroller/namespaces/{namespace}/configs/pods/{name}'.replace('{namespace}', this.namespace).replace('{name}', name)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, PodConfigRecord, 'PodConfigRecord')

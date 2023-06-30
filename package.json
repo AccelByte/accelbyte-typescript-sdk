@@ -17,6 +17,7 @@
     "packages/sdk-leaderboard",
     "packages/sdk-legal",
     "packages/sdk-lobby",
+    "packages/sdk-matchmaking-v1",
     "packages/sdk-matchmaking",
     "packages/sdk-odinconfig",
     "packages/sdk-platform",
@@ -26,7 +27,6 @@
     "packages/sdk-session",
     "packages/sdk-sessionbrowser",
     "packages/sdk-social",
-    "packages/sdk-statistics",
     "packages/sdk-ugc",
     "packages/examples"
   ],

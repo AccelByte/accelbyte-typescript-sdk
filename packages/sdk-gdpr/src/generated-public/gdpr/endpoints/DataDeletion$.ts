@@ -17,6 +17,17 @@ export class DataDeletion$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   */
+  deleteUserMeDeletion(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/gdpr/public/users/me/deletions'
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
    * &lt;p&gt;Requires valid user access token&lt;br&gt; This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use &lt;a href=&#39;#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest&#39;&gt;/gdpr/public/namespaces/{namespace}/users/{userId}/deletions&lt;/a&gt;
    */
   postUserMeDeletion(data: { platformId: string | null; platformToken: string | null }): Promise<IResponse<RequestDeleteResponse>> {
@@ -28,6 +39,23 @@ export class DataDeletion$ {
     })
 
     return Validate.responseType(() => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
+  }
+
+  /**
+   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   */
+  getUsersMeDeletionsStatus(): Promise<IResponseWithSync<DeletionStatus>> {
+    const params = {} as SDKRequestConfig
+    const url = '/gdpr/public/users/me/deletions/status'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, DeletionStatus, 'DeletionStatus')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

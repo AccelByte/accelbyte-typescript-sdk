@@ -1,8 +1,8 @@
 {
-  "buildDate": "2023-06-08T12:01:17+00:00",
-  "gitHash": "9ed6eef20db82177c43fda882618533146d10b09",
+  "buildDate": "2023-06-19T01:15:28+00:00",
+  "gitHash": "2e4eb9f2ec8a2a333af0346e981f043367be0e2d",
   "name": "justice-group-service",
   "realm": "dev",
-  "version": "2.16.3",
+  "version": "2.17.0",
   "version-roles-seeding": "0.0.3"
 }
