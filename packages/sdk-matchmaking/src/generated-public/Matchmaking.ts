@@ -7,18 +7,14 @@
  * AUTO GENERATED
  */
 
-import { BackfillApi } from './matchmaking/BackfillApi.js'
-import { RuleSetsApi } from './matchmaking/RuleSetsApi.js'
-import { MatchPoolsApi } from './matchmaking/MatchPoolsApi.js'
-import { MatchTicketsApi } from './matchmaking/MatchTicketsApi.js'
-import { MatchFunctionsApi } from './matchmaking/MatchFunctionsApi.js'
+import { MatchmakingOperationsApi } from './matchmaking/MatchmakingOperationsApi.js'
+import { MatchmakingApi } from './matchmaking/MatchmakingApi.js'
+import { SocialMatchmakingApi } from './matchmaking/SocialMatchmakingApi.js'
 
 const apis = {
-  BackfillApi,
-  RuleSetsApi,
-  MatchPoolsApi,
-  MatchTicketsApi,
-  MatchFunctionsApi
+  MatchmakingOperationsApi,
+  MatchmakingApi,
+  SocialMatchmakingApi
 }
 
 export const Matchmaking = apis

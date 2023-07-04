@@ -8,11 +8,11 @@
     "example": "node --es-module-specifier-resolution=node index.mjs"
   },
   "dependencies": {
-    "@accelbyte/sdk": "2.0.2",
-    "@accelbyte/sdk-basic": "2.1.0-beta.0",
-    "@accelbyte/sdk-iam": "2.1.0-beta.4",
-    "@accelbyte/sdk-legal": "2.1.0-beta.1",
-    "@accelbyte/sdk-platform": "2.1.0-beta.3",
+    "@accelbyte/sdk": "1.2.2",
+    "@accelbyte/sdk-basic": "1.291.19",
+    "@accelbyte/sdk-iam": "1.5320.20",
+    "@accelbyte/sdk-legal": "1.1290.13",
+    "@accelbyte/sdk-platform": "1.4290.17",
     "dotenv": "16.0.3"
   }
 }

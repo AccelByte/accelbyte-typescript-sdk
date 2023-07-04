@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const TicketMetricResultRecord = z.object({ queueTime: z.number().int() })
+export const TicketMetricResultRecord = z.object({ queue_time: z.number().int() })
 
 export interface TicketMetricResultRecord extends z.TypeOf<typeof TicketMetricResultRecord> {}

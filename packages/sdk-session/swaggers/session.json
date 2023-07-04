@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Session Service",
     "title": "justice-session-service",
-    "version": "2.16.0"
+    "version": "2.15.4"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -1467,7 +1467,7 @@
     "/session/v1/public/namespaces/{namespace}/gamesessions": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Query game sessions.\n\nBy default, API will return a list of available game sessions (joinability: open).\nSession service has several DSInformation status to track DS request to DSMC:\n   - NEED_TO_REQUEST: number of active players hasn\u0026#39;t reached session\u0026#39;s minPlayers therefore DS has not yet requested.\n   - REQUESTED: DS is being requested to DSMC.\n   - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY.\n   - FAILED_TO_REQUEST: DSMC fails to create the DS.\n\nquery parameter \\\u0026#34;availability\\\u0026#34; to filter sessions\u0026#39; availabillity:\nall: return all sessions regardless it\u0026#39;s full\nfull: only return active sessions\ndefault behavior (unset or else): return only available sessions (not full)\n",
+        "description": "Query game sessions.\n\nBy default, API will return a list of available game sessions (joinability: open).\nSession service has several DSInformation status to track DS request to DSMC:\n   - NEED_TO_REQUEST: number of active players hasn\u0026#39;t reached session\u0026#39;s minPlayers therefore DS has not yet requested.\n   - REQUESTED: DS is being requested to DSMC.\n   - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY.\n   - FAILED_TO_REQUEST: DSMC fails to create the DS.\n",
         "operationId": "publicQueryGameSessions",
         "parameters": [
           {
@@ -5202,9 +5202,9 @@
     "path": "/session/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-06-21T16:12:48+00:00",
-    "gitHash": "b2ba259c475d6b9bfedb46ce3febf4aaa505b1c3",
-    "version": "2.16.0",
+    "buildDate": "2023-06-16T09:54:36+00:00",
+    "gitHash": "d61dcc515818f4645e50ce6b8b9f74b9dde6effe",
+    "version": "2.15.4",
     "version-roles-seeding": "0.0.16"
   }
 }
