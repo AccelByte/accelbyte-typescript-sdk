@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk-basic@^1.290.8":
-  version "1.290.8"
-  resolved "https://registry.npmjs.org/@accelbyte/sdk-basic/-/sdk-basic-1.290.8.tgz"
-  integrity sha512-fi4lXn1hMKiij9GmbO1sQo9g7kcIU/lThlR0LLeAetKEOSh+6eDuzQIVB225749V9meJX1V+Fz8vU1vGOkM+Rg==
+"@accelbyte/sdk-basic@1.291.19":
+  version "2.1.0-beta.0"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/sdk-basic/-/sdk-basic-2.1.0-beta.0.tgz#73cc1e7b54939e6ae3f8c5d67628d7c65d5b975c"
+  integrity sha512-9pzaCGH+9qyUGWcMyTgFh4D7NiZC2lrOXJDrQp1KQwX1Kq0QAoW+ZqlzG8QFxbtxpA5ySIaf+eTKYIBhduesRQ==
   dependencies:
-    "@accelbyte/sdk" "1.2.0"
-    "@accelbyte/validator" "0.2.0-beta.4"
-    axios "0.27.2"
+    "@accelbyte/sdk" "2.0.2"
+    "@accelbyte/validator" "0.2.2"
+    axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
     lodash "4.17.21"
@@ -18,14 +18,14 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-iam@1.5320.4", "@accelbyte/sdk-iam@^1.5320.4":
-  version "1.5320.4"
-  resolved "https://registry.npmjs.org/@accelbyte/sdk-iam/-/sdk-iam-1.5320.4.tgz"
-  integrity sha512-jF0P8mFfswNm+iWeUiDtORTJa+7pVWv9JrCku7IEhQ3cnrBBUQrkpsGsn60LzkA76/AUfoH3HFh9v52UiKKoQA==
+"@accelbyte/sdk-iam@1.5320.20":
+  version "1.5320.20"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/sdk-iam/-/sdk-iam-1.5320.20.tgz#691f05ec8989578289668b5d902f841d5b0765c7"
+  integrity sha512-9bWj/KKLQ+jZ2PkmgGcVjaOq2qXJx5xwxC7mJIH35Xzl2qw+jEr4X/5cUjNw8K/TsDL5UcxhKgIoIYQ912yJwA==
   dependencies:
-    "@accelbyte/sdk" "1.2.0"
-    "@accelbyte/validator" "0.2.0-beta.4"
-    axios "0.27.2"
+    "@accelbyte/sdk" "2.0.0"
+    "@accelbyte/validator" "0.2.1"
+    axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
     lodash "4.17.21"
@@ -34,15 +34,14 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-legal@^1.1282.5":
-  version "1.1282.5"
-  resolved "https://registry.npmjs.org/@accelbyte/sdk-legal/-/sdk-legal-1.1282.5.tgz"
-  integrity sha512-+4BOrKR2M0Jqdqt8zaraeZtNnPkgmiFj8lVUiQ1ndgF33guwtqEvWOnU/cG5P6a9hxgJEiMLUtASbiwXmMR8ag==
+"@accelbyte/sdk-iam@2.1.0-beta.4":
+  version "2.1.0-beta.4"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/sdk-iam/-/sdk-iam-2.1.0-beta.4.tgz#cc79a0fbaaec2c58d722cca5aaf2c37a864f7a89"
+  integrity sha512-eebxtAKBkqtw8THzt6XruFweQcGdJ3UcvJQDwmhJUfyLHNtQg/ZoTydQkD3o4iK6+xny0t9aH18UxYmFmtHaVA==
   dependencies:
-    "@accelbyte/sdk" "1.2.0"
-    "@accelbyte/sdk-iam" "1.5320.4"
-    "@accelbyte/validator" "0.2.0-beta.4"
-    axios "0.27.2"
+    "@accelbyte/sdk" "2.0.2"
+    "@accelbyte/validator" "0.2.2"
+    axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
     lodash "4.17.21"
@@ -51,14 +50,15 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-platform@^1.4280.9":
-  version "1.4280.9"
-  resolved "https://registry.npmjs.org/@accelbyte/sdk-platform/-/sdk-platform-1.4280.9.tgz"
-  integrity sha512-JpTTxJHig3qvgI40bHQB7gL30pyBSlHM4FJa7zEsQk+VGSyhkvBECbArJvnXSO0qFwZZGMSjp4kzcZjG3vhv0g==
+"@accelbyte/sdk-legal@1.1290.13":
+  version "2.1.0-beta.1"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/sdk-legal/-/sdk-legal-2.1.0-beta.1.tgz#36e2e6a1b656be8250b8c859f64dab6a673c90a8"
+  integrity sha512-ktIEIQJfE2PVpaJOm4PmS1n2aMWWIff1l4ufzbTQfoXFkXWGWPJDCKxxq7GvUdOSsBwhqSmSxkM01VYa38UCsQ==
   dependencies:
-    "@accelbyte/sdk" "1.2.0"
-    "@accelbyte/validator" "0.2.0-beta.4"
-    axios "0.27.2"
+    "@accelbyte/sdk" "2.0.2"
+    "@accelbyte/sdk-iam" "2.1.0-beta.4"
+    "@accelbyte/validator" "0.2.2"
+    axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
     lodash "4.17.21"
@@ -67,19 +67,18 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/@accelbyte/sdk/-/sdk-1.2.0.tgz"
-  integrity sha512-lG7ZrdfgLeEHKCrOUWPIDGygPnuybrcZDvP18rcMtI3Gaxg3XnReMMYhxUzZqc+DOflqNkrO9UNvAg1FF8tw3w==
+"@accelbyte/sdk-platform@1.4290.17":
+  version "2.1.0-beta.3"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/sdk-platform/-/sdk-platform-2.1.0-beta.3.tgz#38471ca8a5f751cd2ab75d0ceb23360033083e45"
+  integrity sha512-K2HExuHKbTrotVFybk0yqYx7byVDRbl/yrdUXOpVeSAh/Z8aCDG2DLe4Tf6G5Bjut2iw2SYW+bQ3/i7P2+lMeA==
   dependencies:
-    "@accelbyte/validator" "0.2.0-beta.4"
-    axios "0.27.2"
+    "@accelbyte/sdk" "2.0.2"
+    "@accelbyte/validator" "0.2.2"
+    axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
     lodash "4.17.21"
-    nanoid "3.1.31"
     platform "1.3.6"
-    query-string "7.1.1"
     uuid "8.3.2"
     validator "13.7.0"
     zod "3.17.3"
@@ -101,10 +100,60 @@
     validator "13.7.0"
     zod "3.17.3"
 
+"@accelbyte/sdk@2.0.0":
+  version "2.0.0"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/sdk/-/sdk-2.0.0.tgz#04ab8640229825584f8715d62cbc6f2245b284c5"
+  integrity sha512-6BNsuocfkxXGyrzvKgC7cmAtlBUbSRWrJTWUptD9eh+wsN20NOWbWnexBfR/dZFuJQjjrw0FuRm/mTa+n6il5A==
+  dependencies:
+    "@accelbyte/validator" "0.2.1"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    lodash "4.17.21"
+    nanoid "3.1.31"
+    platform "1.3.6"
+    query-string "7.1.1"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
+"@accelbyte/sdk@2.0.2":
+  version "2.0.2"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/sdk/-/sdk-2.0.2.tgz#ef62f7c87ac1dafe41f4e9a4b76906e3a12e5ba2"
+  integrity sha512-66Z+llp29iE4PZAaVFWrbHEa7AVsRV+HkZmzBJ5RZinmOXE/t7O6sY3G9YREHXzalFKhmvC73buQFbQBGNTxVg==
+  dependencies:
+    "@accelbyte/validator" "0.2.2"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    lodash "4.17.21"
+    nanoid "3.1.31"
+    platform "1.3.6"
+    query-string "7.1.1"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
 "@accelbyte/validator@0.2.0-beta.4":
   version "0.2.0-beta.4"
   resolved "https://registry.npmjs.org/@accelbyte/validator/-/validator-0.2.0-beta.4.tgz"
   integrity sha512-nO6KNiCvnjMEWoj6yFIl0C/70mvxDoi8EhGGIjMKWtOj5IJG4+BQC/4CkbqOwPCnhOyClgrzxAKDwjQkFV3eBQ==
+  dependencies:
+    naughty-words "1.2.0"
+    xregexp "5.1.0"
+
+"@accelbyte/validator@0.2.1":
+  version "0.2.1"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/validator/-/validator-0.2.1.tgz#a306e5d5c8cca4df39da69920d23202a93d3487b"
+  integrity sha512-ROL1wPbC8U9bH93t/Ws9BpYQ7yK0WuIgJkf0TzjBkD0knMzUniLgfiNx7iSfbw9SrqHp5/zy+XSCvhgi1TUW3Q==
+  dependencies:
+    naughty-words "1.2.0"
+    xregexp "5.1.0"
+
+"@accelbyte/validator@0.2.2":
+  version "0.2.2"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/@accelbyte/validator/-/validator-0.2.2.tgz#ebfbf6f63718851503f7b40e90c3e480e4dafa17"
+  integrity sha512-Hp68SdqltijLEH6t9U4jfE81DLO82nud6o4vjtKOjJ/WYr7u7tKCRN1RQKA4ujruUJk+7PjebpLOlaBHUY3nNw==
   dependencies:
     naughty-words "1.2.0"
     xregexp "5.1.0"
@@ -538,6 +587,15 @@ axios@0.27.2:
     follow-redirects "^1.14.9"
     form-data "^4.0.0"
 
+axios@1.3.6:
+  version "1.3.6"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/axios/-/axios-1.3.6.tgz#1ace9a9fb994314b5f6327960918406fa92c6646"
+  integrity sha512-PEcdkk7JcdPiMDkvM4K6ZBRYq9keuVJsToxm2zQIM70Qqo2WHTdJZMXcG9X+RmRp2VPNUQC8W1RAGbgt6b1yMg==
+  dependencies:
+    follow-redirects "^1.15.0"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
+
 base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz"
@@ -684,7 +742,7 @@ filter-obj@^1.1.0:
   resolved "https://registry.npmjs.org/filter-obj/-/filter-obj-1.1.0.tgz"
   integrity sha512-8rXg1ZnX7xzy2NGDVkBVaAy+lSlPNwad13BtgSlLuxfIslyt5Vg64U7tFcCt4WS1R0hvtnQybT/IyCkGZ3DpXQ==
 
-follow-redirects@^1.14.9:
+follow-redirects@^1.14.9, follow-redirects@^1.15.0:
   version "1.15.2"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.2.tgz"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
@@ -843,6 +901,11 @@ postcss@^8.4.19:
     nanoid "^3.3.6"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
+
+proxy-from-env@^1.1.0:
+  version "1.1.0"
+  resolved "https://nexus.tools.accelbyte.net/repository/npm-group/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
+  integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
 
 query-string@7.1.1:
   version "7.1.1"

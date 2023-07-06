@@ -7,11 +7,13 @@
  * AUTO GENERATED
  */
 
+import { PublicGameBinaryRecordApi } from './cloudsave/PublicGameBinaryRecordApi.js'
 import { PublicGameRecordApi } from './cloudsave/PublicGameRecordApi.js'
 import { PublicPlayerRecordApi } from './cloudsave/PublicPlayerRecordApi.js'
 import { ConcurrentRecordApi } from './cloudsave/ConcurrentRecordApi.js'
 
 const apis = {
+  PublicGameBinaryRecordApi,
   PublicGameRecordApi,
   PublicPlayerRecordApi,
   ConcurrentRecordApi
