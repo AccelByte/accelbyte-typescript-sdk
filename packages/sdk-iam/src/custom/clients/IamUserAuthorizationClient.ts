@@ -89,7 +89,8 @@ export class IamUserAuthorizationClient {
         'Device-Id': deviceId,
         'Device-Name': platform.name ? platform.name.toString() : '',
         'Device-Os': platform.os ? platform.os.toString() : '',
-        'Device-Type': SdkDevice.getType()
+        'Device-Type': SdkDevice.getType(),
+        ...this.conf.headers
       }
     }
     const axios = Network.create(config)
