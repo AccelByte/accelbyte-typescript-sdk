@@ -11,7 +11,7 @@ import { RequestHistory } from './RequestHistory.js'
 export const IapConsumeHistoryInfo = z.object({
   clientRequestParameter: ClientRequestParameter.nullish(),
   consumeItems: z.array(ConsumeItem).nullish(),
-  iapType: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX']).nullish(),
+  iapType: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'OCULUS', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX']).nullish(),
   id: z.string().nullish(),
   namespace: z.string().nullish(),
   requestBody: z.record(z.any()).nullish(),

@@ -16,12 +16,6 @@
       "flow": "accessCode",
       "scopes": {
         "ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]": "ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]",
-        "ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [CREATE]": "ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [CREATE]",
-        "ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [DELETE]": "ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [DELETE]",
-        "ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [READ]": "ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [READ]",
-        "ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [UPDATE]": "ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [UPDATE]",
-        "ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [DELETE]": "ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [DELETE]",
-        "ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [READ]": "ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [READ]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]",
@@ -32,7 +26,10 @@
         "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]",
+        "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]",
         "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]",
@@ -2322,7 +2319,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/models.ConfigRequest"
+              "$ref": "#/definitions/models.ConfigResponse"
             }
           },
           "400": {
@@ -2377,7 +2374,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/models.ConfigRequest"
+              "$ref": "#/definitions/models.ConfigResponse"
             }
           },
           {
@@ -2393,7 +2390,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/models.ConfigRequest"
+              "$ref": "#/definitions/models.ConfigResponse"
             }
           },
           "400": {
@@ -2446,6 +2443,7 @@
     },
     "/chat/v1/admin/config/namespaces/{namespace}/export": {
       "get": {
+        "consumes": ["application/json"],
         "description": "\n\t\t\t\tRequired permission ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]\n\n\t\t\t\tRequired Scope: social\n\n\t\t\t\tExport chat configuration to a json file. The file can then be imported from the /import endpoint. \n\t\t\t",
         "operationId": "ExportConfig",
         "parameters": [
@@ -2457,6 +2455,7 @@
             "type": "string"
           }
         ],
+        "produces": ["multipart/form-data"],
         "responses": {
           "200": {
             "description": "OK",
@@ -3515,7 +3514,7 @@
     "/chat/v1/admin/namespaces/{namespace}/snapshot/{chatId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [DELETE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Delete the chat snapshot",
+        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Delete the chat snapshot",
         "operationId": "adminDeleteChatSnapshot",
         "parameters": [
           {
@@ -3571,7 +3570,7 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [DELETE]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"],
             "authorization": []
           }
         ],
@@ -3580,7 +3579,7 @@
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Get the chat snapshot",
+        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Get the chat snapshot",
         "operationId": "adminGetChatSnapshot",
         "parameters": [
           {
@@ -3639,7 +3638,7 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namepace}:CHAT:TOPIC [READ]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
             "authorization": []
           }
         ],
@@ -3650,7 +3649,7 @@
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Query all profanity words.",
+        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Query all profanity words.",
         "operationId": "adminProfanityQuery",
         "parameters": [
           {
@@ -3745,7 +3744,7 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [READ]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"],
             "authorization": []
           }
         ],
@@ -3754,7 +3753,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [CREATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Insert new word for profanity censor",
+        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Insert new word for profanity censor",
         "operationId": "adminProfanityCreate",
         "parameters": [
           {
@@ -3815,7 +3814,7 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [CREATE]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"],
             "authorization": []
           }
         ],
@@ -3826,7 +3825,7 @@
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [CREATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Bulk insert new word for profanity censor",
+        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Bulk insert new word for profanity censor",
         "operationId": "adminProfanityCreateBulk",
         "parameters": [
           {
@@ -3887,7 +3886,7 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [CREATE]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"],
             "authorization": []
           }
         ],
@@ -3955,7 +3954,7 @@
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/group": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Get profanity words group.",
+        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Get profanity words group.",
         "operationId": "adminProfanityGroup",
         "parameters": [
           {
@@ -4016,7 +4015,7 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [READ]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"],
             "authorization": []
           }
         ],
@@ -4046,17 +4045,31 @@
           },
           {
             "default": "REPLACE",
-            "description": "The action when same words already exists",
-            "enum": ["LEAVEOUT", "REPLACE"],
+            "description": "The action when same words already exists\u003c/br\u003e\n\t\t\t\t\t\t\t\t\u003cb\u003eREPLACE\u003c/b\u003e: replace all same words with imported false positives and false negatives, existing non-imported words won't be removed\u003c/br\u003e\n                                \u003cb\u003eFULLREPLACE\u003c/b\u003e: replace all words with imported data and remove existing non-imported words, list words will be exactly same with imported data\u003c/br\u003e\n                                \u003cb\u003eLEAVEOUT\u003c/b\u003e: ignore imported same words, false positives and false negatives won't be replaced with imported data'",
+            "enum": ["FULLREPLACE", "LEAVEOUT", "REPLACE"],
             "in": "query",
             "name": "action",
             "type": "string"
+          },
+          {
+            "default": false,
+            "description": "When showResult=true, this endpoint with returns imported words result",
+            "in": "query",
+            "name": "showResult",
+            "type": "boolean",
+            "x-omitempty": false
           }
         ],
         "produces": ["application/json"],
         "responses": {
+          "200": {
+            "description": "returned when showResult=true",
+            "schema": {
+              "$ref": "#/definitions/models.DictionaryImportResult"
+            }
+          },
           "204": {
-            "description": "OK"
+            "description": "No Content returned when showResult=false or not defined"
           },
           "400": {
             "description": "Bad Request",
@@ -4096,7 +4109,7 @@
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/{id}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [DELETE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Delete profanity words.",
+        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Delete profanity words.",
         "operationId": "adminProfanityDelete",
         "parameters": [
           {
@@ -4152,7 +4165,7 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [DELETE]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]"],
             "authorization": []
           }
         ],
@@ -4161,7 +4174,7 @@
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [UPDATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Update profanity word",
+        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Update profanity word",
         "operationId": "adminProfanityUpdate",
         "parameters": [
           {
@@ -4229,7 +4242,7 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namepace}:CHAT:PROFANITY [UPDATE]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]"],
             "authorization": []
           }
         ],
@@ -4899,13 +4912,16 @@
         "SpamMuteDuration": {
           "format": "integer",
           "type": "integer"
+        },
+        "enableClanChat": {
+          "type": "boolean",
+          "x-omitempty": false
         }
       },
       "required": [
         "ChatRateLimitBurst",
         "ChatRateLimitDuration",
         "ConcurrentUsersLimit",
-        "EnableManualTopicCreation",
         "EnableProfanityFilter",
         "FilterAppName",
         "FilterParam",
@@ -4934,6 +4950,10 @@
         "concurrentUsersLimit": {
           "format": "int32",
           "type": "integer"
+        },
+        "enableClanChat": {
+          "type": "boolean",
+          "x-omitempty": false
         },
         "enableManualTopicCreation": {
           "type": "boolean",
@@ -5008,7 +5028,7 @@
       },
       "required": ["configs"]
     },
-    "models.ConfigRequest": {
+    "models.ConfigResponse": {
       "properties": {
         "chatRateLimitBurst": {
           "format": "int32",
@@ -5021,6 +5041,10 @@
         "concurrentUsersLimit": {
           "format": "int32",
           "type": "integer"
+        },
+        "enableClanChat": {
+          "type": "boolean",
+          "x-omitempty": false
         },
         "enableManualTopicCreation": {
           "type": "boolean",
@@ -5071,8 +5095,7 @@
           "format": "integer",
           "type": "integer"
         }
-      },
-      "required": ["spamMuteDuration"]
+      }
     },
     "models.Dictionary": {
       "properties": {
@@ -5147,6 +5170,14 @@
         }
       },
       "required": ["count", "name"]
+    },
+    "models.DictionaryImportResult": {
+      "properties": {
+        "words": {
+          "$ref": "#/definitions/models.DictionaryWordChanges"
+        }
+      },
+      "required": ["words"]
     },
     "models.DictionaryInsertBulkRequest": {
       "properties": {
@@ -5253,6 +5284,41 @@
         }
       },
       "required": ["id", "namespace", "parentId", "word", "wordType"]
+    },
+    "models.DictionaryWordChanges": {
+      "properties": {
+        "added": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "failed": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ignored": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "replaced": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "unchanged": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["added", "failed", "ignored", "replaced", "unchanged"]
     },
     "models.GetInboxCategoriesResponseItem": {
       "properties": {
@@ -5822,8 +5888,8 @@
     "path": "/chat/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-06-19T07:22:46+00:00",
-    "gitHash": "8289f7d794d3a0f369d3bc894ba65fb1503936aa",
+    "buildDate": "2023-07-17T02:22:17+00:00",
+    "gitHash": "3fb732ec85d97d8c5afcbf653be7702be2f9020b",
     "name": "justice-chat-service",
     "revisionID": "0.4.4",
     "version": "0.4.4",

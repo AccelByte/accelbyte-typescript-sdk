@@ -8,7 +8,7 @@
     },
     "description": "Justice Platform Service",
     "title": "justice-platform-service",
-    "version": "4.30.3"
+    "version": "4.31.1"
   },
   "schemes": ["https"],
   "tags": [
@@ -1188,7 +1188,7 @@
     },
     "/platform/admin/namespaces/{namespace}/catalog/plugins/lootbox/customConfig/cert": {
       "put": {
-        "consumes": ["application/x-www-form-urlencoded", "application/json"],
+        "consumes": ["multipart/form-data"],
         "description": "Upload lootbox plugin custom config tls cert.Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: updated service plugin config\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "uplodLootBoxPluginConfigCert",
         "parameters": [
@@ -1384,7 +1384,7 @@
     },
     "/platform/admin/namespaces/{namespace}/catalog/plugins/section/customConfig/cert": {
       "put": {
-        "consumes": ["application/x-www-form-urlencoded", "application/json"],
+        "consumes": ["multipart/form-data"],
         "description": "Upload section plugin custom config tls cert.Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: updated service plugin config\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "uploadSectionPluginConfigCert",
         "parameters": [
@@ -4083,6 +4083,122 @@
         }
       }
     },
+    "/platform/admin/namespaces/{namespace}/iap/config/oculus": {
+      "delete": {
+        "description": "Delete oculus iap config.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:IAP:CONFIG\u0026#34;, action=8 (DELETE)\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "deleteOculusIAPConfig",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Delete successfully"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:IAP:CONFIG [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete oculus iap config",
+        "tags": ["IAP"],
+        "x-authorization": {
+          "action": "8",
+          "resource": "ADMIN:NAMESPACE:{namespace}:IAP:CONFIG"
+        }
+      },
+      "get": {
+        "description": "Get oculus iap config.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:IAP:CONFIG\u0026#34;, action=2 (READ)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: steam iap config\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "getOculusIAPConfig",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/OculusIAPConfigInfo"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:IAP:CONFIG [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get oculus iap config",
+        "tags": ["IAP"],
+        "x-authorization": {
+          "action": "2",
+          "resource": "ADMIN:NAMESPACE:{namespace}:IAP:CONFIG"
+        }
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Update oculus iap config. Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:IAP:CONFIG\u0026#34;, action=4 (UPDATE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: updated steam iap config\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "updateOculusIAPConfig",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/OculusIAPConfigRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/OculusIAPConfigInfo"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:IAP:CONFIG [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Update oculus iap config",
+        "tags": ["IAP"],
+        "x-authorization": {
+          "action": "4",
+          "resource": "ADMIN:NAMESPACE:{namespace}:IAP:CONFIG"
+        }
+      }
+    },
     "/platform/admin/namespaces/{namespace}/iap/config/playstation": {
       "delete": {
         "description": "Delete playstation iap config.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:IAP:CONFIG\u0026#34;, action=8 (DELETE)\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
@@ -4295,6 +4411,12 @@
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/SteamIAPConfigInfo"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e39128\u003c/td\u003e\u003ctd\u003eSteam publisher key is invalid\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e39129\u003c/td\u003e\u003ctd\u003eSteam app id is invalid\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
             }
           }
         },
@@ -8415,7 +8537,7 @@
             "type": "string"
           },
           {
-            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "Xbox"],
+            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "Xbox"],
             "in": "path",
             "name": "platform",
             "required": true,
@@ -8460,7 +8582,7 @@
             "type": "string"
           },
           {
-            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "Xbox"],
+            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "Xbox"],
             "in": "path",
             "name": "platform",
             "required": true,
@@ -8515,7 +8637,7 @@
             "type": "string"
           },
           {
-            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "Xbox"],
+            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "Xbox"],
             "in": "path",
             "name": "platform",
             "required": true,
@@ -8813,7 +8935,7 @@
       "put": {
         "consumes": ["application/json"],
         "description": "Update revocation plugin config. Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=4 (UPDATE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: updated service plugin config\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
-        "operationId": "updateLootBoxPluginConfig_1",
+        "operationId": "updateRevocationPluginConfig",
         "parameters": [
           {
             "in": "path",
@@ -8860,7 +8982,7 @@
     },
     "/platform/admin/namespaces/{namespace}/revocation/plugins/revocation/revocation/customConfig/cert": {
       "put": {
-        "consumes": ["application/x-www-form-urlencoded", "application/json"],
+        "consumes": ["multipart/form-data"],
         "description": "Upload revocation plugin custom config tls cert.Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=4 (UPDATE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: updated service plugin config\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "uploadRevocationPluginConfigCert",
         "parameters": [
@@ -11974,7 +12096,7 @@
             "type": "string"
           },
           {
-            "enum": ["EPICGAMES", "PSN", "STEAM", "XBOX"],
+            "enum": ["EPICGAMES", "OCULUS", "PSN", "STEAM", "XBOX"],
             "in": "query",
             "name": "type",
             "required": true,
@@ -12025,7 +12147,7 @@
             "type": "string"
           },
           {
-            "enum": ["EPICGAMES", "PSN", "STEAM", "XBOX"],
+            "enum": ["EPICGAMES", "OCULUS", "PSN", "STEAM", "XBOX"],
             "in": "query",
             "name": "type",
             "required": false,
@@ -13864,7 +13986,7 @@
             "type": "string"
           },
           {
-            "enum": ["APPLE", "EPICGAMES", "GOOGLE", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
+            "enum": ["APPLE", "EPICGAMES", "GOOGLE", "OCULUS", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
             "in": "query",
             "name": "type",
             "required": false,
@@ -13996,7 +14118,7 @@
             "type": "string"
           },
           {
-            "enum": ["APPLE", "EPICGAMES", "GOOGLE", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
+            "enum": ["APPLE", "EPICGAMES", "GOOGLE", "OCULUS", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
             "in": "query",
             "name": "type",
             "required": false,
@@ -16059,7 +16181,7 @@
             "type": "string"
           },
           {
-            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
             "in": "query",
             "name": "origin",
             "required": true,
@@ -16976,7 +17098,7 @@
           },
           {
             "description": "balance origin",
-            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
             "in": "query",
             "name": "origin",
             "required": false,
@@ -19360,7 +19482,7 @@
             "type": "string"
           },
           {
-            "enum": ["APPLE", "EPICGAMES", "GOOGLE", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
+            "enum": ["APPLE", "EPICGAMES", "GOOGLE", "OCULUS", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
             "in": "query",
             "name": "platform",
             "required": false,
@@ -21271,6 +21393,49 @@
         }
       }
     },
+    "/platform/public/namespaces/{namespace}/users/{userId}/dlc/oculus/sync": {
+      "put": {
+        "description": "Sync oculus dlc.\u0026lt;p\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "syncOculusDLC",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e39124\u003c/td\u003e\u003ctd\u003eIAP request platform [{platformId}] user id is not linked with current user\u003c/td\u003e\u003c/tr\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Sync oculus dlc.",
+        "tags": ["DLC"],
+        "x-authorization": {
+          "action": "4",
+          "resource": "NAMESPACE:{namespace}:USER:{userId}:DLC"
+        }
+      }
+    },
     "/platform/public/namespaces/{namespace}/users/{userId}/dlc/psn/sync": {
       "put": {
         "consumes": ["application/json"],
@@ -22592,6 +22757,59 @@
           }
         ],
         "summary": "Fulfill google iap item.",
+        "tags": ["IAP"],
+        "x-authorization": {
+          "action": "4",
+          "resource": "NAMESPACE:{namespace}:USER:{userId}:IAP"
+        }
+      }
+    },
+    "/platform/public/namespaces/{namespace}/users/{userId}/iap/oculus/sync": {
+      "put": {
+        "description": "Sync Oculus entitlements.\u0026lt;p\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;NAMESPACE:{namespace}:USER:{userId}:IAP\u0026#34;, action=4 (UPDATE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "syncOculusConsumableEntitlements",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/OculusReconcileResult"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e39126\u003c/td\u003e\u003ctd\u003eUser id [{}] in namespace [{}] doesn't link platform [{}]\u003c/td\u003e\u003c/tr\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:IAP [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Sync Oculus entitlements.",
         "tags": ["IAP"],
         "x-authorization": {
           "action": "4",
@@ -24490,19 +24708,6 @@
     }
   },
   "definitions": {
-    "Achievement": {
-      "description": "steam achievement request",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "value": {
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
     "AchievementInfo": {
       "properties": {
         "id": {
@@ -24575,7 +24780,7 @@
         },
         "platform": {
           "description": "platform",
-          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "Xbox"],
+          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "Xbox"],
           "type": "string"
         },
         "price": {
@@ -25412,7 +25617,6 @@
         "currency",
         "itemId",
         "namespace",
-        "paymentOrderNo",
         "recurringOrderNo",
         "sandbox",
         "status",
@@ -26700,7 +26904,7 @@
         },
         "origin": {
           "description": "origin, balance origin decided on the type of wallet, default is System",
-          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
           "type": "string"
         },
         "reason": {
@@ -27096,7 +27300,7 @@
         },
         "balanceOrigin": {
           "description": "balance origin",
-          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
           "type": "string"
         },
         "reason": {
@@ -28460,7 +28664,7 @@
         },
         "origin": {
           "description": "origin",
-          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
           "type": "string"
         },
         "quantity": {
@@ -28992,7 +29196,6 @@
         }
       },
       "required": [
-        "categoryPath",
         "createdAt",
         "entitlementType",
         "itemId",
@@ -29338,7 +29541,7 @@
           "type": "array"
         },
         "iapType": {
-          "enum": ["APPLE", "EPICGAMES", "GOOGLE", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
+          "enum": ["APPLE", "EPICGAMES", "GOOGLE", "OCULUS", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
           "type": "string"
         },
         "id": {
@@ -29441,7 +29644,7 @@
         },
         "platform": {
           "description": "iap platform",
-          "enum": ["APPLE", "EPICGAMES", "GOOGLE", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
+          "enum": ["APPLE", "EPICGAMES", "GOOGLE", "OCULUS", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
           "type": "string"
         },
         "platformProductId": {
@@ -29553,7 +29756,7 @@
         },
         "type": {
           "description": "IAP type",
-          "enum": ["APPLE", "EPICGAMES", "GOOGLE", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
+          "enum": ["APPLE", "EPICGAMES", "GOOGLE", "OCULUS", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
           "type": "string"
         },
         "updatedAt": {
@@ -31336,7 +31539,7 @@
         },
         "type": {
           "description": "The IAP type.",
-          "enum": ["APPLE", "EPICGAMES", "GOOGLE", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
+          "enum": ["APPLE", "EPICGAMES", "GOOGLE", "OCULUS", "PLAYSTATION", "STADIA", "STEAM", "TWITCH", "XBOX"],
           "type": "string"
         }
       },
@@ -31357,6 +31560,65 @@
         },
         "status": {
           "enum": ["ERROR", "IGNORED", "PROCESSED", "WARN"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OculusIAPConfigInfo": {
+      "properties": {
+        "appId": {
+          "description": "oculus api app id",
+          "type": "string"
+        },
+        "appSecret": {
+          "description": "oculus api app secret",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "namespace",
+          "type": "string"
+        }
+      },
+      "required": ["namespace"],
+      "type": "object"
+    },
+    "OculusIAPConfigRequest": {
+      "properties": {
+        "appId": {
+          "description": "oculus api app id, don't allow white space and *",
+          "type": "string"
+        },
+        "appSecret": {
+          "description": "oculus api app secret, don't allow white space and *",
+          "type": "string"
+        }
+      },
+      "required": ["appId"],
+      "type": "object"
+    },
+    "OculusReconcileResult": {
+      "properties": {
+        "iapOrderStatus": {
+          "description": "AGS In App Purchase order status",
+          "enum": ["FAILED", "FULFILLED", "VERIFIED"],
+          "type": "string"
+        },
+        "itemIdentity": {
+          "description": "AGS item identity",
+          "type": "string"
+        },
+        "itemIdentityType": {
+          "description": "AGS item identity type",
+          "enum": ["ITEM_ID", "ITEM_SKU"],
+          "type": "string"
+        },
+        "oculusItemSku": {
+          "description": "Oculus item sku",
+          "type": "string"
+        },
+        "transactionId": {
+          "description": "AGS transaction id",
           "type": "string"
         }
       },
@@ -33267,7 +33529,7 @@
       "properties": {
         "aggregate": {
           "description": "aggregate payment provider, allow empty value",
-          "enum": ["ADYEN", "XSOLLA"],
+          "enum": ["ADYEN", "CHECKOUT", "STRIPE", "XSOLLA"],
           "type": "string"
         },
         "id": {
@@ -33343,7 +33605,7 @@
         },
         "walletPlatform": {
           "description": "wallet platform, base on platform wallet rule to payment wallet",
-          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "Xbox"],
+          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "Xbox"],
           "type": "string"
         }
       },
@@ -33496,8 +33758,8 @@
     "PlatformDlcEntry": {
       "properties": {
         "platform": {
-          "description": "platform: PSN, STEAM, XBOX, EPICGAMES",
-          "enum": ["EPICGAMES", "PSN", "STEAM", "XBOX"],
+          "description": "platform: PSN, STEAM, XBOX, EPICGAMES, OCULUS",
+          "enum": ["EPICGAMES", "OCULUS", "PSN", "STEAM", "XBOX"],
           "type": "string"
         },
         "platformDlcIdMap": {
@@ -33681,7 +33943,7 @@
       "properties": {
         "allowedBalanceOrigins": {
           "items": {
-            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+            "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
             "type": "string"
           },
           "type": "array"
@@ -34842,7 +35104,7 @@
       "properties": {
         "balanceOrigin": {
           "description": "balance origin",
-          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
           "type": "string"
         },
         "currencyCode": {
@@ -34905,7 +35167,7 @@
         },
         "origin": {
           "description": "balance origin, it is used to debit the wallet of the specified balance origin, only available in COINS item",
-          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
           "type": "string"
         }
       },
@@ -35172,7 +35434,7 @@
       "properties": {
         "origin": {
           "description": "origin, if rewards contains item icon, it will credit into related origin wallet. if not set, it will be credit into System wallet",
-          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
+          "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
           "type": "string"
         },
         "rewards": {
@@ -35707,7 +35969,7 @@
         "achievements": {
           "description": "achievements to be updated",
           "items": {
-            "$ref": "#/definitions/Achievement"
+            "$ref": "#/definitions/steam achievement"
           },
           "type": "array"
         },
@@ -37085,7 +37347,7 @@
           "type": "string"
         },
         "platform": {
-          "enum": ["EPICGAMES", "PSN", "STEAM", "XBOX"],
+          "enum": ["EPICGAMES", "OCULUS", "PSN", "STEAM", "XBOX"],
           "type": "string"
         },
         "rvn": {
@@ -37119,7 +37381,7 @@
         },
         "platform": {
           "description": "platform",
-          "enum": ["EPICGAMES", "PSN", "STEAM", "XBOX"],
+          "enum": ["EPICGAMES", "OCULUS", "PSN", "STEAM", "XBOX"],
           "type": "string"
         },
         "revocationResult": {
@@ -37527,7 +37789,7 @@
         "achievements": {
           "description": "achievements to be updated",
           "items": {
-            "$ref": "#/definitions/Achievement"
+            "$ref": "#/definitions/xbox achievement"
           },
           "type": "array"
         },
@@ -37742,6 +38004,34 @@
         }
       },
       "type": "object"
+    },
+    "steam achievement": {
+      "description": "steam achievement request",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "value": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "xbox achievement": {
+      "description": "xbox achievement request",
+      "properties": {
+        "id": {
+          "description": "achievement id",
+          "type": "string"
+        },
+        "percentComplete": {
+          "description": "complete percentage",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
     }
   },
   "x-docs": {
@@ -37751,16 +38041,16 @@
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-06-19T02:12:28+00:00",
-    "buildID": "4.30.3",
+    "buildDate": "2023-07-17T01:08:24+00:00",
+    "buildID": "4.31.1",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
     "buildOS": "Linux amd64 5.13.0-1021-aws",
     "gitBranchName": "master",
-    "gitHash": "91cea6599d",
+    "gitHash": "fbc75a69d5",
     "gitTag": "3.31.0",
     "name": "justice-platform-service",
     "realm": "dev",
-    "version": "4.30.3",
+    "version": "4.31.1",
     "version-roles-seeding": "0.0.32"
   }
 }

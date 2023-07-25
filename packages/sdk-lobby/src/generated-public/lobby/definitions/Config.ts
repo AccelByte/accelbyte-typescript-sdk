@@ -22,6 +22,7 @@ export const Config = z.object({
   generalRateLimitDuration: z.number().int().nullish(),
   keepPresenceActivityOnDisconnect: z.boolean().nullish(),
   maxDSWaitTime: z.number().int(),
+  maxFriendsLimit: z.number().int().nullish(),
   maxPartyMember: z.number().int().nullish(),
   namespace: z.string().nullish(),
   profanityFilter: z.boolean().nullish(),

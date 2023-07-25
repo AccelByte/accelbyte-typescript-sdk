@@ -14,7 +14,7 @@ export const AdminOrderCreate = z.object({
   itemId: z.string(),
   language: z.string().nullish(),
   options: OrderCreationOptions.nullish(),
-  platform: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'Xbox']).nullish(),
+  platform: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'Xbox']).nullish(),
   price: z.number().int(),
   quantity: z.number().int(),
   region: z.string(),

@@ -22,7 +22,11 @@ export class MatchPools$ {
   /**
    * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:POOL [READ] Required Scope: social List matchmaking pools.
    */
-  getMatchPools(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListMatchPoolsResponse>> {
+  getMatchPools(queryParams?: {
+    limit?: number
+    name?: string | null
+    offset?: number
+  }): Promise<IResponseWithSync<ListMatchPoolsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-pools'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

@@ -25,7 +25,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:POOL [READ] Required Scope: social List matchmaking pools.
    */
-  async function getMatchPools(queryParams?: { limit?: number; offset?: number }): Promise<ListMatchPoolsResponse> {
+  async function getMatchPools(queryParams?: { limit?: number; name?: string | null; offset?: number }): Promise<ListMatchPoolsResponse> {
     const $ = new MatchPools$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getMatchPools(queryParams)
     if (resp.error) throw resp.error

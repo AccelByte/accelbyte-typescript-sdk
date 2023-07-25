@@ -6,7 +6,7 @@
 import { z } from 'zod'
 
 export const PlatformDlcEntry = z.object({
-  platform: z.enum(['EPICGAMES', 'PSN', 'STEAM', 'XBOX']).nullish(),
+  platform: z.enum(['EPICGAMES', 'OCULUS', 'PSN', 'STEAM', 'XBOX']).nullish(),
   platformDlcIdMap: z.record(z.string()).nullish()
 })
 

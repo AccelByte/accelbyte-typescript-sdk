@@ -19,7 +19,7 @@ export class RuleSets$ {
   /**
    * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:RULES [READ] Required Scope: social List rule sets.
    */
-  getRulesets(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListRuleSetsResponse>> {
+  getRulesets(queryParams?: { limit?: number; name?: string | null; offset?: number }): Promise<IResponseWithSync<ListRuleSetsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/rulesets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

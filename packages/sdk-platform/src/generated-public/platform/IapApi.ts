@@ -15,6 +15,7 @@ import { GoogleIapReceipt } from './definitions/GoogleIapReceipt.js'
 import { GoogleReceiptResolveResult } from './definitions/GoogleReceiptResolveResult.js'
 import { Iap$ } from './endpoints/Iap$.js'
 import { IapItemMappingInfo } from './definitions/IapItemMappingInfo.js'
+import { OculusReconcileResultArray } from './definitions/OculusReconcileResultArray.js'
 import { PlayStationMultiServiceLabelsReconcileRequest } from './definitions/PlayStationMultiServiceLabelsReconcileRequest.js'
 import { PlayStationReconcileRequest } from './definitions/PlayStationReconcileRequest.js'
 import { PlayStationReconcileResultArray } from './definitions/PlayStationReconcileResultArray.js'
@@ -35,7 +36,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get iap item mapping.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
    */
   async function getIapItemMapping(queryParams?: {
-    platform?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
+    platform?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'OCULUS' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
   }): Promise<IapItemMappingInfo> {
     const $ = new Iap$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getIapItemMapping(queryParams)
@@ -79,6 +80,16 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function updateIapSteamSync_ByUserId(userId: string, data: SteamSyncRequest): Promise<unknown> {
     const $ = new Iap$(Network.create(requestConfig), namespace, cache)
     const resp = await $.updateIapSteamSync_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Sync Oculus entitlements.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:IAP&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   */
+  async function updateIapOculuSync_ByUserId(userId: string): Promise<OculusReconcileResultArray> {
+    const $ = new Iap$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.updateIapOculuSync_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -142,6 +153,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     updateIapPsnSync_ByUserId,
     updateIapXblSync_ByUserId,
     updateIapSteamSync_ByUserId,
+    updateIapOculuSync_ByUserId,
     updateIapTwitchSync_ByUserId,
     updateIapAppleReceipt_ByUserId,
     updateIapEpicgameSync_ByUserId,

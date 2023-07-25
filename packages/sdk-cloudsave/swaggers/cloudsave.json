@@ -8,7 +8,7 @@
     },
     "description": "Justice Cloudsave Service",
     "title": "justice-cloudsave-service",
-    "version": "3.8.1"
+    "version": "3.8.3"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -20,6 +20,10 @@
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
       "scopes": {
+        "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [CREATE]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [DELETE]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [READ]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [READ]",
+        "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [UPDATE]",
         "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]",
         "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]",
         "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]": "ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]",
@@ -68,6 +72,369 @@
   },
   "swagger": "2.0",
   "paths": {
+    "/cloudsave/v1/admin/namespaces/{namespace}/adminrecords": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve list of records key by namespace",
+        "operationId": "adminListAdminGameRecordV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "limit. default value: 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "offset. default value: 0",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "key",
+            "in": "query",
+            "name": "query",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Retrieve list of records key by namespace",
+            "schema": {
+              "$ref": "#/definitions/models.ListAdminGameRecordKeysResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "List key of admin game record",
+        "tags": ["AdminRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/adminrecords/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nBulk get admin game records. Maximum key per request 20.",
+        "operationId": "adminBulkGetAdminGameRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetAdminGameRecordRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetAdminGameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get admin game records",
+        "tags": ["AdminRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/adminrecords/{key}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nThis endpoints delete game record in namespace-level",
+        "operationId": "adminDeleteAdminGameRecordV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record deleted"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete admin game record",
+        "tags": ["AdminRecord"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nGet a record by its key in namespace-level.",
+        "operationId": "adminGetAdminGameRecordV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in namespace-level retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.AdminGameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get admin game record",
+        "tags": ["AdminRecord"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new admin game record or append the existing admin game record.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample 1\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\nExample 2\n-\tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n",
+        "operationId": "adminPostAdminGameRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminGameRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record in namespace-level saved",
+            "schema": {
+              "$ref": "#/definitions/models.AdminGameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or append admin game record",
+        "tags": ["AdminRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new admin game record or replace the existing admin game record.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n",
+        "operationId": "adminPutAdminGameRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminGameRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.AdminGameRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace admin game record",
+        "tags": ["AdminRecord"]
+      }
+    },
     "/cloudsave/v1/admin/namespaces/{namespace}/binaries": {
       "get": {
         "consumes": ["application/json"],
@@ -85,14 +452,12 @@
             "description": "limit",
             "in": "query",
             "name": "limit",
-            "required": true,
             "type": "integer"
           },
           {
             "description": "offset",
             "in": "query",
             "name": "offset",
-            "required": true,
             "type": "integer"
           },
           {
@@ -135,7 +500,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nCreate a game binary record.",
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nCreate a game binary record.\n\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\n\u0026lt;code\u0026gt;key\u0026lt;/code\u0026gt; should follow these rules:\n1. support uppercase and lowercase letters, numbers, and separators \u0026lt;b\u0026gt;\u0026#34;-\u0026#34;\u0026lt;/b\u0026gt;, \u0026lt;b\u0026gt;\u0026#34;_\u0026#34;\u0026lt;/b\u0026gt;, \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; are allowed  \n2. begin and end with letters or numbers\n3. spaces are not allowed\n4. separators must not appears twice in a row\n\t\n\nSupported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.\n",
         "operationId": "adminPostGameBinaryRecordV1",
         "parameters": [
           {
@@ -422,7 +787,7 @@
     "/cloudsave/v1/admin/namespaces/{namespace}/binaries/{key}/presigned": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRequest presigned URL to upload the binary record to s3.",
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRequest presigned URL to upload the binary record to s3.\n\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\nSupported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.\n",
         "operationId": "adminPostGameBinaryPresignedURLV1",
         "parameters": [
           {
@@ -478,6 +843,76 @@
         ],
         "summary": "Request presigned URL for upload game binary records",
         "tags": ["AdminGameBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/concurrent/adminrecords/{key}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new game record or replace the existing game record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Parameters Notes \u0026lt;/h2\u0026gt;\n1. updatedAt (required: true)\n               Time format style: RFC3339\n2. value\n               Json\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;value\u0026#34;: {},\n\t\t\u0026#34;updatedAt\u0026#34;: \u0026#34;2022-03-17T10:42:15.444Z\u0026#34;\n\t}\n\u0026lt;/pre\u0026gt;\n\n\u0026lt;h2\u0026gt;Optimistic Concurrency Control\u0026lt;/h2\u0026gt;\n\nThis endpoint implement optimistic concurrency control to avoid race condition.\nIf the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed)\nand client need to redo the operation (fetch data and do update).\nOtherwise, the server will process the request.\n",
+        "operationId": "adminPutAdminGameRecordConcurrentHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminGameConcurrentRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record saved"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace admin game record",
+        "tags": ["AdminConcurrentRecord"]
       }
     },
     "/cloudsave/v1/admin/namespaces/{namespace}/concurrent/records/{key}": {
@@ -548,6 +983,254 @@
         ],
         "summary": "Create or replace game record",
         "tags": ["AdminConcurrentRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/plugins": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [DELETE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will delete grpc plugins configuration",
+        "operationId": "deletePluginConfig",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18306\u003c/td\u003e\u003ctd\u003eplugins config not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete plugin configuration",
+        "tags": ["PluginConfig"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [READ]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will get grpc plugins configuration",
+        "operationId": "getPluginConfig",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PluginResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18304\u003c/td\u003e\u003ctd\u003eplugins not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get plugin configuration",
+        "tags": ["PluginConfig"]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will update grpc plugins configuration",
+        "operationId": "updatePluginConfig",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PluginRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PluginResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18308\u003c/td\u003e\u003ctd\u003einvalid request body\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18309\u003c/td\u003e\u003ctd\u003eplugins config not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Update plugin configuration",
+        "tags": ["PluginConfig"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new grpc plugins configuration per namespace",
+        "operationId": "createPluginConfig",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PluginRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18301\u003c/td\u003e\u003ctd\u003einvalid request body\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "409": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18302\u003c/td\u003e\u003ctd\u003eplugins already configured\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:PLUGINS [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create plugin configuration",
+        "tags": ["PluginConfig"]
       }
     },
     "/cloudsave/v1/admin/namespaces/{namespace}/records": {
@@ -758,6 +1441,12 @@
               "$ref": "#/definitions/models.GameRecordResponse"
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "schema": {
@@ -839,6 +1528,79 @@
         ],
         "summary": "Create or replace game record",
         "tags": ["AdminGameRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/adminrecords/{key}/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nBulk get admin player record by userIds, max allowed 20 at a time.",
+        "operationId": "bulkGetAdminPlayerRecordByUserIdsV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkUserIDsRequest"
+            }
+          },
+          {
+            "description": "key of admin record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetAdminPlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get admin player record by multiple user ID",
+        "tags": ["AdminRecord"]
       }
     },
     "/cloudsave/v1/admin/namespaces/{namespace}/users/bulk/records/size": {
@@ -978,6 +1740,411 @@
         "tags": ["AdminPlayerRecord"]
       }
     },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/adminrecords": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve list of admin player records key and userID under given namespace.",
+        "operationId": "adminListAdminUserRecordsV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "limit. default value: 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "offset. default value: 0",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.ListAdminPlayerRecordKeysResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "List key of admin player record",
+        "tags": ["AdminRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/adminrecords/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\nBulk get admin player records. Maximum key per request 20.",
+        "operationId": "adminBulkGetAdminPlayerRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetAdminPlayerRecordRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetAdminPlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get admin player records",
+        "tags": ["AdminRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/adminrecords/{key}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nDelete a record (arbitrary JSON data) in user-level with given key.",
+        "operationId": "adminDeleteAdminPlayerRecordV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record in user-level saved"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete admin player record",
+        "tags": ["AdminRecord"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\n\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nGet a admin record in user-level (arbitrary JSON data) by its key.",
+        "operationId": "adminGetAdminPlayerRecordV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in user-level retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.AdminPlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get admin player record",
+        "tags": ["AdminRecord"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new admin player record or append the existing admin game record.\n\n\u0026lt;b\u0026gt;Append example:\u0026lt;/b\u0026gt;\n\nExample 1\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\nExample 2\n-\tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: { \u0026#34;data2\u0026#34;: \u0026#34;value\u0026#34;, \u0026#34;data3\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n",
+        "operationId": "adminPostPlayerAdminRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminPlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record in user-level saved",
+            "schema": {
+              "$ref": "#/definitions/models.AdminPlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or append admin player record",
+        "tags": ["AdminRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new admin player record or replace the existing admin player record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n",
+        "operationId": "adminPutAdminPlayerRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminPlayerRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in user-level saved",
+            "schema": {
+              "$ref": "#/definitions/models.AdminPlayerRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace admin player record",
+        "tags": ["AdminRecord"]
+      }
+    },
     "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/binaries": {
       "get": {
         "consumes": ["application/json"],
@@ -1002,14 +2169,12 @@
             "description": "limit",
             "in": "query",
             "name": "limit",
-            "required": true,
             "type": "integer"
           },
           {
             "description": "offset",
             "in": "query",
             "name": "offset",
-            "required": true,
             "type": "integer"
           },
           {
@@ -1047,12 +2212,12 @@
             "authorization": []
           }
         ],
-        "summary": "Query game binary records",
+        "summary": "Query player binary records",
         "tags": ["AdminPlayerBinaryRecord"]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nCreate a player binary record.",
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nCreate a player binary record.\n\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\n\u0026lt;code\u0026gt;key\u0026lt;/code\u0026gt; should follow these rules:\n1. support uppercase and lowercase letters, numbers, and separators \u0026lt;b\u0026gt;\u0026#34;-\u0026#34;\u0026lt;/b\u0026gt;, \u0026lt;b\u0026gt;\u0026#34;_\u0026#34;\u0026lt;/b\u0026gt;, \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; are allowed  \n2. begin and end with letters or numbers\n3. spaces are not allowed\n4. separators must not appears twice in a row\n\t\n\nSupported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.\n",
         "operationId": "adminPostPlayerBinaryRecordV1",
         "parameters": [
           {
@@ -1374,7 +2539,7 @@
     "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/binaries/{key}/presigned": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRequest presigned URL to upload the binary record to s3.",
+        "description": "Required permission: \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRequest presigned URL to upload the binary record to s3.\n\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\nSupported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.\n",
         "operationId": "adminPostPlayerBinaryPresignedURLV1",
         "parameters": [
           {
@@ -1437,6 +2602,83 @@
         ],
         "summary": "Request presigned URL for upload player binary records",
         "tags": ["AdminPlayerBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/concurrent/adminrecords/{key}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;table\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Permission\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\t\u0026lt;tr\u0026gt;\n\t\t\u0026lt;td\u0026gt;Required Scope\u0026lt;/td\u0026gt;\n\t\t\u0026lt;td\u0026gt;\u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/td\u0026gt;\n\t\u0026lt;/tr\u0026gt;\n\u0026lt;/table\u0026gt;\n\u0026lt;br/\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Description\u0026lt;/h2\u0026gt;\n\nThis endpoints will create new admin player record or replace the existing admin player record.\n\n\u0026lt;b\u0026gt;Replace behaviour:\u0026lt;/b\u0026gt;\nThe existing value will be replaced completely with the new value.\n\nExample\n- \tExisting JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data1\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n- \tNew JSON:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n-\tResult:\n\t\u0026lt;pre\u0026gt;{ \u0026#34;data2\u0026#34;: \u0026#34;new value\u0026#34; }\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Restriction \u0026lt;/h2\u0026gt;\nThis is the restriction of Key Naming for the record:\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n3. Cannot use empty string in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n\t\n\n\u0026lt;h2\u0026gt;Reserved Word\u0026lt;/h2\u0026gt;\n\nReserved Word List: \u0026lt;b\u0026gt;__META\u0026lt;/b\u0026gt;\n\nThe reserved word cannot be used as a field in record value, \nIf still defining the field when creating or updating the record, it will be ignored.\n\n\n\u0026lt;h2\u0026gt;Parameters Notes \u0026lt;/h2\u0026gt;\n1. updatedAt (required: true)\n               Time format style: RFC3339\n2. value\n               Json\n\u0026lt;b\u0026gt;Request Body Example:\u0026lt;/b\u0026gt;\n\u0026lt;pre\u0026gt;\n\t{\n\t\t\u0026#34;value\u0026#34;: {},\n\t\t\u0026#34;updatedAt\u0026#34;: \u0026#34;2022-03-17T10:42:15.444Z\u0026#34;\n\t}\n\u0026lt;/pre\u0026gt;\n\n\n\u0026lt;h2\u0026gt;Optimistic Concurrency Control\u0026lt;/h2\u0026gt;\n\nThis endpoint implement optimistic concurrency control to avoid race condition.\nIf the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed)\nand client need to redo the operation (fetch data and do update).\nOtherwise, the server will process the request.\n",
+        "operationId": "adminPutAdminPlayerRecordConcurrentHandlerV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminPlayerConcurrentRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record saved"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e18201\u003c/td\u003e\u003ctd\u003einvalid record operator, expect [%s] but actual [%s]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create or replace admin player record",
+        "tags": ["AdminConcurrentRecord"]
       }
     },
     "/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/concurrent/records/{key}": {
@@ -2271,14 +3513,12 @@
             "description": "limit",
             "in": "query",
             "name": "limit",
-            "required": true,
             "type": "integer"
           },
           {
             "description": "offset",
             "in": "query",
             "name": "offset",
-            "required": true,
             "type": "integer"
           },
           {
@@ -2321,7 +3561,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nCreate a game binary record.",
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nCreate a game binary record.\n\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\n\u0026lt;code\u0026gt;key\u0026lt;/code\u0026gt; should follow these rules:\n1. support uppercase and lowercase letters, numbers, and separators \u0026lt;b\u0026gt;\u0026#34;-\u0026#34;\u0026lt;/b\u0026gt;, \u0026lt;b\u0026gt;\u0026#34;_\u0026#34;\u0026lt;/b\u0026gt;, \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; are allowed  \n2. begin and end with letters or numbers\n3. spaces are not allowed\n4. separators must not appears twice in a row\n\t\n\nSupported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.\n",
         "operationId": "postGameBinaryRecordV1",
         "parameters": [
           {
@@ -2369,6 +3609,72 @@
           }
         ],
         "summary": "Create game binary record",
+        "tags": ["PublicGameBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/binaries/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required valid user token\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nBulk get game binary records. Maximum key per request 20.",
+        "operationId": "bulkGetGameBinaryRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetGameRecordRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetGameBinaryRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get game binary records",
         "tags": ["PublicGameBinaryRecord"]
       }
     },
@@ -2547,7 +3853,7 @@
     "/cloudsave/v1/namespaces/{namespace}/binaries/{key}/presigned": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRequest presigned URL to upload the binary record to s3.",
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRequest presigned URL to upload the binary record to s3.\n\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\nSupported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.\n",
         "operationId": "postGameBinaryPresignedURLV1",
         "parameters": [
           {
@@ -2824,6 +4130,12 @@
               "$ref": "#/definitions/models.GameRecordResponse"
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "schema": {
@@ -2972,6 +4284,79 @@
         "tags": ["PublicGameRecord"]
       }
     },
+    "/cloudsave/v1/namespaces/{namespace}/users/bulk/binaries/{key}/public": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required Permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\nRequired Scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nBulk get other player\u0026#39;s public binary record by userIds, max allowed 20 at a time. Only record with \u0026lt;code\u0026gt;isPublic=true\u0026lt;/code\u0026gt; can be\nretrieved using this endpoint.",
+        "operationId": "bulkGetPlayerPublicBinaryRecordsV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkUserIDsRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerBinaryRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get player public records",
+        "tags": ["PublicPlayerBinaryRecord"]
+      }
+    },
     "/cloudsave/v1/namespaces/{namespace}/users/bulk/records/{key}/public": {
       "post": {
         "consumes": ["application/json"],
@@ -3043,6 +4428,136 @@
         ],
         "summary": "Bulk get player public records",
         "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/me/binaries": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required valid user token\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve list of my binary records by namespace.",
+        "operationId": "listMyBinaryRecordsV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "key",
+            "in": "query",
+            "name": "query",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Retrieve list of player records by namespace",
+            "schema": {
+              "$ref": "#/definitions/models.ListPlayerBinaryRecordsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Query my binary records",
+        "tags": ["PublicPlayerBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/me/binaries/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required valid user token\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve player record key and payload in bulk under given namespace.\nMaximum bulk key limit per request 20",
+        "operationId": "bulkGetMyBinaryRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerRecordsRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerBinaryRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player records bulk",
+        "tags": ["PublicPlayerBinaryRecord"]
       }
     },
     "/cloudsave/v1/namespaces/{namespace}/users/me/records": {
@@ -3235,6 +4750,606 @@
         ],
         "summary": "Delete player public record",
         "tags": ["PublicPlayerRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nCreate a player binary record.\n\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\n\u0026lt;code\u0026gt;key\u0026lt;/code\u0026gt; should follow these rules:\n1. support uppercase and lowercase letters, numbers, and separators \u0026lt;b\u0026gt;\u0026#34;-\u0026#34;\u0026lt;/b\u0026gt;, \u0026lt;b\u0026gt;\u0026#34;_\u0026#34;\u0026lt;/b\u0026gt;, \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; are allowed  \n2. begin and end with letters or numbers\n3. spaces are not allowed\n4. separators must not appears twice in a row\n\t\n\nSupported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.\n",
+        "operationId": "postPlayerBinaryRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PublicPlayerBinaryRecordCreate"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Record in user-level created",
+            "schema": {
+              "$ref": "#/definitions/models.UploadBinaryRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create player binary record",
+        "tags": ["PublicPlayerBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries/public": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required Permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\nRequired Scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\nRetrieve list of other player public binary records under given namespace.",
+        "operationId": "listOtherPlayerPublicBinaryRecordsV1",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.ListPlayerBinaryRecordsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Query other player public binary record",
+        "tags": ["PublicPlayerBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries/public/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required Permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\nRequired Scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRetrieve other player public binary record in bulk under given namespace.\nMaximum bulk key limit per request 20",
+        "operationId": "bulkGetOtherPlayerPublicBinaryRecordsV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerRecordsRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/models.BulkGetPlayerBinaryRecordResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get other player public binary record",
+        "tags": ["PublicPlayerBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries/{key}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nDelete a player binary record. Only player who own the record can delete it",
+        "operationId": "deletePlayerBinaryRecordV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Record deleted"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete player binary record",
+        "tags": ["PublicPlayerBinaryRecord"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\nGet a player binary record by its key.\nPrivate Record: Only user who own the record could retrieve it.",
+        "operationId": "getPlayerBinaryRecordV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record in user-level retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerBinaryRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player binary record",
+        "tags": ["PublicPlayerBinaryRecord"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nUpdate a player binary record file by its key",
+        "operationId": "putPlayerBinaryRecordV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BinaryRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerBinaryRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Update player binary record file",
+        "tags": ["PublicPlayerBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries/{key}/metadata": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nUpdate a player binary record metadata by its key",
+        "operationId": "putPlayerBinaryRecorMetadataV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayerBinaryRecordMetadataPublicRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record saved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerBinaryRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Update player binary record metadata",
+        "tags": ["PublicPlayerBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries/{key}/presigned": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]\u0026lt;/code\u0026gt;\nRequired scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nRequest presigned URL to upload the binary record to s3.\n\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\nSupported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.\n",
+        "operationId": "postPlayerBinaryPresignedURLV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.UploadBinaryRecordRequest"
+            }
+          },
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID who own the record",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Successful Operation",
+            "schema": {
+              "$ref": "#/definitions/models.UploadBinaryRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Request presigned URL for upload player binary records",
+        "tags": ["PublicPlayerBinaryRecord"]
+      }
+    },
+    "/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries/{key}/public": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required Permission: \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]\u0026lt;/code\u0026gt;\nRequired Scope: \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\nGet other player\u0026#39;s public binary record. Only record with \u0026lt;code\u0026gt;isPublic=true\u0026lt;/code\u0026gt; can be\nretrieved using this endpoint.",
+        "operationId": "getPlayerPublicBinaryRecordsV1",
+        "parameters": [
+          {
+            "description": "key of record",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID of record owner",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Record retrieved",
+            "schema": {
+              "$ref": "#/definitions/models.PlayerBinaryRecordResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/models.ResponseError"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get player public binary record",
+        "tags": ["PublicPlayerBinaryRecord"]
       }
     },
     "/cloudsave/v1/namespaces/{namespace}/users/{userId}/concurrent/records/{key}": {
@@ -4056,6 +6171,105 @@
       },
       "required": ["set_by", "updatedAt", "value"]
     },
+    "models.AdminGameConcurrentRecordRequest": {
+      "properties": {
+        "updatedAt": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": ["updatedAt", "value"]
+    },
+    "models.AdminGameRecordRequest": {
+      "type": "object"
+    },
+    "models.AdminGameRecordResponse": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "key": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": ["created_at", "key", "namespace", "updated_at", "value"]
+    },
+    "models.AdminPlayerConcurrentRecordRequest": {
+      "properties": {
+        "updatedAt": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": ["updatedAt", "value"]
+    },
+    "models.AdminPlayerRecordKeyInfo": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      },
+      "required": ["key", "user_id"]
+    },
+    "models.AdminPlayerRecordRequest": {
+      "type": "object"
+    },
+    "models.AdminPlayerRecordResponse": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "key": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": ["created_at", "key", "namespace", "updated_at", "user_id", "value"]
+    },
+    "models.AppConfig": {
+      "properties": {
+        "appName": {
+          "description": "Extend app name",
+          "type": "string"
+        }
+      },
+      "required": ["appName"]
+    },
     "models.BinaryInfoResponse": {
       "properties": {
         "content_type": {
@@ -4095,6 +6309,61 @@
       },
       "required": ["content_type", "file_location"]
     },
+    "models.BulkGetAdminGameRecordRequest": {
+      "properties": {
+        "keys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["keys"]
+    },
+    "models.BulkGetAdminGameRecordResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.AdminGameRecordResponse"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "models.BulkGetAdminPlayerRecordRequest": {
+      "properties": {
+        "keys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["keys"]
+    },
+    "models.BulkGetAdminPlayerRecordResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.AdminPlayerRecordResponse"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "models.BulkGetGameBinaryRecordResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.GameBinaryRecordResponse"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
     "models.BulkGetGameRecordRequest": {
       "properties": {
         "keys": {
@@ -4111,6 +6380,17 @@
         "data": {
           "items": {
             "$ref": "#/definitions/models.GameRecordResponse"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "models.BulkGetPlayerBinaryRecordResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.PlayerBinaryRecordResponse"
           },
           "type": "array"
         }
@@ -4182,6 +6462,96 @@
         }
       },
       "required": ["updatedAt", "value"]
+    },
+    "models.CustomConfig": {
+      "properties": {
+        "GRPCAddress": {
+          "type": "string"
+        },
+        "connectionType": {
+          "description": "available value: INSECURE",
+          "type": "string"
+        }
+      },
+      "required": ["GRPCAddress", "connectionType"]
+    },
+    "models.CustomFunction": {
+      "properties": {
+        "afterBulkReadAdminGameRecord": {
+          "description": "enable/disable after bulk read admin game record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "afterBulkReadAdminPlayerRecord": {
+          "description": "enable/disable after bulk read admin player record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "afterBulkReadGameRecord": {
+          "description": "enable/disable after bulk read game record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "afterBulkReadPlayerRecord": {
+          "description": "enable/disable after bulk read player record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "afterReadAdminGameRecord": {
+          "description": "enable/disable after read admin game record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "afterReadAdminPlayerRecord": {
+          "description": "enable/disable after read admin player record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "afterReadGameRecord": {
+          "description": "enable/disable after read game record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "afterReadPlayerRecord": {
+          "description": "enable/disable after read player record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "beforeWriteAdminGameRecord": {
+          "description": "enable/disable before write admin game record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "beforeWriteAdminPlayerRecord": {
+          "description": "enable/disable before write admin player record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "beforeWriteGameRecord": {
+          "description": "enable/disable before write game record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "beforeWritePlayerRecord": {
+          "description": "enable/disable before write player record custom validation",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "afterBulkReadAdminGameRecord",
+        "afterBulkReadAdminPlayerRecord",
+        "afterBulkReadGameRecord",
+        "afterBulkReadPlayerRecord",
+        "afterReadAdminGameRecord",
+        "afterReadAdminPlayerRecord",
+        "afterReadGameRecord",
+        "afterReadPlayerRecord",
+        "beforeWriteAdminGameRecord",
+        "beforeWriteAdminPlayerRecord",
+        "beforeWriteGameRecord",
+        "beforeWritePlayerRecord"
+      ]
     },
     "models.GameBinaryRecordCreate": {
       "properties": {
@@ -4266,6 +6636,34 @@
         }
       },
       "required": ["created_at", "key", "namespace", "updated_at", "value"]
+    },
+    "models.ListAdminGameRecordKeysResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.ListAdminPlayerRecordKeysResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.AdminPlayerRecordKeyInfo"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "paging"]
     },
     "models.ListGameBinaryRecordsResponse": {
       "properties": {
@@ -4357,6 +6755,14 @@
         }
       },
       "required": ["file_type", "key", "set_by"]
+    },
+    "models.PlayerBinaryRecordMetadataPublicRequest": {
+      "properties": {
+        "is_public": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      }
     },
     "models.PlayerBinaryRecordMetadataRequest": {
       "properties": {
@@ -4482,10 +6888,63 @@
       },
       "required": ["current_size", "key", "namespace", "remaining_size", "user_id"]
     },
+    "models.PluginRequest": {
+      "properties": {
+        "appConfig": {
+          "$ref": "#/definitions/models.AppConfig"
+        },
+        "customConfig": {
+          "$ref": "#/definitions/models.CustomConfig"
+        },
+        "customFunction": {
+          "$ref": "#/definitions/models.CustomFunction"
+        },
+        "extendType": {
+          "description": "available value: APP, CUSTOM",
+          "type": "string"
+        }
+      },
+      "required": ["customFunction", "extendType"]
+    },
+    "models.PluginResponse": {
+      "properties": {
+        "appConfig": {
+          "$ref": "#/definitions/models.AppConfig"
+        },
+        "customConfig": {
+          "$ref": "#/definitions/models.CustomConfig"
+        },
+        "customFunction": {
+          "$ref": "#/definitions/models.CustomFunction"
+        },
+        "extendType": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        }
+      },
+      "required": ["customFunction", "extendType", "namespace"]
+    },
     "models.PublicGameBinaryRecordCreate": {
       "properties": {
         "file_type": {
           "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": ["file_type", "key"]
+    },
+    "models.PublicPlayerBinaryRecordCreate": {
+      "properties": {
+        "file_type": {
+          "type": "string"
+        },
+        "is_public": {
+          "type": "boolean",
+          "x-omitempty": false
         },
         "key": {
           "type": "string"
@@ -4552,11 +7011,11 @@
     "path": "/cloudsave/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-06-19T03:44:44+00:00",
-    "gitHash": "39f12af45215fbda8be07d60d1ea391ff76aa58b",
+    "buildDate": "2023-07-11T10:45:46+00:00",
+    "gitHash": "d873193fbb51bf292e315b2bbca0210d41d58f94",
     "name": "justice-cloudsave-service",
-    "revisionID": "3.8.1",
-    "version": "3.8.1",
-    "version-roles-seeding": "0.0.3"
+    "revisionID": "3.8.3",
+    "version": "3.8.3",
+    "version-roles-seeding": "0.0.37"
   }
 }

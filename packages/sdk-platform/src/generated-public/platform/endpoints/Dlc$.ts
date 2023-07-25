@@ -59,6 +59,19 @@ export class Dlc$ {
   }
 
   /**
+   * Sync oculus dlc.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   */
+  updateDlcOculuSync_ByUserId(userId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/oculus/sync'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
    * Sync epic games dlc items.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   updateDlcEpicgameSync_ByUserId(userId: string, data: EpicGamesDlcSyncRequest): Promise<IResponse<unknown>> {

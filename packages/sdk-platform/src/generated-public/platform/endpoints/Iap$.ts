@@ -15,6 +15,7 @@ import { EpicGamesReconcileResultArray } from '../definitions/EpicGamesReconcile
 import { GoogleIapReceipt } from '../definitions/GoogleIapReceipt.js'
 import { GoogleReceiptResolveResult } from '../definitions/GoogleReceiptResolveResult.js'
 import { IapItemMappingInfo } from '../definitions/IapItemMappingInfo.js'
+import { OculusReconcileResultArray } from '../definitions/OculusReconcileResultArray.js'
 import { PlayStationMultiServiceLabelsReconcileRequest } from '../definitions/PlayStationMultiServiceLabelsReconcileRequest.js'
 import { PlayStationReconcileRequest } from '../definitions/PlayStationReconcileRequest.js'
 import { PlayStationReconcileResultArray } from '../definitions/PlayStationReconcileResultArray.js'
@@ -32,7 +33,7 @@ export class Iap$ {
    * Get iap item mapping.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
    */
   getIapItemMapping(queryParams?: {
-    platform?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
+    platform?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'OCULUS' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
   }): Promise<IResponseWithSync<IapItemMappingInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/iap/item/mapping'.replace('{namespace}', this.namespace)
@@ -95,6 +96,19 @@ export class Iap$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Sync Oculus entitlements.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:IAP&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   */
+  updateIapOculuSync_ByUserId(userId: string): Promise<IResponse<OculusReconcileResultArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/oculus/sync'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.responseType(() => resultPromise, OculusReconcileResultArray, 'OculusReconcileResultArray')
   }
 
   /**

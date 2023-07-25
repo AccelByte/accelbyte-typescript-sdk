@@ -7,7 +7,9 @@ import { z } from 'zod'
 import { PlatformReward } from './PlatformReward.js'
 
 export const RewardsRequest = z.object({
-  origin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish(),
+  origin: z
+    .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
+    .nullish(),
   rewards: z.array(PlatformReward),
   source: z
     .enum(['ACHIEVEMENT', 'DLC', 'GIFT', 'IAP', 'OTHER', 'PROMOTION', 'PURCHASE', 'REDEEM_CODE', 'REFERRAL_BONUS', 'REWARD'])

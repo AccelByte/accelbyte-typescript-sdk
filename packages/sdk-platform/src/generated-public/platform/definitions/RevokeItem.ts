@@ -8,7 +8,7 @@ import { z } from 'zod'
 export const RevokeItem = z.object({
   itemIdentity: z.string().nullish(),
   itemIdentityType: z.enum(['ITEM_ID', 'ITEM_SKU']).nullish(),
-  origin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish()
+  origin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish()
 })
 
 export interface RevokeItem extends z.TypeOf<typeof RevokeItem> {}

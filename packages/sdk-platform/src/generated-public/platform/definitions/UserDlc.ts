@@ -11,7 +11,7 @@ export const UserDlc = z.object({
   dlcs: z.array(DlcRecord).nullish(),
   id: z.string().nullish(),
   namespace: z.string().nullish(),
-  platform: z.enum(['EPICGAMES', 'PSN', 'STEAM', 'XBOX']).nullish(),
+  platform: z.enum(['EPICGAMES', 'OCULUS', 'PSN', 'STEAM', 'XBOX']).nullish(),
   rvn: z.number().int().nullish(),
   updatedAt: z.string().nullish(),
   userId: z.string().nullish()

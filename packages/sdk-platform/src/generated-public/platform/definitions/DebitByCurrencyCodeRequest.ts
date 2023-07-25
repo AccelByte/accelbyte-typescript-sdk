@@ -8,7 +8,9 @@ import { z } from 'zod'
 export const DebitByCurrencyCodeRequest = z.object({
   allowOverdraft: z.boolean().nullish(),
   amount: z.number().int(),
-  balanceOrigin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish(),
+  balanceOrigin: z
+    .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
+    .nullish(),
   reason: z.string().nullish()
 })
 

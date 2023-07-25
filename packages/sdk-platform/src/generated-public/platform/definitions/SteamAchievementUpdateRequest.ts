@@ -4,8 +4,11 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Achievement } from './Achievement.js'
+import { SteamAchievement } from './SteamAchievement.js'
 
-export const SteamAchievementUpdateRequest = z.object({ achievements: z.array(Achievement).nullish(), steamUserId: z.string().nullish() })
+export const SteamAchievementUpdateRequest = z.object({
+  achievements: z.array(SteamAchievement).nullish(),
+  steamUserId: z.string().nullish()
+})
 
 export interface SteamAchievementUpdateRequest extends z.TypeOf<typeof SteamAchievementUpdateRequest> {}

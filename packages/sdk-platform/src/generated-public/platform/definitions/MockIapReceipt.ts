@@ -10,7 +10,7 @@ export const MockIapReceipt = z.object({
   language: z.string().nullish(),
   productId: z.string(),
   region: z.string().nullish(),
-  type: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX'])
+  type: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'OCULUS', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX'])
 })
 
 export interface MockIapReceipt extends z.TypeOf<typeof MockIapReceipt> {}

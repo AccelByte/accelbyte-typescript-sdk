@@ -8,6 +8,7 @@ import { Team } from './Team.js'
 
 export const CreateGameSessionRequest = z.object({
   attributes: z.record(z.any()),
+  autoJoin: z.boolean().nullish(),
   backfillTicketID: z.string(),
   clientVersion: z.string(),
   configurationName: z.string(),
@@ -26,6 +27,7 @@ export const CreateGameSessionRequest = z.object({
   teams: z.array(Team),
   textChat: z.boolean(),
   ticketIDs: z.array(z.string()),
+  tieTeamsSessionLifetime: z.boolean().nullish(),
   type: z.string()
 })
 

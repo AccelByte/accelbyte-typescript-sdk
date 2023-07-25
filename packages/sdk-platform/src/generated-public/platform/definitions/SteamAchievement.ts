@@ -4,8 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { SlotInfo } from './SlotInfo.js'
 
-export const SlotInfoArray = z.array(SlotInfo)
+export const SteamAchievement = z.object({ id: z.string().nullish(), value: z.number().int().nullish() })
 
-export interface SlotInfoArray extends z.TypeOf<typeof SlotInfoArray> {}
+export interface SteamAchievement extends z.TypeOf<typeof SteamAchievement> {}

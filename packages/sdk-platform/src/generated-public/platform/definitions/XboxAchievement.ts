@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const Achievement = z.object({ id: z.string().nullish(), value: z.number().int().nullish() })
+export const XboxAchievement = z.object({ id: z.string().nullish(), percentComplete: z.number().int().nullish() })
 
-export interface Achievement extends z.TypeOf<typeof Achievement> {}
+export interface XboxAchievement extends z.TypeOf<typeof XboxAchievement> {}

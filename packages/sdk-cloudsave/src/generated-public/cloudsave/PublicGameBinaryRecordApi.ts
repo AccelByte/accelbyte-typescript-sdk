@@ -9,6 +9,8 @@
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BinaryRecordRequest } from './definitions/BinaryRecordRequest.js'
+import { BulkGetGameBinaryRecordResponse } from './definitions/BulkGetGameBinaryRecordResponse.js'
+import { BulkGetGameRecordRequest } from './definitions/BulkGetGameRecordRequest.js'
 import { GameBinaryRecordResponse } from './definitions/GameBinaryRecordResponse.js'
 import { ListGameBinaryRecordsResponse } from './definitions/ListGameBinaryRecordsResponse.js'
 import { PublicGameBinaryRecord$ } from './endpoints/PublicGameBinaryRecord$.js'
@@ -26,9 +28,9 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Retrieve list of binary records by namespace.
    */
-  async function getBinaries(queryParams: {
-    limit: number
-    offset: number
+  async function getBinaries(queryParams?: {
+    limit?: number
+    offset?: number
     query?: string | null
   }): Promise<ListGameBinaryRecordsResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -38,11 +40,21 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Create a game binary record.
+   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Create a game binary record. &lt;p&gt;Other detail info:&lt;/p&gt; &lt;code&gt;key&lt;/code&gt; should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators &lt;b&gt;&#34;-&#34;&lt;/b&gt;, &lt;b&gt;&#34;_&#34;&lt;/b&gt;, &lt;b&gt;&#34;.&#34;&lt;/b&gt; are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   async function createBinary(data: PublicGameBinaryRecordCreate): Promise<UploadBinaryRecordResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createBinary(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Required valid user token Required scope: &lt;code&gt;social&lt;/code&gt; Bulk get game binary records. Maximum key per request 20.
+   */
+  async function createBinaryBulk(data: BulkGetGameRecordRequest): Promise<BulkGetGameBinaryRecordResponse> {
+    const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createBinaryBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -78,7 +90,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Request presigned URL to upload the binary record to s3.
+   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Request presigned URL to upload the binary record to s3. &lt;p&gt;Other detail info:&lt;/p&gt; Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   async function createPresigned_ByKey(key: string, data: UploadBinaryRecordRequest): Promise<UploadBinaryRecordResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -90,6 +102,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getBinaries,
     createBinary,
+    createBinaryBulk,
     deleteBinary_ByKey,
     getBinary_ByKey,
     updateBinary_ByKey,

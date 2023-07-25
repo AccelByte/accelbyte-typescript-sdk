@@ -22,10 +22,11 @@ export const ConfigReq = z.object({
   generalRateLimitDuration: z.number().int().nullish(),
   keepPresenceActivityOnDisconnect: z.boolean().nullish(),
   maxDSWaitTime: z.number().int().nullish(),
+  maxFriendsLimit: z.number().int().nullish(),
   maxPartyMember: z.number().int().nullish(),
   profanityFilter: z.boolean().nullish(),
   readyConsentTimeout: z.number().int().nullish(),
-  unregisterDelay: z.number().int()
+  unregisterDelay: z.number().int().nullish()
 })
 
 export interface ConfigReq extends z.TypeOf<typeof ConfigReq> {}

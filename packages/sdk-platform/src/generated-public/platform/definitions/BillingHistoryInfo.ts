@@ -17,7 +17,7 @@ export const BillingHistoryInfo = z.object({
   extTxId: z.string().nullish(),
   itemId: z.string(),
   namespace: z.string(),
-  paymentOrderNo: z.string(),
+  paymentOrderNo: z.string().nullish(),
   recurringOrderNo: z.string(),
   retryAttempted: z.number().int().nullish(),
   sandbox: z.boolean(),

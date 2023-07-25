@@ -7,6 +7,8 @@ import { z } from 'zod'
 import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const ConfigurationTemplateResponse = z.object({
+  PSNBaseUrl: z.string().nullish(),
+  autoJoin: z.boolean().nullish(),
   clientVersion: z.string(),
   createdAt: z.string(),
   deployment: z.string(),
@@ -26,6 +28,7 @@ export const ConfigurationTemplateResponse = z.object({
   preferredClaimKeys: z.array(z.string()).nullish(),
   requestedRegions: z.array(z.string()).nullish(),
   textChat: z.boolean(),
+  tieTeamsSessionLifetime: z.boolean().nullish(),
   type: z.string(),
   updatedAt: z.string()
 })

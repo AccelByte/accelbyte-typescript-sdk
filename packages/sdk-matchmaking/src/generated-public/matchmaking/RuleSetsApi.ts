@@ -22,7 +22,7 @@ export function RuleSetsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:RULES [READ] Required Scope: social List rule sets.
    */
-  async function getRulesets(queryParams?: { limit?: number; offset?: number }): Promise<ListRuleSetsResponse> {
+  async function getRulesets(queryParams?: { limit?: number; name?: string | null; offset?: number }): Promise<ListRuleSetsResponse> {
     const $ = new RuleSets$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getRulesets(queryParams)
     if (resp.error) throw resp.error

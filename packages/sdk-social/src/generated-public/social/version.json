@@ -1,11 +1,11 @@
 {
   "buildBy": "Gradle 6.9.1",
-  "buildDate": "2023-06-19T01:15:28+00:00",
+  "buildDate": "2023-07-11T07:31:55+00:00",
   "buildID": "2.9.0",
   "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
   "buildOS": "Linux amd64 5.13.0-1021-aws",
   "gitBranchName": "master",
-  "gitHash": "9d2df30e2d",
+  "gitHash": "dd393f2225",
   "gitTag": "2.9.0",
   "name": "justice-social-service",
   "realm": "dev",

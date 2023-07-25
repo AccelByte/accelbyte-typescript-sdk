@@ -19,7 +19,7 @@ export const FullItemInfo = z.object({
   baseAppId: z.string().nullish(),
   boothName: z.string().nullish(),
   boundItemIds: z.array(z.string()).nullish(),
-  categoryPath: z.string(),
+  categoryPath: z.string().nullish(),
   clazz: z.string().nullish(),
   createdAt: z.string(),
   displayOrder: z.number().int().nullish(),

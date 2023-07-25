@@ -5,10 +5,11 @@
  */
 import { z } from 'zod'
 
-export const ConfigRequest = z.object({
+export const ConfigResponse = z.object({
   chatRateLimitBurst: z.number().int().nullish(),
   chatRateLimitDuration: z.number().int().nullish(),
   concurrentUsersLimit: z.number().int().nullish(),
+  enableClanChat: z.boolean().nullish(),
   enableManualTopicCreation: z.boolean().nullish(),
   enableProfanityFilter: z.boolean().nullish(),
   filterAppName: z.string().nullish(),
@@ -21,7 +22,7 @@ export const ConfigRequest = z.object({
   shardHardLimit: z.number().int().nullish(),
   spamChatBurst: z.number().int().nullish(),
   spamChatDuration: z.number().int().nullish(),
-  spamMuteDuration: z.number().int()
+  spamMuteDuration: z.number().int().nullish()
 })
 
-export interface ConfigRequest extends z.TypeOf<typeof ConfigRequest> {}
+export interface ConfigResponse extends z.TypeOf<typeof ConfigResponse> {}

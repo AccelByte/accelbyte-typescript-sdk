@@ -6,7 +6,7 @@
 import { z } from 'zod'
 
 export const PaymentProviderConfigInfo = z.object({
-  aggregate: z.enum(['ADYEN', 'XSOLLA']).nullish(),
+  aggregate: z.enum(['ADYEN', 'CHECKOUT', 'STRIPE', 'XSOLLA']).nullish(),
   id: z.string(),
   namespace: z.string(),
   paymentMerchantConfigId: z.string().nullish(),

@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export const PlatformWalletConfigUpdate = z.object({
   allowedBalanceOrigins: z
-    .array(z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']))
+    .array(z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']))
     .nullish()
 })
 

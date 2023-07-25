@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const MatchFunctionRequest = z.object({ match_function: z.string(), serviceAppName: z.string(), url: z.string() })
+export const MatchFunctionRequest = z.object({ match_function: z.string(), serviceAppName: z.string().nullish(), url: z.string() })
 
 export interface MatchFunctionRequest extends z.TypeOf<typeof MatchFunctionRequest> {}

@@ -22,6 +22,7 @@ export const UpdateGameSessionRequest = z.object({
   requestedRegions: z.array(z.string()),
   teams: z.array(Team),
   ticketIDs: z.array(z.string()),
+  tieTeamsSessionLifetime: z.boolean().nullish(),
   type: z.string(),
   version: z.number().int()
 })

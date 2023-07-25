@@ -382,16 +382,16 @@
             }
           },
           {
-            "description": "namespace of the game",
+            "description": "backfill Ticket ID",
             "in": "path",
-            "name": "namespace",
+            "name": "backfillID",
             "required": true,
             "type": "string"
           },
           {
-            "description": "backfill id",
+            "description": "namespace of the game",
             "in": "path",
-            "name": "backfillID",
+            "name": "namespace",
             "required": true,
             "type": "string"
           }
@@ -458,16 +458,16 @@
             }
           },
           {
-            "description": "namespace of the game",
+            "description": "backfill Ticket ID",
             "in": "path",
-            "name": "namespace",
+            "name": "backfillID",
             "required": true,
             "type": "string"
           },
           {
-            "description": "backfill id",
+            "description": "namespace of the game",
             "in": "path",
-            "name": "backfillID",
+            "name": "namespace",
             "required": true,
             "type": "string"
           }
@@ -810,6 +810,12 @@
             "in": "query",
             "name": "limit",
             "type": "integer"
+          },
+          {
+            "description": "Match Pool name",
+            "in": "query",
+            "name": "name",
+            "type": "string"
           },
           {
             "default": 0,
@@ -1474,6 +1480,12 @@
             "type": "integer"
           },
           {
+            "description": "Rule Set name",
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          },
+          {
             "default": 0,
             "description": "Pagination offset",
             "in": "query",
@@ -1979,7 +1991,7 @@
           "type": "string"
         }
       },
-      "required": ["match_function", "serviceAppName", "url"]
+      "required": ["match_function", "url"]
     },
     "api.MatchFunctionOverride": {
       "properties": {
@@ -2021,7 +2033,7 @@
           "type": "string"
         }
       },
-      "required": ["match_function", "serviceAppName", "url"]
+      "required": ["match_function", "url"]
     },
     "api.MatchPool": {
       "properties": {
@@ -2340,9 +2352,9 @@
     "path": "/match2/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-06-20T07:21:26+00:00",
-    "gitHash": "001fdae0424a607608b97bc2782f561a5aba052e",
+    "buildDate": "2023-07-14T03:15:02+00:00",
+    "gitHash": "f210e1b4b8a3397da922e7c022566247385bb3ce",
     "version": "2.6.0",
-    "version-roles-seeding": "0.0.20"
+    "version-roles-seeding": "0.0.35"
   }
 }

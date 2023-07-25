@@ -9,7 +9,7 @@ export const Config = z.object({
   ChatRateLimitBurst: z.number().int(),
   ChatRateLimitDuration: z.number().int(),
   ConcurrentUsersLimit: z.number().int(),
-  EnableManualTopicCreation: z.boolean(),
+  EnableManualTopicCreation: z.boolean().nullish(),
   EnableProfanityFilter: z.boolean(),
   FilterAppName: z.string(),
   FilterParam: z.string(),
@@ -22,7 +22,8 @@ export const Config = z.object({
   ShardHardLimit: z.number().int(),
   SpamChatBurst: z.number().int(),
   SpamChatDuration: z.number().int(),
-  SpamMuteDuration: z.number().int()
+  SpamMuteDuration: z.number().int(),
+  enableClanChat: z.boolean().nullish()
 })
 
 export interface Config extends z.TypeOf<typeof Config> {}

@@ -14,7 +14,9 @@ export const FulfillmentRequest = z.object({
   language: z.string().nullish(),
   order: OrderSummary.nullish(),
   orderNo: z.string().nullish(),
-  origin: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox']).nullish(),
+  origin: z
+    .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
+    .nullish(),
   quantity: z.number().int(),
   region: z.string().nullish(),
   source: z

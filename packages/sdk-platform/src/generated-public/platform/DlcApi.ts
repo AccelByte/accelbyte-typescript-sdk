@@ -53,6 +53,16 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Sync oculus dlc.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   */
+  async function updateDlcOculuSync_ByUserId(userId: string): Promise<unknown> {
+    const $ = new Dlc$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.updateDlcOculuSync_ByUserId(userId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Sync epic games dlc items.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   async function updateDlcEpicgameSync_ByUserId(userId: string, data: EpicGamesDlcSyncRequest): Promise<unknown> {
@@ -79,6 +89,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     updateDlcPsnSync_ByUserId,
     updateDlcXblSync_ByUserId,
     updateDlcSteamSync_ByUserId,
+    updateDlcOculuSync_ByUserId,
     updateDlcEpicgameSync_ByUserId,
     updateDlcPsnSyncMultiServiceLabel_ByUserId
   }

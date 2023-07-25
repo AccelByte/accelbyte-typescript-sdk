@@ -12,7 +12,7 @@ export const UserDlcRecord = z.object({
   id: z.string().nullish(),
   namespace: z.string().nullish(),
   obtainedAt: z.string().nullish(),
-  platform: z.enum(['EPICGAMES', 'PSN', 'STEAM', 'XBOX']).nullish(),
+  platform: z.enum(['EPICGAMES', 'OCULUS', 'PSN', 'STEAM', 'XBOX']).nullish(),
   revocationResult: RevocationResult.nullish(),
   revokeResults: z.array(RevokeResult).nullish(),
   revokedAt: z.string().nullish(),

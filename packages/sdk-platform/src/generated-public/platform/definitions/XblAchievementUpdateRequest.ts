@@ -4,10 +4,10 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Achievement } from './Achievement.js'
+import { XboxAchievement } from './XboxAchievement.js'
 
 export const XblAchievementUpdateRequest = z.object({
-  achievements: z.array(Achievement).nullish(),
+  achievements: z.array(XboxAchievement).nullish(),
   serviceConfigId: z.string().nullish(),
   titleId: z.string().nullish(),
   xboxUserId: z.string().nullish()

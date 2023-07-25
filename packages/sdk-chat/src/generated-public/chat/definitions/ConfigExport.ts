@@ -9,6 +9,7 @@ export const ConfigExport = z.object({
   chatRateLimitBurst: z.number().int(),
   chatRateLimitDuration: z.number().int(),
   concurrentUsersLimit: z.number().int(),
+  enableClanChat: z.boolean().nullish(),
   enableManualTopicCreation: z.boolean().nullish(),
   enableProfanityFilter: z.boolean().nullish(),
   filterAppName: z.string().nullish(),

@@ -13,7 +13,7 @@ export const ListUserSeasonInfo = z.object({
   id: z.string(),
   lastTierIndex: z.number().int(),
   namespace: z.string(),
-  season: SeasonSummary,
+  season: SeasonSummary.nullish(),
   seasonId: z.string(),
   userId: z.string()
 })

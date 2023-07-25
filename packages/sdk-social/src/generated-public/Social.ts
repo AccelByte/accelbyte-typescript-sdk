@@ -12,7 +12,6 @@ import { StatConfigurationApi } from './social/StatConfigurationApi.js'
 import { StatCycleConfigurationApi } from './social/StatCycleConfigurationApi.js'
 import { UserStatisticApi } from './social/UserStatisticApi.js'
 import { GlobalStatisticApi } from './social/GlobalStatisticApi.js'
-import { SlotApi } from './social/SlotApi.js'
 import { UserStatisticCycleApi } from './social/UserStatisticCycleApi.js'
 
 const apis = {
@@ -21,7 +20,6 @@ const apis = {
   StatCycleConfigurationApi,
   UserStatisticApi,
   GlobalStatisticApi,
-  SlotApi,
   UserStatisticCycleApi
 }
 

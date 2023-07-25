@@ -3,12 +3,20 @@
   "info": {
     "description": "Justice Config Service",
     "title": "config-service-app",
-    "version": "0.14.3"
+    "version": "0.15.0"
   },
   "paths": {
     "/odin-config/v1/admin/namespaces/{namespace}/templates": {
       "get": {
-        "description": "<p>Required permission <code>ADMIN:NAMESPACE:{namespace}:CONFIG</code></p>",
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONFIG [READ]"]
+          },
+          {
+            "HasScope": []
+          }
+        ],
+        "description": "Retrieve templates on a given namespace",
         "consumes": ["application/octet-stream", "application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
@@ -42,7 +50,15 @@
         }
       },
       "post": {
-        "description": "<p>Required permission <code>ADMIN:NAMESPACE:{namespace}:CONFIG</code>. Note that the <code>data</code> field of each config MUST be an object. Please ensure that config-level fields such as <code>updatedAt</code>, <code>format</code>, and <code>version</code>are located on the config-level and not inside the <code>config.data</code> field to reduce confusion.</p>",
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONFIG [CREATE]"]
+          },
+          {
+            "HasScope": []
+          }
+        ],
+        "description": "Create template on a given namespace",
         "consumes": ["application/octet-stream", "application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
@@ -89,7 +105,15 @@
     },
     "/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/cache": {
       "get": {
-        "description": "<p>Required permission <code>ADMIN:NAMESPACE:{namespace}:CONFIG</code></p>",
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONFIG [READ]"]
+          },
+          {
+            "HasScope": []
+          }
+        ],
+        "description": "Get template config on redis cache on a given namespace",
         "consumes": ["application/octet-stream", "application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
@@ -133,7 +157,15 @@
         }
       },
       "post": {
-        "description": "<p>Required permission <code>ADMIN:NAMESPACE:{namespace}:CONFIG</code></p>",
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONFIG [DELETE]"]
+          },
+          {
+            "HasScope": []
+          }
+        ],
+        "description": "Revalidate template config redis cache on a given namespace",
         "consumes": ["application/octet-stream", "application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
@@ -176,7 +208,15 @@
     },
     "/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/configs": {
       "get": {
-        "description": "<p>Required permission <code>ADMIN:NAMESPACE:{namespace}:CONFIG</code></p>",
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONFIG [READ]"]
+          },
+          {
+            "HasScope": []
+          }
+        ],
+        "description": "Retrieve template configs from a given namespace.",
         "consumes": ["application/octet-stream", "application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
@@ -220,7 +260,15 @@
         }
       },
       "post": {
-        "description": "<p>Required permission <code>ADMIN:NAMESPACE:{namespace}:CONFIG</code>. Note that the <code>data</code> field of each config MUST be an object. Please ensure that config-level fields such as <code>updatedAt</code>, <code>format</code>, and <code>version</code>are located on the config-level and not inside the <code>config.data</code> field to reduce confusion.</p>",
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONFIG [CREATE]"]
+          },
+          {
+            "HasScope": []
+          }
+        ],
+        "description": "Create template config on a given namespace",
         "consumes": ["application/octet-stream", "application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
@@ -274,7 +322,15 @@
     },
     "/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/configs/{config}": {
       "get": {
-        "description": "<p>Required permission <code>ADMIN:NAMESPACE:{namespace}:CONFIG</code></p>",
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONFIG [READ]"]
+          },
+          {
+            "HasScope": []
+          }
+        ],
+        "description": "Retrieve specific template config from a given namespace",
         "consumes": ["application/octet-stream", "application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
@@ -325,7 +381,15 @@
         }
       },
       "put": {
-        "description": "<p>Required permission <code>ADMIN:NAMESPACE:{namespace}:CONFIG</code>. Note that the <code>data</code> field of each config MUST be an object. Please ensure that config-level fields such as <code>updatedAt</code>, <code>format</code>, and <code>version</code>are located on the config-level and not inside the <code>config.data</code> field to reduce confusion.</p>",
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONFIG [DELETE]"]
+          },
+          {
+            "HasScope": []
+          }
+        ],
+        "description": "Update specific template config on a given namespace",
         "consumes": ["application/octet-stream", "application/json"],
         "produces": ["application/json"],
         "tags": ["Templates"],
@@ -705,7 +769,25 @@
     }
   },
   "securityDefinitions": {
-    "authorization": {
+    "HasPermission": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "tokenUrl": "https://dummy.oauth.net/token",
+      "scopes": {
+        "ADMIN:NAMESPACE:{namespace}:CONFIG [CREATE]": "Create a template or a config",
+        "ADMIN:NAMESPACE:{namespace}:CONFIG [DELETE]": "Delete a template or a config",
+        "ADMIN:NAMESPACE:{namespace}:CONFIG [READ]": "Read a template or a config",
+        "ADMIN:NAMESPACE:{namespace}:CONFIG [UPDATE]": "Update a template or a config"
+      }
+    },
+    "HasScope": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "tokenUrl": "https://dummy.oauth.net/token"
+    },
+    "accessToken": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header"
@@ -713,7 +795,10 @@
   },
   "security": [
     {
-      "authorization": []
+      "HasPermission": []
+    },
+    {
+      "HasScope": []
     }
   ]
 }

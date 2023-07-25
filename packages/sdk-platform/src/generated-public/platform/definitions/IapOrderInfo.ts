@@ -26,7 +26,7 @@ export const IapOrderInfo = z.object({
   status: z.enum(['FAILED', 'FULFILLED', 'VERIFIED']),
   statusReason: z.string().nullish(),
   transactionId: z.string().nullish(),
-  type: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX']),
+  type: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'OCULUS', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX']),
   updatedAt: z.string(),
   userId: z.string()
 })

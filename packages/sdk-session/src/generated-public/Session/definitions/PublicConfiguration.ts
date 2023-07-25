@@ -4,8 +4,11 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const PublicConfiguration = z.object({
+  PSNBaseURL: z.string().nullish(),
+  autoJoin: z.boolean(),
   clientVersion: z.string(),
   deployment: z.string(),
   dsSource: z.string().nullish(),
@@ -16,10 +19,12 @@ export const PublicConfiguration = z.object({
   maxPlayers: z.number().int(),
   minPlayers: z.number().int(),
   name: z.string(),
+  native_session_setting: NativeSessionSetting.nullish(),
   persistent: z.boolean(),
   preferredClaimKeys: z.array(z.string()).nullish(),
   requestedRegions: z.array(z.string()).nullish(),
   textChat: z.boolean(),
+  tieTeamsSessionLifetime: z.boolean().nullish(),
   type: z.string()
 })
 

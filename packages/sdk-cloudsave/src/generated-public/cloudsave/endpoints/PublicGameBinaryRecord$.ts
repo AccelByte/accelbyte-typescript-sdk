@@ -10,6 +10,8 @@ import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, 
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BinaryRecordRequest } from '../definitions/BinaryRecordRequest.js'
+import { BulkGetGameBinaryRecordResponse } from '../definitions/BulkGetGameBinaryRecordResponse.js'
+import { BulkGetGameRecordRequest } from '../definitions/BulkGetGameRecordRequest.js'
 import { GameBinaryRecordResponse } from '../definitions/GameBinaryRecordResponse.js'
 import { ListGameBinaryRecordsResponse } from '../definitions/ListGameBinaryRecordsResponse.js'
 import { PublicGameBinaryRecordCreate } from '../definitions/PublicGameBinaryRecordCreate.js'
@@ -23,9 +25,9 @@ export class PublicGameBinaryRecord$ {
   /**
    * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Retrieve list of binary records by namespace.
    */
-  getBinaries(queryParams: {
-    limit: number
-    offset: number
+  getBinaries(queryParams?: {
+    limit?: number
+    offset?: number
     query?: string | null
   }): Promise<IResponseWithSync<ListGameBinaryRecordsResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -42,7 +44,7 @@ export class PublicGameBinaryRecord$ {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Create a game binary record.
+   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Create a game binary record. &lt;p&gt;Other detail info:&lt;/p&gt; &lt;code&gt;key&lt;/code&gt; should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators &lt;b&gt;&#34;-&#34;&lt;/b&gt;, &lt;b&gt;&#34;_&#34;&lt;/b&gt;, &lt;b&gt;&#34;.&#34;&lt;/b&gt; are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   createBinary(data: PublicGameBinaryRecordCreate): Promise<IResponse<UploadBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
@@ -50,6 +52,17 @@ export class PublicGameBinaryRecord$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, UploadBinaryRecordResponse, 'UploadBinaryRecordResponse')
+  }
+
+  /**
+   * Required valid user token Required scope: &lt;code&gt;social&lt;/code&gt; Bulk get game binary records. Maximum key per request 20.
+   */
+  createBinaryBulk(data: BulkGetGameRecordRequest): Promise<IResponse<BulkGetGameBinaryRecordResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/cloudsave/v1/namespaces/{namespace}/binaries/bulk'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, BulkGetGameBinaryRecordResponse, 'BulkGetGameBinaryRecordResponse')
   }
 
   /**
@@ -92,7 +105,7 @@ export class PublicGameBinaryRecord$ {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Request presigned URL to upload the binary record to s3.
+   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Request presigned URL to upload the binary record to s3. &lt;p&gt;Other detail info:&lt;/p&gt; Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   createPresigned_ByKey(key: string, data: UploadBinaryRecordRequest): Promise<IResponse<UploadBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig

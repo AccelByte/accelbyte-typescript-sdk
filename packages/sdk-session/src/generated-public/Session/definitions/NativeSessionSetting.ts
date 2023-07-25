@@ -11,7 +11,8 @@ export const NativeSessionSetting = z.object({
   SessionTitle: z.string(),
   ShouldSync: z.boolean().nullish(),
   XboxServiceConfigID: z.string(),
-  XboxSessionTemplateName: z.string()
+  XboxSessionTemplateName: z.string(),
+  localizedSessionName: z.record(z.any()).nullish()
 })
 
 export interface NativeSessionSetting extends z.TypeOf<typeof NativeSessionSetting> {}
