@@ -119,8 +119,4 @@ yarn --cwd packages/sdk test
 
 ## Web SDK Playground
 
-In addition, there is a [Playground web application](https://development.accelbyte.io/web-sdk-playground/) allowing to live test the Web SDK.
-
-## Contributing
-
-Want to contribute to this project? thank you for your interest! we value your input and appreciate your desire to enhance the AccelByte Web SDK. However please note that the direct contributions via Github are currently not accepted. Instead, we encourage you to submit your ideas and suggestion as a feature request through [AccelByte Customer Support Portal](https://accelbyte.atlassian.net/servicedesk/customer/portal/6) or through your assigned TP. This process helps us manage contributions effectively and ensures that every idea is carefully reviewed and considered by Our team.
+In addition, there is a [Playground web application](https://development.accelbyte.io/web-sdk-playground/) allowing to live test the Web SDK. 

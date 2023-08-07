@@ -42,7 +42,7 @@ export class PublicContent$ {
     type?: string | null
     userId?: string | null
   }): Promise<IResponseWithSync<PaginatedContentDownloadResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/contents'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -92,7 +92,7 @@ export class PublicContent$ {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<IResponseWithSync<PaginatedContentDownloadResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/contents'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -145,7 +145,7 @@ export class PublicContent$ {
       userId?: string | null
     }
   ): Promise<IResponseWithSync<PaginatedContentDownloadResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/channels/{channelId}/contents'
       .replace('{namespace}', this.namespace)
       .replace('{channelId}', channelId)

@@ -21,7 +21,7 @@ export class PublicFollow$ {
    * Requires valid user token
    */
   getUsersFollowed(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedCreatorOverviewResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/followed'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -38,7 +38,7 @@ export class PublicFollow$ {
    * Requires valid user token
    */
   getContentsFollowed(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedContentDownloadResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/contents/followed'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -68,7 +68,7 @@ export class PublicFollow$ {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<IResponseWithSync<PaginatedCreatorOverviewResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/followers'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -87,7 +87,7 @@ export class PublicFollow$ {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<IResponseWithSync<PaginatedCreatorOverviewResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/following'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

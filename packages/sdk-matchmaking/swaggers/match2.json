@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Match Service v2",
-    "version": "2.6.0"
+    "version": "2.7.1"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/match2/apidocs"
+    "url": "https://stage.accelbyte.io/match2/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -2348,13 +2348,13 @@
   },
   "x-docs": {
     "alias": "match2",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/match2/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-07-14T03:15:02+00:00",
-    "gitHash": "f210e1b4b8a3397da922e7c022566247385bb3ce",
-    "version": "2.6.0",
+    "buildDate": "2023-07-14T08:52:19+00:00",
+    "gitHash": "715c1061c7abd12e81333494ed4172de0680f59f",
+    "version": "2.7.1",
     "version-roles-seeding": "0.0.35"
   }
 }

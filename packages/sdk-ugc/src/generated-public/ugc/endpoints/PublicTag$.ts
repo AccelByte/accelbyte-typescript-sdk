@@ -18,7 +18,7 @@ export class PublicTag$ {
    * Publicly accessible
    */
   getTags(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetTagResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

@@ -12,7 +12,7 @@ export const PluginRequest = z.object({
   appConfig: AppConfig.nullish(),
   customConfig: CustomConfig.nullish(),
   customFunction: CustomFunction,
-  extendType: z.string()
+  extendType: z.enum(['APP', 'CUSTOM'])
 })
 
 export interface PluginRequest extends z.TypeOf<typeof PluginRequest> {}

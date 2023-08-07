@@ -25,7 +25,7 @@ export class PublicChannel$ {
     userId: string,
     queryParams?: { limit?: number; name?: string | null; offset?: number }
   ): Promise<IResponseWithSync<PaginatedGetChannelResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

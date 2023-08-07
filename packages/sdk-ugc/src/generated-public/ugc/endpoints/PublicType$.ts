@@ -18,7 +18,7 @@ export class PublicType$ {
    * Requires valid user token
    */
   getTypes(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetTypeResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

@@ -24,7 +24,7 @@ export class PublicCreator$ {
     orderby?: string | null
     sortby?: string | null
   }): Promise<IResponseWithSync<PaginatedCreatorOverviewResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

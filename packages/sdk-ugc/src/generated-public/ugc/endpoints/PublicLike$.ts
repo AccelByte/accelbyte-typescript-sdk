@@ -30,7 +30,7 @@ export class PublicLike$ {
     tags?: string[]
     type?: string | null
   }): Promise<IResponseWithSync<PaginatedContentDownloadResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/contents/liked'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

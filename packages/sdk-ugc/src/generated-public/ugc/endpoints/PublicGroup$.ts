@@ -25,7 +25,7 @@ export class PublicGroup$ {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<IResponseWithSync<PaginatedGroupResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -109,7 +109,7 @@ export class PublicGroup$ {
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<IResponseWithSync<PaginatedContentDownloadResponse>> {
-    const params = { limit: 1000, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

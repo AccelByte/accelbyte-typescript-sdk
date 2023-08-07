@@ -33,12 +33,7 @@ export class InputValidationHelper {
       isRequired,
       allowUnicode: validation.allowUnicode,
       isCustomRegex: validation.isCustomRegex,
-      allowSpace: validation.allowSpace,
-      customRegex: validation.regex,
-      letterCase: validation.letterCase,
-      allowAllSpecialCharacters: validation.allowAllSpecialCharacters,
-      specialCharacters: validation.specialCharacters,
-      specialCharacterLocation: validation.specialCharacterLocation
+      customRegex: validation.regex
     })
   }
 

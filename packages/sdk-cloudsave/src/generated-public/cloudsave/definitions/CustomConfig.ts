@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const CustomConfig = z.object({ GRPCAddress: z.string(), connectionType: z.string() })
+export const CustomConfig = z.object({ GRPCAddress: z.string() })
 
 export interface CustomConfig extends z.TypeOf<typeof CustomConfig> {}

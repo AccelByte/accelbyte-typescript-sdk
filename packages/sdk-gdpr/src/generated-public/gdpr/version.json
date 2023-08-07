@@ -1,8 +1,8 @@
 {
-  "buildDate": "2023-07-17T10:51:43+00:00",
-  "gitHash": "cb585d0226ac7833334b06637fb96b2a7eb93b20",
+  "buildDate": "2023-07-18T07:49:52+00:00",
+  "gitHash": "4d0fc2680bbb0edeadb7b8c8daad866f6f6f759a",
   "name": "justice-gdpr-service",
-  "realm": "dev",
+  "realm": "staging",
   "version": "2.1.1",
   "version-roles-seeding": "0.0.3"
 }
