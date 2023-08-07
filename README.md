@@ -84,10 +84,10 @@ const policies = await Legal.Policies().getPolicyCountry_ByCountryCode('US')
 
 ## AccelByte APIs
 
-Web SDK supports the following AccelByte service APIs:
+Web SDK supports the following [AccelByte service APIs](https://docs.accelbyte.io/api-explorer/):
 
 1. [Access - IAM](https://docs.accelbyte.io/api-explorer/?api=IAM)
-2. [GDPR](https://docs.accelbyte.io/api-explorer/?api=GDPR)
+2. [Access - GDPR](https://docs.accelbyte.io/api-explorer/?api=GDPR)
 3. [Access- Event log](https://docs.accelbyte.io/api-explorer/?api=Event%20Log)
 4. [Access - Legal](https://docs.accelbyte.io/api-explorer/?api=Legal)
 5. [Distribution - Build Info](https://docs.accelbyte.io/api-explorer/?api=Buildinfo)
