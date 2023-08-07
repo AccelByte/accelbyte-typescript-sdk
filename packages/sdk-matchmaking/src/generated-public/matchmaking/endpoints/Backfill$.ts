@@ -15,6 +15,7 @@ import { BackFillRejectRequest } from '../definitions/BackFillRejectRequest.js'
 import { BackfillCreateResponse } from '../definitions/BackfillCreateResponse.js'
 import { BackfillGetResponse } from '../definitions/BackfillGetResponse.js'
 import { BackfillProposalResponse } from '../definitions/BackfillProposalResponse.js'
+import { GameSession } from '../definitions/GameSession.js'
 
 export class Backfill$ {
   // @ts-ignore
@@ -83,14 +84,14 @@ export class Backfill$ {
   /**
    *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE] Required Scope: social Accept backfill proposal
    */
-  updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<IResponse<unknown>> {
+  updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<IResponse<GameSession>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/backfill/{backfillID}/proposal/accept'
       .replace('{namespace}', this.namespace)
       .replace('{backfillID}', backfillID)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.responseType(() => resultPromise, GameSession, 'GameSession')
   }
 
   /**

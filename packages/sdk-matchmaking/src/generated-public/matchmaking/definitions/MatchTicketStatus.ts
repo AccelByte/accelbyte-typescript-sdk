@@ -6,6 +6,12 @@
 import { z } from 'zod'
 import { ProposedProposal } from './ProposedProposal.js'
 
-export const MatchTicketStatus = z.object({ matchFound: z.boolean(), proposedProposal: ProposedProposal.nullish(), sessionID: z.string() })
+export const MatchTicketStatus = z.object({
+  matchFound: z.boolean(),
+  matchPool: z.string().nullish(),
+  matchTicketID: z.string().nullish(),
+  proposedProposal: ProposedProposal.nullish(),
+  sessionID: z.string()
+})
 
 export interface MatchTicketStatus extends z.TypeOf<typeof MatchTicketStatus> {}

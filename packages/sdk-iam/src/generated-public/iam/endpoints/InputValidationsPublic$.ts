@@ -11,7 +11,7 @@ import { AxiosInstance } from 'axios'
 import { InputValidationConfigVersion } from '../definitions/InputValidationConfigVersion.js'
 import { InputValidationsPublicResponse } from '../definitions/InputValidationsPublicResponse.js'
 
-export class InputValidations$ {
+export class InputValidationsPublic$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 

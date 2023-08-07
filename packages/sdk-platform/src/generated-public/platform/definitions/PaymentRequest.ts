@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 export const PaymentRequest = z.object({
   amount: z.number().int(),
+  metadata: z.record(z.any()).nullish(),
   walletPlatform: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'Xbox']).nullish()
 })
 

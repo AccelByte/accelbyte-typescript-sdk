@@ -15,6 +15,7 @@ import { Backfill$ } from './endpoints/Backfill$.js'
 import { BackfillCreateResponse } from './definitions/BackfillCreateResponse.js'
 import { BackfillGetResponse } from './definitions/BackfillGetResponse.js'
 import { BackfillProposalResponse } from './definitions/BackfillProposalResponse.js'
+import { GameSession } from './definitions/GameSession.js'
 
 export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
@@ -66,7 +67,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE] Required Scope: social Accept backfill proposal
    */
-  async function updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<unknown> {
+  async function updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<GameSession> {
     const $ = new Backfill$(Network.create(requestConfig), namespace, cache)
     const resp = await $.updateProposalAccept_ByBackfillId(backfillID, data)
     if (resp.error) throw resp.error

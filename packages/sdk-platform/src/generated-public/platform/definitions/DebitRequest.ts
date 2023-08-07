@@ -5,6 +5,11 @@
  */
 import { z } from 'zod'
 
-export const DebitRequest = z.object({ amount: z.number().int(), reason: z.string().nullish() })
+export const DebitRequest = z.object({
+  amount: z.number().int(),
+  balanceSource: z.enum(['DLC_REVOCATION', 'EXPIRATION', 'ORDER_REVOCATION', 'OTHER', 'PAYMENT']).nullish(),
+  metadata: z.record(z.any()).nullish(),
+  reason: z.string().nullish()
+})
 
 export interface DebitRequest extends z.TypeOf<typeof DebitRequest> {}

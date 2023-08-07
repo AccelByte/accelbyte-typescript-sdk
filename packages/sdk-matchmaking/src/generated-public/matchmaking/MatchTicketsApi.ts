@@ -11,6 +11,7 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { MatchTicketRequest } from './definitions/MatchTicketRequest.js'
 import { MatchTicketResponse } from './definitions/MatchTicketResponse.js'
 import { MatchTicketStatus } from './definitions/MatchTicketStatus.js'
+import { MatchTicketStatuses } from './definitions/MatchTicketStatuses.js'
 import { MatchTickets$ } from './endpoints/MatchTickets$.js'
 
 export function MatchTicketsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -26,6 +27,20 @@ export function MatchTicketsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createMatchTicket(data: MatchTicketRequest): Promise<MatchTicketResponse> {
     const $ = new MatchTickets$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createMatchTicket(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:TICKET [READ] Required Scope: social Get my match tickets.
+   */
+  async function getMatchTicketsMe(queryParams?: {
+    limit?: number
+    matchPool?: string | null
+    offset?: number
+  }): Promise<MatchTicketStatuses> {
+    const $ = new MatchTickets$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getMatchTicketsMe(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -52,6 +67,7 @@ export function MatchTicketsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     createMatchTicket,
+    getMatchTicketsMe,
     deleteMatchTicket_ByTicketid,
     getMatchTicket_ByTicketid
   }

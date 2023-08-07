@@ -10,6 +10,7 @@ import { RevokeResult } from './RevokeResult.js'
 
 export const UserDlcRecord = z.object({
   id: z.string().nullish(),
+  metadata: z.record(z.any()).nullish(),
   namespace: z.string().nullish(),
   obtainedAt: z.string().nullish(),
   platform: z.enum(['EPICGAMES', 'OCULUS', 'PSN', 'STEAM', 'XBOX']).nullish(),

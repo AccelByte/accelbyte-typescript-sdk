@@ -6,6 +6,7 @@
 import { z } from 'zod'
 
 export const TelemetryBody = z.object({
+  ClientTimestamp: z.string().nullish(),
   EventId: z.string().nullish(),
   EventName: z.string(),
   EventNamespace: z.string(),

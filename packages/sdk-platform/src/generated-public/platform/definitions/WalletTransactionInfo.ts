@@ -11,6 +11,7 @@ export const WalletTransactionInfo = z.object({
   balanceSource: z.string().nullish(),
   createdAt: z.string(),
   currencyCode: z.string(),
+  metadata: z.record(z.any()).nullish(),
   namespace: z.string(),
   operator: z.string(),
   reason: z.string().nullish(),

@@ -7,12 +7,30 @@ import { z } from 'zod'
 import { PlatformReward } from './PlatformReward.js'
 
 export const RewardsRequest = z.object({
+  metadata: z.record(z.any()).nullish(),
   origin: z
     .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
     .nullish(),
   rewards: z.array(PlatformReward),
   source: z
-    .enum(['ACHIEVEMENT', 'DLC', 'GIFT', 'IAP', 'OTHER', 'PROMOTION', 'PURCHASE', 'REDEEM_CODE', 'REFERRAL_BONUS', 'REWARD'])
+    .enum([
+      'ACHIEVEMENT',
+      'CONSUME_ENTITLEMENT',
+      'DLC',
+      'DLC_REVOCATION',
+      'EXPIRATION',
+      'GIFT',
+      'IAP',
+      'ORDER_REVOCATION',
+      'OTHER',
+      'PAYMENT',
+      'PROMOTION',
+      'PURCHASE',
+      'REDEEM_CODE',
+      'REFERRAL_BONUS',
+      'REWARD',
+      'SELL_BACK'
+    ])
     .nullish()
 })
 

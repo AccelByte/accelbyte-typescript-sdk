@@ -8,6 +8,7 @@ import { z } from 'zod'
 export const CreditRequest = z.object({
   amount: z.number().int(),
   expireAt: z.string().nullish(),
+  metadata: z.record(z.any()).nullish(),
   origin: z
     .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
     .nullish(),
@@ -15,6 +16,7 @@ export const CreditRequest = z.object({
   source: z
     .enum([
       'ACHIEVEMENT',
+      'CONSUME_ENTITLEMENT',
       'DLC',
       'GIFT',
       'IAP',

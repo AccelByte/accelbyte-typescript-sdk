@@ -13,6 +13,7 @@ import { CountryLocationResponse } from '../definitions/CountryLocationResponse.
 import { GameTokenCodeResponse } from '../definitions/GameTokenCodeResponse.js'
 import { OneTimeLinkingCodeResponse } from '../definitions/OneTimeLinkingCodeResponse.js'
 import { OneTimeLinkingCodeValidationResponse } from '../definitions/OneTimeLinkingCodeValidationResponse.js'
+import { PlatformTokenRefreshResponseV3 } from '../definitions/PlatformTokenRefreshResponseV3.js'
 import { TokenResponseV3 } from '../definitions/TokenResponseV3.js'
 
 export class OAuth20Extension$ {
@@ -213,5 +214,22 @@ export class OAuth20Extension$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * &lt;p&gt;This endpoint will validate the third party platform token, for some platforms will also refresh the token stored in IAM, it will not generate any event or AB access/refresh token.&lt;/p&gt; &lt;p&gt;This endpoint can be used by game client to refresh third party token if game client got platform token not found error, for example got 404 platform token not found from IAP/DLC.&lt;/p&gt; &lt;h2&gt;Platforms will refresh stored token:&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;&lt;strong&gt;twitch&lt;/strong&gt;: The platform_token’s value is the authorization code returned by Twitch OAuth.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;epicgames&lt;/strong&gt;: The platform_token’s value is an access-token or authorization code obtained from Epicgames EOS Account Service.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ps4&lt;/strong&gt;: The platform_token’s value is the authorization code returned by Sony OAuth.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ps5&lt;/strong&gt;: The platform_token’s value is the authorization code returned by Sony OAuth.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;amazon&lt;/strong&gt;: The platform_token’s value is authorization code.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;awscognito&lt;/strong&gt;: The platform_token’s value is the aws cognito access token or id token (JWT).&lt;/li&gt; &lt;li&gt;&lt;strong&gt;live&lt;/strong&gt;: The platform_token’s value is xbox XSTS token&lt;/li&gt; &lt;li&gt;&lt;strong&gt;snapchat&lt;/strong&gt;: The platform_token’s value is the authorization code returned by Snapchat OAuth.&lt;/li&gt; &lt;br&gt;&lt;li&gt;&lt;strong&gt;for specific generic oauth (OIDC)&lt;/strong&gt;: The platform_token’s value should be the same type as created OIDC auth type whether it is auth code, idToken or bearerToken.&lt;/li&gt; &lt;/ul&gt;
+   */
+  postTokenVerifyV3_ByPlatformId(
+    platformId: string,
+    data: { platform_token: string | null }
+  ): Promise<IResponse<PlatformTokenRefreshResponseV3>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/v3/platforms/{platformId}/token/verify'.replace('{platformId}', platformId)
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, PlatformTokenRefreshResponseV3, 'PlatformTokenRefreshResponseV3')
   }
 }

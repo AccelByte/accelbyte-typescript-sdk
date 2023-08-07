@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@accelbyte/validator@0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.3.tgz#7a879aa592419c4f8a2bfea5c5b83902f03fc9da"
-  integrity sha512-JFp6YCc+rHqtBGL/H46UsJGOKHaC5MAqCTAwIchPbQ91VnV1AejfBjfpo9PvqDuI2Kb9lvkbbfWBJg7uieH/kA==
+"@accelbyte/validator@0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.4.tgz#109ac2ce3d2783e7942d99da5c5fb00c43b8d3d0"
+  integrity sha512-lFJsX8Z/cwXXVq65HLabJ22VJrOPpSXILSCkV0ezbgSCSEbxMIT7CI48fvitFnCXErp40J8wYba4ixd8SMGX+w==
   dependencies:
     naughty-words "1.2.0"
     xregexp "5.1.0"

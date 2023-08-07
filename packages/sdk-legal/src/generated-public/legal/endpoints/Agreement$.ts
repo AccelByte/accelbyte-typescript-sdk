@@ -47,7 +47,7 @@ export class Agreement$ {
   }
 
   /**
-   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.&lt;br&gt;&lt;br/&gt;Available Extra Information to return: &lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;userIds&lt;/b&gt; : List of userId mapping (&lt;b&gt;IMPORTANT: GOING TO DEPRECATE&lt;/b&gt;)&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   createAgreementPolicyUser_ByUserId(userId: string, data: AcceptAgreementRequest[]): Promise<IResponse<AcceptAgreementResponse>> {
     const params = {} as SDKRequestConfig
@@ -80,25 +80,5 @@ export class Agreement$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-  }
-
-  /**
-   * &lt;b&gt;IMPORTANT: GOING TO DEPRECATE&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
-   */
-  createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(
-    countryCode: string,
-    clientId: string,
-    userId: string,
-    data: AcceptAgreementRequest[]
-  ): Promise<IResponse<AcceptAgreementResponse>> {
-    const params = {} as SDKRequestConfig
-    const url = '/agreement/public/agreements/policies/namespaces/{namespace}/countries/{countryCode}/clients/{clientId}/users/{userId}'
-      .replace('{namespace}', this.namespace)
-      .replace('{countryCode}', countryCode)
-      .replace('{clientId}', clientId)
-      .replace('{userId}', userId)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
-
-    return Validate.responseType(() => resultPromise, AcceptAgreementResponse, 'AcceptAgreementResponse')
   }
 }

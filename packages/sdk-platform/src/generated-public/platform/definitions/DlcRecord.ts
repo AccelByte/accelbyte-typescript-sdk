@@ -10,6 +10,7 @@ import { RevokeResult } from './RevokeResult.js'
 
 export const DlcRecord = z.object({
   id: z.string().nullish(),
+  metadata: z.record(z.any()).nullish(),
   obtainedAt: z.string().nullish(),
   revocationResult: RevocationResult.nullish(),
   revokeResults: z.array(RevokeResult).nullish(),

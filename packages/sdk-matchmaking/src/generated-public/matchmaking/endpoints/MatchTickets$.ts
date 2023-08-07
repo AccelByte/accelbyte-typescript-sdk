@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { MatchTicketRequest } from '../definitions/MatchTicketRequest.js'
 import { MatchTicketResponse } from '../definitions/MatchTicketResponse.js'
 import { MatchTicketStatus } from '../definitions/MatchTicketStatus.js'
+import { MatchTicketStatuses } from '../definitions/MatchTicketStatuses.js'
 
 export class MatchTickets$ {
   // @ts-ignore
@@ -26,6 +27,27 @@ export class MatchTickets$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, MatchTicketResponse, 'MatchTicketResponse')
+  }
+
+  /**
+   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:TICKET [READ] Required Scope: social Get my match tickets.
+   */
+  getMatchTicketsMe(queryParams?: {
+    limit?: number
+    matchPool?: string | null
+    offset?: number
+  }): Promise<IResponseWithSync<MatchTicketStatuses>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/match2/v1/namespaces/{namespace}/match-tickets/me'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, MatchTicketStatuses, 'MatchTicketStatuses')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

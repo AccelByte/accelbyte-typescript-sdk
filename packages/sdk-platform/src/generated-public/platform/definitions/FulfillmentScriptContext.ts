@@ -11,7 +11,24 @@ export const FulfillmentScriptContext = z.object({
   item: ItemInfo,
   namespace: z.string(),
   order: OrderSummary.nullish(),
-  source: z.enum(['ACHIEVEMENT', 'DLC', 'GIFT', 'IAP', 'OTHER', 'PROMOTION', 'PURCHASE', 'REDEEM_CODE', 'REFERRAL_BONUS', 'REWARD'])
+  source: z.enum([
+    'ACHIEVEMENT',
+    'CONSUME_ENTITLEMENT',
+    'DLC',
+    'DLC_REVOCATION',
+    'EXPIRATION',
+    'GIFT',
+    'IAP',
+    'ORDER_REVOCATION',
+    'OTHER',
+    'PAYMENT',
+    'PROMOTION',
+    'PURCHASE',
+    'REDEEM_CODE',
+    'REFERRAL_BONUS',
+    'REWARD',
+    'SELL_BACK'
+  ])
 })
 
 export interface FulfillmentScriptContext extends z.TypeOf<typeof FulfillmentScriptContext> {}

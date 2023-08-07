@@ -6,12 +6,8 @@
 import { z } from 'zod'
 
 export const CustomFunction = z.object({
-  afterBulkReadAdminGameRecord: z.boolean(),
-  afterBulkReadAdminPlayerRecord: z.boolean(),
   afterBulkReadGameRecord: z.boolean(),
   afterBulkReadPlayerRecord: z.boolean(),
-  afterReadAdminGameRecord: z.boolean(),
-  afterReadAdminPlayerRecord: z.boolean(),
   afterReadGameRecord: z.boolean(),
   afterReadPlayerRecord: z.boolean(),
   beforeWriteAdminGameRecord: z.boolean(),

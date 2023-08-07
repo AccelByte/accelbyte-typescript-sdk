@@ -6,6 +6,7 @@
 import { z } from 'zod'
 
 export const ConsumeItem = z.object({
+  extItemDefId: z.string().nullish(),
   extItemId: z.string().nullish(),
   itemIdentity: z.string().nullish(),
   itemIdentityType: z.enum(['ITEM_ID', 'ITEM_SKU']).nullish()

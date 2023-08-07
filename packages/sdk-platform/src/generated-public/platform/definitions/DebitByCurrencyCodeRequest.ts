@@ -11,6 +11,8 @@ export const DebitByCurrencyCodeRequest = z.object({
   balanceOrigin: z
     .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
     .nullish(),
+  balanceSource: z.enum(['DLC_REVOCATION', 'EXPIRATION', 'ORDER_REVOCATION', 'OTHER', 'PAYMENT']).nullish(),
+  metadata: z.record(z.any()).nullish(),
   reason: z.string().nullish()
 })
 

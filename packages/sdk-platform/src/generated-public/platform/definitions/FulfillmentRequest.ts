@@ -12,6 +12,7 @@ export const FulfillmentRequest = z.object({
   itemId: z.string().nullish(),
   itemSku: z.string().nullish(),
   language: z.string().nullish(),
+  metadata: z.record(z.any()).nullish(),
   order: OrderSummary.nullish(),
   orderNo: z.string().nullish(),
   origin: z
@@ -20,7 +21,24 @@ export const FulfillmentRequest = z.object({
   quantity: z.number().int(),
   region: z.string().nullish(),
   source: z
-    .enum(['ACHIEVEMENT', 'DLC', 'GIFT', 'IAP', 'OTHER', 'PROMOTION', 'PURCHASE', 'REDEEM_CODE', 'REFERRAL_BONUS', 'REWARD'])
+    .enum([
+      'ACHIEVEMENT',
+      'CONSUME_ENTITLEMENT',
+      'DLC',
+      'DLC_REVOCATION',
+      'EXPIRATION',
+      'GIFT',
+      'IAP',
+      'ORDER_REVOCATION',
+      'OTHER',
+      'PAYMENT',
+      'PROMOTION',
+      'PURCHASE',
+      'REDEEM_CODE',
+      'REFERRAL_BONUS',
+      'REWARD',
+      'SELL_BACK'
+    ])
     .nullish(),
   startDate: z.string().nullish(),
   storeId: z.string().nullish()

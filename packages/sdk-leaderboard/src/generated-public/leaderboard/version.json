@@ -1,8 +1,8 @@
 {
-  "buildDate": "2023-07-18T02:03:31+00:00",
-  "gitHash": "266d6365a864f631d26604eff03a1ebf70b02f74",
+  "buildDate": "2023-08-01T02:38:02+00:00",
+  "gitHash": "511855c8bf8c5393a0cb5394da7ae8baa4f8306d",
   "name": "justice-leaderboard-service",
-  "realm": "staging",
-  "version": "2.25.0",
+  "realm": "dev",
+  "version": "2.26.0",
   "version-roles-seeding": "0.0.3"
 }

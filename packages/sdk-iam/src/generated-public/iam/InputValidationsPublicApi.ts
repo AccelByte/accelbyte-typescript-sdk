@@ -9,10 +9,10 @@
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { InputValidationConfigVersion } from './definitions/InputValidationConfigVersion.js'
-import { InputValidations$ } from './endpoints/InputValidations$.js'
+import { InputValidationsPublic$ } from './endpoints/InputValidationsPublic$.js'
 import { InputValidationsPublicResponse } from './definitions/InputValidationsPublicResponse.js'
 
-export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function InputValidationsPublicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
@@ -26,7 +26,7 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     defaultOnEmpty?: boolean | null
     languageCode?: string | null
   }): Promise<InputValidationsPublicResponse> {
-    const $ = new InputValidations$(Network.create(requestConfig), namespace, cache)
+    const $ = new InputValidationsPublic$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getInputValidations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +36,7 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;This endpoint is to get input validation configuration by field.&lt;/p&gt;
    */
   async function getInputValidation_ByField(field: string): Promise<InputValidationConfigVersion> {
-    const $ = new InputValidations$(Network.create(requestConfig), namespace, cache)
+    const $ = new InputValidationsPublic$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getInputValidation_ByField(field)
     if (resp.error) throw resp.error
     return resp.response.data

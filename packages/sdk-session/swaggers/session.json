@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Session Service",
     "title": "justice-session-service",
-    "version": "2.20.0"
+    "version": "2.22.0"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/session/apidocs"
+    "url": "https://development.accelbyte.io/session/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -121,6 +121,41 @@
         ],
         "summary": "Get dsmc default configuration . Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]",
         "tags": ["DSMC Default Configuration"]
+      }
+    },
+    "/session/v1/admin/environment-variables": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "List of environment variables.",
+        "operationId": "adminListEnvironmentVariables",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.EnvironmentVariableListResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "List of environment variables. Requires ADMIN:SESSION:CONFIGURATION:ENVIRONMENTVARIABLE [READ]",
+        "tags": ["Environment Variable"]
       }
     },
     "/session/v1/admin/namespaces/{namespace}/alerts-configuration": {
@@ -472,7 +507,7 @@
             "type": "integer"
           },
           {
-            "description": "configuration name",
+            "description": "Configuration name",
             "in": "query",
             "name": "name",
             "type": "string"
@@ -483,6 +518,18 @@
             "in": "query",
             "name": "offset",
             "type": "integer"
+          },
+          {
+            "description": "Order of the result. Supported: desc (default), asc",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "Order result by specific attribute. Supported: createdAt (default), updatedAt",
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
           }
         ],
         "produces": ["application/json"],
@@ -4515,6 +4562,34 @@
       },
       "required": ["failed", "success"]
     },
+    "apimodels.EnvironmentVariableListResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.EnvironmentVariableResponse"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "apimodels.EnvironmentVariableResponse": {
+      "properties": {
+        "actualValue": {
+          "type": "string"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["name"]
+    },
     "apimodels.GameSessionQueryResponse": {
       "properties": {
         "data": {
@@ -4872,6 +4947,10 @@
         "joinability": {
           "type": "string"
         },
+        "maxActiveSession": {
+          "format": "int32",
+          "type": "integer"
+        },
         "maxPlayers": {
           "format": "int32",
           "type": "integer"
@@ -4883,7 +4962,7 @@
         "name": {
           "type": "string"
         },
-        "native_session_setting": {
+        "nativeSessionSetting": {
           "$ref": "#/definitions/models.NativeSessionSetting"
         },
         "persistent": {
@@ -5497,13 +5576,13 @@
   },
   "x-docs": {
     "alias": "session",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/session/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-07-14T07:48:50+00:00",
-    "gitHash": "d5d66101e180b833ad3775e31e9e71c87ed0b34d",
-    "version": "2.20.0",
-    "version-roles-seeding": "0.0.36"
+    "buildDate": "2023-08-02T07:35:02+00:00",
+    "gitHash": "f1dbc0ec9c9694ce4a5b538b17b646c889281bdc",
+    "version": "2.22.0",
+    "version-roles-seeding": "0.0.38"
   }
 }

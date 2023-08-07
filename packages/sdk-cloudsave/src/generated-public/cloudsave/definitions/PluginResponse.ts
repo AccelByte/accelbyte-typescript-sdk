@@ -12,7 +12,7 @@ export const PluginResponse = z.object({
   appConfig: AppConfig.nullish(),
   customConfig: CustomConfig.nullish(),
   customFunction: CustomFunction,
-  extendType: z.string(),
+  extendType: z.enum(['APP', 'CUSTOM']),
   namespace: z.string()
 })
 

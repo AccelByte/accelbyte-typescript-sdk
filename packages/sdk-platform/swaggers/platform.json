@@ -8,7 +8,7 @@
     },
     "description": "Justice Platform Service",
     "title": "justice-platform-service",
-    "version": "4.31.1"
+    "version": "4.32.1"
   },
   "schemes": ["https"],
   "tags": [
@@ -111,7 +111,7 @@
   ],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/platform"
+    "url": "https://development.accelbyte.io/platform"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -26874,13 +26874,20 @@
     },
     "ConsumeItem": {
       "properties": {
+        "extItemDefId": {
+          "description": "third party item sku or def",
+          "type": "string"
+        },
         "extItemId": {
+          "description": "third party item/entitlement id",
           "type": "string"
         },
         "itemIdentity": {
+          "description": "AB item identity",
           "type": "string"
         },
         "itemIdentityType": {
+          "description": "AB item identity type",
           "enum": ["ITEM_ID", "ITEM_SKU"],
           "type": "string"
         }
@@ -26902,6 +26909,13 @@
           "type": "string",
           "x-nullable": true
         },
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "metadata for additional information",
+          "type": "object"
+        },
         "origin": {
           "description": "origin, balance origin decided on the type of wallet, default is System",
           "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
@@ -26912,9 +26926,10 @@
           "type": "string"
         },
         "source": {
-          "description": "source, purchase for default",
+          "description": "source, default is OTHER",
           "enum": [
             "ACHIEVEMENT",
+            "CONSUME_ENTITLEMENT",
             "DLC",
             "GIFT",
             "IAP",
@@ -27239,6 +27254,12 @@
         "id": {
           "type": "string"
         },
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object"
+        },
         "obtainedAt": {
           "format": "date-time",
           "type": "string",
@@ -27304,6 +27325,18 @@
           "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
           "type": "string"
         },
+        "balanceSource": {
+          "description": "balance source, default is OTHER",
+          "enum": ["DLC_REVOCATION", "EXPIRATION", "ORDER_REVOCATION", "OTHER", "PAYMENT"],
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "metadata for additional wallet transaction detail",
+          "type": "object"
+        },
         "reason": {
           "description": "reason",
           "type": "string"
@@ -27320,6 +27353,18 @@
           "format": "int64",
           "minimum": 1,
           "type": "integer"
+        },
+        "balanceSource": {
+          "description": "balance source, default is OTHER",
+          "enum": ["DLC_REVOCATION", "EXPIRATION", "ORDER_REVOCATION", "OTHER", "PAYMENT"],
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "metadata for additional wallet transaction detail",
+          "type": "object"
         },
         "reason": {
           "description": "reason",
@@ -28655,6 +28700,13 @@
           "description": "language",
           "type": "string"
         },
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "metadata",
+          "type": "object"
+        },
         "order": {
           "$ref": "#/definitions/OrderSummary",
           "description": "order summary for fulfillment scripts"
@@ -28679,7 +28731,24 @@
         },
         "source": {
           "description": "source",
-          "enum": ["ACHIEVEMENT", "DLC", "GIFT", "IAP", "OTHER", "PROMOTION", "PURCHASE", "REDEEM_CODE", "REFERRAL_BONUS", "REWARD"],
+          "enum": [
+            "ACHIEVEMENT",
+            "CONSUME_ENTITLEMENT",
+            "DLC",
+            "DLC_REVOCATION",
+            "EXPIRATION",
+            "GIFT",
+            "IAP",
+            "ORDER_REVOCATION",
+            "OTHER",
+            "PAYMENT",
+            "PROMOTION",
+            "PURCHASE",
+            "REDEEM_CODE",
+            "REFERRAL_BONUS",
+            "REWARD",
+            "SELL_BACK"
+          ],
           "type": "string"
         },
         "startDate": {
@@ -28747,7 +28816,24 @@
         },
         "source": {
           "description": "fulfillment source, default PURCHASE",
-          "enum": ["ACHIEVEMENT", "DLC", "GIFT", "IAP", "OTHER", "PROMOTION", "PURCHASE", "REDEEM_CODE", "REFERRAL_BONUS", "REWARD"],
+          "enum": [
+            "ACHIEVEMENT",
+            "CONSUME_ENTITLEMENT",
+            "DLC",
+            "DLC_REVOCATION",
+            "EXPIRATION",
+            "GIFT",
+            "IAP",
+            "ORDER_REVOCATION",
+            "OTHER",
+            "PAYMENT",
+            "PROMOTION",
+            "PURCHASE",
+            "REDEEM_CODE",
+            "REFERRAL_BONUS",
+            "REWARD",
+            "SELL_BACK"
+          ],
           "type": "string"
         }
       },
@@ -33604,6 +33690,13 @@
           "minimum": 0,
           "type": "integer"
         },
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "additional fulfillment information",
+          "type": "object"
+        },
         "walletPlatform": {
           "description": "wallet platform, base on platform wallet rule to payment wallet",
           "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "Xbox"],
@@ -35433,6 +35526,13 @@
     "RewardsRequest": {
       "description": "A DTO object for rewards request API call.",
       "properties": {
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "additional fulfillment information",
+          "type": "object"
+        },
         "origin": {
           "description": "origin, if rewards contains item icon, it will credit into related origin wallet. if not set, it will be credit into System wallet",
           "enum": ["Epic", "GooglePlay", "IOS", "Nintendo", "Oculus", "Other", "Playstation", "Steam", "System", "Twitch", "Xbox"],
@@ -35447,7 +35547,24 @@
         },
         "source": {
           "description": "source",
-          "enum": ["ACHIEVEMENT", "DLC", "GIFT", "IAP", "OTHER", "PROMOTION", "PURCHASE", "REDEEM_CODE", "REFERRAL_BONUS", "REWARD"],
+          "enum": [
+            "ACHIEVEMENT",
+            "CONSUME_ENTITLEMENT",
+            "DLC",
+            "DLC_REVOCATION",
+            "EXPIRATION",
+            "GIFT",
+            "IAP",
+            "ORDER_REVOCATION",
+            "OTHER",
+            "PAYMENT",
+            "PROMOTION",
+            "PURCHASE",
+            "REDEEM_CODE",
+            "REFERRAL_BONUS",
+            "REWARD",
+            "SELL_BACK"
+          ],
           "type": "string"
         }
       },
@@ -37371,6 +37488,12 @@
         "id": {
           "type": "string"
         },
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object"
+        },
         "namespace": {
           "description": "namespace",
           "type": "string"
@@ -37681,6 +37804,13 @@
         "currencyCode": {
           "description": "Transaction currency code",
           "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "wallet transaction metadata",
+          "type": "object"
         },
         "namespace": {
           "description": "Wallet namespace",
@@ -38037,21 +38167,21 @@
   },
   "x-docs": {
     "alias": "platform",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/platform/swagger.json"
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-07-18T09:24:00+00:00",
-    "buildID": "4.31.1",
+    "buildDate": "2023-07-31T18:06:34+00:00",
+    "buildID": "4.32.1",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
     "buildOS": "Linux amd64 5.13.0-1021-aws",
-    "gitBranchName": "release-candidate",
-    "gitHash": "ce0e8832e1",
+    "gitBranchName": "master",
+    "gitHash": "43a307eeea",
     "gitTag": "3.31.0",
     "name": "justice-platform-service",
-    "realm": "staging",
-    "version": "4.31.1",
+    "realm": "dev",
+    "version": "4.32.1",
     "version-roles-seeding": "0.0.32"
   }
 }

@@ -1,8 +1,8 @@
 {
-  "buildDate": "2023-07-18T02:10:16+00:00",
-  "gitHash": "820907d83892793d6426a0338eb65869742168b4",
+  "buildDate": "2023-08-02T09:13:07+00:00",
+  "gitHash": "4b40a3ae89e58654ad9db5d5de37f8d2e247a1b5",
   "name": "justice-cloudsave-service",
-  "revisionID": "3.9.0",
-  "version": "3.9.0",
+  "revisionID": "3.10.0",
+  "version": "3.10.0",
   "version-roles-seeding": "0.0.37"
 }

@@ -1,8 +1,8 @@
 {
-  "buildDate": "2023-07-04T01:57:01+00:00",
-  "gitHash": "2c8fb962b56b7eea93199be98580eb7bc0f2af4a",
+  "buildDate": "2023-07-31T14:30:29+00:00",
+  "gitHash": "590c31650450feb579ef300e88d9eb2644114f58",
   "name": "analytics-game-telemetry",
-  "realm": "staging",
+  "realm": "dev",
   "rolesSeedingVersion": "0.0.3",
   "version": "1.18.0"
 }

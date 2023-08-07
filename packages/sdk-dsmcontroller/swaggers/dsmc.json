@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice DSM Controller Service",
     "title": "justice-dsm-controller-service",
-    "version": "6.3.4"
+    "version": "6.3.5"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/dsmcontroller/apidocs"
+    "url": "https://development.accelbyte.io/dsmcontroller/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -5881,6 +5881,15 @@
         "image": {
           "type": "string"
         },
+        "imageReplications": {
+          "type": "string"
+        },
+        "imageReplicationsMap": {
+          "additionalProperties": {
+            "$ref": "#/definitions/models.ImageReplication"
+          },
+          "type": "object"
+        },
         "imageSize": {
           "format": "int64",
           "type": "integer"
@@ -5909,6 +5918,8 @@
         "createdAt",
         "dockerPath",
         "image",
+        "imageReplications",
+        "imageReplicationsMap",
         "imageSize",
         "modifiedBy",
         "namespace",
@@ -5925,7 +5936,16 @@
         "image": {
           "type": "string"
         },
+        "imageReplicationsMap": {
+          "additionalProperties": {
+            "$ref": "#/definitions/models.ImageReplication"
+          },
+          "type": "object"
+        },
         "namespace": {
+          "type": "string"
+        },
+        "patchVersion": {
           "type": "string"
         },
         "persistent": {
@@ -5936,7 +5956,24 @@
           "type": "string"
         }
       },
-      "required": ["artifactPath", "image", "namespace", "persistent", "version"]
+      "required": ["artifactPath", "image", "imageReplicationsMap", "namespace", "patchVersion", "persistent", "version"]
+    },
+    "models.ImageReplication": {
+      "properties": {
+        "failure_code": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": ["failure_code", "region", "status", "uri"]
     },
     "models.ImportResponse": {
       "properties": {
@@ -6088,6 +6125,15 @@
         "image": {
           "type": "string"
         },
+        "imageReplications": {
+          "type": "string"
+        },
+        "imageReplicationsMap": {
+          "additionalProperties": {
+            "$ref": "#/definitions/models.ImageReplication"
+          },
+          "type": "object"
+        },
         "imageSize": {
           "format": "int64",
           "type": "integer"
@@ -6125,6 +6171,8 @@
         "createdAt",
         "dockerPath",
         "image",
+        "imageReplications",
+        "imageReplicationsMap",
         "imageSize",
         "modifiedBy",
         "namespace",
@@ -6761,15 +6809,15 @@
   },
   "x-docs": {
     "alias": "dsmcontroller",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/dsmcontroller/apidocs/api.json"
   },
   "x-version": {
     "buildDate": "unknown",
-    "gitHash": "5a457a6744c5379322f2c094c40de3042d3a5ef0",
+    "gitHash": "710d3de4e08c549737d58768eda86b5e145f5e7c",
     "name": "justice-dedicated-server-manager-controller-service",
-    "revisionID": "6.3.4",
-    "version": "6.3.4",
+    "revisionID": "6.3.5",
+    "version": "6.3.5",
     "version-roles-seeding": "0.0.3"
   }
 }
