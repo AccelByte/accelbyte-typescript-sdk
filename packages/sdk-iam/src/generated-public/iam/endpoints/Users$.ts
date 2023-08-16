@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { CountryV3Response } from '../definitions/CountryV3Response.js'
 import { CreateJusticeUserResponse } from '../definitions/CreateJusticeUserResponse.js'
 import { DistinctPlatformResponseV3 } from '../definitions/DistinctPlatformResponseV3.js'
+import { ForgotPasswordRequestV3 } from '../definitions/ForgotPasswordRequestV3.js'
 import { GetLinkHeadlessAccountConflictResponse } from '../definitions/GetLinkHeadlessAccountConflictResponse.js'
 import { GetPublisherUserV3Response } from '../definitions/GetPublisherUserV3Response.js'
 import { GetUserBanV3Response } from '../definitions/GetUserBanV3Response.js'
@@ -20,6 +21,7 @@ import { LinkHeadlessAccountRequest } from '../definitions/LinkHeadlessAccountRe
 import { LinkPlatformAccountRequest } from '../definitions/LinkPlatformAccountRequest.js'
 import { LinkPlatformAccountWithProgressionRequest } from '../definitions/LinkPlatformAccountWithProgressionRequest.js'
 import { LinkRequest } from '../definitions/LinkRequest.js'
+import { ListBulkUserResponse } from '../definitions/ListBulkUserResponse.js'
 import { LoginHistoriesResponse } from '../definitions/LoginHistoriesResponse.js'
 import { PlatformUserIdRequest } from '../definitions/PlatformUserIdRequest.js'
 import { PublicUserInformationResponseV3 } from '../definitions/PublicUserInformationResponseV3.js'
@@ -30,13 +32,19 @@ import { SendVerificationLinkRequest } from '../definitions/SendVerificationLink
 import { UnlinkUserPlatformRequest } from '../definitions/UnlinkUserPlatformRequest.js'
 import { UpgradeHeadlessAccountV3Request } from '../definitions/UpgradeHeadlessAccountV3Request.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV3 } from '../definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV3.js'
+import { UserCreateFromInvitationRequestV3 } from '../definitions/UserCreateFromInvitationRequestV3.js'
+import { UserCreateRequestV3 } from '../definitions/UserCreateRequestV3.js'
+import { UserCreateResponseV3 } from '../definitions/UserCreateResponseV3.js'
+import { UserIDsRequest } from '../definitions/UserIDsRequest.js'
 import { UserInformationV3 } from '../definitions/UserInformationV3.js'
+import { UserInvitationV3 } from '../definitions/UserInvitationV3.js'
 import { UserLinkedPlatformsResponseV3 } from '../definitions/UserLinkedPlatformsResponseV3.js'
 import { UserPasswordUpdateV3Request } from '../definitions/UserPasswordUpdateV3Request.js'
 import { UserPlatforms } from '../definitions/UserPlatforms.js'
 import { UserResponseV3 } from '../definitions/UserResponseV3.js'
 import { UserUpdateRequestV3 } from '../definitions/UserUpdateRequestV3.js'
 import { UserVerificationRequestV3 } from '../definitions/UserVerificationRequestV3.js'
+import { VerifyRegistrationCode } from '../definitions/VerifyRegistrationCode.js'
 import { WebLinkingResponse } from '../definitions/WebLinkingResponse.js'
 
 export class Users$ {
@@ -94,6 +102,17 @@ export class Users$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   *  &lt;p&gt;Available Authentication Types:&lt;/p&gt; &lt;ol&gt; &lt;li&gt;&lt;strong&gt;EMAILPASSWD&lt;/strong&gt;: an authentication type used for new user registration through email.&lt;/li&gt; &lt;/ol&gt; &lt;p&gt;Country use ISO3166-1 alpha-2 two letter, e.g. US.&lt;/p&gt; &lt;p&gt;Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.&lt;/p&gt; &lt;p&gt;This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.&lt;/p&gt;
+   */
+  createUser(data: UserCreateRequestV3): Promise<IResponse<UserCreateResponseV3>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, UserCreateResponseV3, 'UserCreateResponseV3')
   }
 
   /**
@@ -161,11 +180,44 @@ export class Users$ {
   }
 
   /**
+   * &lt;p&gt;&lt;strong&gt;Special note for publisher-game scenario:&lt;/strong&gt; Game Client should provide game namespace path parameter and Publisher Client should provide publisher namespace path parameter. &lt;/p&gt; &lt;p&gt;The password reset code will be sent to the publisher account&#39;s email address. &lt;/p&gt; &lt;p&gt;action code : 10104 &lt;/p&gt;
+   */
+  createUserForgot(data: ForgotPasswordRequestV3): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/forgot'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
    * Note:&lt;br&gt; 1. My account should be full account 2. My account not linked to headless account&#39;s third platform.
    */
   createUserMeHeadlesLinkWithProgression(data: LinkHeadlessAccountRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/users/me/headless/linkWithProgression'
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * &lt;p&gt;Notes:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;This endpoint bulk get users&#39; basic info by userId, max allowed 100 at a time&lt;/li&gt; &lt;li&gt;If namespace is game, will search by game user Id, other wise will search by publisher namespace&lt;/li&gt; &lt;li&gt;&lt;strong&gt;Result will include displayName(if it exists)&lt;/strong&gt;&lt;/li&gt; &lt;/ul&gt;
+   */
+  createUserBulkBasic(data: UserIDsRequest): Promise<IResponse<ListBulkUserResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/bulk/basic'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, ListBulkUserResponse, 'ListBulkUserResponse')
+  }
+
+  /**
+   * &lt;p&gt;Verify the registration code&lt;/p&gt;
+   */
+  createUserCodeVerify(data: VerifyRegistrationCode): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/code/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
@@ -342,6 +394,38 @@ export class Users$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Endpoint to validate user invitation. When not found, it could also means the invitation has expired.
+   */
+  getUserInvite_ByInvitationId(invitationId: string): Promise<IResponseWithSync<UserInvitationV3>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/invite/{invitationId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{invitationId}', invitationId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, UserInvitationV3, 'UserInvitationV3')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This endpoint create user from saved roles when creating invitation and submitted data. User will be able to login after completing submitting the data through this endpoint. Available Authentication Types: EMAILPASSWD: an authentication type used for new user registration through email. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.
+   */
+  createUserInvite_ByInvitationId(invitationId: string, data: UserCreateFromInvitationRequestV3): Promise<IResponse<UserCreateResponseV3>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/invite/{invitationId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{invitationId}', invitationId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, UserCreateResponseV3, 'UserCreateResponseV3')
   }
 
   /**

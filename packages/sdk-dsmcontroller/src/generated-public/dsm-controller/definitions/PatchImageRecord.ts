@@ -4,7 +4,6 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ImageReplication } from './ImageReplication.js'
 import { UploaderFlag } from './UploaderFlag.js'
 
 export const PatchImageRecord = z.object({
@@ -12,8 +11,6 @@ export const PatchImageRecord = z.object({
   createdAt: z.string(),
   dockerPath: z.string(),
   image: z.string(),
-  imageReplications: z.string(),
-  imageReplicationsMap: z.record(ImageReplication),
   imageSize: z.number().int(),
   modifiedBy: z.string(),
   namespace: z.string(),

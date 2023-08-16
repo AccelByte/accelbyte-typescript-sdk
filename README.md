@@ -84,15 +84,15 @@ const policies = await Legal.Policies().getPolicyCountry_ByCountryCode('US')
 
 ## AccelByte APIs
 
-Web SDK supports the following [AccelByte service APIs](https://docs.accelbyte.io/api-explorer/):
+Web SDK supports the following AccelByte service APIs:
 
-1. [Access - IAM](https://docs.accelbyte.io/api-explorer/?api=IAM)
-2. [Access - GDPR](https://docs.accelbyte.io/api-explorer/?api=GDPR)
-3. [Access- Event log](https://docs.accelbyte.io/api-explorer/?api=Event%20Log)
-4. [Access - Legal](https://docs.accelbyte.io/api-explorer/?api=Legal)
-5. [Distribution - Build Info](https://docs.accelbyte.io/api-explorer/?api=Buildinfo)
-6. [Monetization](https://docs.accelbyte.io/api-explorer/?api=Platform%20Store)
-7. [Basic](https://docs.accelbyte.io/api-explorer/?api=Basic)
+1. [IAM](https://docs.accelbyte.io/api-endpoints.html#access)
+2. [Monetization](https://docs.accelbyte.io/api-endpoints.html#monetization)
+3. [Basic](https://docs.accelbyte.io/api-endpoints.html#basic)
+4. [Build Info](https://docs.accelbyte.io/api-endpoints.html#distribution)
+5. [GDPR](https://docs.accelbyte.io/api-endpoints.html#access)
+6. [Event](https://docs.accelbyte.io/api-endpoints.html#access)
+7. [Legal](https://docs.accelbyte.io/api-endpoints.html#access)
 
 # AccelByte Web Widgets
 In addition to the Accelbyte Web SDK, the library provides an extension called [Web Widgets](https://www.npmjs.com/package/@accelbyte/widgets-v2) allowing the creation of SDK UI components. AccelByte Web Widgets is a UI library consisting of a set of JavaScript React components that can be embedded inside a browser. These components have the same appearance and business functionality as the AccelByte Player Portal.

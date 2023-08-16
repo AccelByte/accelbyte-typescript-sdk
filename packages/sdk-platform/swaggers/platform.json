@@ -111,7 +111,7 @@
   ],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/platform"
+    "url": "https://stage.accelbyte.io/platform"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -8874,7 +8874,7 @@
     "/platform/admin/namespaces/{namespace}/revocation/plugins/revocation": {
       "delete": {
         "description": "Delete service plugin config.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=8 (DELETE)\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
-        "operationId": "deleteLootBoxPluginConfig_1",
+        "operationId": "deleteRevocationPluginConfig",
         "parameters": [
           {
             "in": "path",
@@ -8903,7 +8903,7 @@
       },
       "get": {
         "description": "Get revocation plugin config.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION\u0026lt;/b\u0026gt;, action=2 \u0026lt;b\u0026gt;(READ)\u0026lt;/b\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
-        "operationId": "getLootBoxPluginConfig_1",
+        "operationId": "getRevocationPluginConfig",
         "parameters": [
           {
             "in": "path",
@@ -38167,20 +38167,20 @@
   },
   "x-docs": {
     "alias": "platform",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/platform/swagger.json"
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-07-31T18:06:34+00:00",
+    "buildDate": "2023-08-07T09:34:38+00:00",
     "buildID": "4.32.1",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
     "buildOS": "Linux amd64 5.13.0-1021-aws",
-    "gitBranchName": "master",
-    "gitHash": "43a307eeea",
+    "gitBranchName": "release-candidate",
+    "gitHash": "ac8761be91",
     "gitTag": "3.31.0",
     "name": "justice-platform-service",
-    "realm": "dev",
+    "realm": "staging",
     "version": "4.32.1",
     "version-roles-seeding": "0.0.32"
   }

@@ -13,7 +13,7 @@
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/iam/apidocs"
+    "url": "https://stage.accelbyte.io/iam/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -124,6 +124,11 @@
       "type": "basic"
     }
   },
+  "security": [
+    {
+      "basic": []
+    }
+  ],
   "swagger": "2.0",
   "paths": {
     "/iam/bans": {
@@ -153,12 +158,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:BAN [READ]", "BAN:ADMIN [READ]"],
             "authorization": []
@@ -195,12 +194,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:BAN [READ]", "BAN:ADMIN [READ]"],
             "authorization": []
@@ -241,12 +234,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["CLIENT [READ]"],
             "authorization": []
@@ -302,12 +289,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["CLIENT:ADMIN [CREATE]"],
             "authorization": []
           }
@@ -353,12 +334,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["CLIENT:ADMIN [DELETE]"],
             "authorization": []
@@ -406,12 +381,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["CLIENT [READ]"],
             "authorization": []
@@ -474,12 +443,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["CLIENT:ADMIN [UPDATE]"],
             "authorization": []
           }
@@ -539,12 +502,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["CLIENT:ADMIN [UPDATE]"],
             "authorization": []
@@ -612,12 +569,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["CLIENT:ADMIN [UPDATE]"],
             "authorization": []
           }
@@ -682,12 +633,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["CLIENT:ADMIN [UPDATE]"],
             "authorization": []
           }
@@ -748,12 +693,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["CLIENT:ADMIN [UPDATE]"],
             "authorization": []
           }
@@ -802,12 +741,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:CLIENT [READ]"],
             "authorization": []
@@ -870,12 +803,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [CREATE]"],
             "authorization": []
           }
@@ -928,12 +855,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT:{clientId} [DELETE]"],
             "authorization": []
@@ -994,12 +915,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER [CREATE]"],
             "authorization": []
@@ -1083,12 +998,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -1137,12 +1046,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
@@ -1212,12 +1115,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
@@ -1340,12 +1237,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -1458,12 +1349,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:* [READ]"],
             "authorization": []
           }
@@ -1517,12 +1402,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [DELETE]"],
             "authorization": []
           }
@@ -1567,12 +1446,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [READ]"],
             "authorization": []
@@ -1639,12 +1512,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -1716,12 +1583,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [CREATE]"],
             "authorization": []
           }
@@ -1780,12 +1641,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [READ]"],
             "authorization": []
@@ -1850,12 +1705,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -1918,12 +1767,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -1997,12 +1840,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -2070,12 +1907,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USERSTATUS:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -2132,12 +1963,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USERSTATUS:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -2190,12 +2015,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]"],
             "authorization": []
@@ -2250,12 +2069,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]"],
             "authorization": []
@@ -2331,12 +2144,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["NAMESPACE:{namespace}:HISTORY:LOGIN:USER:{userId} [READ]"],
             "authorization": []
           }
@@ -2404,12 +2211,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["NAMESPACE:{namespace}:PASSWORD:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -2476,12 +2277,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -2555,12 +2350,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [DELETE]"],
             "authorization": []
@@ -2641,12 +2430,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -2708,12 +2491,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [READ]", "ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId} [READ]"],
             "authorization": []
@@ -2784,12 +2561,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId} [READ]"],
             "authorization": []
           }
@@ -2853,12 +2624,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": [
               "NAMESPACE:{namespace}:JUSTICE:USER:{userId} [UPDATE]",
@@ -2939,12 +2704,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -3017,12 +2776,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -3084,12 +2837,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:PUBLISHER:USER:{userId} [READ]"],
             "authorization": []
@@ -3164,12 +2911,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -3229,12 +2970,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [DELETE]"],
             "authorization": []
@@ -3296,12 +3031,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -3366,12 +3095,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -3443,12 +3166,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -3512,12 +3229,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -3588,12 +3299,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -3673,9 +3378,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "OAuth2 authorize API",
@@ -3701,9 +3403,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "JSON Web Key Set for verifying JWT",
@@ -3774,9 +3473,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "OAuth2 access token generation specific to platform",
@@ -3815,12 +3511,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -3882,9 +3572,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "OAuth2 token revocation API",
@@ -3919,12 +3606,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userID}:ADMIN [UPDATE]"],
             "authorization": []
@@ -4024,9 +3705,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "OAuth2 access token generation endpoint",
@@ -4104,12 +3782,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ROLE [READ]"],
             "authorization": []
           }
@@ -4161,12 +3833,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [CREATE]", "ROLE:ADMIN [CREATE]"],
             "authorization": []
           }
@@ -4212,12 +3878,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [DELETE]", "ROLE:ADMIN [DELETE]"],
             "authorization": []
@@ -4265,12 +3925,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ROLE [READ]"],
             "authorization": []
@@ -4333,12 +3987,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
           }
@@ -4390,12 +4038,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
@@ -4450,12 +4092,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ROLE [READ]"],
             "authorization": []
           }
@@ -4505,12 +4141,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
@@ -4572,12 +4202,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
           }
@@ -4630,12 +4254,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ROLE [READ]"],
             "authorization": []
@@ -4694,12 +4312,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
@@ -4761,12 +4373,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
           }
@@ -4819,12 +4425,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ROLE [READ]"],
             "authorization": []
@@ -4883,12 +4483,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
@@ -4949,12 +4543,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
@@ -5021,12 +4609,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
@@ -5100,12 +4682,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]", "ROLE:ADMIN [UPDATE]"],
             "authorization": []
           }
@@ -5153,12 +4729,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [READ]"],
             "authorization": []
@@ -5221,12 +4791,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [UPDATE]"],
             "authorization": []
           }
@@ -5277,12 +4841,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [READ]"],
             "authorization": []
@@ -5353,12 +4911,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [UPDATE]"],
             "authorization": []
@@ -5466,12 +5018,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -5517,12 +5063,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"],
             "authorization": []
@@ -5588,12 +5128,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -5665,12 +5199,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [CREATE]"],
             "authorization": []
           }
@@ -5735,12 +5263,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [READ]"],
             "authorization": []
@@ -5809,12 +5331,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USERSTATUS:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -5870,12 +5386,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USERSTATUS:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -5943,12 +5453,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PASSWORD:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -6021,12 +5525,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"],
             "authorization": []
@@ -6101,12 +5599,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -6175,12 +5667,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -6231,9 +5717,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Public get age restriction by country code",
@@ -6296,9 +5779,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Create User",
@@ -6349,9 +5829,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Request Password Reset Code",
@@ -6402,9 +5879,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Reset User Password",
@@ -6450,9 +5924,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get User By User ID",
@@ -6520,9 +5991,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Update User",
@@ -6587,9 +6055,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get user's bans",
@@ -6656,9 +6121,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Update User Password",
@@ -6710,9 +6172,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get User Justice Platform Accounts",
@@ -6784,9 +6243,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Delete the link of user's account with platform",
@@ -6860,9 +6316,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Link user's account with platform",
@@ -6901,12 +6354,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:BAN [READ]"],
             "authorization": []
@@ -6949,12 +6396,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:BAN [READ]"],
             "authorization": []
           }
@@ -6990,12 +6431,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:CONFIGURATION [READ]"],
             "authorization": []
@@ -7047,12 +6482,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:CONFIGURATION [UPDATE]"],
             "authorization": []
           }
@@ -7100,12 +6529,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:CONFIGURATION [DELETE]"],
             "authorization": []
@@ -7175,12 +6598,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -7242,12 +6659,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [READ]"],
             "authorization": []
@@ -7312,12 +6723,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [UPDATE]"],
             "authorization": []
           }
@@ -7376,12 +6781,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [READ]"],
             "authorization": []
@@ -7461,12 +6860,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [UPDATE]"],
             "authorization": []
           }
@@ -7542,12 +6935,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:BAN [READ]"],
             "authorization": []
           }
@@ -7616,12 +7003,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN [CREATE]"],
             "authorization": []
@@ -7694,12 +7075,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN [UPDATE]"],
             "authorization": []
           }
@@ -7749,12 +7124,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:BAN [READ]"],
             "authorization": []
@@ -7836,12 +7205,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [READ]"],
             "authorization": []
           }
@@ -7904,12 +7267,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [CREATE]"],
             "authorization": []
@@ -7977,12 +7334,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [DELETE]"],
             "authorization": []
           }
@@ -8043,12 +7394,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [READ]"],
             "authorization": []
@@ -8120,12 +7465,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]"],
             "authorization": []
           }
@@ -8195,12 +7534,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]"],
             "authorization": []
           }
@@ -8267,12 +7600,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]"],
             "authorization": []
@@ -8348,12 +7675,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]"],
             "authorization": []
           }
@@ -8413,12 +7734,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:*:CLIENT [READ]"],
             "authorization": []
           }
@@ -8477,12 +7792,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:*:CLIENT [READ]"],
             "authorization": []
@@ -8555,12 +7864,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:*:SSO [READ]"],
             "authorization": []
           }
@@ -8620,12 +7923,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [DELETE]"],
             "authorization": []
@@ -8687,12 +7984,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [READ]"],
             "authorization": []
@@ -8770,12 +8061,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [CREATE]"],
             "authorization": []
           }
@@ -8845,12 +8130,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [CREATE]"],
             "authorization": []
@@ -8926,12 +8205,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENTDOMAIN [DELETE]"],
             "authorization": []
@@ -9009,12 +8282,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENTDOMAIN [UPDATE]"],
             "authorization": []
           }
@@ -9080,12 +8347,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [DELETE]"],
             "authorization": []
@@ -9153,12 +8414,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [READ]"],
             "authorization": []
@@ -9236,12 +8491,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [UPDATE]"],
             "authorization": []
           }
@@ -9311,12 +8560,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [CREATE]"],
             "authorization": []
@@ -9389,9 +8632,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Admin Get User By Platform User ID",
@@ -9477,12 +8717,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -9550,12 +8784,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
@@ -9641,12 +8869,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER [READ]"],
             "authorization": []
           }
@@ -9711,12 +8933,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
@@ -9801,12 +9017,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:INVITE [CREATE]"],
             "authorization": []
           }
@@ -9889,12 +9099,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -9962,12 +9166,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
@@ -10074,12 +9272,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -10151,12 +9343,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -10226,12 +9412,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"],
             "authorization": []
@@ -10314,12 +9494,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -10415,12 +9589,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [READ]"],
             "authorization": []
           }
@@ -10496,12 +9664,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [CREATE]"],
             "authorization": []
@@ -10588,12 +9750,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -10675,12 +9831,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -10756,12 +9906,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -10821,12 +9965,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CODE [READ]"],
             "authorization": []
@@ -10890,12 +10028,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DELETIONSTATUS:USER:{userId} [READ]"],
             "authorization": []
@@ -10969,12 +10101,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DELETIONSTATUS:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -11060,12 +10186,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -11116,12 +10236,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]"],
             "authorization": []
@@ -11195,12 +10309,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:HISTORY:LOGIN:USER:{userId} [READ]"],
             "authorization": []
           }
@@ -11269,12 +10377,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PASSWORD:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -11345,12 +10447,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [DELETE]"],
             "authorization": []
           }
@@ -11415,12 +10511,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [CREATE]"],
             "authorization": []
           }
@@ -11484,12 +10574,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -11561,12 +10645,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [DELETE]"],
             "authorization": []
@@ -11655,12 +10733,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": [
               "ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]",
               "ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId} [READ]"
@@ -11736,12 +10808,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"],
             "authorization": []
           }
@@ -11808,12 +10874,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId} [READ]"],
             "authorization": []
@@ -11888,12 +10948,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [CREATE]"],
             "authorization": []
@@ -11978,12 +11032,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -12066,12 +11114,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"],
             "authorization": []
           }
@@ -12149,12 +11191,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -12240,12 +11276,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"],
             "authorization": []
           }
@@ -12322,12 +11352,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"],
             "authorization": []
           }
@@ -12396,12 +11420,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [DELETE]"],
             "authorization": []
@@ -12486,12 +11504,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -12564,12 +11576,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [DELETE]"],
             "authorization": []
@@ -12648,12 +11654,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -12729,12 +11729,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USERSTATUS:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -12807,12 +11801,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -12878,12 +11866,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]"],
             "authorization": []
@@ -12959,12 +11941,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [READ]"],
             "authorization": []
           }
@@ -13020,12 +11996,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [CREATE]"],
             "authorization": []
@@ -13092,12 +12062,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [DELETE]"],
             "authorization": []
           }
@@ -13157,12 +12121,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [READ]"],
             "authorization": []
@@ -13233,12 +12191,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
           }
@@ -13297,12 +12249,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -13364,12 +12310,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [READ]"],
             "authorization": []
           }
@@ -13426,12 +12366,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -13500,12 +12434,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -13585,12 +12513,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [READ]"],
             "authorization": []
           }
@@ -13656,12 +12578,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -13730,12 +12646,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -13815,12 +12725,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [READ]"],
             "authorization": []
           }
@@ -13893,12 +12797,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
           }
@@ -13954,12 +12852,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -14027,12 +12919,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
           }
@@ -14098,12 +12984,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -14179,12 +13059,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
           }
@@ -14221,9 +13095,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get My User",
@@ -14366,9 +13237,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Authentication with platform link",
@@ -14432,9 +13300,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Create headless account and response token",
@@ -14467,9 +13332,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Generate one time linking code",
@@ -14570,9 +13432,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get Country Location",
@@ -14593,9 +13452,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Logout",
@@ -14635,9 +13491,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Request code to get game token",
@@ -14701,12 +13554,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"],
             "authorization": []
           }
@@ -14769,12 +13616,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
@@ -14946,8 +13787,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "JSON Web Key Set for verifying JWT",
-        "tags": ["OAuth2.0(Public)"]
+        "tags": ["OAuth2.0"]
       }
     },
     "/iam/v3/oauth/mfa/code": {
@@ -15017,9 +13863,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Send 2FA code",
@@ -15074,9 +13917,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Change 2FA method",
@@ -15137,9 +13977,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Verify 2FA code",
@@ -15204,9 +14041,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Retrieve User Third Party Platform Token",
@@ -15216,7 +14050,7 @@
     "/iam/v3/oauth/platforms/{platformId}/authorize": {
       "get": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Generate url to request auth code from third party platform \u0026lt;br\u0026gt;\n               \u0026lt;h2\u0026gt;Supported platforms:\u0026lt;/h2\u0026gt;\u0026lt;ul\u0026gt;\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;steamopenid\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to steam login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating user steam.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;xblweb\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to xbox login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating xbox user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;ps4web\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to psn login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating psn user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;epicgames\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to Epicgames OAuth login page. then redirect to platform\n               authenticate endpoint after successfully authenticating an Epicgames credential\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;twitch\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to twitch login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating twitch user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;azure\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to azure login page, then redirect back to platform\n               authenticate(saml) endpoint after successfully authenticating azure user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;facebook\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to facebook login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating facebook user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;google\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to google login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating google user.\n\t\t\t\t\t\t\t \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;snapchat\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to snapchat login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating snapchat user.\n\t\t\t\t\t\t\t \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;discord\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to discord login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating discord user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;amazon\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to amazon login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating amazon user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;oculus\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to oculus login page, then redirect back to Login Website page after successfully authenticating oculus user.\n               \u0026lt;/ul\u0026gt; action code : 10702\u0026#39;",
+        "description": "Generate url to request auth code from third party platform \u0026lt;br\u0026gt;\n               \u0026lt;h2\u0026gt;Supported platforms:\u0026lt;/h2\u0026gt;\u0026lt;ul\u0026gt;\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;steamopenid\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to steam login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating user steam.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;xblweb\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to xbox login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating xbox user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;ps4web\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to psn login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating psn user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;epicgames\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to Epicgames OAuth login page. then redirect to platform\n               authenticate endpoint after successfully authenticating an Epicgames credential\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;twitch\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to twitch login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating twitch user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;azure\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to azure login page, then redirect back to platform\n               authenticate(saml) endpoint after successfully authenticating azure user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;facebook\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to facebook login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating facebook user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;google\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to google login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating google user.\n\t\t\t\t\t\t\t \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;snapchat\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to snapchat login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating snapchat user.\n\t\t\t\t\t\t\t \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;discord\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to discord login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating discord user.\n               \u0026lt;li\u0026gt;\u0026lt;strong\u0026gt;amazon\u0026lt;/strong\u0026gt;\u0026lt;/li\u0026gt;This endpoint redirects to amazon login page, then redirect back to platform\n               authenticate endpoint after successfully authenticating amazon user.\n               \u0026lt;/ul\u0026gt; action code : 10702\u0026#39;",
         "operationId": "AuthCodeRequestV3",
         "parameters": [
           {
@@ -15261,9 +14095,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Generate url to request auth code from third party platform.",
@@ -15686,9 +14517,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Platform Authentication API",
@@ -15737,7 +14565,7 @@
         },
         "security": [],
         "summary": "Public Get Input Validations",
-        "tags": ["InputValidations(Public)"]
+        "tags": ["InputValidations"]
       }
     },
     "/iam/v3/public/inputValidations/{field}": {
@@ -15772,8 +14600,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Public Get Input Validation by field",
-        "tags": ["InputValidations(Public)"]
+        "tags": ["InputValidations"]
       }
     },
     "/iam/v3/public/namespaces/{namespace}/agerestrictions/countries/{countryCode}": {
@@ -15817,9 +14650,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Public get age restriction by country code",
@@ -15878,9 +14708,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get All Active Third Party Platform Active Credential for Public Usage",
@@ -15934,9 +14761,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get Active OIDC Platform Credential By Client ID",
@@ -16016,9 +14840,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "List User ID By Platform User ID",
@@ -16088,9 +14909,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get User By Platform User ID",
@@ -16147,9 +14965,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get Linking Progress Status",
@@ -16229,9 +15044,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Search User",
@@ -16291,8 +15103,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Create User",
-        "tags": ["Users(Public)"]
+        "tags": ["Users"]
       }
     },
     "/iam/v3/public/namespaces/{namespace}/users/availability": {
@@ -16346,9 +15163,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Check user's account availability",
@@ -16398,8 +15212,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Bulk get users' basic info by user Id",
-        "tags": ["Users(Public)"]
+        "tags": ["Users"]
       }
     },
     "/iam/v3/public/namespaces/{namespace}/users/code/request": {
@@ -16445,9 +15264,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Send verification code to new unregistered account's email address",
@@ -16488,8 +15304,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Verify the registration code",
-        "tags": ["Users(Public)"]
+        "tags": ["Users"]
       }
     },
     "/iam/v3/public/namespaces/{namespace}/users/forgot": {
@@ -16538,8 +15359,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Request Password Reset Code",
-        "tags": ["Users(Public)"]
+        "tags": ["Users"]
       }
     },
     "/iam/v3/public/namespaces/{namespace}/users/invite/{invitationId}": {
@@ -16583,8 +15409,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Get User Invitation",
-        "tags": ["Users(Public)"]
+        "tags": ["Users"]
       },
       "post": {
         "consumes": ["application/json"],
@@ -16641,8 +15472,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Create User From Invitation",
-        "tags": ["Users(Public)"]
+        "tags": ["Users"]
       }
     },
     "/iam/v3/public/namespaces/{namespace}/users/me": {
@@ -16703,9 +15539,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Update User",
@@ -16768,9 +15601,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Update User",
@@ -16838,9 +15668,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Send verification code to user",
@@ -16902,9 +15729,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Validate or consume verification code sent to user",
@@ -16981,9 +15805,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Verify or consume verification code.",
@@ -17062,9 +15883,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Upgrade user account to full account (with email)",
@@ -17120,9 +15938,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Update User Password",
@@ -17191,9 +16006,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Create Justice User from Publisher User",
@@ -17262,9 +16074,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Unlink user's account from specific platform",
@@ -17342,9 +16151,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Link user's account with platform",
@@ -17405,9 +16211,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Unlink user's account from specific platform",
@@ -17481,9 +16284,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Force linking user's account with platform",
@@ -17552,9 +16352,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Create Public Web Linking",
@@ -17609,9 +16406,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Establish Link Progress ",
@@ -17668,9 +16462,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Reset User Password",
@@ -17725,8 +16516,13 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Get User By User ID",
-        "tags": ["Users(Public)"]
+        "tags": ["Users"]
       }
     },
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/bans": {
@@ -17816,9 +16612,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get user's bans",
@@ -17887,9 +16680,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get distinct platform accounts linked to the user",
@@ -17950,12 +16740,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]"],
             "authorization": []
@@ -18030,9 +16814,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get User's Login Histories",
@@ -18119,9 +16900,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get platform accounts linked to the user",
@@ -18193,9 +16971,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get User Justice Platform Accounts",
@@ -18264,9 +17039,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Link a Platform User Account to User Account",
@@ -18335,9 +17107,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Force link 3rd platform account and transfer progression",
@@ -18395,12 +17164,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:PUBLISHER [READ]"],
             "authorization": []
@@ -18477,9 +17240,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Validate user password by user ID and password",
@@ -18536,9 +17296,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get Roles",
@@ -18583,9 +17340,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get Public Role",
@@ -18620,9 +17374,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get My User",
@@ -18678,9 +17429,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get conflict result when link headless account to current full account by one time code",
@@ -18735,9 +17483,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Link headless account to current full account",
@@ -18792,9 +17537,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Send verification link to user, this link will point to '/iam/v3/public/users/verify_link/verify'",
@@ -18827,9 +17569,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Verify user email by the verification link code",
@@ -18883,9 +17622,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "SAML platform Authentication API",
@@ -18920,9 +17656,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Login to SSO client with provided platformId",
@@ -18969,9 +17702,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Logout",
@@ -19010,9 +17740,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Generate game token by code",
@@ -19076,9 +17803,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Platform Token Validation",
@@ -19145,12 +17869,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [READ]"],
             "authorization": []
@@ -19233,12 +17951,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [READ]"],
             "authorization": []
           }
@@ -19302,12 +18014,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [READ]"],
             "authorization": []
@@ -19374,12 +18080,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [CREATE]"],
             "authorization": []
@@ -19450,12 +18150,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [READ]"],
             "authorization": []
@@ -19536,12 +18230,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [UPDATE]"],
             "authorization": []
           }
@@ -19621,12 +18309,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [READ]"],
             "authorization": []
           }
@@ -19677,12 +18359,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [READ]"],
             "authorization": []
@@ -19748,12 +18424,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [READ]"],
             "authorization": []
           }
@@ -19818,12 +18488,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [READ]"],
             "authorization": []
           }
@@ -19883,12 +18547,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DEVICE [UPDATE]"],
             "authorization": []
@@ -19954,12 +18612,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
           }
@@ -20018,12 +18670,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER []"],
             "authorization": []
@@ -20090,12 +18736,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"],
             "authorization": []
@@ -20181,12 +18821,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -20262,12 +18896,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"],
             "authorization": []
           }
@@ -20333,12 +18961,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"],
             "authorization": []
@@ -20422,12 +19044,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [Delete]"],
             "authorization": []
           }
@@ -20488,12 +19104,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [READ]"],
             "authorization": []
@@ -20578,12 +19188,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [UPDATE]"],
             "authorization": []
           }
@@ -20667,12 +19271,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [UPDATE]"],
             "authorization": []
           }
@@ -20748,12 +19346,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [READ]"],
             "authorization": []
           }
@@ -20809,12 +19401,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [CREATE]"],
             "authorization": []
@@ -20875,12 +19461,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [DELETE]"],
             "authorization": []
           }
@@ -20940,12 +19520,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [READ]"],
             "authorization": []
@@ -21010,12 +19584,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
           }
@@ -21071,12 +19639,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -21141,12 +19703,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
           }
@@ -21210,12 +19766,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
           }
@@ -21277,12 +19827,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -21355,12 +19899,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [READ]"],
             "authorization": []
@@ -21436,12 +19974,6 @@
           }
         },
         "security": [
-          {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
           {
             "HasPermission": ["ADMIN:ROLE [UPDATE]"],
             "authorization": []
@@ -21519,12 +20051,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:USER:INVITE [CREATE]"],
             "authorization": []
           }
@@ -21584,9 +20110,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Admin Update My User",
@@ -21636,9 +20159,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Disable 2FA authenticator",
@@ -21703,9 +20223,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Enable 2FA authenticator",
@@ -21758,9 +20275,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Generate secret key for 3rd-party authenticate app",
@@ -21813,9 +20327,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get backup codes",
@@ -21866,9 +20377,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Generate backup codes",
@@ -21918,9 +20426,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Disable 2FA backup codes",
@@ -21973,9 +20478,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Download user backup codes",
@@ -22034,9 +20536,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Enable 2FA backup codes",
@@ -22092,9 +20591,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Send code for enabling email",
@@ -22144,9 +20640,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Disable 2FA email",
@@ -22212,9 +20705,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Enable 2FA email",
@@ -22267,9 +20757,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get user enabled factors",
@@ -22327,9 +20814,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Make 2FA factor default",
@@ -22405,12 +20889,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "basic": []
-          },
-          {
             "HasPermission": ["ADMIN:USER:INVITE [CREATE]"],
             "authorization": []
           }
@@ -22477,9 +20955,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "[TEST FACILITY ONLY]Create test User",
@@ -22544,9 +21019,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Create User",
@@ -22612,9 +21084,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Create User From Invitation",
@@ -22679,9 +21148,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Update User",
@@ -22749,9 +21215,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Update My Email Address",
@@ -22828,9 +21291,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Upgrade headless account and automatically verified the email address if it is succeeded",
@@ -22901,9 +21361,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Upgrade user account to full account",
@@ -22962,9 +21419,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Disable 2FA authenticator",
@@ -23036,9 +21490,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Enable 2FA authenticator",
@@ -23100,9 +21551,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Generate secret key for 3rd-party authenticate app",
@@ -23164,9 +21612,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get backup codes",
@@ -23226,9 +21671,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Generate backup codes",
@@ -23287,9 +21729,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Disable 2FA backup codes",
@@ -23351,9 +21790,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Download user backup codes",
@@ -23421,9 +21857,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Enable 2FA backup codes",
@@ -23490,9 +21923,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Remove Trusted Device",
@@ -23557,9 +21987,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Send code for enabling email",
@@ -23618,9 +22045,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Disable 2FA email",
@@ -23693,9 +22117,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Enable 2FA email",
@@ -23757,9 +22178,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Get user enabled factors",
@@ -23824,9 +22242,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Make 2FA factor default",
@@ -23884,9 +22299,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "basic": []
           }
         ],
         "summary": "Public invite admin user v4",
@@ -30038,14 +28450,14 @@
   },
   "x-docs": {
     "alias": "iam",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/iam/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-08-02T08:39:12+00:00",
-    "gitHash": "e80565d6a7979582f9a0b5c3ff9807f77df9bfbb",
+    "buildDate": "2023-08-07T01:38:38+00:00",
+    "gitHash": "ad855b61eaa030e68458d1799dc69bea9019c5a4",
     "name": "justice-iam-service",
-    "realm": "dev",
+    "realm": "staging",
     "version": "6.2.0",
     "version-roles-seeding": "0.0.3"
   }

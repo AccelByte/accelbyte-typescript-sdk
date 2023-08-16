@@ -46,7 +46,6 @@ export * from './generated-public/dsm-controller/definitions/GetImageLimitRespon
 export * from './generated-public/dsm-controller/definitions/GetImagePatchDetailResponse.js'
 export * from './generated-public/dsm-controller/definitions/ImageRecord.js'
 export * from './generated-public/dsm-controller/definitions/ImageRecordUpdate.js'
-export * from './generated-public/dsm-controller/definitions/ImageReplication.js'
 export * from './generated-public/dsm-controller/definitions/ImportResponse.js'
 export * from './generated-public/dsm-controller/definitions/InstanceSpec.js'
 export * from './generated-public/dsm-controller/definitions/ListConfigResponse.js'

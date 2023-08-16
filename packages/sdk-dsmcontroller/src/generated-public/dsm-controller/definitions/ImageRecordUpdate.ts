@@ -4,14 +4,11 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ImageReplication } from './ImageReplication.js'
 
 export const ImageRecordUpdate = z.object({
   artifactPath: z.string(),
   image: z.string(),
-  imageReplicationsMap: z.record(ImageReplication),
   namespace: z.string(),
-  patchVersion: z.string(),
   persistent: z.boolean(),
   version: z.string()
 })

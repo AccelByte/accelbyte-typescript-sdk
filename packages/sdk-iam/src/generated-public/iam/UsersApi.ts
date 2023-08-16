@@ -11,6 +11,7 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CountryV3Response } from './definitions/CountryV3Response.js'
 import { CreateJusticeUserResponse } from './definitions/CreateJusticeUserResponse.js'
 import { DistinctPlatformResponseV3 } from './definitions/DistinctPlatformResponseV3.js'
+import { ForgotPasswordRequestV3 } from './definitions/ForgotPasswordRequestV3.js'
 import { GetLinkHeadlessAccountConflictResponse } from './definitions/GetLinkHeadlessAccountConflictResponse.js'
 import { GetPublisherUserV3Response } from './definitions/GetPublisherUserV3Response.js'
 import { GetUserBanV3Response } from './definitions/GetUserBanV3Response.js'
@@ -19,6 +20,7 @@ import { LinkHeadlessAccountRequest } from './definitions/LinkHeadlessAccountReq
 import { LinkPlatformAccountRequest } from './definitions/LinkPlatformAccountRequest.js'
 import { LinkPlatformAccountWithProgressionRequest } from './definitions/LinkPlatformAccountWithProgressionRequest.js'
 import { LinkRequest } from './definitions/LinkRequest.js'
+import { ListBulkUserResponse } from './definitions/ListBulkUserResponse.js'
 import { LoginHistoriesResponse } from './definitions/LoginHistoriesResponse.js'
 import { PlatformUserIdRequest } from './definitions/PlatformUserIdRequest.js'
 import { PublicUserInformationResponseV3 } from './definitions/PublicUserInformationResponseV3.js'
@@ -29,7 +31,12 @@ import { SendVerificationLinkRequest } from './definitions/SendVerificationLinkR
 import { UnlinkUserPlatformRequest } from './definitions/UnlinkUserPlatformRequest.js'
 import { UpgradeHeadlessAccountV3Request } from './definitions/UpgradeHeadlessAccountV3Request.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV3 } from './definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV3.js'
+import { UserCreateFromInvitationRequestV3 } from './definitions/UserCreateFromInvitationRequestV3.js'
+import { UserCreateRequestV3 } from './definitions/UserCreateRequestV3.js'
+import { UserCreateResponseV3 } from './definitions/UserCreateResponseV3.js'
+import { UserIDsRequest } from './definitions/UserIDsRequest.js'
 import { UserInformationV3 } from './definitions/UserInformationV3.js'
+import { UserInvitationV3 } from './definitions/UserInvitationV3.js'
 import { UserLinkedPlatformsResponseV3 } from './definitions/UserLinkedPlatformsResponseV3.js'
 import { UserPasswordUpdateV3Request } from './definitions/UserPasswordUpdateV3Request.js'
 import { UserPlatforms } from './definitions/UserPlatforms.js'
@@ -37,6 +44,7 @@ import { UserResponseV3 } from './definitions/UserResponseV3.js'
 import { UserUpdateRequestV3 } from './definitions/UserUpdateRequestV3.js'
 import { UserVerificationRequestV3 } from './definitions/UserVerificationRequestV3.js'
 import { Users$ } from './endpoints/Users$.js'
+import { VerifyRegistrationCode } from './definitions/VerifyRegistrationCode.js'
 import { WebLinkingResponse } from './definitions/WebLinkingResponse.js'
 
 export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -74,6 +82,16 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }): Promise<PublicUserInformationResponseV3> {
     const $ = new Users$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getUsers(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   *  &lt;p&gt;Available Authentication Types:&lt;/p&gt; &lt;ol&gt; &lt;li&gt;&lt;strong&gt;EMAILPASSWD&lt;/strong&gt;: an authentication type used for new user registration through email.&lt;/li&gt; &lt;/ol&gt; &lt;p&gt;Country use ISO3166-1 alpha-2 two letter, e.g. US.&lt;/p&gt; &lt;p&gt;Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.&lt;/p&gt; &lt;p&gt;This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.&lt;/p&gt;
+   */
+  async function createUser(data: UserCreateRequestV3): Promise<UserCreateResponseV3> {
+    const $ = new Users$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createUser(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -131,11 +149,41 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * &lt;p&gt;&lt;strong&gt;Special note for publisher-game scenario:&lt;/strong&gt; Game Client should provide game namespace path parameter and Publisher Client should provide publisher namespace path parameter. &lt;/p&gt; &lt;p&gt;The password reset code will be sent to the publisher account&#39;s email address. &lt;/p&gt; &lt;p&gt;action code : 10104 &lt;/p&gt;
+   */
+  async function createUserForgot(data: ForgotPasswordRequestV3): Promise<unknown> {
+    const $ = new Users$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createUserForgot(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Note:&lt;br&gt; 1. My account should be full account 2. My account not linked to headless account&#39;s third platform.
    */
   async function createUserMeHeadlesLinkWithProgression(data: LinkHeadlessAccountRequest): Promise<unknown> {
     const $ = new Users$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createUserMeHeadlesLinkWithProgression(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * &lt;p&gt;Notes:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;This endpoint bulk get users&#39; basic info by userId, max allowed 100 at a time&lt;/li&gt; &lt;li&gt;If namespace is game, will search by game user Id, other wise will search by publisher namespace&lt;/li&gt; &lt;li&gt;&lt;strong&gt;Result will include displayName(if it exists)&lt;/strong&gt;&lt;/li&gt; &lt;/ul&gt;
+   */
+  async function createUserBulkBasic(data: UserIDsRequest): Promise<ListBulkUserResponse> {
+    const $ = new Users$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createUserBulkBasic(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * &lt;p&gt;Verify the registration code&lt;/p&gt;
+   */
+  async function createUserCodeVerify(data: VerifyRegistrationCode): Promise<unknown> {
+    const $ = new Users$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createUserCodeVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -255,6 +303,29 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getInformation_ByUserId(userId: string): Promise<UserInformationV3> {
     const $ = new Users$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getInformation_ByUserId(userId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Endpoint to validate user invitation. When not found, it could also means the invitation has expired.
+   */
+  async function getUserInvite_ByInvitationId(invitationId: string): Promise<UserInvitationV3> {
+    const $ = new Users$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getUserInvite_ByInvitationId(invitationId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This endpoint create user from saved roles when creating invitation and submitted data. User will be able to login after completing submitting the data through this endpoint. Available Authentication Types: EMAILPASSWD: an authentication type used for new user registration through email. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.
+   */
+  async function createUserInvite_ByInvitationId(
+    invitationId: string,
+    data: UserCreateFromInvitationRequestV3
+  ): Promise<UserCreateResponseV3> {
+    const $ = new Users$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createUserInvite_ByInvitationId(invitationId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -452,12 +523,16 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getUsersMe,
     getUsersVerifyLinkVerify,
     getUsers,
+    createUser,
     createUserMeVerifyLinkRequest,
     patchUserMe,
     updateUserMe,
     getUsersMeHeadlessLinkConflict,
     createUserReset,
+    createUserForgot,
     createUserMeHeadlesLinkWithProgression,
+    createUserBulkBasic,
+    createUserCodeVerify,
     updateUserMePassword,
     getUsersAvailability,
     createUserCodeRequest,
@@ -469,6 +544,8 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getPublisher_ByUserId,
     createUserMeHeadlesVerify,
     getInformation_ByUserId,
+    getUserInvite_ByInvitationId,
+    createUserInvite_ByInvitationId,
     createUser_ByPlatformId,
     createPlatformLink_ByUserId,
     createUserMeHeadlesCodeVerify,
