@@ -4,17 +4,17 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UploaderFlag } from './UploaderFlag.js'
 
 export const CreateImagePatchRequest = z.object({
   artifactPath: z.string(),
+  coreDumpEnabled: z.boolean(),
   dockerPath: z.string(),
   image: z.string(),
   imageSize: z.number().int(),
   namespace: z.string(),
   patchVersion: z.string(),
   persistent: z.boolean(),
-  uploaderFlags: z.array(UploaderFlag),
+  uploaderFlag: z.string(),
   version: z.string()
 })
 

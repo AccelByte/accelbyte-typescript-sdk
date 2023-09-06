@@ -26,6 +26,7 @@ export const MockMatch = z.object({
   server_name: z.string(),
   status: z.string(),
   ticket_id: z.string(),
+  ticket_ids: z.array(z.string()).nullish(),
   time_to_match_seconds: z.number().int(),
   updated_at: z.string()
 })

@@ -20,6 +20,7 @@ export const CreditRequest = z.object({
       'DLC',
       'GIFT',
       'IAP',
+      'IAP_CHARGEBACK_REVERSED',
       'OTHER',
       'PROMOTION',
       'PURCHASE',

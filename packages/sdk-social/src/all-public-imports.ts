@@ -20,6 +20,7 @@ export * from './generated-public/social/definitions/ADtoObjectForResettingUserS
 export * from './generated-public/social/definitions/ADtoObjectForUserStatItemValue.js'
 export * from './generated-public/social/definitions/Attribute.js'
 export * from './generated-public/social/definitions/BulkCycleStatsAdd.js'
+export * from './generated-public/social/definitions/BulkStatCycleOperationResult.js'
 export * from './generated-public/social/definitions/BulkStatCycleRequest.js'
 export * from './generated-public/social/definitions/BulkStatCycleResult.js'
 export * from './generated-public/social/definitions/BulkStatItemCreate.js'

@@ -7,6 +7,6 @@ import { z } from 'zod'
 import { MatchPool } from './MatchPool.js'
 import { Pagination } from './Pagination.js'
 
-export const ListMatchPoolsResponse = z.object({ data: z.array(MatchPool), pagination: Pagination })
+export const ListMatchPoolsResponse = z.object({ data: z.array(MatchPool), pagination: Pagination.nullish() })
 
 export interface ListMatchPoolsResponse extends z.TypeOf<typeof ListMatchPoolsResponse> {}

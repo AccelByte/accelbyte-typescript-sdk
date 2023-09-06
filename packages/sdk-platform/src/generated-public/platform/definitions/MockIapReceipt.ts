@@ -10,6 +10,7 @@ export const MockIapReceipt = z.object({
   language: z.string().nullish(),
   productId: z.string(),
   region: z.string().nullish(),
+  transactionId: z.string().nullish(),
   type: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'OCULUS', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX'])
 })
 

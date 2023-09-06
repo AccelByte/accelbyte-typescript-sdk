@@ -12,8 +12,8 @@ import { z } from 'zod'
 import { CreatePartyRequest } from '../definitions/CreatePartyRequest.js'
 import { JoinByCodeRequest } from '../definitions/JoinByCodeRequest.js'
 import { KickResponse } from '../definitions/KickResponse.js'
+import { PartyQueryResponse } from '../definitions/PartyQueryResponse.js'
 import { PartySessionResponse } from '../definitions/PartySessionResponse.js'
-import { PartySessionResponseArray } from '../definitions/PartySessionResponseArray.js'
 import { PromoteLeaderRequest } from '../definitions/PromoteLeaderRequest.js'
 import { SessionInviteRequest } from '../definitions/SessionInviteRequest.js'
 import { UpdatePartyRequest } from '../definitions/UpdatePartyRequest.js'
@@ -40,12 +40,12 @@ export class Party$ {
     order?: string | null
     orderBy?: string | null
     status?: string | null
-  }): Promise<IResponseWithSync<PartySessionResponseArray>> {
+  }): Promise<IResponseWithSync<PartyQueryResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/users/me/parties'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, PartySessionResponseArray, 'PartySessionResponseArray')
+    const res = () => Validate.responseType(() => resultPromise, PartyQueryResponse, 'PartyQueryResponse')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

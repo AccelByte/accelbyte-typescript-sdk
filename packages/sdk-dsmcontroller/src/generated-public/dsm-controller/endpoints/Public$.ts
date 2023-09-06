@@ -52,12 +52,12 @@ export class Public$ {
   /**
    * This endpoint returns the providers by region.
    */
-  getProviderRegion_ByRegion(region: string): Promise<IResponseWithSync<DefaultProvider>> {
+  getProviderRegion_ByRegion(region: string): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/public/providers/regions/{region}'.replace('{region}', region)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, DefaultProvider, 'DefaultProvider')
+    const res = () => Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

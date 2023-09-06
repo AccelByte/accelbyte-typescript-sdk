@@ -8,7 +8,8 @@ import { z } from 'zod'
 export const BulkStatOperationResult = z.object({
   details: z.record(z.any()).nullish(),
   statCode: z.string().nullish(),
-  success: z.boolean().nullish()
+  success: z.boolean().nullish(),
+  userId: z.string().nullish()
 })
 
 export interface BulkStatOperationResult extends z.TypeOf<typeof BulkStatOperationResult> {}

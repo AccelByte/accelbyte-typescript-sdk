@@ -434,7 +434,7 @@ export class Users$ {
   createUser_ByPlatformId(
     platformId: string,
     data: PlatformUserIdRequest,
-    queryParams?: { rawPUID?: boolean | null }
+    queryParams?: { rawPID?: boolean | null }
   ): Promise<IResponse<UserPlatforms>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/platforms/{platformId}/users'
@@ -694,6 +694,25 @@ export class Users$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This endpoint is used to process third party account link, this endpoint will return the link status directly instead of redirecting to the original page.&lt;br/&gt; The param &lt;strong&gt;state&lt;/strong&gt; comes from the response of &lt;strong&gt;/users/me/platforms/{platformId}/web/link&lt;/strong&gt;
+   */
+  postWebLinkProcesMeUser_ByPlatformId(
+    platformId: string,
+    data: { state: string | null; code?: string | null }
+  ): Promise<IResponse<LinkRequest>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/web/link/process'
+      .replace('{namespace}', this.namespace)
+      .replace('{platformId}', platformId)
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.responseType(() => resultPromise, LinkRequest, 'LinkRequest')
   }
 
   /**

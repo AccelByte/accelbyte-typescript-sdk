@@ -12,8 +12,8 @@ import { CreatePartyRequest } from './definitions/CreatePartyRequest.js'
 import { JoinByCodeRequest } from './definitions/JoinByCodeRequest.js'
 import { KickResponse } from './definitions/KickResponse.js'
 import { Party$ } from './endpoints/Party$.js'
+import { PartyQueryResponse } from './definitions/PartyQueryResponse.js'
 import { PartySessionResponse } from './definitions/PartySessionResponse.js'
-import { PartySessionResponseArray } from './definitions/PartySessionResponseArray.js'
 import { PromoteLeaderRequest } from './definitions/PromoteLeaderRequest.js'
 import { SessionInviteRequest } from './definitions/SessionInviteRequest.js'
 import { UpdatePartyRequest } from './definitions/UpdatePartyRequest.js'
@@ -42,7 +42,7 @@ export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     order?: string | null
     orderBy?: string | null
     status?: string | null
-  }): Promise<PartySessionResponseArray> {
+  }): Promise<PartyQueryResponse> {
     const $ = new Party$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getUsersMeParties(queryParams)
     if (resp.error) throw resp.error

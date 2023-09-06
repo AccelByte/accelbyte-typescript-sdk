@@ -25,6 +25,7 @@ export const GameSessionResponse = z.object({
   matchPool: z.string(),
   members: z.array(UserResponse),
   namespace: z.string(),
+  storage: z.record(z.any()).nullish(),
   teams: z.array(Team).nullish(),
   ticketIDs: z.array(z.string()).nullish(),
   updatedAt: z.string(),

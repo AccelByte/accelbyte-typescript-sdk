@@ -1,3 +1,7 @@
+### 2.0.3 - 2023-08-15
+
+- Allow customizing interceptors of the SDK
+
 ### 2.0.2 - 2023-05-22
 
 - Add TokenWithDeviceCookieResponseV3 on tsconfig path and rollup config alias entries

@@ -3,6 +3,8 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
+export * from './models/DefaultLoginTemplate.js'
+export * from './models/age-gating.js'
 export * from './models/DiscoveryTemplate.js'
 export * from './models/base-configs.js'
 export * from './models/discovery.js'

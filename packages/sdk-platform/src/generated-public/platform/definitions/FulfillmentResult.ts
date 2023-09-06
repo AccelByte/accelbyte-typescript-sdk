@@ -11,6 +11,7 @@ import { SubscriptionSummary } from './SubscriptionSummary.js'
 export const FulfillmentResult = z.object({
   creditSummaries: z.array(CreditSummary).nullish(),
   entitlementSummaries: z.array(EntitlementSummary).nullish(),
+  id: z.string().nullish(),
   namespace: z.string(),
   subscriptionSummaries: z.array(SubscriptionSummary).nullish(),
   userId: z.string()

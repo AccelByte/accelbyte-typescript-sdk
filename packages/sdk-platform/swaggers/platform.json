@@ -8,7 +8,7 @@
     },
     "description": "Justice Platform Service",
     "title": "justice-platform-service",
-    "version": "4.32.1"
+    "version": "4.34.0"
   },
   "schemes": ["https"],
   "tags": [
@@ -26,6 +26,9 @@
     },
     {
       "name": "Category"
+    },
+    {
+      "name": "Clawback"
     },
     {
       "name": "Currency"
@@ -111,7 +114,7 @@
   ],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/platform"
+    "url": "https://development.accelbyte.io/platform"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -3555,6 +3558,140 @@
         }
       }
     },
+    "/platform/admin/namespaces/{namespace}/iap/clawback/histories": {
+      "get": {
+        "description": "Query clawback history.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK, action=2 (READ)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: paginated clawback history\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "queryIAPClawbackHistory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "end time is exclusive, using ISO 8601 format e.g. yyyy-MM-dd'T'HH:mm:ssZZ",
+            "in": "query",
+            "name": "endTime",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "event type",
+            "enum": ["CHARGEBACK", "CHARGEBACK_REVERSED", "OTHER", "REFUND"],
+            "in": "query",
+            "name": "eventType",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "third party order id",
+            "in": "query",
+            "name": "externalOrderId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "format": "int32",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "format": "int32",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "start time is inclusive, using ISO 8601 format e.g. yyyy-MM-dd'T'HH:mm:ssZZ",
+            "in": "query",
+            "name": "startTime",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "status",
+            "enum": ["FAIL", "IGNORED", "INIT", "SUCCESS"],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "AGS user id",
+            "in": "query",
+            "name": "userId",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/IAPClawbackPagingSlicedResult"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query clawback history",
+        "tags": ["Clawback"],
+        "x-authorization": {
+          "action": "2",
+          "resource": "ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK"
+        }
+      }
+    },
+    "/platform/admin/namespaces/{namespace}/iap/clawback/playstation/mock": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Mock Sync PlayStation Clawback event..\u0026lt;p\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK, action=1(CREATE)\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "mockPlayStationStreamEvent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StreamEvent"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Mock Sync PlayStation Clawback event.",
+        "tags": ["Clawback"],
+        "x-authorization": {
+          "action": "1",
+          "resource": "ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK"
+        }
+      }
+    },
     "/platform/admin/namespaces/{namespace}/iap/config/apple": {
       "delete": {
         "description": "Delete apple iap config.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:IAP:CONFIG\u0026#34;, action=8 (DELETE)\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
@@ -4296,6 +4433,12 @@
             "schema": {
               "$ref": "#/definitions/PlayStationIAPConfigInfo"
             }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e39130\u003c/td\u003e\u003ctd\u003eInvalid playstation config: [{message}]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
           }
         },
         "security": [
@@ -4308,6 +4451,90 @@
           }
         ],
         "summary": "Update playstation iap config",
+        "tags": ["IAP"],
+        "x-authorization": {
+          "action": "4",
+          "resource": "ADMIN:NAMESPACE:{namespace}:IAP:CONFIG"
+        }
+      }
+    },
+    "/platform/admin/namespaces/{namespace}/iap/config/playstation/validate": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Validate playstation iap config. Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:IAP:CONFIG\u0026#34;, action=2 (READ)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: Test Results\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "validateExistedPlaystationIAPConfig",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/TestResult"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:IAP:CONFIG [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Validate existed playstation iap config",
+        "tags": ["IAP"],
+        "x-authorization": {
+          "action": "2",
+          "resource": "ADMIN:NAMESPACE:{namespace}:IAP:CONFIG"
+        }
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Validate playstation iap config. Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:IAP:CONFIG\u0026#34;, action=4 (UPDATE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: Test Results\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "validatePlaystationIAPConfig",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PlaystationIAPConfigRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/TestResult"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:IAP:CONFIG [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Validate playstation iap config",
         "tags": ["IAP"],
         "x-authorization": {
           "action": "4",
@@ -8816,7 +9043,7 @@
             "type": "integer"
           },
           {
-            "enum": ["DLC", "ORDER", "OTHER"],
+            "enum": ["DLC", "IAP", "ORDER", "OTHER"],
             "in": "query",
             "name": "source",
             "required": false,
@@ -24601,7 +24828,7 @@
           },
           {
             "default": true,
-            "description": "default strict mode is false",
+            "description": "default strict mode is true",
             "in": "query",
             "name": "strictMode",
             "required": false,
@@ -24705,6 +24932,77 @@
           "resource": "ADMIN:NAMESPACE:{namespace}:STORE"
         }
       }
+    },
+    "/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillment/rewards": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;b\u0026gt;[SERVICE COMMUNICATION ONLY]\u0026lt;/b\u0026gt; Fulfill rewards.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:FULFILLMENT\u0026#34;, action=1 (CREATED)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: fulfillment result\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "fulfillRewardsV2",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RewardsRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/FulfillmentResult"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e35123\u003c/td\u003e\u003ctd\u003eWallet [{walletId}] is inactive\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e38121\u003c/td\u003e\u003ctd\u003eDuplicate permanent item exists\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e30341\u003c/td\u003e\u003ctd\u003eItem [{itemId}] does not exist in namespace [{namespace}]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
+          "409": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20006\u003c/td\u003e\u003ctd\u003eoptimistic lock\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:FULFILLMENT []"],
+            "authorization": []
+          }
+        ],
+        "summary": "Fulfill rewards",
+        "tags": ["Fulfillment"],
+        "x-authorization": {
+          "action": "1",
+          "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:FULFILLMENT"
+        }
+      }
     }
   },
   "definitions": {
@@ -24740,6 +25038,24 @@
       "properties": {
         "cardSummary": {
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AdditionalDataEntitlement": {
+      "properties": {
+        "clientTransaction": {
+          "items": {
+            "$ref": "#/definitions/ClientTransaction"
+          },
+          "type": "array"
+        },
+        "entitlementId": {
+          "type": "string"
+        },
+        "usageCount": {
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -26631,6 +26947,87 @@
       },
       "type": "object"
     },
+    "ClawbackInfo": {
+      "properties": {
+        "createdAt": {
+          "description": "created at time",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dryRun": {
+          "description": "Whether or not test event",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "eventContent": {
+          "description": "Source event content",
+          "type": "object"
+        },
+        "eventId": {
+          "description": "third-party Event id / notification id",
+          "type": "string"
+        },
+        "eventType": {
+          "description": "Event type",
+          "type": "string"
+        },
+        "externalOrderId": {
+          "description": "third-party order id",
+          "type": "string"
+        },
+        "feedbackContent": {
+          "description": "Feedback Content to third-party platform",
+          "type": "object"
+        },
+        "feedbackStatus": {
+          "description": "Feedback status",
+          "enum": ["FAIL", "INIT", "SUCCESS"],
+          "type": "string"
+        },
+        "feedbackStatusReason": {
+          "description": "Feedback status reason",
+          "type": "string"
+        },
+        "id": {
+          "description": "id",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "namespace",
+          "type": "string"
+        },
+        "platform": {
+          "description": "third party platform name, currently only support PLAYSTATION",
+          "type": "string"
+        },
+        "processId": {
+          "description": "processId is fulfillment history id if event type is CHARGEBACK REVERSAL, and processId is revocation history id if event type is CHARGEBACK/REFUND",
+          "type": "string"
+        },
+        "status": {
+          "description": "Process status",
+          "enum": ["FAIL", "IGNORED", "INIT", "SUCCESS"],
+          "type": "string"
+        },
+        "statusReason": {
+          "description": "Process status reason",
+          "type": "string"
+        },
+        "updatedAt": {
+          "description": "updated at time",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "userId": {
+          "description": "AGS user id",
+          "type": "string"
+        }
+      },
+      "required": ["id", "namespace"],
+      "type": "object"
+    },
     "ClientRequestParameter": {
       "properties": {
         "currencyCode": {
@@ -26644,6 +27041,18 @@
           "type": "number"
         },
         "region": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ClientTransaction": {
+      "properties": {
+        "amountConsumed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "clientTransactionId": {
           "type": "string"
         }
       },
@@ -26933,6 +27342,7 @@
             "DLC",
             "GIFT",
             "IAP",
+            "IAP_CHARGEBACK_REVERSED",
             "OTHER",
             "PROMOTION",
             "PURCHASE",
@@ -27327,7 +27737,7 @@
         },
         "balanceSource": {
           "description": "balance source, default is OTHER",
-          "enum": ["DLC_REVOCATION", "EXPIRATION", "ORDER_REVOCATION", "OTHER", "PAYMENT"],
+          "enum": ["DLC_REVOCATION", "EXPIRATION", "IAP_REVOCATION", "ORDER_REVOCATION", "OTHER", "PAYMENT"],
           "type": "string"
         },
         "metadata": {
@@ -27356,7 +27766,7 @@
         },
         "balanceSource": {
           "description": "balance source, default is OTHER",
-          "enum": ["DLC_REVOCATION", "EXPIRATION", "ORDER_REVOCATION", "OTHER", "PAYMENT"],
+          "enum": ["DLC_REVOCATION", "EXPIRATION", "IAP_REVOCATION", "ORDER_REVOCATION", "OTHER", "PAYMENT"],
           "type": "string"
         },
         "metadata": {
@@ -28273,6 +28683,20 @@
       "required": ["errorCode", "errorMessage"],
       "type": "object"
     },
+    "EventAdditionalData": {
+      "properties": {
+        "entitlement": {
+          "items": {
+            "$ref": "#/definitions/AdditionalDataEntitlement"
+          },
+          "type": "array"
+        },
+        "purpose": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "EventPayload": {
       "properties": {
         "payload": {
@@ -28735,10 +29159,10 @@
             "ACHIEVEMENT",
             "CONSUME_ENTITLEMENT",
             "DLC",
-            "DLC_REVOCATION",
             "EXPIRATION",
             "GIFT",
             "IAP",
+            "IAP_CHARGEBACK_REVERSED",
             "ORDER_REVOCATION",
             "OTHER",
             "PAYMENT",
@@ -28781,6 +29205,10 @@
           },
           "type": "array"
         },
+        "id": {
+          "description": "fulfillment history id, only fulfill rewards will return this filed currently.",
+          "type": "string"
+        },
         "namespace": {
           "description": "namespace",
           "type": "string"
@@ -28820,10 +29248,10 @@
             "ACHIEVEMENT",
             "CONSUME_ENTITLEMENT",
             "DLC",
-            "DLC_REVOCATION",
             "EXPIRATION",
             "GIFT",
             "IAP",
+            "IAP_CHARGEBACK_REVERSED",
             "ORDER_REVOCATION",
             "OTHER",
             "PAYMENT",
@@ -29614,6 +30042,22 @@
         }
       },
       "required": ["categoryPath", "childCategories", "createdAt", "displayName", "namespace", "parentCategoryPath", "updatedAt"],
+      "type": "object"
+    },
+    "IAPClawbackPagingSlicedResult": {
+      "properties": {
+        "data": {
+          "description": "data",
+          "items": {
+            "$ref": "#/definitions/ClawbackInfo"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/Paging"
+        }
+      },
+      "required": ["data"],
       "type": "object"
     },
     "IAPConsumeHistoryInfo": {
@@ -31622,6 +32066,10 @@
         },
         "region": {
           "description": "country value from ISO countries",
+          "type": "string"
+        },
+        "transactionId": {
+          "description": "transactionId",
           "type": "string"
         },
         "type": {
@@ -34071,12 +34519,33 @@
     },
     "PlayStationIAPConfigInfo": {
       "properties": {
+        "backOfficeServerClientId": {
+          "description": "back office server clientId",
+          "type": "string"
+        },
+        "backOfficeServerClientSecret": {
+          "description": "back office server client secret",
+          "type": "string"
+        },
+        "enableStreamJob": {
+          "description": "enable PSN stream event job, will enable stream event job to sync PSN refund charge back etc event if it's true",
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "environment": {
           "description": "environment",
           "type": "string"
         },
         "namespace": {
           "description": "namespace",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "stream name",
+          "type": "string"
+        },
+        "streamPartnerName": {
+          "description": "stream partner name",
           "type": "string"
         }
       },
@@ -34156,8 +34625,29 @@
     },
     "PlaystationIAPConfigRequest": {
       "properties": {
+        "backOfficeServerClientId": {
+          "description": "back office server clientId",
+          "type": "string"
+        },
+        "backOfficeServerClientSecret": {
+          "description": "back office server client secret",
+          "type": "string"
+        },
+        "enableStreamJob": {
+          "description": "enable PSN stream event job, will enable stream event job to sync PSN refund chargeback etc event if it's true",
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "environment": {
           "description": "environment",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "stream name",
+          "type": "string"
+        },
+        "streamPartnerName": {
+          "description": "stream partner name",
           "type": "string"
         }
       },
@@ -35148,7 +35638,7 @@
         },
         "source": {
           "description": "revoke source",
-          "enum": ["DLC", "ORDER", "OTHER"],
+          "enum": ["DLC", "IAP", "ORDER", "OTHER"],
           "type": "string"
         },
         "transactionId": {
@@ -35551,10 +36041,10 @@
             "ACHIEVEMENT",
             "CONSUME_ENTITLEMENT",
             "DLC",
-            "DLC_REVOCATION",
             "EXPIRATION",
             "GIFT",
             "IAP",
+            "IAP_CHARGEBACK_REVERSED",
             "ORDER_REVOCATION",
             "OTHER",
             "PAYMENT",
@@ -35565,6 +36055,10 @@
             "REWARD",
             "SELL_BACK"
           ],
+          "type": "string"
+        },
+        "transactionId": {
+          "description": "transaction id",
           "type": "string"
         }
       },
@@ -36393,6 +36887,59 @@
         }
       },
       "required": ["title"],
+      "type": "object"
+    },
+    "StreamEvent": {
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/StreamEventBody"
+        },
+        "eventDomain": {
+          "type": "string"
+        },
+        "eventSource": {
+          "type": "string"
+        },
+        "eventType": {
+          "type": "string"
+        },
+        "eventVersion": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "StreamEventBody": {
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "additionalData": {
+          "$ref": "#/definitions/EventAdditionalData"
+        },
+        "originalTitleName": {
+          "type": "string"
+        },
+        "paymentProductSKU": {
+          "type": "string"
+        },
+        "purchaseDate": {
+          "type": "string"
+        },
+        "sourceOrderItemId": {
+          "type": "string"
+        },
+        "titleName": {
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "StripeConfig": {
@@ -38167,21 +38714,21 @@
   },
   "x-docs": {
     "alias": "platform",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/platform/swagger.json"
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-08-07T09:34:38+00:00",
-    "buildID": "4.32.1",
+    "buildDate": "2023-08-28T03:11:37+00:00",
+    "buildID": "4.34.0",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
     "buildOS": "Linux amd64 5.13.0-1021-aws",
-    "gitBranchName": "release-candidate",
-    "gitHash": "ac8761be91",
+    "gitBranchName": "master",
+    "gitHash": "a24926e3a7",
     "gitTag": "3.31.0",
     "name": "justice-platform-service",
-    "realm": "staging",
-    "version": "4.32.1",
-    "version-roles-seeding": "0.0.32"
+    "realm": "dev",
+    "version": "4.34.0",
+    "version-roles-seeding": "0.0.43"
   }
 }

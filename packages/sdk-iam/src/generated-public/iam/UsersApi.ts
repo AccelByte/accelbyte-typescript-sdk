@@ -336,7 +336,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createUser_ByPlatformId(
     platformId: string,
     data: PlatformUserIdRequest,
-    queryParams?: { rawPUID?: boolean | null }
+    queryParams?: { rawPID?: boolean | null }
   ): Promise<UserPlatforms> {
     const $ = new Users$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createUser_ByPlatformId(platformId, data, queryParams)
@@ -507,6 +507,19 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * This endpoint is used to process third party account link, this endpoint will return the link status directly instead of redirecting to the original page.&lt;br/&gt; The param &lt;strong&gt;state&lt;/strong&gt; comes from the response of &lt;strong&gt;/users/me/platforms/{platformId}/web/link&lt;/strong&gt;
+   */
+  async function postWebLinkProcesMeUser_ByPlatformId(
+    platformId: string,
+    data: { state: string | null; code?: string | null }
+  ): Promise<LinkRequest> {
+    const $ = new Users$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.postWebLinkProcesMeUser_ByPlatformId(platformId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * This endpoint is used by third party to redirect the code for the purpose of linking the account third party to IAM account.
    */
   async function getWebLinkEstablishMeUsers_ByPlatformId(
@@ -562,6 +575,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createPlatformLinkWithProgression_ByUserId,
     createUserMePlatformJustice_ByTargetNamespace,
     getUser_ByPlatformId_ByPlatformUserId,
+    postWebLinkProcesMeUser_ByPlatformId,
     getWebLinkEstablishMeUsers_ByPlatformId
   }
 }

@@ -52,6 +52,32 @@ export enum PlayerPortalHomepageKeys {
   SITE_BRAND_URL = 'siteBrandURL'
 }
 
+export const PlayerPortalHeaderCustomizationConfig = z.object({
+  isEnabled: z.boolean(),
+  customHTML: z.string(),
+  customCSS: z.string(),
+  isSticky: z.boolean(),
+  stickyHeight: z.number()
+})
+
+export interface PlayerPortalHeaderCustomizationConfig extends z.infer<typeof PlayerPortalHeaderCustomizationConfig> {}
+
+export const PlayerPortalFooterCustomizationConfig = z.object({
+  isEnabled: z.boolean(),
+  customHTML: z.string(),
+  customCSS: z.string()
+})
+
+export interface PlayerPortalFooterCustomizationConfig extends z.infer<typeof PlayerPortalFooterCustomizationConfig> {}
+
+export const PlayerPortalCustomClassPageScrollEventConfig = z.object({
+  isEnabled: z.boolean(),
+  elementSelector: z.string(),
+  customClassName: z.string()
+})
+
+export interface PlayerPortalCustomClassPageScrollEventConfig extends z.infer<typeof PlayerPortalCustomClassPageScrollEventConfig> {}
+
 export const PlayerPortalConfigData = z.object({
   launcherDownloadLink: Config.merge(
     z.object({
@@ -89,6 +115,21 @@ export const PlayerPortalConfigData = z.object({
   logoVariant: Config.merge(
     z.object({
       data: LogoVariantConfig
+    })
+  ),
+  customHeader: Config.merge(
+    z.object({
+      data: PlayerPortalHeaderCustomizationConfig
+    })
+  ),
+  customFooter: Config.merge(
+    z.object({
+      data: PlayerPortalFooterCustomizationConfig
+    })
+  ),
+  customClassPageScrollEvent: Config.merge(
+    z.object({
+      data: PlayerPortalCustomClassPageScrollEventConfig
     })
   )
 })

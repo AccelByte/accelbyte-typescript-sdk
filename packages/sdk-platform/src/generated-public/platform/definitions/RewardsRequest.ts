@@ -17,10 +17,10 @@ export const RewardsRequest = z.object({
       'ACHIEVEMENT',
       'CONSUME_ENTITLEMENT',
       'DLC',
-      'DLC_REVOCATION',
       'EXPIRATION',
       'GIFT',
       'IAP',
+      'IAP_CHARGEBACK_REVERSED',
       'ORDER_REVOCATION',
       'OTHER',
       'PAYMENT',
@@ -31,7 +31,8 @@ export const RewardsRequest = z.object({
       'REWARD',
       'SELL_BACK'
     ])
-    .nullish()
+    .nullish(),
+  transactionId: z.string().nullish()
 })
 
 export interface RewardsRequest extends z.TypeOf<typeof RewardsRequest> {}

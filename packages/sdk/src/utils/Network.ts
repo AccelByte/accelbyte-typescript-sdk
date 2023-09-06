@@ -9,9 +9,9 @@ import { SdkDevice } from './SdkDevice'
 
 type EjectId = number
 
-type RequestInterceptor = (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>
-type ResponseInterceptor = (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
-type ErrorInterceptor = (error: AxiosError) => Promise<unknown> | unknown
+export type RequestInterceptor = (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>
+export type ResponseInterceptor = (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
+export type ErrorInterceptor = (error: AxiosError) => Promise<unknown> | unknown
 
 const requestInterceptors = new Map<
   EjectId,

@@ -20,6 +20,7 @@ import { PublicInviteUserRequestV4 } from './definitions/PublicInviteUserRequest
 import { UpgradeHeadlessAccountRequestV4 } from './definitions/UpgradeHeadlessAccountRequestV4.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from './definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4.js'
 import { UserCreateFromInvitationRequestV4 } from './definitions/UserCreateFromInvitationRequestV4.js'
+import { UserPublicInfoResponseV4 } from './definitions/UserPublicInfoResponseV4.js'
 import { UserResponseV3 } from './definitions/UserResponseV3.js'
 import { UserResponseV4 } from './definitions/UserResponseV4.js'
 import { UserUpdateRequestV3 } from './definitions/UserUpdateRequestV3.js'
@@ -68,6 +69,16 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createTestUser(data: CreateTestUserRequestV4): Promise<CreateUserResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createTestUser(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * &lt;p&gt;This endpoint requires a valid user token and only returns user&#39;s public information.&lt;br/&gt; action code: 10129&lt;/p&gt;
+   */
+  async function getUser_ByUserId(userId: string): Promise<UserPublicInfoResponseV4> {
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -260,6 +271,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     createUser,
     patchUserMe,
     createTestUser,
+    getUser_ByUserId,
     updateUserMeEmail,
     deleteUserMeMfaDevice,
     getUsersMeMfaFactor,

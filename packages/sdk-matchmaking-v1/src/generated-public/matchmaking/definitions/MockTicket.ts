@@ -24,7 +24,8 @@ export const MockTicket = z.object({
   sampling_properties: z.array(z.array(z.string())),
   sorted_latency: z.array(Region),
   status: z.string(),
-  ticket_id: z.string()
+  ticket_id: z.string(),
+  ticket_ids: z.array(z.string())
 })
 
 export interface MockTicket extends z.TypeOf<typeof MockTicket> {}

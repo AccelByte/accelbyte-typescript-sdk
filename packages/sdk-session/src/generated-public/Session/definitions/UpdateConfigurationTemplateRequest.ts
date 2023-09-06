@@ -14,6 +14,7 @@ export const UpdateConfigurationTemplateRequest = z.object({
   deployment: z.string(),
   dsSource: z.string().nullish(),
   fallbackClaimKeys: z.array(z.string()).nullish(),
+  immutableStorage: z.boolean().nullish(),
   inactiveTimeout: z.number().int(),
   inviteTimeout: z.number().int(),
   joinability: z.string(),

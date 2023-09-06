@@ -25,6 +25,7 @@ export const MatchmakingResult = z.object({
   server_name: z.string(),
   status: z.string(),
   ticket_id: z.string(),
+  ticket_ids: z.array(z.string()).nullish(),
   updated_at: z.string()
 })
 

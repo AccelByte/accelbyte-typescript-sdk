@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const ImportResponse = z.object({ affected: z.array(z.string()), failed: z.array(z.string()) })
+export const ImportResponse = z.object({ affected: z.array(z.string()), failed: z.array(z.string()).nullish() })
 
 export interface ImportResponse extends z.TypeOf<typeof ImportResponse> {}

@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const ValidationError = z.object({ loc: z.array(z.undefined()), msg: z.string(), type: z.string() })
+export const ValidationError = z.object({ loc: z.array(z.string()), msg: z.string(), type: z.string() })
 
 export interface ValidationError extends z.TypeOf<typeof ValidationError> {}

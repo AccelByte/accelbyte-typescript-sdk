@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 export const CreateImageRequest = z.object({
   artifactPath: z.string(),
+  coreDumpEnabled: z.boolean(),
   dockerPath: z.string(),
   image: z.string(),
   imageSize: z.number().int(),

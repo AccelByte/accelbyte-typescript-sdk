@@ -13,7 +13,6 @@ import { AppendTeamGameSessionRequest } from '../definitions/AppendTeamGameSessi
 import { CreateGameSessionRequest } from '../definitions/CreateGameSessionRequest.js'
 import { GameSessionQueryResponse } from '../definitions/GameSessionQueryResponse.js'
 import { GameSessionResponse } from '../definitions/GameSessionResponse.js'
-import { GameSessionResponseArray } from '../definitions/GameSessionResponseArray.js'
 import { JoinByCodeRequest } from '../definitions/JoinByCodeRequest.js'
 import { PromoteLeaderRequest } from '../definitions/PromoteLeaderRequest.js'
 import { SessionInviteRequest } from '../definitions/SessionInviteRequest.js'
@@ -38,10 +37,10 @@ export class GameSession$ {
   /**
    * Query game sessions. By default, API will return a list of available game sessions (joinability: open). Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS. query parameter \&#34;availability\&#34; to filter sessions&#39; availability: all: return all sessions regardless it&#39;s full full: only return active sessions default behavior (unset or else): return only available sessions (not full)
    */
-  createGamesession_ByNS(): Promise<IResponse<GameSessionQueryResponse>> {
+  createGamesession_ByNS(data: any): Promise<IResponse<GameSessionQueryResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/gamesessions'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, null, { params })
+    const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
   }
@@ -53,12 +52,12 @@ export class GameSession$ {
     order?: string | null
     orderBy?: string | null
     status?: string | null
-  }): Promise<IResponseWithSync<GameSessionResponseArray>> {
+  }): Promise<IResponseWithSync<GameSessionQueryResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/users/me/gamesessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, GameSessionResponseArray, 'GameSessionResponseArray')
+    const res = () => Validate.responseType(() => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -92,7 +91,7 @@ export class GameSession$ {
   }
 
   /**
-   * Get game session detail. Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS.
+   * Get game session detail. Session will only be accessible from active players in the session, and client with the permission, except the joinability is set to OPEN. Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS.
    */
   getGamesession_BySessionId(sessionId: string): Promise<IResponseWithSync<GameSessionResponse>> {
     const params = {} as SDKRequestConfig

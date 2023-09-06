@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const UploaderFlag = z.object({ name: z.string(), shorthand: z.string(), value: z.string() })
+export const UserPublicInfoResponseV4 = z.object({ displayName: z.string(), userId: z.string() })
 
-export interface UploaderFlag extends z.TypeOf<typeof UploaderFlag> {}
+export interface UserPublicInfoResponseV4 extends z.TypeOf<typeof UserPublicInfoResponseV4> {}

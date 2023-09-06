@@ -13,14 +13,15 @@ import {
   validatePassword,
   validateRegex,
   ValidateRegexErrorType,
-  validateUserName
+  validateUserName,
+  validateNotEmpty
 } from '@accelbyte/validator'
 import isEmpty from 'validator/lib/isEmpty.js'
 import { z } from 'zod'
 import { InputValidationDataPublic } from '../../generated-public/iam/definitions/InputValidationDataPublic.js'
 import { ValidationDetailPublic } from '../../generated-public/iam/definitions/ValidationDetailPublic.js'
 
-export const ValidateableInputField = z.enum(['username', 'displayName', 'password', 'email'])
+export const ValidateableInputField = z.enum(['username', 'displayName', 'password', 'email', 'dateOfBirth'])
 export type ValidateableInputField = z.infer<typeof ValidateableInputField>
 
 export class InputValidationHelper {
@@ -58,6 +59,12 @@ export class InputValidationHelper {
     })
   }
 
+  static validateDateOfBirth = (value: string, validations: InputValidationDataPublic[]) => {
+    const validation = InputValidationHelper.getValidationByKey(ValidateableInputField.enum.dateOfBirth, validations)
+    if (!validation) return null
+    return validateNotEmpty(value)
+  }
+
   static validatePassword = (value: string, validations: InputValidationDataPublic[]) => {
     const validation = InputValidationHelper.getValidationByKey(ValidateableInputField.enum.password, validations)
     if (!validation) return null
@@ -69,6 +76,7 @@ export class InputValidationHelper {
       maxRepeatingSpecialCharacter: validation.maxRepeatingSpecialCharacter,
       minCharType: validation.minCharType,
       letterCase: validation.letterCase,
+      allowSpace: validation.allowSpace,
       allowLetter: validation.allowLetter,
       allowDigit: validation.allowDigit,
       allowAllSpecialCharacters: validation.allowAllSpecialCharacters,

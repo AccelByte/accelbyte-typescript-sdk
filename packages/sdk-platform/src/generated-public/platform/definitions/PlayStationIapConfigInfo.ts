@@ -5,6 +5,14 @@
  */
 import { z } from 'zod'
 
-export const PlayStationIapConfigInfo = z.object({ environment: z.string().nullish(), namespace: z.string() })
+export const PlayStationIapConfigInfo = z.object({
+  backOfficeServerClientId: z.string().nullish(),
+  backOfficeServerClientSecret: z.string().nullish(),
+  enableStreamJob: z.boolean().nullish(),
+  environment: z.string().nullish(),
+  namespace: z.string(),
+  streamName: z.string().nullish(),
+  streamPartnerName: z.string().nullish()
+})
 
 export interface PlayStationIapConfigInfo extends z.TypeOf<typeof PlayStationIapConfigInfo> {}

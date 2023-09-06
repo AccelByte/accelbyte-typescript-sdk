@@ -10,11 +10,13 @@
 import { PartyApi } from './Session/PartyApi.js'
 import { GameSessionApi } from './Session/GameSessionApi.js'
 import { PlayerApi } from './Session/PlayerApi.js'
+import { SessionStorageApi } from './Session/SessionStorageApi.js'
 
 const apis = {
   PartyApi,
   GameSessionApi,
-  PlayerApi
+  PlayerApi,
+  SessionStorageApi
 }
 
 export const Session = apis

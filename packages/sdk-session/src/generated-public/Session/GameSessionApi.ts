@@ -13,7 +13,6 @@ import { CreateGameSessionRequest } from './definitions/CreateGameSessionRequest
 import { GameSession$ } from './endpoints/GameSession$.js'
 import { GameSessionQueryResponse } from './definitions/GameSessionQueryResponse.js'
 import { GameSessionResponse } from './definitions/GameSessionResponse.js'
-import { GameSessionResponseArray } from './definitions/GameSessionResponseArray.js'
 import { JoinByCodeRequest } from './definitions/JoinByCodeRequest.js'
 import { PromoteLeaderRequest } from './definitions/PromoteLeaderRequest.js'
 import { SessionInviteRequest } from './definitions/SessionInviteRequest.js'
@@ -40,9 +39,9 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Query game sessions. By default, API will return a list of available game sessions (joinability: open). Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS. query parameter \&#34;availability\&#34; to filter sessions&#39; availability: all: return all sessions regardless it&#39;s full full: only return active sessions default behavior (unset or else): return only available sessions (not full)
    */
-  async function createGamesession_ByNS(): Promise<GameSessionQueryResponse> {
+  async function createGamesession_ByNS(data: any): Promise<GameSessionQueryResponse> {
     const $ = new GameSession$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.createGamesession_ByNS()
+    const resp = await $.createGamesession_ByNS(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -54,7 +53,7 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     order?: string | null
     orderBy?: string | null
     status?: string | null
-  }): Promise<GameSessionResponseArray> {
+  }): Promise<GameSessionQueryResponse> {
     const $ = new GameSession$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getUsersMeGamesessions(queryParams)
     if (resp.error) throw resp.error
@@ -82,7 +81,7 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get game session detail. Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS.
+   * Get game session detail. Session will only be accessible from active players in the session, and client with the permission, except the joinability is set to OPEN. Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS.
    */
   async function getGamesession_BySessionId(sessionId: string): Promise<GameSessionResponse> {
     const $ = new GameSession$(Network.create(requestConfig), namespace, cache)

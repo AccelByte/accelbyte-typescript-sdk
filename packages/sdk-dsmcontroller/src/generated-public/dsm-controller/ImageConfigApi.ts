@@ -11,6 +11,7 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { GetImageDetailResponse } from './definitions/GetImageDetailResponse.js'
 import { GetImageLimitResponse } from './definitions/GetImageLimitResponse.js'
 import { ImageConfig$ } from './endpoints/ImageConfig$.js'
+import { ListImageResponse } from './definitions/ListImageResponse.js'
 
 export function ImageConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
@@ -18,6 +19,22 @@ export function ImageConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
+
+  /**
+   * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint lists all of dedicated servers images. Parameter Offset and Count is Required
+   */
+  async function getImages(queryParams?: {
+    count?: number
+    offset?: number
+    q?: string | null
+    sortBy?: 'createdAt' | 'updatedAt' | 'version'
+    sortDirection?: 'asc' | 'desc'
+  }): Promise<ListImageResponse> {
+    const $ = new ImageConfig$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getImages(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get DS image limit for specific namespace.This endpoint also give the non-persistent image which is used by any deployments
@@ -40,6 +57,7 @@ export function ImageConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    getImages,
     getImagesLimit,
     getImageVersion_ByVersion
   }

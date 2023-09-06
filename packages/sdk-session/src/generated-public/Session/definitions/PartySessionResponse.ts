@@ -20,6 +20,7 @@ export const PartySessionResponse = z.object({
   leaderID: z.string(),
   members: z.array(UserResponse),
   namespace: z.string(),
+  storage: z.record(z.any()).nullish(),
   updatedAt: z.string(),
   version: z.number().int()
 })

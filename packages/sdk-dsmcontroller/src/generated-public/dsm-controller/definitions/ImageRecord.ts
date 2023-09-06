@@ -4,12 +4,16 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { ImageReplication } from './ImageReplication.js'
 
 export const ImageRecord = z.object({
   artifactPath: z.string(),
+  coreDumpEnabled: z.boolean(),
   createdAt: z.string(),
   dockerPath: z.string(),
   image: z.string(),
+  imageReplications: z.array(ImageReplication),
+  imageReplicationsMap: z.record(ImageReplication),
   imageSize: z.number().int(),
   modifiedBy: z.string(),
   namespace: z.string(),

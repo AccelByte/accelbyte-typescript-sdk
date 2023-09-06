@@ -22,7 +22,7 @@ import { UpdateContentRequest } from '../definitions/UpdateContentRequest.js'
 import { UpdateScreenshotRequest } from '../definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from '../definitions/UpdateScreenshotResponse.js'
 
-export class PublicContent$ {
+export class PublicContentLegacy$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 

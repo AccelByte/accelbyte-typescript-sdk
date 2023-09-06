@@ -15,8 +15,8 @@ export const CreateDeploymentOverrideRequest = z.object({
   game_version: z.string(),
   max_count: z.number().int(),
   min_count: z.number().int(),
-  region_overrides: z.record(PodCountConfigOverride),
-  regions: z.array(z.string()),
+  region_overrides: z.record(PodCountConfigOverride).nullish(),
+  regions: z.array(z.string()).nullish(),
   session_timeout: z.number().int().nullish(),
   unlimited: z.boolean(),
   use_buffer_percent: z.boolean()

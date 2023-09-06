@@ -41,7 +41,7 @@ export function PublicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * This endpoint returns the providers by region.
    */
-  async function getProviderRegion_ByRegion(region: string): Promise<DefaultProvider> {
+  async function getProviderRegion_ByRegion(region: string): Promise<unknown> {
     const $ = new Public$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getProviderRegion_ByRegion(region)
     if (resp.error) throw resp.error

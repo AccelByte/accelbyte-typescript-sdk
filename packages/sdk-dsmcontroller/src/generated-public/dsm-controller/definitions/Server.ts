@@ -8,17 +8,19 @@ import { AllocationEvent } from './AllocationEvent.js'
 import { StatusHistory } from './StatusHistory.js'
 
 export const Server = z.object({
-  allocation_events: z.array(AllocationEvent),
+  allocation_events: z.array(AllocationEvent).nullish(),
   allocation_id: z.string(),
-  alternate_ips: z.array(z.string()),
+  alternate_ips: z.array(z.string()).nullish(),
+  artifact_path: z.string().nullish(),
   cpu_limit: z.number().int(),
   created_at: z.string(),
-  custom_attribute: z.string(),
+  custom_attribute: z.string().nullish(),
   deployment: z.string(),
-  deployment_override: z.string(),
+  deployment_override: z.string().nullish(),
   game_version: z.string(),
   image_version: z.string(),
   ip: z.string(),
+  is_core_dump_enabled: z.boolean(),
   is_override_game_version: z.boolean(),
   job_id: z.string(),
   last_update: z.string(),
@@ -27,13 +29,13 @@ export const Server = z.object({
   params: z.string(),
   pod_name: z.string(),
   port: z.number().int(),
-  ports: z.record(z.number().int()),
+  ports: z.record(z.number().int()).nullish(),
   protocol: z.string(),
   provider: z.string(),
   region: z.string(),
   session_id: z.string(),
   status: z.string(),
-  status_history: z.array(StatusHistory),
+  status_history: z.array(StatusHistory).nullish(),
   termination_reason: z.string()
 })
 

@@ -7,6 +7,7 @@
 import { SDKEvents, SDKOptions, SDKRequestConfig } from './Types'
 import { injectErrorInterceptors } from './interceptors/ErrorInterceptor'
 import { injectAuthInterceptors } from './interceptors/AuthInterceptors'
+import { injectRequestInterceptors, injectResponseInterceptors } from './utils/Network'
 import { ApiUtils } from './utils/ApiUtils'
 
 /**
@@ -48,13 +49,46 @@ class AccelbyteSDKImpl {
         ...config?.headers
       }
     }
+
+    // TODO: what we can do for next breaking change is that,
+    // instead of having a "global" axios interceptors, we can create the instance here.
+    //
+    // ```
+    // this.axiosInstance = Network.create(...)
+    // this.axiosInstance.interceptors.use(...)
+    // ```
+    //
+    // After that, our SDK assembly will return this axiosInstance, which will be used by each of the service SDKs.
+    //
+    // ```
+    // const { axiosInstance, opts } = sdk.assembly()
+    // axiosInstance.defaults = {
+    //   ...axiosInstance.defaults,
+    //   ...args.config,
+    //   headers: {
+    //     ...axiosInstance.defaults.headers,
+    //     ...args.config.headers
+    //   }
+    // }
+    // ```
+    //
+    // This way, each of the SDK instance will have their own interceptors and will not "pollute"
+    // the global axios interceptors. It's easier to test in isolation as well, because with the global
+    // interceptors, we can't isolate test the SDK instance... or maybe we can, with `axios.interceptors.request.clear`,
+    // but they can't be done in parallel.
   }
 
   init() {
-    const { baseURL, clientId } = this.options
+    const { baseURL, clientId, customInterceptors } = this.options
 
-    injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.getRefreshToken)
-    injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
+    if (customInterceptors) {
+      injectRequestInterceptors(customInterceptors.request, customInterceptors.error)
+      injectResponseInterceptors(customInterceptors.response, customInterceptors.error)
+    } else {
+      // Default interceptors.
+      injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.getRefreshToken)
+      injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
+    }
 
     // TODO reintegrate doVersionDiagnostics later on
     // setTimeout(() => this.doVersionDiagnostics(), TIMEOUT_TO_DIAGNOSTICS)

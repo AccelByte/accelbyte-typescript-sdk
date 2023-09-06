@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BulkAddFriendsRequest } from './definitions/BulkAddFriendsRequest.js'
+import { BulkFriendsRequest } from './definitions/BulkFriendsRequest.js'
+import { BulkFriendsResponse } from './definitions/BulkFriendsResponse.js'
 import { Friends$ } from './endpoints/Friends$.js'
 import { GetUserFriendsResponseArray } from './definitions/GetUserFriendsResponseArray.js'
 import { GetUserIncomingFriendsResponseArray } from './definitions/GetUserIncomingFriendsResponseArray.js'
@@ -47,16 +48,16 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
-  async function getFriendsMeIncoming(): Promise<GetUserIncomingFriendsResponseArray> {
+  async function getFriendsMeIncoming(queryParams?: { limit?: number; offset?: number }): Promise<GetUserIncomingFriendsResponseArray> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getFriendsMeIncoming()
+    const resp = await $.getFriendsMeIncoming(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getFriendsMeOutgoing(): Promise<GetUserOutgoingFriendsResponseArray> {
+  async function getFriendsMeOutgoing(queryParams?: { limit?: number; offset?: number }): Promise<GetUserOutgoingFriendsResponseArray> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getFriendsMeOutgoing()
+    const resp = await $.getFriendsMeOutgoing(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -68,23 +69,29 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
-  async function getFriendsMePlatforms(): Promise<ListBulkUserPlatformsResponse> {
+  async function getFriendsMePlatforms(queryParams?: { limit?: number; offset?: number }): Promise<ListBulkUserPlatformsResponse> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getFriendsMePlatforms()
+    const resp = await $.getFriendsMePlatforms(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getFriendsMeIncomingTime(): Promise<LoadIncomingFriendsWithTimeResponseArray> {
+  async function getFriendsMeIncomingTime(queryParams?: {
+    limit?: number
+    offset?: number
+  }): Promise<LoadIncomingFriendsWithTimeResponseArray> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getFriendsMeIncomingTime()
+    const resp = await $.getFriendsMeIncomingTime(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getFriendsMeOutgoingTime(): Promise<LoadOutgoingFriendsWithTimeResponseArray> {
+  async function getFriendsMeOutgoingTime(queryParams?: {
+    limit?: number
+    offset?: number
+  }): Promise<LoadOutgoingFriendsWithTimeResponseArray> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getFriendsMeOutgoingTime()
+    const resp = await $.getFriendsMeOutgoingTime(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -120,9 +127,19 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Required permission : &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;friends request in a namespace.
    */
-  async function createAddBulkFriend_ByUserId(userId: string, data: BulkAddFriendsRequest): Promise<unknown> {
+  async function createAddBulkFriend_ByUserId(userId: string, data: BulkFriendsRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createAddBulkFriend_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;friends request in a namespace.
+   */
+  async function createDeleteBulkFriend_ByUserId(userId: string, data: BulkFriendsRequest): Promise<BulkFriendsResponse> {
+    const $ = new Friends$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createDeleteBulkFriend_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -140,6 +157,7 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createFriendMeRequestCancel,
     createFriendMeRequestReject,
     getFriendMeStatu_ByFriendId,
-    createAddBulkFriend_ByUserId
+    createAddBulkFriend_ByUserId,
+    createDeleteBulkFriend_ByUserId
   }
 }

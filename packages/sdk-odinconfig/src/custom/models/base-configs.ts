@@ -103,3 +103,10 @@ export const BackgroundConfig = z.object({
 })
 
 export interface BackgroundConfig extends z.TypeOf<typeof BackgroundConfig> {}
+
+export const ThirdPartyLoginConfig = z.object({
+  platform: z.string(),
+  status: z.boolean()
+})
+
+export interface ThirdPartyLoginConfig extends z.TypeOf<typeof ThirdPartyLoginConfig> {}

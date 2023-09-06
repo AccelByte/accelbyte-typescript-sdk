@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const BulkAddFriendsRequest = z.object({ friendIds: z.array(z.string()) })
+export const BulkFriendsRequest = z.object({ friendIds: z.array(z.string()) })
 
-export interface BulkAddFriendsRequest extends z.TypeOf<typeof BulkAddFriendsRequest> {}
+export interface BulkFriendsRequest extends z.TypeOf<typeof BulkFriendsRequest> {}

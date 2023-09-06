@@ -15,14 +15,14 @@ import { CreateScreenshotRequest } from './definitions/CreateScreenshotRequest.j
 import { CreateScreenshotResponse } from './definitions/CreateScreenshotResponse.js'
 import { GetContentPreviewResponse } from './definitions/GetContentPreviewResponse.js'
 import { PaginatedContentDownloadResponse } from './definitions/PaginatedContentDownloadResponse.js'
-import { PublicContent$ } from './endpoints/PublicContent$.js'
+import { PublicContentLegacy$ } from './endpoints/PublicContentLegacy$.js'
 import { PublicCreateContentRequestS3 } from './definitions/PublicCreateContentRequestS3.js'
 import { PublicGetContentBulkRequest } from './definitions/PublicGetContentBulkRequest.js'
 import { UpdateContentRequest } from './definitions/UpdateContentRequest.js'
 import { UpdateScreenshotRequest } from './definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from './definitions/UpdateScreenshotResponse.js'
 
-export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
@@ -45,7 +45,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     type?: string | null
     userId?: string | null
   }): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getContents(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +55,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Maximum requested Ids: 100. Public user can access without token or if token specified, requires valid user token
    */
   async function createContentBulk(data: PublicGetContentBulkRequest): Promise<ContentDownloadResponseArray> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createContentBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -65,7 +65,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getContent_ByContentId(contentId: string): Promise<ContentDownloadResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getContent_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -78,7 +78,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getContents_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -88,7 +88,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Requires valid user token&lt;/p&gt;&lt;p&gt;&lt;b&gt;NOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content&lt;/b&gt;&lt;/p&gt;
    */
   async function getPreview_ByContentId(contentId: string): Promise<GetContentPreviewResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getPreview_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -113,7 +113,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       userId?: string | null
     }
   ): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getContents_ByChannelId(channelId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -123,7 +123,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getContentSharecode_ByShareCode(shareCode: string): Promise<ContentDownloadResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getContentSharecode_ByShareCode(shareCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -137,7 +137,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     data: PublicCreateContentRequestS3
   ): Promise<CreateContentResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createContentS3_ByUserId_ByChannelId(userId, channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -151,7 +151,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: CreateScreenshotRequest
   ): Promise<CreateScreenshotResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createScreenshot_ByUserId_ByContentId(userId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -165,7 +165,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateScreenshotRequest
   ): Promise<UpdateScreenshotResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.updateScreenshot_ByUserId_ByContentId(userId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -175,7 +175,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
    */
   async function deleteContent_ByUserId_ByChannelId_ByContentId(userId: string, channelId: string, contentId: string): Promise<unknown> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.deleteContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -190,7 +190,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateContentRequest
   ): Promise<CreateContentResponse> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.updateContentS3_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -204,7 +204,7 @@ export function PublicContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     screenshotId: string
   ): Promise<unknown> {
-    const $ = new PublicContent$(Network.create(requestConfig), namespace, cache)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.deleteScreenshot_ByUserId_ByContentId_ByScreenshotId(userId, contentId, screenshotId)
     if (resp.error) throw resp.error
     return resp.response.data

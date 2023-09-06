@@ -21,6 +21,7 @@ import { PublicInviteUserRequestV4 } from '../definitions/PublicInviteUserReques
 import { UpgradeHeadlessAccountRequestV4 } from '../definitions/UpgradeHeadlessAccountRequestV4.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from '../definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4.js'
 import { UserCreateFromInvitationRequestV4 } from '../definitions/UserCreateFromInvitationRequestV4.js'
+import { UserPublicInfoResponseV4 } from '../definitions/UserPublicInfoResponseV4.js'
 import { UserResponseV3 } from '../definitions/UserResponseV3.js'
 import { UserResponseV4 } from '../definitions/UserResponseV4.js'
 import { UserUpdateRequestV3 } from '../definitions/UserUpdateRequestV3.js'
@@ -71,6 +72,23 @@ export class UsersV4$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.responseType(() => resultPromise, CreateUserResponseV4, 'CreateUserResponseV4')
+  }
+
+  /**
+   * &lt;p&gt;This endpoint requires a valid user token and only returns user&#39;s public information.&lt;br/&gt; action code: 10129&lt;/p&gt;
+   */
+  getUser_ByUserId(userId: string): Promise<IResponseWithSync<UserPublicInfoResponseV4>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, UserPublicInfoResponseV4, 'UserPublicInfoResponseV4')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

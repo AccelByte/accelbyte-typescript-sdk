@@ -9,7 +9,7 @@ import { RevokeEntry } from './RevokeEntry.js'
 export const RevocationRequest = z.object({
   meta: z.record(z.any()).nullish(),
   revokeEntries: z.array(RevokeEntry).nullish(),
-  source: z.enum(['DLC', 'ORDER', 'OTHER']).nullish(),
+  source: z.enum(['DLC', 'IAP', 'ORDER', 'OTHER']).nullish(),
   transactionId: z.string().nullish()
 })
 

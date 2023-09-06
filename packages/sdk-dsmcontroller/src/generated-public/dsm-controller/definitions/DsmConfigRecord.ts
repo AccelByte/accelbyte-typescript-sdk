@@ -13,7 +13,7 @@ export const DsmConfigRecord = z.object({
   modifiedBy: z.string(),
   namespace: z.string(),
   port: z.number().int(),
-  ports: z.record(z.number().int()),
+  ports: z.record(z.number().int()).nullish(),
   protocol: z.string(),
   providers: z.array(z.string()),
   session_timeout: z.number().int(),
