@@ -8,6 +8,7 @@ import { ImageReplication } from './ImageReplication.js'
 
 export const ImageRecordUpdate = z.object({
   artifactPath: z.string(),
+  coreDumpEnabled: z.boolean(),
   image: z.string(),
   imageReplicationsMap: z.record(ImageReplication),
   namespace: z.string(),

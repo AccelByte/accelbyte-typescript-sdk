@@ -23,6 +23,7 @@ export const ItemUpdate = z.object({
   entitlementType: z.enum(['CONSUMABLE', 'DURABLE']),
   ext: z.record(z.any()).nullish(),
   features: z.array(z.string()).nullish(),
+  flexible: z.boolean().nullish(),
   images: z.array(Image).nullish(),
   itemIds: z.array(z.string()).nullish(),
   itemQty: z.record(z.number().int()).nullish(),

@@ -113,7 +113,7 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Revoke code of the game session. Only leader can revoke a code.
    */
-  async function deleteCode_BySessionId(sessionId: string): Promise<GameSessionResponse> {
+  async function deleteCode_BySessionId(sessionId: string): Promise<unknown> {
     const $ = new GameSession$(Network.create(requestConfig), namespace, cache)
     const resp = await $.deleteCode_BySessionId(sessionId)
     if (resp.error) throw resp.error

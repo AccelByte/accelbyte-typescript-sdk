@@ -133,7 +133,7 @@ export function OAuth20Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;This endpoint will return a list of revoked users and revoked tokens. List of revoked tokens in bloom filter format.&lt;/p&gt; &lt;p&gt;This endpoint requires authorized requests header with valid access token.&lt;/p&gt; &lt;p&gt;The bloom filter uses MurmurHash3 algorithm for hashing the values&lt;/p&gt; &lt;p&gt;action code : 10708&lt;/p&gt;
+   * &lt;p&gt;This endpoint will return a list of revoked users and revoked tokens. List of revoked tokens in bloom filter format.&lt;/p&gt; &lt;p&gt;This endpoint requires all requests to have Authorization header set with Basic access authentication constructed from client id and client secret.&lt;/p&gt; &lt;p&gt;The bloom filter uses MurmurHash3 algorithm for hashing the values&lt;/p&gt; &lt;p&gt;action code : 10708&lt;/p&gt;
    */
   async function getOauthRevocationlist(): Promise<RevocationList> {
     const $ = new OAuth20$(Network.create(requestConfig), namespace, cache)

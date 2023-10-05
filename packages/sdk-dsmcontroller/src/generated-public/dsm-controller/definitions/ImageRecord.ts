@@ -12,12 +12,13 @@ export const ImageRecord = z.object({
   createdAt: z.string(),
   dockerPath: z.string(),
   image: z.string(),
-  imageReplications: z.array(ImageReplication),
-  imageReplicationsMap: z.record(ImageReplication),
+  imageReplications: z.array(ImageReplication).nullish(),
+  imageReplicationsMap: z.record(ImageReplication).nullish(),
   imageSize: z.number().int(),
   modifiedBy: z.string(),
   namespace: z.string(),
   persistent: z.boolean(),
+  ulimitFileSize: z.number().int(),
   updatedAt: z.string(),
   version: z.string()
 })

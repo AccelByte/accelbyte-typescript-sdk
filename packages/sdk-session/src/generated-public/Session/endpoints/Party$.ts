@@ -102,14 +102,14 @@ export class Party$ {
   /**
    * Revoke code of the party. Only leader can revoke a code.
    */
-  deleteCode_ByPartyId(partyId: string): Promise<IResponse<PartySessionResponse>> {
+  deleteCode_ByPartyId(partyId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/parties/{partyId}/code'
       .replace('{namespace}', this.namespace)
       .replace('{partyId}', partyId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.responseType(() => resultPromise, PartySessionResponse, 'PartySessionResponse')
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**

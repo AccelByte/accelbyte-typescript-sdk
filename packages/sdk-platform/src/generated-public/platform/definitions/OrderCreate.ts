@@ -11,7 +11,7 @@ export const OrderCreate = z.object({
   ext: z.record(z.any()).nullish(),
   itemId: z.string(),
   language: z.string().nullish(),
-  price: z.number().int(),
+  price: z.number().int().nullish(),
   quantity: z.number().int(),
   region: z.string().nullish(),
   returnUrl: z.string().nullish(),

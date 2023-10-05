@@ -123,7 +123,6 @@ export const widgetSimplifiedDefaultConfig = {
       isGetLauncherVisible: true,
       isLinkedAccountsVisible: true,
       isMyProfileVisible: true,
-      isNewsVisible: false,
       isNotificationsVisible: false,
       isOrderHistoryVisible: true,
       isPaymentMethodsVisible: true,
@@ -134,7 +133,6 @@ export const widgetSimplifiedDefaultConfig = {
       isStoreVisible: true,
       isSubscriptionsVisible: false,
       isVirtualCurrencyVisible: false,
-      isNewsV2Visible: false,
       isTwitchDropEnabled: false,
       isLegalEnabled: true
     }

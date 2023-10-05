@@ -19,6 +19,7 @@ export const ItemSnapshot = z.object({
   description: z.string().nullish(),
   entitlementType: z.enum(['CONSUMABLE', 'DURABLE']),
   features: z.array(z.string()).nullish(),
+  flexible: z.boolean().nullish(),
   itemId: z.string(),
   itemIds: z.array(z.string()).nullish(),
   itemQty: z.record(z.number().int()).nullish(),

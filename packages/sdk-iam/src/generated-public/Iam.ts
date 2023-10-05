@@ -14,6 +14,7 @@ import { UsersApi } from './iam/UsersApi.js'
 import { SsoApi } from './iam/SsoApi.js'
 import { UsersV4Api } from './iam/UsersV4Api.js'
 import { InputValidationsApi } from './iam/InputValidationsApi.js'
+import { CountryApi } from './iam/CountryApi.js'
 import { SsoSaml20Api } from './iam/SsoSaml20Api.js'
 import { ThirdPartyCredentialApi } from './iam/ThirdPartyCredentialApi.js'
 
@@ -25,6 +26,7 @@ const apis = {
   SsoApi,
   UsersV4Api,
   InputValidationsApi,
+  CountryApi,
   SsoSaml20Api,
   ThirdPartyCredentialApi
 }

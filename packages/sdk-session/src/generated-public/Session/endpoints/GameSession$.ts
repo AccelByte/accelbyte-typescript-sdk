@@ -138,14 +138,14 @@ export class GameSession$ {
   /**
    * Revoke code of the game session. Only leader can revoke a code.
    */
-  deleteCode_BySessionId(sessionId: string): Promise<IResponse<GameSessionResponse>> {
+  deleteCode_BySessionId(sessionId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/code'
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**

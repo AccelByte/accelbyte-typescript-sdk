@@ -15,7 +15,7 @@ export class EventV2$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Requires valid user access token
    */
   getEvent_ByUserId(
     userId: string,
@@ -37,7 +37,7 @@ export class EventV2$ {
   }
 
   /**
-   * &lt;p&gt;Available Type: &lt;/p&gt; &lt;ul&gt; &lt;li&gt;email&lt;/li&gt; &lt;li&gt;password&lt;/li&gt; &lt;li&gt;displayname&lt;/li&gt; &lt;li&gt;dateofbirth&lt;/li&gt; &lt;li&gt;country&lt;/li&gt; &lt;li&gt;language&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Requires a valid user access token&lt;/p&gt;
+   * Available Type: * email * password * displayname * dateofbirth * country * language Requires valid user access token
    */
   getEdithistory_ByUserId(
     userId: string,

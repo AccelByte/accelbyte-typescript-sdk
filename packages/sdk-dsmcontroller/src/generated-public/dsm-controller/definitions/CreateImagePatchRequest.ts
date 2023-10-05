@@ -14,6 +14,7 @@ export const CreateImagePatchRequest = z.object({
   namespace: z.string(),
   patchVersion: z.string(),
   persistent: z.boolean(),
+  ulimitFileSize: z.number().int(),
   uploaderFlag: z.string(),
   version: z.string()
 })

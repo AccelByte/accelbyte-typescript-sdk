@@ -9,6 +9,7 @@
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AppInfo } from './definitions/AppInfo.js'
+import { EstimatedPriceInfoArray } from './definitions/EstimatedPriceInfoArray.js'
 import { Item$ } from './endpoints/Item$.js'
 import { ItemDynamicDataInfo } from './definitions/ItemDynamicDataInfo.js'
 import { ItemInfo } from './definitions/ItemInfo.js'
@@ -135,6 +136,20 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * This API is used to get estimated prices of item
+   */
+  async function getItemsEstimatedPrice(queryParams: {
+    itemIds: string | null
+    region?: string | null
+    storeId?: string | null
+  }): Promise<EstimatedPriceInfoArray> {
+    const $ = new Item$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getItemsEstimatedPrice(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * This API is used to get an item in locale. If item not exist in specific region, default region item will return.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getLocale_ByItemId(
@@ -188,6 +203,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getItemsByAppId,
     getItemsByCriteria,
     getItemsLocaleByIds,
+    getItemsEstimatedPrice,
     getLocale_ByItemId,
     getDynamic_ByItemId,
     getAppLocale_ByItemId,

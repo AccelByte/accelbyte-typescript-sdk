@@ -9,7 +9,6 @@
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
-import { CountryObjectArray } from '../definitions/CountryObjectArray.js'
 import { RetrieveTimeResponse } from '../definitions/RetrieveTimeResponse.js'
 
 export class Misc$ {
@@ -25,23 +24,6 @@ export class Misc$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, RetrieveTimeResponse, 'RetrieveTimeResponse')
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
-   * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
-   */
-  getMiscCountries(queryParams?: { lang?: string | null }): Promise<IResponseWithSync<CountryObjectArray>> {
-    const params = { lang: 'en', ...queryParams } as SDKRequestConfig
-    const url = '/basic/v1/public/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, CountryObjectArray, 'CountryObjectArray')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

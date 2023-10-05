@@ -6,6 +6,7 @@
 import { z } from 'zod'
 import { CurrencySummary } from './CurrencySummary.js'
 import { ItemSnapshot } from './ItemSnapshot.js'
+import { OrderBundleItemInfo } from './OrderBundleItemInfo.js'
 import { OrderCreationOptions } from './OrderCreationOptions.js'
 
 export const Order = z.object({
@@ -29,6 +30,7 @@ export const Order = z.object({
   itemSnapshot: ItemSnapshot.nullish(),
   language: z.string().nullish(),
   namespace: z.string().nullish(),
+  orderBundleItemInfos: z.array(OrderBundleItemInfo).nullish(),
   orderNo: z.string().nullish(),
   paymentMethod: z.string().nullish(),
   paymentMethodFee: z.number().int().nullish(),

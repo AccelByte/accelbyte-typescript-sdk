@@ -18,6 +18,7 @@ export const FulfillmentRequest = z.object({
   origin: z
     .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
     .nullish(),
+  overrideBundleItemQty: z.record(z.number().int()).nullish(),
   quantity: z.number().int(),
   region: z.string().nullish(),
   source: z

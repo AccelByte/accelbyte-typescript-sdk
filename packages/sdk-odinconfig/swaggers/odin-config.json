@@ -8,7 +8,7 @@
       "url": "https://accelbyte.io",
       "email": "engineering@accelbyte.io"
     },
-    "version": "0.16.2"
+    "version": "5.5.1"
   },
   "paths": {
     "/odin-config/v1/admin/namespaces/{namespace}/templates": {
@@ -194,7 +194,7 @@
         },
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG [DELETE]"]
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG [UPDATE]"]
           }
         ]
       }
@@ -436,7 +436,7 @@
         },
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG [DELETE]"]
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG [UPDATE]"]
           }
         ]
       }

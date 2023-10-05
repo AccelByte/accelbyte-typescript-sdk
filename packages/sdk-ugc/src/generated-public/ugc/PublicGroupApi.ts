@@ -11,7 +11,6 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreateGroupRequest } from './definitions/CreateGroupRequest.js'
 import { CreateGroupResponse } from './definitions/CreateGroupResponse.js'
 import { PaginatedContentDownloadResponse } from './definitions/PaginatedContentDownloadResponse.js'
-import { PaginatedContentDownloadResponseV2 } from './definitions/PaginatedContentDownloadResponseV2.js'
 import { PaginatedGroupResponse } from './definitions/PaginatedGroupResponse.js'
 import { PublicGroup$ } from './endpoints/PublicGroup$.js'
 
@@ -86,27 +85,12 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
-  /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
-   */
-  async function getContents_ByUserId_ByGroupId_ByNS(
-    userId: string,
-    groupId: string,
-    queryParams?: { limit?: number; offset?: number }
-  ): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getContents_ByUserId_ByGroupId_ByNS(userId, groupId, queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
   return {
     getGroups_ByUserId,
     createGroup_ByUserId,
     deleteGroup_ByUserId_ByGroupId,
     getGroup_ByUserId_ByGroupId,
     updateGroup_ByUserId_ByGroupId,
-    getContents_ByUserId_ByGroupId,
-    getContents_ByUserId_ByGroupId_ByNS
+    getContents_ByUserId_ByGroupId
   }
 }

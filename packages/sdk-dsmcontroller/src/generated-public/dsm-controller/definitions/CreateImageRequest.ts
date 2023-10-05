@@ -13,6 +13,7 @@ export const CreateImageRequest = z.object({
   imageSize: z.number().int(),
   namespace: z.string(),
   persistent: z.boolean(),
+  ulimitFileSize: z.number().int(),
   version: z.string()
 })
 

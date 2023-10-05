@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-seasonpass",
-  "version": "2.1.0-beta.8",
+  "version": "2.1.0-beta.9",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/index.js",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@accelbyte/sdk": "2.0.3",
-    "@accelbyte/validator": "0.2.6",
+    "@accelbyte/validator": "0.2.14",
     "axios": "1.3.6",
     "buffer": "6.0.3",
     "crypto-js": "4.1.1",

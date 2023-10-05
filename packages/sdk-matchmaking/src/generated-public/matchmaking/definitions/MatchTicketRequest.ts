@@ -9,7 +9,7 @@ export const MatchTicketRequest = z.object({
   attributes: z.record(z.any()),
   latencies: z.record(z.number().int()),
   matchPool: z.string(),
-  sessionID: z.string()
+  sessionID: z.string().nullish()
 })
 
 export interface MatchTicketRequest extends z.TypeOf<typeof MatchTicketRequest> {}

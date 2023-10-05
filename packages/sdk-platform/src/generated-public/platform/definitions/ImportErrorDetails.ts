@@ -7,7 +7,9 @@ import { z } from 'zod'
 
 export const ImportErrorDetails = z.object({
   errorCode: z.number().int().nullish(),
+  errorField: z.string().nullish(),
   errorMessage: z.string().nullish(),
+  errorValue: z.string().nullish(),
   messageVariables: z.record(z.string()).nullish()
 })
 

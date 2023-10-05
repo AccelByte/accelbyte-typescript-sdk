@@ -19,7 +19,7 @@ export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Requires valid user access token
    */
   async function getEvent_ByUserId(
     userId: string,
@@ -32,7 +32,7 @@ export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Available Type: &lt;/p&gt; &lt;ul&gt; &lt;li&gt;email&lt;/li&gt; &lt;li&gt;password&lt;/li&gt; &lt;li&gt;displayname&lt;/li&gt; &lt;li&gt;dateofbirth&lt;/li&gt; &lt;li&gt;country&lt;/li&gt; &lt;li&gt;language&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Requires a valid user access token&lt;/p&gt;
+   * Available Type: * email * password * displayname * dateofbirth * country * language Requires valid user access token
    */
   async function getEdithistory_ByUserId(
     userId: string,

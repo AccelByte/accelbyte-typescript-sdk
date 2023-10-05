@@ -27,6 +27,7 @@ export const PopulatedItemInfo = z.object({
   entitlementType: z.enum(['CONSUMABLE', 'DURABLE']),
   ext: z.record(z.any()).nullish(),
   features: z.array(z.string()).nullish(),
+  flexible: z.boolean().nullish(),
   fresh: z.boolean().nullish(),
   images: z.array(Image).nullish(),
   itemId: z.string(),

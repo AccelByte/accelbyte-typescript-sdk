@@ -127,7 +127,7 @@ export class Users$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token &lt;/p&gt; &lt;br&gt;&lt;p&gt;This Endpoint support update user based on given data. &lt;b&gt;Single request can update single field or multi fields.&lt;/b&gt;&lt;/p&gt; &lt;p&gt;Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl}&lt;/p&gt; &lt;p&gt;Country use ISO3166-1 alpha-2 two letter, e.g. US.&lt;/p&gt; &lt;p&gt;Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.&lt;/p&gt; &lt;br&gt;&lt;b&gt;Several case of updating email address&lt;/b&gt; &lt;ul&gt;&lt;li&gt;User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.&lt;/li&gt; &lt;li&gt;User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. &lt;/li&gt; &lt;li&gt;User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. &lt;/li&gt; &lt;p&gt;action code : 10103 &lt;/p&gt;
+   * &lt;p&gt;Requires valid user access token &lt;/p&gt; &lt;br&gt;&lt;p&gt;This Endpoint support update user based on given data. &lt;b&gt;Single request can update single field or multi fields.&lt;/b&gt;&lt;/p&gt; &lt;p&gt;Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl}&lt;/p&gt; &lt;p&gt;Country use ISO3166-1 alpha-2 two letter, e.g. US.&lt;/p&gt; &lt;p&gt;Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.&lt;/p&gt; &lt;br&gt;&lt;b&gt;Response body logic when user updating email address:&lt;/b&gt; &lt;ul&gt;&lt;li&gt;User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.&lt;/li&gt; &lt;li&gt;User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. &lt;/li&gt; &lt;li&gt;User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. &lt;/li&gt; &lt;/ul&gt; &lt;p&gt;action code : 10103 &lt;/p&gt;
    */
   patchUserMe(data: UserUpdateRequestV3): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
@@ -138,7 +138,7 @@ export class Users$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token &lt;/p&gt; &lt;br&gt;&lt;p&gt;This Endpoint support update user based on given data. &lt;b&gt;Single request can update single field or multi fields.&lt;/b&gt;&lt;/p&gt; &lt;p&gt;Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl}&lt;/p&gt; &lt;p&gt;Country use ISO3166-1 alpha-2 two letter, e.g. US.&lt;/p&gt; &lt;p&gt;Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.&lt;/p&gt; &lt;br&gt;&lt;b&gt;Several case of updating email address&lt;/b&gt; &lt;ul&gt;&lt;li&gt;User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.&lt;/li&gt; &lt;li&gt;User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. &lt;/li&gt; &lt;li&gt;User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. &lt;/li&gt; &lt;br&gt;&lt;b&gt;Important notes:&lt;/b&gt; &lt;br&gt;&lt;p&gt;This endpoint provides support for client that doesn&#39;t have PATCH support, i.e. UE4 before v4.23 released. &lt;br&gt;If the client support PATCH method, use [PATCH] /iam/v3/public/namespaces/{namespace}/users/me instead&lt;/p&gt;&lt;br&gt; &lt;p&gt;action code : 10103 &lt;/p&gt;
+   * &lt;p&gt;Requires valid user access token &lt;/p&gt; &lt;br&gt;&lt;p&gt;This Endpoint support update user based on given data. &lt;b&gt;Single request can update single field or multi fields.&lt;/b&gt;&lt;/p&gt; &lt;p&gt;Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl}&lt;/p&gt; &lt;p&gt;Country use ISO3166-1 alpha-2 two letter, e.g. US.&lt;/p&gt; &lt;p&gt;Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.&lt;/p&gt; &lt;br&gt;&lt;b&gt;Response body logic when user updating email address:&lt;/b&gt; &lt;ul&gt;&lt;li&gt;User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.&lt;/li&gt; &lt;li&gt;User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. &lt;/li&gt; &lt;li&gt;User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. &lt;/li&gt; &lt;/ul&gt; &lt;br&gt;&lt;b&gt;Important notes:&lt;/b&gt; &lt;br&gt;&lt;p&gt;This endpoint provides support for client that doesn&#39;t have PATCH support, i.e. UE4 before v4.23 released. &lt;br&gt;If the client support PATCH method, use [PATCH] /iam/v3/public/namespaces/{namespace}/users/me instead&lt;/p&gt;&lt;br&gt; &lt;p&gt;action code : 10103 &lt;/p&gt;
    */
   updateUserMe(data: UserUpdateRequestV3): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
@@ -327,7 +327,7 @@ export class Users$ {
    */
   getPlatforms_ByUserId(
     userId: string,
-    queryParams?: { after?: string | null; before?: string | null; limit?: number }
+    queryParams?: { after?: string | null; before?: string | null; limit?: number; platformId?: string | null }
   ): Promise<IResponseWithSync<UserLinkedPlatformsResponseV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms'
@@ -581,7 +581,7 @@ export class Users$ {
   }
 
   /**
-   * Required valid user authorization. &lt;p&gt;Unlink user&#39;s account from for all third platforms. &lt;/p&gt;
+   * Required valid user authorization. Unlink user&#39;s account from third platform in all namespaces. This API support to handling platform group use case: i.e. 1. Steam group: steam, steamopenid 2. PSN group: ps4, ps5, psnweb 3. XBOX group: live, xblweb Example: if user unlink from ps4, the API logic will unlink ps5 and psnweb as well.
    */
   deleteAllMeUser_ByPlatformId(platformId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

@@ -9,6 +9,7 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AppInfo } from '../definitions/AppInfo.js'
+import { EstimatedPriceInfoArray } from '../definitions/EstimatedPriceInfoArray.js'
 import { ItemDynamicDataInfo } from '../definitions/ItemDynamicDataInfo.js'
 import { ItemInfo } from '../definitions/ItemInfo.js'
 import { ItemInfoArray } from '../definitions/ItemInfoArray.js'
@@ -157,6 +158,27 @@ export class Item$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, ItemInfoArray, 'ItemInfoArray')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This API is used to get estimated prices of item
+   */
+  getItemsEstimatedPrice(queryParams: {
+    itemIds: string | null
+    region?: string | null
+    storeId?: string | null
+  }): Promise<IResponseWithSync<EstimatedPriceInfoArray>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/items/estimatedPrice'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, EstimatedPriceInfoArray, 'EstimatedPriceInfoArray')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice DSM Controller Service",
     "title": "justice-dsm-controller-service",
-    "version": "6.3.5"
+    "version": "6.4.3"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -2376,7 +2376,7 @@
       "get": {
         "consumes": ["application/json"],
         "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ]\n\nRequired scope: social\n\nThis endpoint lists all of dedicated servers images.\n\nParameter Offset and Count is Required",
-        "operationId": "AdminListImages",
+        "operationId": "ListImages",
         "parameters": [
           {
             "description": "namespace of the game",
@@ -5437,6 +5437,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "ulimitFileSize": {
+          "format": "int32",
+          "type": "integer"
+        },
         "uploaderFlag": {
           "type": "string"
         },
@@ -5453,6 +5457,7 @@
         "namespace",
         "patchVersion",
         "persistent",
+        "ulimitFileSize",
         "uploaderFlag",
         "version"
       ]
@@ -5483,11 +5488,25 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "ulimitFileSize": {
+          "format": "int32",
+          "type": "integer"
+        },
         "version": {
           "type": "string"
         }
       },
-      "required": ["artifactPath", "coreDumpEnabled", "dockerPath", "image", "imageSize", "namespace", "persistent", "version"]
+      "required": [
+        "artifactPath",
+        "coreDumpEnabled",
+        "dockerPath",
+        "image",
+        "imageSize",
+        "namespace",
+        "persistent",
+        "ulimitFileSize",
+        "version"
+      ]
     },
     "models.CreatePodConfigRequest": {
       "properties": {
@@ -5997,6 +6016,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "ulimitFileSize": {
+          "format": "int32",
+          "type": "integer"
+        },
         "updatedAt": {
           "format": "date-time",
           "type": "string",
@@ -6012,12 +6035,11 @@
         "createdAt",
         "dockerPath",
         "image",
-        "imageReplications",
-        "imageReplicationsMap",
         "imageSize",
         "modifiedBy",
         "namespace",
         "persistent",
+        "ulimitFileSize",
         "updatedAt",
         "version"
       ]
@@ -6026,6 +6048,10 @@
       "properties": {
         "artifactPath": {
           "type": "string"
+        },
+        "coreDumpEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
         },
         "image": {
           "type": "string"
@@ -6050,7 +6076,7 @@
           "type": "string"
         }
       },
-      "required": ["artifactPath", "image", "imageReplicationsMap", "namespace", "patchVersion", "persistent", "version"]
+      "required": ["artifactPath", "coreDumpEnabled", "image", "imageReplicationsMap", "namespace", "patchVersion", "persistent", "version"]
     },
     "models.ImageReplication": {
       "properties": {
@@ -6252,6 +6278,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "ulimitFileSize": {
+          "format": "int32",
+          "type": "integer"
+        },
         "updatedAt": {
           "format": "date-time",
           "type": "string",
@@ -6270,13 +6300,12 @@
         "createdAt",
         "dockerPath",
         "image",
-        "imageReplications",
-        "imageReplicationsMap",
         "imageSize",
         "modifiedBy",
         "namespace",
         "patchVersion",
         "persistent",
+        "ulimitFileSize",
         "updatedAt",
         "uploaderFlag",
         "version"
@@ -6901,10 +6930,10 @@
   },
   "x-version": {
     "buildDate": "unknown",
-    "gitHash": "d277aaff4e9c959298b6a6b7533a3af3ea339e95",
+    "gitHash": "bab0e6b9ca41a8654e4053ff0d504357704ed13c",
     "name": "justice-dedicated-server-manager-controller-service",
-    "revisionID": "6.3.5",
-    "version": "6.3.5",
+    "revisionID": "6.4.3",
+    "version": "6.4.3",
     "version-roles-seeding": "0.0.3"
   }
 }

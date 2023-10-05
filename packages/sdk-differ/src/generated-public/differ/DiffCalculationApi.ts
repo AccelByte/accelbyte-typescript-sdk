@@ -20,7 +20,7 @@ export function DiffCalculationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * &lt;p&gt;Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.&lt;/p&gt;&lt;p&gt;Every request is registered into the queue first, and will be processed by the available Differ.&lt;/p&gt;&lt;p&gt;The &lt;b&gt;priority&lt;/b&gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]&lt;/code&gt; and scope &lt;code&gt;publishing&lt;/code&gt;&lt;/p&gt;
+   * &lt;p&gt;Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.&lt;/p&gt;&lt;p&gt;Every request is registered into the queue first, and will be processed by the available Differ.&lt;/p&gt;&lt;p&gt;The &lt;b&gt;priority&lt;/b&gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Scope required: &lt;code&gt;publishing&lt;/code&gt;&lt;/p&gt;
    */
   async function createDiff(data: LateDiffRequest): Promise<unknown> {
     const $ = new DiffCalculation$(Network.create(requestConfig), namespace, cache)
@@ -37,7 +37,7 @@ export function DiffCalculationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.&lt;/p&gt;&lt;p&gt;The Diffs calculation will be parallelized between the available Differ instances.&lt;/p&gt;&lt;p&gt;The &lt;b&gt;priority&lt;/b&gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]&lt;/code&gt; and scope &lt;code&gt;publishing&lt;/code&gt;&lt;/p&gt;
+   * &lt;p&gt;Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.&lt;/p&gt;&lt;p&gt;The Diffs calculation will be parallelized between the available Differ instances.&lt;/p&gt;&lt;p&gt;The &lt;b&gt;priority&lt;/b&gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Scope required: &lt;code&gt;publishing&lt;/code&gt;&lt;/p&gt;
    */
   async function createDiff_ByNS(data: LateDiffRequest): Promise<unknown> {
     const $ = new DiffCalculation$(Network.create(requestConfig), namespace, cache)

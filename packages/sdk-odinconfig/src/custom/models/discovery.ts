@@ -88,12 +88,6 @@ export const PlayerPortalFeatureFlagsConfig = z.object({
    **/
   isMyProfileVisible: z.boolean().default(true),
   /**
-   * Determines whether "News" feature is visible or not.
-   *
-   * Defaults to `false`.
-   **/
-  isNewsVisible: z.boolean().default(false),
-  /**
    * Determines whether "Notifications" feature is visible or not.
    *
    * Defaults to `false`.
@@ -154,12 +148,6 @@ export const PlayerPortalFeatureFlagsConfig = z.object({
    **/
   isVirtualCurrencyVisible: z.boolean().default(false),
   /**
-   * Determines whether the "News" (unreleased) feature is visible or not.
-   *
-   * Defaults to `false`.
-   **/
-  isNewsV2Visible: z.boolean().default(false),
-  /**
    * Determines whether the "Twitch Drop" feature is enable or not.
    *
    * Defaults to `true`.
@@ -171,7 +159,13 @@ export const PlayerPortalFeatureFlagsConfig = z.object({
    *
    * Defaults to `true`.
    **/
-  isLegalEnabled: z.boolean().default(true)
+  isLegalEnabled: z.boolean().default(true),
+  /**
+   * Determines whether the "Legal" Page is accessible or not from Player Portal.
+   *
+   * Defaults to `true`.
+   **/
+  isLegalPageVisible: z.boolean().default(true)
 })
 
 export interface PlayerPortalFeatureFlagsConfig extends z.infer<typeof PlayerPortalFeatureFlagsConfig> {}

@@ -1,6 +1,6 @@
 {
-  "buildDate": "2023-08-25T13:51:13+00:00",
-  "gitHash": "62b990761150576d8335961c48fb0d749a2b8067",
-  "version": "3.1.0",
+  "buildDate": "2023-09-29T10:51:11+00:00",
+  "gitHash": "ddc31bcfb3c905d1cdf5fbeab53dddf92c8812b5",
+  "version": "3.7.32",
   "version-roles-seeding": "0.0.40"
 }

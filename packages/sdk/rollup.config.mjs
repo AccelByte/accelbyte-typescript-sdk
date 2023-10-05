@@ -5,6 +5,7 @@
  *
  */
 
+// @ts-check
 import path from 'path'
 
 import commonjs from '@rollup/plugin-commonjs'
@@ -13,7 +14,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import typescript from '@rollup/plugin-typescript'
 import alias from '@rollup/plugin-alias'
-import { writeFileSync, readFileSync, statSync } from 'fs'
+import { readFileSync, statSync } from 'fs'
 
 const CONFIG = JSON.parse(readFileSync('./tsconfig.build.json', 'utf-8'))
 
@@ -60,8 +61,7 @@ function createConfig(config) {
       }),
       json({
         compact: true
-      }),
-      changelogUpdater()
+      })
     ],
     onwarn: warning => {
       if (warning.code !== 'CIRCULAR_DEPENDENCY') {
@@ -107,22 +107,4 @@ export default async function createConfigs() {
       ]
     })
   ]
-}
-function changelogUpdater() {
-  return {
-    name: 'declaration-imports-rewriter-plugin',
-    generateBundle(_opts, _bundle, _isWrite) {
-      updateVersionFromChangelog()
-    }
-  }
-}
-
-function updateVersionFromChangelog() {
-  const packageJson = JSON.parse(readFileSync(path.resolve('./package.json'), 'utf-8'))
-  const changelogContent = readFileSync(path.resolve('./CHANGELOG.md'), 'utf-8')
-  const version = changelogContent.match(/(?<=### )\S+/)?.[0]
-  if (version) {
-    packageJson.version = version
-  }
-  writeFileSync(path.resolve('./package.json'), JSON.stringify(packageJson, null, 2))
 }

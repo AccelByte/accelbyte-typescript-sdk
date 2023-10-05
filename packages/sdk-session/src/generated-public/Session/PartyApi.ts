@@ -82,7 +82,7 @@ export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Revoke code of the party. Only leader can revoke a code.
    */
-  async function deleteCode_ByPartyId(partyId: string): Promise<PartySessionResponse> {
+  async function deleteCode_ByPartyId(partyId: string): Promise<unknown> {
     const $ = new Party$(Network.create(requestConfig), namespace, cache)
     const resp = await $.deleteCode_ByPartyId(partyId)
     if (resp.error) throw resp.error

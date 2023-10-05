@@ -8,7 +8,7 @@
     },
     "description": "Justice Basic Service",
     "title": "justice-basic-service",
-    "version": "2.11.0"
+    "version": "2.13.0"
   },
   "schemes": ["https"],
   "tags": [
@@ -1383,6 +1383,7 @@
     },
     "/basic/v1/admin/namespaces/{namespace}/misc/countries": {
       "get": {
+        "deprecated": true,
         "description": "List countries.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: login user\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Action code\u0026lt;/i\u0026gt;: 11204\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: country code list\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "getCountries",
         "parameters": [
@@ -3043,6 +3044,7 @@
     },
     "/basic/v1/public/namespaces/{namespace}/misc/countries": {
       "get": {
+        "deprecated": true,
         "description": "List countries.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: country code list\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "publicGetCountries",
         "parameters": [
@@ -5309,16 +5311,16 @@
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-08-28T01:16:53+00:00",
-    "buildID": "2.11.0",
+    "buildDate": "2023-09-27T09:00:43+00:00",
+    "buildID": "2.13.0",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
     "buildOS": "Linux amd64 5.13.0-1021-aws",
     "gitBranchName": "master",
-    "gitHash": "bcc59b3fab",
+    "gitHash": "a08c93e687",
     "gitTag": "2.10.1",
     "name": "justice-basic-service",
     "realm": "dev",
-    "version": "2.11.0",
+    "version": "2.13.0",
     "version-roles-seeding": "0.0.10"
   }
 }

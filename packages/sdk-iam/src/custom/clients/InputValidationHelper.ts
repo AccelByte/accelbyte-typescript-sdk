@@ -39,6 +39,7 @@ export class InputValidationHelper {
       letterCase: validation.letterCase,
       allowAllSpecialCharacters: validation.allowAllSpecialCharacters,
       specialCharacters: validation.specialCharacters,
+      maxRepeatingSpecialCharacter: validation.maxRepeatingSpecialCharacter,
       specialCharacterLocation: validation.specialCharacterLocation
     })
   }
@@ -91,6 +92,8 @@ export class InputValidationHelper {
     return validateEmail(value, {
       blockedWord: validation.blockedWord,
       customRegex: validation.regex,
+      maxLength: validation.maxLength,
+      minLength: validation.minLength,
       isRequired: true
     })
   }

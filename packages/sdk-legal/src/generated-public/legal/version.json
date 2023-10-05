@@ -1,14 +1,14 @@
 {
   "buildBy": "Gradle 6.9.1",
-  "buildDate": "2023-08-28T01:16:52+00:00",
-  "buildID": "1.32.0",
+  "buildDate": "2023-09-17T12:33:59+00:00",
+  "buildID": "1.33.0",
   "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
   "buildOS": "Linux amd64 5.13.0-1021-aws",
   "gitBranchName": "master",
-  "gitHash": "a280dcc071",
-  "gitTag": "1.29.2",
+  "gitHash": "9dcd4b03c1",
+  "gitTag": "1.33.0",
   "name": "justice-legal-service",
   "realm": "dev",
-  "version": "1.32.0",
+  "version": "1.33.0",
   "version-roles-seeding": "0.0.3"
 }

@@ -16,8 +16,8 @@ import { RewardApi } from './platform/RewardApi.js'
 import { IapApi } from './platform/IapApi.js'
 import { ViewApi } from './platform/ViewApi.js'
 import { OrderApi } from './platform/OrderApi.js'
-import { SectionApi } from './platform/SectionApi.js'
 import { DlcApi } from './platform/DlcApi.js'
+import { SectionApi } from './platform/SectionApi.js'
 import { EntitlementApi } from './platform/EntitlementApi.js'
 import { SubscriptionApi } from './platform/SubscriptionApi.js'
 import { FulfillmentApi } from './platform/FulfillmentApi.js'
@@ -34,8 +34,8 @@ const apis = {
   IapApi,
   ViewApi,
   OrderApi,
-  SectionApi,
   DlcApi,
+  SectionApi,
   EntitlementApi,
   SubscriptionApi,
   FulfillmentApi,

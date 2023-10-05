@@ -8,7 +8,7 @@
     },
     "description": "Justice GDPR Service",
     "title": "justice-gdpr-service",
-    "version": "2.2.2"
+    "version": "2.2.3"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -24,6 +24,9 @@
         "ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [DELETE]": "ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [DELETE]",
         "ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [READ]": "ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [READ]",
         "ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]": "ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]": "ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]",
+        "ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]",
         "ADMIN:NAMESPACE:{namespace}:INFORMATION:USER [READ]": "ADMIN:NAMESPACE:{namespace}:INFORMATION:USER [READ]",
         "ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [CREATE]": "ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [CREATE]",
         "ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]": "ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]",
@@ -56,7 +59,7 @@
         "operationId": "AdminGetListDeletionDataRequest",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -150,7 +153,7 @@
         "operationId": "DeleteAdminEmailConfiguration",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -212,7 +215,7 @@
           }
         ],
         "summary": "Delete admin emails configurations",
-        "tags": ["Data Retrieval"]
+        "tags": ["Configuration"]
       },
       "get": {
         "consumes": ["application/json"],
@@ -220,7 +223,7 @@
         "operationId": "GetAdminEmailConfiguration",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -259,7 +262,7 @@
           }
         ],
         "summary": "Get admin email addresses configuration",
-        "tags": ["Data Retrieval"]
+        "tags": ["Configuration"]
       },
       "post": {
         "consumes": ["application/json"],
@@ -278,7 +281,7 @@
             }
           },
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -317,7 +320,7 @@
           }
         ],
         "summary": "Add admin email address configuration",
-        "tags": ["Data Retrieval"]
+        "tags": ["Configuration"]
       },
       "put": {
         "consumes": ["application/json"],
@@ -336,7 +339,7 @@
             }
           },
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -374,7 +377,7 @@
           }
         ],
         "summary": "Update admin email address configuration",
-        "tags": ["Data Retrieval"]
+        "tags": ["Configuration"]
       }
     },
     "/gdpr/admin/namespaces/{namespace}/requests": {
@@ -384,7 +387,7 @@
         "operationId": "AdminGetListPersonalDataRequest",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -459,6 +462,159 @@
         "tags": ["Data Retrieval"]
       }
     },
+    "/gdpr/admin/namespaces/{namespace}/services/configurations": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get Registered Services Configuration.\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]\u0026lt;/code\u0026gt; and scope \u0026lt;code\u0026gt;account\u0026lt;/code\u0026gt;\u0026lt;/p\u0026gt;",
+        "operationId": "AdminGetServicesConfiguration",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.ServicesConfigurationResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]"],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get Registered Services Configuration",
+        "tags": ["Configuration"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Update Registered Services Configuration.\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]\u0026lt;/code\u0026gt; and scope \u0026lt;code\u0026gt;account\u0026lt;/code\u0026gt;\u0026lt;/p\u0026gt;",
+        "operationId": "AdminUpdateServicesConfiguration",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dto.ServiceConfigurationUpdateRequest"
+            }
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.ServiceConfigurationUpdateRequest"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]"],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Update Registered Services Configuration",
+        "tags": ["Configuration"]
+      }
+    },
+    "/gdpr/admin/namespaces/{namespace}/services/configurations/reset": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;b\u0026gt;[TEST FACILITY ONLY]\u0026lt;/b\u0026gt;\u0026lt;br/\u0026gt;Reset Registered Services Configuration to use the default configuration.\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]\u0026lt;/code\u0026gt; and scope \u0026lt;code\u0026gt;account\u0026lt;/code\u0026gt;\u0026lt;/p\u0026gt;",
+        "operationId": "AdminResetServicesConfiguration",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]"],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Reset Registered Services Configuration",
+        "tags": ["Configuration"]
+      }
+    },
     "/gdpr/admin/namespaces/{namespace}/users/{userId}/deletions": {
       "delete": {
         "consumes": ["application/json"],
@@ -466,7 +622,7 @@
         "operationId": "AdminCancelUserAccountDeletionRequest",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -532,7 +688,7 @@
         "operationId": "AdminGetUserAccountDeletionRequest",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -590,12 +746,12 @@
         "tags": ["Data Deletion"]
       },
       "post": {
-        "consumes": ["application/x-www-form-urlencoded"],
+        "consumes": ["*/*"],
         "description": "\u0026lt;p\u0026gt;Required permission \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [CREATE]\u0026lt;/code\u0026gt; and scope \u0026lt;code\u0026gt;account\u0026lt;/code\u0026gt;\u0026lt;/p\u0026gt;",
         "operationId": "AdminSubmitUserAccountDeletionRequest",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -666,7 +822,7 @@
         "operationId": "AdminGetUserPersonalDataRequests",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -735,7 +891,7 @@
         "operationId": "AdminRequestDataRetrieval",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -800,7 +956,7 @@
         "operationId": "AdminCancelUserPersonalDataRequest",
         "parameters": [
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -876,7 +1032,7 @@
             "type": "string"
           },
           {
-            "description": "namespace of the user",
+            "description": "namespace",
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -1561,6 +1717,79 @@
     }
   },
   "definitions": {
+    "dto.ExtendConfigDTO": {
+      "properties": {
+        "appName": {
+          "description": "extend app name",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "extend app namespace",
+          "type": "string"
+        }
+      },
+      "required": ["appName", "namespace"]
+    },
+    "dto.ServiceConfigDTO": {
+      "properties": {
+        "protocol": {
+          "description": "protocol type",
+          "enum": ["GRPC"],
+          "type": "string"
+        },
+        "url": {
+          "description": "url of the service with port number",
+          "type": "string"
+        }
+      },
+      "required": ["protocol", "url"]
+    },
+    "dto.ServiceConfigurationDTO": {
+      "properties": {
+        "extendConfig": {
+          "$ref": "#/definitions/dto.ExtendConfigDTO",
+          "description": "extend configuration detail, required when \"type\" is \"EXTEND\""
+        },
+        "id": {
+          "description": "service id",
+          "type": "string"
+        },
+        "serviceConfig": {
+          "$ref": "#/definitions/dto.ServiceConfigDTO",
+          "description": "service configuration detail, required when \"type\" is \"SERVICE\""
+        },
+        "type": {
+          "description": "service type",
+          "enum": ["EXTEND", "SERVICE"],
+          "type": "string"
+        }
+      },
+      "required": ["id", "type"]
+    },
+    "dto.ServiceConfigurationUpdateRequest": {
+      "properties": {
+        "services": {
+          "description": "list of services",
+          "items": {
+            "$ref": "#/definitions/dto.ServiceConfigurationDTO"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["services"]
+    },
+    "dto.ServicesConfigurationResponse": {
+      "properties": {
+        "services": {
+          "description": "list of services",
+          "items": {
+            "$ref": "#/definitions/dto.ServiceConfigurationDTO"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["services"]
+    },
     "models.DataRetrievalResponse": {
       "properties": {
         "Namespace": {
@@ -1773,11 +2002,11 @@
     "path": "/gdpr/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-08-28T01:16:01+00:00",
-    "gitHash": "e935a5fd079a2f81a371fb50cd21aedac99bdfcd",
+    "buildDate": "2023-09-25T02:46:26+00:00",
+    "gitHash": "75d1570d969358d76572a855e8df02361129ea71",
     "name": "justice-gdpr-service",
     "realm": "dev",
-    "version": "2.2.2",
-    "version-roles-seeding": "0.0.3"
+    "version": "2.2.3",
+    "version-roles-seeding": "0.0.48"
   }
 }

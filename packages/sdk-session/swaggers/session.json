@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Session Service",
     "title": "justice-session-service",
-    "version": "3.1.0"
+    "version": "3.7.32"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -156,6 +156,118 @@
         ],
         "summary": "List of environment variables. Requires ADMIN:SESSION:CONFIGURATION:ENVIRONMENTVARIABLE [READ]",
         "tags": ["Environment Variable"]
+      }
+    },
+    "/session/v1/admin/global-configurations": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete of global configuration data.",
+        "operationId": "adminDeleteGlobalConfiguration",
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete of global configuration data. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [DELETE]",
+        "tags": ["Global Configuration"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Record of global configuration data.",
+        "operationId": "adminListGlobalConfiguration",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GlobalConfigurationResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Record of global configuration data. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]",
+        "tags": ["Global Configuration"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Upsert global configuration data.",
+        "operationId": "adminUpdateGlobalConfiguration",
+        "parameters": [
+          {
+            "description": "Update global configuration",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.PutGlobalConfigurationRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.GlobalConfigurationResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Upsert global configuration data. Requires ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [UPDATE]",
+        "tags": ["Global Configuration"]
       }
     },
     "/session/v1/admin/namespaces/{namespace}/alerts-configuration": {
@@ -2245,7 +2357,7 @@
         "operationId": "patchUpdateGameSession",
         "parameters": [
           {
-            "description": "Update game session request",
+            "description": "Patch update game session request",
             "in": "body",
             "name": "body",
             "required": true,
@@ -2487,11 +2599,8 @@
         ],
         "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/apimodels.GameSessionResponse"
-            }
+          "204": {
+            "description": "No Content"
           },
           "400": {
             "description": "Bad Request",
@@ -3323,11 +3432,8 @@
         ],
         "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/apimodels.PartySessionResponse"
-            }
+          "204": {
+            "description": "No Content"
           },
           "400": {
             "description": "Bad Request",
@@ -5071,6 +5177,44 @@
         "version"
       ]
     },
+    "apimodels.GlobalConfigurationResponse": {
+      "properties": {
+        "regionRetryMapping": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        },
+        "regionURLMapping": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "testGameMode": {
+          "type": "string"
+        },
+        "testRegionURLMapping": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "testTargetUserIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "required": ["regionRetryMapping", "regionURLMapping", "testGameMode", "testRegionURLMapping", "testTargetUserIDs", "updatedAt"]
+    },
     "apimodels.JoinByCodeRequest": {
       "properties": {
         "code": {
@@ -5392,6 +5536,41 @@
         "textChat",
         "type"
       ]
+    },
+    "apimodels.PutGlobalConfigurationRequest": {
+      "properties": {
+        "regionRetryMapping": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        },
+        "regionURLMapping": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "testGameMode": {
+          "type": "string"
+        },
+        "testRegionURLMapping": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "testTargetUserIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["regionRetryMapping", "regionURLMapping", "testGameMode", "testRegionURLMapping", "testTargetUserIDs"]
     },
     "apimodels.PutPlatformCredentialsRequest": {
       "properties": {
@@ -5761,6 +5940,12 @@
           },
           "type": "array"
         },
+        "ams_protocol": {
+          "items": {
+            "$ref": "#/definitions/models.PortConfigurationAMS"
+          },
+          "type": "array"
+        },
         "custom_attribute": {
           "type": "string"
         },
@@ -5822,18 +6007,12 @@
       },
       "required": [
         "custom_attribute",
-        "deployment",
-        "game_version",
         "image_version",
         "ip",
         "is_override_game_version",
         "last_update",
         "namespace",
         "pod_name",
-        "port",
-        "ports",
-        "protocol",
-        "provider",
         "region",
         "session_id",
         "source",
@@ -5910,6 +6089,17 @@
       },
       "required": ["psn", "updatedAt"]
     },
+    "models.PortConfigurationAMS": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "protocol"]
+    },
     "models.Team": {
       "properties": {
         "UserIDs": {
@@ -5969,9 +6159,9 @@
     "path": "/session/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-08-25T13:51:13+00:00",
-    "gitHash": "62b990761150576d8335961c48fb0d749a2b8067",
-    "version": "3.1.0",
+    "buildDate": "2023-09-29T10:51:11+00:00",
+    "gitHash": "ddc31bcfb3c905d1cdf5fbeab53dddf92c8812b5",
+    "version": "3.7.32",
     "version-roles-seeding": "0.0.40"
   }
 }

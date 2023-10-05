@@ -9,6 +9,7 @@
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Dlc$ } from './endpoints/Dlc$.js'
+import { DlcConfigRewardShortInfo } from './definitions/DlcConfigRewardShortInfo.js'
 import { EpicGamesDlcSyncRequest } from './definitions/EpicGamesDlcSyncRequest.js'
 import { PlayStationDlcSyncMultiServiceLabelsRequest } from './definitions/PlayStationDlcSyncMultiServiceLabelsRequest.js'
 import { PlayStationDlcSyncRequest } from './definitions/PlayStationDlcSyncRequest.js'
@@ -21,6 +22,18 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
+
+  /**
+   * Get dlc reward simple map, only return the sku of durable item reward&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: Authorized user&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getDlcRewardsDurableMap(queryParams: {
+    dlcType: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
+  }): Promise<DlcConfigRewardShortInfo> {
+    const $ = new Dlc$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getDlcRewardsDurableMap(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * Synchronize with dlc entitlements in PSN Store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
@@ -86,6 +99,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    getDlcRewardsDurableMap,
     updateDlcPsnSync_ByUserId,
     updateDlcXblSync_ByUserId,
     updateDlcSteamSync_ByUserId,

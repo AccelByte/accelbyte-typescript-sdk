@@ -8,7 +8,6 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CountryObjectArray } from './definitions/CountryObjectArray.js'
 import { Misc$ } from './endpoints/Misc$.js'
 import { RetrieveTimeResponse } from './definitions/RetrieveTimeResponse.js'
 
@@ -25,16 +24,6 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getMiscTime(): Promise<RetrieveTimeResponse> {
     const $ = new Misc$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getMiscTime()
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
-  /**
-   * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getMiscCountries(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getMiscCountries(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -61,7 +50,6 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getMiscTime,
-    getMiscCountries,
     getMiscLanguages,
     getMiscTimezones
   }

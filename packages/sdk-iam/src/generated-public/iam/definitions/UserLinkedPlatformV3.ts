@@ -14,7 +14,8 @@ export const UserLinkedPlatformV3 = z.object({
   originNamespace: z.string(),
   platformId: z.string().nullish(),
   platformUserId: z.string().nullish(),
-  userId: z.string()
+  userId: z.string(),
+  xuid: z.string().nullish()
 })
 
 export interface UserLinkedPlatformV3 extends z.TypeOf<typeof UserLinkedPlatformV3> {}

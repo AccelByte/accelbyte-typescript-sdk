@@ -5,12 +5,20 @@
  */
 import { z } from 'zod'
 import { ImportErrorDetails } from './ImportErrorDetails.js'
+import { ImportStoreAppInfo } from './ImportStoreAppInfo.js'
+import { ImportStoreCategoryInfo } from './ImportStoreCategoryInfo.js'
 import { ImportStoreItemInfo } from './ImportStoreItemInfo.js'
+import { ImportStoreSectionInfo } from './ImportStoreSectionInfo.js'
+import { ImportStoreViewInfo } from './ImportStoreViewInfo.js'
 
 export const ImportStoreError = z.object({
+  app: ImportStoreAppInfo.nullish(),
+  category: ImportStoreCategoryInfo.nullish(),
   errors: z.array(ImportErrorDetails).nullish(),
   item: ImportStoreItemInfo.nullish(),
-  type: z.enum(['ITEM']).nullish()
+  section: ImportStoreSectionInfo.nullish(),
+  type: z.enum(['APP', 'CATEGORY', 'ITEM', 'SECTION', 'STORE', 'VIEW']).nullish(),
+  view: ImportStoreViewInfo.nullish()
 })
 
 export interface ImportStoreError extends z.TypeOf<typeof ImportStoreError> {}

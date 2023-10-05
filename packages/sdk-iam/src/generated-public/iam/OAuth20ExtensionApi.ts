@@ -175,12 +175,12 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;This endpoint will validate the third party platform token, for some platforms will also refresh the token stored in IAM, it will not generate any event or AB access/refresh token.&lt;/p&gt; &lt;p&gt;This endpoint can be used by game client to refresh third party token if game client got platform token not found error, for example got 404 platform token not found from IAP/DLC.&lt;/p&gt; &lt;h2&gt;Platforms will refresh stored token:&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;&lt;strong&gt;twitch&lt;/strong&gt;: The platform_token’s value is the authorization code returned by Twitch OAuth.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;epicgames&lt;/strong&gt;: The platform_token’s value is an access-token or authorization code obtained from Epicgames EOS Account Service.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ps4&lt;/strong&gt;: The platform_token’s value is the authorization code returned by Sony OAuth.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ps5&lt;/strong&gt;: The platform_token’s value is the authorization code returned by Sony OAuth.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;amazon&lt;/strong&gt;: The platform_token’s value is authorization code.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;awscognito&lt;/strong&gt;: The platform_token’s value is the aws cognito access token or id token (JWT).&lt;/li&gt; &lt;li&gt;&lt;strong&gt;live&lt;/strong&gt;: The platform_token’s value is xbox XSTS token&lt;/li&gt; &lt;li&gt;&lt;strong&gt;snapchat&lt;/strong&gt;: The platform_token’s value is the authorization code returned by Snapchat OAuth.&lt;/li&gt; &lt;br&gt;&lt;li&gt;&lt;strong&gt;for specific generic oauth (OIDC)&lt;/strong&gt;: The platform_token’s value should be the same type as created OIDC auth type whether it is auth code, idToken or bearerToken.&lt;/li&gt; &lt;/ul&gt;
    */
-  async function postTokenVerifyV3_ByPlatformId(
+  async function postTokenVerify_ByPlatformId(
     platformId: string,
     data: { platform_token: string | null }
   ): Promise<PlatformTokenRefreshResponseV3> {
     const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.postTokenVerifyV3_ByPlatformId(platformId, data)
+    const resp = await $.postTokenVerify_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -197,6 +197,6 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     postAuthenticateWithLink,
     postTokenRequest,
     getAuthenticate_ByPlatformId,
-    postTokenVerifyV3_ByPlatformId
+    postTokenVerify_ByPlatformId
   }
 }

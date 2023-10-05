@@ -10,31 +10,25 @@
 import { PublicTagApi } from './ugc/PublicTagApi.js'
 import { PublicTypeApi } from './ugc/PublicTypeApi.js'
 import { PublicCreatorApi } from './ugc/PublicCreatorApi.js'
-import { PublicContentLegacyApi } from './ugc/PublicContentLegacyApi.js'
-import { PublicContentV2Api } from './ugc/PublicContentV2Api.js'
-import { PublicLikeLegacyApi } from './ugc/PublicLikeLegacyApi.js'
+import { PublicContentApi } from './ugc/PublicContentApi.js'
+import { PublicLikeApi } from './ugc/PublicLikeApi.js'
 import { PublicFollowApi } from './ugc/PublicFollowApi.js'
-import { PublicLikeV2Api } from './ugc/PublicLikeV2Api.js'
 import { AnonymizationApi } from './ugc/AnonymizationApi.js'
 import { PublicGroupApi } from './ugc/PublicGroupApi.js'
 import { PublicChannelApi } from './ugc/PublicChannelApi.js'
-import { PublicDownloadCountV2Api } from './ugc/PublicDownloadCountV2Api.js'
-import { PublicDownloadCountLegacyApi } from './ugc/PublicDownloadCountLegacyApi.js'
+import { PublicDownloadCountApi } from './ugc/PublicDownloadCountApi.js'
 
 const apis = {
   PublicTagApi,
   PublicTypeApi,
   PublicCreatorApi,
-  PublicContentLegacyApi,
-  PublicContentV2Api,
-  PublicLikeLegacyApi,
+  PublicContentApi,
+  PublicLikeApi,
   PublicFollowApi,
-  PublicLikeV2Api,
   AnonymizationApi,
   PublicGroupApi,
   PublicChannelApi,
-  PublicDownloadCountV2Api,
-  PublicDownloadCountLegacyApi
+  PublicDownloadCountApi
 }
 
 export const Ugc = apis

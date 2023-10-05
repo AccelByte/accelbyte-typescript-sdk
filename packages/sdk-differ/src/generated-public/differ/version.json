@@ -1,7 +1,11 @@
 {
-  "buildDate": "2023-06-19T01:10:20+00:00",
-  "gitHash": "62ba63f2774325b08a4a3c9de2c79782397baed7",
-  "name": "JusticeDiffer",
-  "realm": "dev",
-  "version": "1.25.4"
+  "contact": {
+    "email": "engineering@accelbyte.io",
+    "name": "Engineering Team at AccelByte",
+    "url": "https://accelbyte.io"
+  },
+  "description": "Justice Differ Service",
+  "title": "JusticeDiffer",
+  "version": "",
+  "gitHash": ""
 }
