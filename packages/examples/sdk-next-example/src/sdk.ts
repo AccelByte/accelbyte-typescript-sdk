@@ -5,11 +5,16 @@
  */
 
 import { AccelbyteSDK } from '@accelbyte/sdk'
-import { IamUserAuthorizationClient } from '@accelbyte/sdk-iam'
+import { IamOAuthClient, IamUserAuthorizationClient } from '@accelbyte/sdk-iam'
 
 export function login(sdk: AccelbyteSDK) {
   const url = new IamUserAuthorizationClient(sdk).createLoginURL()
   window.location.replace(url)
+}
+
+export async function logout(sdk: AccelbyteSDK) {
+  await new IamOAuthClient(sdk).logout()
+  window.location.reload()
 }
 
 export async function exchangeAuthorizationCode(sdk: AccelbyteSDK, url: string) {

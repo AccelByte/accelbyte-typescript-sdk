@@ -206,6 +206,11 @@ export const DiscoveryConfigData = z.object({
       data: TemplateInfoConfig
     })
   ),
+  newsTemplateInfo: Config.merge(
+    z.object({
+      data: TemplateInfoConfig
+    })
+  ),
   ppFeatureFlags: Config.merge(
     z.object({
       data: PlayerPortalFeatureFlagsConfig
@@ -214,6 +219,7 @@ export const DiscoveryConfigData = z.object({
   launcherFeatureFlags: Config,
   loginFeatureFlags: Config,
   supportFeatureFlags: Config,
+  newsFeatureFlags: Config,
   experimentalFeatureFlags: Config,
   socialLinks: Config.merge(
     z.object({
