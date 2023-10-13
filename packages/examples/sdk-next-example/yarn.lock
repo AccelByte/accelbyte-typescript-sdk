@@ -132,6 +132,23 @@
     validator "13.7.0"
     zod "3.17.3"
 
+"@accelbyte/sdk@2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.0.5.tgz#08cae375f341b8db04befc9a7ccc8004ed41d904"
+  integrity sha512-hSHaM/dQlhWUgzlIy+ApvRCPqxe4AMcgEOQg8jNjPk/EFeUw6Bh3+2V3LSGewLqVGbKbHmUvDsa7K4Y2f+zgkg==
+  dependencies:
+    "@accelbyte/validator" "0.2.15"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    lodash "4.17.21"
+    nanoid "3.1.31"
+    platform "1.3.6"
+    query-string "7.1.1"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
 "@accelbyte/validator@0.2.15":
   version "0.2.15"
   resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.15.tgz#4ba093e22df4de20420e1e0545cb2bd594912dfa"
@@ -140,12 +157,12 @@
     naughty-words "1.2.0"
     xregexp "5.1.0"
 
-"@accelbyte/widgets-v2@1.0.47":
-  version "1.0.47"
-  resolved "https://registry.yarnpkg.com/@accelbyte/widgets-v2/-/widgets-v2-1.0.47.tgz#6f27eed1244c029dbdc879d6216986a16662d227"
-  integrity sha512-jFL04c1inS4+DAeNt5tCJgxD9GTk+n6HarvBiX3RRXcrVRWu0uFhK+Y/sKxkbcYX1AlR4fPDUXhO1vx5JI5pYA==
+"@accelbyte/widgets-v2@1.0.48":
+  version "1.0.48"
+  resolved "https://registry.yarnpkg.com/@accelbyte/widgets-v2/-/widgets-v2-1.0.48.tgz#bd4c6f349694aea869a7725a9e420889d2765b58"
+  integrity sha512-Ye5kgekrxvRoxscL784r44QwSXl2MM3yw9VUKOJRnlJ4J8iJHnIQFwreuVF1hRmLfvunqGZN9u8Y5OX8wqlGGg==
   dependencies:
-    "@accelbyte/sdk" "2.0.4"
+    "@accelbyte/sdk" "2.0.5"
     "@accelbyte/sdk-basic" "2.1.1"
     "@accelbyte/sdk-buildinfo" "2.1.1"
     "@accelbyte/sdk-event" "2.1.1"
@@ -180,8 +197,10 @@
     marked "4.3.0"
     prop-types "15.8.1"
     qrious "4.0.2"
+    query-string "7.1.1"
     react-copy-to-clipboard "5.0.2"
     react-datepicker "3.2.2"
+    react-dropzone "14.2.3"
     react-feather "2.0.9"
     react-helmet "6.1.0"
     react-i18next "12.1.4"
@@ -862,6 +881,11 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
+attr-accept@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-2.2.2.tgz#646613809660110749e92f2c10833b70968d929b"
+  integrity sha512-7prDjvt9HmqiZ0cl5CRjtS84sEyhsHP2coDkaZKRKVfCDo9s7iw7ChVmar78Gu9pC4SoR/28wFu/G5JJhTnqEg==
+
 axios@1.3.6:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.6.tgz#1ace9a9fb994314b5f6327960918406fa92c6646"
@@ -1221,6 +1245,13 @@ file-saver@2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.5.tgz#d61cfe2ce059f414d899e9dd6d4107ee25670c38"
   integrity sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==
+
+file-selector@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/file-selector/-/file-selector-0.6.0.tgz#fa0a8d9007b829504db4d07dd4de0310b65287dc"
+  integrity sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==
+  dependencies:
+    tslib "^2.4.0"
 
 filesize@8.0.7:
   version "8.0.7"
@@ -1787,7 +1818,7 @@ prismjs@^1.27.0:
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.29.0.tgz#f113555a8fa9b57c35e637bba27509dcf802dd12"
   integrity sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==
 
-prop-types@15.8.1, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.8.1, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -1862,6 +1893,15 @@ react-dom@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-dropzone@14.2.3:
+  version "14.2.3"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-14.2.3.tgz#0acab68308fda2d54d1273a1e626264e13d4e84b"
+  integrity sha512-O3om8I+PkFKbxCukfIR3QAGftYXDZfOE2N1mr/7qebQJHs7U+/RSL/9xomJNpRg9kM5h9soQSdf0Gc7OHF5Fug==
+  dependencies:
+    attr-accept "^2.2.2"
+    file-selector "^0.6.0"
+    prop-types "^15.8.1"
 
 react-error-boundary@^3.1.4:
   version "3.1.4"
