@@ -24,6 +24,7 @@ import { OAuth20$ } from '../../generated-public/iam/endpoints/OAuth20$.js'
 import { MFADataResponse } from '../models/TwoFA.js'
 import { TokenWithDeviceCookieResponseV3 } from '../../generated-public/iam/definitions/TokenWithDeviceCookieResponseV3.js'
 import { CodeChallenge } from './CodeChallenge.js'
+import { OAuth20Extension$ } from '../../generated-public/iam/endpoints/OAuth20Extension$.js'
 
 const AUTHORIZE_URL = '/iam/v3/oauth/authorize'
 export const MFA_DATA_STORAGE_KEY = 'mfaData'
@@ -194,6 +195,47 @@ export class IamUserAuthorizationClient {
     }
   }
 
+  loginWithCodeAuthorization = async ({ code }: { code: string }) => {
+    Network.setDeviceTokenCookie()
+    const config = {
+      ...this.conf,
+      headers: {
+        ...this.conf.headers,
+        Authorization: `Basic ${Buffer.from(`${this.options.clientId}:`).toString('base64')}`
+      }
+    }
+    const axios = Network.create(config)
+    const data: Parameters<OAuth20Extension$['postTokenExchange']>[0] = {
+      code
+    }
+    const result = await new OAuth20Extension$(axios, this.namespace, this.cache).postTokenExchange(data)
+    const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse
+    const mfaData = IamUserAuthorizationClient.getMfaDataFromError(errorResponse)
+
+    if (result.error) throw result.error
+
+    Network.removeDeviceTokenCookie()
+    CodeChallenge.clear()
+    return { ...result, mfaData }
+  }
+
+  exchangeSSOAuthorizationCode = async ({ code, error }: { code?: string | null; error?: string | null }) => {
+    if (error) {
+      throw IamUserAuthorizationClient.deduceLoginError(error)
+    }
+    if (!code) return null
+
+    const loginResult = await this.loginWithCodeAuthorization({
+      code
+    })
+
+    return {
+      response: loginResult.response,
+      mfaData: loginResult.mfaData,
+      returnPath: null
+    }
+  }
+
   exchangeAuthorizationCode = async ({ code, error, state }: { code?: string | null; error?: string | null; state?: string | null }) => {
     if (error) {
       throw IamUserAuthorizationClient.deduceLoginError(error)
@@ -292,7 +334,7 @@ export class IamUserAuthorizationClient {
     if (DesktopChecker.isDesktopApp()) {
       return Promise.resolve().then(doRefreshSession({ axiosConfig: this.conf, clientId, refreshToken }))
     }
-    return refreshWithLock({ axiosConfig: this.conf, clientId })
+    return refreshWithLock({ axiosConfig: this.conf, clientId, refreshToken })
   }
 
   private getSearchParams = (sentState, challenge): URLSearchParams => {

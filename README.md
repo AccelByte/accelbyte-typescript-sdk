@@ -10,6 +10,19 @@ Built with TypeScript and strict by design, the SDK goes above and beyond and en
 
 ## Installation
 
+### @accelbyte/sdk 2.0.5 and below
+
+To install the library execute the following command.
+
+```shell
+yarn add @accelbyte/sdk
+yarn add @accelbyte/sdk-iam
+yarn add @accelbyte/sdk-basic // etc
+```
+
+### @accelbyte/sdk 3.0.0 and above
+
+We need to explicitly install `@accelbyte/sdk` in our Project because we moved it as a peerDependencies to the other `@accelbyte/sdk-*`.
 To install the library execute the following command.
 
 ```shell
@@ -80,6 +93,24 @@ const items = await Platform.ItemApi(sdk).getItemsByCriteria({ queryParams: { ap
 
 // Retrieve legal policies
 const policies = await Legal.Policies().getPolicyCountry_ByCountryCode('US')
+```
+
+Web SDK only provide and expose public endpoint of AccelByte service.
+Here's the sample usage to create a Custom Network Call using Web SDK (e.g to create a call into admin endpoint):
+
+```
+// Below example can be used when we want to create a call into admin endpoint using Web SDK
+async function usingCustomNetworkCall() {
+  try {
+    const url = '/iam/v3/public/users/me'
+    const network = Network.create(sdk.assembly())
+
+    return await network.get(url)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 ```
 
 ## AccelByte APIs

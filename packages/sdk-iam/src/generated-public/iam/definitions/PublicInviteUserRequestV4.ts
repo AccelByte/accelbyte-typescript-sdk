@@ -5,6 +5,11 @@
  */
 import { z } from 'zod'
 
-export const PublicInviteUserRequestV4 = z.object({ emailAddress: z.string(), namespace: z.string(), namespaceDisplayName: z.string() })
+export const PublicInviteUserRequestV4 = z.object({
+  additionalData: z.string().nullish(),
+  emailAddress: z.string(),
+  namespace: z.string(),
+  namespaceDisplayName: z.string()
+})
 
 export interface PublicInviteUserRequestV4 extends z.TypeOf<typeof PublicInviteUserRequestV4> {}

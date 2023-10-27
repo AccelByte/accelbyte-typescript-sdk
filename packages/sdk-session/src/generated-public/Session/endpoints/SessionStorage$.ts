@@ -15,7 +15,7 @@ export class SessionStorage$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   *  Update Insert Session Storage Leader. only Leader can update or insert user session storage data Leader. can store generic json example json can store : { &#34;leader&#34;: { &#34;leader&#34;: 1 }, &#34;data&#34;: 123 }
+   *  Update Insert Session Storage Leader. only Leader can update or insert user session storage data Leader. can store generic json example json can store : { "leader": { "leader": 1 }, "data": 123 }
    */
   patchStorageLeader_BySessionId(sessionId: string, data: any): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -28,7 +28,7 @@ export class SessionStorage$ {
   }
 
   /**
-   *  Update Insert Session Storage User. user can only update or insert user session storage data itself. can store generic json example json can store : { &#34;storage&#34;: { &#34;storage&#34;: 1 }, &#34;data&#34;: 123 }
+   *  Update Insert Session Storage User. user can only update or insert user session storage data itself. can store generic json example json can store : { "storage": { "storage": 1 }, "data": 123 }
    */
   patchStorageUser_BySessionId_ByUserId(sessionId: string, userId: string, data: any): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

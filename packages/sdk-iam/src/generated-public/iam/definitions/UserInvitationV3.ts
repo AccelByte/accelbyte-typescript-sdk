@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { NamespaceRole } from './NamespaceRole.js'
 
 export const UserInvitationV3 = z.object({
+  additionalData: z.string().nullish(),
   email: z.string(),
   expiredAt: z.string(),
   id: z.string().nullish(),

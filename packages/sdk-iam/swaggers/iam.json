@@ -8,7 +8,7 @@
     },
     "description": "Justice IAM Service",
     "title": "justice-iam-service",
-    "version": "7.2.1"
+    "version": "7.4.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -22905,7 +22905,7 @@
     "/iam/v4/public/users/invite": {
       "post": {
         "consumes": ["application/json"],
-        "description": "This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode.\nIt will return error if the service multi tenant mode is set to false.\n\nRequest body details:\n- emailAddress: email address of the user to be invited\n- namespace: new namespace of the user to be created\n- namespaceDisplayName: display name of the new namespace\n\nThe invited users will also be assigned with \u0026#34;User\u0026#34; role by default.\n",
+        "description": "This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode.\nIt will return error if the service multi tenant mode is set to false.\n\nRequest body details:\n- emailAddress: email address of the user to be invited\n- namespace: new namespace of the user to be created\n- namespaceDisplayName: display name of the new namespace\n- additionalData(optional): for utm parameter data\n\nThe invited users will also be assigned with \u0026#34;User\u0026#34; role by default.\n",
         "operationId": "PublicInviteUserV4",
         "parameters": [
           {
@@ -26174,6 +26174,9 @@
     },
     "model.PublicInviteUserRequestV4": {
       "properties": {
+        "additionalData": {
+          "type": "string"
+        },
         "emailAddress": {
           "type": "string"
         },
@@ -27902,6 +27905,9 @@
     },
     "model.UserInvitationV3": {
       "properties": {
+        "additionalData": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },
@@ -29220,11 +29226,11 @@
     "path": "/iam/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-09-21T07:27:58+00:00",
-    "gitHash": "ae84f1f361dd57c7351166190642ed779e31d9bb",
+    "buildDate": "2023-10-18T02:56:23+00:00",
+    "gitHash": "70bdd6233f3b04c5c0fac1c8d7670a92d785d328",
     "name": "justice-iam-service",
     "realm": "dev",
-    "version": "7.2.1",
-    "version-roles-seeding": "0.0.3"
+    "version": "7.4.0",
+    "version-roles-seeding": "1.0.2"
   }
 }

@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const PlayerPlatform = z.object({ currentPlatform: z.string(), userID: z.string() })
+export const PlayerPlatform = z.object({ crossplayEnabled: z.boolean().nullish(), currentPlatform: z.string(), userID: z.string() })
 
 export interface PlayerPlatform extends z.TypeOf<typeof PlayerPlatform> {}

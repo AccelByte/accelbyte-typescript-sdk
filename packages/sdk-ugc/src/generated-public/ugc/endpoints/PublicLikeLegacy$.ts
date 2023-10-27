@@ -12,7 +12,7 @@ import { ContentLikeRequest } from '../definitions/ContentLikeRequest.js'
 import { ContentLikeResponse } from '../definitions/ContentLikeResponse.js'
 import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse.js'
 
-export class PublicLike$ {
+export class PublicLikeLegacy$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 

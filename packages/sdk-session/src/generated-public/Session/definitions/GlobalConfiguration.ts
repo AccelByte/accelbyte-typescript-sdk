@@ -5,12 +5,13 @@
  */
 import { z } from 'zod'
 
-export const PutGlobalConfigurationRequest = z.object({
+export const GlobalConfiguration = z.object({
   regionRetryMapping: z.record(z.array(z.string())),
   regionURLMapping: z.array(z.string()),
   testGameMode: z.string(),
   testRegionURLMapping: z.array(z.string()),
-  testTargetUserIDs: z.array(z.string())
+  testTargetUserIDs: z.array(z.string()),
+  updatedAt: z.string()
 })
 
-export interface PutGlobalConfigurationRequest extends z.TypeOf<typeof PutGlobalConfigurationRequest> {}
+export interface GlobalConfiguration extends z.TypeOf<typeof GlobalConfiguration> {}

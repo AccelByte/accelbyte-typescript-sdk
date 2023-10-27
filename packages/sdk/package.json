@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/node/index.cjs",
@@ -39,7 +39,6 @@
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "13.0.4",
     "@rollup/plugin-typescript": "11.0.0",
-    "tslib": "2.4.0",
     "@types/crypto-js": "4.1.0",
     "@types/platform": "1.3.4",
     "@types/uuid": "8.3.4",
@@ -49,6 +48,7 @@
     "rollup": "3.8.1",
     "rollup-plugin-dts": "5.1.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
+    "tslib": "2.4.0",
     "typescript": "4.6.4",
     "vitest": "0.31.1"
   },

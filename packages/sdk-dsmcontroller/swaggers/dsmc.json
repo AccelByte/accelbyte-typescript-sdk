@@ -2833,6 +2833,72 @@
         "tags": ["Image Config"]
       }
     },
+    "/dsmcontroller/admin/namespaces/{namespace}/manual/buffer/add": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "```\nRequired permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE]\nRequired scope: social\n\nThis endpoint manually adds buffer for selected namespace and deployment\nx Job will contain y num of allocs.\n\nRegion can be filled with comma-separated values.\nuse * as region name to deploy to all region specified in the deployment\u0026#39;s region list\n\nif JobPriority set to 0, we will use 80 as default value for job priority\n\nOverrideVersion will be used as override version for the new allocations.\nIf OverrideVersion is empty, will use version in the deployment.\n```",
+        "operationId": "AddBuffer",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AddBufferRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "buffer requested",
+            "schema": {
+              "$ref": "#/definitions/models.AddBufferResponse"
+            }
+          },
+          "400": {
+            "description": "malformed request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Manual Add Buffer",
+        "tags": ["Admin"]
+      }
+    },
     "/dsmcontroller/admin/namespaces/{namespace}/repository": {
       "get": {
         "consumes": ["application/json"],
@@ -3430,6 +3496,88 @@
           }
         ],
         "summary": "Delete a session in a region",
+        "tags": ["Admin"]
+      }
+    },
+    "/dsmcontroller/admin/namespaces/{namespace}/workers/ghost": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]\n\nRequired scope: social\n\nThis endpoint run ghost cleaner once.",
+        "operationId": "RunGhostCleanerRequestHandler",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "worker ran"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Run Ghost Cleaner",
+        "tags": ["Admin"]
+      }
+    },
+    "/dsmcontroller/admin/namespaces/{namespace}/workers/zombie": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "```\nRequired permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]\nRequired scope: social\n\nThis endpoint run zombie cleaner once\n\nuse * as region name to target all regions\n```",
+        "operationId": "RunZombieCleanerRequestHandler",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.DeleteZombieRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "worker ran"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Run Zombie Cleaner",
         "tags": ["Admin"]
       }
     },
@@ -5155,6 +5303,40 @@
       },
       "required": ["Attributes", "Code", "CodeName", "Section", "Service", "Text"]
     },
+    "models.AddBufferRequest": {
+      "properties": {
+        "AllocCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "DeploymentName": {
+          "type": "string"
+        },
+        "JobCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "JobPriority": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "OverrideVersion": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        }
+      },
+      "required": ["AllocCount", "DeploymentName", "JobCount", "JobPriority", "OverrideVersion", "Region"]
+    },
+    "models.AddBufferResponse": {
+      "properties": {
+        "Message": {
+          "type": "string"
+        }
+      },
+      "required": ["Message"]
+    },
     "models.AllocationEvent": {
       "properties": {
         "description": {
@@ -5719,6 +5901,26 @@
       },
       "required": ["provider_name"]
     },
+    "models.DeleteZombieRequest": {
+      "properties": {
+        "JobCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Region": {
+          "type": "string"
+        },
+        "TimeoutSecond": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ZombieCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["JobCount", "Region", "TimeoutSecond", "ZombieCount"]
+    },
     "models.DeploymentConfigOverride": {
       "properties": {
         "buffer_count": {
@@ -6035,6 +6237,8 @@
         "createdAt",
         "dockerPath",
         "image",
+        "imageReplications",
+        "imageReplicationsMap",
         "imageSize",
         "modifiedBy",
         "namespace",
@@ -6300,6 +6504,8 @@
         "createdAt",
         "dockerPath",
         "image",
+        "imageReplications",
+        "imageReplicationsMap",
         "imageSize",
         "modifiedBy",
         "namespace",
@@ -6576,6 +6782,10 @@
         },
         "termination_reason": {
           "type": "string"
+        },
+        "ulimit_file_size": {
+          "format": "int32",
+          "type": "integer"
         }
       },
       "required": [
@@ -6586,7 +6796,6 @@
         "game_version",
         "image_version",
         "ip",
-        "is_core_dump_enabled",
         "is_override_game_version",
         "job_id",
         "last_update",
@@ -6930,7 +7139,7 @@
   },
   "x-version": {
     "buildDate": "unknown",
-    "gitHash": "bab0e6b9ca41a8654e4053ff0d504357704ed13c",
+    "gitHash": "1c4f4323c0b0750548b257ace74f6a59a58a6dc8",
     "name": "justice-dedicated-server-manager-controller-service",
     "revisionID": "6.4.3",
     "version": "6.4.3",

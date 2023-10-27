@@ -42,7 +42,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get player attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player&#39;s 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
+   * Get player attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player's 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - PSN_PUSH_CONTEXT_ID: if provided, session will refer to this when performing session sync with PSN, otherwise will populate from session attributes - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
    */
   async function getUsersMeAttributes(): Promise<PlayerAttributesResponseBody> {
     const $ = new Player$(Network.create(requestConfig), namespace, cache)
@@ -52,7 +52,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API behaves to upsert player&#39;s attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player&#39;s 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
+   * This API behaves to upsert player's attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player's 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - PSN_PUSH_CONTEXT_ID: if provided, session will refer to this when performing session sync with PSN, otherwise will populate from session attributes - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
    */
   async function createUserMeAttribute(data: PlayerAttributesRequestBody): Promise<PlayerAttributesResponseBody> {
     const $ = new Player$(Network.create(requestConfig), namespace, cache)

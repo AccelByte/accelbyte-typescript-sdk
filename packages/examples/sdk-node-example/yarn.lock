@@ -2,77 +2,73 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk-basic@2.1.0-beta.0":
+"@accelbyte/sdk-basic@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-basic/-/sdk-basic-3.0.0-beta.0.tgz#7d49cc9d4a22b45504a970b256850677fc37c8cb"
+  integrity sha512-DnFJrvXb3uuk8r6E/d2IENYGbeMotZPMEvyRZzqsZkN+Pb/XoGXwKlZ3a41d2fP1e00am4FDIodV/KHxZXJwlA==
+  dependencies:
+    "@accelbyte/validator" "0.2.15"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    lodash "4.17.21"
+    platform "1.3.6"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
+"@accelbyte/sdk-iam@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-3.0.0-beta.0.tgz#35f89976bf2812e64ba750c0e3541a3547833dc4"
+  integrity sha512-Xd9JFZoAgj8GcpHfVGnhI/PNY+1i9KPd//QYMbqMgoSD61c9dXdG6FrN7xYHXHpoagYegJ1J6WFpWILcrQW2jw==
+  dependencies:
+    "@accelbyte/validator" "0.2.15"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    lodash "4.17.21"
+    platform "1.3.6"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
+"@accelbyte/sdk-legal@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-legal/-/sdk-legal-3.0.0-beta.0.tgz#53763cd427aecdf6d6cfc6580cd2274e15c905f9"
+  integrity sha512-QREOfUtFAYIspM3/v42Ut+4GMvmRmtL5YyT5PI1b8xLWspn2hW9kDaZvyO3zaYkipMa+v2AJdJoowtOgifyMpw==
+  dependencies:
+    "@accelbyte/sdk-iam" "3.0.0-beta.0"
+    "@accelbyte/validator" "0.2.15"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    lodash "4.17.21"
+    platform "1.3.6"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
+"@accelbyte/sdk-platform@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-platform/-/sdk-platform-3.0.0-beta.0.tgz#f05275ec097a3cd3b7f86154ec42348836cc2dac"
+  integrity sha512-OkZY/CDKFfcHu1oSlI4+xq8tHHsDslrjkjRJx155l1MNPlEDnIRKUI/0FMWSD2G3XxnBnn+rN6FoH95X6YDaew==
+  dependencies:
+    "@accelbyte/validator" "0.2.15"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    lodash "4.17.21"
+    platform "1.3.6"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
+"@accelbyte/sdk@2.1.0-beta.0":
   version "2.1.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-basic/-/sdk-basic-2.1.0-beta.0.tgz#73cc1e7b54939e6ae3f8c5d67628d7c65d5b975c"
-  integrity sha512-9pzaCGH+9qyUGWcMyTgFh4D7NiZC2lrOXJDrQp1KQwX1Kq0QAoW+ZqlzG8QFxbtxpA5ySIaf+eTKYIBhduesRQ==
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.1.0-beta.0.tgz#753839a93a48a4c473cbc43fccc594b493dac0a7"
+  integrity sha512-Q+uVmI+uhcGeABHBwrOF/Phz9//23qlVvlOuupp0EVTuSRN+dUYue/eM/Z8+Y+S9ZUacNdPvA90T0tMBz+b8Jw==
   dependencies:
-    "@accelbyte/sdk" "2.0.2"
-    "@accelbyte/validator" "0.2.2"
-    axios "1.3.6"
-    buffer "6.0.3"
-    crypto-js "4.1.1"
-    lodash "4.17.21"
-    platform "1.3.6"
-    uuid "8.3.2"
-    validator "13.7.0"
-    zod "3.17.3"
-
-"@accelbyte/sdk-iam@2.1.0-beta.4":
-  version "2.1.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-2.1.0-beta.4.tgz#cc79a0fbaaec2c58d722cca5aaf2c37a864f7a89"
-  integrity sha512-eebxtAKBkqtw8THzt6XruFweQcGdJ3UcvJQDwmhJUfyLHNtQg/ZoTydQkD3o4iK6+xny0t9aH18UxYmFmtHaVA==
-  dependencies:
-    "@accelbyte/sdk" "2.0.2"
-    "@accelbyte/validator" "0.2.2"
-    axios "1.3.6"
-    buffer "6.0.3"
-    crypto-js "4.1.1"
-    lodash "4.17.21"
-    platform "1.3.6"
-    uuid "8.3.2"
-    validator "13.7.0"
-    zod "3.17.3"
-
-"@accelbyte/sdk-legal@2.1.0-beta.1":
-  version "2.1.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-legal/-/sdk-legal-2.1.0-beta.1.tgz#36e2e6a1b656be8250b8c859f64dab6a673c90a8"
-  integrity sha512-ktIEIQJfE2PVpaJOm4PmS1n2aMWWIff1l4ufzbTQfoXFkXWGWPJDCKxxq7GvUdOSsBwhqSmSxkM01VYa38UCsQ==
-  dependencies:
-    "@accelbyte/sdk" "2.0.2"
-    "@accelbyte/sdk-iam" "2.1.0-beta.4"
-    "@accelbyte/validator" "0.2.2"
-    axios "1.3.6"
-    buffer "6.0.3"
-    crypto-js "4.1.1"
-    lodash "4.17.21"
-    platform "1.3.6"
-    uuid "8.3.2"
-    validator "13.7.0"
-    zod "3.17.3"
-
-"@accelbyte/sdk-platform@2.1.0-beta.3":
-  version "2.1.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-platform/-/sdk-platform-2.1.0-beta.3.tgz#38471ca8a5f751cd2ab75d0ceb23360033083e45"
-  integrity sha512-K2HExuHKbTrotVFybk0yqYx7byVDRbl/yrdUXOpVeSAh/Z8aCDG2DLe4Tf6G5Bjut2iw2SYW+bQ3/i7P2+lMeA==
-  dependencies:
-    "@accelbyte/sdk" "2.0.2"
-    "@accelbyte/validator" "0.2.2"
-    axios "1.3.6"
-    buffer "6.0.3"
-    crypto-js "4.1.1"
-    lodash "4.17.21"
-    platform "1.3.6"
-    uuid "8.3.2"
-    validator "13.7.0"
-    zod "3.17.3"
-
-"@accelbyte/sdk@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.0.2.tgz#ef62f7c87ac1dafe41f4e9a4b76906e3a12e5ba2"
-  integrity sha512-66Z+llp29iE4PZAaVFWrbHEa7AVsRV+HkZmzBJ5RZinmOXE/t7O6sY3G9YREHXzalFKhmvC73buQFbQBGNTxVg==
-  dependencies:
-    "@accelbyte/validator" "0.2.2"
+    "@accelbyte/validator" "0.2.15"
     axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
@@ -84,10 +80,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/validator@0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.2.tgz#ebfbf6f63718851503f7b40e90c3e480e4dafa17"
-  integrity sha512-Hp68SdqltijLEH6t9U4jfE81DLO82nud6o4vjtKOjJ/WYr7u7tKCRN1RQKA4ujruUJk+7PjebpLOlaBHUY3nNw==
+"@accelbyte/validator@0.2.15":
+  version "0.2.15"
+  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.15.tgz#4ba093e22df4de20420e1e0545cb2bd594912dfa"
+  integrity sha512-S0Jiu3xfE4RdhXvUJAW0haLtyY37h6eOm2XiDcUA/q0PH8xmM56en5IEkazObyqrirVs7cB00dre5Z1G4zXWzQ==
   dependencies:
     naughty-words "1.2.0"
     xregexp "5.1.0"

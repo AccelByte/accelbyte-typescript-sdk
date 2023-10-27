@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { CreateGroupRequest } from '../definitions/CreateGroupRequest.js'
 import { CreateGroupResponse } from '../definitions/CreateGroupResponse.js'
 import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse.js'
+import { PaginatedContentDownloadResponseV2 } from '../definitions/PaginatedContentDownloadResponseV2.js'
 import { PaginatedGroupResponse } from '../definitions/PaginatedGroupResponse.js'
 
 export class PublicGroup$ {
@@ -117,6 +118,30 @@ export class PublicGroup$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () => Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   */
+  getContents_ByUserId_ByGroupId_ByNS(
+    userId: string,
+    groupId: string,
+    queryParams?: { limit?: number; offset?: number }
+  ): Promise<IResponseWithSync<PaginatedContentDownloadResponseV2>> {
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    const url = '/ugc/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{groupId}', groupId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

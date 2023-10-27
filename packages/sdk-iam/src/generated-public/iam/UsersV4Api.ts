@@ -34,7 +34,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Request body details: - emailAddress: email address of the user to be invited - namespace: new namespace of the user to be created - namespaceDisplayName: display name of the new namespace The invited users will also be assigned with &#34;User&#34; role by default.
+   * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Request body details: - emailAddress: email address of the user to be invited - namespace: new namespace of the user to be created - namespaceDisplayName: display name of the new namespace - additionalData(optional): for utm parameter data The invited users will also be assigned with &#34;User&#34; role by default.
    */
   async function createUserInvite(data: PublicInviteUserRequestV4): Promise<InviteUserResponseV3> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache)

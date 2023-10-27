@@ -22,7 +22,7 @@ import { UpdateContentRequest } from '../definitions/UpdateContentRequest.js'
 import { UpdateScreenshotRequest } from '../definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from '../definitions/UpdateScreenshotResponse.js'
 
-export class PublicContent$ {
+export class PublicContentLegacy$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
@@ -31,6 +31,7 @@ export class PublicContent$ {
    */
   getContents(queryParams?: {
     creator?: string | null
+    ishidden?: string | null
     isofficial?: string | null
     limit?: number
     name?: string | null
@@ -133,6 +134,7 @@ export class PublicContent$ {
     channelId: string,
     queryParams?: {
       creator?: string | null
+      ishidden?: string | null
       isofficial?: string | null
       limit?: number
       name?: string | null

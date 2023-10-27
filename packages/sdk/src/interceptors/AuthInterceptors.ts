@@ -14,7 +14,7 @@ const REFRESH_EXPIRY_UPDATE_RATE = 500
 const REFRESH_EXPIRY_CHECK_RATE = 1000
 
 enum LoginUrls {
-  REFRESH_SESSION = '/iam/v3/oauth/token',
+  GRANT_TOKEN = '/iam/v3/oauth/token',
   LOGOUT = '/iam/v3/logout',
   REVOKE = '/iam/v3/oauth/revoke'
 }
@@ -110,7 +110,7 @@ export const injectAuthInterceptors = (
   injectRequestInterceptors(
     async config => {
       // need to lock on the desktop as well to sleep other request before refresh session is done
-      const isRefreshTokenUrl = config.url === LoginUrls.REFRESH_SESSION
+      const isRefreshTokenUrl = config.url === LoginUrls.GRANT_TOKEN
       // eslint-disable-next-line no-unmodified-loop-condition
       while (RefreshSession.isLocked() && !isRefreshTokenUrl) {
         await RefreshSession.sleepAsync(200)
@@ -124,6 +124,16 @@ export const injectAuthInterceptors = (
   // ===== response
   injectResponseInterceptors(
     response => {
+      const { config, status } = response
+
+      if (config.url === LoginUrls.GRANT_TOKEN && status === 200 && onGetUserSession) {
+        const { access_token, refresh_token } = response.data as TokenWithDeviceCookieResponseV3
+
+        if (access_token) {
+          onGetUserSession(access_token, refresh_token ?? '')
+        }
+      }
+
       return response
     },
     async (error: AxiosError) => {
@@ -151,7 +161,7 @@ export const injectAuthInterceptors = (
 
         // need to lock on the desktop as well to prevent multiple token request
         return refreshWithLock({ axiosConfig, clientId, refreshToken }).then(tokenResponse => {
-          return uponRefreshComplete(error, tokenResponse, onGetUserSession, onSessionExpired, axiosConfig, config || {})
+          return uponRefreshComplete(error, tokenResponse, onSessionExpired, axiosConfig, config || {})
         })
       }
 
@@ -163,17 +173,13 @@ export const injectAuthInterceptors = (
 const uponRefreshComplete = (
   error: AxiosError,
   tokenResponse: Partial<TokenWithDeviceCookieResponseV3> | false,
-  onGetUserSession: ((accessToken: string, refreshToken: string) => void) | undefined,
   onSessionExpired: (() => void) | undefined,
   axiosConfig: AxiosRequestConfig,
   errorConfig: AxiosRequestConfig
 ) => {
   //
   if (tokenResponse) {
-    const { access_token, refresh_token } = tokenResponse
-    if (onGetUserSession && access_token && refresh_token) {
-      onGetUserSession(access_token, refresh_token)
-    }
+    const { access_token } = tokenResponse
 
     // desktop
     if (!axiosConfig.withCredentials && access_token) {
@@ -191,7 +197,6 @@ const uponRefreshComplete = (
   }
 
   if (onSessionExpired) {
-    console.log('session expired auth')
     onSessionExpired()
   }
   throw error

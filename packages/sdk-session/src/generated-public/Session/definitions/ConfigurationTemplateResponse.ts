@@ -12,6 +12,8 @@ export const ConfigurationTemplateResponse = z.object({
   clientVersion: z.string(),
   createdAt: z.string(),
   deployment: z.string(),
+  disableCodeGeneration: z.boolean().nullish(),
+  dsManualSetReady: z.boolean().nullish(),
   dsSource: z.string().nullish(),
   fallbackClaimKeys: z.array(z.string()).nullish(),
   immutableStorage: z.boolean().nullish(),

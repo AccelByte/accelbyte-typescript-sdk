@@ -1,11 +1,11 @@
 {
   "buildBy": "Gradle 6.9.1",
-  "buildDate": "2023-09-21T07:11:25+00:00",
+  "buildDate": "2023-10-11T03:58:26+00:00",
   "buildID": "3.28.7",
   "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
   "buildOS": "Linux amd64 5.13.0-1021-aws",
   "gitBranchName": "unknown",
-  "gitHash": "1b96a9883e",
+  "gitHash": "8779547ac9",
   "gitTag": "3.28.7",
   "name": "justice-buildinfo-service",
   "realm": "dev",

@@ -9,6 +9,7 @@ import { DiffCacheObject } from './DiffCacheObject.js'
 export const RetrieveDiffCacheResponse = z.object({
   baseUrls: z.array(z.string()),
   diffCaches: z.array(DiffCacheObject),
+  inProgress: z.boolean(),
   summaryFile: z.string()
 })
 

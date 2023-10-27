@@ -5,7 +5,12 @@
  */
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { exchangeAuthorizationCode, getSdkTestValues, login } from './Sdk'
+import { exchangeAuthorizationCode, getSdkTestValues, login, loginWithPassword } from './Sdk'
+
+const loginInfo = {
+  username: '<replace this with your username>',
+  password: '<replace this with your password>'
+}
 
 function App() {
   const [responses, setResponses] = useState<any>(null)
@@ -23,10 +28,13 @@ function App() {
     initialize()
   }, [])
 
+  const isLoginWithUsernameDisabled =
+    loginInfo.username === '<replace this with your username>' && loginInfo.password === '<replace this with your password>'
+
   return (
     <>
       <div className="App">
-        <h1>Vite + React</h1>
+        <h2>AccelByte SDK Example Using Vite + React</h2>
         <div className="card">
           <p>
             Edit <code>src/App.tsx</code> and save to test HMR
@@ -34,21 +42,31 @@ function App() {
         </div>
       </div>
 
-      {!responses?.currentUser?.response?.data && (
+      {isLoginWithUsernameDisabled && (
         <div>
-          <button onClick={login}>Log in</button>
+          <p>
+            Please fill in the <code>loginInfo</code> located in <code>src/App.tsx</code>
+          </p>
         </div>
       )}
 
-      {responses === null ? (
-        'No responses yet'
-      ) : (
-        <div className="responses">
-          {Object.keys(responses).map(key => (
-            <Collapsible key={key} json={responses[key]} title={key} />
-          ))}
-        </div>
-      )}
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', justifyContent: 'center' }}>
+        <button onClick={login}>Log in with Login Website</button>
+        <button
+          disabled={isLoginWithUsernameDisabled}
+          onClick={() => loginWithPassword({ username: loginInfo.username, password: loginInfo.password })}>
+          Log in with provided user
+        </button>
+      </div>
+
+      <div className="responses" style={{ marginTop: '2rem', marginLeft: '3rem' }}>
+        <h4>Response Result:</h4>
+        {responses === null ? (
+          <p style={{ marginTop: '1rem' }}>No responses yet</p>
+        ) : (
+          Object.keys(responses).map(key => <Collapsible key={key} json={responses[key]} title={key} />)
+        )}
+      </div>
     </>
   )
 }

@@ -7,10 +7,11 @@ import { z } from 'zod'
 import { GameServer } from './GameServer.js'
 
 export const DsInformationResponse = z.object({
+  CreatedAt: z.string(),
   RequestedAt: z.string(),
   Server: GameServer.nullish(),
-  Status: z.string(),
-  StatusV2: z.string()
+  Status: z.string().nullish(),
+  StatusV2: z.string().nullish()
 })
 
 export interface DsInformationResponse extends z.TypeOf<typeof DsInformationResponse> {}

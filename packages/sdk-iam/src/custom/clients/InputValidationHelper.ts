@@ -25,7 +25,7 @@ export const ValidateableInputField = z.enum(['username', 'displayName', 'passwo
 export type ValidateableInputField = z.infer<typeof ValidateableInputField>
 
 export class InputValidationHelper {
-  static validateDisplayName = (value: string, isRequired = false, validations: InputValidationDataPublic[]) => {
+  static validateDisplayName = (value: string, isRequired = false, validations: InputValidationDataPublic[], validateBadWord = false) => {
     const validation = InputValidationHelper.getValidationByKey(ValidateableInputField.enum.displayName, validations)
     if (!validation) return null
     return validateDisplayName(value, {
@@ -40,11 +40,12 @@ export class InputValidationHelper {
       allowAllSpecialCharacters: validation.allowAllSpecialCharacters,
       specialCharacters: validation.specialCharacters,
       maxRepeatingSpecialCharacter: validation.maxRepeatingSpecialCharacter,
-      specialCharacterLocation: validation.specialCharacterLocation
+      specialCharacterLocation: validation.specialCharacterLocation,
+      validateBadWord
     })
   }
 
-  static validateUserName = (value: string, validations: InputValidationDataPublic[]) => {
+  static validateUserName = (value: string, validations: InputValidationDataPublic[], validateBadWord = false) => {
     const validation = InputValidationHelper.getValidationByKey(ValidateableInputField.enum.username, validations)
     if (!validation) return null
     return validateUserName(value, {
@@ -56,7 +57,8 @@ export class InputValidationHelper {
       allowSpace: validation.allowSpace,
       allowAllSpecialCharacters: validation.allowAllSpecialCharacters,
       specialCharacters: validation.specialCharacters,
-      specialCharacterLocation: validation.specialCharacterLocation
+      specialCharacterLocation: validation.specialCharacterLocation,
+      validateBadWord
     })
   }
 
