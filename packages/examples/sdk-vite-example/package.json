@@ -10,11 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@accelbyte/sdk": "2.1.0-beta.0",
-    "@accelbyte/sdk-basic": "3.0.0-beta.0",
-    "@accelbyte/sdk-iam": "3.0.0-beta.0",
-    "@accelbyte/sdk-legal": "3.0.0-beta.0",
-    "@accelbyte/sdk-platform": "3.0.0-beta.0",
+    "@accelbyte/sdk": "2.1.0",
+    "@accelbyte/sdk-basic": "3.0.0",
+    "@accelbyte/sdk-iam": "3.0.0",
+    "@accelbyte/sdk-legal": "3.0.0",
+    "@accelbyte/sdk-platform": "3.0.0",
     "dotenv": "16.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
