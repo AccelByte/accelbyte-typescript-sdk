@@ -7,6 +7,6 @@ import { z } from 'zod'
 import { MatchRuleSetNameData } from './MatchRuleSetNameData.js'
 import { Pagination } from './Pagination.js'
 
-export const ListRuleSetsResponse = z.object({ data: z.array(MatchRuleSetNameData), pagination: Pagination.nullish() })
+export const ListRuleSetsResponse = z.object({ data: z.array(MatchRuleSetNameData).nullish(), pagination: Pagination.nullish() })
 
 export interface ListRuleSetsResponse extends z.TypeOf<typeof ListRuleSetsResponse> {}

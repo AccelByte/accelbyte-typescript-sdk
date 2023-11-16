@@ -4,9 +4,9 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ImageRecord } from './ImageRecord.js'
+import { ImageRecordResponse } from './ImageRecordResponse.js'
 import { PagingCursor } from './PagingCursor.js'
 
-export const ListImageResponse = z.object({ images: z.array(ImageRecord), paging: PagingCursor })
+export const ListImageResponse = z.object({ images: z.array(ImageRecordResponse), paging: PagingCursor })
 
 export interface ListImageResponse extends z.TypeOf<typeof ListImageResponse> {}

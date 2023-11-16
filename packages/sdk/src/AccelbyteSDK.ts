@@ -9,6 +9,7 @@ import { injectErrorInterceptors } from './interceptors/ErrorInterceptor'
 import { injectAuthInterceptors } from './interceptors/AuthInterceptors'
 import { injectRequestInterceptors, injectResponseInterceptors } from './utils/Network'
 import { ApiUtils } from './utils/ApiUtils'
+import { injectInternalNetworkInterceptors } from './interceptors/InternalNetworkInterceptor'
 
 /**
  * This is the main SDK
@@ -79,13 +80,16 @@ class AccelbyteSDKImpl {
   }
 
   init() {
-    const { baseURL, clientId, customInterceptors } = this.options
+    const { baseURL, clientId, customInterceptors, useInternalNetwork } = this.options
 
     if (customInterceptors) {
       injectRequestInterceptors(customInterceptors.request, customInterceptors.error)
       injectResponseInterceptors(customInterceptors.response, customInterceptors.error)
     } else {
       // Default interceptors.
+      if (useInternalNetwork) {
+        injectInternalNetworkInterceptors()
+      }
       injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.getRefreshToken)
       injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
     }

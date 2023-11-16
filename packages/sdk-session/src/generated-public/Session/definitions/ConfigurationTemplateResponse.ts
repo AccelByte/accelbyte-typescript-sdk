@@ -15,6 +15,7 @@ export const ConfigurationTemplateResponse = z.object({
   disableCodeGeneration: z.boolean().nullish(),
   dsManualSetReady: z.boolean().nullish(),
   dsSource: z.string().nullish(),
+  enableSecret: z.boolean(),
   fallbackClaimKeys: z.array(z.string()).nullish(),
   immutableStorage: z.boolean().nullish(),
   inactiveTimeout: z.number().int(),

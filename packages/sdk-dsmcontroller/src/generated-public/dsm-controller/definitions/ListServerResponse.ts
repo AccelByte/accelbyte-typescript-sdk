@@ -5,8 +5,8 @@
  */
 import { z } from 'zod'
 import { PagingCursor } from './PagingCursor.js'
-import { Server } from './Server.js'
+import { ServerDetailsResponse } from './ServerDetailsResponse.js'
 
-export const ListServerResponse = z.object({ paging: PagingCursor, servers: z.array(Server).nullish() })
+export const ListServerResponse = z.object({ paging: PagingCursor, servers: z.array(ServerDetailsResponse).nullish() })
 
 export interface ListServerResponse extends z.TypeOf<typeof ListServerResponse> {}

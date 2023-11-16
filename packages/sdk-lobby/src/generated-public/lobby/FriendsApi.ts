@@ -51,7 +51,7 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Client should provide either friendID or friendPublicID. If both are provided, friendID will be chosen to be used.
+   * Client should provide either friendID or friendPublicID. If both are provided, friendID will be chosen to be used. This endpoint will only send a pending invite that can be either rejected/accepted
    */
   async function createFriendMeRequest(data: UserRequestFriendRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)

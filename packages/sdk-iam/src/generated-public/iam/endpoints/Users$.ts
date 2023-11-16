@@ -14,7 +14,7 @@ import { CreateJusticeUserResponse } from '../definitions/CreateJusticeUserRespo
 import { DistinctPlatformResponseV3 } from '../definitions/DistinctPlatformResponseV3.js'
 import { ForgotPasswordRequestV3 } from '../definitions/ForgotPasswordRequestV3.js'
 import { GetLinkHeadlessAccountConflictResponse } from '../definitions/GetLinkHeadlessAccountConflictResponse.js'
-import { GetPublisherUserV3Response } from '../definitions/GetPublisherUserV3Response.js'
+import { GetPublisherUserResponse } from '../definitions/GetPublisherUserResponse.js'
 import { GetUserBanV3Response } from '../definitions/GetUserBanV3Response.js'
 import { GetUserMappingV3Array } from '../definitions/GetUserMappingV3Array.js'
 import { LinkHeadlessAccountRequest } from '../definitions/LinkHeadlessAccountRequest.js'
@@ -347,14 +347,14 @@ export class Users$ {
   /**
    * &lt;p&gt;Required permissions &#39;NAMESPACE:{namespace}:USER:{userId}:PUBLISHER [READ].&lt;/p&gt; &lt;p&gt;&lt;strong&gt;Restriction:&lt;/strong&gt; Path Parameter &lt;strong&gt;namespace&lt;/strong&gt; can be provided only with game namespace&lt;/p&gt;
    */
-  getPublisher_ByUserId(userId: string): Promise<IResponseWithSync<GetPublisherUserV3Response>> {
+  getPublisher_ByUserId(userId: string): Promise<IResponseWithSync<GetPublisherUserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}/publisher'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, GetPublisherUserV3Response, 'GetPublisherUserV3Response')
+    const res = () => Validate.responseType(() => resultPromise, GetPublisherUserResponse, 'GetPublisherUserResponse')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

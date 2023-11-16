@@ -10,10 +10,10 @@ import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, 
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CountryLocationResponse } from '../definitions/CountryLocationResponse.js'
-import { GameTokenCodeResponse } from '../definitions/GameTokenCodeResponse.js'
 import { OneTimeLinkingCodeResponse } from '../definitions/OneTimeLinkingCodeResponse.js'
 import { OneTimeLinkingCodeValidationResponse } from '../definitions/OneTimeLinkingCodeValidationResponse.js'
 import { PlatformTokenRefreshResponseV3 } from '../definitions/PlatformTokenRefreshResponseV3.js'
+import { TargetTokenCodeResponse } from '../definitions/TargetTokenCodeResponse.js'
 import { TokenResponseV3 } from '../definitions/TokenResponseV3.js'
 
 export class OAuth20Extension$ {
@@ -71,7 +71,7 @@ export class OAuth20Extension$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is being used to generate publisher user&#39;s game token.&lt;br&gt; It require basic header with ClientID and Secret, it should match the ClientID when call &lt;strong&gt;/iam/v3/namespace/{namespace}/token/request&lt;/strong&gt;&lt;br&gt; It required a code which can be generated from &lt;strong&gt;/iam/v3/namespace/{namespace}/token/request&lt;/strong&gt;.&lt;br&gt; &lt;/p&gt;
+   * &lt;p&gt;This endpoint is being used to generate target token.&lt;br&gt; It requires basic header with ClientID and Secret, it should match the ClientID when call &lt;strong&gt;/iam/v3/namespace/{namespace}/token/request&lt;/strong&gt;&lt;br&gt; The code should be generated from &lt;strong&gt;/iam/v3/namespace/{namespace}/token/request&lt;/strong&gt;.&lt;br&gt; &lt;/p&gt;
    */
   postTokenExchange(data: { code: string | null; additionalData?: string | null }): Promise<IResponse<TokenResponseV3>> {
     const params = {} as SDKRequestConfig
@@ -102,7 +102,7 @@ export class OAuth20Extension$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is being used to request the one time code [8 length] for headless account to link or upgrade to a full account.&lt;br&gt; It require a valid user token.&lt;br&gt; Should specify the target platform id and current user should already linked to this platform.&lt;br&gt; Current user should be a headless account.&lt;br&gt; &lt;h2&gt;Supported platforms:&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;&lt;strong&gt;steam&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;steamopenid&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;facebook&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;google&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;oculus&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;twitch&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;discord&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;android&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ios&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;apple&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;device&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;justice&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;epicgames&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ps4&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ps5&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;nintendo&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;awscognito&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;live&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;xblweb&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;netflix&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;snapchat&lt;/strong&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt;
+   * &lt;p&gt;This endpoint is being used to request the one time code [8 length] for headless account to link or upgrade to a full account.&lt;br&gt; It requires a valid user token.&lt;br&gt; Should specify the target platform id and current user should already linked to this platform.&lt;br&gt; Current user should be a headless account.&lt;br&gt; &lt;h2&gt;Supported platforms:&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;&lt;strong&gt;steam&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;steamopenid&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;facebook&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;google&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;oculus&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;twitch&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;discord&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;android&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ios&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;apple&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;device&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;justice&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;epicgames&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ps4&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;ps5&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;nintendo&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;awscognito&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;live&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;xblweb&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;netflix&lt;/strong&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;snapchat&lt;/strong&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt;
    */
   postLinkCodeRequest(data: { platformId: string | null }): Promise<IResponse<OneTimeLinkingCodeResponse>> {
     const params = {} as SDKRequestConfig
@@ -169,9 +169,9 @@ export class OAuth20Extension$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is being used to request the code to generate publisher user&#39;s game token.&lt;br&gt; It require a valid user token with publisher namespace.&lt;br&gt; Path namespace should be a game namespace.&lt;br&gt; Client ID should match the target namespace. It response a code and it can be consumed by &lt;strong&gt;/iam/v3/token/exchange&lt;/strong&gt; &lt;/p&gt;
+   * This endpoint is being used to request the code to exchange a new token. The target new token&#39;s clientId should NOT be same with current using one.&lt;br&gt; It requires a valid user token.&lt;br&gt; Path namespace should be target namespace.&lt;br&gt; Client ID should match the target namespace.&lt;br&gt; &lt;br&gt; The code in response can be consumed by &lt;strong&gt;/iam/v3/token/exchange&lt;/strong&gt;
    */
-  postTokenRequest(data: { client_id: string | null }): Promise<IResponse<GameTokenCodeResponse>> {
+  postTokenRequest(data: { client_id: string | null }): Promise<IResponse<TargetTokenCodeResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/namespace/{namespace}/token/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -179,7 +179,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.responseType(() => resultPromise, GameTokenCodeResponse, 'GameTokenCodeResponse')
+    return Validate.responseType(() => resultPromise, TargetTokenCodeResponse, 'TargetTokenCodeResponse')
   }
 
   /**

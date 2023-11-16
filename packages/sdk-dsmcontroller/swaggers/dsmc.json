@@ -244,64 +244,6 @@
         "tags": ["Image Config"]
       }
     },
-    "/dsmcontroller/admin/images/import": {
-      "post": {
-        "consumes": ["multipart/form-data"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE]\n\nRequired scope: social\n\nThis endpoint import a dedicated servers images in a namespace.\n\nThe image will be upsert. Existing version will be replaced with imported image, will create new one if not found.\n\nExample data inside imported file\n[\n  {\n\t\u0026#34;namespace\u0026#34;: \u0026#34;dewa\u0026#34;,\n\t\u0026#34;image\u0026#34;: \u0026#34;123456789.dkr.ecr.us-west-2.amazonaws.com/ds-dewa:0.0.1-alpha\u0026#34;,\n\t\u0026#34;version\u0026#34;: \u0026#34;0.0.1\u0026#34;,\n\t\u0026#34;persistent\u0026#34;: true\n  }\n]\n",
-        "operationId": "ImportImages",
-        "parameters": [
-          {
-            "description": "imported file",
-            "in": "formData",
-            "name": "file",
-            "required": true,
-            "type": "file"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "images imported",
-            "schema": {
-              "$ref": "#/definitions/models.ImportResponse"
-            }
-          },
-          "400": {
-            "description": "malformed request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "unauthorized access",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "403": {
-            "description": "forbidden access",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "import images for a namespace",
-        "tags": ["Image Config"]
-      }
-    },
     "/dsmcontroller/admin/images/patches": {
       "post": {
         "consumes": ["application/json"],
@@ -2460,67 +2402,6 @@
         "tags": ["Image Config"]
       }
     },
-    "/dsmcontroller/admin/namespaces/{namespace}/images/export": {
-      "get": {
-        "consumes": ["application/json"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ]\n\nRequired scope: social\n\nThis endpoint export a dedicated servers images in a namespace.\n",
-        "operationId": "ExportImages",
-        "parameters": [
-          {
-            "description": "namespace of the game",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "images exported",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/models.ImageRecord"
-              },
-              "type": "array"
-            }
-          },
-          "401": {
-            "description": "unauthorized access",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "403": {
-            "description": "forbidden access",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "images not found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "export DSM Controller images for a namespace",
-        "tags": ["Image Config"]
-      }
-    },
     "/dsmcontroller/admin/namespaces/{namespace}/images/limit": {
       "get": {
         "consumes": ["application/json"],
@@ -3291,7 +3172,7 @@
           "200": {
             "description": "server queried",
             "schema": {
-              "$ref": "#/definitions/models.Server"
+              "$ref": "#/definitions/models.ServerDetailsResponse"
             }
           },
           "401": {
@@ -6130,7 +6011,7 @@
     "models.GetImageDetailResponse": {
       "properties": {
         "data": {
-          "$ref": "#/definitions/models.ImageRecord"
+          "$ref": "#/definitions/models.ImageRecordResponse"
         }
       },
       "required": ["data"]
@@ -6172,7 +6053,7 @@
       },
       "required": ["data"]
     },
-    "models.ImageRecord": {
+    "models.ImageRecordResponse": {
       "properties": {
         "artifactPath": {
           "type": "string"
@@ -6231,22 +6112,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "artifactPath",
-        "coreDumpEnabled",
-        "createdAt",
-        "dockerPath",
-        "image",
-        "imageReplications",
-        "imageReplicationsMap",
-        "imageSize",
-        "modifiedBy",
-        "namespace",
-        "persistent",
-        "ulimitFileSize",
-        "updatedAt",
-        "version"
-      ]
+      "required": ["createdAt", "dockerPath", "image", "imageSize", "modifiedBy", "namespace", "persistent", "updatedAt", "version"]
     },
     "models.ImageRecordUpdate": {
       "properties": {
@@ -6276,11 +6142,25 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "ulimitFileSize": {
+          "format": "int32",
+          "type": "integer"
+        },
         "version": {
           "type": "string"
         }
       },
-      "required": ["artifactPath", "coreDumpEnabled", "image", "imageReplicationsMap", "namespace", "patchVersion", "persistent", "version"]
+      "required": [
+        "artifactPath",
+        "coreDumpEnabled",
+        "image",
+        "imageReplicationsMap",
+        "namespace",
+        "patchVersion",
+        "persistent",
+        "ulimitFileSize",
+        "version"
+      ]
     },
     "models.ImageReplication": {
       "properties": {
@@ -6358,7 +6238,7 @@
       "properties": {
         "images": {
           "items": {
-            "$ref": "#/definitions/models.PatchImageRecord"
+            "$ref": "#/definitions/models.PatchImageRecordResponse"
           },
           "type": "array"
         }
@@ -6369,7 +6249,7 @@
       "properties": {
         "images": {
           "items": {
-            "$ref": "#/definitions/models.ImageRecord"
+            "$ref": "#/definitions/models.ImageRecordResponse"
           },
           "type": "array"
         },
@@ -6400,7 +6280,7 @@
         },
         "servers": {
           "items": {
-            "$ref": "#/definitions/models.Server"
+            "$ref": "#/definitions/models.ServerDetailsResponse"
           },
           "type": "array"
         }
@@ -6499,19 +6379,93 @@
         }
       },
       "required": [
-        "artifactPath",
-        "coreDumpEnabled",
         "createdAt",
         "dockerPath",
         "image",
-        "imageReplications",
-        "imageReplicationsMap",
         "imageSize",
         "modifiedBy",
         "namespace",
         "patchVersion",
         "persistent",
-        "ulimitFileSize",
+        "updatedAt",
+        "uploaderFlag",
+        "version"
+      ]
+    },
+    "models.PatchImageRecordResponse": {
+      "properties": {
+        "artifactPath": {
+          "type": "string"
+        },
+        "coreDumpEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "dockerPath": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "imageReplications": {
+          "items": {
+            "$ref": "#/definitions/models.ImageReplication"
+          },
+          "type": "array"
+        },
+        "imageReplicationsMap": {
+          "additionalProperties": {
+            "$ref": "#/definitions/models.ImageReplication"
+          },
+          "type": "object"
+        },
+        "imageSize": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "patchVersion": {
+          "type": "string"
+        },
+        "persistent": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "ulimitFileSize": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "uploaderFlag": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "createdAt",
+        "dockerPath",
+        "image",
+        "imageSize",
+        "modifiedBy",
+        "namespace",
+        "patchVersion",
+        "persistent",
         "updatedAt",
         "uploaderFlag",
         "version"
@@ -6790,6 +6744,157 @@
       },
       "required": [
         "allocation_id",
+        "artifact_path",
+        "cpu_limit",
+        "created_at",
+        "deployment",
+        "game_version",
+        "image_version",
+        "ip",
+        "is_core_dump_enabled",
+        "is_override_game_version",
+        "job_id",
+        "last_update",
+        "mem_limit",
+        "namespace",
+        "params",
+        "pod_name",
+        "port",
+        "protocol",
+        "provider",
+        "region",
+        "session_id",
+        "status",
+        "termination_reason",
+        "ulimit_file_size"
+      ]
+    },
+    "models.ServerDeploymentConfigSessionTimeoutResponse": {
+      "properties": {
+        "session_timeout": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["session_timeout"]
+    },
+    "models.ServerDetailsResponse": {
+      "properties": {
+        "allocation_events": {
+          "items": {
+            "$ref": "#/definitions/models.AllocationEvent"
+          },
+          "type": "array"
+        },
+        "allocation_id": {
+          "type": "string"
+        },
+        "alternate_ips": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "artifact_path": {
+          "type": "string"
+        },
+        "cpu_limit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "custom_attribute": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "deployment_override": {
+          "type": "string"
+        },
+        "game_version": {
+          "type": "string"
+        },
+        "image_version": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "is_core_dump_enabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "is_override_game_version": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "job_id": {
+          "type": "string"
+        },
+        "last_update": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "mem_limit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "params": {
+          "type": "string"
+        },
+        "pod_name": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ports": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "status_history": {
+          "items": {
+            "$ref": "#/definitions/models.StatusHistory"
+          },
+          "type": "array"
+        },
+        "termination_reason": {
+          "type": "string"
+        },
+        "ulimit_file_size": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "allocation_id",
         "cpu_limit",
         "created_at",
         "deployment",
@@ -6811,15 +6916,6 @@
         "status",
         "termination_reason"
       ]
-    },
-    "models.ServerDeploymentConfigSessionTimeoutResponse": {
-      "properties": {
-        "session_timeout": {
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": ["session_timeout"]
     },
     "models.ServerSessionResponse": {
       "properties": {
@@ -7138,8 +7234,8 @@
     "path": "/dsmcontroller/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "unknown",
-    "gitHash": "1c4f4323c0b0750548b257ace74f6a59a58a6dc8",
+    "buildDate": "2023-11-03T09:03:05+00:00",
+    "gitHash": "f9fa8f833b3a47f838ae3bda00644152f0d70bd4",
     "name": "justice-dedicated-server-manager-controller-service",
     "revisionID": "6.4.3",
     "version": "6.4.3",

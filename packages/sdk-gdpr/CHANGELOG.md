@@ -1,5 +1,14 @@
 # @accelbyte/sdk-gdpr
 
+## 2.3.3
+
+### Patch Changes
+
+- Updated dependencies [8bba3b81b]
+- Updated dependencies [d84f877e9]
+  - @accelbyte/validator@0.2.16
+  - @accelbyte/sdk@2.0.6
+
 ## 2.3.1
 
 ### Patch Changes

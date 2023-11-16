@@ -32,7 +32,7 @@ export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Available Type: * email * password * displayname * dateofbirth * country * language Requires valid user access token
+   * Available Type: * email * password * displayname * dateofbirth * country * language
    */
   async function getEdithistory_ByUserId(
     userId: string,

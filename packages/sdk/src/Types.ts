@@ -27,6 +27,12 @@ export interface ApiArgs {
   cache?: boolean
 }
 
+export interface CustomInterceptors {
+  request: RequestInterceptor
+  response: ResponseInterceptor
+  error: ErrorInterceptor
+}
+
 export interface SDKOptions {
   /**
    * The client ID for the SDK. This value is retrieved from Admin Portal, OAuth Clients.
@@ -50,16 +56,18 @@ export interface SDKOptions {
    * Custom interceptors for axios. If not provided, by default the SDK will send a POST request
    * to `/iam/v3/oauth/token` whenever there is a `401 Unauthenticated` response status.
    */
-  customInterceptors?: {
-    request: RequestInterceptor
-    response: ResponseInterceptor
-    error: ErrorInterceptor
-  }
+  customInterceptors?: CustomInterceptors
 
   /**
    * [Experimental] Whether to cache the responses or not using the mechanism inside the SDK.
    */
   cache?: boolean
+
+  /**
+   * Use when in internal Accelbyte network. Must be used in server only environment.
+   * When value is true, it will call `http://{service-name}/{path}` instead of `baseURL`
+   */
+  useInternalNetwork?: boolean
 }
 
 export interface SDKEvents {

@@ -6,6 +6,9 @@
 import { z } from 'zod'
 import { ResponseDeleteBulkGameSessions } from './ResponseDeleteBulkGameSessions.js'
 
-export const DeleteBulkGameSessionsApiResponse = z.object({ failed: z.array(ResponseDeleteBulkGameSessions), success: z.array(z.string()) })
+export const DeleteBulkGameSessionsApiResponse = z.object({
+  failed: z.array(ResponseDeleteBulkGameSessions).nullish(),
+  success: z.array(z.string()).nullish()
+})
 
 export interface DeleteBulkGameSessionsApiResponse extends z.TypeOf<typeof DeleteBulkGameSessionsApiResponse> {}

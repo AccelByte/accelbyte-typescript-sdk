@@ -7,19 +7,19 @@ import { z } from 'zod'
 import { ImageReplication } from './ImageReplication.js'
 
 export const PatchImageRecord = z.object({
-  artifactPath: z.string(),
-  coreDumpEnabled: z.boolean(),
+  artifactPath: z.string().nullish(),
+  coreDumpEnabled: z.boolean().nullish(),
   createdAt: z.string(),
   dockerPath: z.string(),
   image: z.string(),
-  imageReplications: z.array(ImageReplication),
-  imageReplicationsMap: z.record(ImageReplication),
+  imageReplications: z.array(ImageReplication).nullish(),
+  imageReplicationsMap: z.record(ImageReplication).nullish(),
   imageSize: z.number().int(),
   modifiedBy: z.string(),
   namespace: z.string(),
   patchVersion: z.string(),
   persistent: z.boolean(),
-  ulimitFileSize: z.number().int(),
+  ulimitFileSize: z.number().int().nullish(),
   updatedAt: z.string(),
   uploaderFlag: z.string(),
   version: z.string()

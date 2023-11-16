@@ -8,7 +8,7 @@ import { MatchFunctionConfig } from './MatchFunctionConfig.js'
 import { Pagination } from './Pagination.js'
 
 export const ListMatchFunctionsResponse = z.object({
-  configs: z.array(MatchFunctionConfig),
+  configs: z.array(MatchFunctionConfig).nullish(),
   functions: z.array(z.string()),
   pagination: Pagination
 })

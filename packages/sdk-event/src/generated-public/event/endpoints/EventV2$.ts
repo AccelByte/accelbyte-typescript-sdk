@@ -37,7 +37,7 @@ export class EventV2$ {
   }
 
   /**
-   * Available Type: * email * password * displayname * dateofbirth * country * language Requires valid user access token
+   * Available Type: * email * password * displayname * dateofbirth * country * language
    */
   getEdithistory_ByUserId(
     userId: string,

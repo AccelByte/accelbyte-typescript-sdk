@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk-basic@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-basic/-/sdk-basic-3.0.0.tgz#25dbe0fced1c13143ad9e15839f8608bc2e3c432"
-  integrity sha512-kmrbuQGg+fFugUsga3wxlJkIKJxtXJxFrWhaoJjteBzRUVtNm2a9Giv/uj57sBttMhPpgJnM+CONa0/fgcAcNA==
+"@accelbyte/sdk-basic@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-basic/-/sdk-basic-3.0.0-beta.0.tgz#7d49cc9d4a22b45504a970b256850677fc37c8cb"
+  integrity sha512-DnFJrvXb3uuk8r6E/d2IENYGbeMotZPMEvyRZzqsZkN+Pb/XoGXwKlZ3a41d2fP1e00am4FDIodV/KHxZXJwlA==
   dependencies:
     "@accelbyte/validator" "0.2.15"
     axios "1.3.6"
@@ -17,10 +17,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-iam@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-3.0.0.tgz#9c7250082490bf3c82eeeddf0fae070d256f57e3"
-  integrity sha512-5mmZvzGPDDfC3wAkTRKZZ+BRsSZy0/5/lWlRgZyl9RUOtF3/yJqPIQPpZsVjPWG+Kehnzih/+kWt1589GE/BiQ==
+"@accelbyte/sdk-iam@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-3.0.0-beta.0.tgz#35f89976bf2812e64ba750c0e3541a3547833dc4"
+  integrity sha512-Xd9JFZoAgj8GcpHfVGnhI/PNY+1i9KPd//QYMbqMgoSD61c9dXdG6FrN7xYHXHpoagYegJ1J6WFpWILcrQW2jw==
   dependencies:
     "@accelbyte/validator" "0.2.15"
     axios "1.3.6"
@@ -32,12 +32,12 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-legal@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-legal/-/sdk-legal-3.0.0.tgz#0a932f99eb2689ce6dc21f869270981da48edaf9"
-  integrity sha512-qbPvYz1mv0w6NoKIVA6j7QtjYJ8wIhedqRRotrxxmathN6bq/e5mg5MsSUbKCd0fgLFexKK4VxSgDjhRFwpZ5g==
+"@accelbyte/sdk-legal@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-legal/-/sdk-legal-3.0.0-beta.0.tgz#53763cd427aecdf6d6cfc6580cd2274e15c905f9"
+  integrity sha512-QREOfUtFAYIspM3/v42Ut+4GMvmRmtL5YyT5PI1b8xLWspn2hW9kDaZvyO3zaYkipMa+v2AJdJoowtOgifyMpw==
   dependencies:
-    "@accelbyte/sdk-iam" "3.0.0"
+    "@accelbyte/sdk-iam" "3.0.0-beta.0"
     "@accelbyte/validator" "0.2.15"
     axios "1.3.6"
     buffer "6.0.3"
@@ -48,10 +48,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-platform@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-platform/-/sdk-platform-3.0.0.tgz#377a42ddcad880165fbf92046679aa645dbb2097"
-  integrity sha512-whuzCME/9rQOum6B6u3stnfcR9CChWzP0AySHlvZv2ygSnn/KW8NsS90SsqnpGdIl+63pDzyHaD9eCFqia8nWw==
+"@accelbyte/sdk-platform@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-platform/-/sdk-platform-3.0.0-beta.0.tgz#f05275ec097a3cd3b7f86154ec42348836cc2dac"
+  integrity sha512-OkZY/CDKFfcHu1oSlI4+xq8tHHsDslrjkjRJx155l1MNPlEDnIRKUI/0FMWSD2G3XxnBnn+rN6FoH95X6YDaew==
   dependencies:
     "@accelbyte/validator" "0.2.15"
     axios "1.3.6"
@@ -63,10 +63,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.1.0.tgz#f33452400c1b7d8a80baf2f1dcd9db56208b0d02"
-  integrity sha512-ZDvhujmMxE6Qax8jcpO/pB69cXutNiTUdxola7u0VS0PiGiQU4kl1ih5srOjRLDjTGMZub1AMhjzIuD86bgK+g==
+"@accelbyte/sdk@2.1.0-beta.0":
+  version "2.1.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.1.0-beta.0.tgz#753839a93a48a4c473cbc43fccc594b493dac0a7"
+  integrity sha512-Q+uVmI+uhcGeABHBwrOF/Phz9//23qlVvlOuupp0EVTuSRN+dUYue/eM/Z8+Y+S9ZUacNdPvA90T0tMBz+b8Jw==
   dependencies:
     "@accelbyte/validator" "0.2.15"
     axios "1.3.6"

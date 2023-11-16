@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-matchmaking",
-  "version": "3.0.0",
+  "version": "3.0.1-beta.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/index.js",
@@ -32,7 +32,7 @@
     "typescript": "4.6.4"
   },
   "dependencies": {
-    "@accelbyte/validator": "0.2.15",
+    "@accelbyte/validator": "0.2.17",
     "axios": "1.3.6",
     "buffer": "6.0.3",
     "crypto-js": "4.1.1",
@@ -45,6 +45,5 @@
   "peerDependencies": {
     "@accelbyte/sdk": "^2.0.2"
   },
-  "sideEffects": false,
-  "predefinedMajorVersion": 0
+  "sideEffects": false
 }

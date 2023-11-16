@@ -8,7 +8,7 @@
     },
     "description": "Justice UGC Service",
     "title": "justice-ugc-service",
-    "version": "2.14.0"
+    "version": "2.16.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -1369,6 +1369,12 @@
               "$ref": "#/definitions/response.Error"
             }
           },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -1389,7 +1395,7 @@
     "/ugc/v1/admin/namespaces/{namespace}/contents/{contentId}/screenshots": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;.\\n \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png. \\n\n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
+        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;. \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png.\n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
         "operationId": "AdminUploadContentScreenshot",
         "parameters": [
           {
@@ -1459,7 +1465,7 @@
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.\\n \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
+        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;. \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
         "operationId": "AdminUpdateScreenshots",
         "parameters": [
           {
@@ -5855,7 +5861,7 @@
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/contents/{contentId}/screenshots": {
       "post": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;.\\n \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png. \\n\n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
+        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;. \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png. \n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
         "operationId": "UploadContentScreenshot",
         "parameters": [
           {
@@ -5926,7 +5932,7 @@
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.\\n \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
+        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;. \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
         "operationId": "UpdateScreenshots",
         "parameters": [
           {
@@ -7287,7 +7293,7 @@
             "type": "integer"
           },
           {
-            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003edownload, download:desc, download:asc\u003c/li\u003e\n\u003cli\u003elike, like:desc, like:asc\u003c/li\u003e\n\u003cli\u003ename, name:desc, name:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003edownload, download:desc, download:asc\u003c/li\u003e\n\u003cli\u003elike, like:desc, like:asc\u003c/li\u003e\n\u003cli\u003ename, name:desc, name:asc\u003c/li\u003e\n\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -7408,6 +7414,68 @@
         "tags": ["Admin Content V2"]
       }
     },
+    "/ugc/v2/admin/namespaces/{namespace}/contents/sharecodes/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]\u0026lt;/b\u0026gt;.\n\t\t\t\t\t\tMaximum sharecodes per request 100",
+        "operationId": "AdminGetContentBulkByShareCodesV2",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.GetContentBulkByShareCodesRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/models.ContentDownloadResponseV2"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get content by content sharecodes",
+        "tags": ["Admin Content V2"]
+      }
+    },
     "/ugc/v2/admin/namespaces/{namespace}/contents/sharecodes/{shareCode}": {
       "get": {
         "consumes": ["application/json"],
@@ -7524,10 +7592,81 @@
         "tags": ["Admin Content V2"]
       }
     },
+    "/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}/rollback/{versionId}": {
+      "put": {
+        "consumes": ["*/*"],
+        "description": "Required permission: \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;\n\t\t\t\tRollback content\u0026#39;s payload to specified version.",
+        "operationId": "RollbackContentVersionV2",
+        "parameters": [
+          {
+            "description": "content ID",
+            "in": "path",
+            "name": "contentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "version ID",
+            "in": "path",
+            "name": "versionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.ContentDownloadResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Rollback content's payload version",
+        "tags": ["Admin Content V2"]
+      }
+    },
     "/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}/screenshots": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;.\\n \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png. \\n\n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
+        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;. \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png. \n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
         "operationId": "AdminUploadContentScreenshotV2",
         "parameters": [
           {
@@ -7597,7 +7736,7 @@
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.\\n \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
+        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;. \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
         "operationId": "AdminUpdateScreenshotsV2",
         "parameters": [
           {
@@ -7734,6 +7873,64 @@
         "tags": ["Admin Content V2"]
       }
     },
+    "/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}/versions": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;\n\t\t\t\tContent\u0026#39;s payload versions created when UGC is created or updated with \u0026lt;code\u0026gt;updateContentFile\u0026lt;/code\u0026gt; set to true. Only list up to 10 latest versions.",
+        "operationId": "ListContentVersionsV2",
+        "parameters": [
+          {
+            "description": "content ID",
+            "in": "path",
+            "name": "contentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.ListContentVersionsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "List content's payload versions",
+        "tags": ["Admin Content V2"]
+      }
+    },
     "/ugc/v2/admin/namespaces/{namespace}/groups/{groupId}/contents": {
       "get": {
         "consumes": ["application/json"],
@@ -7804,6 +8001,167 @@
         ],
         "summary": "Get contents belong to a group",
         "tags": ["Admin Group"]
+      }
+    },
+    "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3/sharecodes/{shareCode}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.\n\n\u0026lt;code\u0026gt;shareCode\u0026lt;/code\u0026gt; format should follows:\n\nMax length: 7\nAvailable characters: abcdefhkpqrstuxyz\n\n",
+        "operationId": "AdminUpdateContentByShareCodeV2",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AdminUpdateContentRequestV2"
+            }
+          },
+          {
+            "description": "channel ID",
+            "in": "path",
+            "name": "channelId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "share code",
+            "in": "path",
+            "name": "shareCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.CreateContentResponseV2"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Update content to S3 bucket by share code",
+        "tags": ["Admin Content V2"]
+      }
+    },
+    "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/sharecodes/{shareCode}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.",
+        "operationId": "AdminDeleteContentByShareCodeV2",
+        "parameters": [
+          {
+            "description": "channel ID",
+            "in": "path",
+            "name": "channelId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "share code",
+            "in": "path",
+            "name": "shareCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete content by share code",
+        "tags": ["Admin Content V2"]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}": {
@@ -8486,7 +8844,7 @@
             "type": "integer"
           },
           {
-            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003edownload, download:desc, download:asc\u003c/li\u003e\n\u003cli\u003elike, like:desc, like:asc\u003c/li\u003e\n\u003cli\u003ename, name:desc, name:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003edownload, download:desc, download:asc\u003c/li\u003e\n\u003cli\u003elike, like:desc, like:asc\u003c/li\u003e\n\u003cli\u003ename, name:desc, name:asc\u003c/li\u003e\n\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -11330,11 +11688,11 @@
     "path": "/ugc/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-10-17T09:39:03+00:00",
-    "gitHash": "998e03a5e5d108cce75b95357484bc346418498d",
+    "buildDate": "2023-11-03T06:43:58+00:00",
+    "gitHash": "5768e5ee9938d767468e540e133b36e8fa340d74",
     "name": "justice-ugc-service",
     "realm": "dev",
-    "version": "2.14.0",
+    "version": "2.16.0",
     "version-roles-seeding": "0.0.13"
   }
 }

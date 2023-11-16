@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { ImageRecord } from './ImageRecord.js'
+import { ImageRecordResponse } from './ImageRecordResponse.js'
 
-export const GetImageDetailResponse = z.object({ data: ImageRecord })
+export const GetImageDetailResponse = z.object({ data: ImageRecordResponse })
 
 export interface GetImageDetailResponse extends z.TypeOf<typeof GetImageDetailResponse> {}

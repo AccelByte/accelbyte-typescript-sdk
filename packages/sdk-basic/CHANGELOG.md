@@ -1,5 +1,14 @@
 # @accelbyte/sdk-basic
 
+## 2.1.3
+
+### Patch Changes
+
+- Updated dependencies [8bba3b81b]
+- Updated dependencies [d84f877e9]
+  - @accelbyte/validator@0.2.16
+  - @accelbyte/sdk@2.0.6
+
 ## 2.1.1
 
 ### Patch Changes

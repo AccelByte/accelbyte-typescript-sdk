@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Match Service v2",
-    "version": "2.11.4"
+    "version": "2.11.6"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -2036,7 +2036,7 @@
           "$ref": "#/definitions/models.Pagination"
         }
       },
-      "required": ["configs", "functions", "pagination"]
+      "required": ["functions", "pagination"]
     },
     "api.ListMatchPoolsResponse": {
       "properties": {
@@ -2049,8 +2049,7 @@
         "pagination": {
           "$ref": "#/definitions/models.Pagination"
         }
-      },
-      "required": ["data"]
+      }
     },
     "api.ListRuleSetsResponse": {
       "properties": {
@@ -2063,8 +2062,7 @@
         "pagination": {
           "$ref": "#/definitions/models.Pagination"
         }
-      },
-      "required": ["data"]
+      }
     },
     "api.Match": {
       "properties": {
@@ -2802,9 +2800,9 @@
     "path": "/match2/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-10-18T01:47:07+00:00",
-    "gitHash": "a02323c374d197f514ccd4b7dffc9c3142824e87",
-    "version": "2.11.4",
+    "buildDate": "2023-11-01T02:34:04+00:00",
+    "gitHash": "2d48e986670a2728708518e0e741b19794135950",
+    "version": "2.11.6",
     "version-roles-seeding": "0.0.38"
   }
 }

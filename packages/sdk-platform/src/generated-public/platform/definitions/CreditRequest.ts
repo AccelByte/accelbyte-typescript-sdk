@@ -28,7 +28,8 @@ export const CreditRequest = z.object({
       'REFERRAL_BONUS',
       'REFUND',
       'REWARD',
-      'SELL_BACK'
+      'SELL_BACK',
+      'TRADE'
     ])
     .nullish()
 })

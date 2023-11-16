@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const GetPublisherUserV3Response = z.object({ namespace: z.string(), userId: z.string() })
+export const RevokeEntitlementPayload = z.object({ count: z.number().int().nullish(), entitlementId: z.string() })
 
-export interface GetPublisherUserV3Response extends z.TypeOf<typeof GetPublisherUserV3Response> {}
+export interface RevokeEntitlementPayload extends z.TypeOf<typeof RevokeEntitlementPayload> {}

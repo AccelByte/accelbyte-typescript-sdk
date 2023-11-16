@@ -80,17 +80,15 @@ export class IamUserAuthorizationClient {
     }
   }
 
-  loginWithAuthorizationCode = async ({ code, codeVerifier }: { code: string; codeVerifier: string }) => {
-    const deviceId = SdkDevice.getDeviceId()
-
+  loginWithAuthorizationCode = async ({ code, codeVerifier, deviceId }: { code: string; codeVerifier: string; deviceId?: string }) => {
     Network.setDeviceTokenCookie()
     const config = {
       ...this.conf,
       headers: {
-        'Device-Id': deviceId,
         'Device-Name': platform.name ? platform.name.toString() : '',
         'Device-Os': platform.os ? platform.os.toString() : '',
         'Device-Type': SdkDevice.getType(),
+        ...((BrowserHelper.isOnBrowser() || deviceId) && { 'Device-Id': deviceId || SdkDevice.getDeviceId() }),
         ...this.conf.headers
       }
     }
@@ -114,17 +112,16 @@ export class IamUserAuthorizationClient {
     return { ...result, mfaData }
   }
 
-  loginWithPasswordAuthorization = async ({ username, password }) => {
-    const deviceId = SdkDevice.getDeviceId()
+  loginWithPasswordAuthorization = async ({ username, password, deviceId }: { username: string; password: string; deviceId?: string }) => {
     const axios = Network.create({
       ...this.conf,
       headers: {
         Authorization: `Basic ${Buffer.from(`${this.options.clientId}:`).toString('base64')}`,
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Device-Id': deviceId,
         'Device-Name': platform.name ? platform.name.toString() : '',
         'Device-Os': platform.os ? platform.os.toString() : '',
-        'Device-Type': SdkDevice.getType()
+        'Device-Type': SdkDevice.getType(),
+        ...((BrowserHelper.isOnBrowser() || deviceId) && { 'Device-Id': deviceId || SdkDevice.getDeviceId() })
       }
     })
 

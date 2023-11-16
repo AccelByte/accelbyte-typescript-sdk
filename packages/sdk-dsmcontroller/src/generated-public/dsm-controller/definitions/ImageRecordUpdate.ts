@@ -14,6 +14,7 @@ export const ImageRecordUpdate = z.object({
   namespace: z.string(),
   patchVersion: z.string(),
   persistent: z.boolean(),
+  ulimitFileSize: z.number().int(),
   version: z.string()
 })
 

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PatchImageRecord } from './PatchImageRecord.js'
+import { PatchImageRecordResponse } from './PatchImageRecordResponse.js'
 
-export const ListImagePatchesResponse = z.object({ images: z.array(PatchImageRecord) })
+export const ListImagePatchesResponse = z.object({ images: z.array(PatchImageRecordResponse) })
 
 export interface ListImagePatchesResponse extends z.TypeOf<typeof ListImagePatchesResponse> {}

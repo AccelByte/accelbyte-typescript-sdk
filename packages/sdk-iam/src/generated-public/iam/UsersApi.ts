@@ -13,7 +13,7 @@ import { CreateJusticeUserResponse } from './definitions/CreateJusticeUserRespon
 import { DistinctPlatformResponseV3 } from './definitions/DistinctPlatformResponseV3.js'
 import { ForgotPasswordRequestV3 } from './definitions/ForgotPasswordRequestV3.js'
 import { GetLinkHeadlessAccountConflictResponse } from './definitions/GetLinkHeadlessAccountConflictResponse.js'
-import { GetPublisherUserV3Response } from './definitions/GetPublisherUserV3Response.js'
+import { GetPublisherUserResponse } from './definitions/GetPublisherUserResponse.js'
 import { GetUserBanV3Response } from './definitions/GetUserBanV3Response.js'
 import { GetUserMappingV3Array } from './definitions/GetUserMappingV3Array.js'
 import { LinkHeadlessAccountRequest } from './definitions/LinkHeadlessAccountRequest.js'
@@ -277,7 +277,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * &lt;p&gt;Required permissions &#39;NAMESPACE:{namespace}:USER:{userId}:PUBLISHER [READ].&lt;/p&gt; &lt;p&gt;&lt;strong&gt;Restriction:&lt;/strong&gt; Path Parameter &lt;strong&gt;namespace&lt;/strong&gt; can be provided only with game namespace&lt;/p&gt;
    */
-  async function getPublisher_ByUserId(userId: string): Promise<GetPublisherUserV3Response> {
+  async function getPublisher_ByUserId(userId: string): Promise<GetPublisherUserResponse> {
     const $ = new Users$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getPublisher_ByUserId(userId)
     if (resp.error) throw resp.error

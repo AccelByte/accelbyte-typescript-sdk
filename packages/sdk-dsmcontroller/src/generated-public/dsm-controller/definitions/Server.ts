@@ -11,7 +11,7 @@ export const Server = z.object({
   allocation_events: z.array(AllocationEvent).nullish(),
   allocation_id: z.string(),
   alternate_ips: z.array(z.string()).nullish(),
-  artifact_path: z.string().nullish(),
+  artifact_path: z.string(),
   cpu_limit: z.number().int(),
   created_at: z.string(),
   custom_attribute: z.string().nullish(),
@@ -20,7 +20,7 @@ export const Server = z.object({
   game_version: z.string(),
   image_version: z.string(),
   ip: z.string(),
-  is_core_dump_enabled: z.boolean().nullish(),
+  is_core_dump_enabled: z.boolean(),
   is_override_game_version: z.boolean(),
   job_id: z.string(),
   last_update: z.string(),
@@ -37,7 +37,7 @@ export const Server = z.object({
   status: z.string(),
   status_history: z.array(StatusHistory).nullish(),
   termination_reason: z.string(),
-  ulimit_file_size: z.number().int().nullish()
+  ulimit_file_size: z.number().int()
 })
 
 export interface Server extends z.TypeOf<typeof Server> {}

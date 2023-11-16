@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Matchmaking Service",
-    "version": "2.26.2"
+    "version": "2.26.3"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -4593,9 +4593,9 @@
     "path": "/matchmaking/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-10-17T11:49:11+00:00",
-    "gitHash": "6c472207f7d0617d9953e8ee055817ed619b9a1c",
-    "version": "2.26.2",
+    "buildDate": "2023-10-24T02:04:22+00:00",
+    "gitHash": "c268f8c863f11c74c56b5dce9bae7be271c763e2",
+    "version": "2.26.3",
     "version-roles-seeding": "0.0.23"
   }
 }

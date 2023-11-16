@@ -18,21 +18,21 @@ export function SessionStorageApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   *  Update Insert Session Storage Leader. only Leader can update or insert user session storage data Leader. can store generic json example json can store : { "leader": { "leader": 1 }, "data": 123 }
+   *  Update Insert Session Storage Leader. only Leader can update or insert user session storage data Leader. can store generic json example json can store : { &#34;leader&#34;: { &#34;leader&#34;: 1 }, &#34;data&#34;: 123 }
    */
-  async function patchStorageLeader_BySessionId(sessionId: string, data: any): Promise<unknown> {
+  async function patchStorageLeader_BySessionId(sessionId: string): Promise<unknown> {
     const $ = new SessionStorage$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.patchStorageLeader_BySessionId(sessionId, data)
+    const resp = await $.patchStorageLeader_BySessionId(sessionId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   *  Update Insert Session Storage User. user can only update or insert user session storage data itself. can store generic json example json can store : { "storage": { "storage": 1 }, "data": 123 }
+   *  Update Insert Session Storage User. user can only update or insert user session storage data itself. can store generic json example json can store : { &#34;storage&#34;: { &#34;storage&#34;: 1 }, &#34;data&#34;: 123 }
    */
-  async function patchStorageUser_BySessionId_ByUserId(sessionId: string, userId: string, data: any): Promise<unknown> {
+  async function patchStorageUser_BySessionId_ByUserId(sessionId: string, userId: string): Promise<unknown> {
     const $ = new SessionStorage$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.patchStorageUser_BySessionId_ByUserId(sessionId, userId, data)
+    const resp = await $.patchStorageUser_BySessionId_ByUserId(sessionId, userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
