@@ -11,6 +11,7 @@ import { RetrievePolicyPublicResponse } from '../../generated-public/legal/defin
 import { AcceptedPoliciesRequest } from '@accelbyte/sdk-iam'
 import { RetrieveUserEligibilitiesResponse } from '../../generated-public/legal/definitions/RetrieveUserEligibilitiesResponse.js'
 import { PolicyVersionWithLocalizedVersionObject } from '../../generated-public/legal/definitions/PolicyVersionWithLocalizedVersionObject.js'
+import DOMPurify from 'dompurify'
 
 export class LegalHelper {
   static getUnsignedPolicies = (userEligibilities: RetrieveUserEligibilitiesResponseArray): RetrieveUserEligibilitiesResponseArray => {
@@ -97,5 +98,15 @@ export class LegalHelper {
 
     lastVersions[0].localizedPolicyVersions = localizedPolicyVersions
     return lastVersions
+  }
+
+  static sanitizeHTML = (document: string) => {
+    const domPurifyOption: DOMPurify.Config = {
+      WHOLE_DOCUMENT: true,
+      ADD_TAGS: ['head', 'meta', 'link'],
+      ADD_ATTR: ['content', 'property', 'http-equiv', 'charset', 'target']
+    }
+    const sanitizedHTML = DOMPurify.sanitize(document, domPurifyOption)
+    return sanitizedHTML
   }
 }
