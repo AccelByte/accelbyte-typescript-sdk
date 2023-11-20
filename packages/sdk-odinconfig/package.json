@@ -1,19 +1,12 @@
 {
   "name": "@accelbyte/sdk-odinconfig",
-  "version": "3.1.0-experimental.0",
+  "version": "3.1.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.cjs"
-    }
-  },
   "scripts": {
     "build": "rimraf dist && tsup src/index.ts --dts --format esm,cjs",
     "test": "echo ''",
