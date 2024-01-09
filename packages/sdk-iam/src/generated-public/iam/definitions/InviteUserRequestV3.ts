@@ -8,7 +8,7 @@ import { z } from 'zod'
 export const InviteUserRequestV3 = z.object({
   emailAddresses: z.array(z.string()),
   isAdmin: z.boolean(),
-  namespace: z.string(),
+  namespace: z.string().nullish(),
   roles: z.array(z.string())
 })
 

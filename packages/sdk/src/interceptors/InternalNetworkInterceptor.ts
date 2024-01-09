@@ -13,6 +13,7 @@ const internalServiceMap = {
   '/buildinfo': 'justice-buildinfo-service',
   '/chat': 'justice-chat-service',
   '/cloudsave': 'justice-cloudsave-service',
+  '/content-management': 'justice-odin-content-management-service',
   '/differ': 'justice-differ',
   '/dsmcontroller': 'justice-dsm-controller-service',
   '/event': 'justice-event-log-service',

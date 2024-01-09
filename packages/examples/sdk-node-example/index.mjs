@@ -2,6 +2,7 @@ import { Accelbyte, ApiUtils, Network } from '@accelbyte/sdk'
 import { Iam, IamUserAuthorizationClient } from '@accelbyte/sdk-iam'
 import { Platform } from '@accelbyte/sdk-platform'
 import { Basic } from '@accelbyte/sdk-basic'
+import { Cloudsave } from "@accelbyte/sdk-cloudsave"
 
 const sdk = Accelbyte.SDK({
   options: {
@@ -56,16 +57,26 @@ async function main() {
   // or pass the access token to the `Authorization` header.
   if (accessToken.length < 1000) {
     // min jwt length
-    throw Error('Please provide a valid accessToen')
+    throw Error('Please provide a valid accessToken')
   }
 
   await testGetNamespaces()
 
   await testGetUsersMe()
-
   await testGetUsersMeProfiles()
 
+  await testCloudSave()
   await testCustomNetworkCall()
+}
+
+async function testCloudSave() {
+  console.log('\nTesting CloudSave... ')
+  try {
+    const usersMeRecords = await Cloudsave.PublicPlayerRecordApi(sdk, bearerAuthConfig).getUsersMeRecords()
+    console.log(`fetched:`, usersMeRecords.data)
+  } catch (ex) {
+    console.log(ex)
+  }
 }
 
 function testCreateLoginURL() {

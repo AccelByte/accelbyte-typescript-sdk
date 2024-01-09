@@ -42,7 +42,7 @@ export class UsersV4$ {
   }
 
   /**
-   * Create a new user with unique email address and username. &lt;p&gt; &lt;b&gt;Required attributes:&lt;/b&gt; - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. &lt;br/&gt; &lt;b&gt;Not required attributes:&lt;/b&gt; - displayName: Please refer to the rule from /v3/public/inputValidations API. &lt;/p&gt; &lt;p&gt;This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.&lt;/p&gt;
+   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   createUser(data: CreateUserRequestV4): Promise<IResponse<CreateUserResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -53,7 +53,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token &lt;/p&gt; &lt;br&gt;&lt;p&gt;This Endpoint support update user based on given data. &lt;b&gt;Single request can update single field or multi fields.&lt;/b&gt;&lt;/p&gt; &lt;p&gt;Supported field {country, displayName, languageTag, dateOfBirth}&lt;/p&gt; &lt;p&gt;Country use ISO3166-1 alpha-2 two letter, e.g. US.&lt;/p&gt; &lt;p&gt;Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.&lt;/p&gt; &lt;br&gt;&lt;b&gt;Response body logic when user updating email address:&lt;/b&gt; &lt;ul&gt;&lt;li&gt;User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address.&lt;/li&gt; &lt;li&gt;User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. &lt;/li&gt; &lt;li&gt;User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. &lt;/li&gt; &lt;/ul&gt; &lt;p&gt;action code : 10103 &lt;/p&gt;
+   * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. action code : 10103
    */
   patchUserMe(data: UserUpdateRequestV3): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
@@ -64,7 +64,7 @@ export class UsersV4$ {
   }
 
   /**
-   * Create a test user and not send verification code email &lt;p&gt; &lt;b&gt;Required attributes:&lt;/b&gt; - verified: this new user is verified or not - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. &lt;br/&gt; &lt;b&gt;Not required attributes:&lt;/b&gt; - displayName: Please refer to the rule from /v3/public/inputValidations API. &lt;/p&gt; &lt;p&gt;This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.&lt;/p&gt;
+   * Create a test user and not send verification code email **Required attributes:** - verified: this new user is verified or not - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   createTestUser(data: CreateTestUserRequestV4): Promise<IResponse<CreateUserResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -75,7 +75,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint requires a valid user token and only returns user&#39;s public information.&lt;br/&gt; action code: 10129&lt;/p&gt;
+   * This endpoint only returns user&#39;s public information. action code: 10129
    */
   getUser_ByUserId(userId: string): Promise<IResponseWithSync<UserPublicInfoResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -92,7 +92,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;The endpoint to update my email address. &lt;/p&gt; &lt;p&gt;It requires a verification code from &lt;b&gt;/users/me/code/request&lt;/b&gt; with &lt;b&gt;UpdateEmailAddress&lt;/b&gt; context.&lt;/p&gt;
+   * The endpoint to update my email address. It requires a verification code from &lt;code&gt;/users/me/code/request&lt;/code&gt; with **UpdateEmailAddress** context.
    */
   updateUserMeEmail(data: EmailUpdateRequestV4): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -103,7 +103,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;(Only for test)This endpoint is used to remove trusted device.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;&lt;br/&gt; &lt;p&gt;This endpoint Requires device_token in cookie&lt;/p&gt;
+   * (Only for test)This endpoint is used to remove trusted device. This endpoint Requires device_token in cookie
    */
   deleteUserMeMfaDevice(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -114,7 +114,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to get user enabled factors.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to get user enabled factors.
    */
   getUsersMeMfaFactor(): Promise<IResponseWithSync<EnabledFactorsResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -131,7 +131,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to make 2FA factor default.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to make 2FA factor default.
    */
   postUserMeMfaFactor(data: { factor: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -145,7 +145,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   getUsersMeMfaBackupCode(): Promise<IResponseWithSync<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -162,7 +162,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   createUserMeMfaBackupCode(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -173,7 +173,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to send email code.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to send email code.
    */
   createUserMeMfaEmailCode(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -184,7 +184,7 @@ export class UsersV4$ {
   }
 
   /**
-   * Require valid user authorization Upgrade headless account to full account without verifying email address. Client does not need to provide verification code which sent to email address. &lt;br&gt;action code : 10124 &lt;/p&gt;
+   * Upgrade headless account to full account without verifying email address. Client does not need to provide verification code which sent to email address. action code : 10124
    */
   createUserMeHeadlesVerify(data: UpgradeHeadlessAccountRequestV4): Promise<IResponse<UserResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -195,7 +195,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to enable 2FA email.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to enable 2FA email.
    */
   postUserMeMfaEmailEnable(data: { code: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -209,7 +209,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to disable 2FA email.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to disable 2FA email.
    */
   createUserMeMfaEmailDisable(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -233,7 +233,7 @@ export class UsersV4$ {
   }
 
   /**
-   * Require valid user access token. The endpoint upgrades a headless account by linking the headless account with the email address, username, and password. By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM. &lt;br&gt; The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the &lt;a href=&#34;#operations-Users-PublicSendVerificationCodeV3&#34;&gt;send verification code endpoint&lt;/a&gt;. &lt;br&gt; This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done. Supported user data fields: &lt;ul&gt; &lt;li&gt;displayName&lt;/li&gt; &lt;li&gt;dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29&lt;/li&gt; &lt;li&gt;country : format ISO3166-1 alpha-2 two letter, e.g. US&lt;/li&gt; &lt;/ul&gt; action code : 10124
+   *  The endpoint upgrades a headless account by linking the headless account with the email address, username, and password. By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM. The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the [send verification code endpoint](#operations-Users-PublicSendVerificationCodeV3). This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done. Supported user data fields: - displayName - dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29 - country : format ISO3166-1 alpha-2 two letter, e.g. US action code : 10124
    */
   createUserMeHeadlesCodeVerify(data: UpgradeHeadlessAccountWithVerificationCodeRequestV4): Promise<IResponse<UserResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -244,7 +244,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to generate a secret key for 3rd-party authenticator app. A QR code URI is also returned so that frontend can generate QR code image.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to generate a secret key for 3rd-party authenticator app. A QR code URI is also returned so that frontend can generate QR code image.
    */
   createUserMeMfaAuthenticatorKey(): Promise<IResponse<AuthenticatorKeyResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -255,7 +255,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to enable 2FA backup codes.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to enable 2FA backup codes.
    */
   createUserMeMfaBackupCodeEnable(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -266,7 +266,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to enable 2FA backup codes.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to enable 2FA backup codes.
    */
   deleteUserMeMfaBackupCodeDisable(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -277,7 +277,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to download backup codes.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to download backup codes.
    */
   getUsersMeMfaBackupCodeDownload(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
@@ -294,7 +294,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to enable 2FA authenticator.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to enable 2FA authenticator.
    */
   postUserMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -308,7 +308,7 @@ export class UsersV4$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to disable 2FA authenticator.&lt;/p&gt; &lt;p&gt;This endpoint Requires valid user access token&lt;/p&gt;
+   * This endpoint is used to disable 2FA authenticator.
    */
   deleteUserMeMfaAuthenticatorDisable(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

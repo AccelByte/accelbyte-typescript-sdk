@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -8,9 +8,10 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Chat$ } from './endpoints/Chat$.js'
+import { RecentPlayer$ } from './endpoints/RecentPlayer$.js'
+import { RecentPlayerQueryResponse } from './definitions/RecentPlayerQueryResponse.js'
 
-export function ChatApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function RecentPlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
@@ -18,16 +19,16 @@ export function ChatApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * This endpoint need valid user access token. No specific permission is required. Upgrade connection to websocket upon successful request.
+   * Query recent player with given user id.
    */
-  async function getChat(): Promise<unknown> {
-    const $ = new Chat$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getChat()
+  async function getRecentPlayer(queryParams?: { limit?: number; userId?: string | null }): Promise<RecentPlayerQueryResponse> {
+    const $ = new RecentPlayer$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getRecentPlayer(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    getChat
+    getRecentPlayer
   }
 }

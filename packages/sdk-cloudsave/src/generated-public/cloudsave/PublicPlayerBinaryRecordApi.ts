@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -28,7 +28,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required valid user token Required scope: &lt;code&gt;social&lt;/code&gt; Retrieve list of my binary records by namespace.
+   * Retrieve list of my binary records by namespace.
    */
   async function getUsersMeBinaries(queryParams?: {
     limit?: number
@@ -42,7 +42,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required valid user token Required scope: &lt;code&gt;social&lt;/code&gt; Retrieve player record key and payload in bulk under given namespace. Maximum bulk key limit per request 20
+   * Retrieve player record key and payload in bulk under given namespace. Maximum bulk key limit per request 20
    */
   async function createUserMeBinaryBulk(data: BulkGetPlayerRecordsRequest): Promise<BulkGetPlayerBinaryRecordResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -52,7 +52,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Create a player binary record. &lt;p&gt;Other detail info:&lt;/p&gt; &lt;code&gt;key&lt;/code&gt; should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators &lt;b&gt;&#34;-&#34;&lt;/b&gt;, &lt;b&gt;&#34;_&#34;&lt;/b&gt;, &lt;b&gt;&#34;.&#34;&lt;/b&gt; are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
+   * Create a player binary record. Other detail info: `key` should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators **&#34;-&#34;**, **&#34;_&#34;**, **&#34;.&#34;** are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   async function createBinary_ByUserId(userId: string, data: PublicPlayerBinaryRecordCreate): Promise<UploadBinaryRecordResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -62,7 +62,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Delete a player binary record. Only player who own the record can delete it
+   * Delete a player binary record. Only player who own the record can delete it
    */
   async function deleteBinary_ByUserId_ByKey(userId: string, key: string): Promise<unknown> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -72,7 +72,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Get a player binary record by its key. Private Record: Only user who own the record could retrieve it.
+   * Get a player binary record by its key. **Private Record**: Only user who own the record could retrieve it.
    */
   async function getBinary_ByUserId_ByKey(userId: string, key: string): Promise<PlayerBinaryRecordResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -82,7 +82,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Update a player binary record file by its key
+   * Update a player binary record file by its key
    */
   async function updateBinary_ByUserId_ByKey(userId: string, key: string, data: BinaryRecordRequest): Promise<PlayerBinaryRecordResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -92,7 +92,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required Scope: &lt;code&gt;social&lt;/code&gt; Retrieve list of other player public binary records under given namespace.
+   * Retrieve list of other player public binary records under given namespace.
    */
   async function getBinariesPublic_ByUserId(
     userId: string,
@@ -105,7 +105,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required Scope: &lt;code&gt;social&lt;/code&gt; Bulk get other player&#39;s public binary record by userIds, max allowed 20 at a time. Only record with &lt;code&gt;isPublic=true&lt;/code&gt; can be retrieved using this endpoint.
+   * Bulk get other player&#39;s public binary record by userIds, max allowed 20 at a time. Only record with `isPublic=true` can be retrieved using this endpoint.
    */
   async function createPublicBulkUser_ByKey(key: string, data: BulkUserIDsRequest): Promise<BulkGetPlayerBinaryRecordResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -115,7 +115,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required Scope: &lt;code&gt;social&lt;/code&gt; Retrieve other player public binary record in bulk under given namespace. Maximum bulk key limit per request 20
+   * Retrieve other player public binary record in bulk under given namespace. Maximum bulk key limit per request 20
    */
   async function createBinaryBulk_ByUserId(userId: string, data: BulkGetPlayerRecordsRequest): Promise<BulkGetPlayerBinaryRecordResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -125,7 +125,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required Scope: &lt;code&gt;social&lt;/code&gt; Get other player&#39;s public binary record. Only record with &lt;code&gt;isPublic=true&lt;/code&gt; can be retrieved using this endpoint.
+   * Get other player&#39;s public binary record. Only record with `isPublic=true` can be retrieved using this endpoint.
    */
   async function getPublic_ByUserId_ByKey(userId: string, key: string): Promise<PlayerBinaryRecordResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -135,7 +135,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Update a player binary record metadata by its key
+   * Update a player binary record metadata by its key
    */
   async function updateMetadata_ByUserId_ByKey(
     userId: string,
@@ -149,7 +149,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Request presigned URL to upload the binary record to s3. &lt;p&gt;Other detail info:&lt;/p&gt; Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
+   * Request presigned URL to upload the binary record to s3. Other detail info: Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   async function createPresigned_ByUserId_ByKey(
     userId: string,

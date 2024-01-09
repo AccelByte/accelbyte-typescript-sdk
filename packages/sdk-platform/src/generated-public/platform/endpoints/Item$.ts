@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -27,6 +27,7 @@ export class Item$ {
    */
   getItemsBySku(queryParams: {
     sku: string | null
+    autoCalcEstimatedPrice?: boolean | null
     language?: string | null
     region?: string | null
     storeId?: string | null
@@ -50,6 +51,7 @@ export class Item$ {
   getItemsSearch(queryParams: {
     keyword: string | null
     language: string | null
+    autoCalcEstimatedPrice?: boolean | null
     itemType?:
       | 'APP'
       | 'BUNDLE'
@@ -107,6 +109,7 @@ export class Item$ {
    */
   getItemsByCriteria(queryParams?: {
     appType?: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'
+    autoCalcEstimatedPrice?: boolean | null
     baseAppId?: string | null
     categoryPath?: string | null
     features?: string | null
@@ -149,6 +152,7 @@ export class Item$ {
    */
   getItemsLocaleByIds(queryParams: {
     itemIds: string | null
+    autoCalcEstimatedPrice?: boolean | null
     language?: string | null
     region?: string | null
     storeId?: string | null
@@ -192,7 +196,13 @@ export class Item$ {
    */
   getLocale_ByItemId(
     itemId: string,
-    queryParams?: { language?: string | null; populateBundle?: boolean | null; region?: string | null; storeId?: string | null }
+    queryParams?: {
+      autoCalcEstimatedPrice?: boolean | null
+      language?: string | null
+      populateBundle?: boolean | null
+      region?: string | null
+      storeId?: string | null
+    }
   ): Promise<IResponseWithSync<PopulatedItemInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/items/{itemId}/locale'

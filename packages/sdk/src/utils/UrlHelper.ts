@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -44,5 +44,21 @@ export class UrlHelper {
     const { origin } = url
     const pathname = UrlHelper.trimSlashFromStringEdges(UrlHelper.combinePaths(url.pathname, ...paths))
     return new URL(pathname, origin).toString()
+  }
+
+  static removeQueryParam(fullUrlString: string, param: string) {
+    const url = new URL(fullUrlString)
+    const params = url.searchParams
+    const pathname = this.trimSlashFromStringEnd(url.pathname)
+
+    // Remove the query parameter
+    params.delete(param)
+
+    // Preserving other URL attributes
+    let newUrlString: string
+    if (params.toString() === '') newUrlString = `${url.origin}${pathname}${url.hash}`
+    else newUrlString = `${url.origin}${pathname}?${params.toString()}${url.hash}`
+
+    return newUrlString
   }
 }

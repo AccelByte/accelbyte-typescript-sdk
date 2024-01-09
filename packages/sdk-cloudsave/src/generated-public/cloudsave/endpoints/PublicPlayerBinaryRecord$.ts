@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -25,14 +25,14 @@ export class PublicPlayerBinaryRecord$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required valid user token Required scope: &lt;code&gt;social&lt;/code&gt; Retrieve list of my binary records by namespace.
+   * Retrieve list of my binary records by namespace.
    */
   getUsersMeBinaries(queryParams?: {
     limit?: number
     offset?: number
     query?: string | null
   }): Promise<IResponseWithSync<ListPlayerBinaryRecordsResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/me/binaries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -46,7 +46,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required valid user token Required scope: &lt;code&gt;social&lt;/code&gt; Retrieve player record key and payload in bulk under given namespace. Maximum bulk key limit per request 20
+   * Retrieve player record key and payload in bulk under given namespace. Maximum bulk key limit per request 20
    */
   createUserMeBinaryBulk(data: BulkGetPlayerRecordsRequest): Promise<IResponse<BulkGetPlayerBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
@@ -57,7 +57,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Create a player binary record. &lt;p&gt;Other detail info:&lt;/p&gt; &lt;code&gt;key&lt;/code&gt; should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators &lt;b&gt;&#34;-&#34;&lt;/b&gt;, &lt;b&gt;&#34;_&#34;&lt;/b&gt;, &lt;b&gt;&#34;.&#34;&lt;/b&gt; are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
+   * Create a player binary record. Other detail info: `key` should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators **&#34;-&#34;**, **&#34;_&#34;**, **&#34;.&#34;** are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   createBinary_ByUserId(userId: string, data: PublicPlayerBinaryRecordCreate): Promise<IResponse<UploadBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
@@ -70,7 +70,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [DELETE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Delete a player binary record. Only player who own the record can delete it
+   * Delete a player binary record. Only player who own the record can delete it
    */
   deleteBinary_ByUserId_ByKey(userId: string, key: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -84,7 +84,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Get a player binary record by its key. Private Record: Only user who own the record could retrieve it.
+   * Get a player binary record by its key. **Private Record**: Only user who own the record could retrieve it.
    */
   getBinary_ByUserId_ByKey(userId: string, key: string): Promise<IResponseWithSync<PlayerBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
@@ -104,7 +104,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Update a player binary record file by its key
+   * Update a player binary record file by its key
    */
   updateBinary_ByUserId_ByKey(userId: string, key: string, data: BinaryRecordRequest): Promise<IResponse<PlayerBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
@@ -118,13 +118,13 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required Permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required Scope: &lt;code&gt;social&lt;/code&gt; Retrieve list of other player public binary records under given namespace.
+   * Retrieve list of other player public binary records under given namespace.
    */
   getBinariesPublic_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<IResponseWithSync<ListPlayerBinaryRecordsResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries/public'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -140,7 +140,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required Permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required Scope: &lt;code&gt;social&lt;/code&gt; Bulk get other player&#39;s public binary record by userIds, max allowed 20 at a time. Only record with &lt;code&gt;isPublic=true&lt;/code&gt; can be retrieved using this endpoint.
+   * Bulk get other player&#39;s public binary record by userIds, max allowed 20 at a time. Only record with `isPublic=true` can be retrieved using this endpoint.
    */
   createPublicBulkUser_ByKey(key: string, data: BulkUserIDsRequest): Promise<IResponse<BulkGetPlayerBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
@@ -153,7 +153,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required Permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required Scope: &lt;code&gt;social&lt;/code&gt; Retrieve other player public binary record in bulk under given namespace. Maximum bulk key limit per request 20
+   * Retrieve other player public binary record in bulk under given namespace. Maximum bulk key limit per request 20
    */
   createBinaryBulk_ByUserId(userId: string, data: BulkGetPlayerRecordsRequest): Promise<IResponse<BulkGetPlayerBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
@@ -166,7 +166,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required Permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:PUBLIC:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required Scope: &lt;code&gt;social&lt;/code&gt; Get other player&#39;s public binary record. Only record with &lt;code&gt;isPublic=true&lt;/code&gt; can be retrieved using this endpoint.
+   * Get other player&#39;s public binary record. Only record with `isPublic=true` can be retrieved using this endpoint.
    */
   getPublic_ByUserId_ByKey(userId: string, key: string): Promise<IResponseWithSync<PlayerBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
@@ -186,7 +186,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [UPDATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Update a player binary record metadata by its key
+   * Update a player binary record metadata by its key
    */
   updateMetadata_ByUserId_ByKey(
     userId: string,
@@ -204,7 +204,7 @@ export class PublicPlayerBinaryRecord$ {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Request presigned URL to upload the binary record to s3. &lt;p&gt;Other detail info:&lt;/p&gt; Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
+   * Request presigned URL to upload the binary record to s3. Other detail info: Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   createPresigned_ByUserId_ByKey(
     userId: string,

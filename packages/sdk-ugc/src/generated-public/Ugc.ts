@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -19,6 +19,7 @@ import { PublicGroupApi } from './ugc/PublicGroupApi.js'
 import { PublicChannelApi } from './ugc/PublicChannelApi.js'
 import { PublicLikeV2Api } from './ugc/PublicLikeV2Api.js'
 import { PublicDownloadCountV2Api } from './ugc/PublicDownloadCountV2Api.js'
+import { PublicStagingContentApi } from './ugc/PublicStagingContentApi.js'
 import { PublicDownloadCountLegacyApi } from './ugc/PublicDownloadCountLegacyApi.js'
 
 const apis = {
@@ -34,6 +35,7 @@ const apis = {
   PublicChannelApi,
   PublicLikeV2Api,
   PublicDownloadCountV2Api,
+  PublicStagingContentApi,
   PublicDownloadCountLegacyApi
 }
 

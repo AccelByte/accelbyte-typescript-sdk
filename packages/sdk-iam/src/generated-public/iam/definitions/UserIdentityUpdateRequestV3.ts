@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const UserIdentityUpdateRequestV3 = z.object({ emailAddress: z.string(), password: z.string() })
+export const UserIdentityUpdateRequestV3 = z.object({ emailAddress: z.string().nullish(), password: z.string().nullish() })
 
 export interface UserIdentityUpdateRequestV3 extends z.TypeOf<typeof UserIdentityUpdateRequestV3> {}

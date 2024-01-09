@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -24,6 +24,7 @@ export * from './generated-public/buildinfo/definitions/BuildIdManifest.js'
 export * from './generated-public/buildinfo/definitions/BuildIdVersion.js'
 export * from './generated-public/buildinfo/definitions/BuildInfoPii.js'
 export * from './generated-public/buildinfo/definitions/BuildManifest.js'
+export * from './generated-public/buildinfo/definitions/BulkCalculateDiffCacheRequest.js'
 export * from './generated-public/buildinfo/definitions/CalculateDiffCacheRequest.js'
 export * from './generated-public/buildinfo/definitions/CleanerConfigObject.js'
 export * from './generated-public/buildinfo/definitions/ClientPayload.js'
@@ -37,6 +38,7 @@ export * from './generated-public/buildinfo/definitions/CreateDiffCacheRequest.j
 export * from './generated-public/buildinfo/definitions/DefaultLaunchProfile.js'
 export * from './generated-public/buildinfo/definitions/DependencyObject.js'
 export * from './generated-public/buildinfo/definitions/DiffCacheObject.js'
+export * from './generated-public/buildinfo/definitions/DiffCacheRequest.js'
 export * from './generated-public/buildinfo/definitions/DiffPatchRequest.js'
 export * from './generated-public/buildinfo/definitions/DiffStatusReport.js'
 export * from './generated-public/buildinfo/definitions/DifferentialBuildManifest.js'

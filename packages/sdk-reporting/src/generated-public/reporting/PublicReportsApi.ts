@@ -20,7 +20,7 @@ export function PublicReportsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * User need to be authenticated to access this endpoint. Submit a report and will return ticket for reported object. New ticket will be created if no OPEN ticket present for reported object (based by objectId and objectType) in a namespace. User can only submit report once for each different user / object reported in the same OPEN ticket. Reporting the same user / object in the same OPEN ticket will return HTTP code 409 (conflict). Fill the &#39;reason&#39; field with a &#39;reason title&#39; Supported category: &lt;ul&gt;&lt;li&gt;UGC&lt;/li&gt;&lt;li&gt;USER&lt;/li&gt;&lt;li&gt;CHAT&lt;/li&gt;&lt;li&gt;EXTENSION&lt;/li&gt;&lt;/ul&gt;
+   * User need to be authenticated to access this endpoint. Submit a report and will return ticket for reported object. New ticket will be created if no OPEN ticket present for reported object (based by objectId and objectType) in a namespace. User can only submit report once for each different user / object reported in the same OPEN ticket. Reporting the same user / object in the same OPEN ticket will return HTTP code 409 (conflict). Fill the &#39;reason&#39; field with a &#39;reason title&#39; Supported category: - UGC - USER - CHAT - EXTENSION
    */
   async function createReport(data: SubmitReportRequest): Promise<SubmitReportResponse> {
     const $ = new PublicReports$(Network.create(requestConfig), namespace, cache)

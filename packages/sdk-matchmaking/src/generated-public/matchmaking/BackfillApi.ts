@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -25,7 +25,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [CREATE] Required Scope: social Create backfill ticket
+   * Create backfill ticket.
    */
   async function createBackfill(data: BackFillCreateRequest): Promise<BackfillCreateResponse> {
     const $ = new Backfill$(Network.create(requestConfig), namespace, cache)
@@ -35,7 +35,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [GET] Required Scope: social Get backfill proposal
+   * Get backfill proposal
    */
   async function getBackfillProposal(queryParams: { sessionID: string | null }): Promise<BackfillProposalResponse> {
     const $ = new Backfill$(Network.create(requestConfig), namespace, cache)
@@ -45,7 +45,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [DELETE] Required Scope: social Delete backfill ticket
+   * Delete backfill ticket.
    */
   async function deleteBackfill_ByBackfillId(backfillID: string): Promise<unknown> {
     const $ = new Backfill$(Network.create(requestConfig), namespace, cache)
@@ -55,7 +55,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [GET] Required Scope: social Get backfill ticket by ID
+   * Get backfill ticket by ID
    */
   async function getBackfill_ByBackfillId(backfillID: string): Promise<BackfillGetResponse> {
     const $ = new Backfill$(Network.create(requestConfig), namespace, cache)
@@ -65,7 +65,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE] Required Scope: social Accept backfill proposal
+   * Accept backfill proposal.
    */
   async function updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<GameSession> {
     const $ = new Backfill$(Network.create(requestConfig), namespace, cache)
@@ -75,7 +75,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE] Required Scope: social Reject backfill proposal
+   * Reject backfill proposal
    */
   async function updateProposalReject_ByBackfillId(backfillID: string, data: BackFillRejectRequest): Promise<unknown> {
     const $ = new Backfill$(Network.create(requestConfig), namespace, cache)

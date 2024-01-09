@@ -33,6 +33,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
+  /**
+   * Get list of friends in a namespace.
+   */
   async function getFriendsMe(queryParams?: { limit?: number; offset?: number }): Promise<GetUserFriendsResponseArray> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getFriendsMe(queryParams)
@@ -60,6 +63,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Get list of incoming friends in a namespace.
+   */
   async function getFriendsMeIncoming(queryParams?: { limit?: number; offset?: number }): Promise<GetUserIncomingFriendsResponseArray> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getFriendsMeIncoming(queryParams)
@@ -67,6 +73,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Get list of outgoing friends in a namespace.
+   */
   async function getFriendsMeOutgoing(queryParams?: { limit?: number; offset?: number }): Promise<GetUserOutgoingFriendsResponseArray> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getFriendsMeOutgoing(queryParams)
@@ -74,6 +83,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * User unfriend a friend.
+   */
   async function createFriendMeUnfriend(data: UserUnfriendRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createFriendMeUnfriend(data)
@@ -81,6 +93,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Get list of friends with platform data in a namespace.
+   */
   async function getFriendsMePlatforms(queryParams?: { limit?: number; offset?: number }): Promise<ListBulkUserPlatformsResponse> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getFriendsMePlatforms(queryParams)
@@ -88,6 +103,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Get list of incoming friends with requested time info in a namespace.
+   */
   async function getFriendsMeIncomingTime(queryParams?: {
     limit?: number
     offset?: number
@@ -98,6 +116,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Get list of outgoing friends with requested time info in a namespace.
+   */
   async function getFriendsMeOutgoingTime(queryParams?: {
     limit?: number
     offset?: number
@@ -108,6 +129,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * User accept friend.
+   */
   async function createFriendMeRequestAccept(data: UserAcceptFriendRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createFriendMeRequestAccept(data)
@@ -115,6 +139,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * User cancel a friend request.
+   */
   async function createFriendMeRequestCancel(data: UserCancelFriendRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createFriendMeRequestCancel(data)
@@ -122,6 +149,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * User reject a friend request.
+   */
   async function createFriendMeRequestReject(data: UserRejectFriendRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createFriendMeRequestReject(data)
@@ -129,6 +159,9 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * User get friendship status.
+   */
   async function getFriendMeStatu_ByFriendId(friendId: string): Promise<UserGetFriendshipStatusResponse> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getFriendMeStatu_ByFriendId(friendId)
@@ -137,7 +170,7 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;friends request in a namespace.
+   * Friends request in a namespace.
    */
   async function createAddBulkFriend_ByUserId(userId: string, data: BulkFriendsRequest): Promise<unknown> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)
@@ -147,7 +180,7 @@ export function FriendsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;friends request in a namespace.
+   * Friends request in a namespace.
    */
   async function createDeleteBulkFriend_ByUserId(userId: string, data: BulkFriendsRequest): Promise<BulkFriendsResponse> {
     const $ = new Friends$(Network.create(requestConfig), namespace, cache)

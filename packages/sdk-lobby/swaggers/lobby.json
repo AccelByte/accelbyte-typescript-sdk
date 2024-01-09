@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Lobby Server",
     "title": "justice-lobby-server",
-    "version": "3.30.4"
+    "version": "3.33.1"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -15,41 +15,7 @@
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
       "scopes": {
-        "ADMIN:NAMESPACE:*:LOBBY:CONFIG [READ]": "ADMIN:NAMESPACE:*:LOBBY:CONFIG [READ]",
-        "ADMIN:NAMESPACE:{namespace}:LOBBY:CCU [READ]": "ADMIN:NAMESPACE:{namespace}:LOBBY:CCU [READ]",
-        "ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]": "ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]",
-        "ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]": "ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]": "ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]": "ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]": "ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]",
-        "ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]": "ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]",
-        "ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]": "ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]": "ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]": "ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]": "ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]",
-        "ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]": "ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [CREATE]": "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]": "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [READ]": "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [READ]",
-        "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [UPDATE]": "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]",
-        "NAMESPACE:{namespace}:NOTIFICATION [CREATE]": "NAMESPACE:{namespace}:NOTIFICATION [CREATE]",
-        "NAMESPACE:{namespace}:TEMPLATE [CREATE]": "NAMESPACE:{namespace}:TEMPLATE [CREATE]",
-        "NAMESPACE:{namespace}:TEMPLATE [DELETE]": "NAMESPACE:{namespace}:TEMPLATE [DELETE]",
-        "NAMESPACE:{namespace}:TEMPLATE [READ]": "NAMESPACE:{namespace}:TEMPLATE [READ]",
-        "NAMESPACE:{namespace}:TEMPLATE [UPDATE]": "NAMESPACE:{namespace}:TEMPLATE [UPDATE]",
-        "NAMESPACE:{namespace}:TOPIC [CREATE]": "NAMESPACE:{namespace}:TOPIC [CREATE]",
-        "NAMESPACE:{namespace}:TOPIC [DELETE]": "NAMESPACE:{namespace}:TOPIC [DELETE]",
-        "NAMESPACE:{namespace}:TOPIC [READ]": "NAMESPACE:{namespace}:TOPIC [READ]",
-        "NAMESPACE:{namespace}:TOPIC [UPDATE]": "NAMESPACE:{namespace}:TOPIC [UPDATE]",
-        "NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]": "NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]",
-        "NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]": "NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]",
-        "NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]": "NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]",
-        "NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]": "NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]"
+        "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]": "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]"
       },
       "tokenUrl": "https://dumy.oauth.net/token",
       "type": "oauth2"
@@ -73,6 +39,7 @@
   "paths": {
     "/friends/namespaces/{namespace}/me": {
       "get": {
+        "description": "Get list of friends in a namespace.",
         "operationId": "getUserFriendsUpdated",
         "parameters": [
           {
@@ -145,11 +112,13 @@
           }
         ],
         "summary": "get list of friends",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/incoming": {
       "get": {
+        "description": "Get list of incoming friends in a namespace.",
         "operationId": "getUserIncomingFriends",
         "parameters": [
           {
@@ -222,11 +191,13 @@
           }
         ],
         "summary": "get list of incoming friends",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/incoming-time": {
       "get": {
+        "description": "Get list of incoming friends with requested time info in a namespace.",
         "operationId": "getUserIncomingFriendsWithTime",
         "parameters": [
           {
@@ -299,11 +270,13 @@
           }
         ],
         "summary": "get list of incoming friends with requested time info",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/outgoing": {
       "get": {
+        "description": "Get list of outgoing friends in a namespace.",
         "operationId": "getUserOutgoingFriends",
         "parameters": [
           {
@@ -376,11 +349,13 @@
           }
         ],
         "summary": "get list of outgoing friends",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/outgoing-time": {
       "get": {
+        "description": "Get list of outgoing friends with requested time info in a namespace.",
         "operationId": "getUserOutgoingFriendsWithTime",
         "parameters": [
           {
@@ -453,11 +428,13 @@
           }
         ],
         "summary": "get list of outgoing friends with requested time info",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/platforms": {
       "get": {
+        "description": "Get list of friends with platform data in a namespace.",
         "operationId": "getUserFriendsWithPlatform",
         "parameters": [
           {
@@ -527,7 +504,8 @@
           }
         ],
         "summary": "get list of friends with platform data",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/request": {
@@ -601,12 +579,14 @@
           }
         ],
         "summary": "user add friend",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/request/accept": {
       "post": {
         "consumes": ["application/json"],
+        "description": "User accept friend.",
         "operationId": "userAcceptFriendRequest",
         "parameters": [
           {
@@ -668,12 +648,14 @@
           }
         ],
         "summary": "user accept friend",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/request/cancel": {
       "post": {
         "consumes": ["application/json"],
+        "description": "User cancel a friend request.",
         "operationId": "userCancelFriendRequest",
         "parameters": [
           {
@@ -735,12 +717,14 @@
           }
         ],
         "summary": "user cancel a friend request",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/request/reject": {
       "post": {
         "consumes": ["application/json"],
+        "description": "User reject a friend request.",
         "operationId": "userRejectFriendRequest",
         "parameters": [
           {
@@ -802,11 +786,13 @@
           }
         ],
         "summary": "user reject a friend request",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/status/{friendId}": {
       "get": {
+        "description": "User get friendship status.",
         "operationId": "userGetFriendshipStatus",
         "parameters": [
           {
@@ -863,12 +849,14 @@
           }
         ],
         "summary": "user get friendship status",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/me/unfriend": {
       "post": {
         "consumes": ["application/json"],
+        "description": "User unfriend a friend.",
         "operationId": "userUnfriendRequest",
         "parameters": [
           {
@@ -930,13 +918,14 @@
           }
         ],
         "summary": "user unfriend a friend",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/friends/namespaces/{namespace}/users/{userId}/add/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;friends request in a namespace.",
+        "description": "Friends request in a namespace.",
         "operationId": "addFriendsWithoutConfirmation",
         "parameters": [
           {
@@ -995,19 +984,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Add friends without confirmation",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]"]
+          }
+        ]
       }
     },
     "/friends/namespaces/{namespace}/users/{userId}/delete/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;friends request in a namespace.",
+        "description": "Friends request in a namespace.",
         "operationId": "bulkDeleteFriends",
         "parameters": [
           {
@@ -1069,19 +1061,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Delete friends, and incoming/outgoing friend requests",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]"]
+          }
+        ]
       }
     },
     "/friends/sync/namespaces/{namespace}/me": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "Sync friends using server to server call to native first party servere.\n\t\t\tSupported platforms:\n\t\t\tsteam: The platform_token’s value is the binary ticket returned by Steam. \n\t\t\t \t\tIf this ticket was generated by Steam GetAuthTicketForWebApi with version \u0026gt;= 1.57, then platform token should use this style: {identity}:{ticket}\n\t\t\t\t\tthe {identity} was the parameter to call GetAuthTicketForWebApi when the ticket was created. Note: Do not contain : in this {identity}\n\t\t\tps4: The platform_token’s value is the authorization code returned by Sony OAuth.\n\t\t\tps5: The platform_token’s value is the authorization code returned by Sony OAuth.",
+        "description": "Sync friends using server to server call to native first party servere.\n\t\t\t\tSupported platforms:\n\t\t\t\tsteam: The platform_token’s value is the binary ticket returned by Steam. \n\t\t\t\t\t\tIf this ticket was generated by Steam GetAuthTicketForWebApi with version \u0026gt;= 1.57, then platform token should use this style: {identity}:{ticket}\n\t\t\t\t\t\tthe {identity} was the parameter to call GetAuthTicketForWebApi when the ticket was created. Note: Do not contain : in this {identity}\n\t\t\t\tps4: The platform_token’s value is the authorization code returned by Sony OAuth.\n\t\t\t\tps5: The platform_token’s value is the authorization code returned by Sony OAuth.",
         "operationId": "syncNativeFriends",
         "parameters": [
           {
@@ -1146,13 +1141,14 @@
           }
         ],
         "summary": "sync friends using server to server call to native first party server.",
-        "tags": ["friends", "public"]
+        "tags": ["friends", "public"],
+        "x-security": []
       }
     },
     "/lobby/v1/admin/config": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:*:LOBBY:CONFIG [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get lobby config of all namespaces.\u0026lt;br\u0026gt;default MaxDSWaitTime is 120 (second)",
+        "description": "Get lobby config of all namespaces.\u0026lt;br\u0026gt;default MaxDSWaitTime is 120 (second)",
         "operationId": "adminGetAllConfigV1",
         "produces": ["application/json"],
         "responses": {
@@ -1195,19 +1191,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:*:LOBBY:CONFIG [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get all namespaces config",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:*:LOBBY:CONFIG [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/config/namespaces/{namespace}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get lobby config of a namespace.\u0026lt;br\u0026gt;default MaxDSWaitTime is 120 (second)",
+        "description": "Get lobby config of a namespace.\u0026lt;br\u0026gt;default MaxDSWaitTime is 120 (second)",
         "operationId": "adminGetConfigV1",
         "parameters": [
           {
@@ -1259,17 +1258,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get namespace config",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;update lobby config of a namespace.\u0026lt;br\u0026gt;MaxDSWaitTime value is cannot less than 1, if null it will use default value in 120 (second)",
+        "description": "Update lobby config of a namespace.\u0026lt;br\u0026gt;MaxDSWaitTime value is cannot less than 1, if null it will use default value in 120 (second)",
         "operationId": "adminUpdateConfigV1",
         "parameters": [
           {
@@ -1336,18 +1338,21 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin update namespace config",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/config/namespaces/{namespace}/export": {
       "get": {
-        "description": "\n\t\t\t\tRequired permission ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]\n\n\t\t\t\tRequired Scope: social\n\n\t\t\t\tExport lobby configuration to a json file. The file can then be imported from the /import endpoint. \n\t\t\t\nJSON Schema of the exported file:\n{\u0026#34;required\u0026#34;:[\u0026#34;namespace\u0026#34;,\u0026#34;entitlementItemID\u0026#34;,\u0026#34;chatRateLimitDuration\u0026#34;,\u0026#34;unregisterDelay\u0026#34;,\u0026#34;generalRateLimitDuration\u0026#34;,\u0026#34;autoKickOnDisconnectDelay\u0026#34;,\u0026#34;chatRateLimitBurst\u0026#34;,\u0026#34;generalRateLimitBurst\u0026#34;,\u0026#34;maxPartyMember\u0026#34;,\u0026#34;autoKickOnDisconnect\u0026#34;,\u0026#34;profanityFilter\u0026#34;,\u0026#34;enableChat\u0026#34;,\u0026#34;entitlementCheck\u0026#34;,\u0026#34;cancelTicketOnDisconnect\u0026#34;,\u0026#34;concurrentUsersLimit\u0026#34;,\u0026#34;readyConsentTimeout\u0026#34;,\u0026#34;disableInvitationOnJoinParty\u0026#34;,\u0026#34;allowJoinPartyDuringMatchmaking\u0026#34;,\u0026#34;allowInviteNonConnectedUser\u0026#34;,\u0026#34;keepPresenceActivityOnDisconnect\u0026#34;,\u0026#34;maxDSWaitTime\u0026#34;,\u0026#34;maxFriendsLimit\u0026#34;],\u0026#34;properties\u0026#34;:{\u0026#34;allowInviteNonConnectedUser\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;allowJoinPartyDuringMatchmaking\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;autoKickOnDisconnect\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;autoKickOnDisconnectDelay\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;integer\u0026#34;},\u0026#34;cancelTicketOnDisconnect\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;chatRateLimitBurst\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;int32\u0026#34;},\u0026#34;chatRateLimitDuration\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;integer\u0026#34;},\u0026#34;concurrentUsersLimit\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;int32\u0026#34;},\u0026#34;disableInvitationOnJoinParty\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;enableChat\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;entitlementCheck\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;entitlementItemID\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;string\u0026#34;},\u0026#34;generalRateLimitBurst\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;int32\u0026#34;},\u0026#34;generalRateLimitDuration\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;integer\u0026#34;},\u0026#34;keepPresenceActivityOnDisconnect\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;maxDSWaitTime\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;integer\u0026#34;},\u0026#34;maxFriendsLimit\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;int32\u0026#34;},\u0026#34;maxPartyMember\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;int32\u0026#34;},\u0026#34;namespace\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;string\u0026#34;},\u0026#34;profanityFilter\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;boolean\u0026#34;},\u0026#34;readyConsentTimeout\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;integer\u0026#34;},\u0026#34;unregisterDelay\u0026#34;:{\u0026#34;type\u0026#34;:\u0026#34;integer\u0026#34;,\u0026#34;format\u0026#34;:\u0026#34;integer\u0026#34;}}}",
+        "description": "\n\t\t\t\tExport lobby configuration to a json file. The file can then be imported from the /import endpoint. \n\t\t\t\t\nJSON Schema of the exported file:\n{\n \u0026#34;required\u0026#34;: [\n  \u0026#34;namespace\u0026#34;,\n  \u0026#34;entitlementItemID\u0026#34;,\n  \u0026#34;chatRateLimitDuration\u0026#34;,\n  \u0026#34;unregisterDelay\u0026#34;,\n  \u0026#34;generalRateLimitDuration\u0026#34;,\n  \u0026#34;autoKickOnDisconnectDelay\u0026#34;,\n  \u0026#34;chatRateLimitBurst\u0026#34;,\n  \u0026#34;generalRateLimitBurst\u0026#34;,\n  \u0026#34;maxPartyMember\u0026#34;,\n  \u0026#34;autoKickOnDisconnect\u0026#34;,\n  \u0026#34;profanityFilter\u0026#34;,\n  \u0026#34;enableChat\u0026#34;,\n  \u0026#34;entitlementCheck\u0026#34;,\n  \u0026#34;cancelTicketOnDisconnect\u0026#34;,\n  \u0026#34;concurrentUsersLimit\u0026#34;,\n  \u0026#34;readyConsentTimeout\u0026#34;,\n  \u0026#34;disableInvitationOnJoinParty\u0026#34;,\n  \u0026#34;allowJoinPartyDuringMatchmaking\u0026#34;,\n  \u0026#34;allowInviteNonConnectedUser\u0026#34;,\n  \u0026#34;keepPresenceActivityOnDisconnect\u0026#34;,\n  \u0026#34;maxDSWaitTime\u0026#34;,\n  \u0026#34;maxFriendsLimit\u0026#34;\n ],\n \u0026#34;properties\u0026#34;: {\n  \u0026#34;allowInviteNonConnectedUser\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;allowJoinPartyDuringMatchmaking\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;autoKickOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;autoKickOnDisconnectDelay\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;cancelTicketOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;chatRateLimitBurst\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;chatRateLimitDuration\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;concurrentUsersLimit\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;disableInvitationOnJoinParty\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;enableChat\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;entitlementCheck\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;entitlementItemID\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;string\u0026#34;\n  },\n  \u0026#34;generalRateLimitBurst\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;generalRateLimitDuration\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;keepPresenceActivityOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;maxDSWaitTime\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;maxFriendsLimit\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;maxPartyMember\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;namespace\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;string\u0026#34;\n  },\n  \u0026#34;profanityFilter\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;readyConsentTimeout\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;unregisterDelay\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  }\n }\n}",
         "operationId": "adminExportConfigV1",
         "parameters": [
           {
@@ -1361,7 +1366,7 @@
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "OK\nJSON Schema of the exported file:\n{\"required\":[\"namespace\",\"entitlementItemID\",\"chatRateLimitDuration\",\"unregisterDelay\",\"generalRateLimitDuration\",\"autoKickOnDisconnectDelay\",\"chatRateLimitBurst\",\"generalRateLimitBurst\",\"maxPartyMember\",\"autoKickOnDisconnect\",\"profanityFilter\",\"enableChat\",\"entitlementCheck\",\"cancelTicketOnDisconnect\",\"concurrentUsersLimit\",\"readyConsentTimeout\",\"disableInvitationOnJoinParty\",\"allowJoinPartyDuringMatchmaking\",\"allowInviteNonConnectedUser\",\"keepPresenceActivityOnDisconnect\",\"maxDSWaitTime\",\"maxFriendsLimit\"],\"properties\":{\"allowInviteNonConnectedUser\":{\"type\":\"boolean\"},\"allowJoinPartyDuringMatchmaking\":{\"type\":\"boolean\"},\"autoKickOnDisconnect\":{\"type\":\"boolean\"},\"autoKickOnDisconnectDelay\":{\"type\":\"integer\",\"format\":\"integer\"},\"cancelTicketOnDisconnect\":{\"type\":\"boolean\"},\"chatRateLimitBurst\":{\"type\":\"integer\",\"format\":\"int32\"},\"chatRateLimitDuration\":{\"type\":\"integer\",\"format\":\"integer\"},\"concurrentUsersLimit\":{\"type\":\"integer\",\"format\":\"int32\"},\"disableInvitationOnJoinParty\":{\"type\":\"boolean\"},\"enableChat\":{\"type\":\"boolean\"},\"entitlementCheck\":{\"type\":\"boolean\"},\"entitlementItemID\":{\"type\":\"string\"},\"generalRateLimitBurst\":{\"type\":\"integer\",\"format\":\"int32\"},\"generalRateLimitDuration\":{\"type\":\"integer\",\"format\":\"integer\"},\"keepPresenceActivityOnDisconnect\":{\"type\":\"boolean\"},\"maxDSWaitTime\":{\"type\":\"integer\",\"format\":\"integer\"},\"maxFriendsLimit\":{\"type\":\"integer\",\"format\":\"int32\"},\"maxPartyMember\":{\"type\":\"integer\",\"format\":\"int32\"},\"namespace\":{\"type\":\"string\"},\"profanityFilter\":{\"type\":\"boolean\"},\"readyConsentTimeout\":{\"type\":\"integer\",\"format\":\"integer\"},\"unregisterDelay\":{\"type\":\"integer\",\"format\":\"integer\"}}}",
+            "description": "OK\nJSON Schema of the exported file:\n{\n \"required\": [\n  \"namespace\",\n  \"entitlementItemID\",\n  \"chatRateLimitDuration\",\n  \"unregisterDelay\",\n  \"generalRateLimitDuration\",\n  \"autoKickOnDisconnectDelay\",\n  \"chatRateLimitBurst\",\n  \"generalRateLimitBurst\",\n  \"maxPartyMember\",\n  \"autoKickOnDisconnect\",\n  \"profanityFilter\",\n  \"enableChat\",\n  \"entitlementCheck\",\n  \"cancelTicketOnDisconnect\",\n  \"concurrentUsersLimit\",\n  \"readyConsentTimeout\",\n  \"disableInvitationOnJoinParty\",\n  \"allowJoinPartyDuringMatchmaking\",\n  \"allowInviteNonConnectedUser\",\n  \"keepPresenceActivityOnDisconnect\",\n  \"maxDSWaitTime\",\n  \"maxFriendsLimit\"\n ],\n \"properties\": {\n  \"allowInviteNonConnectedUser\": {\n   \"type\": \"boolean\"\n  },\n  \"allowJoinPartyDuringMatchmaking\": {\n   \"type\": \"boolean\"\n  },\n  \"autoKickOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"autoKickOnDisconnectDelay\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"cancelTicketOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"chatRateLimitBurst\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"chatRateLimitDuration\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"concurrentUsersLimit\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"disableInvitationOnJoinParty\": {\n   \"type\": \"boolean\"\n  },\n  \"enableChat\": {\n   \"type\": \"boolean\"\n  },\n  \"entitlementCheck\": {\n   \"type\": \"boolean\"\n  },\n  \"entitlementItemID\": {\n   \"type\": \"string\"\n  },\n  \"generalRateLimitBurst\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"generalRateLimitDuration\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"keepPresenceActivityOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"maxDSWaitTime\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"maxFriendsLimit\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"maxPartyMember\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"namespace\": {\n   \"type\": \"string\"\n  },\n  \"profanityFilter\": {\n   \"type\": \"boolean\"\n  },\n  \"readyConsentTimeout\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"unregisterDelay\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  }\n }\n}",
             "schema": {
               "type": "file"
             }
@@ -1387,19 +1392,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Export lobby config to a json file.",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/config/namespaces/{namespace}/import": {
       "post": {
         "consumes": ["multipart/form-data"],
-        "description": "\n\t\t\t\tRequired permission ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]\n\n\t\t\t\tRequired Scope: social\n\n\t\t\t\tImport config configuration from file. The existing configuration will be replaced.\n\t\t\t\tThe json file to import can be obtained from the /export endpoint. \n\t\t\t\t\n\t\t\t\tMaxDSWaitTime value is cannot less than 1, if null it will use default value in 120 (second)\n\t\t\t",
+        "description": "\n\t\t\t\tImport config configuration from file. The existing configuration will be replaced.\n\t\t\t\tThe json file to import can be obtained from the /export endpoint. \n\t\t\t\t\n\t\t\t\tMaxDSWaitTime value is cannot less than 1, if null it will use default value in 120 (second)\n\t\t\t\t",
         "operationId": "adminImportConfigV1",
         "parameters": [
           {
@@ -1445,19 +1453,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Import lobby config from a json file.",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\u0026lt;br\u0026gt;get list of friends in a namespace.",
+        "description": "Get list of friends in a namespace.",
         "operationId": "get list of friends",
         "parameters": [
           {
@@ -1530,19 +1541,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get list of friends",
-        "tags": ["friends"]
+        "tags": ["friends"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}/incoming": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\u0026lt;br\u0026gt;get list of incoming friend requests.",
+        "description": "Get list of incoming friend requests.",
         "operationId": "get incoming friend requests",
         "parameters": [
           {
@@ -1615,19 +1629,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get incoming friend requests",
-        "tags": ["friends"]
+        "tags": ["friends"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}/outgoing": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\u0026lt;br\u0026gt;get list of outgoing friend requests in a namespace.",
+        "description": "Get list of outgoing friend requests in a namespace.",
         "operationId": "get outgoing friend requests",
         "parameters": [
           {
@@ -1694,13 +1711,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get list of outgoing friend requests",
-        "tags": ["friends"]
+        "tags": ["friends"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/global-configurations": {
@@ -1734,12 +1754,17 @@
             "authorization": []
           }
         ],
-        "summary": "Required permission : ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [DELETE]",
-        "tags": ["admin", "global-configurations"]
+        "summary": "Delete of global configuration data.",
+        "tags": ["admin", "global-configurations"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\tget dsmc global configuration.",
+        "description": "Get dsmc global configuration.",
         "operationId": "adminGetGlobalConfig",
         "produces": ["application/json"],
         "responses": {
@@ -1782,13 +1807,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Record of global configuration dsmc.",
-        "tags": ["admin", "global-configurations"]
+        "tags": ["admin", "global-configurations"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
@@ -1831,14 +1859,19 @@
             "authorization": []
           }
         ],
-        "summary": "Required permission : ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]",
-        "tags": ["admin", "global-configurations"]
+        "summary": "Upsert global configuration data.",
+        "tags": ["admin", "global-configurations"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/bulkUsers/freeform/notify": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends notification to multiple user.\n\t\t\tAction Code: 50211",
+        "description": "Sends notification to multiple user.\n\t\t\tAction Code: 50211",
         "operationId": "sendMultipleUsersFreeformNotificationV1Admin",
         "parameters": [
           {
@@ -1884,19 +1917,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send freeform notification to multiple users",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/freeform/notify": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends notification to all connected users in a namespace.\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50201",
+        "description": "Sends notification to all connected users in a namespace.\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50201",
         "operationId": "sendUsersFreeformNotificationV1Admin",
         "parameters": [
           {
@@ -1948,19 +1984,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send freeform notification to connected users",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/parties/{partyId}/freeform/notify": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\t\u0026lt;br\u0026gt;Sends notification to a party.",
+        "description": "Sends notification to a party.",
         "operationId": "sendPartyFreeformNotificationV1Admin",
         "parameters": [
           {
@@ -2019,19 +2058,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send freeform notification to a party",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/parties/{partyId}/templates/notify": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\t\u0026lt;br\u0026gt;Sends templated notification to a party.\n\t\t\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\t\t\tTemplate need to be published before it can be use to send notifications\u0026lt;br\u0026gt;",
+        "description": "Sends templated notification to a party.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications\u0026lt;br\u0026gt;",
         "operationId": "sendPartyTemplatedNotificationV1Admin",
         "parameters": [
           {
@@ -2090,19 +2132,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send templated notification to a party",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/templates": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Get all templates in a namespace\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50203",
+        "description": "Get all templates in a namespace\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50203",
         "operationId": "getAllNotificationTemplatesV1Admin",
         "parameters": [
           {
@@ -2157,17 +2202,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get all notification template in a namespace",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Create new notification template. Include handlebars {{key}} for replaceable contexts. The key inside\n\t\t\thandlebars will be the key to be replaced when sending notification. Already existing template with the same\n\t\t\tslug and language can not be created.\n\t\t\t\u0026lt;br\u0026gt;Check model description for detailed input restrictions.\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50204",
+        "description": "Create new notification template. Include handlebars {{key}} for replaceable contexts. The key inside\n\t\t\thandlebars will be the key to be replaced when sending notification. Already existing template with the same\n\t\t\tslug and language can not be created.\n\t\t\t\u0026lt;br\u0026gt;Check model description for detailed input restrictions.\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50204",
         "operationId": "createNotificationTemplateV1Admin",
         "parameters": [
           {
@@ -2225,19 +2273,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "create new notification template",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/templates/notify": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends notification to all connected users in a namespace with predefined template.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50202",
+        "description": "Sends notification to all connected users in a namespace with predefined template.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50202",
         "operationId": "sendUsersTemplatedNotificationV1Admin",
         "parameters": [
           {
@@ -2289,19 +2340,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send notification to connected users with template",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/templates/{templateSlug}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Delete template slug in notification template\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50206",
+        "description": "Delete template slug in notification template\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50206",
         "operationId": "deleteNotificationTemplateSlugV1Admin",
         "parameters": [
           {
@@ -2351,17 +2405,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "delete template slug in notification template",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Get all templates in a namespace\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50205",
+        "description": "Get all templates in a namespace\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50205",
         "operationId": "getTemplateSlugLocalizationsTemplateV1Admin",
         "parameters": [
           {
@@ -2432,19 +2489,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get all notification template localization in a slug",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/templates/{templateSlug}/languages/{templateLanguage}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;delete template localization\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50209",
+        "description": "Delete template localization\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50209",
         "operationId": "deleteTemplateLocalizationV1Admin",
         "parameters": [
           {
@@ -2501,17 +2561,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "delete template localization",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Get a template localization\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50207",
+        "description": "Get a template localization\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50207",
         "operationId": "getSingleTemplateLocalizationV1Admin",
         "parameters": [
           {
@@ -2571,17 +2634,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get a template localization",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br/\u0026gt;update template localization\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50208",
+        "description": "Update template localization\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50208",
         "operationId": "updateTemplateLocalizationV1Admin",
         "parameters": [
           {
@@ -2652,19 +2718,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "update template localization",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/templates/{templateSlug}/languages/{templateLanguage}/publish": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Publish notification template draft. Empty draft can not be published.\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50210",
+        "description": "Publish notification template draft. Empty draft can not be published.\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50210",
         "operationId": "publishTemplateLocalizationV1Admin",
         "parameters": [
           {
@@ -2721,19 +2790,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "publish template localization draft",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/topics": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get topic by namespace.\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50213",
+        "description": "Get topic by namespace.\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50213",
         "operationId": "getAllNotificationTopicsV1Admin",
         "parameters": [
           {
@@ -2797,17 +2869,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get topic by namespace",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Create new notification topic.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50214",
+        "description": "Create new notification topic.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50214",
         "operationId": "createNotificationTopicV1Admin",
         "parameters": [
           {
@@ -2853,19 +2928,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "create new notification topic",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/topics/{topicName}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;delete topic information by topic name.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created \u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50217",
+        "description": "Delete topic information by topic name.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created \u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50217",
         "operationId": "deleteNotificationTopicV1Admin",
         "parameters": [
           {
@@ -2915,17 +2993,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "delete topic information by topic name",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get topic information by topic name.\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50215",
+        "description": "Get topic information by topic name.\u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50215",
         "operationId": "getNotificationTopicV1Admin",
         "parameters": [
           {
@@ -2978,17 +3059,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get topic information by topic name",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;update topic information by topic name.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created \u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50216",
+        "description": "Update topic information by topic name.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created \u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50216",
         "operationId": "updateNotificationTopicV1Admin",
         "parameters": [
           {
@@ -3053,19 +3137,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "update topic information by topic name",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/users/{userId}/freeform/notify": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends notification to a user.\n\t\t\tAction Code: 50211",
+        "description": "Sends notification to a user.\n\t\t\tAction Code: 50211",
         "operationId": "sendSpecificUserFreeformNotificationV1Admin",
         "parameters": [
           {
@@ -3124,19 +3211,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send freeform notification to a user",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/notification/namespaces/{namespace}/users/{userId}/templates/notify": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends templated notification to a user.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50212",
+        "description": "Sends templated notification to a user.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications\u0026lt;br\u0026gt;\n\t\t\tAction Code: 50212",
         "operationId": "sendSpecificUserTemplatedNotificationV1Admin",
         "parameters": [
           {
@@ -3195,19 +3285,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send templated notification to specific user",
-        "tags": ["notification"]
+        "tags": ["notification"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get party data in a namespace.",
+        "description": "Get party data in a namespace.",
         "operationId": "adminGetPartyDataV1",
         "parameters": [
           {
@@ -3266,19 +3359,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get party data",
-        "tags": ["party"]
+        "tags": ["party"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}/attributes": {
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;update party attributes in a namespace.",
+        "description": "Update party attributes in a namespace.",
         "operationId": "adminUpdatePartyAttributesV1",
         "parameters": [
           {
@@ -3352,18 +3448,21 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin update party attributes",
-        "tags": ["Lobby Operations"]
+        "tags": ["Lobby Operations"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}/join/{userId}": {
       "post": {
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;admin join a player into a party.",
+        "description": "Admin join a player into a party.",
         "operationId": "adminJoinPartyV1",
         "parameters": [
           {
@@ -3432,19 +3531,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin join a player into a party",
-        "tags": ["Lobby Operations"]
+        "tags": ["Lobby Operations"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/party/namespaces/{namespace}/users/{userId}/party": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get party data in a namespace.",
+        "description": "Get party data in a namespace.",
         "operationId": "adminGetUserPartyV1",
         "parameters": [
           {
@@ -3503,19 +3605,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get user party data",
-        "tags": ["party"]
+        "tags": ["party"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/player/namespaces/{namespace}/ccu": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:LOBBY:CCU [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Get the number of players connected to the Lobby in the given namespace.",
+        "description": "Get the number of players connected to the Lobby in the given namespace.",
         "operationId": "adminGetLobbyCCU",
         "parameters": [
           {
@@ -3567,19 +3672,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CCU [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get number of players currently connected to the lobby.",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CCU [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/player/namespaces/{namespace}/users/bulk/blocked": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get blocked players data by bulk user ids in a namespace.",
+        "description": "Get blocked players data by bulk user ids in a namespace.",
         "operationId": "adminGetBulkPlayerBlockedPlayersV1",
         "parameters": [
           {
@@ -3640,19 +3748,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get blocked players by bulk user ids",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/attributes": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get all player\u0026#39;s session attribute by user id in a namespace.",
+        "description": "Get all player\u0026#39;s session attribute by user id in a namespace.",
         "operationId": "adminGetAllPlayerSessionAttribute",
         "parameters": [
           {
@@ -3699,17 +3810,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get all player's session attribute",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;set player\u0026#39;s session attribute by user id in a namespace.",
+        "description": "Set player\u0026#39;s session attribute by user id in a namespace.",
         "operationId": "adminSetPlayerSessionAttribute",
         "parameters": [
           {
@@ -3774,19 +3888,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin set player's session attribute",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/attributes/{attribute}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get player\u0026#39;s specific session attribute by user id in a namespace.",
+        "description": "Get player\u0026#39;s specific session attribute by user id in a namespace.",
         "operationId": "adminGetPlayerSessionAttribute",
         "parameters": [
           {
@@ -3852,19 +3969,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get player's session attribute",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/blocked": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get blocked players data by user id in a namespace.",
+        "description": "Get blocked players data by user id in a namespace.",
         "operationId": "adminGetPlayerBlockedPlayersV1",
         "parameters": [
           {
@@ -3923,19 +4043,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get blocked players by user id",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/blocked-by": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;load get players who blocked this player in a namespace based on user id",
+        "description": "Load get players who blocked this player in a namespace based on user id",
         "operationId": "adminGetPlayerBlockedByPlayersV1",
         "parameters": [
           {
@@ -3994,19 +4117,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get players who blocked this player by user id",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/bulk/block": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Bulk block player in a namespace by list of user id",
+        "description": "Bulk block player in a namespace by list of user id",
         "operationId": "adminBulkBlockPlayersV1",
         "parameters": [
           {
@@ -4065,19 +4191,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Admin bulk blocks player by list user id",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/filters/debug": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get the list of filters that would modify the phrase",
+        "description": "Get the list of filters that would modify the phrase",
         "operationId": "adminDebugProfanityFilters",
         "parameters": [
           {
@@ -4141,19 +4270,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get the list of filters that would modify the phrase",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get the list of filters inside the list.",
+        "description": "Get the list of filters inside the list.",
         "operationId": "adminGetProfanityListFiltersV1",
         "parameters": [
           {
@@ -4212,17 +4344,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get the list of filters inside the list",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;add a single filter into the list",
+        "description": "Add a single filter into the list",
         "operationId": "adminAddProfanityFilterIntoList",
         "parameters": [
           {
@@ -4287,19 +4422,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "add a single filter into the list",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;add multiple filters into the list",
+        "description": "Add multiple filters into the list",
         "operationId": "adminAddProfanityFilters",
         "parameters": [
           {
@@ -4364,19 +4502,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "add multiple filters into the list",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/bulk-file": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;import a file with filters",
+        "description": "Import a file with filters",
         "operationId": "adminImportProfanityFiltersFromFile",
         "parameters": [
           {
@@ -4444,19 +4585,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "import a file with filters",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/delete": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;delete the filter from the list",
+        "description": "Delete the filter from the list",
         "operationId": "adminDeleteProfanityFilter",
         "parameters": [
           {
@@ -4527,19 +4671,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "delete the filter from the list",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/lists": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get lists",
+        "description": "Get lists",
         "operationId": "adminGetProfanityLists",
         "parameters": [
           {
@@ -4594,17 +4741,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get lists",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;create a new list",
+        "description": "Create a new list",
         "operationId": "adminCreateProfanityList",
         "parameters": [
           {
@@ -4662,19 +4812,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "create a new list",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/lists/{list}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;delete a list include all filters inside of it",
+        "description": "Delete a list include all filters inside of it",
         "operationId": "adminDeleteProfanityList",
         "parameters": [
           {
@@ -4730,17 +4883,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "delete a list include all filters inside of it",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;update the list",
+        "description": "Update the list",
         "operationId": "adminUpdateProfanityList",
         "parameters": [
           {
@@ -4805,19 +4961,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "update the list",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/rule": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get current profanity rule",
+        "description": "Get current profanity rule",
         "operationId": "adminGetProfanityRule",
         "parameters": [
           {
@@ -4869,17 +5028,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get current profanity rule",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;set current profanity rule",
+        "description": "Set current profanity rule",
         "operationId": "adminSetProfanityRuleForNamespace",
         "parameters": [
           {
@@ -4937,19 +5099,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "set current profanity rule",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/profanity/namespaces/{namespace}/verify": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;verify a message directly from the UI or other services",
+        "description": "Verify a message directly from the UI or other services",
         "operationId": "adminVerifyMessageProfanityResponse",
         "parameters": [
           {
@@ -5010,13 +5175,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "verify a message directly from the UI or other services",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
+          }
+        ]
       }
     },
     "/lobby/v1/admin/thirdparty/namespaces/{namespace}/config/steam": {
@@ -5073,10 +5241,15 @@
           }
         ],
         "summary": "Delete Third Party Steam Config",
-        "tags": ["thirdParty"]
+        "tags": ["thirdParty"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]"]
+          }
+        ]
       },
       "get": {
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get third party config for specified namespace.",
+        "description": "Get third party config for specified namespace.",
         "operationId": "adminGetThirdPartyConfig",
         "parameters": [
           {
@@ -5122,17 +5295,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Get Third Party Steam Config",
-        "tags": ["thirdParty"]
+        "tags": ["thirdParty"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;create third party config in a namespace.",
+        "description": "Create third party config in a namespace.",
         "operationId": "adminCreateThirdPartyConfig",
         "parameters": [
           {
@@ -5193,17 +5369,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Create Third Party Steam Config",
-        "tags": ["thirdParty"]
+        "tags": ["thirdParty"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [CREATE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Update third party config in a namespace.",
+        "description": "Update third party config in a namespace.",
         "operationId": "adminUpdateThirdPartyConfig",
         "parameters": [
           {
@@ -5258,13 +5437,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Update Third Party Steam Config",
-        "tags": ["thirdParty"]
+        "tags": ["thirdParty"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/lobby/v1/messages": {
@@ -5302,7 +5484,7 @@
     "/lobby/v1/public/party/namespaces/{namespace}/parties/{partyId}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;load personal party data in a namespace based on Party ID \u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50101",
+        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;load personal party data in a namespace based on Party ID \u0026lt;br/\u0026gt;\n\t\t\t\tAction Code: 50101",
         "operationId": "publicGetPartyDataV1",
         "parameters": [
           {
@@ -5365,13 +5547,14 @@
           }
         ],
         "summary": "get party data by party id",
-        "tags": ["party"]
+        "tags": ["party"],
+        "x-security": []
       }
     },
     "/lobby/v1/public/party/namespaces/{namespace}/parties/{partyId}/attributes": {
       "put": {
         "consumes": ["application/json"],
-        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;update party attributes in a namespace.",
+        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;update party attributes in a namespace.",
         "operationId": "publicUpdatePartyAttributesV1",
         "parameters": [
           {
@@ -5449,13 +5632,14 @@
           }
         ],
         "summary": "update party attributes",
-        "tags": ["party"]
+        "tags": ["party"],
+        "x-security": []
       }
     },
     "/lobby/v1/public/party/namespaces/{namespace}/parties/{partyId}/limit": {
       "put": {
         "consumes": ["application/json"],
-        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Set party limit, only party leader can call this endpoint.",
+        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;Set party limit, only party leader can call this endpoint.",
         "operationId": "publicSetPartyLimitV1",
         "parameters": [
           {
@@ -5524,13 +5708,14 @@
           }
         ],
         "summary": "set party limit",
-        "tags": ["party"]
+        "tags": ["party"],
+        "x-security": []
       }
     },
     "/lobby/v1/public/player/namespaces/{namespace}/users/me/blocked": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;load blocked players in a namespace based on user id \u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50101",
+        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;load blocked players in a namespace based on user id \u0026lt;br/\u0026gt;\n\t\t\t\tAction Code: 50101",
         "operationId": "publicGetPlayerBlockedPlayersV1",
         "parameters": [
           {
@@ -5586,13 +5771,14 @@
           }
         ],
         "summary": "get blocked players by user id",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": []
       }
     },
     "/lobby/v1/public/player/namespaces/{namespace}/users/me/blocked-by": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;load get players who blocked this player in a namespace based on user id \u0026lt;br/\u0026gt;\n\t\t\tAction Code: 50101",
+        "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;load get players who blocked this player in a namespace based on user id \u0026lt;br/\u0026gt;\n\t\t\t\tAction Code: 50101",
         "operationId": "publicGetPlayerBlockedByPlayersV1",
         "parameters": [
           {
@@ -5648,7 +5834,8 @@
           }
         ],
         "summary": "get players who blocked this player by user id",
-        "tags": ["player"]
+        "tags": ["player"],
+        "x-security": []
       }
     },
     "/lobby/v1/public/presence/namespaces/{namespace}/users/presence": {
@@ -5712,13 +5899,14 @@
           }
         ],
         "summary": "Query users presence",
-        "tags": ["presence"]
+        "tags": ["presence"],
+        "x-security": []
       }
     },
     "/notification/namespaces/{namespace}/freeform": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends notification to all connected users in a namespace.",
+        "description": "Sends notification to all connected users in a namespace.",
         "operationId": "freeFormNotification",
         "parameters": [
           {
@@ -5770,19 +5958,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send freeform notification to a user",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/templated": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends notification to all connected users in a namespace with predefined template.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications",
+        "description": "Sends notification to all connected users in a namespace with predefined template.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications",
         "operationId": "notificationWithTemplate",
         "parameters": [
           {
@@ -5834,19 +6025,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send notification to a user with template",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/templates": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TEMPLATE [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Get all templates in a namespace",
+        "description": "Get all templates in a namespace",
         "operationId": "getGameTemplate",
         "parameters": [
           {
@@ -5895,17 +6089,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TEMPLATE [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get all notification template in a namespace",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TEMPLATE [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Create new notification template. Include handlebars {{key}} for replaceable contexts. The the key inside\n\t\t\thandlebars will be the key to be replaced when sending notification. Already existing template with the same\n\t\t\tslug and language can not be created.\n\t\t\t\u0026lt;br\u0026gt;Check model description for detailed input restrictions.",
+        "description": "Create new notification template. Include handlebars {{key}} for replaceable contexts. The the key inside\n\t\t\thandlebars will be the key to be replaced when sending notification. Already existing template with the same\n\t\t\tslug and language can not be created.\n\t\t\t\u0026lt;br\u0026gt;Check model description for detailed input restrictions.",
         "operationId": "createTemplate",
         "parameters": [
           {
@@ -5957,19 +6154,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TEMPLATE [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "create new notification template",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [CREATE]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/templates/{templateSlug}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TEMPLATE [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Delete localization template",
+        "description": "Delete localization template",
         "operationId": "deleteTemplateSlug",
         "parameters": [
           {
@@ -6019,17 +6219,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TEMPLATE [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "delete template localization",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TEMPLATE [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Get all templates in a namespace",
+        "description": "Get all templates in a namespace",
         "operationId": "getSlugTemplate",
         "parameters": [
           {
@@ -6100,19 +6303,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TEMPLATE [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get all notification template in a slug",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [READ]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/templates/{templateSlug}/languages/{templateLanguage}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TEMPLATE [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Delete all template in a slug",
+        "description": "Delete all template in a slug",
         "operationId": "deleteTemplateLocalization",
         "parameters": [
           {
@@ -6169,17 +6375,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TEMPLATE [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "delete template localization",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TEMPLATE [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Get a template localization",
+        "description": "Get a template localization",
         "operationId": "getLocalizationTemplate",
         "parameters": [
           {
@@ -6239,17 +6448,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TEMPLATE [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get a template localization",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TEMPLATE [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Modify draft template",
+        "description": "Modify draft template",
         "operationId": "updateLocalizationTemplate",
         "parameters": [
           {
@@ -6314,19 +6526,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TEMPLATE [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "update template draft",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [UPDATE]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/templates/{templateSlug}/languages/{templateLanguage}/publish": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TEMPLATE [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Publish notification template draft. Empty draft can not be published.",
+        "description": "Publish notification template draft. Empty draft can not be published.",
         "operationId": "publishTemplate",
         "parameters": [
           {
@@ -6383,19 +6598,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TEMPLATE [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "publish draft template",
-        "tags": ["admin", "notification"]
+        "tags": ["admin", "notification"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [CREATE]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/topics": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get topic by namespace.",
+        "description": "get topic by namespace.",
         "operationId": "getTopicByNamespace",
         "parameters": [
           {
@@ -6459,17 +6677,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get topic by namespace",
-        "tags": ["notification", "public"]
+        "tags": ["notification", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TOPIC [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TOPIC [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Create new notification topic.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created",
+        "description": "Create new notification topic.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created",
         "operationId": "createTopic",
         "parameters": [
           {
@@ -6521,19 +6742,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TOPIC [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "create new notification topic",
-        "tags": ["notification", "public"]
+        "tags": ["notification", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TOPIC [CREATE]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/topics/{topic}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TOPIC [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;delete topic information by topic name.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created",
+        "description": "delete topic information by topic name.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created",
         "operationId": "deleteTopicByTopicName",
         "parameters": [
           {
@@ -6583,17 +6807,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TOPIC [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "delete topic information by topic name",
-        "tags": ["notification", "public"]
+        "tags": ["notification", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TOPIC [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get topic information by topic name.",
+        "description": "get topic information by topic name.",
         "operationId": "getTopicByTopicName",
         "parameters": [
           {
@@ -6646,17 +6873,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "get topic information by topic name",
-        "tags": ["notification", "public"]
+        "tags": ["notification", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TOPIC [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;update topic information by topic name.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created",
+        "description": "update topic information by topic name.\n\t\t\t\u0026lt;br\u0026gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST.\n\t\t\tAlready existing topic can not be created",
         "operationId": "updateTopicByTopicName",
         "parameters": [
           {
@@ -6715,19 +6945,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "update topic information by topic name",
-        "tags": ["notification", "public"]
+        "tags": ["notification", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/users/{userId}/freeform": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends notification to a user.",
+        "description": "Sends notification to a user.",
         "operationId": "freeFormNotificationByUserID",
         "parameters": [
           {
@@ -6786,19 +7019,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send freeform notification to a user",
-        "tags": ["notification", "public"]
+        "tags": ["notification", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     },
     "/notification/namespaces/{namespace}/users/{userId}/templated": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;Sends notification to a user with predefined template.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications",
+        "description": "Sends notification to a user with predefined template.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications",
         "operationId": "notificationWithTemplateByUserID",
         "parameters": [
           {
@@ -6857,13 +7093,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "send notification to a user with template",
-        "tags": ["notification", "public"]
+        "tags": ["notification", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]"]
+          }
+        ]
       }
     }
   },
@@ -7108,7 +7347,9 @@
         },
         "friendsSinceTimes": {
           "items": {
-            "type": "string"
+            "format": "date-time",
+            "type": "string",
+            "x-nullable": false
           },
           "type": "array"
         },
@@ -7842,7 +8083,7 @@
           "x-omitempty": false
         },
         "autoKickOnDisconnectDelay": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "cancelTicketOnDisconnect": {
@@ -7854,7 +8095,7 @@
           "type": "integer"
         },
         "chatRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "concurrentUsersLimit": {
@@ -7881,7 +8122,7 @@
           "type": "integer"
         },
         "generalRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "keepPresenceActivityOnDisconnect": {
@@ -7889,7 +8130,7 @@
           "x-omitempty": false
         },
         "maxDSWaitTime": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "maxFriendsLimit": {
@@ -7908,11 +8149,11 @@
           "x-omitempty": false
         },
         "readyConsentTimeout": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "unregisterDelay": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       },
@@ -7944,7 +8185,7 @@
           "x-omitempty": false
         },
         "autoKickOnDisconnectDelay": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "cancelTicketOnDisconnect": {
@@ -7956,7 +8197,7 @@
           "type": "integer"
         },
         "chatRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "concurrentUsersLimit": {
@@ -7983,7 +8224,7 @@
           "type": "integer"
         },
         "generalRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "keepPresenceActivityOnDisconnect": {
@@ -7991,7 +8232,7 @@
           "x-omitempty": false
         },
         "maxDSWaitTime": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "maxFriendsLimit": {
@@ -8007,11 +8248,11 @@
           "x-omitempty": false
         },
         "readyConsentTimeout": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "unregisterDelay": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       }
@@ -8327,11 +8568,11 @@
     "path": "/lobby/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-11-03T02:17:36+00:00",
-    "gitHash": "a3c6f28d33234c517a1fad89882cda51c66291ed",
+    "buildDate": "2023-12-26T10:24:49+00:00",
+    "gitHash": "2f0bafeaa3d9da1ae3af107ea63f57d7f529ee4e",
     "name": "justice-lobby-server",
-    "revisionID": "3.30.4",
-    "version": "3.30.4",
+    "revisionID": "3.33.1",
+    "version": "3.33.1",
     "version-justice": "3.45.0",
     "version-roles-seeding": "1.0.1"
   }

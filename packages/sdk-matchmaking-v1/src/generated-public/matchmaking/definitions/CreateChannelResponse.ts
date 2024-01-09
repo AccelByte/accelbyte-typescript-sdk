@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { RuleSet } from './RuleSet.js'
 
 export const CreateChannelResponse = z.object({
+  blocked_player_option: z.string(),
   deployment: z.string(),
   description: z.string(),
   find_match_timeout_seconds: z.number().int(),
@@ -22,6 +23,7 @@ export const CreateChannelResponse = z.object({
   session_queue_timeout_seconds: z.number().int(),
   slug: z.string(),
   social_matchmaking: z.boolean(),
+  sub_gamemode_selection: z.string(),
   ticket_observability_enable: z.boolean().nullish(),
   updated_at: z.string(),
   use_sub_gamemode: z.boolean()

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -23,6 +23,7 @@ export * from './generated-public/matchmaking/definitions/BackfillGetResponse.js
 export * from './generated-public/matchmaking/definitions/BackfillProposalResponse.js'
 export * from './generated-public/matchmaking/definitions/ListEnvironmentVariablesResponse.js'
 export * from './generated-public/matchmaking/definitions/ListMatchFunctionsResponse.js'
+export * from './generated-public/matchmaking/definitions/ListMatchPoolTicketsResponse.js'
 export * from './generated-public/matchmaking/definitions/ListMatchPoolsResponse.js'
 export * from './generated-public/matchmaking/definitions/ListRuleSetsResponse.js'
 export * from './generated-public/matchmaking/definitions/Match.js'
@@ -46,12 +47,16 @@ export * from './generated-public/matchmaking/definitions/Ticket.js'
 export * from './generated-public/matchmaking/definitions/TicketMetricResultRecord.js'
 export * from './generated-public/matchmaking/definitions/BackFillRejectRequest.js'
 export * from './generated-public/matchmaking/definitions/EnvironmentVariable.js'
+export * from './generated-public/matchmaking/definitions/MatchTicketRecord.js'
 export * from './generated-public/matchmaking/definitions/MatchmakerParty.js'
+export * from './generated-public/matchmaking/definitions/MatchmakerProposedProposal.js'
 export * from './generated-public/matchmaking/definitions/MatchmakerTeam.js'
+export * from './generated-public/matchmaking/definitions/MatchmakerTicket.js'
 export * from './generated-public/matchmaking/definitions/Configuration.js'
 export * from './generated-public/matchmaking/definitions/DsInformation.js'
 export * from './generated-public/matchmaking/definitions/GameSession.js'
 export * from './generated-public/matchmaking/definitions/Pagination.js'
 export * from './generated-public/matchmaking/definitions/Server.js'
 export * from './generated-public/matchmaking/definitions/User.js'
+export * from './generated-public/matchmaking/definitions/PlayerPlayerData.js'
 export * from './generated-public/matchmaking/definitions/Error.js'

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -12,7 +12,7 @@ export const PlayerBinaryRecordResponse = z.object({
   is_public: z.boolean(),
   key: z.string(),
   namespace: z.string(),
-  set_by: z.string().nullish(),
+  set_by: z.enum(['CLIENT', 'SERVER']).nullish(),
   updated_at: z.string(),
   user_id: z.string()
 })

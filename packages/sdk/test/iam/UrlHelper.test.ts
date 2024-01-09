@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -78,6 +78,25 @@ describe('combineURLPaths', () => {
     // Should be able to remove consecutive path separators and convert it to only one.
     expect(UrlHelper.combineURLPaths('https://hello.world', 'test', 'path///extends', '123')).toBe(
       'https://hello.world/test/path/extends/123'
+    )
+  })
+})
+
+describe('removeQueryParam', () => {
+  test('invalid cases', () => {
+    expect(() => UrlHelper.removeQueryParam('', '')).toThrow()
+  })
+
+  test('valid cases', () => {
+    // Remove Specific Param from URL with 1 query param
+    expect(UrlHelper.removeQueryParam('https://test.com?query1=abc', 'query1')).toBe('https://test.com')
+    // Remove Specific Param from URL with 1 query param and hash
+    expect(UrlHelper.removeQueryParam('https://test.com?query1=abc#section', 'query1')).toBe('https://test.com#section')
+    // Remove Specific Param from URL with 2 query params
+    expect(UrlHelper.removeQueryParam('https://test.com?query1=abc&query2=dsf', 'query1')).toBe('https://test.com?query2=dsf')
+    // Remove Specific Param from URL with 2 query params and hash
+    expect(UrlHelper.removeQueryParam('https://test.com?query1=abc&query2=dsf#section', 'query1')).toBe(
+      'https://test.com?query2=dsf#section'
     )
   })
 })

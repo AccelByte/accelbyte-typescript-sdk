@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,7 +15,7 @@ export class EnvironmentVariables$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required Permission: ADMIN:MATCHMAKING:CONFIGURATION:ENVIRONMENTVARIABLE [READ] Required Scope: social List environment variables.
+   * List environment variables.
    */
   getEnvironmentVariables(): Promise<IResponseWithSync<ListEnvironmentVariablesResponse>> {
     const params = {} as SDKRequestConfig

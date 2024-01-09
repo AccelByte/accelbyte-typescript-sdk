@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -36,6 +36,9 @@ export * from './generated-public/cloudsave/definitions/BulkGetPlayerBinaryRecor
 export * from './generated-public/cloudsave/definitions/BulkGetPlayerRecordResponse.js'
 export * from './generated-public/cloudsave/definitions/BulkGetPlayerRecordSizeResponse.js'
 export * from './generated-public/cloudsave/definitions/BulkGetPlayerRecordsRequest.js'
+export * from './generated-public/cloudsave/definitions/BulkUpdatePlayerRecordRequestDetail.js'
+export * from './generated-public/cloudsave/definitions/BulkUpdatePlayerRecordResponse.js'
+export * from './generated-public/cloudsave/definitions/BulkUpdatePlayerRecordsRequest.js'
 export * from './generated-public/cloudsave/definitions/BulkUserIDsRequest.js'
 export * from './generated-public/cloudsave/definitions/BulkUserKeyRequest.js'
 export * from './generated-public/cloudsave/definitions/ConcurrentRecordRequest.js'
@@ -57,6 +60,7 @@ export * from './generated-public/cloudsave/definitions/PlayerBinaryRecordCreate
 export * from './generated-public/cloudsave/definitions/PlayerBinaryRecordMetadataPublicRequest.js'
 export * from './generated-public/cloudsave/definitions/PlayerBinaryRecordMetadataRequest.js'
 export * from './generated-public/cloudsave/definitions/PlayerBinaryRecordResponse.js'
+export * from './generated-public/cloudsave/definitions/PlayerRecordConcurrentUpdateResponse.js'
 export * from './generated-public/cloudsave/definitions/PlayerRecordKeyInfo.js'
 export * from './generated-public/cloudsave/definitions/PlayerRecordRequest.js'
 export * from './generated-public/cloudsave/definitions/PlayerRecordResponse.js'

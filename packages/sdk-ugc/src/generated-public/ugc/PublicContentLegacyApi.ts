@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,12 +13,14 @@ import { ContentDownloadResponseArray } from './definitions/ContentDownloadRespo
 import { CreateContentResponse } from './definitions/CreateContentResponse.js'
 import { CreateScreenshotRequest } from './definitions/CreateScreenshotRequest.js'
 import { CreateScreenshotResponse } from './definitions/CreateScreenshotResponse.js'
+import { GetContentBulkByShareCodesRequest } from './definitions/GetContentBulkByShareCodesRequest.js'
 import { GetContentPreviewResponse } from './definitions/GetContentPreviewResponse.js'
 import { PaginatedContentDownloadResponse } from './definitions/PaginatedContentDownloadResponse.js'
 import { PublicContentLegacy$ } from './endpoints/PublicContentLegacy$.js'
 import { PublicCreateContentRequestS3 } from './definitions/PublicCreateContentRequestS3.js'
 import { PublicGetContentBulkRequest } from './definitions/PublicGetContentBulkRequest.js'
 import { UpdateContentRequest } from './definitions/UpdateContentRequest.js'
+import { UpdateContentShareCodeRequest } from './definitions/UpdateContentShareCodeRequest.js'
 import { UpdateScreenshotRequest } from './definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from './definitions/UpdateScreenshotResponse.js'
 
@@ -81,6 +83,16 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   ): Promise<PaginatedContentDownloadResponse> {
     const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getContents_ByUserId(userId, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Require valid user token. Maximum sharecodes per request 100
+   */
+  async function createContentSharecodeBulk(data: GetContentBulkByShareCodesRequest): Promise<ContentDownloadResponseArray> {
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createContentSharecodeBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -212,11 +224,56 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]&lt;/b&gt;.&lt;br&gt; This endpoint is used to modify the shareCode of a content. However, this operation is restricted by default and requires the above permission to be granted to the User role.&lt;br&gt; &lt;code&gt;shareCode&lt;/code&gt; format should follows: Max length: 7 Available characters: abcdefhkpqrstuxyz
+   */
+  async function patchSharecode_ByUserId_ByChannelId_ByContentId(
+    userId: string,
+    channelId: string,
+    contentId: string,
+    data: UpdateContentShareCodeRequest
+  ): Promise<CreateContentResponse> {
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.patchSharecode_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   */
+  async function deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(
+    userId: string,
+    channelId: string,
+    shareCode: string
+  ): Promise<unknown> {
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;. All request body are required except &lt;code&gt;payload&lt;/code&gt;, &lt;code&gt;preview&lt;/code&gt;, &lt;code&gt;tags&lt;/code&gt;,&lt;code&gt;contentType&lt;/code&gt;, &lt;code&gt;updateContentFile&lt;/code&gt;, &lt;code&gt;customAttributes&lt;/code&gt; and &lt;code&gt;shareCode&lt;/code&gt;. &lt;code&gt;contentType&lt;/code&gt; values is used to enforce the Content-Type header needed by the client to upload the content using the S3 presigned URL. If not specified, it will use &lt;code&gt;fileExtension&lt;/code&gt; value. To update content file, set &lt;code&gt;updateContentFile&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; and upload the file using URL in &lt;code&gt;payloadURL.url&lt;/code&gt; in response body. &lt;br&gt;&lt;p&gt;&lt;b&gt;NOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content&lt;/b&gt;&lt;/p&gt;
+   */
+  async function updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(
+    userId: string,
+    channelId: string,
+    shareCode: string,
+    data: UpdateContentRequest
+  ): Promise<CreateContentResponse> {
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     getContents,
     createContentBulk,
     getContent_ByContentId,
     getContents_ByUserId,
+    createContentSharecodeBulk,
     getPreview_ByContentId,
     getContents_ByChannelId,
     getContentSharecode_ByShareCode,
@@ -225,6 +282,9 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     updateScreenshot_ByUserId_ByContentId,
     deleteContent_ByUserId_ByChannelId_ByContentId,
     updateContentS3_ByUserId_ByChannelId_ByContentId,
-    deleteScreenshot_ByUserId_ByContentId_ByScreenshotId
+    deleteScreenshot_ByUserId_ByContentId_ByScreenshotId,
+    patchSharecode_ByUserId_ByChannelId_ByContentId,
+    deleteContentSharecode_ByUserId_ByChannelId_ByShareCode,
+    updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode
   }
 }

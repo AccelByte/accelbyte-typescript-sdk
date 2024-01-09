@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -31,6 +31,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getItemsBySku(queryParams: {
     sku: string | null
+    autoCalcEstimatedPrice?: boolean | null
     language?: string | null
     region?: string | null
     storeId?: string | null
@@ -47,6 +48,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getItemsSearch(queryParams: {
     keyword: string | null
     language: string | null
+    autoCalcEstimatedPrice?: boolean | null
     itemType?:
       | 'APP'
       | 'BUNDLE'
@@ -90,6 +92,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getItemsByCriteria(queryParams?: {
     appType?: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'
+    autoCalcEstimatedPrice?: boolean | null
     baseAppId?: string | null
     categoryPath?: string | null
     features?: string | null
@@ -125,6 +128,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getItemsLocaleByIds(queryParams: {
     itemIds: string | null
+    autoCalcEstimatedPrice?: boolean | null
     language?: string | null
     region?: string | null
     storeId?: string | null
@@ -154,7 +158,13 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getLocale_ByItemId(
     itemId: string,
-    queryParams?: { language?: string | null; populateBundle?: boolean | null; region?: string | null; storeId?: string | null }
+    queryParams?: {
+      autoCalcEstimatedPrice?: boolean | null
+      language?: string | null
+      populateBundle?: boolean | null
+      region?: string | null
+      storeId?: string | null
+    }
   ): Promise<PopulatedItemInfo> {
     const $ = new Item$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getLocale_ByItemId(itemId, queryParams)

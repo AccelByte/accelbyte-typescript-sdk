@@ -46,7 +46,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Mute user.
+   * Mute user.
    */
   async function updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<unknown> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
@@ -69,7 +69,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Unmute user.
+   * Unmute user.
    */
   async function updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<unknown> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
@@ -79,7 +79,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;ban topic members in a group topic.
+   * Ban topic members in a group topic.
    */
   async function createBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<PublicBanTopicMembersResponse> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
@@ -89,7 +89,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;unban topic members in a group topic.
+   * Unban topic members in a group topic.
    */
   async function createUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<PublicUnbanTopicMembersResponse> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)
@@ -99,7 +99,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Delete chat.
+   * Delete chat.
    */
   async function deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<unknown> {
     const $ = new Topic$(Network.create(requestConfig), namespace, cache)

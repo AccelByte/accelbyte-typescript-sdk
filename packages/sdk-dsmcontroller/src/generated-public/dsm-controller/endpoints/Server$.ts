@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,6 +10,7 @@ import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, 
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DeregisterLocalServerRequest } from '../definitions/DeregisterLocalServerRequest.js'
+import { DetailedCountServerResponse } from '../definitions/DetailedCountServerResponse.js'
 import { DsHeartbeatRequest } from '../definitions/DsHeartbeatRequest.js'
 import { ListServerResponse } from '../definitions/ListServerResponse.js'
 import { RegisterLocalServerRequest } from '../definitions/RegisterLocalServerRequest.js'
@@ -71,6 +72,23 @@ export class Server$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint counts all of dedicated servers in a region managed by this service.
+   */
+  getServersCountDetailed(queryParams?: { region?: string | null }): Promise<IResponseWithSync<DetailedCountServerResponse>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/dsmcontroller/namespaces/{namespace}/servers/count/detailed'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () => Validate.responseType(() => resultPromise, DetailedCountServerResponse, 'DetailedCountServerResponse')
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

@@ -16,7 +16,7 @@ export class InputValidations$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * &lt;p&gt;No role required&lt;/p&gt; &lt;p&gt;This endpoint is to get list of input validation configuration.&lt;/p&gt; &lt;p&gt;&lt;code&gt;regex&lt;/code&gt; parameter will be returned if &lt;code&gt;isCustomRegex&lt;/code&gt; is true. Otherwise, it will be empty.&lt;/p&gt;
+   * No role required This endpoint is to get list of input validation configuration. &lt;code&gt;regex&lt;/code&gt; parameter will be returned if &lt;code&gt;isCustomRegex&lt;/code&gt; is true. Otherwise, it will be empty.
    */
   getInputValidations(queryParams?: {
     defaultOnEmpty?: boolean | null
@@ -36,7 +36,7 @@ export class InputValidations$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is to get input validation configuration by field.&lt;/p&gt;
+   * This endpoint is to get input validation configuration by field.
    */
   getInputValidation_ByField(field: string): Promise<IResponseWithSync<InputValidationConfigVersion>> {
     const params = {} as SDKRequestConfig

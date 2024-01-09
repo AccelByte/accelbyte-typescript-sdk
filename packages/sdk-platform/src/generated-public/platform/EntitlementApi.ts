@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -51,22 +51,6 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get user entitlement by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getEntitlementsBySku_ByUserId(
-    userId: string,
-    queryParams: {
-      sku: string | null
-      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
-    }
-  ): Promise<EntitlementInfo> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getEntitlementsBySku_ByUserId(userId, queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
-  /**
    * Get user app entitlement by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlementsByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<AppEntitlementInfo> {
@@ -86,22 +70,6 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }): Promise<Ownership> {
     const $ = new Entitlement$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getUsersMeEntitlementsOwnershipAny(queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
-  /**
-   * Get user entitlement by itemId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getEntitlementsByItemId_ByUserId(
-    userId: string,
-    queryParams: {
-      itemId: string | null
-      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
-    }
-  ): Promise<EntitlementInfo> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache)
-    const resp = await $.getEntitlementsByItemId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -277,10 +245,8 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getEntitlements_ByUserId,
-    getEntitlementsBySku_ByUserId,
     getEntitlementsByAppId_ByUserId,
     getUsersMeEntitlementsOwnershipAny,
-    getEntitlementsByItemId_ByUserId,
     getUsersMeEntitlementsOwnershipToken,
     getEntitlementsByAppType_ByUserId,
     getUsersMeEntitlementsOwnershipBySku,

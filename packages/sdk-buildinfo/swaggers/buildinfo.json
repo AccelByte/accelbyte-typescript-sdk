@@ -8,7 +8,7 @@
     },
     "description": "Justice BuildInfo Service",
     "title": "justice-buildinfo-service",
-    "version": "3.28.8"
+    "version": "3.28.11"
   },
   "schemes": ["https"],
   "tags": [
@@ -1085,6 +1085,47 @@
           }
         ],
         "summary": "Dispatch Diff Caching Request",
+        "tags": ["Caching"]
+      }
+    },
+    "/buildinfo/admin/namespaces/{namespace}/diff/calculate/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "This API is used to bulk dispatch diff caching requests to differ instance.\u0026lt;br/\u0026gt;The processing order will follow the order of the array.\u0026lt;br/\u0026gt;The \u0026lt;b\u0026gt;priority\u0026lt;/b\u0026gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.\u0026lt;br/\u0026gt;\u0026lt;br/\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Request is skipped if the source and destination versions is same\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;Request is skipped if the source version is not found\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;Request is skipped if the destination version is not found\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Required permission\u0026lt;/i\u0026gt;: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:DIFFCACHE\u0026#34;, action=1 (CREATE)\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "bulkCachingRequests",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BulkCalculateDiffCacheRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "202": {
+            "description": "Request accepted"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk Dispatch Diff Caching Requests",
         "tags": ["Caching"]
       }
     },
@@ -5598,6 +5639,19 @@
       },
       "type": "object"
     },
+    "BulkCalculateDiffCacheRequest": {
+      "properties": {
+        "diffCacheRequests": {
+          "description": "diff cache request",
+          "items": {
+            "$ref": "#/definitions/DiffCacheRequest"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["diffCacheRequests"],
+      "type": "object"
+    },
     "CalculateDiffCacheRequest": {
       "properties": {
         "destinationBuildId": {
@@ -5773,6 +5827,29 @@
         }
       },
       "required": ["diffFile", "filePath", "url"],
+      "type": "object"
+    },
+    "DiffCacheRequest": {
+      "properties": {
+        "appId": {
+          "description": "application id",
+          "type": "string"
+        },
+        "destinationVersion": {
+          "description": "destination version",
+          "type": "string"
+        },
+        "priority": {
+          "description": "set as priority so it always served first inside queue (default: false)",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "sourceVersion": {
+          "description": "source version",
+          "type": "string"
+        }
+      },
+      "required": ["appId", "destinationVersion", "sourceVersion"],
       "type": "object"
     },
     "DiffPatchRequest": {
@@ -6649,16 +6726,16 @@
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-11-03T06:26:47+00:00",
-    "buildID": "3.28.8",
+    "buildDate": "2023-12-14T06:58:09+00:00",
+    "buildID": "3.28.11",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-    "buildOS": "Linux amd64 5.13.0-1021-aws",
+    "buildOS": "Linux amd64 5.10.199-190.747.amzn2.x86_64",
     "gitBranchName": "unknown",
-    "gitHash": "83dad0728a",
+    "gitHash": "42cd3322e0",
     "gitTag": "3.28.8",
     "name": "justice-buildinfo-service",
     "realm": "dev",
-    "version": "3.28.8",
+    "version": "3.28.11",
     "version-roles-seeding": "0.0.3"
   }
 }

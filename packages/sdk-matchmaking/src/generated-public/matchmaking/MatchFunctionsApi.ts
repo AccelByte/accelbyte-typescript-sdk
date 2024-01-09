@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -21,7 +21,7 @@ export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [READ] Required Scope: social List existing match functions.
+   * List existing match functions.
    */
   async function getMatchFunctions(queryParams?: { limit?: number; offset?: number }): Promise<ListMatchFunctionsResponse> {
     const $ = new MatchFunctions$(Network.create(requestConfig), namespace, cache)
@@ -31,7 +31,7 @@ export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [CREATE] Required Scope: social Creates a new matchmaking function.
+   * Creates a new matchmaking function.
    */
   async function createMatchFunction(data: MatchFunctionRequest): Promise<unknown> {
     const $ = new MatchFunctions$(Network.create(requestConfig), namespace, cache)
@@ -41,7 +41,7 @@ export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [DELETE] Required Scope: social Deletes an existing match function.
+   * Deletes an existing match function.
    */
   async function deleteMatchFunction_ByName(name: string): Promise<unknown> {
     const $ = new MatchFunctions$(Network.create(requestConfig), namespace, cache)
@@ -51,7 +51,7 @@ export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [UPDATE] Required Scope: social Update existing matchmaking function.
+   * Update existing matchmaking function.
    */
   async function updateMatchFunction_ByName(name: string, data: MatchFunctionRequest): Promise<MatchFunctionConfig> {
     const $ = new MatchFunctions$(Network.create(requestConfig), namespace, cache)

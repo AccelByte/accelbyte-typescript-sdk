@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -8,6 +8,7 @@ import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const ConfigurationTemplateResponse = z.object({
   PSNBaseUrl: z.string().nullish(),
+  attributes: z.record(z.any()).nullish(),
   autoJoin: z.boolean().nullish(),
   clientVersion: z.string(),
   createdAt: z.string(),
@@ -15,13 +16,14 @@ export const ConfigurationTemplateResponse = z.object({
   disableCodeGeneration: z.boolean().nullish(),
   dsManualSetReady: z.boolean().nullish(),
   dsSource: z.string().nullish(),
-  enableSecret: z.boolean(),
+  enableSecret: z.boolean().nullish(),
   fallbackClaimKeys: z.array(z.string()).nullish(),
   immutableStorage: z.boolean().nullish(),
   inactiveTimeout: z.number().int(),
   inviteTimeout: z.number().int(),
   joinability: z.string(),
   last: z.string(),
+  leaderElectionGracePeriod: z.number().int().nullish(),
   maxActiveSessions: z.number().int().nullish(),
   maxPlayers: z.number().int(),
   minPlayers: z.number().int(),

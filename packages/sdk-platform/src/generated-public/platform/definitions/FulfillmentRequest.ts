@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,6 +9,9 @@ import { OrderSummary } from './OrderSummary.js'
 export const FulfillmentRequest = z.object({
   duration: z.number().int().nullish(),
   endDate: z.string().nullish(),
+  entitlementOrigin: z
+    .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
+    .nullish(),
   itemId: z.string().nullish(),
   itemSku: z.string().nullish(),
   language: z.string().nullish(),

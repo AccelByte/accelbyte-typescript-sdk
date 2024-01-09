@@ -25,7 +25,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:NOTIFICATION [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Sends notification to all connected users in a namespace.
+   * Sends notification to all connected users in a namespace.
    */
   async function createNotificationFreeform(data: FreeFormNotificationRequest): Promise<unknown> {
     const $ = new Admin$(Network.create(requestConfig), namespace, cache)
@@ -35,7 +35,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:NOTIFICATION [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Sends notification to all connected users in a namespace with predefined template. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications
+   * Sends notification to all connected users in a namespace with predefined template. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications
    */
   async function createNotificationTemplated(data: NotificationWithTemplateRequest): Promise<unknown> {
     const $ = new Admin$(Network.create(requestConfig), namespace, cache)
@@ -45,7 +45,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [READ]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Get all templates in a namespace
+   * Get all templates in a namespace
    */
   async function getNotificationTemplates(): Promise<TemplateResponseArray> {
     const $ = new Admin$(Network.create(requestConfig), namespace, cache)
@@ -55,7 +55,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Create new notification template. Include handlebars {{key}} for replaceable contexts. The the key inside handlebars will be the key to be replaced when sending notification. Already existing template with the same slug and language can not be created. &lt;br&gt;Check model description for detailed input restrictions.
+   * Create new notification template. Include handlebars {{key}} for replaceable contexts. The the key inside handlebars will be the key to be replaced when sending notification. Already existing template with the same slug and language can not be created. &lt;br&gt;Check model description for detailed input restrictions.
    */
   async function createNotificationTemplate(data: CreateTemplateRequest): Promise<unknown> {
     const $ = new Admin$(Network.create(requestConfig), namespace, cache)
@@ -65,7 +65,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Delete localization template
+   * Delete localization template
    */
   async function deleteNotificationTemplate_ByTemplateSlug(templateSlug: string): Promise<unknown> {
     const $ = new Admin$(Network.create(requestConfig), namespace, cache)
@@ -75,7 +75,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [READ]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Get all templates in a namespace
+   * Get all templates in a namespace
    */
   async function getNotificationTemplate_ByTemplateSlug(
     templateSlug: string,
@@ -88,7 +88,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Delete all template in a slug
+   * Delete all template in a slug
    */
   async function deleteLanguageNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,
@@ -101,7 +101,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [READ]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Get a template localization
+   * Get a template localization
    */
   async function getLanguageNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,
@@ -114,7 +114,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Modify draft template
+   * Modify draft template
    */
   async function updateLanguageNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,
@@ -128,7 +128,7 @@ export function AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Publish notification template draft. Empty draft can not be published.
+   * Publish notification template draft. Empty draft can not be published.
    */
   async function createPublishNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,

@@ -61,7 +61,7 @@ export class Topic$ {
   }
 
   /**
-   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Mute user.
+   * Mute user.
    */
   updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -92,7 +92,7 @@ export class Topic$ {
   }
 
   /**
-   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Unmute user.
+   * Unmute user.
    */
   updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -103,7 +103,7 @@ export class Topic$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;ban topic members in a group topic.
+   * Ban topic members in a group topic.
    */
   createBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<IResponse<PublicBanTopicMembersResponse>> {
     const params = {} as SDKRequestConfig
@@ -116,7 +116,7 @@ export class Topic$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;unban topic members in a group topic.
+   * Unban topic members in a group topic.
    */
   createUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<IResponse<PublicUnbanTopicMembersResponse>> {
     const params = {} as SDKRequestConfig
@@ -129,7 +129,7 @@ export class Topic$ {
   }
 
   /**
-   * Required group permission : &lt;code&gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Delete chat.
+   * Delete chat.
    */
   deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

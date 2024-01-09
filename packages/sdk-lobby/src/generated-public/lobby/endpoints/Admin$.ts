@@ -22,7 +22,7 @@ export class Admin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:NOTIFICATION [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Sends notification to all connected users in a namespace.
+   * Sends notification to all connected users in a namespace.
    */
   createNotificationFreeform(data: FreeFormNotificationRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -33,7 +33,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:NOTIFICATION [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Sends notification to all connected users in a namespace with predefined template. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications
+   * Sends notification to all connected users in a namespace with predefined template. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications
    */
   createNotificationTemplated(data: NotificationWithTemplateRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -44,7 +44,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [READ]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Get all templates in a namespace
+   * Get all templates in a namespace
    */
   getNotificationTemplates(): Promise<IResponseWithSync<TemplateResponseArray>> {
     const params = {} as SDKRequestConfig
@@ -61,7 +61,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Create new notification template. Include handlebars {{key}} for replaceable contexts. The the key inside handlebars will be the key to be replaced when sending notification. Already existing template with the same slug and language can not be created. &lt;br&gt;Check model description for detailed input restrictions.
+   * Create new notification template. Include handlebars {{key}} for replaceable contexts. The the key inside handlebars will be the key to be replaced when sending notification. Already existing template with the same slug and language can not be created. &lt;br&gt;Check model description for detailed input restrictions.
    */
   createNotificationTemplate(data: CreateTemplateRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -72,7 +72,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Delete localization template
+   * Delete localization template
    */
   deleteNotificationTemplate_ByTemplateSlug(templateSlug: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -85,7 +85,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [READ]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Get all templates in a namespace
+   * Get all templates in a namespace
    */
   getNotificationTemplate_ByTemplateSlug(
     templateSlug: string,
@@ -107,7 +107,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Delete all template in a slug
+   * Delete all template in a slug
    */
   deleteLanguageNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,
@@ -124,7 +124,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [READ]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Get a template localization
+   * Get a template localization
    */
   getLanguageNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,
@@ -147,7 +147,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [UPDATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Modify draft template
+   * Modify draft template
    */
   updateLanguageNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,
@@ -165,7 +165,7 @@ export class Admin$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:TEMPLATE [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;Publish notification template draft. Empty draft can not be published.
+   * Publish notification template draft. Empty draft can not be published.
    */
   createPublishNotification_ByTemplateSlug_ByTemplateLanguage(templateSlug: string, templateLanguage: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

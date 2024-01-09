@@ -15,7 +15,7 @@ export class Moderation$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required group permission : &lt;code&gt; NAMESPACE:{namespace}:CHAT:TOPIC [READ]&lt;/code&gt; &lt;br&gt;Get the chat snapshot
+   * Get the chat snapshot
    */
   getSnapshot_ByTopic_ByChatId(topic: string, chatId: string): Promise<IResponseWithSync<ChatSnapshots>> {
     const params = {} as SDKRequestConfig

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,7 +22,7 @@ export class Backfill$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [CREATE] Required Scope: social Create backfill ticket
+   * Create backfill ticket.
    */
   createBackfill(data: BackFillCreateRequest): Promise<IResponse<BackfillCreateResponse>> {
     const params = {} as SDKRequestConfig
@@ -33,7 +33,7 @@ export class Backfill$ {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [GET] Required Scope: social Get backfill proposal
+   * Get backfill proposal
    */
   getBackfillProposal(queryParams: { sessionID: string | null }): Promise<IResponseWithSync<BackfillProposalResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -50,7 +50,7 @@ export class Backfill$ {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [DELETE] Required Scope: social Delete backfill ticket
+   * Delete backfill ticket.
    */
   deleteBackfill_ByBackfillId(backfillID: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -63,7 +63,7 @@ export class Backfill$ {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [GET] Required Scope: social Get backfill ticket by ID
+   * Get backfill ticket by ID
    */
   getBackfill_ByBackfillId(backfillID: string): Promise<IResponseWithSync<BackfillGetResponse>> {
     const params = {} as SDKRequestConfig
@@ -82,7 +82,7 @@ export class Backfill$ {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE] Required Scope: social Accept backfill proposal
+   * Accept backfill proposal.
    */
   updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<IResponse<GameSession>> {
     const params = {} as SDKRequestConfig
@@ -95,7 +95,7 @@ export class Backfill$ {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE] Required Scope: social Reject backfill proposal
+   * Reject backfill proposal
    */
   updateProposalReject_ByBackfillId(backfillID: string, data: BackFillRejectRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

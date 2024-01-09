@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,6 +16,7 @@ import { PartyQueryResponse } from './definitions/PartyQueryResponse.js'
 import { PartySessionResponse } from './definitions/PartySessionResponse.js'
 import { PromoteLeaderRequest } from './definitions/PromoteLeaderRequest.js'
 import { SessionInviteRequest } from './definitions/SessionInviteRequest.js'
+import { SessionInviteResponse } from './definitions/SessionInviteResponse.js'
 import { UpdatePartyRequest } from './definitions/UpdatePartyRequest.js'
 
 export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -102,7 +103,7 @@ export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Invite a user to a party. platformID represents the native platform of the invitee. API will return the corresponding native platform&#39;s userID. supported platforms: - STEAM - XBOX - PSN
    */
-  async function createInvite_ByPartyId(partyId: string, data: SessionInviteRequest): Promise<unknown> {
+  async function createInvite_ByPartyId(partyId: string, data: SessionInviteRequest): Promise<SessionInviteResponse> {
     const $ = new Party$(Network.create(requestConfig), namespace, cache)
     const resp = await $.createInvite_ByPartyId(partyId, data)
     if (resp.error) throw resp.error

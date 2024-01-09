@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -85,5 +85,7 @@ export * from './generated-public/dsm-controller/definitions/UpdateDeploymentReq
 export * from './generated-public/dsm-controller/definitions/UpdatePodConfigRequest.js'
 export * from './generated-public/dsm-controller/definitions/UpdatePortRequest.js'
 export * from './generated-public/dsm-controller/definitions/UpdateRegionOverrideRequest.js'
+export * from './generated-public/dsm-controller/definitions/WorkerConfig.js'
+export * from './generated-public/dsm-controller/definitions/WorkerConfigRequest.js'
 export * from './generated-public/dsm-controller/definitions/Error.js'
 export * from './generated-public/dsm-controller/definitions/AppMessageDeclarationArray.js'

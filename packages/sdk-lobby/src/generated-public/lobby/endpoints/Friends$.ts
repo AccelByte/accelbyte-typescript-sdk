@@ -30,6 +30,9 @@ export class Friends$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
+  /**
+   * Get list of friends in a namespace.
+   */
   getFriendsMe(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetUserFriendsResponseArray>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me'.replace('{namespace}', this.namespace)
@@ -66,6 +69,9 @@ export class Friends$ {
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 
+  /**
+   * Get list of incoming friends in a namespace.
+   */
   getFriendsMeIncoming(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetUserIncomingFriendsResponseArray>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/incoming'.replace('{namespace}', this.namespace)
@@ -80,6 +86,9 @@ export class Friends$ {
     return SdkCache.withCache(cacheKey, res)
   }
 
+  /**
+   * Get list of outgoing friends in a namespace.
+   */
   getFriendsMeOutgoing(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetUserOutgoingFriendsResponseArray>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/outgoing'.replace('{namespace}', this.namespace)
@@ -94,6 +103,9 @@ export class Friends$ {
     return SdkCache.withCache(cacheKey, res)
   }
 
+  /**
+   * User unfriend a friend.
+   */
   createFriendMeUnfriend(data: UserUnfriendRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/unfriend'.replace('{namespace}', this.namespace)
@@ -102,6 +114,9 @@ export class Friends$ {
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 
+  /**
+   * Get list of friends with platform data in a namespace.
+   */
   getFriendsMePlatforms(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListBulkUserPlatformsResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/platforms'.replace('{namespace}', this.namespace)
@@ -116,6 +131,9 @@ export class Friends$ {
     return SdkCache.withCache(cacheKey, res)
   }
 
+  /**
+   * Get list of incoming friends with requested time info in a namespace.
+   */
   getFriendsMeIncomingTime(queryParams?: {
     limit?: number
     offset?: number
@@ -134,6 +152,9 @@ export class Friends$ {
     return SdkCache.withCache(cacheKey, res)
   }
 
+  /**
+   * Get list of outgoing friends with requested time info in a namespace.
+   */
   getFriendsMeOutgoingTime(queryParams?: {
     limit?: number
     offset?: number
@@ -152,6 +173,9 @@ export class Friends$ {
     return SdkCache.withCache(cacheKey, res)
   }
 
+  /**
+   * User accept friend.
+   */
   createFriendMeRequestAccept(data: UserAcceptFriendRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/request/accept'.replace('{namespace}', this.namespace)
@@ -160,6 +184,9 @@ export class Friends$ {
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 
+  /**
+   * User cancel a friend request.
+   */
   createFriendMeRequestCancel(data: UserCancelFriendRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/request/cancel'.replace('{namespace}', this.namespace)
@@ -168,6 +195,9 @@ export class Friends$ {
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 
+  /**
+   * User reject a friend request.
+   */
   createFriendMeRequestReject(data: UserRejectFriendRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/request/reject'.replace('{namespace}', this.namespace)
@@ -176,6 +206,9 @@ export class Friends$ {
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
   }
 
+  /**
+   * User get friendship status.
+   */
   getFriendMeStatu_ByFriendId(friendId: string): Promise<IResponseWithSync<UserGetFriendshipStatusResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/status/{friendId}'
@@ -193,7 +226,7 @@ export class Friends$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;friends request in a namespace.
+   * Friends request in a namespace.
    */
   createAddBulkFriend_ByUserId(userId: string, data: BulkFriendsRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -204,7 +237,7 @@ export class Friends$ {
   }
 
   /**
-   * Required permission : &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;friends request in a namespace.
+   * Friends request in a namespace.
    */
   createDeleteBulkFriend_ByUserId(userId: string, data: BulkFriendsRequest): Promise<IResponse<BulkFriendsResponse>> {
     const params = {} as SDKRequestConfig

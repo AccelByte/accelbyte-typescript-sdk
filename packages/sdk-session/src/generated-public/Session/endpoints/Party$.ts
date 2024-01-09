@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,6 +16,7 @@ import { PartyQueryResponse } from '../definitions/PartyQueryResponse.js'
 import { PartySessionResponse } from '../definitions/PartySessionResponse.js'
 import { PromoteLeaderRequest } from '../definitions/PromoteLeaderRequest.js'
 import { SessionInviteRequest } from '../definitions/SessionInviteRequest.js'
+import { SessionInviteResponse } from '../definitions/SessionInviteResponse.js'
 import { UpdatePartyRequest } from '../definitions/UpdatePartyRequest.js'
 
 export class Party$ {
@@ -128,14 +129,14 @@ export class Party$ {
   /**
    * Invite a user to a party. platformID represents the native platform of the invitee. API will return the corresponding native platform&#39;s userID. supported platforms: - STEAM - XBOX - PSN
    */
-  createInvite_ByPartyId(partyId: string, data: SessionInviteRequest): Promise<IResponse<unknown>> {
+  createInvite_ByPartyId(partyId: string, data: SessionInviteRequest): Promise<IResponse<SessionInviteResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/parties/{partyId}/invite'
       .replace('{namespace}', this.namespace)
       .replace('{partyId}', partyId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.responseType(() => resultPromise, SessionInviteResponse, 'SessionInviteResponse')
   }
 
   /**

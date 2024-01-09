@@ -3,14 +3,13 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-export * from './generated-public/chat/endpoints/Chat$.js'
-export * from './generated-public/chat/ChatApi.js'
 export * from './generated-public/chat/endpoints/Topic$.js'
 export * from './generated-public/chat/TopicApi.js'
 export * from './generated-public/chat/endpoints/Moderation$.js'
 export * from './generated-public/chat/ModerationApi.js'
 export * from './generated-public/Chat.js'
 export * from './generated-public/chat/definitions/AddMemberParams.js'
+export * from './generated-public/chat/definitions/CreateNamespaceTopicParams.js'
 export * from './generated-public/chat/definitions/CreateTopicParams.js'
 export * from './generated-public/chat/definitions/CreateTopicResponse.js'
 export * from './generated-public/chat/definitions/MuteUserRequest.js'

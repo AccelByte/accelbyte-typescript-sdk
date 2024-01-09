@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-odinconfig",
-  "version": "3.1.0",
+  "version": "3.1.1-beta.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",
@@ -13,7 +13,7 @@
     "clean": "npx rimraf dist && npx rimraf node_modules && npx rimraf .yalc",
     "cg:prettify": "prettier --write swaggers/*.json && prettier --write src/**/*",
     "cg:download": "yarn cg download-swaggers --config swaggers.json --swaggersOutput swaggers",
-    "cg:generate": "rimraf src/generated-public && yarn cg generate-code --config swaggers.json --swaggersOutput swaggers --output src --snippetOutput ../../../apps/api-explorer-app/src/constants/Snippets",
+    "cg:generate": "rimraf src/generated-public && yarn cg generate-code --config swaggers.json --swaggersOutput swaggers --output src",
     "cg": "ts-node ../codegen/src/cli.ts",
     "codegen": "yarn cg:generate && yarn cg:prettify"
   },

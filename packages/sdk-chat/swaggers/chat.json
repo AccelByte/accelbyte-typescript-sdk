@@ -14,46 +14,14 @@
     "HasPermission": {
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
-      "scopes": {
-        "ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]": "ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [CREATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]": "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]",
-        "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]",
-        "NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]": "NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]",
-        "NAMESPACE:{namespace}:CHAT:TOPIC [READ]": "NAMESPACE:{namespace}:CHAT:TOPIC [READ]",
-        "NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]": "NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"
-      },
+      "scopes": {},
       "tokenUrl": "https://dumy.oauth.net/token",
       "type": "oauth2"
     },
     "HasScope": {
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
-      "scopes": {
-        "inboxadd": "inboxadd",
-        "inboxdelete": "inboxdelete",
-        "inboxget": "inboxget",
-        "inboxsave": "inboxsave",
-        "inboxsend": "inboxsend",
-        "inboxunsend": "inboxunsend",
-        "inboxupdate": "inboxupdate",
-        "social": "social"
-      },
+      "scopes": {},
       "tokenUrl": "https://dumy.oauth.net/token",
       "type": "oauth2"
     },
@@ -65,28 +33,10 @@
   },
   "swagger": "2.0",
   "paths": {
-    "/chat": {
-      "get": {
-        "description": "This endpoint need valid user access token. No specific permission is required. Upgrade connection to websocket upon successful request.",
-        "operationId": "connect",
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ],
-        "summary": "Connect to chat server",
-        "tags": ["chat"]
-      }
-    },
     "/chat/admin/namespaces/{namespace}/chats": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get chat history in a namespace.",
+        "description": "Get chat history in a namespace.",
         "operationId": "adminChatHistory",
         "parameters": [
           {
@@ -200,19 +150,67 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get chat history",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
+      }
+    },
+    "/chat/admin/namespaces/{namespace}/namespace-topic": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Create new namespace group topic in a namespace.",
+        "operationId": "adminCreateNamespaceTopic",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.CreateNamespaceTopicParams"
+            }
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/api.CreateTopicResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Use to create namespace group. Message that send to this group send to connected user in a namespace",
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get chat list of topic in a namespace.",
+        "description": "Get chat list of topic in a namespace.",
         "operationId": "adminTopicList",
         "parameters": [
           {
@@ -279,17 +277,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get list of topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;create new group topic in a namespace.",
+        "description": "Create new group topic in a namespace.",
         "operationId": "adminCreateTopic",
         "parameters": [
           {
@@ -319,19 +320,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Use to create group. Only group admin can use this operation",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/channel": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;get channel chat list of topic in a namespace.",
+        "description": "Get channel chat list of topic in a namespace.",
         "operationId": "adminChannelTopicList",
         "parameters": [
           {
@@ -395,19 +399,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get list of channel topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/channel/summary": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\t\u0026lt;br\u0026gt;get chat list of topic in a namespace.",
+        "description": "Get chat list of topic in a namespace.",
         "operationId": "adminChannelTopicSummary",
         "parameters": [
           {
@@ -453,19 +460,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get channel topic summary",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/log": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;get chat log of topic in a namespace.",
+        "description": "Get chat log of topic in a namespace.",
         "operationId": "adminQueryTopicLog",
         "parameters": [
           {
@@ -563,19 +573,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin query topic log",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;delete topic in a namespace.",
+        "description": "Delete topic in a namespace.",
         "operationId": "adminDeleteTopic",
         "parameters": [
           {
@@ -604,17 +617,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Use to delete group. Only group admin can use this operation",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;update group topic in a namespace.",
+        "description": "Update group topic in a namespace.",
         "operationId": "adminUpdateTopic",
         "parameters": [
           {
@@ -651,19 +667,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Use to update group information. Only group admin can use this operation",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}/ban-members": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;ban users in some topic. banned user not assigned to shard for channel topic, and cannot send and query chat.",
+        "description": "Ban users in some topic. banned user not assigned to shard for channel topic, and cannot send and query chat.",
         "operationId": "adminBanTopicMembers",
         "parameters": [
           {
@@ -724,19 +743,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admins ban user in group topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}/channel": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\t\u0026lt;br\u0026gt;get chat list of topic in a namespace.",
+        "description": "Get chat list of topic in a namespace.",
         "operationId": "adminChannelTopicInfo",
         "parameters": [
           {
@@ -795,20 +817,23 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get channel topic detail",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}/chats": {
       "get": {
         "consumes": ["application/json"],
         "deprecated": true,
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get chat history in a namespace.",
+        "description": "Get chat history in a namespace.",
         "operationId": "adminTopicChatHistory",
         "parameters": [
           {
@@ -909,17 +934,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get chat history",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;send message to chat topic as system.",
+        "description": "Send message to chat topic as system.",
         "operationId": "adminSendChat",
         "parameters": [
           {
@@ -983,19 +1011,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admins send chat to group topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}/chats/{chatId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;Delete chat.",
+        "description": "Delete chat.",
         "operationId": "adminDeleteChat",
         "parameters": [
           {
@@ -1052,19 +1083,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admins delete chat",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}/members": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;get topic members.",
+        "description": "Get topic members.",
         "operationId": "adminTopicMembers",
         "parameters": [
           {
@@ -1149,19 +1183,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get topic member",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}/shards": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;get shard list from topic.",
+        "description": "Get shard list from topic.",
         "operationId": "adminTopicShards",
         "parameters": [
           {
@@ -1217,19 +1254,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get shard list of topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}/unban-members": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;unban users in some topic.",
+        "description": "Unban users in some topic.",
         "operationId": "adminUnbanTopicMembers",
         "parameters": [
           {
@@ -1290,19 +1330,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admins unban user in group topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topic/{topic}/user/{userId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;remove member from topic in a namespace.",
+        "description": "Remove member from topic in a namespace.",
         "operationId": "adminRemoveTopicMember",
         "parameters": [
           {
@@ -1338,17 +1381,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin remove user from topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;add new member for topic in a namespace.",
+        "description": "Add new member for topic in a namespace.",
         "operationId": "adminAddTopicMember",
         "parameters": [
           {
@@ -1392,19 +1438,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin add user to topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/topics": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;get topics in a namespace.",
+        "description": "Get topics in a namespace.",
         "operationId": "adminQueryTopic",
         "parameters": [
           {
@@ -1459,7 +1508,7 @@
           },
           {
             "description": "topicSubType",
-            "enum": ["CLAN", "NORMAL", "PARTY", "SESSION"],
+            "enum": ["CLAN", "NAMESPACE", "NORMAL", "PARTY", "SESSION"],
             "in": "query",
             "name": "topicSubType",
             "type": "string"
@@ -1516,19 +1565,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin query topics",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       }
     },
     "/chat/admin/namespaces/{namespace}/users/{userId}/topics": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;get user\u0026#39;s topics in a namespace.",
+        "description": "Get user\u0026#39;s topics in a namespace.",
         "operationId": "adminQueryUsersTopic",
         "parameters": [
           {
@@ -1566,7 +1618,7 @@
           },
           {
             "description": "topicSubType",
-            "enum": ["CLAN", "NORMAL", "PARTY", "SESSION"],
+            "enum": ["CLAN", "NAMESPACE", "NORMAL", "PARTY", "SESSION"],
             "in": "query",
             "name": "topicSubType",
             "type": "string"
@@ -1614,41 +1666,14 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin query user's topics",
-        "tags": ["topic"]
-      }
-    },
-    "/chat/admin/version": {
-      "get": {
-        "operationId": "extendedVersionHandler",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
+        "tags": ["topic"],
+        "x-security": [
           {
-            "authorization": []
-          }
-        ]
-      }
-    },
-    "/chat/healthz": {
-      "get": {
-        "operationId": "HealthCheckHandler",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
           }
         ]
       }
@@ -1709,7 +1734,8 @@
           }
         ],
         "summary": "public get muted at topics",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": []
       }
     },
     "/chat/public/namespaces/{namespace}/topic": {
@@ -1786,13 +1812,14 @@
           }
         ],
         "summary": "public get list of topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": []
       }
     },
     "/chat/public/namespaces/{namespace}/topic/{topic}/ban-members": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;ban topic members in a group topic.",
+        "description": "Ban topic members in a group topic.",
         "operationId": "publicBanTopicMembers",
         "parameters": [
           {
@@ -1853,13 +1880,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "public ban topic members in a group topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/public/namespaces/{namespace}/topic/{topic}/chats": {
@@ -1943,13 +1973,14 @@
           }
         ],
         "summary": "public get chat history",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": []
       }
     },
     "/chat/public/namespaces/{namespace}/topic/{topic}/chats/{chatId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required group permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;Delete chat.",
+        "description": "Delete chat.",
         "operationId": "publicDeleteChat",
         "parameters": [
           {
@@ -2006,19 +2037,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "public delete chat",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"]
+          }
+        ]
       }
     },
     "/chat/public/namespaces/{namespace}/topic/{topic}/mute": {
       "put": {
         "consumes": ["application/json"],
-        "description": "Required group permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;Mute user.",
+        "description": "Mute user.",
         "operationId": "publicMuteUser",
         "parameters": [
           {
@@ -2077,19 +2111,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "public mute user in a topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/public/namespaces/{namespace}/topic/{topic}/unban-members": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;unban topic members in a group topic.",
+        "description": "Unban topic members in a group topic.",
         "operationId": "publicUnbanTopicMembers",
         "parameters": [
           {
@@ -2150,19 +2187,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "public unban topic members in a group topic",
-        "tags": ["topic"]
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/public/namespaces/{namespace}/topic/{topic}/unmute": {
       "put": {
         "consumes": ["application/json"],
-        "description": "Required group permission : \u0026lt;code\u0026gt;NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;Unmute user.",
+        "description": "Unmute user.",
         "operationId": "publicUnmuteUser",
         "parameters": [
           {
@@ -2221,26 +2261,14 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "public unmute user in a topic",
-        "tags": ["topic"]
-      }
-    },
-    "/chat/readiness": {
-      "get": {
-        "operationId": "ReadinessCheckHandler",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
+        "tags": ["topic"],
+        "x-security": [
           {
-            "authorization": []
+            "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
           }
         ]
       }
@@ -2248,7 +2276,7 @@
     "/chat/v1/admin/config": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get chat config of all namespaces.",
+        "description": "Get chat config of all namespaces.",
         "operationId": "adminGetAllConfigV1",
         "produces": ["application/json"],
         "responses": {
@@ -2291,19 +2319,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get all namespaces config",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/config/namespaces/{namespace}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;get chat config of a namespace.",
+        "description": "Get chat config of a namespace.",
         "operationId": "adminGetConfigV1",
         "parameters": [
           {
@@ -2355,17 +2386,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin get namespace config",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;update chat config of a namespace.",
+        "description": "Update chat config of a namespace.",
         "operationId": "adminUpdateConfigV1",
         "parameters": [
           {
@@ -2432,19 +2466,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "admin update namespace config",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/config/namespaces/{namespace}/export": {
       "get": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\t\tRequired permission ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]\n\n\t\t\t\tRequired Scope: social\n\n\t\t\t\tExport chat configuration to a json file. The file can then be imported from the /import endpoint. \n\t\t\t",
+        "description": "\n\t\t\t\tExport chat configuration to a json file. The file can then be imported from the /import endpoint. \n\t\t\t\t",
         "operationId": "ExportConfig",
         "parameters": [
           {
@@ -2455,7 +2492,7 @@
             "type": "string"
           }
         ],
-        "produces": ["multipart/form-data"],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK",
@@ -2487,19 +2524,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Export chat config to a json file.",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/config/namespaces/{namespace}/import": {
       "post": {
         "consumes": ["multipart/form-data"],
-        "description": "\n\t\t\t\tRequired permission ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]\n\n\t\t\t\tRequired Scope: social\n\n\t\t\t\tImport config configuration from file. The existing configuration will be replaced.\n\t\t\t\tThe json file to import can be obtained from the /export endpoint. \n\t\t\t",
+        "description": "\n\t\t\t\tImport config configuration from file. The existing configuration will be replaced.\n\t\t\t\tThe json file to import can be obtained from the /export endpoint. \n\t\t\t\t",
         "operationId": "ImportConfig",
         "parameters": [
           {
@@ -2545,19 +2585,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Import chat config from a json file.",
-        "tags": ["config"]
+        "tags": ["config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/categories": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;get inbox categories.",
+        "description": "Get inbox categories",
         "operationId": "adminGetInboxCategories",
         "parameters": [
           {
@@ -2606,17 +2649,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]"],
-            "HasScope": ["inboxget"],
             "authorization": []
           }
         ],
         "summary": "admin get inbox categories",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;add inbox category.",
+        "description": "Add inbox category.",
         "operationId": "adminAddInboxCategory",
         "parameters": [
           {
@@ -2670,19 +2716,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]"],
-            "HasScope": ["inboxadd"],
             "authorization": []
           }
         ],
         "summary": "add inbox category",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/categories/{category}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;delete inbox category.",
+        "description": "Delete inbox category",
         "operationId": "adminDeleteInboxCategory",
         "parameters": [
           {
@@ -2732,17 +2781,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]"],
-            "HasScope": ["inboxdelete"],
             "authorization": []
           }
         ],
         "summary": "admin delete inbox category",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]"]
+          }
+        ]
       },
       "patch": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;update inbox category.",
+        "description": "Update inbox category",
         "operationId": "adminUpdateInboxCategory",
         "parameters": [
           {
@@ -2800,19 +2852,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [UPDATE]"],
-            "HasScope": ["inboxupdate"],
             "authorization": []
           }
         ],
         "summary": "admin update inbox category",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/categories/{category}/schema.json": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : valid audience.",
+        "description": "Get category schema.",
         "operationId": "adminGetCategorySchema",
         "parameters": [
           {
@@ -2875,13 +2930,18 @@
           }
         ],
         "summary": "admin get category schema",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/message/{messageId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;delete inbox message.",
+        "description": "Delete inbox message",
         "operationId": "adminDeleteInboxMessage",
         "parameters": [
           {
@@ -2938,19 +2998,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]"],
-            "HasScope": ["inboxdelete"],
             "authorization": []
           }
         ],
         "summary": "admin delete inbox message",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;get inbox messages.",
+        "description": "Get inbox messages",
         "operationId": "adminGetInboxMessages",
         "parameters": [
           {
@@ -3064,17 +3127,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"],
-            "HasScope": ["inboxget"],
             "authorization": []
           }
         ],
         "summary": "admin get inbox messages",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [CREATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;save inbox message.",
+        "description": "Save inbox message",
         "operationId": "adminSaveInboxMessage",
         "parameters": [
           {
@@ -3128,19 +3194,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [CREATE]"],
-            "HasScope": ["inboxsave"],
             "authorization": []
           }
         ],
         "summary": "admin save inbox message",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [CREATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages/{inbox}/unsend": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;unsend inbox message.",
+        "description": "Unsend inbox message",
         "operationId": "adminUnsendInboxMessage",
         "parameters": [
           {
@@ -3201,19 +3270,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"],
-            "HasScope": ["inboxunsend"],
             "authorization": []
           }
         ],
         "summary": "admin unsend inbox message",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages/{inbox}/users": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;get inbox users.",
+        "description": "Get inbox users",
         "operationId": "adminGetInboxUsers",
         "parameters": [
           {
@@ -3291,19 +3363,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"],
-            "HasScope": ["inboxget"],
             "authorization": []
           }
         ],
         "summary": "admin get inbox users",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages/{messageId}": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;update inbox message.",
+        "description": "Update inbox message",
         "operationId": "adminUpdateInboxMessage",
         "parameters": [
           {
@@ -3361,19 +3436,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"],
-            "HasScope": ["inboxupdate"],
             "authorization": []
           }
         ],
         "summary": "admin update inbox message",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/messages/{messageId}/send": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;send inbox message.",
+        "description": "Send inbox message",
         "operationId": "adminSendInboxMessage",
         "parameters": [
           {
@@ -3434,19 +3512,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"],
-            "HasScope": ["inboxsend"],
             "authorization": []
           }
         ],
         "summary": "admin send inbox message",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/inbox/namespaces/{namespace}/stats": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;inbox\u0026lt;/code\u0026gt;\u0026lt;br\u0026gt;get inbox stats.",
+        "description": "Get inbox stats",
         "operationId": "adminGetInboxStats",
         "parameters": [
           {
@@ -3502,19 +3583,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"],
-            "HasScope": ["inboxget"],
             "authorization": []
           }
         ],
         "summary": "admin get inbox stats",
-        "tags": ["inbox"]
+        "tags": ["inbox"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/namespaces/{namespace}/snapshot/{chatId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Delete the chat snapshot",
+        "description": "Delete the chat snapshot",
         "operationId": "adminDeleteChatSnapshot",
         "parameters": [
           {
@@ -3570,16 +3654,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "admin delete chat snapshot",
-        "tags": ["moderation"]
+        "tags": ["moderation"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Get the chat snapshot",
+        "description": "Get the chat snapshot",
         "operationId": "adminGetChatSnapshot",
         "parameters": [
           {
@@ -3638,18 +3726,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
             "authorization": []
           }
         ],
         "summary": "admin get chat snapshot",
-        "tags": ["moderation"]
+        "tags": ["moderation"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Query all profanity words.",
+        "description": "Query all profanity words.",
         "operationId": "adminProfanityQuery",
         "parameters": [
           {
@@ -3744,16 +3836,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"],
             "authorization": []
           }
         ],
         "summary": "admin query profanity words",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Insert new word for profanity censor",
+        "description": "Insert new word for profanity censor",
         "operationId": "adminProfanityCreate",
         "parameters": [
           {
@@ -3814,18 +3910,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "admin insert new profanity words",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Bulk insert new word for profanity censor",
+        "description": "Bulk insert new word for profanity censor",
         "operationId": "adminProfanityCreateBulk",
         "parameters": [
           {
@@ -3886,18 +3986,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "admin bulk insert new profanity words",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/export": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Export profanity words",
+        "description": "Export profanity words",
         "operationId": "adminProfanityExport",
         "parameters": [
           {
@@ -3943,18 +4047,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"],
             "authorization": []
           }
         ],
         "summary": "admin export profanity words",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/group": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Get profanity words group.",
+        "description": "Get profanity words group.",
         "operationId": "adminProfanityGroup",
         "parameters": [
           {
@@ -4015,18 +4123,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"],
             "authorization": []
           }
         ],
         "summary": "admin get profanity words group",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/import": {
       "post": {
         "consumes": ["multipart/form-data"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Import profanity words",
+        "description": "Import profanity words",
         "operationId": "adminProfanityImport",
         "parameters": [
           {
@@ -4098,18 +4210,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"],
             "authorization": []
           }
         ],
         "summary": "admin import profanity words",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/{id}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Delete profanity words.",
+        "description": "Delete profanity words.",
         "operationId": "adminProfanityDelete",
         "parameters": [
           {
@@ -4165,16 +4281,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "admin delete profanity words",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission : \u0026lt;code\u0026gt; ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Update profanity word",
+        "description": "Update profanity word",
         "operationId": "adminProfanityUpdate",
         "parameters": [
           {
@@ -4242,12 +4362,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "admin update profanity word",
-        "tags": ["profanity"]
+        "tags": ["profanity"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]"]
+          }
+        ]
       }
     },
     "/chat/v1/messages": {
@@ -4284,7 +4408,7 @@
     "/chat/v1/public/namespaces/{namespace}/topic/{topic}/snapshot/{chatId}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required group permission : \u0026lt;code\u0026gt; NAMESPACE:{namespace}:CHAT:TOPIC [READ]\u0026lt;/code\u0026gt; \u0026lt;br\u0026gt;Get the chat snapshot",
+        "description": "Get the chat snapshot",
         "operationId": "publicGetChatSnapshot",
         "parameters": [
           {
@@ -4350,25 +4474,14 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHAT:TOPIC [READ]"],
             "authorization": []
           }
         ],
         "summary": "public get chat snapshot",
-        "tags": ["moderation"]
-      }
-    },
-    "/chat/version": {
-      "get": {
-        "operationId": "versionHandler",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
+        "tags": ["moderation"],
+        "x-security": [
           {
-            "authorization": []
+            "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
           }
         ]
       }
@@ -4383,6 +4496,17 @@
         }
       },
       "required": ["isAdmin"]
+    },
+    "api.CreateNamespaceTopicParams": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["description", "name"]
     },
     "api.CreateTopicParams": {
       "properties": {
@@ -4854,7 +4978,7 @@
           "type": "integer"
         },
         "ChatRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "ConcurrentUsersLimit": {
@@ -4883,7 +5007,7 @@
           "type": "integer"
         },
         "GeneralRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "Namespace": {
@@ -4906,14 +5030,22 @@
           "type": "integer"
         },
         "SpamChatDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "SpamMuteDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
+        "defaultDictionaryLoaded": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "enableClanChat": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "useDefaultDictionary": {
           "type": "boolean",
           "x-omitempty": false
         }
@@ -4944,7 +5076,7 @@
           "type": "integer"
         },
         "chatRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "concurrentUsersLimit": {
@@ -4977,7 +5109,7 @@
           "type": "integer"
         },
         "generalRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "namespace": {
@@ -5000,11 +5132,11 @@
           "type": "integer"
         },
         "spamChatDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "spamMuteDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       },
@@ -5035,7 +5167,7 @@
           "type": "integer"
         },
         "chatRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "concurrentUsersLimit": {
@@ -5068,7 +5200,7 @@
           "type": "integer"
         },
         "generalRateLimitDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "shardCapacityLimit": {
@@ -5088,11 +5220,11 @@
           "type": "integer"
         },
         "spamChatDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "spamMuteDuration": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       }
@@ -5888,11 +6020,11 @@
     "path": "/chat/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-10-30T02:48:47+00:00",
-    "gitHash": "242131427e1d352141943ed5b18e62e4df87d545",
+    "buildDate": "2023-12-21T07:50:12+00:00",
+    "gitHash": "61ee23132ecef78d2291c23abcd9e92cf214e2cc",
     "name": "justice-chat-service",
-    "revisionID": "0.4.10",
-    "version": "0.4.10",
+    "revisionID": "0.4.15",
+    "version": "0.4.15",
     "version-roles-seeding": "0.0.18"
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -26,7 +26,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Retrieve list of binary records by namespace.
+   * Retrieve list of binary records by namespace.
    */
   async function getBinaries(queryParams?: {
     limit?: number
@@ -40,7 +40,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Create a game binary record. &lt;p&gt;Other detail info:&lt;/p&gt; &lt;code&gt;key&lt;/code&gt; should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators &lt;b&gt;&#34;-&#34;&lt;/b&gt;, &lt;b&gt;&#34;_&#34;&lt;/b&gt;, &lt;b&gt;&#34;.&#34;&lt;/b&gt; are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
+   * Create a game binary record. Other detail info: `key` should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators **&#34;-&#34;**, **&#34;_&#34;**, **&#34;.&#34;** are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   async function createBinary(data: PublicGameBinaryRecordCreate): Promise<UploadBinaryRecordResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -50,7 +50,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required valid user token Required scope: &lt;code&gt;social&lt;/code&gt; Bulk get game binary records. Maximum key per request 20.
+   * Bulk get game binary records. Maximum key per request 20.
    */
   async function createBinaryBulk(data: BulkGetGameRecordRequest): Promise<BulkGetGameBinaryRecordResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -60,7 +60,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [DELETE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Delete a game binary record.
+   * Delete a game binary record.
    */
   async function deleteBinary_ByKey(key: string): Promise<unknown> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -70,7 +70,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [READ]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Get a game binary record by its key.
+   * Get a game binary record by its key.
    */
   async function getBinary_ByKey(key: string): Promise<GameBinaryRecordResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -80,7 +80,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [UPDATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Update a game binary record file by its key
+   * Update a game binary record file by its key
    */
   async function updateBinary_ByKey(key: string, data: BinaryRecordRequest): Promise<GameBinaryRecordResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)
@@ -90,7 +90,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;code&gt;NAMESPACE:{namespace}:CLOUDSAVE:RECORD [CREATE]&lt;/code&gt; Required scope: &lt;code&gt;social&lt;/code&gt; Request presigned URL to upload the binary record to s3. &lt;p&gt;Other detail info:&lt;/p&gt; Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
+   * Request presigned URL to upload the binary record to s3. Other detail info: Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   async function createPresigned_ByKey(key: string, data: UploadBinaryRecordRequest): Promise<UploadBinaryRecordResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache)

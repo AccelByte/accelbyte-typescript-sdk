@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -20,7 +20,7 @@ export function RuleSetsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:RULES [READ] Required Scope: social List rule sets.
+   * List rule sets.
    */
   async function getRulesets(queryParams?: { limit?: number; name?: string | null; offset?: number }): Promise<ListRuleSetsResponse> {
     const $ = new RuleSets$(Network.create(requestConfig), namespace, cache)
@@ -30,7 +30,7 @@ export function RuleSetsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:RULES [CREATE] Required Scope: social Creates a new rules set. A rule set has a name and contains arbitrary data which is meaningful to some particular match function(s) The name is used for a match pool to select the ruleset data that should be sent to the match function when matchmaking in that pool. To use custom rules set please set enable_custom_match_function=true. Default (false).
+   * Creates a new rules set. A rule set has a name and contains arbitrary data which is meaningful to some particular match function(s) The name is used for a match pool to select the ruleset data that should be sent to the match function when matchmaking in that pool. To use custom rules set please set enable_custom_match_function=true. Default (false).
    */
   async function createRuleset(data: RuleSetPayload): Promise<unknown> {
     const $ = new RuleSets$(Network.create(requestConfig), namespace, cache)
@@ -40,7 +40,7 @@ export function RuleSetsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:RULES [DELETE] Required Scope: social Deletes an existing rule set.
+   * Deletes an existing rule set.
    */
   async function deleteRuleset_ByRuleset(ruleset: string): Promise<unknown> {
     const $ = new RuleSets$(Network.create(requestConfig), namespace, cache)
@@ -50,7 +50,7 @@ export function RuleSetsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:RULES [READ] Required Scope: social Get details for a specific rule set
+   * Get details for a specific rule set
    */
   async function getRuleset_ByRuleset(ruleset: string): Promise<RuleSetPayload> {
     const $ = new RuleSets$(Network.create(requestConfig), namespace, cache)
@@ -60,7 +60,7 @@ export function RuleSetsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:RULES [UPDATE] Required Scope: social Updates an existing matchmaking rule set. To use custom rules set please set enable_custom_match_function=true. Default (false).
+   * Updates an existing matchmaking rule set. To use custom rules set please set enable_custom_match_function=true. Default (false).
    */
   async function updateRuleset_ByRuleset(ruleset: string, data: RuleSetPayload): Promise<RuleSetPayload> {
     const $ = new RuleSets$(Network.create(requestConfig), namespace, cache)

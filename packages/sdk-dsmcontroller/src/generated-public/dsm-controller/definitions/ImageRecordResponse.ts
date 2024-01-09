@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,6 +10,7 @@ export const ImageRecordResponse = z.object({
   artifactPath: z.string().nullish(),
   coreDumpEnabled: z.boolean().nullish(),
   createdAt: z.string(),
+  deployments: z.array(z.string()).nullish(),
   dockerPath: z.string(),
   image: z.string(),
   imageReplications: z.array(ImageReplication).nullish(),

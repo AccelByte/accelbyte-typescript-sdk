@@ -15,7 +15,7 @@ export class Country$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Public get country list, will filter out countries in black list&lt;br&gt;
+   * Public get country list, will filter out countries in black list
    */
   getCountries(): Promise<IResponseWithSync<CountryResponseArray>> {
     const params = {} as SDKRequestConfig

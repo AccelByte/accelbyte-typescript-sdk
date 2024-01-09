@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-matchmaking",
-  "version": "3.1.0",
+  "version": "3.1.2-beta.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",

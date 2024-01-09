@@ -5,6 +5,12 @@
  */
 import { z } from 'zod'
 
-export const ModelUserPlatformInfo = z.object({ platformDisplayName: z.string(), platformId: z.string(), platformUserId: z.string() })
+export const ModelUserPlatformInfo = z.object({
+  platformAvatarUrl: z.string().nullish(),
+  platformDisplayName: z.string().nullish(),
+  platformGroup: z.string().nullish(),
+  platformId: z.string(),
+  platformUserId: z.string().nullish()
+})
 
 export interface ModelUserPlatformInfo extends z.TypeOf<typeof ModelUserPlatformInfo> {}

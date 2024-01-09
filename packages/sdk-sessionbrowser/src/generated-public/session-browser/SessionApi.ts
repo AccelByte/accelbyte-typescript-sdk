@@ -28,7 +28,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Query available game session
+   * Query available game session
    */
   async function getGamesession(queryParams: {
     session_type: string | null
@@ -49,7 +49,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [CREATE] Required scope: social This end point intended to be called directly by P2P game client host or by DSMC
+   * This end point intended to be called directly by P2P game client host or by DSMC
    */
   async function createGamesession(data: CreateSessionRequest): Promise<SessionResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -59,7 +59,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Query game sessions by comma separated user ids
+   * Query game sessions by comma separated user ids
    */
   async function getGamesessionBulk(queryParams: { user_ids: string | null }): Promise<SessionByUserIDsResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -69,7 +69,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:RECENTPLAYER [READ] Required scope: social Query recent player by user ID
+   * Query recent player by user ID
    */
   async function getRecentplayer_ByUserId(userID: string): Promise<RecentPlayerQueryResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -79,7 +79,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE] Required scope: social Delete the session (p2p) by session ID
+   * Delete the session (p2p) by session ID
    */
   async function deleteGamesession_BySessionId(sessionID: string): Promise<SessionResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -89,7 +89,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Get the session by session ID
+   * Get the session by session ID
    */
   async function getGamesession_BySessionId(sessionID: string): Promise<SessionResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -99,7 +99,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE] Required scope: social Update game session, used to update the current player
+   * Update game session, used to update the current player
    */
   async function updateGamesession_BySessionId(sessionID: string, data: UpdateSessionRequest): Promise<SessionResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -109,7 +109,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Join the specified session by session ID. Possible the game required a password to join
+   * Join the specified session by session ID. Possible the game required a password to join
    */
   async function createJoin_BySessionId(sessionID: string, data: JoinGameSessionRequest): Promise<SessionResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -119,7 +119,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE] Required scope: social Add player to game session
+   * Add player to game session
    */
   async function createPlayer_BySessionId(sessionID: string, data: AddPlayerRequest): Promise<AddPlayerResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -129,7 +129,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE] Required scope: social Only use for local DS entry, will error when calling non local DS entry
+   * Only use for local DS entry, will error when calling non local DS entry
    */
   async function deleteLocald_BySessionId(sessionID: string): Promise<SessionResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -139,7 +139,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE] Required scope: social Update game session, used to update OtherSettings
+   * Update game session, used to update OtherSettings
    */
   async function updateSetting_BySessionId(sessionID: string, data: UpdateSettingsRequest): Promise<SessionResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)
@@ -149,7 +149,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE] Required scope: social Remove player from game session
+   * Remove player from game session
    */
   async function deletePlayer_BySessionId_ByUserId(sessionID: string, userID: string): Promise<AddPlayerResponse> {
     const $ = new Session$(Network.create(requestConfig), namespace, cache)

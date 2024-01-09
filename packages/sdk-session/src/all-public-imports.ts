@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -7,6 +7,8 @@ export * from './generated-public/Session/endpoints/Party$.js'
 export * from './generated-public/Session/PartyApi.js'
 export * from './generated-public/Session/endpoints/GameSession$.js'
 export * from './generated-public/Session/GameSessionApi.js'
+export * from './generated-public/Session/endpoints/RecentPlayer$.js'
+export * from './generated-public/Session/RecentPlayerApi.js'
 export * from './generated-public/Session/endpoints/Player$.js'
 export * from './generated-public/Session/PlayerApi.js'
 export * from './generated-public/Session/endpoints/SessionStorage$.js'
@@ -30,6 +32,7 @@ export * from './generated-public/Session/definitions/GameSessionResponse.js'
 export * from './generated-public/Session/definitions/GlobalConfigurationResponse.js'
 export * from './generated-public/Session/definitions/JoinByCodeRequest.js'
 export * from './generated-public/Session/definitions/KickResponse.js'
+export * from './generated-public/Session/definitions/NativeSessionPagingResponse.js'
 export * from './generated-public/Session/definitions/Pagination.js'
 export * from './generated-public/Session/definitions/PartyQueryResponse.js'
 export * from './generated-public/Session/definitions/PartySessionResponse.js'
@@ -44,7 +47,9 @@ export * from './generated-public/Session/definitions/PutGlobalConfigurationRequ
 export * from './generated-public/Session/definitions/PutPlatformCredentialsRequest.js'
 export * from './generated-public/Session/definitions/RequestMember.js'
 export * from './generated-public/Session/definitions/ResponseDeleteBulkGameSessions.js'
+export * from './generated-public/Session/definitions/ServerSecret.js'
 export * from './generated-public/Session/definitions/SessionInviteRequest.js'
+export * from './generated-public/Session/definitions/SessionInviteResponse.js'
 export * from './generated-public/Session/definitions/SetDsReadyRequest.js'
 export * from './generated-public/Session/definitions/UpdateConfigurationTemplateRequest.js'
 export * from './generated-public/Session/definitions/UpdateGameSessionBackfillRequest.js'
@@ -52,6 +57,8 @@ export * from './generated-public/Session/definitions/UpdateGameSessionMemberSta
 export * from './generated-public/Session/definitions/UpdateGameSessionRequest.js'
 export * from './generated-public/Session/definitions/UpdatePartyRequest.js'
 export * from './generated-public/Session/definitions/UserResponse.js'
+export * from './generated-public/Session/definitions/NativeSession.js'
+export * from './generated-public/Session/definitions/NativeSessionMember.js'
 export * from './generated-public/Session/definitions/DsmConfigRecord.js'
 export * from './generated-public/Session/definitions/DefaultDsmcConfig.js'
 export * from './generated-public/Session/definitions/GameServer.js'
@@ -61,7 +68,9 @@ export * from './generated-public/Session/definitions/PsnAppServerCredentials.js
 export * from './generated-public/Session/definitions/PartyMembers.js'
 export * from './generated-public/Session/definitions/PlatformCredentials.js'
 export * from './generated-public/Session/definitions/PortConfigurationAms.js'
+export * from './generated-public/Session/definitions/RecentPlayerQueryResponse.js'
 export * from './generated-public/Session/definitions/RequestReconcileMaxActiveSession.js'
 export * from './generated-public/Session/definitions/Team.js'
+export * from './generated-public/Session/definitions/UserInfoResponse.js'
 export * from './generated-public/Session/definitions/UserPlatformInfo.js'
 export * from './generated-public/Session/definitions/Error.js'

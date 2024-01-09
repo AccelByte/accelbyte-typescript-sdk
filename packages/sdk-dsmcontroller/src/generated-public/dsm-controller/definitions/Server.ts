@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -20,7 +20,7 @@ export const Server = z.object({
   game_version: z.string(),
   image_version: z.string(),
   ip: z.string(),
-  is_core_dump_enabled: z.boolean(),
+  is_core_dump_enabled: z.boolean().nullish(),
   is_override_game_version: z.boolean(),
   job_id: z.string(),
   last_update: z.string(),

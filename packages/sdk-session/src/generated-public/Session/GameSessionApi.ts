@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,6 +15,7 @@ import { GameSessionQueryResponse } from './definitions/GameSessionQueryResponse
 import { GameSessionResponse } from './definitions/GameSessionResponse.js'
 import { JoinByCodeRequest } from './definitions/JoinByCodeRequest.js'
 import { PromoteLeaderRequest } from './definitions/PromoteLeaderRequest.js'
+import { ServerSecret } from './definitions/ServerSecret.js'
 import { SessionInviteRequest } from './definitions/SessionInviteRequest.js'
 import { UpdateGameSessionBackfillRequest } from './definitions/UpdateGameSessionBackfillRequest.js'
 import { UpdateGameSessionRequest } from './definitions/UpdateGameSessionRequest.js'
@@ -201,6 +202,16 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   *  Used by game Client to Get Secret constraints - EnableSecret = true - Type = &#34;DS&#34; - secret value will only be produced if enableSecret is true and type is DS if enableSecret = false - empty secret will be returned as 200 OK Expected caller of this API - Game Client to get server secret In the Response you will get following: - 200 OK { &#34;secret&#34;: &lt;string&gt; } If there is error: - 400 Invalid path parameters - 401 unauthorized - 404 StatusNotFound - 500 Internal server error
+   */
+  async function getSecret_BySessionId(sessionId: string): Promise<ServerSecret> {
+    const $ = new GameSession$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getSecret_BySessionId(sessionId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Update game session backfill ticket id. Will override game session backfill ticket based on given request parameter
    */
   async function updateBackfill_BySessionId(sessionId: string, data: UpdateGameSessionBackfillRequest): Promise<GameSessionResponse> {
@@ -228,6 +239,7 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createInvite_BySessionId,
     createLeader_BySessionId,
     deleteReject_BySessionId,
+    getSecret_BySessionId,
     updateBackfill_BySessionId
   }
 }

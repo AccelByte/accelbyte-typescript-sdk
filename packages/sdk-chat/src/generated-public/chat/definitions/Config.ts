@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -23,7 +23,9 @@ export const Config = z.object({
   SpamChatBurst: z.number().int(),
   SpamChatDuration: z.number().int(),
   SpamMuteDuration: z.number().int(),
-  enableClanChat: z.boolean().nullish()
+  defaultDictionaryLoaded: z.boolean().nullish(),
+  enableClanChat: z.boolean().nullish(),
+  useDefaultDictionary: z.boolean().nullish()
 })
 
 export interface Config extends z.TypeOf<typeof Config> {}

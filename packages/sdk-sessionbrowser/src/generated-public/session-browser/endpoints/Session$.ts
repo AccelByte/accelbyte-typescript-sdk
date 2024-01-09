@@ -24,7 +24,7 @@ export class Session$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Query available game session
+   * Query available game session
    */
   getGamesession(queryParams: {
     session_type: string | null
@@ -52,7 +52,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [CREATE] Required scope: social This end point intended to be called directly by P2P game client host or by DSMC
+   * This end point intended to be called directly by P2P game client host or by DSMC
    */
   createGamesession(data: CreateSessionRequest): Promise<IResponse<SessionResponse>> {
     const params = {} as SDKRequestConfig
@@ -63,7 +63,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Query game sessions by comma separated user ids
+   * Query game sessions by comma separated user ids
    */
   getGamesessionBulk(queryParams: { user_ids: string | null }): Promise<IResponseWithSync<SessionByUserIDsResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -80,7 +80,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:RECENTPLAYER [READ] Required scope: social Query recent player by user ID
+   * Query recent player by user ID
    */
   getRecentplayer_ByUserId(userID: string): Promise<IResponseWithSync<RecentPlayerQueryResponse>> {
     const params = {} as SDKRequestConfig
@@ -99,7 +99,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE] Required scope: social Delete the session (p2p) by session ID
+   * Delete the session (p2p) by session ID
    */
   deleteGamesession_BySessionId(sessionID: string): Promise<IResponse<SessionResponse>> {
     const params = {} as SDKRequestConfig
@@ -112,7 +112,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Get the session by session ID
+   * Get the session by session ID
    */
   getGamesession_BySessionId(sessionID: string): Promise<IResponseWithSync<SessionResponse>> {
     const params = {} as SDKRequestConfig
@@ -131,7 +131,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE] Required scope: social Update game session, used to update the current player
+   * Update game session, used to update the current player
    */
   updateGamesession_BySessionId(sessionID: string, data: UpdateSessionRequest): Promise<IResponse<SessionResponse>> {
     const params = {} as SDKRequestConfig
@@ -144,7 +144,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ] Required scope: social Join the specified session by session ID. Possible the game required a password to join
+   * Join the specified session by session ID. Possible the game required a password to join
    */
   createJoin_BySessionId(sessionID: string, data: JoinGameSessionRequest): Promise<IResponse<SessionResponse>> {
     const params = {} as SDKRequestConfig
@@ -157,7 +157,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE] Required scope: social Add player to game session
+   * Add player to game session
    */
   createPlayer_BySessionId(sessionID: string, data: AddPlayerRequest): Promise<IResponse<AddPlayerResponse>> {
     const params = {} as SDKRequestConfig
@@ -170,7 +170,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE] Required scope: social Only use for local DS entry, will error when calling non local DS entry
+   * Only use for local DS entry, will error when calling non local DS entry
    */
   deleteLocald_BySessionId(sessionID: string): Promise<IResponse<SessionResponse>> {
     const params = {} as SDKRequestConfig
@@ -183,7 +183,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE] Required scope: social Update game session, used to update OtherSettings
+   * Update game session, used to update OtherSettings
    */
   updateSetting_BySessionId(sessionID: string, data: UpdateSettingsRequest): Promise<IResponse<SessionResponse>> {
     const params = {} as SDKRequestConfig
@@ -196,7 +196,7 @@ export class Session$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE] Required scope: social Remove player from game session
+   * Remove player from game session
    */
   deletePlayer_BySessionId_ByUserId(sessionID: string, userID: string): Promise<IResponse<AddPlayerResponse>> {
     const params = {} as SDKRequestConfig

@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { NamespaceRole } from './NamespaceRole.js'
 import { UserActiveBanResponseV3 } from './UserActiveBanResponseV3.js'
 import { UserPermissionsResponseV3 } from './UserPermissionsResponseV3.js'
+import { UserPlatformInfo } from './UserPlatformInfo.js'
 
 export const UserResponseV3 = z.object({
   authType: z.string(),
@@ -33,8 +34,10 @@ export const UserResponseV3 = z.object({
   platformAvatarUrl: z.string().nullish(),
   platformDisplayName: z.string().nullish(),
   platformId: z.string().nullish(),
+  platformInfos: z.array(UserPlatformInfo).nullish(),
   platformUserId: z.string().nullish(),
   roles: z.array(z.string()),
+  testAccount: z.boolean().nullish(),
   userId: z.string(),
   userName: z.string().nullish()
 })

@@ -3,7 +3,7 @@
   "info": {
     "description": "This is analytics game telemetry to standardize avengers and justice telemetry",
     "title": "Analytics Game Telemetry",
-    "version": "1.19.0"
+    "version": "1.21.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -60,15 +60,20 @@
           }
         ],
         "summary": "Get Namespaces",
-        "tags": ["telemetry"]
+        "tags": ["telemetry"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:*:TELEMETRY [READ]"]
+          }
+        ]
       }
     },
     "/game-telemetry/v1/admin/namespaces/{namespace}/events": {
       "get": {
+        "description": "This endpoint requires valid JWT token and telemetry permission\nThis endpoint retrieves event list",
         "operationId": "get_events_game_telemetry_v1_admin_namespaces__namespace__events_get",
         "parameters": [
           {
-            "default": "2023-11-01T22:03:35Z",
             "description": "Start time of data to be queried. Default: Current time in UTC minus 1 day.",
             "in": "query",
             "name": "startTime",
@@ -76,7 +81,6 @@
             "type": "string"
           },
           {
-            "default": "2023-11-02T22:03:35Z",
             "description": "End time of data to be queried. Default: Current time in UTC.",
             "in": "query",
             "name": "endTime",
@@ -163,7 +167,12 @@
           }
         ],
         "summary": "Get Events",
-        "tags": ["telemetry"]
+        "tags": ["telemetry"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TELEMETRY [READ]"]
+          }
+        ]
       }
     },
     "/game-telemetry/v1/protected/events": {
@@ -213,7 +222,8 @@
           }
         ],
         "summary": "Protected Save Events",
-        "tags": ["Gametelemetry Operations"]
+        "tags": ["Gametelemetry Operations"],
+        "x-security": []
       }
     },
     "/game-telemetry/v1/protected/steamIds/{steamId}/playtime": {
@@ -261,7 +271,8 @@
           }
         ],
         "summary": "Protected Get Playtime",
-        "tags": ["Gametelemetry Operations"]
+        "tags": ["Gametelemetry Operations"],
+        "x-security": []
       }
     },
     "/game-telemetry/v1/protected/steamIds/{steamId}/playtime/{playtime}": {
@@ -312,7 +323,8 @@
           }
         ],
         "summary": "Protected Update Playtime",
-        "tags": ["Gametelemetry Operations"]
+        "tags": ["Gametelemetry Operations"],
+        "x-security": []
       }
     }
   },
@@ -397,11 +409,11 @@
     "path": "/game-telemetry/openapi.json"
   },
   "x-version": {
-    "buildDate": "2023-11-02T08:36:10+00:00",
-    "gitHash": "e75ebdc79724a4f61f73e1f9a9c1f12f0dffca85",
+    "buildDate": "2023-12-20T09:06:29+00:00",
+    "gitHash": "3b84a4b0b28c55d42c7d52bad967d457f0f1e39c",
     "name": "analytics-game-telemetry",
-    "realm": "dev",
-    "rolesSeedingVersion": "0.0.3",
-    "version": "1.19.0"
+    "realm": "staging",
+    "version": "1.21.0",
+    "version-roles-seeding": "1.0.18"
   }
 }

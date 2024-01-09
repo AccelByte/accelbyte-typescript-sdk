@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { UpdateRuleset } from './UpdateRuleset.js'
 
 export const UpdateChannelRequest = z.object({
+  blocked_player_option: z.enum(['blockedPlayerCanMatch', 'blockedPlayerCanMatchOnDifferentTeam', 'blockedPlayerCannotMatch']).nullish(),
   deployment: z.string(),
   description: z.string(),
   findMatchTimeoutSeconds: z.number().int(),
@@ -19,6 +20,7 @@ export const UpdateChannelRequest = z.object({
   ruleSet: UpdateRuleset,
   sessionQueueTimeoutSeconds: z.number().int(),
   socialMatchmaking: z.boolean(),
+  sub_gamemode_selection: z.enum(['random', 'ticketOrder']).nullish(),
   ticket_observability_enable: z.boolean().nullish(),
   use_sub_gamemode: z.boolean()
 })

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -8,21 +8,21 @@
  */
 import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
-import { z } from 'zod'
+import { RecentPlayerQueryResponse } from '../definitions/RecentPlayerQueryResponse.js'
 
-export class Chat$ {
+export class RecentPlayer$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * This endpoint need valid user access token. No specific permission is required. Upgrade connection to websocket upon successful request.
+   * Query recent player with given user id.
    */
-  getChat(): Promise<IResponseWithSync<unknown>> {
-    const params = {} as SDKRequestConfig
-    const url = '/chat'
+  getRecentPlayer(queryParams?: { limit?: number; userId?: string | null }): Promise<IResponseWithSync<RecentPlayerQueryResponse>> {
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/recent-player'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    const res = () => Validate.responseType(() => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

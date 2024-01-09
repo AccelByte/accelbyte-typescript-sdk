@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,6 +9,7 @@
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { DeregisterLocalServerRequest } from './definitions/DeregisterLocalServerRequest.js'
+import { DetailedCountServerResponse } from './definitions/DetailedCountServerResponse.js'
 import { DsHeartbeatRequest } from './definitions/DsHeartbeatRequest.js'
 import { ListServerResponse } from './definitions/ListServerResponse.js'
 import { RegisterLocalServerRequest } from './definitions/RegisterLocalServerRequest.js'
@@ -67,6 +68,16 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint counts all of dedicated servers in a region managed by this service.
+   */
+  async function getServersCountDetailed(queryParams?: { region?: string | null }): Promise<DetailedCountServerResponse> {
+    const $ = new Server$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.getServersCountDetailed(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social Use the alternative GET of the same endpoint to upgrade DS connection to DSM via websocket. This endpoint is intended to be called by local dedicated server to let DSM know that it is ready for use. Use local DS only for development purposes since DSM wouldn&#39;t be able to properly manage local DS in production. This MUST be called by DS after it is ready to accept match data and incoming client connections. Upon successfully calling this endpoint, the dedicated server is listed under READY local servers.```
    */
   async function createServerLocalRegister(data: RegisterLocalServerRequest): Promise<Server> {
@@ -111,6 +122,7 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createServerRegister,
     createServerShutdown,
     updateServerHeartbeat,
+    getServersCountDetailed,
     createServerLocalRegister,
     createServerLocalDeregister,
     getSession_ByPodName,

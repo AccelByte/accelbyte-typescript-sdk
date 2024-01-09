@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,6 +14,10 @@ export const EntitlementSummary = z.object({
   itemId: z.string().nullish(),
   name: z.string().nullish(),
   namespace: z.string(),
+  noOrigin: z.boolean().nullish(),
+  origin: z
+    .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
+    .nullish(),
   stackable: z.boolean().nullish(),
   stackedUseCount: z.number().int().nullish(),
   startDate: z.string().nullish(),

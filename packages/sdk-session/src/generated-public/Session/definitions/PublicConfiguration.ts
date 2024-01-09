@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -8,6 +8,7 @@ import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const PublicConfiguration = z.object({
   PSNBaseURL: z.string().nullish(),
+  attributes: z.record(z.any()).nullish(),
   autoJoin: z.boolean(),
   clientVersion: z.string(),
   deployment: z.string(),
@@ -19,6 +20,7 @@ export const PublicConfiguration = z.object({
   inactiveTimeout: z.number().int(),
   inviteTimeout: z.number().int(),
   joinability: z.string(),
+  leaderElectionGracePeriod: z.number().int().nullish(),
   maxActiveSession: z.number().int().nullish(),
   maxPlayers: z.number().int(),
   minPlayers: z.number().int(),

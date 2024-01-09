@@ -20,7 +20,7 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * &lt;p&gt;No role required&lt;/p&gt; &lt;p&gt;This endpoint is to get list of input validation configuration.&lt;/p&gt; &lt;p&gt;&lt;code&gt;regex&lt;/code&gt; parameter will be returned if &lt;code&gt;isCustomRegex&lt;/code&gt; is true. Otherwise, it will be empty.&lt;/p&gt;
+   * No role required This endpoint is to get list of input validation configuration. &lt;code&gt;regex&lt;/code&gt; parameter will be returned if &lt;code&gt;isCustomRegex&lt;/code&gt; is true. Otherwise, it will be empty.
    */
   async function getInputValidations(queryParams?: {
     defaultOnEmpty?: boolean | null
@@ -33,7 +33,7 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;This endpoint is to get input validation configuration by field.&lt;/p&gt;
+   * This endpoint is to get input validation configuration by field.
    */
   async function getInputValidation_ByField(field: string): Promise<InputValidationConfigVersion> {
     const $ = new InputValidations$(Network.create(requestConfig), namespace, cache)

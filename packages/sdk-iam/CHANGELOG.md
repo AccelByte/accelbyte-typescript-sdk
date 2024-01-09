@@ -1,5 +1,12 @@
 # @accelbyte/sdk-iam
 
+## 3.1.1
+
+### Patch Changes
+
+- 35dff2a73: chore(sdk-iam): bump version after accidental publish
+- c7a84b7e8: fix(sdk-iam): add device id param for login with code or password
+
 ## 2.2.3
 
 ### Patch Changes

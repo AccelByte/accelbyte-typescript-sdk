@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,11 +16,13 @@ import { CreateScreenshotRequest } from './definitions/CreateScreenshotRequest.j
 import { CreateScreenshotResponse } from './definitions/CreateScreenshotResponse.js'
 import { GenerateContentUploadUrlRequest } from './definitions/GenerateContentUploadUrlRequest.js'
 import { GenerateContentUploadUrlResponse } from './definitions/GenerateContentUploadUrlResponse.js'
+import { GetContentBulkByShareCodesRequest } from './definitions/GetContentBulkByShareCodesRequest.js'
 import { PaginatedContentDownloadResponseV2 } from './definitions/PaginatedContentDownloadResponseV2.js'
 import { PublicContentV2$ } from './endpoints/PublicContentV2$.js'
 import { PublicGetContentBulkRequest } from './definitions/PublicGetContentBulkRequest.js'
 import { UpdateContentRequestV2 } from './definitions/UpdateContentRequestV2.js'
 import { UpdateContentResponseV2 } from './definitions/UpdateContentResponseV2.js'
+import { UpdateContentShareCodeRequest } from './definitions/UpdateContentShareCodeRequest.js'
 import { UpdateFileLocationRequest } from './definitions/UpdateFileLocationRequest.js'
 import { UpdateScreenshotRequest } from './definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from './definitions/UpdateScreenshotResponse.js'
@@ -36,6 +38,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses () for priority. e.g: &lt;code&gt;tags=red&lt;/code&gt; &lt;code&gt;tags=red&amp;animal&lt;/code&gt; &lt;code&gt;tags=red|animal&lt;/code&gt; &lt;code&gt;tags=red&amp;animal|wild&lt;/code&gt; &lt;code&gt;tags=red&amp;(animal|wild)&lt;/code&gt; The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore &lt;code&gt;_&lt;/code&gt; and dash &lt;code&gt;-&lt;/code&gt; Allowed character for operator: &lt;code&gt;&amp;&lt;/code&gt; &lt;code&gt;|&lt;/code&gt; &lt;code&gt;(&lt;/code&gt; &lt;code&gt;)&lt;/code&gt; &lt;b&gt;Please note that value of tags query param should be URL encoded&lt;/b&gt;
    */
   async function getContents(queryParams?: {
+    isOfficial?: boolean | null
     limit?: number
     name?: string | null
     offset?: number
@@ -84,11 +87,21 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Require valid user token. Maximum sharecodes per request 100
+   */
+  async function createContentSharecodeBulk(data: GetContentBulkByShareCodesRequest): Promise<ContentDownloadResponseV2Array> {
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.createContentSharecodeBulk(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getContents_ByChannelId(
     channelId: string,
-    queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
+    queryParams?: { limit?: number; name?: string | null; offset?: number; sortBy?: string | null }
   ): Promise<PaginatedContentDownloadResponseV2> {
     const $ = new PublicContentV2$(Network.create(requestConfig), namespace, cache)
     const resp = await $.getContents_ByChannelId(channelId, queryParams)
@@ -188,6 +201,21 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]&lt;/b&gt;.&lt;br&gt; This endpoint is used to modify the shareCode of a content. However, this operation is restricted by default and requires the above permission to be granted to the User role.&lt;br&gt; &lt;code&gt;shareCode&lt;/code&gt; format should follows: Max length: 7 Available characters: abcdefhkpqrstuxyz
+   */
+  async function patchSharecode_ByUserId_ByChannelId_ByContentId(
+    userId: string,
+    channelId: string,
+    contentId: string,
+    data: UpdateContentShareCodeRequest
+  ): Promise<CreateContentResponseV2> {
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.patchSharecode_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
    */
   async function patchUploadUrl_ByUserId_ByChannelId_ByContentId(
@@ -198,6 +226,20 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   ): Promise<GenerateContentUploadUrlResponse> {
     const $ = new PublicContentV2$(Network.create(requestConfig), namespace, cache)
     const resp = await $.patchUploadUrl_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   */
+  async function deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(
+    userId: string,
+    channelId: string,
+    shareCode: string
+  ): Promise<unknown> {
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -217,11 +259,27 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   */
+  async function updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(
+    userId: string,
+    channelId: string,
+    shareCode: string,
+    data: UpdateContentRequestV2
+  ): Promise<CreateContentResponseV2> {
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, cache)
+    const resp = await $.updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     getContents,
     createContentBulk,
     getContent_ByContentId,
     getContents_ByUserId,
+    createContentSharecodeBulk,
     getContents_ByChannelId,
     getContentSharecode_ByShareCode,
     createContent_ByUserId_ByChannelId,
@@ -230,7 +288,10 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     deleteContent_ByUserId_ByChannelId_ByContentId,
     patchContent_ByUserId_ByChannelId_ByContentId,
     deleteScreenshot_ByUserId_ByContentId_ByScreenshotId,
+    patchSharecode_ByUserId_ByChannelId_ByContentId,
     patchUploadUrl_ByUserId_ByChannelId_ByContentId,
-    patchFileLocation_ByUserId_ByChannelId_ByContentId
+    deleteContentSharecode_ByUserId_ByChannelId_ByShareCode,
+    patchFileLocation_ByUserId_ByChannelId_ByContentId,
+    updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -19,7 +19,13 @@ export class Section$ {
    */
   getSections_ByUserId(
     userId: string,
-    queryParams?: { language?: string | null; region?: string | null; storeId?: string | null; viewId?: string | null }
+    queryParams?: {
+      autoCalcEstimatedPrice?: boolean | null
+      language?: string | null
+      region?: string | null
+      storeId?: string | null
+      viewId?: string | null
+    }
   ): Promise<IResponseWithSync<SectionInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/sections'

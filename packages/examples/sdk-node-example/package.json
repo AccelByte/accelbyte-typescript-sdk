@@ -1,6 +1,6 @@
 {
   "name": "sdk-demo-node",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "type": "module",
@@ -13,6 +13,7 @@
     "@accelbyte/sdk-iam": "3.0.0-beta.0",
     "@accelbyte/sdk-legal": "3.0.0-beta.0",
     "@accelbyte/sdk-platform": "3.0.0-beta.0",
+    "@accelbyte/sdk-cloudsave": "3.0.0-beta.0",
     "dotenv": "16.0.3"
   }
 }

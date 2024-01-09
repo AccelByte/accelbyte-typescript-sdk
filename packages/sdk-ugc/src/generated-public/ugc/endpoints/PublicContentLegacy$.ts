@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,11 +14,13 @@ import { ContentDownloadResponseArray } from '../definitions/ContentDownloadResp
 import { CreateContentResponse } from '../definitions/CreateContentResponse.js'
 import { CreateScreenshotRequest } from '../definitions/CreateScreenshotRequest.js'
 import { CreateScreenshotResponse } from '../definitions/CreateScreenshotResponse.js'
+import { GetContentBulkByShareCodesRequest } from '../definitions/GetContentBulkByShareCodesRequest.js'
 import { GetContentPreviewResponse } from '../definitions/GetContentPreviewResponse.js'
 import { PaginatedContentDownloadResponse } from '../definitions/PaginatedContentDownloadResponse.js'
 import { PublicCreateContentRequestS3 } from '../definitions/PublicCreateContentRequestS3.js'
 import { PublicGetContentBulkRequest } from '../definitions/PublicGetContentBulkRequest.js'
 import { UpdateContentRequest } from '../definitions/UpdateContentRequest.js'
+import { UpdateContentShareCodeRequest } from '../definitions/UpdateContentShareCodeRequest.js'
 import { UpdateScreenshotRequest } from '../definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from '../definitions/UpdateScreenshotResponse.js'
 
@@ -106,6 +108,17 @@ export class PublicContentLegacy$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Require valid user token. Maximum sharecodes per request 100
+   */
+  createContentSharecodeBulk(data: GetContentBulkByShareCodesRequest): Promise<IResponse<ContentDownloadResponseArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/contents/sharecodes/bulk'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, ContentDownloadResponseArray, 'ContentDownloadResponseArray')
   }
 
   /**
@@ -287,5 +300,64 @@ export class PublicContentLegacy$ {
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]&lt;/b&gt;.&lt;br&gt; This endpoint is used to modify the shareCode of a content. However, this operation is restricted by default and requires the above permission to be granted to the User role.&lt;br&gt; &lt;code&gt;shareCode&lt;/code&gt; format should follows: Max length: 7 Available characters: abcdefhkpqrstuxyz
+   */
+  patchSharecode_ByUserId_ByChannelId_ByContentId(
+    userId: string,
+    channelId: string,
+    contentId: string,
+    data: UpdateContentShareCodeRequest
+  ): Promise<IResponse<CreateContentResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}/sharecode'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{channelId}', channelId)
+      .replace('{contentId}', contentId)
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   */
+  deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(
+    userId: string,
+    channelId: string,
+    shareCode: string
+  ): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/sharecodes/{shareCode}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{channelId}', channelId)
+      .replace('{shareCode}', shareCode)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;. All request body are required except &lt;code&gt;payload&lt;/code&gt;, &lt;code&gt;preview&lt;/code&gt;, &lt;code&gt;tags&lt;/code&gt;,&lt;code&gt;contentType&lt;/code&gt;, &lt;code&gt;updateContentFile&lt;/code&gt;, &lt;code&gt;customAttributes&lt;/code&gt; and &lt;code&gt;shareCode&lt;/code&gt;. &lt;code&gt;contentType&lt;/code&gt; values is used to enforce the Content-Type header needed by the client to upload the content using the S3 presigned URL. If not specified, it will use &lt;code&gt;fileExtension&lt;/code&gt; value. To update content file, set &lt;code&gt;updateContentFile&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; and upload the file using URL in &lt;code&gt;payloadURL.url&lt;/code&gt; in response body. &lt;br&gt;&lt;p&gt;&lt;b&gt;NOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content&lt;/b&gt;&lt;/p&gt;
+   */
+  updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(
+    userId: string,
+    channelId: string,
+    shareCode: string,
+    data: UpdateContentRequest
+  ): Promise<IResponse<CreateContentResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3/sharecodes/{shareCode}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{channelId}', channelId)
+      .replace('{shareCode}', shareCode)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 }

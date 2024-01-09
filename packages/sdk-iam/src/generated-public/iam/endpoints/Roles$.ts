@@ -16,7 +16,7 @@ export class Roles$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   *  &lt;br&gt;This endpoint is used to get all non-admin role. &lt;br&gt; &lt;p&gt;action code: 10418&lt;/p&gt;
+   * This endpoint is used to get all non-admin role. action code: 10418
    */
   getRoles(queryParams?: {
     after?: string | null
@@ -38,7 +38,7 @@ export class Roles$ {
   }
 
   /**
-   *  &lt;br&gt;This endpoint is used to get non-admin role based on specify roleId. &lt;br&gt;action code : 10417
+   * This endpoint is used to get non-admin role based on specify roleId. action code : 10417
    */
   getRole_ByRoleId(roleId: string): Promise<IResponseWithSync<RoleResponse>> {
     const params = {} as SDKRequestConfig

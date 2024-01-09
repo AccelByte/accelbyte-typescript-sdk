@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -11,6 +11,9 @@ export const ItemRevocation: z.ZodType<ItemRevocation> = z.lazy(() =>
   z.object({
     creditRevocations: z.array(CreditRevocation).nullish(),
     customRevocation: z.record(z.any()).nullish(),
+    entitlementOrigin: z
+      .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
+      .nullish(),
     entitlementRevocations: z.array(EntitlementRevocation).nullish(),
     itemId: z.string().nullish(),
     itemRevocations: z.array(ItemRevocation).nullish(),
@@ -29,6 +32,20 @@ export const ItemRevocation: z.ZodType<ItemRevocation> = z.lazy(() =>
 export interface ItemRevocation {
   creditRevocations?: CreditRevocation[] | null | undefined
   customRevocation?: Record<string, any> | null | undefined
+  entitlementOrigin?:
+    | 'Epic'
+    | 'GooglePlay'
+    | 'IOS'
+    | 'Nintendo'
+    | 'Oculus'
+    | 'Other'
+    | 'Playstation'
+    | 'Steam'
+    | 'System'
+    | 'Twitch'
+    | 'Xbox'
+    | null
+    | undefined
   entitlementRevocations?: EntitlementRevocation[] | null | undefined
   itemId?: string | null | undefined
   itemRevocations?: ItemRevocation[] | null | undefined

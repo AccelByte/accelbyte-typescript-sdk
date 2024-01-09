@@ -19,7 +19,7 @@ export function CountryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Public get country list, will filter out countries in black list&lt;br&gt;
+   * Public get country list, will filter out countries in black list
    */
   async function getCountries(): Promise<CountryResponseArray> {
     const $ = new Country$(Network.create(requestConfig), namespace, cache)

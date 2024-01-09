@@ -20,7 +20,7 @@ export function SocialMatchmakingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [UPDATE] Required Scope: social Update a connection weight between player and playtime. This endpoint is intended to be called by admin for debugging purpose on social matchmaking rule.
+   * Update a connection weight between player and playtime. This endpoint is intended to be called by admin for debugging purpose on social matchmaking rule.
    */
   async function patchSocialPlaytimeWeight(data: UpdatePlayTimeWeightRequest): Promise<UpdatePlayerPlaytimeWeightResponse> {
     const $ = new SocialMatchmaking$(Network.create(requestConfig), namespace, cache)

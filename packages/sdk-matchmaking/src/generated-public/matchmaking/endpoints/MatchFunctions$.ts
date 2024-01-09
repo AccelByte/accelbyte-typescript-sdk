@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -18,7 +18,7 @@ export class MatchFunctions$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [READ] Required Scope: social List existing match functions.
+   * List existing match functions.
    */
   getMatchFunctions(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListMatchFunctionsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
@@ -35,7 +35,7 @@ export class MatchFunctions$ {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [CREATE] Required Scope: social Creates a new matchmaking function.
+   * Creates a new matchmaking function.
    */
   createMatchFunction(data: MatchFunctionRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -46,7 +46,7 @@ export class MatchFunctions$ {
   }
 
   /**
-   * Required Permission: NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [DELETE] Required Scope: social Deletes an existing match function.
+   * Deletes an existing match function.
    */
   deleteMatchFunction_ByName(name: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -57,7 +57,7 @@ export class MatchFunctions$ {
   }
 
   /**
-   *  Required Permission: NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [UPDATE] Required Scope: social Update existing matchmaking function.
+   * Update existing matchmaking function.
    */
   updateMatchFunction_ByName(name: string, data: MatchFunctionRequest): Promise<IResponse<MatchFunctionConfig>> {
     const params = {} as SDKRequestConfig

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -19,7 +19,7 @@ export function EnvironmentVariablesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   * Required Permission: ADMIN:MATCHMAKING:CONFIGURATION:ENVIRONMENTVARIABLE [READ] Required Scope: social List environment variables.
+   * List environment variables.
    */
   async function getEnvironmentVariables(): Promise<ListEnvironmentVariablesResponse> {
     const $ = new EnvironmentVariables$(Network.create(requestConfig), namespace, cache)

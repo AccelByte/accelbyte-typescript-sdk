@@ -17,6 +17,21 @@
     validator "13.7.0"
     zod "3.17.3"
 
+"@accelbyte/sdk-cloudsave@3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-cloudsave/-/sdk-cloudsave-3.0.0-beta.0.tgz#c3a73bca8dccfffbf605d3674e543798748e53df"
+  integrity sha512-acsnn7610tpH6pmbemPNKxNUKCYmfpP466Q6O+vPp4XsNyERk+dpRxcGcYozEpNqRRw+Xiurz1jX3LiRsBgdXA==
+  dependencies:
+    "@accelbyte/validator" "0.2.15"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    lodash "4.17.21"
+    platform "1.3.6"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
 "@accelbyte/sdk-iam@3.0.0-beta.0":
   version "3.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-3.0.0-beta.0.tgz#35f89976bf2812e64ba750c0e3541a3547833dc4"

@@ -7,12 +7,10 @@
  * AUTO GENERATED
  */
 
-import { ChatApi } from './chat/ChatApi.js'
 import { TopicApi } from './chat/TopicApi.js'
 import { ModerationApi } from './chat/ModerationApi.js'
 
 const apis = {
-  ChatApi,
   TopicApi,
   ModerationApi
 }

@@ -20,7 +20,7 @@ export function RolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
 
   /**
-   *  &lt;br&gt;This endpoint is used to get all non-admin role. &lt;br&gt; &lt;p&gt;action code: 10418&lt;/p&gt;
+   * This endpoint is used to get all non-admin role. action code: 10418
    */
   async function getRoles(queryParams?: {
     after?: string | null
@@ -35,7 +35,7 @@ export function RolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  &lt;br&gt;This endpoint is used to get non-admin role based on specify roleId. &lt;br&gt;action code : 10417
+   * This endpoint is used to get non-admin role based on specify roleId. action code : 10417
    */
   async function getRole_ByRoleId(roleId: string): Promise<RoleResponse> {
     const $ = new Roles$(Network.create(requestConfig), namespace, cache)

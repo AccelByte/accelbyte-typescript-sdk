@@ -14,26 +14,14 @@
     "HasPermission": {
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
-      "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:SESSION [Read]": "ADMIN:NAMESPACE:{namespace}:SESSION [Read]",
-        "ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]": "ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]": "ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]",
-        "ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [Read]": "ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [Read]",
-        "NAMESPACE:{namespace}:SESSIONBROWSER:RECENTPLAYER [READ]": "NAMESPACE:{namespace}:SESSIONBROWSER:RECENTPLAYER [READ]",
-        "NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [CREATE]": "NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [CREATE]",
-        "NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]": "NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]",
-        "NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]": "NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]",
-        "NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]": "NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"
-      },
+      "scopes": {},
       "tokenUrl": "https://dumy.oauth.net/token",
       "type": "oauth2"
     },
     "HasScope": {
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
-      "scopes": {
-        "social": "social"
-      },
+      "scopes": {},
       "tokenUrl": "https://dumy.oauth.net/token",
       "type": "oauth2"
     },
@@ -47,7 +35,7 @@
   "paths": {
     "/sessionbrowser/admin/namespaces/{namespace}/gamesession": {
       "get": {
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social",
+        "description": "Query to available game session",
         "operationId": "AdminQuerySession",
         "parameters": [
           {
@@ -144,18 +132,21 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Query to available game session",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/count": {
       "get": {
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social",
+        "description": "Get all active session",
         "operationId": "GetTotalActiveSession",
         "parameters": [
           {
@@ -195,18 +186,21 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Get all active session",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/custom-game": {
       "get": {
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social",
+        "description": "Get all active session for custom game, this return only dedicated session type",
         "operationId": "GetActiveCustomGameSessions",
         "parameters": [
           {
@@ -266,18 +260,21 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Get all active session for custom game, this return only dedicated session type",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/matchmaking-game": {
       "get": {
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social",
+        "description": "Get all active session for matchmaking game, this return only dedicated session type",
         "operationId": "GetActiveMatchmakingGameSessions",
         "parameters": [
           {
@@ -343,19 +340,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Get all active session for matchmaking game, this return only dedicated session type",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/admin/namespaces/{namespace}/gamesession/{sessionID}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]\n\nRequired scope: social\n\nAdmin delete the session by session ID",
+        "description": "Admin delete the session by session ID",
         "operationId": "AdminDeleteSession",
         "parameters": [
           {
@@ -402,17 +402,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Admin delete specified session by session ID",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social\n\nGet the session by session ID for admin user",
+        "description": "Get the session by session ID for admin user",
         "operationId": "AdminGetSession",
         "parameters": [
           {
@@ -453,19 +456,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Admin get specified session by session ID",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required Permission: ADMIN:NAMESPACE:{namespace}:SESSION [Read]\n\nRequired Scope: social\n\nSearch sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace \u0026amp; other filter (partyID, userID, matchID).\nQuery with filter namespace only will not group whole session data while query with filter namespace \u0026amp; other filter will include session data.",
+        "description": "Search sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace \u0026amp; other filter (partyID, userID, matchID).\nQuery with filter namespace only will not group whole session data while query with filter namespace \u0026amp; other filter will include session data.",
         "operationId": "AdminSearchSessionsV2",
         "parameters": [
           {
@@ -568,19 +574,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSION [Read]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Search sessions",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/admin/namespaces/{namespace}/sessions/{matchID}/history/detailed": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required Permission: ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [Read]\n\nRequired Scope: social\n\nGet session history detailed.\n\nif party_id value empty/null, field will not show in response body.",
+        "description": "Get session history detailed.\n\nif party_id value empty/null, field will not show in response body.",
         "operationId": "GetSessionHistoryDetailed",
         "parameters": [
           {
@@ -636,19 +645,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [Read]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Get session history detailed",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/gamesession": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social\n\nQuery available game session",
+        "description": "Query available game session",
         "operationId": "UserQuerySession",
         "parameters": [
           {
@@ -745,17 +757,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Query to available game session",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [CREATE]\n\nRequired scope: social\n\nThis end point intended to be called directly by P2P game client host or by DSMC",
+        "description": "This end point intended to be called directly by P2P game client host or by DSMC",
         "operationId": "CreateSession",
         "parameters": [
           {
@@ -809,19 +824,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [CREATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Register a new game session",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [CREATE]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/gamesession/bulk": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social\n\nQuery game sessions by comma separated user ids",
+        "description": "Query game sessions by comma separated user ids",
         "operationId": "GetSessionByUserIDs",
         "parameters": [
           {
@@ -862,19 +880,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Query game sessions by comma separated user ids",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]\n\nRequired scope: social\n\nDelete the session (p2p) by session ID",
+        "description": "Delete the session (p2p) by session ID",
         "operationId": "DeleteSession",
         "parameters": [
           {
@@ -921,17 +942,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Delete specified (p2p) session by session ID",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social\n\nGet the session by session ID",
+        "description": "Get the session by session ID",
         "operationId": "GetSession",
         "parameters": [
           {
@@ -972,17 +996,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Get specified session by session ID",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]\n\nRequired scope: social\n\nUpdate game session, used to update the current player",
+        "description": "Update game session, used to update the current player",
         "operationId": "UpdateSession",
         "parameters": [
           {
@@ -1037,19 +1064,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Update session",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/join": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]\n\nRequired scope: social\n\nJoin the specified session by session ID. Possible the game required a password to join",
+        "description": "Join the specified session by session ID. Possible the game required a password to join",
         "operationId": "JoinSession",
         "parameters": [
           {
@@ -1110,19 +1140,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Join specified session by session ID",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/localds": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]\n\nRequired scope: social\n\nOnly use for local DS entry, will error when calling non local DS entry",
+        "description": "Only use for local DS entry, will error when calling non local DS entry",
         "operationId": "DeleteSessionLocalDS",
         "parameters": [
           {
@@ -1169,19 +1202,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Only use for local DS entry, will error when calling non local DS entry",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/player": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]\n\nRequired scope: social\n\nAdd player to game session",
+        "description": "Add player to game session",
         "operationId": "AddPlayerToSession",
         "parameters": [
           {
@@ -1236,19 +1272,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Add player to game session",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/player/{userID}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]\n\nRequired scope: social\n\nRemove player from game session",
+        "description": "Remove player from game session",
         "operationId": "RemovePlayerFromSession",
         "parameters": [
           {
@@ -1302,19 +1341,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "remove player from game session",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/settings": {
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]\n\nRequired scope: social\n\nUpdate game session, used to update OtherSettings",
+        "description": "Update game session, used to update OtherSettings",
         "operationId": "UpdateSettings",
         "parameters": [
           {
@@ -1369,19 +1411,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Update settings",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"]
+          }
+        ]
       }
     },
     "/sessionbrowser/namespaces/{namespace}/recentplayer/{userID}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission: NAMESPACE:{namespace}:SESSIONBROWSER:RECENTPLAYER [READ]\n\nRequired scope: social\n\nQuery recent player by user ID",
+        "description": "Query recent player by user ID",
         "operationId": "GetRecentPlayer",
         "parameters": [
           {
@@ -1422,13 +1467,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:SESSIONBROWSER:RECENTPLAYER [READ]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
         "summary": "Query recent players with given user id",
-        "tags": ["Session", "public"]
+        "tags": ["Session", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:RECENTPLAYER [READ]"]
+          }
+        ]
       }
     }
   },
@@ -2521,11 +2569,11 @@
     "path": "/sessionbrowser/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-10-24T02:05:34+00:00",
-    "gitHash": "e6fc9acc7e7979a9399974732aa69deba6cdcc61",
+    "buildDate": "2023-12-22T08:28:46+00:00",
+    "gitHash": "6cd2312c3ee7b9493690a2ff0fccfc766a72f5f1",
     "name": "justice-session-browser-service",
-    "revisionID": "1.16.1",
-    "version": "1.16.1",
+    "revisionID": "1.18.0",
+    "version": "1.18.0",
     "version-roles-seeding": "0.0.3"
   }
 }
