@@ -39,7 +39,7 @@
   ],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/social"
+    "url": "https://demo.accelbyte.io/social"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -9505,20 +9505,20 @@
   },
   "x-docs": {
     "alias": "social",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/social/swagger.json"
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-12-29T06:37:51+00:00",
+    "buildDate": "2023-12-29T06:37:45+00:00",
     "buildID": "2.11.1",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
     "buildOS": "Linux amd64 5.10.199-190.747.amzn2.x86_64",
-    "gitBranchName": "master",
-    "gitHash": "bb6d9c0ac9",
-    "gitTag": "2.9.0",
+    "gitBranchName": "release-candidate",
+    "gitHash": "6acb7bd4ee",
+    "gitTag": "2.11.1",
     "name": "justice-social-service",
-    "realm": "dev",
+    "realm": "demo",
     "version": "2.11.1",
     "version-roles-seeding": "0.0.12"
   }

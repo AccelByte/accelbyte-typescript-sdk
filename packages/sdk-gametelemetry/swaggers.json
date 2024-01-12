@@ -1,8 +1,1 @@
-[
-  [
-    "game-telemetry",
-    "gametelemetry",
-    "gametelemetry.json",
-    "https://development.accelbyte.io/game-telemetry/openapi.json"
-  ]
-]
+[["game-telemetry", "gametelemetry", "gametelemetry.json", "https://development.accelbyte.io/game-telemetry/openapi.json"]]

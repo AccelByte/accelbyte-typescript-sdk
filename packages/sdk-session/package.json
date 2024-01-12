@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-session",
-  "version": "3.1.2-beta.3",
+  "version": "4.0.0-experimental.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",
@@ -18,7 +18,7 @@
     "build": "rimraf dist && tsup src/index.ts --dts --format esm,cjs",
     "test": "echo ''",
     "clean": "npx rimraf dist && npx rimraf node_modules && npx rimraf .yalc",
-    "cg:prettify": "prettier --write swaggers/*.json && prettier --write src/**/*",
+    "cg:prettify": "prettier --write swaggers/*.json && prettier --write --no-error-on-unmatched-pattern src/**/*",
     "cg:download": "yarn cg download-swaggers --config swaggers.json --swaggersOutput swaggers",
     "cg:generate": "rimraf src/generated-public && yarn cg generate-code --config swaggers.json --swaggersOutput swaggers --output src --snippetOutput ../../../apps/api-explorer-app/src/constants/Snippets",
     "cg": "ts-node ../codegen/src/cli.ts",

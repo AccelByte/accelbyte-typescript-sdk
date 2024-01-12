@@ -1,0 +1,14 @@
+{
+  "buildBy": "Gradle 6.9.1",
+  "buildDate": "2023-12-29T11:58:59+00:00",
+  "buildID": "4.43.0",
+  "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
+  "buildOS": "Linux amd64 5.10.199-190.747.amzn2.x86_64",
+  "gitBranchName": "release-candidate",
+  "gitHash": "1184024a1d",
+  "gitTag": "4.43.0",
+  "name": "justice-platform-service",
+  "realm": "demo",
+  "version": "4.43.0",
+  "version-roles-seeding": "1.0.16"
+}

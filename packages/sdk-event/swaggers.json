@@ -1,8 +1,1 @@
-[
-  [
-    "event",
-    "event",
-    "eventlog.json",
-    "https://development.accelbyte.io/event/apidocs/api.json"
-  ]
-]
+[["event", "event", "eventlog.json", "https://development.accelbyte.io/event/apidocs/api.json"]]

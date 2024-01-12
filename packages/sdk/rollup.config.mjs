@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2023 AccelByte Inc. All Rights Reserved.
+ * Copyright (c) 2021-2024 AccelByte Inc. All Rights Reserved.
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  *
@@ -47,7 +47,7 @@ function createConfig(config) {
       alias({
         entries: {
           '@accelbyte/sdk': path.resolve('./src'),
-          '~/iam-definitions': path.resolve('../sdk-iam/src/generated-public/iam/definitions')
+          '~/iam-definitions': path.resolve('../sdk-iam/src/generated-definitions')
         }
       }),
       resolve({ jsnext: true, preferBuiltins: true }),

@@ -39,7 +39,7 @@
   ],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/basic"
+    "url": "https://demo.accelbyte.io/basic"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -5306,20 +5306,20 @@
   },
   "x-docs": {
     "alias": "basic",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/basic/swagger.json"
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-12-29T11:57:47+00:00",
+    "buildDate": "2023-12-29T11:57:48+00:00",
     "buildID": "2.15.1",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
     "buildOS": "Linux amd64 5.10.199-190.747.amzn2.x86_64",
-    "gitBranchName": "master",
-    "gitHash": "879dd97799",
-    "gitTag": "2.10.1",
+    "gitBranchName": "release-candidate",
+    "gitHash": "88041fa136",
+    "gitTag": "2.15.1",
     "name": "justice-basic-service",
-    "realm": "dev",
+    "realm": "demo",
     "version": "2.15.1",
     "version-roles-seeding": "0.0.10"
   }

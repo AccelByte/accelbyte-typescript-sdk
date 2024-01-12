@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice DSM Controller Service",
     "title": "justice-dsm-controller-service",
-    "version": "6.4.6"
+    "version": "6.4.7"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/dsmcontroller/apidocs"
+    "url": "https://demo.accelbyte.io/dsmcontroller/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -24,9 +24,6 @@
         "ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ]": "ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ]",
         "ADMIN:NAMESPACE:{namespace}:DSM:SESSION [DELETE]": "ADMIN:NAMESPACE:{namespace}:DSM:SESSION [DELETE]",
         "ADMIN:NAMESPACE:{namespace}:DSM:SESSION [READ]": "ADMIN:NAMESPACE:{namespace}:DSM:SESSION [READ]",
-        "ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [CREATE]": "ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [READ]": "ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [READ]",
-        "ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [UPDATE]": "ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [UPDATE]",
         "NAMESPACE:{namespace}:DSM:CONFIG [CREATE]": "NAMESPACE:{namespace}:DSM:CONFIG [CREATE]",
         "NAMESPACE:{namespace}:DSM:CONFIG [DELETE]": "NAMESPACE:{namespace}:DSM:CONFIG [DELETE]",
         "NAMESPACE:{namespace}:DSM:CONFIG [READ]": "NAMESPACE:{namespace}:DSM:CONFIG [READ]",
@@ -247,6 +244,64 @@
         "tags": ["Image Config"]
       }
     },
+    "/dsmcontroller/admin/images/import": {
+      "post": {
+        "consumes": ["multipart/form-data"],
+        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE]\n\nRequired scope: social\n\nThis endpoint import a dedicated servers images in a namespace.\n\nThe image will be upsert. Existing version will be replaced with imported image, will create new one if not found.\n\nExample data inside imported file\n[\n  {\n\t\u0026#34;namespace\u0026#34;: \u0026#34;dewa\u0026#34;,\n\t\u0026#34;image\u0026#34;: \u0026#34;123456789.dkr.ecr.us-west-2.amazonaws.com/ds-dewa:0.0.1-alpha\u0026#34;,\n\t\u0026#34;version\u0026#34;: \u0026#34;0.0.1\u0026#34;,\n\t\u0026#34;persistent\u0026#34;: true\n  }\n]\n",
+        "operationId": "ImportImages",
+        "parameters": [
+          {
+            "description": "imported file",
+            "in": "formData",
+            "name": "file",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "images imported",
+            "schema": {
+              "$ref": "#/definitions/models.ImportResponse"
+            }
+          },
+          "400": {
+            "description": "malformed request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "forbidden access",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "import images for a namespace",
+        "tags": ["Image Config"]
+      }
+    },
     "/dsmcontroller/admin/images/patches": {
       "post": {
         "consumes": ["application/json"],
@@ -338,183 +393,6 @@
         ],
         "summary": "Get lowest instance spec.",
         "tags": ["Pod Config"]
-      }
-    },
-    "/dsmcontroller/admin/namespace/{namespace}/workers": {
-      "get": {
-        "consumes": ["application/json"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [READ]\n\nRequired scope: social\n\nThis endpoint retrieves a worker configuration to control the worker in the DSMC.",
-        "operationId": "getWorkerConfig",
-        "parameters": [
-          {
-            "description": "the namespace of the game",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "The worker configuration has been successfully retrieved.",
-            "schema": {
-              "$ref": "#/definitions/models.WorkerConfig"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [READ]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "Get worker configuration",
-        "tags": ["Admin"]
-      },
-      "post": {
-        "consumes": ["application/json"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [CREATE]\n\nRequired scope: social\n\nThis endpoint creates a worker configuration to control the worker in the DSMC.",
-        "operationId": "createWorkerConfig",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.WorkerConfigRequest"
-            }
-          },
-          {
-            "description": "the namespace of the game",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "201": {
-            "description": "The worker configuration has been successfully created.",
-            "schema": {
-              "$ref": "#/definitions/models.WorkerConfig"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [CREATE]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "Create worker configuration",
-        "tags": ["Admin"]
-      },
-      "put": {
-        "consumes": ["application/json"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [UPDATE]\n\nRequired scope: social\n\nThis endpoint updates a worker configuration to control the worker in the DSMC.",
-        "operationId": "updateWorkerConfig",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.WorkerConfigRequest"
-            }
-          },
-          {
-            "description": "the namespace of the game",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "204": {
-            "description": "The worker configuration has been successfully updated."
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [UPDATE]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "Update worker configuration",
-        "tags": ["Admin"]
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs": {
@@ -2582,6 +2460,67 @@
         "tags": ["Image Config"]
       }
     },
+    "/dsmcontroller/admin/namespaces/{namespace}/images/export": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ]\n\nRequired scope: social\n\nThis endpoint export a dedicated servers images in a namespace.\n",
+        "operationId": "ExportImages",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "images exported",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/models.ImageRecord"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "forbidden access",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "images not found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "export DSM Controller images for a namespace",
+        "tags": ["Image Config"]
+      }
+    },
     "/dsmcontroller/admin/namespaces/{namespace}/images/limit": {
       "get": {
         "consumes": ["application/json"],
@@ -2892,72 +2831,6 @@
         ],
         "summary": "DS Image patch Detail",
         "tags": ["Image Config"]
-      }
-    },
-    "/dsmcontroller/admin/namespaces/{namespace}/manual/buffer/add": {
-      "post": {
-        "consumes": ["application/json"],
-        "description": "```\nRequired permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE]\nRequired scope: social\n\nThis endpoint manually adds buffer for selected namespace and deployment\nx Job will contain y num of allocs.\n\nRegion can be filled with comma-separated values.\nuse * as region name to deploy to all region specified in the deployment\u0026#39;s region list\n\nif JobPriority set to 0, we will use 80 as default value for job priority\n\nOverrideVersion will be used as override version for the new allocations.\nIf OverrideVersion is empty, will use version in the deployment.\n```",
-        "operationId": "AddBuffer",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.AddBufferRequest"
-            }
-          },
-          {
-            "description": "namespace of the game",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "buffer requested",
-            "schema": {
-              "$ref": "#/definitions/models.AddBufferResponse"
-            }
-          },
-          "400": {
-            "description": "malformed request",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "Manual Add Buffer",
-        "tags": ["Admin"]
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/repository": {
@@ -3352,7 +3225,7 @@
           "200": {
             "description": "server queried",
             "schema": {
-              "$ref": "#/definitions/models.ServerDetailsResponse"
+              "$ref": "#/definitions/models.Server"
             }
           },
           "401": {
@@ -3557,88 +3430,6 @@
           }
         ],
         "summary": "Delete a session in a region",
-        "tags": ["Admin"]
-      }
-    },
-    "/dsmcontroller/admin/namespaces/{namespace}/workers/ghost": {
-      "get": {
-        "consumes": ["application/json"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]\n\nRequired scope: social\n\nThis endpoint run ghost cleaner once.",
-        "operationId": "RunGhostCleanerRequestHandler",
-        "parameters": [
-          {
-            "description": "namespace of the game",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "204": {
-            "description": "worker ran"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "Run Ghost Cleaner",
-        "tags": ["Admin"]
-      }
-    },
-    "/dsmcontroller/admin/namespaces/{namespace}/workers/zombie": {
-      "post": {
-        "consumes": ["application/json"],
-        "description": "```\nRequired permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]\nRequired scope: social\n\nThis endpoint run zombie cleaner once\n\nuse * as region name to target all regions\n```",
-        "operationId": "RunZombieCleanerRequestHandler",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/models.DeleteZombieRequest"
-            }
-          },
-          {
-            "description": "namespace of the game",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "204": {
-            "description": "worker ran"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "Run Zombie Cleaner",
         "tags": ["Admin"]
       }
     },
@@ -4492,58 +4283,6 @@
           }
         ],
         "summary": "List all managed servers in a region for client",
-        "tags": ["Server"]
-      }
-    },
-    "/dsmcontroller/namespaces/{namespace}/servers/count/detailed": {
-      "get": {
-        "consumes": ["application/json"],
-        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ]\n\nRequired scope: social\n\nThis endpoint counts all of dedicated servers in a region managed by this service.",
-        "operationId": "CountServerDetailedClient",
-        "parameters": [
-          {
-            "description": "namespace of the game",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "region where DS server is located.",
-            "in": "query",
-            "name": "region",
-            "type": "string"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "servers listed",
-            "schema": {
-              "$ref": "#/definitions/models.DetailedCountServerResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/response.Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ]"],
-            "HasScope": ["social"],
-            "authorization": []
-          }
-        ],
-        "summary": "Get detailed count of managed servers in a region",
         "tags": ["Server"]
       }
     },
@@ -5416,40 +5155,6 @@
       },
       "required": ["Attributes", "Code", "CodeName", "Section", "Service", "Text"]
     },
-    "models.AddBufferRequest": {
-      "properties": {
-        "AllocCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "DeploymentName": {
-          "type": "string"
-        },
-        "JobCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "JobPriority": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "OverrideVersion": {
-          "type": "string"
-        },
-        "Region": {
-          "type": "string"
-        }
-      },
-      "required": ["AllocCount", "DeploymentName", "JobCount", "JobPriority", "OverrideVersion", "Region"]
-    },
-    "models.AddBufferResponse": {
-      "properties": {
-        "Message": {
-          "type": "string"
-        }
-      },
-      "required": ["Message"]
-    },
     "models.AllocationEvent": {
       "properties": {
         "description": {
@@ -5992,26 +5697,6 @@
       },
       "required": ["provider_name"]
     },
-    "models.DeleteZombieRequest": {
-      "properties": {
-        "JobCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "Region": {
-          "type": "string"
-        },
-        "TimeoutSecond": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "ZombieCount": {
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": ["JobCount", "Region", "TimeoutSecond", "ZombieCount"]
-    },
     "models.DeploymentConfigOverride": {
       "properties": {
         "buffer_count": {
@@ -6221,7 +5906,7 @@
     "models.GetImageDetailResponse": {
       "properties": {
         "data": {
-          "$ref": "#/definitions/models.ImageRecordResponse"
+          "$ref": "#/definitions/models.ImageRecord"
         }
       },
       "required": ["data"]
@@ -6263,7 +5948,7 @@
       },
       "required": ["data"]
     },
-    "models.ImageRecordResponse": {
+    "models.ImageRecord": {
       "properties": {
         "artifactPath": {
           "type": "string"
@@ -6276,12 +5961,6 @@
           "format": "date-time",
           "type": "string",
           "x-nullable": false
-        },
-        "deployments": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         },
         "dockerPath": {
           "type": "string"
@@ -6358,15 +6037,11 @@
           "type": "boolean",
           "x-omitempty": false
         },
-        "ulimitFileSize": {
-          "format": "int32",
-          "type": "integer"
-        },
         "version": {
           "type": "string"
         }
       },
-      "required": ["image", "namespace", "patchVersion", "persistent", "ulimitFileSize", "version"]
+      "required": ["image", "namespace", "patchVersion", "persistent", "version"]
     },
     "models.ImageReplication": {
       "properties": {
@@ -6444,7 +6119,7 @@
       "properties": {
         "images": {
           "items": {
-            "$ref": "#/definitions/models.PatchImageRecordResponse"
+            "$ref": "#/definitions/models.PatchImageRecord"
           },
           "type": "array"
         }
@@ -6455,7 +6130,7 @@
       "properties": {
         "images": {
           "items": {
-            "$ref": "#/definitions/models.ImageRecordResponse"
+            "$ref": "#/definitions/models.ImageRecord"
           },
           "type": "array"
         },
@@ -6486,7 +6161,7 @@
         },
         "servers": {
           "items": {
-            "$ref": "#/definitions/models.ServerDetailsResponse"
+            "$ref": "#/definitions/models.Server"
           },
           "type": "array"
         }
@@ -6520,85 +6195,6 @@
       "required": ["next", "previous"]
     },
     "models.PatchImageRecord": {
-      "properties": {
-        "artifactPath": {
-          "type": "string"
-        },
-        "coreDumpEnabled": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "createdAt": {
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": false
-        },
-        "dockerPath": {
-          "type": "string"
-        },
-        "image": {
-          "type": "string"
-        },
-        "imageReplications": {
-          "items": {
-            "$ref": "#/definitions/models.ImageReplication"
-          },
-          "type": "array"
-        },
-        "imageReplicationsMap": {
-          "additionalProperties": {
-            "$ref": "#/definitions/models.ImageReplication"
-          },
-          "type": "object"
-        },
-        "imageSize": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "modifiedBy": {
-          "type": "string"
-        },
-        "namespace": {
-          "type": "string"
-        },
-        "patchVersion": {
-          "type": "string"
-        },
-        "persistent": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "ulimitFileSize": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "updatedAt": {
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": false
-        },
-        "uploaderFlag": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "createdAt",
-        "dockerPath",
-        "image",
-        "imageSize",
-        "modifiedBy",
-        "namespace",
-        "patchVersion",
-        "persistent",
-        "updatedAt",
-        "uploaderFlag",
-        "version"
-      ]
-    },
-    "models.PatchImageRecordResponse": {
       "properties": {
         "artifactPath": {
           "type": "string"
@@ -6942,160 +6538,6 @@
         },
         "termination_reason": {
           "type": "string"
-        },
-        "ulimit_file_size": {
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "allocation_id",
-        "artifact_path",
-        "cpu_limit",
-        "created_at",
-        "deployment",
-        "game_version",
-        "image_version",
-        "ip",
-        "is_override_game_version",
-        "job_id",
-        "last_update",
-        "mem_limit",
-        "namespace",
-        "params",
-        "pod_name",
-        "port",
-        "protocol",
-        "provider",
-        "region",
-        "session_id",
-        "status",
-        "termination_reason",
-        "ulimit_file_size"
-      ]
-    },
-    "models.ServerDeploymentConfigSessionTimeoutResponse": {
-      "properties": {
-        "session_timeout": {
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": ["session_timeout"]
-    },
-    "models.ServerDetailsResponse": {
-      "properties": {
-        "allocation_events": {
-          "items": {
-            "$ref": "#/definitions/models.AllocationEvent"
-          },
-          "type": "array"
-        },
-        "allocation_id": {
-          "type": "string"
-        },
-        "alternate_ips": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "artifact_path": {
-          "type": "string"
-        },
-        "cpu_limit": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "created_at": {
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": false
-        },
-        "custom_attribute": {
-          "type": "string"
-        },
-        "deployment": {
-          "type": "string"
-        },
-        "deployment_override": {
-          "type": "string"
-        },
-        "game_version": {
-          "type": "string"
-        },
-        "image_version": {
-          "type": "string"
-        },
-        "ip": {
-          "type": "string"
-        },
-        "is_core_dump_enabled": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "is_override_game_version": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "job_id": {
-          "type": "string"
-        },
-        "last_update": {
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": false
-        },
-        "mem_limit": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "namespace": {
-          "type": "string"
-        },
-        "params": {
-          "type": "string"
-        },
-        "pod_name": {
-          "type": "string"
-        },
-        "port": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "ports": {
-          "additionalProperties": {
-            "type": "integer"
-          },
-          "type": "object"
-        },
-        "protocol": {
-          "type": "string"
-        },
-        "provider": {
-          "type": "string"
-        },
-        "region": {
-          "type": "string"
-        },
-        "session_id": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "status_history": {
-          "items": {
-            "$ref": "#/definitions/models.StatusHistory"
-          },
-          "type": "array"
-        },
-        "termination_reason": {
-          "type": "string"
-        },
-        "ulimit_file_size": {
-          "format": "int32",
-          "type": "integer"
         }
       },
       "required": [
@@ -7121,6 +6563,15 @@
         "status",
         "termination_reason"
       ]
+    },
+    "models.ServerDeploymentConfigSessionTimeoutResponse": {
+      "properties": {
+        "session_timeout": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["session_timeout"]
     },
     "models.ServerSessionResponse": {
       "properties": {
@@ -7420,77 +6871,6 @@
       },
       "required": ["buffer_count", "buffer_percent", "max_count", "min_count", "unlimited", "use_buffer_percent"]
     },
-    "models.WorkerConfig": {
-      "properties": {
-        "AutoDeletion": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "CreatedAt": {
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": false
-        },
-        "CreatedBy": {
-          "type": "string"
-        },
-        "GhostWorker": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "ManualBufferOverride": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "ModifiedBy": {
-          "type": "string"
-        },
-        "Namespace": {
-          "type": "string"
-        },
-        "UpdatedAt": {
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": false
-        },
-        "ZombieWorker": {
-          "type": "boolean",
-          "x-omitempty": false
-        }
-      },
-      "required": [
-        "AutoDeletion",
-        "CreatedAt",
-        "CreatedBy",
-        "GhostWorker",
-        "ManualBufferOverride",
-        "ModifiedBy",
-        "Namespace",
-        "UpdatedAt",
-        "ZombieWorker"
-      ]
-    },
-    "models.WorkerConfigRequest": {
-      "properties": {
-        "auto_deletion": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "ghost_worker": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "manual_buffer_override": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "zombie_worker": {
-          "type": "boolean",
-          "x-omitempty": false
-        }
-      },
-      "required": ["auto_deletion", "ghost_worker", "manual_buffer_override", "zombie_worker"]
-    },
     "response.Error": {
       "properties": {
         "errorCode": {
@@ -7506,15 +6886,15 @@
   },
   "x-docs": {
     "alias": "dsmcontroller",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/dsmcontroller/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-12-29T04:50:54+00:00",
-    "gitHash": "0dbe97571ceca02ecacbd5ca4bd8e96f31f50647",
+    "buildDate": "unknown",
+    "gitHash": "60d2e47ebd90bbc40784c672ad168abde28ab99d",
     "name": "justice-dedicated-server-manager-controller-service",
-    "revisionID": "6.4.6",
-    "version": "6.4.6",
-    "version-roles-seeding": "1.20.22"
+    "revisionID": "6.4.7",
+    "version": "6.4.7",
+    "version-roles-seeding": "0.0.3"
   }
 }

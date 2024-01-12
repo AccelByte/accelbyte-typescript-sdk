@@ -1,21 +1,21 @@
 /*
- * Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+ * Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 
 .header {
-    background-color: rgba(var(--callout-rgb), 0.5);
+  background-color: rgba(var(--callout-rgb), 0.5);
 }
 .headerContent {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    flex-direction: row;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    font-size: 0.8rem;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-direction: row;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 0.8rem;
+  align-items: center;
 }
 
 .loginButton {

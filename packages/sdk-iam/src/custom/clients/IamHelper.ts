@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 
-import { UserResponseV3 } from '../../generated-public/iam/definitions/UserResponseV3.js'
 import { BanType, EligibleUser } from '../models/UserTypes.js'
-import { UserActiveBanResponseV3 } from '../../generated-public/iam/definitions/UserActiveBanResponseV3.js'
+import { UserResponseV3 } from '../../generated-definitions/UserResponseV3'
+import { UserActiveBanResponseV3 } from '../../generated-definitions/UserActiveBanResponseV3'
 
 export class IamHelper {
   static getAuthorizationCodeParams(urlSearchParams: string) {

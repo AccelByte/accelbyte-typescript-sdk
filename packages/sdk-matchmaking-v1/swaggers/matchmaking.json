@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Matchmaking Service",
-    "version": "2.28.0"
+    "version": "2.29.0"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/matchmaking/apidocs"
+    "url": "https://demo.accelbyte.io/matchmaking/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -4852,13 +4852,13 @@
   },
   "x-docs": {
     "alias": "matchmaking",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/matchmaking/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-12-21T07:50:50+00:00",
-    "gitHash": "a238a9bf902b7b3f9deb8c89700ccdaf46f55092",
-    "version": "2.28.0",
+    "buildDate": "2024-01-03T02:58:22+00:00",
+    "gitHash": "fa9d6a1bc0969ffc651303ba5569a1c5af6371b5",
+    "version": "2.29.0",
     "version-roles-seeding": "0.0.23"
   }
 }

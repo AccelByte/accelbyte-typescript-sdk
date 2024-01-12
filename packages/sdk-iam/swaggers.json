@@ -1,8 +1,1 @@
-[
-  [
-    "iam",
-    "iam",
-    "iam.json",
-    "https://development.accelbyte.io/iam/apidocs/api.json"
-  ]
-]
+[["iam", "iam", "iam.json", "https://development.accelbyte.io/iam/apidocs/api.json"]]

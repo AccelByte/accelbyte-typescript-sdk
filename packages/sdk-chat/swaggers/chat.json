@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Chat Service",
     "title": "justice-chat-service",
-    "version": "dev"
+    "version": "demo"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/chat/apidocs"
+    "url": "https://demo.accelbyte.io/chat/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -6016,15 +6016,15 @@
   },
   "x-docs": {
     "alias": "chat",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/chat/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-12-21T07:50:12+00:00",
-    "gitHash": "61ee23132ecef78d2291c23abcd9e92cf214e2cc",
+    "buildDate": "2024-01-03T06:09:20+00:00",
+    "gitHash": "3d97000e5096dd321cf9de7f382ca57413077f81",
     "name": "justice-chat-service",
-    "revisionID": "0.4.15",
-    "version": "0.4.15",
+    "revisionID": "0.4.16",
+    "version": "0.4.16",
     "version-roles-seeding": "0.0.18"
   }
 }

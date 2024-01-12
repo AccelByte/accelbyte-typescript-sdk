@@ -13,7 +13,7 @@
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/differ/apidocs"
+    "url": "https://demo.accelbyte.io/differ/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -243,14 +243,14 @@
   },
   "x-docs": {
     "alias": "differ",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/differ/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-09-25T01:16:25+00:00",
+    "buildDate": "2023-09-25T01:16:24+00:00",
     "gitHash": "5bd2fd845fb34bc4b7d8ef4d1256df7852793d3e",
     "name": "JusticeDiffer",
-    "realm": "dev",
+    "realm": "demo",
     "version": "1.25.5"
   }
 }

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Config } from '../../generated-public/odin-config/definitions/Config.js'
+import { Config } from '../../generated-definitions/Config.js'
 import { LogoVariantConfig, PageConfig } from './base-configs.js'
 
 export enum PlayerPortalHomePageKeys {
@@ -20,7 +20,7 @@ export const configSize = z.enum(['default', 's', 'l', 'xl'])
 export const configAlign = z.enum(['mid', 'top', 'top-left', 'top-right', 'left', 'right', 'bottom', 'bottom-left', 'bottom-right'])
 export const pricingType = z.enum(['free', 'paid'])
 const configBgOverlayType = z.enum(['gradient', 'full'])
-const configCTAActionType = z.enum(['purchase-game', 'download-launcher', 'custom'])
+export const configCTAActionType = z.enum(['purchase-game', 'download-launcher', 'custom'])
 const configCTAPurchaseType = z.enum(['purchase-window', 'detailed-page'])
 
 export const PlatformItem = z.object({

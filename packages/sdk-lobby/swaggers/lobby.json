@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Lobby Server",
     "title": "justice-lobby-server",
-    "version": "3.33.1"
+    "version": "3.33.2"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/lobby/apidocs"
+    "url": "https://demo.accelbyte.io/lobby/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -8564,15 +8564,15 @@
   },
   "x-docs": {
     "alias": "lobby",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/lobby/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-12-26T10:24:49+00:00",
-    "gitHash": "2f0bafeaa3d9da1ae3af107ea63f57d7f529ee4e",
+    "buildDate": "2024-01-03T02:58:02+00:00",
+    "gitHash": "059aba197201d5896a80fea1380d95da4efadf45",
     "name": "justice-lobby-server",
-    "revisionID": "3.33.1",
-    "version": "3.33.1",
+    "revisionID": "3.33.2",
+    "version": "3.33.2",
     "version-justice": "3.45.0",
     "version-roles-seeding": "1.0.1"
   }

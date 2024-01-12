@@ -1,8 +1,0 @@
-{
-  "buildDate": "2023-12-19T08:44:27+00:00",
-  "gitHash": "00c15e3546936bc26af0ed54f7fdeede0285f3b5",
-  "name": "justice-group-service",
-  "realm": "staging",
-  "version": "2.18.2",
-  "version-roles-seeding": "0.0.3"
-}

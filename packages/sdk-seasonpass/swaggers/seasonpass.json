@@ -30,7 +30,7 @@
   ],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/seasonpass"
+    "url": "https://demo.accelbyte.io/seasonpass"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -4675,20 +4675,20 @@
   },
   "x-docs": {
     "alias": "seasonpass",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/seasonpass/swagger.json"
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2023-12-29T07:23:54+00:00",
+    "buildDate": "2023-12-29T06:37:52+00:00",
     "buildID": "1.20.1",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
     "buildOS": "Linux amd64 5.10.199-190.747.amzn2.x86_64",
-    "gitBranchName": "master",
-    "gitHash": "8726a95edd",
-    "gitTag": "1.19.3",
+    "gitBranchName": "release-candidate",
+    "gitHash": "346deb53c7",
+    "gitTag": "1.20.1",
     "name": "justice-seasonpass-service",
-    "realm": "dev",
+    "realm": "demo",
     "version": "1.20.1",
     "version-roles-seeding": "0.0.3"
   }

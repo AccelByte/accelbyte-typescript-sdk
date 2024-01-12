@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { UserResponseV4 } from '../../generated-public/iam/definitions/UserResponseV4.js'
+import { UserResponseV4 } from '../../generated-definitions/UserResponseV4'
 
 export const BanType = z.enum(['ORDER_AND_PAYMENT'])
 export type BanType = z.infer<typeof BanType>

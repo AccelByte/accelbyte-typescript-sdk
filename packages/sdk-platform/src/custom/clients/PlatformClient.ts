@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { AccelbyteSDK } from '@accelbyte/sdk'
-import { WalletInfo } from '../../generated-public/platform/definitions/WalletInfo.js'
-import { Platform } from '../../generated-public/Platform.js'
-import { CurrencyInfo } from '../../generated-public/platform/definitions/CurrencyInfo.js'
-import { ItemInfo } from '../../generated-public/platform/definitions/ItemInfo.js'
+import { WalletInfo } from '../../generated-definitions/WalletInfo.js'
+import { CurrencyInfo } from '../../generated-definitions/CurrencyInfo.js'
+import { ItemInfo } from '../../generated-definitions/ItemInfo.js'
+import { Platform } from '../../Platform'
 
 /**
  */

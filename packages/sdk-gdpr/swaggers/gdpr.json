@@ -13,7 +13,7 @@
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/gdpr/apidocs"
+    "url": "https://demo.accelbyte.io/gdpr/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -1998,14 +1998,14 @@
   },
   "x-docs": {
     "alias": "gdpr",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/gdpr/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-12-29T11:59:29+00:00",
-    "gitHash": "7f63865bc83c90e475cdaa7e9b0b0d76e94bf071",
+    "buildDate": "2023-12-29T11:58:09+00:00",
+    "gitHash": "7e6a79d960b80bd03011a8a601922ccec20e9a71",
     "name": "justice-gdpr-service",
-    "realm": "dev",
+    "realm": "demo",
     "version": "2.6.0",
     "version-roles-seeding": "0.0.48"
   }

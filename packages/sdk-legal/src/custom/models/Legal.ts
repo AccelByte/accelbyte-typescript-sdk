@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { PolicyVersionWithLocalizedVersionObject } from '../../generated-public/legal/definitions/PolicyVersionWithLocalizedVersionObject.js'
-import { RetrieveAcceptedAgreementResponse } from '../../generated-public/legal/definitions/RetrieveAcceptedAgreementResponse.js'
+import { PolicyVersionWithLocalizedVersionObject } from '../../generated-definitions/PolicyVersionWithLocalizedVersionObject.js'
+import { RetrieveAcceptedAgreementResponse } from '../../generated-definitions/RetrieveAcceptedAgreementResponse.js'
 
 export const DisplayedPolicy = z.object({
   policyName: z.string(),

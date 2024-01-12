@@ -1,8 +1,1 @@
-[
-  [
-    "qosmanager",
-    "qosmanager",
-    "qosm.json",
-    "https://development.accelbyte.io/qosm/apidocs/api.json"
-  ]
-]
+[["qosmanager", "qosmanager", "qosm.json", "https://development.accelbyte.io/qosm/apidocs/api.json"]]

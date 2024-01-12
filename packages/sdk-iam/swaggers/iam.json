@@ -8,12 +8,12 @@
     },
     "description": "Justice IAM Service",
     "title": "justice-iam-service",
-    "version": "7.7.0"
+    "version": "7.8.0"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/iam/apidocs"
+    "url": "https://demo.accelbyte.io/iam/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -30346,9 +30346,6 @@
     },
     "oauthmodel.TokenThirdPartyResponse": {
       "properties": {
-        "platformUserId": {
-          "type": "string"
-        },
         "platform_token": {
           "type": "string"
         },
@@ -30502,15 +30499,15 @@
   },
   "x-docs": {
     "alias": "iam",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/iam/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-12-21T05:51:48+00:00",
-    "gitHash": "b73e44d53b246016cd49f8f9f4f589b52651546b",
+    "buildDate": "2023-12-29T11:59:16+00:00",
+    "gitHash": "1aa95f9e0faef68fff742fbc15bdcd832446ce04",
     "name": "justice-iam-service",
-    "realm": "staging",
-    "version": "7.7.0",
+    "realm": "demo",
+    "version": "7.8.0",
     "version-roles-seeding": "1.0.23"
   }
 }

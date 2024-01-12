@@ -8,7 +8,7 @@
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/event/apidocs"
+    "url": "https://demo.accelbyte.io/event/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -2212,14 +2212,14 @@
   },
   "x-docs": {
     "alias": "event",
-    "host": "https://development.accelbyte.io",
+    "host": "https://demo.accelbyte.io",
     "path": "/event/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-12-15T07:58:24+00:00",
-    "gitHash": "3177f678fdb47af44690e1650673435e8690eda2",
+    "buildDate": "2023-12-15T09:07:29+00:00",
+    "gitHash": "fac68c7501449b81d37cf429db1636f3a7089d16",
     "name": "justice-event-log-service",
-    "realm": "dev",
+    "realm": "demo",
     "version": "2.2.1",
     "version-roles-seeding": "0.0.3"
   }

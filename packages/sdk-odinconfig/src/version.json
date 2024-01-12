@@ -1,0 +1,11 @@
+{
+  "description": "Justice Config Service",
+  "title": "config-service-app",
+  "contact": {
+    "name": "Engineering Team at AccelByte",
+    "url": "https://accelbyte.io",
+    "email": "engineering@accelbyte.io"
+  },
+  "version": "5.8.2",
+  "gitHash": "5.8.2"
+}

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Config } from '../../generated-public/odin-config/definitions/Config.js'
+import { Config } from '../../generated-definitions/Config.js'
 import { ColorConfigs, FontConfigs } from './base-configs.js'
 
 export const CompanyLogo = z.object({

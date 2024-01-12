@@ -1,8 +1,1 @@
-[
-  [
-    "matchmaking",
-    "matchmaking",
-    "match2.json",
-    "https://development.accelbyte.io/match2/apidocs/api.json"
-  ]
-]
+[["matchmaking", "matchmaking", "match2.json", "https://development.accelbyte.io/match2/apidocs/api.json"]]

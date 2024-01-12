@@ -2,7 +2,7 @@ import { Accelbyte, ApiUtils, Network } from '@accelbyte/sdk'
 import { Iam, IamUserAuthorizationClient } from '@accelbyte/sdk-iam'
 import { Platform } from '@accelbyte/sdk-platform'
 import { Basic } from '@accelbyte/sdk-basic'
-import { Cloudsave } from "@accelbyte/sdk-cloudsave"
+import { Cloudsave } from '@accelbyte/sdk-cloudsave'
 
 const sdk = Accelbyte.SDK({
   options: {

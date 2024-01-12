@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -20,11 +20,11 @@ import {
 import { AxiosError, AxiosResponse } from 'axios'
 import platform from 'platform'
 import { z } from 'zod'
-import { OAuth20$ } from '../../generated-public/iam/endpoints/OAuth20$.js'
 import { MFADataResponse } from '../models/TwoFA.js'
-import { TokenWithDeviceCookieResponseV3 } from '../../generated-public/iam/definitions/TokenWithDeviceCookieResponseV3.js'
 import { CodeChallenge } from './CodeChallenge.js'
-import { OAuth20Extension$ } from '../../generated-public/iam/endpoints/OAuth20Extension$.js'
+import { OAuth20$ } from '../../generated-public/endpoints/OAuth20$'
+import { TokenWithDeviceCookieResponseV3 } from '../../generated-definitions/TokenWithDeviceCookieResponseV3'
+import { OAuth20Extension$ } from '../../generated-public/endpoints/OAuth20Extension$'
 
 const AUTHORIZE_URL = '/iam/v3/oauth/authorize'
 export const MFA_DATA_STORAGE_KEY = 'mfaData'

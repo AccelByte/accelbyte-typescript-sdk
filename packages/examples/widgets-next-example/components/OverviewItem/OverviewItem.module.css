@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+ * Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -30,7 +30,7 @@
   padding: 20px;
   text-align: left;
 }
-.overviewItemRight table td{
+.overviewItemRight table td {
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -50,7 +50,7 @@
   padding: 10px 20px;
   margin-left: 10px;
   background-color: #1d4ed8;
-  border: 0px none
+  border: 0px none;
 }
 
 .gametitle {
@@ -71,7 +71,7 @@
   padding: 10px 20px;
   min-width: 100px;
   background-color: #1d4ed8;
-  border: 0px none
+  border: 0px none;
 }
 
 @media (min-width: 640px) {

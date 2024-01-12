@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { Config } from '../../generated-public/odin-config/definitions/Config.js'
+import { Config } from '../../generated-definitions/Config.js'
 
 // Dev's note: using zod, unfortunately we can't have generics.
 // This is a "hack" so that we can have a safe typing for Config.

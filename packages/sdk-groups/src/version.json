@@ -1,0 +1,8 @@
+{
+  "buildDate": "2023-12-29T06:37:01+00:00",
+  "gitHash": "a8b88954ae3096f65e5ec2e1b180acd90de1f7bf",
+  "name": "justice-group-service",
+  "realm": "demo",
+  "version": "2.18.3",
+  "version-roles-seeding": "0.0.3"
+}

@@ -1,16 +1,16 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, Network, SdkCache, SDKRequestConfig, CodeGenUtil, Validate } from '@accelbyte/sdk'
+import { AccelbyteSDK, ApiArgs, CodeGenUtil, Network, SdkCache, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { Buffer } from 'buffer'
-import { OAuth20Extension$ } from '../../generated-public/iam/endpoints/OAuth20Extension$.js'
 import { MFA_DATA_STORAGE_KEY } from './IamUserAuthorizationClient.js'
-import { OAuth20$ } from '../../generated-public/iam/endpoints/OAuth20$.js'
 import { Request2FAEmailCode, Verify2FAParam } from '../models/TwoFA.js'
-import { TokenResponse } from '../../generated-public/iam/definitions/TokenResponse.js'
+import { OAuth20Extension$ } from '../../generated-public/endpoints/OAuth20Extension$'
+import { OAuth20$ } from '../../generated-public/endpoints/OAuth20$'
+import { TokenResponse } from '../../generated-definitions/TokenResponse'
 
 export interface OAuthApiOptions {
   clientId: string

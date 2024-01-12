@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,16 +10,16 @@ import {
   ValidateForbiddenWordsErrorType,
   validateLength,
   ValidateLengthErrorType,
+  validateNotEmpty,
   validatePassword,
   validateRegex,
   ValidateRegexErrorType,
-  validateUserName,
-  validateNotEmpty
+  validateUserName
 } from '@accelbyte/validator'
 import isEmpty from 'validator/lib/isEmpty.js'
 import { z } from 'zod'
-import { InputValidationDataPublic } from '../../generated-public/iam/definitions/InputValidationDataPublic.js'
-import { ValidationDetailPublic } from '../../generated-public/iam/definitions/ValidationDetailPublic.js'
+import { InputValidationDataPublic } from '../../generated-definitions/InputValidationDataPublic'
+import { ValidationDetailPublic } from '../../generated-definitions/ValidationDetailPublic'
 
 export const ValidateableInputField = z.enum(['username', 'displayName', 'password', 'email', 'dateOfBirth'])
 export type ValidateableInputField = z.infer<typeof ValidateableInputField>

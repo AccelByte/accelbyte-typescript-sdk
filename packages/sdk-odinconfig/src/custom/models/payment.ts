@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
 import { PageConfig } from './base-configs.js'
-import { Config } from '../../generated-public/odin-config/definitions/Config.js'
+import { Config } from '../../generated-definitions/Config.js'
 
 export const PaymentConfigData = z.object({
   pageConfig: Config.merge(

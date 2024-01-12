@@ -1,8 +1,1 @@
-[
-  [
-    "dsm-controller",
-    "dsmcontroller",
-    "dsmc.json",
-    "https://development.accelbyte.io/dsmcontroller/apidocs/api.json"
-  ]
-]
+[["dsm-controller", "dsmcontroller", "dsmc.json", "https://development.accelbyte.io/dsmcontroller/apidocs/api.json"]]

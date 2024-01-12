@@ -68,7 +68,7 @@
         "../sdk-platform/src"
       ],
       "~/iam-definitions/*": [
-        "./src/generated-public/iam/definitions/*"
+        "./src/generated-definitions/*"
       ]
     },
     "outDir": "dist/es"

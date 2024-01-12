@@ -70,7 +70,7 @@
         "../sdk-platform/src"
       ],
       "~/iam-definitions/*": [
-        "../sdk-iam/src/generated-public/iam/definitions/*"
+        "../sdk-iam/src/generated-definitions/*"
       ]
     },
     "declarationDir": "types",

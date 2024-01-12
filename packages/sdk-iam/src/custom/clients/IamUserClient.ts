@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { AccelbyteSDK, ApiArgs, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { ReadyPlayerMe } from '../models/ReadyPlayerMe.js'
-import { Users$ } from '../../generated-public/iam/endpoints/Users$.js'
+import { Users$ } from '../../generated-public/endpoints/Users$'
 
 /**
  * @deprecated, this is original *Api class
