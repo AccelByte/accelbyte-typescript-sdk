@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk-basic@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-basic/-/sdk-basic-3.0.0-beta.0.tgz#7d49cc9d4a22b45504a970b256850677fc37c8cb"
-  integrity sha512-DnFJrvXb3uuk8r6E/d2IENYGbeMotZPMEvyRZzqsZkN+Pb/XoGXwKlZ3a41d2fP1e00am4FDIodV/KHxZXJwlA==
+"@accelbyte/sdk-basic@4.0.0-experimental.0":
+  version "4.0.0-experimental.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-basic/-/sdk-basic-4.0.0-experimental.0.tgz#ce5c90336d682e9e0858fc425442f47a4afb6555"
+  integrity sha512-DJQPf2qphsAlWcDuQXJvVgiplwXluIef7Pt3Lg8hfEWbtSU54LojaawoAXC1TMGYKxzBkxuAegFLD5GaUTvhVQ==
   dependencies:
-    "@accelbyte/validator" "0.2.15"
+    "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
@@ -17,12 +17,12 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-cloudsave@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-cloudsave/-/sdk-cloudsave-3.0.0-beta.0.tgz#c3a73bca8dccfffbf605d3674e543798748e53df"
-  integrity sha512-acsnn7610tpH6pmbemPNKxNUKCYmfpP466Q6O+vPp4XsNyERk+dpRxcGcYozEpNqRRw+Xiurz1jX3LiRsBgdXA==
+"@accelbyte/sdk-cloudsave@4.0.0-experimental.0":
+  version "4.0.0-experimental.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-cloudsave/-/sdk-cloudsave-4.0.0-experimental.0.tgz#dc507693d80eda43141ad855c13afaf319ef1b15"
+  integrity sha512-5cut6NnRdxn3HNANSio9WXOCg+KwXtHpirKIIje4yQ3YU0G+RgCtIiwK6VyjLMZeutywb6rzhnqwBjWFEoqlcA==
   dependencies:
-    "@accelbyte/validator" "0.2.15"
+    "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
@@ -32,12 +32,12 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-iam@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-3.0.0-beta.0.tgz#35f89976bf2812e64ba750c0e3541a3547833dc4"
-  integrity sha512-Xd9JFZoAgj8GcpHfVGnhI/PNY+1i9KPd//QYMbqMgoSD61c9dXdG6FrN7xYHXHpoagYegJ1J6WFpWILcrQW2jw==
+"@accelbyte/sdk-iam@4.0.0-experimental.0":
+  version "4.0.0-experimental.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-4.0.0-experimental.0.tgz#c340f4ff212a74ac8e925f1aaf02dce55f831b4a"
+  integrity sha512-INDyVhP2XH9G7/2mUDFuTd59Fu72MWnWGA9/ry8ouBGlkteimRLu9OciYZLQ1FQhlYy6FF8Ay63h2QPHNy8hQA==
   dependencies:
-    "@accelbyte/validator" "0.2.15"
+    "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
@@ -47,13 +47,29 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-legal@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-legal/-/sdk-legal-3.0.0-beta.0.tgz#53763cd427aecdf6d6cfc6580cd2274e15c905f9"
-  integrity sha512-QREOfUtFAYIspM3/v42Ut+4GMvmRmtL5YyT5PI1b8xLWspn2hW9kDaZvyO3zaYkipMa+v2AJdJoowtOgifyMpw==
+"@accelbyte/sdk-legal@4.0.0-experimental.0":
+  version "4.0.0-experimental.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-legal/-/sdk-legal-4.0.0-experimental.0.tgz#65e19ad1d432808d6370b6ae4b2f6c3946ae6d9a"
+  integrity sha512-hS5U6bItzdr+LMZy1D7D35M+LJFKf25F4lRVtJsG91T+xJ/r76KKNpc44G43mT1ae03xd5FiwOqgr3ACDr3Zog==
   dependencies:
-    "@accelbyte/sdk-iam" "3.0.0-beta.0"
-    "@accelbyte/validator" "0.2.15"
+    "@accelbyte/sdk-iam" "4.0.0-experimental.0"
+    "@accelbyte/validator" "0.2.17"
+    axios "1.3.6"
+    buffer "6.0.3"
+    crypto-js "4.1.1"
+    dompurify "3.0.5"
+    lodash "4.17.21"
+    platform "1.3.6"
+    uuid "8.3.2"
+    validator "13.7.0"
+    zod "3.17.3"
+
+"@accelbyte/sdk-platform@4.0.0-experimental.0":
+  version "4.0.0-experimental.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-platform/-/sdk-platform-4.0.0-experimental.0.tgz#8d1e2d99124745550e6c0fa59a0be534a9cdb236"
+  integrity sha512-XQZ3BhAOAmVGFaV3JE6lY8N9B9UvfsQlp+CGO1uIASo+KsiRTFlgeUTMaF/ef+gquQfIDTVGkBx3gWuVlHO+rQ==
+  dependencies:
+    "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
@@ -63,27 +79,12 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-platform@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-platform/-/sdk-platform-3.0.0-beta.0.tgz#f05275ec097a3cd3b7f86154ec42348836cc2dac"
-  integrity sha512-OkZY/CDKFfcHu1oSlI4+xq8tHHsDslrjkjRJx155l1MNPlEDnIRKUI/0FMWSD2G3XxnBnn+rN6FoH95X6YDaew==
+"@accelbyte/sdk@2.3.0-experimental.0":
+  version "2.3.0-experimental.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.3.0-experimental.0.tgz#34866337f10e5b470d589859e9692060810545ae"
+  integrity sha512-GK6dMgI47RefZBm6+znMP0Fi6n43eytRE3v6Mm8PQ77xNjj2FQHGm5fy0aYiAtWDqRxbjUHx3bundsv+yUZAaA==
   dependencies:
-    "@accelbyte/validator" "0.2.15"
-    axios "1.3.6"
-    buffer "6.0.3"
-    crypto-js "4.1.1"
-    lodash "4.17.21"
-    platform "1.3.6"
-    uuid "8.3.2"
-    validator "13.7.0"
-    zod "3.17.3"
-
-"@accelbyte/sdk@2.1.0-beta.0":
-  version "2.1.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.1.0-beta.0.tgz#753839a93a48a4c473cbc43fccc594b493dac0a7"
-  integrity sha512-Q+uVmI+uhcGeABHBwrOF/Phz9//23qlVvlOuupp0EVTuSRN+dUYue/eM/Z8+Y+S9ZUacNdPvA90T0tMBz+b8Jw==
-  dependencies:
-    "@accelbyte/validator" "0.2.15"
+    "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
     buffer "6.0.3"
     crypto-js "4.1.1"
@@ -95,10 +96,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/validator@0.2.15":
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.15.tgz#4ba093e22df4de20420e1e0545cb2bd594912dfa"
-  integrity sha512-S0Jiu3xfE4RdhXvUJAW0haLtyY37h6eOm2XiDcUA/q0PH8xmM56en5IEkazObyqrirVs7cB00dre5Z1G4zXWzQ==
+"@accelbyte/validator@0.2.17":
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/@accelbyte/validator/-/validator-0.2.17.tgz#0a1a2bd1679bf094c8bc622ee67157ceb932f60a"
+  integrity sha512-qtMqXitJhoVj935LTMjptIJ9+U33LU+S3Y0zVv1EaFjNXggRzAWz5+Pxa1JwcvGxOVNE+K73Jt07Jm3lWj+uUQ==
   dependencies:
     naughty-words "1.2.0"
     xregexp "5.1.0"
@@ -164,6 +165,11 @@ delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
+
+dompurify@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-3.0.5.tgz#eb3d9cfa10037b6e73f32c586682c4b2ab01fbed"
+  integrity sha512-F9e6wPGtY+8KNMRAVfxeCOHU0/NPWMSENNq4pQctuXRqqdEPW7q3CrLbR5Nse044WwacyjHGOMlvNsBe1y6z9A==
 
 dotenv@16.0.3:
   version "16.0.3"

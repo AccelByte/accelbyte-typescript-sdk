@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-event",
-  "version": "4.0.0-experimental.0",
+  "version": "4.0.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",
