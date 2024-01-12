@@ -66,6 +66,8 @@ async function main() {
     throw Error('Please provide a valid accessToken')
   }
 
+  // You can also use access_token acquired from this response to call any Admin Endpoint,
+  // Make sure the CLIENT_ID in the IAM Client has the appropriate permission to call the Admin Endpoint
   const res = await clientGrantToken()
   if (res.access_token) await verifyToken(res.access_token)
 
@@ -73,17 +75,17 @@ async function main() {
 }
 
 async function testCloudSaveAdmin() {
-  console.log('\nTesting Admin CloudSave... ')
+  console.log('\n Testing Admin CloudSave... ')
   try {
     const adminrecords = await Cloudsave.AdminRecordAdminApi(sdk, BEARER_AUTH_SDK_ARGS).getAdminrecords()
-    console.log(`Cloud Save Admin Records:`, adminrecords.data)
+    console.log(`Cloud Save Admin Records:`, adminrecords)
   } catch (ex) {
     console.log(ex)
   }
 }
 
 async function verifyToken(token) {
-  console.log('Verifying access token...')
+  console.log('\n Verifying access token...')
 
   try {
     const res = await Iam.OAuth20Api(sdk, BASIC_AUTH_SDK_ARGS).postOauthVerify({ token })
@@ -97,7 +99,7 @@ async function verifyToken(token) {
 async function clientGrantToken() {
   if (CLIENT_ID === '<replace with CLIENT_ID for given baseURL>') return false
 
-  console.log('Grant access token for current CLIENT_ID...')
+  console.log('\n Grant access token for current CLIENT_ID...')
 
   try {
     const response = await Iam.OAuth20Api(sdk, BASIC_AUTH_SDK_ARGS).postOauthToken({ grant_type: 'client_credentials' })

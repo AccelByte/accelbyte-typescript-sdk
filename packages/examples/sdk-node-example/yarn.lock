@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@accelbyte/sdk-basic@4.0.0-experimental.0":
-  version "4.0.0-experimental.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-basic/-/sdk-basic-4.0.0-experimental.0.tgz#ce5c90336d682e9e0858fc425442f47a4afb6555"
-  integrity sha512-DJQPf2qphsAlWcDuQXJvVgiplwXluIef7Pt3Lg8hfEWbtSU54LojaawoAXC1TMGYKxzBkxuAegFLD5GaUTvhVQ==
+"@accelbyte/sdk-basic@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-basic/-/sdk-basic-4.0.0.tgz#8957d9c5111e1d3268899ac683e8cfafa322b412"
+  integrity sha512-krBlv4P79QI695RfVIwTqhRaXsCYjbyK3Id2pPhVOKHrukMZtDBq+9bUIEHr/FKSWFv/fe7+gScFCeET6bg4tg==
   dependencies:
     "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
@@ -17,10 +17,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-cloudsave@4.0.0-experimental.0":
-  version "4.0.0-experimental.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-cloudsave/-/sdk-cloudsave-4.0.0-experimental.0.tgz#dc507693d80eda43141ad855c13afaf319ef1b15"
-  integrity sha512-5cut6NnRdxn3HNANSio9WXOCg+KwXtHpirKIIje4yQ3YU0G+RgCtIiwK6VyjLMZeutywb6rzhnqwBjWFEoqlcA==
+"@accelbyte/sdk-cloudsave@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-cloudsave/-/sdk-cloudsave-4.0.0.tgz#68d4b43b4c25fe27478078be63457c7c1011203c"
+  integrity sha512-fsZ22G47JiaKY/QTBZ15G5YsgX8fXNQHFVnprY5Df/bAnvuPcB8gpd6PnUoIIY/uc4iEn8BOv1rpmsnP5RJeOA==
   dependencies:
     "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
@@ -32,10 +32,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-iam@4.0.0-experimental.0":
-  version "4.0.0-experimental.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-4.0.0-experimental.0.tgz#c340f4ff212a74ac8e925f1aaf02dce55f831b4a"
-  integrity sha512-INDyVhP2XH9G7/2mUDFuTd59Fu72MWnWGA9/ry8ouBGlkteimRLu9OciYZLQ1FQhlYy6FF8Ay63h2QPHNy8hQA==
+"@accelbyte/sdk-iam@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-iam/-/sdk-iam-4.0.0.tgz#28160fdf67aec2bf34de365539f6ea7c0b58ec51"
+  integrity sha512-zZtCMP3NwYFFUB8JOxqTN/Ir/e9w85lsYS/NSE3h/tsUk+MpjxuchywjxAT6Jpw6VMlV/TUQTnJqDhWH1FcBqA==
   dependencies:
     "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
@@ -47,12 +47,12 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-legal@4.0.0-experimental.0":
-  version "4.0.0-experimental.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-legal/-/sdk-legal-4.0.0-experimental.0.tgz#65e19ad1d432808d6370b6ae4b2f6c3946ae6d9a"
-  integrity sha512-hS5U6bItzdr+LMZy1D7D35M+LJFKf25F4lRVtJsG91T+xJ/r76KKNpc44G43mT1ae03xd5FiwOqgr3ACDr3Zog==
+"@accelbyte/sdk-legal@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-legal/-/sdk-legal-4.0.0.tgz#f89fecf32786d917a885af88453db0eabf632701"
+  integrity sha512-5c1L/k0w9F0b/pWSZQRRTpMn9RtyKhxQz8JMU4PrzXHe3xHAuJ6uVywl8x6Y01U1A/ILlxGAdN8k4tCP2XJ58A==
   dependencies:
-    "@accelbyte/sdk-iam" "4.0.0-experimental.0"
+    "@accelbyte/sdk-iam" "4.0.0"
     "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
     buffer "6.0.3"
@@ -64,10 +64,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk-platform@4.0.0-experimental.0":
-  version "4.0.0-experimental.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-platform/-/sdk-platform-4.0.0-experimental.0.tgz#8d1e2d99124745550e6c0fa59a0be534a9cdb236"
-  integrity sha512-XQZ3BhAOAmVGFaV3JE6lY8N9B9UvfsQlp+CGO1uIASo+KsiRTFlgeUTMaF/ef+gquQfIDTVGkBx3gWuVlHO+rQ==
+"@accelbyte/sdk-platform@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk-platform/-/sdk-platform-4.0.0.tgz#416eb0dd2cc3f3ac8c9c62bf444155b8e5197bed"
+  integrity sha512-31uhy4gPXj0c/RLHjRE7IfasRIfTyVD7hVjvQPYOaso3PyAj3Z61VWKnxSLsEnZDgKjyYJJiIOIzqjDThPTEAw==
   dependencies:
     "@accelbyte/validator" "0.2.17"
     axios "1.3.6"
@@ -79,10 +79,10 @@
     validator "13.7.0"
     zod "3.17.3"
 
-"@accelbyte/sdk@2.3.0-experimental.0":
-  version "2.3.0-experimental.0"
-  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.3.0-experimental.0.tgz#34866337f10e5b470d589859e9692060810545ae"
-  integrity sha512-GK6dMgI47RefZBm6+znMP0Fi6n43eytRE3v6Mm8PQ77xNjj2FQHGm5fy0aYiAtWDqRxbjUHx3bundsv+yUZAaA==
+"@accelbyte/sdk@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@accelbyte/sdk/-/sdk-2.3.0.tgz#3e97739557866980e562c6098bb42589b9c32244"
+  integrity sha512-v2udDHojIlYOKFr5MkDIMo+An9+c6smwU/Yaq9YXB9nMzSPWSs33hN+ND3wTfVY2CMk/y7aMZWiKdA/e6tG7Jg==
   dependencies:
     "@accelbyte/validator" "0.2.17"
     axios "1.3.6"

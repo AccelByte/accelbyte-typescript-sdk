@@ -9,12 +9,12 @@
     "example:admin": "node --es-module-specifier-resolution=node exampleAdmin.mjs"
   },
   "dependencies": {
-    "@accelbyte/sdk": "2.3.0-experimental.0",
-    "@accelbyte/sdk-basic": "4.0.0-experimental.0",
-    "@accelbyte/sdk-iam": "4.0.0-experimental.0",
-    "@accelbyte/sdk-legal": "4.0.0-experimental.0",
-    "@accelbyte/sdk-platform": "4.0.0-experimental.0",
-    "@accelbyte/sdk-cloudsave": "4.0.0-experimental.0",
+    "@accelbyte/sdk": "2.3.0",
+    "@accelbyte/sdk-basic": "4.0.0",
+    "@accelbyte/sdk-iam": "4.0.0",
+    "@accelbyte/sdk-legal": "4.0.0",
+    "@accelbyte/sdk-platform": "4.0.0",
+    "@accelbyte/sdk-cloudsave": "4.0.0",
     "dotenv": "16.0.3"
   }
 }
