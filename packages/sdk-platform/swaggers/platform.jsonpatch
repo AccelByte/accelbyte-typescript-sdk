@@ -1,0 +1,48 @@
+[
+  {
+    "op": "add",
+    "path": "/paths/~1public~1namespaces~1{namespace}~1payment~1returnurl/get/responses/307",
+    "value": {
+      "description": "successful operation",
+      "headers": {
+        "Location": {
+          "description": "The Location header",
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/paths/~1public~1namespaces~1{namespace}~1payment~1returnurl/get/responses/204",
+    "value": {
+      "description": "no content"
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/definitions/OrderInfo/required",
+    "value": [
+      "createdAt",
+      "currency",
+      "discountedPrice",
+      "itemId",
+      "namespace",
+      "orderNo",
+      "paymentRemainSeconds",
+      "price",
+      "quantity",
+      "sandbox",
+      "status",
+      "updatedAt",
+      "userId"
+    ]
+  },
+  {
+    "op": "add",
+    "path": "/definitions/PaymentMethod/properties/enableTax",
+    "value": {
+      "type": "string"
+    }
+  }
+]

@@ -1,0 +1,3075 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "description": "Justice Matchmaking Service",
+    "title": "Justice Match Service v2",
+    "version": "2.15.0"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/match2/apidocs"
+  },
+  "securityDefinitions": {
+    "HasPermission": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "HasScope": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/healthz": {
+      "get": {
+        "operationId": "GetHealthcheckInfo",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/match2/healthz": {
+      "get": {
+        "operationId": "GetHealthcheckInfoV1",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/match2/v1/environment-variables": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "List environment variables.\n",
+        "operationId": "EnvironmentVariableList",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.ListEnvironmentVariablesResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "List environment variables",
+        "tags": ["Environment-Variables", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:MATCHMAKING:CONFIGURATION:ENVIRONMENTVARIABLE [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/backfill": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Create backfill ticket.\n",
+        "operationId": "CreateBackfill",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.BackFillCreateRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.BackfillCreateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create a backfill ticket",
+        "tags": ["Backfill", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/backfill/proposal": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get backfill proposal\n",
+        "operationId": "GetBackfillProposal",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Session ID information",
+            "in": "query",
+            "name": "sessionID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.BackfillProposalResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get backfill proposal",
+        "tags": ["Backfill", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/backfill/{backfillID}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete backfill ticket.\n",
+        "operationId": "DeleteBackfill",
+        "parameters": [
+          {
+            "description": "backfill Ticket ID",
+            "in": "path",
+            "name": "backfillID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete a backfill ticket",
+        "tags": ["Backfill", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [DELETE]"]
+          }
+        ]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get backfill ticket by ID\n",
+        "operationId": "GetBackfill",
+        "parameters": [
+          {
+            "description": "backfill Ticket ID",
+            "in": "path",
+            "name": "backfillID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.BackfillGetResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get a backfill ticket",
+        "tags": ["Backfill", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/backfill/{backfillID}/proposal/accept": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Accept backfill proposal.\n",
+        "operationId": "AcceptBackfill",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.BackFillAcceptRequest"
+            }
+          },
+          {
+            "description": "backfill Ticket ID",
+            "in": "path",
+            "name": "backfillID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GameSession"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Accept a backfill proposal",
+        "tags": ["Backfill", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/backfill/{backfillID}/proposal/reject": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Reject backfill proposal\n",
+        "operationId": "RejectBackfill",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.backFillRejectRequest"
+            }
+          },
+          {
+            "description": "backfill Ticket ID",
+            "in": "path",
+            "name": "backfillID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Reject a backfill proposal",
+        "tags": ["Backfill", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-functions": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "List existing match functions.\n",
+        "operationId": "MatchFunctionList",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Pagination limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Pagination offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.ListMatchFunctionsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "List existing match functions",
+        "tags": ["Match-Functions", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Creates a new matchmaking function.\n",
+        "operationId": "CreateMatchFunction",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.MatchFunctionRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create a match function",
+        "tags": ["Match-Functions", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-functions/{name}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Deletes an existing match function.\n",
+        "operationId": "DeleteMatchFunction",
+        "parameters": [
+          {
+            "description": "name of the match function",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete a match function",
+        "tags": ["Match-Functions", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [DELETE]"]
+          }
+        ]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Update existing matchmaking function.\n",
+        "operationId": "UpdateMatchFunction",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.MatchFunctionRequest"
+            }
+          },
+          {
+            "description": "name of the match function",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.MatchFunctionConfig"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update a match function",
+        "tags": ["Match-Functions", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-pools": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "List matchmaking pools.\n",
+        "operationId": "MatchPoolList",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Pagination limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "Match Pool name",
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "default": 0,
+            "description": "Pagination offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.ListMatchPoolsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "List match pools",
+        "tags": ["Match-Pools", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Creates a new matchmaking pool.\n\nA pool is isolated from other pools (i.e. tickets may be matched with other tickets in the same pool, but not with tickets in other pools).\nEach pool has its own matchmaking rules and/or logic.\n\nticket_expiration_seconds and backfill_ticket_expiration_seconds will be set to 300 seconds (5 minutes) by default if not filled.\n\nMatch Function holds information about the name of the match logic server that matchmaking can refers to. By default we provide (\u0026#34;default\u0026#34; and \u0026#34;basic\u0026#34;). \nMatch Function will be used as reference value for Match Function Overrides if not set.\nIn case Customer would like to use matchmaking service default match logic, then specify it in \u0026#34;match_function_overrides\u0026#34;.\t\t\t\t\nThis sample configuration will let matchmaking service will use \u0026#34;default\u0026#34; match logic for make matches, while validation will hit both \u0026#34;default\u0026#34; and \u0026#34;custom\u0026#34; match logics.\ne.g.\n{ \n              \u0026#34;match_function\u0026#34;: \u0026#34;custom\u0026#34;,\n  \u0026#34;match_function_overrides\u0026#34;: {\n    \u0026#34;validation\u0026#34;: []{\u0026#34;default\u0026#34;,\u0026#34;custom\u0026#34;},\n                \u0026#34;make_matches\u0026#34;: \u0026#34;default\u0026#34;,\n              }\n}\n",
+        "operationId": "CreateMatchPool",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.MatchPool"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create a match pool",
+        "tags": ["Match-Pools", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-pools/{pool}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Deletes an existing matchmaking pool.\n",
+        "operationId": "DeleteMatchPool",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the match pool",
+            "in": "path",
+            "name": "pool",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete a match pool",
+        "tags": ["Match-Pools", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [DELETE]"]
+          }
+        ]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get details for a specific match pool\n",
+        "operationId": "MatchPoolDetails",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the match pool",
+            "in": "path",
+            "name": "pool",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.MatchPool"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get details for a specific match pool",
+        "tags": ["Match-Pools", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [READ]"]
+          }
+        ]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Updates an existing matchmaking pool.\n\nticket_expiration_seconds and backfill_ticket_expiration_seconds will be set to 300 seconds (5 minutes) by default if not filled.\n\nMatch Function holds information about the name of the match logic server that matchmaking can refers to. By default we provide (\u0026#34;default\u0026#34; and \u0026#34;basic\u0026#34;). \nMatch Function will be used as reference value for Match Function Overrides if not set.\nIn case Customer would like to use matchmaking service default match logic, then specify it in \u0026#34;match_function_overrides\u0026#34;.\t\t\t\t\nThis sample configuration will let matchmaking service will use \u0026#34;default\u0026#34; match logic for make matches, while validation will hit both \u0026#34;default\u0026#34; and \u0026#34;custom\u0026#34; match logics.\ne.g.\n{\n\t\u0026#34;match_function\u0026#34;: \u0026#34;custom\u0026#34;,\n\t\u0026#34;match_function_overrides\u0026#34;: {\n\t\t\u0026#34;validation\u0026#34;: []{\u0026#34;default\u0026#34;,\u0026#34;custom\u0026#34;},\n\t\t\u0026#34;make_matches\u0026#34;: \u0026#34;default\u0026#34;,\n\t}\n}\n",
+        "operationId": "UpdateMatchPool",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.MatchPoolConfig"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the match pool",
+            "in": "path",
+            "name": "pool",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.MatchPool"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update a match pool",
+        "tags": ["Match-Pools", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-pools/{pool}/metrics": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get metric for a specific match pool\n\nResult: queueTime in seconds\n",
+        "operationId": "MatchPoolMetric",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the match pool",
+            "in": "path",
+            "name": "pool",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.TicketMetricResultRecord"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get metrics for a specific match pool",
+        "tags": ["Match-Pools", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL:METRICS [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-pools/{pool}/metrics/player": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get player metric for a specific match pool\n",
+        "operationId": "GetPlayerMetric",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the match pool",
+            "in": "path",
+            "name": "pool",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.PlayerMetricRecord"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get metrics player for a specific match pool",
+        "tags": ["Match-Pools", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:POOL:METRICS [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-pools/{pool}/tickets": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get tickets in queue for a specific match pool\n\nResult: number of tickets and list of ticket detail in a match pool.\n",
+        "operationId": "adminGetMatchPoolTickets",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the match pool",
+            "in": "path",
+            "name": "pool",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Pagination limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Pagination offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.ListMatchPoolTicketsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get tickets in queue for a specific match pool",
+        "tags": ["Match-Pools", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:POOL:TICKETS [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-tickets": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Creates a new request for matchmaking.\n\nCross Platform: Allow player to play game with \u0026#34;any\u0026#34; registered platforms.\n1. Cross Platform can be enabled through session service or create match ticket. \n\ta. via ticket: specify several cross_platform on create match ticket attributes. \n\t   This value will override player attributes in session service. e.g. cross_platform:[xbox,psn,steam]\n\tb. via session service: set player/party cross_platform attributes.\n\tc. Enable match options ruleset with name cross_platform and type \u0026#34;any\u0026#34;.\n\t{\n\t\t\u0026#34;name\u0026#34;: \u0026#34;co-op\u0026#34;,\n\t\t\u0026#34;data\u0026#34;: {\n\t\t  \u0026#34;alliance\u0026#34;: {\n\t\t\t\u0026#34;min_number\u0026#34;: 1,\n\t\t\t\u0026#34;max_number\u0026#34;: 1,\n\t\t\t\u0026#34;player_min_number\u0026#34;: 1,\n\t\t\t\u0026#34;player_max_number\u0026#34;: 4\n\t\t  }, \n\t\t  \u0026#34;match_options\u0026#34;: {\n\t\t\t\u0026#34;options\u0026#34;: [\n\t\t\t  {“name”: “cross_platform”, “type”: “any”}\n\t\t\t]\n\t\t  }\n\t\t}\n\t}\n2. Cross Platform can be disabled with specify only ONE cross_platform. Current matchmaking use this behavior. e.g. cross_platform:[xbox] \n3. Matchmaking will consider Party leader cross_platform preference or Session attribute cross_platform preference.\n4. This behavior only works for Default Matchmaker. Custom matchmaker (custom gRPC matchmaker) need to consider this on its own implementation.\n",
+        "operationId": "CreateMatchTicket",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.MatchTicketRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.MatchTicketResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found when the specified match pool does not exist",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create a matchmaking ticket",
+        "tags": ["Match-Tickets", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:TICKET [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-tickets/me": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get my match tickets.\n",
+        "operationId": "GetMyMatchTickets",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit of the returned data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "ticket match pool",
+            "in": "query",
+            "name": "matchPool",
+            "type": "string"
+          },
+          {
+            "description": "offset of the data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.MatchTicketStatuses"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get my match tickets",
+        "tags": ["Match-Tickets", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:TICKET [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-tickets/{ticketid}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Deletes an existing matchmaking ticket.\n",
+        "operationId": "DeleteMatchTicket",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the match ticket",
+            "in": "path",
+            "name": "ticketid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete a match ticket",
+        "tags": ["Match-Tickets", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:TICKET [DELETE]"]
+          }
+        ]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get details for a specific match ticket\n",
+        "operationId": "MatchTicketDetails",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "id of the ticket to get the status of",
+            "in": "path",
+            "name": "ticketid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.MatchTicketStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get details for a specific match ticket",
+        "tags": ["Match-Tickets", "public"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:TICKET [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/rulesets": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "List rule sets.\n",
+        "operationId": "RuleSetList",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Pagination limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "Rule Set name",
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "default": 0,
+            "description": "Pagination offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.ListRuleSetsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "List existing rule sets",
+        "tags": ["Rule-Sets", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Creates a new rules set.\n\nA rule set has a name and contains arbitrary data which is meaningful to some particular match function(s)\nThe name is used for a match pool to select the ruleset data that should be sent to the match function when matchmaking in that pool.\n\nTo use custom rules set please set enable_custom_match_function=true. Default (false).\n",
+        "operationId": "CreateRuleSet",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.RuleSetPayload"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create a match rule set",
+        "tags": ["Rule-Sets", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/rulesets/{ruleset}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Deletes an existing rule set.\n",
+        "operationId": "DeleteRuleSet",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the rule set",
+            "in": "path",
+            "name": "ruleset",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete a rule set",
+        "tags": ["Rule-Sets", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [DELETE]"]
+          }
+        ]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get details for a specific rule set\n",
+        "operationId": "RuleSetDetails",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the rule set",
+            "in": "path",
+            "name": "ruleset",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.RuleSetPayload"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get details for a specific rule set",
+        "tags": ["Rule-Sets", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [READ]"]
+          }
+        ]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Updates an existing matchmaking rule set.\n\t\nTo use custom rules set please set enable_custom_match_function=true. Default (false).\n",
+        "operationId": "UpdateRuleSet",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.RuleSetPayload"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the match rule set",
+            "in": "path",
+            "name": "ruleset",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.RuleSetPayload"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update a match rule set",
+        "tags": ["Rule-Sets", "admin"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/version": {
+      "get": {
+        "operationId": "versionCheckHandler",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "api.BackFillAcceptRequest": {
+      "properties": {
+        "proposalId": {
+          "type": "string"
+        },
+        "stop": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["proposalId", "stop"]
+    },
+    "api.BackFillCreateRequest": {
+      "properties": {
+        "matchPool": {
+          "type": "string"
+        },
+        "sessionId": {
+          "type": "string"
+        }
+      },
+      "required": ["matchPool", "sessionId"]
+    },
+    "api.BackfillCreateResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"]
+    },
+    "api.BackfillGetResponse": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "matchSessionID": {
+          "type": "string"
+        },
+        "partialMatch": {
+          "$ref": "#/definitions/api.Match"
+        },
+        "ticketID": {
+          "type": "string"
+        }
+      }
+    },
+    "api.BackfillProposalResponse": {
+      "properties": {
+        "backfillTicketID": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "matchSessionID": {
+          "type": "string"
+        },
+        "proposalID": {
+          "type": "string"
+        },
+        "proposedTeams": {
+          "items": {
+            "$ref": "#/definitions/api.Team"
+          },
+          "type": "array"
+        },
+        "tickets": {
+          "items": {
+            "$ref": "#/definitions/api.Ticket"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "api.ListEnvironmentVariablesResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/config.EnvironmentVariable"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "api.ListMatchFunctionsResponse": {
+      "properties": {
+        "configs": {
+          "items": {
+            "$ref": "#/definitions/api.MatchFunctionConfig"
+          },
+          "type": "array"
+        },
+        "functions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "pagination": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["functions", "pagination"]
+    },
+    "api.ListMatchPoolTicketsResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/matchmaker.MatchTicketRecord"
+          },
+          "type": "array"
+        },
+        "pagination": {
+          "$ref": "#/definitions/models.Pagination"
+        },
+        "totalData": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["data", "totalData"]
+    },
+    "api.ListMatchPoolsResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/api.MatchPool"
+          },
+          "type": "array"
+        },
+        "pagination": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      }
+    },
+    "api.ListRuleSetsResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/api.MatchRuleSetNameData"
+          },
+          "type": "array"
+        },
+        "pagination": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      }
+    },
+    "api.Match": {
+      "properties": {
+        "backfill": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "clientVersion": {
+          "type": "string"
+        },
+        "matchAttributes": {
+          "type": "object"
+        },
+        "regionPreference": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "teams": {
+          "items": {
+            "$ref": "#/definitions/api.Team"
+          },
+          "type": "array"
+        },
+        "tickets": {
+          "items": {
+            "$ref": "#/definitions/api.Ticket"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "api.MatchFunctionConfig": {
+      "properties": {
+        "match_function": {
+          "type": "string"
+        },
+        "serviceAppName": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": ["match_function", "url"]
+    },
+    "api.MatchFunctionOverride": {
+      "properties": {
+        "backfill_matches": {
+          "type": "string"
+        },
+        "enrichment": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "make_matches": {
+          "type": "string"
+        },
+        "stat_codes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "validation": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "api.MatchFunctionRequest": {
+      "properties": {
+        "match_function": {
+          "type": "string"
+        },
+        "serviceAppName": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": ["match_function", "url"]
+    },
+    "api.MatchPool": {
+      "properties": {
+        "auto_accept_backfill_proposal": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "backfill_proposal_expiration_seconds": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "backfill_ticket_expiration_seconds": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "match_function": {
+          "type": "string"
+        },
+        "match_function_override": {
+          "$ref": "#/definitions/api.MatchFunctionOverride"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rule_set": {
+          "type": "string"
+        },
+        "session_template": {
+          "type": "string"
+        },
+        "ticket_expiration_seconds": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "auto_accept_backfill_proposal",
+        "backfill_proposal_expiration_seconds",
+        "backfill_ticket_expiration_seconds",
+        "match_function",
+        "match_function_override",
+        "name",
+        "rule_set",
+        "session_template",
+        "ticket_expiration_seconds"
+      ]
+    },
+    "api.MatchPoolConfig": {
+      "properties": {
+        "auto_accept_backfill_proposal": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "backfill_proposal_expiration_seconds": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "backfill_ticket_expiration_seconds": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "match_function": {
+          "type": "string"
+        },
+        "match_function_override": {
+          "$ref": "#/definitions/api.MatchFunctionOverride"
+        },
+        "rule_set": {
+          "type": "string"
+        },
+        "session_template": {
+          "type": "string"
+        },
+        "ticket_expiration_seconds": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "auto_accept_backfill_proposal",
+        "backfill_proposal_expiration_seconds",
+        "backfill_ticket_expiration_seconds",
+        "match_function",
+        "match_function_override",
+        "rule_set",
+        "session_template",
+        "ticket_expiration_seconds"
+      ]
+    },
+    "api.MatchRuleSetNameData": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["name"]
+    },
+    "api.MatchTicketRequest": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "latencies": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "sessionID": {
+          "type": "string"
+        }
+      },
+      "required": ["attributes", "latencies", "matchPool"]
+    },
+    "api.MatchTicketResponse": {
+      "properties": {
+        "matchTicketID": {
+          "type": "string"
+        },
+        "queueTime": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["matchTicketID", "queueTime"]
+    },
+    "api.MatchTicketStatus": {
+      "properties": {
+        "matchFound": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "matchTicketID": {
+          "type": "string"
+        },
+        "proposedProposal": {
+          "$ref": "#/definitions/api.ProposedProposal"
+        },
+        "sessionID": {
+          "type": "string"
+        }
+      },
+      "required": ["matchFound", "sessionID"]
+    },
+    "api.MatchTicketStatuses": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/api.MatchTicketStatus"
+          },
+          "type": "array"
+        },
+        "pagination": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data"]
+    },
+    "api.Party": {
+      "properties": {
+        "partyID": {
+          "type": "string"
+        },
+        "userIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "api.PlayerData": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "partyID": {
+          "type": "string"
+        },
+        "playerID": {
+          "type": "string"
+        }
+      }
+    },
+    "api.PlayerMetricRecord": {
+      "properties": {
+        "playerInQueue": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["playerInQueue"]
+    },
+    "api.ProposedProposal": {
+      "properties": {
+        "backfillID": {
+          "type": "string"
+        },
+        "proposalID": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "api.RuleSetPayload": {
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/api.RuleSetPayloadData"
+        },
+        "enable_custom_match_function": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["data", "enable_custom_match_function", "name"]
+    },
+    "api.RuleSetPayloadData": {},
+    "api.Team": {
+      "properties": {
+        "parties": {
+          "items": {
+            "$ref": "#/definitions/api.Party"
+          },
+          "type": "array"
+        },
+        "userIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "api.Ticket": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "latencies": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "partySessionID": {
+          "type": "string"
+        },
+        "players": {
+          "items": {
+            "$ref": "#/definitions/api.PlayerData"
+          },
+          "type": "array"
+        },
+        "ticketAttributes": {
+          "type": "object"
+        },
+        "ticketID": {
+          "type": "string"
+        }
+      }
+    },
+    "api.TicketMetricResultRecord": {
+      "properties": {
+        "queueTime": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["queueTime"]
+    },
+    "api.backFillRejectRequest": {
+      "properties": {
+        "proposalId": {
+          "type": "string"
+        },
+        "stop": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["proposalId", "stop"]
+    },
+    "config.EnvironmentVariable": {
+      "properties": {
+        "actualValue": {
+          "type": "string"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["name"]
+    },
+    "matchmaker.MatchTicketRecord": {
+      "properties": {
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "IsActive": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "PartySessionID": {
+          "type": "string"
+        },
+        "ProposedProposal": {
+          "$ref": "#/definitions/matchmaker.ProposedProposal"
+        },
+        "SessionID": {
+          "type": "string"
+        },
+        "Ticket": {
+          "$ref": "#/definitions/matchmaker.Ticket"
+        },
+        "TicketID": {
+          "type": "string"
+        },
+        "UniqueTicketID": {
+          "type": "string"
+        }
+      },
+      "required": ["CreatedAt", "IsActive", "PartySessionID", "ProposedProposal", "SessionID", "Ticket", "TicketID", "UniqueTicketID"]
+    },
+    "matchmaker.Party": {
+      "properties": {
+        "partyID": {
+          "type": "string"
+        },
+        "userIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["partyID", "userIDs"]
+    },
+    "matchmaker.ProposedProposal": {
+      "properties": {
+        "BackfillID": {
+          "type": "string"
+        },
+        "ProposalID": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      },
+      "required": ["BackfillID", "ProposalID", "Status"]
+    },
+    "matchmaker.Team": {
+      "properties": {
+        "Parties": {
+          "items": {
+            "$ref": "#/definitions/matchmaker.Party"
+          },
+          "type": "array"
+        },
+        "UserIDs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["Parties", "UserIDs"]
+    },
+    "matchmaker.Ticket": {
+      "properties": {
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "Latencies": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        },
+        "MatchPool": {
+          "type": "string"
+        },
+        "Namespace": {
+          "type": "string"
+        },
+        "PartySessionID": {
+          "type": "string"
+        },
+        "Players": {
+          "items": {
+            "$ref": "#/definitions/player.PlayerData"
+          },
+          "type": "array"
+        },
+        "ProposedProposal": {
+          "$ref": "#/definitions/matchmaker.ProposedProposal"
+        },
+        "TicketAttributes": {
+          "type": "object"
+        },
+        "TicketID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CreatedAt",
+        "Latencies",
+        "MatchPool",
+        "Namespace",
+        "PartySessionID",
+        "Players",
+        "ProposedProposal",
+        "TicketAttributes",
+        "TicketID"
+      ]
+    },
+    "models.Configuration": {
+      "properties": {
+        "clientVersion": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "inactiveTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inviteTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "joinability": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "requestedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientVersion",
+        "deployment",
+        "inactiveTimeout",
+        "inviteTimeout",
+        "joinability",
+        "maxPlayers",
+        "minPlayers",
+        "name",
+        "requestedRegions",
+        "type"
+      ]
+    },
+    "models.DSInformation": {
+      "properties": {
+        "MinPlayers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "RequestedAt": {
+          "type": "string"
+        },
+        "RequestedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Server": {
+          "$ref": "#/definitions/models.Server"
+        },
+        "Status": {
+          "type": "string"
+        }
+      },
+      "required": ["MinPlayers", "RequestedAt", "RequestedRegions", "Server", "Status"]
+    },
+    "models.GameSession": {
+      "properties": {
+        "DSInformation": {
+          "$ref": "#/definitions/models.DSInformation"
+        },
+        "GameMode": {
+          "type": "string"
+        },
+        "JoinType": {
+          "type": "string"
+        },
+        "Members": {
+          "items": {
+            "$ref": "#/definitions/models.User"
+          },
+          "type": "array"
+        },
+        "attributes": {
+          "type": "object"
+        },
+        "backfillTicketID": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/models.Configuration"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string"
+        },
+        "leaderID": {
+          "type": "string"
+        },
+        "matchPool": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "teams": {
+          "items": {
+            "$ref": "#/definitions/matchmaker.Team"
+          },
+          "type": "array"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "DSInformation",
+        "GameMode",
+        "JoinType",
+        "Members",
+        "attributes",
+        "backfillTicketID",
+        "configuration",
+        "createdAt",
+        "id",
+        "leaderID",
+        "matchPool",
+        "namespace",
+        "teams",
+        "updatedAt",
+        "version"
+      ]
+    },
+    "models.Pagination": {
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      },
+      "required": ["first", "last", "next", "previous"]
+    },
+    "models.Server": {
+      "properties": {
+        "alternate_ips": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "custom_attribute": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "game_version": {
+          "type": "string"
+        },
+        "image_version": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "is_override_game_version": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "last_update": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "pod_name": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ports": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "alternate_ips",
+        "custom_attribute",
+        "deployment",
+        "game_version",
+        "image_version",
+        "ip",
+        "is_override_game_version",
+        "last_update",
+        "namespace",
+        "pod_name",
+        "port",
+        "ports",
+        "protocol",
+        "provider",
+        "region",
+        "session_id",
+        "status"
+      ]
+    },
+    "models.User": {
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "PlatformID": {
+          "type": "string"
+        },
+        "PlatformUserID": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": ["ID", "PlatformID", "PlatformUserID", "Status", "UpdatedAt"]
+    },
+    "player.PlayerData": {
+      "properties": {
+        "Attributes": {
+          "type": "object"
+        },
+        "PartyID": {
+          "type": "string"
+        },
+        "PlayerID": {
+          "type": "string"
+        }
+      },
+      "required": ["Attributes", "PartyID", "PlayerID"]
+    },
+    "response.Error": {
+      "properties": {
+        "ErrorCode": {
+          "format": "int32",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "ErrorMessage": {
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": ["ErrorCode", "ErrorMessage"]
+    }
+  },
+  "x-docs": {
+    "alias": "match2",
+    "host": "https://development.accelbyte.io",
+    "path": "/match2/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2024-01-17T09:41:09+00:00",
+    "gitHash": "3354ffbcf238193eb98090eee432de17e86f45a1",
+    "version": "2.14.2",
+    "version-roles-seeding": "1.0.12"
+  }
+}

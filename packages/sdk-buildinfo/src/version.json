@@ -1,0 +1,14 @@
+{
+  "buildBy": "Gradle 6.9.1",
+  "buildDate": "2024-01-18T01:33:46+00:00",
+  "buildID": "3.28.11",
+  "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
+  "buildOS": "Linux amd64 5.10.205-195.804.amzn2.x86_64",
+  "gitBranchName": "unknown",
+  "gitHash": "3291719098",
+  "gitTag": "3.28.8",
+  "name": "justice-buildinfo-service",
+  "realm": "staging",
+  "version": "3.28.11",
+  "version-roles-seeding": "0.0.3"
+}

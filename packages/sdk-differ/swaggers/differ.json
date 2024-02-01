@@ -1,0 +1,256 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "contact": {
+      "email": "engineering@accelbyte.io",
+      "name": "Engineering Team at AccelByte",
+      "url": "https://accelbyte.io"
+    },
+    "description": "Justice Differ Service",
+    "title": "JusticeDiffer",
+    "version": ""
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/differ/apidocs"
+  },
+  "securityDefinitions": {
+    "HasPermission": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "HasScope": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/differ/namespaces/{namespace}/diff": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.\u0026lt;/p\u0026gt;\u0026lt;p\u0026gt;Every request is registered into the queue first, and will be processed by the available Differ.\u0026lt;/p\u0026gt;\u0026lt;p\u0026gt;The \u0026lt;b\u0026gt;priority\u0026lt;/b\u0026gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.\u0026lt;/p\u0026gt;\u0026lt;br/\u0026gt;\u0026lt;p\u0026gt;Scope required: \u0026lt;code\u0026gt;publishing\u0026lt;/code\u0026gt;\u0026lt;/p\u0026gt;",
+        "operationId": "PerformLateDiff",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dto.LateDiffRequest"
+            }
+          },
+          {
+            "description": "namespace of the build",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Perform diff from buildId A to buildId B",
+        "tags": ["Diff Calculation"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/differ/namespaces/{namespace}/ping": {
+      "get": {
+        "consumes": ["application/json"],
+        "operationId": "Ping",
+        "parameters": [
+          {
+            "description": "namespace of the build",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.PingResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Ping this diff",
+        "tags": ["Diff Calculation"],
+        "x-security": [
+          {
+            "userPermissions": []
+          }
+        ]
+      }
+    },
+    "/differ/v2/namespaces/{namespace}/diff": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.\u0026lt;/p\u0026gt;\u0026lt;p\u0026gt;The Diffs calculation will be parallelized between the available Differ instances.\u0026lt;/p\u0026gt;\u0026lt;p\u0026gt;The \u0026lt;b\u0026gt;priority\u0026lt;/b\u0026gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.\u0026lt;/p\u0026gt;\u0026lt;br/\u0026gt;\u0026lt;p\u0026gt;Scope required: \u0026lt;code\u0026gt;publishing\u0026lt;/code\u0026gt;\u0026lt;/p\u0026gt;",
+        "operationId": "PerformLateDiffV2",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dto.LateDiffRequest"
+            }
+          },
+          {
+            "description": "namespace of the build",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Perform diff from buildId A to buildId B",
+        "tags": ["Diff Calculation"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]"]
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "dto.LateDiffRequest": {
+      "properties": {
+        "destinationBuildId": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "sourceBuildId": {
+          "type": "string"
+        }
+      },
+      "required": ["destinationBuildId", "namespace", "sourceBuildId"]
+    },
+    "dto.PingResponse": {
+      "properties": {
+        "resp": {
+          "type": "string"
+        }
+      },
+      "required": ["resp"]
+    },
+    "response.Error": {
+      "properties": {
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      },
+      "required": ["errorCode", "errorMessage"]
+    }
+  },
+  "x-docs": {
+    "alias": "differ",
+    "host": "https://development.accelbyte.io",
+    "path": "/differ/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2023-12-12T02:41:33+00:00",
+    "gitHash": "5bd2fd845fb34bc4b7d8ef4d1256df7852793d3e",
+    "name": "JusticeDiffer",
+    "realm": "dev",
+    "version": "1.25.5"
+  }
+}

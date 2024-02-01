@@ -1,0 +1,97 @@
+/*
+ * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+/**
+ * AUTO GENERATED
+ */
+/* eslint-disable camelcase */
+import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AdminConcurrentRecordAdmin$ } from './endpoints/AdminConcurrentRecordAdmin$.js'
+import { AdminConcurrentRecordRequest } from '../generated-definitions/AdminConcurrentRecordRequest.js'
+import { AdminGameConcurrentRecordRequest } from '../generated-definitions/AdminGameConcurrentRecordRequest.js'
+import { AdminPlayerConcurrentRecordRequest } from '../generated-definitions/AdminPlayerConcurrentRecordRequest.js'
+import { PlayerRecordConcurrentUpdateResponse } from '../generated-definitions/PlayerRecordConcurrentUpdateResponse.js'
+
+export function AdminConcurrentRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+  const sdkAssembly = sdk.assembly()
+
+  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
+  const cache = args?.cache ? args?.cache : sdkAssembly.cache
+  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
+  const isValidationEnabled = args?.isValidationEnabled !== false
+
+  /**
+   * ## Description This endpoints will create new game record or replace the existing game record. **Replace behaviour:** The existing value will be replaced completely with the new value. Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Reserved Word Reserved Word List: **__META** The reserved word cannot be used as a field in record value, If still defining the field when creating or updating the record, it will be ignored. ## Parameters Notes 1. set_by (default: CLIENT, type: string) Indicate which party that could modify the game record. SERVER: record can be modified by server only. CLIENT: record can be modified by client and server. 2. updatedAt (required: true) Time format style: RFC3339 3. value Json **Request Body Example:** ``` { &#34;set_by&#34;: &#34;SERVER&#34;, &#34;value&#34;: {}, &#34;updatedAt&#34;: &#34;2022-03-17T10:42:15.444Z&#34; } ``` ## Optimistic Concurrency Control This endpoint implement optimistic concurrency control to avoid race condition. If the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed) and client need to redo the operation (fetch data and do update). Otherwise, the server will process the request.
+   */
+  async function updateConcurrentRecord_ByKey(key: string, data: AdminConcurrentRecordRequest): Promise<unknown> {
+    const $ = new AdminConcurrentRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateConcurrentRecord_ByKey(key, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * ## Description This endpoints will create new game record or replace the existing game record. **Replace behaviour:** The existing value will be replaced completely with the new value. Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Reserved Word Reserved Word List: **__META** The reserved word cannot be used as a field in record value, If still defining the field when creating or updating the record, it will be ignored. ## Parameters Notes 1. updatedAt (required: true) Time format style: RFC3339 2. value Json **Request Body Example:** ``` { &#34;value&#34;: {}, &#34;updatedAt&#34;: &#34;2022-03-17T10:42:15.444Z&#34; } ``` ## Optimistic Concurrency Control This endpoint implement optimistic concurrency control to avoid race condition. If the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed) and client need to redo the operation (fetch data and do update). Otherwise, the server will process the request.
+   */
+  async function updateConcurrentAdminrecord_ByKey(key: string, data: AdminGameConcurrentRecordRequest): Promise<unknown> {
+    const $ = new AdminConcurrentRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateConcurrentAdminrecord_ByKey(key, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * ## Description This endpoints will create new player record or replace the existing player record. **Replace behaviour:** The existing value will be replaced completely with the new value. Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Reserved Word Reserved Word List: **__META** The reserved word cannot be used as a field in record value, If still defining the field when creating or updating the record, it will be ignored. ## Parameters Notes 1. set_by (default: CLIENT, type: string) Indicate which party that could modify the game record. SERVER: record can be modified by server only. CLIENT: record can be modified by client and server. 2. updatedAt (required: true) Time format style: RFC3339 3. value Json **Request Body Example:** ``` { &#34;set_by&#34;: &#34;SERVER&#34;, &#34;value&#34;: {}, &#34;updatedAt&#34;: &#34;2022-03-17T10:42:15.444Z&#34; } ``` ## Optimistic Concurrency Control This endpoint implement optimistic concurrency control to avoid race condition. If the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed) and client need to redo the operation (fetch data and do update). Otherwise, the server will process the request.
+   */
+  async function updateConcurrentRecord_ByUserId_ByKey(
+    userId: string,
+    key: string,
+    data: AdminConcurrentRecordRequest,
+    queryParams?: { responseBody?: boolean | null }
+  ): Promise<PlayerRecordConcurrentUpdateResponse> {
+    const $ = new AdminConcurrentRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateConcurrentRecord_ByUserId_ByKey(userId, key, data, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * ## Description This endpoints will create new admin player record or replace the existing admin player record. **Replace behaviour:** The existing value will be replaced completely with the new value. Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Reserved Word Reserved Word List: **__META** The reserved word cannot be used as a field in record value, If still defining the field when creating or updating the record, it will be ignored. ## Parameters Notes 1. updatedAt (required: true) Time format style: RFC3339 2. value Json **Request Body Example:** ``` { &#34;value&#34;: {}, &#34;updatedAt&#34;: &#34;2022-03-17T10:42:15.444Z&#34; } ``` ## Optimistic Concurrency Control This endpoint implement optimistic concurrency control to avoid race condition. If the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed) and client need to redo the operation (fetch data and do update). Otherwise, the server will process the request.
+   */
+  async function updateConcurrentAdminrecord_ByUserId_ByKey(
+    userId: string,
+    key: string,
+    data: AdminPlayerConcurrentRecordRequest,
+    queryParams?: { responseBody?: boolean | null }
+  ): Promise<PlayerRecordConcurrentUpdateResponse> {
+    const $ = new AdminConcurrentRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateConcurrentAdminrecord_ByUserId_ByKey(userId, key, data, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * ## Description This endpoints will create new player public record or replace the existing player public record. **Replace behaviour:** The existing value will be replaced completely with the new value. Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Reserved Word Reserved Word List: **__META** The reserved word cannot be used as a field in record value, If still defining the field when creating or updating the record, it will be ignored. ## Parameters Notes 1. set_by (default: CLIENT, type: string) Indicate which party that could modify the game record. SERVER: record can be modified by server only. CLIENT: record can be modified by client and server. 2. updatedAt (required: true) Time format style: RFC3339 3. value Json **Request Body Example:** ``` { &#34;set_by&#34;: &#34;SERVER&#34;, &#34;value&#34;: {}, &#34;updatedAt&#34;: &#34;2022-03-17T10:42:15.444Z&#34; } ``` ## Optimistic Concurrency Control This endpoint implement optimistic concurrency control to avoid race condition. If the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed) and client need to redo the operation (fetch data and do update). Otherwise, the server will process the request.
+   */
+  async function updatePublicConcurrent_ByUserId_ByKey(
+    userId: string,
+    key: string,
+    data: AdminConcurrentRecordRequest,
+    queryParams?: { responseBody?: boolean | null }
+  ): Promise<PlayerRecordConcurrentUpdateResponse> {
+    const $ = new AdminConcurrentRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updatePublicConcurrent_ByUserId_ByKey(userId, key, data, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  return {
+    updateConcurrentRecord_ByKey,
+    updateConcurrentAdminrecord_ByKey,
+    updateConcurrentRecord_ByUserId_ByKey,
+    updateConcurrentAdminrecord_ByUserId_ByKey,
+    updatePublicConcurrent_ByUserId_ByKey
+  }
+}
