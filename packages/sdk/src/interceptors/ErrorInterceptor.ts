@@ -3,12 +3,19 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { AxiosError } from 'axios'
+import { AxiosError, HttpStatusCode } from 'axios'
 import { injectResponseInterceptors } from '../utils/Network'
 
 const ERROR_ELIGIBILITY_CODE = 13130
 
-export const injectErrorInterceptors = (baseUrl: string, onUserEligibilityChange?: () => void, onError?: (error: AxiosError) => void) => {
+type ErrorInterceptor = {
+  baseUrl: string
+  onUserEligibilityChange?: () => void
+  onError?: (error: AxiosError) => void
+  onTooManyRequest?: (error: AxiosError) => void
+}
+
+export const injectErrorInterceptors = ({ baseUrl, onError, onTooManyRequest, onUserEligibilityChange }: ErrorInterceptor) => {
   injectResponseInterceptors(
     response => {
       return response
@@ -20,6 +27,10 @@ export const injectErrorInterceptors = (baseUrl: string, onUserEligibilityChange
           if (response.data.errorCode === ERROR_ELIGIBILITY_CODE && onUserEligibilityChange) {
             onUserEligibilityChange()
           }
+        }
+
+        if (response?.status === HttpStatusCode.TooManyRequests && onTooManyRequest) {
+          onTooManyRequest(error)
         }
       }
       if (onError) {

@@ -1,5 +1,17 @@
 # @accelbyte/sdk
 
+## 2.3.1
+
+### Patch Changes
+
+- Add `onTooManyRequest` into `onEvents` to handle event when the request fail if the backend returns 429 response (too many request)
+
+## 2.3.0
+
+### Minor Changes
+
+- CW-3798 Add descriptive log when the other service is down. 
+
 ## 2.0.6
 
 ### Patch Changes

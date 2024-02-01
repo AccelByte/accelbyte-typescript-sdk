@@ -50,6 +50,10 @@ const sdk = Accelbyte.SDK({
     // a callback function fired on error
     onError: error => {
       console.log('SDK EVENT: ERROR ->', error.response)
+    },
+    // a callback function fired when a request/backend return 429 status
+    onTooManyRequest: error => {
+      console.log('Do something when when request being throttled', error)
     }
   }
 })

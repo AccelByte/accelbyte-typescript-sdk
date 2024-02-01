@@ -50,6 +50,10 @@ export class Validate {
     })
   }
 
+  static unsafeResponse<D>(networkCall: () => Promise<AxiosResponse<D>>) {
+    return wrapNetworkCallSafely<D>(() => networkCall())
+  }
+
   static safeParse<D>(data: unknown, Codec: z.ZodType<D>): D | null {
     const result = Codec.safeParse(data)
     if (result.success) {

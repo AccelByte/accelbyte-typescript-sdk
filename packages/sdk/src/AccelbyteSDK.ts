@@ -25,6 +25,7 @@ export interface AccelbyteSDK {
     baseURL: string
     cache: boolean | undefined
     refreshToken?: string
+    isValidationEnabled?: boolean
   }
 }
 
@@ -91,7 +92,12 @@ class AccelbyteSDKImpl {
         injectInternalNetworkInterceptors()
       }
       injectAuthInterceptors(clientId, this.getConfig, this.events?.onSessionExpired, this.events?.onGetUserSession, this.getRefreshToken)
-      injectErrorInterceptors(baseURL, this.events?.onUserEligibilityChange, this.events?.onError)
+      injectErrorInterceptors({
+        baseUrl: baseURL,
+        onError: this.events?.onError,
+        onUserEligibilityChange: this.events?.onUserEligibilityChange,
+        onTooManyRequest: this.events?.onTooManyRequest
+      })
     }
 
     // TODO reintegrate doVersionDiagnostics later on

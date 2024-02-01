@@ -9,7 +9,7 @@
     "example:admin": "node --es-module-specifier-resolution=node exampleAdmin.mjs"
   },
   "dependencies": {
-    "@accelbyte/sdk": "2.3.0",
+    "@accelbyte/sdk": "2.4.1",
     "@accelbyte/sdk-basic": "4.0.0",
     "@accelbyte/sdk-iam": "4.0.0",
     "@accelbyte/sdk-legal": "4.0.0",

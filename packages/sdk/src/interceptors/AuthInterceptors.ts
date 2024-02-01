@@ -145,6 +145,7 @@ export const injectAuthInterceptors = (
       }
 
       if (!response) {
+        console.error(`\n[ERROR] response from ${config?.baseURL}${config?.url}. ${(error as AxiosError).message}\n`)
         console.error('injectResponseInterceptors net::ERR_INTERNET_DISCONNECTED')
       }
 
@@ -164,7 +165,9 @@ export const injectAuthInterceptors = (
           return uponRefreshComplete(error, tokenResponse, onSessionExpired, axiosConfig, config || {})
         })
       }
-
+      if (response && response?.status >= 500 && response?.status <= 599) {
+        console.error(`\n[ERROR][${response?.status}] response from ${config?.baseURL}${config?.url}. Please contact this service PIC.\n`)
+      }
       return Promise.reject(error)
     }
   )

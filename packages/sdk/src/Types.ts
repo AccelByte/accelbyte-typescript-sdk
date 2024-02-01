@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -25,6 +25,7 @@ export interface ApiArgs {
   config?: SDKRequestConfig
   namespace?: string
   cache?: boolean
+  isValidationEnabled?: boolean
 }
 
 export interface CustomInterceptors {
@@ -85,6 +86,10 @@ export interface SDKEvents {
    * [Docs reference](https://docs.accelbyte.io/gaming-services/knowledge-base/api-endpoints-error-codes/#10130---user-under-age).
    */
   onUserEligibilityChange?: () => void
+  /**
+   * The callback fired whenever there is a 429 response error (request being throttled/rate-limited).
+   */
+  onTooManyRequest?: (error: AxiosError) => void
   /**
    * The callback fired whenever there is a non-specific response error.
    */
