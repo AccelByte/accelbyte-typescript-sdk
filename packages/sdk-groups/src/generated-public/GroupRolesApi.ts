@@ -23,7 +23,7 @@ export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;Required Member Role Permission: &#34;GROUP:ROLE [READ]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to get list of member roles&lt;/p&gt; &lt;p&gt;Action Code: 73201&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE \[READ\]&#34; This endpoint is used to get list of member roles Action Code: 73201
    */
   async function getRoles(queryParams?: { limit?: number; offset?: number }): Promise<GetMemberRolesListResponseV1> {
     const $ = new GroupRoles$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -33,7 +33,7 @@ export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to get list of member roles&lt;/p&gt; &lt;p&gt;Action Code: 73201&lt;/p&gt;
+   * This endpoint is used to get list of member roles Action Code: 73201
    */
   async function getRoles_ByNS(queryParams?: { limit?: number; offset?: number }): Promise<GetMemberRolesListResponseV1> {
     const $ = new GroupRoles$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -43,7 +43,7 @@ export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to remove role from group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&#34; This endpoint is used to remove role from group member Action Code: 73204
    */
   async function deleteMember_ByMemberRoleId(memberRoleId: string, data: RemoveRoleFromMemberRequestV1): Promise<unknown> {
     const $ = new GroupRoles$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -53,7 +53,7 @@ export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&lt;/p&gt; &lt;p&gt;This endpoint is used to assign role to group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE] This endpoint is used to assign role to group member Action Code: 73204
    */
   async function createMember_ByMemberRoleId(
     memberRoleId: string,
@@ -66,7 +66,7 @@ export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to remove role from group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE \[UPDATE\]&#34; This endpoint is used to remove role from group member Action Code: 73204
    */
   async function deleteMember_ByMemberRoleId_ByGroupId(
     memberRoleId: string,
@@ -80,7 +80,7 @@ export function GroupRolesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&lt;/p&gt; &lt;p&gt;This endpoint is used to assign role to group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE] This endpoint is used to assign role to group member Action Code: 73204
    */
   async function createMember_ByMemberRoleId_ByGroupId(
     memberRoleId: string,

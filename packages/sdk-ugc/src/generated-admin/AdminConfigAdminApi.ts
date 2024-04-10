@@ -21,7 +21,7 @@ export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]&lt;/b&gt;
+   * Get config paginated
    */
   async function getConfigs(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetConfigsResponse> {
     const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -31,7 +31,7 @@ export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]&lt;/b&gt;. It will create a new config if the &lt;i&gt;key&lt;/i&gt; doesn&#39;t exist. Allowed key value: - &lt;i&gt;contentReview&lt;/i&gt;: &lt;i&gt;enabled&lt;/i&gt;,&lt;i&gt;disabled&lt;/i&gt;
+   * This endpoint will create a new config if the *key* doesn&#39;t exist. Allowed key value: - *contentReview*: *enabled*,*disabled*
    */
   async function patchConfig_ByKey(key: string, data: UpdateConfigRequest): Promise<unknown> {
     const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

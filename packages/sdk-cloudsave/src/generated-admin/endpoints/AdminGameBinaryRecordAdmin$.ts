@@ -10,10 +10,10 @@ import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, 
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BinaryRecordRequest } from '../../generated-definitions/BinaryRecordRequest.js'
+import { GameBinaryRecordAdminResponse } from '../../generated-definitions/GameBinaryRecordAdminResponse.js'
 import { GameBinaryRecordCreate } from '../../generated-definitions/GameBinaryRecordCreate.js'
 import { GameBinaryRecordMetadataRequest } from '../../generated-definitions/GameBinaryRecordMetadataRequest.js'
-import { GameBinaryRecordResponse } from '../../generated-definitions/GameBinaryRecordResponse.js'
-import { ListGameBinaryRecordsResponse } from '../../generated-definitions/ListGameBinaryRecordsResponse.js'
+import { ListGameBinaryRecordsAdminResponse } from '../../generated-definitions/ListGameBinaryRecordsAdminResponse.js'
 import { UploadBinaryRecordRequest } from '../../generated-definitions/UploadBinaryRecordRequest.js'
 import { UploadBinaryRecordResponse } from '../../generated-definitions/UploadBinaryRecordResponse.js'
 
@@ -28,14 +28,15 @@ export class AdminGameBinaryRecordAdmin$ {
     limit?: number
     offset?: number
     query?: string | null
-  }): Promise<IResponseWithSync<ListGameBinaryRecordsResponse>> {
+    tags?: string[]
+  }): Promise<IResponseWithSync<ListGameBinaryRecordsAdminResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/binaries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () =>
       this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListGameBinaryRecordsResponse, 'ListGameBinaryRecordsResponse')
+        ? Validate.responseType(() => resultPromise, ListGameBinaryRecordsAdminResponse, 'ListGameBinaryRecordsAdminResponse')
         : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
@@ -74,14 +75,14 @@ export class AdminGameBinaryRecordAdmin$ {
   /**
    * Get a game binary record by its key.
    */
-  getBinary_ByKey(key: string): Promise<IResponseWithSync<GameBinaryRecordResponse>> {
+  getBinary_ByKey(key: string): Promise<IResponseWithSync<GameBinaryRecordAdminResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/binaries/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () =>
       this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameBinaryRecordResponse, 'GameBinaryRecordResponse')
+        ? Validate.responseType(() => resultPromise, GameBinaryRecordAdminResponse, 'GameBinaryRecordAdminResponse')
         : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
@@ -94,20 +95,20 @@ export class AdminGameBinaryRecordAdmin$ {
   /**
    * Update a game binary record file by its key
    */
-  updateBinary_ByKey(key: string, data: BinaryRecordRequest): Promise<IResponse<GameBinaryRecordResponse>> {
+  updateBinary_ByKey(key: string, data: BinaryRecordRequest): Promise<IResponse<GameBinaryRecordAdminResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/binaries/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameBinaryRecordResponse, 'GameBinaryRecordResponse')
+      ? Validate.responseType(() => resultPromise, GameBinaryRecordAdminResponse, 'GameBinaryRecordAdminResponse')
       : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Update a game binary record metadata by its key
    */
-  updateMetadata_ByKey(key: string, data: GameBinaryRecordMetadataRequest): Promise<IResponse<GameBinaryRecordResponse>> {
+  updateMetadata_ByKey(key: string, data: GameBinaryRecordMetadataRequest): Promise<IResponse<GameBinaryRecordAdminResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/binaries/{key}/metadata'
       .replace('{namespace}', this.namespace)
@@ -115,7 +116,7 @@ export class AdminGameBinaryRecordAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameBinaryRecordResponse, 'GameBinaryRecordResponse')
+      ? Validate.responseType(() => resultPromise, GameBinaryRecordAdminResponse, 'GameBinaryRecordAdminResponse')
       : Validate.unsafeResponse(() => resultPromise)
   }
 

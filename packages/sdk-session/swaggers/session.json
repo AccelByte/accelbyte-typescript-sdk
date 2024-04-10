@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Session Service",
     "title": "justice-session-service",
-    "version": "3.13.8"
+    "version": "3.14.1"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/session/apidocs"
+    "url": "https://development.accelbyte.io/session/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -1870,6 +1870,12 @@
             "type": "string"
           },
           {
+            "description": "game session is soft deleted. supported: TRUE, FALSE",
+            "in": "query",
+            "name": "isSoftDeleted",
+            "type": "string"
+          },
+          {
             "description": "Join type",
             "in": "query",
             "name": "joinability",
@@ -2186,10 +2192,158 @@
         ]
       }
     },
+    "/session/v1/admin/namespaces/{namespace}/recent-player": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Query recent player with given user id.\n\nIf user id parameter is empty:\n1. Using User Token : It will get the user id from the token\n2. Using client token : it will throw an error\n\nPlease ensure environment variable \u0026#34;RECENT_PLAYER_ENABLED\u0026#34; is set to \u0026#34;TRUE\u0026#34; to use this feature.\n",
+        "operationId": "adminGetRecentPlayer",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Recent Player Limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "recent player UserID. If this field empty, will use UserID from token",
+            "in": "query",
+            "name": "userId",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.RecentPlayerQueryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query recent player with given user id.",
+        "tags": ["Recent Player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLAYER:{userId} [READ]"]
+          }
+        ]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/recent-team-player": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Query recent player who were on the same team with given user id.\n\nIf user id parameter is empty:\n1. Using User Token : It will get the user id from the token\n2. Using client token : it will throw an error\n\nPlease ensure environment variable \u0026#34;RECENT_TEAM_PLAYER_ENABLED\u0026#34; is set to \u0026#34;TRUE\u0026#34; to use this feature.\n",
+        "operationId": "adminGetRecentTeamPlayer",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Recent Player Limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "recent team player UserID. If this field empty, will use UserID from token",
+            "in": "query",
+            "name": "userId",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.RecentPlayerQueryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query recent player who were on the same team with given user id.",
+        "tags": ["Recent Player"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLAYER:{userId} [READ]"]
+          }
+        ]
+      }
+    },
     "/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tDelete Session Storage.\n\t\t\t",
+        "description": "\n\t\t\tDelete Session Storage By sessionID\n\t\t\tSession Storage feature only available for Gamesession\n\t\t\t",
         "operationId": "adminDeleteUserSessionStorage",
         "parameters": [
           {
@@ -2252,7 +2406,7 @@
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tRead Session Storage.\n\t\t\t",
+        "description": "\n\t\t\tRead Session Storage by sessionID\n\t\t\tSession Storage feature only available for Gamesession\n\t\t\t",
         "operationId": "adminReadSessionStorage",
         "parameters": [
           {
@@ -2321,7 +2475,7 @@
     "/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage/users/{userId}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tRead Session Storage User.\n\t\t\t",
+        "description": "\n\t\t\tRead Session Storage by sessionID and userID\n\t\t\tSession Storage feature only available for Gamesession\n\t\t\t",
         "operationId": "adminReadUserSessionStorage",
         "parameters": [
           {
@@ -4806,7 +4960,7 @@
     "/session/v1/public/namespaces/{namespace}/recent-player": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Query recent player with given user id.",
+        "description": "Query user\u0026#39;s recent player.\n\nPlease ensure environment variable \u0026#34;RECENT_PLAYER_ENABLED\u0026#34; is set to \u0026#34;TRUE\u0026#34; to use this feature.\n",
         "operationId": "publicGetRecentPlayer",
         "parameters": [
           {
@@ -4822,12 +4976,6 @@
             "in": "query",
             "name": "limit",
             "type": "integer"
-          },
-          {
-            "description": "recent player UserID. If this field empty, will use UserID from token",
-            "in": "query",
-            "name": "userId",
-            "type": "string"
           }
         ],
         "produces": ["application/json"],
@@ -4868,7 +5016,75 @@
             "authorization": []
           }
         ],
-        "summary": "Query recent player with given user id.",
+        "summary": "Query user's recent player",
+        "tags": ["Recent Player"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:SESSION:PLAYER [READ]"]
+          }
+        ]
+      }
+    },
+    "/session/v1/public/namespaces/{namespace}/recent-team-player": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Query user\u0026#39;s recent player who were on the same team.\n\nPlease ensure environment variable \u0026#34;RECENT_TEAM_PLAYER_ENABLED\u0026#34; is set to \u0026#34;TRUE\u0026#34; to use this feature.\n",
+        "operationId": "publicGetRecentTeamPlayer",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Recent Player Limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.RecentPlayerQueryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query user's recent player who were on the same team.",
         "tags": ["Recent Player"],
         "x-security": [
           {
@@ -4880,7 +5096,7 @@
     "/session/v1/public/namespaces/{namespace}/sessions/{sessionId}/storage/leader": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tUpdate Insert Session Storage Leader. only Leader can update or insert user session storage data Leader.\n\t\t\tcan store generic json\n\t\t\texample json can store : \n\t\t\t{\n\t\t\t\t\u0026#34;leader\u0026#34;: {\n\t\t\t\t\t\u0026#34;leader\u0026#34;: 1\n\t\t\t\t},\n\t\t\t\t\u0026#34;data\u0026#34;: 123\n\t\t\t}\n\t\t\t",
+        "description": "\n\t\t\tUpdate Insert Session Storage Leader. only Leader can update or insert user session storage data Leader.\n\t\t\tcan store generic json\n\t\t\texample json can store : \n\t\t\t{\n\t\t\t\t\u0026#34;leader\u0026#34;: {\n\t\t\t\t\t\u0026#34;leader\u0026#34;: 1\n\t\t\t\t},\n\t\t\t\t\u0026#34;data\u0026#34;: 123\n\t\t\t}\n\t\t\tgame Admin can update or insert session storage\n\t\t\tSession Storage feature only available for Gamesession\n\t\t\t",
         "operationId": "publicUpdateInsertSessionStorageLeader",
         "parameters": [
           {
@@ -4964,7 +5180,7 @@
     "/session/v1/public/namespaces/{namespace}/sessions/{sessionId}/storage/users/{userId}": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tUpdate Insert Session Storage User. user can only update or insert user session storage data itself.\n\t\t\tcan store generic json\n\t\t\texample json can store : \n\t\t\t{\n\t\t\t\t\u0026#34;storage\u0026#34;: {\n\t\t\t\t\t\u0026#34;storage\u0026#34;: 1\n\t\t\t\t},\n\t\t\t\t\u0026#34;data\u0026#34;: 123\n\t\t\t}\n\t\t\t",
+        "description": "\n\t\t\tUpdate Insert Session Storage User. user can only update or insert user session storage data itself.\n\t\t\tcan store generic json\n\t\t\texample json can store : \n\t\t\t{\n\t\t\t\t\u0026#34;storage\u0026#34;: {\n\t\t\t\t\t\u0026#34;storage\u0026#34;: 1\n\t\t\t\t},\n\t\t\t\t\u0026#34;data\u0026#34;: 123\n\t\t\t}\n\t\t\tgame Admin can update or insert session storage\n\t\t\tSession Storage feature only available for Gamesession\n\t\t\t",
         "operationId": "publicUpdateInsertSessionStorage",
         "parameters": [
           {
@@ -5503,6 +5719,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "autoLeaveSession": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "clientVersion": {
           "type": "string"
         },
@@ -5655,6 +5875,10 @@
           "type": "object"
         },
         "autoJoin": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "autoLeaveSession": {
           "type": "boolean",
           "x-omitempty": false
         },
@@ -6311,9 +6535,12 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "simultaneousPlatform": {
+          "type": "string"
         }
       },
-      "required": ["crossplayEnabled", "currentPlatform", "data", "platforms"]
+      "required": ["crossplayEnabled", "currentPlatform", "data", "platforms", "simultaneousPlatform"]
     },
     "apimodels.PlayerAttributesResponseBody": {
       "properties": {
@@ -6418,6 +6645,10 @@
         },
         "dsSource": {
           "type": "string"
+        },
+        "enableSecret": {
+          "type": "boolean",
+          "x-omitempty": false
         },
         "fallbackClaimKeys": {
           "items": {
@@ -6628,6 +6859,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "autoLeaveSession": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "clientVersion": {
           "type": "string"
         },
@@ -6724,7 +6959,6 @@
       "required": [
         "clientVersion",
         "deployment",
-        "enableSecret",
         "inactiveTimeout",
         "inviteTimeout",
         "joinability",
@@ -6895,6 +7129,9 @@
           "type": "string"
         },
         "platformUserID": {
+          "type": "string"
+        },
+        "previousStatus": {
           "type": "string"
         },
         "status": {
@@ -7260,10 +7497,16 @@
           "type": "string",
           "x-nullable": true
         },
+        "matchPool": {
+          "type": "string"
+        },
         "namespace": {
           "type": "string"
         },
         "platformName": {
+          "type": "string"
+        },
+        "sessionTemplate": {
           "type": "string"
         },
         "userID": {
@@ -7309,13 +7552,13 @@
   },
   "x-docs": {
     "alias": "session",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/session/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-01-17T03:48:55+00:00",
-    "gitHash": "6b6502558c444a9219381290225e747a5452031a",
-    "version": "3.13.8",
+    "buildDate": "2024-04-01T08:08:01+00:00",
+    "gitHash": "3033c218b36320815f90e0b95e26e941ffbb6c05",
+    "version": "3.14.1",
     "version-roles-seeding": "1.0.20"
   }
 }

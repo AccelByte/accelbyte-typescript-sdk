@@ -19,7 +19,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   * Delete all user group
    */
   async function deleteGroup_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -39,7 +39,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   * Delete all user channel
    */
   async function deleteChannel_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

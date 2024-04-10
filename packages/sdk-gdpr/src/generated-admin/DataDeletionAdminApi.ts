@@ -22,7 +22,7 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER[READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Retrieve all user&#39;s account deletion requests in specified date Scope: account
    */
   async function getDeletions(queryParams?: {
     after?: string | null
@@ -38,7 +38,7 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Cancel user&#39;s account deletion request Scope: account
    */
   async function deleteDeletion_ByUserId(userId: string): Promise<unknown> {
     const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -48,7 +48,7 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId}[READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Retrieve specific user&#39;s account deletion request Scope: account
    */
   async function getDeletions_ByUserId(userId: string): Promise<DeletionData> {
     const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -58,7 +58,7 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [CREATE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Submit user&#39;s account deletion requests Scope: account
    */
   async function createDeletion_ByUserId(userId: string): Promise<RequestDeleteResponse> {
     const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

@@ -18,7 +18,7 @@ export class AdminTypeAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]
+   * Get available types paginated
    */
   getTypes(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetTypeResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
@@ -38,7 +38,7 @@ export class AdminTypeAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE] creates a new type and subtype
+   * Creates a new type and subtype
    */
   createType(data: CreateTypeRequest): Promise<IResponse<CreateTypeResponse>> {
     const params = {} as SDKRequestConfig
@@ -51,7 +51,7 @@ export class AdminTypeAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]
+   * Delete existing type
    */
   deleteType_ByTypeId(typeId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -64,7 +64,7 @@ export class AdminTypeAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE] updates a type and subtype
+   * Updates a type and subtype
    */
   updateType_ByTypeId(typeId: string, data: CreateTypeRequest): Promise<IResponse<CreateTypeResponse>> {
     const params = {} as SDKRequestConfig

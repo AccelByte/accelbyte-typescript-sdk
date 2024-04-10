@@ -7,7 +7,8 @@ import { z } from 'zod'
 
 export const PlayerBinaryRecordMetadataRequest = z.object({
   is_public: z.boolean().nullish(),
-  set_by: z.enum(['CLIENT', 'SERVER']).nullish()
+  set_by: z.enum(['CLIENT', 'SERVER']).nullish(),
+  tags: z.array(z.string()).nullish()
 })
 
 export interface PlayerBinaryRecordMetadataRequest extends z.TypeOf<typeof PlayerBinaryRecordMetadataRequest> {}

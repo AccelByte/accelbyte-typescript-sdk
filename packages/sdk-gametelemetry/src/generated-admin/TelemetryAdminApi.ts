@@ -8,6 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { ListBaseResponseStr } from '../generated-definitions/ListBaseResponseStr.js'
+import { PagedResponseGetNamespaceEventResponse } from '../generated-definitions/PagedResponseGetNamespaceEventResponse.js'
 import { TelemetryAdmin$ } from './endpoints/TelemetryAdmin$.js'
 
 export function TelemetryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -16,12 +18,13 @@ export function TelemetryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
+  const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
    * This endpoint requires valid JWT token and telemetry permission This endpoint retrieves namespace list
    */
-  async function getNamespaces(): Promise<unknown> {
-    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, cache)
+  async function getNamespaces(): Promise<ListBaseResponseStr> {
+    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getNamespaces()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,8 +43,8 @@ export function TelemetryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId?: string | null
     eventName?: string | null
     eventPayload?: string | null
-  }): Promise<unknown> {
-    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, cache)
+  }): Promise<PagedResponseGetNamespaceEventResponse> {
+    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getEvents(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

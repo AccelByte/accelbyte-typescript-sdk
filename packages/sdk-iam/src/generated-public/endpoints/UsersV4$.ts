@@ -18,12 +18,12 @@ import { EmailUpdateRequestV4 } from '../../generated-definitions/EmailUpdateReq
 import { EnabledFactorsResponseV4 } from '../../generated-definitions/EnabledFactorsResponseV4.js'
 import { InviteUserResponseV3 } from '../../generated-definitions/InviteUserResponseV3.js'
 import { PublicInviteUserRequestV4 } from '../../generated-definitions/PublicInviteUserRequestV4.js'
+import { PublicUserUpdateRequestV3 } from '../../generated-definitions/PublicUserUpdateRequestV3.js'
 import { UpgradeHeadlessAccountRequestV4 } from '../../generated-definitions/UpgradeHeadlessAccountRequestV4.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from '../../generated-definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4.js'
 import { UserPublicInfoResponseV4 } from '../../generated-definitions/UserPublicInfoResponseV4.js'
 import { UserResponseV3 } from '../../generated-definitions/UserResponseV3.js'
 import { UserResponseV4 } from '../../generated-definitions/UserResponseV4.js'
-import { UserUpdateRequestV3 } from '../../generated-definitions/UserUpdateRequestV3.js'
 
 export class UsersV4$ {
   // @ts-ignore
@@ -43,7 +43,7 @@ export class UsersV4$ {
   }
 
   /**
-   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
+   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   createUser(data: CreateUserRequestV4): Promise<IResponse<CreateUserResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -58,7 +58,7 @@ export class UsersV4$ {
   /**
    * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. action code : 10103
    */
-  patchUserMe(data: UserUpdateRequestV3): Promise<IResponse<UserResponseV3>> {
+  patchUserMe(data: PublicUserUpdateRequestV3): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
@@ -164,6 +164,7 @@ export class UsersV4$ {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   getUsersMeMfaBackupCode(): Promise<IResponseWithSync<BackupCodesResponseV4>> {
@@ -184,6 +185,7 @@ export class UsersV4$ {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   createUserMeMfaBackupCode(): Promise<IResponse<BackupCodesResponseV4>> {
@@ -223,6 +225,39 @@ export class UsersV4$ {
   }
 
   /**
+   * This endpoint is used to get existing 8-digits backup codes. Each codes is a one-time code and will be deleted once used. The codes will be sent through linked email.
+   */
+  getUsersMeMfaBackupCodes(): Promise<IResponseWithSync<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCodes'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This endpoint is used to generate 8-digits backup codes. Each codes is a one-time code and will be deleted once used. The codes will be sent through linked email.
+   */
+  createUserMeMfaBackupCode_ByNS(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCodes'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * This endpoint is used to enable 2FA email.
    */
   postUserMeMfaEmailEnable(data: { code: string | null }): Promise<IResponse<unknown>> {
@@ -252,7 +287,7 @@ export class UsersV4$ {
   }
 
   /**
-   * This endpoint create user from saved roles when creating invitation and submitted data. User will be able to login after completing submitting the data through this endpoint. Available Authentication Types: EMAILPASSWD: an authentication type used for new user registration through email. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. Required attributes: - authType: possible value is EMAILPASSWD (see above) - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - displayName: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API.
+   * This endpoint create user from saved roles when creating invitation and submitted data. User will be able to login after completing submitting the data through this endpoint. Available Authentication Types: EMAILPASSWD: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. Required attributes: - authType: possible value is EMAILPASSWD (see above) - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - displayName: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API.
    */
   createUserInvite_ByInvitationId(invitationId: string, data: CreateUserRequestV4): Promise<IResponse<CreateUserResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -293,6 +328,7 @@ export class UsersV4$ {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to enable 2FA backup codes.
    */
   createUserMeMfaBackupCodeEnable(): Promise<IResponse<BackupCodesResponseV4>> {
@@ -306,7 +342,7 @@ export class UsersV4$ {
   }
 
   /**
-   * This endpoint is used to enable 2FA backup codes.
+   * This endpoint is used to disable 2FA backup codes.
    */
   deleteUserMeMfaBackupCodeDisable(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -319,6 +355,20 @@ export class UsersV4$ {
   }
 
   /**
+   * This endpoint is used to enable 2FA backup codes.
+   */
+  createUserMeMfaBackupCodeEnable_ByNS(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCodes/enable'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
    * This endpoint is used to download backup codes.
    */
   getUsersMeMfaBackupCodeDownload(): Promise<IResponseWithSync<unknown>> {

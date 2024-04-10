@@ -29,6 +29,7 @@ export class PublicGameBinaryRecord$ {
     limit?: number
     offset?: number
     query?: string | null
+    tags?: string[]
   }): Promise<IResponseWithSync<ListGameBinaryRecordsResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/binaries'.replace('{namespace}', this.namespace)

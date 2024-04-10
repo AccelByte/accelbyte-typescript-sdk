@@ -17,7 +17,7 @@ export class AdminConfigAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]&lt;/b&gt;
+   * Get config paginated
    */
   getConfigs(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetConfigsResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -37,7 +37,7 @@ export class AdminConfigAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]&lt;/b&gt;. It will create a new config if the &lt;i&gt;key&lt;/i&gt; doesn&#39;t exist. Allowed key value: - &lt;i&gt;contentReview&lt;/i&gt;: &lt;i&gt;enabled&lt;/i&gt;,&lt;i&gt;disabled&lt;/i&gt;
+   * This endpoint will create a new config if the *key* doesn&#39;t exist. Allowed key value: - *contentReview*: *enabled*,*disabled*
    */
   patchConfig_ByKey(key: string, data: UpdateConfigRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

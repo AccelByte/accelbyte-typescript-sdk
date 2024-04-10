@@ -35,6 +35,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     limit?: number
     offset?: number
     query?: string | null
+    tags?: string[]
   }): Promise<ListPlayerBinaryRecordsResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getUsersMeBinaries(queryParams)
@@ -97,7 +98,7 @@ export function PublicPlayerBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getBinariesPublic_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; tags?: string[] }
   ): Promise<ListPlayerBinaryRecordsResponse> {
     const $ = new PublicPlayerBinaryRecord$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getBinariesPublic_ByUserId(userId, queryParams)

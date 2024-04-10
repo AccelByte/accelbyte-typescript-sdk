@@ -9,6 +9,7 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
+import { Customization } from '../../generated-definitions/Customization.js'
 import { PaymentMethodArray } from '../../generated-definitions/PaymentMethodArray.js'
 import { PaymentOrderDetails } from '../../generated-definitions/PaymentOrderDetails.js'
 import { PaymentOrderPaidResult } from '../../generated-definitions/PaymentOrderPaidResult.js'
@@ -150,6 +151,31 @@ export class PaymentStation$ {
     const res = () =>
       this.isValidationEnabled
         ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment provider customization, at current only Adyen provide customization. This api has been deprecated, pls use /public/namespaces/{namespace}/payment/publicconfig to get adyen config&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: customization&lt;/li&gt;&lt;/ul&gt;
+   */
+  getPaymentCustomization(queryParams: {
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    region: string | null
+    sandbox?: boolean | null
+  }): Promise<IResponseWithSync<Customization>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/payment/customization'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, Customization, 'Customization')
         : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {

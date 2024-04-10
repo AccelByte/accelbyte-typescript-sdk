@@ -9,6 +9,7 @@ import { SimpleUserPlatformInfoV3 } from './SimpleUserPlatformInfoV3.js'
 export const DistinctLinkedPlatformV3 = z.object({
   details: z.array(SimpleUserPlatformInfoV3),
   linkedAt: z.string(),
+  platformGroup: z.string(),
   platformName: z.string(),
   platformUserId: z.string().nullish()
 })

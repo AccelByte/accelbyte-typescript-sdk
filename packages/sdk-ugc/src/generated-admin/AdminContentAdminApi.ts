@@ -13,6 +13,7 @@ import { AdminGetContentBulkRequest } from '../generated-definitions/AdminGetCon
 import { AdminUpdateContentRequest } from '../generated-definitions/AdminUpdateContentRequest.js'
 import { ContentDownloadResponse } from '../generated-definitions/ContentDownloadResponse.js'
 import { ContentDownloadResponseArray } from '../generated-definitions/ContentDownloadResponseArray.js'
+import { CreateContentRequest } from '../generated-definitions/CreateContentRequest.js'
 import { CreateContentRequestS3 } from '../generated-definitions/CreateContentRequestS3.js'
 import { CreateContentResponse } from '../generated-definitions/CreateContentResponse.js'
 import { CreateScreenshotRequest } from '../generated-definitions/CreateScreenshotRequest.js'
@@ -120,6 +121,17 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
+   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
+   */
+  async function createContent_ByChannelId(channelId: string, data: CreateContentRequest): Promise<CreateContentResponse> {
+    const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createContent_ByChannelId(channelId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Required permission: &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt; Content&#39;s payload versions created when UGC is created or updated with &lt;code&gt;updateContentFile&lt;/code&gt; set to true. Only list up to 10 latest versions.
    */
   async function getVersions_ByContentId(contentId: string): Promise<ListContentVersionsResponse> {
@@ -150,7 +162,7 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;. All request body are required except for contentType field. contentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL. If not specified, it will use fileExtension value. Supported file extensions: pjp, jpg, jpeg, jfif, bmp, png. Maximum description length: 1024.
+   * All request body are required except for *contentType* field. *contentType* values is used to enforce the *Content-Type* header needed by the client to upload the content using the presigned URL. If not specified, it will use *fileExtension* value. Supported file extensions: *pjp*, *jpg*, *jpeg*, *jfif*, *bmp*, *png*. Maximum description length: 1024
    */
   async function createScreenshot_ByContentId(contentId: string, data: CreateScreenshotRequest): Promise<CreateScreenshotResponse> {
     const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -160,7 +172,7 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;. Maximum description length: 1024.
+   * Maximum description length: 1024
    */
   async function updateScreenshot_ByContentId(contentId: string, data: UpdateScreenshotRequest): Promise<UpdateScreenshotResponse> {
     const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -220,6 +232,21 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
+   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
+   */
+  async function updateContent_ByChannelId_ByContentId(
+    channelId: string,
+    contentId: string,
+    data: CreateContentRequest
+  ): Promise<CreateContentResponse> {
+    const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateContent_ByChannelId_ByContentId(channelId, contentId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Required permission: &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt; Rollback content&#39;s payload to specified version.
    */
   async function updateRollback_ByContentId_ByVersionId(contentId: string, versionId: string): Promise<ContentDownloadResponse> {
@@ -244,7 +271,7 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete existing screenshot from a content
    */
   async function deleteScreenshot_ByContentId_ByScreenshotId(contentId: string, screenshotId: string): Promise<unknown> {
     const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -259,6 +286,22 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function deleteContent_ByUserId_ByChannelId_ByContentId(userId: string, channelId: string, contentId: string): Promise<unknown> {
     const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.deleteContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
+   */
+  async function updateContent_ByUserId_ByChannelId_ByContentId(
+    userId: string,
+    channelId: string,
+    contentId: string,
+    data: CreateContentRequest
+  ): Promise<CreateContentResponse> {
+    const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -315,6 +358,7 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getContents_ByUserId,
     createContentSharecodeBulk,
     getPreview_ByContentId,
+    createContent_ByChannelId,
     getVersions_ByContentId,
     getContentSharecode_ByShareCode,
     createContentS3_ByChannelId,
@@ -323,10 +367,12 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getContentsSearch_ByChannelId,
     updateHide_ByUserId_ByContentId,
     deleteContent_ByChannelId_ByContentId,
+    updateContent_ByChannelId_ByContentId,
     updateRollback_ByContentId_ByVersionId,
     updateContentS3_ByChannelId_ByContentId,
     deleteScreenshot_ByContentId_ByScreenshotId,
     deleteContent_ByUserId_ByChannelId_ByContentId,
+    updateContent_ByUserId_ByChannelId_ByContentId,
     updateContentS3_ByUserId_ByChannelId_ByContentId,
     deleteContentSharecode_ByUserId_ByChannelId_ByShareCode,
     updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode

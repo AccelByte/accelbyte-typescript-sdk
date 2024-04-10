@@ -17,7 +17,7 @@ export class ConfigurationAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Delete a list of admin email addresses to stop receiving personal data request notification. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [DELETE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Delete a list of admin email addresses to stop receiving personal data request notification. Scope: account
    */
   deleteEmailConfiguration(queryParams: { emails: string[] }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -30,7 +30,7 @@ export class ConfigurationAdmin$ {
   }
 
   /**
-   * Get list of admin email address configuration. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Get list of admin email address configuration. Scope: account
    */
   getEmailsConfigurations(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
@@ -50,7 +50,7 @@ export class ConfigurationAdmin$ {
   }
 
   /**
-   * Add admin email address for receiving personal data request notification. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [CREATE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Add admin email address for receiving personal data request notification. Scope: account
    */
   createEmailConfiguration(data: string[]): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -63,7 +63,7 @@ export class ConfigurationAdmin$ {
   }
 
   /**
-   * Update admin email address for receiving personal data request notification. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [UPDATE]&lt;/code&gt;&lt;/p&gt;
+   * Update admin email address for receiving personal data request notification. Scope: account
    */
   updateEmailConfiguration(data: string[]): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -76,7 +76,7 @@ export class ConfigurationAdmin$ {
   }
 
   /**
-   * Get Registered Services Configuration. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Get Registered Services Configuration. Scope: account
    */
   getServicesConfigurations(): Promise<IResponseWithSync<ServicesConfigurationResponse>> {
     const params = {} as SDKRequestConfig
@@ -96,7 +96,7 @@ export class ConfigurationAdmin$ {
   }
 
   /**
-   * Update Registered Services Configuration. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Update Registered Services Configuration. Scope: account
    */
   updateServiceConfiguration(data: ServiceConfigurationUpdateRequest): Promise<IResponse<ServiceConfigurationUpdateRequest>> {
     const params = {} as SDKRequestConfig
@@ -109,7 +109,7 @@ export class ConfigurationAdmin$ {
   }
 
   /**
-   * &lt;b&gt;[TEST FACILITY ONLY]&lt;/b&gt;&lt;br/&gt;Reset Registered Services Configuration to use the default configuration. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * **[TEST FACILITY ONLY]** Reset Registered Services Configuration to use the default configuration. Scope: account
    */
   deleteServiceConfigurationReset(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

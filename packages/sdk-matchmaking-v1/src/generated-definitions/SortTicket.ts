@@ -5,9 +5,6 @@
  */
 import { z } from 'zod'
 
-export const SortTicket = z.object({
-  search_result: z.enum(['distance', 'largestPartySize', 'none', 'oldestTicketAge', 'random']),
-  ticket_queue: z.enum(['distance', 'largestPartySize', 'none', 'oldestTicketAge', 'random'])
-})
+export const SortTicket = z.object({ search_result: z.string(), ticket_queue: z.string() })
 
 export interface SortTicket extends z.TypeOf<typeof SortTicket> {}

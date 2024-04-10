@@ -38,7 +38,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   *  Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]&lt;/b&gt; For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses () for priority. e.g: &lt;code&gt;tags=red&lt;/code&gt; &lt;code&gt;tags=red&amp;animal&lt;/code&gt; &lt;code&gt;tags=red|animal&lt;/code&gt; &lt;code&gt;tags=red&amp;animal|wild&lt;/code&gt; &lt;code&gt;tags=red&amp;(animal|wild)&lt;/code&gt; The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore &lt;code&gt;_&lt;/code&gt; and dash &lt;code&gt;-&lt;/code&gt; Allowed character for operator: &lt;code&gt;&amp;&lt;/code&gt; &lt;code&gt;|&lt;/code&gt; &lt;code&gt;(&lt;/code&gt; &lt;code&gt;)&lt;/code&gt; &lt;b&gt;Please note that value of tags query param should be URL encoded&lt;/b&gt;
+   * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
    */
   async function getContents(queryParams?: {
     isOfficial?: boolean | null
@@ -57,7 +57,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]&lt;/b&gt;. Maximum contentId per request 100
+   * Maximum contentId per request 100
    */
   async function createContentBulk(data: AdminGetContentBulkRequest): Promise<ContentDownloadResponseV2Array> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -67,7 +67,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]&lt;/b&gt;.
+   * Get content by content ID
    */
   async function getContent_ByContentId(contentId: string): Promise<ContentDownloadResponseV2> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -77,7 +77,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get user cotent
    */
   async function getContents_ByUserId(
     userId: string,
@@ -90,7 +90,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]&lt;/b&gt;. Maximum sharecodes per request 100
+   * Maximum sharecodes per request 100
    */
   async function createContentSharecodeBulk(data: GetContentBulkByShareCodesRequest): Promise<ContentDownloadResponseV2Array> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -100,7 +100,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * List content specific to a channel
    */
   async function getContents_ByChannelId(
     channelId: string,
@@ -113,7 +113,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;.
+   * Create official content
    */
   async function createContent_ByChannelId(channelId: string, data: AdminContentRequestV2): Promise<CreateContentResponseV2> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -123,7 +123,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt; Content&#39;s payload versions created when UGC is created or updated with &lt;code&gt;updateContentFile&lt;/code&gt; set to true. Only list up to 10 latest versions.
+   * Content&#39;s payload versions created when UGC is created or updated with &lt;code&gt;updateContentFile&lt;/code&gt; set to true. Only list up to 10 latest versions.
    */
   async function getVersions_ByContentId(contentId: string): Promise<ListContentVersionsResponse> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -133,7 +133,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]&lt;/b&gt;.
+   * Get content by share code
    */
   async function getContentSharecode_ByShareCode(shareCode: string): Promise<ContentDownloadResponseV2> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -143,7 +143,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;. All request body are required except for contentType field. contentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL. If not specified, it will use fileExtension value. Supported file extensions: pjp, jpg, jpeg, jfif, bmp, png. Maximum description length: 1024.
+   * This endpoint used to request upload URL from content&#39;s screenshot. If *contentType* is not specified, it will use *fileExtension* value. Supported file extensions: pjp, jpg, jpeg, jfif, bmp, png. Maximum description length: 1024
    */
   async function createScreenshot_ByContentId(contentId: string, data: CreateScreenshotRequest): Promise<CreateScreenshotResponse> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -153,7 +153,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;. Maximum description length: 1024.
+   * Maximum description length: 1024
    */
   async function updateScreenshot_ByContentId(contentId: string, data: UpdateScreenshotRequest): Promise<UpdateScreenshotResponse> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -163,7 +163,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Hide/Unhide user&#39;s generated contents
    */
   async function updateHide_ByUserId_ByContentId(
     userId: string,
@@ -177,7 +177,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete existing official content
    */
   async function deleteContent_ByChannelId_ByContentId(channelId: string, contentId: string): Promise<unknown> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -187,7 +187,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Update existing official content
    */
   async function patchContent_ByChannelId_ByContentId(
     channelId: string,
@@ -201,7 +201,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission: &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt; Rollback content&#39;s payload to specified version.
+   * Rollback content&#39;s payload to specified version
    */
   async function updateRollback_ByContentId_ByVersionId(contentId: string, versionId: string): Promise<ContentDownloadResponse> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -211,7 +211,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete screenshot from a content
    */
   async function deleteScreenshot_ByContentId_ByScreenshotId(contentId: string, screenshotId: string): Promise<unknown> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -221,7 +221,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Generate official content upload URL
    */
   async function patchUploadUrl_ByChannelId_ByContentId(
     channelId: string,
@@ -235,7 +235,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint should be used after calling generate official content upload url endpoint to commit the changes. Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * This endpoint should be used after calling generate official content upload url endpoint to commit the changes
    */
   async function patchFileLocation_ByChannelId_ByContentId(
     channelId: string,
@@ -249,7 +249,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete user content by content ID
    */
   async function deleteContent_ByUserId_ByChannelId_ByContentId(userId: string, channelId: string, contentId: string): Promise<unknown> {
     const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -259,7 +259,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Update existing user content
    */
   async function patchContent_ByUserId_ByChannelId_ByContentId(
     userId: string,
@@ -274,7 +274,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * generate user content upload URL
    */
   async function patchUploadUrl_ByUserId_ByChannelId_ByContentId(
     userId: string,
@@ -289,7 +289,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete content by share code
    */
   async function deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(
     userId: string,
@@ -303,7 +303,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint should be used after calling generate user content upload url endpoint to commit the changes. Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * This endpoint should be used after calling generate user content upload url endpoint to commit the changes
    */
   async function patchFileLocation_ByUserId_ByChannelId_ByContentId(
     userId: string,
@@ -318,7 +318,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;. &lt;code&gt;shareCode&lt;/code&gt; format should follows: Max length: 7 Available characters: abcdefhkpqrstuxyz
+   * *shareCode* format should follows: &#34;Max length: 7 &#34;Available characters: abcdefhkpqrstuxyz
    */
   async function updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(
     userId: string,

@@ -22,7 +22,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * List content that need admin&#39;s approval
    */
   async function getStagingContents(queryParams?: {
     limit?: number
@@ -37,7 +37,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get staging content by ID
    */
   async function getStagingContent_ByContentId(contentId: string): Promise<StagingContentResponse> {
     const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -47,7 +47,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * List user content&#39;s that need admin approval
    */
   async function getStagingContents_ByUserId(
     userId: string,
@@ -60,7 +60,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:CONTENT:APPROVAL [CREATE]&lt;/b&gt;.
+   * Approved content will shown to public player. Rejected content stays in staging area and couldn&#39;t be seen by other player
    */
   async function createApprove_ByContentId(contentId: string, data: ApproveStagingContentRequest): Promise<StagingContentResponse> {
     const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

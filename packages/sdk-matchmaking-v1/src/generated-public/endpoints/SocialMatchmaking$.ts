@@ -13,7 +13,7 @@ import { UpdatePlayerPlaytimeWeightResponse } from '../../generated-definitions/
 
 export class SocialMatchmaking$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
    * Update a connection weight between player and playtime. This endpoint is intended to be called by admin for debugging purpose on social matchmaking rule.
@@ -23,6 +23,8 @@ export class SocialMatchmaking$ {
     const url = '/matchmaking/social/playtime/namespaces/{namespace}/weight'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, UpdatePlayerPlaytimeWeightResponse, 'UpdatePlayerPlaytimeWeightResponse')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UpdatePlayerPlaytimeWeightResponse, 'UpdatePlayerPlaytimeWeightResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

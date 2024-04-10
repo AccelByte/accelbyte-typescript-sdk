@@ -13,6 +13,7 @@ import { AdminGetContentBulkRequest } from '../../generated-definitions/AdminGet
 import { AdminUpdateContentRequest } from '../../generated-definitions/AdminUpdateContentRequest.js'
 import { ContentDownloadResponse } from '../../generated-definitions/ContentDownloadResponse.js'
 import { ContentDownloadResponseArray } from '../../generated-definitions/ContentDownloadResponseArray.js'
+import { CreateContentRequest } from '../../generated-definitions/CreateContentRequest.js'
 import { CreateContentRequestS3 } from '../../generated-definitions/CreateContentRequestS3.js'
 import { CreateContentResponse } from '../../generated-definitions/CreateContentResponse.js'
 import { CreateScreenshotRequest } from '../../generated-definitions/CreateScreenshotRequest.js'
@@ -178,6 +179,22 @@ export class AdminContentAdmin$ {
   }
 
   /**
+   * @deprecated
+   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
+   */
+  createContent_ByChannelId(channelId: string, data: CreateContentRequest): Promise<IResponse<CreateContentResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}/contents'
+      .replace('{namespace}', this.namespace)
+      .replace('{channelId}', channelId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * Required permission: &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt; Content&#39;s payload versions created when UGC is created or updated with &lt;code&gt;updateContentFile&lt;/code&gt; set to true. Only list up to 10 latest versions.
    */
   getVersions_ByContentId(contentId: string): Promise<IResponseWithSync<ListContentVersionsResponse>> {
@@ -237,7 +254,7 @@ export class AdminContentAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;. All request body are required except for contentType field. contentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL. If not specified, it will use fileExtension value. Supported file extensions: pjp, jpg, jpeg, jfif, bmp, png. Maximum description length: 1024.
+   * All request body are required except for *contentType* field. *contentType* values is used to enforce the *Content-Type* header needed by the client to upload the content using the presigned URL. If not specified, it will use *fileExtension* value. Supported file extensions: *pjp*, *jpg*, *jpeg*, *jfif*, *bmp*, *png*. Maximum description length: 1024
    */
   createScreenshot_ByContentId(contentId: string, data: CreateScreenshotRequest): Promise<IResponse<CreateScreenshotResponse>> {
     const params = {} as SDKRequestConfig
@@ -252,7 +269,7 @@ export class AdminContentAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;. Maximum description length: 1024.
+   * Maximum description length: 1024
    */
   updateScreenshot_ByContentId(contentId: string, data: UpdateScreenshotRequest): Promise<IResponse<UpdateScreenshotResponse>> {
     const params = {} as SDKRequestConfig
@@ -337,6 +354,27 @@ export class AdminContentAdmin$ {
   }
 
   /**
+   * @deprecated
+   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
+   */
+  updateContent_ByChannelId_ByContentId(
+    channelId: string,
+    contentId: string,
+    data: CreateContentRequest
+  ): Promise<IResponse<CreateContentResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}/contents/{contentId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{channelId}', channelId)
+      .replace('{contentId}', contentId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * Required permission: &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt; Rollback content&#39;s payload to specified version.
    */
   updateRollback_ByContentId_ByVersionId(contentId: string, versionId: string): Promise<IResponse<ContentDownloadResponse>> {
@@ -373,7 +411,7 @@ export class AdminContentAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete existing screenshot from a content
    */
   deleteScreenshot_ByContentId_ByScreenshotId(contentId: string, screenshotId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -402,6 +440,29 @@ export class AdminContentAdmin$ {
 
     return this.isValidationEnabled
       ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
+   */
+  updateContent_ByUserId_ByChannelId_ByContentId(
+    userId: string,
+    channelId: string,
+    contentId: string,
+    data: CreateContentRequest
+  ): Promise<IResponse<CreateContentResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v1/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{channelId}', channelId)
+      .replace('{contentId}', contentId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
       : Validate.unsafeResponse(() => resultPromise)
   }
 

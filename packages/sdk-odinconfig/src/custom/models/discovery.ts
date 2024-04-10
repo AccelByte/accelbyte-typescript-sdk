@@ -159,13 +159,7 @@ export const PlayerPortalFeatureFlagsConfig = z.object({
    *
    * Defaults to `true`.
    **/
-  isLegalEnabled: z.boolean().default(true),
-  /**
-   * Determines whether the "Legal" Page is accessible or not from Player Portal.
-   *
-   * Defaults to `true`.
-   **/
-  isLegalPageVisible: z.boolean().default(true)
+  isLegalEnabled: z.boolean().default(true)
 })
 
 export interface PlayerPortalFeatureFlagsConfig extends z.infer<typeof PlayerPortalFeatureFlagsConfig> {}
@@ -303,6 +297,14 @@ export const DiscoveryConfigData = z.object({
     })
   ),
   singleTemplatePricingModel: Config.merge(
+    z.object({
+      data: z.object({
+        value: z.string()
+      })
+    })
+  ),
+  releaseConfig: Config,
+  gtmContainerId: Config.merge(
     z.object({
       data: z.object({
         value: z.string()

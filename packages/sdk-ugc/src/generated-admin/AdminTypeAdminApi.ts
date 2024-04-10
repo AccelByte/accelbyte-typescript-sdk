@@ -22,7 +22,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]
+   * Get available types paginated
    */
   async function getTypes(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTypeResponse> {
     const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -32,7 +32,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE] creates a new type and subtype
+   * Creates a new type and subtype
    */
   async function createType(data: CreateTypeRequest): Promise<CreateTypeResponse> {
     const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -42,7 +42,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]
+   * Delete existing type
    */
   async function deleteType_ByTypeId(typeId: string): Promise<unknown> {
     const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -52,7 +52,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE] updates a type and subtype
+   * Updates a type and subtype
    */
   async function updateType_ByTypeId(typeId: string, data: CreateTypeRequest): Promise<CreateTypeResponse> {
     const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

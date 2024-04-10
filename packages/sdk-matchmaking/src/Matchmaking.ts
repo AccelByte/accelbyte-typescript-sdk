@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 
+import { ConfigApi } from './generated-public/ConfigApi.js'
 import { EnvironmentVariablesApi } from './generated-public/EnvironmentVariablesApi.js'
 import { BackfillApi } from './generated-public/BackfillApi.js'
 import { RuleSetsApi } from './generated-public/RuleSetsApi.js'
@@ -15,6 +16,7 @@ import { MatchTicketsApi } from './generated-public/MatchTicketsApi.js'
 import { MatchFunctionsApi } from './generated-public/MatchFunctionsApi.js'
 
 const apis = {
+  ConfigApi,
   EnvironmentVariablesApi,
   BackfillApi,
   RuleSetsApi,

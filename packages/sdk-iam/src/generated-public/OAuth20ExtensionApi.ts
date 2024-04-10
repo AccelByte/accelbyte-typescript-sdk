@@ -139,9 +139,12 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * This endpoint is being used to request the code to exchange a new token. The target new token&#39;s clientId should NOT be same with current using one. Path namespace should be target namespace. Client ID should match the target namespace. The code in response can be consumed by &lt;code&gt;/iam/v3/token/exchange&lt;/code&gt;
    */
-  async function postTokenRequest(data: { client_id: string | null }): Promise<TargetTokenCodeResponse> {
+  async function postTokenRequest(
+    data: { client_id: string | null },
+    queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
+  ): Promise<TargetTokenCodeResponse> {
     const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
-    const resp = await $.postTokenRequest(data)
+    const resp = await $.postTokenRequest(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }

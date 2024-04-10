@@ -9,13 +9,13 @@
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { NamespaceAdmin$ } from './endpoints/NamespaceAdmin$.js'
+import { NamespaceContext } from '../generated-definitions/NamespaceContext.js'
 import { NamespaceCreate } from '../generated-definitions/NamespaceCreate.js'
 import { NamespaceInfo } from '../generated-definitions/NamespaceInfo.js'
 import { NamespaceInfoArray } from '../generated-definitions/NamespaceInfoArray.js'
 import { NamespacePublisherInfo } from '../generated-definitions/NamespacePublisherInfo.js'
 import { NamespaceStatusUpdate } from '../generated-definitions/NamespaceStatusUpdate.js'
 import { NamespaceUpdate } from '../generated-definitions/NamespaceUpdate.js'
-import { ThisModelIsUsedToIndicateTheContextOfANamespace } from '../generated-definitions/ThisModelIsUsedToIndicateTheContextOfANamespace.js'
 
 export function NamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
@@ -108,7 +108,7 @@ export function NamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Get context of namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: context of namespace&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getContext(): Promise<ThisModelIsUsedToIndicateTheContextOfANamespace> {
+  async function getContext(): Promise<NamespaceContext> {
     const $ = new NamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getContext()
     if (resp.error) throw resp.error

@@ -19,7 +19,7 @@ export const ChannelV1 = z.object({
   region_expansion_rate_ms: z.number().int(),
   region_latency_initial_range_ms: z.number().int(),
   region_latency_max_ms: z.number().int(),
-  ruleSet: RuleSetV1,
+  ruleSet: RuleSetV1.nullish(),
   sessionQueueTimeoutSeconds: z.number().int(),
   slug: z.string(),
   socialMatchmaking: z.boolean(),

@@ -18,6 +18,7 @@ export class PartyAdmin$ {
    * Query parties.
    */
   getParties(queryParams?: {
+    isSoftDeleted?: string | null
     joinability?: string | null
     key?: string | null
     leaderID?: string | null

@@ -34,7 +34,7 @@ export function PublicDownloadCountV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Requires valid user token
+   * This endpoint can be used to count how many the ugc downloaded
    */
   async function createDownloadcount_ByContentId(contentId: string): Promise<AddDownloadCountResponse> {
     const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

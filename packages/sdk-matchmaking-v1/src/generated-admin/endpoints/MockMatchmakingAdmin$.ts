@@ -18,7 +18,7 @@ import { QueryMockBy } from '../../generated-definitions/QueryMockBy.js'
 
 export class MockMatchmakingAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
    *  Delete all mock tickets and matches in a channel. &#39;
@@ -30,7 +30,9 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -43,7 +45,10 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -62,7 +67,9 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -75,7 +82,10 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -94,7 +104,9 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, MockTicketArray, 'MockTicketArray')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MockTicketArray, 'MockTicketArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -107,7 +119,9 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -120,6 +134,8 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

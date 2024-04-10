@@ -5,6 +5,12 @@
  */
 import { z } from 'zod'
 
-export const Dictionary = z.object({ id: z.string(), namespace: z.string(), parentId: z.string(), word: z.string(), wordType: z.string() })
+export const Dictionary = z.object({
+  id: z.string(),
+  namespace: z.string(),
+  parentId: z.string().nullish(),
+  word: z.string(),
+  wordType: z.string()
+})
 
 export interface Dictionary extends z.TypeOf<typeof Dictionary> {}

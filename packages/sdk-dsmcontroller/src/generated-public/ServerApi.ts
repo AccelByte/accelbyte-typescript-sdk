@@ -72,7 +72,7 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint counts all of dedicated servers in a region managed by this service.
    */
   async function getServersCountDetailed(queryParams?: { region?: string | null }): Promise<DetailedCountServerResponse> {
-    const $ = new Server$(Network.create(requestConfig), namespace, cache)
+    const $ = new Server$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getServersCountDetailed(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

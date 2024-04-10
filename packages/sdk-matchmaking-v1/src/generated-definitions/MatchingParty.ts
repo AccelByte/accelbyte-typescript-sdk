@@ -11,7 +11,7 @@ export const MatchingParty = z.object({
   party_attributes: z.record(z.any()),
   party_id: z.string(),
   party_members: z.array(PartyMember),
-  ticket_created_at: z.number().int(),
+  ticket_created_at: z.number().int().nullish(),
   ticket_id: z.string()
 })
 

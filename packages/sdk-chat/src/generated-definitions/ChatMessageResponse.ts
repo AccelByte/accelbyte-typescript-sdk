@@ -9,8 +9,8 @@ export const ChatMessageResponse = z.object({
   from: z.string(),
   id: z.string(),
   message: z.string(),
-  readAt: z.number().int(),
-  receivedAt: z.number().int(),
+  readAt: z.number().int().nullish(),
+  receivedAt: z.number().int().nullish(),
   topicId: z.string()
 })
 

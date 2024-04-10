@@ -8,13 +8,13 @@
  */
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
+import { NamespaceContext } from '../../generated-definitions/NamespaceContext.js'
 import { NamespaceCreate } from '../../generated-definitions/NamespaceCreate.js'
 import { NamespaceInfo } from '../../generated-definitions/NamespaceInfo.js'
 import { NamespaceInfoArray } from '../../generated-definitions/NamespaceInfoArray.js'
 import { NamespacePublisherInfo } from '../../generated-definitions/NamespacePublisherInfo.js'
 import { NamespaceStatusUpdate } from '../../generated-definitions/NamespaceStatusUpdate.js'
 import { NamespaceUpdate } from '../../generated-definitions/NamespaceUpdate.js'
-import { ThisModelIsUsedToIndicateTheContextOfANamespace } from '../../generated-definitions/ThisModelIsUsedToIndicateTheContextOfANamespace.js'
 
 export class NamespaceAdmin$ {
   // @ts-ignore
@@ -155,18 +155,14 @@ export class NamespaceAdmin$ {
   /**
    * Get context of namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: context of namespace&lt;/li&gt;&lt;/ul&gt;
    */
-  getContext(): Promise<IResponseWithSync<ThisModelIsUsedToIndicateTheContextOfANamespace>> {
+  getContext(): Promise<IResponseWithSync<NamespaceContext>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/context'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () =>
       this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            ThisModelIsUsedToIndicateTheContextOfANamespace,
-            'ThisModelIsUsedToIndicateTheContextOfANamespace'
-          )
+        ? Validate.responseType(() => resultPromise, NamespaceContext, 'NamespaceContext')
         : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {

@@ -17,12 +17,12 @@ import { EmailUpdateRequestV4 } from '../generated-definitions/EmailUpdateReques
 import { EnabledFactorsResponseV4 } from '../generated-definitions/EnabledFactorsResponseV4.js'
 import { InviteUserResponseV3 } from '../generated-definitions/InviteUserResponseV3.js'
 import { PublicInviteUserRequestV4 } from '../generated-definitions/PublicInviteUserRequestV4.js'
+import { PublicUserUpdateRequestV3 } from '../generated-definitions/PublicUserUpdateRequestV3.js'
 import { UpgradeHeadlessAccountRequestV4 } from '../generated-definitions/UpgradeHeadlessAccountRequestV4.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from '../generated-definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4.js'
 import { UserPublicInfoResponseV4 } from '../generated-definitions/UserPublicInfoResponseV4.js'
 import { UserResponseV3 } from '../generated-definitions/UserResponseV3.js'
 import { UserResponseV4 } from '../generated-definitions/UserResponseV4.js'
-import { UserUpdateRequestV3 } from '../generated-definitions/UserUpdateRequestV3.js'
 import { UsersV4$ } from './endpoints/UsersV4$.js'
 
 export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -44,7 +44,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
+   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   async function createUser(data: CreateUserRequestV4): Promise<CreateUserResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -56,7 +56,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. action code : 10103
    */
-  async function patchUserMe(data: UserUpdateRequestV3): Promise<UserResponseV3> {
+  async function patchUserMe(data: PublicUserUpdateRequestV3): Promise<UserResponseV3> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.patchUserMe(data)
     if (resp.error) throw resp.error
@@ -124,6 +124,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   async function getUsersMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
@@ -134,6 +135,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   async function createUserMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
@@ -164,6 +166,26 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * This endpoint is used to get existing 8-digits backup codes. Each codes is a one-time code and will be deleted once used. The codes will be sent through linked email.
+   */
+  async function getUsersMeMfaBackupCodes(): Promise<unknown> {
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getUsersMeMfaBackupCodes()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This endpoint is used to generate 8-digits backup codes. Each codes is a one-time code and will be deleted once used. The codes will be sent through linked email.
+   */
+  async function createUserMeMfaBackupCode_ByNS(): Promise<unknown> {
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createUserMeMfaBackupCode_ByNS()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * This endpoint is used to enable 2FA email.
    */
   async function postUserMeMfaEmailEnable(data: { code: string | null }): Promise<unknown> {
@@ -184,7 +206,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint create user from saved roles when creating invitation and submitted data. User will be able to login after completing submitting the data through this endpoint. Available Authentication Types: EMAILPASSWD: an authentication type used for new user registration through email. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. Required attributes: - authType: possible value is EMAILPASSWD (see above) - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - displayName: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API.
+   * This endpoint create user from saved roles when creating invitation and submitted data. User will be able to login after completing submitting the data through this endpoint. Available Authentication Types: EMAILPASSWD: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. Required attributes: - authType: possible value is EMAILPASSWD (see above) - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - displayName: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API.
    */
   async function createUserInvite_ByInvitationId(invitationId: string, data: CreateUserRequestV4): Promise<CreateUserResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -214,6 +236,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to enable 2FA backup codes.
    */
   async function createUserMeMfaBackupCodeEnable(): Promise<BackupCodesResponseV4> {
@@ -224,7 +247,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint is used to enable 2FA backup codes.
+   * This endpoint is used to disable 2FA backup codes.
    */
   async function deleteUserMeMfaBackupCodeDisable(): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -234,6 +257,17 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * This endpoint is used to enable 2FA backup codes.
+   */
+  async function createUserMeMfaBackupCodeEnable_ByNS(): Promise<unknown> {
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createUserMeMfaBackupCodeEnable_ByNS()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
    * This endpoint is used to download backup codes.
    */
   async function getUsersMeMfaBackupCodeDownload(): Promise<unknown> {
@@ -277,6 +311,8 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     createUserMeMfaBackupCode,
     createUserMeMfaEmailCode,
     createUserMeHeadlesVerify,
+    getUsersMeMfaBackupCodes,
+    createUserMeMfaBackupCode_ByNS,
     postUserMeMfaEmailEnable,
     createUserMeMfaEmailDisable,
     createUserInvite_ByInvitationId,
@@ -284,6 +320,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     createUserMeMfaAuthenticatorKey,
     createUserMeMfaBackupCodeEnable,
     deleteUserMeMfaBackupCodeDisable,
+    createUserMeMfaBackupCodeEnable_ByNS,
     getUsersMeMfaBackupCodeDownload,
     postUserMeMfaAuthenticatorEnable,
     deleteUserMeMfaAuthenticatorDisable

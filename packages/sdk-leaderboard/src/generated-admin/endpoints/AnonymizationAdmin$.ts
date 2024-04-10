@@ -15,7 +15,7 @@ export class AnonymizationAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;This API will delete specified user leaderboard&lt;p&gt; &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]&lt;/code&gt; &lt;/p&gt;
+   * &lt;p&gt;This API will delete specified user leaderboard&lt;p&gt;
    */
   deleteAnonymizationLeaderboard_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

@@ -15,7 +15,7 @@ export const GameSessionSetting = z.object({
   mode: z.string(),
   num_bot: z.number().int(),
   password: z.string(),
-  settings: z.record(z.any())
+  settings: z.record(z.any()).nullish()
 })
 
 export interface GameSessionSetting extends z.TypeOf<typeof GameSessionSetting> {}

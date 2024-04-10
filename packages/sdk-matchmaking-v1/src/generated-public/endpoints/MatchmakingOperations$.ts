@@ -13,14 +13,17 @@ import { AppMessageDeclarationArray } from '../../generated-definitions/AppMessa
 
 export class MatchmakingOperations$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   getVersion(): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/version'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -37,7 +40,10 @@ export class MatchmakingOperations$ {
     const url = '/matchmaking/v1/messages'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, AppMessageDeclarationArray, 'AppMessageDeclarationArray')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, AppMessageDeclarationArray, 'AppMessageDeclarationArray')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

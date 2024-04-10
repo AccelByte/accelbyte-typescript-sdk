@@ -19,10 +19,13 @@ import { CreateUserRequestV4 } from '../generated-definitions/CreateUserRequestV
 import { CreateUserResponseV4 } from '../generated-definitions/CreateUserResponseV4.js'
 import { EmailUpdateRequestV4 } from '../generated-definitions/EmailUpdateRequestV4.js'
 import { EnabledFactorsResponseV4 } from '../generated-definitions/EnabledFactorsResponseV4.js'
+import { InvitationHistoryResponse } from '../generated-definitions/InvitationHistoryResponse.js'
 import { InviteUserRequestV4 } from '../generated-definitions/InviteUserRequestV4.js'
 import { InviteUserResponseV3 } from '../generated-definitions/InviteUserResponseV3.js'
+import { ListInvitationHistoriesV4Response } from '../generated-definitions/ListInvitationHistoriesV4Response.js'
 import { ListUserRolesV4Response } from '../generated-definitions/ListUserRolesV4Response.js'
 import { ListValidUserIdResponseV4 } from '../generated-definitions/ListValidUserIdResponseV4.js'
+import { NamespaceInvitationHistoryUserV4Response } from '../generated-definitions/NamespaceInvitationHistoryUserV4Response.js'
 import { RemoveUserRoleV4Request } from '../generated-definitions/RemoveUserRoleV4Request.js'
 import { UserResponseV3 } from '../generated-definitions/UserResponseV3.js'
 import { UserUpdateRequestV3 } from '../generated-definitions/UserUpdateRequestV3.js'
@@ -57,6 +60,31 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
+   * Use this endpoint to invite admin or non-admin user and assign role to them. The role must be scoped to namespace. An admin user can only assign role with **assignedNamespaces** if the admin user has required permission which is same as the required permission of endpoint: [AdminAddUserRoleV4]. Detail request body : - Email Address is required, List of email addresses that will be invited - isAdmin is required, true if user is admin, false if user is not admin - Namespace is optional. Only works on multi tenant mode, if not specified then it will be assigned Publisher namespace, if specified, it will become that studio/publisher where user is invited to. - Role is optional, if not specified then it will only assign User role. - Assigned Namespaces is optional, List of namespaces which the Role will be assigned to the user, only works when Role is not empty. The invited admin will also assigned with &#34;User&#34; role by default. Substitute endpoint: /iam/v4/admin/users/invite
+   */
+  async function createUserUserInvite(data: InviteUserRequestV4): Promise<InviteUserResponseV3> {
+    const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createUserUserInvite(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This endpoint is to list all Invitation Histories for new studio namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Accepted Query: - namespace - offset - limit
+   */
+  async function getInvitationHistories(queryParams?: {
+    limit?: number
+    namespace?: string | null
+    offset?: number
+  }): Promise<ListInvitationHistoriesV4Response> {
+    const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getInvitationHistories(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * This endpoint is used to get user enabled factors.
    */
   async function getUsersMeMfaFactor(): Promise<EnabledFactorsResponseV4> {
@@ -77,6 +105,7 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   async function getUsersMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
@@ -87,6 +116,7 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   async function createUserMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
@@ -102,6 +132,26 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createUserMeMfaEmailCode(): Promise<unknown> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.createUserMeMfaEmailCode()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
+   */
+  async function getUsersMeMfaBackupCodes(): Promise<unknown> {
+    const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getUsersMeMfaBackupCodes()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
+   */
+  async function createUserMeMfaBackupCode_v4(): Promise<unknown> {
+    const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createUserMeMfaBackupCode_v4()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -127,7 +177,7 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
+   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   async function createUser(data: CreateUserRequestV4): Promise<CreateUserResponseV4> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -147,6 +197,7 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to enable 2FA backup codes.
    */
   async function createUserMeMfaBackupCodeEnable(): Promise<BackupCodesResponseV4> {
@@ -167,6 +218,17 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * This endpoint is used to enable 2FA backup codes.
+   */
+  async function createUserMeMfaBackupCodeEnable_v4(): Promise<unknown> {
+    const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createUserMeMfaBackupCodeEnable_v4()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
    * This endpoint is used to download backup codes.
    */
   async function getUsersMeMfaBackupCodeDownload(): Promise<unknown> {
@@ -212,6 +274,16 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function updateUser_ByUserId(userId: string, data: UserUpdateRequestV3): Promise<UserResponseV3> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.updateUser_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This endpoint is to Invitation Historiy for specific new studio namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false.
+   */
+  async function getInvitationHistories_ByNS(): Promise<InvitationHistoryResponse> {
+    const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getInvitationHistories_ByNS()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -287,6 +359,19 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * This endpoint is to Get list of users Invitation History for specific new studio namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Accepted Query: - offset - limit
+   */
+  async function getInvitationHistoriesUsers(queryParams?: {
+    limit?: number
+    offset?: number
+  }): Promise<NamespaceInvitationHistoryUserV4Response> {
+    const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getInvitationHistoriesUsers(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * **This endpoint is used to disable user 2FA.**
    */
   async function deleteMfaDisable_ByUserId(userId: string): Promise<unknown> {
@@ -299,22 +384,28 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     patchUserMe,
     createUserInvite,
+    createUserUserInvite,
+    getInvitationHistories,
     getUsersMeMfaFactor,
     postUserMeMfaFactor,
     getUsersMeMfaBackupCode,
     createUserMeMfaBackupCode,
     createUserMeMfaEmailCode,
+    getUsersMeMfaBackupCodes,
+    createUserMeMfaBackupCode_v4,
     postUserMeMfaEmailEnable,
     createUserMeMfaEmailDisable,
     createUser,
     createUserMeMfaAuthenticatorKey,
     createUserMeMfaBackupCodeEnable,
     deleteUserMeMfaBackupCodeDisable,
+    createUserMeMfaBackupCodeEnable_v4,
     getUsersMeMfaBackupCodeDownload,
     createTestUser,
     postUserMeMfaAuthenticatorEnable,
     deleteUserMeMfaAuthenticatorDisable,
     updateUser_ByUserId,
+    getInvitationHistories_ByNS,
     createUserBulkValidate,
     updateEmail_ByUserId,
     deleteRole_ByUserId,
@@ -322,6 +413,7 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createRole_ByUserId,
     updateRole_ByUserId,
     patchUserBulkAccountType,
+    getInvitationHistoriesUsers,
     deleteMfaDisable_ByUserId
   }
 }

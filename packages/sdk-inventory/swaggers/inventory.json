@@ -1,0 +1,3792 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "description": "justice-inventory-service",
+    "title": "justice-inventory-service",
+    "version": "0.1.0"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/inventory/apidocs"
+  },
+  "securityDefinitions": {
+    "HasPermission": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [CREATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"
+      },
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "HasScope": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/inventory/v1/admin/namespaces/{namespace}/chainingOperations": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tCreate chaining Operations.\n\t\t\tThis process will run sequentially \n\t\t\t1. remove item process\n\t\t\t2. consume item process\n\t\t\t3. update item process\n\t\t\t4. create item process\n               if toSpecificInventory set as true, then inventoryId field will be mandatory, vice versa\n\t\t\t\n\t\t\tThe behavior of each process is same with current admin level endpoint\n\n\t\t\trequestId: Request id(Optional), client should provide a unique request id to perform at most once execution, When a request id is resubmitted, \n\t\t\t\t\t   it will return original successful response\n\t\t\treplayed : replayed, if true,the response is original successful response. This will not be included in response if client have not pass request id.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "operationId": "AdminCreateChainingOperations",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.ChainingOperationReq"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ChainingOperationResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ChainingOperationResp"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ChainingOperationResp"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ChainingOperationResp"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ChainingOperationResp"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ChainingOperationResp"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To Create Chaining Operation",
+        "tags": ["Admin Chaining Operations"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tListing all integration configurations in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]\n\t\t",
+        "operationId": "AdminListIntegrationConfigurations",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc"],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListIntegrationConfigurationsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To list integration configurations",
+        "tags": ["Admin Integration Configurations"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tCreating integration configuration.\n\t\t\tThere cannot be one duplicate serviceName per namespace.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]\n\t\t",
+        "operationId": "AdminCreateIntegrationConfiguration",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateIntegrationConfigurationReq"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.IntegrationConfigurationResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To create integration configuration",
+        "tags": ["Admin Integration Configurations"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations/{integrationConfigurationId}": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tto update integration configuration\n\t\t\tThere cannot be duplicate serviceName per namespace.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]\n\t\t",
+        "operationId": "AdminUpdateIntegrationConfiguration",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateIntegrationConfigurationReq"
+            }
+          },
+          {
+            "description": "integrationConfigurationID",
+            "in": "path",
+            "name": "integrationConfigurationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.IntegrationConfigurationResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To update integration configuration",
+        "tags": ["Admin Integration Configurations"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations/{integrationConfigurationId}/status": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tto update status  integration configuration to be Active / Not Active.\n\t\t\tThere cannot be duplicate serviceName per namespace.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]\n\t\t",
+        "operationId": "AdminUpdateStatusIntegrationConfiguration",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateStatusIntegrationConfigurationReq"
+            }
+          },
+          {
+            "description": "integrationConfigurationID",
+            "in": "path",
+            "name": "integrationConfigurationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.IntegrationConfigurationResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To update status integration configuration to be active / not active ",
+        "tags": ["Admin Integration Configurations"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/inventories": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tListing all inventories in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]\n\t\t",
+        "operationId": "AdminListInventories",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "InventoryConfigurationCode",
+            "in": "query",
+            "name": "inventoryConfigurationCode",
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": [
+              "createdAt",
+              "createdAt:asc",
+              "createdAt:desc",
+              "inventoryConfigurationCode",
+              "inventoryConfigurationCode:asc",
+              "inventoryConfigurationCode:desc",
+              "updatedAt",
+              "updatedAt:asc",
+              "updatedAt:desc"
+            ],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          },
+          {
+            "description": "UserID",
+            "in": "query",
+            "name": "userId",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListInventoryResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To list all inventories",
+        "tags": ["Admin Inventories"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tCreating an inventory.\n\t\t\tThe inventory configuration must exists otherwise it will fail.\n\t\t\tThe max slots and max upgrade slots of an inventory will be initialized according to the inventory configuration it used,\n\t\t\tbut it can be changed later when using AdminUpdateInventory endpoint.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]\n\t\t",
+        "operationId": "AdminCreateInventory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateInventoryReq"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.InventoryResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To create inventory",
+        "tags": ["Admin Inventories"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tDeleting an inventory.\n\t\t\tIf an inventory still has items, it cannot be deleted.\n\t\t\t\n\t\t\tADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]\n\t\t",
+        "operationId": "deleteInventory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.DeleteInventoryReq"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To delete inventory",
+        "tags": ["Admin Inventories"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tGetting an inventory info.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]\n\t\t",
+        "operationId": "AdminGetInventory",
+        "parameters": [
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.InventoryResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To get an inventory",
+        "tags": ["Admin Inventories"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tUpdating an inventory.\n\t\t\tPositive value will increase MaxSlots from existing value\n\t\t\tNegative value will decrease MaxSlots from existing value\n\t\t\tLimited slots can not be changed to unlimited, vice versa\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]\n\t\t",
+        "operationId": "AdminUpdateInventory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateInventoryReq"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.InventoryResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To update inventory",
+        "tags": ["Admin Inventories"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/items": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tListing all items in an inventory.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]\n\t\t",
+        "operationId": "AdminListItems",
+        "parameters": [
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": 1,
+            "description": "Qty",
+            "in": "query",
+            "name": "qtyGte",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": [
+              "createdAt",
+              "createdAt:asc",
+              "createdAt:desc",
+              "qty",
+              "qty:asc",
+              "qty:desc",
+              "updatedAt",
+              "updatedAt:asc",
+              "updatedAt:desc"
+            ],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          },
+          {
+            "description": "SourceItemID",
+            "in": "query",
+            "name": "sourceItemId",
+            "type": "string"
+          },
+          {
+            "description": "Tags",
+            "in": "query",
+            "name": "tags",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To list all items",
+        "tags": ["Admin Items"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\t\t\tGetting an item info.\n\n\t\t\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]\n\t\t\t\t",
+        "operationId": "AdminGetInventoryItem",
+        "parameters": [
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "slotID",
+            "in": "path",
+            "name": "slotId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "sourceItemID",
+            "in": "path",
+            "name": "sourceItemId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To get an item",
+        "tags": ["Admin Items"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tListing all inventory configurations in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]\n\t\t",
+        "operationId": "AdminListInventoryConfigurations",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "will partially match inventoryConfigurationCode",
+            "in": "query",
+            "name": "code",
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": [
+              "code",
+              "code:asc",
+              "code:desc",
+              "createdAt",
+              "createdAt:asc",
+              "createdAt:desc",
+              "updatedAt",
+              "updatedAt:asc",
+              "updatedAt:desc"
+            ],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListInventoryConfigurationsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To list inventory configurations",
+        "tags": ["Admin Inventory Configurations"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tCreating inventory configuration.\n\t\t\tThere cannot be one inventory configuration duplicate code per namespace.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]\n\t\t",
+        "operationId": "AdminCreateInventoryConfiguration",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateInventoryConfigurationReq"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.InventoryConfigurationResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To create inventory configuration",
+        "tags": ["Admin Inventory Configurations"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations/{inventoryConfigurationId}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tDeleting an inventory configuration.\n\t\t\tIf an inventory already reference this type (i.e. STATUS is \u0026#34;TIED\u0026#34;), then the type cannot be deleted anymore.\n\t\t\t\n\t\t\tADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]\n\t\t",
+        "operationId": "AdminDeleteInventoryConfiguration",
+        "parameters": [
+          {
+            "description": "InventoryConfigurationID",
+            "in": "path",
+            "name": "inventoryConfigurationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To delete inventory configuration",
+        "tags": ["Admin Inventory Configurations"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tGetting an inventory configuration info.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]\n\t\t",
+        "operationId": "AdminGetInventoryConfiguration",
+        "parameters": [
+          {
+            "description": "InventoryConfigurationID",
+            "in": "path",
+            "name": "inventoryConfigurationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.InventoryConfigurationResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To get inventory configuration",
+        "tags": ["Admin Inventory Configurations"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tUpdating inventory configuration.\n\t\t\tThere cannot be duplicate code per namespace.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [UPDATE]\n\t\t",
+        "operationId": "AdminUpdateInventoryConfiguration",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.InventoryConfigurationReq"
+            }
+          },
+          {
+            "description": "InventoryConfigurationID",
+            "in": "path",
+            "name": "inventoryConfigurationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.InventoryConfigurationResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To update inventory configuration",
+        "tags": ["Admin Inventory Configurations"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/itemtypes": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will list all item types in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]\n\t\t",
+        "operationId": "AdminListItemTypes",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "name", "name:asc", "name:desc"],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListItemTypesResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To list itemtypes",
+        "tags": ["Admin Item Types"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will create a new itemtype.\n\t\t\tThe itemtype name must be unique per namespace.\n\t\t\tIt is safe to call this endpoint even if the itemtype already exists.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [CREATE]\n\t\t",
+        "operationId": "AdminCreateItemType",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateItemTypeReq"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateItemTypeResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To create an itemtype",
+        "tags": ["Admin Item Types"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/itemtypes/{itemTypeName}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will delete a item type by itemtypeName in a specified namespace.\n\t\t\tIf the itemtypeName doesn\u0026#39;t exist in a namespace, it\u0026#39;ll return not found.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]\n\t\t",
+        "operationId": "AdminDeleteItemType",
+        "parameters": [
+          {
+            "description": "ItemTypeName",
+            "in": "path",
+            "name": "itemTypeName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To delete an item type",
+        "tags": ["Admin Item Types"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/tags": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will list all tags in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]\n\t\t",
+        "operationId": "AdminListTags",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "supported parameter SERVER or CLIENT",
+            "in": "query",
+            "name": "owner",
+            "type": "string"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "name", "name:asc", "name:desc"],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListTagsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To list tags",
+        "tags": ["Admin Tags"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will create a new tag.\n\t\t\tThe tag name must be unique per namespace.\n\t\t\tIt is safe to call this endpoint even if the tag already exists.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]\n\t\t",
+        "operationId": "AdminCreateTag",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateTagReq"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateTagResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To create a tag",
+        "tags": ["Admin Tags"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/tags/{tagName}": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will delete a tag by tagName in a specified namespace.\n\t\t\tIf the tagName doesn\u0026#39;t exist in a namespace, it\u0026#39;ll return not found.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]\n\t\t",
+        "operationId": "AdminDeleteTag",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "TagName",
+            "in": "path",
+            "name": "tagName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To delete a tag",
+        "tags": ["Admin Tags"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/consume": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tConsume user\u0026#39;s own item\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
+        "operationId": "AdminConsumeUserItem",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConsumeItemReq"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "userID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To consume item",
+        "tags": ["Admin Items"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tBulk remove user\u0026#39;s own items\u0026#39;.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [DELETE]\n\t\t",
+        "operationId": "AdminBulkRemoveItems",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.RemoveInventoryItemReq"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "userID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.UpdateItemResp"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [DELETE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To bulk remove items",
+        "tags": ["Admin Items"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tSaving an item to specific inventory.\n\t\t\tThe item will be saved in specific user\u0026#39;s inventory,\n\t\t\t\n\t\t\tIf the item already exists, its qty will be increased,\n\t\t\tso no new item with same sourceItemId will be created\n\n\t\t\tTags will be auto-created.\n\t\t\tItemType will be auto-created.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "operationId": "AdminSaveItemToInventory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.SaveItemToInventoryReq"
+            }
+          },
+          {
+            "description": "inventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "UserID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To save item to specific inventory",
+        "tags": ["Admin Items"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tBulk Updating user\u0026#39;s own items.\n\t\t\tTags will be auto-created.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
+        "operationId": "AdminBulkUpdateMyItems",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.AdminUpdateItemReq"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "userID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.UpdateItemResp"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To bulk update items",
+        "tags": ["Admin Items"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tSaving an item.\n\t\t\tThe item will be saved in user\u0026#39;s inventory,\n\t\t\tIf it doesn\u0026#39;t exist it\u0026#39;ll be created.\n\t\t\t\n\t\t\tIf the item already exists, its qty will be increased,\n\t\t\tso no new item with same sourceItemId will be created\n\n\t\t\tTags will be auto-created.\n\t\t\tItemType will be auto-created.\n\n\t\t\tFor Ecommerce item, this fields will be override by ecommerce configuration \n\t\t\t(slotUsed, serverCustomAttributes, customAttributes, type)\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "operationId": "AdminSaveItem",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.SaveItemReq"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "UserID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To save item",
+        "tags": ["Admin Items"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items/entitlements/sync": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
+        "operationId": "AdminSyncUserEntitlements",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "userID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To sync user's entitlements to e-commerce",
+        "tags": ["Admin Items"]
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/purchaseable": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tValidate purchase ecommerce item.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]\n\t\t",
+        "operationId": "AdminPurchasable",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.PurchaseValidationReq"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "UserID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To validate user inventory capacity when purchase ecommerce item",
+        "tags": ["Admin Inventories"]
+      }
+    },
+    "/inventory/v1/public/namespaces/{namespace}/inventoryConfigurations": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\tListing all inventory configurations in a namespace.\n\t\tThe response body will be in the form of standard pagination.\n\t",
+        "operationId": "PublicListInventoryConfigurations",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "will partially match inventoryConfigurationCode",
+            "in": "query",
+            "name": "code",
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": [
+              "code",
+              "code:asc",
+              "code:desc",
+              "createdAt",
+              "createdAt:asc",
+              "createdAt:desc",
+              "updatedAt",
+              "updatedAt:asc",
+              "updatedAt:desc"
+            ],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListInventoryConfigurationsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To list inventory configurations",
+        "tags": ["Public Inventory Configurations"]
+      }
+    },
+    "/inventory/v1/public/namespaces/{namespace}/itemtypes": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will list all item types in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\t\t",
+        "operationId": "PublicListItemTypes",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "name", "name:asc", "name:desc"],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListItemTypesResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To list item types",
+        "tags": ["Public Item Types"]
+      }
+    },
+    "/inventory/v1/public/namespaces/{namespace}/tags": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will list all tags in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\t\t",
+        "operationId": "PublicListTags",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "name", "name:asc", "name:desc"],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListTagsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To list tags",
+        "tags": ["Public Tags"]
+      }
+    },
+    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tListing all my inventories in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\t\t",
+        "operationId": "PublicListInventories",
+        "parameters": [
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "InventoryConfigurationCode",
+            "in": "query",
+            "name": "inventoryConfigurationCode",
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "updatedAt", "updatedAt:asc", "updatedAt:desc"],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListInventoryResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To list all my inventories",
+        "tags": ["Public Inventories"]
+      }
+    },
+    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/consume": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tConsume user\u0026#39;s own item.\n\t\t",
+        "operationId": "PublicConsumeMyItem",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConsumeItemReq"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To consume item",
+        "tags": ["Public Items"]
+      }
+    },
+    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\n        \tBulk remove user\u0026#39;s own items.\n    \t",
+        "operationId": "PublicBulkRemoveMyItems",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.RemoveInventoryItemReq"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.UpdateItemResp"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To bulk remove items",
+        "tags": ["Public Items"]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tListing all user\u0026#39;s owned items in an inventory.\n\t\t\tThe response body will be in the form of standard pagination.\n\t\t",
+        "operationId": "PublicListItems",
+        "parameters": [
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 25,
+            "description": "default 25",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": 1,
+            "description": "Qty",
+            "in": "query",
+            "name": "qtyGte",
+            "type": "integer"
+          },
+          {
+            "default": "createdAt",
+            "description": "Only support one level of sortBy; default createdAt",
+            "enum": [
+              "createdAt",
+              "createdAt:asc",
+              "createdAt:desc",
+              "qty",
+              "qty:asc",
+              "qty:desc",
+              "updatedAt",
+              "updatedAt:asc",
+              "updatedAt:desc"
+            ],
+            "in": "query",
+            "name": "sortBy",
+            "type": "string"
+          },
+          {
+            "description": "SourceItemID",
+            "in": "query",
+            "name": "sourceItemId",
+            "type": "string"
+          },
+          {
+            "description": "Tags",
+            "in": "query",
+            "name": "tags",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ListItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To list all items",
+        "tags": ["Public Items"]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\n        \tBulk Updating user\u0026#39;s own items.\n    \t",
+        "operationId": "PublicBulkUpdateMyItems",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.UpdateItemReq"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.UpdateItemResp"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To bulk update items",
+        "tags": ["Public Items"]
+      }
+    },
+    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/movement": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tMove items between inventories that is owned by the same user.\n\t\t",
+        "operationId": "PublicMoveMyItems",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.MoveItemsReq"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.MoveItemsResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To move items between my inventories",
+        "tags": ["Public Items"]
+      }
+    },
+    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\t\t\tGetting an user\u0026#39;s owned item info.\n\t\t\t\t",
+        "operationId": "PublicGetItem",
+        "parameters": [
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "slotID",
+            "in": "path",
+            "name": "slotId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "sourceItemID",
+            "in": "path",
+            "name": "sourceItemId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To get an item",
+        "tags": ["Public Items"]
+      }
+    }
+  },
+  "definitions": {
+    "apimodels.AdminUpdateItemReq": {
+      "properties": {
+        "customAttributes": {
+          "type": "object"
+        },
+        "serverCustomAttributes": {
+          "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["customAttributes", "serverCustomAttributes", "slotId", "sourceItemId", "tags", "type"]
+    },
+    "apimodels.ChainingOperationReq": {
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "operations": {
+          "items": {
+            "$ref": "#/definitions/apimodels.Operation"
+          },
+          "type": "array"
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "required": ["message", "operations"]
+    },
+    "apimodels.ChainingOperationResp": {
+      "properties": {
+        "errorDetails": {
+          "$ref": "#/definitions/apimodels.ErrorResponse"
+        },
+        "message": {
+          "type": "string"
+        },
+        "replayed": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "apimodels.ConsumeItem": {
+      "properties": {
+        "inventoryId": {
+          "type": "string"
+        },
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": ["inventoryId", "qty", "slotId", "sourceItemId"]
+    },
+    "apimodels.ConsumeItemReq": {
+      "properties": {
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": ["qty", "slotId", "sourceItemId"]
+    },
+    "apimodels.CreateIntegrationConfigurationReq": {
+      "properties": {
+        "mapItemType": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "targetInventoryCode": {
+          "type": "string"
+        }
+      },
+      "required": ["serviceName", "targetInventoryCode"]
+    },
+    "apimodels.CreateInventoryConfigurationReq": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "initialMaxSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxInstancesPerUser": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxUpgradeSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["code", "initialMaxSlots", "maxInstancesPerUser", "maxUpgradeSlots"]
+    },
+    "apimodels.CreateInventoryReq": {
+      "properties": {
+        "inventoryConfigurationCode": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["inventoryConfigurationCode", "userId"]
+    },
+    "apimodels.CreateItem": {
+      "properties": {
+        "customAttributes": {
+          "type": "object"
+        },
+        "inventoryConfigurationCode": {
+          "type": "string"
+        },
+        "inventoryId": {
+          "type": "string"
+        },
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "serverCustomAttributes": {
+          "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "slotUsed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sourceItemId": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "toSpecificInventory": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customAttributes",
+        "qty",
+        "serverCustomAttributes",
+        "slotId",
+        "slotUsed",
+        "sourceItemId",
+        "tags",
+        "toSpecificInventory",
+        "type"
+      ]
+    },
+    "apimodels.CreateItemTypeReq": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["name"]
+    },
+    "apimodels.CreateItemTypeResp": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        }
+      },
+      "required": ["createdAt", "name", "namespace"]
+    },
+    "apimodels.CreateTagReq": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "enum": ["CLIENT", "SERVER"],
+          "type": "string"
+        }
+      },
+      "required": ["name", "owner"]
+    },
+    "apimodels.CreateTagResp": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "owner": {
+          "enum": ["CLIENT", "SERVER"],
+          "type": "string"
+        }
+      },
+      "required": ["createdAt", "name", "namespace", "owner"]
+    },
+    "apimodels.DeleteInventoryReq": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "apimodels.ErrorResponse": {
+      "properties": {
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      },
+      "required": ["errorCode", "errorMessage"]
+    },
+    "apimodels.IntegrationConfigurationResp": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string"
+        },
+        "itemTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "targetInventoryCode": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": ["createdAt", "id", "itemTypes", "namespace", "serviceName", "status", "targetInventoryCode", "updatedAt"]
+    },
+    "apimodels.InventoryConfig": {
+      "properties": {
+        "slotUsed": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "apimodels.InventoryConfigurationReq": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "initialMaxSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxInstancesPerUser": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxUpgradeSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["code", "initialMaxSlots", "maxInstancesPerUser", "maxUpgradeSlots"]
+    },
+    "apimodels.InventoryConfigurationResp": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "initialMaxSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxInstancesPerUser": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxUpgradeSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "status": {
+          "enum": ["INIT", "TIED"],
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "code",
+        "createdAt",
+        "description",
+        "id",
+        "initialMaxSlots",
+        "maxInstancesPerUser",
+        "maxUpgradeSlots",
+        "name",
+        "namespace",
+        "status",
+        "updatedAt"
+      ]
+    },
+    "apimodels.InventoryResp": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string"
+        },
+        "inventoryConfigurationCode": {
+          "type": "string"
+        },
+        "inventoryConfigurationId": {
+          "type": "string"
+        },
+        "maxSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxUpgradeSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "usedCountSlots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "createdAt",
+        "id",
+        "inventoryConfigurationCode",
+        "inventoryConfigurationId",
+        "maxSlots",
+        "maxUpgradeSlots",
+        "namespace",
+        "updatedAt",
+        "usedCountSlots",
+        "userId"
+      ]
+    },
+    "apimodels.ItemResp": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "customAttributes": {
+          "type": "object"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inventoryId": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "platformAvailable": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "serverCustomAttributes": {
+          "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "slotUsed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "createdAt",
+        "customAttributes",
+        "id",
+        "inventoryId",
+        "namespace",
+        "qty",
+        "serverCustomAttributes",
+        "slotId",
+        "slotUsed",
+        "source",
+        "sourceItemId",
+        "tags",
+        "type",
+        "updatedAt",
+        "userId"
+      ]
+    },
+    "apimodels.ListIntegrationConfigurationsResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.IntegrationConfigurationResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.ListInventoryConfigurationsResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.InventoryConfigurationResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.ListInventoryResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.InventoryResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.ListItemResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.ItemResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.ListItemTypesResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.CreateItemTypeResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.ListTagsResp": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/apimodels.CreateTagResp"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "apimodels.MoveItemsReq": {
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/definitions/apimodels.TradeItem"
+          },
+          "type": "array"
+        },
+        "srcInventoryId": {
+          "type": "string"
+        }
+      },
+      "required": ["items", "srcInventoryId"]
+    },
+    "apimodels.MoveItemsResp": {
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "dstInventoryId": {
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/definitions/apimodels.TradeItemResp"
+          },
+          "type": "array"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "srcInventoryId": {
+          "type": "string"
+        }
+      },
+      "required": ["createdAt", "dstInventoryId", "items", "namespace", "srcInventoryId"]
+    },
+    "apimodels.Operation": {
+      "properties": {
+        "consumeItems": {
+          "items": {
+            "$ref": "#/definitions/apimodels.ConsumeItem"
+          },
+          "type": "array"
+        },
+        "createItems": {
+          "items": {
+            "$ref": "#/definitions/apimodels.CreateItem"
+          },
+          "type": "array"
+        },
+        "removeItems": {
+          "items": {
+            "$ref": "#/definitions/apimodels.RemoveItem"
+          },
+          "type": "array"
+        },
+        "targetUserId": {
+          "type": "string"
+        },
+        "updateItems": {
+          "items": {
+            "$ref": "#/definitions/apimodels.UpdateItem"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["consumeItems", "createItems", "removeItems", "targetUserId", "updateItems"]
+    },
+    "apimodels.Paging": {
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      },
+      "required": ["first", "last", "next", "previous"]
+    },
+    "apimodels.PurchaseValidationItemReq": {
+      "properties": {
+        "bundledQty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "entitlementType": {
+          "type": "string"
+        },
+        "inventoryConfig": {
+          "$ref": "#/definitions/apimodels.InventoryConfig"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "useCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["bundledQty", "entitlementType", "inventoryConfig", "itemId", "itemType", "sku"]
+    },
+    "apimodels.PurchaseValidationReq": {
+      "properties": {
+        "entitlementType": {
+          "type": "string"
+        },
+        "inventoryConfig": {
+          "$ref": "#/definitions/apimodels.InventoryConfig"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/definitions/apimodels.PurchaseValidationItemReq"
+          },
+          "type": "array"
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "useCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["itemId", "itemType", "quantity", "sku"]
+    },
+    "apimodels.RemoveInventoryItemReq": {
+      "properties": {
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": ["slotId", "sourceItemId"]
+    },
+    "apimodels.RemoveItem": {
+      "properties": {
+        "inventoryId": {
+          "type": "string"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": ["inventoryId", "slotId", "sourceItemId"]
+    },
+    "apimodels.SaveItemReq": {
+      "properties": {
+        "customAttributes": {
+          "type": "object"
+        },
+        "inventoryConfigurationCode": {
+          "type": "string"
+        },
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "serverCustomAttributes": {
+          "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "slotUsed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "source": {
+          "enum": ["ECOMMERCE", "OTHER"],
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customAttributes",
+        "inventoryConfigurationCode",
+        "qty",
+        "serverCustomAttributes",
+        "slotId",
+        "slotUsed",
+        "source",
+        "sourceItemId",
+        "tags",
+        "type"
+      ]
+    },
+    "apimodels.SaveItemToInventoryReq": {
+      "properties": {
+        "customAttributes": {
+          "type": "object"
+        },
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "serverCustomAttributes": {
+          "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "slotUsed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "source": {
+          "enum": ["ECOMMERCE", "OTHER"],
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["customAttributes", "qty", "serverCustomAttributes", "slotId", "slotUsed", "source", "sourceItemId", "tags", "type"]
+    },
+    "apimodels.TradeItem": {
+      "properties": {
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": ["qty", "slotId", "sourceItemId"]
+    },
+    "apimodels.TradeItemResp": {
+      "properties": {
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": ["qty", "slotId", "sourceItemId"]
+    },
+    "apimodels.UpdateIntegrationConfigurationReq": {
+      "properties": {
+        "mapItemType": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "targetInventoryCode": {
+          "type": "string"
+        }
+      },
+      "required": ["serviceName", "targetInventoryCode"]
+    },
+    "apimodels.UpdateInventoryReq": {
+      "properties": {
+        "incMaxSlots": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["incMaxSlots"]
+    },
+    "apimodels.UpdateItem": {
+      "properties": {
+        "customAttributes": {
+          "type": "object"
+        },
+        "inventoryId": {
+          "type": "string"
+        },
+        "serverCustomAttributes": {
+          "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["customAttributes", "inventoryId", "serverCustomAttributes", "slotId", "sourceItemId", "tags", "type"]
+    },
+    "apimodels.UpdateItemReq": {
+      "properties": {
+        "customAttributes": {
+          "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["customAttributes", "slotId", "sourceItemId", "tags"]
+    },
+    "apimodels.UpdateItemResp": {
+      "properties": {
+        "errorDetails": {
+          "$ref": "#/definitions/apimodels.ErrorResponse"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["slotId", "sourceItemId", "success"]
+    },
+    "apimodels.UpdateStatusIntegrationConfigurationReq": {
+      "properties": {
+        "status": {
+          "enum": ["INIT", "TIED"],
+          "type": "string"
+        }
+      },
+      "required": ["status"]
+    }
+  },
+  "x-docs": {
+    "alias": "inventory",
+    "host": "https://development.accelbyte.io",
+    "path": "/inventory/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2024-04-02T08:18:48+00:00",
+    "gitHash": "915966d64564b96c9c3b8850ee51f965f58a5569",
+    "name": "justice-inventory-service",
+    "realm": "DEV",
+    "version": "0.1.0",
+    "version-roles-seeding": "1.2.32"
+  }
+}

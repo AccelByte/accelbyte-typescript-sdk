@@ -9,6 +9,7 @@ export const UserResponse = z.object({
   id: z.string(),
   platformID: z.string(),
   platformUserID: z.string(),
+  previousStatus: z.string().nullish(),
   status: z.string(),
   statusV2: z.string(),
   updatedAt: z.string()

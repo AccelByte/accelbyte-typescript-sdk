@@ -17,7 +17,7 @@ export const UserCreateRequestV3 = z.object({
   emailAddress: z.string(),
   password: z.string(),
   reachMinimumAge: z.boolean(),
-  uniqueDisplayName: z.string()
+  uniqueDisplayName: z.string().nullish()
 })
 
 export interface UserCreateRequestV3 extends z.TypeOf<typeof UserCreateRequestV3> {}

@@ -23,7 +23,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]&lt;/b&gt;
+   * Get official channel paginated
    */
   async function getChannels(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetChannelResponse> {
     const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -33,7 +33,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]&lt;/b&gt;
+   * Create official channel
    */
   async function createChannel(data: ChannelRequest): Promise<ChannelResponse> {
     const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -43,7 +43,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   * Delete official channel
    */
   async function deleteChannel_ByChannelId(channelId: string): Promise<unknown> {
     const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -53,7 +53,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]&lt;/b&gt;
+   * Update official channel
    */
   async function updateChannel_ByChannelId(channelId: string, data: UpdateChannelRequest): Promise<ChannelResponse> {
     const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -63,7 +63,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]&lt;/b&gt;
+   * Get user channel paginated
    */
   async function getChannels_ByUserId(
     userId: string,
@@ -76,7 +76,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   * Delete user channel
    */
   async function deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<unknown> {
     const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -86,7 +86,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]&lt;/b&gt;
+   * Update user channel
    */
   async function updateChannel_ByUserId_ByChannelId(
     userId: string,

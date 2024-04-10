@@ -5,6 +5,10 @@
  */
 import { z } from 'zod'
 
-export const AdminPlayerConcurrentRecordRequest = z.object({ updatedAt: z.string(), value: z.record(z.any()) })
+export const AdminPlayerConcurrentRecordRequest = z.object({
+  tags: z.array(z.string()).nullish(),
+  updatedAt: z.string(),
+  value: z.record(z.any())
+})
 
 export interface AdminPlayerConcurrentRecordRequest extends z.TypeOf<typeof AdminPlayerConcurrentRecordRequest> {}

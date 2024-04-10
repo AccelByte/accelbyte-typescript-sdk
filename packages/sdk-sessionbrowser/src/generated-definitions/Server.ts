@@ -8,7 +8,7 @@ import { StatusHistory } from './StatusHistory.js'
 
 export const Server = z.object({
   allocation_id: z.string(),
-  alternate_ips: z.array(z.string()),
+  alternate_ips: z.array(z.string()).nullish(),
   cpu_limit: z.number().int(),
   cpu_request: z.string(),
   deployment: z.string(),
@@ -23,12 +23,12 @@ export const Server = z.object({
   params: z.string(),
   pod_name: z.string(),
   port: z.number().int(),
-  ports: z.record(z.number().int()),
+  ports: z.record(z.number().int()).nullish(),
   provider: z.string(),
   region: z.string(),
   session_id: z.string(),
   status: z.string(),
-  status_history: z.array(StatusHistory)
+  status_history: z.array(StatusHistory).nullish()
 })
 
 export interface Server extends z.TypeOf<typeof Server> {}

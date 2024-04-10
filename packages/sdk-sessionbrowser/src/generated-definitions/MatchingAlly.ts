@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { MatchingParty } from './MatchingParty.js'
 
-export const MatchingAlly = z.object({ matching_parties: z.array(MatchingParty) })
+export const MatchingAlly = z.object({ matching_parties: z.array(MatchingParty).nullish() })
 
 export interface MatchingAlly extends z.TypeOf<typeof MatchingAlly> {}

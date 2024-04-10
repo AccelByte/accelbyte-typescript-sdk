@@ -11,6 +11,7 @@ export const UserUpdateRequestV3 = z.object({
   dateOfBirth: z.string().nullish(),
   displayName: z.string().nullish(),
   languageTag: z.string().nullish(),
+  skipLoginQueue: z.boolean().nullish(),
   uniqueDisplayName: z.string().nullish(),
   userName: z.string().nullish()
 })

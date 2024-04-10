@@ -6,14 +6,30 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
+import { z } from 'zod'
+import { BlockPlayerRequest } from '../../generated-definitions/BlockPlayerRequest.js'
 import { GetAllPlayerBlockedByUsersResponse } from '../../generated-definitions/GetAllPlayerBlockedByUsersResponse.js'
 import { GetAllPlayerBlockedUsersResponse } from '../../generated-definitions/GetAllPlayerBlockedUsersResponse.js'
+import { UnblockPlayerRequest } from '../../generated-definitions/UnblockPlayerRequest.js'
 
 export class Player$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+
+  /**
+   * Required valid user authorization &lt;br/&gt; &lt;br&gt;add blocked players in a namespace based on user id &lt;br/&gt;
+   */
+  createPlayerUserMeBlock(data: BlockPlayerRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/lobby/v1/public/player/namespaces/{namespace}/users/me/block'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
 
   /**
    * Required valid user authorization &lt;br/&gt; &lt;br&gt;load blocked players in a namespace based on user id &lt;br/&gt; Action Code: 50101
@@ -33,6 +49,19 @@ export class Player$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Required valid user authorization &lt;br/&gt; unblock player in a namespace based on user id &lt;br/&gt;
+   */
+  createPlayerUserMeUnblock(data: UnblockPlayerRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/lobby/v1/public/player/namespaces/{namespace}/users/me/unblock'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

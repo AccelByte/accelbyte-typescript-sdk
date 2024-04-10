@@ -9,10 +9,10 @@ export const SaveInboxMessageResponse = z.object({
   category: z.string(),
   expiredAt: z.number().int(),
   id: z.string(),
-  message: z.record(z.any()),
+  message: z.record(z.any()).nullish(),
   scope: z.enum(['NAMESPACE', 'USER']),
   status: z.enum(['DRAFT', 'SENT', 'UNSENT']),
-  userIDs: z.array(z.string())
+  userIDs: z.array(z.string()).nullish()
 })
 
 export interface SaveInboxMessageResponse extends z.TypeOf<typeof SaveInboxMessageResponse> {}

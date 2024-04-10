@@ -13,6 +13,7 @@ export const PlayerBinaryRecordResponse = z.object({
   key: z.string(),
   namespace: z.string(),
   set_by: z.enum(['CLIENT', 'SERVER']).nullish(),
+  tags: z.array(z.string()).nullish(),
   updated_at: z.string(),
   user_id: z.string()
 })

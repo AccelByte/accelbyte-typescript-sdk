@@ -9,6 +9,7 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
+import { CheckAvailabilityResponse } from '../../generated-definitions/CheckAvailabilityResponse.js'
 import { PlatformDomainDeleteRequest } from '../../generated-definitions/PlatformDomainDeleteRequest.js'
 import { PlatformDomainResponse } from '../../generated-definitions/PlatformDomainResponse.js'
 import { PlatformDomainUpdateRequest } from '../../generated-definitions/PlatformDomainUpdateRequest.js'
@@ -19,6 +20,26 @@ import { ThirdPartyLoginPlatformCredentialResponseArray } from '../../generated-
 export class ThirdPartyCredentialAdmin$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+
+  /**
+   * This is the API to check specific 3rd party platform availability. Passing platform group name or it&#39;s member will return same platform availability data Supported third party platform and platform group: - PSN group(psn) - ps4web - ps4 - ps5
+   */
+  getAvailability_ByPlatformId(platformId: string): Promise<IResponseWithSync<CheckAvailabilityResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/admin/platforms/{platformId}/availability'.replace('{platformId}', platformId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, CheckAvailabilityResponse, 'CheckAvailabilityResponse')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
 
   /**
    * This is the API to Get All Active 3rd Platform Credential.

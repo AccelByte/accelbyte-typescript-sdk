@@ -10,10 +10,10 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminGameBinaryRecordAdmin$ } from './endpoints/AdminGameBinaryRecordAdmin$.js'
 import { BinaryRecordRequest } from '../generated-definitions/BinaryRecordRequest.js'
+import { GameBinaryRecordAdminResponse } from '../generated-definitions/GameBinaryRecordAdminResponse.js'
 import { GameBinaryRecordCreate } from '../generated-definitions/GameBinaryRecordCreate.js'
 import { GameBinaryRecordMetadataRequest } from '../generated-definitions/GameBinaryRecordMetadataRequest.js'
-import { GameBinaryRecordResponse } from '../generated-definitions/GameBinaryRecordResponse.js'
-import { ListGameBinaryRecordsResponse } from '../generated-definitions/ListGameBinaryRecordsResponse.js'
+import { ListGameBinaryRecordsAdminResponse } from '../generated-definitions/ListGameBinaryRecordsAdminResponse.js'
 import { UploadBinaryRecordRequest } from '../generated-definitions/UploadBinaryRecordRequest.js'
 import { UploadBinaryRecordResponse } from '../generated-definitions/UploadBinaryRecordResponse.js'
 
@@ -32,7 +32,8 @@ export function AdminGameBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs)
     limit?: number
     offset?: number
     query?: string | null
-  }): Promise<ListGameBinaryRecordsResponse> {
+    tags?: string[]
+  }): Promise<ListGameBinaryRecordsAdminResponse> {
     const $ = new AdminGameBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getBinaries(queryParams)
     if (resp.error) throw resp.error
@@ -62,7 +63,7 @@ export function AdminGameBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs)
   /**
    * Get a game binary record by its key.
    */
-  async function getBinary_ByKey(key: string): Promise<GameBinaryRecordResponse> {
+  async function getBinary_ByKey(key: string): Promise<GameBinaryRecordAdminResponse> {
     const $ = new AdminGameBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getBinary_ByKey(key)
     if (resp.error) throw resp.error
@@ -72,7 +73,7 @@ export function AdminGameBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs)
   /**
    * Update a game binary record file by its key
    */
-  async function updateBinary_ByKey(key: string, data: BinaryRecordRequest): Promise<GameBinaryRecordResponse> {
+  async function updateBinary_ByKey(key: string, data: BinaryRecordRequest): Promise<GameBinaryRecordAdminResponse> {
     const $ = new AdminGameBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.updateBinary_ByKey(key, data)
     if (resp.error) throw resp.error
@@ -82,7 +83,7 @@ export function AdminGameBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs)
   /**
    * Update a game binary record metadata by its key
    */
-  async function updateMetadata_ByKey(key: string, data: GameBinaryRecordMetadataRequest): Promise<GameBinaryRecordResponse> {
+  async function updateMetadata_ByKey(key: string, data: GameBinaryRecordMetadataRequest): Promise<GameBinaryRecordAdminResponse> {
     const $ = new AdminGameBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.updateMetadata_ByKey(key, data)
     if (resp.error) throw resp.error

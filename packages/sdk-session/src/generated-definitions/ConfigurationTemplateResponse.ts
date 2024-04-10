@@ -10,6 +10,7 @@ export const ConfigurationTemplateResponse = z.object({
   PSNBaseUrl: z.string().nullish(),
   attributes: z.record(z.any()).nullish(),
   autoJoin: z.boolean().nullish(),
+  autoLeaveSession: z.boolean().nullish(),
   clientVersion: z.string(),
   createdAt: z.string(),
   deployment: z.string(),

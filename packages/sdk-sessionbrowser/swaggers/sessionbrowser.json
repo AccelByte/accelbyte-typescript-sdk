@@ -764,7 +764,7 @@
         "tags": ["Session", "public"],
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
           }
         ]
       },
@@ -887,7 +887,7 @@
         "tags": ["Session", "public"],
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
           }
         ]
       }
@@ -1003,7 +1003,7 @@
         "tags": ["Session", "public"],
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
           }
         ]
       },
@@ -1147,7 +1147,7 @@
         "tags": ["Session", "public"],
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
+            "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
           }
         ]
       }
@@ -1507,7 +1507,7 @@
           "type": "array"
         }
       },
-      "required": ["pagination", "sessions"]
+      "required": ["pagination"]
     },
     "models.AddPlayerRequest": {
       "properties": {
@@ -1590,10 +1590,8 @@
       "required": [
         "all_players",
         "created_at",
-        "game_session_setting",
         "game_version",
         "joinable",
-        "match",
         "namespace",
         "players",
         "server",
@@ -1686,18 +1684,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "all_players",
-        "created_at",
-        "game_session_setting",
-        "joinable",
-        "namespace",
-        "players",
-        "server",
-        "session_id",
-        "session_type",
-        "spectators"
-      ]
+      "required": ["created_at", "joinable", "namespace", "session_id", "session_type"]
     },
     "models.GameSession": {
       "properties": {
@@ -1756,22 +1743,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "all_players",
-        "created_at",
-        "game_session_setting",
-        "game_version",
-        "joinable",
-        "match",
-        "namespace",
-        "players",
-        "server",
-        "session_id",
-        "session_type",
-        "spectators",
-        "user_id",
-        "username"
-      ]
+      "required": ["created_at", "game_version", "joinable", "namespace", "server", "session_id", "session_type", "user_id", "username"]
     },
     "models.GameSessionSetting": {
       "properties": {
@@ -1821,8 +1793,7 @@
         "max_player",
         "mode",
         "num_bot",
-        "password",
-        "settings"
+        "password"
       ]
     },
     "models.GetSessionHistoryDetailedResponseItem": {
@@ -1923,11 +1894,8 @@
         "event_name",
         "game_mode",
         "joinable",
-        "joining",
         "match_id",
-        "matching_allies",
         "namespace",
-        "players",
         "region",
         "removed_reason",
         "server_name",
@@ -2001,14 +1969,11 @@
         "created_at",
         "game_mode",
         "joinable",
-        "joining",
         "match_id",
         "namespace",
-        "players",
         "removed_reason",
         "session_type",
         "status",
-        "sub_game_mode",
         "user_id"
       ]
     },
@@ -2127,14 +2092,12 @@
         "event",
         "game_mode",
         "match_id",
-        "matching_allies",
         "namespace",
         "party_attributes",
         "queued_at",
         "region",
         "server_name",
-        "status",
-        "sub_game_mode"
+        "status"
       ]
     },
     "models.MatchingAlly": {
@@ -2145,8 +2108,7 @@
           },
           "type": "array"
         }
-      },
-      "required": ["matching_parties"]
+      }
     },
     "models.MatchingParty": {
       "properties": {
@@ -2167,7 +2129,7 @@
           "type": "array"
         }
       },
-      "required": ["match_attributes", "party_attributes", "party_id", "party_members"]
+      "required": ["party_id"]
     },
     "models.Pagination": {
       "properties": {
@@ -2207,7 +2169,7 @@
           "x-nullable": false
         }
       },
-      "required": ["extra_attributes", "user_id"]
+      "required": ["user_id"]
     },
     "models.RecentPlayerHistory": {
       "properties": {
@@ -2333,7 +2295,6 @@
       },
       "required": [
         "allocation_id",
-        "alternate_ips",
         "cpu_limit",
         "cpu_request",
         "deployment",
@@ -2348,12 +2309,10 @@
         "params",
         "pod_name",
         "port",
-        "ports",
         "provider",
         "region",
         "session_id",
-        "status",
-        "status_history"
+        "status"
       ]
     },
     "models.SessionByUserIDsResponse": {
@@ -2569,11 +2528,11 @@
     "path": "/sessionbrowser/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-01-17T03:48:32+00:00",
-    "gitHash": "969f3be2fa6fd7c461da256c0d711a28d28e1e98",
+    "buildDate": "2024-03-27T01:31:56+00:00",
+    "gitHash": "5503220ccb9c91ee5cca6340d9c9d3f396859bfa",
     "name": "justice-session-browser-service",
-    "revisionID": "1.18.2",
-    "version": "1.18.2",
+    "revisionID": "1.18.6",
+    "version": "1.18.6",
     "version-roles-seeding": "0.0.3"
   }
 }

@@ -16,7 +16,7 @@ export class GroupMemberAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;This endpoint is used to get user joined group information.&lt;/p&gt; &lt;p&gt;Get user group joined information. If user does not belong to any group, it will return warning to give information about it&lt;/p&gt; &lt;p&gt;Group Member Status:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;JOINED: status of user already joined to a group&lt;/li&gt; &lt;/ul&gt;
+   * Required valid user authentication This endpoint is used to get user joined group information. Get user group joined information. If user does not belong to any group, it will return warning to give information about it Group Member Status: * JOINED: status of user already joined to a group
    */
   getGroups_ByUserId(
     userId: string,
@@ -41,7 +41,7 @@ export class GroupMemberAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission ADMIN:NAMESPACE:{namespace}:GROUP:MEMBER [READ] &lt;/p&gt; &lt;p&gt;This endpoint is used to get list of group members.&lt;/p&gt; &lt;p&gt;Action Code: 73410&lt;/p&gt;
+   * This endpoint is used to get list of group members. Action Code: 73410
    */
   getMembers_ByGroupId(
     groupId: string,
@@ -66,7 +66,7 @@ export class GroupMemberAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required Permission: &#34;ADMIN:NAMESPACE:{namespace}:GROUP:MEMBER [READ]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to get user group status information.&lt;/p&gt;
+   * This endpoint is used to get user group status information.
    */
   getStatus_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponseWithSync<GetUserGroupInformationResponseV1>> {
     const params = {} as SDKRequestConfig

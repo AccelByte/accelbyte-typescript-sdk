@@ -15,7 +15,7 @@ export const MatchMaking = z.object({
   game_mode: z.string(),
   joinable: z.boolean().nullish(),
   match_id: z.string(),
-  matching_allies: z.array(MatchingAlly),
+  matching_allies: z.array(MatchingAlly).nullish(),
   namespace: z.string(),
   party_attributes: z.record(z.any()),
   party_id: z.string().nullish(),
@@ -23,7 +23,7 @@ export const MatchMaking = z.object({
   region: z.string(),
   server_name: z.string(),
   status: z.string(),
-  sub_game_mode: z.array(z.string())
+  sub_game_mode: z.array(z.string()).nullish()
 })
 
 export interface MatchMaking extends z.TypeOf<typeof MatchMaking> {}

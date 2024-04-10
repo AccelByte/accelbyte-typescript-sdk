@@ -26,7 +26,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:GROUP:CONFIGURATION [READ]&#39;&lt;/p&gt; &lt;p&gt;This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration&lt;/p&gt; &lt;p&gt;Action Code: 73101&lt;/p&gt;
+   * This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
    */
   async function getConfiguration(queryParams?: { limit?: number; offset?: number }): Promise<ListConfigurationResponseV1> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -36,7 +36,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:GROUP:CONFIGURATION [CREATE]&#39;&lt;/p&gt; &lt;p&gt;This endpoint is used to create new configuration. Before creating the configuration, make sure that member role for admin and group member are already created before.&lt;/p&gt; &lt;p&gt;For each of the global rule, it will be the rule detail that consists of these fields: &lt;/p&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;ruleAttribute&lt;/b&gt;: attribute of the player that needs to be checked&lt;/li&gt; &lt;li&gt;&lt;b&gt;ruleCriteria&lt;/b&gt;: criteria of the value. The value will be in enum of EQUAL, MINIMUM, MAXIMUM&lt;/li&gt; &lt;li&gt;&lt;b&gt;ruleValue&lt;/b&gt;: value that needs to be checked&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Allowed Action can only be filled with any available action in the Group Service. For the configuration, the only value is &lt;b&gt;&#34;createGroup&#34;&lt;/b&gt;&lt;/p&gt; &lt;p&gt;Action Code: 73103&lt;/p&gt;
+   * This endpoint is used to create new configuration. Before creating the configuration, make sure that member role for admin and group member are already created before. For each of the global rule, it will be the rule detail that consists of these fields: * **ruleAttribute**: attribute of the player that needs to be checked * **ruleCriteria**: criteria of the value. The value will be in enum of EQUAL, MINIMUM, MAXIMUM * **ruleValue**: value that needs to be checked Allowed Action can only be filled with any available action in the Group Service. For the configuration, the only value is **&#34;createGroup&#34;** Action Code: 73103
    */
   async function createConfiguration(data: CreateGroupConfigurationRequestV1): Promise<CreateGroupConfigurationResponseV1> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -46,7 +46,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:GROUP:CONFIGURATION [CREATE]&#39;&lt;/p&gt; &lt;p&gt;This endpoint is used to initiate configuration. This endpoint will automatically create default configuration and member roles with default permission&lt;/p&gt; &lt;p&gt;Default Permission for admin role will cover these permission: &lt;/p&gt; &lt;ul&gt; &lt;li&gt;Permission to invite user to group&lt;/li&gt; &lt;li&gt;Permission to accept or reject join request&lt;/li&gt; &lt;li&gt;Permission to kick group member&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Default max member value will be 50 and global rules will be empty&lt;/p&gt; &lt;p&gt;Action Code: 73104&lt;/p&gt;
+   * This endpoint is used to initiate configuration. This endpoint will automatically create default configuration and member roles with default permission Default Permission for admin role will cover these permission: - Permission to invite user to group - Permission to accept or reject join request - Permission to kick group member Default max member value will be 50 and global rules will be empty Action Code: 73104
    */
   async function createConfigurationInitiate(): Promise<CreateGroupConfigurationResponseV1> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -56,7 +56,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:GROUP:CONFIGURATION [DELETE]&#39;&lt;/p&gt; &lt;p&gt;This endpoint is used to delete group configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration&lt;/p&gt; &lt;p&gt;Action Code: 73101&lt;/p&gt;
+   * This endpoint is used to delete group configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
    */
   async function deleteConfiguration_ByConfigurationCode(configurationCode: string): Promise<unknown> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -66,7 +66,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:GROUP:CONFIGURATION [READ]&#39;&lt;/p&gt; &lt;p&gt;This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration&lt;/p&gt; &lt;p&gt;Action Code: 73101&lt;/p&gt;
+   * This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
    */
   async function getConfiguration_ByConfigurationCode(configurationCode: string): Promise<GetGroupConfigurationResponseV1> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -76,7 +76,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:GROUP:CONFIGURATION [UPDATE]&#39;&lt;/p&gt; &lt;p&gt;This endpoint is used to update existing configuration. groupAdminRoleId and groupMemberRoleId won&#39;t be able to be updated. User can try to change the member role permission instead for each of those member role&lt;/p&gt; &lt;p&gt;Action Code: 73102&lt;/p&gt;
+   * This endpoint is used to update existing configuration. groupAdminRoleId and groupMemberRoleId won&#39;t be able to be updated. User can try to change the member role permission instead for each of those member role Action Code: 73102
    */
   async function patchConfiguration_ByConfigurationCode(
     configurationCode: string,
@@ -89,7 +89,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:GROUP:CONFIGURATION [UPDATE]&#39;&lt;/p&gt; &lt;p&gt;This endpoint is used to delete existing global rule configuration based on the allowed action. It will not give any error if the allowed action is not existed in the global rule&lt;/p&gt; &lt;p&gt;Action Code: 73105&lt;/p&gt;
+   * This endpoint is used to delete existing global rule configuration based on the allowed action. It will not give any error if the allowed action is not existed in the global rule Action Code: 73105
    */
   async function deleteRule_ByConfigurationCode_ByAllowedAction(
     configurationCode: string,
@@ -102,7 +102,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:GROUP:CONFIGURATION [UPDATE]&#39;&lt;/p&gt; &lt;p&gt;This endpoint is used to update existing global rule configuration based on the allowed action. It will replace the permission with the request&lt;/p&gt; &lt;p&gt;Action Code: 73106&lt;/p&gt;
+   * This endpoint is used to update existing global rule configuration based on the allowed action. It will replace the permission with the request Action Code: 73106
    */
   async function updateRule_ByConfigurationCode_ByAllowedAction(
     configurationCode: string,

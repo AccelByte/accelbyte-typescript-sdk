@@ -8,16 +8,16 @@ import { GameSessionSetting } from './GameSessionSetting.js'
 import { Server } from './Server.js'
 
 export const CustomGameResponse = z.object({
-  all_players: z.array(z.string()),
+  all_players: z.array(z.string()).nullish(),
   created_at: z.string(),
-  game_session_setting: GameSessionSetting,
+  game_session_setting: GameSessionSetting.nullish(),
   joinable: z.boolean(),
   namespace: z.string(),
-  players: z.array(z.string()),
-  server: Server,
+  players: z.array(z.string()).nullish(),
+  server: Server.nullish(),
   session_id: z.string(),
   session_type: z.string(),
-  spectators: z.array(z.string())
+  spectators: z.array(z.string()).nullish()
 })
 
 export interface CustomGameResponse extends z.TypeOf<typeof CustomGameResponse> {}

@@ -51,6 +51,7 @@ export class Agreement$ {
   }
 
   /**
+   * @deprecated
    * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   createAgreementPolicyUser_ByUserId(userId: string, data: AcceptAgreementRequest[]): Promise<IResponse<AcceptAgreementResponse>> {
@@ -89,6 +90,29 @@ export class Agreement$ {
 
     return this.isValidationEnabled
       ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   */
+  createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(
+    countryCode: string,
+    clientId: string,
+    userId: string,
+    data: AcceptAgreementRequest[]
+  ): Promise<IResponse<AcceptAgreementResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/agreement/public/agreements/policies/namespaces/{namespace}/countries/{countryCode}/clients/{clientId}/users/{userId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{countryCode}', countryCode)
+      .replace('{clientId}', clientId)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AcceptAgreementResponse, 'AcceptAgreementResponse')
       : Validate.unsafeResponse(() => resultPromise)
   }
 }

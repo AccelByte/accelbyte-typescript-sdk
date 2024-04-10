@@ -11,6 +11,7 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AddCountryGroupRequest } from '../generated-definitions/AddCountryGroupRequest.js'
 import { AddCountryGroupResponse } from '../generated-definitions/AddCountryGroupResponse.js'
 import { CountryGroupObject } from '../generated-definitions/CountryGroupObject.js'
+import { CountryObjectArray } from '../generated-definitions/CountryObjectArray.js'
 import { MiscAdmin$ } from './endpoints/MiscAdmin$.js'
 import { RetrieveCountryGroupResponseArray } from '../generated-definitions/RetrieveCountryGroupResponseArray.js'
 import { UpdateCountryGroupRequest } from '../generated-definitions/UpdateCountryGroupRequest.js'
@@ -22,6 +23,17 @@ export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
+
+  /**
+   * @deprecated
+   * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11204&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getMiscCountries(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
+    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getMiscCountries(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11206&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;
@@ -87,6 +99,7 @@ export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    getMiscCountries,
     getMiscLanguages,
     getMiscTimezones,
     getMiscCountrygroups,

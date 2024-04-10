@@ -70,4 +70,26 @@ export class DeploymentConfig$ {
       ? Validate.responseType(() => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
       : Validate.unsafeResponse(() => resultPromise)
   }
+
+  /**
+   * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server deployment in a namespace
+   */
+  getConfigDeployment_ByNamespace_ByDeployment(deployment: string): Promise<IResponseWithSync<DeploymentWithOverride>> {
+    const params = {} as SDKRequestConfig
+    const url = '/dsmcontroller/namespaces/{namespace}/namespaces/{namespace}/configs/deployments/{deployment}'
+      .replace('{namespace}', this.namespace)
+      .replace('{deployment}', deployment)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
 }

@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { Role } from './Role.js'
 
 export const Combination = z.object({
-  alliances: z.array(z.array(Role)),
+  alliances: z.array(z.array(Role)).nullish(),
   has_combination: z.boolean(),
   role_flexing_enable: z.boolean(),
   role_flexing_player: z.number().int(),

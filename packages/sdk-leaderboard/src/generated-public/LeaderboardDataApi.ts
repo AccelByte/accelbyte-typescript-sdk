@@ -114,7 +114,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Delete user ranking Required permission: NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE] Remove entry with provided userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
+   * Delete user ranking Remove entry with provided userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
    */
   async function deleteUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<unknown> {
     const $ = new LeaderboardData$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

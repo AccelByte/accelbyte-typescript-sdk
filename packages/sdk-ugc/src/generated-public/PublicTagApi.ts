@@ -20,7 +20,7 @@ export function PublicTagApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Publicly accessible
+   * Get available tags paginated
    */
   async function getTags(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTagResponse> {
     const $ = new PublicTag$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

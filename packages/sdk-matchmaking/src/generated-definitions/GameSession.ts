@@ -12,6 +12,7 @@ import { User } from './User.js'
 export const GameSession = z.object({
   DSInformation: DsInformation,
   GameMode: z.string(),
+  IsFull: z.boolean(),
   JoinType: z.string(),
   Members: z.array(User),
   attributes: z.record(z.any()),

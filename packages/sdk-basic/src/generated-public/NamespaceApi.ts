@@ -11,6 +11,7 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Namespace$ } from './endpoints/Namespace$.js'
 import { NamespaceInfoArray } from '../generated-definitions/NamespaceInfoArray.js'
 import { NamespacePublisherInfo } from '../generated-definitions/NamespacePublisherInfo.js'
+import { NamespaceSimpleInfo } from '../generated-definitions/NamespaceSimpleInfo.js'
 
 export function NamespaceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
@@ -31,6 +32,16 @@ export function NamespaceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Get a namespace info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: namespace info&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getNamespace_ByNamespace(): Promise<NamespaceSimpleInfo> {
+    const $ = new Namespace$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getNamespace_ByNamespace()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Get namespace info related publisher namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11305&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Namespace info related publisher namespace&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPublisher(): Promise<NamespacePublisherInfo> {
@@ -42,6 +53,7 @@ export function NamespaceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getNamespaces,
+    getNamespace_ByNamespace,
     getPublisher
   }
 }

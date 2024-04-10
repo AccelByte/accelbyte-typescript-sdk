@@ -20,7 +20,7 @@ export function PublicDownloadCountLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) 
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Requires valid user token
+   * This endpoint can be used to count how many the ugc downloaded
    */
   async function createDownloadcount_ByContentId(contentId: string): Promise<AddDownloadCountResponse> {
     const $ = new PublicDownloadCountLegacy$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

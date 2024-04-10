@@ -114,6 +114,22 @@ export class DeploymentConfigAdmin$ {
   }
 
   /**
+   * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint deletes the deployment creating server count queue in a namespace in all registered region for the selected version
+   */
+  deleteQueueConfig_ByDeployment_ByVersion(deployment: string, version: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/versions/{version}/queues'
+      .replace('{namespace}', this.namespace)
+      .replace('{deployment}', deployment)
+      .replace('{version}', version)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint delete a dedicated server deployment override in a namespace in a region for root deployment
    */
   deleteOverrideRegionConfig_ByDeployment_ByRegion(deployment: string, region: string): Promise<IResponse<DeploymentWithOverride>> {

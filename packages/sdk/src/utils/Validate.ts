@@ -43,7 +43,7 @@ export class Validate {
     return wrapNetworkCallSafely<D>(async () => {
       const response = await networkCall()
       const decodeResult = Codec.safeParse(response.data)
-      if (!decodeResult.success) {
+      if (!decodeResult.success && response.status !== 204) {
         throw new DecodeError({ error: decodeResult.error, response, modelName })
       }
       return response

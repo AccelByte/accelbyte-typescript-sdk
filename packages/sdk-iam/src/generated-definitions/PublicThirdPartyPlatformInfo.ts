@@ -11,7 +11,8 @@ export const PublicThirdPartyPlatformInfo = z.object({
   Environment: z.string(),
   IsActive: z.boolean(),
   PlatformId: z.string(),
-  PlatformName: z.string()
+  PlatformName: z.string(),
+  TokenAuthenticationType: z.string()
 })
 
 export interface PublicThirdPartyPlatformInfo extends z.TypeOf<typeof PublicThirdPartyPlatformInfo> {}

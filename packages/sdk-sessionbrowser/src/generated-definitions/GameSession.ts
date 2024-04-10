@@ -9,18 +9,18 @@ import { MatchMaking } from './MatchMaking.js'
 import { Server } from './Server.js'
 
 export const GameSession = z.object({
-  all_players: z.array(z.string()),
+  all_players: z.array(z.string()).nullish(),
   created_at: z.string(),
-  game_session_setting: GameSessionSetting,
+  game_session_setting: GameSessionSetting.nullish(),
   game_version: z.string(),
   joinable: z.boolean(),
-  match: MatchMaking,
+  match: MatchMaking.nullish(),
   namespace: z.string(),
-  players: z.array(z.string()),
+  players: z.array(z.string()).nullish(),
   server: Server,
   session_id: z.string(),
   session_type: z.string(),
-  spectators: z.array(z.string()),
+  spectators: z.array(z.string()).nullish(),
   user_id: z.string(),
   username: z.string()
 })

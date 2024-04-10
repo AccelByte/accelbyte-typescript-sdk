@@ -81,6 +81,16 @@ export function DeploymentConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint deletes the deployment creating server count queue in a namespace in all registered region for the selected version
+   */
+  async function deleteQueueConfig_ByDeployment_ByVersion(deployment: string, version: string): Promise<unknown> {
+    const $ = new DeploymentConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.deleteQueueConfig_ByDeployment_ByVersion(deployment, version)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint delete a dedicated server deployment override in a namespace in a region for root deployment
    */
   async function deleteOverrideRegionConfig_ByDeployment_ByRegion(deployment: string, region: string): Promise<DeploymentWithOverride> {
@@ -206,6 +216,7 @@ export function DeploymentConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getConfigDeployment_ByDeployment,
     patchConfigDeployment_ByDeployment,
     createConfigDeployment_ByDeployment,
+    deleteQueueConfig_ByDeployment_ByVersion,
     deleteOverrideRegionConfig_ByDeployment_ByRegion,
     patchOverrideRegionConfig_ByDeployment_ByRegion,
     createOverrideRegionConfig_ByDeployment_ByRegion,

@@ -6,7 +6,7 @@
 import { z } from 'zod'
 
 export const CreateScreenshotRequestItem = z.object({
-  contentType: z.string(),
+  contentType: z.string().nullish(),
   description: z.string(),
   fileExtension: z.enum(['bmp', 'jfif', 'jpeg', 'jpg', 'pjp', 'png'])
 })

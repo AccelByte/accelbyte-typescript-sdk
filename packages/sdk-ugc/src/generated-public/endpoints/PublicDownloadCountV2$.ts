@@ -22,7 +22,7 @@ export class PublicDownloadCountV2$ {
     contentId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; userId?: string | null }
   ): Promise<IResponseWithSync<PaginatedContentDownloaderResponse>> {
-    const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, sortBy: '*createdTime:desc*', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloader'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)
@@ -41,7 +41,7 @@ export class PublicDownloadCountV2$ {
   }
 
   /**
-   * Requires valid user token
+   * This endpoint can be used to count how many the ugc downloaded
    */
   createDownloadcount_ByContentId(contentId: string): Promise<IResponse<AddDownloadCountResponse>> {
     const params = {} as SDKRequestConfig

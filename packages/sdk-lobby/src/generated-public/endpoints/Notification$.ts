@@ -11,9 +11,9 @@ import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateTopicRequest } from '../../generated-definitions/CreateTopicRequest.js'
 import { FreeFormNotificationRequest } from '../../generated-definitions/FreeFormNotificationRequest.js'
+import { NotificationResponse } from '../../generated-definitions/NotificationResponse.js'
 import { NotificationTopicResponse } from '../../generated-definitions/NotificationTopicResponse.js'
 import { NotificationWithTemplateRequest } from '../../generated-definitions/NotificationWithTemplateRequest.js'
-import { NotificationsResponse } from '../../generated-definitions/NotificationsResponse.js'
 import { TopicByNamespacesResponse } from '../../generated-definitions/TopicByNamespacesResponse.js'
 import { UpdateTopicRequest } from '../../generated-definitions/UpdateTopicRequest.js'
 
@@ -22,21 +22,21 @@ export class Notification$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Get list of notifications in a namespace. The **startTime** and **endTime** query parameters can be filled with **sequenceID** from notifications.
+   * Get list of notifications in a namespace. The query parameters **startTime** and **endTime** can be filled with the **sequenceID** value in the notification, where the value is an epoch timestamp. Example **sequenceID** or epoch timestamp value: **1706595813**
    */
   getNotificationMe(queryParams?: {
     endTime?: number
     limit?: number
     offset?: number
     startTime?: number
-  }): Promise<IResponseWithSync<NotificationsResponse>> {
+  }): Promise<IResponseWithSync<NotificationResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/notification/namespaces/{namespace}/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     const res = () =>
       this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NotificationsResponse, 'NotificationsResponse')
+        ? Validate.responseType(() => resultPromise, NotificationResponse, 'NotificationResponse')
         : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {

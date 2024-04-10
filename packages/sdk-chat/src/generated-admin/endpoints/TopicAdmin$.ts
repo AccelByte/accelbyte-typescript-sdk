@@ -22,6 +22,8 @@ import { ChatMessageWithPaginationResponse } from '../../generated-definitions/C
 import { CreateNamespaceTopicParams } from '../../generated-definitions/CreateNamespaceTopicParams.js'
 import { CreateTopicParams } from '../../generated-definitions/CreateTopicParams.js'
 import { CreateTopicResponse } from '../../generated-definitions/CreateTopicResponse.js'
+import { MessageRequest } from '../../generated-definitions/MessageRequest.js'
+import { MessageResultWithAttributes } from '../../generated-definitions/MessageResultWithAttributes.js'
 import { SendChatParams } from '../../generated-definitions/SendChatParams.js'
 import { TopicInfoArray } from '../../generated-definitions/TopicInfoArray.js'
 import { TopicLogWithPaginationResponse } from '../../generated-definitions/TopicLogWithPaginationResponse.js'
@@ -159,6 +161,19 @@ export class TopicAdmin$ {
   }
 
   /**
+   * For testing purpose, doesn&#39;t send any message to the topic. Always do filter regardless of enableProfanityFilter configuration.
+   */
+  createChatFilter(data: MessageRequest, queryParams?: { detail?: boolean | null }): Promise<IResponse<MessageResultWithAttributes>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/chat/admin/namespaces/{namespace}/chat/filter'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MessageResultWithAttributes, 'MessageResultWithAttributes')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * Delete topic in a namespace.
    */
   deleteTopic_ByTopic(topic: string): Promise<IResponse<ActionDeleteTopicResult>> {
@@ -219,6 +234,39 @@ export class TopicAdmin$ {
     return this.isValidationEnabled
       ? Validate.responseType(() => resultPromise, CreateTopicResponse, 'CreateTopicResponse')
       : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * Get chat history in a namespace.
+   */
+  getChats_ByTopic(
+    topic: string,
+    queryParams?: {
+      endCreatedAt?: number
+      keyword?: string | null
+      limit?: number
+      offset?: number
+      order?: string | null
+      senderUserId?: string | null
+      shardId?: string | null
+      startCreatedAt?: number
+    }
+  ): Promise<IResponseWithSync<ChatMessageWithPaginationResponse>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, ChatMessageWithPaginationResponse, 'ChatMessageWithPaginationResponse')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

@@ -24,7 +24,7 @@ import { TicketMetricResultRecord } from '../../generated-definitions/TicketMetr
 
 export class Matchmaking$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
    * Reads all available channels in a namespace
@@ -34,7 +34,10 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, GetChannelsResponse, 'GetChannelsResponse')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, GetChannelsResponse, 'GetChannelsResponse')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -51,7 +54,9 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, CreateChannelResponse, 'CreateChannelResponse')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CreateChannelResponse, 'CreateChannelResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -62,7 +67,9 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/sessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -73,7 +80,9 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/rebalance'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, RebalanceResponse, 'RebalanceResponse')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RebalanceResponse, 'RebalanceResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -84,7 +93,9 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/matchresult'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, MatchResultResponse, 'MatchResultResponse')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MatchResultResponse, 'MatchResultResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -95,7 +106,9 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/sessions/dequeue'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -108,7 +121,9 @@ export class Matchmaking$ {
       .replace('{channel}', channel)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -119,7 +134,10 @@ export class Matchmaking$ {
     const url = '/matchmaking/v1/public/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, ChannelV1Array, 'ChannelV1Array')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, ChannelV1Array, 'ChannelV1Array')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -138,7 +156,10 @@ export class Matchmaking$ {
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, MatchmakingResult, 'MatchmakingResult')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, MatchmakingResult, 'MatchmakingResult')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -157,7 +178,10 @@ export class Matchmaking$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -176,7 +200,10 @@ export class Matchmaking$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)

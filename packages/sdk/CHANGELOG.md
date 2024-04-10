@@ -1,5 +1,17 @@
 # @accelbyte/sdk
 
+## 2.4.3
+
+### Patch Changes
+
+- test publish
+
+## 2.4.2
+
+### Patch Changes
+
+- CW-3992 fix validate responseType to exclude 204 response status
+
 ## 2.3.1
 
 ### Patch Changes

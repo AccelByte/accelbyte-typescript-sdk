@@ -17,7 +17,7 @@ export class AdminStagingContentAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * List content that need admin&#39;s approval
    */
   getStagingContents(queryParams?: {
     limit?: number
@@ -25,7 +25,7 @@ export class AdminStagingContentAdmin$ {
     sortBy?: string | null
     status?: string | null
   }): Promise<IResponseWithSync<PaginatedListStagingContentResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    const params = { sortBy: 'createdTimed:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/staging-contents'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -42,7 +42,7 @@ export class AdminStagingContentAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get staging content by ID
    */
   getStagingContent_ByContentId(contentId: string): Promise<IResponseWithSync<StagingContentResponse>> {
     const params = {} as SDKRequestConfig
@@ -64,13 +64,13 @@ export class AdminStagingContentAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * List user content&#39;s that need admin approval
    */
   getStagingContents_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: string | null }
   ): Promise<IResponseWithSync<PaginatedListStagingContentResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    const params = { sortBy: 'createdTimed:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/users/{userId}/staging-contents'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -89,7 +89,7 @@ export class AdminStagingContentAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:CONTENT:APPROVAL [CREATE]&lt;/b&gt;.
+   * Approved content will shown to public player. Rejected content stays in staging area and couldn&#39;t be seen by other player
    */
   createApprove_ByContentId(contentId: string, data: ApproveStagingContentRequest): Promise<IResponse<StagingContentResponse>> {
     const params = {} as SDKRequestConfig

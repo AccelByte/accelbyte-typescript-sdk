@@ -1,8 +1,8 @@
 {
-  "buildDate": "2024-01-17T08:18:41+00:00",
-  "gitHash": "1e6e8d7a3705522430737d97f08dea8412becfd7",
+  "buildDate": "2024-02-29T01:41:04+00:00",
+  "gitHash": "cfa1f1b75c300db557644d40c56b7a65969b171a",
   "name": "justice-reporting-service",
   "realm": "dev",
-  "version": "0.1.30",
+  "version": "0.1.32",
   "version-roles-seeding": "0.0.3"
 }

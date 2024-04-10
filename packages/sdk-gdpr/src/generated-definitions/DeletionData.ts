@@ -5,6 +5,12 @@
  */
 import { z } from 'zod'
 
-export const DeletionData = z.object({ DisplayName: z.string(), RequestDate: z.string(), Status: z.string(), UserID: z.string() })
+export const DeletionData = z.object({
+  DisplayName: z.string(),
+  RequestDate: z.string(),
+  Status: z.string(),
+  UniqueDisplayName: z.string(),
+  UserID: z.string()
+})
 
 export interface DeletionData extends z.TypeOf<typeof DeletionData> {}

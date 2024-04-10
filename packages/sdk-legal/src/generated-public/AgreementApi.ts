@@ -42,6 +42,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function createAgreementPolicyUser_ByUserId(userId: string, data: AcceptAgreementRequest[]): Promise<AcceptAgreementResponse> {
@@ -71,11 +72,28 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * @deprecated
+   * Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(
+    countryCode: string,
+    clientId: string,
+    userId: string,
+    data: AcceptAgreementRequest[]
+  ): Promise<AcceptAgreementResponse> {
+    const $ = new Agreement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(countryCode, clientId, userId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     getAgreementsPolicies,
     createAgreementPolicy,
     createAgreementPolicyUser_ByUserId,
     patchAgreementLocalizedPolicyVersionPreference,
-    createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId
+    createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId,
+    createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId
   }
 }

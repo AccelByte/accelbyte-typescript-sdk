@@ -19,7 +19,7 @@ export class PublicChannel$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]&lt;/b&gt;
+   * Get user channel paginated
    */
   getChannels_ByUserId(
     userId: string,
@@ -44,7 +44,7 @@ export class PublicChannel$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]&lt;/b&gt;
+   * Create user channel
    */
   createChannel_ByUserId(userId: string, data: PublicChannelRequest): Promise<IResponse<ChannelResponse>> {
     const params = {} as SDKRequestConfig
@@ -59,7 +59,7 @@ export class PublicChannel$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   * Delete user channel
    */
   deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -75,7 +75,7 @@ export class PublicChannel$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]&lt;/b&gt;
+   * Update user channel
    */
   updateChannel_ByUserId_ByChannelId(userId: string, channelId: string, data: UpdateChannelRequest): Promise<IResponse<ChannelResponse>> {
     const params = {} as SDKRequestConfig

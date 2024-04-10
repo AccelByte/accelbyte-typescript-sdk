@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const SelectionRule = z.object({ selection: z.enum(['newest', 'oldest', 'pivot', 'random']), threshold: z.number().int() })
+export const SelectionRule = z.object({ selection: z.string(), threshold: z.number().int() })
 
 export interface SelectionRule extends z.TypeOf<typeof SelectionRule> {}

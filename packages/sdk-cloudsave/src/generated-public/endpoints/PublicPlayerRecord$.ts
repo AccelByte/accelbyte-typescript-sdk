@@ -23,7 +23,11 @@ export class PublicPlayerRecord$ {
   /**
    * Retrieve list of player records key under given namespace.
    */
-  getUsersMeRecords(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListPlayerRecordKeysResponse>> {
+  getUsersMeRecords(queryParams?: {
+    limit?: number
+    offset?: number
+    tags?: string[]
+  }): Promise<IResponseWithSync<ListPlayerRecordKeysResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/me/records'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -129,7 +133,7 @@ export class PublicPlayerRecord$ {
    */
   getRecordsPublic_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; tags?: string[] }
   ): Promise<IResponseWithSync<ListPlayerRecordKeysResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/{userId}/records/public'

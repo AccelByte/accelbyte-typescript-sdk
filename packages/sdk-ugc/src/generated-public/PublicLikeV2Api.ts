@@ -35,7 +35,7 @@ export function PublicLikeV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Requires valid user token
+   * This endpoint will update like/unlike state from a content
    */
   async function updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<ContentLikeResponse> {
     const $ = new PublicLikeV2$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

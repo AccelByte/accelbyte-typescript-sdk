@@ -26,6 +26,7 @@ import { EntitlementTransferResult } from '../generated-definitions/EntitlementT
 import { Ownership } from '../generated-definitions/Ownership.js'
 import { OwnershipToken } from '../generated-definitions/OwnershipToken.js'
 import { TimedOwnership } from '../generated-definitions/TimedOwnership.js'
+import { UserEntitlementHistoryPagingSlicedResultArray } from '../generated-definitions/UserEntitlementHistoryPagingSlicedResultArray.js'
 
 export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
@@ -70,11 +71,47 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
+   * Get user entitlement by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getEntitlementsBySku_ByUserId(
+    userId: string,
+    queryParams: {
+      sku: string | null
+      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
+    }
+  ): Promise<EntitlementInfo> {
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getEntitlementsBySku_ByUserId(userId, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Get user app entitlement by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlementsByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<AppEntitlementInfo> {
     const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getEntitlementsByAppId_ByUserId(userId, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Get user entitlement history&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user entitlement history list&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getEntitlementsHistory_ByUserId(
+    userId: string,
+    queryParams?: {
+      endDate?: string | null
+      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
+      limit?: number
+      offset?: number
+      startDate?: string | null
+    }
+  ): Promise<UserEntitlementHistoryPagingSlicedResultArray> {
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getEntitlementsHistory_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -89,6 +126,23 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }): Promise<Ownership> {
     const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getUsersMeEntitlementsOwnershipAny(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * Get user entitlement by itemId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getEntitlementsByItemId_ByUserId(
+    userId: string,
+    queryParams: {
+      itemId: string | null
+      entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
+    }
+  ): Promise<EntitlementInfo> {
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getEntitlementsByItemId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -293,8 +347,11 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getEntitlements_ByUserId,
     getEntitlementsByIds_ByUserId,
+    getEntitlementsBySku_ByUserId,
     getEntitlementsByAppId_ByUserId,
+    getEntitlementsHistory_ByUserId,
     getUsersMeEntitlementsOwnershipAny,
+    getEntitlementsByItemId_ByUserId,
     getUsersMeEntitlementsOwnershipToken,
     getEntitlementsByAppType_ByUserId,
     getUsersMeEntitlementsOwnershipBySku,

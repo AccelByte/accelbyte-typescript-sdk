@@ -7,8 +7,10 @@ import { z } from 'zod'
 
 export const UserInfoResponse = z.object({
   lastPlayedTime: z.string().nullish(),
+  matchPool: z.string().nullish(),
   namespace: z.string().nullish(),
   platformName: z.string().nullish(),
+  sessionTemplate: z.string().nullish(),
   userID: z.string().nullish()
 })
 

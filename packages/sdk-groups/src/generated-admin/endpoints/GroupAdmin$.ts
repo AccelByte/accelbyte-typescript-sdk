@@ -19,7 +19,7 @@ export class GroupAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;Required Permission: &#34;ADMIN:NAMESPACE:{namespace}:GROUP [READ]&#34; &lt;/p&gt; &lt;p&gt;Get list of groups. This endpoint will show any types of group&lt;/p&gt; &lt;p&gt;Action Code: 73301&lt;/p&gt;
+   * Get list of groups. This endpoint will show any types of group Action Code: 73301
    */
   getGroups(queryParams?: {
     configurationCode?: string | null
@@ -45,7 +45,7 @@ export class GroupAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Get list of groups by group Ids.&lt;/p&gt; &lt;p&gt;Action Code: 73303&lt;/p&gt;
+   * Required valid user authentication Get list of groups by group Ids. Action Code: 73303
    */
   createGroupBulk(data: GetGroupListRequestV2): Promise<IResponse<GetGroupsResponseV1>> {
     const params = {} as SDKRequestConfig
@@ -58,7 +58,7 @@ export class GroupAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required Permission: &#34;ADMIN:NAMESPACE:{namespace}:GROUP:{groupId} [DELETE]&#34;&lt;/p&gt; &lt;p&gt;Delete existing group. It will check whether the groupID is exist before doing the process to delete the group.&lt;/p&gt; &lt;p&gt;Action Code: 73302&lt;/p&gt;
+   * Delete existing group. It will check whether the groupID is exist before doing the process to delete the group. Action Code: 73302
    */
   deleteGroup_ByGroupId(groupId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -73,7 +73,7 @@ export class GroupAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required Permission: &#34;ADMIN:NAMESPACE:{namespace}:GROUP [READ]&#34;&lt;/p&gt; &lt;p&gt;Get single group information. This endpoint will show the group information by the groupId&lt;/p&gt; &lt;p&gt;Action Code: 73306&lt;/p&gt;
+   * Get single group information. This endpoint will show the group information by the groupId Action Code: 73306
    */
   getGroup_ByGroupId(groupId: string): Promise<IResponseWithSync<GroupResponseV1>> {
     const params = {} as SDKRequestConfig

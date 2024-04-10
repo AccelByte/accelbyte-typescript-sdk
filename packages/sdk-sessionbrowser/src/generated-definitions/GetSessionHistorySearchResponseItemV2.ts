@@ -12,14 +12,14 @@ export const GetSessionHistorySearchResponseItemV2 = z.object({
   created_at: z.string(),
   game_mode: z.string(),
   joinable: z.boolean(),
-  joining: z.array(SessionPlayerJoining),
+  joining: z.array(SessionPlayerJoining).nullish(),
   match_id: z.string(),
   namespace: z.string(),
-  players: z.array(SessionPlayerHistory),
+  players: z.array(SessionPlayerHistory).nullish(),
   removed_reason: z.string(),
   session_type: z.string(),
   status: z.string(),
-  sub_game_mode: z.array(z.string()),
+  sub_game_mode: z.array(z.string()).nullish(),
   user_id: z.string()
 })
 

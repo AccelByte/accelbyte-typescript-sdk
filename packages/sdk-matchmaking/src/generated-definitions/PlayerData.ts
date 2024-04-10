@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const PlayerData = z.object({ Attributes: z.record(z.any()), PartyID: z.string(), PlayerID: z.string() })
+export const PlayerData = z.object({ Attributes: z.record(z.any()), PartyID: z.string(), PlatformID: z.string(), PlayerID: z.string() })
 
 export interface PlayerData extends z.TypeOf<typeof PlayerData> {}

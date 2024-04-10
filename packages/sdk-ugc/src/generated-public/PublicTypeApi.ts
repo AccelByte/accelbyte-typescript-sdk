@@ -20,7 +20,7 @@ export function PublicTypeApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Requires valid user token
+   * Get available types paginated
    */
   async function getTypes(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTypeResponse> {
     const $ = new PublicType$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

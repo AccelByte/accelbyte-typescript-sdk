@@ -7,6 +7,8 @@
 import { BanType, EligibleUser } from '../models/UserTypes.js'
 import { UserResponseV3 } from '../../generated-definitions/UserResponseV3'
 import { UserActiveBanResponseV3 } from '../../generated-definitions/UserActiveBanResponseV3'
+import { UserResponseV4 } from '../../generated-definitions/UserResponseV4'
+import { UserActiveBanResponseV4 } from '../../generated-definitions/UserActiveBanResponseV4'
 
 export class IamHelper {
   static getAuthorizationCodeParams(urlSearchParams: string) {
@@ -46,13 +48,14 @@ export class IamHelper {
     return EligibleUser.safeParse(user).success
   }
 
-  static isUserBanned(user: UserResponseV3 | null): boolean {
+  static isUserBanned(user: UserResponseV3 | UserResponseV4 | null): boolean {
     const parsed = EligibleUser.safeParse(user)
     if (parsed.success) {
       const now = new Date().getTime()
       return (
         parsed.data.bans.find(
-          (ban: UserActiveBanResponseV3) => ban.ban === BanType.enum.ORDER_AND_PAYMENT && new Date(ban.endDate).getTime() > now
+          (ban: UserActiveBanResponseV3 | UserActiveBanResponseV4) =>
+            ban.ban === BanType.enum.ORDER_AND_PAYMENT && new Date(ban.endDate).getTime() > now
         ) !== undefined
       )
     }

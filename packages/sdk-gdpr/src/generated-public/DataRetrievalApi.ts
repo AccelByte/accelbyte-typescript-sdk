@@ -22,7 +22,7 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Get user&#39;s personal data requests Requires valid user access token Scope: account
    */
   async function getRequests_ByUserId(
     userId: string,
@@ -35,7 +35,7 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Submit personal data retrieval request. Scope: account
    */
   async function postRequest_ByUserId(userId: string, data: { password: string | null }): Promise<DataRetrievalResponse> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -45,7 +45,7 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Cancel user&#39;s personal data requests Requires valid user access token Scope: account
    */
   async function deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<unknown> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -55,7 +55,7 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Generate personal data download url Requires valid user access token Scope: account
    */
   async function postGenerate_ByUserId_ByRequestDate(
     userId: string,

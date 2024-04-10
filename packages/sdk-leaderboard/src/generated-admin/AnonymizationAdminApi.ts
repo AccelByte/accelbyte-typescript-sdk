@@ -19,7 +19,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;This API will delete specified user leaderboard&lt;p&gt; &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]&lt;/code&gt; &lt;/p&gt;
+   * &lt;p&gt;This API will delete specified user leaderboard&lt;p&gt;
    */
   async function deleteAnonymizationLeaderboard_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

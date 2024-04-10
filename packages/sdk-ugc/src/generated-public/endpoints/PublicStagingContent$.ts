@@ -18,13 +18,13 @@ export class PublicStagingContent$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * List user staging contents
    */
   getStagingContents_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: string | null }
   ): Promise<IResponseWithSync<PaginatedListStagingContentResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    const params = { sortBy: 'createdTimed:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/users/{userId}/staging-contents'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -43,7 +43,7 @@ export class PublicStagingContent$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete user staging content by ID
    */
   deleteStagingContent_ByUserId_ByContentId(userId: string, contentId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -59,7 +59,7 @@ export class PublicStagingContent$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get user staging content by ID
    */
   getStagingContent_ByUserId_ByContentId(userId: string, contentId: string): Promise<IResponseWithSync<StagingContentResponse>> {
     const params = {} as SDKRequestConfig
@@ -82,7 +82,7 @@ export class PublicStagingContent$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Update staging content
    */
   updateStagingContent_ByUserId_ByContentId(
     userId: string,

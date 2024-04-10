@@ -46,11 +46,33 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
+   * This API is used to get build manifest of release version of the application. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getUpdategame_ByAppId(appId: string): Promise<BuildManifest> {
+    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getUpdategame_ByAppId(appId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * This API is used to get simple build manifest that contains list of current build in various platform.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAvailablebuild_ByAppId(appId: string): Promise<BasicBuildManifestArray> {
     const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getAvailablebuild_ByAppId(appId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and generate chunks difference and obsolete files list between two version. Only works for builds uploaded with BuildInfo v1 [DEPRECATED}&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getUpdategameBuild_ByBuildId(buildId: string): Promise<BuildManifest> {
+    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getUpdategameBuild_ByBuildId(buildId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -66,11 +88,22 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
+   * This API is used to get build manifest that contains file difference between requested version and release version. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getUpdategame_ByAppId_ByVersion(appId: string, version: string): Promise<BuildManifest> {
+    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getUpdategame_ByAppId_ByVersion(appId, version)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and obsolete files list between two version. Only works for builds uploaded with BuildInfo v2&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getUpdategameBuild_ByBuildId(buildId: string): Promise<BuildManifest> {
+  async function getUpdategameBuild_ByBuildId_ByNS(buildId: string): Promise<BuildManifest> {
     const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
-    const resp = await $.getUpdategameBuild_ByBuildId(buildId)
+    const resp = await $.getUpdategameBuild_ByBuildId_ByNS(buildId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -111,9 +144,12 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getVersionHistory,
     getBulkCheckLatest,
+    getUpdategame_ByAppId,
     getAvailablebuild_ByAppId,
-    createBlockUrl_ByBuildId,
     getUpdategameBuild_ByBuildId,
+    createBlockUrl_ByBuildId,
+    getUpdategame_ByAppId_ByVersion,
+    getUpdategameBuild_ByBuildId_ByNS,
     getUpdategame_ByAppId_ByPlatformId,
     getDiff_BySourceBuildId_ByDestinationBuildId,
     getVersion_ByAppId_ByVersion_ByPlatformId

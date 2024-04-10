@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const Party = z.object({ partyID: z.string(), userIDs: z.array(z.string()) })
+export const Party = z.object({ partyID: z.string().nullish(), userIDs: z.array(z.string()).nullish() })
 
 export interface Party extends z.TypeOf<typeof Party> {}

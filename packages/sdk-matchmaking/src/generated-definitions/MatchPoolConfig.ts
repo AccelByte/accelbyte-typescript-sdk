@@ -10,8 +10,10 @@ export const MatchPoolConfig = z.object({
   auto_accept_backfill_proposal: z.boolean(),
   backfill_proposal_expiration_seconds: z.number().int(),
   backfill_ticket_expiration_seconds: z.number().int(),
+  crossplay_disabled: z.boolean().nullish(),
   match_function: z.string(),
   match_function_override: MatchFunctionOverride,
+  platfrom_group_enabled: z.boolean().nullish(),
   rule_set: z.string(),
   session_template: z.string(),
   ticket_expiration_seconds: z.number().int()

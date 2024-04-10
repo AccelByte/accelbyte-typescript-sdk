@@ -22,7 +22,7 @@ export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * List user staging contents
    */
   async function getStagingContents_ByUserId(
     userId: string,
@@ -35,7 +35,7 @@ export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete user staging content by ID
    */
   async function deleteStagingContent_ByUserId_ByContentId(userId: string, contentId: string): Promise<unknown> {
     const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -45,7 +45,7 @@ export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get user staging content by ID
    */
   async function getStagingContent_ByUserId_ByContentId(userId: string, contentId: string): Promise<StagingContentResponse> {
     const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -55,7 +55,7 @@ export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Update staging content
    */
   async function updateStagingContent_ByUserId_ByContentId(
     userId: string,

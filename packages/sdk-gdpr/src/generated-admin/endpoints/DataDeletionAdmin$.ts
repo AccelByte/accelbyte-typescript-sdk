@@ -18,7 +18,7 @@ export class DataDeletionAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER[READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Retrieve all user&#39;s account deletion requests in specified date Scope: account
    */
   getDeletions(queryParams?: {
     after?: string | null
@@ -44,7 +44,7 @@ export class DataDeletionAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Cancel user&#39;s account deletion request Scope: account
    */
   deleteDeletion_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -59,7 +59,7 @@ export class DataDeletionAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId}[READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Retrieve specific user&#39;s account deletion request Scope: account
    */
   getDeletions_ByUserId(userId: string): Promise<IResponseWithSync<DeletionData>> {
     const params = {} as SDKRequestConfig
@@ -81,7 +81,7 @@ export class DataDeletionAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [CREATE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Submit user&#39;s account deletion requests Scope: account
    */
   createDeletion_ByUserId(userId: string): Promise<IResponse<RequestDeleteResponse>> {
     const params = {} as SDKRequestConfig

@@ -9,6 +9,7 @@ export const AdminGameRecordResponse = z.object({
   created_at: z.string(),
   key: z.string(),
   namespace: z.string(),
+  tags: z.array(z.string()).nullish(),
   updated_at: z.string(),
   value: z.record(z.any())
 })

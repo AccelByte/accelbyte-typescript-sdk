@@ -11,10 +11,10 @@ import { Server } from './Server.js'
 export const AdminSessionResponse = z.object({
   all_players: z.array(z.string()),
   created_at: z.string(),
-  game_session_setting: GameSessionSetting,
+  game_session_setting: GameSessionSetting.nullish(),
   game_version: z.string(),
   joinable: z.boolean(),
-  match: MatchMaking,
+  match: MatchMaking.nullish(),
   namespace: z.string(),
   players: z.array(z.string()),
   server: Server,

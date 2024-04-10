@@ -37,6 +37,7 @@ export const UserResponseV3 = z.object({
   platformInfos: z.array(UserPlatformInfo).nullish(),
   platformUserId: z.string().nullish(),
   roles: z.array(z.string()),
+  skipLoginQueue: z.boolean().nullish(),
   testAccount: z.boolean().nullish(),
   uniqueDisplayName: z.string().nullish(),
   userId: z.string(),

@@ -11,6 +11,7 @@ export const UserWithLinkedPlatformAccounts = z.object({
   emailAddress: z.string(),
   linkedPlatforms: z.array(PlatformAccount),
   namespace: z.string(),
+  uniqueDisplayName: z.string(),
   userId: z.string()
 })
 

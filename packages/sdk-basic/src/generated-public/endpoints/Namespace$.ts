@@ -10,6 +10,7 @@ import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } 
 import { AxiosInstance } from 'axios'
 import { NamespaceInfoArray } from '../../generated-definitions/NamespaceInfoArray.js'
 import { NamespacePublisherInfo } from '../../generated-definitions/NamespacePublisherInfo.js'
+import { NamespaceSimpleInfo } from '../../generated-definitions/NamespaceSimpleInfo.js'
 
 export class Namespace$ {
   // @ts-ignore
@@ -26,6 +27,26 @@ export class Namespace$ {
     const res = () =>
       this.isValidationEnabled
         ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Get a namespace info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: namespace info&lt;/li&gt;&lt;/ul&gt;
+   */
+  getNamespace_ByNamespace(): Promise<IResponseWithSync<NamespaceSimpleInfo>> {
+    const params = {} as SDKRequestConfig
+    const url = '/basic/v1/public/namespaces/{namespace}'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, NamespaceSimpleInfo, 'NamespaceSimpleInfo')
         : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {

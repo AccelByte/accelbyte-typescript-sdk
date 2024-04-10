@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Matchmaking Service",
-    "version": "2.29.1"
+    "version": "2.30.3"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/matchmaking/apidocs"
+    "url": "https://development.accelbyte.io/matchmaking/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -2998,7 +2998,6 @@
         "region_expansion_rate_ms",
         "region_latency_initial_range_ms",
         "region_latency_max_ms",
-        "ruleset",
         "session_queue_timeout_seconds",
         "slug",
         "social_matchmaking",
@@ -3182,7 +3181,6 @@
         "region_expansion_rate_ms",
         "region_latency_initial_range_ms",
         "region_latency_max_ms",
-        "ruleSet",
         "sessionQueueTimeoutSeconds",
         "slug",
         "socialMatchmaking",
@@ -3219,7 +3217,7 @@
           "type": "integer"
         }
       },
-      "required": ["alliances", "has_combination", "role_flexing_enable", "role_flexing_player", "role_flexing_second"]
+      "required": ["has_combination", "role_flexing_enable", "role_flexing_player", "role_flexing_second"]
     },
     "models.CreateChannelResponse": {
       "properties": {
@@ -3308,7 +3306,6 @@
         "region_expansion_rate_ms",
         "region_latency_initial_range_ms",
         "region_latency_max_ms",
-        "ruleset",
         "session_queue_timeout_seconds",
         "slug",
         "social_matchmaking",
@@ -3616,7 +3613,7 @@
           "x-nullable": false
         }
       },
-      "required": ["first_ticket_created_at", "party_attributes", "party_id", "party_members", "ticket_created_at", "ticket_id"]
+      "required": ["first_ticket_created_at", "party_attributes", "party_id", "party_members", "ticket_id"]
     },
     "models.MatchingRule": {
       "properties": {
@@ -4161,7 +4158,6 @@
           "type": "object"
         },
         "ticket_flexing_selection": {
-          "enum": ["newest", "oldest", "pivot", "random"],
           "type": "string"
         },
         "ticket_flexing_selections": {
@@ -4175,18 +4171,7 @@
           "x-omitempty": false
         }
       },
-      "required": [
-        "alliance",
-        "batch_size",
-        "flexing_rule",
-        "match_options",
-        "matching_rule",
-        "rebalance_enable",
-        "sort_ticket",
-        "sort_tickets",
-        "ticket_flexing_selection",
-        "ticket_flexing_selections"
-      ]
+      "required": ["batch_size", "rebalance_enable", "ticket_flexing_selection"]
     },
     "models.RuleSetV1": {
       "properties": {
@@ -4237,7 +4222,6 @@
           "type": "object"
         },
         "ticket_flexing_selection": {
-          "enum": ["newest", "oldest", "pivot", "random"],
           "type": "string"
         },
         "ticket_flexing_selections": {
@@ -4251,24 +4235,11 @@
           "x-omitempty": false
         }
       },
-      "required": [
-        "alliance",
-        "alliance_flexing_rule",
-        "batch_size",
-        "flexingRules",
-        "match_options",
-        "matchingRules",
-        "sort_ticket",
-        "sort_tickets",
-        "sub_game_modes",
-        "ticket_flexing_selection",
-        "ticket_flexing_selections"
-      ]
+      "required": ["batch_size", "ticket_flexing_selection"]
     },
     "models.SelectionRule": {
       "properties": {
         "selection": {
-          "enum": ["newest", "oldest", "pivot", "random"],
           "type": "string"
         },
         "threshold": {
@@ -4281,11 +4252,9 @@
     "models.SortTicket": {
       "properties": {
         "search_result": {
-          "enum": ["distance", "largestPartySize", "none", "oldestTicketAge", "random"],
           "type": "string"
         },
         "ticket_queue": {
-          "enum": ["distance", "largestPartySize", "none", "oldestTicketAge", "random"],
           "type": "string"
         }
       },
@@ -4294,7 +4263,6 @@
     "models.SortTicketRule": {
       "properties": {
         "search_result": {
-          "enum": ["distance", "largestPartySize", "none", "oldestTicketAge", "random"],
           "type": "string"
         },
         "threshold": {
@@ -4302,7 +4270,6 @@
           "type": "integer"
         },
         "ticket_queue": {
-          "enum": ["distance", "largestPartySize", "none", "oldestTicketAge", "random"],
           "type": "string"
         }
       },
@@ -4356,7 +4323,7 @@
           "x-nullable": false
         }
       },
-      "required": ["alliance", "alliance_flexing_rule", "name"]
+      "required": ["alliance", "name"]
     },
     "models.TicketMetricResultRecord": {
       "properties": {
@@ -4553,7 +4520,6 @@
           "$ref": "#/definitions/models.UpdateRuleset.sub_game_modes"
         },
         "ticket_flexing_selection": {
-          "enum": ["newest", "oldest", "pivot", "random"],
           "type": "string"
         },
         "ticket_flexing_selections": {
@@ -4852,13 +4818,13 @@
   },
   "x-docs": {
     "alias": "matchmaking",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/matchmaking/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-01-15T03:06:45+00:00",
-    "gitHash": "23f4abc42581ddc883e084f168d5694bfb602c11",
-    "version": "2.29.1",
+    "buildDate": "2024-03-21T04:29:56+00:00",
+    "gitHash": "7715ecd21b72968f99dd385cfa51c26ad80520d6",
+    "version": "2.30.3",
     "version-roles-seeding": "0.0.23"
   }
 }

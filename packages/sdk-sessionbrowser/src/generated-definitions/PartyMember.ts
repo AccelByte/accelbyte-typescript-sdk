@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const PartyMember = z.object({ extra_attributes: z.record(z.any()), user_id: z.string() })
+export const PartyMember = z.object({ extra_attributes: z.record(z.any()).nullish(), user_id: z.string() })
 
 export interface PartyMember extends z.TypeOf<typeof PartyMember> {}

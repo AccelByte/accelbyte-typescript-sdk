@@ -20,7 +20,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;This endpoint is used to Get My Join Request To The Groups&lt;/p&gt; &lt;p&gt;Get My Join Request To The Groups for the user calling this endpoint. It will check any join request group for this user&lt;/p&gt; &lt;p&gt;Action Code: 73502&lt;/p&gt;
+   * Required valid user authentication This endpoint is used to Get My Join Request To The Groups Get My Join Request To The Groups for the user calling this endpoint. It will check any join request group for this user Action Code: 73502
    */
   async function getUsersMeJoinRequest(queryParams?: { limit?: number; offset?: number }): Promise<GetMemberRequestsListResponseV1> {
     const $ = new MemberRequest$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -30,7 +30,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;This endpoint is used to Get Group Invitation Request List&lt;/p&gt; &lt;p&gt;Get Group Invitation Request List for the user calling this endpoint. It will check any group invitation for this user&lt;/p&gt; &lt;p&gt;Action Code: 73502&lt;/p&gt;
+   * Required valid user authentication This endpoint is used to Get Group Invitation Request List Get Group Invitation Request List for the user calling this endpoint. It will check any group invitation for this user Action Code: 73502
    */
   async function getUsersMeInviteRequest(queryParams?: { limit?: number; offset?: number }): Promise<GetMemberRequestsListResponseV1> {
     const $ = new MemberRequest$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -40,7 +40,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:JOIN [READ]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to Get Group Join Request List&lt;/p&gt; &lt;p&gt;Get Group Join Request List for specific group. Group members needs to have permission and also belong to the group to access this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73501&lt;/p&gt;
+   * Required valid user authentication Required Member Role Permission: &#34;GROUP:JOIN [READ]&#34; This endpoint is used to Get Group Join Request List Get Group Join Request List for specific group. Group members needs to have permission and also belong to the group to access this endpoint Action Code: 73501
    */
   async function getJoinRequest_ByGroupId(
     groupId: string,
@@ -53,7 +53,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:JOIN [READ]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to Get Group Join Request List&lt;/p&gt; &lt;p&gt;Get Group Join Request List for specific group. Group members needs to have permission and also belong to the group to access this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73501&lt;/p&gt;
+   * Required valid user authentication Required Member Role Permission: &#34;GROUP:JOIN [READ]&#34; This endpoint is used to Get Group Join Request List Get Group Join Request List for specific group. Group members needs to have permission and also belong to the group to access this endpoint Action Code: 73501
    */
   async function getJoinRequest_ByGroupId_ByNS(
     groupId: string,
@@ -66,7 +66,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Required Member Role Permission: &#34;GROUP:JOIN [READ]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to Get Group Invite Request List&lt;/p&gt; &lt;p&gt;Get Group Invite Request List for specific group. Group members needs to have permission and also belong to the group to access this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73501&lt;/p&gt;
+   * Required valid user authentication Required Member Role Permission: &#34;GROUP:JOIN [READ]&#34; This endpoint is used to Get Group Invite Request List Get Group Invite Request List for specific group. Group members needs to have permission and also belong to the group to access this endpoint Action Code: 73501
    */
   async function getInviteRequest_ByGroupId(
     groupId: string,

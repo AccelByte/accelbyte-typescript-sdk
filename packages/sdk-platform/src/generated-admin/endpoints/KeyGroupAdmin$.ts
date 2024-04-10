@@ -59,6 +59,27 @@ export class KeyGroupAdmin$ {
   }
 
   /**
+   * @deprecated
+   * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
+   */
+  getKeygroupsByBoothName(queryParams: { boothName: string | null }): Promise<IResponseWithSync<KeyGroupInfo>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/keygroups/byBoothName'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
   getKeygroup_ByKeyGroupId(keyGroupId: string): Promise<IResponseWithSync<KeyGroupInfo>> {

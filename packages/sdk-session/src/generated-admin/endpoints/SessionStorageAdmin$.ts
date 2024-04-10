@@ -15,7 +15,7 @@ export class SessionStorageAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   *  Delete Session Storage.
+   *  Delete Session Storage By sessionID Session Storage feature only available for Gamesession
    */
   deleteStorage_BySessionId(sessionId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -30,7 +30,7 @@ export class SessionStorageAdmin$ {
   }
 
   /**
-   *  Read Session Storage.
+   *  Read Session Storage by sessionID Session Storage feature only available for Gamesession
    */
   getStorage_BySessionId(sessionId: string): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig
@@ -52,7 +52,7 @@ export class SessionStorageAdmin$ {
   }
 
   /**
-   *  Read Session Storage User.
+   *  Read Session Storage by sessionID and userID Session Storage feature only available for Gamesession
    */
   getStorageUser_BySessionId_ByUserId(sessionId: string, userId: string): Promise<IResponseWithSync<unknown>> {
     const params = {} as SDKRequestConfig

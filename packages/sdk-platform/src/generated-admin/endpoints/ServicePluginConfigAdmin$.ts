@@ -16,10 +16,61 @@ import { RevocationPluginConfigInfo } from '../../generated-definitions/Revocati
 import { RevocationPluginConfigUpdate } from '../../generated-definitions/RevocationPluginConfigUpdate.js'
 import { SectionPluginConfigInfo } from '../../generated-definitions/SectionPluginConfigInfo.js'
 import { SectionPluginConfigUpdate } from '../../generated-definitions/SectionPluginConfigUpdate.js'
+import { ServicePluginConfigInfo } from '../../generated-definitions/ServicePluginConfigInfo.js'
+import { ServicePluginConfigUpdate } from '../../generated-definitions/ServicePluginConfigUpdate.js'
 
 export class ServicePluginConfigAdmin$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+
+  /**
+   * @deprecated
+   * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   */
+  deleteConfigServicePlugin(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * Get service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   */
+  getConfigsServicePlugin(): Promise<IResponseWithSync<ServicePluginConfigInfo>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, ServicePluginConfigInfo, 'ServicePluginConfigInfo')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateConfigServicePlugin(data: ServicePluginConfigUpdate): Promise<IResponse<ServicePluginConfigInfo>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ServicePluginConfigInfo, 'ServicePluginConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
 
   /**
    * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;

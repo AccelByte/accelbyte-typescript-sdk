@@ -14,7 +14,7 @@ import { PingResponse } from '../../generated-definitions/PingResponse.js'
 
 export class DiffCalculation$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
    * &lt;p&gt;Perform diff calculation from buildA to buildB. The calculation will generate diff cache result that will be stored in the storage provider.&lt;/p&gt;&lt;p&gt;Every request is registered into the queue first, and will be processed by the available Differ.&lt;/p&gt;&lt;p&gt;The &lt;b&gt;priority&lt;/b&gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Scope required: &lt;code&gt;publishing&lt;/code&gt;&lt;/p&gt;
@@ -24,7 +24,9 @@ export class DiffCalculation$ {
     const url = '/differ/namespaces/{namespace}/diff'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   getPing(): Promise<IResponseWithSync<PingResponse>> {
@@ -32,7 +34,10 @@ export class DiffCalculation$ {
     const url = '/differ/namespaces/{namespace}/ping'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, PingResponse, 'PingResponse')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, PingResponse, 'PingResponse')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -49,6 +54,8 @@ export class DiffCalculation$ {
     const url = '/differ/v2/namespaces/{namespace}/diff'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

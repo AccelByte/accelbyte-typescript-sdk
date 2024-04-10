@@ -16,7 +16,7 @@ export class AdminUserAgreementAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
    */
   createAgreementPolicy_ByUserId(
     userId: string,

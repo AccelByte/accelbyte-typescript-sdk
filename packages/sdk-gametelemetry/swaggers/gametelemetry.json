@@ -3,12 +3,12 @@
   "info": {
     "description": "This is analytics game telemetry to standardize avengers and justice telemetry",
     "title": "Analytics Game Telemetry",
-    "version": "1.22.0"
+    "version": "1.24.1"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/game-telemetry"
+    "url": "https://development.accelbyte.io/game-telemetry"
   },
   "securityDefinitions": {
     "APIKeyCookie": {
@@ -48,7 +48,15 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/ListBaseResponse_str_"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/BaseErrorResponse"
+            }
           }
         },
         "security": [
@@ -149,7 +157,15 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/PagedResponse_GetNamespaceEventResponse_"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/BaseErrorResponse"
+            }
           },
           "422": {
             "description": "Validation Error",
@@ -207,9 +223,21 @@
             "description": "Successful Response"
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unable to process request",
             "schema": {
-              "$ref": "#/definitions/HTTPValidationError"
+              "$ref": "#/definitions/BaseErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/BaseErrorResponse"
+            }
+          },
+          "507": {
+            "description": "Insufficient space",
+            "schema": {
+              "$ref": "#/definitions/BaseErrorResponse"
             }
           }
         },
@@ -251,14 +279,25 @@
           "200": {
             "description": "Successful Response",
             "schema": {
-              "title": "Response Protected Get Playtime Game Telemetry V1 Protected Steamids  Steamid  Playtime Get",
-              "type": "object"
+              "$ref": "#/definitions/PlayTimeResponse"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/BaseErrorResponse"
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unable to process request",
             "schema": {
-              "$ref": "#/definitions/HTTPValidationError"
+              "$ref": "#/definitions/BaseErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/BaseErrorResponse"
             }
           }
         },
@@ -305,12 +344,26 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/PlayTimeResponse"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/BaseErrorResponse"
+            }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unable to process request",
             "schema": {
-              "$ref": "#/definitions/HTTPValidationError"
+              "$ref": "#/definitions/BaseErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/BaseErrorResponse"
             }
           }
         },
@@ -329,6 +382,60 @@
     }
   },
   "definitions": {
+    "BaseErrorResponse": {
+      "properties": {
+        "errorCode": {
+          "title": "Errorcode",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "title": "Errormessage",
+          "type": "string"
+        }
+      },
+      "required": ["errorCode", "errorMessage"],
+      "title": "BaseErrorResponse",
+      "type": "object"
+    },
+    "GetNamespaceEventResponse": {
+      "properties": {
+        "EventId": {
+          "title": "Eventid",
+          "type": "string"
+        },
+        "EventName": {
+          "title": "Eventname",
+          "type": "string"
+        },
+        "EventNamespace": {
+          "title": "Eventnamespace",
+          "type": "string"
+        },
+        "EventTimeStamp": {
+          "title": "Eventtimestamp",
+          "type": "string"
+        },
+        "FlightId": {
+          "title": "Flightid",
+          "type": "string"
+        },
+        "Payload": {
+          "title": "Payload",
+          "type": "object"
+        },
+        "UserId": {
+          "title": "Userid",
+          "type": "string"
+        },
+        "UserNamespace": {
+          "title": "Usernamespace",
+          "type": "string"
+        }
+      },
+      "required": ["EventId", "EventName", "EventNamespace", "EventTimeStamp", "FlightId", "UserId", "UserNamespace"],
+      "title": "GetNamespaceEventResponse",
+      "type": "object"
+    },
     "HTTPValidationError": {
       "properties": {
         "detail": {
@@ -340,6 +447,49 @@
         }
       },
       "title": "HTTPValidationError",
+      "type": "object"
+    },
+    "ListBaseResponse_str_": {
+      "properties": {
+        "data": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Data",
+          "type": "array"
+        }
+      },
+      "required": ["data"],
+      "title": "ListBaseResponse[str]",
+      "type": "object"
+    },
+    "PagedResponse_GetNamespaceEventResponse_": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/GetNamespaceEventResponse"
+          },
+          "title": "Data",
+          "type": "array"
+        },
+        "paging": {
+          "title": "Paging",
+          "type": "integer"
+        }
+      },
+      "required": ["data", "paging"],
+      "title": "PagedResponse[GetNamespaceEventResponse]",
+      "type": "object"
+    },
+    "PlayTimeResponse": {
+      "properties": {
+        "total_playtime": {
+          "title": "Total Playtime",
+          "type": "number"
+        }
+      },
+      "required": ["total_playtime"],
+      "title": "PlayTimeResponse",
       "type": "object"
     },
     "TelemetryBody": {
@@ -405,15 +555,15 @@
   },
   "x-docs": {
     "alias": "game-telemetry",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/game-telemetry/openapi.json"
   },
   "x-version": {
-    "buildDate": "2024-01-02T01:45:16+00:00",
-    "gitHash": "d9b247168f196ca7f323ff46566915f12ee7f08d",
+    "buildDate": "2024-03-12T07:24:10+00:00",
+    "gitHash": "e48917e82b6b60926c94266104fa28c1ce5d36a1",
     "name": "analytics-game-telemetry",
-    "realm": "staging",
-    "version": "1.22.0",
+    "realm": "dev",
+    "version": "1.24.1",
     "version-roles-seeding": "1.0.18"
   }
 }

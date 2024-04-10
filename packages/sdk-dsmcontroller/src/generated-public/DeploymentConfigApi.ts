@@ -55,9 +55,20 @@ export function DeploymentConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server deployment in a namespace
+   */
+  async function getConfigDeployment_ByNamespace_ByDeployment(deployment: string): Promise<DeploymentWithOverride> {
+    const $ = new DeploymentConfig$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getConfigDeployment_ByNamespace_ByDeployment(deployment)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     getConfigsDeployments,
     deleteConfigDeployment_ByDeployment,
-    createConfigDeployment_ByDeployment
+    createConfigDeployment_ByDeployment,
+    getConfigDeployment_ByNamespace_ByDeployment
   }
 }

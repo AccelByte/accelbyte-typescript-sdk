@@ -19,7 +19,7 @@ export class DataRetrievalAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Get list personal data requests Scope: account
    */
   getRequests(queryParams?: {
     limit?: number
@@ -43,7 +43,7 @@ export class DataRetrievalAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Get user&#39;s personal data requests Scope: account
    */
   getRequests_ByUserId(
     userId: string,
@@ -68,7 +68,7 @@ export class DataRetrievalAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [CREATE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt; &lt;p&gt;If admin request data for themselves, password is need to be set&lt;/p&gt;
+   * Submit user personal data retrieval request If admin request data for themselves, password is need to be set Scope: account
    */
   postRequest_ByUserId(userId: string, data: { password?: string | null }): Promise<IResponse<DataRetrievalResponse>> {
     const params = {} as SDKRequestConfig
@@ -86,7 +86,7 @@ export class DataRetrievalAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Cancel user&#39;s personal data requests Scope: account
    */
   deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -102,7 +102,7 @@ export class DataRetrievalAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Generate personal data download url Scope: account
    */
   postGenerate_ByUserId_ByRequestDate(
     userId: string,

@@ -16,19 +16,19 @@ import { SortTicketRule } from './SortTicketRule.js'
 import { SubGameMode } from './SubGameMode.js'
 
 export const RuleSet = z.object({
-  alliance: AllianceRule,
+  alliance: AllianceRule.nullish(),
   alliance_flexing_rule: z.array(AllianceFlexingRule).nullish(),
   batch_size: z.number().int(),
   bucket_mmr_rule: BucketMmrRule.nullish(),
-  flexing_rule: z.array(FlexingRule),
-  match_options: MatchOptionRule,
-  matching_rule: z.array(MatchingRule),
+  flexing_rule: z.array(FlexingRule).nullish(),
+  match_options: MatchOptionRule.nullish(),
+  matching_rule: z.array(MatchingRule).nullish(),
   rebalance_enable: z.boolean(),
-  sort_ticket: SortTicket,
-  sort_tickets: z.array(SortTicketRule),
+  sort_ticket: SortTicket.nullish(),
+  sort_tickets: z.array(SortTicketRule).nullish(),
   sub_game_modes: z.record(SubGameMode).nullish(),
-  ticket_flexing_selection: z.enum(['newest', 'oldest', 'pivot', 'random']),
-  ticket_flexing_selections: z.array(SelectionRule),
+  ticket_flexing_selection: z.string(),
+  ticket_flexing_selections: z.array(SelectionRule).nullish(),
   use_newest_ticket_for_flexing: z.boolean().nullish()
 })
 

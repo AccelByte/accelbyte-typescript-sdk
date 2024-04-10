@@ -27,7 +27,11 @@ export function PublicPlayerRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Retrieve list of player records key under given namespace.
    */
-  async function getUsersMeRecords(queryParams?: { limit?: number; offset?: number }): Promise<ListPlayerRecordKeysResponse> {
+  async function getUsersMeRecords(queryParams?: {
+    limit?: number
+    offset?: number
+    tags?: string[]
+  }): Promise<ListPlayerRecordKeysResponse> {
     const $ = new PublicPlayerRecord$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getUsersMeRecords(queryParams)
     if (resp.error) throw resp.error
@@ -89,7 +93,7 @@ export function PublicPlayerRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getRecordsPublic_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; tags?: string[] }
   ): Promise<ListPlayerRecordKeysResponse> {
     const $ = new PublicPlayerRecord$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getRecordsPublic_ByUserId(userId, queryParams)

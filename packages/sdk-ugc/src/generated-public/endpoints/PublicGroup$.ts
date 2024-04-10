@@ -20,7 +20,7 @@ export class PublicGroup$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user groups paginated
    */
   getGroups_ByUserId(
     userId: string,
@@ -45,7 +45,7 @@ export class PublicGroup$ {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]
+   * Create group
    */
   createGroup_ByUserId(userId: string, data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
     const params = {} as SDKRequestConfig
@@ -60,7 +60,7 @@ export class PublicGroup$ {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   * Delete user group by group ID
    */
   deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -76,7 +76,7 @@ export class PublicGroup$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user groups by group ID
    */
   getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponseWithSync<CreateGroupResponse>> {
     const params = {} as SDKRequestConfig
@@ -99,7 +99,7 @@ export class PublicGroup$ {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE] replace group name and contents with new ones
+   * Replace group name and contents with new ones
    */
   updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
     const params = {} as SDKRequestConfig
@@ -115,7 +115,7 @@ export class PublicGroup$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get content that belong to a group
    */
   getContents_ByUserId_ByGroupId(
     userId: string,
@@ -142,7 +142,7 @@ export class PublicGroup$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get content belong to a group
    */
   getContents_ByUserId_ByGroupId_ByNS(
     userId: string,

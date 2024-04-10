@@ -8,7 +8,7 @@
     },
     "description": "Justice UGC Service",
     "title": "justice-ugc-service",
-    "version": "2.19.3"
+    "version": "2.20.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -20,39 +20,18 @@
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
       "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:CONTENT:APPROVAL [CREATE]": "ADMIN:NAMESPACE:{namespace}:CONTENT:APPROVAL [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]": "ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]": "ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]": "ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]",
-        "ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]": "ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]",
         "ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]": "ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]",
         "ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]",
         "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]",
         "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]",
         "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]",
         "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]",
         "NAMESPACE:{namespace}:USER:{userId} [DELETE]": "NAMESPACE:{namespace}:USER:{userId} [DELETE]",
-        "NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]": "NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]",
-        "NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]": "NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]",
-        "NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]": "NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]",
-        "NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]": "NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]",
         "NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]": "NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]",
         "NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]": "NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]",
         "NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]": "NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]",
         "NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]": "NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]",
-        "NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]": "NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]",
-        "NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]": "NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]",
-        "NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]": "NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]",
-        "NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]": "NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]",
-        "NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]": "NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"
+        "NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]": "NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]"
       },
       "tokenUrl": "https://dumy.oauth.net/token",
       "type": "oauth2"
@@ -75,7 +54,7 @@
     "/ugc/v1/admin/namespaces/{namespace}/channels": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]\u0026lt;/b\u0026gt;",
+        "description": "Get official channel paginated",
         "operationId": "SingleAdminGetChannel",
         "parameters": [
           {
@@ -129,16 +108,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get Channels",
-        "tags": ["Admin Channel"]
+        "tags": ["Admin Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]\u0026lt;/b\u0026gt;",
+        "description": "Create official channel",
         "operationId": "AdminCreateChannel",
         "parameters": [
           {
@@ -192,18 +175,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Create Channel",
-        "tags": ["Admin Channel"]
+        "tags": ["Admin Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]\u0026lt;/b\u0026gt;",
+        "description": "Delete official channel",
         "operationId": "SingleAdminDeleteChannel",
         "parameters": [
           {
@@ -247,16 +234,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete Channel",
-        "tags": ["Admin Channel"]
+        "tags": ["Admin Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]\u0026lt;/b\u0026gt;",
+        "description": "Update official channel",
         "operationId": "SingleAdminUpdateChannel",
         "parameters": [
           {
@@ -317,12 +308,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update Channel",
-        "tags": ["Admin Channel"]
+        "tags": ["Admin Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}/contents": {
@@ -401,7 +396,12 @@
           }
         ],
         "summary": "Upload content to a channel",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}/contents/s3": {
@@ -479,7 +479,12 @@
           }
         ],
         "summary": "Upload content to S3 bucket",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}/contents/s3/{contentId}": {
@@ -570,7 +575,12 @@
           }
         ],
         "summary": "Update content to S3 bucket",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}/contents/search": {
@@ -706,7 +716,12 @@
           }
         ],
         "summary": "Search contents specific to a channel",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}/contents/{contentId}": {
@@ -768,7 +783,12 @@
           }
         ],
         "summary": "Delete content",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
@@ -852,7 +872,12 @@
           }
         ],
         "summary": "Update content to a channel",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents": {
@@ -917,7 +942,12 @@
           }
         ],
         "summary": "Get user's generated contents",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/bulk": {
@@ -985,7 +1015,12 @@
           }
         ],
         "summary": "Bulk get content by content IDs",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/search": {
@@ -1114,7 +1149,12 @@
           }
         ],
         "summary": "Search contents",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/sharecodes/bulk": {
@@ -1182,7 +1222,12 @@
           }
         ],
         "summary": "Bulk get content by content sharecodes",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/sharecodes/{shareCode}": {
@@ -1240,7 +1285,12 @@
           }
         ],
         "summary": "Get content by sharecode",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/{contentId}": {
@@ -1298,7 +1348,12 @@
           }
         ],
         "summary": "Get user specific content",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/{contentId}/preview": {
@@ -1356,7 +1411,12 @@
           }
         ],
         "summary": "Get content preview",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/{contentId}/rollback/{versionId}": {
@@ -1427,13 +1487,18 @@
           }
         ],
         "summary": "Rollback content's payload version",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/{contentId}/screenshots": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;. \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png.\n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
+        "description": "All request body are required except for *contentType* field. \n*contentType* values is used to enforce the *Content-Type* header needed by the client to upload the content using the presigned URL.\nIf not specified, it will use *fileExtension* value.\nSupported file extensions: *pjp*, *jpg*, *jpeg*, *jfif*, *bmp*, *png*.\nMaximum description length: 1024",
         "operationId": "AdminUploadContentScreenshot",
         "parameters": [
           {
@@ -1500,16 +1565,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"],
             "authorization": []
           }
         ],
-        "summary": "Upload screenshots for content",
-        "tags": ["Admin Content"]
+        "summary": "Upload screenshots for official content",
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;. \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
+        "description": "Maximum description length: 1024",
         "operationId": "AdminUpdateScreenshots",
         "parameters": [
           {
@@ -1576,18 +1645,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update screenshot of content",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/{contentId}/screenshots/{screenshotId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.\n\t\t\t\t",
+        "description": "Delete existing screenshot from a content",
         "operationId": "AdminDeleteContentScreenshot",
         "parameters": [
           {
@@ -1650,12 +1723,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
-        "summary": "Delete screenshots content",
-        "tags": ["Admin Content"]
+        "summary": "Delete content's screenshot",
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/contents/{contentId}/versions": {
@@ -1713,13 +1790,18 @@
           }
         ],
         "summary": "List content's payload versions",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/groups": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get user group paginated",
         "operationId": "SingleAdminGetAllGroups",
         "parameters": [
           {
@@ -1773,16 +1855,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get all user groups",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]",
+        "description": "Create group",
         "operationId": "AdminCreateGroup",
         "parameters": [
           {
@@ -1830,18 +1916,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Create groups",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/groups/{groupId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]",
+        "description": "Delete group by group ID",
         "operationId": "SingleAdminDeleteGroup",
         "parameters": [
           {
@@ -1885,16 +1975,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get user group by group ID",
         "operationId": "SingleAdminGetGroup",
         "parameters": [
           {
@@ -1941,16 +2035,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get specific user group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]\n\t\t\t\t\treplace group name and contents with new ones.",
+        "description": "Replace group name and contents with new ones.",
         "operationId": "SingleAdminUpdateGroup",
         "parameters": [
           {
@@ -2011,18 +2109,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/groups/{groupId}/contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get content belong to a group",
         "operationId": "SingleAdminGetGroupContents",
         "parameters": [
           {
@@ -2089,18 +2191,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "(Legacy) Get contents belong to a group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/tags": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]",
+        "description": "Get available tags paginated",
         "operationId": "AdminGetTag",
         "parameters": [
           {
@@ -2154,16 +2260,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get tags",
-        "tags": ["Admin Tag"]
+        "tags": ["Admin Tag"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]\n\t\t\t\tcreates a new tag",
+        "description": "Creates a new tag",
         "operationId": "AdminCreateTag",
         "parameters": [
           {
@@ -2217,18 +2327,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Create tags",
-        "tags": ["Admin Tag"]
+        "tags": ["Admin Tag"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/tags/{tagId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]",
+        "description": "Delete existing tag",
         "operationId": "AdminDeleteTag",
         "parameters": [
           {
@@ -2272,16 +2386,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete tags",
-        "tags": ["Admin Tag"]
+        "tags": ["Admin Tag"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]\n\t\t\t\tupdates a tag",
+        "description": "Update existing tag",
         "operationId": "AdminUpdateTag",
         "parameters": [
           {
@@ -2348,18 +2466,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update tag",
-        "tags": ["Admin Tag"]
+        "tags": ["Admin Tag"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/types": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]",
+        "description": "Get available types paginated",
         "operationId": "AdminGetType",
         "parameters": [
           {
@@ -2413,16 +2535,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get types",
-        "tags": ["Admin Type"]
+        "tags": ["Admin Type"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]\n\t\t\tcreates a new type and subtype",
+        "description": "Creates a new type and subtype",
         "operationId": "AdminCreateType",
         "parameters": [
           {
@@ -2476,18 +2602,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Create types",
-        "tags": ["Admin Type"]
+        "tags": ["Admin Type"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/types/{typeId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]",
+        "description": "Delete existing type",
         "operationId": "AdminDeleteType",
         "parameters": [
           {
@@ -2531,16 +2661,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]"],
             "authorization": []
           }
         ],
-        "summary": "Delete types",
-        "tags": ["Admin Type"]
+        "summary": "Delete type",
+        "tags": ["Admin Type"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]\n\t\t\tupdates a type and subtype",
+        "description": "Updates a type and subtype",
         "operationId": "AdminUpdateType",
         "parameters": [
           {
@@ -2607,18 +2741,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update types",
-        "tags": ["Admin Type"]
+        "tags": ["Admin Type"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/channels": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]\u0026lt;/b\u0026gt;",
+        "description": "Delete all user channel",
         "operationId": "AdminDeleteAllUserChannels",
         "parameters": [
           {
@@ -2662,16 +2800,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete all user channel",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]\u0026lt;/b\u0026gt;",
+        "description": "Get user channel paginated",
         "operationId": "AdminGetChannel",
         "parameters": [
           {
@@ -2738,18 +2880,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get Channels",
-        "tags": ["Admin Channel"]
+        "tags": ["Admin Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]\u0026lt;/b\u0026gt;",
+        "description": "Delete user channel",
         "operationId": "AdminDeleteChannel",
         "parameters": [
           {
@@ -2800,16 +2946,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete Channel",
-        "tags": ["Admin Channel"]
+        "tags": ["Admin Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]\u0026lt;/b\u0026gt;",
+        "description": "Update user channel",
         "operationId": "AdminUpdateChannel",
         "parameters": [
           {
@@ -2877,12 +3027,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update Channel",
-        "tags": ["Admin Channel"]
+        "tags": ["Admin Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3/sharecodes/{shareCode}": {
@@ -2980,7 +3134,12 @@
           }
         ],
         "summary": "Update content to S3 bucket by share code",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3/{contentId}": {
@@ -3078,7 +3237,12 @@
           }
         ],
         "summary": "Update content to S3 bucket",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/sharecodes/{shareCode}": {
@@ -3147,7 +3311,12 @@
           }
         ],
         "summary": "Delete content by share code",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}": {
@@ -3216,7 +3385,12 @@
           }
         ],
         "summary": "Delete content",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
@@ -3307,7 +3481,12 @@
           }
         ],
         "summary": "Update content to a channel",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/contents": {
@@ -3362,7 +3541,12 @@
           }
         ],
         "summary": "Delete all user content",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
@@ -3432,7 +3616,12 @@
           }
         ],
         "summary": "Get user's generated contents",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/contents/{contentId}/hide": {
@@ -3511,13 +3700,18 @@
           }
         ],
         "summary": "Hide/Unhide user's generated contents",
-        "tags": ["Admin Content"]
+        "tags": ["Admin Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/groups": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]",
+        "description": "Delete all user group",
         "operationId": "AdminDeleteAllUserGroup",
         "parameters": [
           {
@@ -3561,16 +3755,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete all user group",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get user group paginated",
         "operationId": "AdminGetAllGroups",
         "parameters": [
           {
@@ -3631,18 +3829,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get all user groups",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/groups/{groupId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]",
+        "description": "Delete group",
         "operationId": "AdminDeleteGroup",
         "parameters": [
           {
@@ -3693,16 +3895,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get user group by group ID",
         "operationId": "AdminGetGroup",
         "parameters": [
           {
@@ -3756,16 +3962,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get specific user group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]\n\t\t\t\t\treplace group name and contents with new ones.",
+        "description": "Replace group name and contents with new ones.",
         "operationId": "AdminUpdateGroup",
         "parameters": [
           {
@@ -3833,18 +4043,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get content belong to a group",
         "operationId": "AdminGetGroupContents",
         "parameters": [
           {
@@ -3918,12 +4132,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "(Legacy) Get contents belong to a group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/admin/namespaces/{namespace}/users/{userId}/states": {
@@ -3978,7 +4196,12 @@
           }
         ],
         "summary": "Remove all user related state: likes, downloads, followers, following",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/channels/{channelId}/contents": {
@@ -4113,7 +4336,8 @@
           }
         ],
         "summary": "Search contents specific to a channel",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents": {
@@ -4241,7 +4465,8 @@
           }
         ],
         "summary": "Search contents",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/bulk": {
@@ -4302,7 +4527,8 @@
           }
         ],
         "summary": "Get contents by content Ids ",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/followed": {
@@ -4366,13 +4592,14 @@
           }
         ],
         "summary": "Get contents from followed creators",
-        "tags": ["Public Follow"]
+        "tags": ["Public Follow"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/liked": {
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Requires valid user token.\n\nFor advance tag filtering supports \u0026amp; as AND operator and | as OR operator and parentheses () for priority. e.g: \n\n\u0026lt;code\u0026gt;tags=red\u0026lt;/code\u0026gt;\n\n\u0026lt;code\u0026gt;tags=red\u0026amp;animal\u0026lt;/code\u0026gt;\n\n\u0026lt;code\u0026gt;tags=red|animal\u0026lt;/code\u0026gt;\n\n\u0026lt;code\u0026gt;tags=red\u0026amp;animal|wild\u0026lt;/code\u0026gt;\n\n\u0026lt;code\u0026gt;tags=red\u0026amp;(animal|wild)\u0026lt;/code\u0026gt;\n\nThe precedence of logical operator is AND \u0026gt; OR, so if no parentheses, AND logical operator will be executed first.\n\nAllowed character for operand: alphanumeric, underscore \u0026lt;code\u0026gt;_\u0026lt;/code\u0026gt; and dash \u0026lt;code\u0026gt;-\u0026lt;/code\u0026gt;\n\nAllowed character for operator: \u0026lt;code\u0026gt;\u0026amp;\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;|\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;(\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;)\u0026lt;/code\u0026gt;\n\n\u0026lt;b\u0026gt;Please note that value of tags query param should be URL encoded\u0026lt;/b\u0026gt;",
+        "description": "For advance tag filtering supports \u0026amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g:  \n\n\n*tags=red*\n*tags=red\u0026amp;animal*\n*tags=red|animal*\n*tags=red\u0026amp;animal|wild*\n*tags=red\u0026amp;(animal|wild)*\n\nThe precedence of logical operator is AND \u0026gt; OR, so if no parentheses, AND logical operator will be executed first.  \n\nAllowed character for operand: alphanumeric, underscore _ and dash -  \n\nAllowed character for operator: \u0026amp; | ( )\n\n\n**Please note that value of tags query param should be URL encoded**",
         "operationId": "GetLikedContent",
         "parameters": [
           {
@@ -4477,7 +4704,8 @@
           }
         ],
         "summary": "Get liked contents",
-        "tags": ["Public Like (Legacy)"]
+        "tags": ["Public Like (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/sharecodes/bulk": {
@@ -4544,7 +4772,8 @@
           }
         ],
         "summary": "Bulk get content by content sharecodes",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/sharecodes/{shareCode}": {
@@ -4601,7 +4830,8 @@
           }
         ],
         "summary": "Get content by sharecode",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/{contentId}": {
@@ -4658,13 +4888,14 @@
           }
         ],
         "summary": "Get user specific content",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/{contentId}/downloadcount": {
       "post": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Requires valid user token",
+        "description": "This endpoint can be used to count how many the ugc downloaded",
         "operationId": "AddDownloadCount",
         "parameters": [
           {
@@ -4715,13 +4946,14 @@
           }
         ],
         "summary": "Add unique download count to a content",
-        "tags": ["Public Download Count (Legacy)"]
+        "tags": ["Public Download Count (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/{contentId}/like": {
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Requires valid user token",
+        "description": "This endpoint will update like/unlike state from a content",
         "operationId": "UpdateContentLikeStatus",
         "parameters": [
           {
@@ -4786,7 +5018,8 @@
           }
         ],
         "summary": "Update like/unlike status to a content",
-        "tags": ["Public Like (Legacy)"]
+        "tags": ["Public Like (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/contents/{contentId}/preview": {
@@ -4843,13 +5076,14 @@
           }
         ],
         "summary": "Get content preview",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/tags": {
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Publicly accessible",
+        "description": "Get available tags paginated",
         "operationId": "GetTag",
         "parameters": [
           {
@@ -4913,7 +5147,7 @@
     "/ugc/v1/public/namespaces/{namespace}/types": {
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Requires valid user token",
+        "description": "Get available types paginated",
         "operationId": "GetType",
         "parameters": [
           {
@@ -4971,7 +5205,8 @@
           }
         ],
         "summary": "Get types",
-        "tags": ["Public Type"]
+        "tags": ["Public Type"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users": {
@@ -5047,7 +5282,8 @@
           }
         ],
         "summary": "Search creator",
-        "tags": ["Public Creator"]
+        "tags": ["Public Creator"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/followed": {
@@ -5111,7 +5347,8 @@
           }
         ],
         "summary": "Get followed creators",
-        "tags": ["Public Follow"]
+        "tags": ["Public Follow"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}": {
@@ -5168,13 +5405,14 @@
           }
         ],
         "summary": "Get creator stats: number of total like by other user, number of total following and follower user",
-        "tags": ["Public Creator"]
+        "tags": ["Public Creator"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]\u0026lt;/b\u0026gt;",
+        "description": "Delete all user channel",
         "operationId": "DeleteAllUserChannel",
         "parameters": [
           {
@@ -5218,16 +5456,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete all user channel",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]\u0026lt;/b\u0026gt;",
+        "description": "Get user channel paginated",
         "operationId": "GetChannels",
         "parameters": [
           {
@@ -5294,16 +5536,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get Channels",
-        "tags": ["Public Channel"]
+        "tags": ["Public Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]\u0026lt;/b\u0026gt;",
+        "description": "Create user channel",
         "operationId": "PublicCreateChannel",
         "parameters": [
           {
@@ -5358,18 +5604,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Create Channel",
-        "tags": ["Public Channel"]
+        "tags": ["Public Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]\u0026lt;/b\u0026gt;",
+        "description": "Delete user channel",
         "operationId": "DeleteChannel",
         "parameters": [
           {
@@ -5420,16 +5670,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete Channel",
-        "tags": ["Public Channel"]
+        "tags": ["Public Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]\u0026lt;/b\u0026gt;",
+        "description": "Update user channel",
         "operationId": "UpdateChannel",
         "parameters": [
           {
@@ -5497,12 +5751,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update Channel",
-        "tags": ["Public Channel"]
+        "tags": ["Public Channel"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents": {
@@ -5582,7 +5840,12 @@
           }
         ],
         "summary": "Upload content to a channel",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3": {
@@ -5661,7 +5924,12 @@
           }
         ],
         "summary": "Upload content to S3 bucket",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3/sharecodes/{shareCode}": {
@@ -5759,7 +6027,12 @@
           }
         ],
         "summary": "Update content to S3 bucket by share code",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3/{contentId}": {
@@ -5851,7 +6124,12 @@
           }
         ],
         "summary": "Update content to S3 bucket",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/sharecodes/{shareCode}": {
@@ -5920,7 +6198,12 @@
           }
         ],
         "summary": "Delete content by share code",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}": {
@@ -5989,7 +6272,12 @@
           }
         ],
         "summary": "Delete content",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
@@ -6080,7 +6368,12 @@
           }
         ],
         "summary": "Update content to a channel",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}/sharecode": {
@@ -6178,7 +6471,12 @@
           }
         ],
         "summary": "Update content sharecode",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/contents": {
@@ -6233,7 +6531,12 @@
           }
         ],
         "summary": "Delete all user content",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
@@ -6303,13 +6606,14 @@
           }
         ],
         "summary": "Get user's generated contents",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/contents/{contentId}/screenshots": {
       "post": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;. \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png. \n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
+        "description": "All request body are required except for *contentType* field. \n*contentType* values is used to enforce the *Content-Type* header needed by the client to upload the content using the presigned URL.\nIf not specified, it will use *fileExtension* value.\nSupported file extensions: *pjp*, *jpg*, *jpeg*, *jfif*, *bmp*, *png*.\nMaximum description length: 1024",
         "operationId": "UploadContentScreenshot",
         "parameters": [
           {
@@ -6383,16 +6687,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Upload screenshots for content",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;. \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
+        "description": "Maximum description length: 1024",
         "operationId": "UpdateScreenshots",
         "parameters": [
           {
@@ -6466,18 +6774,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update screenshot of content",
-        "tags": ["Public Content (Legacy)"]
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/contents/{contentId}/screenshots/{screenshotId}": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.\n\t\t\t\t",
+        "description": "Delete existing screenshot from a content",
         "operationId": "DeleteContentScreenshot",
         "parameters": [
           {
@@ -6547,12 +6859,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
-        "summary": "Delete screenshots content",
-        "tags": ["Public Content (Legacy)"]
+        "summary": "Delete content's screenshot",
+        "tags": ["Public Content (Legacy)"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/follow": {
@@ -6617,7 +6933,8 @@
           }
         ],
         "summary": "Update follow/unfollow status to a user",
-        "tags": ["Public Follow"]
+        "tags": ["Public Follow"],
+        "x-security": {}
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/followers": {
@@ -6763,7 +7080,7 @@
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]",
+        "description": "Delete all user group",
         "operationId": "DeleteAllUserGroup",
         "parameters": [
           {
@@ -6807,16 +7124,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete all user group",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get user groups paginated",
         "operationId": "GetGroups",
         "parameters": [
           {
@@ -6877,16 +7198,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get all user groups",
-        "tags": ["Public Group"]
+        "tags": ["Public Group"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]",
+        "description": "Create group",
         "operationId": "CreateGroup",
         "parameters": [
           {
@@ -6941,18 +7266,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Create groups",
-        "tags": ["Public Group"]
+        "tags": ["Public Group"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]",
+        "description": "Delete user group by group ID",
         "operationId": "DeleteGroup",
         "parameters": [
           {
@@ -7003,16 +7332,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete group",
-        "tags": ["Public Group"]
+        "tags": ["Public Group"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get user groups by group ID",
         "operationId": "GetGroup",
         "parameters": [
           {
@@ -7066,16 +7399,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get user's groups",
-        "tags": ["Public Group"]
+        "tags": ["Public Group"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]\n\t\t\t\treplace group name and contents with new ones",
+        "description": "Replace group name and contents with new ones",
         "operationId": "UpdateGroup",
         "parameters": [
           {
@@ -7143,18 +7480,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update group",
-        "tags": ["Public Group"]
+        "tags": ["Public Group"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents": {
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get content that belong to a group",
         "operationId": "GetGroupContent",
         "parameters": [
           {
@@ -7228,12 +7569,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "(Legacy) Get contents belong to a group",
-        "tags": ["Public Group"]
+        "tags": ["Public Group"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/states": {
@@ -7288,13 +7633,18 @@
           }
         ],
         "summary": "Remove all user related state: likes, downloads, followers, following",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId} [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/channels/{channelId}/contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "List content specific to a channel",
         "operationId": "AdminGetContentByChannelIDV2",
         "parameters": [
           {
@@ -7333,7 +7683,7 @@
           },
           {
             "default": "createdTime:desc",
-            "description": "default value: createdTime:desc.\n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "description": "available values:\n\t\t\t\t- *createdTime*\n\t\t\t\t- *createdTime:desc*\n\t\t\t\t- *createdTime:asc*\n\t\t\t\t- *updatedTime*\n\t\t\t\t- *updatedTime:desc*\n\t\t\t\t- *updatedTime:asc*",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -7368,16 +7718,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "List contents specific to a channel",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;.",
+        "description": "Create official content",
         "operationId": "AdminCreateContentV2",
         "parameters": [
           {
@@ -7444,18 +7798,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Create a content",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/channels/{channelId}/contents/{contentId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.",
+        "description": "Delete existing official content",
         "operationId": "AdminDeleteOfficialContentV2",
         "parameters": [
           {
@@ -7506,16 +7864,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete official content",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "patch": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "Update existing official content",
         "operationId": "AdminUpdateOfficialContentV2",
         "parameters": [
           {
@@ -7589,18 +7951,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update official content",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/channels/{channelId}/contents/{contentId}/fileLocation": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "This endpoint should be used after calling generate official content upload url endpoint to commit the changes.\nRequired permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "This endpoint should be used after calling generate official content upload url endpoint to commit the changes",
         "operationId": "AdminUpdateOfficialContentFileLocation",
         "parameters": [
           {
@@ -7674,18 +8040,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update content file location",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/channels/{channelId}/contents/{contentId}/uploadUrl": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "Generate official content upload URL",
         "operationId": "AdminGenerateOfficialContentUploadURLV2",
         "parameters": [
           {
@@ -7753,18 +8123,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Generate official content upload URL",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/configs": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]\u0026lt;/b\u0026gt;",
+        "description": "Get config paginated",
         "operationId": "AdminGetConfigs",
         "parameters": [
           {
@@ -7822,18 +8196,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get configs",
-        "tags": ["Admin Config"]
+        "tags": ["Admin Config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/configs/{key}": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]\u0026lt;/b\u0026gt;.\n\t\t\t\t\tIt will create a new config if the \u0026lt;i\u0026gt;key\u0026lt;/i\u0026gt; doesn\u0026#39;t exist.\n\t\t\t\t\tAllowed key value:\n\t\t\t\t\t- \u0026lt;i\u0026gt;contentReview\u0026lt;/i\u0026gt;: \u0026lt;i\u0026gt;enabled\u0026lt;/i\u0026gt;,\u0026lt;i\u0026gt;disabled\u0026lt;/i\u0026gt;",
+        "description": "This endpoint will create a new config if the *key* doesn\u0026#39;t exist.  \n\nAllowed key value:\n- *contentReview*: *enabled*,*disabled*",
         "operationId": "AdminUpdateConfig",
         "parameters": [
           {
@@ -7891,18 +8269,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update config",
-        "tags": ["Admin Config"]
+        "tags": ["Admin Config"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "\nRequired permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]\u0026lt;/b\u0026gt;\nFor advance tag filtering supports \u0026amp; as AND operator and | as OR operator and parentheses () for priority. e.g:\n\n\u0026lt;code\u0026gt;tags=red\u0026lt;/code\u0026gt;\n\u0026lt;code\u0026gt;tags=red\u0026amp;animal\u0026lt;/code\u0026gt;\n\u0026lt;code\u0026gt;tags=red|animal\u0026lt;/code\u0026gt;\n\u0026lt;code\u0026gt;tags=red\u0026amp;animal|wild\u0026lt;/code\u0026gt;\n\u0026lt;code\u0026gt;tags=red\u0026amp;(animal|wild)\u0026lt;/code\u0026gt;\n\nThe precedence of logical operator is AND \u0026gt; OR, so if no parentheses, AND logical operator will be executed first.\n\nAllowed character for operand: alphanumeric, underscore \u0026lt;code\u0026gt;_\u0026lt;/code\u0026gt; and dash \u0026lt;code\u0026gt;-\u0026lt;/code\u0026gt;\nAllowed character for operator: \u0026lt;code\u0026gt;\u0026amp;\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;|\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;(\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;)\u0026lt;/code\u0026gt;\n\n\u0026lt;b\u0026gt;Please note that value of tags query param should be URL encoded\u0026lt;/b\u0026gt;",
+        "description": "For advance tag filtering supports \u0026amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g:  \n\n\n*tags=red*\n*tags=red\u0026amp;animal*\n*tags=red|animal*\n*tags=red\u0026amp;animal|wild*\n*tags=red\u0026amp;(animal|wild)*\n\nThe precedence of logical operator is AND \u0026gt; OR, so if no parentheses, AND logical operator will be executed first.  \n\nAllowed character for operand: alphanumeric, underscore _ and dash -  \n\nAllowed character for operator: \u0026amp; | ( )\n\n\n**Please note that value of tags query param should be URL encoded**",
         "operationId": "AdminListContentV2",
         "parameters": [
           {
@@ -7940,7 +8322,8 @@
             "type": "integer"
           },
           {
-            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003edownload, download:desc, download:asc\u003c/li\u003e\n\u003cli\u003elike, like:desc, like:asc\u003c/li\u003e\n\u003cli\u003ename, name:desc, name:asc\u003c/li\u003e\n\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "default": "createdTime:desc",
+            "description": "sort order of query result\navailable value: \n- *createdTime*\n- *createdTime:desc*\n- *createdTime:asc*\n- *download*\n- *download:desc* \n- *download:asc*\n- *name* \n- *name:desc* \n- *name:asc*\n- *updatedTime*\n- *updatedTime:desc* \n- *updatedTime:asc*",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -7997,18 +8380,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "List contents",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]\u0026lt;/b\u0026gt;.\n\t\t\t\t\t\tMaximum contentId per request 100",
+        "description": "Maximum contentId per request 100",
         "operationId": "AdminBulkGetContentByIDsV2",
         "parameters": [
           {
@@ -8065,18 +8452,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Bulk get content by content IDs",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents/sharecodes/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]\u0026lt;/b\u0026gt;.\n\t\t\t\t\t\tMaximum sharecodes per request 100",
+        "description": "Maximum sharecodes per request 100",
         "operationId": "AdminGetContentBulkByShareCodesV2",
         "parameters": [
           {
@@ -8133,18 +8524,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Bulk get content by content sharecodes",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents/sharecodes/{shareCode}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get content by share code",
         "operationId": "AdminGetContentByShareCodeV2",
         "parameters": [
           {
@@ -8191,18 +8586,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get content by sharecode",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get content by content ID",
         "operationId": "AdminGetContentByContentIDV2",
         "parameters": [
           {
@@ -8249,18 +8648,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get content by content ID",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}/rollback/{versionId}": {
       "put": {
         "consumes": ["*/*"],
-        "description": "Required permission: \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;\n\t\t\t\tRollback content\u0026#39;s payload to specified version.",
+        "description": "Rollback content\u0026#39;s payload to specified version",
         "operationId": "RollbackContentVersionV2",
         "parameters": [
           {
@@ -8320,18 +8723,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Rollback content's payload version",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}/screenshots": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;. \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png. \n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
+        "description": "This endpoint used to request upload URL from content\u0026#39;s screenshot.  \nIf *contentType* is not specified, it will use *fileExtension* value.\nSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png.\nMaximum description length: 1024",
         "operationId": "AdminUploadContentScreenshotV2",
         "parameters": [
           {
@@ -8398,16 +8805,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Upload screenshots for content",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;. \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
+        "description": "Maximum description length: 1024",
         "operationId": "AdminUpdateScreenshotsV2",
         "parameters": [
           {
@@ -8474,18 +8885,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update screenshot of content",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}/screenshots/{screenshotId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.\n\t\t\t\t",
+        "description": "Delete screenshot from a content",
         "operationId": "AdminDeleteContentScreenshotV2",
         "parameters": [
           {
@@ -8548,18 +8963,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete screenshots content",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}/versions": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission: \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;\n\t\t\t\tContent\u0026#39;s payload versions created when UGC is created or updated with \u0026lt;code\u0026gt;updateContentFile\u0026lt;/code\u0026gt; set to true. Only list up to 10 latest versions.",
+        "description": "Content\u0026#39;s payload versions created when UGC is created or updated with \u0026lt;code\u0026gt;updateContentFile\u0026lt;/code\u0026gt; set to true. Only list up to 10 latest versions.",
         "operationId": "ListContentVersionsV2",
         "parameters": [
           {
@@ -8606,18 +9025,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "List content's payload versions",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/groups/{groupId}/contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get contents belong to a group",
         "operationId": "AdminGetOfficialGroupContentsV2",
         "parameters": [
           {
@@ -8684,18 +9107,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get contents belong to a group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/staging-contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "List content that need admin\u0026#39;s approval",
         "operationId": "AdminListStagingContents",
         "parameters": [
           {
@@ -8718,13 +9145,14 @@
             "type": "integer"
           },
           {
-            "description": "default value: createdTime:desc\n\t\t\t\tavailable value:\n\t\t\t\t\u003cul\u003e\n\t\t\t\t\t\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\t\t\t\t\t\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\t\t\t\t\u003c/ul\u003e",
+            "default": "createdTimed:desc",
+            "description": "sort query result\navailable value:\n- createdTime\n- createdTime:desc\n- createdTime:asc\n- updatedTime\n- updatedTime:desc\n- updatedTime:asc",
             "in": "query",
             "name": "sortBy",
             "type": "string"
           },
           {
-            "description": "filter by content status [\u003ci\u003ePENDING\u003c/i\u003e, \u003ci\u003eREJECTED\u003c/i\u003e]",
+            "description": "filter by content status [*PENDING*, *REJECTED*]",
             "in": "query",
             "name": "status",
             "type": "string"
@@ -8765,18 +9193,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "List staging contents",
-        "tags": ["Admin Staging Content"]
+        "tags": ["Admin Staging Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/staging-contents/{contentId}": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get staging content by ID",
         "operationId": "AdminGetStagingContentByID",
         "parameters": [
           {
@@ -8829,18 +9261,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get staging content by id",
-        "tags": ["Admin Staging Content"]
+        "tags": ["Admin Staging Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/staging-contents/{contentId}/approve": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:CONTENT:APPROVAL [CREATE]\u0026lt;/b\u0026gt;.",
+        "description": "Approved content will shown to public player. Rejected content stays in staging area and couldn\u0026#39;t be seen by other player",
         "operationId": "AdminApproveStagingContent",
         "parameters": [
           {
@@ -8907,18 +9343,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CONTENT:APPROVAL [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Approve or reject content",
-        "tags": ["Admin Staging Content"]
+        "tags": ["Admin Staging Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONTENT:APPROVAL [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3/sharecodes/{shareCode}": {
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.\n\n\u0026lt;code\u0026gt;shareCode\u0026lt;/code\u0026gt; format should follows:\n\nMax length: 7\nAvailable characters: abcdefhkpqrstuxyz\n\n",
+        "description": "*shareCode* format should follows:  \n\n\t\t\t\t\u0026#34;Max length: 7\n\t\t\t\t\u0026#34;Available characters: abcdefhkpqrstuxyz",
         "operationId": "AdminUpdateContentByShareCodeV2",
         "parameters": [
           {
@@ -9005,18 +9445,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update content to S3 bucket by share code",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/sharecodes/{shareCode}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.",
+        "description": "Delete content by share code",
         "operationId": "AdminDeleteContentByShareCodeV2",
         "parameters": [
           {
@@ -9074,18 +9518,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete content by share code",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.",
+        "description": "Delete user content by content ID",
         "operationId": "AdminDeleteUserContentV2",
         "parameters": [
           {
@@ -9143,16 +9591,20 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete user content",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "patch": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "Update existing user content",
         "operationId": "AdminUpdateUserContentV2",
         "parameters": [
           {
@@ -9233,18 +9685,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update user content",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}/fileLocation": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "This endpoint should be used after calling generate user content upload url endpoint to commit the changes.\nRequired permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "This endpoint should be used after calling generate user content upload url endpoint to commit the changes",
         "operationId": "AdminUpdateUserContentFileLocation",
         "parameters": [
           {
@@ -9325,18 +9781,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update user content file location",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}/uploadUrl": {
       "patch": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "generate user content upload URL",
         "operationId": "AdminGenerateUserContentUploadURLV2",
         "parameters": [
           {
@@ -9411,18 +9871,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Generate user content upload URL",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get user cotent",
         "operationId": "AdminGetContentByUserIDV2",
         "parameters": [
           {
@@ -9455,7 +9919,7 @@
           },
           {
             "default": "createdTime:desc",
-            "description": "default value: createdTime:desc.\n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "description": "available values:\n\t\t\t\t- *createdTime*\n\t\t\t\t- *createdTime:desc*\n\t\t\t\t- *createdTime:asc*",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -9490,18 +9954,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get user's generated contents",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/contents/{contentId}/hide": {
       "put": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "Hide/Unhide user\u0026#39;s generated contents",
         "operationId": "AdminUpdateContentHideStatusV2",
         "parameters": [
           {
@@ -9575,18 +10043,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Hide/Unhide user's generated contents",
-        "tags": ["Admin Content V2"]
+        "tags": ["Admin Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get contents belong to a group",
         "operationId": "AdminGetUserGroupContentsV2",
         "parameters": [
           {
@@ -9660,18 +10132,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get contents belong to a group",
-        "tags": ["Admin Group"]
+        "tags": ["Admin Group"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/admin/namespaces/{namespace}/users/{userId}/staging-contents": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Required permission \u0026lt;b\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "List user content\u0026#39;s that need admin approval",
         "operationId": "AdminListUserStagingContents",
         "parameters": [
           {
@@ -9701,13 +10177,14 @@
             "type": "integer"
           },
           {
-            "description": "default value: createdTime:desc\n\t\t\t\t\tavailable value:\n\t\t\t\t\t\u003cul\u003e\n\t\t\t\t\t\t\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\t\t\t\t\t\t\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\t\t\t\t\t\t\u003c/ul\u003e",
+            "default": "createdTimed:desc",
+            "description": "sort query result\navailable value:\n- createdTime\n- createdTime:desc\n- createdTime:asc\n- updatedTime\n- updatedTime:desc\n- updatedTime:asc",
             "in": "query",
             "name": "sortBy",
             "type": "string"
           },
           {
-            "description": "filter by content status [\u003ci\u003ePENDING\u003c/i\u003e, \u003ci\u003eREJECTED\u003c/i\u003e]",
+            "description": "filter by content status [*PENDING*, *REJECTED*]",
             "in": "query",
             "name": "status",
             "type": "string"
@@ -9748,12 +10225,16 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "List user staging contents",
-        "tags": ["Admin Staging Content"]
+        "tags": ["Admin Staging Content"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/channels/{channelId}/contents": {
@@ -9798,7 +10279,7 @@
           },
           {
             "default": "createdTime:desc",
-            "description": "default value: createdTime:desc.\n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "description": "available values:\n\t\t\t\t- *createdTime*\n\t\t\t\t- *createdTime:desc*\n\t\t\t\t- *createdTime:asc*\n\t\t\t\t- *updatedTime*\n\t\t\t\t- *updatedTime:desc*\n\t\t\t\t- *updatedTime:asc*",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -9837,13 +10318,14 @@
           }
         ],
         "summary": "List contents specific to a channel",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/contents": {
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "\nFor advance tag filtering supports \u0026amp; as AND operator and | as OR operator and parentheses () for priority. e.g:\n\n\u0026lt;code\u0026gt;tags=red\u0026lt;/code\u0026gt;\n\u0026lt;code\u0026gt;tags=red\u0026amp;animal\u0026lt;/code\u0026gt;\n\u0026lt;code\u0026gt;tags=red|animal\u0026lt;/code\u0026gt;\n\u0026lt;code\u0026gt;tags=red\u0026amp;animal|wild\u0026lt;/code\u0026gt;\n\u0026lt;code\u0026gt;tags=red\u0026amp;(animal|wild)\u0026lt;/code\u0026gt;\n\nThe precedence of logical operator is AND \u0026gt; OR, so if no parentheses, AND logical operator will be executed first.\n\nAllowed character for operand: alphanumeric, underscore \u0026lt;code\u0026gt;_\u0026lt;/code\u0026gt; and dash \u0026lt;code\u0026gt;-\u0026lt;/code\u0026gt;\nAllowed character for operator: \u0026lt;code\u0026gt;\u0026amp;\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;|\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;(\u0026lt;/code\u0026gt; \u0026lt;code\u0026gt;)\u0026lt;/code\u0026gt;\n\n\u0026lt;b\u0026gt;Please note that value of tags query param should be URL encoded\u0026lt;/b\u0026gt;",
+        "description": "For advance tag filtering supports \u0026amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g:  \n\n\n*tags=red*\n*tags=red\u0026amp;animal*\n*tags=red|animal*\n*tags=red\u0026amp;animal|wild*\n*tags=red\u0026amp;(animal|wild)*\n\nThe precedence of logical operator is AND \u0026gt; OR, so if no parentheses, AND logical operator will be executed first.  \n\nAllowed character for operand: alphanumeric, underscore _ and dash -  \n\nAllowed character for operator: \u0026amp; | ( )\n\n\n**Please note that value of tags query param should be URL encoded**",
         "operationId": "PublicListContentV2",
         "parameters": [
           {
@@ -9881,7 +10363,8 @@
             "type": "integer"
           },
           {
-            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003cli\u003edownload, download:desc, download:asc\u003c/li\u003e\n\u003cli\u003elike, like:desc, like:asc\u003c/li\u003e\n\u003cli\u003ename, name:desc, name:asc\u003c/li\u003e\n\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "default": "createdTime:desc",
+            "description": "sort order of query result\navailable value: \n- *createdTime*\n- *createdTime:desc*\n- *createdTime:asc*\n- *download*\n- *download:desc* \n- *download:asc*\n- *name* \n- *name:desc* \n- *name:asc*\n- *updatedTime*\n- *updatedTime:desc* \n- *updatedTime:asc*",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -9942,7 +10425,8 @@
           }
         ],
         "summary": "List contents",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/contents/bulk": {
@@ -10003,7 +10487,8 @@
           }
         ],
         "summary": "Get contents by content Ids ",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/contents/sharecodes/bulk": {
@@ -10070,7 +10555,8 @@
           }
         ],
         "summary": "Bulk get content by content sharecodes",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/contents/sharecodes/{shareCode}": {
@@ -10127,7 +10613,8 @@
           }
         ],
         "summary": "Get content by sharecode",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/contents/{contentId}": {
@@ -10184,13 +10671,14 @@
           }
         ],
         "summary": "Get content by content ID",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloadcount": {
       "post": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Requires valid user token",
+        "description": "This endpoint can be used to count how many the ugc downloaded",
         "operationId": "PublicAddDownloadCountV2",
         "parameters": [
           {
@@ -10247,7 +10735,8 @@
           }
         ],
         "summary": "Add unique download count to a content",
-        "tags": ["Public Download Count V2"]
+        "tags": ["Public Download Count V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloader": {
@@ -10285,8 +10774,8 @@
             "type": "integer"
           },
           {
-            "default": "createdTime:desc",
-            "description": "default value: createdTime:desc. \n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "default": "*createdTime:desc*",
+            "description": "sort the result.  \n\navailable value:\n- *createdTime*\n- *createdTime:desc*\n- *createdTime:asc*",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -10370,7 +10859,7 @@
           },
           {
             "default": "createdTime:desc",
-            "description": "default value: createdTime:desc.\n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "description": "sort order of query result\navailable value: \n- *createdTime*\n- *createdTime:desc*\n- *createdTime:asc*",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -10413,7 +10902,7 @@
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Requires valid user token",
+        "description": "This endpoint will update like/unlike state from a content",
         "operationId": "UpdateContentLikeStatusV2",
         "parameters": [
           {
@@ -10484,13 +10973,14 @@
           }
         ],
         "summary": "Update like/unlike status to a content",
-        "tags": ["Public Like V2"]
+        "tags": ["Public Like V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents": {
       "post": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;.",
+        "description": "Create a new content",
         "operationId": "PublicCreateContentV2",
         "parameters": [
           {
@@ -10558,18 +11048,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Create a content",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/s3/sharecodes/{shareCode}": {
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "Update content by share code",
         "operationId": "PublicUpdateContentByShareCodeV2",
         "parameters": [
           {
@@ -10656,18 +11150,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update content to S3 bucket by share code",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/sharecodes/{shareCode}": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.",
+        "description": "Delete existing content by share code",
         "operationId": "PublicDeleteContentByShareCodeV2",
         "parameters": [
           {
@@ -10725,18 +11223,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete content by share code",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.",
+        "description": "Delete existing content",
         "operationId": "PublicDeleteContentV2",
         "parameters": [
           {
@@ -10794,16 +11296,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete content",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "patch": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "Update existing content",
         "operationId": "PublicUpdateContentV2",
         "parameters": [
           {
@@ -10884,18 +11390,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update content",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}/fileLocation": {
       "patch": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "This endpoint should be used after calling generate upload url endpoint to commit the changes.\nRequired permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "This endpoint should be used after calling generate upload url endpoint to commit the changes",
         "operationId": "PublicUpdateContentFileLocation",
         "parameters": [
           {
@@ -10976,18 +11486,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update content file location",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}/sharecode": {
       "patch": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]\u0026lt;/b\u0026gt;.\u0026lt;br\u0026gt;\n\t\t\t\t\t\t\t\tThis endpoint is used to modify the shareCode of a content. However, this operation is restricted by default and requires the above permission to be granted to the User role.\u0026lt;br\u0026gt;\n\t\t\t\t\t\t\t\t\u0026lt;code\u0026gt;shareCode\u0026lt;/code\u0026gt; format should follows:\n\t\t\t\t\t\t\t\tMax length: 7\n\t\t\t\t\t\t\t\tAvailable characters: abcdefhkpqrstuxyz",
+        "description": "This endpoint is used to modify the shareCode of a content. However, this operation is restricted by default and requires the above permission to be granted to the User role.\u0026lt;br\u0026gt;\n\t\t\t\t\t\t\t\t\u0026lt;code\u0026gt;shareCode\u0026lt;/code\u0026gt; format should follows:\n\t\t\t\t\t\t\t\tMax length: 7\n\t\t\t\t\t\t\t\tAvailable characters: abcdefhkpqrstuxyz",
         "operationId": "UpdateContentShareCodeV2",
         "parameters": [
           {
@@ -11074,18 +11588,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update content share code",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/channels/{channelId}/contents/{contentId}/uploadUrl": {
       "patch": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "Generate content upload URL",
         "operationId": "PublicGenerateContentUploadURLV2",
         "parameters": [
           {
@@ -11166,12 +11684,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Generate content upload URL",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/contents": {
@@ -11210,7 +11732,7 @@
           },
           {
             "default": "createdTime:desc",
-            "description": "default value: createdTime:desc.\n\navailable value:\n\u003cul\u003e\n\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\u003c/ul\u003e",
+            "description": "available values:\n\t\t\t- *createdTime*\n\t\t\t- *createdTime:desc*\n\t\t\t- *createdTime:asc*",
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -11250,13 +11772,14 @@
           }
         ],
         "summary": "Get content by user ID",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": {}
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/contents/{contentId}/screenshots": {
       "post": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]\u0026lt;/b\u0026gt;. \n\t\t\t\tAll request body are required except for contentType field. \n\t\t\t\tcontentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL.\n\t\t\t\tIf not specified, it will use fileExtension value.\n\t\t\t\tSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png.\n\t\t\t\tMaximum description length: 1024.\n\t\t\t\t",
+        "description": "This endpoint used to request upload URL from content\u0026#39;s screenshot.  \nIf *contentType* is not specified, it will use *fileExtension* value.\nSupported file extensions: pjp, jpg, jpeg, jfif, bmp, png.\nMaximum description length: 1024",
         "operationId": "UploadContentScreenshotV2",
         "parameters": [
           {
@@ -11324,16 +11847,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Upload screenshots for content",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;. \n\t\t\t\t\tMaximum description length: 1024.\n\t\t\t\t\t",
+        "description": "Maximum description length: 1024",
         "operationId": "UpdateScreenshotsV2",
         "parameters": [
           {
@@ -11407,18 +11934,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update screenshot of content",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/contents/{contentId}/screenshots/{screenshotId}": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.\n\t\t\t\t",
+        "description": "Delete screenshot from a content",
         "operationId": "DeleteContentScreenshotV2",
         "parameters": [
           {
@@ -11488,18 +12019,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete screenshots content",
-        "tags": ["Public Content V2"]
+        "tags": ["Public Content V2"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents": {
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get content belong to a group",
         "operationId": "PublicGetGroupContentsV2",
         "parameters": [
           {
@@ -11573,18 +12108,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get contents belong to a group",
-        "tags": ["Public Group"]
+        "tags": ["Public Group"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/staging-contents": {
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "List user staging contents",
         "operationId": "ListUserStagingContents",
         "parameters": [
           {
@@ -11614,13 +12153,14 @@
             "type": "integer"
           },
           {
-            "description": "default value: createdTime:desc\n\t\t\t\tavailable value:\n\t\t\t\t\u003cul\u003e\n\t\t\t\t\t\u003cli\u003ecreatedTime, createdTime:desc, createdTime:asc\u003c/li\u003e\n\t\t\t\t\t\u003cli\u003eupdatedTime, updatedTime:desc, updatedTime:asc\u003c/li\u003e\n\t\t\t\t\t\u003c/ul\u003e",
+            "default": "createdTimed:desc",
+            "description": "sort query result\navailable value:\n- createdTime\n- createdTime:desc\n- createdTime:asc\n- updatedTime\n- updatedTime:desc\n- updatedTime:asc",
             "in": "query",
             "name": "sortBy",
             "type": "string"
           },
           {
-            "description": "filter by content status [\u003ci\u003ePENDING\u003c/i\u003e, \u003ci\u003eREJECTED\u003c/i\u003e]",
+            "description": "filter by content status [*PENDING*, *REJECTED*]",
             "in": "query",
             "name": "status",
             "type": "string"
@@ -11661,18 +12201,22 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "List user staging contents",
-        "tags": ["Public Staging Content"]
+        "tags": ["Public Staging Content"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/users/{userId}/staging-contents/{contentId}": {
       "delete": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]\u0026lt;/b\u0026gt;.",
+        "description": "Delete user staging content by ID",
         "operationId": "DeleteUserStagingContentByID",
         "parameters": [
           {
@@ -11729,16 +12273,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete user staging content by id",
-        "tags": ["Public Staging Content"]
+        "tags": ["Public Staging Content"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
+          }
+        ]
       },
       "get": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]\u0026lt;/b\u0026gt;.",
+        "description": "Get user staging content by ID",
         "operationId": "GetUserStagingContentByID",
         "parameters": [
           {
@@ -11798,16 +12346,20 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get user staging content by id",
-        "tags": ["Public Staging Content"]
+        "tags": ["Public Staging Content"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
-        "description": "Required permission \u0026lt;b\u0026gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]\u0026lt;/b\u0026gt;.",
+        "description": "Update staging content",
         "operationId": "UpdateStagingContent",
         "parameters": [
           {
@@ -11881,12 +12433,16 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update staging content",
-        "tags": ["Public Staging Content"]
+        "tags": ["Public Staging Content"],
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
       }
     }
   },
@@ -13549,7 +14105,7 @@
           "type": "string"
         }
       },
-      "required": ["contentType", "description", "fileExtension"]
+      "required": ["description", "fileExtension"]
     },
     "models.previewMetadata": {
       "properties": {
@@ -13592,11 +14148,11 @@
     "path": "/ugc/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-01-16T08:11:05+00:00",
-    "gitHash": "60b26603c4636420db27044e29eecd137cee2866",
+    "buildDate": "2024-03-22T03:23:13+00:00",
+    "gitHash": "0d853d65674924b4293b73c8306e3816d7a4227e",
     "name": "justice-ugc-service",
     "realm": "dev",
-    "version": "2.19.3",
+    "version": "2.20.0",
     "version-roles-seeding": "1.0.21"
   }
 }

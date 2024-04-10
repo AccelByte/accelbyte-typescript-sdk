@@ -13,6 +13,7 @@ import { GlobalConfigurationAdminApi } from './generated-admin/GlobalConfigurati
 import { PartyAdminApi } from './generated-admin/PartyAdminApi.js'
 import { ConfigurationTemplateAdminApi } from './generated-admin/ConfigurationTemplateAdminApi.js'
 import { GameSessionAdminApi } from './generated-admin/GameSessionAdminApi.js'
+import { RecentPlayerAdminApi } from './generated-admin/RecentPlayerAdminApi.js'
 import { NativeSessionAdminApi } from './generated-admin/NativeSessionAdminApi.js'
 import { PlayerAdminApi } from './generated-admin/PlayerAdminApi.js'
 import { PlatformCredentialAdminApi } from './generated-admin/PlatformCredentialAdminApi.js'
@@ -32,6 +33,7 @@ const apis = {
   PartyAdminApi,
   ConfigurationTemplateAdminApi,
   GameSessionAdminApi,
+  RecentPlayerAdminApi,
   NativeSessionAdminApi,
   PlayerAdminApi,
   PlatformCredentialAdminApi,

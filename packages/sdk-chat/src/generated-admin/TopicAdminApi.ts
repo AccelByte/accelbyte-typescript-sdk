@@ -21,6 +21,8 @@ import { ChatMessageWithPaginationResponse } from '../generated-definitions/Chat
 import { CreateNamespaceTopicParams } from '../generated-definitions/CreateNamespaceTopicParams.js'
 import { CreateTopicParams } from '../generated-definitions/CreateTopicParams.js'
 import { CreateTopicResponse } from '../generated-definitions/CreateTopicResponse.js'
+import { MessageRequest } from '../generated-definitions/MessageRequest.js'
+import { MessageResultWithAttributes } from '../generated-definitions/MessageResultWithAttributes.js'
 import { SendChatParams } from '../generated-definitions/SendChatParams.js'
 import { TopicAdmin$ } from './endpoints/TopicAdmin$.js'
 import { TopicInfoArray } from '../generated-definitions/TopicInfoArray.js'
@@ -120,6 +122,16 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * For testing purpose, doesn&#39;t send any message to the topic. Always do filter regardless of enableProfanityFilter configuration.
+   */
+  async function createChatFilter(data: MessageRequest, queryParams?: { detail?: boolean | null }): Promise<MessageResultWithAttributes> {
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createChatFilter(data, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Delete topic in a namespace.
    */
   async function deleteTopic_ByTopic(topic: string): Promise<ActionDeleteTopicResult> {
@@ -159,6 +171,29 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createNamespaceTopic(data: CreateNamespaceTopicParams): Promise<CreateTopicResponse> {
     const $ = new TopicAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.createNamespaceTopic(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * Get chat history in a namespace.
+   */
+  async function getChats_ByTopic(
+    topic: string,
+    queryParams?: {
+      endCreatedAt?: number
+      keyword?: string | null
+      limit?: number
+      offset?: number
+      order?: string | null
+      senderUserId?: string | null
+      shardId?: string | null
+      startCreatedAt?: number
+    }
+  ): Promise<ChatMessageWithPaginationResponse> {
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getChats_ByTopic(topic, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -291,10 +326,12 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createTopic,
     getTopics,
     getTopicLog,
+    createChatFilter,
     deleteTopic_ByTopic,
     updateTopic_ByTopic,
     getTopicChannel,
     createNamespaceTopic,
+    getChats_ByTopic,
     createChat_ByTopic,
     getShards_ByTopic,
     getChannel_ByTopic,

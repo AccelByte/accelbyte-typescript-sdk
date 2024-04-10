@@ -21,7 +21,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Cancel my account deletion request Requires valid user access token
    */
   async function deleteUserMeDeletion(): Promise<unknown> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -31,7 +31,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;br&gt; This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use &lt;a href=&#39;#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest&#39;&gt;/gdpr/public/namespaces/{namespace}/users/{userId}/deletions&lt;/a&gt;
+   * Submit my account deletion requests. Requires valid user access token This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest)
    */
   async function postUserMeDeletion(data: { platformId: string | null; platformToken: string | null }): Promise<RequestDeleteResponse> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -41,7 +41,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Retrieve my account deletion status Requires valid user access token
    */
   async function getUsersMeDeletionsStatus(): Promise<DeletionStatus> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -51,7 +51,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Cancel user&#39;s account deletion request Requires valid user access token Scope: account
    */
   async function deleteDeletion_ByUserId(userId: string): Promise<unknown> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -61,7 +61,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token and password
+   * Submit user&#39;s account deletion requests Requires valid user access token and password Scope: account
    */
   async function postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<RequestDeleteResponse> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -71,7 +71,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Retrieve specific user&#39;s account deletion status Requires valid user access token Scope: account
    */
   async function getDeletionsStatus_ByUserId(userId: string): Promise<DeletionStatus> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

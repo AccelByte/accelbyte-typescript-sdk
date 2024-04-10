@@ -23,7 +23,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]&lt;/b&gt;
+   * Get user channel paginated
    */
   async function getChannels_ByUserId(
     userId: string,
@@ -36,7 +36,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]&lt;/b&gt;
+   * Create user channel
    */
   async function createChannel_ByUserId(userId: string, data: PublicChannelRequest): Promise<ChannelResponse> {
     const $ = new PublicChannel$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -46,7 +46,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   * Delete user channel
    */
   async function deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<unknown> {
     const $ = new PublicChannel$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -56,7 +56,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]&lt;/b&gt;
+   * Update user channel
    */
   async function updateChannel_ByUserId_ByChannelId(
     userId: string,

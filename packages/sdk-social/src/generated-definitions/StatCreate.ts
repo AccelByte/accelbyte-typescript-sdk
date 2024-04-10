@@ -9,6 +9,7 @@ export const StatCreate = z.object({
   cycleIds: z.array(z.string()).nullish(),
   defaultValue: z.number(),
   description: z.string().nullish(),
+  globalAggregationMethod: z.enum(['LAST', 'MAX', 'MIN', 'TOTAL']).nullish(),
   ignoreAdditionalDataOnValueRejected: z.boolean().nullish(),
   incrementOnly: z.boolean().nullish(),
   isPublic: z.boolean().nullish(),

@@ -18,12 +18,13 @@ export function SocialMatchmakingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
+  const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
    * Update a connection weight between player and playtime. This endpoint is intended to be called by admin for debugging purpose on social matchmaking rule.
    */
   async function patchSocialPlaytimeWeight(data: UpdatePlayTimeWeightRequest): Promise<UpdatePlayerPlaytimeWeightResponse> {
-    const $ = new SocialMatchmaking$(Network.create(requestConfig), namespace, cache)
+    const $ = new SocialMatchmaking$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.patchSocialPlaytimeWeight(data)
     if (resp.error) throw resp.error
     return resp.response.data

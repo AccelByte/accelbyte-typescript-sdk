@@ -11,7 +11,7 @@ export const DictionaryWithChildren = z.object({
   falsePositives: z.array(DictionaryChild).nullish(),
   id: z.string(),
   namespace: z.string(),
-  parentId: z.string(),
+  parentId: z.string().nullish(),
   word: z.string(),
   wordType: z.string()
 })

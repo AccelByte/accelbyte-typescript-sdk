@@ -24,7 +24,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user group paginated
    */
   async function getGroups(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGroupResponse> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -34,7 +34,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]
+   * Create group
    */
   async function createGroup(data: CreateGroupRequest): Promise<CreateGroupResponse> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -44,7 +44,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   * Delete group by group ID
    */
   async function deleteGroup_ByGroupId(groupId: string): Promise<unknown> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -54,7 +54,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user group by group ID
    */
   async function getGroup_ByGroupId(groupId: string): Promise<CreateGroupResponse> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -64,7 +64,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE] replace group name and contents with new ones.
+   * Replace group name and contents with new ones.
    */
   async function updateGroup_ByGroupId(groupId: string, data: CreateGroupRequest): Promise<CreateGroupResponse> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -74,7 +74,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user group paginated
    */
   async function getGroups_ByUserId(userId: string, queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGroupResponse> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -84,7 +84,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get content belong to a group
    */
   async function getContents_ByGroupId(
     groupId: string,
@@ -97,7 +97,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get contents belong to a group
    */
   async function getContents_ByGroupId_ByNS(
     groupId: string,
@@ -110,7 +110,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   * Delete group
    */
   async function deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<unknown> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -120,7 +120,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user group by group ID
    */
   async function getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<CreateGroupResponse> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -130,7 +130,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE] replace group name and contents with new ones.
+   * Replace group name and contents with new ones.
    */
   async function updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<CreateGroupResponse> {
     const $ = new AdminGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -140,7 +140,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get content belong to a group
    */
   async function getContents_ByUserId_ByGroupId(
     userId: string,
@@ -154,7 +154,7 @@ export function AdminGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get contents belong to a group
    */
   async function getContents_ByUserId_ByGroupId_ByNS(
     userId: string,

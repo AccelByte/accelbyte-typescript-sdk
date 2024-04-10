@@ -22,6 +22,7 @@ export const ServerDetailsResponse = z.object({
   ip: z.string(),
   is_core_dump_enabled: z.boolean().nullish(),
   is_override_game_version: z.boolean(),
+  is_override_region: z.boolean(),
   job_id: z.string(),
   last_update: z.string(),
   mem_limit: z.number().int(),

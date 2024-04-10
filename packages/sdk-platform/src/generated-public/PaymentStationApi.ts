@@ -8,6 +8,7 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { Customization } from '../generated-definitions/Customization.js'
 import { PaymentMethodArray } from '../generated-definitions/PaymentMethodArray.js'
 import { PaymentOrderDetails } from '../generated-definitions/PaymentOrderDetails.js'
 import { PaymentOrderPaidResult } from '../generated-definitions/PaymentOrderPaidResult.js'
@@ -111,6 +112,21 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment provider customization, at current only Adyen provide customization. This api has been deprecated, pls use /public/namespaces/{namespace}/payment/publicconfig to get adyen config&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: customization&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getPaymentCustomization(queryParams: {
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    region: string | null
+    sandbox?: boolean | null
+  }): Promise<Customization> {
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getPaymentCustomization(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Do payment(For now, this only support checkout.com).&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment process result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createPayPayment_ByPaymentOrderNo(
@@ -154,6 +170,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getPaymentMethods,
     getPaymentReturnurl,
     getPaymentPublicconfig,
+    getPaymentCustomization,
     createPayPayment_ByPaymentOrderNo,
     getInfoPayment_ByPaymentOrderNo,
     getStatusPayment_ByPaymentOrderNo

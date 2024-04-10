@@ -19,7 +19,7 @@ export function SessionStorageApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   *  Update Insert Session Storage Leader. only Leader can update or insert user session storage data Leader. can store generic json example json can store : { &#34;leader&#34;: { &#34;leader&#34;: 1 }, &#34;data&#34;: 123 }
+   *  Update Insert Session Storage Leader. only Leader can update or insert user session storage data Leader. can store generic json example json can store : { &#34;leader&#34;: { &#34;leader&#34;: 1 }, &#34;data&#34;: 123 } game Admin can update or insert session storage Session Storage feature only available for Gamesession
    */
   async function patchStorageLeader_BySessionId(sessionId: string): Promise<unknown> {
     const $ = new SessionStorage$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -29,7 +29,7 @@ export function SessionStorageApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Update Insert Session Storage User. user can only update or insert user session storage data itself. can store generic json example json can store : { &#34;storage&#34;: { &#34;storage&#34;: 1 }, &#34;data&#34;: 123 }
+   *  Update Insert Session Storage User. user can only update or insert user session storage data itself. can store generic json example json can store : { &#34;storage&#34;: { &#34;storage&#34;: 1 }, &#34;data&#34;: 123 } game Admin can update or insert session storage Session Storage feature only available for Gamesession
    */
   async function patchStorageUser_BySessionId_ByUserId(sessionId: string, userId: string): Promise<unknown> {
     const $ = new SessionStorage$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

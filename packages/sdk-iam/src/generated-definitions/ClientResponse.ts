@@ -4,6 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { ClientModulePermission } from './ClientModulePermission.js'
 import { Permission } from './Permission.js'
 
 export const ClientResponse = z.object({
@@ -13,7 +14,8 @@ export const ClientResponse = z.object({
   CreatedAt: z.string(),
   Namespace: z.string(),
   RedirectUri: z.string(),
-  TwoFactorEnabled: z.boolean()
+  TwoFactorEnabled: z.boolean(),
+  modulePermissions: z.array(ClientModulePermission).nullish()
 })
 
 export interface ClientResponse extends z.TypeOf<typeof ClientResponse> {}

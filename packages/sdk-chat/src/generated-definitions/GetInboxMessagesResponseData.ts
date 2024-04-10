@@ -10,12 +10,12 @@ export const GetInboxMessagesResponseData = z.object({
   createdAt: z.number().int(),
   expiredAt: z.number().int(),
   id: z.string(),
-  message: z.record(z.any()),
+  message: z.record(z.any()).nullish(),
   scope: z.enum(['NAMESPACE', 'USER']),
   senderId: z.string(),
   status: z.enum(['DRAFT', 'SENT', 'UNSENT']),
   updatedAt: z.number().int(),
-  userIds: z.array(z.string())
+  userIds: z.array(z.string()).nullish()
 })
 
 export interface GetInboxMessagesResponseData extends z.TypeOf<typeof GetInboxMessagesResponseData> {}

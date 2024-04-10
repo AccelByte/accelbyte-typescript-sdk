@@ -22,7 +22,7 @@ export function AdminTagAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]
+   * Get available tags paginated
    */
   async function getTags(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTagResponse> {
     const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -32,7 +32,7 @@ export function AdminTagAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE] creates a new tag
+   * Creates a new tag
    */
   async function createTag(data: CreateTagRequest): Promise<CreateTagResponse> {
     const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -42,7 +42,7 @@ export function AdminTagAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]
+   * Delete existing tag
    */
   async function deleteTag_ByTagId(tagId: string): Promise<unknown> {
     const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -52,7 +52,7 @@ export function AdminTagAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE] updates a tag
+   * Update existing tag
    */
   async function updateTag_ByTagId(tagId: string, data: CreateTagRequest): Promise<CreateTagResponse> {
     const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

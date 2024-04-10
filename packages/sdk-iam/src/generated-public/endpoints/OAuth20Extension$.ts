@@ -190,8 +190,11 @@ export class OAuth20Extension$ {
   /**
    * This endpoint is being used to request the code to exchange a new token. The target new token&#39;s clientId should NOT be same with current using one. Path namespace should be target namespace. Client ID should match the target namespace. The code in response can be consumed by &lt;code&gt;/iam/v3/token/exchange&lt;/code&gt;
    */
-  postTokenRequest(data: { client_id: string | null }): Promise<IResponse<TargetTokenCodeResponse>> {
-    const params = {} as SDKRequestConfig
+  postTokenRequest(
+    data: { client_id: string | null },
+    queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
+  ): Promise<IResponse<TargetTokenCodeResponse>> {
+    const params = { code_challenge_method: 'plain', ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/namespace/{namespace}/token/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
       ...params,

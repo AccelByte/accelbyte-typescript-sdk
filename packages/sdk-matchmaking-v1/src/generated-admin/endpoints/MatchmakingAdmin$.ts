@@ -10,6 +10,9 @@ import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, 
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ChannelV1 } from '../../generated-definitions/ChannelV1.js'
+import { GetSessionHistoryDetailedResponseItemArray } from '../../generated-definitions/GetSessionHistoryDetailedResponseItemArray.js'
+import { GetSessionHistorySearchResponse } from '../../generated-definitions/GetSessionHistorySearchResponse.js'
+import { GetSessionHistorySearchResponseV2 } from '../../generated-definitions/GetSessionHistorySearchResponseV2.js'
 import { ImportConfigResponse } from '../../generated-definitions/ImportConfigResponse.js'
 import { MatchAddUserIntoSessionRequest } from '../../generated-definitions/MatchAddUserIntoSessionRequest.js'
 import { MatchingPartyArray } from '../../generated-definitions/MatchingPartyArray.js'
@@ -19,7 +22,7 @@ import { UpdateChannelRequest } from '../../generated-definitions/UpdateChannelR
 
 export class MatchmakingAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
    * Export channels configuration to file. Action Code: 510114
@@ -29,7 +32,10 @@ export class MatchmakingAdmin$ {
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -47,7 +53,9 @@ export class MatchmakingAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -58,7 +66,10 @@ export class MatchmakingAdmin$ {
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/all/parties'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -77,7 +88,10 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -96,7 +110,67 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   *  &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Search sessions.
+   */
+  getSessionsHistorySearch(queryParams: {
+    limit: number
+    offset: number
+    channel?: string | null
+    deleted?: boolean | null
+    matchID?: string | null
+    partyID?: string | null
+    userID?: string | null
+  }): Promise<IResponseWithSync<GetSessionHistorySearchResponse>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/matchmaking/v1/admin/namespaces/{namespace}/sessions/history/search'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponse, 'GetSessionHistorySearchResponse')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   * &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Search sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace &amp; other filter (partyID, userID, matchID). Query with filter namespace only will not group whole session data while query with filter namespace &amp; other filter will include session data.
+   */
+  getSessionsHistorySearch_ByNS(queryParams: {
+    limit: number
+    offset: number
+    channel?: string | null
+    deleted?: boolean | null
+    matchID?: string | null
+    partyID?: string | null
+    userID?: string | null
+  }): Promise<IResponseWithSync<GetSessionHistorySearchResponseV2>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/matchmaking/v2/admin/namespaces/{namespace}/sessions/history/search'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponseV2, 'GetSessionHistorySearchResponseV2')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -107,7 +181,10 @@ export class MatchmakingAdmin$ {
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/all/sessions/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -126,7 +203,10 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, StatResumeResponse, 'StatResumeResponse')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, StatResumeResponse, 'StatResumeResponse')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -145,7 +225,10 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, MatchingPartyArray, 'MatchingPartyArray')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, MatchingPartyArray, 'MatchingPartyArray')
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -164,7 +247,37 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () => Validate.responseType(() => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   *  &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/{sessionId}/history/detailed [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Get session history detailed. if party_id value empty/null, field will not show in response body.
+   */
+  getHistoryDetailed_ByMatchId(matchID: string): Promise<IResponseWithSync<GetSessionHistoryDetailedResponseItemArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/matchmaking/v1/admin/namespaces/{namespace}/sessions/{matchID}/history/detailed'
+      .replace('{namespace}', this.namespace)
+      .replace('{matchID}', matchID)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(
+            () => resultPromise,
+            GetSessionHistoryDetailedResponseItemArray,
+            'GetSessionHistoryDetailedResponseItemArray'
+          )
+        : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
       return SdkCache.withoutCache(res)
@@ -184,7 +297,9 @@ export class MatchmakingAdmin$ {
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -202,7 +317,9 @@ export class MatchmakingAdmin$ {
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -217,6 +334,8 @@ export class MatchmakingAdmin$ {
       .replace('{userID}', userID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

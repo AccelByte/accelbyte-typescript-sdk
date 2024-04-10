@@ -20,16 +20,27 @@ export function RecentPlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Query recent player with given user id.
+   * Query user&#39;s recent player. Please ensure environment variable &#34;RECENT_PLAYER_ENABLED&#34; is set to &#34;TRUE&#34; to use this feature.
    */
-  async function getRecentPlayer(queryParams?: { limit?: number; userId?: string | null }): Promise<RecentPlayerQueryResponse> {
+  async function getRecentPlayer(queryParams?: { limit?: number }): Promise<RecentPlayerQueryResponse> {
     const $ = new RecentPlayer$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getRecentPlayer(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
+  /**
+   * Query user&#39;s recent player who were on the same team. Please ensure environment variable &#34;RECENT_TEAM_PLAYER_ENABLED&#34; is set to &#34;TRUE&#34; to use this feature.
+   */
+  async function getRecentTeamPlayer(queryParams?: { limit?: number }): Promise<RecentPlayerQueryResponse> {
+    const $ = new RecentPlayer$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getRecentTeamPlayer(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
-    getRecentPlayer
+    getRecentPlayer,
+    getRecentTeamPlayer
   }
 }

@@ -8,7 +8,7 @@
     },
     "description": "Justice Leaderboard Service",
     "title": "justice-leaderboard-service",
-    "version": "2.26.7"
+    "version": "2.29.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -20,14 +20,7 @@
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
       "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]",
-        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]",
-        "NAMESPACE:{namespace}:LEADERBOARD [CREATE]": "NAMESPACE:{namespace}:LEADERBOARD [CREATE]",
-        "NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]": "NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]"
+        "ADMIN:NAMESPACE:{namespace}:LEADERBOARD:HARDDELETE [DELETE]": "ADMIN:NAMESPACE:{namespace}:LEADERBOARD:HARDDELETE [DELETE]"
       },
       "tokenUrl": "https://dumy.oauth.net/token",
       "type": "oauth2"
@@ -49,7 +42,7 @@
   "paths": {
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint return all leaderboard configurations\u0026lt;/p\u0026gt;\t\n\t\t",
+        "description": "\u0026lt;p\u0026gt;This endpoint return all leaderboard configurations\u0026lt;/p\u0026gt;",
         "operationId": "getLeaderboardConfigurationsAdminV1",
         "parameters": [
           {
@@ -121,16 +114,23 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "list all leaderboards by given namespace",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;LeaderboardConfig code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.Default is \u0026#39;00:00\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;LeaderboardConfig code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.Default is \u0026#39;00:00\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
         "operationId": "createLeaderboardConfigurationAdminV1",
         "parameters": [
           {
@@ -190,12 +190,19 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "create new leaderboard",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/archived": {
@@ -236,7 +243,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71239\u003c/td\u003e\u003ctd\u003eleaderboard is not archived\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -272,11 +279,19 @@
           }
         ],
         "summary": "Admin Get signed url for archive all time leaderboard ranking data",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Archive leaderboard ranking data for specified leaderboard codes. NOTE: This will remove all data of the leaderboard on every slug,\n\t\t\tremove the leaderboard code on stat mapping, and remove the leaderboard on the queue reset. This will be a bulk endpoint\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Archive leaderboard ranking data for specified leaderboard codes. NOTE: This will remove all data of the leaderboard on every slug,\n\t\t\tremove the leaderboard code on stat mapping, and remove the leaderboard on the queue reset. This will be a bulk endpoint\u0026lt;/p\u0026gt;",
         "operationId": "CreateArchivedLeaderboardRankingDataV1Handler",
         "parameters": [
           {
@@ -327,18 +342,25 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "Archive a leadeboard data ranking",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/delete": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint delete multiple leaderboards configuration in one request\u0026lt;/p\u0026gt;\t\n\t\t",
+        "description": "\u0026lt;p\u0026gt;This endpoint delete multiple leaderboards configuration in one request\u0026lt;/p\u0026gt;",
         "operationId": "deleteBulkLeaderboardConfigurationAdminV1",
         "parameters": [
           {
@@ -392,17 +414,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "delete bulk leaderboards. response body will contains failed leaderboard with the reason why it's failed to delete",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}": {
       "delete": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint delete a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "description": "\u0026lt;p\u0026gt;This endpoint delete a leaderboard configuration\u0026lt;/p\u0026gt;",
         "operationId": "deleteLeaderboardConfigurationAdminV1",
         "parameters": [
           {
@@ -458,15 +487,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "delete leaderboard by leaderboardCode",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"]
+          }
+        ]
       },
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint returns a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "description": "\u0026lt;p\u0026gt;This endpoint returns a leaderboard configuration\u0026lt;/p\u0026gt;",
         "operationId": "getLeaderboardConfigurationAdminV1",
         "parameters": [
           {
@@ -525,16 +561,23 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "get leaderboard by leaderboardCode",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
         "operationId": "updateLeaderboardConfigurationAdminV1",
         "parameters": [
           {
@@ -587,7 +630,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71130\u003c/td\u003e\u003ctd\u003eleaderboard config not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71133\u003c/td\u003e\u003ctd\u003eleaderboard configuration deleted\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -607,17 +650,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "update leaderboard by leaderboardCode",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in an all time leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get rankings in an all time leaderboard.\u0026lt;/p\u0026gt;",
         "operationId": "GetAllTimeLeaderboardRankingAdminV1",
         "parameters": [
           {
@@ -680,7 +730,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -688,17 +738,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get all time leaderboard ranking data",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/hard": {
       "delete": {
-        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete leaderboard configuration and its data\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment, you might want to use \u0026lt;b\u0026gt;archive endpoint\u0026lt;/b\u0026gt; instead hard delete.\u0026lt;/p\u0026gt;",
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD:HARDDELETE [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete leaderboard configuration and its data\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment, you might want to use \u0026lt;b\u0026gt;archive endpoint\u0026lt;/b\u0026gt; instead hard delete.\u0026lt;/p\u0026gt;",
         "operationId": "hardDeleteLeaderboardAdminV1",
         "parameters": [
           {
@@ -734,7 +791,7 @@
             }
           },
           "403": {
-            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71241\u003c/td\u003e\u003ctd\u003eforbidden environment\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -754,17 +811,25 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:HARDDELETE [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "hard delete leaderboard config and data by leaderboard code",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:HARDDELETE [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/month": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in current month leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get rankings in current month leaderboard.\u0026lt;/p\u0026gt;",
         "operationId": "GetCurrentMonthLeaderboardRankingAdminV1",
         "parameters": [
           {
@@ -833,7 +898,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -841,17 +906,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get current month leaderboard ranking data",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/reset": {
       "delete": {
-        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete user ranking by leaderboard code\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment.\u0026lt;/p\u0026gt;",
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete user ranking by leaderboard code\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment.\u0026lt;/p\u0026gt;",
         "operationId": "deleteUserRankingByLeaderboardCodeAdminV1",
         "parameters": [
           {
@@ -901,17 +973,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "delete all user ranking by leaderboard code",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/season": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in current season leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get rankings in current season leaderboard.\u0026lt;/p\u0026gt;",
         "operationId": "GetCurrentSeasonLeaderboardRankingAdminV1",
         "parameters": [
           {
@@ -980,7 +1059,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -988,17 +1067,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get current season leaderboard ranking data",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/today": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in today leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get rankings in today leaderboard.\u0026lt;/p\u0026gt;",
         "operationId": "GetTodayLeaderboardRankingAdminV1",
         "parameters": [
           {
@@ -1067,7 +1153,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -1075,18 +1161,25 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get today leaderboard ranking data",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Delete user ranking\nRequired permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
+        "description": "Delete user ranking\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
         "operationId": "deleteUserRankingAdminV1",
         "parameters": [
           {
@@ -1129,7 +1222,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71230\u003c/td\u003e\u003ctd\u003eleaderboard configuration not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71233\u003c/td\u003e\u003ctd\u003euser ranking data not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -1143,15 +1236,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete user ranking",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"]
+          }
+        ]
       },
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;",
         "operationId": "getUserRankingAdminV1",
         "parameters": [
           {
@@ -1203,7 +1303,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71230\u003c/td\u003e\u003ctd\u003eleaderboard configuration not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71237\u003c/td\u003e\u003ctd\u003eleaderboard ranking not created for inactive leaderboard\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71233\u003c/td\u003e\u003ctd\u003euser ranking data not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -1217,16 +1317,23 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get user ranking",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;Update user point in a leaderboard. This endpoint uses for test utility only.\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Required permission: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:USER:(userId):LEADERBOARD\u0026#34;, action=4 (UPDATE)\u0026lt;/li\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Returns: user ranking\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
+        "description": "\u0026lt;p\u0026gt;Update user point in a leaderboard. This endpoint uses for test utility only.\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Other detail info:\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;ul\u0026gt;\n\t\t\t\t\u0026lt;li\u0026gt;Returns: user ranking\u0026lt;/li\u0026gt;\n\t\t\t\u0026lt;/ul\u0026gt;\n\t\t",
         "operationId": "updateUserPointAdminV1",
         "parameters": [
           {
@@ -1304,12 +1411,20 @@
           }
         ],
         "summary": "Update user point",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/week": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in current week leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get rankings in current week leaderboard.\u0026lt;/p\u0026gt;",
         "operationId": "GetCurrentWeekLeaderboardRankingAdminV1",
         "parameters": [
           {
@@ -1378,7 +1493,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -1386,18 +1501,25 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get current week leaderboard ranking data",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/users/{userId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Delete user ranking across leaderboard\nRequired permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]\n\nRemove entry with provided userId from leaderboard.\n",
+        "description": "Delete user ranking across leaderboard\n\nRemove entry with provided userId from leaderboard.\n",
         "operationId": "deleteUserRankingsAdminV1",
         "parameters": [
           {
@@ -1452,18 +1574,25 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete user ranking across leaderboard(s)",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/users/{userId}/anonymization/leaderboards": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;This API will delete specified user leaderboard\u0026lt;p\u0026gt;\n\u0026lt;p\u0026gt;Required permission\n\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]\u0026lt;/code\u0026gt;\n\u0026lt;/p\u0026gt; \n",
+        "description": "\u0026lt;p\u0026gt;This API will delete specified user leaderboard\u0026lt;p\u0026gt;",
         "operationId": "adminAnonymizeUserLeaderboardAdminV1",
         "parameters": [
           {
@@ -1507,17 +1636,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Anonymize user's leaderboard",
-        "tags": ["Anonymization"]
+        "tags": ["Anonymization"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/admin/namespaces/{namespace}/users/{userId}/leaderboards": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get user leaderboard rankings\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get user leaderboard rankings\u0026lt;/p\u0026gt;",
         "operationId": "getUserLeaderboardRankingsAdminV1",
         "parameters": [
           {
@@ -1582,12 +1718,19 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get user rankings",
-        "tags": ["UserData"]
+        "tags": ["UserData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/public/namespaces/{namespace}/leaderboards": {
@@ -1668,11 +1811,19 @@
           }
         ],
         "summary": "list all leaderboards by given namespace",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": []
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Public endpoint to create a new leaderboard.\n\n\u0026lt;p\u0026gt;Required permission \u0026#39;NAMESPACE:{namespace}:LEADERBOARD [CREATE]\u0026#39;\u0026lt;/p\u0026gt;\n\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;LeaderboardConfig code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.Default is \u0026#39;00:00\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\u0026lt;/ul\u0026gt;\n",
+        "description": "Public endpoint to create a new leaderboard.\n\n\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;LeaderboardConfig code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Start time must be follow RFC3339 standard. e.g. 2020-10-02T15:00:00.05Z\u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Season period must be greater than 31 days.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;If seasonPeriod is filled, the LeaderboardConfig would have seasonal leaderboard.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset Date must be a number 1 - 31. Default is \u0026#39;1\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset Day must be a number 0 - 6. 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday (day of week). Default is \u0026#39;0\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Reset time must be \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 10:30, 15:30, 23:15.Default is \u0026#39;00:00\u0026#39;.\u0026lt;/li\u0026gt;\n\t\u0026lt;li\u0026gt;Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\u0026lt;/ul\u0026gt;\n",
         "operationId": "createLeaderboardConfigurationPublicV1",
         "parameters": [
           {
@@ -1732,12 +1883,19 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:LEADERBOARD [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "create new leaderboard",
-        "tags": ["LeaderboardConfiguration"]
+        "tags": ["LeaderboardConfiguration"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:LEADERBOARD [CREATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
@@ -1775,7 +1933,7 @@
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "All time leaderboard ranking data retrived",
+            "description": "All time leaderboard ranking data retrieved",
             "schema": {
               "$ref": "#/definitions/models.GetLeaderboardRankingResp"
             }
@@ -1793,7 +1951,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -1853,7 +2011,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71239\u003c/td\u003e\u003ctd\u003eleaderboard is not archived\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -1889,7 +2047,15 @@
           }
         ],
         "summary": "Get signed url for archive all time leaderboard ranking data",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": []
+          }
+        ]
       }
     },
     "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/month": {
@@ -1951,7 +2117,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -2025,7 +2191,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -2099,7 +2265,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -2117,7 +2283,7 @@
     "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Delete user ranking\nRequired permission: NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
+        "description": "Delete user ranking\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
         "operationId": "deleteUserRankingPublicV1",
         "parameters": [
           {
@@ -2160,7 +2326,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71230\u003c/td\u003e\u003ctd\u003eleaderboard configuration not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71233\u003c/td\u003e\u003ctd\u003euser ranking data not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -2174,12 +2340,19 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete user ranking",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:LEADERBOARD:USER:{userId} [DELETE]"]
+          }
+        ]
       },
       "get": {
         "description": "\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;",
@@ -2234,7 +2407,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71230\u003c/td\u003e\u003ctd\u003eleaderboard configuration not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71237\u003c/td\u003e\u003ctd\u003eleaderboard ranking not created for inactive leaderboard\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71233\u003c/td\u003e\u003ctd\u003euser ranking data not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -2252,7 +2425,15 @@
           }
         ],
         "summary": "Get user ranking",
-        "tags": ["LeaderboardData"]
+        "tags": ["LeaderboardData"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": []
+          }
+        ]
       }
     },
     "/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/week": {
@@ -2314,7 +2495,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -2400,7 +2581,15 @@
           }
         ],
         "summary": "Get hidden users on a leaderboard",
-        "tags": ["UserVisibility"]
+        "tags": ["UserVisibility"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v2/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}/visibility": {
@@ -2469,7 +2658,15 @@
           }
         ],
         "summary": "Get user visibility status",
-        "tags": ["UserVisibility"]
+        "tags": ["UserVisibility"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
@@ -2545,7 +2742,15 @@
           }
         ],
         "summary": "Set user visibility status on a specific leaderboard code",
-        "tags": ["UserVisibility"]
+        "tags": ["UserVisibility"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [UPDATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v2/admin/namespaces/{namespace}/users/{userId}/visibility": {
@@ -2616,7 +2821,15 @@
           }
         ],
         "summary": "Set user visibility status on a all current leaderboard",
-        "tags": ["UserVisibility"]
+        "tags": ["UserVisibility"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [UPDATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v2/public/namespaces/{namespace}/leaderboards": {
@@ -2768,7 +2981,7 @@
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint return all leaderboard configurations\u0026lt;/p\u0026gt;\t\n\t\t",
+        "description": "\u0026lt;p\u0026gt;This endpoint return all leaderboard configurations\u0026lt;/p\u0026gt;",
         "operationId": "getLeaderboardConfigurationsAdminV3",
         "parameters": [
           {
@@ -2833,16 +3046,23 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "list all leaderboards by given namespace",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]\u0026#39;\u0026lt;/p\u0026gt;\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;leaderboardCode: unique leaderboard config code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;name: leaderboard name, maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;description: leaderboard description, maximum length for leaderboard description is 2048 characters. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;iconURL: leaderboard icon image url. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;allTime: if true, all time leaderboard will be created. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;descending: leaderboard order. If true, the points will be sorted in descending order. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;statCode: Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;cycleIds: Statistic cycle ids that will be tracked in the leaderboard. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;/ul\u0026gt;",
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;leaderboardCode: unique leaderboard config code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;name: leaderboard name, maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;description: leaderboard description, maximum length for leaderboard description is 2048 characters. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;iconURL: leaderboard icon image url. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;allTime: if true, all time leaderboard will be created. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;descending: leaderboard order. If true, the points will be sorted in descending order. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;statCode: Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;cycleIds: Statistic cycle ids that will be tracked in the leaderboard. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;/ul\u0026gt;",
         "operationId": "createLeaderboardConfigurationAdminV3",
         "parameters": [
           {
@@ -2902,18 +3122,25 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"],
             "authorization": []
           }
         ],
         "summary": "create new leaderboard",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/delete": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint delete multiple leaderboards configuration in one request\u0026lt;/p\u0026gt;\t\n\t\t",
+        "description": "\u0026lt;p\u0026gt;This endpoint delete multiple leaderboards configuration in one request\u0026lt;/p\u0026gt;",
         "operationId": "deleteBulkLeaderboardConfigurationAdminV3",
         "parameters": [
           {
@@ -2967,17 +3194,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "delete bulk leaderboards. response body will contains failed leaderboard with the reason why it's failed to delete",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}": {
       "delete": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint delete a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "description": "\u0026lt;p\u0026gt;This endpoint delete a leaderboard configuration\u0026lt;/p\u0026gt;",
         "operationId": "deleteLeaderboardConfigurationAdminV3",
         "parameters": [
           {
@@ -3033,15 +3267,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "delete leaderboard by leaderboardCode",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"]
+          }
+        ]
       },
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint returns a leaderboard configuration\u0026lt;/p\u0026gt;\t\n\t\t",
+        "description": "\u0026lt;p\u0026gt;This endpoint returns a leaderboard configuration\u0026lt;/p\u0026gt;",
         "operationId": "getLeaderboardConfigurationAdminV3",
         "parameters": [
           {
@@ -3100,16 +3341,23 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "get leaderboard by leaderboardCode",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]\u0026#39;\u0026lt;/p\u0026gt;\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;leaderboardCode: unique leaderboard config code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;name: leaderboard name, maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;description: leaderboard description, maximum length for leaderboard description is 2048 characters. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;iconURL: leaderboard icon image url. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;allTime: if true, all time leaderboard will be created. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;descending: leaderboard order. If true, the points will be sorted in descending order. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;statCode: Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;cycleIds: Statistic cycle ids that will be tracked in the leaderboard. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;/ul\u0026gt;",
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;Fields :\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;leaderboardCode: unique leaderboard config code must be lowercase and maximum length is 48 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;name: leaderboard name, maximum length for leaderboard name is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;description: leaderboard description, maximum length for leaderboard description is 2048 characters. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;iconURL: leaderboard icon image url. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;allTime: if true, all time leaderboard will be created. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;descending: leaderboard order. If true, the points will be sorted in descending order. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;statCode: Stat Code is related with statistic code in statistic service. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\t\u0026lt;li\u0026gt;cycleIds: Statistic cycle ids that will be tracked in the leaderboard. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\n\t\u0026lt;/ul\u0026gt;",
         "operationId": "updateLeaderboardConfigurationAdminV3",
         "parameters": [
           {
@@ -3162,7 +3410,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71130\u003c/td\u003e\u003ctd\u003eleaderboard config not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71242\u003c/td\u003e\u003ctd\u003estat code not found in namespace\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71133\u003c/td\u003e\u003ctd\u003eleaderboard configuration deleted\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -3182,17 +3430,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "update leaderboard by leaderboardCode",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [UPDATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in an all time leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get rankings in an all time leaderboard.\u0026lt;/p\u0026gt;",
         "operationId": "GetAllTimeLeaderboardRankingAdminV3",
         "parameters": [
           {
@@ -3255,7 +3510,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -3263,17 +3518,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get all time leaderboard ranking data",
-        "tags": ["LeaderboardDataV3"]
+        "tags": ["LeaderboardDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/cycles/{cycleId}": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get rankings in cycle leaderboard.\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get rankings in cycle leaderboard.\u0026lt;/p\u0026gt;",
         "operationId": "GetCurrentCycleLeaderboardRankingAdminV3",
         "parameters": [
           {
@@ -3343,7 +3605,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -3351,17 +3613,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get cycle leaderboard ranking data",
-        "tags": ["LeaderboardDataV3"]
+        "tags": ["LeaderboardDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/hard": {
       "delete": {
-        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete leaderboard configuration and its data\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment, you might want to use \u0026lt;b\u0026gt;archive endpoint\u0026lt;/b\u0026gt; instead hard delete.\u0026lt;/p\u0026gt;",
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD:HARDDELETE [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete leaderboard configuration and its data\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment, you might want to use \u0026lt;b\u0026gt;archive endpoint\u0026lt;/b\u0026gt; instead hard delete.\u0026lt;/p\u0026gt;",
         "operationId": "hardDeleteLeaderboardAdminV3",
         "parameters": [
           {
@@ -3397,7 +3666,7 @@
             }
           },
           "403": {
-            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71241\u003c/td\u003e\u003ctd\u003eforbidden environment\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -3417,17 +3686,25 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:HARDDELETE [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "hard delete leaderboard config and data by leaderboard code",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/reset": {
       "delete": {
-        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete user ranking by leaderboard code\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment.\u0026lt;/p\u0026gt;",
+        "description": "\u0026lt;p\u0026gt;\u0026lt;b\u0026gt;[Test Facility Only]\u0026lt;/b\u0026gt;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;This endpoint will delete user ranking by leaderboard code\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Note: this endpoint only works on development environment.\u0026lt;/p\u0026gt;",
         "operationId": "deleteUserRankingByLeaderboardCodeAdminV3",
         "parameters": [
           {
@@ -3477,12 +3754,19 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "delete all user ranking by leaderboard code",
-        "tags": ["LeaderboardDataV3"]
+        "tags": ["LeaderboardDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/hidden": {
@@ -3556,13 +3840,21 @@
           }
         ],
         "summary": "Get hidden users on a leaderboard",
-        "tags": ["UserVisibilityV3"]
+        "tags": ["UserVisibilityV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Delete user ranking\nRequired permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
+        "description": "Delete user ranking\n\nRemove entry with provided userId from leaderboard. \nIf leaderboard with given leaderboard code not found, it will return http status not found (404).\nIf the leaderboard is found and no entry found in it, it will still return success (204) \n",
         "operationId": "deleteUserRankingAdminV3",
         "parameters": [
           {
@@ -3605,7 +3897,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71230\u003c/td\u003e\u003ctd\u003eleaderboard configuration not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71233\u003c/td\u003e\u003ctd\u003euser ranking data not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -3619,15 +3911,22 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete user ranking",
-        "tags": ["LeaderboardDataV3"]
+        "tags": ["LeaderboardDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"]
+          }
+        ]
       },
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get user ranking in leaderboard\u0026lt;/p\u0026gt;",
         "operationId": "getUserRankingAdminV3",
         "parameters": [
           {
@@ -3673,7 +3972,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71230\u003c/td\u003e\u003ctd\u003eleaderboard configuration not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71233\u003c/td\u003e\u003ctd\u003euser ranking data not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -3687,12 +3986,19 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get user ranking",
-        "tags": ["LeaderboardDataV3"]
+        "tags": ["LeaderboardDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}/visibility": {
@@ -3761,7 +4067,15 @@
           }
         ],
         "summary": "Get user visibility status",
-        "tags": ["UserVisibilityV3"]
+        "tags": ["UserVisibilityV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
@@ -3837,13 +4151,21 @@
           }
         ],
         "summary": "Set user visibility status on a specific leaderboard code",
-        "tags": ["UserVisibilityV3"]
+        "tags": ["UserVisibilityV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [UPDATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/users/{userId}": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Delete user ranking across leaderboard\nRequired permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]\n\nRemove entry with provided userId from leaderboard.\n",
+        "description": "Delete user ranking across leaderboard\n\nRemove entry with provided userId from leaderboard.\n",
         "operationId": "deleteUserRankingsAdminV3",
         "parameters": [
           {
@@ -3898,17 +4220,24 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"],
             "authorization": []
           }
         ],
         "summary": "Delete user ranking across leaderboard(s)",
-        "tags": ["LeaderboardDataV3"]
+        "tags": ["LeaderboardDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/users/{userId}/leaderboards": {
       "get": {
-        "description": "\u0026lt;p\u0026gt;Required permission \u0026#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]\u0026#39;\u0026lt;/p\u0026gt;\n\t\t\t\u0026lt;p\u0026gt;Get user leaderboard rankings\u0026lt;/p\u0026gt;\n\t\t\t",
+        "description": "\u0026lt;p\u0026gt;Get user leaderboard rankings\u0026lt;/p\u0026gt;",
         "operationId": "getUserLeaderboardRankingsAdminV3",
         "parameters": [
           {
@@ -3967,12 +4296,19 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]"],
             "authorization": []
           }
         ],
         "summary": "Get user rankings",
-        "tags": ["UserDataV3"]
+        "tags": ["UserDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [READ]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/admin/namespaces/{namespace}/users/{userId}/visibility": {
@@ -4043,7 +4379,15 @@
           }
         ],
         "summary": "Set user visibility status on a all current leaderboard",
-        "tags": ["UserVisibilityV3"]
+        "tags": ["UserVisibilityV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEADERBOARD [UPDATE]"]
+          }
+        ]
       }
     },
     "/leaderboard/v3/public/namespaces/{namespace}/leaderboards": {
@@ -4117,7 +4461,15 @@
           }
         ],
         "summary": "list all leaderboards by given namespace",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": []
+          }
+        ]
       }
     },
     "/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}": {
@@ -4185,7 +4537,15 @@
           }
         ],
         "summary": "get leaderboard by leaderboardCode",
-        "tags": ["LeaderboardConfigurationV3"]
+        "tags": ["LeaderboardConfigurationV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": []
+          }
+        ]
       }
     },
     "/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime": {
@@ -4241,7 +4601,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -4316,7 +4676,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71236\u003c/td\u003e\u003ctd\u003eleaderboard ranking count failed\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -4405,7 +4765,15 @@
           }
         ],
         "summary": "Bulk get users ranking",
-        "tags": ["LeaderboardDataV3"]
+        "tags": ["LeaderboardDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": []
+          }
+        ]
       }
     },
     "/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}": {
@@ -4456,7 +4824,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71230\u003c/td\u003e\u003ctd\u003eleaderboard configuration not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e71233\u003c/td\u003e\u003ctd\u003euser ranking data not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/response.ErrorResponse"
             }
@@ -4474,7 +4842,15 @@
           }
         ],
         "summary": "Get user ranking",
-        "tags": ["LeaderboardDataV3"]
+        "tags": ["LeaderboardDataV3"],
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": []
+          }
+        ]
       }
     }
   },
@@ -5365,11 +5741,11 @@
     "path": "/leaderboard/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-01-17T06:47:55+00:00",
-    "gitHash": "37f2ee6b22eb66fa3ffa5c8e047d1d675419540d",
+    "buildDate": "2024-03-22T03:21:28+00:00",
+    "gitHash": "4936cc360f42586b8fc92043278726d333615335",
     "name": "justice-leaderboard-service",
     "realm": "dev",
-    "version": "2.26.7",
-    "version-roles-seeding": "1.0.4"
+    "version": "2.29.0",
+    "version-roles-seeding": "1.2.32"
   }
 }

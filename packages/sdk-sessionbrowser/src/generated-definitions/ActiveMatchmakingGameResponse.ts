@@ -7,6 +7,6 @@ import { z } from 'zod'
 import { GameSession } from './GameSession.js'
 import { PagingCursor } from './PagingCursor.js'
 
-export const ActiveMatchmakingGameResponse = z.object({ pagination: PagingCursor, sessions: z.array(GameSession) })
+export const ActiveMatchmakingGameResponse = z.object({ pagination: PagingCursor, sessions: z.array(GameSession).nullish() })
 
 export interface ActiveMatchmakingGameResponse extends z.TypeOf<typeof ActiveMatchmakingGameResponse> {}

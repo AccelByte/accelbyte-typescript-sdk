@@ -19,7 +19,7 @@ export class AdminChannelAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]&lt;/b&gt;
+   * Get official channel paginated
    */
   getChannels(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetChannelResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
@@ -39,7 +39,7 @@ export class AdminChannelAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]&lt;/b&gt;
+   * Create official channel
    */
   createChannel(data: ChannelRequest): Promise<IResponse<ChannelResponse>> {
     const params = {} as SDKRequestConfig
@@ -52,7 +52,7 @@ export class AdminChannelAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   * Delete official channel
    */
   deleteChannel_ByChannelId(channelId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -67,7 +67,7 @@ export class AdminChannelAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]&lt;/b&gt;
+   * Update official channel
    */
   updateChannel_ByChannelId(channelId: string, data: UpdateChannelRequest): Promise<IResponse<ChannelResponse>> {
     const params = {} as SDKRequestConfig
@@ -82,7 +82,7 @@ export class AdminChannelAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]&lt;/b&gt;
+   * Get user channel paginated
    */
   getChannels_ByUserId(
     userId: string,
@@ -107,7 +107,7 @@ export class AdminChannelAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   * Delete user channel
    */
   deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -123,7 +123,7 @@ export class AdminChannelAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]&lt;/b&gt;
+   * Update user channel
    */
   updateChannel_ByUserId_ByChannelId(userId: string, channelId: string, data: UpdateChannelRequest): Promise<IResponse<ChannelResponse>> {
     const params = {} as SDKRequestConfig

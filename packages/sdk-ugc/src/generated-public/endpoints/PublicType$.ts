@@ -15,7 +15,7 @@ export class PublicType$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Requires valid user token
+   * Get available types paginated
    */
   getTypes(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetTypeResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig

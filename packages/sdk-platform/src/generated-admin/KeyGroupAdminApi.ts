@@ -51,6 +51,17 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
+   * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getKeygroupsByBoothName(queryParams: { boothName: string | null }): Promise<KeyGroupInfo> {
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getKeygroupsByBoothName(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getKeygroup_ByKeyGroupId(keyGroupId: string): Promise<KeyGroupInfo> {
@@ -106,6 +117,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getKeygroups,
     createKeygroup,
+    getKeygroupsByBoothName,
     getKeygroup_ByKeyGroupId,
     updateKeygroup_ByKeyGroupId,
     getKeys_ByKeyGroupId,

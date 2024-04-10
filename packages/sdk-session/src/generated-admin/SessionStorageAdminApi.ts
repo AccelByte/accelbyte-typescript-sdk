@@ -19,7 +19,7 @@ export function SessionStorageAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   *  Delete Session Storage.
+   *  Delete Session Storage By sessionID Session Storage feature only available for Gamesession
    */
   async function deleteStorage_BySessionId(sessionId: string): Promise<unknown> {
     const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -29,7 +29,7 @@ export function SessionStorageAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Read Session Storage.
+   *  Read Session Storage by sessionID Session Storage feature only available for Gamesession
    */
   async function getStorage_BySessionId(sessionId: string): Promise<unknown> {
     const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -39,7 +39,7 @@ export function SessionStorageAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Read Session Storage User.
+   *  Read Session Storage by sessionID and userID Session Storage feature only available for Gamesession
    */
   async function getStorageUser_BySessionId_ByUserId(sessionId: string, userId: string): Promise<unknown> {
     const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

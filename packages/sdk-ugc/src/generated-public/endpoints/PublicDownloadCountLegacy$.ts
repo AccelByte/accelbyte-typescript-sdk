@@ -15,7 +15,7 @@ export class PublicDownloadCountLegacy$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Requires valid user token
+   * This endpoint can be used to count how many the ugc downloaded
    */
   createDownloadcount_ByContentId(contentId: string): Promise<IResponse<AddDownloadCountResponse>> {
     const params = {} as SDKRequestConfig

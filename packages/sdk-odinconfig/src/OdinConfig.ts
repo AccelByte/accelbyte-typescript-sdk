@@ -9,11 +9,13 @@
 
 import { TemplatesAdminApi } from './generated-admin/TemplatesAdminApi.js'
 import { StaticConfigsApi } from './generated-public/StaticConfigsApi.js'
+import { CompatibilityConfigsApi } from './generated-public/CompatibilityConfigsApi.js'
 import { TemplatesApi } from './generated-public/TemplatesApi.js'
 
 const apis = {
   TemplatesAdminApi,
   StaticConfigsApi,
+  CompatibilityConfigsApi,
   TemplatesApi
 }
 

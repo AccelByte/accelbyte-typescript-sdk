@@ -20,7 +20,7 @@ export function UserDataV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]&#39;&lt;/p&gt; &lt;p&gt;Get user leaderboard rankings&lt;/p&gt;
+   * &lt;p&gt;Get user leaderboard rankings&lt;/p&gt;
    */
   async function getLeaderboards_ByUserId(
     userId: string,

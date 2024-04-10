@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 export const GlobalStatItemInfo = z.object({
   createdAt: z.string(),
+  globalAggregationMethod: z.enum(['LAST', 'MAX', 'MIN', 'TOTAL']).nullish(),
   namespace: z.string(),
   statCode: z.string(),
   statName: z.string(),

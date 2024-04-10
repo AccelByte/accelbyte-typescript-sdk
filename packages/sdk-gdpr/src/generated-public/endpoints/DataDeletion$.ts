@@ -17,7 +17,7 @@ export class DataDeletion$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Cancel my account deletion request Requires valid user access token
    */
   deleteUserMeDeletion(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -30,7 +30,7 @@ export class DataDeletion$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;br&gt; This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use &lt;a href=&#39;#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest&#39;&gt;/gdpr/public/namespaces/{namespace}/users/{userId}/deletions&lt;/a&gt;
+   * Submit my account deletion requests. Requires valid user access token This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest)
    */
   postUserMeDeletion(data: { platformId: string | null; platformToken: string | null }): Promise<IResponse<RequestDeleteResponse>> {
     const params = {} as SDKRequestConfig
@@ -46,7 +46,7 @@ export class DataDeletion$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Retrieve my account deletion status Requires valid user access token
    */
   getUsersMeDeletionsStatus(): Promise<IResponseWithSync<DeletionStatus>> {
     const params = {} as SDKRequestConfig
@@ -66,7 +66,7 @@ export class DataDeletion$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Cancel user&#39;s account deletion request Requires valid user access token Scope: account
    */
   deleteDeletion_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -81,7 +81,7 @@ export class DataDeletion$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token and password
+   * Submit user&#39;s account deletion requests Requires valid user access token and password Scope: account
    */
   postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<RequestDeleteResponse>> {
     const params = {} as SDKRequestConfig
@@ -99,7 +99,7 @@ export class DataDeletion$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Retrieve specific user&#39;s account deletion status Requires valid user access token Scope: account
    */
   getDeletionsStatus_ByUserId(userId: string): Promise<IResponseWithSync<DeletionStatus>> {
     const params = {} as SDKRequestConfig

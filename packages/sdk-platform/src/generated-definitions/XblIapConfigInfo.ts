@@ -6,6 +6,7 @@
 import { z } from 'zod'
 
 export const XblIapConfigInfo = z.object({
+  businessPartnerCertExpiredTime: z.string().nullish(),
   businessPartnerCertFileName: z.string().nullish(),
   namespace: z.string(),
   password: z.string().nullish(),

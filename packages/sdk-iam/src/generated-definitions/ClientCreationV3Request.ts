@@ -4,6 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { ClientModulePermission } from './ClientModulePermission.js'
 import { PermissionV3 } from './PermissionV3.js'
 
 export const ClientCreationV3Request = z.object({
@@ -11,10 +12,11 @@ export const ClientCreationV3Request = z.object({
   baseUri: z.string(),
   clientId: z.string(),
   clientName: z.string(),
-  clientPermissions: z.array(PermissionV3),
+  clientPermissions: z.array(PermissionV3).nullish(),
   clientPlatform: z.string(),
   deletable: z.boolean().nullish(),
   description: z.string(),
+  modulePermissions: z.array(ClientModulePermission).nullish(),
   namespace: z.string(),
   oauthAccessTokenExpiration: z.number().int().nullish(),
   oauthAccessTokenExpirationTimeUnit: z.string().nullish(),
@@ -25,6 +27,7 @@ export const ClientCreationV3Request = z.object({
   redirectUri: z.string(),
   scopes: z.array(z.string()).nullish(),
   secret: z.string(),
+  skipLoginQueue: z.boolean(),
   twoFactorEnabled: z.boolean().nullish()
 })
 

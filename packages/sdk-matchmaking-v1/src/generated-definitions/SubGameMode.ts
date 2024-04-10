@@ -7,6 +7,10 @@ import { z } from 'zod'
 import { AllianceFlexingRule } from './AllianceFlexingRule.js'
 import { AllianceRule } from './AllianceRule.js'
 
-export const SubGameMode = z.object({ alliance: AllianceRule, alliance_flexing_rule: z.array(AllianceFlexingRule), name: z.string() })
+export const SubGameMode = z.object({
+  alliance: AllianceRule,
+  alliance_flexing_rule: z.array(AllianceFlexingRule).nullish(),
+  name: z.string()
+})
 
 export interface SubGameMode extends z.TypeOf<typeof SubGameMode> {}

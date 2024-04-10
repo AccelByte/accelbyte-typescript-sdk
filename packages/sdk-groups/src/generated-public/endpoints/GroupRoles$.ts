@@ -19,7 +19,7 @@ export class GroupRoles$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;Required Member Role Permission: &#34;GROUP:ROLE [READ]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to get list of member roles&lt;/p&gt; &lt;p&gt;Action Code: 73201&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE \[READ\]&#34; This endpoint is used to get list of member roles Action Code: 73201
    */
   getRoles(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetMemberRolesListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -39,7 +39,7 @@ export class GroupRoles$ {
   }
 
   /**
-   * &lt;p&gt;This endpoint is used to get list of member roles&lt;/p&gt; &lt;p&gt;Action Code: 73201&lt;/p&gt;
+   * This endpoint is used to get list of member roles Action Code: 73201
    */
   getRoles_ByNS(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetMemberRolesListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -59,7 +59,7 @@ export class GroupRoles$ {
   }
 
   /**
-   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to remove role from group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&#34; This endpoint is used to remove role from group member Action Code: 73204
    */
   deleteMember_ByMemberRoleId(memberRoleId: string, data: RemoveRoleFromMemberRequestV1): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -74,7 +74,7 @@ export class GroupRoles$ {
   }
 
   /**
-   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&lt;/p&gt; &lt;p&gt;This endpoint is used to assign role to group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE] This endpoint is used to assign role to group member Action Code: 73204
    */
   createMember_ByMemberRoleId(
     memberRoleId: string,
@@ -92,7 +92,7 @@ export class GroupRoles$ {
   }
 
   /**
-   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&#34;&lt;/p&gt; &lt;p&gt;This endpoint is used to remove role from group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE \[UPDATE\]&#34; This endpoint is used to remove role from group member Action Code: 73204
    */
   deleteMember_ByMemberRoleId_ByGroupId(
     memberRoleId: string,
@@ -112,7 +112,7 @@ export class GroupRoles$ {
   }
 
   /**
-   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&lt;/p&gt; &lt;p&gt;This endpoint is used to assign role to group member&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE] This endpoint is used to assign role to group member Action Code: 73204
    */
   createMember_ByMemberRoleId_ByGroupId(
     memberRoleId: string,

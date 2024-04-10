@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { Party } from './Party.js'
 
-export const Team = z.object({ Parties: z.array(Party), UserIDs: z.array(z.string()) })
+export const Team = z.object({ Parties: z.array(Party).nullish(), UserIDs: z.array(z.string()).nullish() })
 
 export interface Team extends z.TypeOf<typeof Team> {}

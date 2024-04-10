@@ -24,7 +24,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user groups paginated
    */
   async function getGroups_ByUserId(userId: string, queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGroupResponse> {
     const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -34,7 +34,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]
+   * Create group
    */
   async function createGroup_ByUserId(userId: string, data: CreateGroupRequest): Promise<CreateGroupResponse> {
     const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -44,7 +44,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   * Delete user group by group ID
    */
   async function deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<unknown> {
     const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -54,7 +54,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user groups by group ID
    */
   async function getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<CreateGroupResponse> {
     const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -64,7 +64,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE] replace group name and contents with new ones
+   * Replace group name and contents with new ones
    */
   async function updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<CreateGroupResponse> {
     const $ = new PublicGroup$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -74,7 +74,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get content that belong to a group
    */
   async function getContents_ByUserId_ByGroupId(
     userId: string,
@@ -88,7 +88,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get content belong to a group
    */
   async function getContents_ByUserId_ByGroupId_ByNS(
     userId: string,

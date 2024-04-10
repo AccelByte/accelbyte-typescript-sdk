@@ -19,7 +19,7 @@ export const CreateChannelResponse = z.object({
   region_expansion_rate_ms: z.number().int(),
   region_latency_initial_range_ms: z.number().int(),
   region_latency_max_ms: z.number().int(),
-  ruleset: RuleSet,
+  ruleset: RuleSet.nullish(),
   session_queue_timeout_seconds: z.number().int(),
   slug: z.string(),
   social_matchmaking: z.boolean(),

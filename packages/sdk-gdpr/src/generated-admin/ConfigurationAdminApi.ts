@@ -21,7 +21,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Delete a list of admin email addresses to stop receiving personal data request notification. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [DELETE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Delete a list of admin email addresses to stop receiving personal data request notification. Scope: account
    */
   async function deleteEmailConfiguration(queryParams: { emails: string[] }): Promise<unknown> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -31,7 +31,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get list of admin email address configuration. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Get list of admin email address configuration. Scope: account
    */
   async function getEmailsConfigurations(): Promise<unknown> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -41,7 +41,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Add admin email address for receiving personal data request notification. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [CREATE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Add admin email address for receiving personal data request notification. Scope: account
    */
   async function createEmailConfiguration(data: string[]): Promise<unknown> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -51,7 +51,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update admin email address for receiving personal data request notification. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [UPDATE]&lt;/code&gt;&lt;/p&gt;
+   * Update admin email address for receiving personal data request notification. Scope: account
    */
   async function updateEmailConfiguration(data: string[]): Promise<unknown> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -61,7 +61,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get Registered Services Configuration. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Get Registered Services Configuration. Scope: account
    */
   async function getServicesConfigurations(): Promise<ServicesConfigurationResponse> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -71,7 +71,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update Registered Services Configuration. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * Update Registered Services Configuration. Scope: account
    */
   async function updateServiceConfiguration(data: ServiceConfigurationUpdateRequest): Promise<ServiceConfigurationUpdateRequest> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -81,7 +81,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;b&gt;[TEST FACILITY ONLY]&lt;/b&gt;&lt;br/&gt;Reset Registered Services Configuration to use the default configuration. &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt;
+   * **[TEST FACILITY ONLY]** Reset Registered Services Configuration to use the default configuration. Scope: account
    */
   async function deleteServiceConfigurationReset(): Promise<unknown> {
     const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

@@ -17,7 +17,7 @@ export class LeaderboardDataV3Admin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Delete user ranking across leaderboard Required permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE] Remove entry with provided userId from leaderboard.
+   * Delete user ranking across leaderboard Remove entry with provided userId from leaderboard.
    */
   deleteUser_ByUserId(userId: string, queryParams: { leaderboardCode: string[] }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -32,7 +32,7 @@ export class LeaderboardDataV3Admin$ {
   }
 
   /**
-   * &lt;p&gt;&lt;b&gt;[Test Facility Only]&lt;/b&gt;&lt;/p&gt; &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [DELETE]&#39;&lt;/p&gt; &lt;p&gt;This endpoint will delete user ranking by leaderboard code&lt;/p&gt; &lt;p&gt;Note: this endpoint only works on development environment.&lt;/p&gt;
+   * &lt;p&gt;&lt;b&gt;[Test Facility Only]&lt;/b&gt;&lt;/p&gt; &lt;p&gt;This endpoint will delete user ranking by leaderboard code&lt;/p&gt; &lt;p&gt;Note: this endpoint only works on development environment.&lt;/p&gt;
    */
   deleteReset_ByLeaderboardCode(leaderboardCode: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -47,7 +47,7 @@ export class LeaderboardDataV3Admin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]&#39;&lt;/p&gt; &lt;p&gt;Get rankings in an all time leaderboard.&lt;/p&gt;
+   * &lt;p&gt;Get rankings in an all time leaderboard.&lt;/p&gt;
    */
   getAlltime_ByLeaderboardCode(
     leaderboardCode: string,
@@ -72,7 +72,7 @@ export class LeaderboardDataV3Admin$ {
   }
 
   /**
-   * Delete user ranking Required permission: ADMIN:NAMESPACE:{namespace}:LEADERBOARD:USER [DELETE] Remove entry with provided userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
+   * Delete user ranking Remove entry with provided userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
    */
   deleteUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -88,7 +88,7 @@ export class LeaderboardDataV3Admin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]&#39;&lt;/p&gt; &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
+   * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
   getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponseWithSync<UserRankingResponseV3>> {
     const params = {} as SDKRequestConfig
@@ -111,7 +111,7 @@ export class LeaderboardDataV3Admin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission &#39;ADMIN:NAMESPACE:{namespace}:LEADERBOARD [READ]&#39;&lt;/p&gt; &lt;p&gt;Get rankings in cycle leaderboard.&lt;/p&gt;
+   * &lt;p&gt;Get rankings in cycle leaderboard.&lt;/p&gt;
    */
   getCycle_ByLeaderboardCode_ByCycleId(
     leaderboardCode: string,

@@ -15,7 +15,7 @@ export class Anonymization$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   * Delete all user group
    */
   deleteGroup_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -45,7 +45,7 @@ export class Anonymization$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]&lt;/b&gt;
+   * Delete all user channel
    */
   deleteChannel_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

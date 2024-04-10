@@ -11,6 +11,7 @@ export const CreateConfigurationTemplateRequest = z.object({
   PSNBaseUrl: z.string().nullish(),
   attributes: z.record(z.any()).nullish(),
   autoJoin: z.boolean().nullish(),
+  autoLeaveSession: z.boolean().nullish(),
   clientVersion: z.string(),
   deployment: z.string(),
   disableCodeGeneration: z.boolean().nullish(),

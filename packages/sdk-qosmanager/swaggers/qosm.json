@@ -403,11 +403,11 @@
     "path": "/qosm/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-01-12T16:47:49+00:00",
-    "gitHash": "13a7cab359bed46f9e00e9d07ef9aebcbf4fa5be",
+    "buildDate": "2024-03-20T02:16:59+00:00",
+    "gitHash": "be4e42427cf0699df7f8b73fa78880020e124d14",
     "name": "Justice QoS Manager Service",
-    "revisionID": "1.19.0",
-    "version": "1.19.0",
+    "revisionID": "1.19.3",
+    "version": "1.19.3",
     "version-roles-seeding": "1.0.15"
   }
 }

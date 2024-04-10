@@ -42,7 +42,7 @@ export class PublicLikeV2$ {
   }
 
   /**
-   * Requires valid user token
+   * This endpoint will update like/unlike state from a content
    */
   updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<IResponse<ContentLikeResponse>> {
     const params = {} as SDKRequestConfig

@@ -16,6 +16,7 @@ import { ViewAdminApi } from './generated-admin/ViewAdminApi.js'
 import { OrderAdminApi } from './generated-admin/OrderAdminApi.js'
 import { StoreAdminApi } from './generated-admin/StoreAdminApi.js'
 import { RewardAdminApi } from './generated-admin/RewardAdminApi.js'
+import { WalletAdminApi } from './generated-admin/WalletAdminApi.js'
 import { SectionAdminApi } from './generated-admin/SectionAdminApi.js'
 import { CampaignAdminApi } from './generated-admin/CampaignAdminApi.js'
 import { KeyGroupAdminApi } from './generated-admin/KeyGroupAdminApi.js'
@@ -24,7 +25,6 @@ import { CurrencyAdminApi } from './generated-admin/CurrencyAdminApi.js'
 import { EntitlementAdminApi } from './generated-admin/EntitlementAdminApi.js'
 import { TradeActionAdminApi } from './generated-admin/TradeActionAdminApi.js'
 import { SubscriptionAdminApi } from './generated-admin/SubscriptionAdminApi.js'
-import { WalletAdminApi } from './generated-admin/WalletAdminApi.js'
 import { IapAdminApi } from './generated-admin/IapAdminApi.js'
 import { PaymentAdminApi } from './generated-admin/PaymentAdminApi.js'
 import { DlcAdminApi } from './generated-admin/DlcAdminApi.js'
@@ -32,8 +32,8 @@ import { InvoiceAdminApi } from './generated-admin/InvoiceAdminApi.js'
 import { RevocationAdminApi } from './generated-admin/RevocationAdminApi.js'
 import { FulfillmentAdminApi } from './generated-admin/FulfillmentAdminApi.js'
 import { TicketAdminApi } from './generated-admin/TicketAdminApi.js'
-import { ClawbackAdminApi } from './generated-admin/ClawbackAdminApi.js'
 import { ServicePluginConfigAdminApi } from './generated-admin/ServicePluginConfigAdminApi.js'
+import { ClawbackAdminApi } from './generated-admin/ClawbackAdminApi.js'
 import { PaymentCallbackConfigAdminApi } from './generated-admin/PaymentCallbackConfigAdminApi.js'
 import { SessionPlatformAdminApi } from './generated-admin/SessionPlatformAdminApi.js'
 import { AchievementPlatformAdminApi } from './generated-admin/AchievementPlatformAdminApi.js'
@@ -66,6 +66,7 @@ const apis = {
   OrderAdminApi,
   StoreAdminApi,
   RewardAdminApi,
+  WalletAdminApi,
   SectionAdminApi,
   CampaignAdminApi,
   KeyGroupAdminApi,
@@ -74,7 +75,6 @@ const apis = {
   EntitlementAdminApi,
   TradeActionAdminApi,
   SubscriptionAdminApi,
-  WalletAdminApi,
   IapAdminApi,
   PaymentAdminApi,
   DlcAdminApi,
@@ -82,8 +82,8 @@ const apis = {
   RevocationAdminApi,
   FulfillmentAdminApi,
   TicketAdminApi,
-  ClawbackAdminApi,
   ServicePluginConfigAdminApi,
+  ClawbackAdminApi,
   PaymentCallbackConfigAdminApi,
   SessionPlatformAdminApi,
   AchievementPlatformAdminApi,

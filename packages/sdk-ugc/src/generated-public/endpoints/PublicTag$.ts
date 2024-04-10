@@ -15,7 +15,7 @@ export class PublicTag$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Publicly accessible
+   * Get available tags paginated
    */
   getTags(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetTagResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig

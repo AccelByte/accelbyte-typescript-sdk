@@ -19,9 +19,10 @@ import { LobbyOperationsAdminApi } from './generated-admin/LobbyOperationsAdminA
 import { LobbyOperationsApi } from './generated-public/LobbyOperationsApi.js'
 import { FriendsApi } from './generated-public/FriendsApi.js'
 import { NotificationApi } from './generated-public/NotificationApi.js'
-import { AdminApi } from './generated-admin/AdminApi.js'
-import { PartyApi } from './generated-public/PartyApi.js'
+import { BlocksApi } from './generated-public/BlocksApi.js'
+import { AdminApi } from './generated-public/AdminApi.js'
 import { PlayerApi } from './generated-public/PlayerApi.js'
+import { PartyApi } from './generated-public/PartyApi.js'
 import { PresenceApi } from './generated-public/PresenceApi.js'
 
 const apis = {
@@ -37,9 +38,10 @@ const apis = {
   LobbyOperationsApi,
   FriendsApi,
   NotificationApi,
+  BlocksApi,
   AdminApi,
-  PartyApi,
   PlayerApi,
+  PartyApi,
   PresenceApi
 }
 

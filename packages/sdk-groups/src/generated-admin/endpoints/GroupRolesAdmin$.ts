@@ -20,7 +20,7 @@ export class GroupRolesAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;Required permission ADMIN:NAMESPACE:{namespace}:GROUP:ROLE [READ]&lt;/p&gt; &lt;p&gt;This endpoint is used to get list of member roles&lt;/p&gt; &lt;p&gt;Action Code: 73201&lt;/p&gt;
+   * This endpoint is used to get list of member roles Action Code: 73201
    */
   getRoles(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetMemberRolesListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -40,7 +40,7 @@ export class GroupRolesAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission ADMIN:NAMESPACE:{namespace}:GROUP:ROLE [CREATE]&lt;/p&gt; &lt;p&gt;This endpoint is used to create new member role&lt;/p&gt; &lt;p&gt;Action Code: 73202&lt;/p&gt; &lt;br&gt; &lt;p&gt;memberRolePermissions example value :&lt;/p&gt; &lt;p&gt;&#34;action&#34;: 1&lt;/p&gt; &lt;p&gt;&#34;resourceName&#34;: &#34;GROUP:ROLE&#34;&lt;/p&gt; &lt;p&gt;The changes will give user with that role have a permission to create a role for new group member&lt;p/&gt;
+   * This endpoint is used to create new member role Action Code: 73202 memberRolePermissions example value : &#34;action&#34;: 1 &#34;resourceName&#34;: &#34;GROUP:ROLE&#34; The changes will give user with that role have a permission to create a role for new group member
    */
   createRole(data: CreateMemberRoleRequestV1): Promise<IResponse<MemberRoleResponseV1>> {
     const params = {} as SDKRequestConfig
@@ -53,7 +53,7 @@ export class GroupRolesAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission ADMIN:NAMESPACE:{namespace}:GROUP:ROLE [DELETE]&lt;/p&gt; &lt;p&gt;This endpoint is used to delete member role. Any member role can&#39;t be deleted if the specific role is applied to the configuration (admin and member role)&lt;/p&gt; &lt;p&gt;Action Code: 73207&lt;/p&gt;
+   * This endpoint is used to delete member role. Any member role can&#39;t be deleted if the specific role is applied to the configuration (admin and member role) Action Code: 73207
    */
   deleteRole_ByMemberRoleId(memberRoleId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -68,7 +68,7 @@ export class GroupRolesAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission ADMIN:NAMESPACE:{namespace}:GROUP:ROLE [READ]&lt;/p&gt; &lt;p&gt;This endpoint is used to get member role based on the role ID&lt;/p&gt; &lt;p&gt;Action Code: 73203&lt;/p&gt;
+   * This endpoint is used to get member role based on the role ID Action Code: 73203
    */
   getRole_ByMemberRoleId(memberRoleId: string): Promise<IResponseWithSync<MemberRoleResponseV1>> {
     const params = {} as SDKRequestConfig
@@ -90,7 +90,7 @@ export class GroupRolesAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission ADMIN:NAMESPACE:{namespace}:GROUP:ROLE [UPDATE]&lt;/p&gt; &lt;p&gt;This endpoint is used to update member role&lt;/p&gt; &lt;p&gt;Action Code: 73204&lt;/p&gt;
+   * This endpoint is used to update member role Action Code: 73204
    */
   patchRole_ByMemberRoleId(memberRoleId: string, data: UpdateMemberRoleRequestV1): Promise<IResponse<MemberRoleResponseV1>> {
     const params = {} as SDKRequestConfig
@@ -105,7 +105,7 @@ export class GroupRolesAdmin$ {
   }
 
   /**
-   * &lt;p&gt;Required permission ADMIN:NAMESPACE:{namespace}:GROUP:ROLE [UPDATE]&lt;/p&gt; &lt;p&gt;This endpoint is used to update member role permission. It will replace the existing permission based on the request from this endpoint&lt;/p&gt; &lt;p&gt;Action Code: 73205&lt;/p&gt; &lt;br&gt; &lt;p&gt;memberRolePermissions example value :&lt;/p&gt; &lt;p&gt;&#34;action&#34;: 2&lt;/p&gt; &lt;p&gt;&#34;resourceName&#34;: &#34;GROUP:ROLE&#34;&lt;/p&gt; &lt;p&gt;The changes will update user role to be able to read a role of other member &lt;p/&gt;
+   * This endpoint is used to update member role permission. It will replace the existing permission based on the request from this endpoint Action Code: 73205 memberRolePermissions example value : &#34;action&#34;: 2 &#34;resourceName&#34;: &#34;GROUP:ROLE&#34; The changes will update user role to be able to read a role of other member
    */
   updatePermission_ByMemberRoleId(
     memberRoleId: string,

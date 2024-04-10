@@ -12,12 +12,34 @@ import { z } from 'zod'
 import { AddCountryGroupRequest } from '../../generated-definitions/AddCountryGroupRequest.js'
 import { AddCountryGroupResponse } from '../../generated-definitions/AddCountryGroupResponse.js'
 import { CountryGroupObject } from '../../generated-definitions/CountryGroupObject.js'
+import { CountryObjectArray } from '../../generated-definitions/CountryObjectArray.js'
 import { RetrieveCountryGroupResponseArray } from '../../generated-definitions/RetrieveCountryGroupResponseArray.js'
 import { UpdateCountryGroupRequest } from '../../generated-definitions/UpdateCountryGroupRequest.js'
 
 export class MiscAdmin$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+
+  /**
+   * @deprecated
+   * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11204&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
+   */
+  getMiscCountries(queryParams?: { lang?: string | null }): Promise<IResponseWithSync<CountryObjectArray>> {
+    const params = { lang: 'en', ...queryParams } as SDKRequestConfig
+    const url = '/basic/v1/admin/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, CountryObjectArray, 'CountryObjectArray')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
 
   /**
    * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11206&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;

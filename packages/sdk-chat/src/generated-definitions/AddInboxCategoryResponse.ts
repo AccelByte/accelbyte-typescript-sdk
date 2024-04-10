@@ -9,7 +9,7 @@ import { CategoryHook } from './CategoryHook.js'
 export const AddInboxCategoryResponse = z.object({
   enabled: z.boolean(),
   expiresIn: z.number().int(),
-  hook: CategoryHook,
+  hook: CategoryHook.nullish(),
   jsonSchema: z.record(z.any()).nullish(),
   name: z.string(),
   saveInbox: z.boolean(),

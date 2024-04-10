@@ -26,7 +26,7 @@ export const UpdateRuleset = z.object({
   sort_ticket: SortTicket,
   sort_tickets: z.array(SortTicketRule),
   sub_game_modes: UpdateRulesetSubGameModes.nullish(),
-  ticket_flexing_selection: z.enum(['newest', 'oldest', 'pivot', 'random']),
+  ticket_flexing_selection: z.string(),
   ticket_flexing_selections: z.array(SelectionRule),
   use_newest_ticket_for_flexing: z.boolean().nullish()
 })

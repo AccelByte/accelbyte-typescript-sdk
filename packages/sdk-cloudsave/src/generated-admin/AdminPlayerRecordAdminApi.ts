@@ -10,10 +10,14 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminPlayerRecordAdmin$ } from './endpoints/AdminPlayerRecordAdmin$.js'
 import { BulkGetAdminPlayerRecordResponse } from '../generated-definitions/BulkGetAdminPlayerRecordResponse.js'
+import { BulkGetPlayerRecordResponse } from '../generated-definitions/BulkGetPlayerRecordResponse.js'
 import { BulkGetPlayerRecordSizeResponse } from '../generated-definitions/BulkGetPlayerRecordSizeResponse.js'
 import { BulkGetPlayerRecordsRequest } from '../generated-definitions/BulkGetPlayerRecordsRequest.js'
+import { BulkUpdatePlayerRecordByKeyResponseArray } from '../generated-definitions/BulkUpdatePlayerRecordByKeyResponseArray.js'
 import { BulkUpdatePlayerRecordResponseArray } from '../generated-definitions/BulkUpdatePlayerRecordResponseArray.js'
+import { BulkUpdatePlayerRecordsByKeyRequest } from '../generated-definitions/BulkUpdatePlayerRecordsByKeyRequest.js'
 import { BulkUpdatePlayerRecordsRequest } from '../generated-definitions/BulkUpdatePlayerRecordsRequest.js'
+import { BulkUserIDsRequest } from '../generated-definitions/BulkUserIDsRequest.js'
 import { BulkUserKeyRequest } from '../generated-definitions/BulkUserKeyRequest.js'
 import { ListPlayerRecordKeysResponse } from '../generated-definitions/ListPlayerRecordKeysResponse.js'
 import { PlayerRecordRequest } from '../generated-definitions/PlayerRecordRequest.js'
@@ -29,11 +33,26 @@ export function AdminPlayerRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
+   * @deprecated
+   * Retrieve list of player records key and userID under given namespace.
+   */
+  async function getUsersRecords(queryParams?: {
+    limit?: number
+    offset?: number
+    query?: string | null
+  }): Promise<ListPlayerRecordKeysResponse> {
+    const $ = new AdminPlayerRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getUsersRecords(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Retrieve list of player records key and userID under given namespace.
    */
   async function getRecords_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; query?: string | null; tags?: string[] }
   ): Promise<ListPlayerRecordKeysResponse> {
     const $ = new AdminPlayerRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getRecords_ByUserId(userId, queryParams)
@@ -47,6 +66,29 @@ export function AdminPlayerRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createUserBulkRecordSize(data: BulkUserKeyRequest): Promise<BulkGetPlayerRecordSizeResponse> {
     const $ = new AdminPlayerRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.createUserBulkRecordSize(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Retrieve player record key and payload in bulk under given namespace. Maximum number of user ids per request is 20.
+   */
+  async function createBulkUser_ByKey(key: string, data: BulkUserIDsRequest): Promise<BulkGetPlayerRecordResponse> {
+    const $ = new AdminPlayerRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.createBulkUser_ByKey(key, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This endpoints will create new player record or replace the existing player record in bulk. Maximum number of user ids per request is 10. Maximum total size of the request payload is 5 MB.
+   */
+  async function updateBulkUser_ByKey(
+    key: string,
+    data: BulkUpdatePlayerRecordsByKeyRequest
+  ): Promise<BulkUpdatePlayerRecordByKeyResponseArray> {
+    const $ = new AdminPlayerRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateBulkUser_ByKey(key, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -95,7 +137,7 @@ export function AdminPlayerRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * ## Description This endpoints will create new player record or append the existing player record. **Append example:** Example 1 - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data1&#34;: &#34;value&#34;, &#34;data2&#34;: &#34;new value&#34; }` Example 2 - Existing JSON: `{ &#34;data1&#34;: { &#34;data2&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data1&#34;: { &#34;data3&#34;: &#34;new value&#34; }` - Result: `{ &#34;data1&#34;: { &#34;data2&#34;: &#34;value&#34;, &#34;data3&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Record Metadata Metadata allows user to define the behaviour of the record. Metadata can be defined in request body with field name **__META**. When creating record, if **__META** field is not defined, the metadata value will use the default value. When updating record, if **__META** field is not defined, the existing metadata value will stay as is. **Metadata List:** 1. set_by (default: CLIENT, type: string) Indicate which party that could modify the game record. SERVER: record can be modified by server only. CLIENT: record can be modified by client and server. 2. is_public (default: false, type: bool) Indicate whether the player record is a public record or not. **Request Body Example:** ``` { &#34;__META&#34;: { &#34;set_by&#34;: &#34;SERVER&#34;, &#34;is_public&#34;: true } ... } ```
+   * ## Description This endpoints will create new player record or append the existing player record. **Append example:** Example 1 - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data1&#34;: &#34;value&#34;, &#34;data2&#34;: &#34;new value&#34; }` Example 2 - Existing JSON: `{ &#34;data1&#34;: { &#34;data2&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data1&#34;: { &#34;data3&#34;: &#34;new value&#34; }` - Result: `{ &#34;data1&#34;: { &#34;data2&#34;: &#34;value&#34;, &#34;data3&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Record Metadata Metadata allows user to define the behaviour of the record. Metadata can be defined in request body with field name **__META**. When creating record, if **__META** field is not defined, the metadata value will use the default value. When updating record, if **__META** field is not defined, the existing metadata value will stay as is. **Metadata List:** 1. set_by (default: CLIENT, type: string) Indicate which party that could modify the game record. SERVER: record can be modified by server only. CLIENT: record can be modified by client and server. 2. is_public (default: false, type: bool) Indicate whether the player record is a public record or not. 3. tags (default: *empty array*, type: array of string) Indicate the tagging for the game record. **Request Body Example:** ``` { &#34;__META&#34;: { &#34;set_by&#34;: &#34;SERVER&#34;, &#34;is_public&#34;: true, &#34;tags&#34;: [&#34;tag1&#34;, &#34;tag2&#34;] } ... } ```
    */
   async function createRecord_ByUserId_ByKey(userId: string, key: string, data: PlayerRecordRequest): Promise<PlayerRecordResponse> {
     const $ = new AdminPlayerRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -105,7 +147,7 @@ export function AdminPlayerRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * ## Description This endpoints will create new player record or replace the existing player record. **Replace behaviour:** The existing value will be replaced completely with the new value. Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Record Metadata Metadata allows user to define the behaviour of the record. Metadata can be defined in request body with field name **__META**. When creating record, if **__META** field is not defined, the metadata value will use the default value. When updating record, if **__META** field is not defined, the existing metadata value will stay as is. **Metadata List:** 1. set_by (default: CLIENT, type: string) Indicate which party that could modify the game record. SERVER: record can be modified by server only. CLIENT: record can be modified by client and server. 2. is_public (default: false, type: bool) Indicate whether the player record is a public record or not. **Request Body Example:** ``` { &#34;__META&#34;: { &#34;set_by&#34;: &#34;SERVER&#34;, &#34;is_public&#34;: true } ... } ```
+   * ## Description This endpoints will create new player record or replace the existing player record. **Replace behaviour:** The existing value will be replaced completely with the new value. Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Record Metadata Metadata allows user to define the behaviour of the record. Metadata can be defined in request body with field name **__META**. When creating record, if **__META** field is not defined, the metadata value will use the default value. When updating record, if **__META** field is not defined, the existing metadata value will stay as is. **Metadata List:** 1. set_by (default: CLIENT, type: string) Indicate which party that could modify the game record. SERVER: record can be modified by server only. CLIENT: record can be modified by client and server. 2. is_public (default: false, type: bool) Indicate whether the player record is a public record or not. 3. tags (default: *empty array*, type: array of string) Indicate the tagging for the game record. **Request Body Example:** ``` { &#34;__META&#34;: { &#34;set_by&#34;: &#34;SERVER&#34;, &#34;is_public&#34;: true, &#34;tags&#34;: [&#34;tag1&#34;, &#34;tag2&#34;] } ... } ```
    */
   async function updateRecord_ByUserId_ByKey(userId: string, key: string, data: PlayerRecordRequest): Promise<PlayerRecordResponse> {
     const $ = new AdminPlayerRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -165,8 +207,11 @@ export function AdminPlayerRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    getUsersRecords,
     getRecords_ByUserId,
     createUserBulkRecordSize,
+    createBulkUser_ByKey,
+    updateBulkUser_ByKey,
     createRecordBulk_ByUserId,
     updateRecordBulk_ByUserId,
     deleteRecord_ByUserId_ByKey,

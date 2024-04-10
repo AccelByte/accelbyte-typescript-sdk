@@ -104,23 +104,6 @@ export class Server$ {
   }
 
   /**
-   * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint counts all of dedicated servers in a region managed by this service.
-   */
-  getServersCountDetailed(queryParams?: { region?: string | null }): Promise<IResponseWithSync<DetailedCountServerResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/dsmcontroller/namespaces/{namespace}/servers/count/detailed'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.get(url, { params })
-
-    const res = () => Validate.responseType(() => resultPromise, DetailedCountServerResponse, 'DetailedCountServerResponse')
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
-  }
-
-  /**
    * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social Use the alternative GET of the same endpoint to upgrade DS connection to DSM via websocket. This endpoint is intended to be called by local dedicated server to let DSM know that it is ready for use. Use local DS only for development purposes since DSM wouldn&#39;t be able to properly manage local DS in production. This MUST be called by DS after it is ready to accept match data and incoming client connections. Upon successfully calling this endpoint, the dedicated server is listed under READY local servers.```
    */
   createServerLocalRegister(data: RegisterLocalServerRequest): Promise<IResponse<Server>> {

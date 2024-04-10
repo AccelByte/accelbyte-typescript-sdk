@@ -29,6 +29,7 @@ export class InputValidationHelper {
     const validation = InputValidationHelper.getValidationByKey(ValidateableInputField.enum.displayName, validations)
     if (!validation) return null
     return validateDisplayName(value, {
+      blockedWord: validation.blockedWord,
       maxLength: validation.maxLength,
       minLength: validation.minLength,
       isRequired,
@@ -151,5 +152,18 @@ export class InputValidationHelper {
     const inputValidation = validations.find(validator => validator.field === key)
     if (!inputValidation) return
     return inputValidation.validation
+  }
+
+  // format blocked word to string
+  static formatBlockedWord = (value: string, blockedWord: string[]) => {
+    const blockedWordList = blockedWord
+      .map(word => {
+        const lowercaseWord = word.toLowerCase()
+        return value.toLocaleLowerCase().includes(lowercaseWord) ? lowercaseWord : ''
+      })
+      .filter(Boolean)
+    const wordList = [...blockedWordList]
+    const last = wordList.pop()
+    return wordList.length ? `${wordList.join(', ')} or ${last}` : last
   }
 }

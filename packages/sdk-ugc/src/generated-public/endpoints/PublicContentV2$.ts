@@ -32,7 +32,7 @@ export class PublicContentV2$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   *  For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses () for priority. e.g: &lt;code&gt;tags=red&lt;/code&gt; &lt;code&gt;tags=red&amp;animal&lt;/code&gt; &lt;code&gt;tags=red|animal&lt;/code&gt; &lt;code&gt;tags=red&amp;animal|wild&lt;/code&gt; &lt;code&gt;tags=red&amp;(animal|wild)&lt;/code&gt; The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore &lt;code&gt;_&lt;/code&gt; and dash &lt;code&gt;-&lt;/code&gt; Allowed character for operator: &lt;code&gt;&amp;&lt;/code&gt; &lt;code&gt;|&lt;/code&gt; &lt;code&gt;(&lt;/code&gt; &lt;code&gt;)&lt;/code&gt; &lt;b&gt;Please note that value of tags query param should be URL encoded&lt;/b&gt;
+   * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
    */
   getContents(queryParams?: {
     isOfficial?: boolean | null
@@ -44,7 +44,7 @@ export class PublicContentV2$ {
     tags?: string[]
     type?: string | null
   }): Promise<IResponseWithSync<PaginatedContentDownloadResponseV2>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/contents'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -181,7 +181,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;.
+   * Create a new content
    */
   createContent_ByUserId_ByChannelId(
     userId: string,
@@ -201,7 +201,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;. All request body are required except for contentType field. contentType values is used to enforce the Content-Type header needed by the client to upload the content using the presigned URL. If not specified, it will use fileExtension value. Supported file extensions: pjp, jpg, jpeg, jfif, bmp, png. Maximum description length: 1024.
+   * This endpoint used to request upload URL from content&#39;s screenshot. If *contentType* is not specified, it will use *fileExtension* value. Supported file extensions: pjp, jpg, jpeg, jfif, bmp, png. Maximum description length: 1024
    */
   createScreenshot_ByUserId_ByContentId(
     userId: string,
@@ -221,7 +221,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;. Maximum description length: 1024.
+   * Maximum description length: 1024
    */
   updateScreenshot_ByUserId_ByContentId(
     userId: string,
@@ -241,7 +241,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete existing content
    */
   deleteContent_ByUserId_ByChannelId_ByContentId(userId: string, channelId: string, contentId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -258,7 +258,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Update existing content
    */
   patchContent_ByUserId_ByChannelId_ByContentId(
     userId: string,
@@ -280,7 +280,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete screenshot from a content
    */
   deleteScreenshot_ByUserId_ByContentId_ByScreenshotId(
     userId: string,
@@ -301,7 +301,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]&lt;/b&gt;.&lt;br&gt; This endpoint is used to modify the shareCode of a content. However, this operation is restricted by default and requires the above permission to be granted to the User role.&lt;br&gt; &lt;code&gt;shareCode&lt;/code&gt; format should follows: Max length: 7 Available characters: abcdefhkpqrstuxyz
+   * This endpoint is used to modify the shareCode of a content. However, this operation is restricted by default and requires the above permission to be granted to the User role.&lt;br&gt; &lt;code&gt;shareCode&lt;/code&gt; format should follows: Max length: 7 Available characters: abcdefhkpqrstuxyz
    */
   patchSharecode_ByUserId_ByChannelId_ByContentId(
     userId: string,
@@ -323,7 +323,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Generate content upload URL
    */
   patchUploadUrl_ByUserId_ByChannelId_ByContentId(
     userId: string,
@@ -345,7 +345,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+   * Delete existing content by share code
    */
   deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(
     userId: string,
@@ -366,7 +366,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * This endpoint should be used after calling generate upload url endpoint to commit the changes. Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * This endpoint should be used after calling generate upload url endpoint to commit the changes
    */
   patchFileLocation_ByUserId_ByChannelId_ByContentId(
     userId: string,
@@ -388,7 +388,7 @@ export class PublicContentV2$ {
   }
 
   /**
-   * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.
+   * Update content by share code
    */
   updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(
     userId: string,

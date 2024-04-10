@@ -18,7 +18,7 @@ export class DataRetrieval$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Get user&#39;s personal data requests Requires valid user access token Scope: account
    */
   getRequests_ByUserId(
     userId: string,
@@ -43,7 +43,7 @@ export class DataRetrieval$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Submit personal data retrieval request. Scope: account
    */
   postRequest_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<DataRetrievalResponse>> {
     const params = {} as SDKRequestConfig
@@ -61,7 +61,7 @@ export class DataRetrieval$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Cancel user&#39;s personal data requests Requires valid user access token Scope: account
    */
   deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -77,7 +77,7 @@ export class DataRetrieval$ {
   }
 
   /**
-   * &lt;p&gt;Requires valid user access token&lt;/p&gt;
+   * Generate personal data download url Requires valid user access token Scope: account
    */
   postGenerate_ByUserId_ByRequestDate(
     userId: string,

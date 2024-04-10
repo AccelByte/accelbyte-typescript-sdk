@@ -11,9 +11,9 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreateTopicRequest } from '../generated-definitions/CreateTopicRequest.js'
 import { FreeFormNotificationRequest } from '../generated-definitions/FreeFormNotificationRequest.js'
 import { Notification$ } from './endpoints/Notification$.js'
+import { NotificationResponse } from '../generated-definitions/NotificationResponse.js'
 import { NotificationTopicResponse } from '../generated-definitions/NotificationTopicResponse.js'
 import { NotificationWithTemplateRequest } from '../generated-definitions/NotificationWithTemplateRequest.js'
-import { NotificationsResponse } from '../generated-definitions/NotificationsResponse.js'
 import { TopicByNamespacesResponse } from '../generated-definitions/TopicByNamespacesResponse.js'
 import { UpdateTopicRequest } from '../generated-definitions/UpdateTopicRequest.js'
 
@@ -26,14 +26,14 @@ export function NotificationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * Get list of notifications in a namespace. The **startTime** and **endTime** query parameters can be filled with **sequenceID** from notifications.
+   * Get list of notifications in a namespace. The query parameters **startTime** and **endTime** can be filled with the **sequenceID** value in the notification, where the value is an epoch timestamp. Example **sequenceID** or epoch timestamp value: **1706595813**
    */
   async function getNotificationMe(queryParams?: {
     endTime?: number
     limit?: number
     offset?: number
     startTime?: number
-  }): Promise<NotificationsResponse> {
+  }): Promise<NotificationResponse> {
     const $ = new Notification$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getNotificationMe(queryParams)
     if (resp.error) throw resp.error

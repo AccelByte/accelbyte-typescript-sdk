@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const CategoryHook = z.object({ driver: z.enum(['KAFKA']), params: z.string() })
+export const CategoryHook = z.object({ driver: z.string().nullish(), params: z.record(z.any()).nullish() })
 
 export interface CategoryHook extends z.TypeOf<typeof CategoryHook> {}

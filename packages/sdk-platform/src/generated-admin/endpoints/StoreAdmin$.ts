@@ -9,6 +9,8 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
+import { CatalogConfigInfo } from '../../generated-definitions/CatalogConfigInfo.js'
+import { CatalogConfigUpdate } from '../../generated-definitions/CatalogConfigUpdate.js'
 import { CatalogDefinitionInfoArray } from '../../generated-definitions/CatalogDefinitionInfoArray.js'
 import { ExportStoreRequest } from '../../generated-definitions/ExportStoreRequest.js'
 import { ExportStoreToCsvRequest } from '../../generated-definitions/ExportStoreToCsvRequest.js'
@@ -54,6 +56,54 @@ export class StoreAdmin$ {
 
     return this.isValidationEnabled
       ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * This API is used to import a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/import to import store.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateStoreImport(data: { file?: File }, queryParams?: { storeId?: string | null }): Promise<IResponse<StoreInfo>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/stores/import'.replace('{namespace}', this.namespace)
+    // TODO file upload not implemented
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * Get catalog config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:STORE&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   */
+  getCatalogConfigs(): Promise<IResponseWithSync<CatalogConfigInfo>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/catalog/configs'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, CatalogConfigInfo, 'CatalogConfigInfo')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:STORE, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated catalog config&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateCatalogConfig(data: CatalogConfigUpdate): Promise<IResponse<CatalogConfigInfo>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/catalog/configs'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CatalogConfigInfo, 'CatalogConfigInfo')
       : Validate.unsafeResponse(() => resultPromise)
   }
 
@@ -145,7 +195,7 @@ export class StoreAdmin$ {
   /**
    * This API is used to import a store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
-  updateStoreImport(
+  updateStoreImport_ByNS(
     data: { file?: File },
     queryParams?: { storeId?: string | null; strictMode?: boolean | null }
   ): Promise<IResponse<ImportStoreResult>> {
@@ -185,6 +235,29 @@ export class StoreAdmin$ {
     return this.isValidationEnabled
       ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
       : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * This API is used to export a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/export to export store.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   */
+  getExport_ByStoreId(storeId: string): Promise<IResponseWithSync<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/stores/{storeId}/export'
+      .replace('{namespace}', this.namespace)
+      .replace('{storeId}', storeId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

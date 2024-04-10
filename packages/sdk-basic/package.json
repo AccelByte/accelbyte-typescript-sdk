@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-basic",
-  "version": "4.0.1-beta.0",
+  "version": "4.0.1-beta.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",
@@ -18,11 +18,12 @@
     "build": "rimraf dist && tsup src/index.ts --dts --format esm,cjs",
     "test": "echo ''",
     "clean": "npx rimraf dist && npx rimraf node_modules && npx rimraf .yalc",
+    "cg:lint": "find src -type d -empty -prune -o -type f -name '*.ts' -exec eslint --fix --config ../codegen/.eslintrc.json {} +",
     "cg:prettify": "prettier --write swaggers/*.json && prettier --write --no-error-on-unmatched-pattern src/**/*",
     "cg:download": "yarn cg download-swaggers --config swaggers.json --swaggersOutput swaggers",
     "cg:generate": "rimraf src/generated-public && yarn cg generate-code --config swaggers.json --swaggersOutput swaggers --output src --snippetOutput ../../../apps/api-explorer-app/src/constants/Snippets",
     "cg": "ts-node ../codegen/src/cli.ts",
-    "codegen": "yarn cg:generate && yarn cg:prettify"
+    "codegen": "yarn cg:generate && yarn cg:lint && yarn cg:prettify"
   },
   "devDependencies": {
     "@types/crypto-js": "4.1.0",

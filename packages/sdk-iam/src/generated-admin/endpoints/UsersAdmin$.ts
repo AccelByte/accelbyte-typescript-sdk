@@ -9,14 +9,21 @@
 import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
+import { AgeRestrictionRequest } from '../../generated-definitions/AgeRestrictionRequest.js'
 import { AgeRestrictionRequestV3 } from '../../generated-definitions/AgeRestrictionRequestV3.js'
+import { AgeRestrictionResponse } from '../../generated-definitions/AgeRestrictionResponse.js'
 import { AgeRestrictionResponseV3 } from '../../generated-definitions/AgeRestrictionResponseV3.js'
 import { BanCreateRequest } from '../../generated-definitions/BanCreateRequest.js'
 import { BanUpdateRequest } from '../../generated-definitions/BanUpdateRequest.js'
+import { Country } from '../../generated-definitions/Country.js'
+import { CountryAgeRestrictionArray } from '../../generated-definitions/CountryAgeRestrictionArray.js'
+import { CountryAgeRestrictionRequest } from '../../generated-definitions/CountryAgeRestrictionRequest.js'
 import { CountryAgeRestrictionV3Request } from '../../generated-definitions/CountryAgeRestrictionV3Request.js'
 import { CountryV3Response } from '../../generated-definitions/CountryV3Response.js'
 import { CountryV3ResponseArray } from '../../generated-definitions/CountryV3ResponseArray.js'
 import { CreateJusticeUserResponse } from '../../generated-definitions/CreateJusticeUserResponse.js'
+import { DisableUserRequest } from '../../generated-definitions/DisableUserRequest.js'
+import { DistinctPlatformResponseV3 } from '../../generated-definitions/DistinctPlatformResponseV3.js'
 import { GetBulkUserBansRequest } from '../../generated-definitions/GetBulkUserBansRequest.js'
 import { GetUserBanV3Response } from '../../generated-definitions/GetUserBanV3Response.js'
 import { GetUserMappingArray } from '../../generated-definitions/GetUserMappingArray.js'
@@ -36,6 +43,7 @@ import { NamespaceRoleRequest } from '../../generated-definitions/NamespaceRoleR
 import { PermissionDeleteRequest } from '../../generated-definitions/PermissionDeleteRequest.js'
 import { Permissions } from '../../generated-definitions/Permissions.js'
 import { PlatformUserIdRequest } from '../../generated-definitions/PlatformUserIdRequest.js'
+import { SearchUsersByPlatformIdResponse } from '../../generated-definitions/SearchUsersByPlatformIdResponse.js'
 import { SearchUsersResponseWithPaginationV3 } from '../../generated-definitions/SearchUsersResponseWithPaginationV3.js'
 import { SendVerificationCodeRequestV3 } from '../../generated-definitions/SendVerificationCodeRequestV3.js'
 import { TokenThirdPartyLinkStatusResponse } from '../../generated-definitions/TokenThirdPartyLinkStatusResponse.js'
@@ -43,17 +51,23 @@ import { UnlinkUserPlatformRequest } from '../../generated-definitions/UnlinkUse
 import { UpdateUserDeletionStatusRequest } from '../../generated-definitions/UpdateUserDeletionStatusRequest.js'
 import { UpdateUserStatusRequest } from '../../generated-definitions/UpdateUserStatusRequest.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV3 } from '../../generated-definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV3.js'
+import { UserBanResponse } from '../../generated-definitions/UserBanResponse.js'
+import { UserBanResponseArray } from '../../generated-definitions/UserBanResponseArray.js'
 import { UserBanResponseV3 } from '../../generated-definitions/UserBanResponseV3.js'
 import { UserDeletionStatusResponse } from '../../generated-definitions/UserDeletionStatusResponse.js'
 import { UserIDsRequest } from '../../generated-definitions/UserIDsRequest.js'
 import { UserIdentityUpdateRequestV3 } from '../../generated-definitions/UserIdentityUpdateRequestV3.js'
 import { UserLinkedPlatformsResponseV3 } from '../../generated-definitions/UserLinkedPlatformsResponseV3.js'
+import { UserPasswordUpdateRequest } from '../../generated-definitions/UserPasswordUpdateRequest.js'
 import { UserPasswordUpdateV3Request } from '../../generated-definitions/UserPasswordUpdateV3Request.js'
 import { UserPlatformMetadata } from '../../generated-definitions/UserPlatformMetadata.js'
 import { UserPlatforms } from '../../generated-definitions/UserPlatforms.js'
+import { UserResponse } from '../../generated-definitions/UserResponse.js'
 import { UserResponseV3 } from '../../generated-definitions/UserResponseV3.js'
+import { UserUpdateRequest } from '../../generated-definitions/UserUpdateRequest.js'
 import { UserUpdateRequestV3 } from '../../generated-definitions/UserUpdateRequestV3.js'
 import { UserVerificationRequest } from '../../generated-definitions/UserVerificationRequest.js'
+import { UsersUpdateRequestV3 } from '../../generated-definitions/UsersUpdateRequestV3.js'
 import { VerificationCodeResponse } from '../../generated-definitions/VerificationCodeResponse.js'
 
 export class UsersAdmin$ {
@@ -81,9 +95,40 @@ export class UsersAdmin$ {
   }
 
   /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/search [GET]_**
+   */
+  getUsers(queryParams: {
+    platformId: string | null
+    after?: string | null
+    before?: string | null
+    displayName?: string | null
+    limit?: number
+    loginId?: string | null
+    platformUserId?: string | null
+    roleId?: string | null
+    userId?: string | null
+  }): Promise<IResponseWithSync<SearchUsersByPlatformIdResponse>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, SearchUsersByPlatformIdResponse, 'SearchUsersByPlatformIdResponse')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * This endpoint search user who owns the given email address action code : 10132
    */
-  getUsers(queryParams?: { emailAddress?: string | null }): Promise<IResponseWithSync<UserResponseV3>> {
+  getUsers_ByNS(queryParams?: { emailAddress?: string | null }): Promise<IResponseWithSync<UserResponseV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -101,12 +146,29 @@ export class UsersAdmin$ {
   }
 
   /**
-   * List all users that has admin role (role that has admin_role attribute set to true). The endpoint will return all admin from all namespace when called from publisher namespace. When not called from publisher namespace, the endpoint will return all admin from the path namespace.
+   * This endpoint support to bulk update users based on given data. ------ Supported fields: * skipLoginQueue
+   */
+  updateUser(data: UsersUpdateRequestV3): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/admin/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * List all users that has admin role (role that has admin_role attribute set to true). Endpoint behavior : - if query parameter is defined, endpoint will search users whose email address and display name match with the query - if roleId parameter is defined, endpoint will search users that have the defined roleId - if startDate and endDate parameters is defined, endpoint will search users which created on the certain date range - if startDate parameter is defined, endpoint will search users that created start from the defined date - if endDate parameter is defined, endpoint will search users that created until the defined date In multi tenant mode : - if super admin search in super admin namespace, the result will be all admin users - if super admin search in game studio namespace, the result will be all admin users under the game studio namespace - if studio admin search in their studio namespace, the result will be all admin user in the game studio namespace The endpoint will return all admin from all namespace when called from publisher namespace. When not called from publisher namespace, the endpoint will return all admin from the path namespace.
    */
   getAdmins(queryParams?: {
     after?: string | null
     before?: string | null
+    endDate?: string | null
     limit?: number
+    query?: string | null
+    roleId?: string | null
+    startDate?: string | null
   }): Promise<IResponseWithSync<GetUsersResponseWithPaginationV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/admins'.replace('{namespace}', this.namespace)
@@ -178,6 +240,8 @@ export class UsersAdmin$ {
     platformBy?: string | null
     platformId?: string | null
     query?: string | null
+    roleIds?: string | null
+    skipLoginQueue?: boolean | null
     startDate?: string | null
     testAccount?: boolean | null
   }): Promise<IResponseWithSync<SearchUsersResponseWithPaginationV3>> {
@@ -198,9 +262,44 @@ export class UsersAdmin$ {
   }
 
   /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_**
+   */
+  getUser_ByUserId(userId: string): Promise<IResponseWithSync<UserResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, UserResponse, 'UserResponse')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [PATCH]_** This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {Country, DisplayName, LanguageTag} Country use ISO3166-1 alpha-2 two letter, e.g. US. **Several case of updating email address** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address.
+   */
+  patchUser_ByUserId(userId: string, data: UserUpdateRequest): Promise<IResponse<UserResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserResponse, 'UserResponse')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * Admin Get User By User Id
    */
-  getUser_ByUserId(userId: string): Promise<IResponseWithSync<UserResponseV3>> {
+  getUser_ByUserId_ByNS(userId: string): Promise<IResponseWithSync<UserResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -220,7 +319,7 @@ export class UsersAdmin$ {
   /**
    * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address. action code : 10103
    */
-  patchUser_ByUserId(userId: string, data: UserUpdateRequestV3): Promise<IResponse<UserResponseV3>> {
+  patchUser_ByUserId_ByNS(userId: string, data: UserUpdateRequestV3): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
@@ -231,9 +330,44 @@ export class UsersAdmin$ {
   }
 
   /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [GET]_** - **Note:** difference in V3 response, format difference: Pascal case =&gt; Camel case
+   */
+  getAgerestrictions(): Promise<IResponseWithSync<AgeRestrictionResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/agerestrictions'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, AgeRestrictionResponse, 'AgeRestrictionResponse')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [PATCH]_**
+   */
+  patchAgerestriction(data: AgeRestrictionRequest): Promise<IResponse<AgeRestrictionResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/agerestrictions'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AgeRestrictionResponse, 'AgeRestrictionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * action code: 10138
    */
-  getAgerestrictions(): Promise<IResponseWithSync<AgeRestrictionResponseV3>> {
+  getAgerestrictions_ByNS(): Promise<IResponseWithSync<AgeRestrictionResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/agerestrictions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -253,7 +387,7 @@ export class UsersAdmin$ {
   /**
    * action code: 10122
    */
-  patchAgerestriction(data: AgeRestrictionRequestV3): Promise<IResponse<AgeRestrictionResponseV3>> {
+  patchAgerestriction_ByNS(data: AgeRestrictionRequestV3): Promise<IResponse<AgeRestrictionResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/agerestrictions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
@@ -277,9 +411,46 @@ export class UsersAdmin$ {
   }
 
   /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [POST]_**
+   */
+  createBan_ByUserId(userId: string, data: BanCreateRequest): Promise<IResponse<UserBanResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/ban'.replace('{namespace}', this.namespace).replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserBanResponse, 'UserBanResponse')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [GET]_**
+   */
+  getBans_ByUserId(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<IResponseWithSync<UserBanResponseArray>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/bans'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, UserBanResponseArray, 'UserBanResponseArray')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * This endpoint retrieve the first page of the data if after and before parameters is empty action code : 10126
    */
-  getBans_ByUserId(
+  getBans_ByUserId_ByNS(
     userId: string,
     queryParams?: { activeOnly?: boolean | null; after?: string | null; before?: string | null; limit?: number }
   ): Promise<IResponseWithSync<GetUserBanV3Response>> {
@@ -304,7 +475,7 @@ export class UsersAdmin$ {
   /**
    * Bans a user with specific type of ban. Ban types and reason can be queried. action code : 10141
    */
-  createBan_ByUserId(userId: string, data: BanCreateRequest): Promise<IResponse<UserBanResponseV3>> {
+  createBan_ByUserId_ByNS(userId: string, data: BanCreateRequest): Promise<IResponse<UserBanResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans'
       .replace('{namespace}', this.namespace)
@@ -339,6 +510,38 @@ export class UsersAdmin$ {
     }
     const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
     return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
+   */
+  createRole_ByUserId(userId: string, data: string[]): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/roles'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
+   */
+  updateRole_ByUserId(userId: string, data: string[]): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/roles'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -432,6 +635,22 @@ export class UsersAdmin$ {
   }
 
   /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_**
+   */
+  updateEnable_ByUserId(userId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/enable'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * This endpoint disable or enable user account. Set the enable status on the request body to true to enable user account or set to false to disable it. Disable user for **Account Disable** purpose fill the reason with: - **AdminDeactivateAccount** : if your disable account request comes from admin Enable user ignore field &#39;reason&#39; in the request body. action code : 10143
    */
   patchStatus_ByUserId(userId: string, data: UpdateUserStatusRequest): Promise<IResponse<unknown>> {
@@ -462,9 +681,57 @@ export class UsersAdmin$ {
   }
 
   /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_** For **Deletion Account** purpose fill the reason with: - **DeactivateAccount** : if your deletion request comes from user - **AdminDeactivateAccount** : if your deletion request comes from admin
+   */
+  updateDisable_ByUserId(userId: string, data: DisableUserRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/disable'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries/{countryCode} [PATCH]_**
+   */
+  patchCountry_ByCountryCode(countryCode: string, data: CountryAgeRestrictionRequest): Promise<IResponse<Country>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/countries/{countryCode}'
+      .replace('{namespace}', this.namespace)
+      .replace('{countryCode}', countryCode)
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Country, 'Country')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/password [PUT]_**
+   */
+  updatePassword_ByUserId(userId: string, data: UserPasswordUpdateRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/password'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * Update User Password
    */
-  updatePassword_ByUserId(userId: string, data: UserPasswordUpdateV3Request): Promise<IResponse<unknown>> {
+  updatePassword_ByUserId_ByNS(userId: string, data: UserPasswordUpdateV3Request): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/password'
       .replace('{namespace}', this.namespace)
@@ -515,6 +782,27 @@ export class UsersAdmin$ {
     const res = () =>
       this.isValidationEnabled
         ? Validate.responseType(() => resultPromise, UserLinkedPlatformsResponseV3, 'UserLinkedPlatformsResponseV3')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries [GET]_**
+   */
+  getCountriesAgerestrictions(): Promise<IResponseWithSync<CountryAgeRestrictionArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/countries/agerestrictions'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, CountryAgeRestrictionArray, 'CountryAgeRestrictionArray')
         : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
@@ -651,7 +939,7 @@ export class UsersAdmin$ {
   }
 
   /**
-   * Admin List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   * Admin List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
   createUser_ByPlatformId(
     platformId: string,
@@ -798,6 +1086,28 @@ export class UsersAdmin$ {
   }
 
   /**
+   * This endpoint retrieves platform accounts linked to user. It will query all linked platform accounts and result will be distinct &amp; grouped, same platform we will pick oldest linked one.
+   */
+  getDistinctPlatforms_ByUserId(userId: string): Promise<IResponseWithSync<DistinctPlatformResponseV3>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/distinctPlatforms'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, DistinctPlatformResponseV3, 'DistinctPlatformResponseV3')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * This endpoint gets list justice platform account by providing publisher namespace and publisher userID
    */
   getPlatformsJustice_ByUserId(userId: string): Promise<IResponseWithSync<GetUserMappingArray>> {
@@ -872,6 +1182,43 @@ export class UsersAdmin$ {
   }
 
   /**
+   * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: if user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
+   */
+  deleteAll_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/all'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{platformId}', platformId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId} [DELETE]_** ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **android** - **ios** - **device** - **discord** Delete link of user&#39;s account with platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. platform_namespace need to be specified when the platform ID is &#39;justice&#39;. Delete link of justice platform will enable password token grant and password update.
+   */
+  deleteLink_ByUserId_ByPlatformId(
+    userId: string,
+    platformId: string,
+    data: { platform_namespace?: string | null }
+  ): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{platformId}', platformId)
+    const resultPromise = this.axiosInstance.delete(url, { data, params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
    * **Prerequisite:** Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables). ## Supported platforms: - **steam**: The ticket’s value is the authentication code returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The ticket&#39;s value is URL generated by Steam on web authentication - **facebook**: The ticket’s value is the authorization code returned by Facebook OAuth - **google**: The ticket’s value is the authorization code returned by Google OAuth - **oculus**: The ticket’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The ticket’s value is the authorization code returned by Twitch OAuth. - **android**: The ticket&#39;s value is the Android’s device ID - **ios**: The ticket&#39;s value is the iOS’s device ID. - **apple**: The ticket’s value is the authorization code returned by Apple OAuth. - **device**: Every device that does’nt run Android and iOS is categorized as a device platform. The ticket&#39;s value is the device’s ID. - **discord**: The ticket’s value is the authorization code returned by Discord OAuth. - **awscognito**: The ticket’s value is the aws cognito access token (JWT). - **epicgames**: The ticket’s value is an access-token obtained from Epicgames EOS Account Service. - **nintendo**: The ticket’s value is the authorization code(id_token) returned by Nintendo OAuth.
    */
   postLink_ByUserId_ByPlatformId(userId: string, platformId: string, data: { ticket: string | null }): Promise<IResponse<unknown>> {
@@ -891,7 +1238,7 @@ export class UsersAdmin$ {
   }
 
   /**
-   * Get User By Platform User ID This endpoint return user information by given platform ID and platform user ID **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   * Get User By Platform User ID This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
   getUser_ByPlatformId_ByPlatformUserId(platformId: string, platformUserId: string): Promise<IResponseWithSync<UserResponseV3>> {
     const params = {} as SDKRequestConfig
@@ -931,7 +1278,7 @@ export class UsersAdmin$ {
   }
 
   /**
-   * This endpoint gets user single platform account metadata. Supported platforms are same with the supported login platforms.
+   * This endpoint gets user single platform account metadata. Supported Platform: - Steam group(steamnetwork): - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - epicgames - nintendo - aws cognito - facebook - google - discord - twitch - snapchat - amazon Note: you can use either platform ID or platform group as platformId query parameter
    */
   getMetadata_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<IResponseWithSync<UserPlatformMetadata>> {
     const params = {} as SDKRequestConfig
@@ -977,7 +1324,7 @@ export class UsersAdmin$ {
   }
 
   /**
-   * This endpoint requires the client access token as the bearer token This endpoint will support publisher access to game and game access to publisher If targetNamespace filled with publisher namespace then this endpoint will return its game user id and game namespace If targetNamespace filled with game namespace then this endpoint will return its publisher user id and publisher namespace. Will create game user id if not exists.
+   * This endpoint requires the client access token as the bearer token This endpoint will support publisher access to game and game access to publisher If targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace. If targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace.
    */
   getPlatformJustice_ByUserId_ByTargetNamespace(userId: string, targetNamespace: string): Promise<IResponseWithSync<GetUserMappingV3>> {
     const params = {} as SDKRequestConfig
@@ -1016,7 +1363,7 @@ export class UsersAdmin$ {
   }
 
   /**
-   * This API is for admin to delete user&#39;s linking history with target platform id
+   * This API is for admin to delete user&#39;s linking history with target platform id. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - apple - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: you can use either platform ID or platform group as platformId query parameter
    */
   deleteLinkHistory_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

@@ -16,6 +16,8 @@ import { RevocationPluginConfigUpdate } from '../generated-definitions/Revocatio
 import { SectionPluginConfigInfo } from '../generated-definitions/SectionPluginConfigInfo.js'
 import { SectionPluginConfigUpdate } from '../generated-definitions/SectionPluginConfigUpdate.js'
 import { ServicePluginConfigAdmin$ } from './endpoints/ServicePluginConfigAdmin$.js'
+import { ServicePluginConfigInfo } from '../generated-definitions/ServicePluginConfigInfo.js'
+import { ServicePluginConfigUpdate } from '../generated-definitions/ServicePluginConfigUpdate.js'
 
 export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
@@ -24,6 +26,39 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
+
+  /**
+   * @deprecated
+   * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function deleteConfigServicePlugin(): Promise<unknown> {
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.deleteConfigServicePlugin()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * Get service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getConfigsServicePlugin(): Promise<ServicePluginConfigInfo> {
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getConfigsServicePlugin()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function updateConfigServicePlugin(data: ServicePluginConfigUpdate): Promise<ServicePluginConfigInfo> {
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateConfigServicePlugin(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
@@ -156,6 +191,9 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    deleteConfigServicePlugin,
+    getConfigsServicePlugin,
+    updateConfigServicePlugin,
     deleteCatalogPluginLootbox,
     getCatalogPluginsLootbox,
     updateCatalogPluginLootbox,

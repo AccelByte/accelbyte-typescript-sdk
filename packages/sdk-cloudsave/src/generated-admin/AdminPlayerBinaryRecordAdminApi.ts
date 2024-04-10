@@ -30,7 +30,7 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
    */
   async function getBinaries_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number; query?: string | null }
+    queryParams?: { limit?: number; offset?: number; query?: string | null; tags?: string[] }
   ): Promise<ListPlayerBinaryRecordsResponse> {
     const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getBinaries_ByUserId(userId, queryParams)

@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk",
-  "version": "2.4.1",
+  "version": "2.4.3",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/node/index.cjs",

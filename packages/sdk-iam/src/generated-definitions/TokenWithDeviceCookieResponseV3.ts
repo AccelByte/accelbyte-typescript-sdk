@@ -25,6 +25,8 @@ export const TokenWithDeviceCookieResponseV3 = z.object({
   refresh_token: z.string().nullish(),
   roles: z.array(z.string()).nullish(),
   scope: z.string(),
+  simultaneous_platform_id: z.string().nullish(),
+  simultaneous_platform_user_id: z.string().nullish(),
   token_type: z.string(),
   unique_display_name: z.string().nullish(),
   user_id: z.string().nullish(),

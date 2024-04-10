@@ -23,7 +23,7 @@ export function GroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * &lt;p&gt;Required Permission: &#34;ADMIN:NAMESPACE:{namespace}:GROUP [READ]&#34; &lt;/p&gt; &lt;p&gt;Get list of groups. This endpoint will show any types of group&lt;/p&gt; &lt;p&gt;Action Code: 73301&lt;/p&gt;
+   * Get list of groups. This endpoint will show any types of group Action Code: 73301
    */
   async function getGroups(queryParams?: {
     configurationCode?: string | null
@@ -39,7 +39,7 @@ export function GroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required valid user authentication &lt;/p&gt; &lt;p&gt;Get list of groups by group Ids.&lt;/p&gt; &lt;p&gt;Action Code: 73303&lt;/p&gt;
+   * Required valid user authentication Get list of groups by group Ids. Action Code: 73303
    */
   async function createGroupBulk(data: GetGroupListRequestV2): Promise<GetGroupsResponseV1> {
     const $ = new GroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -49,7 +49,7 @@ export function GroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required Permission: &#34;ADMIN:NAMESPACE:{namespace}:GROUP:{groupId} [DELETE]&#34;&lt;/p&gt; &lt;p&gt;Delete existing group. It will check whether the groupID is exist before doing the process to delete the group.&lt;/p&gt; &lt;p&gt;Action Code: 73302&lt;/p&gt;
+   * Delete existing group. It will check whether the groupID is exist before doing the process to delete the group. Action Code: 73302
    */
   async function deleteGroup_ByGroupId(groupId: string): Promise<unknown> {
     const $ = new GroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -59,7 +59,7 @@ export function GroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * &lt;p&gt;Required Permission: &#34;ADMIN:NAMESPACE:{namespace}:GROUP [READ]&#34;&lt;/p&gt; &lt;p&gt;Get single group information. This endpoint will show the group information by the groupId&lt;/p&gt; &lt;p&gt;Action Code: 73306&lt;/p&gt;
+   * Get single group information. This endpoint will show the group information by the groupId Action Code: 73306
    */
   async function getGroup_ByGroupId(groupId: string): Promise<GroupResponseV1> {
     const $ = new GroupAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)

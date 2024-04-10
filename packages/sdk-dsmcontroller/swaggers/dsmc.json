@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice DSM Controller Service",
     "title": "justice-dsm-controller-service",
-    "version": "6.5.0"
+    "version": "6.7.6"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -1866,6 +1866,75 @@
           }
         ],
         "summary": "Create region override for deployment override",
+        "tags": ["Deployment Config"]
+      }
+    },
+    "/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/versions/{version}/queues": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE]\n\nRequired scope: social\n\nThis endpoint deletes the deployment creating server count queue in a namespace in all registered region for the selected version",
+        "operationId": "DeleteCreatingServerCountQueue",
+        "parameters": [
+          {
+            "description": "deployment name",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "version",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "deployment creating server count queue deleted"
+          },
+          "400": {
+            "description": "malformed request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "deployment not found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete creating server count deployment queue",
         "tags": ["Deployment Config"]
       }
     },
@@ -4435,6 +4504,71 @@
         "tags": ["Image Config"]
       }
     },
+    "/dsmcontroller/namespaces/{namespace}/namespaces/{namespace}/configs/deployments/{deployment}": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ]\n\nRequired scope: social\n\nThis endpoint get a dedicated server deployment in a namespace",
+        "operationId": "GetDeploymentClient",
+        "parameters": [
+          {
+            "description": "deployment name",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/models.DeploymentWithOverride"
+            }
+          },
+          "400": {
+            "description": "malformed request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "deployment not found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["NAMESPACE:{namespace}:DSM:CONFIG [READ]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get Deployment for Client",
+        "tags": ["Deployment Config"]
+      }
+    },
     "/dsmcontroller/namespaces/{namespace}/servers": {
       "get": {
         "consumes": ["application/json"],
@@ -6894,6 +7028,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "is_override_region": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "job_id": {
           "type": "string"
         },
@@ -6964,6 +7102,7 @@
         "image_version",
         "ip",
         "is_override_game_version",
+        "is_override_region",
         "job_id",
         "last_update",
         "mem_limit",
@@ -7044,6 +7183,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "is_override_region": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "job_id": {
           "type": "string"
         },
@@ -7113,6 +7256,7 @@
         "image_version",
         "ip",
         "is_override_game_version",
+        "is_override_region",
         "job_id",
         "last_update",
         "mem_limit",
@@ -7516,11 +7660,11 @@
     "path": "/dsmcontroller/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-01-17T09:06:31+00:00",
-    "gitHash": "d880260d741a8a3214db7ba54f52bdcc03f8c865",
+    "buildDate": "2024-04-02T08:12:17+00:00",
+    "gitHash": "2f772a830f4ad7dd6ad03fdfbc5e5e7e0b850a4e",
     "name": "justice-dedicated-server-manager-controller-service",
-    "revisionID": "6.5.0",
-    "version": "6.5.0",
+    "revisionID": "6.7.6",
+    "version": "6.7.6",
     "version-roles-seeding": "1.0.26"
   }
 }

@@ -33,6 +33,82 @@
   },
   "swagger": "2.0",
   "paths": {
+    "/chat/admin/namespaces/{namespace}/chat/filter": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "For testing purpose, doesn\u0026#39;t send any message to the topic. Always do filter regardless of enableProfanityFilter configuration.",
+        "operationId": "adminFilterChatMessage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.MessageRequest"
+            }
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "To show what filter driver is used",
+            "in": "query",
+            "name": "detail",
+            "type": "boolean",
+            "x-omitempty": false
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.MessageResultWithAttributes"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Return filtered chat message",
+        "tags": ["topic"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
+          }
+        ]
+      }
+    },
     "/chat/admin/namespaces/{namespace}/chats": {
       "get": {
         "consumes": ["application/json"],
@@ -4751,7 +4827,7 @@
           "x-omitempty": false
         }
       },
-      "required": ["enabled", "expiresIn", "hook", "name", "saveInbox", "sendNotification"]
+      "required": ["enabled", "expiresIn", "name", "saveInbox", "sendNotification"]
     },
     "models.BanTopicMemberParam": {
       "properties": {
@@ -4778,14 +4854,12 @@
     "models.CategoryHook": {
       "properties": {
         "driver": {
-          "enum": ["KAFKA"],
           "type": "string"
         },
         "params": {
-          "type": "string"
+          "type": "object"
         }
-      },
-      "required": ["driver", "params"]
+      }
     },
     "models.ChannelTopicResponse": {
       "properties": {
@@ -4897,7 +4971,7 @@
           "type": "string"
         }
       },
-      "required": ["from", "id", "message", "readAt", "receivedAt", "topicId"]
+      "required": ["from", "id", "message", "topicId"]
     },
     "models.ChatMessageWithPaginationResponse": {
       "properties": {
@@ -5247,7 +5321,7 @@
           "type": "string"
         }
       },
-      "required": ["id", "namespace", "parentId", "word", "wordType"]
+      "required": ["id", "namespace", "word", "wordType"]
     },
     "models.DictionaryChild": {
       "properties": {
@@ -5415,7 +5489,7 @@
           "type": "string"
         }
       },
-      "required": ["id", "namespace", "parentId", "word", "wordType"]
+      "required": ["id", "namespace", "word", "wordType"]
     },
     "models.DictionaryWordChanges": {
       "properties": {
@@ -5540,7 +5614,7 @@
           "type": "array"
         }
       },
-      "required": ["createdAt", "expiredAt", "id", "message", "scope", "senderId", "status", "updatedAt", "userIds"]
+      "required": ["createdAt", "expiredAt", "id", "scope", "senderId", "status", "updatedAt"]
     },
     "models.GetInboxStatsResponse": {
       "properties": {
@@ -5601,6 +5675,64 @@
     },
     "models.JSONSchemaType": {
       "type": "object"
+    },
+    "models.MessageRequest": {
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "topicId": {
+          "type": "string"
+        },
+        "topicType": {
+          "enum": ["GROUP", "PERSONAL"],
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["message"]
+    },
+    "models.MessageResultWithAttributes": {
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "object"
+        },
+        "cencoredWords": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "classifications": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "finalMessage": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "referenceId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": ["action", "finalMessage", "id", "timestamp"]
     },
     "models.MessageStats": {
       "properties": {
@@ -5736,7 +5868,7 @@
           "type": "array"
         }
       },
-      "required": ["category", "expiredAt", "id", "message", "scope", "status", "userIDs"]
+      "required": ["category", "expiredAt", "id", "scope", "status"]
     },
     "models.SendInboxMessageRequest": {},
     "models.SendInboxMessageResponse": {},
@@ -6020,11 +6152,11 @@
     "path": "/chat/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-01-17T03:46:01+00:00",
-    "gitHash": "b7c15f209e153249a9a46575dc64a8d95ac54810",
+    "buildDate": "2024-04-02T02:50:59+00:00",
+    "gitHash": "d8e46dda27311e717b34ebddbf503930ef78b91f",
     "name": "justice-chat-service",
-    "revisionID": "0.4.17",
-    "version": "0.4.17",
-    "version-roles-seeding": "0.0.18"
+    "revisionID": "0.4.25",
+    "version": "0.4.25",
+    "version-roles-seeding": "1.2.15"
   }
 }

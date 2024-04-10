@@ -8,6 +8,7 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { CheckAvailabilityResponse } from '../generated-definitions/CheckAvailabilityResponse.js'
 import { PlatformDomainDeleteRequest } from '../generated-definitions/PlatformDomainDeleteRequest.js'
 import { PlatformDomainResponse } from '../generated-definitions/PlatformDomainResponse.js'
 import { PlatformDomainUpdateRequest } from '../generated-definitions/PlatformDomainUpdateRequest.js'
@@ -23,6 +24,16 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
   const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
+
+  /**
+   * This is the API to check specific 3rd party platform availability. Passing platform group name or it&#39;s member will return same platform availability data Supported third party platform and platform group: - PSN group(psn) - ps4web - ps4 - ps5
+   */
+  async function getAvailability_ByPlatformId(platformId: string): Promise<CheckAvailabilityResponse> {
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getAvailability_ByPlatformId(platformId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * This is the API to Get All Active 3rd Platform Credential.
@@ -111,6 +122,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
   }
 
   return {
+    getAvailability_ByPlatformId,
     getPlatformsAllClients,
     getPlatformsAllClientsActive,
     deleteClient_ByPlatformId,

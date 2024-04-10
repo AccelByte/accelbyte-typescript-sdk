@@ -18,7 +18,7 @@ export class AdminTagAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]
+   * Get available tags paginated
    */
   getTags(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetTagResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
@@ -38,7 +38,7 @@ export class AdminTagAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE] creates a new tag
+   * Creates a new tag
    */
   createTag(data: CreateTagRequest): Promise<IResponse<CreateTagResponse>> {
     const params = {} as SDKRequestConfig
@@ -51,7 +51,7 @@ export class AdminTagAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]
+   * Delete existing tag
    */
   deleteTag_ByTagId(tagId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -64,7 +64,7 @@ export class AdminTagAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE] updates a tag
+   * Update existing tag
    */
   updateTag_ByTagId(tagId: string, data: CreateTagRequest): Promise<IResponse<CreateTagResponse>> {
     const params = {} as SDKRequestConfig

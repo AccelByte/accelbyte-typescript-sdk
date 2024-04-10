@@ -22,7 +22,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   /**
-   * This API will return all users who has accepted a specific policy version.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API will return users who has accepted a specific policy version.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAgreementsPolicyVersionsUsers(queryParams: {
     policyVersionId: string | null
@@ -37,7 +37,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API will return all accepted Legal Agreements for specified user. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API will return all accepted Legal Agreements for specified user. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAgreementPolicyUser_ByUserId(userId: string): Promise<RetrieveAcceptedAgreementResponseArray> {
     const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
@@ -47,7 +47,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API will Update Preference Consent. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API will Update Preference Consent. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function patchAgreementLocalizedPolicyVersionPreferenceUserId_ByUserId(
     userId: string,

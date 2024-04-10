@@ -61,6 +61,29 @@ export class Downloader$ {
   }
 
   /**
+   * @deprecated
+   * This API is used to get build manifest of release version of the application. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
+   */
+  getUpdategame_ByAppId(appId: string): Promise<IResponseWithSync<BuildManifest>> {
+    const params = {} as SDKRequestConfig
+    const url = '/buildinfo/public/namespaces/{namespace}/updategame/{appId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{appId}', appId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * This API is used to get simple build manifest that contains list of current build in various platform.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getAvailablebuild_ByAppId(appId: string): Promise<IResponseWithSync<BasicBuildManifestArray>> {
@@ -73,6 +96,29 @@ export class Downloader$ {
     const res = () =>
       this.isValidationEnabled
         ? Validate.responseType(() => resultPromise, BasicBuildManifestArray, 'BasicBuildManifestArray')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * @deprecated
+   * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and generate chunks difference and obsolete files list between two version. Only works for builds uploaded with BuildInfo v1 [DEPRECATED}&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
+   */
+  getUpdategameBuild_ByBuildId(buildId: string): Promise<IResponseWithSync<BuildManifest>> {
+    const params = {} as SDKRequestConfig
+    const url = '/buildinfo/public/namespaces/{namespace}/updategame/builds/{buildId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{buildId}', buildId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
         : Validate.unsafeResponse(() => resultPromise)
 
     if (!this.cache) {
@@ -98,9 +144,33 @@ export class Downloader$ {
   }
 
   /**
+   * @deprecated
+   * This API is used to get build manifest that contains file difference between requested version and release version. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
+   */
+  getUpdategame_ByAppId_ByVersion(appId: string, version: string): Promise<IResponseWithSync<BuildManifest>> {
+    const params = {} as SDKRequestConfig
+    const url = '/buildinfo/public/namespaces/{namespace}/updategame/{appId}/{version}'
+      .replace('{namespace}', this.namespace)
+      .replace('{appId}', appId)
+      .replace('{version}', version)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
    * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and obsolete files list between two version. Only works for builds uploaded with BuildInfo v2&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategameBuild_ByBuildId(buildId: string): Promise<IResponseWithSync<BuildManifest>> {
+  getUpdategameBuild_ByBuildId_ByNS(buildId: string): Promise<IResponseWithSync<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/v2/updategame/builds/{buildId}'
       .replace('{namespace}', this.namespace)

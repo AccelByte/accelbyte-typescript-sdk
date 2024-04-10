@@ -15,7 +15,7 @@ export class Config$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * This endpoint return the value of config key. Note: this endpoint does not need any authorization. **Supported config key:** * uniqueDisplayNameEnabled
+   * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. Note: this endpoint does not need any authorization. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled
    */
   getConfig_ByConfigKey(configKey: string): Promise<IResponseWithSync<ConfigValueResponseV3>> {
     const params = {} as SDKRequestConfig

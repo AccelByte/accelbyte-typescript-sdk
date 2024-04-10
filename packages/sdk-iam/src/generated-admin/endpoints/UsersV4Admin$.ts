@@ -20,10 +20,13 @@ import { CreateUserRequestV4 } from '../../generated-definitions/CreateUserReque
 import { CreateUserResponseV4 } from '../../generated-definitions/CreateUserResponseV4.js'
 import { EmailUpdateRequestV4 } from '../../generated-definitions/EmailUpdateRequestV4.js'
 import { EnabledFactorsResponseV4 } from '../../generated-definitions/EnabledFactorsResponseV4.js'
+import { InvitationHistoryResponse } from '../../generated-definitions/InvitationHistoryResponse.js'
 import { InviteUserRequestV4 } from '../../generated-definitions/InviteUserRequestV4.js'
 import { InviteUserResponseV3 } from '../../generated-definitions/InviteUserResponseV3.js'
+import { ListInvitationHistoriesV4Response } from '../../generated-definitions/ListInvitationHistoriesV4Response.js'
 import { ListUserRolesV4Response } from '../../generated-definitions/ListUserRolesV4Response.js'
 import { ListValidUserIdResponseV4 } from '../../generated-definitions/ListValidUserIdResponseV4.js'
+import { NamespaceInvitationHistoryUserV4Response } from '../../generated-definitions/NamespaceInvitationHistoryUserV4Response.js'
 import { RemoveUserRoleV4Request } from '../../generated-definitions/RemoveUserRoleV4Request.js'
 import { UserResponseV3 } from '../../generated-definitions/UserResponseV3.js'
 import { UserUpdateRequestV3 } from '../../generated-definitions/UserUpdateRequestV3.js'
@@ -56,6 +59,44 @@ export class UsersV4Admin$ {
     return this.isValidationEnabled
       ? Validate.responseType(() => resultPromise, InviteUserResponseV3, 'InviteUserResponseV3')
       : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
+   * Use this endpoint to invite admin or non-admin user and assign role to them. The role must be scoped to namespace. An admin user can only assign role with **assignedNamespaces** if the admin user has required permission which is same as the required permission of endpoint: [AdminAddUserRoleV4]. Detail request body : - Email Address is required, List of email addresses that will be invited - isAdmin is required, true if user is admin, false if user is not admin - Namespace is optional. Only works on multi tenant mode, if not specified then it will be assigned Publisher namespace, if specified, it will become that studio/publisher where user is invited to. - Role is optional, if not specified then it will only assign User role. - Assigned Namespaces is optional, List of namespaces which the Role will be assigned to the user, only works when Role is not empty. The invited admin will also assigned with &#34;User&#34; role by default. Substitute endpoint: /iam/v4/admin/users/invite
+   */
+  createUserUserInvite(data: InviteUserRequestV4): Promise<IResponse<InviteUserResponseV3>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/admin/users/users/invite'
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, InviteUserResponseV3, 'InviteUserResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * This endpoint is to list all Invitation Histories for new studio namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Accepted Query: - namespace - offset - limit
+   */
+  getInvitationHistories(queryParams?: {
+    limit?: number
+    namespace?: string | null
+    offset?: number
+  }): Promise<IResponseWithSync<ListInvitationHistoriesV4Response>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v4/admin/invitationHistories'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, ListInvitationHistoriesV4Response, 'ListInvitationHistoriesV4Response')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -95,6 +136,7 @@ export class UsersV4Admin$ {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   getUsersMeMfaBackupCode(): Promise<IResponseWithSync<BackupCodesResponseV4>> {
@@ -115,6 +157,7 @@ export class UsersV4Admin$ {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   createUserMeMfaBackupCode(): Promise<IResponse<BackupCodesResponseV4>> {
@@ -133,6 +176,39 @@ export class UsersV4Admin$ {
   createUserMeMfaEmailCode(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/email/code'
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
+   */
+  getUsersMeMfaBackupCodes(): Promise<IResponseWithSync<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/admin/users/me/mfa/backupCodes'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
+  }
+
+  /**
+   * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
+   */
+  createUserMeMfaBackupCode_v4(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/admin/users/me/mfa/backupCodes'
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return this.isValidationEnabled
@@ -170,7 +246,7 @@ export class UsersV4Admin$ {
   }
 
   /**
-   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
+   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   createUser(data: CreateUserRequestV4): Promise<IResponse<CreateUserResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -196,6 +272,7 @@ export class UsersV4Admin$ {
   }
 
   /**
+   * @deprecated
    * This endpoint is used to enable 2FA backup codes.
    */
   createUserMeMfaBackupCodeEnable(): Promise<IResponse<BackupCodesResponseV4>> {
@@ -222,6 +299,20 @@ export class UsersV4Admin$ {
   }
 
   /**
+   * This endpoint is used to enable 2FA backup codes.
+   */
+  createUserMeMfaBackupCodeEnable_v4(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/admin/users/me/mfa/backupCodes/enable'
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * @deprecated
    * This endpoint is used to download backup codes.
    */
   getUsersMeMfaBackupCodeDownload(): Promise<IResponseWithSync<unknown>> {
@@ -294,6 +385,26 @@ export class UsersV4Admin$ {
     return this.isValidationEnabled
       ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
       : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * This endpoint is to Invitation Historiy for specific new studio namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false.
+   */
+  getInvitationHistories_ByNS(): Promise<IResponseWithSync<InvitationHistoryResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/admin/namespaces/{namespace}/invitationHistories'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, InvitationHistoryResponse, 'InvitationHistoryResponse')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**
@@ -402,6 +513,29 @@ export class UsersV4Admin$ {
     return this.isValidationEnabled
       ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
       : Validate.unsafeResponse(() => resultPromise)
+  }
+
+  /**
+   * This endpoint is to Get list of users Invitation History for specific new studio namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Accepted Query: - offset - limit
+   */
+  getInvitationHistoriesUsers(queryParams?: {
+    limit?: number
+    offset?: number
+  }): Promise<IResponseWithSync<NamespaceInvitationHistoryUserV4Response>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v4/admin/namespaces/{namespace}/invitationHistories/users'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    const res = () =>
+      this.isValidationEnabled
+        ? Validate.responseType(() => resultPromise, NamespaceInvitationHistoryUserV4Response, 'NamespaceInvitationHistoryUserV4Response')
+        : Validate.unsafeResponse(() => resultPromise)
+
+    if (!this.cache) {
+      return SdkCache.withoutCache(res)
+    }
+    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
+    return SdkCache.withCache(cacheKey, res)
   }
 
   /**

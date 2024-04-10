@@ -14,7 +14,8 @@ export const UserInvitationV3 = z.object({
   isNewStudio: z.boolean().nullish(),
   namespace: z.string().nullish(),
   namespaceDisplayName: z.string().nullish(),
-  roles: z.array(NamespaceRole)
+  roles: z.array(NamespaceRole),
+  studioNamespace: z.string().nullish()
 })
 
 export interface UserInvitationV3 extends z.TypeOf<typeof UserInvitationV3> {}

@@ -33,6 +33,7 @@ export function PublicGameBinaryRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     limit?: number
     offset?: number
     query?: string | null
+    tags?: string[]
   }): Promise<ListGameBinaryRecordsResponse> {
     const $ = new PublicGameBinaryRecord$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.getBinaries(queryParams)

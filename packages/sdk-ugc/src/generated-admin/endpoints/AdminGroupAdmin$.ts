@@ -20,7 +20,7 @@ export class AdminGroupAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user group paginated
    */
   getGroups(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGroupResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
@@ -40,7 +40,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]
+   * Create group
    */
   createGroup(data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
     const params = {} as SDKRequestConfig
@@ -53,7 +53,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   * Delete group by group ID
    */
   deleteGroup_ByGroupId(groupId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -66,7 +66,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user group by group ID
    */
   getGroup_ByGroupId(groupId: string): Promise<IResponseWithSync<CreateGroupResponse>> {
     const params = {} as SDKRequestConfig
@@ -86,7 +86,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE] replace group name and contents with new ones.
+   * Replace group name and contents with new ones.
    */
   updateGroup_ByGroupId(groupId: string, data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
     const params = {} as SDKRequestConfig
@@ -99,7 +99,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user group paginated
    */
   getGroups_ByUserId(
     userId: string,
@@ -124,7 +124,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get content belong to a group
    */
   getContents_ByGroupId(
     groupId: string,
@@ -149,7 +149,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get contents belong to a group
    */
   getContents_ByGroupId_ByNS(
     groupId: string,
@@ -174,7 +174,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]
+   * Delete group
    */
   deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -190,7 +190,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]&lt;/b&gt;.
+   * Get user group by group ID
    */
   getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponseWithSync<CreateGroupResponse>> {
     const params = {} as SDKRequestConfig
@@ -213,7 +213,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE] replace group name and contents with new ones.
+   * Replace group name and contents with new ones.
    */
   updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
     const params = {} as SDKRequestConfig
@@ -229,7 +229,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get content belong to a group
    */
   getContents_ByUserId_ByGroupId(
     userId: string,
@@ -256,7 +256,7 @@ export class AdminGroupAdmin$ {
   }
 
   /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
+   * Get contents belong to a group
    */
   getContents_ByUserId_ByGroupId_ByNS(
     userId: string,

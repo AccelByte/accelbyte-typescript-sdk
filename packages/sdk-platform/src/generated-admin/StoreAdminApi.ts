@@ -8,6 +8,8 @@
  */
 /* eslint-disable camelcase */
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { CatalogConfigInfo } from '../generated-definitions/CatalogConfigInfo.js'
+import { CatalogConfigUpdate } from '../generated-definitions/CatalogConfigUpdate.js'
 import { CatalogDefinitionInfoArray } from '../generated-definitions/CatalogDefinitionInfoArray.js'
 import { ExportStoreRequest } from '../generated-definitions/ExportStoreRequest.js'
 import { ExportStoreToCsvRequest } from '../generated-definitions/ExportStoreToCsvRequest.js'
@@ -44,6 +46,37 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createStore(data: StoreCreate): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.createStore(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * This API is used to import a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/import to import store.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function updateStoreImport(data: { file?: File }, queryParams?: { storeId?: string | null }): Promise<StoreInfo> {
+    const $ = new StoreAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateStoreImport(data, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Get catalog config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:STORE&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getCatalogConfigs(): Promise<CatalogConfigInfo> {
+    const $ = new StoreAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getCatalogConfigs()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:STORE, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated catalog config&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function updateCatalogConfig(data: CatalogConfigUpdate): Promise<CatalogConfigInfo> {
+    const $ = new StoreAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.updateCatalogConfig(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -101,12 +134,12 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * This API is used to import a store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
-  async function updateStoreImport(
+  async function updateStoreImport_ByNS(
     data: { file?: File },
     queryParams?: { storeId?: string | null; strictMode?: boolean | null }
   ): Promise<ImportStoreResult> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
-    const resp = await $.updateStoreImport(data, queryParams)
+    const resp = await $.updateStoreImport_ByNS(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -127,6 +160,17 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function updateClone_ByStoreId(storeId: string, queryParams?: { targetStoreId?: string | null }): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
     const resp = await $.updateClone_ByStoreId(storeId, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * This API is used to export a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/export to export store.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getExport_ByStoreId(storeId: string): Promise<unknown> {
+    const $ = new StoreAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const resp = await $.getExport_ByStoreId(storeId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -219,14 +263,18 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getStores,
     createStore,
+    updateStoreImport,
+    getCatalogConfigs,
+    updateCatalogConfig,
     deleteStore_ByStoreId,
     getStore_ByStoreId,
     updateStore_ByStoreId,
     deleteStorePublished,
     getStoresPublished,
-    updateStoreImport,
+    updateStoreImport_ByNS,
     createStoreExportByCsv,
     updateClone_ByStoreId,
+    getExport_ByStoreId,
     getStoresPublishedBackup,
     getStoresCatalogDefinition,
     updateStorePublishedRollback,

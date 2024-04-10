@@ -31,6 +31,7 @@ export class PublicPlayerBinaryRecord$ {
     limit?: number
     offset?: number
     query?: string | null
+    tags?: string[]
   }): Promise<IResponseWithSync<ListPlayerBinaryRecordsResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/me/binaries'.replace('{namespace}', this.namespace)
@@ -136,7 +137,7 @@ export class PublicPlayerBinaryRecord$ {
    */
   getBinariesPublic_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; tags?: string[] }
   ): Promise<IResponseWithSync<ListPlayerBinaryRecordsResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/{userId}/binaries/public'
