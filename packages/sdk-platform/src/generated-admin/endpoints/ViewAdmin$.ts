@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { FullViewInfo } from '../../generated-definitions/FullViewInfo.js'
@@ -16,26 +16,19 @@ import { ViewUpdate } from '../../generated-definitions/ViewUpdate.js'
 
 export class ViewAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to list all views.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of views&lt;/li&gt;&lt;/ul&gt;
    */
-  getViews(queryParams?: { storeId?: string | null }): Promise<IResponseWithSync<ListViewInfoArray>> {
+  getViews(queryParams?: { storeId?: string | null }): Promise<IResponse<ListViewInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/views'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListViewInfoArray, 'ListViewInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListViewInfoArray, 'ListViewInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -67,21 +60,14 @@ export class ViewAdmin$ {
   /**
    * This API is used to get a view.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: view data&lt;/li&gt;&lt;/ul&gt;
    */
-  getView_ByViewId(viewId: string, queryParams?: { storeId?: string | null }): Promise<IResponseWithSync<FullViewInfo>> {
+  getView_ByViewId(viewId: string, queryParams?: { storeId?: string | null }): Promise<IResponse<FullViewInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/views/{viewId}'.replace('{namespace}', this.namespace).replace('{viewId}', viewId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullViewInfo, 'FullViewInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullViewInfo, 'FullViewInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

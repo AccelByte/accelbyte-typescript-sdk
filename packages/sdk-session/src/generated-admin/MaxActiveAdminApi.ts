@@ -16,7 +16,6 @@ export function MaxActiveAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -24,7 +23,7 @@ export function MaxActiveAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Reconcile Max Active Session.
    */
   async function createReconcile_ByName(name: string, data: RequestReconcileMaxActiveSession): Promise<unknown> {
-    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createReconcile_ByName(name, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +33,7 @@ export function MaxActiveAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Get Member Active Session.
    */
   async function getMemberactivesession_ByName_ByUserId(name: string, userId: string): Promise<MemberActiveSession> {
-    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMemberactivesession_ByName_ByUserId(name, userId)
     if (resp.error) throw resp.error
     return resp.response.data

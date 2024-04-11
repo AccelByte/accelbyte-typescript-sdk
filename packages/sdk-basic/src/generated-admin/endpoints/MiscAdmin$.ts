@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AddCountryGroupRequest } from '../../generated-definitions/AddCountryGroupRequest.js'
@@ -18,87 +18,59 @@ import { UpdateCountryGroupRequest } from '../../generated-definitions/UpdateCou
 
 export class MiscAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
    * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11204&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
    */
-  getMiscCountries(queryParams?: { lang?: string | null }): Promise<IResponseWithSync<CountryObjectArray>> {
+  getMiscCountries(queryParams?: { lang?: string | null }): Promise<IResponse<CountryObjectArray>> {
     const params = { lang: 'en', ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountryObjectArray, 'CountryObjectArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountryObjectArray, 'CountryObjectArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11206&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;
    */
-  getMiscLanguages(): Promise<IResponseWithSync<unknown>> {
+  getMiscLanguages(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/languages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * List time zones.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11205&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: time zones&lt;/li&gt;&lt;/ul&gt;
    */
-  getMiscTimezones(): Promise<IResponseWithSync<unknown>> {
+  getMiscTimezones(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/timezones'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * List country groups. Will return all available country groups if the query param is not specified&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource = &lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:MISC&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11203&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of country groups&lt;/li&gt;&lt;/ul&gt;
    */
-  getMiscCountrygroups(queryParams?: { groupCode?: string | null }): Promise<IResponseWithSync<RetrieveCountryGroupResponseArray>> {
+  getMiscCountrygroups(queryParams?: { groupCode?: string | null }): Promise<IResponse<RetrieveCountryGroupResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/countrygroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrieveCountryGroupResponseArray, 'RetrieveCountryGroupResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrieveCountryGroupResponseArray, 'RetrieveCountryGroupResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

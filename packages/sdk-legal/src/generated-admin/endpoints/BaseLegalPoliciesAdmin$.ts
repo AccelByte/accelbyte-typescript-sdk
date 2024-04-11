@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { CreateBasePolicyRequest } from '../../generated-definitions/CreateBasePolicyRequest.js'
 import { CreateBasePolicyResponse } from '../../generated-definitions/CreateBasePolicyResponse.js'
@@ -19,46 +19,32 @@ import { UpdateBasePolicyResponse } from '../../generated-definitions/UpdateBase
 
 export class BaseLegalPoliciesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve all supported policy types.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<IResponseWithSync<RetrievePolicyTypeResponseArray>> {
+  getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<IResponse<RetrievePolicyTypeResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/policy-types'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrievePolicyTypeResponseArray, 'RetrievePolicyTypeResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrievePolicyTypeResponseArray, 'RetrievePolicyTypeResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Retrieve all base policies.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getBasePolicies(): Promise<IResponseWithSync<RetrieveBasePolicyResponseArray>> {
+  getBasePolicies(): Promise<IResponse<RetrieveBasePolicyResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/admin/base-policies'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrieveBasePolicyResponseArray, 'RetrieveBasePolicyResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrieveBasePolicyResponseArray, 'RetrieveBasePolicyResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -77,21 +63,14 @@ export class BaseLegalPoliciesAdmin$ {
   /**
    * Retrieve a base policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<IResponseWithSync<RetrieveBasePolicyResponse>> {
+  getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<IResponse<RetrieveBasePolicyResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/admin/base-policies/{basePolicyId}'.replace('{basePolicyId}', basePolicyId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrieveBasePolicyResponse, 'RetrieveBasePolicyResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrieveBasePolicyResponse, 'RetrieveBasePolicyResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -110,22 +89,15 @@ export class BaseLegalPoliciesAdmin$ {
   /**
    * Retrieve a Base Legal Policy based on a Particular Country.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<IResponseWithSync<RetrievePolicyResponse>> {
+  getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<IResponse<RetrievePolicyResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/admin/base-policies/{basePolicyId}/countries/{countryCode}'
       .replace('{basePolicyId}', basePolicyId)
       .replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrievePolicyResponse, 'RetrievePolicyResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrievePolicyResponse, 'RetrievePolicyResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

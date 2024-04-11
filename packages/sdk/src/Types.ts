@@ -24,7 +24,6 @@ import { RequestInterceptor, ResponseInterceptor, ErrorInterceptor } from './uti
 export interface ApiArgs {
   config?: SDKRequestConfig
   namespace?: string
-  cache?: boolean
   isValidationEnabled?: boolean
 }
 
@@ -58,11 +57,6 @@ export interface SDKOptions {
    * to `/iam/v3/oauth/token` whenever there is a `401 Unauthenticated` response status.
    */
   customInterceptors?: CustomInterceptors
-
-  /**
-   * [Experimental] Whether to cache the responses or not using the mechanism inside the SDK.
-   */
-  cache?: boolean
 
   /**
    * Use when in internal Accelbyte network. Must be used in server only environment.

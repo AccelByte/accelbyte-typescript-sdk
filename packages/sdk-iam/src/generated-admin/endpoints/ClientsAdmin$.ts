@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ClientCreationV3Request } from '../../generated-definitions/ClientCreationV3Request.js'
@@ -19,7 +19,7 @@ import { V3ClientUpdateSecretRequest } from '../../generated-definitions/V3Clien
 
 export class ClientsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * action code: 10308
@@ -31,21 +31,14 @@ export class ClientsAdmin$ {
     limit?: number
     offset?: number
     skipLoginQueue?: boolean | null
-  }): Promise<IResponseWithSync<ClientsV3Response>> {
+  }): Promise<IResponse<ClientsV3Response>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ClientsV3Response, 'ClientsV3Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ClientsV3Response, 'ClientsV3Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -107,23 +100,16 @@ export class ClientsAdmin$ {
   /**
    * action code: 10309
    */
-  getClient_ByClientId(clientId: string): Promise<IResponseWithSync<ClientV3Response>> {
+  getClient_ByClientId(clientId: string): Promise<IResponse<ClientV3Response>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/clients/{clientId}'
       .replace('{namespace}', this.namespace)
       .replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ClientV3Response, 'ClientV3Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ClientV3Response, 'ClientV3Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

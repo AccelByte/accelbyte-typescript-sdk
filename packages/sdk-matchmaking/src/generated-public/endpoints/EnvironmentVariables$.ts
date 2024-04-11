@@ -6,31 +6,24 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ListEnvironmentVariablesResponse } from '../../generated-definitions/ListEnvironmentVariablesResponse.js'
 
 export class EnvironmentVariables$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List environment variables.
    */
-  getEnvironmentVariables(): Promise<IResponseWithSync<ListEnvironmentVariablesResponse>> {
+  getEnvironmentVariables(): Promise<IResponse<ListEnvironmentVariablesResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/environment-variables'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListEnvironmentVariablesResponse, 'ListEnvironmentVariablesResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListEnvironmentVariablesResponse, 'ListEnvironmentVariablesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

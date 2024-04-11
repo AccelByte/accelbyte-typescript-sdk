@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateGoalRequest } from '../../generated-definitions/CreateGoalRequest.js'
@@ -16,7 +16,7 @@ import { UpdateGoalRequest } from '../../generated-definitions/UpdateGoalRequest
 
 export class GoalConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -24,23 +24,16 @@ export class GoalConfigurationAdmin$ {
   getGoals_ByChallengeCode(
     challengeCode: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
-  ): Promise<IResponseWithSync<GetGoalsResponse>> {
+  ): Promise<IResponse<GetGoalsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}/goals'
       .replace('{namespace}', this.namespace)
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetGoalsResponse, 'GetGoalsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetGoalsResponse, 'GetGoalsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -77,7 +70,7 @@ export class GoalConfigurationAdmin$ {
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
    */
-  getGoal_ByChallengeCode_ByCode(challengeCode: string, code: string): Promise<IResponseWithSync<GoalResponse>> {
+  getGoal_ByChallengeCode_ByCode(challengeCode: string, code: string): Promise<IResponse<GoalResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}/goals/{code}'
       .replace('{namespace}', this.namespace)
@@ -85,16 +78,9 @@ export class GoalConfigurationAdmin$ {
       .replace('{code}', code)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GoalResponse, 'GoalResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GoalResponse, 'GoalResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

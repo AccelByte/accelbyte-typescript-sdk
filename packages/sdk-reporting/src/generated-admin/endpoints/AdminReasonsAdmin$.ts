@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AdminAllReasonsResponse } from '../../generated-definitions/AdminAllReasonsResponse.js'
@@ -21,7 +21,7 @@ import { UpdateReasonGroupRequest } from '../../generated-definitions/UpdateReas
 
 export class AdminReasonsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This endpoint get reasons with pagination
@@ -31,21 +31,14 @@ export class AdminReasonsAdmin$ {
     limit?: number
     offset?: number
     title?: string | null
-  }): Promise<IResponseWithSync<AdminReasonListResponse>> {
+  }): Promise<IResponse<AdminReasonListResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasons'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AdminReasonListResponse, 'AdminReasonListResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AdminReasonListResponse, 'AdminReasonListResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -64,41 +57,27 @@ export class AdminReasonsAdmin$ {
   /**
    * This endpoint get all reasons without pagination.
    */
-  getReasonsAll(): Promise<IResponseWithSync<AdminAllReasonsResponse>> {
+  getReasonsAll(): Promise<IResponse<AdminAllReasonsResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasons/all'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AdminAllReasonsResponse, 'AdminAllReasonsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AdminAllReasonsResponse, 'AdminAllReasonsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Return list of reason groups ID and title under given namespace. To fetch the reasons inside a group, use get reason group endpoint.
    */
-  getReasonGroups(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ReasonGroupListResponse>> {
+  getReasonGroups(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ReasonGroupListResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasonGroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ReasonGroupListResponse, 'ReasonGroupListResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ReasonGroupListResponse, 'ReasonGroupListResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -120,21 +99,14 @@ export class AdminReasonsAdmin$ {
   getReasonsUnused(queryParams: {
     category: string | null
     extensionCategory?: string | null
-  }): Promise<IResponseWithSync<UnusedReasonListResponse>> {
+  }): Promise<IResponse<UnusedReasonListResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasons/unused'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UnusedReasonListResponse, 'UnusedReasonListResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UnusedReasonListResponse, 'UnusedReasonListResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -155,23 +127,16 @@ export class AdminReasonsAdmin$ {
   /**
    * This endpoint get a single reason.
    */
-  getReason_ByReasonId(reasonId: string): Promise<IResponseWithSync<AdminReasonResponse>> {
+  getReason_ByReasonId(reasonId: string): Promise<IResponse<AdminReasonResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasons/{reasonId}'
       .replace('{namespace}', this.namespace)
       .replace('{reasonId}', reasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AdminReasonResponse, 'AdminReasonResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AdminReasonResponse, 'AdminReasonResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -204,23 +169,16 @@ export class AdminReasonsAdmin$ {
       : Validate.unsafeResponse(() => resultPromise)
   }
 
-  getReasonGroup_ByGroupId(groupId: string): Promise<IResponseWithSync<ReasonGroupResponse>> {
+  getReasonGroup_ByGroupId(groupId: string): Promise<IResponse<ReasonGroupResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasonGroups/{groupId}'
       .replace('{namespace}', this.namespace)
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ReasonGroupResponse, 'ReasonGroupResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ReasonGroupResponse, 'ReasonGroupResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

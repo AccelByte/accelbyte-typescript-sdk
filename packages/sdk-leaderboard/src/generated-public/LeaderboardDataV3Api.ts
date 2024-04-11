@@ -18,7 +18,6 @@ export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -29,7 +28,7 @@ export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetLeaderboardRankingResp> {
-    const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAlltime_ByLeaderboardCode(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +38,7 @@ export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Bulk get users ranking in leaderboard, max allowed 20 userIDs at a time.&lt;/p&gt;
    */
   async function createUserBulk_ByLeaderboardCode(leaderboardCode: string, data: BulkUserIDsRequest): Promise<BulkUserRankingResponseV3> {
-    const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserBulk_ByLeaderboardCode(leaderboardCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +48,7 @@ export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
   async function getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<UserRankingResponseV3> {
-    const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByLeaderboardCode_ByUserId(leaderboardCode, userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +62,7 @@ export function LeaderboardDataV3Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     cycleId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetLeaderboardRankingResp> {
-    const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LeaderboardDataV3$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCycle_ByLeaderboardCode_ByCycleId(leaderboardCode, cycleId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

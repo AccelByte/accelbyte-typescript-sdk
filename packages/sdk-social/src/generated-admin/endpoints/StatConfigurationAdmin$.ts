@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { StatCreate } from '../../generated-definitions/StatCreate.js'
@@ -17,7 +17,7 @@ import { StatUpdate } from '../../generated-definitions/StatUpdate.js'
 
 export class StatConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List stats by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stats&lt;/li&gt;&lt;/ul&gt;
@@ -28,21 +28,14 @@ export class StatConfigurationAdmin$ {
     isPublic?: boolean | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<StatPagingSlicedResult>> {
+  }): Promise<IResponse<StatPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/social/v1/admin/namespaces/{namespace}/stats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StatPagingSlicedResult, 'StatPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StatPagingSlicedResult, 'StatPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -61,21 +54,14 @@ export class StatConfigurationAdmin$ {
   /**
    * Export all stat configurations for a given namespace into file At current, only JSON file is supported.&lt;p&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;*Required permission*: resource=&#34;ADMIN:NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getStatsExport(): Promise<IResponseWithSync<unknown>> {
+  getStatsExport(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/social/v1/admin/namespaces/{namespace}/stats/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -101,21 +87,14 @@ export class StatConfigurationAdmin$ {
     isPublic?: boolean | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<StatPagingSlicedResult>> {
+  }): Promise<IResponse<StatPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/social/v1/admin/namespaces/{namespace}/stats/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StatPagingSlicedResult, 'StatPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StatPagingSlicedResult, 'StatPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -136,23 +115,16 @@ export class StatConfigurationAdmin$ {
   /**
    * Get stat by statCode.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat info&lt;/ul&gt;
    */
-  getStat_ByStatCode(statCode: string): Promise<IResponseWithSync<StatInfo>> {
+  getStat_ByStatCode(statCode: string): Promise<IResponse<StatInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/social/v1/admin/namespaces/{namespace}/stats/{statCode}'
       .replace('{namespace}', this.namespace)
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StatInfo, 'StatInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StatInfo, 'StatInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BulkCreditRequest } from '../../generated-definitions/BulkCreditRequest.js'
@@ -29,7 +29,7 @@ import { WalletTransactionPagingSlicedResult } from '../../generated-definitions
 
 export class WalletAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
@@ -41,21 +41,14 @@ export class WalletAdmin$ {
     offset?: number
     origin?: 'Epic' | 'GooglePlay' | 'IOS' | 'Nintendo' | 'Oculus' | 'Other' | 'Playstation' | 'Steam' | 'System' | 'Twitch' | 'Xbox'
     userId?: string | null
-  }): Promise<IResponseWithSync<WalletPagingSlicedResult>> {
+  }): Promise<IResponse<WalletPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/wallets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, WalletPagingSlicedResult, 'WalletPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, WalletPagingSlicedResult, 'WalletPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -88,30 +81,23 @@ export class WalletAdmin$ {
    * @deprecated
    * get a wallet by wallet id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
-  getWallet_ByWalletId(walletId: string): Promise<IResponseWithSync<WalletInfo>> {
+  getWallet_ByWalletId(walletId: string): Promise<IResponse<WalletInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/wallets/{walletId}'
       .replace('{namespace}', this.namespace)
       .replace('{walletId}', walletId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, WalletInfo, 'WalletInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, WalletInfo, 'WalletInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * @deprecated
    * get a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
-  getWallet_ByUserId_ByWalletId(userId: string, walletId: string): Promise<IResponseWithSync<WalletInfo>> {
+  getWallet_ByUserId_ByWalletId(userId: string, walletId: string): Promise<IResponse<WalletInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{walletId}'
       .replace('{namespace}', this.namespace)
@@ -119,38 +105,24 @@ export class WalletAdmin$ {
       .replace('{walletId}', walletId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, WalletInfo, 'WalletInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, WalletInfo, 'WalletInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get platform wallet config list.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
-  getWalletConfig_ByPlatform(platform: string): Promise<IResponseWithSync<PlatformWalletConfigInfo>> {
+  getWalletConfig_ByPlatform(platform: string): Promise<IResponse<PlatformWalletConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/platforms/{platform}/wallet/config'
       .replace('{namespace}', this.namespace)
       .replace('{platform}', platform)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PlatformWalletConfigInfo, 'PlatformWalletConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PlatformWalletConfigInfo, 'PlatformWalletConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -237,23 +209,16 @@ export class WalletAdmin$ {
   /**
    * Get user currency wallet summary.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency wallet summary&lt;/li&gt;&lt;/ul&gt;
    */
-  getWalletsCurrenciesSummary_ByUserId(userId: string): Promise<IResponseWithSync<CurrencyWalletArray>> {
+  getWalletsCurrenciesSummary_ByUserId(userId: string): Promise<IResponse<CurrencyWalletArray>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/currencies/summary'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CurrencyWalletArray, 'CurrencyWalletArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CurrencyWalletArray, 'CurrencyWalletArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -266,7 +231,7 @@ export class WalletAdmin$ {
     queryParams: {
       origin: 'Epic' | 'GooglePlay' | 'IOS' | 'Nintendo' | 'Oculus' | 'Other' | 'Playstation' | 'Steam' | 'System' | 'Twitch' | 'Xbox'
     }
-  ): Promise<IResponseWithSync<unknown>> {
+  ): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{currencyCode}/check'
       .replace('{namespace}', this.namespace)
@@ -274,16 +239,9 @@ export class WalletAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -326,7 +284,7 @@ export class WalletAdmin$ {
     userId: string,
     walletId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<DetailedWalletTransactionPagingSlicedResult>> {
+  ): Promise<IResponse<DetailedWalletTransactionPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{walletId}/transactions'
       .replace('{namespace}', this.namespace)
@@ -334,20 +292,13 @@ export class WalletAdmin$ {
       .replace('{walletId}', walletId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            DetailedWalletTransactionPagingSlicedResult,
-            'DetailedWalletTransactionPagingSlicedResult'
-          )
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(
+          () => resultPromise,
+          DetailedWalletTransactionPagingSlicedResult,
+          'DetailedWalletTransactionPagingSlicedResult'
+        )
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -417,7 +368,7 @@ export class WalletAdmin$ {
     userId: string,
     currencyCode: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<WalletTransactionPagingSlicedResult>> {
+  ): Promise<IResponse<WalletTransactionPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/currencies/{currencyCode}/transactions'
       .replace('{namespace}', this.namespace)
@@ -425,15 +376,8 @@ export class WalletAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, WalletTransactionPagingSlicedResult, 'WalletTransactionPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, WalletTransactionPagingSlicedResult, 'WalletTransactionPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

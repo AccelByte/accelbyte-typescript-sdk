@@ -21,7 +21,6 @@ export function TicketAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -29,7 +28,7 @@ export function TicketAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Get ticket(code/key) dynamic based on booth name.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:TICKET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ticket dynamic&lt;/li&gt;&lt;/ul&gt;
    */
   async function getTicket_ByBoothName(boothName: string): Promise<TicketDynamicInfo> {
-    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getTicket_ByBoothName(boothName)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +38,7 @@ export function TicketAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get ticket(code/key) booth ID.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:TICKET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ticket booth id&lt;/li&gt;&lt;/ul&gt;
    */
   async function getId_ByBoothName(boothName: string): Promise<TicketBoothId> {
-    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getId_ByBoothName(boothName)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +48,7 @@ export function TicketAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Decrease ticket(code/key) sale if requested orderNo is already increased.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:TICKET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateDecrement_ByBoothName(boothName: string, data: TicketSaleDecrementRequest): Promise<unknown> {
-    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateDecrement_ByBoothName(boothName, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +58,7 @@ export function TicketAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; increase ticket(code/key) sale.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:TICKET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Ticket sale increment result&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIncrement_ByBoothName(boothName: string, data: TicketSaleIncrementRequest): Promise<TicketSaleIncrementResult> {
-    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateIncrement_ByBoothName(boothName, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +72,7 @@ export function TicketAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     boothName: string,
     data: TicketAcquireRequest
   ): Promise<TicketAcquireResult> {
-    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new TicketAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createTicket_ByUserId_ByBoothName(userId, boothName, data)
     if (resp.error) throw resp.error
     return resp.response.data

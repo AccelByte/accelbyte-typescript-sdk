@@ -6,52 +6,40 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { BanReasons } from '../../generated-definitions/BanReasons.js'
 import { Bans } from '../../generated-definitions/Bans.js'
 
 export class Bans$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans [GET]_**
    */
-  getBans(): Promise<IResponseWithSync<Bans>> {
+  getBans(): Promise<IResponse<Bans>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/bans'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled ? Validate.responseType(() => resultPromise, Bans, 'Bans') : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Bans, 'Bans')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans/reasons [GET]_**
    */
-  getBansReasons(): Promise<IResponseWithSync<BanReasons>> {
+  getBansReasons(): Promise<IResponse<BanReasons>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/bans/reasons'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BanReasons, 'BanReasons')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BanReasons, 'BanReasons')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

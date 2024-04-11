@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { GetAllPlayerBlockedByUsersResponse } from '../../generated-definitions/GetAllPlayerBlockedByUsersResponse.js'
@@ -21,26 +21,19 @@ import { SetPlayerSessionAttributeRequest } from '../../generated-definitions/Se
 
 export class PlayerAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get the number of players connected to the Lobby in the given namespace.
    */
-  getPlayerCcu(): Promise<IResponseWithSync<GetLobbyCcuResponse>> {
+  getPlayerCcu(): Promise<IResponse<GetLobbyCcuResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/player/namespaces/{namespace}/ccu'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLobbyCcuResponse, 'GetLobbyCcuResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLobbyCcuResponse, 'GetLobbyCcuResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -59,45 +52,31 @@ export class PlayerAdmin$ {
   /**
    * Get blocked players data by user id in a namespace.
    */
-  getBlockedPlayer_ByUserId(userId: string): Promise<IResponseWithSync<GetAllPlayerBlockedUsersResponse>> {
+  getBlockedPlayer_ByUserId(userId: string): Promise<IResponse<GetAllPlayerBlockedUsersResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/blocked'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedUsersResponse, 'GetAllPlayerBlockedUsersResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedUsersResponse, 'GetAllPlayerBlockedUsersResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get all player&#39;s session attribute by user id in a namespace.
    */
-  getAttributesPlayer_ByUserId(userId: string): Promise<IResponseWithSync<GetAllPlayerSessionAttributeResponse>> {
+  getAttributesPlayer_ByUserId(userId: string): Promise<IResponse<GetAllPlayerSessionAttributeResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/attributes'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetAllPlayerSessionAttributeResponse, 'GetAllPlayerSessionAttributeResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetAllPlayerSessionAttributeResponse, 'GetAllPlayerSessionAttributeResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -118,23 +97,16 @@ export class PlayerAdmin$ {
   /**
    * Load get players who blocked this player in a namespace based on user id
    */
-  getBlockedByPlayer_ByUserId(userId: string): Promise<IResponseWithSync<GetAllPlayerBlockedByUsersResponse>> {
+  getBlockedByPlayer_ByUserId(userId: string): Promise<IResponse<GetAllPlayerBlockedByUsersResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/blocked-by'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedByUsersResponse, 'GetAllPlayerBlockedByUsersResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedByUsersResponse, 'GetAllPlayerBlockedByUsersResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -155,10 +127,7 @@ export class PlayerAdmin$ {
   /**
    * Get player&#39;s specific session attribute by user id in a namespace.
    */
-  getAttributePlayer_ByUserId_ByAttribute(
-    userId: string,
-    attribute: string
-  ): Promise<IResponseWithSync<GetPlayerSessionAttributeResponse>> {
+  getAttributePlayer_ByUserId_ByAttribute(userId: string, attribute: string): Promise<IResponse<GetPlayerSessionAttributeResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/attributes/{attribute}'
       .replace('{namespace}', this.namespace)
@@ -166,15 +135,8 @@ export class PlayerAdmin$ {
       .replace('{attribute}', attribute)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetPlayerSessionAttributeResponse, 'GetPlayerSessionAttributeResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetPlayerSessionAttributeResponse, 'GetPlayerSessionAttributeResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ClientCreateRequest } from '../../generated-definitions/ClientCreateRequest.js'
@@ -19,27 +19,20 @@ import { ClientUpdateSecretRequest } from '../../generated-definitions/ClientUpd
 
 export class Clients$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [GET]_**
    */
-  getClients(): Promise<IResponseWithSync<ClientResponseArray>> {
+  getClients(): Promise<IResponse<ClientResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/clients'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ClientResponseArray, 'ClientResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ClientResponseArray, 'ClientResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -74,21 +67,14 @@ export class Clients$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [GET]_**
    */
-  getClient_ByClientId(clientId: string): Promise<IResponseWithSync<ClientResponse>> {
+  getClient_ByClientId(clientId: string): Promise<IResponse<ClientResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/clients/{clientId}'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ClientResponse, 'ClientResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ClientResponse, 'ClientResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -123,21 +109,14 @@ export class Clients$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [GET]_**
    */
-  getClients_ByNS(): Promise<IResponseWithSync<ClientResponseArray>> {
+  getClients_ByNS(): Promise<IResponse<ClientResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ClientResponseArray, 'ClientResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ClientResponseArray, 'ClientResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

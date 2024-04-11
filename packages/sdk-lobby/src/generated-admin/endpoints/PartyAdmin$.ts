@@ -6,55 +6,41 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { PartyData } from '../../generated-definitions/PartyData.js'
 
 export class PartyAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get party data in a namespace.
    */
-  getPartyParty_ByPartyId(partyId: string): Promise<IResponseWithSync<PartyData>> {
+  getPartyParty_ByPartyId(partyId: string): Promise<IResponse<PartyData>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}'
       .replace('{namespace}', this.namespace)
       .replace('{partyId}', partyId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PartyData, 'PartyData')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PartyData, 'PartyData')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get party data in a namespace.
    */
-  getParty_ByUserId(userId: string): Promise<IResponseWithSync<PartyData>> {
+  getParty_ByUserId(userId: string): Promise<IResponse<PartyData>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/party/namespaces/{namespace}/users/{userId}/party'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PartyData, 'PartyData')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PartyData, 'PartyData')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

@@ -16,7 +16,6 @@ export function GroupMemberAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -27,7 +26,7 @@ export function GroupMemberAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetGroupMemberListResponseV1> {
-    const $ = new GroupMemberAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupMemberAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getGroups_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +39,7 @@ export function GroupMemberAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     groupId: string,
     queryParams?: { limit?: number; offset?: number; order?: string | null }
   ): Promise<GetGroupMemberListResponseV1> {
-    const $ = new GroupMemberAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupMemberAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMembers_ByGroupId(groupId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -50,7 +49,7 @@ export function GroupMemberAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to get user group status information.
    */
   async function getStatus_ByUserId_ByGroupId(userId: string, groupId: string): Promise<GetUserGroupInformationResponseV1> {
-    const $ = new GroupMemberAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupMemberAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getStatus_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data

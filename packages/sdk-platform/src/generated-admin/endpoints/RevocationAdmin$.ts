@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { RevocationConfigInfo } from '../../generated-definitions/RevocationConfigInfo.js'
@@ -17,7 +17,7 @@ import { RevocationResult } from '../../generated-definitions/RevocationResult.j
 
 export class RevocationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Delete revocation config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:REVOCATION, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
@@ -35,21 +35,14 @@ export class RevocationAdmin$ {
   /**
    * Get revocation configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:REVOCATION, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Revocation config&lt;/li&gt;&lt;/ul&gt;
    */
-  getRevocationConfig(): Promise<IResponseWithSync<RevocationConfigInfo>> {
+  getRevocationConfig(): Promise<IResponse<RevocationConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/revocation/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RevocationConfigInfo, 'RevocationConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RevocationConfigInfo, 'RevocationConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -77,21 +70,14 @@ export class RevocationAdmin$ {
     status?: 'FAIL' | 'SUCCESS'
     transactionId?: string | null
     userId?: string | null
-  }): Promise<IResponseWithSync<RevocationHistoryPagingSlicedResult>> {
+  }): Promise<IResponse<RevocationHistoryPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/revocation/history'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RevocationHistoryPagingSlicedResult, 'RevocationHistoryPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RevocationHistoryPagingSlicedResult, 'RevocationHistoryPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

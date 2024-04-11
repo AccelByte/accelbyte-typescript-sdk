@@ -6,13 +6,13 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ListInventoryConfigurationsResp } from '../../generated-definitions/ListInventoryConfigurationsResp.js'
 
 export class PublicInventoryConfigurations$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination.
@@ -31,20 +31,13 @@ export class PublicInventoryConfigurations$ {
       | 'updatedAt'
       | 'updatedAt:asc'
       | 'updatedAt:desc'
-  }): Promise<IResponseWithSync<ListInventoryConfigurationsResp>> {
+  }): Promise<IResponse<ListInventoryConfigurationsResp>> {
     const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/inventoryConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListInventoryConfigurationsResp, 'ListInventoryConfigurationsResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListInventoryConfigurationsResp, 'ListInventoryConfigurationsResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

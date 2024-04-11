@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DeregisterLocalServerRequest } from '../../generated-definitions/DeregisterLocalServerRequest.js'
@@ -22,26 +22,19 @@ import { ShutdownServerRequest } from '../../generated-definitions/ShutdownServe
 
 export class Server$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Required permission: NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint lists all of dedicated servers in a namespace managed by this service. Parameter Offset and Count is Required
    */
-  getServers(queryParams: { count: number; offset: number; region?: string | null }): Promise<IResponseWithSync<ListServerResponse>> {
+  getServers(queryParams: { count: number; offset: number; region?: string | null }): Promise<IResponse<ListServerResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/dsmcontroller/namespaces/{namespace}/servers'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListServerResponse, 'ListServerResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListServerResponse, 'ListServerResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -86,21 +79,14 @@ export class Server$ {
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint counts all of dedicated servers in a region managed by this service.
    */
-  getServersCountDetailed(queryParams?: { region?: string | null }): Promise<IResponseWithSync<DetailedCountServerResponse>> {
+  getServersCountDetailed(queryParams?: { region?: string | null }): Promise<IResponse<DetailedCountServerResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/dsmcontroller/namespaces/{namespace}/servers/count/detailed'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DetailedCountServerResponse, 'DetailedCountServerResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DetailedCountServerResponse, 'DetailedCountServerResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -132,48 +118,34 @@ export class Server$ {
   /**
    * ``` Required permission: NAMESPACE:{namespace}:DSM:SERVER [UPDATE] Required scope: social This endpoint is intended to be called by dedicated server to query its session ID. DS should call this when it first receive player connection, to see if it is actually claimed```
    */
-  getSession_ByPodName(podName: string): Promise<IResponseWithSync<ServerSessionResponse>> {
+  getSession_ByPodName(podName: string): Promise<IResponse<ServerSessionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/namespaces/{namespace}/servers/{podName}/session'
       .replace('{namespace}', this.namespace)
       .replace('{podName}', podName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ServerSessionResponse, 'ServerSessionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ServerSessionResponse, 'ServerSessionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * ``` Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint is intended to be called by dedicated server to get the session timeout that will be used for the DS. DS will use this session timeout to make sure it regularly make heartbeat call to the DSMC, before the session timeout.```
    */
-  getConfigSessiontimeout_ByPodName(podName: string): Promise<IResponseWithSync<ServerDeploymentConfigSessionTimeoutResponse>> {
+  getConfigSessiontimeout_ByPodName(podName: string): Promise<IResponse<ServerDeploymentConfigSessionTimeoutResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/namespaces/{namespace}/servers/{podName}/config/sessiontimeout'
       .replace('{namespace}', this.namespace)
       .replace('{podName}', podName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            ServerDeploymentConfigSessionTimeoutResponse,
-            'ServerDeploymentConfigSessionTimeoutResponse'
-          )
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(
+          () => resultPromise,
+          ServerDeploymentConfigSessionTimeoutResponse,
+          'ServerDeploymentConfigSessionTimeoutResponse'
+        )
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CacheResult } from '../../generated-definitions/CacheResult.js'
@@ -17,26 +17,19 @@ import { TemplateCompactArray } from '../../generated-definitions/TemplateCompac
 
 export class TemplatesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve templates on a given namespace
    */
-  getTemplates(): Promise<IResponseWithSync<TemplateCompactArray>> {
+  getTemplates(): Promise<IResponse<TemplateCompactArray>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/admin/namespaces/{namespace}/templates'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TemplateCompactArray, 'TemplateCompactArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TemplateCompactArray, 'TemplateCompactArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -55,23 +48,16 @@ export class TemplatesAdmin$ {
   /**
    * Get template config on redis cache on a given namespace
    */
-  getCache_ByTemplate(template: string): Promise<IResponseWithSync<CacheResult>> {
+  getCache_ByTemplate(template: string): Promise<IResponse<CacheResult>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/cache'
       .replace('{namespace}', this.namespace)
       .replace('{template}', template)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CacheResult, 'CacheResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CacheResult, 'CacheResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -92,23 +78,16 @@ export class TemplatesAdmin$ {
   /**
    * Retrieve template configs from a given namespace.
    */
-  getConfigs_ByTemplate(template: string): Promise<IResponseWithSync<Configs>> {
+  getConfigs_ByTemplate(template: string): Promise<IResponse<Configs>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/configs'
       .replace('{namespace}', this.namespace)
       .replace('{template}', template)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Configs, 'Configs')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Configs, 'Configs')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -129,7 +108,7 @@ export class TemplatesAdmin$ {
   /**
    * Retrieve specific template config from a given namespace
    */
-  getConfig_ByTemplate_ByConfig(template: string, config: string): Promise<IResponseWithSync<Config>> {
+  getConfig_ByTemplate_ByConfig(template: string, config: string): Promise<IResponse<Config>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/admin/namespaces/{namespace}/templates/{template}/configs/{config}'
       .replace('{namespace}', this.namespace)
@@ -137,14 +116,9 @@ export class TemplatesAdmin$ {
       .replace('{config}', config)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled ? Validate.responseType(() => resultPromise, Config, 'Config') : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Config, 'Config')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

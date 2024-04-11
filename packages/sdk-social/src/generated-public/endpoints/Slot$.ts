@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { SlotInfo } from '../../generated-definitions/SlotInfo.js'
@@ -15,29 +15,22 @@ import { SlotMetadataUpdate } from '../../generated-definitions/SlotMetadataUpda
 
 export class Slot$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Get list of slots for a given user in namespace.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of slots&lt;/li&gt;&lt;/ul&gt;
    */
-  getSlots_ByUserId(userId: string): Promise<IResponseWithSync<SlotInfoArray>> {
+  getSlots_ByUserId(userId: string): Promise<IResponse<SlotInfoArray>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/slots'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SlotInfoArray, 'SlotInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SlotInfoArray, 'SlotInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -81,7 +74,7 @@ export class Slot$ {
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Get slot data.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slot data&lt;/li&gt;&lt;/ul&gt;
    */
-  getSlot_ByUserId_BySlotId(userId: string, slotId: string): Promise<IResponseWithSync<unknown>> {
+  getSlot_ByUserId_BySlotId(userId: string, slotId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/slots/{slotId}'
       .replace('{namespace}', this.namespace)
@@ -89,16 +82,9 @@ export class Slot$ {
       .replace('{slotId}', slotId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

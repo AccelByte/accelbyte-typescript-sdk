@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { Permissions } from '../../generated-definitions/Permissions.js'
@@ -25,27 +25,20 @@ import { UpdatePermissionScheduleRequest } from '../../generated-definitions/Upd
 
 export class Roles$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/roles [GET]_**
    */
-  getRoles(queryParams?: { isWildcard?: string | null }): Promise<IResponseWithSync<RoleResponseWithManagersArray>> {
+  getRoles(queryParams?: { isWildcard?: string | null }): Promise<IResponse<RoleResponseWithManagersArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/roles'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleResponseWithManagersArray, 'RoleResponseWithManagersArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleResponseWithManagersArray, 'RoleResponseWithManagersArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -80,21 +73,14 @@ export class Roles$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/roles/{roleId} [GET]_**
    */
-  getRole_ByRoleId(roleId: string): Promise<IResponseWithSync<RoleResponse>> {
+  getRole_ByRoleId(roleId: string): Promise<IResponse<RoleResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleResponse, 'RoleResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleResponse, 'RoleResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -119,21 +105,14 @@ export class Roles$ {
     before?: string | null
     isWildcard?: boolean | null
     limit?: number
-  }): Promise<IResponseWithSync<RoleNamesResponseV3>> {
+  }): Promise<IResponse<RoleNamesResponseV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/roles'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleNamesResponseV3, 'RoleNamesResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleNamesResponseV3, 'RoleNamesResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -154,21 +133,14 @@ export class Roles$ {
    * @deprecated
    * ## The endpoint is going to be deprecated Admin roles has its members listed in the role. ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/roles/{roleId}/admin [GET]_**
    */
-  getAdmin_ByRoleId(roleId: string): Promise<IResponseWithSync<RoleAdminStatusResponse>> {
+  getAdmin_ByRoleId(roleId: string): Promise<IResponse<RoleAdminStatusResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/roles/{roleId}/admin'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleAdminStatusResponse, 'RoleAdminStatusResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleAdminStatusResponse, 'RoleAdminStatusResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -203,21 +175,14 @@ export class Roles$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/roles/{roleId}/members [GET]_**
    */
-  getMembers_ByRoleId(roleId: string): Promise<IResponseWithSync<RoleMembersResponse>> {
+  getMembers_ByRoleId(roleId: string): Promise<IResponse<RoleMembersResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/roles/{roleId}/members'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleMembersResponse, 'RoleMembersResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleMembersResponse, 'RoleMembersResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -252,21 +217,14 @@ export class Roles$ {
    * @deprecated
    * ## The endpoint is going to be deprecated Role can only be assigned to other users by the role&#39;s manager. ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/roles/{roleId}/managers [GET]_**
    */
-  getManagers_ByRoleId(roleId: string): Promise<IResponseWithSync<RoleManagersResponse>> {
+  getManagers_ByRoleId(roleId: string): Promise<IResponse<RoleManagersResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/roles/{roleId}/managers'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleManagersResponse, 'RoleManagersResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleManagersResponse, 'RoleManagersResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -286,21 +244,14 @@ export class Roles$ {
   /**
    * This endpoint is used to get non-admin role based on specify roleId. action code : 10417
    */
-  getRole_ByRoleId_v3(roleId: string): Promise<IResponseWithSync<RoleResponse>> {
+  getRole_ByRoleId_v3(roleId: string): Promise<IResponse<RoleResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleResponse, 'RoleResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleResponse, 'RoleResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

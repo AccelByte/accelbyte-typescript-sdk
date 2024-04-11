@@ -6,55 +6,41 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { RewardInfo } from '../../generated-definitions/RewardInfo.js'
 import { RewardPagingSlicedResult } from '../../generated-definitions/RewardPagingSlicedResult.js'
 
 export class Reward$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to get reward by reward code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward instance&lt;/li&gt;&lt;/ul&gt;
    */
-  getRewardsByCode(queryParams: { rewardCode: string | null }): Promise<IResponseWithSync<RewardInfo>> {
+  getRewardsByCode(queryParams: { rewardCode: string | null }): Promise<IResponse<RewardInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/rewards/byCode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RewardInfo, 'RewardInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RewardInfo, 'RewardInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get reward by reward Id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward instance&lt;/li&gt;&lt;/ul&gt;
    */
-  getReward_ByRewardId(rewardId: string): Promise<IResponseWithSync<RewardInfo>> {
+  getReward_ByRewardId(rewardId: string): Promise<IResponse<RewardInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/rewards/{rewardId}'
       .replace('{namespace}', this.namespace)
       .replace('{rewardId}', rewardId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RewardInfo, 'RewardInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RewardInfo, 'RewardInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -65,20 +51,13 @@ export class Reward$ {
     limit?: number
     offset?: number
     sortBy?: string[]
-  }): Promise<IResponseWithSync<RewardPagingSlicedResult>> {
+  }): Promise<IResponse<RewardPagingSlicedResult>> {
     const params = { limit: 20, sortBy: ['namespace:asc', 'rewardCode:asc'], ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/rewards/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RewardPagingSlicedResult, 'RewardPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RewardPagingSlicedResult, 'RewardPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

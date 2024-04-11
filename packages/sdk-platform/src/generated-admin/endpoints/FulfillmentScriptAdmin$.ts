@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { FulfillmentScriptCreate } from '../../generated-definitions/FulfillmentScriptCreate.js'
@@ -16,26 +16,19 @@ import { FulfillmentScriptUpdate } from '../../generated-definitions/Fulfillment
 
 export class FulfillmentScriptAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;List all fulfillment scripts.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:FULFILLMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getFulfillmentScripts(): Promise<IResponseWithSync<FulfillmentScriptInfoArray>> {
+  getFulfillmentScripts(): Promise<IResponse<FulfillmentScriptInfoArray>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/fulfillment/scripts'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FulfillmentScriptInfoArray, 'FulfillmentScriptInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FulfillmentScriptInfoArray, 'FulfillmentScriptInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -54,21 +47,14 @@ export class FulfillmentScriptAdmin$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get fulfillment script by id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:FULFILLMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get fulfillment script&lt;/li&gt;&lt;/ul&gt;
    */
-  getFulfillmentScript_ById(id: string): Promise<IResponseWithSync<FulfillmentScriptInfo>> {
+  getFulfillmentScript_ById(id: string): Promise<IResponse<FulfillmentScriptInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

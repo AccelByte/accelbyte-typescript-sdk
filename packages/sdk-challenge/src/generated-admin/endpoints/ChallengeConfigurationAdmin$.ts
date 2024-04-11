@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ChallengeResponse } from '../../generated-definitions/ChallengeResponse.js'
@@ -18,7 +18,7 @@ import { UpdateChallengeRequest } from '../../generated-definitions/UpdateChalle
 
 export class ChallengeConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -28,21 +28,14 @@ export class ChallengeConfigurationAdmin$ {
     offset?: number
     sortBy?: string | null
     status?: 'INIT' | 'RETIRED' | 'TIED'
-  }): Promise<IResponseWithSync<ListChallengeResponse>> {
+  }): Promise<IResponse<ListChallengeResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListChallengeResponse, 'ListChallengeResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListChallengeResponse, 'ListChallengeResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -76,23 +69,16 @@ export class ChallengeConfigurationAdmin$ {
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
    */
-  getChallenge_ByChallengeCode(challengeCode: string): Promise<IResponseWithSync<ChallengeResponse>> {
+  getChallenge_ByChallengeCode(challengeCode: string): Promise<IResponse<ChallengeResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}'
       .replace('{namespace}', this.namespace)
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChallengeResponse, 'ChallengeResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChallengeResponse, 'ChallengeResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -131,23 +117,16 @@ export class ChallengeConfigurationAdmin$ {
   getPeriods_ByChallengeCode(
     challengeCode: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<ListPeriodsResponse>> {
+  ): Promise<IResponse<ListPeriodsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}/periods'
       .replace('{namespace}', this.namespace)
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListPeriodsResponse, 'ListPeriodsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListPeriodsResponse, 'ListPeriodsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

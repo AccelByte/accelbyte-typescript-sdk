@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ListRuleSetsResponse } from '../../generated-definitions/ListRuleSetsResponse.js'
@@ -14,26 +14,19 @@ import { RuleSetPayload } from '../../generated-definitions/RuleSetPayload.js'
 
 export class RuleSets$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List rule sets.
    */
-  getRulesets(queryParams?: { limit?: number; name?: string | null; offset?: number }): Promise<IResponseWithSync<ListRuleSetsResponse>> {
+  getRulesets(queryParams?: { limit?: number; name?: string | null; offset?: number }): Promise<IResponse<ListRuleSetsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/rulesets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListRuleSetsResponse, 'ListRuleSetsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListRuleSetsResponse, 'ListRuleSetsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -65,21 +58,14 @@ export class RuleSets$ {
   /**
    * Get details for a specific rule set
    */
-  getRuleset_ByRuleset(ruleset: string): Promise<IResponseWithSync<RuleSetPayload>> {
+  getRuleset_ByRuleset(ruleset: string): Promise<IResponse<RuleSetPayload>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/rulesets/{ruleset}'.replace('{namespace}', this.namespace).replace('{ruleset}', ruleset)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RuleSetPayload, 'RuleSetPayload')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RuleSetPayload, 'RuleSetPayload')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

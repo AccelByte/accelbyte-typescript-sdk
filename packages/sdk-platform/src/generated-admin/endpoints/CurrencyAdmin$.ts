@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { CurrencyConfig } from '../../generated-definitions/CurrencyConfig.js'
 import { CurrencyCreate } from '../../generated-definitions/CurrencyCreate.js'
@@ -17,26 +17,19 @@ import { CurrencyUpdate } from '../../generated-definitions/CurrencyUpdate.js'
 
 export class CurrencyAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List currencies of a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CURRENCY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Currency List&lt;/li&gt;&lt;/ul&gt;
    */
-  getCurrencies(queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' }): Promise<IResponseWithSync<CurrencyInfoArray>> {
+  getCurrencies(queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' }): Promise<IResponse<CurrencyInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/currencies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CurrencyInfoArray, 'CurrencyInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CurrencyInfoArray, 'CurrencyInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -85,44 +78,30 @@ export class CurrencyAdmin$ {
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Get currency config by code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CURRENCY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: simplified Currency&lt;/li&gt;&lt;/ul&gt;
    */
-  getConfig_ByCurrencyCode(currencyCode: string): Promise<IResponseWithSync<CurrencyConfig>> {
+  getConfig_ByCurrencyCode(currencyCode: string): Promise<IResponse<CurrencyConfig>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/currencies/{currencyCode}/config'
       .replace('{namespace}', this.namespace)
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CurrencyConfig, 'CurrencyConfig')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CurrencyConfig, 'CurrencyConfig')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get currency summary by code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CURRENCY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: simplified Currency&lt;/li&gt;&lt;/ul&gt;
    */
-  getSummary_ByCurrencyCode(currencyCode: string): Promise<IResponseWithSync<CurrencySummary>> {
+  getSummary_ByCurrencyCode(currencyCode: string): Promise<IResponse<CurrencySummary>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/currencies/{currencyCode}/summary'
       .replace('{namespace}', this.namespace)
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CurrencySummary, 'CurrencySummary')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CurrencySummary, 'CurrencySummary')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

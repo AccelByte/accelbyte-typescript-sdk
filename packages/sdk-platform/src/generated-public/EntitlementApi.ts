@@ -32,7 +32,6 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -51,7 +50,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       offset?: number
     }
   ): Promise<EntitlementPagingSlicedResult> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlements_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -64,7 +63,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { availablePlatformOnly?: boolean | null; ids?: string[] }
   ): Promise<EntitlementInfoArray> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsByIds_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -81,7 +80,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
     }
   ): Promise<EntitlementInfo> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsBySku_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -91,7 +90,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user app entitlement by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlementsByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<AppEntitlementInfo> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsByAppId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -110,7 +109,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       startDate?: string | null
     }
   ): Promise<UserEntitlementHistoryPagingSlicedResultArray> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsHistory_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -124,7 +123,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     itemIds?: string[]
     skus?: string[]
   }): Promise<Ownership> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeEntitlementsOwnershipAny(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -141,7 +140,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
     }
   ): Promise<EntitlementInfo> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsByItemId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -155,7 +154,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     itemIds?: string[]
     skus?: string[]
   }): Promise<OwnershipToken> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeEntitlementsOwnershipToken(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -168,7 +167,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { appType: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'; limit?: number; offset?: number }
   ): Promise<AppEntitlementPagingSlicedResult> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsByAppType_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -181,7 +180,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sku: string | null
     entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
   }): Promise<TimedOwnership> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeEntitlementsOwnershipBySku(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -191,7 +190,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get my app entitlement ownership by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Path&#39;s namespace&lt;/i&gt; : &lt;ul&gt;&lt;li&gt;can be filled with &lt;b&gt;publisher namespace&lt;/b&gt; in order to get &lt;b&gt;publisher namespace app entitlement ownership&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   async function getUsersMeEntitlementsOwnershipByAppId(queryParams: { appId: string | null }): Promise<Ownership> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeEntitlementsOwnershipByAppId(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -204,7 +203,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     itemId: string | null
     entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
   }): Promise<TimedOwnership> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeEntitlementsOwnershipByItemId(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -217,7 +216,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { appIds?: string[]; itemIds?: string[]; skus?: string[] }
   ): Promise<Ownership> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsOwnershipAny_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -227,7 +226,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user entitlement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlement_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<EntitlementInfo> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlement_ByUserId_ByEntitlementId(userId, entitlementId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -243,7 +242,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
     }
   ): Promise<TimedOwnership> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsOwnershipBySku_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -253,7 +252,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user app entitlement ownership by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlementsOwnershipByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<Ownership> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsOwnershipByAppId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -269,7 +268,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
     }
   ): Promise<TimedOwnership> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsOwnershipByItemId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -282,7 +281,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { ids?: string[] }
   ): Promise<EntitlementOwnershipArray> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEntitlementsOwnershipByItemIds_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -296,7 +295,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: EntitlementSoldRequest
   ): Promise<EntitlementSoldResult> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateSell_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -310,7 +309,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: EntitlementSplitRequest
   ): Promise<EntitlementSplitResult> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateSplit_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -324,7 +323,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: EntitlementTransferRequest
   ): Promise<EntitlementTransferResult> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateTransfer_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -338,7 +337,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: EntitlementDecrement
   ): Promise<EntitlementDecrementResult> {
-    const $ = new Entitlement$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Entitlement$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateDecrement_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data

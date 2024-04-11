@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ListMatchFunctionsResponse } from '../../generated-definitions/ListMatchFunctionsResponse.js'
@@ -15,26 +15,19 @@ import { MatchFunctionRequest } from '../../generated-definitions/MatchFunctionR
 
 export class MatchFunctions$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List existing match functions.
    */
-  getMatchFunctions(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListMatchFunctionsResponse>> {
+  getMatchFunctions(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ListMatchFunctionsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-functions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListMatchFunctionsResponse, 'ListMatchFunctionsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListMatchFunctionsResponse, 'ListMatchFunctionsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

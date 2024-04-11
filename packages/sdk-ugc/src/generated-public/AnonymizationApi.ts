@@ -14,7 +14,6 @@ export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -22,7 +21,7 @@ export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete all user group
    */
   async function deleteGroup_ByUserId(userId: string): Promise<unknown> {
-    const $ = new Anonymization$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Anonymization$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteGroup_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +31,7 @@ export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission NAMESPACE:{namespace}:USER:{userId}&#34; [DELETE]
    */
   async function deleteState_ByUserId(userId: string): Promise<unknown> {
-    const $ = new Anonymization$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Anonymization$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteState_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +41,7 @@ export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete all user channel
    */
   async function deleteChannel_ByUserId(userId: string): Promise<unknown> {
-    const $ = new Anonymization$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Anonymization$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteChannel_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +51,7 @@ export function AnonymizationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
    */
   async function deleteContent_ByUserId(userId: string): Promise<unknown> {
-    const $ = new Anonymization$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Anonymization$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteContent_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

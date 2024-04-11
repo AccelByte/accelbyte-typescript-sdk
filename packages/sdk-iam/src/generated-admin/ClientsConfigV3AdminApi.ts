@@ -18,7 +18,6 @@ export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List client templates
    */
   async function getClientConfigTemplates(): Promise<ListTemplatesResponse> {
-    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getClientConfigTemplates()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +38,7 @@ export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: PermissionSetDeleteGroupRequest,
     queryParams?: { forceDelete?: boolean | null }
   ): Promise<unknown> {
-    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteClientConfigPermission(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +48,7 @@ export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List Client available permissions
    */
   async function getClientConfigPermissions(queryParams?: { excludePermissions?: boolean | null }): Promise<ListClientPermissionSet> {
-    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getClientConfigPermissions(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +61,7 @@ export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: ListUpsertModulesRequest,
     queryParams?: { forceDelete?: boolean | null }
   ): Promise<unknown> {
-    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateClientConfigPermission(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

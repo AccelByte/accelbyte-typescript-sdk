@@ -6,39 +6,32 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { RetrieveLocalizedPolicyVersionPublicResponse } from '../../generated-definitions/RetrieveLocalizedPolicyVersionPublicResponse.js'
 
 export class LocalizedPolicyVersionsWithNamespace$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
    */
   getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
-  ): Promise<IResponseWithSync<RetrieveLocalizedPolicyVersionPublicResponse>> {
+  ): Promise<IResponse<RetrieveLocalizedPolicyVersionPublicResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/public/namespaces/{namespace}/localized-policy-versions/{localizedPolicyVersionId}'
       .replace('{namespace}', this.namespace)
       .replace('{localizedPolicyVersionId}', localizedPolicyVersionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            RetrieveLocalizedPolicyVersionPublicResponse,
-            'RetrieveLocalizedPolicyVersionPublicResponse'
-          )
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(
+          () => resultPromise,
+          RetrieveLocalizedPolicyVersionPublicResponse,
+          'RetrieveLocalizedPolicyVersionPublicResponse'
+        )
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

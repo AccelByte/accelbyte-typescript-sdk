@@ -16,7 +16,6 @@ export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -24,7 +23,7 @@ export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get config paginated
    */
   async function getConfigs(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetConfigsResponse> {
-    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getConfigs(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +33,7 @@ export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will create a new config if the *key* doesn&#39;t exist. Allowed key value: - *contentReview*: *enabled*,*disabled*
    */
   async function patchConfig_ByKey(key: string, data: UpdateConfigRequest): Promise<unknown> {
-    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchConfig_ByKey(key, data)
     if (resp.error) throw resp.error
     return resp.response.data

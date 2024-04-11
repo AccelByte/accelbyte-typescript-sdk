@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { NamespaceContext } from '../../generated-definitions/NamespaceContext.js'
 import { NamespaceCreate } from '../../generated-definitions/NamespaceCreate.js'
@@ -18,26 +18,19 @@ import { NamespaceUpdate } from '../../generated-definitions/NamespaceUpdate.js'
 
 export class NamespaceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get all namespaces.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11303&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of namespaces&lt;/li&gt;&lt;/ul&gt;
    */
-  getNamespaces(queryParams?: { activeOnly?: boolean | null }): Promise<IResponseWithSync<NamespaceInfoArray>> {
+  getNamespaces(queryParams?: { activeOnly?: boolean | null }): Promise<IResponse<NamespaceInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -69,41 +62,27 @@ export class NamespaceAdmin$ {
   /**
    * Get a namespace.&lt;br&gt;In multi tenant mode, parentNamespace will be returned.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11304&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: namespace&lt;/li&gt;&lt;/ul&gt;
    */
-  getNamespace_ByNamespace(queryParams?: { activeOnly?: boolean | null }): Promise<IResponseWithSync<NamespaceInfo>> {
+  getNamespace_ByNamespace(queryParams?: { activeOnly?: boolean | null }): Promise<IResponse<NamespaceInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespaceInfo, 'NamespaceInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespaceInfo, 'NamespaceInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get game namespaces.&lt;br&gt;In multi tenant mode, a given super admin namespace will return all game namespaces of studio namespaces&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11308&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of namespaces&lt;/li&gt;&lt;/ul&gt;
    */
-  getGame(queryParams?: { activeOnly?: boolean | null }): Promise<IResponseWithSync<NamespaceInfoArray>> {
+  getGame(queryParams?: { activeOnly?: boolean | null }): Promise<IResponse<NamespaceInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -122,21 +101,14 @@ export class NamespaceAdmin$ {
   /**
    * Get child namespaces.&lt;br&gt;If input namespace is publisher namespace, then it will return its all studio namespace.&lt;br&gt;If input namespace is studio namespace, then it will return its all game namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of child namespaces&lt;/li&gt;&lt;/ul&gt;
    */
-  getChild(queryParams?: { activeOnly?: boolean | null }): Promise<IResponseWithSync<NamespaceInfoArray>> {
+  getChild(queryParams?: { activeOnly?: boolean | null }): Promise<IResponse<NamespaceInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/child'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -155,40 +127,26 @@ export class NamespaceAdmin$ {
   /**
    * Get context of namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: context of namespace&lt;/li&gt;&lt;/ul&gt;
    */
-  getContext(): Promise<IResponseWithSync<NamespaceContext>> {
+  getContext(): Promise<IResponse<NamespaceContext>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/context'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespaceContext, 'NamespaceContext')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespaceContext, 'NamespaceContext')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get namespace info related publisher namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11305&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Namespace info related publisher namespace&lt;/li&gt;&lt;/ul&gt;
    */
-  getPublisher(): Promise<IResponseWithSync<NamespacePublisherInfo>> {
+  getPublisher(): Promise<IResponse<NamespacePublisherInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/publisher'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespacePublisherInfo, 'NamespacePublisherInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespacePublisherInfo, 'NamespacePublisherInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

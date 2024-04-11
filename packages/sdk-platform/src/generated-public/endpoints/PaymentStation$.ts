@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { Customization } from '../../generated-definitions/Customization.js'
@@ -21,7 +21,7 @@ import { TaxResult } from '../../generated-definitions/TaxResult.js'
 
 export class PaymentStation$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Check and get a payment order&#39;s should pay tax.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: tax result&lt;/li&gt;&lt;/ul&gt;
@@ -30,21 +30,14 @@ export class PaymentStation$ {
     paymentOrderNo: string | null
     paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     zipCode?: string | null
-  }): Promise<IResponseWithSync<TaxResult>> {
+  }): Promise<IResponse<TaxResult>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/tax'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TaxResult, 'TaxResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TaxResult, 'TaxResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -63,41 +56,27 @@ export class PaymentStation$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get qrcode.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: QRCode image stream&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaymentQrcode(queryParams: { code: string | null }): Promise<IResponseWithSync<unknown>> {
+  getPaymentQrcode(queryParams: { code: string | null }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/qrcode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment methods.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment method list&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaymentMethods(queryParams: { paymentOrderNo: string | null }): Promise<IResponseWithSync<PaymentMethodArray>> {
+  getPaymentMethods(queryParams: { paymentOrderNo: string | null }): Promise<IResponse<PaymentMethodArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/methods'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentMethodArray, 'PaymentMethodArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentMethodArray, 'PaymentMethodArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -119,21 +98,14 @@ export class PaymentStation$ {
     token?: string | null
     type?: string | null
     user_id?: string | null
-  }): Promise<IResponseWithSync<unknown>> {
+  }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/returnurl'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -143,21 +115,14 @@ export class PaymentStation$ {
     paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     region: string | null
     sandbox?: boolean | null
-  }): Promise<IResponseWithSync<unknown>> {
+  }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/publicconfig'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -168,21 +133,14 @@ export class PaymentStation$ {
     paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     region: string | null
     sandbox?: boolean | null
-  }): Promise<IResponseWithSync<Customization>> {
+  }): Promise<IResponse<Customization>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/customization'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Customization, 'Customization')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Customization, 'Customization')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -210,44 +168,30 @@ export class PaymentStation$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment order info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment order details&lt;/li&gt;&lt;/ul&gt;
    */
-  getInfoPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<IResponseWithSync<PaymentOrderDetails>> {
+  getInfoPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<IResponse<PaymentOrderDetails>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/info'
       .replace('{namespace}', this.namespace)
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentOrderDetails, 'PaymentOrderDetails')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentOrderDetails, 'PaymentOrderDetails')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Check payment order paid status.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment order paid result&lt;/li&gt;&lt;/ul&gt;
    */
-  getStatusPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<IResponseWithSync<PaymentOrderPaidResult>> {
+  getStatusPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<IResponse<PaymentOrderPaidResult>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/orders/{paymentOrderNo}/status'
       .replace('{namespace}', this.namespace)
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentOrderPaidResult, 'PaymentOrderPaidResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentOrderPaidResult, 'PaymentOrderPaidResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

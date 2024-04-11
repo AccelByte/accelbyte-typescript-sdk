@@ -16,7 +16,6 @@ export function EventV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -27,7 +26,7 @@ export function EventV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: GenericQueryPayload,
     queryParams?: { endDate?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
   ): Promise<EventResponseV2> {
-    const $ = new EventV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new EventV2Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createQuery(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +39,7 @@ export function EventV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { endDate?: string | null; eventName?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
   ): Promise<EventResponseV2> {
-    const $ = new EventV2Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new EventV2Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEvent_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

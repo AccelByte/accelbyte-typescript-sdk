@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AdminUpdateItemReq } from '../../generated-definitions/AdminUpdateItemReq.js'
@@ -20,7 +20,7 @@ import { UpdateItemRespArray } from '../../generated-definitions/UpdateItemRespA
 
 export class AdminItemsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    *  Saving an item. The item will be saved in user&#39;s inventory, If it doesn&#39;t exist it&#39;ll be created. If the item already exists, its qty will be increased, so no new item with same sourceItemId will be created Tags will be auto-created. ItemType will be auto-created. For Ecommerce item, this fields will be override by ecommerce configuration (slotUsed, serverCustomAttributes, customAttributes, type) Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]
@@ -59,23 +59,16 @@ export class AdminItemsAdmin$ {
       sourceItemId?: string | null
       tags?: string | null
     }
-  ): Promise<IResponseWithSync<ListItemResp>> {
+  ): Promise<IResponse<ListItemResp>> {
     const params = { limit: 25, qtyGte: 1, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
     const url = '/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/items'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListItemResp, 'ListItemResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListItemResp, 'ListItemResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -172,7 +165,7 @@ export class AdminItemsAdmin$ {
     inventoryId: string,
     slotId: string,
     sourceItemId: string
-  ): Promise<IResponseWithSync<ItemResp>> {
+  ): Promise<IResponse<ItemResp>> {
     const params = {} as SDKRequestConfig
     const url = '/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}'
       .replace('{namespace}', this.namespace)
@@ -181,15 +174,8 @@ export class AdminItemsAdmin$ {
       .replace('{sourceItemId}', sourceItemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ItemResp, 'ItemResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemResp, 'ItemResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

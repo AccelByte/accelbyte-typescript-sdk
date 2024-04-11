@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AddInboxCategoryRequest } from '../../generated-definitions/AddInboxCategoryRequest.js'
@@ -27,26 +27,19 @@ import { UpdateInboxMessageRequest } from '../../generated-definitions/UpdateInb
 
 export class InboxAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get inbox stats
    */
-  getInboxStats(queryParams?: { messageId?: string[] }): Promise<IResponseWithSync<GetInboxStatsResponse>> {
+  getInboxStats(queryParams?: { messageId?: string[] }): Promise<IResponse<GetInboxStatsResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/stats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetInboxStatsResponse, 'GetInboxStatsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetInboxStatsResponse, 'GetInboxStatsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -63,21 +56,14 @@ export class InboxAdmin$ {
     startCreatedAt?: number
     status?: 'DRAFT' | 'SENT' | 'UNSENT'
     transient?: boolean | null
-  }): Promise<IResponseWithSync<GetInboxMessagesResponse>> {
+  }): Promise<IResponse<GetInboxMessagesResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetInboxMessagesResponse, 'GetInboxMessagesResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetInboxMessagesResponse, 'GetInboxMessagesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -96,21 +82,14 @@ export class InboxAdmin$ {
   /**
    * Get inbox categories
    */
-  getInboxCategories(): Promise<IResponseWithSync<GetInboxCategoriesResponseItemArray>> {
+  getInboxCategories(): Promise<IResponse<GetInboxCategoriesResponseItemArray>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetInboxCategoriesResponseItemArray, 'GetInboxCategoriesResponseItemArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetInboxCategoriesResponseItemArray, 'GetInboxCategoriesResponseItemArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -192,23 +171,16 @@ export class InboxAdmin$ {
   getUsersInbox_ByInbox(
     inbox: string,
     queryParams?: { limit?: number; offset?: number; status?: 'READ' | 'UNREAD'; userId?: string | null }
-  ): Promise<IResponseWithSync<GetInboxUsersResponse>> {
+  ): Promise<IResponse<GetInboxUsersResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages/{inbox}/users'
       .replace('{namespace}', this.namespace)
       .replace('{inbox}', inbox)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetInboxUsersResponse, 'GetInboxUsersResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetInboxUsersResponse, 'GetInboxUsersResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -244,22 +216,15 @@ export class InboxAdmin$ {
   /**
    * Get category schema.
    */
-  getSchemaJsonInbox_ByCategory(category: string): Promise<IResponseWithSync<JsonSchemaType>> {
+  getSchemaJsonInbox_ByCategory(category: string): Promise<IResponse<JsonSchemaType>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories/{category}/schema.json'
       .replace('{namespace}', this.namespace)
       .replace('{category}', category)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, JsonSchemaType, 'JsonSchemaType')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, JsonSchemaType, 'JsonSchemaType')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

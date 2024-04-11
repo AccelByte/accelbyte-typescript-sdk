@@ -18,7 +18,6 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -40,7 +39,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
       | 'updatedAt:asc'
       | 'updatedAt:desc'
   }): Promise<ListInventoryConfigurationsResp> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getInventoryConfigurations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -50,7 +49,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
    *  Creating inventory configuration. There cannot be one inventory configuration duplicate code per namespace. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]
    */
   async function createInventoryConfiguration(data: CreateInventoryConfigurationReq): Promise<InventoryConfigurationResp> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createInventoryConfiguration(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -60,7 +59,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
    *  Deleting an inventory configuration. If an inventory already reference this type (i.e. STATUS is &#34;TIED&#34;), then the type cannot be deleted anymore. ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]
    */
   async function deleteInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId: string): Promise<unknown> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -72,7 +71,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
   async function getInventoryConfiguration_ByInventoryConfigurationId(
     inventoryConfigurationId: string
   ): Promise<InventoryConfigurationResp> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -85,7 +84,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
     inventoryConfigurationId: string,
     data: InventoryConfigurationReq
   ): Promise<InventoryConfigurationResp> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId, data)
     if (resp.error) throw resp.error
     return resp.response.data

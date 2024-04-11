@@ -17,7 +17,6 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -31,7 +30,7 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     requestDate?: string | null
   }): Promise<ListDeletionDataResponse> {
-    const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDeletions(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +40,7 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Cancel user&#39;s account deletion request Scope: account
    */
   async function deleteDeletion_ByUserId(userId: string): Promise<unknown> {
-    const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteDeletion_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -51,7 +50,7 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Retrieve specific user&#39;s account deletion request Scope: account
    */
   async function getDeletions_ByUserId(userId: string): Promise<DeletionData> {
-    const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDeletions_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -61,7 +60,7 @@ export function DataDeletionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Submit user&#39;s account deletion requests Scope: account
    */
   async function createDeletion_ByUserId(userId: string): Promise<RequestDeleteResponse> {
-    const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createDeletion_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -15,7 +15,6 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ``` Required permission: QOS:SERVER [CREATE][UPDATE] Required scope: social This endpoint is intended to be called by QoS service to register and periodically let QoS Manager know that it is still alive. ```
    */
   async function createServerHeartbeat(data: HeartbeatRequest): Promise<unknown> {
-    const $ = new Server$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Server$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createServerHeartbeat(data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -20,7 +20,6 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -43,7 +42,7 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'updatedAt:desc'
     tags?: string[]
   }): Promise<PaginatedAchievementResponse> {
-    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAchievements(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +52,7 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [CREATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; Other detail info: - achievementCode: Human readable unique code to indentify the achievement. Must be lowercase and maximum length is 32 - incremental: If the achievement is not incremental, it does not need to store a goal value of a stat to be unlocked. If the achievement is incremental, it needs to set statCode and goalValue - statCode: Selected statistic code, from the published statistic code event.Human readable unique code to indentify the achievement. Must be lowercase and maximum length is 32 - goalValue: Statistics value required to unlock the achievement. - defaultLanguage: localozation for achievement name and achievement description. Allowed format : en, en-US - slug: specify the image they want to use, it can be file image name or something to define the achievement icon.
    */
   async function createAchievement(data: AchievementRequest): Promise<AchievementResponse> {
-    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createAchievement(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +62,7 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt; Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt;&lt;/p&gt;&lt;p&gt;Required Scope: &lt;code&gt;social&lt;/code&gt;&lt;p&gt;Successful response header will contain: &lt;code&gt;content-disposition: attachment; filename=achievement_&lt;namespace&gt;_config.json&lt;/code&gt;&lt;/p&gt;
    */
   async function getAchievementsExport(queryParams?: { tags?: string[] }): Promise<unknown> {
-    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAchievementsExport(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +72,7 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Required permission ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [UPDATE] Required Scope: social Import achievement configuration from file. It will merge with existing achievement. Available import strategy: - leaveOut: if achievement with same key exist, the existing will be used and imported one will be ignored (default) - replace: if achievement with same key exist, the imported achievement will be used and existing one will be removed
    */
   async function createAchievementImport(data: { file?: File; strategy?: string | null }): Promise<ImportConfigResponse> {
-    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createAchievementImport(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +82,7 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [DELETE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function deleteAchievement_ByAchievementCode(achievementCode: string): Promise<unknown> {
-    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAchievement_ByAchievementCode(achievementCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +92,7 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function getAchievement_ByAchievementCode(achievementCode: string): Promise<AchievementResponse> {
-    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAchievement_ByAchievementCode(achievementCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -103,7 +102,7 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function patchAchievement_ByAchievementCode(achievementCode: string, data: AchievementOrderUpdateRequest): Promise<unknown> {
-    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchAchievement_ByAchievementCode(achievementCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -116,7 +115,7 @@ export function AchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     achievementCode: string,
     data: AchievementUpdateRequest
   ): Promise<AchievementResponse> {
-    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateAchievement_ByAchievementCode(achievementCode, data)
     if (resp.error) throw resp.error
     return resp.response.data

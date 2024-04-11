@@ -16,7 +16,6 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -30,7 +29,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     startDate: string | null
     offset?: number
   }): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getNamespace_ByNamespace(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +40,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [CREATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function createNamespace_ByNamespace(data: Event): Promise<unknown> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createNamespace_ByNamespace(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +54,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +68,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEventId_ByEventId(eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +82,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEventType_ByEventType(eventType, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -98,7 +97,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEventId_ByUserId_ByEventId(userId, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -113,7 +112,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEventType_ByUserId_ByEventType(userId, eventType, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -128,7 +127,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEventId_ByEventType_ByEventId(eventType, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -144,7 +143,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEventId_ByUserId_ByEventType_ByEventId(userId, eventType, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

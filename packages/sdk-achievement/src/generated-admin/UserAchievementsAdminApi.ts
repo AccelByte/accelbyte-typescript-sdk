@@ -15,7 +15,6 @@ export function UserAchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function UserAchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; preferUnlocked?: boolean | null; sortBy?: string | null; tags?: string[] }
   ): Promise<PaginatedUserAchievementResponse> {
-    const $ = new UserAchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserAchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAchievements_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +35,7 @@ export function UserAchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;[TEST FACILITY ONLY]&lt;/p&gt; &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [DELETE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt; &lt;/p&gt;
    */
   async function deleteReset_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<unknown> {
-    const $ = new UserAchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserAchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteReset_ByUserId_ByAchievementCode(userId, achievementCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -46,7 +45,7 @@ export function UserAchievementsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   async function updateUnlock_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<unknown> {
-    const $ = new UserAchievementsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserAchievementsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateUnlock_ByUserId_ByAchievementCode(userId, achievementCode)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -18,7 +18,6 @@ export function FriendsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -29,7 +28,7 @@ export function FriendsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { friendId?: string | null; friendIds?: string[]; limit?: number; offset?: number }
   ): Promise<GetFriendsResponse> {
-    const $ = new FriendsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new FriendsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getFriendUser_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +41,7 @@ export function FriendsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { friendId?: string | null; limit?: number; offset?: number }
   ): Promise<LoadIncomingFriendsWithTimeResponse> {
-    const $ = new FriendsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new FriendsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getIncomingFriend_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +54,7 @@ export function FriendsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<LoadOutgoingFriendsWithTimeResponse> {
-    const $ = new FriendsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new FriendsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOutgoingFriend_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +67,7 @@ export function FriendsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { friendId?: string | null; limit?: number; nopaging?: boolean | null; offset?: number }
   ): Promise<FriendshipConnectionResponse> {
-    const $ = new FriendsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new FriendsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOfFriends_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

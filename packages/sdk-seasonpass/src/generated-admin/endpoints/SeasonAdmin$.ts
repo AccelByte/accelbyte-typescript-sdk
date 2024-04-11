@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BulkUserProgressionRequest } from '../../generated-definitions/BulkUserProgressionRequest.js'
@@ -28,30 +28,19 @@ import { UserSeasonSummaryArray } from '../../generated-definitions/UserSeasonSu
 
 export class SeasonAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to query seasons, seasons only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of season basic info&lt;/li&gt;&lt;/ul&gt;
    */
-  getSeasons(queryParams?: {
-    limit?: number
-    offset?: number
-    status?: string[]
-  }): Promise<IResponseWithSync<ListSeasonInfoPagingSlicedResult>> {
+  getSeasons(queryParams?: { limit?: number; offset?: number; status?: string[] }): Promise<IResponse<ListSeasonInfoPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListSeasonInfoPagingSlicedResult, 'ListSeasonInfoPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListSeasonInfoPagingSlicedResult, 'ListSeasonInfoPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -70,21 +59,14 @@ export class SeasonAdmin$ {
   /**
    * [SERVICE COMMUNICATION ONLY]This API is used to get current published season summary which includes previous published season summary if exists, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season summary data&lt;/li&gt;&lt;/ul&gt;
    */
-  getSeasonsCurrent(): Promise<IResponseWithSync<SeasonSummary>> {
+  getSeasonsCurrent(): Promise<IResponse<SeasonSummary>> {
     const params = {} as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons/current'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SeasonSummary, 'SeasonSummary')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SeasonSummary, 'SeasonSummary')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -105,23 +87,16 @@ export class SeasonAdmin$ {
   /**
    * This API is used to get a season, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season data&lt;/li&gt;&lt;/ul&gt;
    */
-  getSeason_BySeasonId(seasonId: string): Promise<IResponseWithSync<SeasonInfo>> {
+  getSeason_BySeasonId(seasonId: string): Promise<IResponse<SeasonInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons/{seasonId}'
       .replace('{namespace}', this.namespace)
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SeasonInfo, 'SeasonInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SeasonInfo, 'SeasonInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -145,45 +120,31 @@ export class SeasonAdmin$ {
   getSeasons_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<ListUserSeasonInfoPagingSlicedResult>> {
+  ): Promise<IResponse<ListUserSeasonInfoPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/users/{userId}/seasons'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListUserSeasonInfoPagingSlicedResult, 'ListUserSeasonInfoPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListUserSeasonInfoPagingSlicedResult, 'ListUserSeasonInfoPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get a season full content, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season data&lt;/li&gt;&lt;/ul&gt;
    */
-  getFull_BySeasonId(seasonId: string): Promise<IResponseWithSync<FullSeasonInfo>> {
+  getFull_BySeasonId(seasonId: string): Promise<IResponse<FullSeasonInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons/{seasonId}/full'
       .replace('{namespace}', this.namespace)
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullSeasonInfo, 'FullSeasonInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullSeasonInfo, 'FullSeasonInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -260,23 +221,16 @@ export class SeasonAdmin$ {
       tags?: string[]
       to?: string | null
     }
-  ): Promise<IResponseWithSync<ExpGrantHistoryPagingSlicedResult>> {
+  ): Promise<IResponse<ExpGrantHistoryPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/users/{userId}/seasons/exp/history'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ExpGrantHistoryPagingSlicedResult, 'ExpGrantHistoryPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ExpGrantHistoryPagingSlicedResult, 'ExpGrantHistoryPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -310,7 +264,7 @@ export class SeasonAdmin$ {
   /**
    * This API is used to get user season data, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
    */
-  getData_ByUserId_BySeasonId(userId: string, seasonId: string): Promise<IResponseWithSync<ClaimableUserSeasonInfo>> {
+  getData_ByUserId_BySeasonId(userId: string, seasonId: string): Promise<IResponse<ClaimableUserSeasonInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/users/{userId}/seasons/{seasonId}/data'
       .replace('{namespace}', this.namespace)
@@ -318,63 +272,39 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ClaimableUserSeasonInfo, 'ClaimableUserSeasonInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ClaimableUserSeasonInfo, 'ClaimableUserSeasonInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get user exp acquisition history&#39;s tag list.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;default will query from current active season&lt;/li&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: exp grant history tags list&lt;/li&gt;&lt;/ul&gt;
    */
-  getSeasonsExpHistoryTags_ByUserId(
-    userId: string,
-    queryParams?: { seasonId?: string | null }
-  ): Promise<IResponseWithSync<ReasonTagsResult>> {
+  getSeasonsExpHistoryTags_ByUserId(userId: string, queryParams?: { seasonId?: string | null }): Promise<IResponse<ReasonTagsResult>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/users/{userId}/seasons/exp/history/tags'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ReasonTagsResult, 'ReasonTagsResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ReasonTagsResult, 'ReasonTagsResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get current user season progression, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season progression&lt;/li&gt;&lt;/ul&gt;
    */
-  getSeasonsCurrentProgression_ByUserId(userId: string): Promise<IResponseWithSync<UserSeasonSummary>> {
+  getSeasonsCurrentProgression_ByUserId(userId: string): Promise<IResponse<UserSeasonSummary>> {
     const params = {} as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/users/{userId}/seasons/current/progression'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -395,25 +325,15 @@ export class SeasonAdmin$ {
   /**
    * [SERVICE COMMUNICATION ONLY]This API is used to get ownership for any pass codes, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ownership&lt;/li&gt;&lt;/ul&gt;
    */
-  getSeasonsCurrentPassesOwnershipAny_ByUserId(
-    userId: string,
-    queryParams?: { passCodes?: string[] }
-  ): Promise<IResponseWithSync<Ownership>> {
+  getSeasonsCurrentPassesOwnershipAny_ByUserId(userId: string, queryParams?: { passCodes?: string[] }): Promise<IResponse<Ownership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/users/{userId}/seasons/current/passes/ownership/any'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Ownership, 'Ownership')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Ownership, 'Ownership')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

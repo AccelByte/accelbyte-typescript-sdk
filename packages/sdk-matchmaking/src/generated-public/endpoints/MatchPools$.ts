@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ListMatchPoolTicketsResponse } from '../../generated-definitions/ListMatchPoolTicketsResponse.js'
@@ -18,30 +18,19 @@ import { TicketMetricResultRecord } from '../../generated-definitions/TicketMetr
 
 export class MatchPools$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List matchmaking pools.
    */
-  getMatchPools(queryParams?: {
-    limit?: number
-    name?: string | null
-    offset?: number
-  }): Promise<IResponseWithSync<ListMatchPoolsResponse>> {
+  getMatchPools(queryParams?: { limit?: number; name?: string | null; offset?: number }): Promise<IResponse<ListMatchPoolsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-pools'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListMatchPoolsResponse, 'ListMatchPoolsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListMatchPoolsResponse, 'ListMatchPoolsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -73,21 +62,14 @@ export class MatchPools$ {
   /**
    * Get details for a specific match pool
    */
-  getMatchPool_ByPool(pool: string): Promise<IResponseWithSync<MatchPool>> {
+  getMatchPool_ByPool(pool: string): Promise<IResponse<MatchPool>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-pools/{pool}'.replace('{namespace}', this.namespace).replace('{pool}', pool)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, MatchPool, 'MatchPool')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MatchPool, 'MatchPool')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -106,69 +88,45 @@ export class MatchPools$ {
   /**
    * Get metric for a specific match pool Result: queueTime in seconds
    */
-  getMetrics_ByPool(pool: string): Promise<IResponseWithSync<TicketMetricResultRecord>> {
+  getMetrics_ByPool(pool: string): Promise<IResponse<TicketMetricResultRecord>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-pools/{pool}/metrics'
       .replace('{namespace}', this.namespace)
       .replace('{pool}', pool)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get tickets in queue for a specific match pool Result: number of tickets and list of ticket detail in a match pool.
    */
-  getTickets_ByPool(
-    pool: string,
-    queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<ListMatchPoolTicketsResponse>> {
+  getTickets_ByPool(pool: string, queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ListMatchPoolTicketsResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-pools/{pool}/tickets'
       .replace('{namespace}', this.namespace)
       .replace('{pool}', pool)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListMatchPoolTicketsResponse, 'ListMatchPoolTicketsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListMatchPoolTicketsResponse, 'ListMatchPoolTicketsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get player metric for a specific match pool
    */
-  getMetricsPlayer_ByPool(pool: string): Promise<IResponseWithSync<PlayerMetricRecord>> {
+  getMetricsPlayer_ByPool(pool: string): Promise<IResponse<PlayerMetricRecord>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-pools/{pool}/metrics/player'
       .replace('{namespace}', this.namespace)
       .replace('{pool}', pool)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PlayerMetricRecord, 'PlayerMetricRecord')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PlayerMetricRecord, 'PlayerMetricRecord')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

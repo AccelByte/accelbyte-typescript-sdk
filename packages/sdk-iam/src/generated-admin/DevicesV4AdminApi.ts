@@ -23,7 +23,6 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -31,7 +30,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to get devices a user ever used to login
    */
   async function getDevices(queryParams?: { userId?: string | null }): Promise<DevicesResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDevices(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +40,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to get device bans of user
    */
   async function getDevicesBans(queryParams: { userId: string | null }): Promise<DeviceBansResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDevicesBans(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -51,7 +50,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to ban a device
    */
   async function createDeviceBan(data: DeviceBanRequestV4): Promise<unknown> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createDeviceBan(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -61,7 +60,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to get device types
    */
   async function getDevicesTypes(): Promise<DeviceTypesResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDevicesTypes()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -77,7 +76,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     startDate?: string | null
   }): Promise<DeviceBannedResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDevicesBanned(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -91,7 +90,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     endDate?: string | null
     startDate?: string | null
   }): Promise<unknown> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDevicesReport(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -101,7 +100,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to get device ban config
    */
   async function getDeviceBan_ByBanId(banId: string): Promise<DeviceBanResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDeviceBan_ByBanId(banId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -111,7 +110,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to update a device ban config
    */
   async function updateDeviceBan_ByBanId(banId: string, data: DeviceBanUpdateRequestV4): Promise<unknown> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateDeviceBan_ByBanId(banId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -121,7 +120,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to get device ban list
    */
   async function getBans_ByDeviceId(deviceId: string): Promise<DeviceBansResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBans_ByDeviceId(deviceId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -131,7 +130,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to unban device
    */
   async function updateUnban_ByDeviceId(deviceId: string): Promise<unknown> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateUnban_ByDeviceId(deviceId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -141,7 +140,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to get users that ever login on the device
    */
   async function getUsers_ByDeviceId(deviceId: string): Promise<DeviceUsersResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsers_ByDeviceId(deviceId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -151,7 +150,7 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the endpoint for an admin to decrypt device id
    */
   async function getDecrypt_ByDeviceId(deviceId: string): Promise<DeviceIdDecryptResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDecrypt_ByDeviceId(deviceId)
     if (resp.error) throw resp.error
     return resp.response.data

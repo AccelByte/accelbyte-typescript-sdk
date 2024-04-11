@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { GlobalConfiguration } from '../../generated-definitions/GlobalConfiguration.js'
@@ -14,7 +14,7 @@ import { PutGlobalConfigurationRequest } from '../../generated-definitions/PutGl
 
 export class AdminAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Delete of global configuration data.
@@ -32,21 +32,14 @@ export class AdminAdmin$ {
   /**
    * Get dsmc global configuration.
    */
-  getGlobalConfigurations(): Promise<IResponseWithSync<GlobalConfiguration>> {
+  getGlobalConfigurations(): Promise<IResponse<GlobalConfiguration>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GlobalConfiguration, 'GlobalConfiguration')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GlobalConfiguration, 'GlobalConfiguration')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

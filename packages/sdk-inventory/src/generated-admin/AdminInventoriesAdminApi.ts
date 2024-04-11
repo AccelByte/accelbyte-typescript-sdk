@@ -20,7 +20,6 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -43,7 +42,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'updatedAt:desc'
     userId?: string | null
   }): Promise<ListInventoryResp> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getInventories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +52,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Creating an inventory. The inventory configuration must exists otherwise it will fail. The max slots and max upgrade slots of an inventory will be initialized according to the inventory configuration it used, but it can be changed later when using AdminUpdateInventory endpoint. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]
    */
   async function createInventory(data: CreateInventoryReq): Promise<InventoryResp> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createInventory(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +62,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Deleting an inventory. If an inventory still has items, it cannot be deleted. ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]
    */
   async function deleteInventory_ByInventoryId(inventoryId: string, data: DeleteInventoryReq): Promise<unknown> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteInventory_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +72,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Getting an inventory info. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]
    */
   async function getInventory_ByInventoryId(inventoryId: string): Promise<InventoryResp> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getInventory_ByInventoryId(inventoryId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +82,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Updating an inventory. Positive value will increase MaxSlots from existing value Negative value will decrease MaxSlots from existing value Limited slots can not be changed to unlimited, vice versa Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
    */
   async function updateInventory_ByInventoryId(inventoryId: string, data: UpdateInventoryReq): Promise<InventoryResp> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateInventory_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +92,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Validate purchase ecommerce item. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
    */
   async function createPurchaseable_ByUserId(userId: string, data: PurchaseValidationReq): Promise<unknown> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPurchaseable_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

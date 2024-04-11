@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AdminOrderCreate } from '../../generated-definitions/AdminOrderCreate.js'
@@ -23,7 +23,7 @@ import { TradeNotification } from '../../generated-definitions/TradeNotification
 
 export class OrderAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query orders&lt;/li&gt;&lt;/ul&gt;
@@ -48,63 +48,42 @@ export class OrderAdmin$ {
       | 'REFUNDING'
       | 'REFUND_FAILED'
     withTotal?: boolean | null
-  }): Promise<IResponseWithSync<OrderPagingResult>> {
+  }): Promise<IResponse<OrderPagingResult>> {
     const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/orders'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, OrderPagingResult, 'OrderPagingResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, OrderPagingResult, 'OrderPagingResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get Order Statistics.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: order statistics&lt;/li&gt;&lt;/ul&gt;
    */
-  getOrdersStats(): Promise<IResponseWithSync<OrderStatistics>> {
+  getOrdersStats(): Promise<IResponse<OrderStatistics>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/orders/stats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, OrderStatistics, 'OrderStatistics')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, OrderStatistics, 'OrderStatistics')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get order by orderNo.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: order instance&lt;/li&gt;&lt;/ul&gt;
    */
-  getOrder_ByOrderNo(orderNo: string): Promise<IResponseWithSync<OrderInfo>> {
+  getOrder_ByOrderNo(orderNo: string): Promise<IResponse<OrderInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/orders/{orderNo}'
       .replace('{namespace}', this.namespace)
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, OrderInfo, 'OrderInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, OrderInfo, 'OrderInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -129,23 +108,16 @@ export class OrderAdmin$ {
         | 'REFUNDING'
         | 'REFUND_FAILED'
     }
-  ): Promise<IResponseWithSync<OrderPagingSlicedResult>> {
+  ): Promise<IResponse<OrderPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/orders'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, OrderPagingSlicedResult, 'OrderPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, OrderPagingSlicedResult, 'OrderPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -181,7 +153,7 @@ export class OrderAdmin$ {
   /**
    * Get an order.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order&lt;/li&gt;&lt;/ul&gt;
    */
-  getOrder_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponseWithSync<OrderInfo>> {
+  getOrder_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponse<OrderInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/orders/{orderNo}'
       .replace('{namespace}', this.namespace)
@@ -189,16 +161,9 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, OrderInfo, 'OrderInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, OrderInfo, 'OrderInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -220,29 +185,22 @@ export class OrderAdmin$ {
   /**
    * This API is used to get the count of purchased item which is the order target.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Item purchased count&lt;/li&gt;&lt;/ul&gt;
    */
-  getOrdersCountOfItem_ByUserId(userId: string, queryParams: { itemId: string | null }): Promise<IResponseWithSync<PurchasedItemCount>> {
+  getOrdersCountOfItem_ByUserId(userId: string, queryParams: { itemId: string | null }): Promise<IResponse<PurchasedItemCount>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/orders/countOfItem'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PurchasedItemCount, 'PurchasedItemCount')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PurchasedItemCount, 'PurchasedItemCount')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get user order grant that fulfilled by this order.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order grant&lt;/li&gt;&lt;/ul&gt;
    */
-  getGrant_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponseWithSync<OrderGrantInfo>> {
+  getGrant_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponse<OrderGrantInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/orders/{orderNo}/grant'
       .replace('{namespace}', this.namespace)
@@ -250,16 +208,9 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, OrderGrantInfo, 'OrderGrantInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, OrderGrantInfo, 'OrderGrantInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -281,7 +232,7 @@ export class OrderAdmin$ {
   /**
    * Get user order history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order history&lt;/li&gt;&lt;/ul&gt;
    */
-  getHistory_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponseWithSync<OrderHistoryInfoArray>> {
+  getHistory_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponse<OrderHistoryInfoArray>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/orders/{orderNo}/history'
       .replace('{namespace}', this.namespace)
@@ -289,22 +240,15 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, OrderHistoryInfoArray, 'OrderHistoryInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, OrderHistoryInfoArray, 'OrderHistoryInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Download user order receipt by orderNo.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: order receipt pdf&lt;/li&gt;&lt;/ul&gt;
    */
-  getReceiptPdf_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponseWithSync<unknown>> {
+  getReceiptPdf_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/orders/{orderNo}/receipt.pdf'
       .replace('{namespace}', this.namespace)
@@ -312,16 +256,9 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

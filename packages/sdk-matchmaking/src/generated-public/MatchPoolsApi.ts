@@ -20,7 +20,6 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -28,7 +27,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List matchmaking pools.
    */
   async function getMatchPools(queryParams?: { limit?: number; name?: string | null; offset?: number }): Promise<ListMatchPoolsResponse> {
-    const $ = new MatchPools$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MatchPools$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMatchPools(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +37,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Creates a new matchmaking pool. A pool is isolated from other pools (i.e. tickets may be matched with other tickets in the same pool, but not with tickets in other pools). Each pool has its own matchmaking rules and/or logic. ticket_expiration_seconds and backfill_ticket_expiration_seconds will be set to 300 seconds (5 minutes) by default if not filled. Match Function holds information about the name of the match logic server that matchmaking can refers to. By default we provide (&#34;default&#34; and &#34;basic&#34;). Match Function will be used as reference value for Match Function Overrides if not set. In case Customer would like to use matchmaking service default match logic, then specify it in &#34;match_function_overrides&#34;. This sample configuration will let matchmaking service will use &#34;default&#34; match logic for make matches, while validation will hit both &#34;default&#34; and &#34;custom&#34; match logics. e.g. { &#34;match_function&#34;: &#34;custom&#34;, &#34;match_function_overrides&#34;: { &#34;validation&#34;: []{&#34;default&#34;,&#34;custom&#34;}, &#34;make_matches&#34;: &#34;default&#34;, } }
    */
   async function createMatchPool(data: MatchPool): Promise<unknown> {
-    const $ = new MatchPools$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MatchPools$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createMatchPool(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -48,7 +47,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Deletes an existing matchmaking pool.
    */
   async function deleteMatchPool_ByPool(pool: string): Promise<unknown> {
-    const $ = new MatchPools$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MatchPools$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteMatchPool_ByPool(pool)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +57,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get details for a specific match pool
    */
   async function getMatchPool_ByPool(pool: string): Promise<MatchPool> {
-    const $ = new MatchPools$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MatchPools$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMatchPool_ByPool(pool)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +67,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Updates an existing matchmaking pool. ticket_expiration_seconds and backfill_ticket_expiration_seconds will be set to 300 seconds (5 minutes) by default if not filled. Match Function holds information about the name of the match logic server that matchmaking can refers to. By default we provide (&#34;default&#34; and &#34;basic&#34;). Match Function will be used as reference value for Match Function Overrides if not set. In case Customer would like to use matchmaking service default match logic, then specify it in &#34;match_function_overrides&#34;. This sample configuration will let matchmaking service will use &#34;default&#34; match logic for make matches, while validation will hit both &#34;default&#34; and &#34;custom&#34; match logics. e.g. { &#34;match_function&#34;: &#34;custom&#34;, &#34;match_function_overrides&#34;: { &#34;validation&#34;: []{&#34;default&#34;,&#34;custom&#34;}, &#34;make_matches&#34;: &#34;default&#34;, } }
    */
   async function updateMatchPool_ByPool(pool: string, data: MatchPoolConfig): Promise<MatchPool> {
-    const $ = new MatchPools$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MatchPools$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateMatchPool_ByPool(pool, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -78,7 +77,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get metric for a specific match pool Result: queueTime in seconds
    */
   async function getMetrics_ByPool(pool: string): Promise<TicketMetricResultRecord> {
-    const $ = new MatchPools$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MatchPools$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMetrics_ByPool(pool)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -88,7 +87,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get tickets in queue for a specific match pool Result: number of tickets and list of ticket detail in a match pool.
    */
   async function getTickets_ByPool(pool: string, queryParams?: { limit?: number; offset?: number }): Promise<ListMatchPoolTicketsResponse> {
-    const $ = new MatchPools$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MatchPools$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getTickets_ByPool(pool, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -98,7 +97,7 @@ export function MatchPoolsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get player metric for a specific match pool
    */
   async function getMetricsPlayer_ByPool(pool: string): Promise<PlayerMetricRecord> {
-    const $ = new MatchPools$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new MatchPools$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMetricsPlayer_ByPool(pool)
     if (resp.error) throw resp.error
     return resp.response.data

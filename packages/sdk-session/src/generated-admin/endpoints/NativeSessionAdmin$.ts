@@ -6,13 +6,13 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { NativeSessionPagingResponse } from '../../generated-definitions/NativeSessionPagingResponse.js'
 
 export class NativeSessionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List of native sessions.
@@ -21,20 +21,13 @@ export class NativeSessionAdmin$ {
     limit?: number
     offset?: number
     order?: string | null
-  }): Promise<IResponseWithSync<NativeSessionPagingResponse>> {
+  }): Promise<IResponse<NativeSessionPagingResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/native-sessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NativeSessionPagingResponse, 'NativeSessionPagingResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NativeSessionPagingResponse, 'NativeSessionPagingResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

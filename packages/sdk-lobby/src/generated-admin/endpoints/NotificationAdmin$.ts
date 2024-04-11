@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BulkUsersFreeFormNotificationRequestV1 } from '../../generated-definitions/BulkUsersFreeFormNotificationRequestV1.js'
@@ -24,7 +24,7 @@ import { UpdateTopicRequest } from '../../generated-definitions/UpdateTopicReque
 
 export class NotificationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get topic by namespace.&lt;br/&gt; Action Code: 50213
@@ -33,21 +33,14 @@ export class NotificationAdmin$ {
     after?: string | null
     before?: string | null
     limit?: number
-  }): Promise<IResponseWithSync<GetAllNotificationTopicsResponse>> {
+  }): Promise<IResponse<GetAllNotificationTopicsResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/lobby/v1/admin/notification/namespaces/{namespace}/topics'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetAllNotificationTopicsResponse, 'GetAllNotificationTopicsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetAllNotificationTopicsResponse, 'GetAllNotificationTopicsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -66,21 +59,14 @@ export class NotificationAdmin$ {
   /**
    * Get all templates in a namespace&lt;br&gt; Action Code: 50203
    */
-  getNotificationTemplates(): Promise<IResponseWithSync<NotificationTemplateResponseArray>> {
+  getNotificationTemplates(): Promise<IResponse<NotificationTemplateResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/notification/namespaces/{namespace}/templates'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NotificationTemplateResponseArray, 'NotificationTemplateResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NotificationTemplateResponseArray, 'NotificationTemplateResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -140,23 +126,16 @@ export class NotificationAdmin$ {
   /**
    * Get topic information by topic name.&lt;br/&gt; Action Code: 50215
    */
-  getNotificationTopic_ByTopicName(topicName: string): Promise<IResponseWithSync<NotificationTopicResponseV1>> {
+  getNotificationTopic_ByTopicName(topicName: string): Promise<IResponse<NotificationTopicResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/notification/namespaces/{namespace}/topics/{topicName}'
       .replace('{namespace}', this.namespace)
       .replace('{topicName}', topicName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NotificationTopicResponseV1, 'NotificationTopicResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NotificationTopicResponseV1, 'NotificationTopicResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -195,23 +174,16 @@ export class NotificationAdmin$ {
   getNotificationTemplate_ByTemplateSlug(
     templateSlug: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number }
-  ): Promise<IResponseWithSync<GetAllNotificationTemplateSlugResp>> {
+  ): Promise<IResponse<GetAllNotificationTemplateSlugResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/lobby/v1/admin/notification/namespaces/{namespace}/templates/{templateSlug}'
       .replace('{namespace}', this.namespace)
       .replace('{templateSlug}', templateSlug)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetAllNotificationTemplateSlugResp, 'GetAllNotificationTemplateSlugResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetAllNotificationTemplateSlugResp, 'GetAllNotificationTemplateSlugResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -312,7 +284,7 @@ export class NotificationAdmin$ {
   getLanguageNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,
     templateLanguage: string
-  ): Promise<IResponseWithSync<Localization>> {
+  ): Promise<IResponse<Localization>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/notification/namespaces/{namespace}/templates/{templateSlug}/languages/{templateLanguage}'
       .replace('{namespace}', this.namespace)
@@ -320,16 +292,9 @@ export class NotificationAdmin$ {
       .replace('{templateLanguage}', templateLanguage)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Localization, 'Localization')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Localization, 'Localization')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

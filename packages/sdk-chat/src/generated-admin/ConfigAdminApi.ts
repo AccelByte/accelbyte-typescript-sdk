@@ -18,7 +18,6 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get chat config of all namespaces.
    */
   async function getConfig(): Promise<ConfigList> {
-    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getConfig()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +35,7 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get chat config of a namespace.
    */
   async function getConfig_ByNamespace(): Promise<ConfigResponse> {
-    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getConfig_ByNamespace()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -46,7 +45,7 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update chat config of a namespace.
    */
   async function updateConfig_ByNamespace(data: ConfigResponse): Promise<ConfigResponse> {
-    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateConfig_ByNamespace(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -56,7 +55,7 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Export chat configuration to a json file. The file can then be imported from the /import endpoint.
    */
   async function getConfigExport(): Promise<ConfigExportArray> {
-    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getConfigExport()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -66,7 +65,7 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Import config configuration from file. The existing configuration will be replaced. The json file to import can be obtained from the /export endpoint.
    */
   async function createConfigImport(data: { file?: File }): Promise<ImportConfigResponse> {
-    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createConfigImport(data)
     if (resp.error) throw resp.error
     return resp.response.data

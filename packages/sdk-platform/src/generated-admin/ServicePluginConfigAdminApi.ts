@@ -23,7 +23,6 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -32,7 +31,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteConfigServicePlugin(): Promise<unknown> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteConfigServicePlugin()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -43,7 +42,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   async function getConfigsServicePlugin(): Promise<ServicePluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getConfigsServicePlugin()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +53,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateConfigServicePlugin(data: ServicePluginConfigUpdate): Promise<ServicePluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateConfigServicePlugin(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -64,7 +63,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteCatalogPluginLootbox(): Promise<unknown> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteCatalogPluginLootbox()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -74,7 +73,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get lootbox plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   async function getCatalogPluginsLootbox(): Promise<LootBoxPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCatalogPluginsLootbox()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -84,7 +83,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update lootbox plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogPluginLootbox(data: LootBoxPluginConfigUpdate): Promise<LootBoxPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateCatalogPluginLootbox(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -94,7 +93,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete section plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteCatalogPluginSection(): Promise<unknown> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteCatalogPluginSection()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -104,7 +103,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get section plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   async function getCatalogPluginsSection(): Promise<SectionPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCatalogPluginsSection()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -114,7 +113,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update section config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogPluginSection(data: SectionPluginConfigUpdate): Promise<SectionPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateCatalogPluginSection(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -124,7 +123,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteRevocationPluginRevocation(): Promise<unknown> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteRevocationPluginRevocation()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -134,7 +133,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get revocation plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   async function getRevocationPluginsRevocation(): Promise<RevocationPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getRevocationPluginsRevocation()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -144,7 +143,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update revocation plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRevocationPluginRevocation(data: RevocationPluginConfigUpdate): Promise<RevocationPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateRevocationPluginRevocation(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -154,7 +153,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get lootbox plugin gRPC info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
   async function getCatalogPluginsLootboxGrpcInfo(queryParams?: { force?: boolean | null }): Promise<GrpcServerInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCatalogPluginsLootboxGrpcInfo(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -164,7 +163,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Upload lootbox plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogPluginLootboxCustomConfigCert(data: { file?: File }): Promise<LootBoxPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateCatalogPluginLootboxCustomConfigCert(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -174,7 +173,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Upload section plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogPluginSectionCustomConfigCert(data: { file?: File }): Promise<SectionPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateCatalogPluginSectionCustomConfigCert(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -184,7 +183,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Upload revocation plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRevocationPluginRevocationRevocationCustomConfigCert(data: { file?: File }): Promise<RevocationPluginConfigInfo> {
-    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateRevocationPluginRevocationRevocationCustomConfigCert(data)
     if (resp.error) throw resp.error
     return resp.response.data

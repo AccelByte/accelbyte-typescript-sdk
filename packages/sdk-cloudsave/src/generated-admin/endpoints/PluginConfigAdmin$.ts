@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { PluginRequest } from '../../generated-definitions/PluginRequest.js'
@@ -14,7 +14,7 @@ import { PluginResponse } from '../../generated-definitions/PluginResponse.js'
 
 export class PluginConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * ## Description This endpoints will delete grpc plugins configuration
@@ -32,21 +32,14 @@ export class PluginConfigAdmin$ {
   /**
    * ## Description This endpoints will get grpc plugins configuration
    */
-  getPlugins(): Promise<IResponseWithSync<PluginResponse>> {
+  getPlugins(): Promise<IResponse<PluginResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/plugins'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PluginResponse, 'PluginResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PluginResponse, 'PluginResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

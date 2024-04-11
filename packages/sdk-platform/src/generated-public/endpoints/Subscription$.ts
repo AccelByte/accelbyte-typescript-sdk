@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BillingHistoryPagingSlicedResult } from '../../generated-definitions/BillingHistoryPagingSlicedResult.js'
@@ -18,7 +18,7 @@ import { SubscriptionPagingSlicedResult } from '../../generated-definitions/Subs
 
 export class Subscription$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query user subscriptions.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated subscription&lt;/li&gt;&lt;/ul&gt;
@@ -34,23 +34,16 @@ export class Subscription$ {
       status?: 'ACTIVE' | 'CANCELLED' | 'EXPIRED' | 'INIT'
       subscribedBy?: 'PLATFORM' | 'USER'
     }
-  ): Promise<IResponseWithSync<SubscriptionPagingSlicedResult>> {
+  ): Promise<IResponse<SubscriptionPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/subscriptions'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SubscriptionPagingSlicedResult, 'SubscriptionPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SubscriptionPagingSlicedResult, 'SubscriptionPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -71,7 +64,7 @@ export class Subscription$ {
   /**
    * Get user subscription.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: subscription&lt;/li&gt;&lt;/ul&gt;
    */
-  getSubscription_ByUserId_BySubscriptionId(userId: string, subscriptionId: string): Promise<IResponseWithSync<SubscriptionInfo>> {
+  getSubscription_ByUserId_BySubscriptionId(userId: string, subscriptionId: string): Promise<IResponse<SubscriptionInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/subscriptions/{subscriptionId}'
       .replace('{namespace}', this.namespace)
@@ -79,41 +72,24 @@ export class Subscription$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Check user subscription subscribable by itemId, ACTIVE USER subscription can&#39;t do subscribe again.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: subscribable info&lt;/li&gt;&lt;/ul&gt;
    */
-  getSubscriptionsSubscribableByItemId_ByUserId(
-    userId: string,
-    queryParams: { itemId: string | null }
-  ): Promise<IResponseWithSync<Subscribable>> {
+  getSubscriptionsSubscribableByItemId_ByUserId(userId: string, queryParams: { itemId: string | null }): Promise<IResponse<Subscribable>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/subscriptions/subscribable/byItemId'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Subscribable, 'Subscribable')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Subscribable, 'Subscribable')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -143,7 +119,7 @@ export class Subscription$ {
     userId: string,
     subscriptionId: string,
     queryParams?: { excludeFree?: boolean | null; limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<BillingHistoryPagingSlicedResult>> {
+  ): Promise<IResponse<BillingHistoryPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/subscriptions/{subscriptionId}/history'
       .replace('{namespace}', this.namespace)
@@ -151,16 +127,9 @@ export class Subscription$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BillingHistoryPagingSlicedResult, 'BillingHistoryPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BillingHistoryPagingSlicedResult, 'BillingHistoryPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

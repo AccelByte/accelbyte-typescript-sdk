@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { Event } from '../../generated-definitions/Event.js'
@@ -14,7 +14,7 @@ import { EventResponse } from '../../generated-definitions/EventResponse.js'
 
 export class Event$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
@@ -25,21 +25,14 @@ export class Event$ {
     pageSize: number
     startDate: string | null
     offset?: number
-  }): Promise<IResponseWithSync<EventResponse>> {
+  }): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -63,21 +56,14 @@ export class Event$ {
   getUser_ByUserId(
     userId: string,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
-  ): Promise<IResponseWithSync<EventResponse>> {
+  ): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -87,23 +73,16 @@ export class Event$ {
   getEventId_ByEventId(
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
-  ): Promise<IResponseWithSync<EventResponse>> {
+  ): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/eventId/{eventId}'
       .replace('{namespace}', this.namespace)
       .replace('{eventId}', String(eventId))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -113,23 +92,16 @@ export class Event$ {
   getEventType_ByEventType(
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
-  ): Promise<IResponseWithSync<EventResponse>> {
+  ): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/eventType/{eventType}'
       .replace('{namespace}', this.namespace)
       .replace('{eventType}', String(eventType))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -140,7 +112,7 @@ export class Event$ {
     userId: string,
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
-  ): Promise<IResponseWithSync<EventResponse>> {
+  ): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/users/{userId}/eventId/{eventId}'
       .replace('{namespace}', this.namespace)
@@ -148,16 +120,9 @@ export class Event$ {
       .replace('{eventId}', String(eventId))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -168,7 +133,7 @@ export class Event$ {
     userId: string,
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
-  ): Promise<IResponseWithSync<EventResponse>> {
+  ): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/users/{userId}/eventType/{eventType}'
       .replace('{namespace}', this.namespace)
@@ -176,16 +141,9 @@ export class Event$ {
       .replace('{eventType}', String(eventType))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -196,7 +154,7 @@ export class Event$ {
     eventType: number,
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
-  ): Promise<IResponseWithSync<EventResponse>> {
+  ): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/eventType/{eventType}/eventId/{eventId}'
       .replace('{namespace}', this.namespace)
@@ -204,16 +162,9 @@ export class Event$ {
       .replace('{eventId}', String(eventId))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -225,7 +176,7 @@ export class Event$ {
     eventType: number,
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
-  ): Promise<IResponseWithSync<EventResponse>> {
+  ): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/users/{userId}/eventType/{eventType}/eventId/{eventId}'
       .replace('{namespace}', this.namespace)
@@ -234,15 +185,8 @@ export class Event$ {
       .replace('{eventId}', String(eventId))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponse, 'EventResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AdminAddProfanityFilterIntoListRequest } from '../../generated-definitions/AdminAddProfanityFilterIntoListRequest.js'
@@ -25,26 +25,19 @@ import { ProfanityRule } from '../../generated-definitions/ProfanityRule.js'
 
 export class ProfanityAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get current profanity rule
    */
-  getProfanityRule(): Promise<IResponseWithSync<ProfanityRule>> {
+  getProfanityRule(): Promise<IResponse<ProfanityRule>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/rule'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ProfanityRule, 'ProfanityRule')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ProfanityRule, 'ProfanityRule')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -63,21 +56,14 @@ export class ProfanityAdmin$ {
   /**
    * Get lists
    */
-  getProfanityLists(): Promise<IResponseWithSync<AdminGetProfanityListsListResponseArray>> {
+  getProfanityLists(): Promise<IResponse<AdminGetProfanityListsListResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/lists'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AdminGetProfanityListsListResponseArray, 'AdminGetProfanityListsListResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AdminGetProfanityListsListResponseArray, 'AdminGetProfanityListsListResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -152,23 +138,16 @@ export class ProfanityAdmin$ {
   /**
    * Get the list of filters inside the list.
    */
-  getFiltersProfanity_ByList(list: string): Promise<IResponseWithSync<AdminGetProfanityListFiltersV1Response>> {
+  getFiltersProfanity_ByList(list: string): Promise<IResponse<AdminGetProfanityListFiltersV1Response>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters'
       .replace('{namespace}', this.namespace)
       .replace('{list}', list)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AdminGetProfanityListFiltersV1Response, 'AdminGetProfanityListFiltersV1Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AdminGetProfanityListFiltersV1Response, 'AdminGetProfanityListFiltersV1Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

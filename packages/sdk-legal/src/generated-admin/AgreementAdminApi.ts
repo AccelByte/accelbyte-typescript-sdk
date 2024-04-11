@@ -17,7 +17,6 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -30,7 +29,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     limit?: number
     offset?: number
   }): Promise<PagedRetrieveUserAcceptedAgreementResponse> {
-    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgreementsPolicyVersionsUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +39,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API will return all accepted Legal Agreements for specified user. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAgreementPolicyUser_ByUserId(userId: string): Promise<RetrieveAcceptedAgreementResponseArray> {
-    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgreementPolicyUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +52,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: AcceptAgreementRequest[]
   ): Promise<unknown> {
-    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchAgreementLocalizedPolicyVersionPreferenceUserId_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

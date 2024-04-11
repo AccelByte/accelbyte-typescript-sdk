@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DeletionData } from '../../generated-definitions/DeletionData.js'
@@ -15,7 +15,7 @@ import { RequestDeleteResponse } from '../../generated-definitions/RequestDelete
 
 export class DataDeletionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve all user&#39;s account deletion requests in specified date Scope: account
@@ -26,21 +26,14 @@ export class DataDeletionAdmin$ {
     limit?: number
     offset?: number
     requestDate?: string | null
-  }): Promise<IResponseWithSync<ListDeletionDataResponse>> {
+  }): Promise<IResponse<ListDeletionDataResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/deletions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListDeletionDataResponse, 'ListDeletionDataResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListDeletionDataResponse, 'ListDeletionDataResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -61,23 +54,16 @@ export class DataDeletionAdmin$ {
   /**
    * Retrieve specific user&#39;s account deletion request Scope: account
    */
-  getDeletions_ByUserId(userId: string): Promise<IResponseWithSync<DeletionData>> {
+  getDeletions_ByUserId(userId: string): Promise<IResponse<DeletionData>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/users/{userId}/deletions'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeletionData, 'DeletionData')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeletionData, 'DeletionData')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

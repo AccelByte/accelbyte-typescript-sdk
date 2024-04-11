@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { CodeGenUtil, IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AddUserRoleV4Request } from '../../generated-definitions/AddUserRoleV4Request.js'
@@ -33,7 +33,7 @@ import { UserUpdateRequestV3 } from '../../generated-definitions/UserUpdateReque
 
 export class UsersV4Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. action code : 10103
@@ -82,41 +82,27 @@ export class UsersV4Admin$ {
     limit?: number
     namespace?: string | null
     offset?: number
-  }): Promise<IResponseWithSync<ListInvitationHistoriesV4Response>> {
+  }): Promise<IResponse<ListInvitationHistoriesV4Response>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/admin/invitationHistories'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListInvitationHistoriesV4Response, 'ListInvitationHistoriesV4Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListInvitationHistoriesV4Response, 'ListInvitationHistoriesV4Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This endpoint is used to get user enabled factors.
    */
-  getUsersMeMfaFactor(): Promise<IResponseWithSync<EnabledFactorsResponseV4>> {
+  getUsersMeMfaFactor(): Promise<IResponse<EnabledFactorsResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/factor'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EnabledFactorsResponseV4, 'EnabledFactorsResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EnabledFactorsResponseV4, 'EnabledFactorsResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -139,21 +125,14 @@ export class UsersV4Admin$ {
    * @deprecated
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
-  getUsersMeMfaBackupCode(): Promise<IResponseWithSync<BackupCodesResponseV4>> {
+  getUsersMeMfaBackupCode(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/backupCode'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BackupCodesResponseV4, 'BackupCodesResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BackupCodesResponseV4, 'BackupCodesResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -186,21 +165,14 @@ export class UsersV4Admin$ {
   /**
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
-  getUsersMeMfaBackupCodes(): Promise<IResponseWithSync<unknown>> {
+  getUsersMeMfaBackupCodes(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/backupCodes'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -315,21 +287,14 @@ export class UsersV4Admin$ {
    * @deprecated
    * This endpoint is used to download backup codes.
    */
-  getUsersMeMfaBackupCodeDownload(): Promise<IResponseWithSync<unknown>> {
+  getUsersMeMfaBackupCodeDownload(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/backupCode/download'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -390,21 +355,14 @@ export class UsersV4Admin$ {
   /**
    * This endpoint is to Invitation Historiy for specific new studio namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false.
    */
-  getInvitationHistories_ByNS(): Promise<IResponseWithSync<InvitationHistoryResponse>> {
+  getInvitationHistories_ByNS(): Promise<IResponse<InvitationHistoryResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/invitationHistories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, InvitationHistoryResponse, 'InvitationHistoryResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, InvitationHistoryResponse, 'InvitationHistoryResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -453,23 +411,16 @@ export class UsersV4Admin$ {
   /**
    * List roles assigned to a user
    */
-  getRoles_ByUserId(userId: string): Promise<IResponseWithSync<ListUserRolesV4Response>> {
+  getRoles_ByUserId(userId: string): Promise<IResponse<ListUserRolesV4Response>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/users/{userId}/roles'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListUserRolesV4Response, 'ListUserRolesV4Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListUserRolesV4Response, 'ListUserRolesV4Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -521,21 +472,14 @@ export class UsersV4Admin$ {
   getInvitationHistoriesUsers(queryParams?: {
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<NamespaceInvitationHistoryUserV4Response>> {
+  }): Promise<IResponse<NamespaceInvitationHistoryUserV4Response>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/invitationHistories/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespaceInvitationHistoryUserV4Response, 'NamespaceInvitationHistoryUserV4Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespaceInvitationHistoryUserV4Response, 'NamespaceInvitationHistoryUserV4Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

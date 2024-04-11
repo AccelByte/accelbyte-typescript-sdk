@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreatePodConfigRequest } from '../../generated-definitions/CreatePodConfigRequest.js'
@@ -17,46 +17,32 @@ import { UpdatePodConfigRequest } from '../../generated-definitions/UpdatePodCon
 
 export class PodConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:*:DSM:CONFIG [READ] Required scope: social This endpoint returns the lowest instance spec, both cpu (in Mhz) and memory (in Mb).
    */
-  getInstancesSpecLowest(): Promise<IResponseWithSync<InstanceSpec>> {
+  getInstancesSpecLowest(): Promise<IResponse<InstanceSpec>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/instances/spec/lowest'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, InstanceSpec, 'InstanceSpec')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, InstanceSpec, 'InstanceSpec')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a all pod configs in a namespace Parameter Offset and Count is Required
    */
-  getConfigsPods(queryParams: { count: number; offset: number }): Promise<IResponseWithSync<ListPodConfigResponse>> {
+  getConfigsPods(queryParams: { count: number; offset: number }): Promise<IResponse<ListPodConfigResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/pods'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListPodConfigResponse, 'ListPodConfigResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListPodConfigResponse, 'ListPodConfigResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -77,23 +63,16 @@ export class PodConfigAdmin$ {
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server pod config in a namespace
    */
-  getConfigPod_ByName(name: string): Promise<IResponseWithSync<PodConfigRecord>> {
+  getConfigPod_ByName(name: string): Promise<IResponse<PodConfigRecord>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/pods/{name}'
       .replace('{namespace}', this.namespace)
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PodConfigRecord, 'PodConfigRecord')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PodConfigRecord, 'PodConfigRecord')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

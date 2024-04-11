@@ -16,7 +16,6 @@ export function ConcurrentRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -24,7 +23,7 @@ export function ConcurrentRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will create new game record or replace the existing game record. **Replace behaviour:** The existing value will be replaced completely with the new value. Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Reserved Word Reserved Word List: **__META** The reserved word cannot be used as a field in record value, If still defining the field when creating or updating the record, it will be ignored. ## Optimistic Concurrency Control This endpoint implement optimistic concurrency control to avoid race condition. If the record has been updated since the client fetch it, the server will return HTTP status code 412 (precondition failed) and client need to redo the operation (fetch data and do update). Otherwise, the server will process the request.
    */
   async function updateConcurrentRecord_ByKey(key: string, data: ConcurrentRecordRequest): Promise<unknown> {
-    const $ = new ConcurrentRecord$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ConcurrentRecord$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateConcurrentRecord_ByKey(key, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +38,7 @@ export function ConcurrentRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: ConcurrentRecordRequest,
     queryParams?: { responseBody?: boolean | null }
   ): Promise<PlayerRecordConcurrentUpdateResponse> {
-    const $ = new ConcurrentRecord$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ConcurrentRecord$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateConcurrentRecord_ByUserId_ByKey(userId, key, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +53,7 @@ export function ConcurrentRecordApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: ConcurrentRecordRequest,
     queryParams?: { responseBody?: boolean | null }
   ): Promise<PlayerRecordConcurrentUpdateResponse> {
-    const $ = new ConcurrentRecord$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ConcurrentRecord$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updatePublicConcurrent_ByUserId_ByKey(userId, key, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

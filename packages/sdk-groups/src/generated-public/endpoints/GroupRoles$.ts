@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AssignRoleToMemberRequestV1 } from '../../generated-definitions/AssignRoleToMemberRequestV1.js'
@@ -16,46 +16,32 @@ import { RemoveRoleFromMemberRequestV1 } from '../../generated-definitions/Remov
 
 export class GroupRoles$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Required Member Role Permission: &#34;GROUP:ROLE \[READ\]&#34; This endpoint is used to get list of member roles Action Code: 73201
    */
-  getRoles(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetMemberRolesListResponseV1>> {
+  getRoles(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetMemberRolesListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/roles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetMemberRolesListResponseV1, 'GetMemberRolesListResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetMemberRolesListResponseV1, 'GetMemberRolesListResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This endpoint is used to get list of member roles Action Code: 73201
    */
-  getRoles_ByNS(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetMemberRolesListResponseV1>> {
+  getRoles_ByNS(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetMemberRolesListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/roles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetMemberRolesListResponseV1, 'GetMemberRolesListResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetMemberRolesListResponseV1, 'GetMemberRolesListResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

@@ -19,7 +19,6 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -27,7 +26,7 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission : &lt;code&gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;delete third party config in a namespace.
    */
   async function deleteThirdpartyConfigSteam(): Promise<unknown> {
-    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteThirdpartyConfigSteam()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +36,7 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get third party config for specified namespace.
    */
   async function getThirdpartyConfigSteam(): Promise<GetConfigResponse> {
-    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getThirdpartyConfigSteam()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +46,7 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create third party config in a namespace.
    */
   async function createThirdpartyConfigSteam(data: CreateConfigRequest): Promise<CreateConfigResponse> {
-    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createThirdpartyConfigSteam(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +56,7 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update third party config in a namespace.
    */
   async function updateThirdpartyConfigSteam(data: UpdateConfigRequest): Promise<UpdateConfigResponse> {
-    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateThirdpartyConfigSteam(data)
     if (resp.error) throw resp.error
     return resp.response.data

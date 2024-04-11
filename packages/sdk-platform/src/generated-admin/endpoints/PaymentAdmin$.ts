@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { NotificationProcessResult } from '../../generated-definitions/NotificationProcessResult.js'
@@ -21,7 +21,7 @@ import { PaymentOrderRefund } from '../../generated-definitions/PaymentOrderRefu
 
 export class PaymentAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Query payment orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:PAYMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query payment orders&lt;/li&gt;&lt;/ul&gt;
@@ -45,21 +45,14 @@ export class PaymentAdmin$ {
       | 'REFUNDING'
       | 'REFUND_FAILED'
       | 'REQUEST_FOR_INFORMATION'
-  }): Promise<IResponseWithSync<PaymentOrderPagingSlicedResult>> {
+  }): Promise<IResponse<PaymentOrderPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/payment/orders'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentOrderPagingSlicedResult, 'PaymentOrderPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentOrderPagingSlicedResult, 'PaymentOrderPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -75,41 +68,27 @@ export class PaymentAdmin$ {
     paymentOrderNo?: string | null
     startDate?: string | null
     status?: 'ERROR' | 'IGNORED' | 'PROCESSED' | 'WARN'
-  }): Promise<IResponseWithSync<PaymentNotificationPagingSlicedResult>> {
+  }): Promise<IResponse<PaymentNotificationPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/payment/notifications'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentNotificationPagingSlicedResult, 'PaymentNotificationPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentNotificationPagingSlicedResult, 'PaymentNotificationPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;List external order No by external transaction id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:PAYMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment orders&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaymentOrdersByExtTxId(queryParams: { extTxId: string | null }): Promise<IResponseWithSync<unknown>> {
+  getPaymentOrdersByExtTxId(queryParams: { extTxId: string | null }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/payment/orders/byExtTxId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -130,23 +109,16 @@ export class PaymentAdmin$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment order by paymentOrderNo.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:PAYMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment order instance&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaymentOrder_ByPaymentOrderNo(paymentOrderNo: string): Promise<IResponseWithSync<PaymentOrderInfo>> {
+  getPaymentOrder_ByPaymentOrderNo(paymentOrderNo: string): Promise<IResponse<PaymentOrderInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/payment/orders/{paymentOrderNo}'
       .replace('{namespace}', this.namespace)
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -167,23 +139,16 @@ export class PaymentAdmin$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment order charge status.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:PAYMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment order charge status&lt;/li&gt;&lt;/ul&gt;
    */
-  getStatusPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<IResponseWithSync<PaymentOrderChargeStatus>> {
+  getStatusPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<IResponse<PaymentOrderChargeStatus>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/payment/orders/{paymentOrderNo}/status'
       .replace('{namespace}', this.namespace)
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentOrderChargeStatus, 'PaymentOrderChargeStatus')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentOrderChargeStatus, 'PaymentOrderChargeStatus')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

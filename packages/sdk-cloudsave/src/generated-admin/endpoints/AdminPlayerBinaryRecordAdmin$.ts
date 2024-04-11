@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BinaryRecordRequest } from '../../generated-definitions/BinaryRecordRequest.js'
@@ -19,7 +19,7 @@ import { UploadBinaryRecordResponse } from '../../generated-definitions/UploadBi
 
 export class AdminPlayerBinaryRecordAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve list of player binary records by namespace.
@@ -27,23 +27,16 @@ export class AdminPlayerBinaryRecordAdmin$ {
   getBinaries_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number; query?: string | null; tags?: string[] }
-  ): Promise<IResponseWithSync<ListPlayerBinaryRecordsResponse>> {
+  ): Promise<IResponse<ListPlayerBinaryRecordsResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/binaries'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListPlayerBinaryRecordsResponse, 'ListPlayerBinaryRecordsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListPlayerBinaryRecordsResponse, 'ListPlayerBinaryRecordsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -80,7 +73,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
   /**
    * Get a player binary record by its key.
    */
-  getBinary_ByUserId_ByKey(userId: string, key: string): Promise<IResponseWithSync<PlayerBinaryRecordResponse>> {
+  getBinary_ByUserId_ByKey(userId: string, key: string): Promise<IResponse<PlayerBinaryRecordResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/users/{userId}/binaries/{key}'
       .replace('{namespace}', this.namespace)
@@ -88,16 +81,9 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

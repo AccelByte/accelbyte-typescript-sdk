@@ -12,7 +12,7 @@ import { z } from 'zod'
 
 export class TtlConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * ## Description This endpoints will delete the ttl config of the game record

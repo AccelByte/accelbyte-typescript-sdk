@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { CodeGenUtil, IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DataRetrievalResponse } from '../../generated-definitions/DataRetrievalResponse.js'
@@ -15,31 +15,21 @@ import { UserPersonalDataResponse } from '../../generated-definitions/UserPerson
 
 export class DataRetrieval$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get user&#39;s personal data requests Requires valid user access token Scope: account
    */
-  getRequests_ByUserId(
-    userId: string,
-    queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<UserPersonalDataResponse>> {
+  getRequests_ByUserId(userId: string, queryParams?: { limit?: number; offset?: number }): Promise<IResponse<UserPersonalDataResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/requests'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserPersonalDataResponse, 'UserPersonalDataResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserPersonalDataResponse, 'UserPersonalDataResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

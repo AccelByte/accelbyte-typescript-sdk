@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateTemplateRequest } from '../../generated-definitions/CreateTemplateRequest.js'
@@ -19,7 +19,7 @@ import { UpdateTemplateRequest } from '../../generated-definitions/UpdateTemplat
 
 export class Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Sends notification to all connected users in a namespace.
@@ -50,21 +50,14 @@ export class Admin$ {
   /**
    * Get all templates in a namespace
    */
-  getNotificationTemplates(): Promise<IResponseWithSync<TemplateResponseArray>> {
+  getNotificationTemplates(): Promise<IResponse<TemplateResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/notification/namespaces/{namespace}/templates'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TemplateResponseArray, 'TemplateResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TemplateResponseArray, 'TemplateResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -101,23 +94,16 @@ export class Admin$ {
   getNotificationTemplate_ByTemplateSlug(
     templateSlug: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number }
-  ): Promise<IResponseWithSync<TemplateLocalizationResponse>> {
+  ): Promise<IResponse<TemplateLocalizationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/notification/namespaces/{namespace}/templates/{templateSlug}'
       .replace('{namespace}', this.namespace)
       .replace('{templateSlug}', templateSlug)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TemplateLocalizationResponse, 'TemplateLocalizationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TemplateLocalizationResponse, 'TemplateLocalizationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -145,7 +131,7 @@ export class Admin$ {
   getLanguageNotification_ByTemplateSlug_ByTemplateLanguage(
     templateSlug: string,
     templateLanguage: string
-  ): Promise<IResponseWithSync<TemplateLocalization>> {
+  ): Promise<IResponse<TemplateLocalization>> {
     const params = {} as SDKRequestConfig
     const url = '/notification/namespaces/{namespace}/templates/{templateSlug}/languages/{templateLanguage}'
       .replace('{namespace}', this.namespace)
@@ -153,16 +139,9 @@ export class Admin$ {
       .replace('{templateLanguage}', templateLanguage)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TemplateLocalization, 'TemplateLocalization')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TemplateLocalization, 'TemplateLocalization')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

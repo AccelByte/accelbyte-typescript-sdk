@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BinaryUpload } from '../../generated-definitions/BinaryUpload.js'
@@ -19,46 +19,32 @@ import { UploadSummary } from '../../generated-definitions/UploadSummary.js'
 
 export class UploaderV2Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to get basic build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getBuildsByAppId(queryParams: { appId: string | null; platformId: string | null }): Promise<IResponseWithSync<BuildIdVersionArray>> {
+  getBuildsByAppId(queryParams: { appId: string | null; platformId: string | null }): Promise<IResponse<BuildIdVersionArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/builds/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get basic DLC build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getDlcByGameAppId(queryParams: { appId: string | null; platformId: string | null }): Promise<IResponseWithSync<BuildIdVersionArray>> {
+  getDlcByGameAppId(queryParams: { appId: string | null; platformId: string | null }): Promise<IResponse<BuildIdVersionArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/dlc/byGameAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -79,23 +65,16 @@ export class UploaderV2Admin$ {
   /**
    * This API is used to get build manifest for build uploaded with BuildInfo v2.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getBuild_ByBuildId(buildId: string): Promise<IResponseWithSync<BuildManifest>> {
+  getBuild_ByBuildId(buildId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/builds/{buildId}'
       .replace('{namespace}', this.namespace)
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -129,21 +108,14 @@ export class UploaderV2Admin$ {
   /**
    * This API is used to get diff trigger status.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getDifftriggerStatus(): Promise<IResponseWithSync<unknown>> {
+  getDifftriggerStatus(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/difftrigger/status'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

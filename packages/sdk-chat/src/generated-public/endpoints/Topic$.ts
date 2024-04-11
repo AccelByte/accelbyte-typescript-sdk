@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ChatMessageResponseArray } from '../../generated-definitions/ChatMessageResponseArray.js'
@@ -20,50 +20,32 @@ import { UnmuteUserRequest } from '../../generated-definitions/UnmuteUserRequest
 
 export class Topic$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * get chat muted topics in a namespace.
    */
-  getMuted(): Promise<IResponseWithSync<MutedTopicResponseArray>> {
+  getMuted(): Promise<IResponse<MutedTopicResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/public/namespaces/{namespace}/muted'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, MutedTopicResponseArray, 'MutedTopicResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MutedTopicResponseArray, 'MutedTopicResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * get chat list of topic in a namespace.
    */
-  getTopic(queryParams?: {
-    limit?: number
-    offset?: number
-    topicType?: string | null
-  }): Promise<IResponseWithSync<ChatMessageResponseArray>> {
+  getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<IResponse<ChatMessageResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -85,21 +67,14 @@ export class Topic$ {
   getChats_ByTopic(
     topic: string,
     queryParams?: { limit?: number; order?: string | null; startCreatedAt?: number }
-  ): Promise<IResponseWithSync<ChatMessageResponseArray>> {
+  ): Promise<IResponse<ChatMessageResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

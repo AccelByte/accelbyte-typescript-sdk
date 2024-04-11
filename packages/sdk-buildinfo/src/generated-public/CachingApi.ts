@@ -15,7 +15,6 @@ export function CachingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function CachingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sourceBuildId: string,
     destinationBuildId: string
   ): Promise<RetrieveDiffCacheResponse> {
-    const $ = new Caching$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Caching$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDestCacheDiff_BySourceBuildId_ByDestinationBuildId(sourceBuildId, destinationBuildId)
     if (resp.error) throw resp.error
     return resp.response.data

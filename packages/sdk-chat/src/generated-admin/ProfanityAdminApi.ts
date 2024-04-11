@@ -22,7 +22,6 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -38,7 +37,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     startWith?: string | null
     wordType?: string | null
   }): Promise<DictionaryQueryResult> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getProfanityDictionary(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -48,7 +47,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Insert new word for profanity censor
    */
   async function createProfanityDictionary(data: DictionaryInsertRequest): Promise<Dictionary> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createProfanityDictionary(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +57,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete profanity words.
    */
   async function deleteProfanityDictionary_ById(id: string): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteProfanityDictionary_ById(id)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +67,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update profanity word
    */
   async function updateProfanityDictionary_ById(id: string, data: DictionaryUpdateRequest): Promise<Dictionary> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateProfanityDictionary_ById(id, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -78,7 +77,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Bulk insert new word for profanity censor
    */
   async function createProfanityDictionaryBulk(data: DictionaryInsertBulkRequest): Promise<Dictionary> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createProfanityDictionaryBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -88,7 +87,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get profanity words group.
    */
   async function getProfanityDictionaryGroup(queryParams?: { limit?: number; offset?: number }): Promise<DictionaryGroupArray> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getProfanityDictionaryGroup(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -98,7 +97,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Export profanity words
    */
   async function getProfanityDictionaryExport(): Promise<DictionaryExport> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getProfanityDictionaryExport()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -111,7 +110,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: { file: File },
     queryParams?: { action?: 'FULLREPLACE' | 'LEAVEOUT' | 'REPLACE'; showResult?: boolean | null }
   ): Promise<DictionaryImportResult> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createProfanityDictionaryImport(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

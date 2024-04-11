@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CatalogConfigInfo } from '../../generated-definitions/CatalogConfigInfo.js'
@@ -24,26 +24,19 @@ import { StoreUpdate } from '../../generated-definitions/StoreUpdate.js'
 
 export class StoreAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to list stores in a namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of stores&lt;/li&gt;&lt;/ul&gt;
    */
-  getStores(): Promise<IResponseWithSync<StoreInfoArray>> {
+  getStores(): Promise<IResponse<StoreInfoArray>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StoreInfoArray, 'StoreInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StoreInfoArray, 'StoreInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -77,21 +70,14 @@ export class StoreAdmin$ {
   /**
    * Get catalog config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:STORE&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
-  getCatalogConfigs(): Promise<IResponseWithSync<CatalogConfigInfo>> {
+  getCatalogConfigs(): Promise<IResponse<CatalogConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/catalog/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CatalogConfigInfo, 'CatalogConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CatalogConfigInfo, 'CatalogConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -125,23 +111,16 @@ export class StoreAdmin$ {
   /**
    * This API is used to get a store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store data&lt;/li&gt;&lt;/ul&gt;
    */
-  getStore_ByStoreId(storeId: string): Promise<IResponseWithSync<StoreInfo>> {
+  getStore_ByStoreId(storeId: string): Promise<IResponse<StoreInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/{storeId}'
       .replace('{namespace}', this.namespace)
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -175,21 +154,14 @@ export class StoreAdmin$ {
   /**
    * This API is used to get a published store basic info, exclude category and item information.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store data&lt;/li&gt;&lt;/ul&gt;
    */
-  getStoresPublished(): Promise<IResponseWithSync<StoreInfo>> {
+  getStoresPublished(): Promise<IResponse<StoreInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/published'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -241,43 +213,29 @@ export class StoreAdmin$ {
    * @deprecated
    * This API is used to export a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/export to export store.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getExport_ByStoreId(storeId: string): Promise<IResponseWithSync<unknown>> {
+  getExport_ByStoreId(storeId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/{storeId}/export'
       .replace('{namespace}', this.namespace)
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get a store&#39;s backup. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store backup info&lt;/li&gt;&lt;/ul&gt;
    */
-  getStoresPublishedBackup(): Promise<IResponseWithSync<StoreBackupInfo>> {
+  getStoresPublishedBackup(): Promise<IResponse<StoreBackupInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/published/backup'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StoreBackupInfo, 'StoreBackupInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StoreBackupInfo, 'StoreBackupInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -285,21 +243,14 @@ export class StoreAdmin$ {
    */
   getStoresCatalogDefinition(queryParams: {
     catalogType: 'APP' | 'CATEGORY' | 'ITEM' | 'SECTION' | 'VIEW'
-  }): Promise<IResponseWithSync<CatalogDefinitionInfoArray>> {
+  }): Promise<IResponse<CatalogDefinitionInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/catalogDefinition'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CatalogDefinitionInfoArray, 'CatalogDefinitionInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CatalogDefinitionInfoArray, 'CatalogDefinitionInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -333,21 +284,14 @@ export class StoreAdmin$ {
   /**
    * This API is used to download store csv templates for store importing by CSV feature&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getStoresDownloadCsvTemplates(): Promise<IResponseWithSync<unknown>> {
+  getStoresDownloadCsvTemplates(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/downloadCSVTemplates'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -381,22 +325,15 @@ export class StoreAdmin$ {
       start?: string | null
       success?: boolean | null
     }
-  ): Promise<IResponseWithSync<ImportStoreHistoryPagingResult>> {
+  ): Promise<IResponse<ImportStoreHistoryPagingResult>> {
     const params = { limit: 20, sortBy: 'createdAt:desc', ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/{storeId}/import/history'
       .replace('{namespace}', this.namespace)
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ImportStoreHistoryPagingResult, 'ImportStoreHistoryPagingResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ImportStoreHistoryPagingResult, 'ImportStoreHistoryPagingResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

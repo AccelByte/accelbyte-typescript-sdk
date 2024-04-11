@@ -15,7 +15,6 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Retrieve List of Countries that have Active Legal Policies.
    */
   async function getPoliciesCountriesList(): Promise<unknown> {
-    const $ = new Policies$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Policies$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPoliciesCountriesList()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +37,7 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     policyType?: 'LEGAL_DOCUMENT_TYPE' | 'MARKETING_PREFERENCE_TYPE'
     tags?: string | null
   }): Promise<RetrievePolicyPublicResponseArray> {
-    const $ = new Policies$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Policies$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPolicy_ByNamespace(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +54,7 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       tags?: string | null
     }
   ): Promise<RetrievePolicyPublicResponseArray> {
-    const $ = new Policies$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Policies$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPolicyCountry_ByCountryCode(countryCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +72,7 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       tags?: string | null
     }
   ): Promise<RetrievePolicyPublicResponseArray> {
-    const $ = new Policies$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Policies$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPolicyCountry_ByCountryCode_ByNS(countryCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

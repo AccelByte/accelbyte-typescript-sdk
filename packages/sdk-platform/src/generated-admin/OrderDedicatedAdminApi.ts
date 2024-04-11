@@ -15,7 +15,6 @@ export function OrderDedicatedAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -27,7 +26,7 @@ export function OrderDedicatedAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     start: string | null
     nextEvaluatedKey?: string | null
   }): Promise<OrderSyncResult> {
-    const $ = new OrderDedicatedAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderDedicatedAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOrders(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

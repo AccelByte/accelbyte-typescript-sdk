@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateInventoryConfigurationReq } from '../../generated-definitions/CreateInventoryConfigurationReq.js'
@@ -16,7 +16,7 @@ import { ListInventoryConfigurationsResp } from '../../generated-definitions/Lis
 
 export class AdminInventoryConfigurationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]
@@ -35,21 +35,14 @@ export class AdminInventoryConfigurationsAdmin$ {
       | 'updatedAt'
       | 'updatedAt:asc'
       | 'updatedAt:desc'
-  }): Promise<IResponseWithSync<ListInventoryConfigurationsResp>> {
+  }): Promise<IResponse<ListInventoryConfigurationsResp>> {
     const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
     const url = '/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListInventoryConfigurationsResp, 'ListInventoryConfigurationsResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListInventoryConfigurationsResp, 'ListInventoryConfigurationsResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -83,25 +76,16 @@ export class AdminInventoryConfigurationsAdmin$ {
   /**
    *  Getting an inventory configuration info. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]
    */
-  getInventoryConfiguration_ByInventoryConfigurationId(
-    inventoryConfigurationId: string
-  ): Promise<IResponseWithSync<InventoryConfigurationResp>> {
+  getInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId: string): Promise<IResponse<InventoryConfigurationResp>> {
     const params = {} as SDKRequestConfig
     const url = '/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations/{inventoryConfigurationId}'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryConfigurationId}', inventoryConfigurationId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, InventoryConfigurationResp, 'InventoryConfigurationResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, InventoryConfigurationResp, 'InventoryConfigurationResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

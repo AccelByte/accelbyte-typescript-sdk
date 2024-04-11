@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateLocalizedPolicyVersionRequest } from '../../generated-definitions/CreateLocalizedPolicyVersionRequest.js'
@@ -20,14 +20,14 @@ import { UploadPolicyVersionAttachmentRequest } from '../../generated-definition
 
 export class LocalizedPolicyVersionsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
-  ): Promise<IResponseWithSync<RetrieveLocalizedPolicyVersionResponse>> {
+  ): Promise<IResponse<RetrieveLocalizedPolicyVersionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/admin/localized-policy-versions/{localizedPolicyVersionId}'.replace(
       '{localizedPolicyVersionId}',
@@ -35,16 +35,9 @@ export class LocalizedPolicyVersionsAdmin$ {
     )
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrieveLocalizedPolicyVersionResponse, 'RetrieveLocalizedPolicyVersionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrieveLocalizedPolicyVersionResponse, 'RetrieveLocalizedPolicyVersionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -71,25 +64,18 @@ export class LocalizedPolicyVersionsAdmin$ {
    */
   getLocalizedPolicyVersionVersion_ByPolicyVersionId(
     policyVersionId: string
-  ): Promise<IResponseWithSync<RetrieveLocalizedPolicyVersionResponseArray>> {
+  ): Promise<IResponse<RetrieveLocalizedPolicyVersionResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/admin/localized-policy-versions/versions/{policyVersionId}'.replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            RetrieveLocalizedPolicyVersionResponseArray,
-            'RetrieveLocalizedPolicyVersionResponseArray'
-          )
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(
+          () => resultPromise,
+          RetrieveLocalizedPolicyVersionResponseArray,
+          'RetrieveLocalizedPolicyVersionResponseArray'
+        )
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

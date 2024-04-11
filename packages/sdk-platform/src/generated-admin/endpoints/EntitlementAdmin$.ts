@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AdminEntitlementDecrement } from '../../generated-definitions/AdminEntitlementDecrement.js'
 import { AdminEntitlementSoldRequest } from '../../generated-definitions/AdminEntitlementSoldRequest.js'
@@ -37,7 +37,7 @@ import { TimedOwnership } from '../../generated-definitions/TimedOwnership.js'
 
 export class EntitlementAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query entitlements.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement list&lt;/li&gt;&lt;/ul&gt;
@@ -52,21 +52,14 @@ export class EntitlementAdmin$ {
     offset?: number
     origin?: 'Epic' | 'GooglePlay' | 'IOS' | 'Nintendo' | 'Oculus' | 'Other' | 'Playstation' | 'Steam' | 'System' | 'Twitch' | 'Xbox'
     userId?: string | null
-  }): Promise<IResponseWithSync<EntitlementPagingSlicedResult>> {
+  }): Promise<IResponse<EntitlementPagingSlicedResult>> {
     const params = { activeOnly: true, limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/entitlements'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementPagingSlicedResult, 'EntitlementPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementPagingSlicedResult, 'EntitlementPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -103,41 +96,27 @@ export class EntitlementAdmin$ {
     itemIds?: string[]
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<EntitlementPagingSlicedResult>> {
+  }): Promise<IResponse<EntitlementPagingSlicedResult>> {
     const params = { activeOnly: true, limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/entitlements/byItemIds'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementPagingSlicedResult, 'EntitlementPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementPagingSlicedResult, 'EntitlementPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get entitlement config info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ENTITLEMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement info&lt;/li&gt;&lt;/ul&gt;
    */
-  getEntitlementsConfigInfo(queryParams?: { withoutCache?: boolean | null }): Promise<IResponseWithSync<EntitlementConfigInfo>> {
+  getEntitlementsConfigInfo(queryParams?: { withoutCache?: boolean | null }): Promise<IResponse<EntitlementConfigInfo>> {
     const params = { withoutCache: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/entitlements/config/info'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementConfigInfo, 'EntitlementConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementConfigInfo, 'EntitlementConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -158,23 +137,16 @@ export class EntitlementAdmin$ {
       offset?: number
       origin?: 'Epic' | 'GooglePlay' | 'IOS' | 'Nintendo' | 'Oculus' | 'Other' | 'Playstation' | 'Steam' | 'System' | 'Twitch' | 'Xbox'
     }
-  ): Promise<IResponseWithSync<EntitlementPagingSlicedResult>> {
+  ): Promise<IResponse<EntitlementPagingSlicedResult>> {
     const params = { activeOnly: true, limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementPagingSlicedResult, 'EntitlementPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementPagingSlicedResult, 'EntitlementPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -195,23 +167,16 @@ export class EntitlementAdmin$ {
   /**
    * Get entitlement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement&lt;/li&gt;&lt;/ul&gt;
    */
-  getEntitlement_ByEntitlementId(entitlementId: string): Promise<IResponseWithSync<EntitlementInfo>> {
+  getEntitlement_ByEntitlementId(entitlementId: string): Promise<IResponse<EntitlementInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/entitlements/{entitlementId}'
       .replace('{namespace}', this.namespace)
       .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementInfo, 'EntitlementInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementInfo, 'EntitlementInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -225,23 +190,16 @@ export class EntitlementAdmin$ {
       entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
       platform?: string | null
     }
-  ): Promise<IResponseWithSync<EntitlementInfo>> {
+  ): Promise<IResponse<EntitlementInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/bySku'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementInfo, 'EntitlementInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementInfo, 'EntitlementInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -265,23 +223,16 @@ export class EntitlementAdmin$ {
   getEntitlementsByAppId_ByUserId(
     userId: string,
     queryParams: { appId: string | null; activeOnly?: boolean | null }
-  ): Promise<IResponseWithSync<AppEntitlementInfo>> {
+  ): Promise<IResponse<AppEntitlementInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byAppId'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AppEntitlementInfo, 'AppEntitlementInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AppEntitlementInfo, 'AppEntitlementInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -295,23 +246,16 @@ export class EntitlementAdmin$ {
       entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
       platform?: string | null
     }
-  ): Promise<IResponseWithSync<EntitlementInfo>> {
+  ): Promise<IResponse<EntitlementInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byItemId'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementInfo, 'EntitlementInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementInfo, 'EntitlementInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -320,23 +264,16 @@ export class EntitlementAdmin$ {
   getEntitlementsByAppType_ByUserId(
     userId: string,
     queryParams: { appType: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'; activeOnly?: boolean | null; limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<AppEntitlementPagingSlicedResult>> {
+  ): Promise<IResponse<AppEntitlementPagingSlicedResult>> {
     const params = { activeOnly: true, limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byAppType'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AppEntitlementPagingSlicedResult, 'AppEntitlementPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AppEntitlementPagingSlicedResult, 'AppEntitlementPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -345,45 +282,31 @@ export class EntitlementAdmin$ {
   getEntitlementsByItemIds_ByUserId(
     userId: string,
     queryParams?: { ids?: string[]; platform?: string | null }
-  ): Promise<IResponseWithSync<EntitlementInfoArray>> {
+  ): Promise<IResponse<EntitlementInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byItemIds'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementInfoArray, 'EntitlementInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementInfoArray, 'EntitlementInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get platform entitlement config list.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ENTITLEMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement info&lt;/li&gt;&lt;/ul&gt;
    */
-  getEntitlementConfig_ByPlatform(platform: string): Promise<IResponseWithSync<EntitlementPlatformConfigInfo>> {
+  getEntitlementConfig_ByPlatform(platform: string): Promise<IResponse<EntitlementPlatformConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/platforms/{platform}/entitlement/config'
       .replace('{namespace}', this.namespace)
       .replace('{platform}', platform)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementPlatformConfigInfo, 'EntitlementPlatformConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementPlatformConfigInfo, 'EntitlementPlatformConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -428,29 +351,22 @@ export class EntitlementAdmin$ {
   getEntitlementsOwnershipAny_ByUserId(
     userId: string,
     queryParams?: { appIds?: string[]; itemIds?: string[]; platform?: string | null; skus?: string[] }
-  ): Promise<IResponseWithSync<Ownership>> {
+  ): Promise<IResponse<Ownership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/any'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Ownership, 'Ownership')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Ownership, 'Ownership')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get user entitlement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement&lt;/li&gt;&lt;/ul&gt;
    */
-  getEntitlement_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<IResponseWithSync<EntitlementInfo>> {
+  getEntitlement_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<IResponse<EntitlementInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}'
       .replace('{namespace}', this.namespace)
@@ -458,16 +374,9 @@ export class EntitlementAdmin$ {
       .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementInfo, 'EntitlementInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementInfo, 'EntitlementInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -496,23 +405,16 @@ export class EntitlementAdmin$ {
   getEntitlementsOwnershipAnyOf_ByUserId(
     userId: string,
     queryParams: { itemIds: string[]; platform?: string | null }
-  ): Promise<IResponseWithSync<Ownership>> {
+  ): Promise<IResponse<Ownership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/anyOf'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Ownership, 'Ownership')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Ownership, 'Ownership')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -525,23 +427,16 @@ export class EntitlementAdmin$ {
       entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
       platform?: string | null
     }
-  ): Promise<IResponseWithSync<TimedOwnership>> {
+  ): Promise<IResponse<TimedOwnership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/bySku'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TimedOwnership, 'TimedOwnership')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TimedOwnership, 'TimedOwnership')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -560,23 +455,16 @@ export class EntitlementAdmin$ {
   /**
    * Get user app entitlement ownership by appId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getEntitlementsOwnershipByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<IResponseWithSync<Ownership>> {
+  getEntitlementsOwnershipByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<IResponse<Ownership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/byAppId'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Ownership, 'Ownership')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Ownership, 'Ownership')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -589,23 +477,16 @@ export class EntitlementAdmin$ {
       entitlementClazz?: 'APP' | 'CODE' | 'ENTITLEMENT' | 'LOOTBOX' | 'MEDIA' | 'OPTIONBOX' | 'SUBSCRIPTION'
       platform?: string | null
     }
-  ): Promise<IResponseWithSync<TimedOwnership>> {
+  ): Promise<IResponse<TimedOwnership>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemId'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TimedOwnership, 'TimedOwnership')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TimedOwnership, 'TimedOwnership')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -614,23 +495,16 @@ export class EntitlementAdmin$ {
   getEntitlementsOwnershipByItemIds_ByUserId(
     userId: string,
     queryParams?: { ids?: string[]; platform?: string | null }
-  ): Promise<IResponseWithSync<EntitlementOwnershipArray>> {
+  ): Promise<IResponse<EntitlementOwnershipArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemIds'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementOwnershipArray, 'EntitlementOwnershipArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementOwnershipArray, 'EntitlementOwnershipArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -704,7 +578,7 @@ export class EntitlementAdmin$ {
   /**
    * Get user entitlement histories.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ENTITLEMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of entitlement history&lt;/li&gt;&lt;/ul&gt;
    */
-  getHistory_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<IResponseWithSync<EntitlementHistoryInfoArray>> {
+  getHistory_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<IResponse<EntitlementHistoryInfoArray>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/history'
       .replace('{namespace}', this.namespace)
@@ -712,16 +586,9 @@ export class EntitlementAdmin$ {
       .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementHistoryInfoArray, 'EntitlementHistoryInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementHistoryInfoArray, 'EntitlementHistoryInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -792,7 +659,7 @@ export class EntitlementAdmin$ {
     userId: string,
     entitlementId: string,
     queryParams: { quantity: number }
-  ): Promise<IResponseWithSync<EntitlementPrechekResult>> {
+  ): Promise<IResponse<EntitlementPrechekResult>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/revoke/byUseCount/preCheck'
       .replace('{namespace}', this.namespace)
@@ -800,15 +667,8 @@ export class EntitlementAdmin$ {
       .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EntitlementPrechekResult, 'EntitlementPrechekResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EntitlementPrechekResult, 'EntitlementPrechekResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

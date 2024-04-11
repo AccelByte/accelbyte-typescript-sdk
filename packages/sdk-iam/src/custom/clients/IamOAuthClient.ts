@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, CodeGenUtil, Network, SdkCache, SDKRequestConfig, Validate } from '@accelbyte/sdk'
+import { AccelbyteSDK, ApiArgs, CodeGenUtil, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { Buffer } from 'buffer'
 import { MFA_DATA_STORAGE_KEY } from './IamUserAuthorizationClient.js'
 import { Request2FAEmailCode, Verify2FAParam } from '../models/TwoFA.js'
@@ -22,14 +22,12 @@ export interface OAuthApiOptions {
 export class IamOAuthClient {
   conf: SDKRequestConfig
   namespace: string
-  cache
   options: OAuthApiOptions
 
   constructor(sdk: AccelbyteSDK, args?: ApiArgs) {
     const amb = sdk.assembly()
     this.conf = amb.config
     this.namespace = args?.namespace ? args?.namespace : amb.namespace
-    this.cache = args?.cache ? args?.cache : amb.cache
     this.options = {
       clientId: amb.clientId
     }
@@ -49,8 +47,7 @@ export class IamOAuthClient {
       headers: { 'Content-Type': 'text/plain' }
     })
     localStorage.removeItem(MFA_DATA_STORAGE_KEY)
-    SdkCache.clearCache()
-    return new OAuth20Extension$(axios, this.namespace, this.cache).createLogout()
+    return new OAuth20Extension$(axios, this.namespace).createLogout()
   }
 
   /**
@@ -67,8 +64,7 @@ export class IamOAuthClient {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     })
-    SdkCache.clearCache()
-    return new OAuth20$(axios, this.namespace, this.cache).postOauthRevoke({ token })
+    return new OAuth20$(axios, this.namespace).postOauthRevoke({ token })
   }
 
   /**
@@ -99,7 +95,7 @@ export class IamOAuthClient {
   }
 
   private newInstance() {
-    return new OAuth20$(Network.create(this.conf), this.namespace, this.cache)
+    return new OAuth20$(Network.create(this.conf), this.namespace)
   }
 
   static exchangeTokenOauthByPlatformId = (

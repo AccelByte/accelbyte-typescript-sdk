@@ -6,31 +6,24 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AppMessageDeclarationArray } from '../../generated-definitions/AppMessageDeclarationArray.js'
 
 export class DsmcOperations$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * get the list of messages.
    */
-  getMessages(): Promise<IResponseWithSync<AppMessageDeclarationArray>> {
+  getMessages(): Promise<IResponse<AppMessageDeclarationArray>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/v1/messages'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AppMessageDeclarationArray, 'AppMessageDeclarationArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AppMessageDeclarationArray, 'AppMessageDeclarationArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

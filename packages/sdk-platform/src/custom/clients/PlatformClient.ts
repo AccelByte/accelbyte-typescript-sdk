@@ -88,9 +88,9 @@ export class PlatformClient {
 //  * @internal
 //  */
 // fetchPrePurchaseInformation = async ({ userId, item }: { userId?: string | null; item: ItemInfo }) => {
-//   const currencyApi = new CurrencyApi(this.conf, this.namespace, this.cache)
-//   const itemApi = new ItemApi(this.conf, this.namespace, this.cache)
-//   const entitlementApi = new EntitlementApi(this.conf, this.namespace, this.cache)
+//   const currencyApi = new CurrencyApi(this.conf, this.namespace)
+//   const itemApi = new ItemApi(this.conf, this.namespace)
+//   const entitlementApi = new EntitlementApi(this.conf, this.namespace)
 //
 //   const [currencyMapResult, availableItemInfoResult, itemOwnershipResult, baseAppOwnershipResult, purchaseConditionValidationResult] =
 //       await Promise.all([

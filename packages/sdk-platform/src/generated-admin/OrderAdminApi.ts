@@ -25,7 +25,6 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -53,7 +52,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'REFUND_FAILED'
     withTotal?: boolean | null
   }): Promise<OrderPagingResult> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOrders(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +62,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get Order Statistics.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: order statistics&lt;/li&gt;&lt;/ul&gt;
    */
   async function getOrdersStats(): Promise<OrderStatistics> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOrdersStats()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +72,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get order by orderNo.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: order instance&lt;/li&gt;&lt;/ul&gt;
    */
   async function getOrder_ByOrderNo(orderNo: string): Promise<OrderInfo> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOrder_ByOrderNo(orderNo)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -102,7 +101,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
         | 'REFUND_FAILED'
     }
   ): Promise<OrderPagingSlicedResult> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOrders_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -112,7 +111,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Admin Create an order. The result contains the checkout link and payment token. User with permission SANDBOX will create sandbox order that not real paid for xsolla/alipay and not validate price for wxpay.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;It will be forbidden while the user is banned: ORDER_INITIATE or ORDER_AND_PAYMENT&lt;/li&gt;&lt;li&gt;sandbox default value is &lt;b&gt;false&lt;/b&gt;&lt;/li&gt;&lt;li&gt;platform default value is &lt;b&gt;Other&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created order&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for ext field&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
    */
   async function createOrder_ByUserId(userId: string, data: AdminOrderCreate): Promise<OrderInfo> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createOrder_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -122,7 +121,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Refund order by orderNo.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ORDER&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRefund_ByOrderNo(orderNo: string, data: OrderRefundCreate): Promise<OrderInfo> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateRefund_ByOrderNo(orderNo, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -132,7 +131,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get an order.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order&lt;/li&gt;&lt;/ul&gt;
    */
   async function getOrder_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<OrderInfo> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOrder_ByUserId_ByOrderNo(userId, orderNo)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -142,7 +141,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update order status.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated order&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateOrder_ByUserId_ByOrderNo(userId: string, orderNo: string, data: OrderUpdate): Promise<OrderInfo> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateOrder_ByUserId_ByOrderNo(userId, orderNo, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -152,7 +151,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get the count of purchased item which is the order target.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Item purchased count&lt;/li&gt;&lt;/ul&gt;
    */
   async function getOrdersCountOfItem_ByUserId(userId: string, queryParams: { itemId: string | null }): Promise<PurchasedItemCount> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getOrdersCountOfItem_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -162,7 +161,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user order grant that fulfilled by this order.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order grant&lt;/li&gt;&lt;/ul&gt;
    */
   async function getGrant_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<OrderGrantInfo> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getGrant_ByUserId_ByOrderNo(userId, orderNo)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -172,7 +171,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Fulfill an order if the order is charged but fulfill failed.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfilled order&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateFulfill_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<OrderInfo> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateFulfill_ByUserId_ByOrderNo(userId, orderNo)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -182,7 +181,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user order history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order history&lt;/li&gt;&lt;/ul&gt;
    */
   async function getHistory_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<OrderHistoryInfoArray> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getHistory_ByUserId_ByOrderNo(userId, orderNo)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -192,7 +191,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Download user order receipt by orderNo.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: order receipt pdf&lt;/li&gt;&lt;/ul&gt;
    */
   async function getReceiptPdf_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<unknown> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getReceiptPdf_ByUserId_ByOrderNo(userId, orderNo)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -202,7 +201,7 @@ export function OrderAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; This API is used as a web hook for payment notification from justice payment service.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Process result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createNotification_ByUserId_ByOrderNo(userId: string, orderNo: string, data: TradeNotification): Promise<unknown> {
-    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OrderAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createNotification_ByUserId_ByOrderNo(userId, orderNo, data)
     if (resp.error) throw resp.error
     return resp.response.data

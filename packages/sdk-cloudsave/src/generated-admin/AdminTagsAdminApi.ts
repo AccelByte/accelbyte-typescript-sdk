@@ -16,7 +16,6 @@ export function AdminTagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -24,7 +23,7 @@ export function AdminTagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description Retrieve list of available tags by namespace
    */
   async function getTags(queryParams?: { limit?: number; offset?: number }): Promise<ListTagsResponse> {
-    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +33,7 @@ export function AdminTagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoint will create new tags
    */
   async function createTag(data: TagRequest): Promise<unknown> {
-    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createTag(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +43,7 @@ export function AdminTagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoint will delete tag by name
    */
   async function deleteTag_ByTag(tag: string): Promise<unknown> {
-    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteTag_ByTag(tag)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ActionApiRequest } from '../../generated-definitions/ActionApiRequest.js'
 import { ActionApiResponse } from '../../generated-definitions/ActionApiResponse.js'
@@ -17,26 +17,19 @@ import { ExtensionCategoryListApiResponse } from '../../generated-definitions/Ex
 
 export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get a list of auto moderation actions
    */
-  getExtensionActions(): Promise<IResponseWithSync<ActionListApiResponse>> {
+  getExtensionActions(): Promise<IResponse<ActionListApiResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/reporting/v1/admin/extensionActions'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ActionListApiResponse, 'ActionListApiResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ActionListApiResponse, 'ActionListApiResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -58,21 +51,14 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
   getExtensionCategories(queryParams?: {
     order?: 'asc' | 'ascending' | 'desc' | 'descending'
     sortBy?: 'extensionCategory' | 'extensionCategoryName'
-  }): Promise<IResponseWithSync<ExtensionCategoryListApiResponse>> {
+  }): Promise<IResponse<ExtensionCategoryListApiResponse>> {
     const params = { order: 'asc', sortBy: 'extensionCategory', ...queryParams } as SDKRequestConfig
     const url = '/reporting/v1/admin/extensionCategories'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ExtensionCategoryListApiResponse, 'ExtensionCategoryListApiResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ExtensionCategoryListApiResponse, 'ExtensionCategoryListApiResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

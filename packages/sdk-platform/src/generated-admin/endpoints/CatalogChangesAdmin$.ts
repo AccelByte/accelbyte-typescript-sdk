@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CatalogChangePagingResult } from '../../generated-definitions/CatalogChangePagingResult.js'
@@ -15,7 +15,7 @@ import { StoreInfo } from '../../generated-definitions/StoreInfo.js'
 
 export class CatalogChangesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Select all changes.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
@@ -62,23 +62,16 @@ export class CatalogChangesAdmin$ {
       updatedAtStart?: string | null
       withTotal?: boolean | null
     }
-  ): Promise<IResponseWithSync<CatalogChangePagingResult>> {
+  ): Promise<IResponse<CatalogChangePagingResult>> {
     const params = { limit: 20, sortBy: ['updatedAt:desc'], status: 'UNPUBLISHED', ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/{storeId}/catalogChanges/byCriteria'
       .replace('{namespace}', this.namespace)
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CatalogChangePagingResult, 'CatalogChangePagingResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CatalogChangePagingResult, 'CatalogChangePagingResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -120,23 +113,16 @@ export class CatalogChangesAdmin$ {
       updatedAtEnd?: string | null
       updatedAtStart?: string | null
     }
-  ): Promise<IResponseWithSync<CatalogChangeStatistics>> {
+  ): Promise<IResponse<CatalogChangeStatistics>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/stores/{storeId}/catalogChanges/statistics'
       .replace('{namespace}', this.namespace)
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CatalogChangeStatistics, 'CatalogChangeStatistics')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CatalogChangeStatistics, 'CatalogChangeStatistics')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

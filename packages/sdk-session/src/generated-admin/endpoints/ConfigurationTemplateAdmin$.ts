@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ConfigAlertRequestCreate } from '../../generated-definitions/ConfigAlertRequestCreate.js'
@@ -19,26 +19,19 @@ import { UpdateConfigurationTemplateRequest } from '../../generated-definitions/
 
 export class ConfigurationTemplateAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get a dsmc configuration.
    */
-  getDsconfigs(): Promise<IResponseWithSync<DsmConfigRecord>> {
+  getDsconfigs(): Promise<IResponse<DsmConfigRecord>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/dsconfigs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -63,41 +56,27 @@ export class ConfigurationTemplateAdmin$ {
     offset?: number
     order?: string | null
     orderBy?: string | null
-  }): Promise<IResponseWithSync<ConfigurationTemplatesResponse>> {
+  }): Promise<IResponse<ConfigurationTemplatesResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ConfigurationTemplatesResponse, 'ConfigurationTemplatesResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ConfigurationTemplatesResponse, 'ConfigurationTemplatesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * sync dsmc configuration.
    */
-  getDsconfigsSync(): Promise<IResponseWithSync<DsmConfigRecord>> {
+  getDsconfigsSync(): Promise<IResponse<DsmConfigRecord>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/dsconfigs/sync'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -116,21 +95,14 @@ export class ConfigurationTemplateAdmin$ {
   /**
    * Get a configuration alert.
    */
-  getAlertsConfiguration(): Promise<IResponseWithSync<ConfigAlertResponse>> {
+  getAlertsConfiguration(): Promise<IResponse<ConfigAlertResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -177,23 +149,16 @@ export class ConfigurationTemplateAdmin$ {
   /**
    * Get a template configuration.
    */
-  getConfiguration_ByName(name: string): Promise<IResponseWithSync<ConfigurationTemplateResponse>> {
+  getConfiguration_ByName(name: string): Promise<IResponse<ConfigurationTemplateResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/configurations/{name}'
       .replace('{namespace}', this.namespace)
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ConfigurationTemplateResponse, 'ConfigurationTemplateResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ConfigurationTemplateResponse, 'ConfigurationTemplateResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

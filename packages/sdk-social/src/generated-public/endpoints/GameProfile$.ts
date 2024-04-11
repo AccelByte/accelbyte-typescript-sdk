@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { Attribute } from '../../generated-definitions/Attribute.js'
@@ -17,48 +17,34 @@ import { UserGameProfilesArray } from '../../generated-definitions/UserGameProfi
 
 export class GameProfile$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Returns all profiles for specified users.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:GAMEPROFILE&#34;, action=2 (READ) &lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/ul&gt;
    */
-  getProfiles(queryParams: { userIds: string[] }): Promise<IResponseWithSync<UserGameProfilesArray>> {
+  getProfiles(queryParams: { userIds: string[] }): Promise<IResponse<UserGameProfilesArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/profiles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserGameProfilesArray, 'UserGameProfilesArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserGameProfilesArray, 'UserGameProfilesArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Returns all profiles&#39; header for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfiles_ByUserId(userId: string): Promise<IResponseWithSync<GameProfileHeaderArray>> {
+  getProfiles_ByUserId(userId: string): Promise<IResponse<GameProfileHeaderArray>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameProfileHeaderArray, 'GameProfileHeaderArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GameProfileHeaderArray, 'GameProfileHeaderArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -95,7 +81,7 @@ export class GameProfile$ {
   /**
    * Returns profile for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: game profile info&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<IResponseWithSync<GameProfileInfo>> {
+  getProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<IResponse<GameProfileInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles/{profileId}'
       .replace('{namespace}', this.namespace)
@@ -103,16 +89,9 @@ export class GameProfile$ {
       .replace('{profileId}', profileId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameProfileInfo, 'GameProfileInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GameProfileInfo, 'GameProfileInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -138,7 +117,7 @@ export class GameProfile$ {
     userId: string,
     profileId: string,
     attributeName: string
-  ): Promise<IResponseWithSync<Attribute>> {
+  ): Promise<IResponse<Attribute>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles/{profileId}/attributes/{attributeName}'
       .replace('{namespace}', this.namespace)
@@ -147,16 +126,9 @@ export class GameProfile$ {
       .replace('{attributeName}', attributeName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, Attribute, 'Attribute')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, Attribute, 'Attribute')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

@@ -22,7 +22,6 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -30,7 +29,7 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Bulk remove user&#39;s own items.
    */
   async function deleteItemMeUser_ByInventoryId(inventoryId: string, data: RemoveInventoryItemReq[]): Promise<UpdateItemRespArray> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicItems$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteItemMeUser_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +58,7 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       tags?: string | null
     }
   ): Promise<ListItemResp> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicItems$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getItemsMeUsers_ByInventoryId(inventoryId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +68,7 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Bulk Updating user&#39;s own items.
    */
   async function updateItemMeUser_ByInventoryId(inventoryId: string, data: UpdateItemReq[]): Promise<UpdateItemRespArray> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicItems$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateItemMeUser_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -79,7 +78,7 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Consume user&#39;s own item.
    */
   async function createConsumeUser_ByInventoryId(inventoryId: string, data: ConsumeItemReq): Promise<ItemResp> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicItems$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createConsumeUser_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -89,7 +88,7 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Move items between inventories that is owned by the same user.
    */
   async function createItemMovementUser_ByInventoryId(inventoryId: string, data: MoveItemsReq): Promise<MoveItemsResp> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicItems$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createItemMovementUser_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -103,7 +102,7 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     slotId: string,
     sourceItemId: string
   ): Promise<ItemResp> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicItems$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSourceItemMeUser_ByInventoryId_BySlotId_BySourceItemId(inventoryId, slotId, sourceItemId)
     if (resp.error) throw resp.error
     return resp.response.data

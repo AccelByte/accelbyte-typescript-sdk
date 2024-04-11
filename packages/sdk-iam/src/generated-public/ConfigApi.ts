@@ -15,7 +15,6 @@ export function ConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function ConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. Note: this endpoint does not need any authorization. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled
    */
   async function getConfig_ByConfigKey(configKey: string): Promise<ConfigValueResponseV3> {
-    const $ = new Config$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Config$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getConfig_ByConfigKey(configKey)
     if (resp.error) throw resp.error
     return resp.response.data

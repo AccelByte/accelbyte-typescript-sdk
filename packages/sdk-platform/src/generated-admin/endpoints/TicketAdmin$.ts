@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { TicketAcquireRequest } from '../../generated-definitions/TicketAcquireRequest.js'
@@ -19,50 +19,36 @@ import { TicketSaleIncrementResult } from '../../generated-definitions/TicketSal
 
 export class TicketAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Get ticket(code/key) dynamic based on booth name.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:TICKET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ticket dynamic&lt;/li&gt;&lt;/ul&gt;
    */
-  getTicket_ByBoothName(boothName: string): Promise<IResponseWithSync<TicketDynamicInfo>> {
+  getTicket_ByBoothName(boothName: string): Promise<IResponse<TicketDynamicInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/tickets/{boothName}'
       .replace('{namespace}', this.namespace)
       .replace('{boothName}', boothName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TicketDynamicInfo, 'TicketDynamicInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TicketDynamicInfo, 'TicketDynamicInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get ticket(code/key) booth ID.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:TICKET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ticket booth id&lt;/li&gt;&lt;/ul&gt;
    */
-  getId_ByBoothName(boothName: string): Promise<IResponseWithSync<TicketBoothId>> {
+  getId_ByBoothName(boothName: string): Promise<IResponse<TicketBoothId>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/tickets/{boothName}/id'
       .replace('{namespace}', this.namespace)
       .replace('{boothName}', boothName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TicketBoothId, 'TicketBoothId')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TicketBoothId, 'TicketBoothId')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CountryBlacklistRequest } from '../../generated-definitions/CountryBlacklistRequest.js'
@@ -15,46 +15,32 @@ import { CountryResponseArray } from '../../generated-definitions/CountryRespons
 
 export class CountryAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Admin get country list
    */
-  getCountries(queryParams?: { filterBlacklist?: boolean | null }): Promise<IResponseWithSync<CountryResponseArray>> {
+  getCountries(queryParams?: { filterBlacklist?: boolean | null }): Promise<IResponse<CountryResponseArray>> {
     const params = { filterBlacklist: true, ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountryResponseArray, 'CountryResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountryResponseArray, 'CountryResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Admin get country blacklist
    */
-  getCountriesBlacklist(): Promise<IResponseWithSync<CountryBlacklistResponse>> {
+  getCountriesBlacklist(): Promise<IResponse<CountryBlacklistResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/countries/blacklist'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountryBlacklistResponse, 'CountryBlacklistResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountryBlacklistResponse, 'CountryBlacklistResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

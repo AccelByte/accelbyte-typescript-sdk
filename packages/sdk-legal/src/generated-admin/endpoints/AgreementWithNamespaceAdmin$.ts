@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { DownloadExportedAgreementsInCsvResponse } from '../../generated-definitions/DownloadExportedAgreementsInCsvResponse.js'
 import { InitiateExportAgreementsToCsvResponse } from '../../generated-definitions/InitiateExportAgreementsToCsvResponse.js'
@@ -17,7 +17,7 @@ import { UsersAgreementsRequest } from '../../generated-definitions/UsersAgreeme
 
 export class AgreementWithNamespaceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API will return all accepted Legal Agreements for each user, including agreements of game users if publisher user has corresponding game account.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -41,25 +41,14 @@ export class AgreementWithNamespaceAdmin$ {
     keyword?: string | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<PagedRetrieveUserAcceptedAgreementResponse>> {
+  }): Promise<IResponse<PagedRetrieveUserAcceptedAgreementResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/agreements/policy-versions/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            PagedRetrieveUserAcceptedAgreementResponse,
-            'PagedRetrieveUserAcceptedAgreementResponse'
-          )
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PagedRetrieveUserAcceptedAgreementResponse, 'PagedRetrieveUserAcceptedAgreementResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -68,23 +57,16 @@ export class AgreementWithNamespaceAdmin$ {
   getAgreementPolicyUser_ByUserId(
     userId: string,
     queryParams?: { excludeOtherNamespacesPolicies?: boolean | null }
-  ): Promise<IResponseWithSync<RetrieveAcceptedAgreementResponseArray>> {
+  ): Promise<IResponse<RetrieveAcceptedAgreementResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/agreements/policies/users/{userId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrieveAcceptedAgreementResponseArray, 'RetrieveAcceptedAgreementResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrieveAcceptedAgreementResponseArray, 'RetrieveAcceptedAgreementResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -92,7 +74,7 @@ export class AgreementWithNamespaceAdmin$ {
    */
   getAgreementsPolicyVersionsUsersExportCsvDownload(queryParams: {
     policyVersionId: string | null
-  }): Promise<IResponseWithSync<DownloadExportedAgreementsInCsvResponse>> {
+  }): Promise<IResponse<DownloadExportedAgreementsInCsvResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/agreements/policy-versions/users/export-csv/download'.replace(
       '{namespace}',
@@ -100,16 +82,9 @@ export class AgreementWithNamespaceAdmin$ {
     )
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DownloadExportedAgreementsInCsvResponse, 'DownloadExportedAgreementsInCsvResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DownloadExportedAgreementsInCsvResponse, 'DownloadExportedAgreementsInCsvResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

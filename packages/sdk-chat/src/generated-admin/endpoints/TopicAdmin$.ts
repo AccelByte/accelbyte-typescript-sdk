@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ActionAddUserToTopicResult } from '../../generated-definitions/ActionAddUserToTopicResult.js'
@@ -35,7 +35,7 @@ import { UpdateTopicParams } from '../../generated-definitions/UpdateTopicParams
 
 export class TopicAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get chat history in a namespace.
@@ -51,41 +51,27 @@ export class TopicAdmin$ {
     shardId?: string | null
     startCreatedAt?: number
     topic?: string[]
-  }): Promise<IResponseWithSync<ChatMessageWithPaginationResponse>> {
+  }): Promise<IResponse<ChatMessageWithPaginationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/chats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChatMessageWithPaginationResponse, 'ChatMessageWithPaginationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChatMessageWithPaginationResponse, 'ChatMessageWithPaginationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get chat list of topic in a namespace.
    */
-  getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<IResponseWithSync<TopicResponseArray>> {
+  getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<IResponse<TopicResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TopicResponseArray, 'TopicResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TopicResponseArray, 'TopicResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -114,21 +100,14 @@ export class TopicAdmin$ {
     topicSubType?: 'CLAN' | 'NAMESPACE' | 'NORMAL' | 'PARTY' | 'SESSION'
     topicType?: 'GROUP' | 'PERSONAL'
     userId?: string | null
-  }): Promise<IResponseWithSync<TopicInfoArray>> {
+  }): Promise<IResponse<TopicInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topics'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TopicInfoArray, 'TopicInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TopicInfoArray, 'TopicInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -143,21 +122,14 @@ export class TopicAdmin$ {
     topicId?: string | null
     topicIds?: string[]
     userId?: string | null
-  }): Promise<IResponseWithSync<TopicLogWithPaginationResponse>> {
+  }): Promise<IResponse<TopicLogWithPaginationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/log'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TopicLogWithPaginationResponse, 'TopicLogWithPaginationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TopicLogWithPaginationResponse, 'TopicLogWithPaginationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -206,21 +178,14 @@ export class TopicAdmin$ {
     limit?: number
     offset?: number
     topicName?: string | null
-  }): Promise<IResponseWithSync<ChannelTopicWithPaginationResponse>> {
+  }): Promise<IResponse<ChannelTopicWithPaginationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/channel'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChannelTopicWithPaginationResponse, 'ChannelTopicWithPaginationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChannelTopicWithPaginationResponse, 'ChannelTopicWithPaginationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -252,21 +217,14 @@ export class TopicAdmin$ {
       shardId?: string | null
       startCreatedAt?: number
     }
-  ): Promise<IResponseWithSync<ChatMessageWithPaginationResponse>> {
+  ): Promise<IResponse<ChatMessageWithPaginationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChatMessageWithPaginationResponse, 'ChatMessageWithPaginationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChatMessageWithPaginationResponse, 'ChatMessageWithPaginationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -285,41 +243,27 @@ export class TopicAdmin$ {
   /**
    * Get shard list from topic.
    */
-  getShards_ByTopic(topic: string): Promise<IResponseWithSync<unknown>> {
+  getShards_ByTopic(topic: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/shards'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get chat list of topic in a namespace.
    */
-  getChannel_ByTopic(topic: string): Promise<IResponseWithSync<ChannelTopicResponse>> {
+  getChannel_ByTopic(topic: string): Promise<IResponse<ChannelTopicResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/channel'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChannelTopicResponse, 'ChannelTopicResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChannelTopicResponse, 'ChannelTopicResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -328,41 +272,27 @@ export class TopicAdmin$ {
   getMembers_ByTopic(
     topic: string,
     queryParams?: { isBanned?: boolean | null; isModerator?: boolean | null; limit?: number; offset?: number; shardId?: string | null }
-  ): Promise<IResponseWithSync<TopicMemberWithPaginationResponse>> {
+  ): Promise<IResponse<TopicMemberWithPaginationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/members'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TopicMemberWithPaginationResponse, 'TopicMemberWithPaginationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TopicMemberWithPaginationResponse, 'TopicMemberWithPaginationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get chat list of topic in a namespace.
    */
-  getTopicChannelSummary(): Promise<IResponseWithSync<ChannelTopicSummaryResponse>> {
+  getTopicChannelSummary(): Promise<IResponse<ChannelTopicSummaryResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/channel/summary'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChannelTopicSummaryResponse, 'ChannelTopicSummaryResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChannelTopicSummaryResponse, 'ChannelTopicSummaryResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -377,23 +307,16 @@ export class TopicAdmin$ {
       topicSubType?: 'CLAN' | 'NAMESPACE' | 'NORMAL' | 'PARTY' | 'SESSION'
       topicType?: 'GROUP' | 'PERSONAL'
     }
-  ): Promise<IResponseWithSync<TopicLogWithPaginationResponse>> {
+  ): Promise<IResponse<TopicLogWithPaginationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/users/{userId}/topics'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TopicLogWithPaginationResponse, 'TopicLogWithPaginationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TopicLogWithPaginationResponse, 'TopicLogWithPaginationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

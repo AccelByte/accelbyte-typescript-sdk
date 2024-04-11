@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateTopicRequest } from '../../generated-definitions/CreateTopicRequest.js'
@@ -19,7 +19,7 @@ import { UpdateTopicRequest } from '../../generated-definitions/UpdateTopicReque
 
 export class Notification$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get list of notifications in a namespace. The query parameters **startTime** and **endTime** can be filled with the **sequenceID** value in the notification, where the value is an epoch timestamp. Example **sequenceID** or epoch timestamp value: **1706595813**
@@ -29,21 +29,14 @@ export class Notification$ {
     limit?: number
     offset?: number
     startTime?: number
-  }): Promise<IResponseWithSync<NotificationResponse>> {
+  }): Promise<IResponse<NotificationResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/notification/namespaces/{namespace}/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NotificationResponse, 'NotificationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NotificationResponse, 'NotificationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -53,21 +46,14 @@ export class Notification$ {
     after?: string | null
     before?: string | null
     limit?: number
-  }): Promise<IResponseWithSync<TopicByNamespacesResponse>> {
+  }): Promise<IResponse<TopicByNamespacesResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/notification/namespaces/{namespace}/topics'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TopicByNamespacesResponse, 'TopicByNamespacesResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TopicByNamespacesResponse, 'TopicByNamespacesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -99,21 +85,14 @@ export class Notification$ {
   /**
    * get topic information by topic name.
    */
-  getNotificationTopic_ByTopic(topic: string): Promise<IResponseWithSync<NotificationTopicResponse>> {
+  getNotificationTopic_ByTopic(topic: string): Promise<IResponse<NotificationTopicResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/notification/namespaces/{namespace}/topics/{topic}'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NotificationTopicResponse, 'NotificationTopicResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NotificationTopicResponse, 'NotificationTopicResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

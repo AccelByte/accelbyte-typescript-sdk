@@ -17,7 +17,6 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -32,7 +31,7 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     status?: string | null
     tags?: string[]
   }): Promise<PaginatedGlobalAchievementResponse> {
-    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getGlobalAchievements(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +44,7 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { achievementCodes?: string | null; limit?: number; offset?: number; sortBy?: string | null; tags?: string[] }
   ): Promise<PaginatedUserContributionResponse> {
-    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getGlobalAchievements_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +57,7 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     achievementCode: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
   ): Promise<PaginatedContributorResponse> {
-    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getContributorsGlobal_ByAchievementCode(achievementCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +67,7 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement should be unlocked to claim the reward. Only contributor of global achievement are eligible for rewards
    */
   async function createClaimGlobal_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<unknown> {
-    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createClaimGlobal_ByUserId_ByAchievementCode(userId, achievementCode)
     if (resp.error) throw resp.error
     return resp.response.data

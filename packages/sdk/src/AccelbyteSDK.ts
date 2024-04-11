@@ -23,7 +23,6 @@ export interface AccelbyteSDK {
     clientId: string
     redirectURI: string
     baseURL: string
-    cache: boolean | undefined
     refreshToken?: string
     isValidationEnabled?: boolean
   }
@@ -37,7 +36,6 @@ class AccelbyteSDKImpl {
 
   constructor(options: SDKOptions, config?: SDKRequestConfig, events?: SDKEvents) {
     this.options = {
-      cache: false,
       ...options
     }
     this.events = events
@@ -112,7 +110,6 @@ class AccelbyteSDKImpl {
           clientId: this.options.clientId,
           redirectURI: this.options.redirectURI,
           baseURL: this.options.baseURL,
-          cache: this.options.cache !== undefined ? this.options.cache : false,
           refreshToken: this.refreshToken
         }
       }

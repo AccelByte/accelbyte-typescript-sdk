@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ActiveCustomGameResponse } from '../../generated-definitions/ActiveCustomGameResponse.js'
 import { ActiveMatchmakingGameResponse } from '../../generated-definitions/ActiveMatchmakingGameResponse.js'
@@ -18,7 +18,7 @@ import { SessionQueryResponse } from '../../generated-definitions/SessionQueryRe
 
 export class SessionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query to available game session
@@ -34,21 +34,14 @@ export class SessionAdmin$ {
     offset?: number
     server_status?: string | null
     user_id?: string | null
-  }): Promise<IResponseWithSync<SessionQueryResponse>> {
+  }): Promise<IResponse<SessionQueryResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -69,23 +62,16 @@ export class SessionAdmin$ {
   /**
    * Get the session by session ID for admin user
    */
-  getGamesession_BySessionId(sessionID: string): Promise<IResponseWithSync<AdminSessionResponse>> {
+  getGamesession_BySessionId(sessionID: string): Promise<IResponse<AdminSessionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/{sessionID}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -101,41 +87,27 @@ export class SessionAdmin$ {
     sessionType?: string | null
     status?: string | null
     userID?: string | null
-  }): Promise<IResponseWithSync<GetSessionHistorySearchResponseV2>> {
+  }): Promise<IResponse<GetSessionHistorySearchResponseV2>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponseV2, 'GetSessionHistorySearchResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponseV2, 'GetSessionHistorySearchResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get all active session
    */
-  getGamesessionActiveCount(queryParams?: { session_type?: string | null }): Promise<IResponseWithSync<CountActiveSessionResponse>> {
+  getGamesessionActiveCount(queryParams?: { session_type?: string | null }): Promise<IResponse<CountActiveSessionResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/count'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountActiveSessionResponse, 'CountActiveSessionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountActiveSessionResponse, 'CountActiveSessionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -146,21 +118,14 @@ export class SessionAdmin$ {
     offset?: number
     server_region?: string | null
     session_id?: string | null
-  }): Promise<IResponseWithSync<ActiveCustomGameResponse>> {
+  }): Promise<IResponse<ActiveCustomGameResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/custom-game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ActiveCustomGameResponse, 'ActiveCustomGameResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ActiveCustomGameResponse, 'ActiveCustomGameResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -172,46 +137,28 @@ export class SessionAdmin$ {
     offset?: number
     server_region?: string | null
     session_id?: string | null
-  }): Promise<IResponseWithSync<ActiveMatchmakingGameResponse>> {
+  }): Promise<IResponse<ActiveMatchmakingGameResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/matchmaking-game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ActiveMatchmakingGameResponse, 'ActiveMatchmakingGameResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ActiveMatchmakingGameResponse, 'ActiveMatchmakingGameResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get session history detailed. if party_id value empty/null, field will not show in response body.
    */
-  getHistoryDetailed_ByMatchId(matchID: string): Promise<IResponseWithSync<GetSessionHistoryDetailedResponseItemArray>> {
+  getHistoryDetailed_ByMatchId(matchID: string): Promise<IResponse<GetSessionHistoryDetailedResponseItemArray>> {
     const params = {} as SDKRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/sessions/{matchID}/history/detailed'
       .replace('{namespace}', this.namespace)
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            GetSessionHistoryDetailedResponseItemArray,
-            'GetSessionHistoryDetailedResponseItemArray'
-          )
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetSessionHistoryDetailedResponseItemArray, 'GetSessionHistoryDetailedResponseItemArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

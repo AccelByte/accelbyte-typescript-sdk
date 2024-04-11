@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-sessionbrowser",
-  "version": "4.0.1-beta.2",
+  "version": "4.0.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",
@@ -45,7 +45,7 @@
     "zod": "3.17.3"
   },
   "peerDependencies": {
-    "@accelbyte/sdk": "^2.0.2"
+    "@accelbyte/sdk": "^3.0.0"
   },
   "sideEffects": false
 }

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AddBufferRequest } from '../../generated-definitions/AddBufferRequest.js'
@@ -23,26 +23,19 @@ import { WorkerConfigRequest } from '../../generated-definitions/WorkerConfigReq
 
 export class AdminAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [READ] Required scope: social This endpoint retrieves a worker configuration to control the worker in the DSMC.
    */
-  getWorkers(): Promise<IResponseWithSync<WorkerConfig>> {
+  getWorkers(): Promise<IResponse<WorkerConfig>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespace/{namespace}/workers'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, WorkerConfig, 'WorkerConfig')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, WorkerConfig, 'WorkerConfig')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -74,21 +67,14 @@ export class AdminAdmin$ {
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint lists all of dedicated servers in a namespace managed by this service. Parameter Offset and Count is Required
    */
-  getServers(queryParams: { count: number; offset: number; region?: string | null }): Promise<IResponseWithSync<ListServerResponse>> {
+  getServers(queryParams: { count: number; offset: number; region?: string | null }): Promise<IResponse<ListServerResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/servers'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListServerResponse, 'ListServerResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListServerResponse, 'ListServerResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -99,101 +85,66 @@ export class AdminAdmin$ {
     offset: number
     region?: string | null
     withServer?: boolean | null
-  }): Promise<IResponseWithSync<ListSessionResponse>> {
+  }): Promise<IResponse<ListSessionResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/sessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListSessionResponse, 'ListSessionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListSessionResponse, 'ListSessionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint counts all of dedicated servers in a namespace managed by this service.
    */
-  getServersCount(): Promise<IResponseWithSync<CountServerResponse>> {
+  getServersCount(): Promise<IResponse<CountServerResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/servers/count'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountServerResponse, 'CountServerResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountServerResponse, 'CountServerResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint lists all of local dedicated servers in a namespace managed by this service.
    */
-  getServersLocal(): Promise<IResponseWithSync<ListServerResponse>> {
+  getServersLocal(): Promise<IResponse<ListServerResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/servers/local'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListServerResponse, 'ListServerResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListServerResponse, 'ListServerResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE] Required scope: social This endpoint run ghost cleaner once.
    */
-  getWorkersGhost(): Promise<IResponseWithSync<unknown>> {
+  getWorkersGhost(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/workers/ghost'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SESSION [READ] Required scope: social This endpoint count all of sessions in a namespace managed by this service.
    */
-  getSessionsCount(queryParams?: { region?: string | null }): Promise<IResponseWithSync<CountSessionResponse>> {
+  getSessionsCount(queryParams?: { region?: string | null }): Promise<IResponse<CountSessionResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/sessions/count'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountSessionResponse, 'CountSessionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountSessionResponse, 'CountSessionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -240,23 +191,16 @@ export class AdminAdmin$ {
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint queries a specified dedicated server from DB.
    */
-  getServer_ByPodName(podName: string): Promise<IResponseWithSync<ServerDetailsResponse>> {
+  getServer_ByPodName(podName: string): Promise<IResponse<ServerDetailsResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/servers/{podName}'
       .replace('{namespace}', this.namespace)
       .replace('{podName}', podName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ServerDetailsResponse, 'ServerDetailsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ServerDetailsResponse, 'ServerDetailsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -292,20 +236,13 @@ export class AdminAdmin$ {
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint counts all of dedicated servers in a region managed by this service.
    */
-  getServersCountDetailed(queryParams?: { region?: string | null }): Promise<IResponseWithSync<DetailedCountServerResponse>> {
+  getServersCountDetailed(queryParams?: { region?: string | null }): Promise<IResponse<DetailedCountServerResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/servers/count/detailed'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DetailedCountServerResponse, 'DetailedCountServerResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DetailedCountServerResponse, 'DetailedCountServerResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

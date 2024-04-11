@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DeleteBulkLeaderboardsReq } from '../../generated-definitions/DeleteBulkLeaderboardsReq.js'
@@ -18,7 +18,7 @@ import { UpdateLeaderboardConfigReqV3 } from '../../generated-definitions/Update
 
 export class LeaderboardConfigurationV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
@@ -27,21 +27,14 @@ export class LeaderboardConfigurationV3Admin$ {
     isDeleted?: boolean | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<GetAllLeaderboardConfigsRespV3>> {
+  }): Promise<IResponse<GetAllLeaderboardConfigsRespV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v3/admin/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetAllLeaderboardConfigsRespV3, 'GetAllLeaderboardConfigsRespV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetAllLeaderboardConfigsRespV3, 'GetAllLeaderboardConfigsRespV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -88,23 +81,16 @@ export class LeaderboardConfigurationV3Admin$ {
   /**
    * &lt;p&gt;This endpoint returns a leaderboard configuration&lt;/p&gt;
    */
-  getLeaderboard_ByLeaderboardCode(leaderboardCode: string): Promise<IResponseWithSync<GetLeaderboardConfigRespV3>> {
+  getLeaderboard_ByLeaderboardCode(leaderboardCode: string): Promise<IResponse<GetLeaderboardConfigRespV3>> {
     const params = {} as SDKRequestConfig
     const url = '/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLeaderboardConfigRespV3, 'GetLeaderboardConfigRespV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLeaderboardConfigRespV3, 'GetLeaderboardConfigRespV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

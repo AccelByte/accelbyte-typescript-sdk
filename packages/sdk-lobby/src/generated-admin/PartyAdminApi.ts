@@ -15,7 +15,6 @@ export function PartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function PartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get party data in a namespace.
    */
   async function getPartyParty_ByPartyId(partyId: string): Promise<PartyData> {
-    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPartyParty_ByPartyId(partyId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +32,7 @@ export function PartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get party data in a namespace.
    */
   async function getParty_ByUserId(userId: string): Promise<PartyData> {
-    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getParty_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

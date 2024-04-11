@@ -22,7 +22,6 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -30,7 +29,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * get chat muted topics in a namespace.
    */
   async function getMuted(): Promise<MutedTopicResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMuted()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +39,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * get chat list of topic in a namespace.
    */
   async function getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<ChatMessageResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getTopic(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -50,7 +49,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Mute user.
    */
   async function updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateMute_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +62,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     topic: string,
     queryParams?: { limit?: number; order?: string | null; startCreatedAt?: number }
   ): Promise<ChatMessageResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getChats_ByTopic(topic, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +72,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Unmute user.
    */
   async function updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateUnmute_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +82,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Ban topic members in a group topic.
    */
   async function createBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<PublicBanTopicMembersResponse> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createBanMember_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +92,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Unban topic members in a group topic.
    */
   async function createUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<PublicUnbanTopicMembersResponse> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUnbanMember_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -103,7 +102,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete chat.
    */
   async function deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteChat_ByTopic_ByChatId(topic, chatId)
     if (resp.error) throw resp.error
     return resp.response.data

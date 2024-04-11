@@ -14,12 +14,11 @@ export function SsoApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   async function getSso_ByPlatformId(platformId: string, queryParams?: { payload?: string | null }): Promise<unknown> {
-    const $ = new Sso$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Sso$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSso_ByPlatformId(platformId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -29,7 +28,7 @@ export function SsoApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Logout user&#39;s session on platform that logged in using SSO. Supported platforms: - discourse
    */
   async function createLogout_ByPlatformId(platformId: string): Promise<unknown> {
-    const $ = new Sso$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Sso$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createLogout_ByPlatformId(platformId)
     if (resp.error) throw resp.error
     return resp.response.data

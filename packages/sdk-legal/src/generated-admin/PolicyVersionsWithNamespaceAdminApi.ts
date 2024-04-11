@@ -19,7 +19,6 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -30,7 +29,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyId: string,
     queryParams?: { versionId?: string | null }
   ): Promise<RetrievePolicyVersionResponseArray> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getVersions_ByPolicyId(policyId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +39,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
    * Create a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function createVersion_ByPolicyId(policyId: string, data: CreatePolicyVersionRequest): Promise<CreatePolicyVersionResponse> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createVersion_ByPolicyId(policyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +52,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyVersionId: string,
     data: UpdatePolicyVersionRequest
   ): Promise<UpdatePolicyVersionResponse> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchPolicyVersion_ByPolicyVersionId(policyVersionId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -66,7 +65,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyVersionId: string,
     queryParams?: { shouldNotify?: boolean | null }
   ): Promise<unknown> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchLatestPolicy_ByPolicyVersionId(policyVersionId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

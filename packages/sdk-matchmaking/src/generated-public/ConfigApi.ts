@@ -17,7 +17,6 @@ export function ConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -25,7 +24,7 @@ export function ConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get matchmaking config of all namespaces. Will only return namespace configs than have been updated.
    */
   async function getConfig(): Promise<NamespaceConfigList> {
-    const $ = new Config$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Config$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getConfig()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +34,7 @@ export function ConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get matchmaking config of a namespaces.
    */
   async function getConfig_ByNamespace(): Promise<NamespaceConfig> {
-    const $ = new Config$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Config$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getConfig_ByNamespace()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +44,7 @@ export function ConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Patch update matchmaking config of a namespaces. Partially update matchmaking config, will only update value that defined on the request.
    */
   async function patchConfig_ByNamespace(data: PatchNamespaceConfigRequest): Promise<NamespaceConfig> {
-    const $ = new Config$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Config$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchConfig_ByNamespace(data)
     if (resp.error) throw resp.error
     return resp.response.data

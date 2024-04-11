@@ -15,7 +15,6 @@ export function CertificateAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -28,7 +27,7 @@ export function CertificateAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     certname: string | null
     description?: string | null
   }): Promise<PlatformCredentials> {
-    const $ = new CertificateAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new CertificateAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateCertificatePfxPlatformXbl(data)
     if (resp.error) throw resp.error
     return resp.response.data

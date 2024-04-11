@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { Tier } from '../../generated-definitions/Tier.js'
@@ -21,31 +21,21 @@ import { UserTierGrant } from '../../generated-definitions/UserTierGrant.js'
 
 export class TierAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to query paginated tiers for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of passes&lt;/li&gt;&lt;/ul&gt;
    */
-  getTiers_BySeasonId(
-    seasonId: string,
-    queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<TierPagingSlicedResult>> {
+  getTiers_BySeasonId(seasonId: string, queryParams?: { limit?: number; offset?: number }): Promise<IResponse<TierPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons/{seasonId}/tiers'
       .replace('{namespace}', this.namespace)
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TierPagingSlicedResult, 'TierPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TierPagingSlicedResult, 'TierPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

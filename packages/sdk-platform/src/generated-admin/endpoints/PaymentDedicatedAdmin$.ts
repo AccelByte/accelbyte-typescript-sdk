@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ExternalPaymentOrderCreate } from '../../generated-definitions/ExternalPaymentOrderCreate.js'
 import { PaymentOrderCreateResult } from '../../generated-definitions/PaymentOrderCreateResult.js'
@@ -16,7 +16,7 @@ import { PaymentOrderSyncResult } from '../../generated-definitions/PaymentOrder
 
 export class PaymentDedicatedAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Sync payment orders. If response contains nextEvaluatedKey, please use it as query param in the next call to fetch the next batch, a batch has 1000 elements or less.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: sync payment orders&lt;/li&gt;&lt;/ul&gt;
@@ -25,21 +25,14 @@ export class PaymentDedicatedAdmin$ {
     end: string | null
     start: string | null
     nextEvaluatedKey?: string | null
-  }): Promise<IResponseWithSync<PaymentOrderSyncResult>> {
+  }): Promise<IResponse<PaymentOrderSyncResult>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/orders'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentOrderSyncResult, 'PaymentOrderSyncResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentOrderSyncResult, 'PaymentOrderSyncResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

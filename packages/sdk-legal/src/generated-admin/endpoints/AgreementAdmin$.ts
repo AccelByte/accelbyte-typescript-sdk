@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AcceptAgreementRequest } from '../../generated-definitions/AcceptAgreementRequest.js'
@@ -15,7 +15,7 @@ import { RetrieveAcceptedAgreementResponseArray } from '../../generated-definiti
 
 export class AgreementAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API will return users who has accepted a specific policy version.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -25,45 +25,27 @@ export class AgreementAdmin$ {
     keyword?: string | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<PagedRetrieveUserAcceptedAgreementResponse>> {
+  }): Promise<IResponse<PagedRetrieveUserAcceptedAgreementResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/agreements/policy-versions/users'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            PagedRetrieveUserAcceptedAgreementResponse,
-            'PagedRetrieveUserAcceptedAgreementResponse'
-          )
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PagedRetrieveUserAcceptedAgreementResponse, 'PagedRetrieveUserAcceptedAgreementResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API will return all accepted Legal Agreements for specified user. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getAgreementPolicyUser_ByUserId(userId: string): Promise<IResponseWithSync<RetrieveAcceptedAgreementResponseArray>> {
+  getAgreementPolicyUser_ByUserId(userId: string): Promise<IResponse<RetrieveAcceptedAgreementResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/admin/agreements/policies/users/{userId}'.replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrieveAcceptedAgreementResponseArray, 'RetrieveAcceptedAgreementResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrieveAcceptedAgreementResponseArray, 'RetrieveAcceptedAgreementResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

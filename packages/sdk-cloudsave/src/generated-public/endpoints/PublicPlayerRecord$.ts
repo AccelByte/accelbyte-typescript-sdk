@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BulkGetPlayerRecordResponse } from '../../generated-definitions/BulkGetPlayerRecordResponse.js'
@@ -18,30 +18,19 @@ import { PlayerRecordResponse } from '../../generated-definitions/PlayerRecordRe
 
 export class PublicPlayerRecord$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve list of player records key under given namespace.
    */
-  getUsersMeRecords(queryParams?: {
-    limit?: number
-    offset?: number
-    tags?: string[]
-  }): Promise<IResponseWithSync<ListPlayerRecordKeysResponse>> {
+  getUsersMeRecords(queryParams?: { limit?: number; offset?: number; tags?: string[] }): Promise<IResponse<ListPlayerRecordKeysResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/me/records'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListPlayerRecordKeysResponse, 'ListPlayerRecordKeysResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListPlayerRecordKeysResponse, 'ListPlayerRecordKeysResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -76,7 +65,7 @@ export class PublicPlayerRecord$ {
   /**
    * Get player record by its key. **Private Record**: Only user that own the player record could retrieve it.
    */
-  getRecord_ByUserId_ByKey(userId: string, key: string): Promise<IResponseWithSync<PlayerRecordResponse>> {
+  getRecord_ByUserId_ByKey(userId: string, key: string): Promise<IResponse<PlayerRecordResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}'
       .replace('{namespace}', this.namespace)
@@ -84,16 +73,9 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -134,23 +116,16 @@ export class PublicPlayerRecord$ {
   getRecordsPublic_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number; tags?: string[] }
-  ): Promise<IResponseWithSync<ListPlayerRecordKeysResponse>> {
+  ): Promise<IResponse<ListPlayerRecordKeysResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/{userId}/records/public'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListPlayerRecordKeysResponse, 'ListPlayerRecordKeysResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListPlayerRecordKeysResponse, 'ListPlayerRecordKeysResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -201,7 +176,7 @@ export class PublicPlayerRecord$ {
   /**
    * Get other player&#39;s record that is public. Only record with `isPublic=true` that can be retrieved using this endpoint.
    */
-  getPublic_ByUserId_ByKey(userId: string, key: string): Promise<IResponseWithSync<PlayerRecordResponse>> {
+  getPublic_ByUserId_ByKey(userId: string, key: string): Promise<IResponse<PlayerRecordResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/users/{userId}/records/{key}/public'
       .replace('{namespace}', this.namespace)
@@ -209,16 +184,9 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

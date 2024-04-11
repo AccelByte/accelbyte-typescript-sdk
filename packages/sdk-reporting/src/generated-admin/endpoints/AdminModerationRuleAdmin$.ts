@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ModerationRuleActiveRequest } from '../../generated-definitions/ModerationRuleActiveRequest.js'
@@ -16,7 +16,7 @@ import { ModerationRulesList } from '../../generated-definitions/ModerationRules
 
 export class AdminModerationRuleAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This endpoint create moderation rule. Supported Category: - UGC - USER - CHAT - EXTENSION Supported Action (GOING TO DEPRECATE, for replacement please use &#34;actions&#34;): * HideContent Supported Actions: * **hideContent**: Hide the content * **banAccount**: Ban the user account * **deleteChat**: Delete chat
@@ -39,21 +39,14 @@ export class AdminModerationRuleAdmin$ {
     extensionCategory?: string | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<ModerationRulesList>> {
+  }): Promise<IResponse<ModerationRulesList>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/reporting/v1/admin/namespaces/{namespace}/rules'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ModerationRulesList, 'ModerationRulesList')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ModerationRulesList, 'ModerationRulesList')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -89,23 +82,16 @@ export class AdminModerationRuleAdmin$ {
   /**
    * This endpoint get moderation rule.
    */
-  getRule_ByRuleId(ruleId: string): Promise<IResponseWithSync<ModerationRuleResponse>> {
+  getRule_ByRuleId(ruleId: string): Promise<IResponse<ModerationRuleResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/reporting/v1/admin/namespaces/{namespace}/rules/{ruleId}'
       .replace('{namespace}', this.namespace)
       .replace('{ruleId}', ruleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ModerationRuleResponse, 'ModerationRuleResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ModerationRuleResponse, 'ModerationRuleResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

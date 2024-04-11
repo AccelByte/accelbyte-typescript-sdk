@@ -12,7 +12,7 @@ import { AddDownloadCountResponse } from '../../generated-definitions/AddDownloa
 
 export class PublicDownloadCountLegacy$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This endpoint can be used to count how many the ugc downloaded

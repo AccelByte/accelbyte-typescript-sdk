@@ -15,7 +15,6 @@ export function NativeSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -27,7 +26,7 @@ export function NativeSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     order?: string | null
   }): Promise<NativeSessionPagingResponse> {
-    const $ = new NativeSessionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new NativeSessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getNativeSessions(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

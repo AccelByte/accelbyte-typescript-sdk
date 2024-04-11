@@ -16,7 +16,6 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -24,7 +23,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Cancel my account deletion request Requires valid user access token
    */
   async function deleteUserMeDeletion(): Promise<unknown> {
-    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletion$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteUserMeDeletion()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +33,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Submit my account deletion requests. Requires valid user access token This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest)
    */
   async function postUserMeDeletion(data: { platformId: string | null; platformToken: string | null }): Promise<RequestDeleteResponse> {
-    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletion$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postUserMeDeletion(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +43,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Retrieve my account deletion status Requires valid user access token
    */
   async function getUsersMeDeletionsStatus(): Promise<DeletionStatus> {
-    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletion$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeDeletionsStatus()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +53,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Cancel user&#39;s account deletion request Requires valid user access token Scope: account
    */
   async function deleteDeletion_ByUserId(userId: string): Promise<unknown> {
-    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletion$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteDeletion_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -64,7 +63,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Submit user&#39;s account deletion requests Requires valid user access token and password Scope: account
    */
   async function postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<RequestDeleteResponse> {
-    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletion$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postDeletion_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -74,7 +73,7 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Retrieve specific user&#39;s account deletion status Requires valid user access token Scope: account
    */
   async function getDeletionsStatus_ByUserId(userId: string): Promise<DeletionStatus> {
-    const $ = new DataDeletion$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DataDeletion$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDeletionsStatus_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

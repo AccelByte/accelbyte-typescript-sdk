@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { PassCreate } from '../../generated-definitions/PassCreate.js'
@@ -18,28 +18,21 @@ import { UserSeasonSummary } from '../../generated-definitions/UserSeasonSummary
 
 export class PassAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to query all passes for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of passes&lt;/li&gt;&lt;/ul&gt;
    */
-  getPasses_BySeasonId(seasonId: string): Promise<IResponseWithSync<PassInfoArray>> {
+  getPasses_BySeasonId(seasonId: string): Promise<IResponse<PassInfoArray>> {
     const params = {} as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons/{seasonId}/passes'
       .replace('{namespace}', this.namespace)
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PassInfoArray, 'PassInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PassInfoArray, 'PassInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -76,7 +69,7 @@ export class PassAdmin$ {
   /**
    * This API is used to get a pass for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: pass data&lt;/li&gt;&lt;/ul&gt;
    */
-  getPasse_BySeasonId_ByCode(seasonId: string, code: string): Promise<IResponseWithSync<PassInfo>> {
+  getPasse_BySeasonId_ByCode(seasonId: string, code: string): Promise<IResponse<PassInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons/{seasonId}/passes/{code}'
       .replace('{namespace}', this.namespace)
@@ -84,16 +77,9 @@ export class PassAdmin$ {
       .replace('{code}', code)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PassInfo, 'PassInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PassInfo, 'PassInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

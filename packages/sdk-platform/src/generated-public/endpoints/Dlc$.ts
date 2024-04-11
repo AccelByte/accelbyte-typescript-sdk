@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DlcConfigRewardShortInfo } from '../../generated-definitions/DlcConfigRewardShortInfo.js'
@@ -18,28 +18,21 @@ import { XblDlcSyncRequest } from '../../generated-definitions/XblDlcSyncRequest
 
 export class Dlc$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get dlc reward simple map, only return the sku of durable item reward&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: Authorized user&lt;/li&gt;&lt;/ul&gt;
    */
   getDlcRewardsDurableMap(queryParams: {
     dlcType: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
-  }): Promise<IResponseWithSync<DlcConfigRewardShortInfo>> {
+  }): Promise<IResponse<DlcConfigRewardShortInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/dlc/rewards/durable/map'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DlcConfigRewardShortInfo, 'DlcConfigRewardShortInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DlcConfigRewardShortInfo, 'DlcConfigRewardShortInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

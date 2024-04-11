@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { GrpcServerInfo } from '../../generated-definitions/GrpcServerInfo.js'
@@ -21,7 +21,7 @@ import { ServicePluginConfigUpdate } from '../../generated-definitions/ServicePl
 
 export class ServicePluginConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
@@ -41,21 +41,14 @@ export class ServicePluginConfigAdmin$ {
    * @deprecated
    * Get service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
-  getConfigsServicePlugin(): Promise<IResponseWithSync<ServicePluginConfigInfo>> {
+  getConfigsServicePlugin(): Promise<IResponse<ServicePluginConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ServicePluginConfigInfo, 'ServicePluginConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ServicePluginConfigInfo, 'ServicePluginConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -88,21 +81,14 @@ export class ServicePluginConfigAdmin$ {
   /**
    * Get lootbox plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
-  getCatalogPluginsLootbox(): Promise<IResponseWithSync<LootBoxPluginConfigInfo>> {
+  getCatalogPluginsLootbox(): Promise<IResponse<LootBoxPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/lootbox'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, LootBoxPluginConfigInfo, 'LootBoxPluginConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, LootBoxPluginConfigInfo, 'LootBoxPluginConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -134,21 +120,14 @@ export class ServicePluginConfigAdmin$ {
   /**
    * Get section plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
-  getCatalogPluginsSection(): Promise<IResponseWithSync<SectionPluginConfigInfo>> {
+  getCatalogPluginsSection(): Promise<IResponse<SectionPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/section'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SectionPluginConfigInfo, 'SectionPluginConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SectionPluginConfigInfo, 'SectionPluginConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -180,21 +159,14 @@ export class ServicePluginConfigAdmin$ {
   /**
    * Get revocation plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
-  getRevocationPluginsRevocation(): Promise<IResponseWithSync<RevocationPluginConfigInfo>> {
+  getRevocationPluginsRevocation(): Promise<IResponse<RevocationPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/revocation/plugins/revocation'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RevocationPluginConfigInfo, 'RevocationPluginConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RevocationPluginConfigInfo, 'RevocationPluginConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -213,21 +185,14 @@ export class ServicePluginConfigAdmin$ {
   /**
    * Get lootbox plugin gRPC info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
    */
-  getCatalogPluginsLootboxGrpcInfo(queryParams?: { force?: boolean | null }): Promise<IResponseWithSync<GrpcServerInfo>> {
+  getCatalogPluginsLootboxGrpcInfo(queryParams?: { force?: boolean | null }): Promise<IResponse<GrpcServerInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/lootbox/grpcInfo'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GrpcServerInfo, 'GrpcServerInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GrpcServerInfo, 'GrpcServerInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

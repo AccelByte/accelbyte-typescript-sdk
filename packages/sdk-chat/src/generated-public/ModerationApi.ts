@@ -15,7 +15,6 @@ export function ModerationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function ModerationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get the chat snapshot
    */
   async function getSnapshot_ByTopic_ByChatId(topic: string, chatId: string): Promise<ChatSnapshots> {
-    const $ = new Moderation$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Moderation$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSnapshot_ByTopic_ByChatId(topic, chatId)
     if (resp.error) throw resp.error
     return resp.response.data

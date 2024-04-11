@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { GetGroupListRequestV2 } from '../../generated-definitions/GetGroupListRequestV2.js'
@@ -16,7 +16,7 @@ import { GroupResponseV1 } from '../../generated-definitions/GroupResponseV1.js'
 
 export class GroupAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get list of groups. This endpoint will show any types of group Action Code: 73301
@@ -27,21 +27,14 @@ export class GroupAdmin$ {
     groupRegion?: string | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<GetGroupsListResponseV1>> {
+  }): Promise<IResponse<GetGroupsListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v1/admin/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetGroupsListResponseV1, 'GetGroupsListResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetGroupsListResponseV1, 'GetGroupsListResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -75,22 +68,15 @@ export class GroupAdmin$ {
   /**
    * Get single group information. This endpoint will show the group information by the groupId Action Code: 73306
    */
-  getGroup_ByGroupId(groupId: string): Promise<IResponseWithSync<GroupResponseV1>> {
+  getGroup_ByGroupId(groupId: string): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/admin/namespaces/{namespace}/groups/{groupId}'
       .replace('{namespace}', this.namespace)
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

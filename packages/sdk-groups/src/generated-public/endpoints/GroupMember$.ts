@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { CancelInvitationGroupResponseV2 } from '../../generated-definitions/CancelInvitationGroupResponseV2.js'
 import { GetGroupMemberListResponseV1 } from '../../generated-definitions/GetGroupMemberListResponseV1.js'
@@ -19,7 +19,7 @@ import { UserInvitationResponseV1 } from '../../generated-definitions/UserInvita
 
 export class GroupMember$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Required valid user authentication This endpoint is used to leave from group. leave from group. Admin is not allowed to leave the group. This endpoint will also give response if the user does not belong to any group. Action Code: 73404
@@ -37,41 +37,27 @@ export class GroupMember$ {
   /**
    * Required valid user authentication This endpoint is used to get user group information. Get user group information. If user does not belong to any group, it will return warning to give information about it Group Member Status: * JOIN : status of user requested to join group * INVITE: status of user invited to a group * JOINED: status of user already joined to a group Action Code: 73405
    */
-  getUser_ByUserId(userId: string): Promise<IResponseWithSync<GetUserGroupInformationResponseV1>> {
+  getUser_ByUserId(userId: string): Promise<IResponse<GetUserGroupInformationResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserGroupInformationResponseV1, 'GetUserGroupInformationResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserGroupInformationResponseV1, 'GetUserGroupInformationResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required valid user authentication This endpoint is used to get user joined group information. Get user group joined information. If user does not belong to any group, it will return warning to give information about it Group Member Status: * JOINED: status of user already joined to a group Action Code: 73405
    */
-  getUsersMeGroups(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetGroupMemberListResponseV1>> {
+  getUsersMeGroups(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetGroupMemberListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/users/me/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetGroupMemberListResponseV1, 'GetGroupMemberListResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetGroupMemberListResponseV1, 'GetGroupMemberListResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -155,23 +141,16 @@ export class GroupMember$ {
   getMembers_ByGroupId(
     groupId: string,
     queryParams?: { limit?: number; offset?: number; order?: string | null }
-  ): Promise<IResponseWithSync<GetGroupMemberListResponseV1>> {
+  ): Promise<IResponse<GetGroupMemberListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}/members'
       .replace('{namespace}', this.namespace)
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetGroupMemberListResponseV1, 'GetGroupMemberListResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetGroupMemberListResponseV1, 'GetGroupMemberListResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -314,7 +293,7 @@ export class GroupMember$ {
   /**
    * Required valid user authentication Required Member Role Permission: &#34;GROUP [READ]&#34; This endpoint is used to get user group status information. get user group status information. This endpoint will check the member and group information, and also the role permission of the the user who accesses this endpoint Action Code: 73409
    */
-  getStatus_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponseWithSync<GetUserGroupInformationResponseV1>> {
+  getStatus_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<GetUserGroupInformationResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/status'
       .replace('{namespace}', this.namespace)
@@ -322,16 +301,9 @@ export class GroupMember$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserGroupInformationResponseV1, 'GetUserGroupInformationResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserGroupInformationResponseV1, 'GetUserGroupInformationResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

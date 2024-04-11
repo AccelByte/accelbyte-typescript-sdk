@@ -6,14 +6,14 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { GlobalStatItemInfo } from '../../generated-definitions/GlobalStatItemInfo.js'
 import { GlobalStatItemPagingSlicedResult } from '../../generated-definitions/GlobalStatItemPagingSlicedResult.js'
 
 export class GlobalStatistic$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List global statItems by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat items&lt;/li&gt;&lt;/ul&gt;
@@ -22,42 +22,28 @@ export class GlobalStatistic$ {
     limit?: number
     offset?: number
     statCodes?: string | null
-  }): Promise<IResponseWithSync<GlobalStatItemPagingSlicedResult>> {
+  }): Promise<IResponse<GlobalStatItemPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/globalstatitems'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GlobalStatItemPagingSlicedResult, 'GlobalStatItemPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GlobalStatItemPagingSlicedResult, 'GlobalStatItemPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get global statItem by stat code.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: global stat item&lt;/li&gt;&lt;/ul&gt;
    */
-  getGlobalstatitem_ByStatCode(statCode: string): Promise<IResponseWithSync<GlobalStatItemInfo>> {
+  getGlobalstatitem_ByStatCode(statCode: string): Promise<IResponse<GlobalStatItemInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/globalstatitems/{statCode}'
       .replace('{namespace}', this.namespace)
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GlobalStatItemInfo, 'GlobalStatItemInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GlobalStatItemInfo, 'GlobalStatItemInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

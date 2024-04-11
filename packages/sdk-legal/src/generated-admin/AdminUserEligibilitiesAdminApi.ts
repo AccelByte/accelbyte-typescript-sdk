@@ -15,7 +15,6 @@ export function AdminUserEligibilitiesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function AdminUserEligibilitiesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
     userId: string,
     queryParams: { clientId: string | null; countryCode: string | null; publisherUserId?: string | null }
   ): Promise<RetrieveUserEligibilitiesIndirectResponse> {
-    const $ = new AdminUserEligibilitiesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminUserEligibilitiesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getEligibilities_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

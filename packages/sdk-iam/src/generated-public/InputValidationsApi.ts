@@ -16,7 +16,6 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -27,7 +26,7 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     defaultOnEmpty?: boolean | null
     languageCode?: string | null
   }): Promise<InputValidationsPublicResponse> {
-    const $ = new InputValidations$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new InputValidations$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getInputValidations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +36,7 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is to get input validation configuration by field.
    */
   async function getInputValidation_ByField(field: string): Promise<InputValidationConfigVersion> {
-    const $ = new InputValidations$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new InputValidations$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getInputValidation_ByField(field)
     if (resp.error) throw resp.error
     return resp.response.data

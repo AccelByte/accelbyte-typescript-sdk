@@ -80,7 +80,6 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -88,7 +87,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get my user data __Supported 3rd platforms:__ * __PSN(ps4web, ps4, ps5)__ * account id * display name * avatar * __Xbox(live, xblweb)__ * xuid or pxuid * display name * __Steam(steam, steamopenid)__ * steam id * display name * avatar * __EpicGames(epicgames)__ * epic account id * display name action code : 10147
    */
   async function getUsersMe(queryParams?: { includeAllPlatforms?: boolean | null }): Promise<UserResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMe(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -99,7 +98,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users [POST]_** - **Substitute endpoint: _/iam/v4/public/namespaces/{namespace}/users [POST]_** - **Note:** 1. v3 &amp; v4 introduce optional verification code 2. format difference（Pascal case =&gt; Camel case) Available Authentication Types: 1. **EMAILPASSWD**: an authentication type used for new user registration through email. 2. **PHONEPASSWD**: an authentication type used for new user registration through phone number. Country use ISO3166-1 alpha-2 two letter, e.g. US.
    */
   async function createUser(data: UserCreateRequest): Promise<UserCreateResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUser(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -115,14 +114,14 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     limit?: number
     roleId?: string | null
   }): Promise<GetAdminUsersResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersAdmin(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   async function getUsersVerifyLinkVerify(queryParams?: { code?: string | null }): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersVerifyLinkVerify(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -133,7 +132,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/search [GET]_** Search all users that match the query on these fields: all login IDs (email address, phone number, and platform user id), userID, display name, and on the specified namespace. If the query is not defined, then it searches all users on the specified namespace.
    */
   async function getUsersSearch(queryParams?: { query?: string | null }): Promise<SearchUsersResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersSearch(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -144,7 +143,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/information [DELETE]_**
    */
   async function deleteUser_ByUserId(userId: string): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -155,7 +154,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint(Public): _/iam/v3/public/namespaces/{namespace}/users/{userId} [GET]_** - **Substitute endpoint(Admin): _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_** - **Note:** format difference in response: Pascal case =&gt; Camel case
    */
   async function getUser_ByUserId(userId: string): Promise<UserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -166,7 +165,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint([PUT]): _/iam/v3/public/namespaces/{namespace}/users/me [PUT]_** - **Substitute endpoint([PATCH]): _/iam/v3/public/namespaces/{namespace}/users/me [PATCH]_** - **Substitute endpoint([PATCH]): _/iam/v4/public/namespaces/{namespace}/users/me [PATCH]_** - **Note:** 1. Prefer [PATCH] if client support PATCH method 2. Difference in V3/v4 request body, format difference: Pascal case =&gt; Camel case This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {Country, DisplayName, LanguageTag} Country use ISO3166-1 alpha-2 two letter, e.g. US. **Several case of updating email address** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address.
    */
   async function updateUser_ByUserId(userId: string, data: UserUpdateRequest): Promise<UserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateUser_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -177,7 +176,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users [GET]_**
    */
   async function getUsersByLoginId(queryParams?: { loginId?: string | null }): Promise<PublicUserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersByLoginId(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -188,7 +187,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users [POST]_** - **Substitute endpoint: _/iam/v4/public/namespaces/{namespace}/users [POST]_** - **Note:** 1. v3 &amp; v4 introduce optional verification code 2. format difference（Pascal case =&gt; Camel case) Available Authentication Types: 1. *EMAILPASSWD*: an authentication type used for new user registration through email. Country use ISO3166-1 alpha-2 two letter, e.g. US.
    */
   async function createUser_ByNS(data: UserCreateRequest): Promise<UserCreateResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUser_ByNS(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -205,7 +204,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId?: string | null
     query?: string | null
   }): Promise<PublicUserInformationResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -215,7 +214,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Available Authentication Types: 1. **EMAILPASSWD**: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   async function createUser_ByNS_v3(data: UserCreateRequestV3): Promise<UserCreateResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUser_ByNS_v3(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -225,7 +224,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * The verification link is sent to email address It will not send request if user email is already verified
    */
   async function createUserMeVerifyLinkRequest(data: SendVerificationLinkRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeVerifyLinkRequest(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -236,7 +235,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [POST]_**
    */
   async function createBan_ByUserId(userId: string, data: BanCreateRequest): Promise<UserBanResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createBan_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -246,7 +245,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. action code : 10103
    */
   async function patchUserMe(data: PublicUserUpdateRequestV3): Promise<UserResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchUserMe(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -256,7 +255,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. **Important notes:** This endpoint provides support for client that doesn&#39;t have PATCH support, i.e. UE4 before v4.23 released. If the client support PATCH method, use [PATCH] /iam/v3/public/namespaces/{namespace}/users/me instead action code : 10103
    */
   async function updateUserMe(data: PublicUserUpdateRequestV3): Promise<UserResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateUserMe(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -268,7 +267,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getUsersMeHeadlessLinkConflict(queryParams: {
     oneTimeLinkCode: string | null
   }): Promise<GetLinkHeadlessAccountConflictResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeHeadlessLinkConflict(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -279,7 +278,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [GET]_**
    */
   async function getBans_ByUserId(userId: string): Promise<UserBanResponseArray> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBans_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -290,7 +289,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/reset [POST]_**
    */
   async function createUserResetPassword(data: ResetPasswordRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserResetPassword(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -301,7 +300,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
    */
   async function createRole_ByUserId(userId: string, data: string[]): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createRole_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -312,7 +311,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/forgot [POST]_** **Special note for publisher-game scenario:** Game Client should provide game namespace path parameter and Publisher Client should provide publisher namespace path parameter. The password reset code will be sent to the publisher account&#39;s email address.
    */
   async function createUserForgotPassword(data: SendVerificationCodeRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserForgotPassword(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -323,7 +322,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint(query by email list): _/iam/v3/public/namespaces/{namespace}/users/bulk/basic [POST]_** - **Substitute endpoint(query by user id list): _/iam/v3/admin/namespaces/{namespace}/users/search/bulk [POST]_**
    */
   async function getUsersListByLoginIds(queryParams?: { loginIds?: string | null }): Promise<PublicUsersResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersListByLoginIds(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -334,7 +333,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_**
    */
   async function updateEnable_ByUserId(userId: string): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateEnable_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -344,7 +343,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * action code: 10105
    */
   async function createUserReset(data: ResetPasswordRequestV3): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserReset(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -355,7 +354,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_** For **Deletion Account** purpose fill the reason with: - **DeactivateAccount** : if your deletion request comes from user - **AdminDeactivateAccount** : if your deletion request comes from admin
    */
   async function updateDisable_ByUserId(userId: string, data: DisableUserRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateDisable_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -369,7 +368,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformID: string | null
     platformUserID: string | null
   }): Promise<PublicUserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersByPlatformUserId(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -379,7 +378,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * **Special note for publisher-game scenario:** Game Client should provide game namespace path parameter and Publisher Client should provide publisher namespace path parameter. The password reset code will be sent to the publisher account&#39;s email address. action code : 10104
    */
   async function createUserForgot(data: ForgotPasswordRequestV3): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserForgot(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -390,7 +389,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/password [PUT]_**
    */
   async function updatePassword_ByUserId(userId: string, data: UserPasswordUpdateRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updatePassword_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -404,7 +403,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: { linkingToken: string | null; platformId?: string | null }
   ): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postCrosslink_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -415,7 +414,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms [GET]_** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms [GET]_** ## Justice Platform Account The permission ’ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId}’ [READ] is required in order to read the UserID who linked with the user.
    */
   async function getPlatforms_ByUserId(userId: string): Promise<UserLinkedPlatformArray> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatforms_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -426,7 +425,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/publisher [GET]_** **Restriction:** Path Parameter *namespace* can be provided only with game namespace
    */
   async function getPublisher_ByUserId(userId: string): Promise<GetPublisherUserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPublisher_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -437,7 +436,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint(Public): _/iam/v3/public/namespaces/{namespace}/users/{userId} [GET]_** - **Substitute endpoint(Admin): _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_** - **Note:** format difference in response: Pascal case =&gt; Camel case
    */
   async function getUser_ByUserId_ByNS(userId: string): Promise<UserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByUserId_ByNS(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -448,7 +447,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint([PUT]): _/iam/v3/public/namespaces/{namespace}/users/me [PUT]_** - **Substitute endpoint([PATCH]): _/iam/v3/public/namespaces/{namespace}/users/me [PATCH]_** - **Substitute endpoint([PATCH]): _/iam/v4/public/namespaces/{namespace}/users/me [PATCH]_** - **Note:** 1. Prefer [PATCH] if client support PATCH method 2. Difference in V3/v4 request body, format difference: Pascal case =&gt; Camel case This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {Country, DisplayName, LanguageTag}
    */
   async function patchUser_ByUserId(userId: string, data: UserUpdateRequest): Promise<UserResponseArray> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchUser_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -459,7 +458,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint retrieve user attributes. action code: 10129 **Substitute endpoint:** /v4/public/namespaces/{namespace}/users/{userId} [READ]
    */
   async function getUser_ByUserId_ByNS_v3(userId: string): Promise<PublicUserResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByUserId_ByNS_v3(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -469,7 +468,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Note: 1. My account should be full account 2. My account not linked to headless account&#39;s third platform.
    */
   async function createUserMeHeadlesLinkWithProgression(data: LinkHeadlessAccountRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeHeadlesLinkWithProgression(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -479,7 +478,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Note: 1. the max count of user ids in the request is 100 2. if platform id is not empty, the result will only contain the corresponding platform infos 3. if platform id is empty, the result will contain all the supported platform infos __Supported 3rd platforms:__ * __PSN(ps4web, ps4, ps5)__ * account id * display name * avatar * __Xbox(live, xblweb)__ * xuid or pxuid * display name * __Steam(steam, steamopenid)__ * steam id * display name * avatar * __EpicGames(epicgames)__ * epic account id * display name
    */
   async function createUserPlatform(data: UsersPlatformInfosRequestV3): Promise<UsersPlatformInfosResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserPlatform(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -490,7 +489,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/information [DELETE]_**
    */
   async function deleteInformation_ByUserId(userId: string): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteInformation_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -501,7 +500,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/information [GET]_**
    */
   async function getInformation_ByUserId(userId: string): Promise<UserInformation> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getInformation_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -512,7 +511,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/permissions [POST]_** This endpoint will REPLACE user&#39;s permissions with the ones defined in body Schedule contains cron string or date range (both are UTC, also in cron syntax) to indicate when a permission and action are in effect. Both schedule types accepts quartz compatible cron syntax e.g. * * * * * * *. In ranged schedule, first element will be start date, and second one will be end date If schedule is set, the scheduled action must be valid too, that is between 1 to 15, inclusive Syntax reference Fields: 1. Seconds: 0-59 * / , - 2. Minutes: 0-59 * / , - 3. Hours: 0-23 * / , - 4. Day of month: 1-31 * / , - L W 5. Month: 1-12 JAN-DEC * / , - 6. Day of week: 0-6 SUN-SAT * / , - L # 7. Year: 1970-2099 * / , - Special characters: 1. *: all values in the fields, e.g. * in seconds fields indicates every second 2. /: increments of ranges, e.g. 3-59/15 in the minute field indicate the third minute of the hour and every 15 minutes thereafter 3. ,: separate items of a list, e.g. MON,WED,FRI in day of week 4. -: range, e.g. 2010-2018 indicates every year between 2010 and 2018, inclusive 5. L: last, e.g. When used in the day-of-week field, it allows you to specify constructs such as &#34;the last Friday&#34; (5L) of a given month. In the day-of-month field, it specifies the last day of the month. 6. W: business day, e.g. if you were to specify 15W as the value for the day-of-month field, the meaning is: &#34;the nearest business day to the 15th of the month.&#34; 7. #: must be followed by a number between one and five. It allows you to specify constructs such as &#34;the second Friday&#34; of a given month.
    */
   async function createPermission_ByUserId(userId: string, data: Permissions): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPermission_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -522,7 +521,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Notes: - This endpoint bulk get users&#39; basic info by userId, max allowed 100 at a time - If namespace is game, will search by game user Id, other wise will search by publisher namespace - **Result will include displayName(if it exists)**
    */
   async function createUserBulkBasic(data: UserIDsRequest): Promise<ListBulkUserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserBulkBasic(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -533,7 +532,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/code/verify [POST]_** Redeems a verification code sent to a user to verify the user&#39;s contact address is correct Available ContactType : *email* or *phone*
    */
   async function createVerification_ByUserId(userId: string, data: UserVerificationRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createVerification_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -543,7 +542,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Verify the registration code
    */
   async function createUserCodeVerify(data: VerifyRegistrationCode): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserCodeVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -553,7 +552,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * action code: 10107
    */
   async function updateUserMePassword(data: UserPasswordUpdateV3Request): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateUserMePassword(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -563,7 +562,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Check user&#39;s account availability. Available field : - displayName - uniqueDisplayName - username If request include access token with user ID data, that user ID will be excluded from availability check. For example, in case user update his emailAddress, he can use his own emailAddress to update his account. Response Code : - Account Available : 404 (not found) - Account Not Available : 204 (no content)
    */
   async function getUsersAvailability(queryParams: { field: string | null; query: string | null }): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersAvailability(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -573,7 +572,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will validate the request&#39;s email address. If it already been used, will response 409. If it is available, we will send a verification code to this email address. This code can be verified by this [endpoint](#operations-Users-PublicVerifyRegistrationCode).
    */
   async function createUserCodeRequest(data: SendRegisterVerificationCodeRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserCodeRequest(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -584,7 +583,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles/{roleId} [DELETE]_**
    */
   async function deleteRole_ByUserId_ByRoleId(userId: string, roleId: string): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteRole_ByUserId_ByRoleId(userId, roleId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -595,7 +594,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles/{roleId} [POST]_**
    */
   async function createRole_ByUserId_ByRoleId(userId: string, roleId: string): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createRole_ByUserId_ByRoleId(userId, roleId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -606,7 +605,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/bans [GET]_**
    */
   async function getBans_ByUserId_ByNS(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<UserBanResponseArray> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBans_ByUserId_ByNS(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -617,7 +616,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/reset [POST]_**
    */
   async function createUserResetPassword_ByNS(data: ResetPasswordRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserResetPassword_ByNS(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -630,7 +629,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { activeOnly?: boolean | null; after?: string | null; before?: string | null; limit?: number }
   ): Promise<GetUserBanV3Response> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBans_ByUserId_ByNS_v3(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -641,7 +640,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/forgot [POST]_** **Special note for publisher-game scenario:** Game Client should provide game namespace path parameter and Publisher Client should provide publisher namespace path parameter. The password reset code will be sent to the publisher account&#39;s email address.
    */
   async function createUserForgotPassword_ByNS(data: SendVerificationCodeRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserForgotPassword_ByNS(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -651,7 +650,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Will consume code if validateOnly is set false Redeems a verification code sent to a user to verify the user&#39;s contact address is correct Available ContactType : **email** action code: 10107
    */
   async function createUserMeCodeVerify(data: UserVerificationRequestV3): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeCodeVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -665,7 +664,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { after?: number; before?: number; limit?: number }
   ): Promise<LoginHistoriesResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLoginsHistories_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -676,7 +675,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/code/request [POST]_** The verification code is sent to either the phone number or email address. It depends on the LoginID&#39;s value. Available contexts for use : 1. **UserAccountRegistration** a context type used for verifying email address in user account registration. It returns 409 if the email address already verified. **_It is the default context if the Context field is empty_** 2. **UpdateEmailAddress** a context type used for verify user before updating email address.(Without email address verified checking) 3. **upgradeHeadlessAccount** The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account. If this context used, IAM rejects the request if the loginId field&#39;s value is already used by others by returning HTTP Status Code 409.
    */
   async function createVerificationcode_ByUserId(userId: string, data: SendVerificationCodeRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createVerificationcode_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -686,7 +685,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * The verification code is sent to email address Available contexts for use : 1. **UserAccountRegistration** a context type used for verifying email address in user account registration. It returns 409 if the email address already verified. **_It is the default context if the Context field is empty_** 2. **UpdateEmailAddress** a context type used for verify user before updating email address.(Without email address verified checking) 3. **upgradeHeadlessAccount** The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account. If this context used, IAM rejects the request if the email address is already used by others by returning HTTP Status Code 409. action code: 10116
    */
   async function createUserMeCodeRequest(data: SendVerificationCodeRequestV3): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeCodeRequest(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -697,7 +696,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/password [PUT]_**
    */
   async function updatePassword_ByUserId_ByNS(userId: string, data: UserPasswordUpdateRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updatePassword_ByUserId_ByNS(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -707,7 +706,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to validate the user password. Require valid user ID. Notes: - This endpoint validate the user password by specifying the userId and password
    */
   async function postValidate_ByUserId(userId: string, data: { password: string | null }): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postValidate_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -718,7 +717,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans/{banId} [PATCH]_**
    */
   async function updateEnable_ByUserId_ByBanId(userId: string, banId: string): Promise<UserBanResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateEnable_ByUserId_ByBanId(userId, banId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -731,7 +730,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number; platformId?: string | null }
   ): Promise<UserLinkedPlatformsResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatforms_ByUserId_ByNS(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -741,7 +740,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * **Restriction:** Path Parameter **namespace** can be provided only with game namespace
    */
   async function getPublisher_ByUserId_ByNS(userId: string): Promise<GetPublisherUserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPublisher_ByUserId_ByNS(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -754,7 +753,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: UpgradeHeadlessAccountV3Request,
     queryParams?: { needVerificationCode?: boolean | null }
   ): Promise<UserResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeHeadlesVerify(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -765,7 +764,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans/{banId} [PATCH]_** **Notes for using IAM in publisher - game studio scenarios** The endpoint allows: - The admin user in publisher namespace disables user’s ban in publisher namespace. - The admin user in game namespace disables user’s ban in game namespace. - The admin user in publisher namespace disables user’s ban in publisher namespace. Other scenarios are not supported and will return 403: Forbidden.
    */
   async function updateDisable_ByUserId_ByBanId(userId: string, banId: string): Promise<UserBanResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateDisable_ByUserId_ByBanId(userId, banId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -775,7 +774,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint retrieves user info and linked platform accounts
    */
   async function getInformation_ByUserId_ByNS(userId: string): Promise<UserInformationV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getInformation_ByUserId_ByNS(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -786,7 +785,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/headless/verify [POST]_**
    */
   async function createUpgradeHeadlessAccount_ByUserId(userId: string, data: UpgradeHeadlessAccountRequest): Promise<UserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUpgradeHeadlessAccount_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -796,7 +795,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Endpoint to validate user invitation. When not found, it could also means the invitation has expired.
    */
   async function getUserInvite_ByInvitationId(invitationId: string): Promise<UserInvitationV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUserInvite_ByInvitationId(invitationId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -806,7 +805,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint create user from saved roles when creating invitation and submitted data. User will be able to login after completing submitting the data through this endpoint. Available Authentication Types: EMAILPASSWD: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.
    */
   async function createUserInvite_ByInvitationId(invitationId: string, data: UserCreateRequestV3): Promise<UserCreateResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserInvite_ByInvitationId(invitationId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -820,7 +819,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: PlatformUserIdRequest,
     queryParams?: { rawPID?: boolean | null }
   ): Promise<UserPlatforms> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUser_ByPlatformId(platformId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -830,7 +829,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * It is going to be **DEPRECATED**. Update Platform Account relation to current User Account. Note: Game progression data (statistics, reward, etc) associated with previous User Account will not be transferred. If the data is tight to game user ID, the user will have the game progression data.
    */
   async function createPlatformLink_ByUserId(userId: string, data: LinkPlatformAccountRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPlatformLink_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -840,7 +839,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * If validateOnly is set false, consume code and upgrade headless account and automatically verified the email address if it is succeeded The endpoint upgrades a headless account by linking the headless account with the email address and the password. By upgrading the headless account into a full account, the user could use the email address and password for using Justice IAM. The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the send verification code endpoint. This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done. Supported user data fields : - displayName - dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29 - country : format ISO3166-1 alpha-2 two letter, e.g. US action code : 10124
    */
   async function createUserMeHeadlesCodeVerify(data: UpgradeHeadlessAccountWithVerificationCodeRequestV3): Promise<UserResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeHeadlesCodeVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -853,7 +852,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { after?: number; before?: number; limit?: number }
   ): Promise<LoginHistoriesResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLoginsHistories_ByUserId_ByNS(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -863,7 +862,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **android** - **ios** - **apple** - **device** - **discord** - **awscognito** - **epicgames** - **nintendo** Unlink user&#39;s account from a specific platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. _platformNamespace_ need to be specified when the platform ID is &#39;justice&#39;. Unlink user&#39;s account from justice platform will enable password token grant and password update. If you want to unlink user&#39;s account in a game namespace, you have to specify _platformNamespace_ to that game namespace. action code : 10121
    */
   async function deleteUserMePlatform_ByPlatformId(platformId: string, data: UnlinkUserPlatformRequest): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteUserMePlatform_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -876,7 +875,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: { ticket: string | null; redirectUri?: string | null }
   ): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postUserMePlatform_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -887,7 +886,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId} [POST]_** **Prerequisite:** Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables). ## Supported platforms: - **steam**: The ticket’s value is the authentication code returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The ticket&#39;s value is URL generated by Steam on web authentication - **facebook**: The ticket’s value is the authorization code returned by Facebook OAuth - **google**: The ticket’s value is the authorization code returned by Google OAuth - **oculus**: The ticket’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The ticket’s value is the authorization code returned by Twitch OAuth. - **android**: The ticket&#39;s value is the Android’s device ID - **ios**: The ticket&#39;s value is the iOS’s device ID. - **apple**: The ticket’s value is the authorization code returned by Apple OAuth. - **device**: Every device that does’nt run Android and iOS is categorized as a device platform. The ticket&#39;s value is the device’s ID. - **discord**: The ticket’s value is the authorization code returned by Discord OAuth.
    */
   async function postLink_ByUserId_ByPlatformId(userId: string, platformId: string, data: { ticket: string | null }): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postLink_ByUserId_ByPlatformId(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -898,7 +897,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/justice [GET]_** This endpoint gets list justice platform account by providing publisher namespace and publisher userID.
    */
   async function getPlatformsJustice_ByUserId(userId: string): Promise<GetUserMappingArray> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatformsJustice_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -908,7 +907,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint retrieves platform accounts linked to user. It will query all linked platform accounts and result will be distinct &amp; grouped, same platform we will pick oldest linked one.
    */
   async function getDistinctPlatforms_ByUserId(userId: string): Promise<DistinctPlatformResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDistinctPlatforms_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -918,7 +917,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint gets list justice platform account by providing publisher namespace and publisher userID
    */
   async function getPlatformsJustice_ByUserId_ByNS(userId: string): Promise<GetUserMappingV3Array> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatformsJustice_ByUserId_ByNS(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -928,7 +927,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to get linking status. This API need logged user and user can only request its own linking status.
    */
   async function getAsyncStatus_ByRequestId(requestId: string): Promise<LinkRequest> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAsyncStatus_ByRequestId(requestId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -943,7 +942,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: { platform_namespace?: string | null }
   ): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postUnlink_ByUserId_ByPlatformId(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -953,7 +952,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: if user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
    */
   async function deleteAllMeUser_ByPlatformId(platformId: string): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAllMeUser_ByPlatformId(platformId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -964,7 +963,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/permissions/{resource}/{action} [DELETE]_**
    */
   async function deletePermission_ByUserId_ByResource_ByAction(userId: string, resource: string, action: number): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deletePermission_ByUserId_ByResource_ByAction(userId, resource, action)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -980,7 +979,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     action: number,
     data: UpdatePermissionScheduleRequest
   ): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPermission_ByUserId_ByResource_ByAction(userId, resource, action, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -990,7 +989,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Force linking user account with platform. If this platform account was already linked to another user account, this endpoint will perform force linking and remove platform from that conflict user, not only from the current request namespace but also include all the enrolled namespaces. If current user have linked to this platform with another platform account (include once linked but it is unlinked now), it will not allow user to perform linking. ## Supported platforms: - **steam**: The platform_token’s value is the binary ticket returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The platform_token&#39;s value is URL generated by Steam on web authentication - **facebook**: The platform_token’s value is the authorization code returned by Facebook OAuth - **google**: The platform_token’s value is the authorization code returned by Google OAuth - **oculus**: The platform_token’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The platform_token’s value is the authorization code returned by Twitch OAuth. - **discord**: The platform_token’s value is the authorization code returned by Discord OAuth - **android**: The device_id is the Android’s device ID - **ios**: The device_id is the iOS’s device ID. - **apple**: The platform_token’s value is the authorization code returned by Apple OAuth.(We will use this code to generate APP token) - **device**: Every device that does’nt run Android and iOS is categorized as a device. The device_id is the device’s ID. - **justice**: The platform_token’s value is the designated user’s access token. - **epicgames**: The platform_token’s value is an access-token obtained from Epicgames EOS Account Service. - **ps4**: The platform_token’s value is the authorization code returned by Sony OAuth. - **ps5**: The platform_token’s value is the authorization code returned by Sony OAuth. - **nintendo**: The platform_token’s value is the id_token returned by Nintendo OAuth. - **awscognito**: The platform_token’s value is the aws cognito access token or id token (JWT). - **live**: The platform_token’s value is xbox XSTS token - **xblweb**: The platform_token’s value is code returned by xbox after login - **netflix**: The platform_token’s value is GAT (Gamer Access Token) returned by Netflix backend - **snapchat**: The platform_token’s value is the authorization code returned by Snapchat OAuth. - **for specific generic oauth (OIDC)**: The platform_token’s value should be the same type as created OIDC auth type whether it is auth code, idToken or bearerToken.
    */
   async function postForceMeUser_ByPlatformId(platformId: string, data: { ticket: string | null }): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postForceMeUser_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1001,7 +1000,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/agerestrictions/countries/{countryCode} [GET]_**
    */
   async function getAgerestrictions_ByCountryCode(countryCode: string): Promise<Country> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgerestrictions_ByCountryCode(countryCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1011,7 +1010,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get age restriction by country code. It will always get by publisher namespace
    */
   async function getAgerestrictionCountry_ByCountryCode(countryCode: string): Promise<CountryV3Response> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgerestrictionCountry_ByCountryCode(countryCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1022,7 +1021,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/justice/{targetNamespace} [GET]_** This endpoint requires the client access token as the bearer token This endpoint will support publisher access to game and game access to publisher If targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace. If targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace. **Will create game user id if not exists.**
    */
   async function getPlatformJustice_ByUserId_ByTargetNamespace(userId: string, targetNamespace: string): Promise<GetUserMapping> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatformJustice_ByUserId_ByTargetNamespace(userId, targetNamespace)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1036,7 +1035,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     targetNamespace: string
   ): Promise<GetUserJusticePlatformAccountResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPlatformJustice_ByUserId_ByTargetNamespace(userId, targetNamespace)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1049,7 +1048,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     queryParams?: { clientId?: string | null; redirectUri?: string | null }
   ): Promise<WebLinkingResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getWebLinkMeUsers_ByPlatformId(platformId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1064,7 +1063,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: { platform_namespace?: string | null }
   ): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteLink_ByUserId_ByPlatformId(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1079,7 +1078,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: { ticket: string | null }
   ): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postLink_ByUserId_ByPlatformId_ByNS(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1092,7 +1091,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: LinkPlatformAccountWithProgressionRequest
   ): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPlatformLinkWithProgression_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1102,7 +1101,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create Justice User from Publisher User information. It will check first if Justice User on target namespace already exist.
    */
   async function createUserMePlatformJustice_ByTargetNamespace(targetNamespace: string): Promise<CreateJusticeUserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMePlatformJustice_ByTargetNamespace(targetNamespace)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1112,7 +1111,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
   async function getUser_ByPlatformId_ByPlatformUserId(platformId: string, platformUserId: string): Promise<UserResponseV3> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByPlatformId_ByPlatformUserId(platformId, platformUserId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1126,7 +1125,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: UpgradeHeadlessAccountWithVerificationCodeRequest
   ): Promise<UserResponse> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUpgradeHeadlessAccountWithVerificationCode_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1139,7 +1138,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: { state: string | null; code?: string | null }
   ): Promise<LinkRequest> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postWebLinkProcesMeUser_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -1152,7 +1151,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     queryParams: { state: string | null; code?: string | null }
   ): Promise<unknown> {
-    const $ = new Users$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Users$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getWebLinkEstablishMeUsers_ByPlatformId(platformId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

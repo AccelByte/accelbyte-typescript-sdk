@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { BulkOperationResult } from '../../generated-definitions/BulkOperationResult.js'
 import { KeyGroupCreate } from '../../generated-definitions/KeyGroupCreate.js'
@@ -18,7 +18,7 @@ import { KeyPagingSliceResult } from '../../generated-definitions/KeyPagingSlice
 
 export class KeyGroupAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query key groups, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of key group&lt;/li&gt;&lt;/ul&gt;
@@ -28,21 +28,14 @@ export class KeyGroupAdmin$ {
     name?: string | null
     offset?: number
     tag?: string | null
-  }): Promise<IResponseWithSync<KeyGroupPagingSlicedResult>> {
+  }): Promise<IResponse<KeyGroupPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, KeyGroupPagingSlicedResult, 'KeyGroupPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, KeyGroupPagingSlicedResult, 'KeyGroupPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -62,43 +55,29 @@ export class KeyGroupAdmin$ {
    * @deprecated
    * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
-  getKeygroupsByBoothName(queryParams: { boothName: string | null }): Promise<IResponseWithSync<KeyGroupInfo>> {
+  getKeygroupsByBoothName(queryParams: { boothName: string | null }): Promise<IResponse<KeyGroupInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/byBoothName'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
-  getKeygroup_ByKeyGroupId(keyGroupId: string): Promise<IResponseWithSync<KeyGroupInfo>> {
+  getKeygroup_ByKeyGroupId(keyGroupId: string): Promise<IResponse<KeyGroupInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/{keyGroupId}'
       .replace('{namespace}', this.namespace)
       .replace('{keyGroupId}', keyGroupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -122,23 +101,16 @@ export class KeyGroupAdmin$ {
   getKeys_ByKeyGroupId(
     keyGroupId: string,
     queryParams?: { limit?: number; offset?: number; status?: 'ACQUIRED' | 'ACTIVE' }
-  ): Promise<IResponseWithSync<KeyPagingSliceResult>> {
+  ): Promise<IResponse<KeyPagingSliceResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/{keyGroupId}/keys'
       .replace('{namespace}', this.namespace)
       .replace('{keyGroupId}', keyGroupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, KeyPagingSliceResult, 'KeyPagingSliceResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, KeyPagingSliceResult, 'KeyPagingSliceResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -160,22 +132,15 @@ export class KeyGroupAdmin$ {
   /**
    * Get key group dynamic.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
-  getDynamic_ByKeyGroupId(keyGroupId: string): Promise<IResponseWithSync<KeyGroupDynamicInfo>> {
+  getDynamic_ByKeyGroupId(keyGroupId: string): Promise<IResponse<KeyGroupDynamicInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/{keyGroupId}/dynamic'
       .replace('{namespace}', this.namespace)
       .replace('{keyGroupId}', keyGroupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, KeyGroupDynamicInfo, 'KeyGroupDynamicInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, KeyGroupDynamicInfo, 'KeyGroupDynamicInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

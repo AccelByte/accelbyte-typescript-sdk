@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BinaryUpload } from '../../generated-definitions/BinaryUpload.js'
@@ -16,7 +16,7 @@ import { ReleaseNoteManifest } from '../../generated-definitions/ReleaseNoteMani
 
 export class ReleaseNoteAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to commit release note file that has been uploaded to signal completion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
@@ -70,7 +70,7 @@ export class ReleaseNoteAdmin$ {
     appId: string,
     platformId: string,
     queryParams?: { version?: string | null }
-  ): Promise<IResponseWithSync<ReleaseNoteDto>> {
+  ): Promise<IResponse<ReleaseNoteDto>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/releasenote/manifest/get/{appId}/{platformId}'
       .replace('{namespace}', this.namespace)
@@ -78,15 +78,8 @@ export class ReleaseNoteAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ReleaseNoteDto, 'ReleaseNoteDto')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ReleaseNoteDto, 'ReleaseNoteDto')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

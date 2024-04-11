@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { BasicBuildManifestArray } from '../../generated-definitions/BasicBuildManifestArray.js'
 import { BlockDownloadUrls } from '../../generated-definitions/BlockDownloadUrls.js'
@@ -18,114 +18,79 @@ import { VersionChain } from '../../generated-definitions/VersionChain.js'
 
 export class Downloader$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to get version history.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: version chain from specified build&lt;/li&gt;&lt;/ul&gt;
    */
-  getVersionHistory(queryParams: { appId: string | null; comparedBuildId: string | null }): Promise<IResponseWithSync<VersionChain>> {
+  getVersionHistory(queryParams: { appId: string | null; comparedBuildId: string | null }): Promise<IResponse<VersionChain>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/versionHistory'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, VersionChain, 'VersionChain')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, VersionChain, 'VersionChain')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to check whether supplied list of appId has valid buildmanifest and at least one of its build set as latest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of build availability&lt;/li&gt;&lt;/ul&gt;
    */
-  getBulkCheckLatest(queryParams: { appIds: string[] }): Promise<IResponseWithSync<BuildAvailabilityArray>> {
+  getBulkCheckLatest(queryParams: { appIds: string[] }): Promise<IResponse<BuildAvailabilityArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/bulkCheckLatest'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildAvailabilityArray, 'BuildAvailabilityArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildAvailabilityArray, 'BuildAvailabilityArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * @deprecated
    * This API is used to get build manifest of release version of the application. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategame_ByAppId(appId: string): Promise<IResponseWithSync<BuildManifest>> {
+  getUpdategame_ByAppId(appId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/updategame/{appId}'
       .replace('{namespace}', this.namespace)
       .replace('{appId}', appId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get simple build manifest that contains list of current build in various platform.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getAvailablebuild_ByAppId(appId: string): Promise<IResponseWithSync<BasicBuildManifestArray>> {
+  getAvailablebuild_ByAppId(appId: string): Promise<IResponse<BasicBuildManifestArray>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/availablebuilds/{appId}'
       .replace('{namespace}', this.namespace)
       .replace('{appId}', appId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BasicBuildManifestArray, 'BasicBuildManifestArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BasicBuildManifestArray, 'BasicBuildManifestArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * @deprecated
    * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and generate chunks difference and obsolete files list between two version. Only works for builds uploaded with BuildInfo v1 [DEPRECATED}&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategameBuild_ByBuildId(buildId: string): Promise<IResponseWithSync<BuildManifest>> {
+  getUpdategameBuild_ByBuildId(buildId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/updategame/builds/{buildId}'
       .replace('{namespace}', this.namespace)
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -147,7 +112,7 @@ export class Downloader$ {
    * @deprecated
    * This API is used to get build manifest that contains file difference between requested version and release version. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategame_ByAppId_ByVersion(appId: string, version: string): Promise<IResponseWithSync<BuildManifest>> {
+  getUpdategame_ByAppId_ByVersion(appId: string, version: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/updategame/{appId}/{version}'
       .replace('{namespace}', this.namespace)
@@ -155,44 +120,30 @@ export class Downloader$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and obsolete files list between two version. Only works for builds uploaded with BuildInfo v2&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategameBuild_ByBuildId_ByNS(buildId: string): Promise<IResponseWithSync<BuildManifest>> {
+  getUpdategameBuild_ByBuildId_ByNS(buildId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/v2/updategame/builds/{buildId}'
       .replace('{namespace}', this.namespace)
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get build manifest of release version of the application.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategame_ByAppId_ByPlatformId(appId: string, platformId: string): Promise<IResponseWithSync<BuildManifest>> {
+  getUpdategame_ByAppId_ByPlatformId(appId: string, platformId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/v2/updategame/{appId}/{platformId}'
       .replace('{namespace}', this.namespace)
@@ -200,25 +151,15 @@ export class Downloader$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API fetch the diff status between two builds. The diff generated by diff wrapper and saved in the database. Return 404 if no diff found.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Simple diff status containing where to fetch diff manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getDiff_BySourceBuildId_ByDestinationBuildId(
-    sourceBuildId: string,
-    destinationBuildId: string
-  ): Promise<IResponseWithSync<DiffStatusReport>> {
+  getDiff_BySourceBuildId_ByDestinationBuildId(sourceBuildId: string, destinationBuildId: string): Promise<IResponse<DiffStatusReport>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/diff/{sourceBuildId}/{destinationBuildId}'
       .replace('{namespace}', this.namespace)
@@ -226,22 +167,15 @@ export class Downloader$ {
       .replace('{destinationBuildId}', destinationBuildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DiffStatusReport, 'DiffStatusReport')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DiffStatusReport, 'DiffStatusReport')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get build manifest. The binary diff will be calculated in the client side, while obsolete file list will be generated by server side.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getVersion_ByAppId_ByVersion_ByPlatformId(appId: string, version: string, platformId: string): Promise<IResponseWithSync<BuildManifest>> {
+  getVersion_ByAppId_ByVersion_ByPlatformId(appId: string, version: string, platformId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/v2/updategame/{appId}/{version}/{platformId}'
       .replace('{namespace}', this.namespace)
@@ -250,15 +184,8 @@ export class Downloader$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

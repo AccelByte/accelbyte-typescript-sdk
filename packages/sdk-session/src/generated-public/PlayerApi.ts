@@ -18,7 +18,6 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get bulk players current platform.
    */
   async function createUserBulkPlatform(data: PlayersCurrentPlatformRequest): Promise<PlayersCurrentPlatformResponse> {
-    const $ = new Player$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Player$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserBulkPlatform(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +35,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Reset player attributes.
    */
   async function deleteUserMeAttribute(): Promise<unknown> {
-    const $ = new Player$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Player$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteUserMeAttribute()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -46,7 +45,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get player attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player&#39;s 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - PSN_PUSH_CONTEXT_ID: if provided, session will refer to this when performing session sync with PSN, otherwise will populate from session attributes - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
    */
   async function getUsersMeAttributes(): Promise<PlayerAttributesResponseBody> {
-    const $ = new Player$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Player$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeAttributes()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -56,7 +55,7 @@ export function PlayerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API behaves to upsert player&#39;s attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player&#39;s 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - PSN_PUSH_CONTEXT_ID: if provided, session will refer to this when performing session sync with PSN, otherwise will populate from session attributes - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
    */
   async function createUserMeAttribute(data: PlayerAttributesRequestBody): Promise<PlayerAttributesResponseBody> {
-    const $ = new Player$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Player$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeAttribute(data)
     if (resp.error) throw resp.error
     return resp.response.data

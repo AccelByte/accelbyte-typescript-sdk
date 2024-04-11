@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { MemberActiveSession } from '../../generated-definitions/MemberActiveSession.js'
@@ -14,7 +14,7 @@ import { RequestReconcileMaxActiveSession } from '../../generated-definitions/Re
 
 export class MaxActiveAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    *  Reconcile Max Active Session.
@@ -34,7 +34,7 @@ export class MaxActiveAdmin$ {
   /**
    *  Get Member Active Session.
    */
-  getMemberactivesession_ByName_ByUserId(name: string, userId: string): Promise<IResponseWithSync<MemberActiveSession>> {
+  getMemberactivesession_ByName_ByUserId(name: string, userId: string): Promise<IResponse<MemberActiveSession>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/configurations/{name}/memberactivesession/{userId}'
       .replace('{namespace}', this.namespace)
@@ -42,15 +42,8 @@ export class MaxActiveAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, MemberActiveSession, 'MemberActiveSession')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MemberActiveSession, 'MemberActiveSession')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

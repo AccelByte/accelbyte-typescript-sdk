@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { SsoPlatformCredentialRequest } from '../../generated-definitions/SsoPlatformCredentialRequest.js'
@@ -15,26 +15,19 @@ import { SsoPlatformCredentialResponseArray } from '../../generated-definitions/
 
 export class SsoCredentialAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This is the API to Get All Active SSO Platform Credential.
    */
-  getPlatformsSso(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<SsoPlatformCredentialResponseArray>> {
+  getPlatformsSso(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<SsoPlatformCredentialResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/platforms/sso'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SsoPlatformCredentialResponseArray, 'SsoPlatformCredentialResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SsoPlatformCredentialResponseArray, 'SsoPlatformCredentialResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -55,23 +48,16 @@ export class SsoCredentialAdmin$ {
   /**
    * This is the API to Get SSO Platform Credential.
    */
-  getSso_ByPlatformId(platformId: string): Promise<IResponseWithSync<SsoPlatformCredentialResponse>> {
+  getSso_ByPlatformId(platformId: string): Promise<IResponse<SsoPlatformCredentialResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/sso'
       .replace('{namespace}', this.namespace)
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SsoPlatformCredentialResponse, 'SsoPlatformCredentialResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SsoPlatformCredentialResponse, 'SsoPlatformCredentialResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

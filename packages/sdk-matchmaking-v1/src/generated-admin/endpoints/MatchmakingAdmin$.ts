@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ChannelV1 } from '../../generated-definitions/ChannelV1.js'
@@ -22,26 +22,19 @@ import { UpdateChannelRequest } from '../../generated-definitions/UpdateChannelR
 
 export class MatchmakingAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Export channels configuration to file. Action Code: 510114
    */
-  getChannelsExport(): Promise<IResponseWithSync<unknown>> {
+  getChannelsExport(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -61,43 +54,29 @@ export class MatchmakingAdmin$ {
   /**
    * Get all parties queueing in all channels.
    */
-  getChannelsAllParties(): Promise<IResponseWithSync<unknown>> {
+  getChannelsAllParties(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/all/parties'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Reads single channel based on namespace and channel name Action Code: 510112
    */
-  getChannel_ByChannelName(channelName: string): Promise<IResponseWithSync<ChannelV1>> {
+  getChannel_ByChannelName(channelName: string): Promise<IResponse<ChannelV1>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/{channelName}'
       .replace('{namespace}', this.namespace)
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -127,21 +106,14 @@ export class MatchmakingAdmin$ {
     matchID?: string | null
     partyID?: string | null
     userID?: string | null
-  }): Promise<IResponseWithSync<GetSessionHistorySearchResponse>> {
+  }): Promise<IResponse<GetSessionHistorySearchResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/sessions/history/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponse, 'GetSessionHistorySearchResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponse, 'GetSessionHistorySearchResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -156,134 +128,88 @@ export class MatchmakingAdmin$ {
     matchID?: string | null
     partyID?: string | null
     userID?: string | null
-  }): Promise<IResponseWithSync<GetSessionHistorySearchResponseV2>> {
+  }): Promise<IResponse<GetSessionHistorySearchResponseV2>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/matchmaking/v2/admin/namespaces/{namespace}/sessions/history/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponseV2, 'GetSessionHistorySearchResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponseV2, 'GetSessionHistorySearchResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Bulk get sessions.
    */
-  getChannelsAllSessionsBulk(queryParams?: { matchIDs?: string | null }): Promise<IResponseWithSync<MatchmakingResultArray>> {
+  getChannelsAllSessionsBulk(queryParams?: { matchIDs?: string | null }): Promise<IResponse<MatchmakingResultArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/all/sessions/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    *  Get a channel&#39;s stat data (mean, stddev, min, max) according to the stats collected from statistics service. &#39;
    */
-  getStats_ByChannelName(channelName: string): Promise<IResponseWithSync<StatResumeResponse>> {
+  getStats_ByChannelName(channelName: string): Promise<IResponse<StatResumeResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/{channelName}/stats'
       .replace('{namespace}', this.namespace)
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StatResumeResponse, 'StatResumeResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StatResumeResponse, 'StatResumeResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get all parties queueing in a channel.
    */
-  getParties_ByChannelName(channelName: string): Promise<IResponseWithSync<MatchingPartyArray>> {
+  getParties_ByChannelName(channelName: string): Promise<IResponse<MatchingPartyArray>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/{channelName}/parties'
       .replace('{namespace}', this.namespace)
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, MatchingPartyArray, 'MatchingPartyArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MatchingPartyArray, 'MatchingPartyArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get all sessions in a channel. if party_id value empty/null, field will not show in response body.
    */
-  getSessions_ByChannelName(channelName: string): Promise<IResponseWithSync<MatchmakingResultArray>> {
+  getSessions_ByChannelName(channelName: string): Promise<IResponse<MatchmakingResultArray>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/{channelName}/sessions'
       .replace('{namespace}', this.namespace)
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * @deprecated
    *  &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/{sessionId}/history/detailed [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Get session history detailed. if party_id value empty/null, field will not show in response body.
    */
-  getHistoryDetailed_ByMatchId(matchID: string): Promise<IResponseWithSync<GetSessionHistoryDetailedResponseItemArray>> {
+  getHistoryDetailed_ByMatchId(matchID: string): Promise<IResponse<GetSessionHistoryDetailedResponseItemArray>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/sessions/{matchID}/history/detailed'
       .replace('{namespace}', this.namespace)
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(
-            () => resultPromise,
-            GetSessionHistoryDetailedResponseItemArray,
-            'GetSessionHistoryDetailedResponseItemArray'
-          )
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetSessionHistoryDetailedResponseItemArray, 'GetSessionHistoryDetailedResponseItemArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

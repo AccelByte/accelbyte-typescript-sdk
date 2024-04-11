@@ -15,7 +15,6 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -45,7 +44,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
   ): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postOauthToken(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -60,7 +59,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     mfaToken: string | null
     rememberDevice: boolean | null
   }): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postOauthMfaVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -74,7 +73,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     additionalData?: string | null
     extend_exp?: boolean | null
   }): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postOauthHeadlesToken(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -84,7 +83,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is being used to generate target token. It requires basic header with ClientID and Secret, it should match the ClientID when call &lt;code&gt;/iam/v3/namespace/{namespace}/token/request&lt;/code&gt; The code should be generated from &lt;code&gt;/iam/v3/namespace/{namespace}/token/request&lt;/code&gt;.
    */
   async function postOauthTokenExchange(data: { code: string | null; additionalData?: string | null }): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postOauthTokenExchange(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -102,7 +101,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
   ): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postOauthSimultaneousLogin(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -118,7 +117,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     username: string | null
     extend_exp?: boolean | null
   }): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postOauthAuthenticateWithLink(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -140,7 +139,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
   ): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postTokenOauth_ByPlatformId(platformId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

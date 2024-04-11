@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateGroupConfigurationRequestV1 } from '../../generated-definitions/CreateGroupConfigurationRequestV1.js'
@@ -19,26 +19,19 @@ import { UpdateGroupConfigurationResponseV1 } from '../../generated-definitions/
 
 export class ConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
    */
-  getConfiguration(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListConfigurationResponseV1>> {
+  getConfiguration(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ListConfigurationResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v1/admin/namespaces/{namespace}/configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListConfigurationResponseV1, 'ListConfigurationResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListConfigurationResponseV1, 'ListConfigurationResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -85,23 +78,16 @@ export class ConfigurationAdmin$ {
   /**
    * This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
    */
-  getConfiguration_ByConfigurationCode(configurationCode: string): Promise<IResponseWithSync<GetGroupConfigurationResponseV1>> {
+  getConfiguration_ByConfigurationCode(configurationCode: string): Promise<IResponse<GetGroupConfigurationResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/admin/namespaces/{namespace}/configuration/{configurationCode}'
       .replace('{namespace}', this.namespace)
       .replace('{configurationCode}', configurationCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetGroupConfigurationResponseV1, 'GetGroupConfigurationResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetGroupConfigurationResponseV1, 'GetGroupConfigurationResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

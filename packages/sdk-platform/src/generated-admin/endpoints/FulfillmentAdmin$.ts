@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { FulfillCodeRequest } from '../../generated-definitions/FulfillCodeRequest.js'
@@ -19,7 +19,7 @@ import { RewardsRequest } from '../../generated-definitions/RewardsRequest.js'
 
 export class FulfillmentAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query fulfillment histories in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:FULFILLMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillment history&lt;/li&gt;&lt;/ul&gt;
@@ -29,21 +29,14 @@ export class FulfillmentAdmin$ {
     offset?: number
     status?: 'FAIL' | 'SUCCESS'
     userId?: string | null
-  }): Promise<IResponseWithSync<FulfillmentHistoryPagingSlicedResult>> {
+  }): Promise<IResponse<FulfillmentHistoryPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/fulfillment/history'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FulfillmentHistoryPagingSlicedResult, 'FulfillmentHistoryPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FulfillmentHistoryPagingSlicedResult, 'FulfillmentHistoryPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

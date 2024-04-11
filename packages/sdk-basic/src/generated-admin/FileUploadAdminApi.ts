@@ -15,7 +15,6 @@ export function FileUploadAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function FileUploadAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { fileType: string | null; category?: string | null }
   ): Promise<FileUploadUrlInfo> {
-    const $ = new FileUploadAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new FileUploadAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createFile_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +35,7 @@ export function FileUploadAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Generate an upload URL. It&#39;s valid for 10 minutes.&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource = &lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:FILEUPLOAD&#34;&lt;/b&gt;, action=1 &lt;b&gt;(CREATE)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11101&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: URL data&lt;/li&gt;&lt;/ul&gt;
    */
   async function createFile_ByFolder(folder: string, queryParams: { fileType: string | null }): Promise<FileUploadUrlInfo> {
-    const $ = new FileUploadAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new FileUploadAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createFile_ByFolder(folder, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

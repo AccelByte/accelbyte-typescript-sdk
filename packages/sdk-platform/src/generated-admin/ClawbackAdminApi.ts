@@ -17,7 +17,6 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -34,7 +33,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     status?: 'FAIL' | 'IGNORED' | 'INIT' | 'SUCCESS'
     userId?: string | null
   }): Promise<IapClawbackPagingSlicedResult> {
-    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getIapClawbackHistories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +43,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Mock Sync PlayStation Clawback event..&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK, action=1(CREATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function createIapClawbackPlaystationMock(data: StreamEvent): Promise<ClawbackInfo> {
-    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createIapClawbackPlaystationMock(data)
     if (resp.error) throw resp.error
     return resp.response.data

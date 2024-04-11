@@ -17,7 +17,6 @@ export function CategoryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -25,7 +24,7 @@ export function CategoryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get root categories.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store category)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store category)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: root category data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getCategories(queryParams?: { language?: string | null; storeId?: string | null }): Promise<CategoryInfoArray> {
-    const $ = new Category$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Category$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCategories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +37,7 @@ export function CategoryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     language?: string | null
     storeId?: string | null
   }): Promise<HierarchicalCategoryInfoArray> {
-    const $ = new Category$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Category$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCategoriesDownload(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -51,7 +50,7 @@ export function CategoryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     categoryPath: string,
     queryParams?: { language?: string | null; storeId?: string | null }
   ): Promise<CategoryInfo> {
-    const $ = new Category$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Category$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCategory_ByCategoryPath(categoryPath, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -64,7 +63,7 @@ export function CategoryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     categoryPath: string,
     queryParams?: { language?: string | null; storeId?: string | null }
   ): Promise<CategoryInfoArray> {
-    const $ = new Category$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Category$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getChildren_ByCategoryPath(categoryPath, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -77,7 +76,7 @@ export function CategoryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     categoryPath: string,
     queryParams?: { language?: string | null; storeId?: string | null }
   ): Promise<CategoryInfoArray> {
-    const $ = new Category$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Category$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDescendants_ByCategoryPath(categoryPath, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

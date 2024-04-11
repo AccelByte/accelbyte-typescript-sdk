@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ChannelRequest } from '../../generated-definitions/ChannelRequest.js'
@@ -16,26 +16,19 @@ import { UpdateChannelRequest } from '../../generated-definitions/UpdateChannelR
 
 export class AdminChannelAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get official channel paginated
    */
-  getChannels(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedGetChannelResponse>> {
+  getChannels(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<PaginatedGetChannelResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/admin/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedGetChannelResponse, 'PaginatedGetChannelResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedGetChannelResponse, 'PaginatedGetChannelResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -87,23 +80,16 @@ export class AdminChannelAdmin$ {
   getChannels_ByUserId(
     userId: string,
     queryParams?: { limit?: number; name?: string | null; offset?: number }
-  ): Promise<IResponseWithSync<PaginatedGetChannelResponse>> {
+  ): Promise<IResponse<PaginatedGetChannelResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/admin/namespaces/{namespace}/users/{userId}/channels'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedGetChannelResponse, 'PaginatedGetChannelResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedGetChannelResponse, 'PaginatedGetChannelResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

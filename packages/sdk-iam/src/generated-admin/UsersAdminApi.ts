@@ -74,7 +74,6 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -82,7 +81,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get my user data action code : 10147
    */
   async function getUsersMe(): Promise<UserResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMe()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -103,7 +102,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     roleId?: string | null
     userId?: string | null
   }): Promise<SearchUsersByPlatformIdResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -113,7 +112,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint search user who owns the given email address action code : 10132
    */
   async function getUsers_ByNS(queryParams?: { emailAddress?: string | null }): Promise<UserResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsers_ByNS(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -123,7 +122,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint support to bulk update users based on given data. ------ Supported fields: * skipLoginQueue
    */
   async function updateUser(data: UsersUpdateRequestV3): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateUser(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -141,7 +140,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     roleId?: string | null
     startDate?: string | null
   }): Promise<GetUsersResponseWithPaginationV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAdmins(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -154,7 +153,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: GetBulkUserBansRequest,
     queryParams?: { activeOnly?: boolean | null; banType?: string | null }
   ): Promise<GetUserBanV3Response> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserBan(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -164,7 +163,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List User By User ID This endpoint intended to list user information from the given list of userID and namespace
    */
   async function createUserBulk(data: UserIDsRequest): Promise<ListUserInformationResult> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -174,7 +173,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Use this endpoint to invite admin or non-admin user and assign role to them. The role must be scoped to namespace based on the **{namespace}** value in path parameter. An admin user can only assign role to namespaces that the admin user has the required permission. Role is optional, if not specified then it will only assign User role The invited admin will also assigned with &#34;User&#34; role by default.
    */
   async function createUserInvite(data: InviteUserRequestV3): Promise<InviteUserResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserInvite(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -197,7 +196,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     startDate?: string | null
     testAccount?: boolean | null
   }): Promise<SearchUsersResponseWithPaginationV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersSearch(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -208,7 +207,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_**
    */
   async function getUser_ByUserId(userId: string): Promise<UserResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -219,7 +218,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [PATCH]_** This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {Country, DisplayName, LanguageTag} Country use ISO3166-1 alpha-2 two letter, e.g. US. **Several case of updating email address** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address.
    */
   async function patchUser_ByUserId(userId: string, data: UserUpdateRequest): Promise<UserResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchUser_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -229,7 +228,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Admin Get User By User Id
    */
   async function getUser_ByUserId_ByNS(userId: string): Promise<UserResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByUserId_ByNS(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -239,7 +238,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address. action code : 10103
    */
   async function patchUser_ByUserId_ByNS(userId: string, data: UserUpdateRequestV3): Promise<UserResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchUser_ByUserId_ByNS(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -250,7 +249,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [GET]_** - **Note:** difference in V3 response, format difference: Pascal case =&gt; Camel case
    */
   async function getAgerestrictions(): Promise<AgeRestrictionResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgerestrictions()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -261,7 +260,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [PATCH]_**
    */
   async function patchAgerestriction(data: AgeRestrictionRequest): Promise<AgeRestrictionResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchAgerestriction(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -271,7 +270,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * action code: 10138
    */
   async function getAgerestrictions_ByNS(): Promise<AgeRestrictionResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgerestrictions_ByNS()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -281,7 +280,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * action code: 10122
    */
   async function patchAgerestriction_ByNS(data: AgeRestrictionRequestV3): Promise<AgeRestrictionResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchAgerestriction_ByNS(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -291,7 +290,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint search user by the list of email addresses action code : 10132
    */
   async function createUserSearchBulk(data: ListEmailAddressRequest): Promise<ListUserResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserSearchBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -302,7 +301,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [POST]_**
    */
   async function createBan_ByUserId(userId: string, data: BanCreateRequest): Promise<UserBanResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createBan_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -313,7 +312,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [GET]_**
    */
   async function getBans_ByUserId(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<UserBanResponseArray> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBans_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -326,7 +325,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { activeOnly?: boolean | null; after?: string | null; before?: string | null; limit?: number }
   ): Promise<GetUserBanV3Response> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBans_ByUserId_ByNS(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -336,7 +335,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Bans a user with specific type of ban. Ban types and reason can be queried. action code : 10141
    */
   async function createBan_ByUserId_ByNS(userId: string, data: BanCreateRequest): Promise<UserBanResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createBan_ByUserId_ByNS(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -351,7 +350,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     platformUserId?: string | null
   }): Promise<LinkingHistoryResponseWithPaginationV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersLinkhistories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -362,7 +361,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
    */
   async function createRole_ByUserId(userId: string, data: string[]): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createRole_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -373,7 +372,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
    */
   async function updateRole_ByUserId(userId: string, data: string[]): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateRole_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -386,7 +385,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     roleId: string,
     queryParams?: { after?: number; before?: number; limit?: number }
   ): Promise<GetUsersResponseWithPaginationV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsers_ByRoleId(roleId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -396,7 +395,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * [WARNING] This endpoint is only for testing purpose. This endpoint get active user verification code. There are 3 scenario of getting verification codes : after account registration, after reset password request, and after headless account upgrade. All of them will be returned on this endpoint. action code: 10146
    */
   async function getCodes_ByUserId(userId: string): Promise<VerificationCodeResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCodes_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -406,7 +405,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete User Roles
    */
   async function deleteRole_ByUserId(userId: string, data: string[]): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteRole_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -416,7 +415,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * User&#39;s roles will be replaced with roles from request body. An admin user can only assign role with **namespace** (in request body) if the admin user has required permission which is same as the required permission of endpoint: [AdminAddUserRoleV4].
    */
   async function patchRole_ByUserId(userId: string, data: NamespaceRoleRequest[]): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchRole_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -426,7 +425,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Notes: - This endpoint bulk get users&#39; basic info by userId, max allowed 100 at a time - If namespace is game, will search by game user Id, other wise will search by publisher namespace
    */
   async function createUserBulkPlatform(data: UserIDsRequest): Promise<ListBulkUserPlatformsResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserBulkPlatform(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -437,7 +436,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_**
    */
   async function updateEnable_ByUserId(userId: string): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateEnable_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -447,7 +446,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint disable or enable user account. Set the enable status on the request body to true to enable user account or set to false to disable it. Disable user for **Account Disable** purpose fill the reason with: - **AdminDeactivateAccount** : if your disable account request comes from admin Enable user ignore field &#39;reason&#39; in the request body. action code : 10143
    */
   async function patchStatus_ByUserId(userId: string, data: UpdateUserStatusRequest): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchStatus_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -457,7 +456,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint force verify user action code: 10118
    */
   async function updateVerify_ByUserId(userId: string): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateVerify_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -468,7 +467,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_** For **Deletion Account** purpose fill the reason with: - **DeactivateAccount** : if your deletion request comes from user - **AdminDeactivateAccount** : if your deletion request comes from admin
    */
   async function updateDisable_ByUserId(userId: string, data: DisableUserRequest): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateDisable_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -479,7 +478,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries/{countryCode} [PATCH]_**
    */
   async function patchCountry_ByCountryCode(countryCode: string, data: CountryAgeRestrictionRequest): Promise<Country> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchCountry_ByCountryCode(countryCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -490,7 +489,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/password [PUT]_**
    */
   async function updatePassword_ByUserId(userId: string, data: UserPasswordUpdateRequest): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updatePassword_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -500,7 +499,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update User Password
    */
   async function updatePassword_ByUserId_ByNS(userId: string, data: UserPasswordUpdateV3Request): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updatePassword_ByUserId_ByNS(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -513,7 +512,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     limit?: number
     offset?: number
   }): Promise<ListUsersWithPlatformAccountsResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersPlatformsJustice(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -526,7 +525,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number; platformId?: string | null }
   ): Promise<UserLinkedPlatformsResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatforms_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -537,7 +536,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries [GET]_**
    */
   async function getCountriesAgerestrictions(): Promise<CountryAgeRestrictionArray> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCountriesAgerestrictions()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -547,7 +546,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * action code : 10139
    */
   async function getAgerestrictionsCountries(): Promise<CountryV3ResponseArray> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgerestrictionsCountries()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -557,7 +556,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Will verify account and consume code if validateOnly is set false in request body Redeems a verification code sent to a user to verify the user&#39;s contact address is correct Available ContactType : **email** or **phone**
    */
   async function createCodeVerify_ByUserId(userId: string, data: UserVerificationRequest): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createCodeVerify_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -567,7 +566,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * [WARNING] This endpoint is deleting user data from database directly by skipping GDPR flow
    */
   async function deleteInformation_ByUserId(userId: string): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteInformation_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -577,7 +576,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete User Permission
    */
   async function deletePermission_ByUserId(userId: string, data: PermissionDeleteRequest[]): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deletePermission_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -587,7 +586,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will APPEND user&#39;s permissions with the ones defined in body Schedule contains cron string or date range (both are UTC, also in cron syntax) to indicate when a permission and action are in effect. Both schedule types accepts quartz compatible cron syntax e.g. * * * * * * *. In ranged schedule, first element will be start date, and second one will be end date If schedule is set, the scheduled action must be valid too, that is between 1 to 15, inclusive Syntax reference Fields: 1. Seconds: 0-59 * / , - 1. Minutes: 0-59 * / , - 1. Hours: 0-23 * / , - 1. Day of month: 1-31 * / , - L W 1. Month: 1-12 JAN-DEC * / , - 1. Day of week: 0-6 SUN-SAT * / , - L # 1. Year: 1970-2099 * / , - Special characters: 1. *: all values in the fields, e.g. * in seconds fields indicates every second 1. /: increments of ranges, e.g. 3-59/15 in the minute field indicate the third minute of the hour and every 15 minutes thereafter 1. ,: separate items of a list, e.g. MON,WED,FRI in day of week 1. -: range, e.g. 2010-2018 indicates every year between 2010 and 2018, inclusive 1. L: last, e.g. When used in the day-of-week field, it allows you to specify constructs such as &#34;the last Friday&#34; (5L) of a given month. In the day-of-month field, it specifies the last day of the month. 1. W: business day, e.g. if you were to specify 15W as the value for the day-of-month field, the meaning is: &#34;the nearest business day to the 15th of the month.&#34; 1. #: must be followed by a number between one and five. It allows you to specify constructs such as &#34;the second Friday&#34; of a given month.
    */
   async function createPermission_ByUserId(userId: string, data: Permissions): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPermission_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -597,7 +596,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will REPLACE user&#39;s permissions with the ones defined in body Schedule contains cron string or date range (both are UTC, also in cron syntax) to indicate when a permission and action are in effect. Both schedule types accepts quartz compatible cron syntax e.g. * * * * * * *. In ranged schedule, first element will be start date, and second one will be end date If schedule is set, the scheduled action must be valid too, that is between 1 to 15, inclusive Syntax reference Fields: 1. Seconds: 0-59 * / , - 2. Minutes: 0-59 * / , - 3. Hours: 0-23 * / , - 4. Day of month: 1-31 * / , - L W 5. Month: 1-12 JAN-DEC * / , - 6. Day of week: 0-6 SUN-SAT * / , - L # 7. Year: 1970-2099 * / , - Special characters: 1. *: all values in the fields, e.g. * in seconds fields indicates every second 2. /: increments of ranges, e.g. 3-59/15 in the minute field indicate the third minute of the hour and every 15 minutes thereafter 3. ,: separate items of a list, e.g. MON,WED,FRI in day of week 4. -: range, e.g. 2010-2018 indicates every year between 2010 and 2018, inclusive 5. L: last, e.g. When used in the day-of-week field, it allows you to specify constructs such as &#34;the last Friday&#34; (5L) of a given month. In the day-of-month field, it specifies the last day of the month. 6. W: business day, e.g. if you were to specify 15W as the value for the day-of-month field, the meaning is: &#34;the nearest business day to the 15th of the month.&#34; 7. #: must be followed by a number between one and five. It allows you to specify constructs such as &#34;the second Friday&#34; of a given month.
    */
   async function updatePermission_ByUserId(userId: string, data: Permissions): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updatePermission_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -607,7 +606,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Set ban status for a single user for a specific ban. Retrieve user ban and choose the ban ID. Set the form parameter to true/false to enable or disable the ban. action code : 10142&#39;
    */
   async function patchBan_ByUserId_ByBanId(userId: string, banId: string, data: BanUpdateRequest): Promise<UserBanResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchBan_ByUserId_ByBanId(userId, banId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -617,7 +616,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * The verification code is sent to email address. Available contexts for use : - **UserAccountRegistration** a context type used for verifying email address in user account registration. It returns 409 if the email address already verified. **_It is the default context if the Context field is empty_** - **UpdateEmailAddress** a context type used for verify user before updating email address.(Without email address verified checking) - **upgradeHeadlessAccount** The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account. If this context used, IAM rejects the request if the email address is already used by others by returning HTTP Status Code 409. action code: 10116
    */
   async function createCodeRequest_ByUserId(userId: string, data: SendVerificationCodeRequestV3): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createCodeRequest_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -631,7 +630,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: PlatformUserIdRequest,
     queryParams?: { rawPID?: boolean | null }
   ): Promise<UserPlatforms> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUser_ByPlatformId(platformId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -645,7 +644,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: LinkPlatformAccountRequest,
     queryParams?: { skipConflict?: boolean | null }
   ): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPlatformLink_ByUserId(userId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -655,7 +654,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint removes role from user action code: 10110
    */
   async function deleteRole_ByUserId_ByRoleId(userId: string, roleId: string): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteRole_ByUserId_ByRoleId(userId, roleId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -665,7 +664,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * action code: 10109
    */
   async function createRole_ByUserId_ByRoleId(userId: string, roleId: string): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createRole_ByUserId_ByRoleId(userId, roleId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -675,7 +674,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * action code : 10145
    */
   async function getDeletionStatus_ByUserId(userId: string): Promise<UserDeletionStatusResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDeletionStatus_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -685,7 +684,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * action code : 10144
    */
   async function patchDeletionStatus_ByUserId(userId: string, data: UpdateUserDeletionStatusRequest): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchDeletionStatus_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -698,7 +697,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { after?: number; before?: number; limit?: number }
   ): Promise<LoginHistoriesResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLoginsHistories_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -708,7 +707,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint ONLY accept **Client Token** This endpoint is utilized for specific scenarios where **email notifications are disabled** The user&#39;s email will be marked as verified Note: - emailAddress or password field are optional - request body can&#39;t be empty action code : 10103
    */
   async function patchTrustlyIdentity_ByUserId(userId: string, data: UserIdentityUpdateRequestV3): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchTrustlyIdentity_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -718,7 +717,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint retrieves platform accounts linked to user. It will query all linked platform accounts and result will be distinct &amp; grouped, same platform we will pick oldest linked one.
    */
   async function getDistinctPlatforms_ByUserId(userId: string): Promise<DistinctPlatformResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDistinctPlatforms_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -728,7 +727,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint gets list justice platform account by providing publisher namespace and publisher userID
    */
   async function getPlatformsJustice_ByUserId(userId: string): Promise<GetUserMappingArray> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatformsJustice_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -741,7 +740,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: UpgradeHeadlessAccountWithVerificationCodeRequestV3
   ): Promise<UserResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createHeadlesCodeVerify_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -755,7 +754,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: UnlinkUserPlatformRequest
   ): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deletePlatform_ByUserId_ByPlatformId(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -768,7 +767,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     countryCode: string,
     data: CountryAgeRestrictionV3Request
   ): Promise<CountryV3Response> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchAgerestrictionCountry_ByCountryCode(countryCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -778,7 +777,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: if user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
    */
   async function deleteAll_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAll_ByUserId_ByPlatformId(userId, platformId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -793,7 +792,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: { platform_namespace?: string | null }
   ): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteLink_ByUserId_ByPlatformId(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -803,7 +802,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * **Prerequisite:** Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables). ## Supported platforms: - **steam**: The ticket’s value is the authentication code returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The ticket&#39;s value is URL generated by Steam on web authentication - **facebook**: The ticket’s value is the authorization code returned by Facebook OAuth - **google**: The ticket’s value is the authorization code returned by Google OAuth - **oculus**: The ticket’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The ticket’s value is the authorization code returned by Twitch OAuth. - **android**: The ticket&#39;s value is the Android’s device ID - **ios**: The ticket&#39;s value is the iOS’s device ID. - **apple**: The ticket’s value is the authorization code returned by Apple OAuth. - **device**: Every device that does’nt run Android and iOS is categorized as a device platform. The ticket&#39;s value is the device’s ID. - **discord**: The ticket’s value is the authorization code returned by Discord OAuth. - **awscognito**: The ticket’s value is the aws cognito access token (JWT). - **epicgames**: The ticket’s value is an access-token obtained from Epicgames EOS Account Service. - **nintendo**: The ticket’s value is the authorization code(id_token) returned by Nintendo OAuth.
    */
   async function postLink_ByUserId_ByPlatformId(userId: string, platformId: string, data: { ticket: string | null }): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postLink_ByUserId_ByPlatformId(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -813,7 +812,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get User By Platform User ID This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
   async function getUser_ByPlatformId_ByPlatformUserId(platformId: string, platformUserId: string): Promise<UserResponseV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByPlatformId_ByPlatformUserId(platformId, platformUserId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -823,7 +822,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete User Permission
    */
   async function deletePermission_ByUserId_ByResource_ByAction(userId: string, resource: string, action: number): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deletePermission_ByUserId_ByResource_ByAction(userId, resource, action)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -833,7 +832,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint gets user single platform account metadata. Supported Platform: - Steam group(steamnetwork): - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - epicgames - nintendo - aws cognito - facebook - google - discord - twitch - snapchat - amazon Note: you can use either platform ID or platform group as platformId query parameter
    */
   async function getMetadata_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<UserPlatformMetadata> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMetadata_ByUserId_ByPlatformId(userId, platformId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -847,7 +846,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: { platformToken: string | null }
   ): Promise<TokenThirdPartyLinkStatusResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postLinkStatu_ByUserId_ByPlatformId(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -857,7 +856,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint requires the client access token as the bearer token This endpoint will support publisher access to game and game access to publisher If targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace. If targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace.
    */
   async function getPlatformJustice_ByUserId_ByTargetNamespace(userId: string, targetNamespace: string): Promise<GetUserMappingV3> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatformJustice_ByUserId_ByTargetNamespace(userId, targetNamespace)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -870,7 +869,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     targetNamespace: string
   ): Promise<CreateJusticeUserResponse> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPlatformJustice_ByUserId_ByTargetNamespace(userId, targetNamespace)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -880,7 +879,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is for admin to delete user&#39;s linking history with target platform id. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - apple - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: you can use either platform ID or platform group as platformId query parameter
    */
   async function deleteLinkHistory_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<unknown> {
-    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteLinkHistory_ByUserId_ByPlatformId(userId, platformId)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -16,7 +16,6 @@ export function PublicDownloadCountV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -27,7 +26,7 @@ export function PublicDownloadCountV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; userId?: string | null }
   ): Promise<PaginatedContentDownloaderResponse> {
-    const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDownloader_ByContentId(contentId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +36,7 @@ export function PublicDownloadCountV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint can be used to count how many the ugc downloaded
    */
   async function createDownloadcount_ByContentId(contentId: string): Promise<AddDownloadCountResponse> {
-    const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createDownloadcount_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data

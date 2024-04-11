@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DeleteBulkGameSessionRequest } from '../../generated-definitions/DeleteBulkGameSessionRequest.js'
@@ -17,7 +17,7 @@ import { UpdateGameSessionMemberStatusResponse } from '../../generated-definitio
 
 export class GameSessionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get all game sessions.
@@ -40,21 +40,14 @@ export class GameSessionAdmin$ {
     status?: string | null
     statusV2?: string | null
     toTime?: string | null
-  }): Promise<IResponseWithSync<GameSessionQueryResponse>> {
+  }): Promise<IResponse<GameSessionQueryResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/gamesessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

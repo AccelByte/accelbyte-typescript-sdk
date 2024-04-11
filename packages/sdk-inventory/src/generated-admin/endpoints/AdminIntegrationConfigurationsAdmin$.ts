@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { CreateIntegrationConfigurationReq } from '../../generated-definitions/CreateIntegrationConfigurationReq.js'
 import { IntegrationConfigurationResp } from '../../generated-definitions/IntegrationConfigurationResp.js'
@@ -16,7 +16,7 @@ import { UpdateStatusIntegrationConfigurationReq } from '../../generated-definit
 
 export class AdminIntegrationConfigurationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    *  Listing all integration configurations in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]
@@ -25,21 +25,14 @@ export class AdminIntegrationConfigurationsAdmin$ {
     limit?: number
     offset?: number
     sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc'
-  }): Promise<IResponseWithSync<ListIntegrationConfigurationsResp>> {
+  }): Promise<IResponse<ListIntegrationConfigurationsResp>> {
     const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
     const url = '/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListIntegrationConfigurationsResp, 'ListIntegrationConfigurationsResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListIntegrationConfigurationsResp, 'ListIntegrationConfigurationsResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

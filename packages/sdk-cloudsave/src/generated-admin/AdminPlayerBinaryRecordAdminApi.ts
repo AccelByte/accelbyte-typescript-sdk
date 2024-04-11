@@ -21,7 +21,6 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -32,7 +31,7 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
     userId: string,
     queryParams?: { limit?: number; offset?: number; query?: string | null; tags?: string[] }
   ): Promise<ListPlayerBinaryRecordsResponse> {
-    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBinaries_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +41,7 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
    * Create a player binary record. Other detail info: `key` should follow these rules: 1. support uppercase and lowercase letters, numbers, and separators **&#34;-&#34;**, **&#34;_&#34;**, **&#34;.&#34;** are allowed 2. begin and end with letters or numbers 3. spaces are not allowed 4. separators must not appears twice in a row Supported file types: jpeg, jpg, png, bmp, gif, mp3, webp, and bin.
    */
   async function createBinary_ByUserId(userId: string, data: PlayerBinaryRecordCreate): Promise<UploadBinaryRecordResponse> {
-    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createBinary_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +51,7 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
    * Delete a player binary record.
    */
   async function deleteBinary_ByUserId_ByKey(userId: string, key: string): Promise<unknown> {
-    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteBinary_ByUserId_ByKey(userId, key)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +61,7 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
    * Get a player binary record by its key.
    */
   async function getBinary_ByUserId_ByKey(userId: string, key: string): Promise<PlayerBinaryRecordResponse> {
-    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBinary_ByUserId_ByKey(userId, key)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -72,7 +71,7 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
    * Update a player binary record file by its key
    */
   async function updateBinary_ByUserId_ByKey(userId: string, key: string, data: BinaryRecordRequest): Promise<PlayerBinaryRecordResponse> {
-    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateBinary_ByUserId_ByKey(userId, key, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -86,7 +85,7 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
     key: string,
     data: PlayerBinaryRecordMetadataRequest
   ): Promise<PlayerBinaryRecordResponse> {
-    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateMetadata_ByUserId_ByKey(userId, key, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -100,7 +99,7 @@ export function AdminPlayerBinaryRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArg
     key: string,
     data: UploadBinaryRecordRequest
   ): Promise<UploadBinaryRecordResponse> {
-    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminPlayerBinaryRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPresigned_ByUserId_ByKey(userId, key, data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateMockTicket } from '../../generated-definitions/CreateMockTicket.js'
@@ -18,7 +18,7 @@ import { QueryMockBy } from '../../generated-definitions/QueryMockBy.js'
 
 export class MockMatchmakingAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    *  Delete all mock tickets and matches in a channel. &#39;
@@ -38,23 +38,16 @@ export class MockMatchmakingAdmin$ {
   /**
    *  Read all mock matches in a channel resulted from matching mock tickets. &#39;
    */
-  getMocksMatches_ByChannelName(channelName: string): Promise<IResponseWithSync<GetMockMatchesResponse>> {
+  getMocksMatches_ByChannelName(channelName: string): Promise<IResponse<GetMockMatchesResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/{channelName}/mocks/matches'
       .replace('{namespace}', this.namespace)
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -75,23 +68,16 @@ export class MockMatchmakingAdmin$ {
   /**
    *  Read all mock tickets in a channel. &#39;
    */
-  getMocksTickets_ByChannelName(channelName: string): Promise<IResponseWithSync<GetMockTicketsResponse>> {
+  getMocksTickets_ByChannelName(channelName: string): Promise<IResponse<GetMockTicketsResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/{channelName}/mocks/tickets'
       .replace('{namespace}', this.namespace)
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

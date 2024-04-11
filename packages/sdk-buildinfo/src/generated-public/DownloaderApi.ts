@@ -21,7 +21,6 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -29,7 +28,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get version history.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: version chain from specified build&lt;/li&gt;&lt;/ul&gt;
    */
   async function getVersionHistory(queryParams: { appId: string | null; comparedBuildId: string | null }): Promise<VersionChain> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getVersionHistory(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +38,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to check whether supplied list of appId has valid buildmanifest and at least one of its build set as latest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of build availability&lt;/li&gt;&lt;/ul&gt;
    */
   async function getBulkCheckLatest(queryParams: { appIds: string[] }): Promise<BuildAvailabilityArray> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBulkCheckLatest(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -50,7 +49,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get build manifest of release version of the application. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   async function getUpdategame_ByAppId(appId: string): Promise<BuildManifest> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUpdategame_ByAppId(appId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -60,7 +59,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get simple build manifest that contains list of current build in various platform.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAvailablebuild_ByAppId(appId: string): Promise<BasicBuildManifestArray> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAvailablebuild_ByAppId(appId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -71,7 +70,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and generate chunks difference and obsolete files list between two version. Only works for builds uploaded with BuildInfo v1 [DEPRECATED}&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   async function getUpdategameBuild_ByBuildId(buildId: string): Promise<BuildManifest> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUpdategameBuild_ByBuildId(buildId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -81,7 +80,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to Generate Download URLs for the requested blocks inside the specified buildId.&lt;br/&gt;The download URL generation may returns Signed URL or Public URL, depends on service configurations.&lt;br/&gt;Before processing the URL generation, it will validate the user entitlement first, if not entitled then the request will be refused.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Block Download URLs&lt;/li&gt;&lt;/ul&gt;
    */
   async function createBlockUrl_ByBuildId(buildId: string, data: BlockDownloadUrlsRequest): Promise<BlockDownloadUrls> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createBlockUrl_ByBuildId(buildId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -92,7 +91,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get build manifest that contains file difference between requested version and release version. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   async function getUpdategame_ByAppId_ByVersion(appId: string, version: string): Promise<BuildManifest> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUpdategame_ByAppId_ByVersion(appId, version)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -102,7 +101,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and obsolete files list between two version. Only works for builds uploaded with BuildInfo v2&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   async function getUpdategameBuild_ByBuildId_ByNS(buildId: string): Promise<BuildManifest> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUpdategameBuild_ByBuildId_ByNS(buildId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -112,7 +111,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get build manifest of release version of the application.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   async function getUpdategame_ByAppId_ByPlatformId(appId: string, platformId: string): Promise<BuildManifest> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUpdategame_ByAppId_ByPlatformId(appId, platformId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -125,7 +124,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sourceBuildId: string,
     destinationBuildId: string
   ): Promise<DiffStatusReport> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDiff_BySourceBuildId_ByDestinationBuildId(sourceBuildId, destinationBuildId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -135,7 +134,7 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get build manifest. The binary diff will be calculated in the client side, while obsolete file list will be generated by server side.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
   async function getVersion_ByAppId_ByVersion_ByPlatformId(appId: string, version: string, platformId: string): Promise<BuildManifest> {
-    const $ = new Downloader$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Downloader$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getVersion_ByAppId_ByVersion_ByPlatformId(appId, version, platformId)
     if (resp.error) throw resp.error
     return resp.response.data

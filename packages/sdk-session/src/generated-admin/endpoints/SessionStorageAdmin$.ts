@@ -6,13 +6,13 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 
 export class SessionStorageAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    *  Delete Session Storage By sessionID Session Storage feature only available for Gamesession
@@ -32,29 +32,22 @@ export class SessionStorageAdmin$ {
   /**
    *  Read Session Storage by sessionID Session Storage feature only available for Gamesession
    */
-  getStorage_BySessionId(sessionId: string): Promise<IResponseWithSync<unknown>> {
+  getStorage_BySessionId(sessionId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage'
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    *  Read Session Storage by sessionID and userID Session Storage feature only available for Gamesession
    */
-  getStorageUser_BySessionId_ByUserId(sessionId: string, userId: string): Promise<IResponseWithSync<unknown>> {
+  getStorageUser_BySessionId_ByUserId(sessionId: string, userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage/users/{userId}'
       .replace('{namespace}', this.namespace)
@@ -62,15 +55,8 @@ export class SessionStorageAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

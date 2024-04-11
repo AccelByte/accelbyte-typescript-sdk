@@ -12,7 +12,7 @@ import { z } from 'zod'
 
 export class AnonymizationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;p&gt;This API will delete specified user leaderboard&lt;p&gt;

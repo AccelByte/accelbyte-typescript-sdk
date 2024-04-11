@@ -65,14 +65,12 @@ export class LoginErrorUnmatchedState extends Error {}
 export class IamUserAuthorizationClient {
   conf: SDKRequestConfig
   namespace: string
-  cache
   options: UserAuthorizationOptions
 
   constructor(private sdk: AccelbyteSDK, args?: ApiArgs) {
-    const { config, namespace, cache, baseURL, clientId, redirectURI } = sdk.assembly()
+    const { config, namespace, baseURL, clientId, redirectURI } = sdk.assembly()
     this.conf = config
     this.namespace = args?.namespace || namespace
-    this.cache = args?.cache || cache
     this.options = {
       baseURL,
       clientId,
@@ -101,7 +99,7 @@ export class IamUserAuthorizationClient {
       client_id: this.options.clientId,
       redirect_uri: this.options.redirectURI
     }
-    const result = await new OAuth20$(axios, this.namespace, this.cache).postOauthToken(data)
+    const result = await new OAuth20$(axios, this.namespace).postOauthToken(data)
 
     const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse
     const mfaData = IamUserAuthorizationClient.getMfaDataFromError(errorResponse)
@@ -131,7 +129,7 @@ export class IamUserAuthorizationClient {
       grant_type: 'password',
       client_id: this.options.clientId
     }
-    const result = await new OAuth20$(axios, this.namespace, this.cache).postOauthToken(data)
+    const result = await new OAuth20$(axios, this.namespace).postOauthToken(data)
 
     const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse
     const mfaData = IamUserAuthorizationClient.getMfaDataFromError(errorResponse)
@@ -205,7 +203,7 @@ export class IamUserAuthorizationClient {
     const data: Parameters<OAuth20Extension$['postTokenExchange']>[0] = {
       code
     }
-    const result = await new OAuth20Extension$(axios, this.namespace, this.cache).postTokenExchange(data)
+    const result = await new OAuth20Extension$(axios, this.namespace).postTokenExchange(data)
     const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse
     const mfaData = IamUserAuthorizationClient.getMfaDataFromError(errorResponse)
 

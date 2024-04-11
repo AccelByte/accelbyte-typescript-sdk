@@ -25,18 +25,6 @@ export type IResponse<D> =
       error: IResponseError
     }
 
-export type IResponseWithSync<D> =
-  | {
-      response: IDataStatus<D>
-      error: null
-      onSync: (syncedData: (_: IResponse<D>) => void) => void
-    }
-  | {
-      response: null
-      error: IResponseError
-      onSync: (syncedData: (_: IResponse<D>) => void) => void
-    }
-
 export class Validate {
   //
   static responseType<D>(networkCall: () => Promise<AxiosResponse<D>>, Codec: z.ZodType<D>, modelName: string) {

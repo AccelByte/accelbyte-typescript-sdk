@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { NamespaceConfig } from '../../generated-definitions/NamespaceConfig.js'
 import { NamespaceConfigList } from '../../generated-definitions/NamespaceConfigList.js'
@@ -14,46 +14,32 @@ import { PatchNamespaceConfigRequest } from '../../generated-definitions/PatchNa
 
 export class Config$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get matchmaking config of all namespaces. Will only return namespace configs than have been updated.
    */
-  getConfig(): Promise<IResponseWithSync<NamespaceConfigList>> {
+  getConfig(): Promise<IResponse<NamespaceConfigList>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/config'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespaceConfigList, 'NamespaceConfigList')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespaceConfigList, 'NamespaceConfigList')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get matchmaking config of a namespaces.
    */
-  getConfig_ByNamespace(): Promise<IResponseWithSync<NamespaceConfig>> {
+  getConfig_ByNamespace(): Promise<IResponse<NamespaceConfig>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, NamespaceConfig, 'NamespaceConfig')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, NamespaceConfig, 'NamespaceConfig')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

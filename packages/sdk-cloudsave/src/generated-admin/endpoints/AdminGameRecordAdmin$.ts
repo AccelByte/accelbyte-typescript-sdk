@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { GameRecordAdminResponse } from '../../generated-definitions/GameRecordAdminResponse.js'
@@ -15,7 +15,7 @@ import { ListGameRecordKeysResponse } from '../../generated-definitions/ListGame
 
 export class AdminGameRecordAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve list of records key by namespace
@@ -25,21 +25,14 @@ export class AdminGameRecordAdmin$ {
     offset: number
     query?: string | null
     tags?: string[]
-  }): Promise<IResponseWithSync<ListGameRecordKeysResponse>> {
+  }): Promise<IResponse<ListGameRecordKeysResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/records'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListGameRecordKeysResponse, 'ListGameRecordKeysResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListGameRecordKeysResponse, 'ListGameRecordKeysResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -58,21 +51,14 @@ export class AdminGameRecordAdmin$ {
   /**
    * Get a record by its key in namespace-level.
    */
-  getRecord_ByKey(key: string): Promise<IResponseWithSync<GameRecordAdminResponse>> {
+  getRecord_ByKey(key: string): Promise<IResponse<GameRecordAdminResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameRecordAdminResponse, 'GameRecordAdminResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GameRecordAdminResponse, 'GameRecordAdminResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

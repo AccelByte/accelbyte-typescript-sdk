@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { CodeGenUtil, IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DeletionStatus } from '../../generated-definitions/DeletionStatus.js'
@@ -14,7 +14,7 @@ import { RequestDeleteResponse } from '../../generated-definitions/RequestDelete
 
 export class DataDeletion$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Cancel my account deletion request Requires valid user access token
@@ -48,21 +48,14 @@ export class DataDeletion$ {
   /**
    * Retrieve my account deletion status Requires valid user access token
    */
-  getUsersMeDeletionsStatus(): Promise<IResponseWithSync<DeletionStatus>> {
+  getUsersMeDeletionsStatus(): Promise<IResponse<DeletionStatus>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/users/me/deletions/status'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeletionStatus, 'DeletionStatus')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeletionStatus, 'DeletionStatus')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -101,22 +94,15 @@ export class DataDeletion$ {
   /**
    * Retrieve specific user&#39;s account deletion status Requires valid user access token Scope: account
    */
-  getDeletionsStatus_ByUserId(userId: string): Promise<IResponseWithSync<DeletionStatus>> {
+  getDeletionsStatus_ByUserId(userId: string): Promise<IResponse<DeletionStatus>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/deletions/status'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeletionStatus, 'DeletionStatus')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeletionStatus, 'DeletionStatus')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

@@ -17,7 +17,6 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -25,7 +24,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get available types paginated
    */
   async function getTypes(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTypeResponse> {
-    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getTypes(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +34,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Creates a new type and subtype
    */
   async function createType(data: CreateTypeRequest): Promise<CreateTypeResponse> {
-    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createType(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +44,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete existing type
    */
   async function deleteType_ByTypeId(typeId: string): Promise<unknown> {
-    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteType_ByTypeId(typeId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +54,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Updates a type and subtype
    */
   async function updateType_ByTypeId(typeId: string, data: CreateTypeRequest): Promise<CreateTypeResponse> {
-    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateType_ByTypeId(typeId, data)
     if (resp.error) throw resp.error
     return resp.response.data

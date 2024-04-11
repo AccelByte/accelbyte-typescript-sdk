@@ -15,7 +15,6 @@ export function ChallengeProgressionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function ChallengeProgressionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;/ul&gt;
    */
   async function createProgresEvaluate(data: EvaluatePlayerProgressionRequest): Promise<unknown> {
-    const $ = new ChallengeProgressionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ChallengeProgressionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createProgresEvaluate(data)
     if (resp.error) throw resp.error
     return resp.response.data

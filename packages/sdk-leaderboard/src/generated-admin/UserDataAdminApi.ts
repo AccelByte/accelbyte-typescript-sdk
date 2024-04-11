@@ -15,7 +15,6 @@ export function UserDataAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function UserDataAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetAllUserLeaderboardsResp> {
-    const $ = new UserDataAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserDataAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLeaderboards_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

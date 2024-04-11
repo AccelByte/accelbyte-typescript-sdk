@@ -16,7 +16,6 @@ export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -24,7 +23,7 @@ export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will delete grpc plugins configuration
    */
   async function deletePlugin(): Promise<unknown> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deletePlugin()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +33,7 @@ export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will get grpc plugins configuration
    */
   async function getPlugins(): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlugins()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +43,7 @@ export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will update grpc plugins configuration
    */
   async function patchPlugin(data: PluginRequest): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchPlugin(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +53,7 @@ export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will create new grpc plugins configuration per namespace
    */
   async function createPlugin(data: PluginRequest): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPlugin(data)
     if (resp.error) throw resp.error
     return resp.response.data

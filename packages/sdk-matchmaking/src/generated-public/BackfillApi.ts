@@ -21,7 +21,6 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -29,7 +28,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create backfill ticket.
    */
   async function createBackfill(data: BackFillCreateRequest): Promise<BackfillCreateResponse> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createBackfill(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +38,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get backfill proposal
    */
   async function getBackfillProposal(queryParams: { sessionID: string | null }): Promise<BackfillProposalResponse> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBackfillProposal(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +48,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete backfill ticket.
    */
   async function deleteBackfill_ByBackfillId(backfillID: string): Promise<unknown> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteBackfill_ByBackfillId(backfillID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +58,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get backfill ticket by ID
    */
   async function getBackfill_ByBackfillId(backfillID: string): Promise<BackfillGetResponse> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getBackfill_ByBackfillId(backfillID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +68,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Accept backfill proposal.
    */
   async function updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<GameSession> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateProposalAccept_ByBackfillId(backfillID, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -79,7 +78,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Reject backfill proposal
    */
   async function updateProposalReject_ByBackfillId(backfillID: string, data: BackFillRejectRequest): Promise<unknown> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateProposalReject_ByBackfillId(backfillID, data)
     if (resp.error) throw resp.error
     return resp.response.data

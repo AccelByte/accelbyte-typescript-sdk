@@ -16,7 +16,6 @@ export function ChallengeListApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -29,7 +28,7 @@ export function ChallengeListApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sortBy?: string | null
     status?: 'INIT' | 'RETIRED' | 'TIED'
   }): Promise<ListChallengeResponse> {
-    const $ = new ChallengeList$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ChallengeList$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getChallenges(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +41,7 @@ export function ChallengeListApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     challengeCode: string,
     queryParams?: { limit?: number; offset?: number; tags?: string[] }
   ): Promise<GetGoalsResponse> {
-    const $ = new ChallengeList$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ChallengeList$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getGoals_ByChallengeCode(challengeCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BlockPlayerRequest } from '../../generated-definitions/BlockPlayerRequest.js'
@@ -16,7 +16,7 @@ import { UnblockPlayerRequest } from '../../generated-definitions/UnblockPlayerR
 
 export class Player$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Required valid user authorization &lt;br/&gt; &lt;br&gt;add blocked players in a namespace based on user id &lt;br/&gt;
@@ -34,21 +34,14 @@ export class Player$ {
   /**
    * Required valid user authorization &lt;br/&gt; &lt;br&gt;load blocked players in a namespace based on user id &lt;br/&gt; Action Code: 50101
    */
-  getPlayerUsersMeBlocked(): Promise<IResponseWithSync<GetAllPlayerBlockedUsersResponse>> {
+  getPlayerUsersMeBlocked(): Promise<IResponse<GetAllPlayerBlockedUsersResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/public/player/namespaces/{namespace}/users/me/blocked'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedUsersResponse, 'GetAllPlayerBlockedUsersResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedUsersResponse, 'GetAllPlayerBlockedUsersResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -67,20 +60,13 @@ export class Player$ {
   /**
    * Required valid user authorization &lt;br/&gt; &lt;br&gt;load get players who blocked this player in a namespace based on user id &lt;br/&gt; Action Code: 50101
    */
-  getPlayerUsersMeBlockedBy(): Promise<IResponseWithSync<GetAllPlayerBlockedByUsersResponse>> {
+  getPlayerUsersMeBlockedBy(): Promise<IResponse<GetAllPlayerBlockedByUsersResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/lobby/v1/public/player/namespaces/{namespace}/users/me/blocked-by'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedByUsersResponse, 'GetAllPlayerBlockedByUsersResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedByUsersResponse, 'GetAllPlayerBlockedByUsersResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

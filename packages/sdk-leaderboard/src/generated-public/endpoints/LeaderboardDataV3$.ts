@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { BulkUserIDsRequest } from '../../generated-definitions/BulkUserIDsRequest.js'
 import { BulkUserRankingResponseV3 } from '../../generated-definitions/BulkUserRankingResponseV3.js'
@@ -15,7 +15,7 @@ import { UserRankingResponseV3 } from '../../generated-definitions/UserRankingRe
 
 export class LeaderboardDataV3$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;p&gt;Get rankings in an all time leaderboard.&lt;/p&gt;
@@ -23,23 +23,16 @@ export class LeaderboardDataV3$ {
   getAlltime_ByLeaderboardCode(
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
+  ): Promise<IResponse<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -60,7 +53,7 @@ export class LeaderboardDataV3$ {
   /**
    * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
-  getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponseWithSync<UserRankingResponseV3>> {
+  getUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<IResponse<UserRankingResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}'
       .replace('{namespace}', this.namespace)
@@ -68,16 +61,9 @@ export class LeaderboardDataV3$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserRankingResponseV3, 'UserRankingResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserRankingResponseV3, 'UserRankingResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -87,7 +73,7 @@ export class LeaderboardDataV3$ {
     leaderboardCode: string,
     cycleId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
+  ): Promise<IResponse<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/cycles/{cycleId}'
       .replace('{namespace}', this.namespace)
@@ -95,15 +81,8 @@ export class LeaderboardDataV3$ {
       .replace('{cycleId}', cycleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

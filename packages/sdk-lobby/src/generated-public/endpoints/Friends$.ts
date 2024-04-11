@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BulkFriendsRequest } from '../../generated-definitions/BulkFriendsRequest.js'
@@ -28,26 +28,19 @@ import { UserUnfriendRequest } from '../../generated-definitions/UserUnfriendReq
 
 export class Friends$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get list of friends in a namespace.
    */
-  getFriendsMe(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetUserFriendsResponseArray>> {
+  getFriendsMe(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetUserFriendsResponseArray>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserFriendsResponseArray, 'GetUserFriendsResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserFriendsResponseArray, 'GetUserFriendsResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -79,41 +72,27 @@ export class Friends$ {
   /**
    * Get list of incoming friends in a namespace.
    */
-  getFriendsMeIncoming(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetUserIncomingFriendsResponseArray>> {
+  getFriendsMeIncoming(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetUserIncomingFriendsResponseArray>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/incoming'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserIncomingFriendsResponseArray, 'GetUserIncomingFriendsResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserIncomingFriendsResponseArray, 'GetUserIncomingFriendsResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get list of outgoing friends in a namespace.
    */
-  getFriendsMeOutgoing(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetUserOutgoingFriendsResponseArray>> {
+  getFriendsMeOutgoing(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetUserOutgoingFriendsResponseArray>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/outgoing'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserOutgoingFriendsResponseArray, 'GetUserOutgoingFriendsResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserOutgoingFriendsResponseArray, 'GetUserOutgoingFriendsResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -132,21 +111,14 @@ export class Friends$ {
   /**
    * Get list of friends with platform data in a namespace.
    */
-  getFriendsMePlatforms(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListBulkUserPlatformsResponse>> {
+  getFriendsMePlatforms(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ListBulkUserPlatformsResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/platforms'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListBulkUserPlatformsResponse, 'ListBulkUserPlatformsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListBulkUserPlatformsResponse, 'ListBulkUserPlatformsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -155,21 +127,14 @@ export class Friends$ {
   getFriendsMeIncomingTime(queryParams?: {
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<LoadIncomingFriendsWithTimeResponseArray>> {
+  }): Promise<IResponse<LoadIncomingFriendsWithTimeResponseArray>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/incoming-time'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, LoadIncomingFriendsWithTimeResponseArray, 'LoadIncomingFriendsWithTimeResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, LoadIncomingFriendsWithTimeResponseArray, 'LoadIncomingFriendsWithTimeResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -178,21 +143,14 @@ export class Friends$ {
   getFriendsMeOutgoingTime(queryParams?: {
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<LoadOutgoingFriendsWithTimeResponseArray>> {
+  }): Promise<IResponse<LoadOutgoingFriendsWithTimeResponseArray>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/outgoing-time'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, LoadOutgoingFriendsWithTimeResponseArray, 'LoadOutgoingFriendsWithTimeResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, LoadOutgoingFriendsWithTimeResponseArray, 'LoadOutgoingFriendsWithTimeResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -237,23 +195,16 @@ export class Friends$ {
   /**
    * User get friendship status. Code: 0 - Message: &#34;not friend&#34; Code: 1 - Message: &#34;outgoing&#34; Code: 2 - Message: &#34;incoming&#34; Code: 3 - Message: &#34;friend&#34;
    */
-  getFriendMeStatu_ByFriendId(friendId: string): Promise<IResponseWithSync<UserGetFriendshipStatusResponse>> {
+  getFriendMeStatu_ByFriendId(friendId: string): Promise<IResponse<UserGetFriendshipStatusResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/friends/namespaces/{namespace}/me/status/{friendId}'
       .replace('{namespace}', this.namespace)
       .replace('{friendId}', friendId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserGetFriendshipStatusResponse, 'UserGetFriendshipStatusResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserGetFriendshipStatusResponse, 'UserGetFriendshipStatusResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

@@ -24,7 +24,6 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -43,7 +42,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     server_status?: string | null
     user_id?: string | null
   }): Promise<SessionQueryResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getGamesession(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +52,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This end point intended to be called directly by P2P game client host or by DSMC
    */
   async function createGamesession(data: CreateSessionRequest): Promise<SessionResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createGamesession(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +62,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Query game sessions by comma separated user ids
    */
   async function getGamesessionBulk(queryParams: { user_ids: string | null }): Promise<SessionByUserIDsResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getGamesessionBulk(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +72,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Query recent player by user ID
    */
   async function getRecentplayer_ByUserId(userID: string): Promise<RecentPlayerQueryResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getRecentplayer_ByUserId(userID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +82,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete the session (p2p) by session ID
    */
   async function deleteGamesession_BySessionId(sessionID: string): Promise<SessionResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteGamesession_BySessionId(sessionID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +92,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get the session by session ID
    */
   async function getGamesession_BySessionId(sessionID: string): Promise<SessionResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getGamesession_BySessionId(sessionID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -103,7 +102,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update game session, used to update the current player
    */
   async function updateGamesession_BySessionId(sessionID: string, data: UpdateSessionRequest): Promise<SessionResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateGamesession_BySessionId(sessionID, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -113,7 +112,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Join the specified session by session ID. Possible the game required a password to join
    */
   async function createJoin_BySessionId(sessionID: string, data: JoinGameSessionRequest): Promise<SessionResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createJoin_BySessionId(sessionID, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -123,7 +122,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Add player to game session
    */
   async function createPlayer_BySessionId(sessionID: string, data: AddPlayerRequest): Promise<AddPlayerResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createPlayer_BySessionId(sessionID, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -133,7 +132,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Only use for local DS entry, will error when calling non local DS entry
    */
   async function deleteLocald_BySessionId(sessionID: string): Promise<SessionResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteLocald_BySessionId(sessionID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -143,7 +142,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update game session, used to update OtherSettings
    */
   async function updateSetting_BySessionId(sessionID: string, data: UpdateSettingsRequest): Promise<SessionResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateSetting_BySessionId(sessionID, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -153,7 +152,7 @@ export function SessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Remove player from game session
    */
   async function deletePlayer_BySessionId_ByUserId(sessionID: string, userID: string): Promise<AddPlayerResponse> {
-    const $ = new Session$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Session$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deletePlayer_BySessionId_ByUserId(sessionID, userID)
     if (resp.error) throw resp.error
     return resp.response.data

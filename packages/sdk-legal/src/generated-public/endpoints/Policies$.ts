@@ -6,33 +6,26 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { RetrievePolicyPublicResponseArray } from '../../generated-definitions/RetrievePolicyPublicResponseArray.js'
 
 export class Policies$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Retrieve List of Countries that have Active Legal Policies.
    */
-  getPoliciesCountriesList(): Promise<IResponseWithSync<unknown>> {
+  getPoliciesCountriesList(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/public/policies/countries/list'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -43,21 +36,14 @@ export class Policies$ {
     defaultOnEmpty?: boolean | null
     policyType?: 'LEGAL_DOCUMENT_TYPE' | 'MARKETING_PREFERENCE_TYPE'
     tags?: string | null
-  }): Promise<IResponseWithSync<RetrievePolicyPublicResponseArray>> {
+  }): Promise<IResponse<RetrievePolicyPublicResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/public/policies/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -70,21 +56,14 @@ export class Policies$ {
       policyType?: 'LEGAL_DOCUMENT_TYPE' | 'MARKETING_PREFERENCE_TYPE'
       tags?: string | null
     }
-  ): Promise<IResponseWithSync<RetrievePolicyPublicResponseArray>> {
+  ): Promise<IResponse<RetrievePolicyPublicResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/public/policies/countries/{countryCode}'.replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -98,22 +77,15 @@ export class Policies$ {
       policyType?: 'LEGAL_DOCUMENT_TYPE' | 'MARKETING_PREFERENCE_TYPE'
       tags?: string | null
     }
-  ): Promise<IResponseWithSync<RetrievePolicyPublicResponseArray>> {
+  ): Promise<IResponse<RetrievePolicyPublicResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/public/policies/namespaces/{namespace}/countries/{countryCode}'
       .replace('{namespace}', this.namespace)
       .replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

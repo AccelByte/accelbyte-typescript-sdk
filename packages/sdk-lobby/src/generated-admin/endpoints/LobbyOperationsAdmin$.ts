@@ -14,7 +14,7 @@ import { PartyPutCustomAttributesRequest } from '../../generated-definitions/Par
 
 export class LobbyOperationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Update party attributes in a namespace.

@@ -6,72 +6,51 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DefaultProvider } from '../../generated-definitions/DefaultProvider.js'
 
 export class Public$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This endpoints returns list of supported providers. Armada is the default provider.
    */
-  getProviders(): Promise<IResponseWithSync<unknown>> {
+  getProviders(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/public/providers'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This endpoints returns the default provider.
    */
-  getProviderDefault(): Promise<IResponseWithSync<DefaultProvider>> {
+  getProviderDefault(): Promise<IResponse<DefaultProvider>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/public/provider/default'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DefaultProvider, 'DefaultProvider')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DefaultProvider, 'DefaultProvider')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This endpoint returns the providers by region.
    */
-  getProviderRegion_ByRegion(region: string): Promise<IResponseWithSync<unknown>> {
+  getProviderRegion_ByRegion(region: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/public/providers/regions/{region}'.replace('{region}', region)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

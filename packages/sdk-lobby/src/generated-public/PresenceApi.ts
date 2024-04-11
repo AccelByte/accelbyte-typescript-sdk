@@ -15,7 +15,6 @@ export function PresenceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function PresenceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userIds: string | null
     countOnly?: boolean | null
   }): Promise<GetUsersPresenceResponse> {
-    const $ = new Presence$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Presence$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPresenceUsersPresence(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

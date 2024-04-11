@@ -20,7 +20,6 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -28,7 +27,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
    * This API will return all accepted Legal Agreements for each user, including agreements of game users if publisher user has corresponding game account.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function createAgreement(data: UsersAgreementsRequest): Promise<UserAgreementsResponseArray> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createAgreement(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +43,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
     limit?: number
     offset?: number
   }): Promise<PagedRetrieveUserAcceptedAgreementResponse> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgreementsPolicyVersionsUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +56,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
     userId: string,
     queryParams?: { excludeOtherNamespacesPolicies?: boolean | null }
   ): Promise<RetrieveAcceptedAgreementResponseArray> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgreementPolicyUser_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +68,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
   async function getAgreementsPolicyVersionsUsersExportCsvDownload(queryParams: {
     policyVersionId: string | null
   }): Promise<DownloadExportedAgreementsInCsvResponse> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAgreementsPolicyVersionsUsersExportCsvDownload(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -81,7 +80,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
   async function createAgreementPolicyVersionUserExportCsvInitiate(queryParams: {
     policyVersionId: string | null
   }): Promise<InitiateExportAgreementsToCsvResponse> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createAgreementPolicyVersionUserExportCsvInitiate(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ApproveStagingContentRequest } from '../../generated-definitions/ApproveStagingContentRequest.js'
 import { PaginatedListStagingContentResponse } from '../../generated-definitions/PaginatedListStagingContentResponse.js'
@@ -14,7 +14,7 @@ import { StagingContentResponse } from '../../generated-definitions/StagingConte
 
 export class AdminStagingContentAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List content that need admin&#39;s approval
@@ -24,43 +24,29 @@ export class AdminStagingContentAdmin$ {
     offset?: number
     sortBy?: string | null
     status?: string | null
-  }): Promise<IResponseWithSync<PaginatedListStagingContentResponse>> {
+  }): Promise<IResponse<PaginatedListStagingContentResponse>> {
     const params = { sortBy: 'createdTimed:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/staging-contents'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedListStagingContentResponse, 'PaginatedListStagingContentResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedListStagingContentResponse, 'PaginatedListStagingContentResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get staging content by ID
    */
-  getStagingContent_ByContentId(contentId: string): Promise<IResponseWithSync<StagingContentResponse>> {
+  getStagingContent_ByContentId(contentId: string): Promise<IResponse<StagingContentResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/staging-contents/{contentId}'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, StagingContentResponse, 'StagingContentResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, StagingContentResponse, 'StagingContentResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -69,23 +55,16 @@ export class AdminStagingContentAdmin$ {
   getStagingContents_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: string | null }
-  ): Promise<IResponseWithSync<PaginatedListStagingContentResponse>> {
+  ): Promise<IResponse<PaginatedListStagingContentResponse>> {
     const params = { sortBy: 'createdTimed:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/users/{userId}/staging-contents'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedListStagingContentResponse, 'PaginatedListStagingContentResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedListStagingContentResponse, 'PaginatedListStagingContentResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

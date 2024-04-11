@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { PlatformCredentials } from '../../generated-definitions/PlatformCredentials.js'
@@ -14,7 +14,7 @@ import { PutPlatformCredentialsRequest } from '../../generated-definitions/PutPl
 
 export class PlatformCredentialAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Delete platform credentials used for Native Session sync.
@@ -32,21 +32,14 @@ export class PlatformCredentialAdmin$ {
   /**
    * Get platform credentials used for Native Session sync. PSN: - clientID: Auth Server (Client Credential) ClientID - clientSecret: Auth Server (Client Credential) Secret. For security, only the first few characters are shown. - scope: should be psn:s2s.service (For Sync non PSN member to PSN Session)
    */
-  getPlatformCredentials(): Promise<IResponseWithSync<PlatformCredentials>> {
+  getPlatformCredentials(): Promise<IResponse<PlatformCredentials>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/platform-credentials'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PlatformCredentials, 'PlatformCredentials')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PlatformCredentials, 'PlatformCredentials')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

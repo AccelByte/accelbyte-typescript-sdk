@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BulkGetGameRecordRequest } from '../../generated-definitions/BulkGetGameRecordRequest.js'
@@ -16,7 +16,7 @@ import { GameRecordResponse } from '../../generated-definitions/GameRecordRespon
 
 export class PublicGameRecord$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Bulk get game records. Maximum key per request 20.
@@ -47,21 +47,14 @@ export class PublicGameRecord$ {
   /**
    * Get game record by its key.
    */
-  getRecord_ByKey(key: string): Promise<IResponseWithSync<GameRecordResponse>> {
+  getRecord_ByKey(key: string): Promise<IResponse<GameRecordResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameRecordResponse, 'GameRecordResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GameRecordResponse, 'GameRecordResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

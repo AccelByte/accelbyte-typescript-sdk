@@ -6,34 +6,27 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { EventRegistry } from '../../generated-definitions/EventRegistry.js'
 
 export class EventRegistry$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getRegistryEventIds(): Promise<IResponseWithSync<EventRegistry>> {
+  getRegistryEventIds(): Promise<IResponse<EventRegistry>> {
     const params = {} as SDKRequestConfig
     const url = '/event/registry/eventIds'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventRegistry, 'EventRegistry')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventRegistry, 'EventRegistry')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -68,21 +61,14 @@ export class EventRegistry$ {
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getRegistryEventId_ByEventId(eventId: string): Promise<IResponseWithSync<EventRegistry>> {
+  getRegistryEventId_ByEventId(eventId: string): Promise<IResponse<EventRegistry>> {
     const params = {} as SDKRequestConfig
     const url = '/event/registry/eventIds/{eventId}'.replace('{eventId}', eventId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventRegistry, 'EventRegistry')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventRegistry, 'EventRegistry')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -103,20 +89,13 @@ export class EventRegistry$ {
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getRegistryEventType_ByEventType(eventType: string): Promise<IResponseWithSync<EventRegistry>> {
+  getRegistryEventType_ByEventType(eventType: string): Promise<IResponse<EventRegistry>> {
     const params = {} as SDKRequestConfig
     const url = '/event/registry/eventTypes/{eventType}'.replace('{eventType}', eventType)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventRegistry, 'EventRegistry')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventRegistry, 'EventRegistry')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

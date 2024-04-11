@@ -16,7 +16,6 @@ export function LeaderboardConfigurationV3Api(sdk: AccelbyteSDK, args?: ApiArgs)
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -28,7 +27,7 @@ export function LeaderboardConfigurationV3Api(sdk: AccelbyteSDK, args?: ApiArgs)
     limit?: number
     offset?: number
   }): Promise<GetAllLeaderboardConfigsPublicRespV3> {
-    const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLeaderboards(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +37,7 @@ export function LeaderboardConfigurationV3Api(sdk: AccelbyteSDK, args?: ApiArgs)
    * &lt;p&gt;This endpoint returns a leaderboard configuration&lt;/p&gt;
    */
   async function getLeaderboard_ByLeaderboardCode(leaderboardCode: string): Promise<GetLeaderboardConfigPublicRespV3> {
-    const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLeaderboard_ByLeaderboardCode(leaderboardCode)
     if (resp.error) throw resp.error
     return resp.response.data

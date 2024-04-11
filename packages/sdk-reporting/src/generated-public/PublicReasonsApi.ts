@@ -16,7 +16,6 @@ export function PublicReasonsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -26,7 +25,7 @@ export function PublicReasonsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     title?: string | null
   }): Promise<PublicReasonListResponse> {
-    const $ = new PublicReasons$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicReasons$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getReasons(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +35,7 @@ export function PublicReasonsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Return list of reason groups ID and title under given namespace.
    */
   async function getReasonGroups(queryParams?: { limit?: number; offset?: number }): Promise<ReasonGroupListResponse> {
-    const $ = new PublicReasons$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicReasons$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getReasonGroups(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

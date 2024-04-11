@@ -16,7 +16,6 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -40,7 +39,7 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'updatedAt:desc'
     tags?: string[]
   }): Promise<PublicAchievementsResponse> {
-    const $ = new Achievements$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Achievements$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAchievements(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +52,7 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     achievementCode: string,
     queryParams: { language: string | null }
   ): Promise<PublicAchievementResponse> {
-    const $ = new Achievements$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Achievements$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAchievement_ByAchievementCode(achievementCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

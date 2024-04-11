@@ -14,7 +14,6 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -22,7 +21,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;This API will delete specified user achievement&lt;p&gt; &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]&lt;/code&gt; &lt;/p&gt;
    */
   async function deleteAnonymizationAchievement_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationAchievement_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

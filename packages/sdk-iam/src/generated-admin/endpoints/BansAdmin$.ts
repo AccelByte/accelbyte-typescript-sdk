@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { BanReasonsV3 } from '../../generated-definitions/BanReasonsV3.js'
 import { BansV3 } from '../../generated-definitions/BansV3.js'
@@ -17,62 +17,45 @@ import { ListBulkUserBanResponseV3 } from '../../generated-definitions/ListBulkU
 
 export class BansAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Ban type is the code available for ban assignment. It is applicable globally for any namespace. action code : 10201
    */
-  getBans(): Promise<IResponseWithSync<BansV3>> {
+  getBans(): Promise<IResponse<BansV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/bans'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled ? Validate.responseType(() => resultPromise, BansV3, 'BansV3') : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BansV3, 'BansV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Ban reasons is the code available to justify ban assignment. It is applicable globally for any namespace. action code : 10202
    */
-  getBansReasons(): Promise<IResponseWithSync<BanReasonsV3>> {
+  getBansReasons(): Promise<IResponse<BanReasonsV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/bans/reasons'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BanReasonsV3, 'BanReasonsV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BanReasonsV3, 'BanReasonsV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Ban type is the code available for ban assignment. It is applicable globally for any namespace. action code : 10201
    */
-  getBantypes(): Promise<IResponseWithSync<BansV3>> {
+  getBantypes(): Promise<IResponse<BansV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/bantypes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled ? Validate.responseType(() => resultPromise, BansV3, 'BansV3') : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BansV3, 'BansV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -83,21 +66,14 @@ export class BansAdmin$ {
     banType?: string | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<GetUserBanV3Response>> {
+  }): Promise<IResponse<GetUserBanV3Response>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/bans/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserBanV3Response, 'GetUserBanV3Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserBanV3Response, 'GetUserBanV3Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

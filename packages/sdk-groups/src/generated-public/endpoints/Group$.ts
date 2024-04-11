@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { GetGroupListRequestV2 } from '../../generated-definitions/GetGroupListRequestV2.js'
@@ -21,7 +21,7 @@ import { UpdateGroupRequestV1 } from '../../generated-definitions/UpdateGroupReq
 
 export class Group$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Required valid user authentication Get list of groups. This endpoint will only show OPEN and PUBLIC group type. This endpoint can search based on the group name by filling the &#34;groupName&#34; query parameter Action Code: 73303
@@ -31,21 +31,14 @@ export class Group$ {
     groupRegion?: string | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<GetGroupsListResponseV1>> {
+  }): Promise<IResponse<GetGroupsListResponseV1>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetGroupsListResponseV1, 'GetGroupsListResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetGroupsListResponseV1, 'GetGroupsListResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -105,23 +98,16 @@ export class Group$ {
   /**
    * Required valid user authentication Get single group information. This endpoint will show the group information by the groupId Action Code: 73306
    */
-  getGroup_ByGroupId(groupId: string): Promise<IResponseWithSync<GroupResponseV1>> {
+  getGroup_ByGroupId(groupId: string): Promise<IResponse<GroupResponseV1>> {
     const params = {} as SDKRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/groups/{groupId}'
       .replace('{namespace}', this.namespace)
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

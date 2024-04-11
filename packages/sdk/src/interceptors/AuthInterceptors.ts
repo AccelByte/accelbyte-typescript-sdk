@@ -43,7 +43,7 @@ const refreshSession = ({ axiosConfig, refreshToken, clientId }: RefreshArgs) =>
     grant_type: 'refresh_token'
   } as const
 
-  const oauth20 = new OAuth20$(axios, 'NAMESPACE-NOT-REQUIRED', false)
+  const oauth20 = new OAuth20$(axios, 'NAMESPACE-NOT-REQUIRED')
   return oauth20.postOauthToken(payload)
 }
 

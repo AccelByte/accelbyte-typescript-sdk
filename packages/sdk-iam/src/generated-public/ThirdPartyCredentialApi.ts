@@ -15,7 +15,6 @@ export function ThirdPartyCredentialApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function ThirdPartyCredentialApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the Public API to Get All Active OIDC Platform Credential By Client ID
    */
   async function getPlatformsClientsOidc(queryParams: { clientId: string | null }): Promise<PublicThirdPartyPlatformInfoArray> {
-    const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatformsClientsOidc(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +32,7 @@ export function ThirdPartyCredentialApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the Public API to Get All Active 3rd Platform Credential.
    */
   async function getPlatformsClientsActive(): Promise<PublicThirdPartyPlatformInfoArray> {
-    const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getPlatformsClientsActive()
     if (resp.error) throw resp.error
     return resp.response.data

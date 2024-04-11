@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateDsmConfigRequest } from '../../generated-definitions/CreateDsmConfigRequest.js'
@@ -19,26 +19,19 @@ import { UpdatePortRequest } from '../../generated-definitions/UpdatePortRequest
 
 export class ConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint lists all of dedicated servers configs.
    */
-  getConfigs(): Promise<IResponseWithSync<ListConfigResponse>> {
+  getConfigs(): Promise<IResponse<ListConfigResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/configs'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListConfigResponse, 'ListConfigResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListConfigResponse, 'ListConfigResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -71,21 +64,14 @@ export class ConfigAdmin$ {
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated servers config in a namespace.
    */
-  getConfigs_ByNS(): Promise<IResponseWithSync<DsmConfigRecord>> {
+  getConfigs_ByNS(): Promise<IResponse<DsmConfigRecord>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -130,21 +116,14 @@ export class ConfigAdmin$ {
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint export a dedicated servers config in a namespace.
    */
-  getConfigsExport(): Promise<IResponseWithSync<unknown>> {
+  getConfigsExport(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/v1/namespaces/{namespace}/configs/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

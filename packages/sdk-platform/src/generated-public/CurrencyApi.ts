@@ -15,7 +15,6 @@ export function CurrencyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function CurrencyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List currencies of a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Currency List&lt;/li&gt;&lt;/ul&gt;
    */
   async function getCurrencies(queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' }): Promise<CurrencyInfoArray> {
-    const $ = new Currency$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Currency$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCurrencies(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

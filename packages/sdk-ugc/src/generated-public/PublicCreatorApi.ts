@@ -16,7 +16,6 @@ export function PublicCreatorApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -29,7 +28,7 @@ export function PublicCreatorApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     orderby?: string | null
     sortby?: string | null
   }): Promise<PaginatedCreatorOverviewResponse> {
-    const $ = new PublicCreator$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicCreator$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +38,7 @@ export function PublicCreatorApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getUser_ByUserId(userId: string): Promise<CreatorResponse> {
-    const $ = new PublicCreator$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicCreator$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

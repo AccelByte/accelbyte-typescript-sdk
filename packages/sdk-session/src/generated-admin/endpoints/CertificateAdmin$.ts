@@ -12,7 +12,7 @@ import { PlatformCredentials } from '../../generated-definitions/PlatformCredent
 
 export class CertificateAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Upload certificates for xbox. Certificate must be in the valid form of PFX format.

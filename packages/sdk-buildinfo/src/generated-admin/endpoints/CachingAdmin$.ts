@@ -16,7 +16,7 @@ import { CreateDiffCacheRequest } from '../../generated-definitions/CreateDiffCa
 
 export class CachingAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to save detailed diff cache. Only used by differ. Not to be used directly.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:DIFFCACHE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;

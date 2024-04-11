@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ConditionMatchResult } from '../../generated-definitions/ConditionMatchResult.js'
@@ -19,7 +19,7 @@ import { RewardUpdate } from '../../generated-definitions/RewardUpdate.js'
 
 export class RewardAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to create a reward.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:REWARD&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created reward data&lt;/li&gt;&lt;li&gt;&lt;i&gt;Acceptable values for rewardItem&#39;s identityType are&lt;/i&gt;: ITEM_ID or ITEM_SKU&lt;/li&gt;&lt;/ul&gt;
@@ -37,21 +37,14 @@ export class RewardAdmin$ {
   /**
    * Export reward configurations for a given namespace into file. At current, only JSON file is supported.&lt;p&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;*Required permission*: resource=&#34;ADMIN:NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
-  getRewardsExport(): Promise<IResponseWithSync<unknown>> {
+  getRewardsExport(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/rewards/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -86,23 +79,16 @@ export class RewardAdmin$ {
   /**
    * This API is used to get reward by reward Id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward instance&lt;/li&gt;&lt;/ul&gt;
    */
-  getReward_ByRewardId(rewardId: string): Promise<IResponseWithSync<RewardInfo>> {
+  getReward_ByRewardId(rewardId: string): Promise<IResponse<RewardInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/rewards/{rewardId}'
       .replace('{namespace}', this.namespace)
       .replace('{rewardId}', rewardId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RewardInfo, 'RewardInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RewardInfo, 'RewardInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -128,21 +114,14 @@ export class RewardAdmin$ {
     limit?: number
     offset?: number
     sortBy?: string[]
-  }): Promise<IResponseWithSync<RewardPagingSlicedResult>> {
+  }): Promise<IResponse<RewardPagingSlicedResult>> {
     const params = { limit: 20, sortBy: ['namespace:asc', 'rewardCode:asc'], ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/rewards/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RewardPagingSlicedResult, 'RewardPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RewardPagingSlicedResult, 'RewardPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

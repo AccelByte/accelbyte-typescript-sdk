@@ -16,7 +16,6 @@ export function AdminUserAgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -28,7 +27,7 @@ export function AdminUserAgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: AcceptAgreementRequest[],
     queryParams: { clientId: string | null; countryCode: string | null; publisherUserId?: string | null }
   ): Promise<AcceptAgreementResponse> {
-    const $ = new AdminUserAgreementAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminUserAgreementAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createAgreementPolicy_ByUserId(userId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

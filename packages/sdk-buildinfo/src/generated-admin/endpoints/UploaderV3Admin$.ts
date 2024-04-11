@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BinaryUpload } from '../../generated-definitions/BinaryUpload.js'
@@ -24,7 +24,7 @@ import { ZsyncDiffRequest } from '../../generated-definitions/ZsyncDiffRequest.j
 
 export class UploaderV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to send diff request to MQ.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: diff status&lt;/li&gt;&lt;/ul&gt;
@@ -107,7 +107,7 @@ export class UploaderV3Admin$ {
   /**
    * This API is used to the current build from particular appId. This is a utility API used by BuildUtil to determine whether there&#39;s an older build set as current. If it does, the BuildUtil will proceed the upload as differential upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Diff File Status Manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getCurrent_ByAppId_ByPlatformId(appId: string, platformId: string): Promise<IResponseWithSync<BuildManifest>> {
+  getCurrent_ByAppId_ByPlatformId(appId: string, platformId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v3/current/{appId}/{platformId}'
       .replace('{namespace}', this.namespace)
@@ -115,16 +115,9 @@ export class UploaderV3Admin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -160,7 +153,7 @@ export class UploaderV3Admin$ {
   /**
    * This API is used to see whether BuildUtil should upload in differential mode or normal mode.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Diff File Status Manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUploadmode_ByAppId_ByPlatformId(appId: string, platformId: string): Promise<IResponseWithSync<UploadModeCheck>> {
+  getUploadmode_ByAppId_ByPlatformId(appId: string, platformId: string): Promise<IResponse<UploadModeCheck>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v3/uploadmode/{appId}/{platformId}'
       .replace('{namespace}', this.namespace)
@@ -168,16 +161,9 @@ export class UploaderV3Admin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UploadModeCheck, 'UploadModeCheck')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UploadModeCheck, 'UploadModeCheck')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -303,7 +289,7 @@ export class UploaderV3Admin$ {
     sourceBuildId: string,
     destinationBuildId: string,
     destinationFilePath: string
-  ): Promise<IResponseWithSync<FileDiffingStatus>> {
+  ): Promise<IResponse<FileDiffingStatus>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v3/diff/status/{sourceBuildId}/{destinationBuildId}/{destinationFilePath}'
       .replace('{namespace}', this.namespace)
@@ -312,15 +298,8 @@ export class UploaderV3Admin$ {
       .replace('{destinationFilePath}', destinationFilePath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FileDiffingStatus, 'FileDiffingStatus')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FileDiffingStatus, 'FileDiffingStatus')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ADtoObjectForUserStatItemValueArray } from '../../generated-definitions/ADtoObjectForUserStatItemValueArray.js'
@@ -26,26 +26,19 @@ import { UserStatItemPagingSlicedResult } from '../../generated-definitions/User
 
 export class UserStatistic$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Public bulk fetch multiple user&#39;s statitem value for a given namespace and statCode. Other detail info: + *Required permission*: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=2 (READ) + *Returns*: list of user&#39;s statItem
    */
-  getStatitemsBulk(queryParams: { statCode: string | null; userIds: string | null }): Promise<IResponseWithSync<UserStatItemInfoArray>> {
+  getStatitemsBulk(queryParams: { statCode: string | null; userIds: string | null }): Promise<IResponse<UserStatItemInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/statitems/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserStatItemInfoArray, 'UserStatItemInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserStatItemInfoArray, 'UserStatItemInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -57,21 +50,14 @@ export class UserStatistic$ {
     sortBy?: string | null
     statCodes?: string[]
     tags?: string[]
-  }): Promise<IResponseWithSync<UserStatItemPagingSlicedResult>> {
+  }): Promise<IResponse<UserStatItemPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/users/me/statitems'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserStatItemPagingSlicedResult, 'UserStatItemPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserStatItemPagingSlicedResult, 'UserStatItemPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -119,23 +105,16 @@ export class UserStatistic$ {
   getStatitems_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; statCodes?: string | null; tags?: string | null }
-  ): Promise<IResponseWithSync<UserStatItemPagingSlicedResult>> {
+  ): Promise<IResponse<UserStatItemPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/users/{userId}/statitems'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserStatItemPagingSlicedResult, 'UserStatItemPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserStatItemPagingSlicedResult, 'UserStatItemPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -173,21 +152,14 @@ export class UserStatistic$ {
     additionalKey?: string | null
     statCodes?: string[]
     tags?: string[]
-  }): Promise<IResponseWithSync<ADtoObjectForUserStatItemValueArray>> {
+  }): Promise<IResponse<ADtoObjectForUserStatItemValueArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/users/me/statitems/value/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -196,23 +168,16 @@ export class UserStatistic$ {
   getStatitemsValueBulk_ByUserId(
     userId: string,
     queryParams?: { additionalKey?: string | null; statCodes?: string[]; tags?: string[] }
-  ): Promise<IResponseWithSync<ADtoObjectForUserStatItemValueArray>> {
+  ): Promise<IResponse<ADtoObjectForUserStatItemValueArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/users/{userId}/statitems/value/bulk'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -251,23 +216,16 @@ export class UserStatistic$ {
   getStatitemsValueBulk_ByUserId_ByNS(
     userId: string,
     queryParams?: { additionalKey?: string | null; statCodes?: string[]; tags?: string[] }
-  ): Promise<IResponseWithSync<ADtoObjectForUserStatItemValueArray>> {
+  ): Promise<IResponse<ADtoObjectForUserStatItemValueArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/social/v2/public/namespaces/{namespace}/users/{userId}/statitems/value/bulk'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

@@ -6,31 +6,24 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ListTagsResponse } from '../../generated-definitions/ListTagsResponse.js'
 
 export class PublicTags$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * ## Description Retrieve list of available tags by namespace
    */
-  getTags(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<ListTagsResponse>> {
+  getTags(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ListTagsResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListTagsResponse, 'ListTagsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListTagsResponse, 'ListTagsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

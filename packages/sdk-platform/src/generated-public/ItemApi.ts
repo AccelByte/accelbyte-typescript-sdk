@@ -23,7 +23,6 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -37,7 +36,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<ItemInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getItemsBySku(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +66,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<ItemPagingSlicedResult> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getItemsSearch(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -82,7 +81,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<ItemInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getItemsByAppId(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -118,7 +117,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     storeId?: string | null
     tags?: string | null
   }): Promise<ItemPagingSlicedResult> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getItemsByCriteria(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -134,7 +133,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<ItemInfoArray> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getItemsLocaleByIds(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -148,7 +147,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<EstimatedPriceInfoArray> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getItemsEstimatedPrice(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -167,7 +166,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       storeId?: string | null
     }
   ): Promise<PopulatedItemInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLocale_ByItemId(itemId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -177,7 +176,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get item dynamic data for a published item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item dynamic data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getDynamic_ByItemId(itemId: string): Promise<ItemDynamicDataInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDynamic_ByItemId(itemId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -190,7 +189,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     itemId: string,
     queryParams?: { language?: string | null; region?: string | null; storeId?: string | null }
   ): Promise<AppInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAppLocale_ByItemId(itemId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -202,7 +201,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createItemPurchaseConditionValidate(
     data: ItemPurchaseConditionValidateRequest
   ): Promise<ItemPurchaseConditionValidateResultArray> {
-    const $ = new Item$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createItemPurchaseConditionValidate(data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -15,7 +15,6 @@ export function DsmcOperationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function DsmcOperationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * get the list of messages.
    */
   async function getMessages(): Promise<AppMessageDeclarationArray> {
-    const $ = new DsmcOperations$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DsmcOperations$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getMessages()
     if (resp.error) throw resp.error
     return resp.response.data

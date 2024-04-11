@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { CodeGenUtil, IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AgeRestrictionRequest } from '../../generated-definitions/AgeRestrictionRequest.js'
@@ -72,26 +72,19 @@ import { VerificationCodeResponse } from '../../generated-definitions/Verificati
 
 export class UsersAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get my user data action code : 10147
    */
-  getUsersMe(): Promise<IResponseWithSync<UserResponseV3>> {
+  getUsersMe(): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/users/me'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -108,41 +101,27 @@ export class UsersAdmin$ {
     platformUserId?: string | null
     roleId?: string | null
     userId?: string | null
-  }): Promise<IResponseWithSync<SearchUsersByPlatformIdResponse>> {
+  }): Promise<IResponse<SearchUsersByPlatformIdResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SearchUsersByPlatformIdResponse, 'SearchUsersByPlatformIdResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SearchUsersByPlatformIdResponse, 'SearchUsersByPlatformIdResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This endpoint search user who owns the given email address action code : 10132
    */
-  getUsers_ByNS(queryParams?: { emailAddress?: string | null }): Promise<IResponseWithSync<UserResponseV3>> {
+  getUsers_ByNS(queryParams?: { emailAddress?: string | null }): Promise<IResponse<UserResponseV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -169,21 +148,14 @@ export class UsersAdmin$ {
     query?: string | null
     roleId?: string | null
     startDate?: string | null
-  }): Promise<IResponseWithSync<GetUsersResponseWithPaginationV3>> {
+  }): Promise<IResponse<GetUsersResponseWithPaginationV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/admins'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUsersResponseWithPaginationV3, 'GetUsersResponseWithPaginationV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUsersResponseWithPaginationV3, 'GetUsersResponseWithPaginationV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -244,42 +216,28 @@ export class UsersAdmin$ {
     skipLoginQueue?: boolean | null
     startDate?: string | null
     testAccount?: boolean | null
-  }): Promise<IResponseWithSync<SearchUsersResponseWithPaginationV3>> {
+  }): Promise<IResponse<SearchUsersResponseWithPaginationV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SearchUsersResponseWithPaginationV3, 'SearchUsersResponseWithPaginationV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SearchUsersResponseWithPaginationV3, 'SearchUsersResponseWithPaginationV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_**
    */
-  getUser_ByUserId(userId: string): Promise<IResponseWithSync<UserResponse>> {
+  getUser_ByUserId(userId: string): Promise<IResponse<UserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserResponse, 'UserResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserResponse, 'UserResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -299,21 +257,14 @@ export class UsersAdmin$ {
   /**
    * Admin Get User By User Id
    */
-  getUser_ByUserId_ByNS(userId: string): Promise<IResponseWithSync<UserResponseV3>> {
+  getUser_ByUserId_ByNS(userId: string): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -333,21 +284,14 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [GET]_** - **Note:** difference in V3 response, format difference: Pascal case =&gt; Camel case
    */
-  getAgerestrictions(): Promise<IResponseWithSync<AgeRestrictionResponse>> {
+  getAgerestrictions(): Promise<IResponse<AgeRestrictionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/agerestrictions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AgeRestrictionResponse, 'AgeRestrictionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AgeRestrictionResponse, 'AgeRestrictionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -367,21 +311,14 @@ export class UsersAdmin$ {
   /**
    * action code: 10138
    */
-  getAgerestrictions_ByNS(): Promise<IResponseWithSync<AgeRestrictionResponseV3>> {
+  getAgerestrictions_ByNS(): Promise<IResponse<AgeRestrictionResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/agerestrictions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AgeRestrictionResponseV3, 'AgeRestrictionResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AgeRestrictionResponseV3, 'AgeRestrictionResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -428,23 +365,16 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [GET]_**
    */
-  getBans_ByUserId(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<IResponseWithSync<UserBanResponseArray>> {
+  getBans_ByUserId(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<IResponse<UserBanResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/bans'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserBanResponseArray, 'UserBanResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserBanResponseArray, 'UserBanResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -453,23 +383,16 @@ export class UsersAdmin$ {
   getBans_ByUserId_ByNS(
     userId: string,
     queryParams?: { activeOnly?: boolean | null; after?: string | null; before?: string | null; limit?: number }
-  ): Promise<IResponseWithSync<GetUserBanV3Response>> {
+  ): Promise<IResponse<GetUserBanV3Response>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserBanV3Response, 'GetUserBanV3Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserBanV3Response, 'GetUserBanV3Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -495,21 +418,14 @@ export class UsersAdmin$ {
     limit?: number
     offset?: number
     platformUserId?: string | null
-  }): Promise<IResponseWithSync<LinkingHistoryResponseWithPaginationV3>> {
+  }): Promise<IResponse<LinkingHistoryResponseWithPaginationV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/linkhistories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, LinkingHistoryResponseWithPaginationV3, 'LinkingHistoryResponseWithPaginationV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, LinkingHistoryResponseWithPaginationV3, 'LinkingHistoryResponseWithPaginationV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -550,45 +466,31 @@ export class UsersAdmin$ {
   getUsers_ByRoleId(
     roleId: string,
     queryParams?: { after?: number; before?: number; limit?: number }
-  ): Promise<IResponseWithSync<GetUsersResponseWithPaginationV3>> {
+  ): Promise<IResponse<GetUsersResponseWithPaginationV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/roles/{roleId}/users'
       .replace('{namespace}', this.namespace)
       .replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUsersResponseWithPaginationV3, 'GetUsersResponseWithPaginationV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUsersResponseWithPaginationV3, 'GetUsersResponseWithPaginationV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * [WARNING] This endpoint is only for testing purpose. This endpoint get active user verification code. There are 3 scenario of getting verification codes : after account registration, after reset password request, and after headless account upgrade. All of them will be returned on this endpoint. action code: 10146
    */
-  getCodes_ByUserId(userId: string): Promise<IResponseWithSync<VerificationCodeResponse>> {
+  getCodes_ByUserId(userId: string): Promise<IResponse<VerificationCodeResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/codes'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, VerificationCodeResponse, 'VerificationCodeResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, VerificationCodeResponse, 'VerificationCodeResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -746,24 +648,14 @@ export class UsersAdmin$ {
   /**
    * **This endpoint requires publisher namespace.** Returns list of users ID and namespace with their Justice platform account, under a namespace. If user doesn&#39;t have Justice platform account, the linkedPlatforms will be empty array.&#39;
    */
-  getUsersPlatformsJustice(queryParams?: {
-    limit?: number
-    offset?: number
-  }): Promise<IResponseWithSync<ListUsersWithPlatformAccountsResponse>> {
+  getUsersPlatformsJustice(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ListUsersWithPlatformAccountsResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/platforms/justice'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListUsersWithPlatformAccountsResponse, 'ListUsersWithPlatformAccountsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListUsersWithPlatformAccountsResponse, 'ListUsersWithPlatformAccountsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -772,64 +664,43 @@ export class UsersAdmin$ {
   getPlatforms_ByUserId(
     userId: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number; platformId?: string | null }
-  ): Promise<IResponseWithSync<UserLinkedPlatformsResponseV3>> {
+  ): Promise<IResponse<UserLinkedPlatformsResponseV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserLinkedPlatformsResponseV3, 'UserLinkedPlatformsResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserLinkedPlatformsResponseV3, 'UserLinkedPlatformsResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries [GET]_**
    */
-  getCountriesAgerestrictions(): Promise<IResponseWithSync<CountryAgeRestrictionArray>> {
+  getCountriesAgerestrictions(): Promise<IResponse<CountryAgeRestrictionArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/countries/agerestrictions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountryAgeRestrictionArray, 'CountryAgeRestrictionArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountryAgeRestrictionArray, 'CountryAgeRestrictionArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * action code : 10139
    */
-  getAgerestrictionsCountries(): Promise<IResponseWithSync<CountryV3ResponseArray>> {
+  getAgerestrictionsCountries(): Promise<IResponse<CountryV3ResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountryV3ResponseArray, 'CountryV3ResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountryV3ResponseArray, 'CountryV3ResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -1011,23 +882,16 @@ export class UsersAdmin$ {
   /**
    * action code : 10145
    */
-  getDeletionStatus_ByUserId(userId: string): Promise<IResponseWithSync<UserDeletionStatusResponse>> {
+  getDeletionStatus_ByUserId(userId: string): Promise<IResponse<UserDeletionStatusResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/deletion/status'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserDeletionStatusResponse, 'UserDeletionStatusResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserDeletionStatusResponse, 'UserDeletionStatusResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -1051,23 +915,16 @@ export class UsersAdmin$ {
   getLoginsHistories_ByUserId(
     userId: string,
     queryParams?: { after?: number; before?: number; limit?: number }
-  ): Promise<IResponseWithSync<LoginHistoriesResponse>> {
+  ): Promise<IResponse<LoginHistoriesResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/logins/histories'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, LoginHistoriesResponse, 'LoginHistoriesResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, LoginHistoriesResponse, 'LoginHistoriesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -1088,45 +945,31 @@ export class UsersAdmin$ {
   /**
    * This endpoint retrieves platform accounts linked to user. It will query all linked platform accounts and result will be distinct &amp; grouped, same platform we will pick oldest linked one.
    */
-  getDistinctPlatforms_ByUserId(userId: string): Promise<IResponseWithSync<DistinctPlatformResponseV3>> {
+  getDistinctPlatforms_ByUserId(userId: string): Promise<IResponse<DistinctPlatformResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/distinctPlatforms'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DistinctPlatformResponseV3, 'DistinctPlatformResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DistinctPlatformResponseV3, 'DistinctPlatformResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This endpoint gets list justice platform account by providing publisher namespace and publisher userID
    */
-  getPlatformsJustice_ByUserId(userId: string): Promise<IResponseWithSync<GetUserMappingArray>> {
+  getPlatformsJustice_ByUserId(userId: string): Promise<IResponse<GetUserMappingArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/justice'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserMappingArray, 'GetUserMappingArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserMappingArray, 'GetUserMappingArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -1240,7 +1083,7 @@ export class UsersAdmin$ {
   /**
    * Get User By Platform User ID This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
-  getUser_ByPlatformId_ByPlatformUserId(platformId: string, platformUserId: string): Promise<IResponseWithSync<UserResponseV3>> {
+  getUser_ByPlatformId_ByPlatformUserId(platformId: string, platformUserId: string): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId}'
       .replace('{namespace}', this.namespace)
@@ -1248,16 +1091,9 @@ export class UsersAdmin$ {
       .replace('{platformUserId}', platformUserId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserResponseV3, 'UserResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -1280,7 +1116,7 @@ export class UsersAdmin$ {
   /**
    * This endpoint gets user single platform account metadata. Supported Platform: - Steam group(steamnetwork): - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - epicgames - nintendo - aws cognito - facebook - google - discord - twitch - snapchat - amazon Note: you can use either platform ID or platform group as platformId query parameter
    */
-  getMetadata_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<IResponseWithSync<UserPlatformMetadata>> {
+  getMetadata_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<IResponse<UserPlatformMetadata>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/metadata'
       .replace('{namespace}', this.namespace)
@@ -1288,16 +1124,9 @@ export class UsersAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserPlatformMetadata, 'UserPlatformMetadata')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserPlatformMetadata, 'UserPlatformMetadata')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -1326,7 +1155,7 @@ export class UsersAdmin$ {
   /**
    * This endpoint requires the client access token as the bearer token This endpoint will support publisher access to game and game access to publisher If targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace. If targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace.
    */
-  getPlatformJustice_ByUserId_ByTargetNamespace(userId: string, targetNamespace: string): Promise<IResponseWithSync<GetUserMappingV3>> {
+  getPlatformJustice_ByUserId_ByTargetNamespace(userId: string, targetNamespace: string): Promise<IResponse<GetUserMappingV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/justice/{targetNamespace}'
       .replace('{namespace}', this.namespace)
@@ -1334,16 +1163,9 @@ export class UsersAdmin$ {
       .replace('{targetNamespace}', targetNamespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetUserMappingV3, 'GetUserMappingV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetUserMappingV3, 'GetUserMappingV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

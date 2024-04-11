@@ -15,7 +15,6 @@ export function LocalizedPolicyVersionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -25,7 +24,7 @@ export function LocalizedPolicyVersionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
   ): Promise<RetrieveLocalizedPolicyVersionPublicResponse> {
-    const $ = new LocalizedPolicyVersions$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LocalizedPolicyVersions$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { Dictionary } from '../../generated-definitions/Dictionary.js'
@@ -20,7 +20,7 @@ import { DictionaryUpdateRequest } from '../../generated-definitions/DictionaryU
 
 export class ProfanityAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query all profanity words.
@@ -33,21 +33,14 @@ export class ProfanityAdmin$ {
     parentId?: string | null
     startWith?: string | null
     wordType?: string | null
-  }): Promise<IResponseWithSync<DictionaryQueryResult>> {
+  }): Promise<IResponse<DictionaryQueryResult>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DictionaryQueryResult, 'DictionaryQueryResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DictionaryQueryResult, 'DictionaryQueryResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -105,41 +98,27 @@ export class ProfanityAdmin$ {
   /**
    * Get profanity words group.
    */
-  getProfanityDictionaryGroup(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<DictionaryGroupArray>> {
+  getProfanityDictionaryGroup(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<DictionaryGroupArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/group'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DictionaryGroupArray, 'DictionaryGroupArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DictionaryGroupArray, 'DictionaryGroupArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Export profanity words
    */
-  getProfanityDictionaryExport(): Promise<IResponseWithSync<DictionaryExport>> {
+  getProfanityDictionaryExport(): Promise<IResponse<DictionaryExport>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DictionaryExport, 'DictionaryExport')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DictionaryExport, 'DictionaryExport')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

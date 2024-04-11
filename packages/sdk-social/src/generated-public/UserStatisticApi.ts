@@ -28,7 +28,6 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -36,7 +35,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public bulk fetch multiple user&#39;s statitem value for a given namespace and statCode. Other detail info: + *Required permission*: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=2 (READ) + *Returns*: list of user&#39;s statItem
    */
   async function getStatitemsBulk(queryParams: { statCode: string | null; userIds: string | null }): Promise<UserStatItemInfoArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getStatitemsBulk(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +51,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     statCodes?: string[]
     tags?: string[]
   }): Promise<UserStatItemPagingSlicedResult> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeStatitems(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +61,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public bulk update multiple user&#39;s statitems value.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk updated result&lt;/li&gt;&lt;/ul&gt;
    */
   async function patchStatitemValueBulk(data: BulkUserStatItemInc[]): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchStatitemValueBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -72,7 +71,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public bulk update multiple user&#39;s statitems value.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk updated result&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateStatitemValueBulk(data: BulkUserStatItemInc[]): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValueBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -82,7 +81,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public bulk update multiple user&#39;s statitems value with specific update strategy. There are four supported update strategies: + *OVERRIDE*: update user statitem with the new value + *INCREMENT*: increment user statitem with the specified value + *MAX*: update user statitem with the specified value if it&#39;s larger than the existing value + *MIN*: update user statitem with the specified value if it&#39;s lower than the existing value Other detail info: + *Required permission*: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=4 (UPDATE) + *Returns*: bulk updated result
    */
   async function updateStatitemValueBulk_ByNS(data: BulkUserStatItemUpdate[]): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValueBulk_ByNS(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -95,7 +94,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; statCodes?: string | null; tags?: string | null }
   ): Promise<UserStatItemPagingSlicedResult> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getStatitems_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -105,7 +104,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Bulk reset multiple user&#39;s statitems value. User&#39;s statitem value will be reset to the default value defined in the statistic configuration. Other detail info: + *Required permission*: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=4 (UPDATE) + *Returns*: bulk updated result
    */
   async function updateStatitemValueResetBulk(data: BulkUserStatItemReset[]): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValueResetBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -115,7 +114,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Bulk create statItems.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk created result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createStatitemBulk_ByUserId(userId: string, data: BulkStatItemCreate[]): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createStatitemBulk_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -129,7 +128,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     statCodes?: string[]
     tags?: string[]
   }): Promise<ADtoObjectForUserStatItemValueArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeStatitemsValueBulk(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -142,7 +141,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { additionalKey?: string | null; statCodes?: string[]; tags?: string[] }
   ): Promise<ADtoObjectForUserStatItemValueArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getStatitemsValueBulk_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -152,7 +151,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public bulk update user&#39;s statitems value.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk updated result&lt;/li&gt;
    */
   async function patchStatitemValueBulk_ByUserId(userId: string, data: BulkStatItemInc[]): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchStatitemValueBulk_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -162,7 +161,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public bulk update user&#39;s statitems value.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk updated result&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateStatitemValueBulk_ByUserId(userId: string, data: BulkStatItemInc[]): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValueBulk_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -175,7 +174,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { additionalKey?: string | null; statCodes?: string[]; tags?: string[] }
   ): Promise<ADtoObjectForUserStatItemValueArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getStatitemsValueBulk_ByUserId_ByNS(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -189,7 +188,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: BulkStatItemUpdate[],
     queryParams?: { additionalKey?: string | null }
   ): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValueBulk_ByUserId_ByNS(userId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -199,7 +198,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public bulk reset user&#39;s statitems value for given namespace and user. Other detail info: + *Required permission*: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=4 (UPDATE) + *Returns*: bulk updated result
    */
   async function updateStatitemValueResetBulk_ByUserId(userId: string, data: BulkStatItemReset[]): Promise<BulkStatOperationResultArray> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValueResetBulk_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -209,7 +208,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete user&#39;s statItems given stat code.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: no content&lt;/li&gt;&lt;/li&gt;
    */
   async function deleteStatitem_ByUserId_ByStatCode(userId: string, statCode: string): Promise<unknown> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteStatitem_ByUserId_ByStatCode(userId, statCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -219,7 +218,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create user&#39;s statItem.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created user&#39;s statItem&lt;/li&gt;&lt;/ul&gt;
    */
   async function createStatitem_ByUserId_ByStatCode(userId: string, statCode: string): Promise<unknown> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createStatitem_ByUserId_ByStatCode(userId, statCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -229,7 +228,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public update user&#39;s statitem value.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated user&#39;s statItem&lt;/li&gt;&lt;/ul&gt;
    */
   async function patchStatitemValue_ByUserId_ByStatCode(userId: string, statCode: string, data: StatItemInc): Promise<StatItemIncResult> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchStatitemValue_ByUserId_ByStatCode(userId, statCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -239,7 +238,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public update user&#39;s statitem value.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated user&#39;s statItem&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateStatitemValue_ByUserId_ByStatCode(userId: string, statCode: string, data: StatItemInc): Promise<StatItemIncResult> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValue_ByUserId_ByStatCode(userId, statCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -254,7 +253,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: StatItemUpdate,
     queryParams?: { additionalKey?: string | null }
   ): Promise<StatItemIncResult> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValue_ByUserId_ByStatCode_ByNS(userId, statCode, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -264,7 +263,7 @@ export function UserStatisticApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Reset user&#39;s statitem value for a given namespace and user. User&#39;s statitem value will be reset to the default value defined in the statistic configuration. Other detail info: + *Required permission*: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=4 (UPDATE) + *Returns*: updated user&#39;s statItem
    */
   async function updateStatitemValueReset_ByUserId_ByStatCode(userId: string, statCode: string): Promise<StatItemIncResult> {
-    const $ = new UserStatistic$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserStatistic$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatitemValueReset_ByUserId_ByStatCode(userId, statCode)
     if (resp.error) throw resp.error
     return resp.response.data

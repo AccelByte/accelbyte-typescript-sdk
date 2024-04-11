@@ -15,7 +15,6 @@ export function ChallengeProgressionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function ChallengeProgressionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;/ul&gt;
    */
   async function createUserMeProgresEvaluate(): Promise<unknown> {
-    const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeProgresEvaluate()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +35,7 @@ export function ChallengeProgressionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     challengeCode: string,
     queryParams?: { goalCode?: string | null }
   ): Promise<UserProgressionResponse> {
-    const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUserMeProgres_ByChallengeCode(challengeCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

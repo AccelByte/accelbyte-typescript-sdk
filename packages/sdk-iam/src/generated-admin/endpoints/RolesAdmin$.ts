@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AssignUserV4Request } from '../../generated-definitions/AssignUserV4Request.js'
@@ -30,7 +30,7 @@ import { RoleV4Response } from '../../generated-definitions/RoleV4Response.js'
 
 export class RolesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * action code: 10414
@@ -40,21 +40,14 @@ export class RolesAdmin$ {
     before?: string | null
     isWildcard?: boolean | null
     limit?: number
-  }): Promise<IResponseWithSync<RoleResponseWithManagersAndPaginationV3>> {
+  }): Promise<IResponse<RoleResponseWithManagersAndPaginationV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/roles'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleResponseWithManagersAndPaginationV3, 'RoleResponseWithManagersAndPaginationV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleResponseWithManagersAndPaginationV3, 'RoleResponseWithManagersAndPaginationV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -78,21 +71,14 @@ export class RolesAdmin$ {
     isWildcard?: boolean | null
     limit?: number
     offset?: number
-  }): Promise<IResponseWithSync<ListRoleV4Response>> {
+  }): Promise<IResponse<ListRoleV4Response>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/admin/roles'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListRoleV4Response, 'ListRoleV4Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListRoleV4Response, 'ListRoleV4Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -124,21 +110,14 @@ export class RolesAdmin$ {
   /**
    * action code: 10419
    */
-  getRole_ByRoleId(roleId: string): Promise<IResponseWithSync<RoleResponseV3>> {
+  getRole_ByRoleId(roleId: string): Promise<IResponse<RoleResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleResponseV3, 'RoleResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleResponseV3, 'RoleResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -170,21 +149,14 @@ export class RolesAdmin$ {
   /**
    * action code: 10419
    */
-  getRole_ByRoleId_v4(roleId: string): Promise<IResponseWithSync<RoleV4Response>> {
+  getRole_ByRoleId_v4(roleId: string): Promise<IResponse<RoleV4Response>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleV4Response, 'RoleV4Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleV4Response, 'RoleV4Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -216,21 +188,14 @@ export class RolesAdmin$ {
   /**
    * Admin roles has its members listed in the role. action code: 10420
    */
-  getAdmin_ByRoleId(roleId: string): Promise<IResponseWithSync<RoleAdminStatusResponseV3>> {
+  getAdmin_ByRoleId(roleId: string): Promise<IResponse<RoleAdminStatusResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/roles/{roleId}/admin'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleAdminStatusResponseV3, 'RoleAdminStatusResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleAdminStatusResponseV3, 'RoleAdminStatusResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -265,21 +230,14 @@ export class RolesAdmin$ {
   getUsers_ByRoleId(
     roleId: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number }
-  ): Promise<IResponseWithSync<ListAssignedUsersV4Response>> {
+  ): Promise<IResponse<ListAssignedUsersV4Response>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/admin/roles/{roleId}/users'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListAssignedUsersV4Response, 'ListAssignedUsersV4Response')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListAssignedUsersV4Response, 'ListAssignedUsersV4Response')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -314,21 +272,14 @@ export class RolesAdmin$ {
   getMembers_ByRoleId(
     roleId: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number }
-  ): Promise<IResponseWithSync<RoleMembersResponseV3>> {
+  ): Promise<IResponse<RoleMembersResponseV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/roles/{roleId}/members'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleMembersResponseV3, 'RoleMembersResponseV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleMembersResponseV3, 'RoleMembersResponseV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -363,21 +314,14 @@ export class RolesAdmin$ {
   getManagers_ByRoleId(
     roleId: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number }
-  ): Promise<IResponseWithSync<RoleManagersResponsesV3>> {
+  ): Promise<IResponse<RoleManagersResponsesV3>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/roles/{roleId}/managers'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RoleManagersResponsesV3, 'RoleManagersResponsesV3')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RoleManagersResponsesV3, 'RoleManagersResponsesV3')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

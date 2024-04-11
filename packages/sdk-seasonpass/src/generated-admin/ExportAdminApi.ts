@@ -14,7 +14,6 @@ export function ExportAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -22,7 +21,7 @@ export function ExportAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to export all of season service data files with csv format.
    */
   async function getExport(): Promise<unknown> {
-    const $ = new ExportAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ExportAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getExport()
     if (resp.error) throw resp.error
     return resp.response.data

@@ -19,7 +19,6 @@ export function GroupRolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -27,7 +26,7 @@ export function GroupRolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to get list of member roles Action Code: 73201
    */
   async function getRoles(queryParams?: { limit?: number; offset?: number }): Promise<GetMemberRolesListResponseV1> {
-    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getRoles(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +36,7 @@ export function GroupRolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to create new member role Action Code: 73202 memberRolePermissions example value : &#34;action&#34;: 1 &#34;resourceName&#34;: &#34;GROUP:ROLE&#34; The changes will give user with that role have a permission to create a role for new group member
    */
   async function createRole(data: CreateMemberRoleRequestV1): Promise<MemberRoleResponseV1> {
-    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createRole(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +46,7 @@ export function GroupRolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to delete member role. Any member role can&#39;t be deleted if the specific role is applied to the configuration (admin and member role) Action Code: 73207
    */
   async function deleteRole_ByMemberRoleId(memberRoleId: string): Promise<unknown> {
-    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteRole_ByMemberRoleId(memberRoleId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +56,7 @@ export function GroupRolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to get member role based on the role ID Action Code: 73203
    */
   async function getRole_ByMemberRoleId(memberRoleId: string): Promise<MemberRoleResponseV1> {
-    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getRole_ByMemberRoleId(memberRoleId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +66,7 @@ export function GroupRolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to update member role Action Code: 73204
    */
   async function patchRole_ByMemberRoleId(memberRoleId: string, data: UpdateMemberRoleRequestV1): Promise<MemberRoleResponseV1> {
-    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.patchRole_ByMemberRoleId(memberRoleId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -80,7 +79,7 @@ export function GroupRolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     memberRoleId: string,
     data: UpdateMemberRolePermissionsRequestV1
   ): Promise<MemberRoleResponseV1> {
-    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new GroupRolesAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updatePermission_ByMemberRoleId(memberRoleId, data)
     if (resp.error) throw resp.error
     return resp.response.data

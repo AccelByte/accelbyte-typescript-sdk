@@ -6,13 +6,13 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { EventResponseV2 } from '../../generated-definitions/EventResponseV2.js'
 
 export class EventV2$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Requires valid user access token
@@ -20,23 +20,16 @@ export class EventV2$ {
   getEvent_ByUserId(
     userId: string,
     queryParams?: { endDate?: string | null; eventName?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
-  ): Promise<IResponseWithSync<EventResponseV2>> {
+  ): Promise<IResponse<EventResponseV2>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/event'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponseV2, 'EventResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponseV2, 'EventResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -45,22 +38,15 @@ export class EventV2$ {
   getEdithistory_ByUserId(
     userId: string,
     queryParams?: { endDate?: string | null; offset?: number; pageSize?: number; startDate?: string | null; type?: string | null }
-  ): Promise<IResponseWithSync<EventResponseV2>> {
+  ): Promise<IResponse<EventResponseV2>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/v2/public/namespaces/{namespace}/users/{userId}/edithistory'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EventResponseV2, 'EventResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EventResponseV2, 'EventResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

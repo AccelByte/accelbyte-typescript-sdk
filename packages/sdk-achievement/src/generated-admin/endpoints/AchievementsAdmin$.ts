@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AchievementOrderUpdateRequest } from '../../generated-definitions/AchievementOrderUpdateRequest.js'
@@ -18,7 +18,7 @@ import { PaginatedAchievementResponse } from '../../generated-definitions/Pagina
 
 export class AchievementsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
@@ -38,21 +38,14 @@ export class AchievementsAdmin$ {
       | 'updatedAt:asc'
       | 'updatedAt:desc'
     tags?: string[]
-  }): Promise<IResponseWithSync<PaginatedAchievementResponse>> {
+  }): Promise<IResponse<PaginatedAchievementResponse>> {
     const params = { limit: 10, sortBy: 'listOrder:asc', ...queryParams } as SDKRequestConfig
     const url = '/achievement/v1/admin/namespaces/{namespace}/achievements'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedAchievementResponse, 'PaginatedAchievementResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedAchievementResponse, 'PaginatedAchievementResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -71,21 +64,14 @@ export class AchievementsAdmin$ {
   /**
    * &lt;p&gt; Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt;&lt;/p&gt;&lt;p&gt;Required Scope: &lt;code&gt;social&lt;/code&gt;&lt;p&gt;Successful response header will contain: &lt;code&gt;content-disposition: attachment; filename=achievement_&lt;namespace&gt;_config.json&lt;/code&gt;&lt;/p&gt;
    */
-  getAchievementsExport(queryParams?: { tags?: string[] }): Promise<IResponseWithSync<unknown>> {
+  getAchievementsExport(queryParams?: { tags?: string[] }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/achievement/v1/admin/namespaces/{namespace}/achievements/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -120,23 +106,16 @@ export class AchievementsAdmin$ {
   /**
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
-  getAchievement_ByAchievementCode(achievementCode: string): Promise<IResponseWithSync<AchievementResponse>> {
+  getAchievement_ByAchievementCode(achievementCode: string): Promise<IResponse<AchievementResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/achievement/v1/admin/namespaces/{namespace}/achievements/{achievementCode}'
       .replace('{namespace}', this.namespace)
       .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AchievementResponse, 'AchievementResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AchievementResponse, 'AchievementResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

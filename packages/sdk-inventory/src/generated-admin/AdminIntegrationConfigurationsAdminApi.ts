@@ -19,7 +19,6 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -31,7 +30,7 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
     offset?: number
     sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc'
   }): Promise<ListIntegrationConfigurationsResp> {
-    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getIntegrationConfigurations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +40,7 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
    *  Creating integration configuration. There cannot be one duplicate serviceName per namespace. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]
    */
   async function createIntegrationConfiguration(data: CreateIntegrationConfigurationReq): Promise<IntegrationConfigurationResp> {
-    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createIntegrationConfiguration(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +53,7 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
     integrationConfigurationId: string,
     data: UpdateIntegrationConfigurationReq
   ): Promise<IntegrationConfigurationResp> {
-    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateIntegrationConfiguration_ByIntegrationConfigurationId(integrationConfigurationId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +66,7 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
     integrationConfigurationId: string,
     data: UpdateStatusIntegrationConfigurationReq
   ): Promise<IntegrationConfigurationResp> {
-    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateStatus_ByIntegrationConfigurationId(integrationConfigurationId, data)
     if (resp.error) throw resp.error
     return resp.response.data

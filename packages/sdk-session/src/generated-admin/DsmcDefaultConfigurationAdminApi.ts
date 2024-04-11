@@ -15,7 +15,6 @@ export function DsmcDefaultConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiAr
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function DsmcDefaultConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiAr
    * Get dsmc default configuration.
    */
   async function getDsconfigsDefault(): Promise<DefaultDsmcConfig> {
-    const $ = new DsmcDefaultConfigurationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new DsmcDefaultConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getDsconfigsDefault()
     if (resp.error) throw resp.error
     return resp.response.data

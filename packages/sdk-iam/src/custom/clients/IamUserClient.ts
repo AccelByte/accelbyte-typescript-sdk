@@ -13,7 +13,6 @@ import { Users$ } from '../../generated-public/endpoints/Users$'
 export class IamUserClient {
   conf: SDKRequestConfig
   namespace: string
-  cache
 
   /**
    * @internal
@@ -22,7 +21,6 @@ export class IamUserClient {
     const amb = sdk.assembly()
     this.conf = amb.config
     this.namespace = args?.namespace ? args?.namespace : amb.namespace
-    this.cache = args?.cache ? args?.cache : amb.cache
   }
 
   /**
@@ -49,6 +47,6 @@ export class IamUserClient {
    * @internal
    */
   newInstance(namespace?: string) {
-    return new Users$(Network.create(this.conf), namespace || this.namespace, this.cache)
+    return new Users$(Network.create(this.conf), namespace || this.namespace)
   }
 }

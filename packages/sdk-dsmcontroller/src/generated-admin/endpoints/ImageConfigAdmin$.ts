@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CreateImagePatchRequest } from '../../generated-definitions/CreateImagePatchRequest.js'
@@ -22,7 +22,7 @@ import { RepositoryRecord } from '../../generated-definitions/RepositoryRecord.j
 
 export class ImageConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint will create image. Sample image: { &#34;namespace&#34;:&#34;dewa&#34;, &#34;version&#34;:&#34;1.0.0&#34;, &#34;image&#34;:&#34;144436415367.dkr.ecr.us-west-2.amazonaws.com/dewa:1.0.0&#34;, &#34;persistent&#34;:false } ```
@@ -98,61 +98,40 @@ export class ImageConfigAdmin$ {
     q?: string | null
     sortBy?: 'createdAt' | 'updatedAt' | 'version'
     sortDirection?: 'asc' | 'desc'
-  }): Promise<IResponseWithSync<ListImageResponse>> {
+  }): Promise<IResponse<ListImageResponse>> {
     const params = { sortBy: 'createdAt', sortDirection: 'asc', ...queryParams } as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListImageResponse, 'ListImageResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListImageResponse, 'ListImageResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated servers repository name in a namespace.
    */
-  getRepository(): Promise<IResponseWithSync<RepositoryRecord>> {
+  getRepository(): Promise<IResponse<RepositoryRecord>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/repository'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RepositoryRecord, 'RepositoryRecord')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RepositoryRecord, 'RepositoryRecord')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get ds image limit for specific namespace
    */
-  getImagesLimit(): Promise<IResponseWithSync<GetImageLimitResponse>> {
+  getImagesLimit(): Promise<IResponse<GetImageLimitResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/limit'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetImageLimitResponse, 'GetImageLimitResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetImageLimitResponse, 'GetImageLimitResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -175,51 +154,37 @@ export class ImageConfigAdmin$ {
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get specific version of dedicated servers images.
    */
-  getImageVersion_ByVersion(version: string): Promise<IResponseWithSync<GetImageDetailResponse>> {
+  getImageVersion_ByVersion(version: string): Promise<IResponse<GetImageDetailResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}'
       .replace('{namespace}', this.namespace)
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetImageDetailResponse, 'GetImageDetailResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetImageDetailResponse, 'GetImageDetailResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get image patches by version. Image Size unit is byte.
    */
-  getPatchesImages_ByVersion(version: string): Promise<IResponseWithSync<ListImagePatchesResponse>> {
+  getPatchesImages_ByVersion(version: string): Promise<IResponse<ListImagePatchesResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}/patches'
       .replace('{namespace}', this.namespace)
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListImagePatchesResponse, 'ListImagePatchesResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListImagePatchesResponse, 'ListImagePatchesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get specific image patch version of dedicated servers version.
    */
-  getPatcheImage_ByVersion_ByVersionPatch(version: string, versionPatch: string): Promise<IResponseWithSync<GetImagePatchDetailResponse>> {
+  getPatcheImage_ByVersion_ByVersionPatch(version: string, versionPatch: string): Promise<IResponse<GetImagePatchDetailResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}/patches/{versionPatch}'
       .replace('{namespace}', this.namespace)
@@ -227,15 +192,8 @@ export class ImageConfigAdmin$ {
       .replace('{versionPatch}', versionPatch)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetImagePatchDetailResponse, 'GetImagePatchDetailResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetImagePatchDetailResponse, 'GetImagePatchDetailResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

@@ -24,7 +24,6 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -41,7 +40,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     subscribedBy?: 'PLATFORM' | 'USER'
     userId?: string | null
   }): Promise<SubscriptionPagingSlicedResult> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSubscriptions(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +61,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       subscribedBy?: 'PLATFORM' | 'USER'
     }
   ): Promise<SubscriptionPagingSlicedResult> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSubscriptions_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -75,7 +74,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { excludeSystem?: boolean | null; limit?: number; offset?: number; subscriptionId?: string | null }
   ): Promise<SubscriptionActivityPagingSlicedResult> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSubscriptionsActivities_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -85,7 +84,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt; Recurring charge subscription, it will trigger recurring charge if the USER subscription status is ACTIVE, nextBillingDate is before now and no fail recurring charge within X(default 12) hours.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SUBSCRIPTION&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: recurring charge result&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRecurring_BySubscriptionId(subscriptionId: string): Promise<RecurringChargeResult> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateRecurring_BySubscriptionId(subscriptionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -95,7 +94,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt; Delete user subscription.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteSubscription_ByUserId_BySubscriptionId(userId: string, subscriptionId: string): Promise<unknown> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteSubscription_ByUserId_BySubscriptionId(userId, subscriptionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -105,7 +104,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user subscription.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: subscription&lt;/li&gt;&lt;/ul&gt;
    */
   async function getSubscription_ByUserId_BySubscriptionId(userId: string, subscriptionId: string): Promise<SubscriptionInfo> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSubscription_ByUserId_BySubscriptionId(userId, subscriptionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -115,7 +114,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Free subscribe by platform, can used by other justice service to redeem/reward the subscription.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result subscription&lt;/li&gt;&lt;/ul&gt;
    */
   async function createSubscriptionPlatformSubscribe_ByUserId(userId: string, data: PlatformSubscribeRequest): Promise<SubscriptionInfo> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createSubscriptionPlatformSubscribe_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -128,7 +127,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { itemId: string | null }
   ): Promise<Subscribable> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSubscriptionsSubscribableByItemId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -142,7 +141,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     subscriptionId: string,
     data: GrantSubscriptionDaysRequest
   ): Promise<SubscriptionInfo> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateGrant_ByUserId_BySubscriptionId(userId, subscriptionId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -157,7 +156,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: CancelRequest,
     queryParams?: { force?: boolean | null }
   ): Promise<SubscriptionInfo> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateCancel_ByUserId_BySubscriptionId(userId, subscriptionId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -171,7 +170,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     subscriptionId: string,
     queryParams?: { excludeFree?: boolean | null; limit?: number; offset?: number }
   ): Promise<BillingHistoryPagingSlicedResult> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getHistory_ByUserId_BySubscriptionId(userId, subscriptionId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -185,7 +184,7 @@ export function SubscriptionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     subscriptionId: string,
     data: TradeNotification
   ): Promise<unknown> {
-    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new SubscriptionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createNotification_ByUserId_BySubscriptionId(userId, subscriptionId, data)
     if (resp.error) throw resp.error
     return resp.response.data

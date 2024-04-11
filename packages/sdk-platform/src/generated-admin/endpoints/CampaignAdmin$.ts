@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BulkOperationResult } from '../../generated-definitions/BulkOperationResult.js'
@@ -25,7 +25,7 @@ import { RedeemResult } from '../../generated-definitions/RedeemResult.js'
 
 export class CampaignAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query campaigns, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CAMPAIGN&#34;, action=2 (READ) (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of campaigns&lt;/li&gt;&lt;/ul&gt;
@@ -35,21 +35,14 @@ export class CampaignAdmin$ {
     name?: string | null
     offset?: number
     tag?: string | null
-  }): Promise<IResponseWithSync<CampaignPagingSlicedResult>> {
+  }): Promise<IResponse<CampaignPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/campaigns'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CampaignPagingSlicedResult, 'CampaignPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CampaignPagingSlicedResult, 'CampaignPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -68,21 +61,14 @@ export class CampaignAdmin$ {
   /**
    * Get campaign code, it will check code whether available to redeem if redeemable true.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CAMPAIGN&#34;, action=2 (READ) (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: code info&lt;/li&gt;&lt;/ul&gt;
    */
-  getCode_ByCode(code: string, queryParams?: { redeemable?: boolean | null }): Promise<IResponseWithSync<CodeInfo>> {
+  getCode_ByCode(code: string, queryParams?: { redeemable?: boolean | null }): Promise<IResponse<CodeInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/codes/{code}'.replace('{namespace}', this.namespace).replace('{code}', code)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CodeInfo, 'CodeInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CodeInfo, 'CodeInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -114,23 +100,16 @@ export class CampaignAdmin$ {
   /**
    * Get campaign info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CAMPAIGN&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: campaign info&lt;/li&gt;&lt;/ul&gt;
    */
-  getCampaign_ByCampaignId(campaignId: string): Promise<IResponseWithSync<CampaignInfo>> {
+  getCampaign_ByCampaignId(campaignId: string): Promise<IResponse<CampaignInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/campaigns/{campaignId}'
       .replace('{namespace}', this.namespace)
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CampaignInfo, 'CampaignInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CampaignInfo, 'CampaignInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -169,23 +148,16 @@ export class CampaignAdmin$ {
   getCodeCampaign_ByCampaignId(
     campaignId: string,
     queryParams?: { activeOnly?: boolean | null; batchNo?: number; code?: string | null; limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<CodeInfoPagingSlicedResult>> {
+  ): Promise<IResponse<CodeInfoPagingSlicedResult>> {
     const params = { activeOnly: true, limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/codes/campaigns/{campaignId}'
       .replace('{namespace}', this.namespace)
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CodeInfoPagingSlicedResult, 'CodeInfoPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CodeInfoPagingSlicedResult, 'CodeInfoPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -206,23 +178,16 @@ export class CampaignAdmin$ {
   /**
    * Get campaign dynamic.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CAMPAIGN&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: campaign dynamic&lt;/li&gt;&lt;/ul&gt;
    */
-  getDynamic_ByCampaignId(campaignId: string): Promise<IResponseWithSync<CampaignDynamicInfo>> {
+  getDynamic_ByCampaignId(campaignId: string): Promise<IResponse<CampaignDynamicInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/campaigns/{campaignId}/dynamic'
       .replace('{namespace}', this.namespace)
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CampaignDynamicInfo, 'CampaignDynamicInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CampaignDynamicInfo, 'CampaignDynamicInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -231,45 +196,31 @@ export class CampaignAdmin$ {
   getHistoryCodes_ByCampaignId(
     campaignId: string,
     queryParams?: { code?: string | null; limit?: number; offset?: number; userId?: string | null }
-  ): Promise<IResponseWithSync<RedeemHistoryPagingSlicedResult>> {
+  ): Promise<IResponse<RedeemHistoryPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/codes/campaigns/{campaignId}/history'
       .replace('{namespace}', this.namespace)
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RedeemHistoryPagingSlicedResult, 'RedeemHistoryPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RedeemHistoryPagingSlicedResult, 'RedeemHistoryPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Download all or a batch of campaign&#39;s codes as a csv file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CAMPAIGN&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: codes csv file&lt;/li&gt;&lt;/ul&gt;
    */
-  getCodesCsv_ByCampaignId(campaignId: string, queryParams?: { batchNo?: number }): Promise<IResponseWithSync<unknown>> {
+  getCodesCsv_ByCampaignId(campaignId: string, queryParams?: { batchNo?: number }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/codes/campaigns/{campaignId}/codes.csv'
       .replace('{namespace}', this.namespace)
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

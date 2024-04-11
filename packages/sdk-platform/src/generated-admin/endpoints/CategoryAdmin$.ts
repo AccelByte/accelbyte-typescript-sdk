@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { BasicCategoryInfoArray } from '../../generated-definitions/BasicCategoryInfoArray.js'
 import { CategoryCreate } from '../../generated-definitions/CategoryCreate.js'
@@ -16,26 +16,19 @@ import { FullCategoryInfoArray } from '../../generated-definitions/FullCategoryI
 
 export class CategoryAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This API is used to get root categories.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CATEGORY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: root category data&lt;/li&gt;&lt;/ul&gt;
    */
-  getCategories(queryParams?: { storeId?: string | null }): Promise<IResponseWithSync<FullCategoryInfoArray>> {
+  getCategories(queryParams?: { storeId?: string | null }): Promise<IResponse<FullCategoryInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -54,21 +47,14 @@ export class CategoryAdmin$ {
   /**
    * This API is used to list all categories&#39; basic info of a store ordered by category path.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CATEGORY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of categories&#39; paths&lt;/li&gt;&lt;/ul&gt;
    */
-  getCategoriesBasic(queryParams?: { storeId?: string | null }): Promise<IResponseWithSync<BasicCategoryInfoArray>> {
+  getCategoriesBasic(queryParams?: { storeId?: string | null }): Promise<IResponse<BasicCategoryInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/categories/basic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BasicCategoryInfoArray, 'BasicCategoryInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BasicCategoryInfoArray, 'BasicCategoryInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -89,26 +75,16 @@ export class CategoryAdmin$ {
   /**
    * This API is used to get category by category path.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CATEGORY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: category data&lt;/li&gt;&lt;/ul&gt;
    */
-  getCategory_ByCategoryPath(
-    categoryPath: string,
-    queryParams?: { storeId?: string | null }
-  ): Promise<IResponseWithSync<FullCategoryInfo>> {
+  getCategory_ByCategoryPath(categoryPath: string, queryParams?: { storeId?: string | null }): Promise<IResponse<FullCategoryInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/categories/{categoryPath}'
       .replace('{namespace}', this.namespace)
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -133,26 +109,16 @@ export class CategoryAdmin$ {
   /**
    * This API is used to get child categories by category path.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CATEGORY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of child categories data&lt;/li&gt;&lt;/ul&gt;
    */
-  getChildren_ByCategoryPath(
-    categoryPath: string,
-    queryParams?: { storeId?: string | null }
-  ): Promise<IResponseWithSync<FullCategoryInfoArray>> {
+  getChildren_ByCategoryPath(categoryPath: string, queryParams?: { storeId?: string | null }): Promise<IResponse<FullCategoryInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/categories/{categoryPath}/children'
       .replace('{namespace}', this.namespace)
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -161,22 +127,15 @@ export class CategoryAdmin$ {
   getDescendants_ByCategoryPath(
     categoryPath: string,
     queryParams?: { storeId?: string | null }
-  ): Promise<IResponseWithSync<FullCategoryInfoArray>> {
+  ): Promise<IResponse<FullCategoryInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/categories/{categoryPath}/descendants'
       .replace('{namespace}', this.namespace)
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

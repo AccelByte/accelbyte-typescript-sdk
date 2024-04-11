@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ArchiveLeaderboardSignedUrlResponseArray } from '../../generated-definitions/ArchiveLeaderboardSignedUrlResponseArray.js'
@@ -16,7 +16,7 @@ import { UserRankingResponse } from '../../generated-definitions/UserRankingResp
 
 export class LeaderboardData$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;p&gt;Get rankings in current week leaderboard.&lt;/p&gt;
@@ -24,23 +24,16 @@ export class LeaderboardData$ {
   getWeek_ByLeaderboardCode(
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
-  ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
+  ): Promise<IResponse<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/week'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -49,23 +42,16 @@ export class LeaderboardData$ {
   getMonth_ByLeaderboardCode(
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
-  ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
+  ): Promise<IResponse<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/month'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -74,23 +60,16 @@ export class LeaderboardData$ {
   getToday_ByLeaderboardCode(
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
-  ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
+  ): Promise<IResponse<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/today'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -99,23 +78,16 @@ export class LeaderboardData$ {
   getSeason_ByLeaderboardCode(
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
-  ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
+  ): Promise<IResponse<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/season'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -124,23 +96,16 @@ export class LeaderboardData$ {
   getAlltime_ByLeaderboardCode(
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<GetLeaderboardRankingResp>> {
+  ): Promise<IResponse<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -149,23 +114,16 @@ export class LeaderboardData$ {
   getAlltime_ByLeaderboardCode_ByNS(
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<GetPublicLeaderboardRankingResponse>> {
+  ): Promise<IResponse<GetPublicLeaderboardRankingResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v2/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/alltime'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetPublicLeaderboardRankingResponse, 'GetPublicLeaderboardRankingResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetPublicLeaderboardRankingResponse, 'GetPublicLeaderboardRankingResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -174,23 +132,16 @@ export class LeaderboardData$ {
   getArchived_ByLeaderboardCode(
     leaderboardCode: string,
     queryParams: { leaderboardCodes: string | null; slug?: string | null }
-  ): Promise<IResponseWithSync<ArchiveLeaderboardSignedUrlResponseArray>> {
+  ): Promise<IResponse<ArchiveLeaderboardSignedUrlResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/archived'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ArchiveLeaderboardSignedUrlResponseArray, 'ArchiveLeaderboardSignedUrlResponseArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ArchiveLeaderboardSignedUrlResponseArray, 'ArchiveLeaderboardSignedUrlResponseArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -216,7 +167,7 @@ export class LeaderboardData$ {
     leaderboardCode: string,
     userId: string,
     queryParams?: { previousVersion?: number }
-  ): Promise<IResponseWithSync<UserRankingResponse>> {
+  ): Promise<IResponse<UserRankingResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}'
       .replace('{namespace}', this.namespace)
@@ -224,15 +175,8 @@ export class LeaderboardData$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserRankingResponse, 'UserRankingResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserRankingResponse, 'UserRankingResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

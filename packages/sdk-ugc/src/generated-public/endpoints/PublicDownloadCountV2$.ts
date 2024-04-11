@@ -6,14 +6,14 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AddDownloadCountResponse } from '../../generated-definitions/AddDownloadCountResponse.js'
 import { PaginatedContentDownloaderResponse } from '../../generated-definitions/PaginatedContentDownloaderResponse.js'
 
 export class PublicDownloadCountV2$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This endpoint will only display the list of users who performed add download count from v2 endpoint.
@@ -21,23 +21,16 @@ export class PublicDownloadCountV2$ {
   getDownloader_ByContentId(
     contentId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; userId?: string | null }
-  ): Promise<IResponseWithSync<PaginatedContentDownloaderResponse>> {
+  ): Promise<IResponse<PaginatedContentDownloaderResponse>> {
     const params = { limit: 20, sortBy: '*createdTime:desc*', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloader'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedContentDownloaderResponse, 'PaginatedContentDownloaderResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedContentDownloaderResponse, 'PaginatedContentDownloaderResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

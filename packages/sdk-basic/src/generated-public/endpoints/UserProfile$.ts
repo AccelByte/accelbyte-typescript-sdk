@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { UserProfileCreate } from '../../generated-definitions/UserProfileCreate.js'
@@ -22,46 +22,32 @@ import { UserZipCodeUpdate } from '../../generated-definitions/UserZipCodeUpdate
 
 export class UserProfile$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get user public profile by ids.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11405&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user public profiles&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfilesPublic(queryParams: { userIds: string | null }): Promise<IResponseWithSync<UserProfilePublicInfoArray>> {
+  getProfilesPublic(queryParams: { userIds: string | null }): Promise<IResponse<UserProfilePublicInfoArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/profiles/public'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserProfilePublicInfoArray, 'UserProfilePublicInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserProfilePublicInfoArray, 'UserProfilePublicInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get my profile&lt;br&gt;&lt;b&gt;Client with user token can get user profile in target namespace&lt;/b&gt;&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;NAMESPACE:{namespace}:PROFILE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11403&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user profile&lt;/li&gt;&lt;li&gt;&lt;i&gt;Path&#39;s namespace&lt;/i&gt; : &lt;ul&gt;&lt;li&gt;can be filled with &lt;b&gt;publisher namespace&lt;/b&gt; in order to get &lt;b&gt;publisher user profile&lt;/b&gt;&lt;/li&gt;&lt;li&gt;can be filled with &lt;b&gt;game namespace&lt;/b&gt; in order to get &lt;b&gt;game user profile&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Language&lt;/i&gt; : allowed format: en, en-US&lt;/li&gt;&lt;li&gt;&lt;i&gt;Timezone&lt;/i&gt; : IANA time zone, e.g. Asia/Shanghai&lt;/li&gt;&lt;/ul&gt;
    */
-  getUsersMeProfiles(): Promise<IResponseWithSync<UserProfilePrivateInfo>> {
+  getUsersMeProfiles(): Promise<IResponse<UserProfilePrivateInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/me/profiles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserProfilePrivateInfo, 'UserProfilePrivateInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserProfilePrivateInfo, 'UserProfilePrivateInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -93,23 +79,16 @@ export class UserProfile$ {
   /**
    * Get user profile.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;NAMESPACE:{namespace}:USER:{userId}:PROFILE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11403&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user profile&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfiles_ByUserId(userId: string): Promise<IResponseWithSync<UserProfileInfo>> {
+  getProfiles_ByUserId(userId: string): Promise<IResponse<UserProfileInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/{userId}/profiles'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserProfileInfo, 'UserProfileInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserProfileInfo, 'UserProfileInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -145,21 +124,14 @@ export class UserProfile$ {
   /**
    * Get my zip code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;NAMESPACE:{namespace}:PROFILE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11407&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user zip code&lt;/li&gt;&lt;/ul&gt;
    */
-  getUsersMeProfilesZipCode(): Promise<IResponseWithSync<UserZipCode>> {
+  getUsersMeProfilesZipCode(): Promise<IResponse<UserZipCode>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/me/profiles/zipCode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserZipCode, 'UserZipCode')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserZipCode, 'UserZipCode')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -178,43 +150,29 @@ export class UserProfile$ {
   /**
    * Get user public profile by public id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user public profile&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfilesPublicByPublicId(queryParams: { publicId: string | null }): Promise<IResponseWithSync<UserProfilePublicInfo>> {
+  getProfilesPublicByPublicId(queryParams: { publicId: string | null }): Promise<IResponse<UserProfilePublicInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/profiles/public/byPublicId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserProfilePublicInfo, 'UserProfilePublicInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserProfilePublicInfo, 'UserProfilePublicInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get user profile public info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11404&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user public profile&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfilesPublic_ByUserId(userId: string): Promise<IResponseWithSync<UserProfilePublicInfo>> {
+  getProfilesPublic_ByUserId(userId: string): Promise<IResponse<UserProfilePublicInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/{userId}/profiles/public'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, UserProfilePublicInfo, 'UserProfilePublicInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, UserProfilePublicInfo, 'UserProfilePublicInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -235,23 +193,16 @@ export class UserProfile$ {
   /**
    * Get custom attributes info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11404&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user custom attributes&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfilesCustomAttributes_ByUserId(userId: string): Promise<IResponseWithSync<unknown>> {
+  getProfilesCustomAttributes_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/{userId}/profiles/customAttributes'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -272,21 +223,14 @@ export class UserProfile$ {
   /**
    * Get my private custom attributes.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;NAMESPACE:{namespace}:PROFILE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: custom attributes&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11403&lt;/li&gt;&lt;/ul&gt;
    */
-  getUsersMeProfilesPrivateCustomAttributes(): Promise<IResponseWithSync<unknown>> {
+  getUsersMeProfilesPrivateCustomAttributes(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/users/me/profiles/privateCustomAttributes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

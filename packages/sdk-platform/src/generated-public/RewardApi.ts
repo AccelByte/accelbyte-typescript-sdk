@@ -16,7 +16,6 @@ export function RewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -24,7 +23,7 @@ export function RewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get reward by reward code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward instance&lt;/li&gt;&lt;/ul&gt;
    */
   async function getRewardsByCode(queryParams: { rewardCode: string | null }): Promise<RewardInfo> {
-    const $ = new Reward$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Reward$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getRewardsByCode(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +33,7 @@ export function RewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get reward by reward Id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:REWARD&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward instance&lt;/li&gt;&lt;/ul&gt;
    */
   async function getReward_ByRewardId(rewardId: string): Promise<RewardInfo> {
-    const $ = new Reward$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Reward$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getReward_ByRewardId(rewardId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +48,7 @@ export function RewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     sortBy?: string[]
   }): Promise<RewardPagingSlicedResult> {
-    const $ = new Reward$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Reward$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getRewardsByCriteria(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

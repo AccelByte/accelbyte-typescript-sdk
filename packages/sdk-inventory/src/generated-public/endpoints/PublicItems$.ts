@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ConsumeItemReq } from '../../generated-definitions/ConsumeItemReq.js'
 import { ItemResp } from '../../generated-definitions/ItemResp.js'
@@ -19,7 +19,7 @@ import { UpdateItemRespArray } from '../../generated-definitions/UpdateItemRespA
 
 export class PublicItems$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    *  Bulk remove user&#39;s own items.
@@ -58,23 +58,16 @@ export class PublicItems$ {
       sourceItemId?: string | null
       tags?: string | null
     }
-  ): Promise<IResponseWithSync<ListItemResp>> {
+  ): Promise<IResponse<ListItemResp>> {
     const params = { limit: 25, qtyGte: 1, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListItemResp, 'ListItemResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListItemResp, 'ListItemResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -129,7 +122,7 @@ export class PublicItems$ {
     inventoryId: string,
     slotId: string,
     sourceItemId: string
-  ): Promise<IResponseWithSync<ItemResp>> {
+  ): Promise<IResponse<ItemResp>> {
     const params = {} as SDKRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}'
       .replace('{namespace}', this.namespace)
@@ -138,15 +131,8 @@ export class PublicItems$ {
       .replace('{sourceItemId}', sourceItemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ItemResp, 'ItemResp')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemResp, 'ItemResp')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

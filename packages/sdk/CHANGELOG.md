@@ -1,10 +1,10 @@
 # @accelbyte/sdk
 
-## 2.4.3
+## 3.0.0
 
-### Patch Changes
+### Major Changes
 
-- test publish
+- Removed "cache" argument
 
 ## 2.4.2
 

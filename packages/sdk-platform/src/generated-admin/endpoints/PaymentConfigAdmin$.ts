@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AdyenConfig } from '../../generated-definitions/AdyenConfig.js'
@@ -27,26 +27,19 @@ import { XsollaPaywallConfigRequest } from '../../generated-definitions/XsollaPa
 
 export class PaymentConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment global tax config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment provider list&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaymentConfigTax(): Promise<IResponseWithSync<PaymentTaxConfigInfo>> {
+  getPaymentConfigTax(): Promise<IResponse<PaymentTaxConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/payment/config/tax'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentTaxConfigInfo, 'PaymentTaxConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentTaxConfigInfo, 'PaymentTaxConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -70,21 +63,14 @@ export class PaymentConfigAdmin$ {
     namespace?: string | null
     offset?: number
     region?: string | null
-  }): Promise<IResponseWithSync<PaymentProviderConfigPagingSlicedResult>> {
+  }): Promise<IResponse<PaymentProviderConfigPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/config/provider'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentProviderConfigPagingSlicedResult, 'PaymentProviderConfigPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentProviderConfigPagingSlicedResult, 'PaymentProviderConfigPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -103,21 +89,14 @@ export class PaymentConfigAdmin$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment merchant config by id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment merchant config info&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaymentConfigMerchant_ById(id: string): Promise<IResponseWithSync<PaymentMerchantConfigInfo>> {
+  getPaymentConfigMerchant_ById(id: string): Promise<IResponse<PaymentMerchantConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -152,21 +131,14 @@ export class PaymentConfigAdmin$ {
   getPaymentConfigMerchantMatched(queryParams?: {
     namespace?: string | null
     region?: string | null
-  }): Promise<IResponseWithSync<PaymentMerchantConfigInfo>> {
+  }): Promise<IResponse<PaymentMerchantConfigInfo>> {
     const params = { namespace: '*', region: '*', ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/matched'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -175,61 +147,40 @@ export class PaymentConfigAdmin$ {
   getPaymentConfigProviderMatched(queryParams?: {
     namespace?: string | null
     region?: string | null
-  }): Promise<IResponseWithSync<PaymentProviderConfigInfo>> {
+  }): Promise<IResponse<PaymentProviderConfigInfo>> {
     const params = { namespace: '*', region: '*', ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/config/provider/matched'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaymentProviderConfigInfo, 'PaymentProviderConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaymentProviderConfigInfo, 'PaymentProviderConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get special payment providers, such as ALIPAY, WXPAY.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment provider list&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaymentConfigProviderSpecial(): Promise<IResponseWithSync<unknown>> {
+  getPaymentConfigProviderSpecial(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/payment/config/provider/special'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get aggregate payment providers, such as XSOLLA, ADYEN.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment provider list&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaymentConfigProviderAggregate(): Promise<IResponseWithSync<unknown>> {
+  getPaymentConfigProviderAggregate(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/payment/config/provider/aggregate'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -473,21 +424,14 @@ export class PaymentConfigAdmin$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test adyen configuration in payment merchant config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test adyen config&lt;/li&gt;&lt;/ul&gt;
    */
-  getAdyenconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponseWithSync<TestResult>> {
+  getAdyenconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponse<TestResult>> {
     const params = { sandbox: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/{id}/adyenconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -507,120 +451,78 @@ export class PaymentConfigAdmin$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test WxPay configuration in payment merchant config. Reference: &lt;a href=&#34;https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1&#34;&gt;WxPay Document&lt;/a&gt;.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test WxPay config&lt;/li&gt;&lt;/ul&gt;
    */
-  getWxpayconfigTestPayment_ById(id: string): Promise<IResponseWithSync<TestResult>> {
+  getWxpayconfigTestPayment_ById(id: string): Promise<IResponse<TestResult>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/{id}/wxpayconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test AliPay configuration in payment merchant config. Reference: &lt;a href=&#34;https://docs.open.alipay.com/270/alipay.trade.page.pay&#34;&gt;Alipay Document&lt;/a&gt;.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test alipay config&lt;/li&gt;&lt;/ul&gt;
    */
-  getAlipayconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponseWithSync<TestResult>> {
+  getAlipayconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponse<TestResult>> {
     const params = { sandbox: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/{id}/alipayconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test PayPal configuration in payment merchant config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test result&lt;/li&gt;&lt;/ul&gt;
    */
-  getPaypalconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponseWithSync<TestResult>> {
+  getPaypalconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponse<TestResult>> {
     const params = { sandbox: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/{id}/paypalconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test stripe configuration in payment merchant config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test adyen config&lt;/li&gt;&lt;/ul&gt;
    */
-  getStripeconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponseWithSync<TestResult>> {
+  getStripeconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponse<TestResult>> {
     const params = { sandbox: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/{id}/stripeconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test xsolla configuration in payment merchant config. Reference: &lt;a href=&#34;https://developers.xsolla.com/?#simple-checkout&#34;&gt;Xsolla Document&lt;/a&gt;.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test xsolla config&lt;/li&gt;&lt;/ul&gt;
    */
-  getXsollaconfigTestPayment_ById(id: string): Promise<IResponseWithSync<TestResult>> {
+  getXsollaconfigTestPayment_ById(id: string): Promise<IResponse<TestResult>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/{id}/xsollaconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test checkout.com configuration in payment merchant config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:PAYMENT:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test result&lt;/li&gt;&lt;/ul&gt;
    */
-  getCheckoutconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponseWithSync<TestResult>> {
+  getCheckoutconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponse<TestResult>> {
     const params = { sandbox: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/payment/config/merchant/{id}/checkoutconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TestResult, 'TestResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

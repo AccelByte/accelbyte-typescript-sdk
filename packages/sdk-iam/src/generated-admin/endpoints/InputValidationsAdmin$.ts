@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { InputValidationUpdatePayload } from '../../generated-definitions/InputValidationUpdatePayload.js'
@@ -14,26 +14,19 @@ import { InputValidationsResponse } from '../../generated-definitions/InputValid
 
 export class InputValidationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This endpoint is to get list of input validation configuration. &lt;code&gt;regex&lt;/code&gt; parameter will be returned if &lt;code&gt;isCustomRegex&lt;/code&gt; is true. Otherwise, it will be empty.
    */
-  getInputValidations(): Promise<IResponseWithSync<InputValidationsResponse>> {
+  getInputValidations(): Promise<IResponse<InputValidationsResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/inputValidations'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, InputValidationsResponse, 'InputValidationsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, InputValidationsResponse, 'InputValidationsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

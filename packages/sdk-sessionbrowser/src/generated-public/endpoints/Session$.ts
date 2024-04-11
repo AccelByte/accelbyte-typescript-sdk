@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AddPlayerRequest } from '../../generated-definitions/AddPlayerRequest.js'
 import { AddPlayerResponse } from '../../generated-definitions/AddPlayerResponse.js'
@@ -21,7 +21,7 @@ import { UpdateSettingsRequest } from '../../generated-definitions/UpdateSetting
 
 export class Session$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Query available game session
@@ -37,21 +37,14 @@ export class Session$ {
     offset?: number
     server_status?: string | null
     user_id?: string | null
-  }): Promise<IResponseWithSync<SessionQueryResponse>> {
+  }): Promise<IResponse<SessionQueryResponse>> {
     const params = { limit: 25, ...queryParams } as SDKRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -70,43 +63,29 @@ export class Session$ {
   /**
    * Query game sessions by comma separated user ids
    */
-  getGamesessionBulk(queryParams: { user_ids: string | null }): Promise<IResponseWithSync<SessionByUserIDsResponse>> {
+  getGamesessionBulk(queryParams: { user_ids: string | null }): Promise<IResponse<SessionByUserIDsResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SessionByUserIDsResponse, 'SessionByUserIDsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SessionByUserIDsResponse, 'SessionByUserIDsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Query recent player by user ID
    */
-  getRecentplayer_ByUserId(userID: string): Promise<IResponseWithSync<RecentPlayerQueryResponse>> {
+  getRecentplayer_ByUserId(userID: string): Promise<IResponse<RecentPlayerQueryResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/recentplayer/{userID}'
       .replace('{namespace}', this.namespace)
       .replace('{userID}', userID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -127,23 +106,16 @@ export class Session$ {
   /**
    * Get the session by session ID
    */
-  getGamesession_BySessionId(sessionID: string): Promise<IResponseWithSync<SessionResponse>> {
+  getGamesession_BySessionId(sessionID: string): Promise<IResponse<SessionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

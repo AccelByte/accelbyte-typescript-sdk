@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { PaginatedContentDownloadResponse } from '../../generated-definitions/PaginatedContentDownloadResponse.js'
 import { PaginatedCreatorOverviewResponse } from '../../generated-definitions/PaginatedCreatorOverviewResponse.js'
@@ -15,46 +15,32 @@ import { UserFollowResponse } from '../../generated-definitions/UserFollowRespon
 
 export class PublicFollow$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Requires valid user token
    */
-  getUsersFollowed(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedCreatorOverviewResponse>> {
+  getUsersFollowed(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<PaginatedCreatorOverviewResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/followed'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedCreatorOverviewResponse, 'PaginatedCreatorOverviewResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedCreatorOverviewResponse, 'PaginatedCreatorOverviewResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Requires valid user token
    */
-  getContentsFollowed(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<PaginatedContentDownloadResponse>> {
+  getContentsFollowed(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<PaginatedContentDownloadResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/contents/followed'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -75,44 +61,30 @@ export class PublicFollow$ {
   getFollowers_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<PaginatedCreatorOverviewResponse>> {
+  ): Promise<IResponse<PaginatedCreatorOverviewResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/followers'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedCreatorOverviewResponse, 'PaginatedCreatorOverviewResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedCreatorOverviewResponse, 'PaginatedCreatorOverviewResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   getFollowing_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponseWithSync<PaginatedCreatorOverviewResponse>> {
+  ): Promise<IResponse<PaginatedCreatorOverviewResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/following'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedCreatorOverviewResponse, 'PaginatedCreatorOverviewResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedCreatorOverviewResponse, 'PaginatedCreatorOverviewResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

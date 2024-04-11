@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ListClientPermissionSet } from '../../generated-definitions/ListClientPermissionSet.js'
@@ -16,26 +16,19 @@ import { PermissionSetDeleteGroupRequest } from '../../generated-definitions/Per
 
 export class ClientsConfigV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * List client templates
    */
-  getClientConfigTemplates(): Promise<IResponseWithSync<ListTemplatesResponse>> {
+  getClientConfigTemplates(): Promise<IResponse<ListTemplatesResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/admin/clientConfig/templates'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListTemplatesResponse, 'ListTemplatesResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListTemplatesResponse, 'ListTemplatesResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -57,21 +50,14 @@ export class ClientsConfigV3Admin$ {
   /**
    * List Client available permissions
    */
-  getClientConfigPermissions(queryParams?: { excludePermissions?: boolean | null }): Promise<IResponseWithSync<ListClientPermissionSet>> {
+  getClientConfigPermissions(queryParams?: { excludePermissions?: boolean | null }): Promise<IResponse<ListClientPermissionSet>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/clientConfig/permissions'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListClientPermissionSet, 'ListClientPermissionSet')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListClientPermissionSet, 'ListClientPermissionSet')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

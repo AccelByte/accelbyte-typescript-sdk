@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { ConfigExportArray } from '../../generated-definitions/ConfigExportArray.js'
 import { ConfigList } from '../../generated-definitions/ConfigList.js'
@@ -15,46 +15,32 @@ import { ImportConfigResponse } from '../../generated-definitions/ImportConfigRe
 
 export class ConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Get chat config of all namespaces.
    */
-  getConfig(): Promise<IResponseWithSync<ConfigList>> {
+  getConfig(): Promise<IResponse<ConfigList>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/v1/admin/config'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ConfigList, 'ConfigList')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ConfigList, 'ConfigList')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get chat config of a namespace.
    */
-  getConfig_ByNamespace(): Promise<IResponseWithSync<ConfigResponse>> {
+  getConfig_ByNamespace(): Promise<IResponse<ConfigResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/v1/admin/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ConfigResponse, 'ConfigResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ConfigResponse, 'ConfigResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -73,21 +59,14 @@ export class ConfigAdmin$ {
   /**
    *  Export chat configuration to a json file. The file can then be imported from the /import endpoint.
    */
-  getConfigExport(): Promise<IResponseWithSync<ConfigExportArray>> {
+  getConfigExport(): Promise<IResponse<ConfigExportArray>> {
     const params = {} as SDKRequestConfig
     const url = '/chat/v1/admin/config/namespaces/{namespace}/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ConfigExportArray, 'ConfigExportArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ConfigExportArray, 'ConfigExportArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

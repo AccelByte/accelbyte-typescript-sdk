@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { BackFillAcceptRequest } from '../../generated-definitions/BackFillAcceptRequest.js'
@@ -19,7 +19,7 @@ import { GameSession } from '../../generated-definitions/GameSession.js'
 
 export class Backfill$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Create backfill ticket.
@@ -37,21 +37,14 @@ export class Backfill$ {
   /**
    * Get backfill proposal
    */
-  getBackfillProposal(queryParams: { sessionID: string | null }): Promise<IResponseWithSync<BackfillProposalResponse>> {
+  getBackfillProposal(queryParams: { sessionID: string | null }): Promise<IResponse<BackfillProposalResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/backfill/proposal'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BackfillProposalResponse, 'BackfillProposalResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BackfillProposalResponse, 'BackfillProposalResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -72,23 +65,16 @@ export class Backfill$ {
   /**
    * Get backfill ticket by ID
    */
-  getBackfill_ByBackfillId(backfillID: string): Promise<IResponseWithSync<BackfillGetResponse>> {
+  getBackfill_ByBackfillId(backfillID: string): Promise<IResponse<BackfillGetResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/backfill/{backfillID}'
       .replace('{namespace}', this.namespace)
       .replace('{backfillID}', backfillID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BackfillGetResponse, 'BackfillGetResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BackfillGetResponse, 'BackfillGetResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

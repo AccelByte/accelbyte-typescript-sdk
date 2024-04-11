@@ -17,7 +17,6 @@ export function AdminTagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -30,7 +29,7 @@ export function AdminTagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     owner?: string | null
     sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'name' | 'name:asc' | 'name:desc'
   }): Promise<ListTagsResp> {
-    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +39,7 @@ export function AdminTagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  This endpoint will create a new tag. The tag name must be unique per namespace. It is safe to call this endpoint even if the tag already exists. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]
    */
   async function createTag(data: CreateTagReq): Promise<CreateTagResp> {
-    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createTag(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -50,7 +49,7 @@ export function AdminTagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  This endpoint will delete a tag by tagName in a specified namespace. If the tagName doesn&#39;t exist in a namespace, it&#39;ll return not found. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]
    */
   async function deleteTag_ByTagName(tagName: string): Promise<unknown> {
-    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AdminTagsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteTag_ByTagName(tagName)
     if (resp.error) throw resp.error
     return resp.response.data

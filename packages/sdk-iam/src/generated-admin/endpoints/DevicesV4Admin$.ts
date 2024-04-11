@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { DeviceBanRequestV4 } from '../../generated-definitions/DeviceBanRequestV4.js'
@@ -21,46 +21,32 @@ import { DevicesResponseV4 } from '../../generated-definitions/DevicesResponseV4
 
 export class DevicesV4Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This is the endpoint for an admin to get devices a user ever used to login
    */
-  getDevices(queryParams?: { userId?: string | null }): Promise<IResponseWithSync<DevicesResponseV4>> {
+  getDevices(queryParams?: { userId?: string | null }): Promise<IResponse<DevicesResponseV4>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DevicesResponseV4, 'DevicesResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DevicesResponseV4, 'DevicesResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This is the endpoint for an admin to get device bans of user
    */
-  getDevicesBans(queryParams: { userId: string | null }): Promise<IResponseWithSync<DeviceBansResponseV4>> {
+  getDevicesBans(queryParams: { userId: string | null }): Promise<IResponse<DeviceBansResponseV4>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/bans'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeviceBansResponseV4, 'DeviceBansResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeviceBansResponseV4, 'DeviceBansResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -79,21 +65,14 @@ export class DevicesV4Admin$ {
   /**
    * This is the endpoint for an admin to get device types
    */
-  getDevicesTypes(): Promise<IResponseWithSync<DeviceTypesResponseV4>> {
+  getDevicesTypes(): Promise<IResponse<DeviceTypesResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeviceTypesResponseV4, 'DeviceTypesResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeviceTypesResponseV4, 'DeviceTypesResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -105,21 +84,14 @@ export class DevicesV4Admin$ {
     limit?: number
     offset?: number
     startDate?: string | null
-  }): Promise<IResponseWithSync<DeviceBannedResponseV4>> {
+  }): Promise<IResponse<DeviceBannedResponseV4>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/banned'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeviceBannedResponseV4, 'DeviceBannedResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeviceBannedResponseV4, 'DeviceBannedResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -129,41 +101,27 @@ export class DevicesV4Admin$ {
     deviceType: string | null
     endDate?: string | null
     startDate?: string | null
-  }): Promise<IResponseWithSync<unknown>> {
+  }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/report'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This is the endpoint for an admin to get device ban config
    */
-  getDeviceBan_ByBanId(banId: string): Promise<IResponseWithSync<DeviceBanResponseV4>> {
+  getDeviceBan_ByBanId(banId: string): Promise<IResponse<DeviceBanResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/bans/{banId}'.replace('{namespace}', this.namespace).replace('{banId}', banId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeviceBanResponseV4, 'DeviceBanResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeviceBanResponseV4, 'DeviceBanResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -182,23 +140,16 @@ export class DevicesV4Admin$ {
   /**
    * This is the endpoint for an admin to get device ban list
    */
-  getBans_ByDeviceId(deviceId: string): Promise<IResponseWithSync<DeviceBansResponseV4>> {
+  getBans_ByDeviceId(deviceId: string): Promise<IResponse<DeviceBansResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/bans'
       .replace('{namespace}', this.namespace)
       .replace('{deviceId}', deviceId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeviceBansResponseV4, 'DeviceBansResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeviceBansResponseV4, 'DeviceBansResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -219,44 +170,30 @@ export class DevicesV4Admin$ {
   /**
    * This is the endpoint for an admin to get users that ever login on the device
    */
-  getUsers_ByDeviceId(deviceId: string): Promise<IResponseWithSync<DeviceUsersResponseV4>> {
+  getUsers_ByDeviceId(deviceId: string): Promise<IResponse<DeviceUsersResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/users'
       .replace('{namespace}', this.namespace)
       .replace('{deviceId}', deviceId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeviceUsersResponseV4, 'DeviceUsersResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeviceUsersResponseV4, 'DeviceUsersResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This is the endpoint for an admin to decrypt device id
    */
-  getDecrypt_ByDeviceId(deviceId: string): Promise<IResponseWithSync<DeviceIdDecryptResponseV4>> {
+  getDecrypt_ByDeviceId(deviceId: string): Promise<IResponse<DeviceIdDecryptResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/decrypt'
       .replace('{namespace}', this.namespace)
       .replace('{deviceId}', deviceId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, DeviceIdDecryptResponseV4, 'DeviceIdDecryptResponseV4')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, DeviceIdDecryptResponseV4, 'DeviceIdDecryptResponseV4')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

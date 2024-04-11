@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ServiceConfigurationUpdateRequest } from '../../generated-definitions/ServiceConfigurationUpdateRequest.js'
@@ -14,7 +14,7 @@ import { ServicesConfigurationResponse } from '../../generated-definitions/Servi
 
 export class ConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Delete a list of admin email addresses to stop receiving personal data request notification. Scope: account
@@ -32,21 +32,14 @@ export class ConfigurationAdmin$ {
   /**
    * Get list of admin email address configuration. Scope: account
    */
-  getEmailsConfigurations(): Promise<IResponseWithSync<unknown>> {
+  getEmailsConfigurations(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -78,21 +71,14 @@ export class ConfigurationAdmin$ {
   /**
    * Get Registered Services Configuration. Scope: account
    */
-  getServicesConfigurations(): Promise<IResponseWithSync<ServicesConfigurationResponse>> {
+  getServicesConfigurations(): Promise<IResponse<ServicesConfigurationResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/services/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ServicesConfigurationResponse, 'ServicesConfigurationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ServicesConfigurationResponse, 'ServicesConfigurationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

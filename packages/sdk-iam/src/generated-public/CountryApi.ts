@@ -15,7 +15,6 @@ export function CountryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function CountryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public get country list, will filter out countries in black list
    */
   async function getCountries(): Promise<CountryResponseArray> {
-    const $ = new Country$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new Country$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getCountries()
     if (resp.error) throw resp.error
     return resp.response.data

@@ -15,12 +15,11 @@ export function StaticConfigsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
   async function getStaticConfig_ByConfig(config: string): Promise<Config> {
-    const $ = new StaticConfigs$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new StaticConfigs$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getStaticConfig_ByConfig(config)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -15,7 +15,6 @@ export function PublicInventoriesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -28,7 +27,7 @@ export function PublicInventoriesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
   }): Promise<ListInventoryResp> {
-    const $ = new PublicInventories$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicInventories$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeInventories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

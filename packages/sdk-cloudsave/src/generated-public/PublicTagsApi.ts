@@ -15,7 +15,6 @@ export function PublicTagsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function PublicTagsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description Retrieve list of available tags by namespace
    */
   async function getTags(queryParams?: { limit?: number; offset?: number }): Promise<ListTagsResponse> {
-    const $ = new PublicTags$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicTags$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

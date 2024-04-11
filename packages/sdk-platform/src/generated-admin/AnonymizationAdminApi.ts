@@ -14,7 +14,6 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -22,7 +21,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize order. At current it will only anonymize order, order history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationOrder_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationOrder_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +31,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize payment. At current it will only anonymize payment order, payment order history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationPayment_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationPayment_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +41,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationWallet_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationWallet_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +51,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize campaign. At current it will only anonymize redeem history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationCampaign_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationCampaign_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +61,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize revocation. At current it will only anonymize revocation history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationRevocation_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationRevocation_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -72,7 +71,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize fulfillment. At current it will only anonymize fulfillment history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationFulfillment_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationFulfillment_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -82,7 +81,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationEntitlement_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationEntitlement_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -92,7 +91,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize integrations. At current it will only anonymize iap histories.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationIntegration_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationIntegration_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -102,7 +101,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationSubscription_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteAnonymizationSubscription_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

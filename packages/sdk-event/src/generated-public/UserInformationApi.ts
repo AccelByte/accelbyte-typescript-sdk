@@ -16,7 +16,6 @@ export function UserInformationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -25,7 +24,7 @@ export function UserInformationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function deleteActivity_ByUserId(userId: string): Promise<unknown> {
-    const $ = new UserInformation$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserInformation$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteActivity_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +35,7 @@ export function UserInformationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function getActivities_ByUserId(userId: string, queryParams: { pageSize: number; offset?: number }): Promise<EventResponse> {
-    const $ = new UserInformation$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserInformation$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getActivities_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +46,7 @@ export function UserInformationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function getLastActivityTime_ByUserId(userId: string): Promise<UserLastActivity> {
-    const $ = new UserInformation$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new UserInformation$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLastActivityTime_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

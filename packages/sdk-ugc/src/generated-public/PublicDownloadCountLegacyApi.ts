@@ -15,7 +15,6 @@ export function PublicDownloadCountLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) 
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function PublicDownloadCountLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * This endpoint can be used to count how many the ugc downloaded
    */
   async function createDownloadcount_ByContentId(contentId: string): Promise<AddDownloadCountResponse> {
-    const $ = new PublicDownloadCountLegacy$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PublicDownloadCountLegacy$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createDownloadcount_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data

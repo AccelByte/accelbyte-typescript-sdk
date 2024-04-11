@@ -14,7 +14,6 @@ export function TtlConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -22,7 +21,7 @@ export function TtlConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will delete the ttl config of the game record
    */
   async function deleteTtl_ByKey(key: string): Promise<unknown> {
-    const $ = new TtlConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new TtlConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteTtl_ByKey(key)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +31,7 @@ export function TtlConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will delete the ttl config of the game binary record
    */
   async function deleteTtl_ByKey_ByNS(key: string): Promise<unknown> {
-    const $ = new TtlConfigAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new TtlConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteTtl_ByKey_ByNS(key)
     if (resp.error) throw resp.error
     return resp.response.data

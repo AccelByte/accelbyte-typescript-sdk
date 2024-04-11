@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ChannelRequest } from '../../generated-definitions/ChannelRequest.js'
@@ -24,26 +24,19 @@ import { TicketMetricResultRecord } from '../../generated-definitions/TicketMetr
 
 export class Matchmaking$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Reads all available channels in a namespace
    */
-  getChannels(queryParams?: { limit?: number; offset?: number }): Promise<IResponseWithSync<GetChannelsResponse>> {
+  getChannels(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetChannelsResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/matchmaking/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GetChannelsResponse, 'GetChannelsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GetChannelsResponse, 'GetChannelsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -129,86 +122,58 @@ export class Matchmaking$ {
   /**
    * Reads all available channels in a namespace
    */
-  getChannels_ByNS(): Promise<IResponseWithSync<ChannelV1Array>> {
+  getChannels_ByNS(): Promise<IResponse<ChannelV1Array>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/public/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChannelV1Array, 'ChannelV1Array')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChannelV1Array, 'ChannelV1Array')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Queries the specified session&#39;s status. Game servers are expected to call this periodically as long as it has a session in queue to see if there are new players being matched to the session. Possible session statuses are &#34;sessionInQueue&#34;, &#34;sessionFull&#34;, and &#34;sessionTimeout&#34;. if party_id value empty/null, field will not show in response body.
    */
-  getStatus_ByMatchId(matchID: string): Promise<IResponseWithSync<MatchmakingResult>> {
+  getStatus_ByMatchId(matchID: string): Promise<IResponse<MatchmakingResult>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/namespaces/{namespace}/sessions/{matchID}/status'
       .replace('{namespace}', this.namespace)
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, MatchmakingResult, 'MatchmakingResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, MatchmakingResult, 'MatchmakingResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get metric for a specific match pool Result: queue_time in seconds
    */
-  getMetrics_ByChannelName(channelName: string): Promise<IResponseWithSync<TicketMetricResultRecord>> {
+  getMetrics_ByChannelName(channelName: string): Promise<IResponse<TicketMetricResultRecord>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/namespaces/{namespace}/channels/{channelName}/metrics'
       .replace('{namespace}', this.namespace)
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Reads single channel based on namespace and channel name
    */
-  getChannel_ByChannelName(channelName: string): Promise<IResponseWithSync<ChannelV1>> {
+  getChannel_ByChannelName(channelName: string): Promise<IResponse<ChannelV1>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/public/namespaces/{namespace}/channels/{channelName}'
       .replace('{namespace}', this.namespace)
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 }

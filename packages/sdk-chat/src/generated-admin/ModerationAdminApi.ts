@@ -15,7 +15,6 @@ export function ModerationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -23,7 +22,7 @@ export function ModerationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete the chat snapshot
    */
   async function deleteSnapshot_ByChatId(chatId: string): Promise<unknown> {
-    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.deleteSnapshot_ByChatId(chatId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +32,7 @@ export function ModerationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get the chat snapshot
    */
   async function getSnapshot_ByChatId(chatId: string): Promise<ChatSnapshots> {
-    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getSnapshot_ByChatId(chatId)
     if (resp.error) throw resp.error
     return resp.response.data

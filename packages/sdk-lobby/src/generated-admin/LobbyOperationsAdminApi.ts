@@ -16,7 +16,6 @@ export function LobbyOperationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -24,7 +23,7 @@ export function LobbyOperationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update party attributes in a namespace.
    */
   async function updateAttributeParty_ByPartyId(partyId: string, data: PartyPutCustomAttributesRequest): Promise<PartyData> {
-    const $ = new LobbyOperationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LobbyOperationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.updateAttributeParty_ByPartyId(partyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +33,7 @@ export function LobbyOperationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Admin join a player into a party.
    */
   async function createJoinParty_ByPartyId_ByUserId(partyId: string, userId: string): Promise<unknown> {
-    const $ = new LobbyOperationsAdmin$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new LobbyOperationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createJoinParty_ByPartyId_ByUserId(partyId, userId)
     if (resp.error) throw resp.error
     return resp.response.data

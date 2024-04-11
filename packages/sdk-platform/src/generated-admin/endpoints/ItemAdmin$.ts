@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AppUpdate } from '../../generated-definitions/AppUpdate.js'
@@ -40,26 +40,19 @@ import { PurchaseConditionUpdate } from '../../generated-definitions/PurchaseCon
 
 export class ItemAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;This API is used to get all item type configs.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:ITEM:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of items&lt;/li&gt;&lt;/ul&gt;
    */
-  getItemsConfigs(): Promise<IResponseWithSync<ItemTypeConfigInfoArray>> {
+  getItemsConfigs(): Promise<IResponse<ItemTypeConfigInfoArray>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/items/configs'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ItemTypeConfigInfoArray, 'ItemTypeConfigInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemTypeConfigInfoArray, 'ItemTypeConfigInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -91,21 +84,14 @@ export class ItemAdmin$ {
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;This API is used to get an item type config.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:ITEM:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item type config data&lt;/li&gt;&lt;/ul&gt;
    */
-  getItemConfig_ById(id: string): Promise<IResponseWithSync<ItemTypeConfigInfo>> {
+  getItemConfig_ById(id: string): Promise<IResponse<ItemTypeConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/items/configs/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -138,21 +124,14 @@ export class ItemAdmin$ {
       | 'SEASON'
       | 'SUBSCRIPTION'
     clazz?: string | null
-  }): Promise<IResponseWithSync<ItemTypeConfigInfo>> {
+  }): Promise<IResponse<ItemTypeConfigInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/items/configs/search'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -188,21 +167,14 @@ export class ItemAdmin$ {
     itemIds: string | null
     activeOnly?: boolean | null
     storeId?: string | null
-  }): Promise<IResponseWithSync<FullItemInfoArray>> {
+  }): Promise<IResponse<FullItemInfoArray>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/byIds'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullItemInfoArray, 'FullItemInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullItemInfoArray, 'FullItemInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -212,21 +184,14 @@ export class ItemAdmin$ {
     sku: string | null
     activeOnly?: boolean | null
     storeId?: string | null
-  }): Promise<IResponseWithSync<FullItemInfo>> {
+  }): Promise<IResponse<FullItemInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/bySku'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullItemInfo, 'FullItemInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullItemInfo, 'FullItemInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -252,21 +217,14 @@ export class ItemAdmin$ {
     offset?: number
     sortBy?: string | null
     storeId?: string | null
-  }): Promise<IResponseWithSync<FullItemPagingSlicedResult>> {
+  }): Promise<IResponse<FullItemPagingSlicedResult>> {
     const params = { activeOnly: true, limit: 20, sortBy: 'name:asc,createdAt:asc', ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullItemPagingSlicedResult, 'FullItemPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullItemPagingSlicedResult, 'FullItemPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -276,21 +234,14 @@ export class ItemAdmin$ {
     appId: string | null
     activeOnly?: boolean | null
     storeId?: string | null
-  }): Promise<IResponseWithSync<FullItemInfo>> {
+  }): Promise<IResponse<FullItemInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullItemInfo, 'FullItemInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullItemInfo, 'FullItemInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -312,21 +263,14 @@ export class ItemAdmin$ {
   getItem_ByItemId(
     itemId: string,
     queryParams?: { activeOnly?: boolean | null; storeId?: string | null }
-  ): Promise<IResponseWithSync<FullItemInfo>> {
+  ): Promise<IResponse<FullItemInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}'.replace('{namespace}', this.namespace).replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullItemInfo, 'FullItemInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullItemInfo, 'FullItemInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -372,21 +316,14 @@ export class ItemAdmin$ {
     storeId?: string | null
     tags?: string | null
     targetNamespace?: string | null
-  }): Promise<IResponseWithSync<FullItemPagingSlicedResult>> {
+  }): Promise<IResponse<FullItemPagingSlicedResult>> {
     const params = { activeOnly: true, limit: 20, sortBy: ['name:asc', 'displayOrder:asc'], ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullItemPagingSlicedResult, 'FullItemPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullItemPagingSlicedResult, 'FullItemPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -405,26 +342,16 @@ export class ItemAdmin$ {
   /**
    * This API is used to get an app info.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: app data&lt;/li&gt;&lt;/ul&gt;
    */
-  getApp_ByItemId(
-    itemId: string,
-    queryParams?: { activeOnly?: boolean | null; storeId?: string | null }
-  ): Promise<IResponseWithSync<FullAppInfo>> {
+  getApp_ByItemId(itemId: string, queryParams?: { activeOnly?: boolean | null; storeId?: string | null }): Promise<IResponse<FullAppInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}/app'
       .replace('{namespace}', this.namespace)
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullAppInfo, 'FullAppInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullAppInfo, 'FullAppInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -452,21 +379,14 @@ export class ItemAdmin$ {
     populateBundle?: boolean | null
     region?: string | null
     storeId?: string | null
-  }): Promise<IResponseWithSync<PopulatedItemInfo>> {
+  }): Promise<IResponse<PopulatedItemInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/bySku/locale'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -476,19 +396,14 @@ export class ItemAdmin$ {
     sku: string | null
     activeOnly?: boolean | null
     storeId?: string | null
-  }): Promise<IResponseWithSync<ItemId>> {
+  }): Promise<IResponse<ItemId>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/itemId/bySku'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled ? Validate.responseType(() => resultPromise, ItemId, 'ItemId') : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemId, 'ItemId')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -500,41 +415,27 @@ export class ItemAdmin$ {
     language?: string | null
     region?: string | null
     storeId?: string | null
-  }): Promise<IResponseWithSync<ItemInfoArray>> {
+  }): Promise<IResponse<ItemInfoArray>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/locale/byIds'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ItemInfoArray, 'ItemInfoArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemInfoArray, 'ItemInfoArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * This API is used to get an list of itemId by list of sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
    */
-  getItemsItemIdBySkus(queryParams?: { sku?: string[]; storeId?: string | null }): Promise<IResponseWithSync<ItemIdArray>> {
+  getItemsItemIdBySkus(queryParams?: { sku?: string[]; storeId?: string | null }): Promise<IResponse<ItemIdArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/itemId/bySkus'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ItemIdArray, 'ItemIdArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemIdArray, 'ItemIdArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -546,21 +447,14 @@ export class ItemAdmin$ {
     offset?: number
     sortBy?: string[]
     storeId?: string | null
-  }): Promise<IResponseWithSync<FullItemPagingSlicedResult>> {
+  }): Promise<IResponse<FullItemPagingSlicedResult>> {
     const params = { activeOnly: true, limit: 20, sortBy: ['name:asc'], ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/uncategorized'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullItemPagingSlicedResult, 'FullItemPagingSlicedResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullItemPagingSlicedResult, 'FullItemPagingSlicedResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -596,21 +490,14 @@ export class ItemAdmin$ {
     tags?: string | null
     targetNamespace?: string | null
     withTotal?: boolean | null
-  }): Promise<IResponseWithSync<FullItemPagingResult>> {
+  }): Promise<IResponse<FullItemPagingResult>> {
     const params = { limit: 20, sortBy: ['name:asc', 'displayOrder:asc'], ...queryParams } as SDKRequestConfig
     const url = '/platform/v2/admin/namespaces/{namespace}/items/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, FullItemPagingResult, 'FullItemPagingResult')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, FullItemPagingResult, 'FullItemPagingResult')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -622,21 +509,14 @@ export class ItemAdmin$ {
     platform?: string | null
     region?: string | null
     storeId?: string | null
-  }): Promise<IResponseWithSync<EstimatedPriceInfo>> {
+  }): Promise<IResponse<EstimatedPriceInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/estimatedPrice'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, EstimatedPriceInfo, 'EstimatedPriceInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, EstimatedPriceInfo, 'EstimatedPriceInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -666,23 +546,16 @@ export class ItemAdmin$ {
       region?: string | null
       storeId?: string | null
     }
-  ): Promise<IResponseWithSync<PopulatedItemInfo>> {
+  ): Promise<IResponse<PopulatedItemInfo>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}/locale'
       .replace('{namespace}', this.namespace)
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -703,21 +576,14 @@ export class ItemAdmin$ {
   /**
    * Get available predicate types.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:ITEM, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: available predicate types&lt;/li&gt;&lt;/ul&gt;
    */
-  getItemsPredicateTypes(): Promise<IResponseWithSync<AvailablePredicateArray>> {
+  getItemsPredicateTypes(): Promise<IResponse<AvailablePredicateArray>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/predicate/types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, AvailablePredicateArray, 'AvailablePredicateArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, AvailablePredicateArray, 'AvailablePredicateArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -753,43 +619,29 @@ export class ItemAdmin$ {
   /**
    * Get item dynamic data for published item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item dynamic data&lt;/li&gt;&lt;/ul&gt;
    */
-  getDynamic_ByItemId(itemId: string): Promise<IResponseWithSync<ItemDynamicDataInfo>> {
+  getDynamic_ByItemId(itemId: string): Promise<IResponse<ItemDynamicDataInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}/dynamic'
       .replace('{namespace}', this.namespace)
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ItemDynamicDataInfo, 'ItemDynamicDataInfo')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ItemDynamicDataInfo, 'ItemDynamicDataInfo')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; This API is used to list basic items by features.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:ITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of basic items&lt;/li&gt;&lt;/ul&gt;
    */
-  getItemsByFeaturesBasic(queryParams?: { activeOnly?: boolean | null; features?: string[] }): Promise<IResponseWithSync<BasicItemArray>> {
+  getItemsByFeaturesBasic(queryParams?: { activeOnly?: boolean | null; features?: string[] }): Promise<IResponse<BasicItemArray>> {
     const params = { activeOnly: true, ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/byFeatures/basic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, BasicItemArray, 'BasicItemArray')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, BasicItemArray, 'BasicItemArray')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

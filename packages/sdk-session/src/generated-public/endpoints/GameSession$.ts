@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AppendTeamGameSessionRequest } from '../../generated-definitions/AppendTeamGameSessionRequest.js'
@@ -22,7 +22,7 @@ import { UpdateGameSessionRequest } from '../../generated-definitions/UpdateGame
 
 export class GameSession$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * Create a game session. Session configuration name is mandatory, this API will refer following values from the session template if they&#39;re not provided in the request: - type - joinability - autoJoin. If enabled (set to true), players provided in the request will automatically joined the initial game session creation. Game session will not send any invite and players dont need to act upon it. - minPlayers - maxPlayers - inviteTimeout - inactiveTimeout - dsSource - tieTeamsSessionLifetime When the tieTeamsSessionLifetime is true, the lifetime of any partyId inside teams attribute will be tied to the game session. Only applies when the teams partyId is a game session. When the session type is a DS, a DS creation request will be sent if number of active players reaches session&#39;s minPlayers. Active user is a user who present within the session, has status CONNECTED/JOINED. Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS. By default, DS requests are sent to DSMC, but if dsSource is set to &#34;AMS&#34;: - A DS will be requested from AMS instead of DSMC. - The server will be chosen based on a set of claim keys, in order of preference, to match with fleets. - The claim key list is built build from the preferredClaimKeys, fallbackClaimKeys, and clientVersion as follows: [preferredClaimKeys.., clientVersion, fallbackClaimKeys...]
@@ -57,21 +57,14 @@ export class GameSession$ {
     order?: string | null
     orderBy?: string | null
     status?: string | null
-  }): Promise<IResponseWithSync<GameSessionQueryResponse>> {
+  }): Promise<IResponse<GameSessionQueryResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/users/me/gamesessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -105,23 +98,16 @@ export class GameSession$ {
   /**
    * Get game session detail. Session will only be accessible from active players in the session, and client with the permission, except the joinability is set to OPEN. Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS.
    */
-  getGamesession_BySessionId(sessionId: string): Promise<IResponseWithSync<GameSessionResponse>> {
+  getGamesession_BySessionId(sessionId: string): Promise<IResponse<GameSessionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -232,23 +218,16 @@ export class GameSession$ {
   /**
    * Get game session detail by podname. Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS.
    */
-  getGamesessionServer_ByPodName(podName: string): Promise<IResponseWithSync<GameSessionResponse>> {
+  getGamesessionServer_ByPodName(podName: string): Promise<IResponse<GameSessionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/gamesessions/servers/{podName}'
       .replace('{namespace}', this.namespace)
       .replace('{podName}', podName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, GameSessionResponse, 'GameSessionResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -299,23 +278,16 @@ export class GameSession$ {
   /**
    *  Used by game Client to Get Secret constraints - EnableSecret = true - Type = &#34;DS&#34; - secret value will only be produced if enableSecret is true and type is DS if enableSecret = false - empty secret will be returned as 200 OK Expected caller of this API - Game Client to get server secret In the Response you will get following: - 200 OK { &#34;secret&#34;: &lt;string&gt; } If there is error: - 400 Invalid path parameters - 401 unauthorized - 404 StatusNotFound - 500 Internal server error
    */
-  getSecret_BySessionId(sessionId: string): Promise<IResponseWithSync<ServerSecret>> {
+  getSecret_BySessionId(sessionId: string): Promise<IResponse<ServerSecret>> {
     const params = {} as SDKRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/secret'
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ServerSecret, 'ServerSecret')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ServerSecret, 'ServerSecret')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

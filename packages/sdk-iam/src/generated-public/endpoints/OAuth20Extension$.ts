@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { CodeGenUtil, IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { CountryLocationResponse } from '../../generated-definitions/CountryLocationResponse.js'
@@ -18,7 +18,7 @@ import { TokenResponseV3 } from '../../generated-definitions/TokenResponseV3.js'
 
 export class OAuth20Extension$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage. Supported methods: - VerifyToken to verify token from header - AddTokenToRevocationList to revoke token with TTL
@@ -95,21 +95,14 @@ export class OAuth20Extension$ {
   /**
    * This endpoint get country location based on the request.
    */
-  getLocationCountry(): Promise<IResponseWithSync<CountryLocationResponse>> {
+  getLocationCountry(): Promise<IResponse<CountryLocationResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/location/country'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, CountryLocationResponse, 'CountryLocationResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, CountryLocationResponse, 'CountryLocationResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -226,21 +219,14 @@ export class OAuth20Extension$ {
       sig?: string | null
       signed?: string | null
     }
-  ): Promise<IResponseWithSync<unknown>> {
+  ): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/platforms/{platformId}/authenticate'.replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**

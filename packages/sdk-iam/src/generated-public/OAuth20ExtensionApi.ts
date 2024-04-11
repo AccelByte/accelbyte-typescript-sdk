@@ -20,7 +20,6 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -28,7 +27,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage. Supported methods: - VerifyToken to verify token from header - AddTokenToRevocationList to revoke token with TTL
    */
   async function createLogout(): Promise<unknown> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createLogout()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +44,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     extend_exp?: boolean | null
     redirect_uri?: string | null
   }): Promise<unknown> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postAuthenticate(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +58,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     additionalData?: string | null
     extend_exp?: boolean | null
   }): Promise<TokenResponseV3> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postHeadlesToken(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +68,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is being used to generate target token. It requires basic header with ClientID and Secret, it should match the ClientID when call &lt;code&gt;/iam/v3/namespace/{namespace}/token/request&lt;/code&gt; The code should be generated from &lt;code&gt;/iam/v3/namespace/{namespace}/token/request&lt;/code&gt;.
    */
   async function postTokenExchange(data: { code: string | null; additionalData?: string | null }): Promise<TokenResponseV3> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postTokenExchange(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -79,7 +78,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint get country location based on the request.
    */
   async function getLocationCountry(): Promise<CountryLocationResponse> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getLocationCountry()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -89,7 +88,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is being used to request the one time code [8 length] for headless account to link or upgrade to a full account. Should specify the target platform id and current user should already linked to this platform. Current user should be a headless account. ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **discord** - **android** - **ios** - **apple** - **device** - **justice** - **epicgames** - **ps4** - **ps5** - **nintendo** - **awscognito** - **live** - **xblweb** - **netflix** - **snapchat**
    */
   async function postLinkCodeRequest(data: { platformId: string | null }): Promise<OneTimeLinkingCodeResponse> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postLinkCodeRequest(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -99,7 +98,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is being used to validate one time link code.
    */
   async function postLinkCodeValidate(data: { oneTimeLinkCode: string | null }): Promise<OneTimeLinkingCodeValidationResponse> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postLinkCodeValidate(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -114,7 +113,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     additionalData?: string | null
     isTransient?: boolean | null
   }): Promise<TokenResponseV3> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postLinkTokenExchange(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -130,7 +129,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     username: string | null
     extend_exp?: boolean | null
   }): Promise<TokenResponseV3> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postAuthenticateWithLink(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -143,7 +142,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: { client_id: string | null },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
   ): Promise<TargetTokenCodeResponse> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postTokenRequest(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -170,7 +169,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       signed?: string | null
     }
   ): Promise<unknown> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getAuthenticate_ByPlatformId(platformId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -183,7 +182,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     data: { platform_token: string | null }
   ): Promise<PlatformTokenRefreshResponseV3> {
-    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.postTokenVerify_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data

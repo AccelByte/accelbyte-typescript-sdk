@@ -17,7 +17,6 @@ export function PlayerRewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const cache = args?.cache ? args?.cache : sdkAssembly.cache
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isValidationEnabled = args?.isValidationEnabled !== false
 
@@ -30,7 +29,7 @@ export function PlayerRewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sortBy?: string | null
     status?: 'CLAIMED' | 'UNCLAIMED'
   }): Promise<ListUserRewardsResponse> {
-    const $ = new PlayerReward$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PlayerReward$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.getUsersMeRewards(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +39,7 @@ export function PlayerRewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
    */
   async function createUserMeRewardClaim(data: ClaimUserRewardsReq): Promise<UserRewardArray> {
-    const $ = new PlayerReward$(Network.create(requestConfig), namespace, cache, isValidationEnabled)
+    const $ = new PlayerReward$(Network.create(requestConfig), namespace, isValidationEnabled)
     const resp = await $.createUserMeRewardClaim(data)
     if (resp.error) throw resp.error
     return resp.response.data

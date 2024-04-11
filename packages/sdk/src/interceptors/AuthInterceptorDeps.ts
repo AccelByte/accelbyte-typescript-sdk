@@ -20,7 +20,7 @@ export { TokenWithDeviceCookieResponseV3 }
 
 export class OAuth20$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string) {}
 
   postOauthToken<T = TokenWithDeviceCookieResponseV3>(data: {
     grant_type: 'authorization_code' | 'client_credentials' | 'password' | 'refresh_token'

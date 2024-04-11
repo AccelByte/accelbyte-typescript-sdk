@@ -6,7 +6,7 @@
 /**
  * AUTO GENERATED
  */
-import { CodeGenUtil, IResponse, IResponseWithSync, SDKRequestConfig, SdkCache, Validate } from '@accelbyte/sdk'
+import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AdminContentRequestV2 } from '../../generated-definitions/AdminContentRequestV2.js'
@@ -31,7 +31,7 @@ import { UpdateScreenshotResponse } from '../../generated-definitions/UpdateScre
 
 export class AdminContentV2Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private cache = false, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
 
   /**
    * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
@@ -45,21 +45,14 @@ export class AdminContentV2Admin$ {
     subType?: string | null
     tags?: string[]
     type?: string | null
-  }): Promise<IResponseWithSync<PaginatedContentDownloadResponseV2>> {
+  }): Promise<IResponse<PaginatedContentDownloadResponseV2>> {
     const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/contents'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -78,23 +71,16 @@ export class AdminContentV2Admin$ {
   /**
    * Get content by content ID
    */
-  getContent_ByContentId(contentId: string): Promise<IResponseWithSync<ContentDownloadResponseV2>> {
+  getContent_ByContentId(contentId: string): Promise<IResponse<ContentDownloadResponseV2>> {
     const params = {} as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ContentDownloadResponseV2, 'ContentDownloadResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ContentDownloadResponseV2, 'ContentDownloadResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -103,23 +89,16 @@ export class AdminContentV2Admin$ {
   getContents_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
-  ): Promise<IResponseWithSync<PaginatedContentDownloadResponseV2>> {
+  ): Promise<IResponse<PaginatedContentDownloadResponseV2>> {
     const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/users/{userId}/contents'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -141,23 +120,16 @@ export class AdminContentV2Admin$ {
   getContents_ByChannelId(
     channelId: string,
     queryParams?: { limit?: number; name?: string | null; offset?: number; sortBy?: string | null }
-  ): Promise<IResponseWithSync<PaginatedContentDownloadResponseV2>> {
+  ): Promise<IResponse<PaginatedContentDownloadResponseV2>> {
     const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/channels/{channelId}/contents'
       .replace('{namespace}', this.namespace)
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
@@ -178,45 +150,31 @@ export class AdminContentV2Admin$ {
   /**
    * Content&#39;s payload versions created when UGC is created or updated with &lt;code&gt;updateContentFile&lt;/code&gt; set to true. Only list up to 10 latest versions.
    */
-  getVersions_ByContentId(contentId: string): Promise<IResponseWithSync<ListContentVersionsResponse>> {
+  getVersions_ByContentId(contentId: string): Promise<IResponse<ListContentVersionsResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/contents/{contentId}/versions'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ListContentVersionsResponse, 'ListContentVersionsResponse')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ListContentVersionsResponse, 'ListContentVersionsResponse')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
    * Get content by share code
    */
-  getContentSharecode_ByShareCode(shareCode: string): Promise<IResponseWithSync<ContentDownloadResponseV2>> {
+  getContentSharecode_ByShareCode(shareCode: string): Promise<IResponse<ContentDownloadResponseV2>> {
     const params = {} as SDKRequestConfig
     const url = '/ugc/v2/admin/namespaces/{namespace}/contents/sharecodes/{shareCode}'
       .replace('{namespace}', this.namespace)
       .replace('{shareCode}', shareCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    const res = () =>
-      this.isValidationEnabled
-        ? Validate.responseType(() => resultPromise, ContentDownloadResponseV2, 'ContentDownloadResponseV2')
-        : Validate.unsafeResponse(() => resultPromise)
-
-    if (!this.cache) {
-      return SdkCache.withoutCache(res)
-    }
-    const cacheKey = url + CodeGenUtil.hashCode(JSON.stringify({ params }))
-    return SdkCache.withCache(cacheKey, res)
+    return this.isValidationEnabled
+      ? Validate.responseType(() => resultPromise, ContentDownloadResponseV2, 'ContentDownloadResponseV2')
+      : Validate.unsafeResponse(() => resultPromise)
   }
 
   /**
