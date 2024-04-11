@@ -15,7 +15,7 @@ import { UserPersonalDataResponse } from '../../generated-definitions/UserPerson
 
 export class DataRetrieval$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get user&#39;s personal data requests Requires valid user access token Scope: account
@@ -27,9 +27,7 @@ export class DataRetrieval$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserPersonalDataResponse, 'UserPersonalDataResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserPersonalDataResponse, 'UserPersonalDataResponse')
   }
 
   /**
@@ -45,9 +43,7 @@ export class DataRetrieval$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DataRetrievalResponse, 'DataRetrievalResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DataRetrievalResponse, 'DataRetrievalResponse')
   }
 
   /**
@@ -61,9 +57,7 @@ export class DataRetrieval$ {
       .replace('{requestDate}', requestDate)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -84,8 +78,6 @@ export class DataRetrieval$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserDataUrl, 'UserDataUrl')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserDataUrl, 'UserDataUrl')
   }
 }

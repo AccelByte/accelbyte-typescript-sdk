@@ -16,7 +16,7 @@ import { UpdateStatusIntegrationConfigurationReq } from '../../generated-definit
 
 export class AdminIntegrationConfigurationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    *  Listing all integration configurations in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]
@@ -30,9 +30,12 @@ export class AdminIntegrationConfigurationsAdmin$ {
     const url = '/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListIntegrationConfigurationsResp, 'ListIntegrationConfigurationsResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListIntegrationConfigurationsResp,
+      'ListIntegrationConfigurationsResp'
+    )
   }
 
   /**
@@ -43,9 +46,12 @@ export class AdminIntegrationConfigurationsAdmin$ {
     const url = '/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, IntegrationConfigurationResp, 'IntegrationConfigurationResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      IntegrationConfigurationResp,
+      'IntegrationConfigurationResp'
+    )
   }
 
   /**
@@ -61,9 +67,12 @@ export class AdminIntegrationConfigurationsAdmin$ {
       .replace('{integrationConfigurationId}', integrationConfigurationId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, IntegrationConfigurationResp, 'IntegrationConfigurationResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      IntegrationConfigurationResp,
+      'IntegrationConfigurationResp'
+    )
   }
 
   /**
@@ -79,8 +88,11 @@ export class AdminIntegrationConfigurationsAdmin$ {
       .replace('{integrationConfigurationId}', integrationConfigurationId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, IntegrationConfigurationResp, 'IntegrationConfigurationResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      IntegrationConfigurationResp,
+      'IntegrationConfigurationResp'
+    )
   }
 }

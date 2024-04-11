@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminChannelAdmin$ } from './endpoints/AdminChannelAdmin$.js'
 import { ChannelRequest } from '../generated-definitions/ChannelRequest.js'
@@ -19,13 +20,13 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get official channel paginated
    */
   async function getChannels(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetChannelResponse> {
-    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getChannels(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +36,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create official channel
    */
   async function createChannel(data: ChannelRequest): Promise<ChannelResponse> {
-    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createChannel(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +46,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete official channel
    */
   async function deleteChannel_ByChannelId(channelId: string): Promise<unknown> {
-    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteChannel_ByChannelId(channelId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +56,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update official channel
    */
   async function updateChannel_ByChannelId(channelId: string, data: UpdateChannelRequest): Promise<ChannelResponse> {
-    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateChannel_ByChannelId(channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +69,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; name?: string | null; offset?: number }
   ): Promise<PaginatedGetChannelResponse> {
-    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getChannels_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -78,7 +79,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete user channel
    */
   async function deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<unknown> {
-    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteChannel_ByUserId_ByChannelId(userId, channelId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -92,7 +93,7 @@ export function AdminChannelAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     data: UpdateChannelRequest
   ): Promise<ChannelResponse> {
-    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminChannelAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateChannel_ByUserId_ByChannelId(userId, channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data

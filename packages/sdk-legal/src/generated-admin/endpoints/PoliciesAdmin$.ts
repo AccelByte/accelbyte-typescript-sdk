@@ -14,7 +14,7 @@ import { UpdatePolicyRequest } from '../../generated-definitions/UpdatePolicyReq
 
 export class PoliciesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Update country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
@@ -24,9 +24,7 @@ export class PoliciesAdmin$ {
     const url = '/agreement/admin/policies/{policyId}'.replace('{policyId}', policyId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -37,9 +35,7 @@ export class PoliciesAdmin$ {
     const url = '/agreement/admin/policies/{policyId}/default'.replace('{policyId}', policyId)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -50,8 +46,11 @@ export class PoliciesAdmin$ {
     const url = '/agreement/admin/policies/countries/{countryCode}'.replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrievePolicyResponseArray, 'RetrievePolicyResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrievePolicyResponseArray,
+      'RetrievePolicyResponseArray'
+    )
   }
 }

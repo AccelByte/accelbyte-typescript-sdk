@@ -16,7 +16,7 @@ import { PlayersCurrentPlatformResponse } from '../../generated-definitions/Play
 
 export class Player$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get bulk players current platform.
@@ -26,9 +26,12 @@ export class Player$ {
     const url = '/session/v1/public/namespaces/{namespace}/users/bulk/platform'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayersCurrentPlatformResponse, 'PlayersCurrentPlatformResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayersCurrentPlatformResponse,
+      'PlayersCurrentPlatformResponse'
+    )
   }
 
   /**
@@ -39,9 +42,7 @@ export class Player$ {
     const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -52,9 +53,12 @@ export class Player$ {
     const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerAttributesResponseBody, 'PlayerAttributesResponseBody')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerAttributesResponseBody,
+      'PlayerAttributesResponseBody'
+    )
   }
 
   /**
@@ -65,8 +69,11 @@ export class Player$ {
     const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerAttributesResponseBody, 'PlayerAttributesResponseBody')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerAttributesResponseBody,
+      'PlayerAttributesResponseBody'
+    )
   }
 }

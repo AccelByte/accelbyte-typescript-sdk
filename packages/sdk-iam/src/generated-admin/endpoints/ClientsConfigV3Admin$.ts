@@ -16,7 +16,7 @@ import { PermissionSetDeleteGroupRequest } from '../../generated-definitions/Per
 
 export class ClientsConfigV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * List client templates
@@ -26,9 +26,7 @@ export class ClientsConfigV3Admin$ {
     const url = '/iam/v3/admin/clientConfig/templates'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListTemplatesResponse, 'ListTemplatesResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListTemplatesResponse, 'ListTemplatesResponse')
   }
 
   /**
@@ -42,9 +40,7 @@ export class ClientsConfigV3Admin$ {
     const url = '/iam/v3/admin/clientConfig/permissions'
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -55,9 +51,7 @@ export class ClientsConfigV3Admin$ {
     const url = '/iam/v3/admin/clientConfig/permissions'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListClientPermissionSet, 'ListClientPermissionSet')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListClientPermissionSet, 'ListClientPermissionSet')
   }
 
   /**
@@ -71,8 +65,6 @@ export class ClientsConfigV3Admin$ {
     const url = '/iam/v3/admin/clientConfig/permissions'
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

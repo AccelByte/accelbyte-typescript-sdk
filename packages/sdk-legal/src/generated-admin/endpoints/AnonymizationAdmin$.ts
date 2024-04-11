@@ -12,7 +12,7 @@ import { z } from 'zod'
 
 export class AnonymizationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API will anonymize agreement record for specified user. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
@@ -22,8 +22,6 @@ export class AnonymizationAdmin$ {
     const url = '/agreement/admin/users/{userId}/anonymization/agreements'.replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminTagAdmin$ } from './endpoints/AdminTagAdmin$.js'
 import { CreateTagRequest } from '../generated-definitions/CreateTagRequest.js'
@@ -18,13 +19,13 @@ export function AdminTagAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get available tags paginated
    */
   async function getTags(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTagResponse> {
-    const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +35,7 @@ export function AdminTagAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Creates a new tag
    */
   async function createTag(data: CreateTagRequest): Promise<CreateTagResponse> {
-    const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createTag(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +45,7 @@ export function AdminTagAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete existing tag
    */
   async function deleteTag_ByTagId(tagId: string): Promise<unknown> {
-    const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteTag_ByTagId(tagId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +55,7 @@ export function AdminTagAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update existing tag
    */
   async function updateTag_ByTagId(tagId: string, data: CreateTagRequest): Promise<CreateTagResponse> {
-    const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTagAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateTag_ByTagId(tagId, data)
     if (resp.error) throw resp.error
     return resp.response.data

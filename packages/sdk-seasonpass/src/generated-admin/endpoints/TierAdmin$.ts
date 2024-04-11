@@ -21,7 +21,7 @@ import { UserTierGrant } from '../../generated-definitions/UserTierGrant.js'
 
 export class TierAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to query paginated tiers for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of passes&lt;/li&gt;&lt;/ul&gt;
@@ -33,9 +33,7 @@ export class TierAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TierPagingSlicedResult, 'TierPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TierPagingSlicedResult, 'TierPagingSlicedResult')
   }
 
   /**
@@ -48,9 +46,7 @@ export class TierAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TierArray, 'TierArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TierArray, 'TierArray')
   }
 
   /**
@@ -64,9 +60,7 @@ export class TierAdmin$ {
       .replace('{id}', id)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -80,9 +74,7 @@ export class TierAdmin$ {
       .replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, Tier, 'Tier')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Tier, 'Tier')
   }
 
   /**
@@ -95,9 +87,7 @@ export class TierAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
   }
 
   /**
@@ -110,9 +100,7 @@ export class TierAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
   }
 
   /**
@@ -126,8 +114,6 @@ export class TierAdmin$ {
       .replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, Tier, 'Tier')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Tier, 'Tier')
   }
 }

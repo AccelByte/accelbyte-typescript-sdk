@@ -15,7 +15,7 @@ import { ListItemTypesResp } from '../../generated-definitions/ListItemTypesResp
 
 export class AdminItemTypesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    *  This endpoint will list all item types in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]
@@ -29,9 +29,7 @@ export class AdminItemTypesAdmin$ {
     const url = '/inventory/v1/admin/namespaces/{namespace}/itemtypes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListItemTypesResp, 'ListItemTypesResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListItemTypesResp, 'ListItemTypesResp')
   }
 
   /**
@@ -42,9 +40,7 @@ export class AdminItemTypesAdmin$ {
     const url = '/inventory/v1/admin/namespaces/{namespace}/itemtypes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateItemTypeResp, 'CreateItemTypeResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateItemTypeResp, 'CreateItemTypeResp')
   }
 
   /**
@@ -57,8 +53,6 @@ export class AdminItemTypesAdmin$ {
       .replace('{itemTypeName}', itemTypeName)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

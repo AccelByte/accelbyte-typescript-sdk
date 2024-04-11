@@ -16,7 +16,7 @@ import { ReleaseNoteManifest } from '../../generated-definitions/ReleaseNoteMani
 
 export class ReleaseNoteAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to commit release note file that has been uploaded to signal completion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
@@ -28,9 +28,7 @@ export class ReleaseNoteAdmin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -43,9 +41,7 @@ export class ReleaseNoteAdmin$ {
       .replace('{uploaderId}', uploaderId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -58,9 +54,7 @@ export class ReleaseNoteAdmin$ {
       .replace('{uploadMode}', uploadMode)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -78,8 +72,6 @@ export class ReleaseNoteAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ReleaseNoteDto, 'ReleaseNoteDto')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReleaseNoteDto, 'ReleaseNoteDto')
   }
 }

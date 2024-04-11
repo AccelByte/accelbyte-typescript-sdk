@@ -19,7 +19,7 @@ import { UpdateBasePolicyResponse } from '../../generated-definitions/UpdateBase
 
 export class BaseLegalPoliciesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Retrieve all supported policy types.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -29,9 +29,12 @@ export class BaseLegalPoliciesAdmin$ {
     const url = '/agreement/admin/policy-types'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrievePolicyTypeResponseArray, 'RetrievePolicyTypeResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrievePolicyTypeResponseArray,
+      'RetrievePolicyTypeResponseArray'
+    )
   }
 
   /**
@@ -42,9 +45,12 @@ export class BaseLegalPoliciesAdmin$ {
     const url = '/agreement/admin/base-policies'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveBasePolicyResponseArray, 'RetrieveBasePolicyResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveBasePolicyResponseArray,
+      'RetrieveBasePolicyResponseArray'
+    )
   }
 
   /**
@@ -55,9 +61,7 @@ export class BaseLegalPoliciesAdmin$ {
     const url = '/agreement/admin/base-policies'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateBasePolicyResponse, 'CreateBasePolicyResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateBasePolicyResponse, 'CreateBasePolicyResponse')
   }
 
   /**
@@ -68,9 +72,12 @@ export class BaseLegalPoliciesAdmin$ {
     const url = '/agreement/admin/base-policies/{basePolicyId}'.replace('{basePolicyId}', basePolicyId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveBasePolicyResponse, 'RetrieveBasePolicyResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveBasePolicyResponse,
+      'RetrieveBasePolicyResponse'
+    )
   }
 
   /**
@@ -81,9 +88,7 @@ export class BaseLegalPoliciesAdmin$ {
     const url = '/agreement/admin/base-policies/{basePolicyId}'.replace('{basePolicyId}', basePolicyId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateBasePolicyResponse, 'UpdateBasePolicyResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateBasePolicyResponse, 'UpdateBasePolicyResponse')
   }
 
   /**
@@ -96,8 +101,6 @@ export class BaseLegalPoliciesAdmin$ {
       .replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrievePolicyResponse, 'RetrievePolicyResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RetrievePolicyResponse, 'RetrievePolicyResponse')
   }
 }

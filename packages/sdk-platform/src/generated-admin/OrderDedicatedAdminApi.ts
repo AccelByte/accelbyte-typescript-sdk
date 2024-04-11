@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { OrderDedicatedAdmin$ } from './endpoints/OrderDedicatedAdmin$.js'
 import { OrderSyncResult } from '../generated-definitions/OrderSyncResult.js'
@@ -16,7 +17,7 @@ export function OrderDedicatedAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Sync orders. If response contains nextEvaluatedKey, please use it as query param in the next call to fetch the next batch, a batch has 1000 elements or less.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: sync orders&lt;/li&gt;&lt;/ul&gt;
@@ -26,7 +27,7 @@ export function OrderDedicatedAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     start: string | null
     nextEvaluatedKey?: string | null
   }): Promise<OrderSyncResult> {
-    const $ = new OrderDedicatedAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new OrderDedicatedAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getOrders(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

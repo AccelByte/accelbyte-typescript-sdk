@@ -13,7 +13,7 @@ import { NativeUserBlockResponseArray } from '../../generated-definitions/Native
 
 export class Blocks$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Sync blocked user using server to server call to native first party server. Supported platforms: ps5, ps4 and pspc : the default environment would be sp-int, can be override using psnEnv. psnEnv consist of sp-int (default), prod-qa, np
@@ -23,8 +23,11 @@ export class Blocks$ {
     const url = '/lobby/sync/namespaces/{namespace}/me/block'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NativeUserBlockResponseArray, 'NativeUserBlockResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      NativeUserBlockResponseArray,
+      'NativeUserBlockResponseArray'
+    )
   }
 }

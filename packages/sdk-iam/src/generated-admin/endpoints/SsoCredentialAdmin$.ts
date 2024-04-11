@@ -15,7 +15,7 @@ import { SsoPlatformCredentialResponseArray } from '../../generated-definitions/
 
 export class SsoCredentialAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This is the API to Get All Active SSO Platform Credential.
@@ -25,9 +25,12 @@ export class SsoCredentialAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/platforms/sso'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SsoPlatformCredentialResponseArray, 'SsoPlatformCredentialResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      SsoPlatformCredentialResponseArray,
+      'SsoPlatformCredentialResponseArray'
+    )
   }
 
   /**
@@ -40,9 +43,7 @@ export class SsoCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -55,9 +56,12 @@ export class SsoCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SsoPlatformCredentialResponse, 'SsoPlatformCredentialResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      SsoPlatformCredentialResponse,
+      'SsoPlatformCredentialResponse'
+    )
   }
 
   /**
@@ -70,9 +74,12 @@ export class SsoCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SsoPlatformCredentialResponse, 'SsoPlatformCredentialResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      SsoPlatformCredentialResponse,
+      'SsoPlatformCredentialResponse'
+    )
   }
 
   /**
@@ -85,8 +92,11 @@ export class SsoCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SsoPlatformCredentialResponse, 'SsoPlatformCredentialResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      SsoPlatformCredentialResponse,
+      'SsoPlatformCredentialResponse'
+    )
   }
 }

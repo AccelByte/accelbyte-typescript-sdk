@@ -16,7 +16,7 @@ import { OrderPagingSlicedResult } from '../../generated-definitions/OrderPaging
 
 export class Order$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query user orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:ORDER&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order&lt;/li&gt;&lt;/ul&gt;
@@ -47,9 +47,7 @@ export class Order$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, OrderPagingSlicedResult, 'OrderPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderPagingSlicedResult, 'OrderPagingSlicedResult')
   }
 
   /**
@@ -62,9 +60,7 @@ export class Order$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, OrderInfo, 'OrderInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -78,9 +74,7 @@ export class Order$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, OrderInfo, 'OrderInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -94,9 +88,7 @@ export class Order$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, OrderInfo, 'OrderInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -110,9 +102,7 @@ export class Order$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, OrderHistoryInfoArray, 'OrderHistoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderHistoryInfoArray, 'OrderHistoryInfoArray')
   }
 
   /**
@@ -126,8 +116,6 @@ export class Order$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

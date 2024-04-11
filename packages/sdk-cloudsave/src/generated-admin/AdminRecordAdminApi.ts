@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminGameRecordRequest } from '../generated-definitions/AdminGameRecordRequest.js'
 import { AdminGameRecordResponse } from '../generated-definitions/AdminGameRecordResponse.js'
@@ -26,7 +27,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Retrieve list of records key by namespace
@@ -37,7 +38,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     query?: string | null
     tags?: string[]
   }): Promise<ListAdminGameRecordKeysResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAdminrecords(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +48,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Bulk get admin game records. Maximum key per request 20.
    */
   async function createAdminrecordBulk(data: BulkGetAdminGameRecordRequest): Promise<BulkGetAdminGameRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createAdminrecordBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +58,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoints delete game record in namespace-level
    */
   async function deleteAdminrecord_ByKey(key: string): Promise<unknown> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteAdminrecord_ByKey(key)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +68,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get a record by its key in namespace-level.
    */
   async function getAdminrecord_ByKey(key: string): Promise<AdminGameRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAdminrecord_ByKey(key)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -77,7 +78,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will create new admin game record or append the existing admin game record. **Append example:** Example 1 - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data1&#34;: &#34;value&#34;, &#34;data2&#34;: &#34;new value&#34; }` Example 2 - Existing JSON: `{ &#34;data1&#34;: { &#34;data2&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data1&#34;: { &#34;data3&#34;: &#34;new value&#34; }` - Result: `{ &#34;data1&#34;: { &#34;data2&#34;: &#34;value&#34;, &#34;data3&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Record Metadata Metadata allows user to define the behaviour of the record. Metadata can be defined in request body with field name **__META**. When creating record, if **__META** field is not defined, the metadata value will use the default value. When updating record, if **__META** field is not defined, the existing metadata value will stay as is. **Metadata List:** 1. tags (default: *empty array*, type: array of string) Indicate the tagging for the admin record. **Request Body Example:** ``` { &#34;__META&#34;: { &#34;tags&#34;: [&#34;tag1&#34;, &#34;tag2&#34;] } ... } ```
    */
   async function createAdminrecord_ByKey(key: string, data: AdminGameRecordRequest): Promise<AdminGameRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createAdminrecord_ByKey(key, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -87,7 +88,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will create new admin game record or replace the existing admin game record. **Append example:** Example - Existing JSON: `{ &#34;data1&#34;: &#34;value&#34; }` - New JSON: `{ &#34;data2&#34;: &#34;new value&#34; }` - Result: `{ &#34;data2&#34;: &#34;new value&#34; }` ## Restriction This is the restriction of Key Naming for the record: 1. Cannot use **&#34;.&#34;** as the key name - `{ &#34;data.2&#34;: &#34;value&#34; }` 2. Cannot use **&#34;$&#34;** as the prefix in key names - `{ &#34;$data&#34;: &#34;value&#34; }` 3. Cannot use empty string in key names - `{ &#34;&#34;: &#34;value&#34; }` ## Record Metadata Metadata allows user to define the behaviour of the record. Metadata can be defined in request body with field name **__META**. When creating record, if **__META** field is not defined, the metadata value will use the default value. When updating record, if **__META** field is not defined, the existing metadata value will stay as is. **Metadata List:** 1. tags (default: *empty array*, type: array of string) Indicate the tagging for the admin record. **Request Body Example:** ``` { &#34;__META&#34;: { &#34;tags&#34;: [&#34;tag1&#34;, &#34;tag2&#34;] } ... } ```
    */
   async function updateAdminrecord_ByKey(key: string, data: AdminGameRecordRequest): Promise<AdminGameRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateAdminrecord_ByKey(key, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -100,7 +101,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; query?: string | null; tags?: string[] }
   ): Promise<ListAdminPlayerRecordKeysResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAdminrecords_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -110,7 +111,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Bulk get admin player record by userIds, max allowed 20 at a time.
    */
   async function createBulkUser_ByKey(key: string, data: BulkUserIDsRequest): Promise<BulkGetAdminPlayerRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createBulkUser_ByKey(key, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -123,7 +124,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: BulkGetAdminPlayerRecordRequest
   ): Promise<BulkGetAdminPlayerRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createAdminrecordBulk_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -133,7 +134,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete a record (arbitrary JSON data) in user-level with given key.
    */
   async function deleteAdminrecord_ByUserId_ByKey(userId: string, key: string): Promise<unknown> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteAdminrecord_ByUserId_ByKey(userId, key)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -143,7 +144,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get a admin record in user-level (arbitrary JSON data) by its key.
    */
   async function getAdminrecord_ByUserId_ByKey(userId: string, key: string): Promise<AdminPlayerRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAdminrecord_ByUserId_ByKey(userId, key)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -157,7 +158,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     key: string,
     data: AdminPlayerRecordRequest
   ): Promise<AdminPlayerRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createAdminrecord_ByUserId_ByKey(userId, key, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -171,7 +172,7 @@ export function AdminRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     key: string,
     data: AdminPlayerRecordRequest
   ): Promise<AdminPlayerRecordResponse> {
-    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateAdminrecord_ByUserId_ByKey(userId, key, data)
     if (resp.error) throw resp.error
     return resp.response.data

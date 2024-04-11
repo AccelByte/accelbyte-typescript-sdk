@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminTicketsAdmin$ } from './endpoints/AdminTicketsAdmin$.js'
 import { ReportListResponse } from '../generated-definitions/ReportListResponse.js'
@@ -20,7 +21,7 @@ export function AdminTicketsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Tickets list can be ordered by: - createdAt - reportsCount - status (currently there are OPEN, AUTO_MODERATED and CLOSED statuses, desc order will put ticket with CLOSED status at the top)
@@ -35,7 +36,7 @@ export function AdminTicketsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sortBy?: string | null
     status?: string | null
   }): Promise<TicketListResponse> {
-    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTickets(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -48,7 +49,7 @@ export function AdminTicketsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     category: string | null
     extensionCategory?: string | null
   }): Promise<TicketStatisticResponse> {
-    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTicketsStatistic(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +59,7 @@ export function AdminTicketsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will delete ticket and all its reports.
    */
   async function deleteTicket_ByTicketId(ticketId: string): Promise<unknown> {
-    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteTicket_ByTicketId(ticketId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +69,7 @@ export function AdminTicketsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will return ticket detail with ticket id.
    */
   async function getTicket_ByTicketId(ticketId: string): Promise<TicketResponse> {
-    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTicket_ByTicketId(ticketId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -78,7 +79,7 @@ export function AdminTicketsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List reports ordered by createdAt in descending order.
    */
   async function getReports_ByTicketId(ticketId: string, queryParams?: { limit?: number; offset?: number }): Promise<ReportListResponse> {
-    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getReports_ByTicketId(ticketId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -88,7 +89,7 @@ export function AdminTicketsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update ticket resolution status to either OPEN or CLOSED. It is mandatory to provide notes
    */
   async function createResolution_ByTicketId(ticketId: string, data: UpdateTicketResolutionsRequest): Promise<TicketResponse> {
-    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTicketsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createResolution_ByTicketId(ticketId, data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -21,7 +21,7 @@ import { UpdateReasonGroupRequest } from '../../generated-definitions/UpdateReas
 
 export class AdminReasonsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint get reasons with pagination
@@ -36,9 +36,7 @@ export class AdminReasonsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasons'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminReasonListResponse, 'AdminReasonListResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminReasonListResponse, 'AdminReasonListResponse')
   }
 
   /**
@@ -49,9 +47,7 @@ export class AdminReasonsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasons'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminReasonResponse, 'AdminReasonResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminReasonResponse, 'AdminReasonResponse')
   }
 
   /**
@@ -62,9 +58,7 @@ export class AdminReasonsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasons/all'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminAllReasonsResponse, 'AdminAllReasonsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminAllReasonsResponse, 'AdminAllReasonsResponse')
   }
 
   /**
@@ -75,9 +69,7 @@ export class AdminReasonsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasonGroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ReasonGroupListResponse, 'ReasonGroupListResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReasonGroupListResponse, 'ReasonGroupListResponse')
   }
 
   /**
@@ -88,9 +80,7 @@ export class AdminReasonsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasonGroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ReasonGroupResponse, 'ReasonGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReasonGroupResponse, 'ReasonGroupResponse')
   }
 
   /**
@@ -104,9 +94,7 @@ export class AdminReasonsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/reasons/unused'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UnusedReasonListResponse, 'UnusedReasonListResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UnusedReasonListResponse, 'UnusedReasonListResponse')
   }
 
   /**
@@ -119,9 +107,7 @@ export class AdminReasonsAdmin$ {
       .replace('{reasonId}', reasonId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -134,9 +120,7 @@ export class AdminReasonsAdmin$ {
       .replace('{reasonId}', reasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminReasonResponse, 'AdminReasonResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminReasonResponse, 'AdminReasonResponse')
   }
 
   /**
@@ -149,9 +133,7 @@ export class AdminReasonsAdmin$ {
       .replace('{reasonId}', reasonId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminReasonResponse, 'AdminReasonResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminReasonResponse, 'AdminReasonResponse')
   }
 
   /**
@@ -164,9 +146,7 @@ export class AdminReasonsAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   getReasonGroup_ByGroupId(groupId: string): Promise<IResponse<ReasonGroupResponse>> {
@@ -176,9 +156,7 @@ export class AdminReasonsAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ReasonGroupResponse, 'ReasonGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReasonGroupResponse, 'ReasonGroupResponse')
   }
 
   /**
@@ -191,8 +169,6 @@ export class AdminReasonsAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ReasonGroupResponse, 'ReasonGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReasonGroupResponse, 'ReasonGroupResponse')
   }
 }

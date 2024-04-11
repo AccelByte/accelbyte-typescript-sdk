@@ -18,7 +18,7 @@ import { TokenResponseV3 } from '../../generated-definitions/TokenResponseV3.js'
 
 export class OAuth20Extension$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage. Supported methods: - VerifyToken to verify token from header - AddTokenToRevocationList to revoke token with TTL
@@ -28,9 +28,7 @@ export class OAuth20Extension$ {
     const url = '/iam/v3/logout'
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -51,9 +49,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -71,9 +67,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TokenResponseV3, 'TokenResponseV3')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
 
   /**
@@ -87,9 +81,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TokenResponseV3, 'TokenResponseV3')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
 
   /**
@@ -100,9 +92,7 @@ export class OAuth20Extension$ {
     const url = '/iam/v3/location/country'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CountryLocationResponse, 'CountryLocationResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryLocationResponse, 'CountryLocationResponse')
   }
 
   /**
@@ -116,9 +106,12 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, OneTimeLinkingCodeResponse, 'OneTimeLinkingCodeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      OneTimeLinkingCodeResponse,
+      'OneTimeLinkingCodeResponse'
+    )
   }
 
   /**
@@ -132,9 +125,12 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, OneTimeLinkingCodeValidationResponse, 'OneTimeLinkingCodeValidationResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      OneTimeLinkingCodeValidationResponse,
+      'OneTimeLinkingCodeValidationResponse'
+    )
   }
 
   /**
@@ -153,9 +149,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TokenResponseV3, 'TokenResponseV3')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
 
   /**
@@ -175,9 +169,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TokenResponseV3, 'TokenResponseV3')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
 
   /**
@@ -194,9 +186,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TargetTokenCodeResponse, 'TargetTokenCodeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TargetTokenCodeResponse, 'TargetTokenCodeResponse')
   }
 
   /**
@@ -224,9 +214,7 @@ export class OAuth20Extension$ {
     const url = '/iam/v3/platforms/{platformId}/authenticate'.replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -243,8 +231,11 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlatformTokenRefreshResponseV3, 'PlatformTokenRefreshResponseV3')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlatformTokenRefreshResponseV3,
+      'PlatformTokenRefreshResponseV3'
+    )
   }
 }

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Caching$ } from './endpoints/Caching$.js'
 import { RetrieveDiffCacheResponse } from '../generated-definitions/RetrieveDiffCacheResponse.js'
@@ -16,7 +17,7 @@ export function CachingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This API is used to retrieve detailed diff cache.&lt;br/&gt;The response will contains list of diff cache files along with its download url.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
@@ -25,7 +26,7 @@ export function CachingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sourceBuildId: string,
     destinationBuildId: string
   ): Promise<RetrieveDiffCacheResponse> {
-    const $ = new Caching$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Caching$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getDestCacheDiff_BySourceBuildId_ByDestinationBuildId(sourceBuildId, destinationBuildId)
     if (resp.error) throw resp.error
     return resp.response.data

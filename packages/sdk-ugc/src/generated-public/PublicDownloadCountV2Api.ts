@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AddDownloadCountResponse } from '../generated-definitions/AddDownloadCountResponse.js'
 import { PaginatedContentDownloaderResponse } from '../generated-definitions/PaginatedContentDownloaderResponse.js'
@@ -17,7 +18,7 @@ export function PublicDownloadCountV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This endpoint will only display the list of users who performed add download count from v2 endpoint.
@@ -26,7 +27,7 @@ export function PublicDownloadCountV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; userId?: string | null }
   ): Promise<PaginatedContentDownloaderResponse> {
-    const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getDownloader_ByContentId(contentId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +37,7 @@ export function PublicDownloadCountV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint can be used to count how many the ugc downloaded
    */
   async function createDownloadcount_ByContentId(contentId: string): Promise<AddDownloadCountResponse> {
-    const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicDownloadCountV2$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createDownloadcount_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data

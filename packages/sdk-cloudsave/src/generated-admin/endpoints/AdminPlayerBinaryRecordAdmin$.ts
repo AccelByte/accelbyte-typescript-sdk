@@ -19,7 +19,7 @@ import { UploadBinaryRecordResponse } from '../../generated-definitions/UploadBi
 
 export class AdminPlayerBinaryRecordAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Retrieve list of player binary records by namespace.
@@ -34,9 +34,12 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListPlayerBinaryRecordsResponse, 'ListPlayerBinaryRecordsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListPlayerBinaryRecordsResponse,
+      'ListPlayerBinaryRecordsResponse'
+    )
   }
 
   /**
@@ -49,9 +52,12 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UploadBinaryRecordResponse, 'UploadBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UploadBinaryRecordResponse,
+      'UploadBinaryRecordResponse'
+    )
   }
 
   /**
@@ -65,9 +71,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -81,9 +85,12 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerBinaryRecordResponse,
+      'PlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -97,9 +104,12 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerBinaryRecordResponse,
+      'PlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -117,9 +127,12 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerBinaryRecordResponse,
+      'PlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -137,8 +150,11 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UploadBinaryRecordResponse, 'UploadBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UploadBinaryRecordResponse,
+      'UploadBinaryRecordResponse'
+    )
   }
 }

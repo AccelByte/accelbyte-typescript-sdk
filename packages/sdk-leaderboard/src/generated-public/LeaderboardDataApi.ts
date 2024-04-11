@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ArchiveLeaderboardSignedUrlResponseArray } from '../generated-definitions/ArchiveLeaderboardSignedUrlResponseArray.js'
 import { GetLeaderboardRankingResp } from '../generated-definitions/GetLeaderboardRankingResp.js'
@@ -19,7 +20,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * &lt;p&gt;Get rankings in current week leaderboard.&lt;/p&gt;
@@ -28,7 +29,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetLeaderboardRankingResp> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getWeek_ByLeaderboardCode(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +42,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetLeaderboardRankingResp> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getMonth_ByLeaderboardCode(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +55,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetLeaderboardRankingResp> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getToday_ByLeaderboardCode(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +68,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<GetLeaderboardRankingResp> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getSeason_ByLeaderboardCode(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -80,7 +81,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetLeaderboardRankingResp> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAlltime_ByLeaderboardCode(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +94,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetPublicLeaderboardRankingResponse> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAlltime_ByLeaderboardCode_ByNS(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -106,7 +107,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams: { leaderboardCodes: string | null; slug?: string | null }
   ): Promise<ArchiveLeaderboardSignedUrlResponseArray> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getArchived_ByLeaderboardCode(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -116,7 +117,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete user ranking Remove entry with provided userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
    */
   async function deleteUser_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<unknown> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteUser_ByLeaderboardCode_ByUserId(leaderboardCode, userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -130,7 +131,7 @@ export function LeaderboardDataApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { previousVersion?: number }
   ): Promise<UserRankingResponse> {
-    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LeaderboardData$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUser_ByLeaderboardCode_ByUserId(leaderboardCode, userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

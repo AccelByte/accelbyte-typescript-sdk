@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { DataRetrievalAdmin$ } from './endpoints/DataRetrievalAdmin$.js'
 import { DataRetrievalResponse } from '../generated-definitions/DataRetrievalResponse.js'
@@ -19,7 +20,7 @@ export function DataRetrievalAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get list personal data requests Scope: account
@@ -29,7 +30,7 @@ export function DataRetrievalAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     requestDate?: string | null
   }): Promise<ListPersonalDataResponse> {
-    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getRequests(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +43,7 @@ export function DataRetrievalAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<UserPersonalDataResponse> {
-    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getRequests_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +53,7 @@ export function DataRetrievalAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Submit user personal data retrieval request If admin request data for themselves, password is need to be set Scope: account
    */
   async function postRequest_ByUserId(userId: string, data: { password?: string | null }): Promise<DataRetrievalResponse> {
-    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postRequest_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +63,7 @@ export function DataRetrievalAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Cancel user&#39;s personal data requests Scope: account
    */
   async function deleteRequest_ByUserId_ByRequestDate(userId: string, requestDate: string): Promise<unknown> {
-    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteRequest_ByUserId_ByRequestDate(userId, requestDate)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -76,7 +77,7 @@ export function DataRetrievalAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     requestDate: string,
     data: { password: string | null }
   ): Promise<UserDataUrl> {
-    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new DataRetrievalAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postGenerate_ByUserId_ByRequestDate(userId, requestDate, data)
     if (resp.error) throw resp.error
     return resp.response.data

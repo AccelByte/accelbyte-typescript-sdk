@@ -12,7 +12,7 @@ import { PartyData } from '../../generated-definitions/PartyData.js'
 
 export class PartyAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get party data in a namespace.
@@ -24,9 +24,7 @@ export class PartyAdmin$ {
       .replace('{partyId}', partyId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PartyData, 'PartyData')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PartyData, 'PartyData')
   }
 
   /**
@@ -39,8 +37,6 @@ export class PartyAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PartyData, 'PartyData')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PartyData, 'PartyData')
   }
 }

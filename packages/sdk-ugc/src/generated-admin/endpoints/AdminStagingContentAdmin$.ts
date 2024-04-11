@@ -14,7 +14,7 @@ import { StagingContentResponse } from '../../generated-definitions/StagingConte
 
 export class AdminStagingContentAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * List content that need admin&#39;s approval
@@ -29,9 +29,12 @@ export class AdminStagingContentAdmin$ {
     const url = '/ugc/v2/admin/namespaces/{namespace}/staging-contents'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedListStagingContentResponse, 'PaginatedListStagingContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedListStagingContentResponse,
+      'PaginatedListStagingContentResponse'
+    )
   }
 
   /**
@@ -44,9 +47,7 @@ export class AdminStagingContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StagingContentResponse, 'StagingContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StagingContentResponse, 'StagingContentResponse')
   }
 
   /**
@@ -62,9 +63,12 @@ export class AdminStagingContentAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedListStagingContentResponse, 'PaginatedListStagingContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedListStagingContentResponse,
+      'PaginatedListStagingContentResponse'
+    )
   }
 
   /**
@@ -77,8 +81,6 @@ export class AdminStagingContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StagingContentResponse, 'StagingContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StagingContentResponse, 'StagingContentResponse')
   }
 }

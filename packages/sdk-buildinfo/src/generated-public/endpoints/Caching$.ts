@@ -12,7 +12,7 @@ import { RetrieveDiffCacheResponse } from '../../generated-definitions/RetrieveD
 
 export class Caching$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to retrieve detailed diff cache.&lt;br/&gt;The response will contains list of diff cache files along with its download url.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
@@ -28,8 +28,6 @@ export class Caching$ {
       .replace('{destinationBuildId}', destinationBuildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveDiffCacheResponse, 'RetrieveDiffCacheResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RetrieveDiffCacheResponse, 'RetrieveDiffCacheResponse')
   }
 }

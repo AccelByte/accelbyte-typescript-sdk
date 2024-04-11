@@ -15,7 +15,7 @@ import { PaginatedUserContributionResponse } from '../../generated-definitions/P
 
 export class GlobalAchievements$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement status value mean: &lt;code&gt;status = 1 (in progress)&lt;/code&gt; and &lt;code&gt;status = 2 (unlocked)&lt;/code&gt;&lt;/p&gt;
@@ -32,9 +32,12 @@ export class GlobalAchievements$ {
     const url = '/achievement/v1/public/namespaces/{namespace}/global/achievements'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedGlobalAchievementResponse, 'PaginatedGlobalAchievementResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedGlobalAchievementResponse,
+      'PaginatedGlobalAchievementResponse'
+    )
   }
 
   /**
@@ -50,9 +53,12 @@ export class GlobalAchievements$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedUserContributionResponse, 'PaginatedUserContributionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedUserContributionResponse,
+      'PaginatedUserContributionResponse'
+    )
   }
 
   /**
@@ -68,9 +74,12 @@ export class GlobalAchievements$ {
       .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContributorResponse, 'PaginatedContributorResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContributorResponse,
+      'PaginatedContributorResponse'
+    )
   }
 
   /**
@@ -84,8 +93,6 @@ export class GlobalAchievements$ {
       .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

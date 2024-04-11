@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreateLocalizedPolicyVersionRequest } from '../generated-definitions/CreateLocalizedPolicyVersionRequest.js'
 import { CreateLocalizedPolicyVersionResponse } from '../generated-definitions/CreateLocalizedPolicyVersionResponse.js'
@@ -23,7 +24,7 @@ export function LocalizedPolicyVersionsAdminApi(sdk: AccelbyteSDK, args?: ApiArg
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Retrieve a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -31,7 +32,7 @@ export function LocalizedPolicyVersionsAdminApi(sdk: AccelbyteSDK, args?: ApiArg
   async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
   ): Promise<RetrieveLocalizedPolicyVersionResponse> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +45,7 @@ export function LocalizedPolicyVersionsAdminApi(sdk: AccelbyteSDK, args?: ApiArg
     localizedPolicyVersionId: string,
     data: UpdateLocalizedPolicyVersionRequest
   ): Promise<UpdateLocalizedPolicyVersionResponse> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -56,7 +57,7 @@ export function LocalizedPolicyVersionsAdminApi(sdk: AccelbyteSDK, args?: ApiArg
   async function getLocalizedPolicyVersionVersion_ByPolicyVersionId(
     policyVersionId: string
   ): Promise<RetrieveLocalizedPolicyVersionResponseArray> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getLocalizedPolicyVersionVersion_ByPolicyVersionId(policyVersionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +70,7 @@ export function LocalizedPolicyVersionsAdminApi(sdk: AccelbyteSDK, args?: ApiArg
     policyVersionId: string,
     data: CreateLocalizedPolicyVersionRequest
   ): Promise<CreateLocalizedPolicyVersionResponse> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createLocalizedPolicyVersionVersion_ByPolicyVersionId(policyVersionId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -79,7 +80,7 @@ export function LocalizedPolicyVersionsAdminApi(sdk: AccelbyteSDK, args?: ApiArg
    * Update a localized version policy to be the default.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function patchDefault_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<unknown> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchDefault_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -92,7 +93,7 @@ export function LocalizedPolicyVersionsAdminApi(sdk: AccelbyteSDK, args?: ApiArg
     localizedPolicyVersionId: string,
     data: UploadPolicyVersionAttachmentRequest
   ): Promise<UploadLocalizedPolicyVersionAttachmentResponse> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createAttachment_ByLocalizedPolicyVersionId(localizedPolicyVersionId, data)
     if (resp.error) throw resp.error
     return resp.response.data

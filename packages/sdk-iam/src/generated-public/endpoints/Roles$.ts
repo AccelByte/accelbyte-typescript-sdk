@@ -25,7 +25,7 @@ import { UpdatePermissionScheduleRequest } from '../../generated-definitions/Upd
 
 export class Roles$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * @deprecated
@@ -36,9 +36,12 @@ export class Roles$ {
     const url = '/iam/roles'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RoleResponseWithManagersArray, 'RoleResponseWithManagersArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RoleResponseWithManagersArray,
+      'RoleResponseWithManagersArray'
+    )
   }
 
   /**
@@ -50,9 +53,7 @@ export class Roles$ {
     const url = '/iam/roles'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, Role, 'Role')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Role, 'Role')
   }
 
   /**
@@ -64,9 +65,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -78,9 +77,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RoleResponse, 'RoleResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleResponse, 'RoleResponse')
   }
 
   /**
@@ -92,9 +89,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RoleResponse, 'RoleResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleResponse, 'RoleResponse')
   }
 
   /**
@@ -110,9 +105,7 @@ export class Roles$ {
     const url = '/iam/v3/public/roles'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RoleNamesResponseV3, 'RoleNamesResponseV3')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleNamesResponseV3, 'RoleNamesResponseV3')
   }
 
   /**
@@ -124,9 +117,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/admin'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -138,9 +129,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/admin'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RoleAdminStatusResponse, 'RoleAdminStatusResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleAdminStatusResponse, 'RoleAdminStatusResponse')
   }
 
   /**
@@ -152,9 +141,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/admin'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -166,9 +153,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/members'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -180,9 +165,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/members'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RoleMembersResponse, 'RoleMembersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleMembersResponse, 'RoleMembersResponse')
   }
 
   /**
@@ -194,9 +177,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/members'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -208,9 +189,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/managers'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -222,9 +201,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/managers'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RoleManagersResponse, 'RoleManagersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleManagersResponse, 'RoleManagersResponse')
   }
 
   /**
@@ -236,9 +213,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/managers'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -249,9 +224,7 @@ export class Roles$ {
     const url = '/iam/v3/public/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RoleResponse, 'RoleResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleResponse, 'RoleResponse')
   }
 
   /**
@@ -263,9 +236,7 @@ export class Roles$ {
     const url = '/iam/roles/{roleId}/permissions'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -280,9 +251,7 @@ export class Roles$ {
       .replace('{action}', String(action))
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -302,8 +271,6 @@ export class Roles$ {
       .replace('{action}', String(action))
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

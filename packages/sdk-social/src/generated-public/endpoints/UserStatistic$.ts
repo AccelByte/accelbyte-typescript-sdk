@@ -26,7 +26,7 @@ import { UserStatItemPagingSlicedResult } from '../../generated-definitions/User
 
 export class UserStatistic$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Public bulk fetch multiple user&#39;s statitem value for a given namespace and statCode. Other detail info: + *Required permission*: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=2 (READ) + *Returns*: list of user&#39;s statItem
@@ -36,9 +36,7 @@ export class UserStatistic$ {
     const url = '/social/v1/public/namespaces/{namespace}/statitems/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserStatItemInfoArray, 'UserStatItemInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserStatItemInfoArray, 'UserStatItemInfoArray')
   }
 
   /**
@@ -55,9 +53,12 @@ export class UserStatistic$ {
     const url = '/social/v1/public/namespaces/{namespace}/users/me/statitems'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserStatItemPagingSlicedResult, 'UserStatItemPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UserStatItemPagingSlicedResult,
+      'UserStatItemPagingSlicedResult'
+    )
   }
 
   /**
@@ -68,9 +69,12 @@ export class UserStatistic$ {
     const url = '/social/v1/public/namespaces/{namespace}/statitems/value/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -81,9 +85,12 @@ export class UserStatistic$ {
     const url = '/social/v1/public/namespaces/{namespace}/statitems/value/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -94,9 +101,12 @@ export class UserStatistic$ {
     const url = '/social/v2/public/namespaces/{namespace}/statitems/value/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -112,9 +122,12 @@ export class UserStatistic$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserStatItemPagingSlicedResult, 'UserStatItemPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UserStatItemPagingSlicedResult,
+      'UserStatItemPagingSlicedResult'
+    )
   }
 
   /**
@@ -125,9 +138,12 @@ export class UserStatistic$ {
     const url = '/social/v1/public/namespaces/{namespace}/statitems/value/reset/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -140,9 +156,12 @@ export class UserStatistic$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -157,9 +176,12 @@ export class UserStatistic$ {
     const url = '/social/v1/public/namespaces/{namespace}/users/me/statitems/value/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ADtoObjectForUserStatItemValueArray,
+      'ADtoObjectForUserStatItemValueArray'
+    )
   }
 
   /**
@@ -175,9 +197,12 @@ export class UserStatistic$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ADtoObjectForUserStatItemValueArray,
+      'ADtoObjectForUserStatItemValueArray'
+    )
   }
 
   /**
@@ -190,9 +215,12 @@ export class UserStatistic$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -205,9 +233,12 @@ export class UserStatistic$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -223,9 +254,12 @@ export class UserStatistic$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ADtoObjectForUserStatItemValueArray, 'ADtoObjectForUserStatItemValueArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ADtoObjectForUserStatItemValueArray,
+      'ADtoObjectForUserStatItemValueArray'
+    )
   }
 
   /**
@@ -242,9 +276,12 @@ export class UserStatistic$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -257,9 +294,12 @@ export class UserStatistic$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkStatOperationResultArray, 'BulkStatOperationResultArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkStatOperationResultArray,
+      'BulkStatOperationResultArray'
+    )
   }
 
   /**
@@ -273,9 +313,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -289,9 +327,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -305,9 +341,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StatItemIncResult, 'StatItemIncResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
   }
 
   /**
@@ -321,9 +355,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StatItemIncResult, 'StatItemIncResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
   }
 
   /**
@@ -342,9 +374,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StatItemIncResult, 'StatItemIncResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
   }
 
   /**
@@ -358,8 +388,6 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StatItemIncResult, 'StatItemIncResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
   }
 }

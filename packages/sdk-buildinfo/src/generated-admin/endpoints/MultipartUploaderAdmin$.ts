@@ -16,7 +16,7 @@ import { StartMultipartUploadRequest } from '../../generated-definitions/StartMu
 
 export class MultipartUploaderAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to &lt;b&gt;start multipart file upload&lt;/b&gt;. The service will returns the list of presigned urls that will be used to upload the Parts.&lt;br/&gt;Make sure to upload the Parts in-order based on the presigned urls order.The size of each Part should above or equals to 5MB, except the last one.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission (IAM Auth)&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: multipart upload summary&lt;/li&gt;&lt;/ul&gt;
@@ -26,9 +26,7 @@ export class MultipartUploaderAdmin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/blocks/multipart'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipartUploadSummary, 'MultipartUploadSummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipartUploadSummary, 'MultipartUploadSummary')
   }
 
   /**
@@ -39,9 +37,7 @@ export class MultipartUploaderAdmin$ {
     const url = '/buildinfo/v2/admin/namespaces/{namespace}/blocks/multipart'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipartUploadSummary, 'MultipartUploadSummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipartUploadSummary, 'MultipartUploadSummary')
   }
 
   /**
@@ -54,9 +50,7 @@ export class MultipartUploaderAdmin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -69,9 +63,7 @@ export class MultipartUploaderAdmin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -84,9 +76,7 @@ export class MultipartUploaderAdmin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -99,9 +89,7 @@ export class MultipartUploaderAdmin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -114,8 +102,6 @@ export class MultipartUploaderAdmin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipartUploadSummary, 'MultipartUploadSummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipartUploadSummary, 'MultipartUploadSummary')
   }
 }

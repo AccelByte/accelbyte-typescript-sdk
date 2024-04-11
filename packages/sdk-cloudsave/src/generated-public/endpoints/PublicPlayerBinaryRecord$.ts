@@ -22,7 +22,7 @@ import { UploadBinaryRecordResponse } from '../../generated-definitions/UploadBi
 
 export class PublicPlayerBinaryRecord$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Retrieve list of my binary records by namespace.
@@ -37,9 +37,12 @@ export class PublicPlayerBinaryRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/users/me/binaries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListPlayerBinaryRecordsResponse, 'ListPlayerBinaryRecordsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListPlayerBinaryRecordsResponse,
+      'ListPlayerBinaryRecordsResponse'
+    )
   }
 
   /**
@@ -50,9 +53,12 @@ export class PublicPlayerBinaryRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/users/me/binaries/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkGetPlayerBinaryRecordResponse, 'BulkGetPlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkGetPlayerBinaryRecordResponse,
+      'BulkGetPlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -65,9 +71,12 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UploadBinaryRecordResponse, 'UploadBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UploadBinaryRecordResponse,
+      'UploadBinaryRecordResponse'
+    )
   }
 
   /**
@@ -81,9 +90,7 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -97,9 +104,12 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerBinaryRecordResponse,
+      'PlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -113,9 +123,12 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerBinaryRecordResponse,
+      'PlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -131,9 +144,12 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListPlayerBinaryRecordsResponse, 'ListPlayerBinaryRecordsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListPlayerBinaryRecordsResponse,
+      'ListPlayerBinaryRecordsResponse'
+    )
   }
 
   /**
@@ -146,9 +162,12 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkGetPlayerBinaryRecordResponse, 'BulkGetPlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkGetPlayerBinaryRecordResponse,
+      'BulkGetPlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -161,9 +180,12 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkGetPlayerBinaryRecordResponse, 'BulkGetPlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkGetPlayerBinaryRecordResponse,
+      'BulkGetPlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -177,9 +199,12 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerBinaryRecordResponse,
+      'PlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -197,9 +222,12 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerBinaryRecordResponse, 'PlayerBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PlayerBinaryRecordResponse,
+      'PlayerBinaryRecordResponse'
+    )
   }
 
   /**
@@ -217,8 +245,11 @@ export class PublicPlayerBinaryRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UploadBinaryRecordResponse, 'UploadBinaryRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UploadBinaryRecordResponse,
+      'UploadBinaryRecordResponse'
+    )
   }
 }

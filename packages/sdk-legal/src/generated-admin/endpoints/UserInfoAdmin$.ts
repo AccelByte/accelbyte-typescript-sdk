@@ -13,7 +13,7 @@ import { RetrieveUserInfoCacheStatusResponseArray } from '../../generated-defini
 
 export class UserInfoAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * @deprecated
@@ -24,9 +24,7 @@ export class UserInfoAdmin$ {
     const url = '/agreement/admin/userInfo'
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -37,9 +35,12 @@ export class UserInfoAdmin$ {
     const url = '/agreement/admin/userInfo'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveUserInfoCacheStatusResponseArray, 'RetrieveUserInfoCacheStatusResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveUserInfoCacheStatusResponseArray,
+      'RetrieveUserInfoCacheStatusResponseArray'
+    )
   }
 
   /**
@@ -51,8 +52,6 @@ export class UserInfoAdmin$ {
     const url = '/agreement/admin/userInfo'
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

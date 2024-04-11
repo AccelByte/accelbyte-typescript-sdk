@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { SocialMatchmaking$ } from './endpoints/SocialMatchmaking$.js'
 import { UpdatePlayTimeWeightRequest } from '../generated-definitions/UpdatePlayTimeWeightRequest.js'
@@ -17,13 +18,13 @@ export function SocialMatchmakingApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Update a connection weight between player and playtime. This endpoint is intended to be called by admin for debugging purpose on social matchmaking rule.
    */
   async function patchSocialPlaytimeWeight(data: UpdatePlayTimeWeightRequest): Promise<UpdatePlayerPlaytimeWeightResponse> {
-    const $ = new SocialMatchmaking$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SocialMatchmaking$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchSocialPlaytimeWeight(data)
     if (resp.error) throw resp.error
     return resp.response.data

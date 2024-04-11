@@ -19,7 +19,7 @@ import { UpdatePortRequest } from '../../generated-definitions/UpdatePortRequest
 
 export class ConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint lists all of dedicated servers configs.
@@ -29,9 +29,7 @@ export class ConfigAdmin$ {
     const url = '/dsmcontroller/admin/configs'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListConfigResponse, 'ListConfigResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListConfigResponse, 'ListConfigResponse')
   }
 
   /**
@@ -43,9 +41,7 @@ export class ConfigAdmin$ {
     const url = '/dsmcontroller/admin/configs'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -56,9 +52,7 @@ export class ConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -69,9 +63,7 @@ export class ConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -82,9 +74,7 @@ export class ConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -95,9 +85,7 @@ export class ConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -108,9 +96,7 @@ export class ConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/cache'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -121,9 +107,7 @@ export class ConfigAdmin$ {
     const url = '/dsmcontroller/admin/v1/namespaces/{namespace}/configs/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -135,9 +119,7 @@ export class ConfigAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ImportResponse, 'ImportResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ImportResponse, 'ImportResponse')
   }
 
   /**
@@ -150,9 +132,7 @@ export class ConfigAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -165,9 +145,7 @@ export class ConfigAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -180,8 +158,6 @@ export class ConfigAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 }

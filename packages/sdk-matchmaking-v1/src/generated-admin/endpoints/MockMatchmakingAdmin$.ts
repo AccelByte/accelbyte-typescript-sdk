@@ -18,7 +18,7 @@ import { QueryMockBy } from '../../generated-definitions/QueryMockBy.js'
 
 export class MockMatchmakingAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    *  Delete all mock tickets and matches in a channel. &#39;
@@ -30,9 +30,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -45,9 +43,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
   }
 
   /**
@@ -60,9 +56,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
   }
 
   /**
@@ -75,9 +69,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
   }
 
   /**
@@ -90,9 +82,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MockTicketArray, 'MockTicketArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MockTicketArray, 'MockTicketArray')
   }
 
   /**
@@ -105,9 +95,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -120,8 +108,6 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
   }
 }

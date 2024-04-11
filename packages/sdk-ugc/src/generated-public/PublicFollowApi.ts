@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { PaginatedContentDownloadResponse } from '../generated-definitions/PaginatedContentDownloadResponse.js'
 import { PaginatedCreatorOverviewResponse } from '../generated-definitions/PaginatedCreatorOverviewResponse.js'
@@ -19,13 +20,13 @@ export function PublicFollowApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Requires valid user token
    */
   async function getUsersFollowed(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedCreatorOverviewResponse> {
-    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsersFollowed(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +36,7 @@ export function PublicFollowApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Requires valid user token
    */
   async function getContentsFollowed(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getContentsFollowed(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +46,7 @@ export function PublicFollowApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Requires valid user token
    */
   async function updateFollow_ByUserId(userId: string, data: UserFollowRequest): Promise<UserFollowResponse> {
-    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateFollow_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +56,7 @@ export function PublicFollowApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<PaginatedCreatorOverviewResponse> {
-    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getFollowers_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -65,7 +66,7 @@ export function PublicFollowApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<PaginatedCreatorOverviewResponse> {
-    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicFollow$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getFollowing_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

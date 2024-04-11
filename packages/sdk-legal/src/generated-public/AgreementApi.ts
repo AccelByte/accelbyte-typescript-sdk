@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AcceptAgreementRequest } from '../generated-definitions/AcceptAgreementRequest.js'
 import { AcceptAgreementResponse } from '../generated-definitions/AcceptAgreementResponse.js'
@@ -18,13 +19,13 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Retrieve accepted Legal Agreements.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAgreementsPolicies(): Promise<RetrieveAcceptedAgreementResponseArray> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAgreementsPolicies()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +35,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function createAgreementPolicy(data: AcceptAgreementRequest[]): Promise<AcceptAgreementResponse> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createAgreementPolicy(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +46,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function createAgreementPolicyUser_ByUserId(userId: string, data: AcceptAgreementRequest[]): Promise<AcceptAgreementResponse> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createAgreementPolicyUser_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +56,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Change marketing preference consent.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function patchAgreementLocalizedPolicyVersionPreference(data: AcceptAgreementRequest[]): Promise<unknown> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchAgreementLocalizedPolicyVersionPreference(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -65,7 +66,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Accepts a legal policy version. Supply with localized version policy id to accept an agreement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<unknown> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -81,7 +82,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: AcceptAgreementRequest[]
   ): Promise<AcceptAgreementResponse> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(countryCode, clientId, userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

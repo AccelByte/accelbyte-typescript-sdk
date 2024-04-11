@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AppMessageDeclarationArray } from '../generated-definitions/AppMessageDeclarationArray.js'
 import { MatchmakingOperations$ } from './endpoints/MatchmakingOperations$.js'
@@ -16,10 +17,10 @@ export function MatchmakingOperationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   async function getVersion(): Promise<unknown> {
-    const $ = new MatchmakingOperations$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new MatchmakingOperations$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getVersion()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -29,7 +30,7 @@ export function MatchmakingOperationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * get the list of messages.
    */
   async function getMessages(): Promise<AppMessageDeclarationArray> {
-    const $ = new MatchmakingOperations$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new MatchmakingOperations$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getMessages()
     if (resp.error) throw resp.error
     return resp.response.data

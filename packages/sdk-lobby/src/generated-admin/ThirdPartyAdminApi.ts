@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreateConfigRequest } from '../generated-definitions/CreateConfigRequest.js'
 import { CreateConfigResponse } from '../generated-definitions/CreateConfigResponse.js'
@@ -20,13 +21,13 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Required permission : &lt;code&gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;delete third party config in a namespace.
    */
   async function deleteThirdpartyConfigSteam(): Promise<unknown> {
-    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteThirdpartyConfigSteam()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +37,7 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get third party config for specified namespace.
    */
   async function getThirdpartyConfigSteam(): Promise<GetConfigResponse> {
-    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getThirdpartyConfigSteam()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -46,7 +47,7 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create third party config in a namespace.
    */
   async function createThirdpartyConfigSteam(data: CreateConfigRequest): Promise<CreateConfigResponse> {
-    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createThirdpartyConfigSteam(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -56,7 +57,7 @@ export function ThirdPartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update third party config in a namespace.
    */
   async function updateThirdpartyConfigSteam(data: UpdateConfigRequest): Promise<UpdateConfigResponse> {
-    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateThirdpartyConfigSteam(data)
     if (resp.error) throw resp.error
     return resp.response.data

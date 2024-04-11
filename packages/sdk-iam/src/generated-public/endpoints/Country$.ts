@@ -12,7 +12,7 @@ import { CountryResponseArray } from '../../generated-definitions/CountryRespons
 
 export class Country$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Public get country list, will filter out countries in black list
@@ -22,8 +22,6 @@ export class Country$ {
     const url = '/iam/v3/public/namespaces/{namespace}/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CountryResponseArray, 'CountryResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryResponseArray, 'CountryResponseArray')
   }
 }

@@ -17,7 +17,7 @@ import { CurrencyUpdate } from '../../generated-definitions/CurrencyUpdate.js'
 
 export class CurrencyAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * List currencies of a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CURRENCY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Currency List&lt;/li&gt;&lt;/ul&gt;
@@ -27,9 +27,7 @@ export class CurrencyAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/currencies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CurrencyInfoArray, 'CurrencyInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CurrencyInfoArray, 'CurrencyInfoArray')
   }
 
   /**
@@ -40,9 +38,7 @@ export class CurrencyAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/currencies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CurrencyInfo, 'CurrencyInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CurrencyInfo, 'CurrencyInfo')
   }
 
   /**
@@ -55,9 +51,7 @@ export class CurrencyAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CurrencyInfo, 'CurrencyInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CurrencyInfo, 'CurrencyInfo')
   }
 
   /**
@@ -70,9 +64,7 @@ export class CurrencyAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CurrencyInfo, 'CurrencyInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CurrencyInfo, 'CurrencyInfo')
   }
 
   /**
@@ -85,9 +77,7 @@ export class CurrencyAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CurrencyConfig, 'CurrencyConfig')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CurrencyConfig, 'CurrencyConfig')
   }
 
   /**
@@ -100,8 +90,6 @@ export class CurrencyAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CurrencySummary, 'CurrencySummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CurrencySummary, 'CurrencySummary')
   }
 }

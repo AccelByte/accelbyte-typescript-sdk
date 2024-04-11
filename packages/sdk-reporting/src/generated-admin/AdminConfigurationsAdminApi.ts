@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminConfigurationsAdmin$ } from './endpoints/AdminConfigurationsAdmin$.js'
 import { ConfigResponse } from '../generated-definitions/ConfigResponse.js'
@@ -17,13 +18,13 @@ export function AdminConfigurationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * TimeInterval is in nanoseconds. When there&#39;s no configuration set, the response is the default value (configurable through envar).
    */
   async function getConfigurations(queryParams?: { category?: 'all' | 'extension' }): Promise<ConfigResponse> {
-    const $ = new AdminConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getConfigurations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +34,7 @@ export function AdminConfigurationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * The behaviour of this endpoint is upsert based on the namespace. So, you can use this for both creating &amp; updating the configuration. TimeInterval is in nanoseconds.
    */
   async function createConfiguration(data: ReportingLimit): Promise<ConfigResponse> {
-    const $ = new AdminConfigurationsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createConfiguration(data)
     if (resp.error) throw resp.error
     return resp.response.data

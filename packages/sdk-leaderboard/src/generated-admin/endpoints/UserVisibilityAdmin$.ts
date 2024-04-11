@@ -14,7 +14,7 @@ import { SetUserVisibilityRequest } from '../../generated-definitions/SetUserVis
 
 export class UserVisibilityAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * User with false visibility status will have &lt;b&gt;hidden&lt;/b&gt; attribute set to true on it&#39;s leaderboard entry
@@ -26,9 +26,7 @@ export class UserVisibilityAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
   }
 
   /**
@@ -44,9 +42,7 @@ export class UserVisibilityAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetHiddenUserResponse, 'GetHiddenUserResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetHiddenUserResponse, 'GetHiddenUserResponse')
   }
 
   /**
@@ -60,9 +56,7 @@ export class UserVisibilityAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
   }
 
   /**
@@ -80,8 +74,6 @@ export class UserVisibilityAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
   }
 }

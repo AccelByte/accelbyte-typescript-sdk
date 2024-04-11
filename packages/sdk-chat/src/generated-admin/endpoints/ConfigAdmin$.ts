@@ -15,7 +15,7 @@ import { ImportConfigResponse } from '../../generated-definitions/ImportConfigRe
 
 export class ConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get chat config of all namespaces.
@@ -25,9 +25,7 @@ export class ConfigAdmin$ {
     const url = '/chat/v1/admin/config'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigList, 'ConfigList')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigList, 'ConfigList')
   }
 
   /**
@@ -38,9 +36,7 @@ export class ConfigAdmin$ {
     const url = '/chat/v1/admin/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigResponse, 'ConfigResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigResponse, 'ConfigResponse')
   }
 
   /**
@@ -51,9 +47,7 @@ export class ConfigAdmin$ {
     const url = '/chat/v1/admin/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigResponse, 'ConfigResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigResponse, 'ConfigResponse')
   }
 
   /**
@@ -64,9 +58,7 @@ export class ConfigAdmin$ {
     const url = '/chat/v1/admin/config/namespaces/{namespace}/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigExportArray, 'ConfigExportArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigExportArray, 'ConfigExportArray')
   }
 
   /**
@@ -78,8 +70,6 @@ export class ConfigAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
   }
 }

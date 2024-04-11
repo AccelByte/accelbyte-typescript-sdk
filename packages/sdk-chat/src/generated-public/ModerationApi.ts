@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ChatSnapshots } from '../generated-definitions/ChatSnapshots.js'
 import { Moderation$ } from './endpoints/Moderation$.js'
@@ -16,13 +17,13 @@ export function ModerationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get the chat snapshot
    */
   async function getSnapshot_ByTopic_ByChatId(topic: string, chatId: string): Promise<ChatSnapshots> {
-    const $ = new Moderation$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Moderation$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getSnapshot_ByTopic_ByChatId(topic, chatId)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -28,7 +28,7 @@ import { UpdateScreenshotResponse } from '../../generated-definitions/UpdateScre
 
 export class AdminContentAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]&lt;/b&gt;.
@@ -38,9 +38,12 @@ export class AdminContentAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/contents'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloadResponse,
+      'PaginatedContentDownloadResponse'
+    )
   }
 
   /**
@@ -51,9 +54,12 @@ export class AdminContentAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/contents/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ContentDownloadResponseArray, 'ContentDownloadResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ContentDownloadResponseArray,
+      'ContentDownloadResponseArray'
+    )
   }
 
   /**
@@ -77,9 +83,12 @@ export class AdminContentAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/contents/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloadResponse,
+      'PaginatedContentDownloadResponse'
+    )
   }
 
   /**
@@ -92,9 +101,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ContentDownloadResponse, 'ContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ContentDownloadResponse, 'ContentDownloadResponse')
   }
 
   /**
@@ -110,9 +117,12 @@ export class AdminContentAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloadResponse,
+      'PaginatedContentDownloadResponse'
+    )
   }
 
   /**
@@ -123,9 +133,12 @@ export class AdminContentAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/contents/sharecodes/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ContentDownloadResponseArray, 'ContentDownloadResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ContentDownloadResponseArray,
+      'ContentDownloadResponseArray'
+    )
   }
 
   /**
@@ -138,9 +151,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetContentPreviewResponse, 'GetContentPreviewResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetContentPreviewResponse, 'GetContentPreviewResponse')
   }
 
   /**
@@ -154,9 +165,7 @@ export class AdminContentAdmin$ {
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 
   /**
@@ -169,9 +178,12 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListContentVersionsResponse, 'ListContentVersionsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListContentVersionsResponse,
+      'ListContentVersionsResponse'
+    )
   }
 
   /**
@@ -184,9 +196,7 @@ export class AdminContentAdmin$ {
       .replace('{shareCode}', shareCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ContentDownloadResponse, 'ContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ContentDownloadResponse, 'ContentDownloadResponse')
   }
 
   /**
@@ -199,9 +209,7 @@ export class AdminContentAdmin$ {
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 
   /**
@@ -214,9 +222,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateScreenshotResponse, 'CreateScreenshotResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateScreenshotResponse, 'CreateScreenshotResponse')
   }
 
   /**
@@ -229,9 +235,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateScreenshotResponse, 'UpdateScreenshotResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateScreenshotResponse, 'UpdateScreenshotResponse')
   }
 
   /**
@@ -260,9 +264,12 @@ export class AdminContentAdmin$ {
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloadResponse,
+      'PaginatedContentDownloadResponse'
+    )
   }
 
   /**
@@ -276,9 +283,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 
   /**
@@ -292,9 +297,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -313,9 +316,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 
   /**
@@ -329,9 +330,7 @@ export class AdminContentAdmin$ {
       .replace('{versionId}', versionId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ContentDownloadResponse, 'ContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ContentDownloadResponse, 'ContentDownloadResponse')
   }
 
   /**
@@ -349,9 +348,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 
   /**
@@ -365,9 +362,7 @@ export class AdminContentAdmin$ {
       .replace('{screenshotId}', screenshotId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -382,9 +377,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -405,9 +398,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 
   /**
@@ -427,9 +418,7 @@ export class AdminContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 
   /**
@@ -448,9 +437,7 @@ export class AdminContentAdmin$ {
       .replace('{shareCode}', shareCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -470,8 +457,6 @@ export class AdminContentAdmin$ {
       .replace('{shareCode}', shareCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateContentResponse, 'CreateContentResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponse, 'CreateContentResponse')
   }
 }

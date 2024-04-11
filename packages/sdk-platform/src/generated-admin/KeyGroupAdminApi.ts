@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BulkOperationResult } from '../generated-definitions/BulkOperationResult.js'
 import { KeyGroupAdmin$ } from './endpoints/KeyGroupAdmin$.js'
@@ -22,7 +23,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Query key groups, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of key group&lt;/li&gt;&lt;/ul&gt;
@@ -33,7 +34,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     tag?: string | null
   }): Promise<KeyGroupPagingSlicedResult> {
-    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getKeygroups(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -43,7 +44,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created key group&lt;/li&gt;&lt;/ul&gt;
    */
   async function createKeygroup(data: KeyGroupCreate): Promise<KeyGroupInfo> {
-    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createKeygroup(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +55,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getKeygroupsByBoothName(queryParams: { boothName: string | null }): Promise<KeyGroupInfo> {
-    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getKeygroupsByBoothName(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -64,7 +65,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getKeygroup_ByKeyGroupId(keyGroupId: string): Promise<KeyGroupInfo> {
-    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getKeygroup_ByKeyGroupId(keyGroupId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -74,7 +75,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated key group&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateKeygroup_ByKeyGroupId(keyGroupId: string, data: KeyGroupUpdate): Promise<KeyGroupInfo> {
-    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateKeygroup_ByKeyGroupId(keyGroupId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -87,7 +88,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     keyGroupId: string,
     queryParams?: { limit?: number; offset?: number; status?: 'ACQUIRED' | 'ACTIVE' }
   ): Promise<KeyPagingSliceResult> {
-    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getKeys_ByKeyGroupId(keyGroupId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -97,7 +98,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to upload keys with csv format to a key group.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
    */
   async function createKey_ByKeyGroupId(keyGroupId: string, data: { file?: File }): Promise<BulkOperationResult> {
-    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createKey_ByKeyGroupId(keyGroupId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -107,7 +108,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get key group dynamic.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getDynamic_ByKeyGroupId(keyGroupId: string): Promise<KeyGroupDynamicInfo> {
-    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getDynamic_ByKeyGroupId(keyGroupId)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -12,7 +12,7 @@ import { ListInventoryConfigurationsResp } from '../../generated-definitions/Lis
 
 export class PublicInventoryConfigurations$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination.
@@ -36,8 +36,11 @@ export class PublicInventoryConfigurations$ {
     const url = '/inventory/v1/public/namespaces/{namespace}/inventoryConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListInventoryConfigurationsResp, 'ListInventoryConfigurationsResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListInventoryConfigurationsResp,
+      'ListInventoryConfigurationsResp'
+    )
   }
 }

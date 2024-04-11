@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { PoliciesWithNamespaceAdmin$ } from './endpoints/PoliciesWithNamespaceAdmin$.js'
 import { UpdatePolicyRequest } from '../generated-definitions/UpdatePolicyRequest.js'
@@ -16,13 +17,13 @@ export function PoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs)
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Update country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function patchPolicy_ByPolicyId(policyId: string, data: UpdatePolicyRequest): Promise<unknown> {
-    const $ = new PoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchPolicy_ByPolicyId(policyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +33,7 @@ export function PoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs)
    * Update a policy to be the default.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function patchDefault_ByPolicyId(policyId: string): Promise<unknown> {
-    const $ = new PoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchDefault_ByPolicyId(policyId)
     if (resp.error) throw resp.error
     return resp.response.data

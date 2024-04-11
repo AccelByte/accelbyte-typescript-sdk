@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { GlobalConfigurationAdmin$ } from './endpoints/GlobalConfigurationAdmin$.js'
 import { GlobalConfigurationResponse } from '../generated-definitions/GlobalConfigurationResponse.js'
@@ -17,13 +18,13 @@ export function GlobalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Delete of global configuration data.
    */
   async function deleteGlobalConfiguration(): Promise<unknown> {
-    const $ = new GlobalConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GlobalConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteGlobalConfiguration()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +34,7 @@ export function GlobalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Record of global configuration data.
    */
   async function getGlobalConfigurations(): Promise<GlobalConfigurationResponse> {
-    const $ = new GlobalConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GlobalConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGlobalConfigurations()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -43,7 +44,7 @@ export function GlobalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Upsert global configuration data.
    */
   async function updateGlobalConfiguration(data: PutGlobalConfigurationRequest): Promise<GlobalConfigurationResponse> {
-    const $ = new GlobalConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GlobalConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateGlobalConfiguration(data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -13,7 +13,7 @@ import { RetrievePolicyPublicResponseArray } from '../../generated-definitions/R
 
 export class Policies$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Retrieve List of Countries that have Active Legal Policies.
@@ -23,9 +23,7 @@ export class Policies$ {
     const url = '/agreement/public/policies/countries/list'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -41,9 +39,12 @@ export class Policies$ {
     const url = '/agreement/public/policies/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrievePolicyPublicResponseArray,
+      'RetrievePolicyPublicResponseArray'
+    )
   }
 
   /**
@@ -61,9 +62,12 @@ export class Policies$ {
     const url = '/agreement/public/policies/countries/{countryCode}'.replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrievePolicyPublicResponseArray,
+      'RetrievePolicyPublicResponseArray'
+    )
   }
 
   /**
@@ -84,8 +88,11 @@ export class Policies$ {
       .replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrievePolicyPublicResponseArray, 'RetrievePolicyPublicResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrievePolicyPublicResponseArray,
+      'RetrievePolicyPublicResponseArray'
+    )
   }
 }

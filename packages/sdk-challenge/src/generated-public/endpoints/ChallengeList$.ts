@@ -13,7 +13,7 @@ import { ListChallengeResponse } from '../../generated-definitions/ListChallenge
 
 export class ChallengeList$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -28,9 +28,7 @@ export class ChallengeList$ {
     const url = '/challenge/v1/public/namespaces/{namespace}/challenges'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListChallengeResponse, 'ListChallengeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListChallengeResponse, 'ListChallengeResponse')
   }
 
   /**
@@ -46,8 +44,6 @@ export class ChallengeList$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetGoalsResponse, 'GetGoalsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetGoalsResponse, 'GetGoalsResponse')
   }
 }

@@ -17,7 +17,7 @@ import { UsersAgreementsRequest } from '../../generated-definitions/UsersAgreeme
 
 export class AgreementWithNamespaceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API will return all accepted Legal Agreements for each user, including agreements of game users if publisher user has corresponding game account.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -27,9 +27,12 @@ export class AgreementWithNamespaceAdmin$ {
     const url = '/agreement/admin/namespaces/{namespace}/agreements'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserAgreementsResponseArray, 'UserAgreementsResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UserAgreementsResponseArray,
+      'UserAgreementsResponseArray'
+    )
   }
 
   /**
@@ -46,9 +49,12 @@ export class AgreementWithNamespaceAdmin$ {
     const url = '/agreement/admin/namespaces/{namespace}/agreements/policy-versions/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PagedRetrieveUserAcceptedAgreementResponse, 'PagedRetrieveUserAcceptedAgreementResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PagedRetrieveUserAcceptedAgreementResponse,
+      'PagedRetrieveUserAcceptedAgreementResponse'
+    )
   }
 
   /**
@@ -64,9 +70,12 @@ export class AgreementWithNamespaceAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveAcceptedAgreementResponseArray, 'RetrieveAcceptedAgreementResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveAcceptedAgreementResponseArray,
+      'RetrieveAcceptedAgreementResponseArray'
+    )
   }
 
   /**
@@ -82,9 +91,12 @@ export class AgreementWithNamespaceAdmin$ {
     )
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DownloadExportedAgreementsInCsvResponse, 'DownloadExportedAgreementsInCsvResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      DownloadExportedAgreementsInCsvResponse,
+      'DownloadExportedAgreementsInCsvResponse'
+    )
   }
 
   /**
@@ -100,8 +112,11 @@ export class AgreementWithNamespaceAdmin$ {
     )
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, InitiateExportAgreementsToCsvResponse, 'InitiateExportAgreementsToCsvResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      InitiateExportAgreementsToCsvResponse,
+      'InitiateExportAgreementsToCsvResponse'
+    )
   }
 }

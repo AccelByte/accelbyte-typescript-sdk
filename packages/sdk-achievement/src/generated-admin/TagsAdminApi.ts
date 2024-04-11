@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { PaginatedTagResponse } from '../generated-definitions/PaginatedTagResponse.js'
 import { TagsAdmin$ } from './endpoints/TagsAdmin$.js'
@@ -16,7 +17,7 @@ export function TagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
@@ -27,7 +28,7 @@ export function TagsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     sortBy?: string | null
   }): Promise<PaginatedTagResponse> {
-    const $ = new TagsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new TagsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

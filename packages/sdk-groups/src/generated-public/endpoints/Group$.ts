@@ -21,7 +21,7 @@ import { UpdateGroupRequestV1 } from '../../generated-definitions/UpdateGroupReq
 
 export class Group$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Required valid user authentication Get list of groups. This endpoint will only show OPEN and PUBLIC group type. This endpoint can search based on the group name by filling the &#34;groupName&#34; query parameter Action Code: 73303
@@ -36,9 +36,7 @@ export class Group$ {
     const url = '/group/v1/public/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetGroupsListResponseV1, 'GetGroupsListResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetGroupsListResponseV1, 'GetGroupsListResponseV1')
   }
 
   /**
@@ -49,9 +47,7 @@ export class Group$ {
     const url = '/group/v1/public/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -62,9 +58,7 @@ export class Group$ {
     const url = '/group/v2/public/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -75,9 +69,7 @@ export class Group$ {
     const url = '/group/v2/public/namespaces/{namespace}/groups/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetGroupsResponseV1, 'GetGroupsResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetGroupsResponseV1, 'GetGroupsResponseV1')
   }
 
   /**
@@ -90,9 +82,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -105,9 +95,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -120,9 +108,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -135,9 +121,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -150,9 +134,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -165,9 +147,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -180,9 +160,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -195,9 +173,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -210,9 +186,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -225,9 +199,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -240,9 +212,7 @@ export class Group$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -256,9 +226,7 @@ export class Group$ {
       .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -276,9 +244,7 @@ export class Group$ {
       .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 
   /**
@@ -292,9 +258,7 @@ export class Group$ {
       .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -312,8 +276,6 @@ export class Group$ {
       .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GroupResponseV1, 'GroupResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 }

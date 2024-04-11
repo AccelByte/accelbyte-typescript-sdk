@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminStagingContentAdmin$ } from './endpoints/AdminStagingContentAdmin$.js'
 import { ApproveStagingContentRequest } from '../generated-definitions/ApproveStagingContentRequest.js'
@@ -18,7 +19,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * List content that need admin&#39;s approval
@@ -29,7 +30,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sortBy?: string | null
     status?: string | null
   }): Promise<PaginatedListStagingContentResponse> {
-    const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStagingContents(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +40,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get staging content by ID
    */
   async function getStagingContent_ByContentId(contentId: string): Promise<StagingContentResponse> {
-    const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStagingContent_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +53,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: string | null }
   ): Promise<PaginatedListStagingContentResponse> {
-    const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStagingContents_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +63,7 @@ export function AdminStagingContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Approved content will shown to public player. Rejected content stays in staging area and couldn&#39;t be seen by other player
    */
   async function createApprove_ByContentId(contentId: string, data: ApproveStagingContentRequest): Promise<StagingContentResponse> {
-    const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminStagingContentAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createApprove_ByContentId(contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data

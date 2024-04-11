@@ -25,7 +25,7 @@ import { RedeemResult } from '../../generated-definitions/RedeemResult.js'
 
 export class CampaignAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query campaigns, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CAMPAIGN&#34;, action=2 (READ) (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of campaigns&lt;/li&gt;&lt;/ul&gt;
@@ -40,9 +40,12 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/campaigns'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CampaignPagingSlicedResult, 'CampaignPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      CampaignPagingSlicedResult,
+      'CampaignPagingSlicedResult'
+    )
   }
 
   /**
@@ -53,9 +56,7 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/campaigns'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CampaignInfo, 'CampaignInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CampaignInfo, 'CampaignInfo')
   }
 
   /**
@@ -66,9 +67,7 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/codes/{code}'.replace('{namespace}', this.namespace).replace('{code}', code)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CodeInfo, 'CodeInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CodeInfo, 'CodeInfo')
   }
 
   /**
@@ -79,9 +78,7 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/codes/{code}/enable'.replace('{namespace}', this.namespace).replace('{code}', code)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CodeInfo, 'CodeInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CodeInfo, 'CodeInfo')
   }
 
   /**
@@ -92,9 +89,7 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/codes/{code}/disable'.replace('{namespace}', this.namespace).replace('{code}', code)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CodeInfo, 'CodeInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CodeInfo, 'CodeInfo')
   }
 
   /**
@@ -107,9 +102,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CampaignInfo, 'CampaignInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CampaignInfo, 'CampaignInfo')
   }
 
   /**
@@ -122,9 +115,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CampaignInfo, 'CampaignInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CampaignInfo, 'CampaignInfo')
   }
 
   /**
@@ -137,9 +128,7 @@ export class CampaignAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RedeemResult, 'RedeemResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RedeemResult, 'RedeemResult')
   }
 
   /**
@@ -155,9 +144,12 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CodeInfoPagingSlicedResult, 'CodeInfoPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      CodeInfoPagingSlicedResult,
+      'CodeInfoPagingSlicedResult'
+    )
   }
 
   /**
@@ -170,9 +162,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CodeCreateResult, 'CodeCreateResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CodeCreateResult, 'CodeCreateResult')
   }
 
   /**
@@ -185,9 +175,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CampaignDynamicInfo, 'CampaignDynamicInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CampaignDynamicInfo, 'CampaignDynamicInfo')
   }
 
   /**
@@ -203,9 +191,12 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RedeemHistoryPagingSlicedResult, 'RedeemHistoryPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RedeemHistoryPagingSlicedResult,
+      'RedeemHistoryPagingSlicedResult'
+    )
   }
 
   /**
@@ -218,9 +209,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -233,9 +222,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkOperationResult, 'BulkOperationResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
   }
 
   /**
@@ -248,8 +235,6 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkOperationResult, 'BulkOperationResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
   }
 }

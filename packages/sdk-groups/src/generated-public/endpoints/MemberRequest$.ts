@@ -12,7 +12,7 @@ import { GetMemberRequestsListResponseV1 } from '../../generated-definitions/Get
 
 export class MemberRequest$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Required valid user authentication This endpoint is used to Get My Join Request To The Groups Get My Join Request To The Groups for the user calling this endpoint. It will check any join request group for this user Action Code: 73502
@@ -22,9 +22,12 @@ export class MemberRequest$ {
     const url = '/group/v2/public/namespaces/{namespace}/users/me/join/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMemberRequestsListResponseV1, 'GetMemberRequestsListResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetMemberRequestsListResponseV1,
+      'GetMemberRequestsListResponseV1'
+    )
   }
 
   /**
@@ -35,9 +38,12 @@ export class MemberRequest$ {
     const url = '/group/v1/public/namespaces/{namespace}/users/me/invite/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMemberRequestsListResponseV1, 'GetMemberRequestsListResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetMemberRequestsListResponseV1,
+      'GetMemberRequestsListResponseV1'
+    )
   }
 
   /**
@@ -53,9 +59,12 @@ export class MemberRequest$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMemberRequestsListResponseV1, 'GetMemberRequestsListResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetMemberRequestsListResponseV1,
+      'GetMemberRequestsListResponseV1'
+    )
   }
 
   /**
@@ -71,9 +80,12 @@ export class MemberRequest$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMemberRequestsListResponseV1, 'GetMemberRequestsListResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetMemberRequestsListResponseV1,
+      'GetMemberRequestsListResponseV1'
+    )
   }
 
   /**
@@ -89,8 +101,11 @@ export class MemberRequest$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMemberRequestsListResponseV1, 'GetMemberRequestsListResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetMemberRequestsListResponseV1,
+      'GetMemberRequestsListResponseV1'
+    )
   }
 }

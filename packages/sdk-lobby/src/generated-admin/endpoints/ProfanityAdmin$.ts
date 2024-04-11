@@ -25,7 +25,7 @@ import { ProfanityRule } from '../../generated-definitions/ProfanityRule.js'
 
 export class ProfanityAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get current profanity rule
@@ -35,9 +35,7 @@ export class ProfanityAdmin$ {
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/rule'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ProfanityRule, 'ProfanityRule')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ProfanityRule, 'ProfanityRule')
   }
 
   /**
@@ -48,9 +46,7 @@ export class ProfanityAdmin$ {
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/rule'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -61,9 +57,12 @@ export class ProfanityAdmin$ {
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/lists'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminGetProfanityListsListResponseArray, 'AdminGetProfanityListsListResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      AdminGetProfanityListsListResponseArray,
+      'AdminGetProfanityListsListResponseArray'
+    )
   }
 
   /**
@@ -74,9 +73,7 @@ export class ProfanityAdmin$ {
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/lists'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -87,9 +84,12 @@ export class ProfanityAdmin$ {
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminVerifyMessageProfanityResponse, 'AdminVerifyMessageProfanityResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      AdminVerifyMessageProfanityResponse,
+      'AdminVerifyMessageProfanityResponse'
+    )
   }
 
   /**
@@ -102,9 +102,7 @@ export class ProfanityAdmin$ {
       .replace('{list}', list)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -117,9 +115,7 @@ export class ProfanityAdmin$ {
       .replace('{list}', list)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -130,9 +126,7 @@ export class ProfanityAdmin$ {
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/filters/debug'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ProfanityFilterArray, 'ProfanityFilterArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ProfanityFilterArray, 'ProfanityFilterArray')
   }
 
   /**
@@ -145,9 +139,12 @@ export class ProfanityAdmin$ {
       .replace('{list}', list)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminGetProfanityListFiltersV1Response, 'AdminGetProfanityListFiltersV1Response')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      AdminGetProfanityListFiltersV1Response,
+      'AdminGetProfanityListFiltersV1Response'
+    )
   }
 
   /**
@@ -160,9 +157,7 @@ export class ProfanityAdmin$ {
       .replace('{list}', list)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -175,9 +170,7 @@ export class ProfanityAdmin$ {
       .replace('{list}', list)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -190,9 +183,7 @@ export class ProfanityAdmin$ {
       .replace('{list}', list)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ProfanityFilterArray, 'ProfanityFilterArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ProfanityFilterArray, 'ProfanityFilterArray')
   }
 
   /**
@@ -205,8 +196,6 @@ export class ProfanityAdmin$ {
       .replace('{list}', list)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

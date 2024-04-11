@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { GetUsersPresenceResponse } from '../generated-definitions/GetUsersPresenceResponse.js'
 import { Presence$ } from './endpoints/Presence$.js'
@@ -16,7 +17,7 @@ export function PresenceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Query users presence with given namespace and userIds.
@@ -25,7 +26,7 @@ export function PresenceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userIds: string | null
     countOnly?: boolean | null
   }): Promise<GetUsersPresenceResponse> {
-    const $ = new Presence$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Presence$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPresenceUsersPresence(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

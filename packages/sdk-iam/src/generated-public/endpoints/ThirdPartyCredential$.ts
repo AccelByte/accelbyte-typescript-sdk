@@ -12,7 +12,7 @@ import { PublicThirdPartyPlatformInfoArray } from '../../generated-definitions/P
 
 export class ThirdPartyCredential$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This is the Public API to Get All Active OIDC Platform Credential By Client ID
@@ -22,9 +22,12 @@ export class ThirdPartyCredential$ {
     const url = '/iam/v3/public/namespaces/{namespace}/platforms/clients/oidc'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PublicThirdPartyPlatformInfoArray, 'PublicThirdPartyPlatformInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PublicThirdPartyPlatformInfoArray,
+      'PublicThirdPartyPlatformInfoArray'
+    )
   }
 
   /**
@@ -35,8 +38,11 @@ export class ThirdPartyCredential$ {
     const url = '/iam/v3/public/namespaces/{namespace}/platforms/clients/active'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PublicThirdPartyPlatformInfoArray, 'PublicThirdPartyPlatformInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PublicThirdPartyPlatformInfoArray,
+      'PublicThirdPartyPlatformInfoArray'
+    )
   }
 }

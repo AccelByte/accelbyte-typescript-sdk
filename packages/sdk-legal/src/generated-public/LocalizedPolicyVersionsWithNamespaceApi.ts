@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { LocalizedPolicyVersionsWithNamespace$ } from './endpoints/LocalizedPolicyVersionsWithNamespace$.js'
 import { RetrieveLocalizedPolicyVersionPublicResponse } from '../generated-definitions/RetrieveLocalizedPolicyVersionPublicResponse.js'
@@ -16,7 +17,7 @@ export function LocalizedPolicyVersionsWithNamespaceApi(sdk: AccelbyteSDK, args?
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
@@ -24,7 +25,7 @@ export function LocalizedPolicyVersionsWithNamespaceApi(sdk: AccelbyteSDK, args?
   async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
   ): Promise<RetrieveLocalizedPolicyVersionPublicResponse> {
-    const $ = new LocalizedPolicyVersionsWithNamespace$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new LocalizedPolicyVersionsWithNamespace$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
     if (resp.error) throw resp.error
     return resp.response.data

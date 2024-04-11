@@ -12,7 +12,7 @@ import { EventResponseV2 } from '../../generated-definitions/EventResponseV2.js'
 
 export class EventV2$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Requires valid user access token
@@ -27,9 +27,7 @@ export class EventV2$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, EventResponseV2, 'EventResponseV2')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponseV2, 'EventResponseV2')
   }
 
   /**
@@ -45,8 +43,6 @@ export class EventV2$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, EventResponseV2, 'EventResponseV2')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponseV2, 'EventResponseV2')
   }
 }

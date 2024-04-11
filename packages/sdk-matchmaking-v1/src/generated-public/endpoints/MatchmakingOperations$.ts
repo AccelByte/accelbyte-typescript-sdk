@@ -13,16 +13,14 @@ import { AppMessageDeclarationArray } from '../../generated-definitions/AppMessa
 
 export class MatchmakingOperations$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   getVersion(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/version'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -33,8 +31,11 @@ export class MatchmakingOperations$ {
     const url = '/matchmaking/v1/messages'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AppMessageDeclarationArray, 'AppMessageDeclarationArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      AppMessageDeclarationArray,
+      'AppMessageDeclarationArray'
+    )
   }
 }

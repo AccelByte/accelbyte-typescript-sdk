@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { PartyAdmin$ } from './endpoints/PartyAdmin$.js'
 import { PartyQueryResponse } from '../generated-definitions/PartyQueryResponse.js'
@@ -16,7 +17,7 @@ export function PartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Query parties.
@@ -35,7 +36,7 @@ export function PartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     partyID?: string | null
     value?: string | null
   }): Promise<PartyQueryResponse> {
-    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getParties(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

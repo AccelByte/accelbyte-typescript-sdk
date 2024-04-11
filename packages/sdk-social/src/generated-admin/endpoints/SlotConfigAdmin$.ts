@@ -15,7 +15,7 @@ import { UserSlotConfigInfo } from '../../generated-definitions/UserSlotConfigIn
 
 export class SlotConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * @deprecated
@@ -26,9 +26,7 @@ export class SlotConfigAdmin$ {
     const url = '/social/admin/namespaces/{namespace}/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -40,9 +38,7 @@ export class SlotConfigAdmin$ {
     const url = '/social/admin/namespaces/{namespace}/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceSlotConfigInfo, 'NamespaceSlotConfigInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceSlotConfigInfo, 'NamespaceSlotConfigInfo')
   }
 
   /**
@@ -54,9 +50,7 @@ export class SlotConfigAdmin$ {
     const url = '/social/admin/namespaces/{namespace}/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceSlotConfigInfo, 'NamespaceSlotConfigInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceSlotConfigInfo, 'NamespaceSlotConfigInfo')
   }
 
   /**
@@ -70,9 +64,7 @@ export class SlotConfigAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -86,9 +78,7 @@ export class SlotConfigAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserSlotConfigInfo, 'UserSlotConfigInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserSlotConfigInfo, 'UserSlotConfigInfo')
   }
 
   /**
@@ -102,8 +92,6 @@ export class SlotConfigAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserSlotConfigInfo, 'UserSlotConfigInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserSlotConfigInfo, 'UserSlotConfigInfo')
   }
 }

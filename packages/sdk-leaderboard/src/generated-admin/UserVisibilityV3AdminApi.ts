@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { GetHiddenUserResponse } from '../generated-definitions/GetHiddenUserResponse.js'
 import { GetUserVisibilityResponse } from '../generated-definitions/GetUserVisibilityResponse.js'
@@ -18,13 +19,13 @@ export function UserVisibilityV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * User with false visibility status will have &lt;b&gt;hidden&lt;/b&gt; attribute set to true on it&#39;s leaderboard entry
    */
   async function updateVisibility_ByUserId(userId: string, data: SetUserVisibilityRequest): Promise<GetUserVisibilityResponse> {
-    const $ = new UserVisibilityV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UserVisibilityV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateVisibility_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +38,7 @@ export function UserVisibilityV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     leaderboardCode: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetHiddenUserResponse> {
-    const $ = new UserVisibilityV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UserVisibilityV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsersHidden_ByLeaderboardCode(leaderboardCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +48,7 @@ export function UserVisibilityV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * User with false visibility status will have &lt;b&gt;hidden&lt;/b&gt; attribute set to true on it&#39;s leaderboard entry
    */
   async function getVisibility_ByLeaderboardCode_ByUserId(leaderboardCode: string, userId: string): Promise<GetUserVisibilityResponse> {
-    const $ = new UserVisibilityV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UserVisibilityV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getVisibility_ByLeaderboardCode_ByUserId(leaderboardCode, userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -61,7 +62,7 @@ export function UserVisibilityV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: SetUserVisibilityRequest
   ): Promise<GetUserVisibilityResponse> {
-    const $ = new UserVisibilityV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UserVisibilityV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateVisibility_ByLeaderboardCode_ByUserId(leaderboardCode, userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

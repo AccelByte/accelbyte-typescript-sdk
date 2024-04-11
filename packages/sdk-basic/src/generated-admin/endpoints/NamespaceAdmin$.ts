@@ -18,7 +18,7 @@ import { NamespaceUpdate } from '../../generated-definitions/NamespaceUpdate.js'
 
 export class NamespaceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get all namespaces.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11303&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of namespaces&lt;/li&gt;&lt;/ul&gt;
@@ -28,9 +28,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
   }
 
   /**
@@ -41,9 +39,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceInfo, 'NamespaceInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfo, 'NamespaceInfo')
   }
 
   /**
@@ -54,9 +50,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceInfo, 'NamespaceInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfo, 'NamespaceInfo')
   }
 
   /**
@@ -67,9 +61,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceInfo, 'NamespaceInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfo, 'NamespaceInfo')
   }
 
   /**
@@ -80,9 +72,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
   }
 
   /**
@@ -93,9 +83,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/basic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceInfo, 'NamespaceInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfo, 'NamespaceInfo')
   }
 
   /**
@@ -106,9 +94,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/child'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
   }
 
   /**
@@ -119,9 +105,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/status'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceInfo, 'NamespaceInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfo, 'NamespaceInfo')
   }
 
   /**
@@ -132,9 +116,7 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/context'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespaceContext, 'NamespaceContext')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceContext, 'NamespaceContext')
   }
 
   /**
@@ -145,8 +127,6 @@ export class NamespaceAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/publisher'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NamespacePublisherInfo, 'NamespacePublisherInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespacePublisherInfo, 'NamespacePublisherInfo')
   }
 }

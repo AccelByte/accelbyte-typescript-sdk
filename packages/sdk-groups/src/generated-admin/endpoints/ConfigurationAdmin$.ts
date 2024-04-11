@@ -19,7 +19,7 @@ import { UpdateGroupConfigurationResponseV1 } from '../../generated-definitions/
 
 export class ConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
@@ -29,9 +29,12 @@ export class ConfigurationAdmin$ {
     const url = '/group/v1/admin/namespaces/{namespace}/configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListConfigurationResponseV1, 'ListConfigurationResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListConfigurationResponseV1,
+      'ListConfigurationResponseV1'
+    )
   }
 
   /**
@@ -42,9 +45,12 @@ export class ConfigurationAdmin$ {
     const url = '/group/v1/admin/namespaces/{namespace}/configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateGroupConfigurationResponseV1, 'CreateGroupConfigurationResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      CreateGroupConfigurationResponseV1,
+      'CreateGroupConfigurationResponseV1'
+    )
   }
 
   /**
@@ -55,9 +61,12 @@ export class ConfigurationAdmin$ {
     const url = '/group/v1/admin/namespaces/{namespace}/configuration/initiate'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateGroupConfigurationResponseV1, 'CreateGroupConfigurationResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      CreateGroupConfigurationResponseV1,
+      'CreateGroupConfigurationResponseV1'
+    )
   }
 
   /**
@@ -70,9 +79,7 @@ export class ConfigurationAdmin$ {
       .replace('{configurationCode}', configurationCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -85,9 +92,12 @@ export class ConfigurationAdmin$ {
       .replace('{configurationCode}', configurationCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetGroupConfigurationResponseV1, 'GetGroupConfigurationResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetGroupConfigurationResponseV1,
+      'GetGroupConfigurationResponseV1'
+    )
   }
 
   /**
@@ -103,9 +113,12 @@ export class ConfigurationAdmin$ {
       .replace('{configurationCode}', configurationCode)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateGroupConfigurationResponseV1, 'UpdateGroupConfigurationResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UpdateGroupConfigurationResponseV1,
+      'UpdateGroupConfigurationResponseV1'
+    )
   }
 
   /**
@@ -122,9 +135,12 @@ export class ConfigurationAdmin$ {
       .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateGroupConfigurationResponseV1, 'UpdateGroupConfigurationResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UpdateGroupConfigurationResponseV1,
+      'UpdateGroupConfigurationResponseV1'
+    )
   }
 
   /**
@@ -142,8 +158,11 @@ export class ConfigurationAdmin$ {
       .replace('{allowedAction}', allowedAction)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateGroupConfigurationResponseV1, 'UpdateGroupConfigurationResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UpdateGroupConfigurationResponseV1,
+      'UpdateGroupConfigurationResponseV1'
+    )
   }
 }

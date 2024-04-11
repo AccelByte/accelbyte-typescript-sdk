@@ -18,7 +18,7 @@ import { TicketMetricResultRecord } from '../../generated-definitions/TicketMetr
 
 export class MatchPools$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * List matchmaking pools.
@@ -28,9 +28,7 @@ export class MatchPools$ {
     const url = '/match2/v1/namespaces/{namespace}/match-pools'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListMatchPoolsResponse, 'ListMatchPoolsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListMatchPoolsResponse, 'ListMatchPoolsResponse')
   }
 
   /**
@@ -41,9 +39,7 @@ export class MatchPools$ {
     const url = '/match2/v1/namespaces/{namespace}/match-pools'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -54,9 +50,7 @@ export class MatchPools$ {
     const url = '/match2/v1/namespaces/{namespace}/match-pools/{pool}'.replace('{namespace}', this.namespace).replace('{pool}', pool)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -67,9 +61,7 @@ export class MatchPools$ {
     const url = '/match2/v1/namespaces/{namespace}/match-pools/{pool}'.replace('{namespace}', this.namespace).replace('{pool}', pool)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MatchPool, 'MatchPool')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchPool, 'MatchPool')
   }
 
   /**
@@ -80,9 +72,7 @@ export class MatchPools$ {
     const url = '/match2/v1/namespaces/{namespace}/match-pools/{pool}'.replace('{namespace}', this.namespace).replace('{pool}', pool)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MatchPool, 'MatchPool')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchPool, 'MatchPool')
   }
 
   /**
@@ -95,9 +85,7 @@ export class MatchPools$ {
       .replace('{pool}', pool)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
   }
 
   /**
@@ -110,9 +98,12 @@ export class MatchPools$ {
       .replace('{pool}', pool)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListMatchPoolTicketsResponse, 'ListMatchPoolTicketsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListMatchPoolTicketsResponse,
+      'ListMatchPoolTicketsResponse'
+    )
   }
 
   /**
@@ -125,8 +116,6 @@ export class MatchPools$ {
       .replace('{pool}', pool)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlayerMetricRecord, 'PlayerMetricRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerMetricRecord, 'PlayerMetricRecord')
   }
 }

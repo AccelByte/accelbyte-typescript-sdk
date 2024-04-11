@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminTypeAdmin$ } from './endpoints/AdminTypeAdmin$.js'
 import { CreateTypeRequest } from '../generated-definitions/CreateTypeRequest.js'
@@ -18,13 +19,13 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get available types paginated
    */
   async function getTypes(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTypeResponse> {
-    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTypes(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +35,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Creates a new type and subtype
    */
   async function createType(data: CreateTypeRequest): Promise<CreateTypeResponse> {
-    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createType(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +45,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete existing type
    */
   async function deleteType_ByTypeId(typeId: string): Promise<unknown> {
-    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteType_ByTypeId(typeId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +55,7 @@ export function AdminTypeAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Updates a type and subtype
    */
   async function updateType_ByTypeId(typeId: string, data: CreateTypeRequest): Promise<CreateTypeResponse> {
-    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminTypeAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateType_ByTypeId(typeId, data)
     if (resp.error) throw resp.error
     return resp.response.data

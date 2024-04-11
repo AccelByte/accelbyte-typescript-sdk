@@ -24,7 +24,7 @@ import { StoreUpdate } from '../../generated-definitions/StoreUpdate.js'
 
 export class StoreAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to list stores in a namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of stores&lt;/li&gt;&lt;/ul&gt;
@@ -34,9 +34,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfoArray, 'StoreInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfoArray, 'StoreInfoArray')
   }
 
   /**
@@ -47,9 +45,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -62,9 +58,7 @@ export class StoreAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -75,9 +69,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CatalogConfigInfo, 'CatalogConfigInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CatalogConfigInfo, 'CatalogConfigInfo')
   }
 
   /**
@@ -88,9 +80,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CatalogConfigInfo, 'CatalogConfigInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CatalogConfigInfo, 'CatalogConfigInfo')
   }
 
   /**
@@ -103,9 +93,7 @@ export class StoreAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -118,9 +106,7 @@ export class StoreAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -133,9 +119,7 @@ export class StoreAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -146,9 +130,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores/published'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -159,9 +141,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores/published'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -176,9 +156,7 @@ export class StoreAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ImportStoreResult, 'ImportStoreResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ImportStoreResult, 'ImportStoreResult')
   }
 
   /**
@@ -189,9 +167,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores/exportByCSV'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -204,9 +180,7 @@ export class StoreAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -220,9 +194,7 @@ export class StoreAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -233,9 +205,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores/published/backup'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreBackupInfo, 'StoreBackupInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreBackupInfo, 'StoreBackupInfo')
   }
 
   /**
@@ -248,9 +218,12 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores/catalogDefinition'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CatalogDefinitionInfoArray, 'CatalogDefinitionInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      CatalogDefinitionInfoArray,
+      'CatalogDefinitionInfoArray'
+    )
   }
 
   /**
@@ -261,9 +234,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores/published/rollback'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, StoreInfo, 'StoreInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -276,9 +247,7 @@ export class StoreAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -289,9 +258,7 @@ export class StoreAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/stores/downloadCSVTemplates'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -307,9 +274,7 @@ export class StoreAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ImportStoreResult, 'ImportStoreResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ImportStoreResult, 'ImportStoreResult')
   }
 
   /**
@@ -332,8 +297,11 @@ export class StoreAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ImportStoreHistoryPagingResult, 'ImportStoreHistoryPagingResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ImportStoreHistoryPagingResult,
+      'ImportStoreHistoryPagingResult'
+    )
   }
 }

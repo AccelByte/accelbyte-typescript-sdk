@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AnonymizationAdmin$ } from './endpoints/AnonymizationAdmin$.js'
 
@@ -15,13 +16,13 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Anonymize user profile.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;&lt;/b&gt;, action=8 &lt;b&gt;(DELETE)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11501&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationProfile_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteAnonymizationProfile_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

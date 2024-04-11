@@ -13,7 +13,7 @@ import { PaginatedContentDownloaderResponse } from '../../generated-definitions/
 
 export class PublicDownloadCountV2$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint will only display the list of users who performed add download count from v2 endpoint.
@@ -28,9 +28,12 @@ export class PublicDownloadCountV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloaderResponse, 'PaginatedContentDownloaderResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloaderResponse,
+      'PaginatedContentDownloaderResponse'
+    )
   }
 
   /**
@@ -43,8 +46,6 @@ export class PublicDownloadCountV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AddDownloadCountResponse, 'AddDownloadCountResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddDownloadCountResponse, 'AddDownloadCountResponse')
   }
 }

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { PaginatedGetTypeResponse } from '../generated-definitions/PaginatedGetTypeResponse.js'
 import { PublicType$ } from './endpoints/PublicType$.js'
@@ -16,13 +17,13 @@ export function PublicTypeApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get available types paginated
    */
   async function getTypes(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTypeResponse> {
-    const $ = new PublicType$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicType$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTypes(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

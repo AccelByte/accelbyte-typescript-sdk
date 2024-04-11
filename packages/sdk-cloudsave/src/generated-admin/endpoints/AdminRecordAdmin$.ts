@@ -23,7 +23,7 @@ import { ListAdminPlayerRecordKeysResponse } from '../../generated-definitions/L
 
 export class AdminRecordAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Retrieve list of records key by namespace
@@ -38,9 +38,12 @@ export class AdminRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/adminrecords'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListAdminGameRecordKeysResponse, 'ListAdminGameRecordKeysResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListAdminGameRecordKeysResponse,
+      'ListAdminGameRecordKeysResponse'
+    )
   }
 
   /**
@@ -51,9 +54,12 @@ export class AdminRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/adminrecords/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkGetAdminGameRecordResponse, 'BulkGetAdminGameRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkGetAdminGameRecordResponse,
+      'BulkGetAdminGameRecordResponse'
+    )
   }
 
   /**
@@ -64,9 +70,7 @@ export class AdminRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/adminrecords/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -77,9 +81,7 @@ export class AdminRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/adminrecords/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminGameRecordResponse, 'AdminGameRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminGameRecordResponse, 'AdminGameRecordResponse')
   }
 
   /**
@@ -90,9 +92,7 @@ export class AdminRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/adminrecords/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminGameRecordResponse, 'AdminGameRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminGameRecordResponse, 'AdminGameRecordResponse')
   }
 
   /**
@@ -103,9 +103,7 @@ export class AdminRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/adminrecords/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminGameRecordResponse, 'AdminGameRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminGameRecordResponse, 'AdminGameRecordResponse')
   }
 
   /**
@@ -121,9 +119,12 @@ export class AdminRecordAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListAdminPlayerRecordKeysResponse, 'ListAdminPlayerRecordKeysResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListAdminPlayerRecordKeysResponse,
+      'ListAdminPlayerRecordKeysResponse'
+    )
   }
 
   /**
@@ -136,9 +137,12 @@ export class AdminRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkGetAdminPlayerRecordResponse, 'BulkGetAdminPlayerRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkGetAdminPlayerRecordResponse,
+      'BulkGetAdminPlayerRecordResponse'
+    )
   }
 
   /**
@@ -154,9 +158,12 @@ export class AdminRecordAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkGetAdminPlayerRecordResponse, 'BulkGetAdminPlayerRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BulkGetAdminPlayerRecordResponse,
+      'BulkGetAdminPlayerRecordResponse'
+    )
   }
 
   /**
@@ -170,9 +177,7 @@ export class AdminRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -186,9 +191,7 @@ export class AdminRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminPlayerRecordResponse, 'AdminPlayerRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminPlayerRecordResponse, 'AdminPlayerRecordResponse')
   }
 
   /**
@@ -206,9 +209,7 @@ export class AdminRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminPlayerRecordResponse, 'AdminPlayerRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminPlayerRecordResponse, 'AdminPlayerRecordResponse')
   }
 
   /**
@@ -226,8 +227,6 @@ export class AdminRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminPlayerRecordResponse, 'AdminPlayerRecordResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminPlayerRecordResponse, 'AdminPlayerRecordResponse')
   }
 }

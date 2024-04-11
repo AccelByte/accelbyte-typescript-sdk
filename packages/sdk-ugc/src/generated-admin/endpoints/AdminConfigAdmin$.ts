@@ -14,7 +14,7 @@ import { UpdateConfigRequest } from '../../generated-definitions/UpdateConfigReq
 
 export class AdminConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get config paginated
@@ -24,9 +24,12 @@ export class AdminConfigAdmin$ {
     const url = '/ugc/v2/admin/namespaces/{namespace}/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedGetConfigsResponse, 'PaginatedGetConfigsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedGetConfigsResponse,
+      'PaginatedGetConfigsResponse'
+    )
   }
 
   /**
@@ -37,8 +40,6 @@ export class AdminConfigAdmin$ {
     const url = '/ugc/v2/admin/namespaces/{namespace}/configs/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

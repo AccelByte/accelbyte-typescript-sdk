@@ -12,7 +12,7 @@ import { ListTagsResponse } from '../../generated-definitions/ListTagsResponse.j
 
 export class PublicTags$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * ## Description Retrieve list of available tags by namespace
@@ -22,8 +22,6 @@ export class PublicTags$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListTagsResponse, 'ListTagsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListTagsResponse, 'ListTagsResponse')
   }
 }

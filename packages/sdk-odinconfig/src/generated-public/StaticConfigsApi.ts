@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Config } from '../generated-definitions/Config.js'
 import { StaticConfigs$ } from './endpoints/StaticConfigs$.js'
@@ -16,10 +17,10 @@ export function StaticConfigsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   async function getStaticConfig_ByConfig(config: string): Promise<Config> {
-    const $ = new StaticConfigs$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new StaticConfigs$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStaticConfig_ByConfig(config)
     if (resp.error) throw resp.error
     return resp.response.data

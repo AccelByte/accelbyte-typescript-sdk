@@ -13,7 +13,7 @@ import { PagedResponseGetNamespaceEventResponse } from '../../generated-definiti
 
 export class TelemetryAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint requires valid JWT token and telemetry permission This endpoint retrieves namespace list
@@ -23,9 +23,7 @@ export class TelemetryAdmin$ {
     const url = '/game-telemetry/v1/admin/namespaces'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListBaseResponseStr, 'ListBaseResponseStr')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListBaseResponseStr, 'ListBaseResponseStr')
   }
 
   /**
@@ -46,8 +44,11 @@ export class TelemetryAdmin$ {
     const url = '/game-telemetry/v1/admin/namespaces/{namespace}/events'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PagedResponseGetNamespaceEventResponse, 'PagedResponseGetNamespaceEventResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PagedResponseGetNamespaceEventResponse,
+      'PagedResponseGetNamespaceEventResponse'
+    )
   }
 }

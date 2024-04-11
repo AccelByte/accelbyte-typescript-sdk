@@ -12,7 +12,7 @@ import { ListTagsResp } from '../../generated-definitions/ListTagsResp.js'
 
 export class PublicTags$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    *  This endpoint will list all tags in a namespace. The response body will be in the form of standard pagination.
@@ -26,8 +26,6 @@ export class PublicTags$ {
     const url = '/inventory/v1/public/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListTagsResp, 'ListTagsResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListTagsResp, 'ListTagsResp')
   }
 }

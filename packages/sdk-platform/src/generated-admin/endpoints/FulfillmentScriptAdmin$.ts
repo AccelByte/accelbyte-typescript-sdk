@@ -16,7 +16,7 @@ import { FulfillmentScriptUpdate } from '../../generated-definitions/Fulfillment
 
 export class FulfillmentScriptAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;List all fulfillment scripts.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:FULFILLMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -26,9 +26,12 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FulfillmentScriptInfoArray, 'FulfillmentScriptInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      FulfillmentScriptInfoArray,
+      'FulfillmentScriptInfoArray'
+    )
   }
 
   /**
@@ -39,9 +42,7 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -52,9 +53,7 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
   }
 
   /**
@@ -65,9 +64,7 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
   }
 
   /**
@@ -78,8 +75,6 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
   }
 }

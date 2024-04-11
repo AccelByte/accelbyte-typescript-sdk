@@ -14,7 +14,7 @@ import { PutGlobalConfigurationRequest } from '../../generated-definitions/PutGl
 
 export class GlobalConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Delete of global configuration data.
@@ -24,9 +24,7 @@ export class GlobalConfigurationAdmin$ {
     const url = '/session/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -37,9 +35,12 @@ export class GlobalConfigurationAdmin$ {
     const url = '/session/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GlobalConfigurationResponse, 'GlobalConfigurationResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GlobalConfigurationResponse,
+      'GlobalConfigurationResponse'
+    )
   }
 
   /**
@@ -50,8 +51,11 @@ export class GlobalConfigurationAdmin$ {
     const url = '/session/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GlobalConfigurationResponse, 'GlobalConfigurationResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GlobalConfigurationResponse,
+      'GlobalConfigurationResponse'
+    )
   }
 }

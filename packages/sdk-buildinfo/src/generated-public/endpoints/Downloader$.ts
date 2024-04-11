@@ -18,7 +18,7 @@ import { VersionChain } from '../../generated-definitions/VersionChain.js'
 
 export class Downloader$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to get version history.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: version chain from specified build&lt;/li&gt;&lt;/ul&gt;
@@ -28,9 +28,7 @@ export class Downloader$ {
     const url = '/buildinfo/public/namespaces/{namespace}/versionHistory'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, VersionChain, 'VersionChain')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, VersionChain, 'VersionChain')
   }
 
   /**
@@ -41,9 +39,7 @@ export class Downloader$ {
     const url = '/buildinfo/public/namespaces/{namespace}/bulkCheckLatest'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BuildAvailabilityArray, 'BuildAvailabilityArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildAvailabilityArray, 'BuildAvailabilityArray')
   }
 
   /**
@@ -57,9 +53,7 @@ export class Downloader$ {
       .replace('{appId}', appId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
@@ -72,9 +66,7 @@ export class Downloader$ {
       .replace('{appId}', appId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BasicBuildManifestArray, 'BasicBuildManifestArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BasicBuildManifestArray, 'BasicBuildManifestArray')
   }
 
   /**
@@ -88,9 +80,7 @@ export class Downloader$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
@@ -103,9 +93,7 @@ export class Downloader$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockDownloadUrls, 'BlockDownloadUrls')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockDownloadUrls, 'BlockDownloadUrls')
   }
 
   /**
@@ -120,9 +108,7 @@ export class Downloader$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
@@ -135,9 +121,7 @@ export class Downloader$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
@@ -151,9 +135,7 @@ export class Downloader$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
@@ -167,9 +149,7 @@ export class Downloader$ {
       .replace('{destinationBuildId}', destinationBuildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DiffStatusReport, 'DiffStatusReport')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DiffStatusReport, 'DiffStatusReport')
   }
 
   /**
@@ -184,8 +164,6 @@ export class Downloader$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 }

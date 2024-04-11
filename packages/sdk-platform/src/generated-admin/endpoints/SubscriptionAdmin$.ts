@@ -22,7 +22,7 @@ import { TradeNotification } from '../../generated-definitions/TradeNotification
 
 export class SubscriptionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query subscriptions.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SUBSCRIPTION&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated subscriptions&lt;/li&gt;&lt;/ul&gt;
@@ -41,9 +41,12 @@ export class SubscriptionAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/subscriptions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SubscriptionPagingSlicedResult, 'SubscriptionPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      SubscriptionPagingSlicedResult,
+      'SubscriptionPagingSlicedResult'
+    )
   }
 
   /**
@@ -67,9 +70,12 @@ export class SubscriptionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SubscriptionPagingSlicedResult, 'SubscriptionPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      SubscriptionPagingSlicedResult,
+      'SubscriptionPagingSlicedResult'
+    )
   }
 
   /**
@@ -85,9 +91,12 @@ export class SubscriptionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SubscriptionActivityPagingSlicedResult, 'SubscriptionActivityPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      SubscriptionActivityPagingSlicedResult,
+      'SubscriptionActivityPagingSlicedResult'
+    )
   }
 
   /**
@@ -100,9 +109,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RecurringChargeResult, 'RecurringChargeResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RecurringChargeResult, 'RecurringChargeResult')
   }
 
   /**
@@ -116,9 +123,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -132,9 +137,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
   }
 
   /**
@@ -147,9 +150,7 @@ export class SubscriptionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
   }
 
   /**
@@ -162,9 +163,7 @@ export class SubscriptionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, Subscribable, 'Subscribable')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Subscribable, 'Subscribable')
   }
 
   /**
@@ -182,9 +181,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
   }
 
   /**
@@ -203,9 +200,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
   }
 
   /**
@@ -223,9 +218,12 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BillingHistoryPagingSlicedResult, 'BillingHistoryPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      BillingHistoryPagingSlicedResult,
+      'BillingHistoryPagingSlicedResult'
+    )
   }
 
   /**
@@ -243,8 +241,6 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

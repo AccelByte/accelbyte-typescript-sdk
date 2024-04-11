@@ -17,7 +17,7 @@ import { ExtensionCategoryListApiResponse } from '../../generated-definitions/Ex
 
 export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get a list of auto moderation actions
@@ -27,9 +27,7 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
     const url = '/reporting/v1/admin/extensionActions'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ActionListApiResponse, 'ActionListApiResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ActionListApiResponse, 'ActionListApiResponse')
   }
 
   /**
@@ -40,9 +38,7 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
     const url = '/reporting/v1/admin/extensionActions'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ActionApiResponse, 'ActionApiResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ActionApiResponse, 'ActionApiResponse')
   }
 
   /**
@@ -56,9 +52,12 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
     const url = '/reporting/v1/admin/extensionCategories'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ExtensionCategoryListApiResponse, 'ExtensionCategoryListApiResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ExtensionCategoryListApiResponse,
+      'ExtensionCategoryListApiResponse'
+    )
   }
 
   /**
@@ -69,8 +68,11 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
     const url = '/reporting/v1/admin/extensionCategories'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ExtensionCategoryApiResponse, 'ExtensionCategoryApiResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ExtensionCategoryApiResponse,
+      'ExtensionCategoryApiResponse'
+    )
   }
 }

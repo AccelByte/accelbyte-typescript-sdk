@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ListInventoryResp } from '../generated-definitions/ListInventoryResp.js'
 import { PublicInventories$ } from './endpoints/PublicInventories$.js'
@@ -16,7 +17,7 @@ export function PublicInventoriesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    *  Listing all my inventories in a namespace. The response body will be in the form of standard pagination.
@@ -27,7 +28,7 @@ export function PublicInventoriesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
   }): Promise<ListInventoryResp> {
-    const $ = new PublicInventories$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicInventories$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsersMeInventories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

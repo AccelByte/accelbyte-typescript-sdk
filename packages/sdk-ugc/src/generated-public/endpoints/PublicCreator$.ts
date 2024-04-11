@@ -13,7 +13,7 @@ import { PaginatedCreatorOverviewResponse } from '../../generated-definitions/Pa
 
 export class PublicCreator$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Public user can access without token or if token specified, requires valid user token
@@ -28,9 +28,12 @@ export class PublicCreator$ {
     const url = '/ugc/v1/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedCreatorOverviewResponse, 'PaginatedCreatorOverviewResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedCreatorOverviewResponse,
+      'PaginatedCreatorOverviewResponse'
+    )
   }
 
   /**
@@ -41,8 +44,6 @@ export class PublicCreator$ {
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreatorResponse, 'CreatorResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreatorResponse, 'CreatorResponse')
   }
 }

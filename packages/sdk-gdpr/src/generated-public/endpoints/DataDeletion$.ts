@@ -14,7 +14,7 @@ import { RequestDeleteResponse } from '../../generated-definitions/RequestDelete
 
 export class DataDeletion$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Cancel my account deletion request Requires valid user access token
@@ -24,9 +24,7 @@ export class DataDeletion$ {
     const url = '/gdpr/public/users/me/deletions'
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -40,9 +38,7 @@ export class DataDeletion$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
   }
 
   /**
@@ -53,9 +49,7 @@ export class DataDeletion$ {
     const url = '/gdpr/public/users/me/deletions/status'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DeletionStatus, 'DeletionStatus')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeletionStatus, 'DeletionStatus')
   }
 
   /**
@@ -68,9 +62,7 @@ export class DataDeletion$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -86,9 +78,7 @@ export class DataDeletion$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
   }
 
   /**
@@ -101,8 +91,6 @@ export class DataDeletion$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DeletionStatus, 'DeletionStatus')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeletionStatus, 'DeletionStatus')
   }
 }

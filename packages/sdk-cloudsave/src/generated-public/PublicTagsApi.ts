@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ListTagsResponse } from '../generated-definitions/ListTagsResponse.js'
 import { PublicTags$ } from './endpoints/PublicTags$.js'
@@ -16,13 +17,13 @@ export function PublicTagsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * ## Description Retrieve list of available tags by namespace
    */
   async function getTags(queryParams?: { limit?: number; offset?: number }): Promise<ListTagsResponse> {
-    const $ = new PublicTags$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicTags$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

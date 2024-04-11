@@ -15,7 +15,7 @@ import { CountryResponseArray } from '../../generated-definitions/CountryRespons
 
 export class CountryAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Admin get country list
@@ -25,9 +25,7 @@ export class CountryAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CountryResponseArray, 'CountryResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryResponseArray, 'CountryResponseArray')
   }
 
   /**
@@ -38,9 +36,7 @@ export class CountryAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/countries/blacklist'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CountryBlacklistResponse, 'CountryBlacklistResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryBlacklistResponse, 'CountryBlacklistResponse')
   }
 
   /**
@@ -51,8 +47,6 @@ export class CountryAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/countries/blacklist'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

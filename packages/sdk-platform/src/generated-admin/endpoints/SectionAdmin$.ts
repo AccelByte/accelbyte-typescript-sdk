@@ -16,7 +16,7 @@ import { SectionUpdate } from '../../generated-definitions/SectionUpdate.js'
 
 export class SectionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to query sections.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated sections&lt;/li&gt;&lt;/ul&gt;
@@ -33,9 +33,7 @@ export class SectionAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/sections'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SectionPagingSlicedResult, 'SectionPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SectionPagingSlicedResult, 'SectionPagingSlicedResult')
   }
 
   /**
@@ -46,9 +44,7 @@ export class SectionAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/sections'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullSectionInfo, 'FullSectionInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
   }
 
   /**
@@ -61,9 +57,7 @@ export class SectionAdmin$ {
       .replace('{sectionId}', sectionId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -76,9 +70,7 @@ export class SectionAdmin$ {
       .replace('{sectionId}', sectionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullSectionInfo, 'FullSectionInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
   }
 
   /**
@@ -95,9 +87,7 @@ export class SectionAdmin$ {
       .replace('{sectionId}', sectionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullSectionInfo, 'FullSectionInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
   }
 
   /**
@@ -108,8 +98,6 @@ export class SectionAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/sections/purge/expired'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

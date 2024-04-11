@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ChatSnapshots } from '../generated-definitions/ChatSnapshots.js'
 import { ModerationAdmin$ } from './endpoints/ModerationAdmin$.js'
@@ -16,13 +17,13 @@ export function ModerationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Delete the chat snapshot
    */
   async function deleteSnapshot_ByChatId(chatId: string): Promise<unknown> {
-    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteSnapshot_ByChatId(chatId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +33,7 @@ export function ModerationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get the chat snapshot
    */
   async function getSnapshot_ByChatId(chatId: string): Promise<ChatSnapshots> {
-    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getSnapshot_ByChatId(chatId)
     if (resp.error) throw resp.error
     return resp.response.data

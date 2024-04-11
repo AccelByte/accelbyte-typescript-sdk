@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ListInventoryConfigurationsResp } from '../generated-definitions/ListInventoryConfigurationsResp.js'
 import { PublicInventoryConfigurations$ } from './endpoints/PublicInventoryConfigurations$.js'
@@ -16,7 +17,7 @@ export function PublicInventoryConfigurationsApi(sdk: AccelbyteSDK, args?: ApiAr
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination.
@@ -36,7 +37,7 @@ export function PublicInventoryConfigurationsApi(sdk: AccelbyteSDK, args?: ApiAr
       | 'updatedAt:asc'
       | 'updatedAt:desc'
   }): Promise<ListInventoryConfigurationsResp> {
-    const $ = new PublicInventoryConfigurations$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicInventoryConfigurations$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getInventoryConfigurations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

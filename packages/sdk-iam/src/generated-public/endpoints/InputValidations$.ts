@@ -13,7 +13,7 @@ import { InputValidationsPublicResponse } from '../../generated-definitions/Inpu
 
 export class InputValidations$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * No role required This endpoint is to get list of input validation configuration. &lt;code&gt;regex&lt;/code&gt; parameter will be returned if &lt;code&gt;isCustomRegex&lt;/code&gt; is true. Otherwise, it will be empty.
@@ -26,9 +26,12 @@ export class InputValidations$ {
     const url = '/iam/v3/public/inputValidations'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, InputValidationsPublicResponse, 'InputValidationsPublicResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      InputValidationsPublicResponse,
+      'InputValidationsPublicResponse'
+    )
   }
 
   /**
@@ -39,8 +42,11 @@ export class InputValidations$ {
     const url = '/iam/v3/public/inputValidations/{field}'.replace('{field}', field)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, InputValidationConfigVersion, 'InputValidationConfigVersion')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      InputValidationConfigVersion,
+      'InputValidationConfigVersion'
+    )
   }
 }

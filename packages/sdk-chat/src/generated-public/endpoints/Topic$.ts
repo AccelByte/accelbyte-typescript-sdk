@@ -20,7 +20,7 @@ import { UnmuteUserRequest } from '../../generated-definitions/UnmuteUserRequest
 
 export class Topic$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * get chat muted topics in a namespace.
@@ -30,9 +30,7 @@ export class Topic$ {
     const url = '/chat/public/namespaces/{namespace}/muted'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MutedTopicResponseArray, 'MutedTopicResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MutedTopicResponseArray, 'MutedTopicResponseArray')
   }
 
   /**
@@ -43,9 +41,7 @@ export class Topic$ {
     const url = '/chat/public/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
   }
 
   /**
@@ -56,9 +52,7 @@ export class Topic$ {
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/mute'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -72,9 +66,7 @@ export class Topic$ {
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
   }
 
   /**
@@ -85,9 +77,7 @@ export class Topic$ {
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/unmute'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -100,9 +90,12 @@ export class Topic$ {
       .replace('{topic}', topic)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PublicBanTopicMembersResponse, 'PublicBanTopicMembersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PublicBanTopicMembersResponse,
+      'PublicBanTopicMembersResponse'
+    )
   }
 
   /**
@@ -115,9 +108,12 @@ export class Topic$ {
       .replace('{topic}', topic)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PublicUnbanTopicMembersResponse, 'PublicUnbanTopicMembersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PublicUnbanTopicMembersResponse,
+      'PublicUnbanTopicMembersResponse'
+    )
   }
 
   /**
@@ -131,8 +127,6 @@ export class Topic$ {
       .replace('{chatId}', chatId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

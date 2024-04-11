@@ -17,7 +17,7 @@ import { UpdateGameSessionMemberStatusResponse } from '../../generated-definitio
 
 export class GameSessionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get all game sessions.
@@ -45,9 +45,7 @@ export class GameSessionAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/gamesessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
   }
 
   /**
@@ -58,9 +56,7 @@ export class GameSessionAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/gamesessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
   }
 
   /**
@@ -71,9 +67,12 @@ export class GameSessionAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/gamesessions/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DeleteBulkGameSessionsApiResponse, 'DeleteBulkGameSessionsApiResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      DeleteBulkGameSessionsApiResponse,
+      'DeleteBulkGameSessionsApiResponse'
+    )
   }
 
   /**
@@ -86,9 +85,7 @@ export class GameSessionAdmin$ {
       .replace('{sessionId}', sessionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -107,8 +104,11 @@ export class GameSessionAdmin$ {
       .replace('{statusType}', statusType)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateGameSessionMemberStatusResponse, 'UpdateGameSessionMemberStatusResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UpdateGameSessionMemberStatusResponse,
+      'UpdateGameSessionMemberStatusResponse'
+    )
   }
 }

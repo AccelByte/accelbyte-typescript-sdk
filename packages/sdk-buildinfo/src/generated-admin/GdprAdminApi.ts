@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BuildInfoPii } from '../generated-definitions/BuildInfoPii.js'
 import { GdprAdmin$ } from './endpoints/GdprAdmin$.js'
@@ -16,13 +17,13 @@ export function GdprAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This API is used to remove all stored data that relates to supplied machineId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of data related to machineId&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteGdprRemove(queryParams: { userId: string | null }): Promise<BuildInfoPii> {
-    const $ = new GdprAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GdprAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteGdprRemove(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +33,7 @@ export function GdprAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to get all stored data that relates to supplied machineId.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of data related to machineId&lt;/li&gt;&lt;/ul&gt;
    */
   async function getGdprRetrieve(queryParams: { userId: string | null }): Promise<BuildInfoPii> {
-    const $ = new GdprAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GdprAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGdprRetrieve(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

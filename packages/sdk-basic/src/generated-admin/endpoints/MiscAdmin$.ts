@@ -18,7 +18,7 @@ import { UpdateCountryGroupRequest } from '../../generated-definitions/UpdateCou
 
 export class MiscAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * @deprecated
@@ -29,9 +29,7 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CountryObjectArray, 'CountryObjectArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryObjectArray, 'CountryObjectArray')
   }
 
   /**
@@ -42,9 +40,7 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/languages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -55,9 +51,7 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/timezones'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -68,9 +62,12 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/countrygroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveCountryGroupResponseArray, 'RetrieveCountryGroupResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveCountryGroupResponseArray,
+      'RetrieveCountryGroupResponseArray'
+    )
   }
 
   /**
@@ -81,9 +78,7 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/countrygroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AddCountryGroupResponse, 'AddCountryGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddCountryGroupResponse, 'AddCountryGroupResponse')
   }
 
   /**
@@ -96,9 +91,7 @@ export class MiscAdmin$ {
       .replace('{countryGroupCode}', countryGroupCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -114,8 +107,6 @@ export class MiscAdmin$ {
       .replace('{countryGroupCode}', countryGroupCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CountryGroupObject, 'CountryGroupObject')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryGroupObject, 'CountryGroupObject')
   }
 }

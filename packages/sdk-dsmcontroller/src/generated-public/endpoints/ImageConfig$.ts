@@ -14,7 +14,7 @@ import { ListImageResponse } from '../../generated-definitions/ListImageResponse
 
 export class ImageConfig$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint lists all of dedicated servers images. Parameter Offset and Count is Required
@@ -30,9 +30,7 @@ export class ImageConfig$ {
     const url = '/dsmcontroller/namespaces/{namespace}/images'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListImageResponse, 'ListImageResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListImageResponse, 'ListImageResponse')
   }
 
   /**
@@ -43,9 +41,7 @@ export class ImageConfig$ {
     const url = '/dsmcontroller/namespaces/{namespace}/images/limit'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetImageLimitResponse, 'GetImageLimitResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetImageLimitResponse, 'GetImageLimitResponse')
   }
 
   /**
@@ -58,8 +54,6 @@ export class ImageConfig$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetImageDetailResponse, 'GetImageDetailResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetImageDetailResponse, 'GetImageDetailResponse')
   }
 }

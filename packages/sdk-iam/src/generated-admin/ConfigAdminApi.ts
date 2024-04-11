@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ConfigAdmin$ } from './endpoints/ConfigAdmin$.js'
 import { ConfigValueResponseV3 } from '../generated-definitions/ConfigValueResponseV3.js'
@@ -16,13 +17,13 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled
    */
   async function getConfig_ByConfigKey(configKey: string): Promise<ConfigValueResponseV3> {
-    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getConfig_ByConfigKey(configKey)
     if (resp.error) throw resp.error
     return resp.response.data

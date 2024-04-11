@@ -12,7 +12,7 @@ import { RecentPlayerQueryResponse } from '../../generated-definitions/RecentPla
 
 export class RecentPlayer$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query user&#39;s recent player. Please ensure environment variable &#34;RECENT_PLAYER_ENABLED&#34; is set to &#34;TRUE&#34; to use this feature.
@@ -22,9 +22,7 @@ export class RecentPlayer$ {
     const url = '/session/v1/public/namespaces/{namespace}/recent-player'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
   }
 
   /**
@@ -35,8 +33,6 @@ export class RecentPlayer$ {
     const url = '/session/v1/public/namespaces/{namespace}/recent-team-player'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
   }
 }

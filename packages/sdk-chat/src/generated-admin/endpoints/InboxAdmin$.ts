@@ -27,7 +27,7 @@ import { UpdateInboxMessageRequest } from '../../generated-definitions/UpdateInb
 
 export class InboxAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get inbox stats
@@ -37,9 +37,7 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/stats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetInboxStatsResponse, 'GetInboxStatsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetInboxStatsResponse, 'GetInboxStatsResponse')
   }
 
   /**
@@ -61,9 +59,7 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetInboxMessagesResponse, 'GetInboxMessagesResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetInboxMessagesResponse, 'GetInboxMessagesResponse')
   }
 
   /**
@@ -74,9 +70,7 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SaveInboxMessageResponse, 'SaveInboxMessageResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SaveInboxMessageResponse, 'SaveInboxMessageResponse')
   }
 
   /**
@@ -87,9 +81,12 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetInboxCategoriesResponseItemArray, 'GetInboxCategoriesResponseItemArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetInboxCategoriesResponseItemArray,
+      'GetInboxCategoriesResponseItemArray'
+    )
   }
 
   /**
@@ -100,9 +97,7 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AddInboxCategoryResponse, 'AddInboxCategoryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddInboxCategoryResponse, 'AddInboxCategoryResponse')
   }
 
   /**
@@ -115,9 +110,7 @@ export class InboxAdmin$ {
       .replace('{messageId}', messageId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -130,9 +123,7 @@ export class InboxAdmin$ {
       .replace('{messageId}', messageId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -145,9 +136,7 @@ export class InboxAdmin$ {
       .replace('{category}', category)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -160,9 +149,7 @@ export class InboxAdmin$ {
       .replace('{category}', category)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -178,9 +165,7 @@ export class InboxAdmin$ {
       .replace('{inbox}', inbox)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetInboxUsersResponse, 'GetInboxUsersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetInboxUsersResponse, 'GetInboxUsersResponse')
   }
 
   /**
@@ -193,9 +178,12 @@ export class InboxAdmin$ {
       .replace('{inbox}', inbox)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UnsendInboxMessageResponse, 'UnsendInboxMessageResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UnsendInboxMessageResponse,
+      'UnsendInboxMessageResponse'
+    )
   }
 
   /**
@@ -208,9 +196,7 @@ export class InboxAdmin$ {
       .replace('{messageId}', messageId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SendInboxMessageResponse, 'SendInboxMessageResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SendInboxMessageResponse, 'SendInboxMessageResponse')
   }
 
   /**
@@ -223,8 +209,6 @@ export class InboxAdmin$ {
       .replace('{category}', category)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, JsonSchemaType, 'JsonSchemaType')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, JsonSchemaType, 'JsonSchemaType')
   }
 }

@@ -16,7 +16,7 @@ import { UserPersonalDataResponse } from '../../generated-definitions/UserPerson
 
 export class DataRetrievalAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get list personal data requests Scope: account
@@ -30,9 +30,7 @@ export class DataRetrievalAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/requests'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListPersonalDataResponse, 'ListPersonalDataResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListPersonalDataResponse, 'ListPersonalDataResponse')
   }
 
   /**
@@ -45,9 +43,7 @@ export class DataRetrievalAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserPersonalDataResponse, 'UserPersonalDataResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserPersonalDataResponse, 'UserPersonalDataResponse')
   }
 
   /**
@@ -63,9 +59,7 @@ export class DataRetrievalAdmin$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DataRetrievalResponse, 'DataRetrievalResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DataRetrievalResponse, 'DataRetrievalResponse')
   }
 
   /**
@@ -79,9 +73,7 @@ export class DataRetrievalAdmin$ {
       .replace('{requestDate}', requestDate)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -102,8 +94,6 @@ export class DataRetrievalAdmin$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserDataUrl, 'UserDataUrl')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserDataUrl, 'UserDataUrl')
   }
 }

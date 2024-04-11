@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreateGoalRequest } from '../generated-definitions/CreateGoalRequest.js'
 import { GetGoalsResponse } from '../generated-definitions/GetGoalsResponse.js'
@@ -19,7 +20,7 @@ export function GoalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -28,7 +29,7 @@ export function GoalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     challengeCode: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
   ): Promise<GetGoalsResponse> {
-    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGoals_ByChallengeCode(challengeCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +39,7 @@ export function GoalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]&lt;/li&gt;&lt;p&gt;Request body:&lt;ul&gt;&lt;li&gt;code: unique within a challenge&lt;/li&gt;&lt;li&gt;name: name of the goal &lt;/li&gt;&lt;li&gt;description: text describing the goal (optional)&lt;/li&gt;&lt;li&gt;schedule: a time range that indicated the availability of a goal within a timeframe. used in fixed assignment rule&lt;/li&gt;&lt;li&gt;requirementGroups: list of conditions that conform with the goal progressions. &lt;/li&gt;&lt;li&gt;rewards: list of rewards that will be claimable once a goal is complete &lt;/li&gt;&lt;li&gt;tag: goal&#39;s labels&lt;/li&gt;&lt;li&gt;isActive: when goal is in a schedule, isActive determine whether goal is active to progress or not&lt;/li&gt;&lt;/ul&gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.
    */
   async function createGoal_ByChallengeCode(challengeCode: string, data: CreateGoalRequest): Promise<GoalResponse> {
-    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createGoal_ByChallengeCode(challengeCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -48,7 +49,7 @@ export function GoalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [DELETE]&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteGoal_ByChallengeCode_ByCode(challengeCode: string, code: string): Promise<unknown> {
-    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteGoal_ByChallengeCode_ByCode(challengeCode, code)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +59,7 @@ export function GoalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
    */
   async function getGoal_ByChallengeCode_ByCode(challengeCode: string, code: string): Promise<GoalResponse> {
-    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGoal_ByChallengeCode_ByCode(challengeCode, code)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +69,7 @@ export function GoalConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Request body:&lt;ul&gt;&lt;li&gt;name: name of the goal &lt;/li&gt;&lt;li&gt;description: text describing the goal (optional)&lt;/li&gt;&lt;li&gt;schedule (optional): a time range that indicated the availability of a goal within a timeframe. used in fixed assignment rule&lt;/li&gt;&lt;li&gt;requirementGroups: list of conditions that conform with the goal progressions. &lt;/li&gt;&lt;li&gt;rewards: list of rewards that will be claimable once a goal is complete &lt;/li&gt;&lt;li&gt;tag: goal&#39;s labels&lt;/li&gt;&lt;li&gt;isActive (optional): when goal is in a schedule, isActive determine whether goal is active to progress or not&lt;/li&gt;&lt;/ul&gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.
    */
   async function updateGoal_ByChallengeCode_ByCode(challengeCode: string, code: string, data: UpdateGoalRequest): Promise<GoalResponse> {
-    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GoalConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateGoal_ByChallengeCode_ByCode(challengeCode, code, data)
     if (resp.error) throw resp.error
     return resp.response.data

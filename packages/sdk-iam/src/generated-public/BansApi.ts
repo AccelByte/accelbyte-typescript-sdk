@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BanReasons } from '../generated-definitions/BanReasons.js'
 import { Bans } from '../generated-definitions/Bans.js'
@@ -17,14 +18,14 @@ export function BansApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans [GET]_**
    */
   async function getBans(): Promise<Bans> {
-    const $ = new Bans$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Bans$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getBans()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +36,7 @@ export function BansApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans/reasons [GET]_**
    */
   async function getBansReasons(): Promise<BanReasons> {
-    const $ = new Bans$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Bans$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getBansReasons()
     if (resp.error) throw resp.error
     return resp.response.data

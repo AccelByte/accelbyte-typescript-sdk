@@ -19,7 +19,7 @@ import { UpdateItemRespArray } from '../../generated-definitions/UpdateItemRespA
 
 export class PublicItems$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    *  Bulk remove user&#39;s own items.
@@ -31,9 +31,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
   }
 
   /**
@@ -65,9 +63,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListItemResp, 'ListItemResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListItemResp, 'ListItemResp')
   }
 
   /**
@@ -80,9 +76,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
   }
 
   /**
@@ -95,9 +89,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ItemResp, 'ItemResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemResp, 'ItemResp')
   }
 
   /**
@@ -110,9 +102,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MoveItemsResp, 'MoveItemsResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MoveItemsResp, 'MoveItemsResp')
   }
 
   /**
@@ -131,8 +121,6 @@ export class PublicItems$ {
       .replace('{sourceItemId}', sourceItemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ItemResp, 'ItemResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemResp, 'ItemResp')
   }
 }

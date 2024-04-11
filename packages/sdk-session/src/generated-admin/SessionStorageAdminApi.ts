@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { SessionStorageAdmin$ } from './endpoints/SessionStorageAdmin$.js'
 
@@ -15,13 +16,13 @@ export function SessionStorageAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    *  Delete Session Storage By sessionID Session Storage feature only available for Gamesession
    */
   async function deleteStorage_BySessionId(sessionId: string): Promise<unknown> {
-    const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteStorage_BySessionId(sessionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -31,7 +32,7 @@ export function SessionStorageAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Read Session Storage by sessionID Session Storage feature only available for Gamesession
    */
   async function getStorage_BySessionId(sessionId: string): Promise<unknown> {
-    const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStorage_BySessionId(sessionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +42,7 @@ export function SessionStorageAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Read Session Storage by sessionID and userID Session Storage feature only available for Gamesession
    */
   async function getStorageUser_BySessionId_ByUserId(sessionId: string, userId: string): Promise<unknown> {
-    const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionStorageAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStorageUser_BySessionId_ByUserId(sessionId, userId)
     if (resp.error) throw resp.error
     return resp.response.data

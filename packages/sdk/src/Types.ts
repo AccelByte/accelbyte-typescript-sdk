@@ -24,7 +24,6 @@ import { RequestInterceptor, ResponseInterceptor, ErrorInterceptor } from './uti
 export interface ApiArgs {
   config?: SDKRequestConfig
   namespace?: string
-  isValidationEnabled?: boolean
 }
 
 export interface CustomInterceptors {

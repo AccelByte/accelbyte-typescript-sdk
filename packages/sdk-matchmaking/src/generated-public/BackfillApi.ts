@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BackFillAcceptRequest } from '../generated-definitions/BackFillAcceptRequest.js'
 import { BackFillCreateRequest } from '../generated-definitions/BackFillCreateRequest.js'
@@ -22,13 +23,13 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Create backfill ticket.
    */
   async function createBackfill(data: BackFillCreateRequest): Promise<BackfillCreateResponse> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createBackfill(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +39,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get backfill proposal
    */
   async function getBackfillProposal(queryParams: { sessionID: string | null }): Promise<BackfillProposalResponse> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getBackfillProposal(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -48,7 +49,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete backfill ticket.
    */
   async function deleteBackfill_ByBackfillId(backfillID: string): Promise<unknown> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteBackfill_ByBackfillId(backfillID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +59,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get backfill ticket by ID
    */
   async function getBackfill_ByBackfillId(backfillID: string): Promise<BackfillGetResponse> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getBackfill_ByBackfillId(backfillID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +69,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Accept backfill proposal.
    */
   async function updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<GameSession> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateProposalAccept_ByBackfillId(backfillID, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -78,7 +79,7 @@ export function BackfillApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Reject backfill proposal
    */
   async function updateProposalReject_ByBackfillId(backfillID: string, data: BackFillRejectRequest): Promise<unknown> {
-    const $ = new Backfill$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Backfill$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateProposalReject_ByBackfillId(backfillID, data)
     if (resp.error) throw resp.error
     return resp.response.data

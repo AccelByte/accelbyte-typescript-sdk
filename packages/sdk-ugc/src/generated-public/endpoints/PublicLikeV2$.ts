@@ -14,7 +14,7 @@ import { PaginatedContentLikersResponse } from '../../generated-definitions/Pagi
 
 export class PublicLikeV2$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint will only display the list of users who performed like from v2 endpoint.
@@ -29,9 +29,12 @@ export class PublicLikeV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentLikersResponse, 'PaginatedContentLikersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentLikersResponse,
+      'PaginatedContentLikersResponse'
+    )
   }
 
   /**
@@ -44,8 +47,6 @@ export class PublicLikeV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ContentLikeResponse, 'ContentLikeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ContentLikeResponse, 'ContentLikeResponse')
   }
 }

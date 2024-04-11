@@ -13,7 +13,7 @@ import { GlobalStatItemPagingSlicedResult } from '../../generated-definitions/Gl
 
 export class GlobalStatisticAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * List global statItems by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STATITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat items&lt;/li&gt;&lt;/ul&gt;
@@ -27,9 +27,12 @@ export class GlobalStatisticAdmin$ {
     const url = '/social/v1/admin/namespaces/{namespace}/globalstatitems'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GlobalStatItemPagingSlicedResult, 'GlobalStatItemPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GlobalStatItemPagingSlicedResult,
+      'GlobalStatItemPagingSlicedResult'
+    )
   }
 
   /**
@@ -42,8 +45,6 @@ export class GlobalStatisticAdmin$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GlobalStatItemInfo, 'GlobalStatItemInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GlobalStatItemInfo, 'GlobalStatItemInfo')
   }
 }

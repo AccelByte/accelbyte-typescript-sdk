@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { LoginQueueTicketResponse } from '../generated-definitions/LoginQueueTicketResponse.js'
 import { OAuth20V4$ } from './endpoints/OAuth20V4$.js'
@@ -16,7 +17,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This endpoint supports grant type: 1. Grant Type == &lt;code&gt;authorization_code&lt;/code&gt;: It generates the user token by given the authorization code which generated in &#34;/iam/v3/authenticate&#34; API response. It should also pass in the redirect_uri, which should be the same as generating the authorization code request. 2. Grant Type == &lt;code&gt;password&lt;/code&gt;: The grant type to use for authenticating a user, whether it&#39;s by email / username and password combination or through platform. 3. Grant Type == &lt;code&gt;refresh_token&lt;/code&gt;: Used to get a new access token for a valid refresh token. 4. Grant Type == &lt;code&gt;client_credentials&lt;/code&gt;: It generates a token by checking the client credentials provided through Authorization header. 5. Grant Type == &lt;code&gt;urn:ietf:params:oauth:grant-type:extend_client_credentials&lt;/code&gt;: It generates a token by checking the client credentials provided through Authorization header. It only allows publisher/studio namespace client. In generated token: 1. There wil be no roles, namespace_roles &amp; permission. 2. The scope will be fixed as &#39;extend&#39;. 3. There will have a new field &#39;extend_namespace&#39;, the value is from token request body. 6. Grant Type == &lt;code&gt;urn:ietf:params:oauth:grant-type:login_queue_ticket&lt;/code&gt;: It generates a token by validating the login queue ticket against login queue service. ## Access Token Content Following is the access token’s content: - **namespace**. It is the namespace the token was generated from. - **display_name**. The display name of the sub. It is empty if the token is generated from the client credential - **roles**. The sub’s roles. It is empty if the token is generated from the client credential - **namespace_roles**. The sub’s roles scoped to namespace. Improvement from roles, which make the role scoped to specific namespace instead of global to publisher namespace - **permissions**. The sub or aud’ permissions - **bans**. The sub’s list of bans. It is used by the IAM client for validating the token. - **jflgs**. It stands for Justice Flags. It is a special flag used for storing additional status information regarding the sub. It is implemented as a bit mask. Following explains what each bit represents: - 1: Email Address Verified - 2: Phone Number Verified - 4: Anonymous - 8: Suspicious Login - **aud**. The aud is the targeted resource server. - **iat**. The time the token issues at. It is in Epoch time format - **exp**. The time the token expires. It is in Epoch time format - **client_id**. The UserID. The sub is omitted if the token is generated from client credential - **scope**. The scope of the access request, expressed as a list of space-delimited, case-sensitive strings ## Bans The JWT contains user&#39;s active bans with its expiry date. List of ban types can be obtained from /bans. ## Device Cookie Validation _**For grant type &#34;password&#34; only**_ Device Cookie is used to protect the user account from brute force login attack, &lt;a target=&#34;_blank&#34; href=&#34;https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies&#34;&gt;more detail from OWASP&lt;a&gt;. This endpoint will read device cookie from request header **Auth-Trust-Id**. If device cookie not found, it will generate a new one and set it into response body **auth_trust_id** when successfully login. ## Track Login History This endpoint will track login history to detect suspicious login activity, please provide **Device-Id** (alphanumeric) in request header parameter otherwise it will set to &#34;unknown&#34;. Align with General Data Protection Regulation in Europe, user login history will be kept within 28 days by default&#34; ## 2FA remember device To remember device for 2FA, should provide cookie: device_token or header: Device-Token ## Response note If it is a user token request and user hasn&#39;t accepted required legal policy, the field &lt;code&gt;is_comply&lt;/code&gt; will be false in response and responsed token will have no permission. action code: 10703
@@ -44,7 +45,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
   ): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postOauthToken(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +60,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     mfaToken: string | null
     rememberDevice: boolean | null
   }): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postOauthMfaVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +74,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     additionalData?: string | null
     extend_exp?: boolean | null
   }): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postOauthHeadlesToken(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +84,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is being used to generate target token. It requires basic header with ClientID and Secret, it should match the ClientID when call &lt;code&gt;/iam/v3/namespace/{namespace}/token/request&lt;/code&gt; The code should be generated from &lt;code&gt;/iam/v3/namespace/{namespace}/token/request&lt;/code&gt;.
    */
   async function postOauthTokenExchange(data: { code: string | null; additionalData?: string | null }): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postOauthTokenExchange(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -101,7 +102,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
   ): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postOauthSimultaneousLogin(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -117,7 +118,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     username: string | null
     extend_exp?: boolean | null
   }): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postOauthAuthenticateWithLink(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -139,7 +140,7 @@ export function OAuth20V4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }
   ): Promise<LoginQueueTicketResponse> {
-    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new OAuth20V4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postTokenOauth_ByPlatformId(platformId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

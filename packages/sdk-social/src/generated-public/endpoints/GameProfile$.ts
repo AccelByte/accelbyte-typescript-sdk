@@ -17,7 +17,7 @@ import { UserGameProfilesArray } from '../../generated-definitions/UserGameProfi
 
 export class GameProfile$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Returns all profiles for specified users.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:GAMEPROFILE&#34;, action=2 (READ) &lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/ul&gt;
@@ -27,9 +27,7 @@ export class GameProfile$ {
     const url = '/social/public/namespaces/{namespace}/profiles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserGameProfilesArray, 'UserGameProfilesArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserGameProfilesArray, 'UserGameProfilesArray')
   }
 
   /**
@@ -42,9 +40,7 @@ export class GameProfile$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameProfileHeaderArray, 'GameProfileHeaderArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameProfileHeaderArray, 'GameProfileHeaderArray')
   }
 
   /**
@@ -57,9 +53,7 @@ export class GameProfile$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -73,9 +67,7 @@ export class GameProfile$ {
       .replace('{profileId}', profileId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -89,9 +81,7 @@ export class GameProfile$ {
       .replace('{profileId}', profileId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameProfileInfo, 'GameProfileInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameProfileInfo, 'GameProfileInfo')
   }
 
   /**
@@ -105,9 +95,7 @@ export class GameProfile$ {
       .replace('{profileId}', profileId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameProfileInfo, 'GameProfileInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameProfileInfo, 'GameProfileInfo')
   }
 
   /**
@@ -126,9 +114,7 @@ export class GameProfile$ {
       .replace('{attributeName}', attributeName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, Attribute, 'Attribute')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Attribute, 'Attribute')
   }
 
   /**
@@ -148,8 +134,6 @@ export class GameProfile$ {
       .replace('{attributeName}', attributeName)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameProfileInfo, 'GameProfileInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameProfileInfo, 'GameProfileInfo')
   }
 }

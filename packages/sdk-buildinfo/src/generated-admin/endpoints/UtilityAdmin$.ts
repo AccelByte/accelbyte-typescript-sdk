@@ -16,7 +16,7 @@ import { PingResultResponse } from '../../generated-definitions/PingResultRespon
 
 export class UtilityAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to manually checks the readiness of differ.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ping result&lt;/li&gt;&lt;/ul&gt;
@@ -26,9 +26,7 @@ export class UtilityAdmin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/ping/differ'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PingResultResponse, 'PingResultResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PingResultResponse, 'PingResultResponse')
   }
 
   /**
@@ -39,9 +37,7 @@ export class UtilityAdmin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigurationInfo, 'ConfigurationInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigurationInfo, 'ConfigurationInfo')
   }
 
   /**
@@ -52,9 +48,7 @@ export class UtilityAdmin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigurationInfo, 'ConfigurationInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigurationInfo, 'ConfigurationInfo')
   }
 
   /**
@@ -65,9 +59,7 @@ export class UtilityAdmin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/validateSDKConfig'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ClientPayload, 'ClientPayload')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientPayload, 'ClientPayload')
   }
 
   /**
@@ -78,8 +70,6 @@ export class UtilityAdmin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/cleanerConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CleanerConfigObject, 'CleanerConfigObject')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CleanerConfigObject, 'CleanerConfigObject')
   }
 }

@@ -28,7 +28,7 @@ import { UserUnfriendRequest } from '../../generated-definitions/UserUnfriendReq
 
 export class Friends$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get list of friends in a namespace.
@@ -38,9 +38,12 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetUserFriendsResponseArray, 'GetUserFriendsResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetUserFriendsResponseArray,
+      'GetUserFriendsResponseArray'
+    )
   }
 
   /**
@@ -51,9 +54,12 @@ export class Friends$ {
     const url = '/friends/sync/namespaces/{namespace}/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NativeFriendSyncResponseArray, 'NativeFriendSyncResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      NativeFriendSyncResponseArray,
+      'NativeFriendSyncResponseArray'
+    )
   }
 
   /**
@@ -64,9 +70,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -77,9 +81,12 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/incoming'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetUserIncomingFriendsResponseArray, 'GetUserIncomingFriendsResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetUserIncomingFriendsResponseArray,
+      'GetUserIncomingFriendsResponseArray'
+    )
   }
 
   /**
@@ -90,9 +97,12 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/outgoing'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetUserOutgoingFriendsResponseArray, 'GetUserOutgoingFriendsResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetUserOutgoingFriendsResponseArray,
+      'GetUserOutgoingFriendsResponseArray'
+    )
   }
 
   /**
@@ -103,9 +113,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/unfriend'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -116,9 +124,12 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/platforms'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListBulkUserPlatformsResponse, 'ListBulkUserPlatformsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListBulkUserPlatformsResponse,
+      'ListBulkUserPlatformsResponse'
+    )
   }
 
   /**
@@ -132,9 +143,12 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/incoming-time'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, LoadIncomingFriendsWithTimeResponseArray, 'LoadIncomingFriendsWithTimeResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      LoadIncomingFriendsWithTimeResponseArray,
+      'LoadIncomingFriendsWithTimeResponseArray'
+    )
   }
 
   /**
@@ -148,9 +162,12 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/outgoing-time'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, LoadOutgoingFriendsWithTimeResponseArray, 'LoadOutgoingFriendsWithTimeResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      LoadOutgoingFriendsWithTimeResponseArray,
+      'LoadOutgoingFriendsWithTimeResponseArray'
+    )
   }
 
   /**
@@ -161,9 +178,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/request/accept'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -174,9 +189,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/request/cancel'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -187,9 +200,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/request/reject'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -202,9 +213,12 @@ export class Friends$ {
       .replace('{friendId}', friendId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UserGetFriendshipStatusResponse, 'UserGetFriendshipStatusResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UserGetFriendshipStatusResponse,
+      'UserGetFriendshipStatusResponse'
+    )
   }
 
   /**
@@ -215,9 +229,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/users/{userId}/add/bulk'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -230,8 +242,6 @@ export class Friends$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BulkFriendsResponse, 'BulkFriendsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkFriendsResponse, 'BulkFriendsResponse')
   }
 }

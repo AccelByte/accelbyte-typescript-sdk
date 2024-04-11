@@ -13,7 +13,7 @@ import { RetrieveUserEligibilitiesResponseArray } from '../../generated-definiti
 
 export class Eligibilities$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
@@ -23,9 +23,12 @@ export class Eligibilities$ {
     const url = '/agreement/public/eligibilities/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveUserEligibilitiesResponseArray, 'RetrieveUserEligibilitiesResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveUserEligibilitiesResponseArray,
+      'RetrieveUserEligibilitiesResponseArray'
+    )
   }
 
   /**
@@ -44,8 +47,11 @@ export class Eligibilities$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveUserEligibilitiesIndirectResponse, 'RetrieveUserEligibilitiesIndirectResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveUserEligibilitiesIndirectResponse,
+      'RetrieveUserEligibilitiesIndirectResponse'
+    )
   }
 }

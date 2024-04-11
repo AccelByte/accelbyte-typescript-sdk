@@ -12,7 +12,7 @@ import { ListEnvironmentVariablesResponse } from '../../generated-definitions/Li
 
 export class EnvironmentVariables$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * List environment variables.
@@ -22,8 +22,11 @@ export class EnvironmentVariables$ {
     const url = '/match2/v1/environment-variables'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListEnvironmentVariablesResponse, 'ListEnvironmentVariablesResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListEnvironmentVariablesResponse,
+      'ListEnvironmentVariablesResponse'
+    )
   }
 }

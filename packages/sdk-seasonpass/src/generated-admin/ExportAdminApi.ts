@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ExportAdmin$ } from './endpoints/ExportAdmin$.js'
 
@@ -15,13 +16,13 @@ export function ExportAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This API is used to export all of season service data files with csv format.
    */
   async function getExport(): Promise<unknown> {
-    const $ = new ExportAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ExportAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getExport()
     if (resp.error) throw resp.error
     return resp.response.data

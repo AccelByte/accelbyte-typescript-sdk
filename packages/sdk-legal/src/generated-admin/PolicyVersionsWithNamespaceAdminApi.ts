@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreatePolicyVersionRequest } from '../generated-definitions/CreatePolicyVersionRequest.js'
 import { CreatePolicyVersionResponse } from '../generated-definitions/CreatePolicyVersionResponse.js'
@@ -20,7 +21,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -29,7 +30,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyId: string,
     queryParams?: { versionId?: string | null }
   ): Promise<RetrievePolicyVersionResponseArray> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getVersions_ByPolicyId(policyId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +40,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
    * Create a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function createVersion_ByPolicyId(policyId: string, data: CreatePolicyVersionRequest): Promise<CreatePolicyVersionResponse> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createVersion_ByPolicyId(policyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +53,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyVersionId: string,
     data: UpdatePolicyVersionRequest
   ): Promise<UpdatePolicyVersionResponse> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchPolicyVersion_ByPolicyVersionId(policyVersionId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -65,7 +66,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyVersionId: string,
     queryParams?: { shouldNotify?: boolean | null }
   ): Promise<unknown> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchLatestPolicy_ByPolicyVersionId(policyVersionId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

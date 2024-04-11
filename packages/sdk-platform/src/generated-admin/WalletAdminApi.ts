@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BulkCreditRequest } from '../generated-definitions/BulkCreditRequest.js'
 import { BulkCreditResult } from '../generated-definitions/BulkCreditResult.js'
@@ -32,7 +33,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * @deprecated
@@ -45,7 +46,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     origin?: 'Epic' | 'GooglePlay' | 'IOS' | 'Nintendo' | 'Oculus' | 'Other' | 'Playstation' | 'Steam' | 'System' | 'Twitch' | 'Xbox'
     userId?: string | null
   }): Promise<WalletPagingSlicedResult> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getWallets(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +56,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Debit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createWalletDebit(data: BulkDebitRequest[]): Promise<BulkDebitResult> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createWalletDebit(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -65,7 +66,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Credit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createWalletCredit(data: BulkCreditRequest[]): Promise<BulkCreditResult> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createWalletCredit(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -76,7 +77,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * get a wallet by wallet id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getWallet_ByWalletId(walletId: string): Promise<WalletInfo> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getWallet_ByWalletId(walletId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -87,7 +88,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * get a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getWallet_ByUserId_ByWalletId(userId: string, walletId: string): Promise<WalletInfo> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getWallet_ByUserId_ByWalletId(userId, walletId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -97,7 +98,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get platform wallet config list.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getWalletConfig_ByPlatform(platform: string): Promise<PlatformWalletConfigInfo> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getWalletConfig_ByPlatform(platform)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -107,7 +108,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update platform wallet config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateWalletConfig_ByPlatform(platform: string, data: PlatformWalletConfigUpdate): Promise<PlatformWalletConfigInfo> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateWalletConfig_ByPlatform(platform, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -118,7 +119,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Debit a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateDebit_ByUserId_ByWalletId(userId: string, walletId: string, data: DebitRequest): Promise<WalletInfo> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateDebit_ByUserId_ByWalletId(userId, walletId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -128,7 +129,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Reset platform wallet config to default config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateWalletConfigReset_ByPlatform(platform: string): Promise<PlatformWalletConfigInfo> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateWalletConfigReset_ByPlatform(platform)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -139,7 +140,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * enable a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateEnable_ByUserId_ByWalletId(userId: string, walletId: string): Promise<unknown> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateEnable_ByUserId_ByWalletId(userId, walletId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -150,7 +151,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * disable a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateDisable_ByUserId_ByWalletId(userId: string, walletId: string): Promise<unknown> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateDisable_ByUserId_ByWalletId(userId, walletId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -160,7 +161,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user currency wallet summary.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency wallet summary&lt;/li&gt;&lt;/ul&gt;
    */
   async function getWalletsCurrenciesSummary_ByUserId(userId: string): Promise<CurrencyWalletArray> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getWalletsCurrenciesSummary_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -177,7 +178,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       origin: 'Epic' | 'GooglePlay' | 'IOS' | 'Nintendo' | 'Oculus' | 'Other' | 'Playstation' | 'Steam' | 'System' | 'Twitch' | 'Xbox'
     }
   ): Promise<unknown> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getCheck_ByUserId_ByCurrencyCode(userId, currencyCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -187,7 +188,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Credit a user wallet by currency code and balance origin, if wallet not exists, it will create a new wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCredit_ByUserId_ByCurrencyCode(userId: string, currencyCode: string, data: CreditRequest): Promise<WalletInfo> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateCredit_ByUserId_ByCurrencyCode(userId, currencyCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -201,7 +202,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     currencyCode: string,
     data: PaymentRequest
   ): Promise<PlatformWallet> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updatePayment_ByUserId_ByCurrencyCode(userId, currencyCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -216,7 +217,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     walletId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<DetailedWalletTransactionPagingSlicedResult> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTransactions_ByUserId_ByWalletId(userId, walletId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -230,7 +231,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     currencyCode: string,
     data: DebitByWalletPlatformRequest
   ): Promise<unknown> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createBalanceCheck_ByUserId_ByCurrencyCode(userId, currencyCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -244,7 +245,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     currencyCode: string,
     data: DebitByCurrencyCodeRequest
   ): Promise<WalletInfo> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateDebitWallet_ByUserId_ByCurrencyCode(userId, currencyCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -258,7 +259,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     currencyCode: string,
     data: DebitByWalletPlatformRequest
   ): Promise<PlatformWallet> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateDebitByWalletPlatform_ByUserId_ByCurrencyCode(userId, currencyCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -272,7 +273,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     currencyCode: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<WalletTransactionPagingSlicedResult> {
-    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getTransactionsWallets_ByUserId_ByCurrencyCode(userId, currencyCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -20,7 +20,7 @@ import { DictionaryUpdateRequest } from '../../generated-definitions/DictionaryU
 
 export class ProfanityAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query all profanity words.
@@ -38,9 +38,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DictionaryQueryResult, 'DictionaryQueryResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DictionaryQueryResult, 'DictionaryQueryResult')
   }
 
   /**
@@ -51,9 +49,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, Dictionary, 'Dictionary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Dictionary, 'Dictionary')
   }
 
   /**
@@ -64,9 +60,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/{id}'.replace('{namespace}', this.namespace).replace('{id}', id)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -77,9 +71,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/{id}'.replace('{namespace}', this.namespace).replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, Dictionary, 'Dictionary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Dictionary, 'Dictionary')
   }
 
   /**
@@ -90,9 +82,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, Dictionary, 'Dictionary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Dictionary, 'Dictionary')
   }
 
   /**
@@ -103,9 +93,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/group'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DictionaryGroupArray, 'DictionaryGroupArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DictionaryGroupArray, 'DictionaryGroupArray')
   }
 
   /**
@@ -116,9 +104,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DictionaryExport, 'DictionaryExport')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DictionaryExport, 'DictionaryExport')
   }
 
   /**
@@ -133,8 +119,6 @@ export class ProfanityAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DictionaryImportResult, 'DictionaryImportResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DictionaryImportResult, 'DictionaryImportResult')
   }
 }

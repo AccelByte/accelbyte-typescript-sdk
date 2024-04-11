@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CertificateAdmin$ } from './endpoints/CertificateAdmin$.js'
 import { PlatformCredentials } from '../generated-definitions/PlatformCredentials.js'
@@ -16,7 +17,7 @@ export function CertificateAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Upload certificates for xbox. Certificate must be in the valid form of PFX format.
@@ -27,7 +28,7 @@ export function CertificateAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     certname: string | null
     description?: string | null
   }): Promise<PlatformCredentials> {
-    const $ = new CertificateAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new CertificateAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateCertificatePfxPlatformXbl(data)
     if (resp.error) throw resp.error
     return resp.response.data

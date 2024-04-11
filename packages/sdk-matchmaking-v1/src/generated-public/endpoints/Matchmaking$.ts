@@ -24,7 +24,7 @@ import { TicketMetricResultRecord } from '../../generated-definitions/TicketMetr
 
 export class Matchmaking$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Reads all available channels in a namespace
@@ -34,9 +34,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetChannelsResponse, 'GetChannelsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetChannelsResponse, 'GetChannelsResponse')
   }
 
   /**
@@ -47,9 +45,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateChannelResponse, 'CreateChannelResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateChannelResponse, 'CreateChannelResponse')
   }
 
   /**
@@ -60,9 +56,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/sessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -73,9 +67,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/rebalance'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RebalanceResponse, 'RebalanceResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RebalanceResponse, 'RebalanceResponse')
   }
 
   /**
@@ -86,9 +78,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/matchresult'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MatchResultResponse, 'MatchResultResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchResultResponse, 'MatchResultResponse')
   }
 
   /**
@@ -99,9 +89,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/sessions/dequeue'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -114,9 +102,7 @@ export class Matchmaking$ {
       .replace('{channel}', channel)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -127,9 +113,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/v1/public/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ChannelV1Array, 'ChannelV1Array')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelV1Array, 'ChannelV1Array')
   }
 
   /**
@@ -142,9 +126,7 @@ export class Matchmaking$ {
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MatchmakingResult, 'MatchmakingResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchmakingResult, 'MatchmakingResult')
   }
 
   /**
@@ -157,9 +139,7 @@ export class Matchmaking$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
   }
 
   /**
@@ -172,8 +152,6 @@ export class Matchmaking$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ChannelV1, 'ChannelV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelV1, 'ChannelV1')
   }
 }

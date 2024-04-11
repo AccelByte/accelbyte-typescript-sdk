@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Attribute } from '../generated-definitions/Attribute.js'
 import { GameProfile$ } from './endpoints/GameProfile$.js'
@@ -20,13 +21,13 @@ export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Returns all profiles for specified users.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:GAMEPROFILE&#34;, action=2 (READ) &lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/ul&gt;
    */
   async function getProfiles(queryParams: { userIds: string[] }): Promise<UserGameProfilesArray> {
-    const $ = new GameProfile$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameProfile$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getProfiles(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +37,7 @@ export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Returns all profiles&#39; header for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/li&gt;&lt;/ul&gt;
    */
   async function getProfiles_ByUserId(userId: string): Promise<GameProfileHeaderArray> {
-    const $ = new GameProfile$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameProfile$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getProfiles_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -46,7 +47,7 @@ export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create new profile for user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/li&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/li&gt;: created game profile&lt;/li&gt;&lt;/ul&gt;
    */
   async function createProfile_ByUserId(userId: string, data: GameProfileRequest): Promise<unknown> {
-    const $ = new GameProfile$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameProfile$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createProfile_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -56,7 +57,7 @@ export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Deletes game profile.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<unknown> {
-    const $ = new GameProfile$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameProfile$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteProfile_ByUserId_ByProfileId(userId, profileId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -66,7 +67,7 @@ export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Returns profile for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: game profile info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<GameProfileInfo> {
-    const $ = new GameProfile$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameProfile$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getProfile_ByUserId_ByProfileId(userId, profileId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -76,7 +77,7 @@ export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Updates user game profile, returns updated profile.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated game profile&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateProfile_ByUserId_ByProfileId(userId: string, profileId: string, data: GameProfileRequest): Promise<GameProfileInfo> {
-    const $ = new GameProfile$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameProfile$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateProfile_ByUserId_ByProfileId(userId, profileId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -90,7 +91,7 @@ export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     profileId: string,
     attributeName: string
   ): Promise<Attribute> {
-    const $ = new GameProfile$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameProfile$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAttribute_ByUserId_ByProfileId_ByAttributeName(userId, profileId, attributeName)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -105,7 +106,7 @@ export function GameProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     attributeName: string,
     data: Attribute
   ): Promise<GameProfileInfo> {
-    const $ = new GameProfile$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameProfile$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateAttribute_ByUserId_ByProfileId_ByAttributeName(userId, profileId, attributeName, data)
     if (resp.error) throw resp.error
     return resp.response.data

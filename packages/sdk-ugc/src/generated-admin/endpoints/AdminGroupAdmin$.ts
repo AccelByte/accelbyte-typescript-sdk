@@ -17,7 +17,7 @@ import { PaginatedGroupResponse } from '../../generated-definitions/PaginatedGro
 
 export class AdminGroupAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get user group paginated
@@ -27,9 +27,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedGroupResponse, 'PaginatedGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGroupResponse, 'PaginatedGroupResponse')
   }
 
   /**
@@ -40,9 +38,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -53,9 +49,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups/{groupId}'.replace('{namespace}', this.namespace).replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -66,9 +60,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups/{groupId}'.replace('{namespace}', this.namespace).replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -79,9 +71,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups/{groupId}'.replace('{namespace}', this.namespace).replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -94,9 +84,7 @@ export class AdminGroupAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedGroupResponse, 'PaginatedGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGroupResponse, 'PaginatedGroupResponse')
   }
 
   /**
@@ -112,9 +100,12 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloadResponse,
+      'PaginatedContentDownloadResponse'
+    )
   }
 
   /**
@@ -130,9 +121,12 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloadResponseV2,
+      'PaginatedContentDownloadResponseV2'
+    )
   }
 
   /**
@@ -146,9 +140,7 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -162,9 +154,7 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -178,9 +168,7 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -198,9 +186,12 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponse, 'PaginatedContentDownloadResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloadResponse,
+      'PaginatedContentDownloadResponse'
+    )
   }
 
   /**
@@ -218,8 +209,11 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedContentDownloadResponseV2, 'PaginatedContentDownloadResponseV2')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      PaginatedContentDownloadResponseV2,
+      'PaginatedContentDownloadResponseV2'
+    )
   }
 }

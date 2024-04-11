@@ -14,7 +14,7 @@ import { PutGlobalConfigurationRequest } from '../../generated-definitions/PutGl
 
 export class AdminAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Delete of global configuration data.
@@ -24,9 +24,7 @@ export class AdminAdmin$ {
     const url = '/lobby/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -37,9 +35,7 @@ export class AdminAdmin$ {
     const url = '/lobby/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GlobalConfiguration, 'GlobalConfiguration')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GlobalConfiguration, 'GlobalConfiguration')
   }
 
   /**
@@ -50,8 +46,6 @@ export class AdminAdmin$ {
     const url = '/lobby/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GlobalConfiguration, 'GlobalConfiguration')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GlobalConfiguration, 'GlobalConfiguration')
   }
 }

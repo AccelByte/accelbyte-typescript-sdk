@@ -24,7 +24,7 @@ import { ZsyncDiffRequest } from '../../generated-definitions/ZsyncDiffRequest.j
 
 export class UploaderV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to send diff request to MQ.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: diff status&lt;/li&gt;&lt;/ul&gt;
@@ -34,9 +34,7 @@ export class UploaderV3Admin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/diff/send'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -47,9 +45,7 @@ export class UploaderV3Admin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/patch/send'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -60,9 +56,7 @@ export class UploaderV3Admin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/listenDiffStatus'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FileDiffingStatus, 'FileDiffingStatus')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FileDiffingStatus, 'FileDiffingStatus')
   }
 
   /**
@@ -73,9 +67,7 @@ export class UploaderV3Admin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/listenPatchStatus'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FileDiffingStatus, 'FileDiffingStatus')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FileDiffingStatus, 'FileDiffingStatus')
   }
 
   /**
@@ -86,9 +78,7 @@ export class UploaderV3Admin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/v3/prezsyncupload'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DifferentialUploadSummary, 'DifferentialUploadSummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DifferentialUploadSummary, 'DifferentialUploadSummary')
   }
 
   /**
@@ -99,9 +89,7 @@ export class UploaderV3Admin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/v3/startbuildupload'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DifferentialBuildManifest, 'DifferentialBuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DifferentialBuildManifest, 'DifferentialBuildManifest')
   }
 
   /**
@@ -115,9 +103,7 @@ export class UploaderV3Admin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BuildManifest, 'BuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
@@ -130,9 +116,7 @@ export class UploaderV3Admin$ {
       .replace('{uploaderId}', uploaderId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UploadSummary, 'UploadSummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UploadSummary, 'UploadSummary')
   }
 
   /**
@@ -145,9 +129,7 @@ export class UploaderV3Admin$ {
       .replace('{fileHash}', fileHash)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UploadSummary, 'UploadSummary')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UploadSummary, 'UploadSummary')
   }
 
   /**
@@ -161,9 +143,7 @@ export class UploaderV3Admin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UploadModeCheck, 'UploadModeCheck')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UploadModeCheck, 'UploadModeCheck')
   }
 
   /**
@@ -176,9 +156,7 @@ export class UploaderV3Admin$ {
       .replace('{sourceBuildId}', sourceBuildId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DifferentialBuildManifest, 'DifferentialBuildManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DifferentialBuildManifest, 'DifferentialBuildManifest')
   }
 
   /**
@@ -192,9 +170,7 @@ export class UploaderV3Admin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -207,9 +183,7 @@ export class UploaderV3Admin$ {
       .replace('{sourceBuildId}', sourceBuildId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -222,9 +196,7 @@ export class UploaderV3Admin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -238,9 +210,7 @@ export class UploaderV3Admin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -255,9 +225,7 @@ export class UploaderV3Admin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -277,9 +245,7 @@ export class UploaderV3Admin$ {
       .replace('{blockSize}', String(blockSize))
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BlockManifest, 'BlockManifest')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -298,8 +264,6 @@ export class UploaderV3Admin$ {
       .replace('{destinationFilePath}', destinationFilePath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FileDiffingStatus, 'FileDiffingStatus')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FileDiffingStatus, 'FileDiffingStatus')
   }
 }

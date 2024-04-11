@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AppMessageDeclarationArray } from '../generated-definitions/AppMessageDeclarationArray.js'
 import { DsmcOperations$ } from './endpoints/DsmcOperations$.js'
@@ -16,13 +17,13 @@ export function DsmcOperationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * get the list of messages.
    */
   async function getMessages(): Promise<AppMessageDeclarationArray> {
-    const $ = new DsmcOperations$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new DsmcOperations$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getMessages()
     if (resp.error) throw resp.error
     return resp.response.data

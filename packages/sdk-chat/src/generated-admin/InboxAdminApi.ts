@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AddInboxCategoryRequest } from '../generated-definitions/AddInboxCategoryRequest.js'
 import { AddInboxCategoryResponse } from '../generated-definitions/AddInboxCategoryResponse.js'
@@ -30,13 +31,13 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get inbox stats
    */
   async function getInboxStats(queryParams?: { messageId?: string[] }): Promise<GetInboxStatsResponse> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getInboxStats(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +58,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     status?: 'DRAFT' | 'SENT' | 'UNSENT'
     transient?: boolean | null
   }): Promise<GetInboxMessagesResponse> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getInboxMessages(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +68,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Save inbox message
    */
   async function createInboxMessage(data: SaveInboxMessageRequest): Promise<SaveInboxMessageResponse> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createInboxMessage(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -77,7 +78,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get inbox categories
    */
   async function getInboxCategories(): Promise<GetInboxCategoriesResponseItemArray> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getInboxCategories()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -87,7 +88,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Add inbox category.
    */
   async function createInboxCategory(data: AddInboxCategoryRequest): Promise<AddInboxCategoryResponse> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createInboxCategory(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -97,7 +98,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete inbox message
    */
   async function deleteInboxMessage_ByMessageId(messageId: string, queryParams?: { force?: boolean | null }): Promise<unknown> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteInboxMessage_ByMessageId(messageId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -107,7 +108,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update inbox message
    */
   async function patchInboxMessage_ByMessageId(messageId: string, data: UpdateInboxMessageRequest): Promise<unknown> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchInboxMessage_ByMessageId(messageId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -117,7 +118,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete inbox category
    */
   async function deleteInboxCategory_ByCategory(category: string): Promise<unknown> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteInboxCategory_ByCategory(category)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -127,7 +128,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update inbox category
    */
   async function patchInboxCategory_ByCategory(category: string, data: UpdateInboxCategoryRequest): Promise<unknown> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchInboxCategory_ByCategory(category, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -140,7 +141,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     inbox: string,
     queryParams?: { limit?: number; offset?: number; status?: 'READ' | 'UNREAD'; userId?: string | null }
   ): Promise<GetInboxUsersResponse> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsersInbox_ByInbox(inbox, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -150,7 +151,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Unsend inbox message
    */
   async function createUnsendInbox_ByInbox(inbox: string, data: UnsendInboxMessageRequest): Promise<UnsendInboxMessageResponse> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUnsendInbox_ByInbox(inbox, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -160,7 +161,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Send inbox message
    */
   async function createSendInbox_ByMessageId(messageId: string, data: SendInboxMessageRequest): Promise<SendInboxMessageResponse> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createSendInbox_ByMessageId(messageId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -170,7 +171,7 @@ export function InboxAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get category schema.
    */
   async function getSchemaJsonInbox_ByCategory(category: string): Promise<JsonSchemaType> {
-    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new InboxAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getSchemaJsonInbox_ByCategory(category)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AchievementPlatformAdmin$ } from './endpoints/AchievementPlatformAdmin$.js'
 import { SteamAchievementUpdateRequest } from '../generated-definitions/SteamAchievementUpdateRequest.js'
@@ -18,13 +19,13 @@ export function AchievementPlatformAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This API is used to get xbox live user achievements(Only for test).&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAchievementXbl_ByUserId(userId: string, queryParams: { xboxUserId: string | null }): Promise<XblUserAchievements> {
-    const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAchievementXbl_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +35,7 @@ export function AchievementPlatformAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to update xbox live achievements.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateAchievementXbl_ByUserId(userId: string, data: XblAchievementUpdateRequest): Promise<unknown> {
-    const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateAchievementXbl_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +45,7 @@ export function AchievementPlatformAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API is used to unlock steam achievement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateAchievementSteam_ByUserId(userId: string, data: SteamAchievementUpdateRequest): Promise<unknown> {
-    const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateAchievementSteam_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

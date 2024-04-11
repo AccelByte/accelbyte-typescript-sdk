@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BanReasonsV3 } from '../generated-definitions/BanReasonsV3.js'
 import { BansAdmin$ } from './endpoints/BansAdmin$.js'
@@ -21,13 +22,13 @@ export function BansAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Ban type is the code available for ban assignment. It is applicable globally for any namespace. action code : 10201
    */
   async function getBans(): Promise<BansV3> {
-    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getBans()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +38,7 @@ export function BansAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Ban reasons is the code available to justify ban assignment. It is applicable globally for any namespace. action code : 10202
    */
   async function getBansReasons(): Promise<BanReasonsV3> {
-    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getBansReasons()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +48,7 @@ export function BansAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Ban type is the code available for ban assignment. It is applicable globally for any namespace. action code : 10201
    */
   async function getBantypes(): Promise<BansV3> {
-    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getBantypes()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +63,7 @@ export function BansAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     limit?: number
     offset?: number
   }): Promise<GetUserBanV3Response> {
-    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getBansUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -72,7 +73,7 @@ export function BansAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Bulk ban user with specific type of ban. Ban types and reason can be queried. The maximum limit value is 100 userIDs action code : 10141
    */
   async function createBanUser(data: BulkBanCreateRequestV3): Promise<ListBulkUserBanResponseV3> {
-    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createBanUser(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -82,7 +83,7 @@ export function BansAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * disable bulk ban user. The maximum limit value is 100 action code : 10142
    */
   async function patchBanUserDisabled(data: BulkUnbanCreateRequestV3): Promise<ListBulkUserBanResponseV3> {
-    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new BansAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchBanUserDisabled(data)
     if (resp.error) throw resp.error
     return resp.response.data

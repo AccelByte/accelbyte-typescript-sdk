@@ -19,7 +19,7 @@ import { GameSession } from '../../generated-definitions/GameSession.js'
 
 export class Backfill$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Create backfill ticket.
@@ -29,9 +29,7 @@ export class Backfill$ {
     const url = '/match2/v1/namespaces/{namespace}/backfill'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BackfillCreateResponse, 'BackfillCreateResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BackfillCreateResponse, 'BackfillCreateResponse')
   }
 
   /**
@@ -42,9 +40,7 @@ export class Backfill$ {
     const url = '/match2/v1/namespaces/{namespace}/backfill/proposal'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BackfillProposalResponse, 'BackfillProposalResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BackfillProposalResponse, 'BackfillProposalResponse')
   }
 
   /**
@@ -57,9 +53,7 @@ export class Backfill$ {
       .replace('{backfillID}', backfillID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -72,9 +66,7 @@ export class Backfill$ {
       .replace('{backfillID}', backfillID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BackfillGetResponse, 'BackfillGetResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BackfillGetResponse, 'BackfillGetResponse')
   }
 
   /**
@@ -87,9 +79,7 @@ export class Backfill$ {
       .replace('{backfillID}', backfillID)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GameSession, 'GameSession')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameSession, 'GameSession')
   }
 
   /**
@@ -102,8 +92,6 @@ export class Backfill$ {
       .replace('{backfillID}', backfillID)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

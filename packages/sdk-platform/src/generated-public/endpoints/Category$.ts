@@ -14,7 +14,7 @@ import { HierarchicalCategoryInfoArray } from '../../generated-definitions/Hiera
 
 export class Category$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to get root categories.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store category)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store category)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: root category data&lt;/li&gt;&lt;/ul&gt;
@@ -24,9 +24,7 @@ export class Category$ {
     const url = '/platform/public/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CategoryInfoArray, 'CategoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CategoryInfoArray, 'CategoryInfoArray')
   }
 
   /**
@@ -40,9 +38,12 @@ export class Category$ {
     const url = '/platform/public/namespaces/{namespace}/categories/download'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, HierarchicalCategoryInfoArray, 'HierarchicalCategoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      HierarchicalCategoryInfoArray,
+      'HierarchicalCategoryInfoArray'
+    )
   }
 
   /**
@@ -58,9 +59,7 @@ export class Category$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CategoryInfo, 'CategoryInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CategoryInfo, 'CategoryInfo')
   }
 
   /**
@@ -76,9 +75,7 @@ export class Category$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CategoryInfoArray, 'CategoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CategoryInfoArray, 'CategoryInfoArray')
   }
 
   /**
@@ -94,8 +91,6 @@ export class Category$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CategoryInfoArray, 'CategoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CategoryInfoArray, 'CategoryInfoArray')
   }
 }

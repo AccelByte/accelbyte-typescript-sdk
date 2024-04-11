@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminAllReasonsResponse } from '../generated-definitions/AdminAllReasonsResponse.js'
 import { AdminReasonListResponse } from '../generated-definitions/AdminReasonListResponse.js'
@@ -24,7 +25,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This endpoint get reasons with pagination
@@ -35,7 +36,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     title?: string | null
   }): Promise<AdminReasonListResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getReasons(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +46,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint create a reason for a namespace.
    */
   async function createReason(data: CreateReasonRequest): Promise<AdminReasonResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createReason(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +56,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint get all reasons without pagination.
    */
   async function getReasonsAll(): Promise<AdminAllReasonsResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getReasonsAll()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -65,7 +66,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Return list of reason groups ID and title under given namespace. To fetch the reasons inside a group, use get reason group endpoint.
    */
   async function getReasonGroups(queryParams?: { limit?: number; offset?: number }): Promise<ReasonGroupListResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getReasonGroups(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -75,7 +76,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create a reason group for easier query. You can query reasons by specifying the group title in the list reasons query. Reason group title is case insensitive, meaning you can&#39;t have **reason** if you already create a reason titled **Reason**
    */
   async function createReasonGroup(data: CreateReasonGroupRequest): Promise<ReasonGroupResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createReasonGroup(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -88,7 +89,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     category: string | null
     extensionCategory?: string | null
   }): Promise<UnusedReasonListResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getReasonsUnused(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -98,7 +99,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint delete a reason for a namespace with ID.
    */
   async function deleteReason_ByReasonId(reasonId: string): Promise<unknown> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteReason_ByReasonId(reasonId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -108,7 +109,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint get a single reason.
    */
   async function getReason_ByReasonId(reasonId: string): Promise<AdminReasonResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getReason_ByReasonId(reasonId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -118,7 +119,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint update a reason for a namespace with ID.
    */
   async function patchReason_ByReasonId(reasonId: string, data: CreateReasonRequest): Promise<AdminReasonResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchReason_ByReasonId(reasonId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -128,14 +129,14 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint delete a reason group for a namespace with ID.
    */
   async function deleteReasonGroup_ByGroupId(groupId: string): Promise<unknown> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteReasonGroup_ByGroupId(groupId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   async function getReasonGroup_ByGroupId(groupId: string): Promise<ReasonGroupResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getReasonGroup_ByGroupId(groupId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -145,7 +146,7 @@ export function AdminReasonsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Reason group title is case insensitive, meaning you can&#39;t have **reason** if you already create a reason titled **Reason** If no reasonIds passed when updating, the current reasons under the reason group will be kept (reasons will not be removed from the group).
    */
   async function patchReasonGroup_ByGroupId(groupId: string, data: UpdateReasonGroupRequest): Promise<ReasonGroupResponse> {
-    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminReasonsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchReasonGroup_ByGroupId(groupId, data)
     if (resp.error) throw resp.error
     return resp.response.data

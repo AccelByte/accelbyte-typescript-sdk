@@ -19,7 +19,7 @@ import { ThirdPartyLoginPlatformCredentialResponseArray } from '../../generated-
 
 export class ThirdPartyCredentialAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This is the API to check specific 3rd party platform availability. Passing platform group name or it&#39;s member will return same platform availability data Supported third party platform and platform group: - PSN group(psn) - ps4web - ps4 - ps5
@@ -29,9 +29,7 @@ export class ThirdPartyCredentialAdmin$ {
     const url = '/iam/v3/admin/platforms/{platformId}/availability'.replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CheckAvailabilityResponse, 'CheckAvailabilityResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CheckAvailabilityResponse, 'CheckAvailabilityResponse')
   }
 
   /**
@@ -42,13 +40,12 @@ export class ThirdPartyCredentialAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/platforms/all/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(
-          () => resultPromise,
-          ThirdPartyLoginPlatformCredentialResponseArray,
-          'ThirdPartyLoginPlatformCredentialResponseArray'
-        )
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ThirdPartyLoginPlatformCredentialResponseArray,
+      'ThirdPartyLoginPlatformCredentialResponseArray'
+    )
   }
 
   /**
@@ -59,13 +56,12 @@ export class ThirdPartyCredentialAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/platforms/all/clients/active'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(
-          () => resultPromise,
-          ThirdPartyLoginPlatformCredentialResponseArray,
-          'ThirdPartyLoginPlatformCredentialResponseArray'
-        )
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ThirdPartyLoginPlatformCredentialResponseArray,
+      'ThirdPartyLoginPlatformCredentialResponseArray'
+    )
   }
 
   /**
@@ -78,9 +74,7 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -93,9 +87,12 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ThirdPartyLoginPlatformCredentialResponse, 'ThirdPartyLoginPlatformCredentialResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ThirdPartyLoginPlatformCredentialResponse,
+      'ThirdPartyLoginPlatformCredentialResponse'
+    )
   }
 
   /**
@@ -111,9 +108,12 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ThirdPartyLoginPlatformCredentialResponse, 'ThirdPartyLoginPlatformCredentialResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ThirdPartyLoginPlatformCredentialResponse,
+      'ThirdPartyLoginPlatformCredentialResponse'
+    )
   }
 
   /**
@@ -129,9 +129,12 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ThirdPartyLoginPlatformCredentialResponse, 'ThirdPartyLoginPlatformCredentialResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ThirdPartyLoginPlatformCredentialResponse,
+      'ThirdPartyLoginPlatformCredentialResponse'
+    )
   }
 
   /**
@@ -144,9 +147,7 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -159,8 +160,6 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PlatformDomainResponse, 'PlatformDomainResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformDomainResponse, 'PlatformDomainResponse')
   }
 }

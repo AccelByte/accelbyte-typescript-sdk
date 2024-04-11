@@ -16,7 +16,7 @@ import { ListInventoryConfigurationsResp } from '../../generated-definitions/Lis
 
 export class AdminInventoryConfigurationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]
@@ -40,9 +40,12 @@ export class AdminInventoryConfigurationsAdmin$ {
     const url = '/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListInventoryConfigurationsResp, 'ListInventoryConfigurationsResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ListInventoryConfigurationsResp,
+      'ListInventoryConfigurationsResp'
+    )
   }
 
   /**
@@ -53,9 +56,12 @@ export class AdminInventoryConfigurationsAdmin$ {
     const url = '/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, InventoryConfigurationResp, 'InventoryConfigurationResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      InventoryConfigurationResp,
+      'InventoryConfigurationResp'
+    )
   }
 
   /**
@@ -68,9 +74,7 @@ export class AdminInventoryConfigurationsAdmin$ {
       .replace('{inventoryConfigurationId}', inventoryConfigurationId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -83,9 +87,12 @@ export class AdminInventoryConfigurationsAdmin$ {
       .replace('{inventoryConfigurationId}', inventoryConfigurationId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, InventoryConfigurationResp, 'InventoryConfigurationResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      InventoryConfigurationResp,
+      'InventoryConfigurationResp'
+    )
   }
 
   /**
@@ -101,8 +108,11 @@ export class AdminInventoryConfigurationsAdmin$ {
       .replace('{inventoryConfigurationId}', inventoryConfigurationId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, InventoryConfigurationResp, 'InventoryConfigurationResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      InventoryConfigurationResp,
+      'InventoryConfigurationResp'
+    )
   }
 }

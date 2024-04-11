@@ -18,7 +18,7 @@ import { UpdateLeaderboardConfigReq } from '../../generated-definitions/UpdateLe
 
 export class LeaderboardConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
@@ -33,9 +33,12 @@ export class LeaderboardConfigurationAdmin$ {
     const url = '/leaderboard/v1/admin/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetAllLeaderboardConfigsResp, 'GetAllLeaderboardConfigsResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetAllLeaderboardConfigsResp,
+      'GetAllLeaderboardConfigsResp'
+    )
   }
 
   /**
@@ -46,9 +49,7 @@ export class LeaderboardConfigurationAdmin$ {
     const url = '/leaderboard/v1/admin/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, LeaderboardConfigReq, 'LeaderboardConfigReq')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LeaderboardConfigReq, 'LeaderboardConfigReq')
   }
 
   /**
@@ -59,9 +60,12 @@ export class LeaderboardConfigurationAdmin$ {
     const url = '/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/delete'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DeleteBulkLeaderboardsResp, 'DeleteBulkLeaderboardsResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      DeleteBulkLeaderboardsResp,
+      'DeleteBulkLeaderboardsResp'
+    )
   }
 
   /**
@@ -74,9 +78,7 @@ export class LeaderboardConfigurationAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -89,9 +91,7 @@ export class LeaderboardConfigurationAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetLeaderboardConfigResp, 'GetLeaderboardConfigResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLeaderboardConfigResp, 'GetLeaderboardConfigResp')
   }
 
   /**
@@ -107,9 +107,7 @@ export class LeaderboardConfigurationAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetLeaderboardConfigResp, 'GetLeaderboardConfigResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLeaderboardConfigResp, 'GetLeaderboardConfigResp')
   }
 
   /**
@@ -122,8 +120,6 @@ export class LeaderboardConfigurationAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

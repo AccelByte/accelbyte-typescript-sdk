@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { DeleteBulkGameSessionRequest } from '../generated-definitions/DeleteBulkGameSessionRequest.js'
 import { DeleteBulkGameSessionsApiResponse } from '../generated-definitions/DeleteBulkGameSessionsApiResponse.js'
@@ -20,7 +21,7 @@ export function GameSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get all game sessions.
@@ -44,7 +45,7 @@ export function GameSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     statusV2?: string | null
     toTime?: string | null
   }): Promise<GameSessionQueryResponse> {
-    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGamesessions(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +55,7 @@ export function GameSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Query game sessions by admin. By default, API will return a list of available game sessions (joinability: open). Session service has several DSInformation status to track DS request to DSMC: - NEED_TO_REQUEST: number of active players hasn&#39;t reached session&#39;s minPlayers therefore DS has not yet requested. - REQUESTED: DS is being requested to DSMC. - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY. - FAILED_TO_REQUEST: DSMC fails to create the DS. query parameter \&#34;availability\&#34; to filter sessions&#39; availability: all: return all sessions regardless it&#39;s full full: only return active sessions default behavior (unset or else): return only available sessions (not full)
    */
   async function createGamesession(): Promise<GameSessionQueryResponse> {
-    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createGamesession()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -64,7 +65,7 @@ export function GameSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete bulk game sessions.
    */
   async function deleteGamesessionBulk(data: DeleteBulkGameSessionRequest): Promise<DeleteBulkGameSessionsApiResponse> {
-    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteGamesessionBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -74,7 +75,7 @@ export function GameSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * When the session template has ds_manual_set_ready as true. Then the DS need to calls this end point in order to notify game client if the DS is ready to accept any game client connection.
    */
   async function updateD_BySessionId(sessionId: string, data: SetDsReadyRequest): Promise<unknown> {
-    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateD_BySessionId(sessionId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -88,7 +89,7 @@ export function GameSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     memberId: string,
     statusType: string
   ): Promise<UpdateGameSessionMemberStatusResponse> {
-    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new GameSessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateStatu_BySessionId_ByMemberId_ByStatusType(sessionId, memberId, statusType)
     if (resp.error) throw resp.error
     return resp.response.data

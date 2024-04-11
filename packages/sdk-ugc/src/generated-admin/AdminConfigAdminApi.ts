@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminConfigAdmin$ } from './endpoints/AdminConfigAdmin$.js'
 import { PaginatedGetConfigsResponse } from '../generated-definitions/PaginatedGetConfigsResponse.js'
@@ -17,13 +18,13 @@ export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get config paginated
    */
   async function getConfigs(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetConfigsResponse> {
-    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getConfigs(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +34,7 @@ export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will create a new config if the *key* doesn&#39;t exist. Allowed key value: - *contentReview*: *enabled*,*disabled*
    */
   async function patchConfig_ByKey(key: string, data: UpdateConfigRequest): Promise<unknown> {
-    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchConfig_ByKey(key, data)
     if (resp.error) throw resp.error
     return resp.response.data

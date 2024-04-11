@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { MaxActiveAdmin$ } from './endpoints/MaxActiveAdmin$.js'
 import { MemberActiveSession } from '../generated-definitions/MemberActiveSession.js'
@@ -17,13 +18,13 @@ export function MaxActiveAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    *  Reconcile Max Active Session.
    */
   async function createReconcile_ByName(name: string, data: RequestReconcileMaxActiveSession): Promise<unknown> {
-    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createReconcile_ByName(name, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +34,7 @@ export function MaxActiveAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Get Member Active Session.
    */
   async function getMemberactivesession_ByName_ByUserId(name: string, userId: string): Promise<MemberActiveSession> {
-    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getMemberactivesession_ByName_ByUserId(name, userId)
     if (resp.error) throw resp.error
     return resp.response.data

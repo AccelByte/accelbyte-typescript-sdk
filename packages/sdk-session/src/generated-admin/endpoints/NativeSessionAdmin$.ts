@@ -12,7 +12,7 @@ import { NativeSessionPagingResponse } from '../../generated-definitions/NativeS
 
 export class NativeSessionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * List of native sessions.
@@ -26,8 +26,11 @@ export class NativeSessionAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/native-sessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, NativeSessionPagingResponse, 'NativeSessionPagingResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      NativeSessionPagingResponse,
+      'NativeSessionPagingResponse'
+    )
   }
 }

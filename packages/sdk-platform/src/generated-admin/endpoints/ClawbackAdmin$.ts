@@ -14,7 +14,7 @@ import { StreamEvent } from '../../generated-definitions/StreamEvent.js'
 
 export class ClawbackAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
@@ -33,9 +33,12 @@ export class ClawbackAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/clawback/histories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, IapClawbackPagingSlicedResult, 'IapClawbackPagingSlicedResult')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      IapClawbackPagingSlicedResult,
+      'IapClawbackPagingSlicedResult'
+    )
   }
 
   /**
@@ -46,8 +49,6 @@ export class ClawbackAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/clawback/playstation/mock'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ClawbackInfo, 'ClawbackInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClawbackInfo, 'ClawbackInfo')
   }
 }

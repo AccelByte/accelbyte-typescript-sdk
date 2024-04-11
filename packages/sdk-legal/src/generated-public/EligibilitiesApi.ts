@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Eligibilities$ } from './endpoints/Eligibilities$.js'
 import { RetrieveUserEligibilitiesIndirectResponse } from '../generated-definitions/RetrieveUserEligibilitiesIndirectResponse.js'
@@ -17,13 +18,13 @@ export function EligibilitiesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEligibility_ByNamespace(): Promise<RetrieveUserEligibilitiesResponseArray> {
-    const $ = new Eligibilities$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Eligibilities$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getEligibility_ByNamespace()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +38,7 @@ export function EligibilitiesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     clientId: string,
     userId: string
   ): Promise<RetrieveUserEligibilitiesIndirectResponse> {
-    const $ = new Eligibilities$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Eligibilities$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUserEligibility_ByCountryCode_ByClientId_ByUserId(countryCode, clientId, userId)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { GetAllUserLeaderboardsRespV3 } from '../generated-definitions/GetAllUserLeaderboardsRespV3.js'
 import { UserDataV3Admin$ } from './endpoints/UserDataV3Admin$.js'
@@ -16,7 +17,7 @@ export function UserDataV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * &lt;p&gt;Get user leaderboard rankings&lt;/p&gt;
@@ -25,7 +26,7 @@ export function UserDataV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetAllUserLeaderboardsRespV3> {
-    const $ = new UserDataV3Admin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UserDataV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getLeaderboards_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

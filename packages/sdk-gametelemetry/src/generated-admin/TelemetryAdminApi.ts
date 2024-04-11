@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ListBaseResponseStr } from '../generated-definitions/ListBaseResponseStr.js'
 import { PagedResponseGetNamespaceEventResponse } from '../generated-definitions/PagedResponseGetNamespaceEventResponse.js'
@@ -17,13 +18,13 @@ export function TelemetryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This endpoint requires valid JWT token and telemetry permission This endpoint retrieves namespace list
    */
   async function getNamespaces(): Promise<ListBaseResponseStr> {
-    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getNamespaces()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -43,7 +44,7 @@ export function TelemetryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventName?: string | null
     eventPayload?: string | null
   }): Promise<PagedResponseGetNamespaceEventResponse> {
-    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getEvents(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

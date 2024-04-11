@@ -13,7 +13,7 @@ import { LeaderboardConfigReq } from '../../generated-definitions/LeaderboardCon
 
 export class LeaderboardConfiguration$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
@@ -28,9 +28,12 @@ export class LeaderboardConfiguration$ {
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetAllLeaderboardConfigsPublicResp, 'GetAllLeaderboardConfigsPublicResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetAllLeaderboardConfigsPublicResp,
+      'GetAllLeaderboardConfigsPublicResp'
+    )
   }
 
   /**
@@ -41,9 +44,7 @@ export class LeaderboardConfiguration$ {
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, LeaderboardConfigReq, 'LeaderboardConfigReq')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LeaderboardConfigReq, 'LeaderboardConfigReq')
   }
 
   /**
@@ -54,8 +55,11 @@ export class LeaderboardConfiguration$ {
     const url = '/leaderboard/v2/public/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetAllLeaderboardConfigsPublicResp, 'GetAllLeaderboardConfigsPublicResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetAllLeaderboardConfigsPublicResp,
+      'GetAllLeaderboardConfigsPublicResp'
+    )
   }
 }

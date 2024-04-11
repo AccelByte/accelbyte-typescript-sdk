@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Policies$ } from './endpoints/Policies$.js'
 import { RetrievePolicyPublicResponseArray } from '../generated-definitions/RetrievePolicyPublicResponseArray.js'
@@ -16,13 +17,13 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Retrieve List of Countries that have Active Legal Policies.
    */
   async function getPoliciesCountriesList(): Promise<unknown> {
-    const $ = new Policies$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Policies$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPoliciesCountriesList()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +38,7 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     policyType?: 'LEGAL_DOCUMENT_TYPE' | 'MARKETING_PREFERENCE_TYPE'
     tags?: string | null
   }): Promise<RetrievePolicyPublicResponseArray> {
-    const $ = new Policies$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Policies$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPolicy_ByNamespace(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +55,7 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       tags?: string | null
     }
   ): Promise<RetrievePolicyPublicResponseArray> {
-    const $ = new Policies$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Policies$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPolicyCountry_ByCountryCode(countryCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -72,7 +73,7 @@ export function PoliciesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       tags?: string | null
     }
   ): Promise<RetrievePolicyPublicResponseArray> {
-    const $ = new Policies$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Policies$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPolicyCountry_ByCountryCode_ByNS(countryCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -14,7 +14,7 @@ import { TagRequest } from '../../generated-definitions/TagRequest.js'
 
 export class AdminTagsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * ## Description Retrieve list of available tags by namespace
@@ -24,9 +24,7 @@ export class AdminTagsAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListTagsResponse, 'ListTagsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListTagsResponse, 'ListTagsResponse')
   }
 
   /**
@@ -37,9 +35,7 @@ export class AdminTagsAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -50,8 +46,6 @@ export class AdminTagsAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/tags/{tag}'.replace('{namespace}', this.namespace).replace('{tag}', tag)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { SlotAdmin$ } from './endpoints/SlotAdmin$.js'
 import { SlotInfoArray } from '../generated-definitions/SlotInfoArray.js'
@@ -16,14 +17,14 @@ export function SlotAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Get slots for a given user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of slots&lt;/li&gt;&lt;/ul&gt;
    */
   async function getSlots_ByUserId(userId: string): Promise<SlotInfoArray> {
-    const $ = new SlotAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SlotAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getSlots_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +35,7 @@ export function SlotAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Get slot data.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slot data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getSlot_ByUserId_BySlotId(userId: string, slotId: string): Promise<unknown> {
-    const $ = new SlotAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SlotAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getSlot_ByUserId_BySlotId(userId, slotId)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -12,7 +12,7 @@ import { ConfigValueResponseV3 } from '../../generated-definitions/ConfigValueRe
 
 export class ConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled
@@ -24,8 +24,6 @@ export class ConfigAdmin$ {
       .replace('{configKey}', configKey)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigValueResponseV3, 'ConfigValueResponseV3')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigValueResponseV3, 'ConfigValueResponseV3')
   }
 }

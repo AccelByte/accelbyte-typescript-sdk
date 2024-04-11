@@ -12,7 +12,7 @@ import { GetAllUserLeaderboardsResp } from '../../generated-definitions/GetAllUs
 
 export class UserDataAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * &lt;p&gt;Get user leaderboard rankings&lt;/p&gt;
@@ -27,8 +27,11 @@ export class UserDataAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetAllUserLeaderboardsResp, 'GetAllUserLeaderboardsResp')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetAllUserLeaderboardsResp,
+      'GetAllUserLeaderboardsResp'
+    )
   }
 }

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CheckAvailabilityResponse } from '../generated-definitions/CheckAvailabilityResponse.js'
 import { PlatformDomainDeleteRequest } from '../generated-definitions/PlatformDomainDeleteRequest.js'
@@ -22,13 +23,13 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This is the API to check specific 3rd party platform availability. Passing platform group name or it&#39;s member will return same platform availability data Supported third party platform and platform group: - PSN group(psn) - ps4web - ps4 - ps5
    */
   async function getAvailability_ByPlatformId(platformId: string): Promise<CheckAvailabilityResponse> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAvailability_ByPlatformId(platformId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +39,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * This is the API to Get All Active 3rd Platform Credential.
    */
   async function getPlatformsAllClients(): Promise<ThirdPartyLoginPlatformCredentialResponseArray> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPlatformsAllClients()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -48,7 +49,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * This is the API to Get All Active 3rd Platform Credential.
    */
   async function getPlatformsAllClientsActive(): Promise<ThirdPartyLoginPlatformCredentialResponseArray> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPlatformsAllClientsActive()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +59,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * This is the API to Delete 3rd Platform Credential.
    */
   async function deleteClient_ByPlatformId(platformId: string): Promise<unknown> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteClient_ByPlatformId(platformId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +69,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * This is the API to Get 3rd Platform Credential.
    */
   async function getClients_ByPlatformId(platformId: string): Promise<ThirdPartyLoginPlatformCredentialResponse> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getClients_ByPlatformId(platformId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -81,7 +82,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
     platformId: string,
     data: ThirdPartyLoginPlatformCredentialRequest
   ): Promise<ThirdPartyLoginPlatformCredentialResponse> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchClient_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -94,7 +95,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
     platformId: string,
     data: ThirdPartyLoginPlatformCredentialRequest
   ): Promise<ThirdPartyLoginPlatformCredentialResponse> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createClient_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -104,7 +105,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * This is the API to unregister 3rd Platform domain.
    */
   async function deleteClientDomain_ByPlatformId(platformId: string, data: PlatformDomainDeleteRequest): Promise<unknown> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteClientDomain_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -114,7 +115,7 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) 
    * This is the API to set 3rd Platform domain.
    */
   async function updateClientDomain_ByPlatformId(platformId: string, data: PlatformDomainUpdateRequest): Promise<PlatformDomainResponse> {
-    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredentialAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateClientDomain_ByPlatformId(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data

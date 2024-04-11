@@ -12,7 +12,7 @@ import { AddDownloadCountResponse } from '../../generated-definitions/AddDownloa
 
 export class PublicDownloadCountLegacy$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint can be used to count how many the ugc downloaded
@@ -24,8 +24,6 @@ export class PublicDownloadCountLegacy$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AddDownloadCountResponse, 'AddDownloadCountResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddDownloadCountResponse, 'AddDownloadCountResponse')
   }
 }

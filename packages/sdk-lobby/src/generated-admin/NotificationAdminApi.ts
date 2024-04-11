@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BulkUsersFreeFormNotificationRequestV1 } from '../generated-definitions/BulkUsersFreeFormNotificationRequestV1.js'
 import { CreateTemplateRequest } from '../generated-definitions/CreateTemplateRequest.js'
@@ -27,7 +28,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get topic by namespace.&lt;br/&gt; Action Code: 50213
@@ -37,7 +38,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     before?: string | null
     limit?: number
   }): Promise<GetAllNotificationTopicsResponse> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getNotificationTopics(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +48,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create new notification topic. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created&lt;br/&gt; Action Code: 50214
    */
   async function createNotificationTopic(data: CreateTopicRequestV1): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createNotificationTopic(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +58,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get all templates in a namespace&lt;br&gt; Action Code: 50203
    */
   async function getNotificationTemplates(): Promise<NotificationTemplateResponseArray> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getNotificationTemplates()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +68,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create new notification template. Include handlebars {{key}} for replaceable contexts. The key inside handlebars will be the key to be replaced when sending notification. Already existing template with the same slug and language can not be created. &lt;br&gt;Check model description for detailed input restrictions.&lt;br&gt; Action Code: 50204
    */
   async function createNotificationTemplate(data: CreateTemplateRequest): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createNotificationTemplate(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -77,7 +78,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sends notification to all connected users in a namespace.&lt;br&gt; Action Code: 50201
    */
   async function createNotificationFreeformNotify(data: FreeFormNotificationRequestV1): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createNotificationFreeformNotify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -87,7 +88,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sends notification to all connected users in a namespace with predefined template. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications&lt;br/&gt; Action Code: 50202
    */
   async function createNotificationTemplateNotify(data: NotificationWithTemplateRequestV1): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createNotificationTemplateNotify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -97,7 +98,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete topic information by topic name. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created &lt;br/&gt; Action Code: 50217
    */
   async function deleteNotificationTopic_ByTopicName(topicName: string): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteNotificationTopic_ByTopicName(topicName)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -107,7 +108,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get topic information by topic name.&lt;br/&gt; Action Code: 50215
    */
   async function getNotificationTopic_ByTopicName(topicName: string): Promise<NotificationTopicResponseV1> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getNotificationTopic_ByTopicName(topicName)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -117,7 +118,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update topic information by topic name. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created &lt;br/&gt; Action Code: 50216
    */
   async function updateNotificationTopic_ByTopicName(topicName: string, data: UpdateTopicRequest): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateNotificationTopic_ByTopicName(topicName, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -127,7 +128,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete template slug in notification template&lt;br&gt; Action Code: 50206
    */
   async function deleteNotificationTemplate_ByTemplateSlug(templateSlug: string): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteNotificationTemplate_ByTemplateSlug(templateSlug)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -140,7 +141,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     templateSlug: string,
     queryParams?: { after?: string | null; before?: string | null; limit?: number }
   ): Promise<GetAllNotificationTemplateSlugResp> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getNotificationTemplate_ByTemplateSlug(templateSlug, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -150,7 +151,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sends notification to multiple user. Action Code: 50211
    */
   async function createNotificationBulkUserFreeformNotify(data: BulkUsersFreeFormNotificationRequestV1): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createNotificationBulkUserFreeformNotify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -160,7 +161,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sends notification to a user. Action Code: 50211
    */
   async function createFreeformNotifyNotification_ByUserId(userId: string, data: FreeFormNotificationRequestV1): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createFreeformNotifyNotification_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -170,7 +171,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sends templated notification to a user. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications&lt;br&gt; Action Code: 50212
    */
   async function createTemplateNotifyNotification_ByUserId(userId: string, data: NotificationWithTemplateRequestV1): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createTemplateNotifyNotification_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -180,7 +181,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sends notification to a party.
    */
   async function createFreeformNotifyNotification_ByPartyId(partyId: string, data: FreeFormNotificationRequestV1): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createFreeformNotifyNotification_ByPartyId(partyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -190,7 +191,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sends templated notification to a party. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications&lt;br&gt;
    */
   async function createTemplateNotifyNotification_ByPartyId(partyId: string, data: NotificationWithTemplateRequestV1): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createTemplateNotifyNotification_ByPartyId(partyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -203,7 +204,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     templateSlug: string,
     templateLanguage: string
   ): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteLanguageNotification_ByTemplateSlug_ByTemplateLanguage(templateSlug, templateLanguage)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -216,7 +217,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     templateSlug: string,
     templateLanguage: string
   ): Promise<Localization> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getLanguageNotification_ByTemplateSlug_ByTemplateLanguage(templateSlug, templateLanguage)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -230,7 +231,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     templateLanguage: string,
     data: UpdateTemplateRequest
   ): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateLanguageNotification_ByTemplateSlug_ByTemplateLanguage(templateSlug, templateLanguage, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -243,7 +244,7 @@ export function NotificationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     templateSlug: string,
     templateLanguage: string
   ): Promise<unknown> {
-    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new NotificationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createPublishNotification_ByTemplateSlug_ByTemplateLanguage(templateSlug, templateLanguage)
     if (resp.error) throw resp.error
     return resp.response.data

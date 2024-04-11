@@ -17,7 +17,7 @@ import { UpdatePolicyVersionResponse } from '../../generated-definitions/UpdateP
 
 export class PolicyVersionsWithNamespaceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -32,9 +32,12 @@ export class PolicyVersionsWithNamespaceAdmin$ {
       .replace('{policyId}', policyId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrievePolicyVersionResponseArray, 'RetrievePolicyVersionResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrievePolicyVersionResponseArray,
+      'RetrievePolicyVersionResponseArray'
+    )
   }
 
   /**
@@ -47,9 +50,12 @@ export class PolicyVersionsWithNamespaceAdmin$ {
       .replace('{policyId}', policyId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreatePolicyVersionResponse, 'CreatePolicyVersionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      CreatePolicyVersionResponse,
+      'CreatePolicyVersionResponse'
+    )
   }
 
   /**
@@ -65,9 +71,12 @@ export class PolicyVersionsWithNamespaceAdmin$ {
       .replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdatePolicyVersionResponse, 'UpdatePolicyVersionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UpdatePolicyVersionResponse,
+      'UpdatePolicyVersionResponse'
+    )
   }
 
   /**
@@ -83,8 +92,6 @@ export class PolicyVersionsWithNamespaceAdmin$ {
       .replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

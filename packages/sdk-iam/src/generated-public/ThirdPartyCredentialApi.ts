@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { PublicThirdPartyPlatformInfoArray } from '../generated-definitions/PublicThirdPartyPlatformInfoArray.js'
 import { ThirdPartyCredential$ } from './endpoints/ThirdPartyCredential$.js'
@@ -16,13 +17,13 @@ export function ThirdPartyCredentialApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This is the Public API to Get All Active OIDC Platform Credential By Client ID
    */
   async function getPlatformsClientsOidc(queryParams: { clientId: string | null }): Promise<PublicThirdPartyPlatformInfoArray> {
-    const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPlatformsClientsOidc(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +33,7 @@ export function ThirdPartyCredentialApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This is the Public API to Get All Active 3rd Platform Credential.
    */
   async function getPlatformsClientsActive(): Promise<PublicThirdPartyPlatformInfoArray> {
-    const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ThirdPartyCredential$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getPlatformsClientsActive()
     if (resp.error) throw resp.error
     return resp.response.data

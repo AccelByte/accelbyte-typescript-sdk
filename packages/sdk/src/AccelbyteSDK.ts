@@ -24,7 +24,6 @@ export interface AccelbyteSDK {
     redirectURI: string
     baseURL: string
     refreshToken?: string
-    isValidationEnabled?: boolean
   }
 }
 

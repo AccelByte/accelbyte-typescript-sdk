@@ -17,7 +17,7 @@ import { UpdateMemberRoleRequestV1 } from '../../generated-definitions/UpdateMem
 
 export class GroupRolesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This endpoint is used to get list of member roles Action Code: 73201
@@ -27,9 +27,12 @@ export class GroupRolesAdmin$ {
     const url = '/group/v1/admin/namespaces/{namespace}/roles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetMemberRolesListResponseV1, 'GetMemberRolesListResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetMemberRolesListResponseV1,
+      'GetMemberRolesListResponseV1'
+    )
   }
 
   /**
@@ -40,9 +43,7 @@ export class GroupRolesAdmin$ {
     const url = '/group/v1/admin/namespaces/{namespace}/roles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MemberRoleResponseV1, 'MemberRoleResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MemberRoleResponseV1, 'MemberRoleResponseV1')
   }
 
   /**
@@ -55,9 +56,7 @@ export class GroupRolesAdmin$ {
       .replace('{memberRoleId}', memberRoleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -70,9 +69,7 @@ export class GroupRolesAdmin$ {
       .replace('{memberRoleId}', memberRoleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MemberRoleResponseV1, 'MemberRoleResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MemberRoleResponseV1, 'MemberRoleResponseV1')
   }
 
   /**
@@ -85,9 +82,7 @@ export class GroupRolesAdmin$ {
       .replace('{memberRoleId}', memberRoleId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MemberRoleResponseV1, 'MemberRoleResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MemberRoleResponseV1, 'MemberRoleResponseV1')
   }
 
   /**
@@ -103,8 +98,6 @@ export class GroupRolesAdmin$ {
       .replace('{memberRoleId}', memberRoleId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MemberRoleResponseV1, 'MemberRoleResponseV1')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MemberRoleResponseV1, 'MemberRoleResponseV1')
   }
 }

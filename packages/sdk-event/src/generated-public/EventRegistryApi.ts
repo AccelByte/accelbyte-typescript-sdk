@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { EventRegistry } from '../generated-definitions/EventRegistry.js'
 import { EventRegistry$ } from './endpoints/EventRegistry$.js'
@@ -16,14 +17,14 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function getRegistryEventIds(): Promise<EventRegistry> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getRegistryEventIds()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +35,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [CREATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function createRegistryEventId(data: EventRegistry): Promise<unknown> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createRegistryEventId(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +46,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [DELETE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function deleteRegistryEventId_ByEventId(eventId: string): Promise<unknown> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteRegistryEventId_ByEventId(eventId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -56,7 +57,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function getRegistryEventId_ByEventId(eventId: string): Promise<EventRegistry> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getRegistryEventId_ByEventId(eventId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +68,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function createRegistryEventId_ByEventId(eventId: string, data: EventRegistry): Promise<unknown> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createRegistryEventId_ByEventId(eventId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -78,7 +79,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function getRegistryEventType_ByEventType(eventType: string): Promise<EventRegistry> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getRegistryEventType_ByEventType(eventType)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { BulkStatCycleRequest } from '../generated-definitions/BulkStatCycleRequest.js'
 import { BulkStatCycleResult } from '../generated-definitions/BulkStatCycleResult.js'
@@ -19,7 +20,7 @@ export function StatCycleConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * List stat cycles by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycles&lt;/li&gt;&lt;/ul&gt;
@@ -32,7 +33,7 @@ export function StatCycleConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sortBy?: string | null
     status?: 'ACTIVE' | 'INIT' | 'STOPPED'
   }): Promise<StatCyclePagingSlicedResult> {
-    const $ = new StatCycleConfiguration$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new StatCycleConfiguration$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStatCycles(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +43,7 @@ export function StatCycleConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Bulk get stat cycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of stat cycles&lt;/li&gt;&lt;/ul&gt;
    */
   async function createStatCycleBulk(data: BulkStatCycleRequest): Promise<BulkStatCycleResult> {
-    const $ = new StatCycleConfiguration$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new StatCycleConfiguration$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createStatCycleBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +53,7 @@ export function StatCycleConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get stat cycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycle info&lt;/ul&gt;
    */
   async function getStatCycle_ByCycleId(cycleId: string): Promise<StatCycleInfo> {
-    const $ = new StatCycleConfiguration$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new StatCycleConfiguration$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStatCycle_ByCycleId(cycleId)
     if (resp.error) throw resp.error
     return resp.response.data

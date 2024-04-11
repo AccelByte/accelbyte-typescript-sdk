@@ -15,7 +15,7 @@ import { PaginatedGetTagResponse } from '../../generated-definitions/PaginatedGe
 
 export class AdminTagAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get available tags paginated
@@ -25,9 +25,7 @@ export class AdminTagAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedGetTagResponse, 'PaginatedGetTagResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGetTagResponse, 'PaginatedGetTagResponse')
   }
 
   /**
@@ -38,9 +36,7 @@ export class AdminTagAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateTagResponse, 'CreateTagResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateTagResponse, 'CreateTagResponse')
   }
 
   /**
@@ -51,9 +47,7 @@ export class AdminTagAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/tags/{tagId}'.replace('{namespace}', this.namespace).replace('{tagId}', tagId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -64,8 +58,6 @@ export class AdminTagAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/tags/{tagId}'.replace('{namespace}', this.namespace).replace('{tagId}', tagId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateTagResponse, 'CreateTagResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateTagResponse, 'CreateTagResponse')
   }
 }

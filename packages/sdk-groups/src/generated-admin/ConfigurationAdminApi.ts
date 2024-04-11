@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ConfigurationAdmin$ } from './endpoints/ConfigurationAdmin$.js'
 import { CreateGroupConfigurationRequestV1 } from '../generated-definitions/CreateGroupConfigurationRequestV1.js'
@@ -22,13 +23,13 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
    */
   async function getConfiguration(queryParams?: { limit?: number; offset?: number }): Promise<ListConfigurationResponseV1> {
-    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getConfiguration(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +39,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to create new configuration. Before creating the configuration, make sure that member role for admin and group member are already created before. For each of the global rule, it will be the rule detail that consists of these fields: * **ruleAttribute**: attribute of the player that needs to be checked * **ruleCriteria**: criteria of the value. The value will be in enum of EQUAL, MINIMUM, MAXIMUM * **ruleValue**: value that needs to be checked Allowed Action can only be filled with any available action in the Group Service. For the configuration, the only value is **&#34;createGroup&#34;** Action Code: 73103
    */
   async function createConfiguration(data: CreateGroupConfigurationRequestV1): Promise<CreateGroupConfigurationResponseV1> {
-    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createConfiguration(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -48,7 +49,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to initiate configuration. This endpoint will automatically create default configuration and member roles with default permission Default Permission for admin role will cover these permission: - Permission to invite user to group - Permission to accept or reject join request - Permission to kick group member Default max member value will be 50 and global rules will be empty Action Code: 73104
    */
   async function createConfigurationInitiate(): Promise<CreateGroupConfigurationResponseV1> {
-    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createConfigurationInitiate()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +59,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to delete group configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
    */
   async function deleteConfiguration_ByConfigurationCode(configurationCode: string): Promise<unknown> {
-    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteConfiguration_ByConfigurationCode(configurationCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +69,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration Action Code: 73101
    */
   async function getConfiguration_ByConfigurationCode(configurationCode: string): Promise<GetGroupConfigurationResponseV1> {
-    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getConfiguration_ByConfigurationCode(configurationCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -81,7 +82,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     configurationCode: string,
     data: UpdateGroupConfigurationRequestV1
   ): Promise<UpdateGroupConfigurationResponseV1> {
-    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchConfiguration_ByConfigurationCode(configurationCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -94,7 +95,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     configurationCode: string,
     allowedAction: string
   ): Promise<UpdateGroupConfigurationResponseV1> {
-    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteRule_ByConfigurationCode_ByAllowedAction(configurationCode, allowedAction)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -108,7 +109,7 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     allowedAction: string,
     data: UpdateGroupConfigurationGlobalRulesRequestV1
   ): Promise<UpdateGroupConfigurationResponseV1> {
-    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateRule_ByConfigurationCode_ByAllowedAction(configurationCode, allowedAction, data)
     if (resp.error) throw resp.error
     return resp.response.data

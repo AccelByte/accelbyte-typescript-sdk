@@ -17,7 +17,7 @@ import { UpdateTicketResolutionsRequest } from '../../generated-definitions/Upda
 
 export class AdminTicketsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Tickets list can be ordered by: - createdAt - reportsCount - status (currently there are OPEN, AUTO_MODERATED and CLOSED statuses, desc order will put ticket with CLOSED status at the top)
@@ -36,9 +36,7 @@ export class AdminTicketsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/tickets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TicketListResponse, 'TicketListResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketListResponse, 'TicketListResponse')
   }
 
   /**
@@ -52,9 +50,7 @@ export class AdminTicketsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/tickets/statistic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TicketStatisticResponse, 'TicketStatisticResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketStatisticResponse, 'TicketStatisticResponse')
   }
 
   /**
@@ -67,9 +63,7 @@ export class AdminTicketsAdmin$ {
       .replace('{ticketId}', ticketId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -82,9 +76,7 @@ export class AdminTicketsAdmin$ {
       .replace('{ticketId}', ticketId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TicketResponse, 'TicketResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketResponse, 'TicketResponse')
   }
 
   /**
@@ -97,9 +89,7 @@ export class AdminTicketsAdmin$ {
       .replace('{ticketId}', ticketId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ReportListResponse, 'ReportListResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReportListResponse, 'ReportListResponse')
   }
 
   /**
@@ -112,8 +102,6 @@ export class AdminTicketsAdmin$ {
       .replace('{ticketId}', ticketId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, TicketResponse, 'TicketResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketResponse, 'TicketResponse')
   }
 }

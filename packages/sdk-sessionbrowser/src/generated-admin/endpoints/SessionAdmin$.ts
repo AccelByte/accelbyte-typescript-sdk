@@ -18,7 +18,7 @@ import { SessionQueryResponse } from '../../generated-definitions/SessionQueryRe
 
 export class SessionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query to available game session
@@ -39,9 +39,7 @@ export class SessionAdmin$ {
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
   }
 
   /**
@@ -54,9 +52,7 @@ export class SessionAdmin$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
   }
 
   /**
@@ -69,9 +65,7 @@ export class SessionAdmin$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
   }
 
   /**
@@ -92,9 +86,12 @@ export class SessionAdmin$ {
     const url = '/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetSessionHistorySearchResponseV2, 'GetSessionHistorySearchResponseV2')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetSessionHistorySearchResponseV2,
+      'GetSessionHistorySearchResponseV2'
+    )
   }
 
   /**
@@ -105,9 +102,12 @@ export class SessionAdmin$ {
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/count'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CountActiveSessionResponse, 'CountActiveSessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      CountActiveSessionResponse,
+      'CountActiveSessionResponse'
+    )
   }
 
   /**
@@ -123,9 +123,7 @@ export class SessionAdmin$ {
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/custom-game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ActiveCustomGameResponse, 'ActiveCustomGameResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ActiveCustomGameResponse, 'ActiveCustomGameResponse')
   }
 
   /**
@@ -142,9 +140,12 @@ export class SessionAdmin$ {
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/matchmaking-game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ActiveMatchmakingGameResponse, 'ActiveMatchmakingGameResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ActiveMatchmakingGameResponse,
+      'ActiveMatchmakingGameResponse'
+    )
   }
 
   /**
@@ -157,8 +158,11 @@ export class SessionAdmin$ {
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetSessionHistoryDetailedResponseItemArray, 'GetSessionHistoryDetailedResponseItemArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetSessionHistoryDetailedResponseItemArray,
+      'GetSessionHistoryDetailedResponseItemArray'
+    )
   }
 }

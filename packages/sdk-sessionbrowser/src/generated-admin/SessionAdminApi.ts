@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ActiveCustomGameResponse } from '../generated-definitions/ActiveCustomGameResponse.js'
 import { ActiveMatchmakingGameResponse } from '../generated-definitions/ActiveMatchmakingGameResponse.js'
@@ -22,7 +23,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Query to available game session
@@ -39,7 +40,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     server_status?: string | null
     user_id?: string | null
   }): Promise<SessionQueryResponse> {
-    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGamesession(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +50,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Admin delete the session by session ID
    */
   async function deleteGamesession_BySessionId(sessionID: string): Promise<AdminSessionResponse> {
-    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteGamesession_BySessionId(sessionID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +60,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get the session by session ID for admin user
    */
   async function getGamesession_BySessionId(sessionID: string): Promise<AdminSessionResponse> {
-    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGamesession_BySessionId(sessionID)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -79,7 +80,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     status?: string | null
     userID?: string | null
   }): Promise<GetSessionHistorySearchResponseV2> {
-    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getSessionsHistorySearch(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -89,7 +90,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get all active session
    */
   async function getGamesessionActiveCount(queryParams?: { session_type?: string | null }): Promise<CountActiveSessionResponse> {
-    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGamesessionActiveCount(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -104,7 +105,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     server_region?: string | null
     session_id?: string | null
   }): Promise<ActiveCustomGameResponse> {
-    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGamesessionActiveCustomGame(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -120,7 +121,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     server_region?: string | null
     session_id?: string | null
   }): Promise<ActiveMatchmakingGameResponse> {
-    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getGamesessionActiveMatchmakingGame(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -130,7 +131,7 @@ export function SessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get session history detailed. if party_id value empty/null, field will not show in response body.
    */
   async function getHistoryDetailed_ByMatchId(matchID: string): Promise<GetSessionHistoryDetailedResponseItemArray> {
-    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getHistoryDetailed_ByMatchId(matchID)
     if (resp.error) throw resp.error
     return resp.response.data

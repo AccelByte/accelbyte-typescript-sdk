@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreatorResponse } from '../generated-definitions/CreatorResponse.js'
 import { PaginatedCreatorOverviewResponse } from '../generated-definitions/PaginatedCreatorOverviewResponse.js'
@@ -17,7 +18,7 @@ export function PublicCreatorApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Public user can access without token or if token specified, requires valid user token
@@ -28,7 +29,7 @@ export function PublicCreatorApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     orderby?: string | null
     sortby?: string | null
   }): Promise<PaginatedCreatorOverviewResponse> {
-    const $ = new PublicCreator$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicCreator$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +39,7 @@ export function PublicCreatorApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getUser_ByUserId(userId: string): Promise<CreatorResponse> {
-    const $ = new PublicCreator$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new PublicCreator$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

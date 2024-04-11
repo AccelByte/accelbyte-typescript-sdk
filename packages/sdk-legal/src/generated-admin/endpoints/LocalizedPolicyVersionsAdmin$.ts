@@ -20,7 +20,7 @@ import { UploadPolicyVersionAttachmentRequest } from '../../generated-definition
 
 export class LocalizedPolicyVersionsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Retrieve a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
@@ -35,9 +35,12 @@ export class LocalizedPolicyVersionsAdmin$ {
     )
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveLocalizedPolicyVersionResponse, 'RetrieveLocalizedPolicyVersionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveLocalizedPolicyVersionResponse,
+      'RetrieveLocalizedPolicyVersionResponse'
+    )
   }
 
   /**
@@ -54,9 +57,12 @@ export class LocalizedPolicyVersionsAdmin$ {
     )
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, UpdateLocalizedPolicyVersionResponse, 'UpdateLocalizedPolicyVersionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UpdateLocalizedPolicyVersionResponse,
+      'UpdateLocalizedPolicyVersionResponse'
+    )
   }
 
   /**
@@ -69,13 +75,12 @@ export class LocalizedPolicyVersionsAdmin$ {
     const url = '/agreement/admin/localized-policy-versions/versions/{policyVersionId}'.replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(
-          () => resultPromise,
-          RetrieveLocalizedPolicyVersionResponseArray,
-          'RetrieveLocalizedPolicyVersionResponseArray'
-        )
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveLocalizedPolicyVersionResponseArray,
+      'RetrieveLocalizedPolicyVersionResponseArray'
+    )
   }
 
   /**
@@ -89,9 +94,12 @@ export class LocalizedPolicyVersionsAdmin$ {
     const url = '/agreement/admin/localized-policy-versions/versions/{policyVersionId}'.replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, CreateLocalizedPolicyVersionResponse, 'CreateLocalizedPolicyVersionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      CreateLocalizedPolicyVersionResponse,
+      'CreateLocalizedPolicyVersionResponse'
+    )
   }
 
   /**
@@ -105,9 +113,7 @@ export class LocalizedPolicyVersionsAdmin$ {
     )
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -124,12 +130,11 @@ export class LocalizedPolicyVersionsAdmin$ {
     )
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(
-          () => resultPromise,
-          UploadLocalizedPolicyVersionAttachmentResponse,
-          'UploadLocalizedPolicyVersionAttachmentResponse'
-        )
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      UploadLocalizedPolicyVersionAttachmentResponse,
+      'UploadLocalizedPolicyVersionAttachmentResponse'
+    )
   }
 }

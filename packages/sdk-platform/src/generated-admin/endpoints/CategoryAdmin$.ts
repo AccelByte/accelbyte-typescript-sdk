@@ -16,7 +16,7 @@ import { FullCategoryInfoArray } from '../../generated-definitions/FullCategoryI
 
 export class CategoryAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to get root categories.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:CATEGORY&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: root category data&lt;/li&gt;&lt;/ul&gt;
@@ -26,9 +26,7 @@ export class CategoryAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
   }
 
   /**
@@ -39,9 +37,7 @@ export class CategoryAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
   }
 
   /**
@@ -52,9 +48,7 @@ export class CategoryAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/categories/basic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, BasicCategoryInfoArray, 'BasicCategoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BasicCategoryInfoArray, 'BasicCategoryInfoArray')
   }
 
   /**
@@ -67,9 +61,7 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
   }
 
   /**
@@ -82,9 +74,7 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
   }
 
   /**
@@ -101,9 +91,7 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
   }
 
   /**
@@ -116,9 +104,7 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
   }
 
   /**
@@ -134,8 +120,6 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
   }
 }

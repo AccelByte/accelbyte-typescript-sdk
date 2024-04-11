@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Achievements$ } from './endpoints/Achievements$.js'
 import { PublicAchievementResponse } from '../generated-definitions/PublicAchievementResponse.js'
@@ -17,7 +18,7 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
@@ -39,7 +40,7 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'updatedAt:desc'
     tags?: string[]
   }): Promise<PublicAchievementsResponse> {
-    const $ = new Achievements$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Achievements$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAchievements(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +53,7 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     achievementCode: string,
     queryParams: { language: string | null }
   ): Promise<PublicAchievementResponse> {
-    const $ = new Achievements$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Achievements$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getAchievement_ByAchievementCode(achievementCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

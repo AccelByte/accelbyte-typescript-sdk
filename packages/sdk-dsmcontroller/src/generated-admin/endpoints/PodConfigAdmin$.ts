@@ -17,7 +17,7 @@ import { UpdatePodConfigRequest } from '../../generated-definitions/UpdatePodCon
 
 export class PodConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:*:DSM:CONFIG [READ] Required scope: social This endpoint returns the lowest instance spec, both cpu (in Mhz) and memory (in Mb).
@@ -27,9 +27,7 @@ export class PodConfigAdmin$ {
     const url = '/dsmcontroller/admin/instances/spec/lowest'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, InstanceSpec, 'InstanceSpec')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, InstanceSpec, 'InstanceSpec')
   }
 
   /**
@@ -40,9 +38,7 @@ export class PodConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/pods'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListPodConfigResponse, 'ListPodConfigResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListPodConfigResponse, 'ListPodConfigResponse')
   }
 
   /**
@@ -55,9 +51,7 @@ export class PodConfigAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -70,9 +64,7 @@ export class PodConfigAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PodConfigRecord, 'PodConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PodConfigRecord, 'PodConfigRecord')
   }
 
   /**
@@ -85,9 +77,7 @@ export class PodConfigAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PodConfigRecord, 'PodConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PodConfigRecord, 'PodConfigRecord')
   }
 
   /**
@@ -100,8 +90,6 @@ export class PodConfigAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PodConfigRecord, 'PodConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PodConfigRecord, 'PodConfigRecord')
   }
 }

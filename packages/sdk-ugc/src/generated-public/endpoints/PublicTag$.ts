@@ -12,7 +12,7 @@ import { PaginatedGetTagResponse } from '../../generated-definitions/PaginatedGe
 
 export class PublicTag$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get available tags paginated
@@ -22,8 +22,6 @@ export class PublicTag$ {
     const url = '/ugc/v1/public/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PaginatedGetTagResponse, 'PaginatedGetTagResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGetTagResponse, 'PaginatedGetTagResponse')
   }
 }

@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Country$ } from './endpoints/Country$.js'
 import { CountryResponseArray } from '../generated-definitions/CountryResponseArray.js'
@@ -16,13 +17,13 @@ export function CountryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Public get country list, will filter out countries in black list
    */
   async function getCountries(): Promise<CountryResponseArray> {
-    const $ = new Country$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Country$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getCountries()
     if (resp.error) throw resp.error
     return resp.response.data

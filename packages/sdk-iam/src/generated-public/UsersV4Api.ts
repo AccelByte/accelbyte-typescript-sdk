@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AuthenticatorKeyResponseV4 } from '../generated-definitions/AuthenticatorKeyResponseV4.js'
 import { BackupCodesResponseV4 } from '../generated-definitions/BackupCodesResponseV4.js'
@@ -30,13 +31,13 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Request body details: - emailAddress: email address of the user to be invited - namespace: new namespace of the user to be created - namespaceDisplayName: display name of the new namespace - additionalData(optional): for utm parameter data The invited users will also be assigned with &#34;User&#34; role by default.
    */
   async function createUserInvite(data: PublicInviteUserRequestV4): Promise<InviteUserResponseV3> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserInvite(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -46,7 +47,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   async function createUser(data: CreateUserRequestV4): Promise<CreateUserResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUser(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -56,7 +57,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, newEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, { oldEmailAddress, emailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, { oldEmailAddress, emailAddress} response field will be filled with verified email before. newEmailAddress response field will be filled with newest email address. action code : 10103
    */
   async function patchUserMe(data: PublicUserUpdateRequestV3): Promise<UserResponseV3> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.patchUserMe(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -66,7 +67,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create a test user and not send verification code email **Required attributes:** - verified: this new user is verified or not - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   async function createTestUser(data: CreateTestUserRequestV4): Promise<CreateUserResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createTestUser(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -76,7 +77,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint only returns user&#39;s public information. action code: 10129
    */
   async function getUser_ByUserId(userId: string): Promise<UserPublicInfoResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -86,7 +87,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * The endpoint to update my email address. It requires a verification code from &lt;code&gt;/users/me/code/request&lt;/code&gt; with **UpdateEmailAddress** context.
    */
   async function updateUserMeEmail(data: EmailUpdateRequestV4): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateUserMeEmail(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -96,7 +97,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * (Only for test)This endpoint is used to remove trusted device. This endpoint Requires device_token in cookie
    */
   async function deleteUserMeMfaDevice(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteUserMeMfaDevice()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -106,7 +107,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to get user enabled factors.
    */
   async function getUsersMeMfaFactor(): Promise<EnabledFactorsResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsersMeMfaFactor()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -116,7 +117,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to make 2FA factor default.
    */
   async function postUserMeMfaFactor(data: { factor: string | null }): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postUserMeMfaFactor(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -127,7 +128,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   async function getUsersMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsersMeMfaBackupCode()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -138,7 +139,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
   async function createUserMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeMfaBackupCode()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -148,7 +149,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to send email code.
    */
   async function createUserMeMfaEmailCode(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeMfaEmailCode()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -158,7 +159,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Upgrade headless account to full account without verifying email address. Client does not need to provide verification code which sent to email address. action code : 10124
    */
   async function createUserMeHeadlesVerify(data: UpgradeHeadlessAccountRequestV4): Promise<UserResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeHeadlesVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -168,7 +169,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to get existing 8-digits backup codes. Each codes is a one-time code and will be deleted once used. The codes will be sent through linked email.
    */
   async function getUsersMeMfaBackupCodes(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsersMeMfaBackupCodes()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -178,7 +179,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to generate 8-digits backup codes. Each codes is a one-time code and will be deleted once used. The codes will be sent through linked email.
    */
   async function createUserMeMfaBackupCode_ByNS(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeMfaBackupCode_ByNS()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -188,7 +189,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to enable 2FA email.
    */
   async function postUserMeMfaEmailEnable(data: { code: string | null }): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postUserMeMfaEmailEnable(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -198,7 +199,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to disable 2FA email.
    */
   async function createUserMeMfaEmailDisable(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeMfaEmailDisable()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -208,7 +209,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint create user from saved roles when creating invitation and submitted data. User will be able to login after completing submitting the data through this endpoint. Available Authentication Types: EMAILPASSWD: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. Required attributes: - authType: possible value is EMAILPASSWD (see above) - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - displayName: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API.
    */
   async function createUserInvite_ByInvitationId(invitationId: string, data: CreateUserRequestV4): Promise<CreateUserResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserInvite_ByInvitationId(invitationId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -218,7 +219,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  The endpoint upgrades a headless account by linking the headless account with the email address, username, and password. By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM. The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the [send verification code endpoint](#operations-Users-PublicSendVerificationCodeV3). This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done. Supported user data fields: - displayName - dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29 - country : format ISO3166-1 alpha-2 two letter, e.g. US action code : 10124
    */
   async function createUserMeHeadlesCodeVerify(data: UpgradeHeadlessAccountWithVerificationCodeRequestV4): Promise<UserResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeHeadlesCodeVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -228,7 +229,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to generate a secret key for 3rd-party authenticator app. A QR code URI is also returned so that frontend can generate QR code image.
    */
   async function createUserMeMfaAuthenticatorKey(): Promise<AuthenticatorKeyResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeMfaAuthenticatorKey()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -239,7 +240,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to enable 2FA backup codes.
    */
   async function createUserMeMfaBackupCodeEnable(): Promise<BackupCodesResponseV4> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeMfaBackupCodeEnable()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -249,7 +250,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to disable 2FA backup codes.
    */
   async function deleteUserMeMfaBackupCodeDisable(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteUserMeMfaBackupCodeDisable()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -259,7 +260,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to enable 2FA backup codes.
    */
   async function createUserMeMfaBackupCodeEnable_ByNS(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createUserMeMfaBackupCodeEnable_ByNS()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -270,7 +271,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to download backup codes.
    */
   async function getUsersMeMfaBackupCodeDownload(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUsersMeMfaBackupCodeDownload()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -280,7 +281,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to enable 2FA authenticator.
    */
   async function postUserMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.postUserMeMfaAuthenticatorEnable(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -290,7 +291,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is used to disable 2FA authenticator.
    */
   async function deleteUserMeMfaAuthenticatorDisable(): Promise<unknown> {
-    const $ = new UsersV4$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.deleteUserMeMfaAuthenticatorDisable()
     if (resp.error) throw resp.error
     return resp.response.data

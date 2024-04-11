@@ -15,7 +15,7 @@ import { RetrieveLatestDlcResponseArray } from '../../generated-definitions/Retr
 
 export class Dlc$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * This API is used to retrieve DLC versions against the game version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
@@ -27,9 +27,12 @@ export class Dlc$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveDependencyLinkResponse, 'RetrieveDependencyLinkResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveDependencyLinkResponse,
+      'RetrieveDependencyLinkResponse'
+    )
   }
 
   /**
@@ -42,9 +45,12 @@ export class Dlc$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveDependencyCompatibilityResponse, 'RetrieveDependencyCompatibilityResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveDependencyCompatibilityResponse,
+      'RetrieveDependencyCompatibilityResponse'
+    )
   }
 
   /**
@@ -57,9 +63,12 @@ export class Dlc$ {
       .replace('{appId}', appId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveLatestDlcResponseArray, 'RetrieveLatestDlcResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveLatestDlcResponseArray,
+      'RetrieveLatestDlcResponseArray'
+    )
   }
 
   /**
@@ -72,8 +81,11 @@ export class Dlc$ {
       .replace('{dlcAppId}', dlcAppId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RetrieveBaseGameResponseArray, 'RetrieveBaseGameResponseArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      RetrieveBaseGameResponseArray,
+      'RetrieveBaseGameResponseArray'
+    )
   }
 }

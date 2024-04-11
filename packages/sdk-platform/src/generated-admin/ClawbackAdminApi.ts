@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ClawbackAdmin$ } from './endpoints/ClawbackAdmin$.js'
 import { ClawbackInfo } from '../generated-definitions/ClawbackInfo.js'
@@ -18,7 +19,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
@@ -33,7 +34,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     status?: 'FAIL' | 'IGNORED' | 'INIT' | 'SUCCESS'
     userId?: string | null
   }): Promise<IapClawbackPagingSlicedResult> {
-    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getIapClawbackHistories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -43,7 +44,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Mock Sync PlayStation Clawback event..&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK, action=1(CREATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function createIapClawbackPlaystationMock(data: StreamEvent): Promise<ClawbackInfo> {
-    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.createIapClawbackPlaystationMock(data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -19,7 +19,7 @@ import { UpdateConfigurationTemplateRequest } from '../../generated-definitions/
 
 export class ConfigurationTemplateAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get a dsmc configuration.
@@ -29,9 +29,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/dsconfigs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -42,9 +40,12 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigurationTemplateResponse, 'ConfigurationTemplateResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ConfigurationTemplateResponse,
+      'ConfigurationTemplateResponse'
+    )
   }
 
   /**
@@ -61,9 +62,12 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigurationTemplatesResponse, 'ConfigurationTemplatesResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ConfigurationTemplatesResponse,
+      'ConfigurationTemplatesResponse'
+    )
   }
 
   /**
@@ -74,9 +78,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/dsconfigs/sync'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -87,9 +89,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -100,9 +100,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
   }
 
   /**
@@ -113,9 +111,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
   }
 
   /**
@@ -126,9 +122,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
   }
 
   /**
@@ -141,9 +135,7 @@ export class ConfigurationTemplateAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -156,9 +148,12 @@ export class ConfigurationTemplateAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigurationTemplateResponse, 'ConfigurationTemplateResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ConfigurationTemplateResponse,
+      'ConfigurationTemplateResponse'
+    )
   }
 
   /**
@@ -171,8 +166,11 @@ export class ConfigurationTemplateAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ConfigurationTemplateResponse, 'ConfigurationTemplateResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ConfigurationTemplateResponse,
+      'ConfigurationTemplateResponse'
+    )
   }
 }

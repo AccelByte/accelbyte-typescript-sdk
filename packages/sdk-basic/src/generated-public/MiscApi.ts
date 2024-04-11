@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CountryObjectArray } from '../generated-definitions/CountryObjectArray.js'
 import { Misc$ } from './endpoints/Misc$.js'
@@ -17,13 +18,13 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * Get server time
    */
   async function getMiscTime(): Promise<RetrieveTimeResponse> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Misc$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getMiscTime()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +35,7 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscCountries(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Misc$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getMiscCountries(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +45,7 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscLanguages(): Promise<unknown> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Misc$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getMiscLanguages()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +55,7 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List time zones.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: time zones&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscTimezones(): Promise<unknown> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Misc$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getMiscTimezones()
     if (resp.error) throw resp.error
     return resp.response.data

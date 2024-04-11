@@ -12,7 +12,7 @@ import { EnvironmentVariableListResponse } from '../../generated-definitions/Env
 
 export class EnvironmentVariableAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * List of environment variables.
@@ -22,8 +22,11 @@ export class EnvironmentVariableAdmin$ {
     const url = '/session/v1/admin/environment-variables'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, EnvironmentVariableListResponse, 'EnvironmentVariableListResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      EnvironmentVariableListResponse,
+      'EnvironmentVariableListResponse'
+    )
   }
 }

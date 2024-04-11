@@ -13,7 +13,7 @@ import { AcceptAgreementResponse } from '../../generated-definitions/AcceptAgree
 
 export class AdminUserAgreementAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
@@ -29,8 +29,6 @@ export class AdminUserAgreementAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AcceptAgreementResponse, 'AcceptAgreementResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AcceptAgreementResponse, 'AcceptAgreementResponse')
   }
 }

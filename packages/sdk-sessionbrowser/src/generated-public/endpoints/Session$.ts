@@ -21,7 +21,7 @@ import { UpdateSettingsRequest } from '../../generated-definitions/UpdateSetting
 
 export class Session$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query available game session
@@ -42,9 +42,7 @@ export class Session$ {
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
   }
 
   /**
@@ -55,9 +53,7 @@ export class Session$ {
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionResponse, 'SessionResponse')
   }
 
   /**
@@ -68,9 +64,7 @@ export class Session$ {
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionByUserIDsResponse, 'SessionByUserIDsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionByUserIDsResponse, 'SessionByUserIDsResponse')
   }
 
   /**
@@ -83,9 +77,7 @@ export class Session$ {
       .replace('{userID}', userID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RecentPlayerQueryResponse, 'RecentPlayerQueryResponse')
   }
 
   /**
@@ -98,9 +90,7 @@ export class Session$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionResponse, 'SessionResponse')
   }
 
   /**
@@ -113,9 +103,7 @@ export class Session$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionResponse, 'SessionResponse')
   }
 
   /**
@@ -128,9 +116,7 @@ export class Session$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionResponse, 'SessionResponse')
   }
 
   /**
@@ -143,9 +129,7 @@ export class Session$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionResponse, 'SessionResponse')
   }
 
   /**
@@ -158,9 +142,7 @@ export class Session$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AddPlayerResponse, 'AddPlayerResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddPlayerResponse, 'AddPlayerResponse')
   }
 
   /**
@@ -173,9 +155,7 @@ export class Session$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionResponse, 'SessionResponse')
   }
 
   /**
@@ -188,9 +168,7 @@ export class Session$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, SessionResponse, 'SessionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionResponse, 'SessionResponse')
   }
 
   /**
@@ -204,8 +182,6 @@ export class Session$ {
       .replace('{userID}', userID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, AddPlayerResponse, 'AddPlayerResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddPlayerResponse, 'AddPlayerResponse')
   }
 }

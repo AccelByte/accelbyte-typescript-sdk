@@ -12,7 +12,7 @@ import { PartyQueryResponse } from '../../generated-definitions/PartyQueryRespon
 
 export class PartyAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Query parties.
@@ -35,8 +35,6 @@ export class PartyAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/parties'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, PartyQueryResponse, 'PartyQueryResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PartyQueryResponse, 'PartyQueryResponse')
   }
 }

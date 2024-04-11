@@ -16,16 +16,14 @@ import { MultipleUx } from '../../generated-definitions/MultipleUx.js'
 
 export class EventDescriptions$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   getDescriptionsUx(): Promise<IResponse<MultipleUx>> {
     const params = {} as SDKRequestConfig
     const url = '/event/descriptions/ux'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleUx, 'MultipleUx')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleUx, 'MultipleUx')
   }
 
   getDescriptionsEventId(): Promise<IResponse<MultipleEventId>> {
@@ -33,9 +31,7 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/eventId'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleEventId, 'MultipleEventId')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventId, 'MultipleEventId')
   }
 
   getDescriptionsAgentType(): Promise<IResponse<MultipleAgentType>> {
@@ -43,9 +39,7 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/agentType'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleAgentType, 'MultipleAgentType')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleAgentType, 'MultipleAgentType')
   }
 
   getDescriptionsEventType(): Promise<IResponse<MultipleEventType>> {
@@ -53,9 +47,7 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/eventType'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleEventType, 'MultipleEventType')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventType, 'MultipleEventType')
   }
 
   getDescriptionsEventLevel(): Promise<IResponse<MultipleEventLevel>> {
@@ -63,9 +55,7 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/eventLevel'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleEventLevel, 'MultipleEventLevel')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventLevel, 'MultipleEventLevel')
   }
 
   getDescriptionsUxListByUx(queryParams?: { ux?: string | null }): Promise<IResponse<MultipleUx>> {
@@ -73,9 +63,7 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/ux/listByUx'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleUx, 'MultipleUx')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleUx, 'MultipleUx')
   }
 
   getDescriptionsEventIdListByEventIds(queryParams?: { eventIds?: string | null }): Promise<IResponse<MultipleEventId>> {
@@ -83,9 +71,7 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/eventId/listByEventIds'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleEventId, 'MultipleEventId')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventId, 'MultipleEventId')
   }
 
   getDescriptionsAgentTypeListByAgentTypes(queryParams?: { agentTypes?: string | null }): Promise<IResponse<MultipleAgentType>> {
@@ -93,9 +79,7 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/agentType/listByAgentTypes'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleAgentType, 'MultipleAgentType')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleAgentType, 'MultipleAgentType')
   }
 
   getDescriptionsEventTypeListByEventTypes(queryParams?: { eventTypes?: string | null }): Promise<IResponse<MultipleEventType>> {
@@ -103,9 +87,7 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/eventType/listByEventTypes'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleEventType, 'MultipleEventType')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventType, 'MultipleEventType')
   }
 
   getDescriptionsEventLevelListByEventLevels(queryParams?: { eventLevels?: string | null }): Promise<IResponse<MultipleEventLevel>> {
@@ -113,8 +95,6 @@ export class EventDescriptions$ {
     const url = '/event/descriptions/eventLevel/listByEventLevels'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, MultipleEventLevel, 'MultipleEventLevel')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventLevel, 'MultipleEventLevel')
   }
 }

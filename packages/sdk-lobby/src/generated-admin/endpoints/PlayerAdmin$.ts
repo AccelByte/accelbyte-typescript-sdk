@@ -21,7 +21,7 @@ import { SetPlayerSessionAttributeRequest } from '../../generated-definitions/Se
 
 export class PlayerAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get the number of players connected to the Lobby in the given namespace.
@@ -31,9 +31,7 @@ export class PlayerAdmin$ {
     const url = '/lobby/v1/admin/player/namespaces/{namespace}/ccu'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetLobbyCcuResponse, 'GetLobbyCcuResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLobbyCcuResponse, 'GetLobbyCcuResponse')
   }
 
   /**
@@ -44,9 +42,12 @@ export class PlayerAdmin$ {
     const url = '/lobby/v1/admin/player/namespaces/{namespace}/users/bulk/blocked'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetBulkAllPlayerBlockedUsersResponse, 'GetBulkAllPlayerBlockedUsersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetBulkAllPlayerBlockedUsersResponse,
+      'GetBulkAllPlayerBlockedUsersResponse'
+    )
   }
 
   /**
@@ -59,9 +60,12 @@ export class PlayerAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedUsersResponse, 'GetAllPlayerBlockedUsersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetAllPlayerBlockedUsersResponse,
+      'GetAllPlayerBlockedUsersResponse'
+    )
   }
 
   /**
@@ -74,9 +78,12 @@ export class PlayerAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetAllPlayerSessionAttributeResponse, 'GetAllPlayerSessionAttributeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetAllPlayerSessionAttributeResponse,
+      'GetAllPlayerSessionAttributeResponse'
+    )
   }
 
   /**
@@ -89,9 +96,7 @@ export class PlayerAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -104,9 +109,12 @@ export class PlayerAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetAllPlayerBlockedByUsersResponse, 'GetAllPlayerBlockedByUsersResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetAllPlayerBlockedByUsersResponse,
+      'GetAllPlayerBlockedByUsersResponse'
+    )
   }
 
   /**
@@ -119,9 +127,7 @@ export class PlayerAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -135,8 +141,11 @@ export class PlayerAdmin$ {
       .replace('{attribute}', attribute)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetPlayerSessionAttributeResponse, 'GetPlayerSessionAttributeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      GetPlayerSessionAttributeResponse,
+      'GetPlayerSessionAttributeResponse'
+    )
   }
 }

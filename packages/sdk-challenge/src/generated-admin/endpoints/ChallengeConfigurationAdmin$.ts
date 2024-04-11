@@ -18,7 +18,7 @@ import { UpdateChallengeRequest } from '../../generated-definitions/UpdateChalle
 
 export class ChallengeConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -33,9 +33,7 @@ export class ChallengeConfigurationAdmin$ {
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListChallengeResponse, 'ListChallengeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListChallengeResponse, 'ListChallengeResponse')
   }
 
   /**
@@ -46,9 +44,7 @@ export class ChallengeConfigurationAdmin$ {
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ChallengeResponse, 'ChallengeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
   }
 
   /**
@@ -61,9 +57,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -76,9 +70,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ChallengeResponse, 'ChallengeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
   }
 
   /**
@@ -91,9 +83,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ChallengeResponse, 'ChallengeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
   }
 
   /**
@@ -106,9 +96,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, z.unknown(), 'z.unknown()')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -124,9 +112,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ListPeriodsResponse, 'ListPeriodsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListPeriodsResponse, 'ListPeriodsResponse')
   }
 
   /**
@@ -139,8 +125,6 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, ScheduleArray, 'ScheduleArray')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ScheduleArray, 'ScheduleArray')
   }
 }

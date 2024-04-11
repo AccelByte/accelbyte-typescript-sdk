@@ -15,7 +15,7 @@ import { LoadOutgoingFriendsWithTimeResponse } from '../../generated-definitions
 
 export class FriendsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isValidationEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
    * Get list of friends in a namespace.
@@ -30,9 +30,7 @@ export class FriendsAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, GetFriendsResponse, 'GetFriendsResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetFriendsResponse, 'GetFriendsResponse')
   }
 
   /**
@@ -48,9 +46,12 @@ export class FriendsAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, LoadIncomingFriendsWithTimeResponse, 'LoadIncomingFriendsWithTimeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      LoadIncomingFriendsWithTimeResponse,
+      'LoadIncomingFriendsWithTimeResponse'
+    )
   }
 
   /**
@@ -66,9 +67,12 @@ export class FriendsAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, LoadOutgoingFriendsWithTimeResponse, 'LoadOutgoingFriendsWithTimeResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      LoadOutgoingFriendsWithTimeResponse,
+      'LoadOutgoingFriendsWithTimeResponse'
+    )
   }
 
   /**
@@ -84,8 +88,11 @@ export class FriendsAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return this.isValidationEnabled
-      ? Validate.responseType(() => resultPromise, FriendshipConnectionResponse, 'FriendshipConnectionResponse')
-      : Validate.unsafeResponse(() => resultPromise)
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      FriendshipConnectionResponse,
+      'FriendshipConnectionResponse'
+    )
   }
 }

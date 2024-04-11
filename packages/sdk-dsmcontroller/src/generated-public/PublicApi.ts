@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { DefaultProvider } from '../generated-definitions/DefaultProvider.js'
 import { Public$ } from './endpoints/Public$.js'
@@ -16,13 +17,13 @@ export function PublicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This endpoints returns list of supported providers. Armada is the default provider.
    */
   async function getProviders(): Promise<unknown> {
-    const $ = new Public$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Public$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getProviders()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +33,7 @@ export function PublicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoints returns the default provider.
    */
   async function getProviderDefault(): Promise<DefaultProvider> {
-    const $ = new Public$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Public$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getProviderDefault()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +43,7 @@ export function PublicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint returns the providers by region.
    */
   async function getProviderRegion_ByRegion(region: string): Promise<unknown> {
-    const $ = new Public$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new Public$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getProviderRegion_ByRegion(region)
     if (resp.error) throw resp.error
     return resp.response.data

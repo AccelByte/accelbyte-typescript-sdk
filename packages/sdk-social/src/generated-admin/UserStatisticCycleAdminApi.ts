@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { UserStatCycleItemPagingSlicedResult } from '../generated-definitions/UserStatCycleItemPagingSlicedResult.js'
 import { UserStatisticCycleAdmin$ } from './endpoints/UserStatisticCycleAdmin$.js'
@@ -16,7 +17,7 @@ export function UserStatisticCycleAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * List user&#39;s statCycleItems by statCycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycle items&lt;/li&gt;&lt;/ul&gt;
@@ -26,7 +27,7 @@ export function UserStatisticCycleAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     cycleId: string,
     queryParams?: { isPublic?: boolean | null; limit?: number; offset?: number; sortBy?: string | null; statCodes?: string | null }
   ): Promise<UserStatCycleItemPagingSlicedResult> {
-    const $ = new UserStatisticCycleAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new UserStatisticCycleAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getStatCycleitems_ByUserId_ByCycleId(userId, cycleId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

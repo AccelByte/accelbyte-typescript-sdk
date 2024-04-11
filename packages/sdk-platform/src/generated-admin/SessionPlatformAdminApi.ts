@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
+// @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { SessionPlatformAdmin$ } from './endpoints/SessionPlatformAdmin$.js'
 import { XblUserSessionRequest } from '../generated-definitions/XblUserSessionRequest.js'
@@ -16,13 +17,13 @@ export function SessionPlatformAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isValidationEnabled = args?.isValidationEnabled !== false
+  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
    * This API is used to register/update a session on xbox.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:INTEGRATION, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateSessionXbl_ByUserId(userId: string, data: XblUserSessionRequest): Promise<unknown> {
-    const $ = new SessionPlatformAdmin$(Network.create(requestConfig), namespace, isValidationEnabled)
+    const $ = new SessionPlatformAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.updateSessionXbl_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
