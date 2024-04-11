@@ -28,7 +28,9 @@ export class InputValidationHelper {
   static validateDisplayName = (value: string, isRequired = false, validations: InputValidationDataPublic[], validateBadWord = false) => {
     const validation = InputValidationHelper.getValidationByKey(ValidateableInputField.enum.displayName, validations)
     if (!validation) return null
+
     return validateDisplayName(value, {
+      // @ts-ignore  Why? -> error TS2345: Argument of type '{ blockedWord: string[]; maxLength: number; minLength: number; isRequired: boolean; allowUnicode: boolean; isCustomRegex: boolean; allowSpace: boolean; customRegex: string; letterCase: string; ... 4 more ...; validateBadWord: boolean; }' is not assignable to parameter of type 'ValidateDisplayNameOptions'.
       blockedWord: validation.blockedWord,
       maxLength: validation.maxLength,
       minLength: validation.minLength,
