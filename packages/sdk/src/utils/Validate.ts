@@ -26,7 +26,15 @@ export type IResponse<D> =
     }
 
 export class Validate {
-  //
+  static validateOrReturnResponse<D>(
+    isValidationEnabled: boolean,
+    networkCall: () => Promise<AxiosResponse<D>>,
+    Codec: z.ZodType<D>,
+    modelName: string
+  ) {
+    return isValidationEnabled ? Validate.responseType(() => networkCall(), Codec, modelName) : Validate.unsafeResponse(() => networkCall())
+  }
+
   static responseType<D>(networkCall: () => Promise<AxiosResponse<D>>, Codec: z.ZodType<D>, modelName: string) {
     return wrapNetworkCallSafely<D>(async () => {
       const response = await networkCall()
