@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const InitiateExportAgreementsToCsvResponse = z.object({ processing: z.boolean() })
+export const InitiateExportAgreementsToCsvResponse = z.object({ exportId: z.string(), processing: z.boolean() })
 
 export interface InitiateExportAgreementsToCsvResponse extends z.TypeOf<typeof InitiateExportAgreementsToCsvResponse> {}

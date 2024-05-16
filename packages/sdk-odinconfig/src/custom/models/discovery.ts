@@ -159,7 +159,13 @@ export const PlayerPortalFeatureFlagsConfig = z.object({
    *
    * Defaults to `true`.
    **/
-  isLegalEnabled: z.boolean().default(true)
+  isLegalEnabled: z.boolean().default(true),
+  /**
+   * Determines whether the "Account History" feature is enable or not.
+   *
+   * Defaults to `true`.
+   **/
+  isAccountHistoryEnabled: z.boolean().default(true)
 })
 
 export interface PlayerPortalFeatureFlagsConfig extends z.infer<typeof PlayerPortalFeatureFlagsConfig> {}

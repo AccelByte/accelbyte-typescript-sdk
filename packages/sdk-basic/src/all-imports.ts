@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
@@ -33,6 +33,7 @@ export * from './generated-definitions/NamespacePublisherInfo.js'
 export * from './generated-definitions/NamespaceSimpleInfo.js'
 export * from './generated-definitions/NamespaceStatusUpdate.js'
 export * from './generated-definitions/NamespaceUpdate.js'
+export * from './generated-definitions/Permission.js'
 export * from './generated-definitions/RetrieveCountryGroupResponse.js'
 export * from './generated-definitions/RetrieveTimeResponse.js'
 export * from './generated-definitions/UpdateCountryGroupRequest.js'

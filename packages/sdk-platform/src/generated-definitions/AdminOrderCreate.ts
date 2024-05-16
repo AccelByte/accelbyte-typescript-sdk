@@ -9,6 +9,7 @@ import { OrderCreationOptions } from './OrderCreationOptions.js'
 export const AdminOrderCreate = z.object({
   currencyCode: z.string(),
   currencyNamespace: z.string().nullish(),
+  discountCodes: z.array(z.string()).nullish(),
   discountedPrice: z.number().int(),
   entitlementPlatform: z.enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'Xbox']).nullish(),
   ext: z.record(z.any()).nullish(),

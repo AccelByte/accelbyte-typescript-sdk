@@ -22,7 +22,7 @@ export function AchievementPlatformAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * This API is used to get xbox live user achievements(Only for test).&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get xbox live user achievements(Only for test).
    */
   async function getAchievementXbl_ByUserId(userId: string, queryParams: { xboxUserId: string | null }): Promise<XblUserAchievements> {
     const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -32,7 +32,7 @@ export function AchievementPlatformAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to update xbox live achievements.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to update xbox live achievements.
    */
   async function updateAchievementXbl_ByUserId(userId: string, data: XblAchievementUpdateRequest): Promise<unknown> {
     const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -42,7 +42,7 @@ export function AchievementPlatformAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to unlock steam achievement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to unlock steam achievement.
    */
   async function updateAchievementSteam_ByUserId(userId: string, data: SteamAchievementUpdateRequest): Promise<unknown> {
     const $ = new AchievementPlatformAdmin$(Network.create(requestConfig), namespace, isZodEnabled)

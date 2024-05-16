@@ -21,7 +21,7 @@ export class OAuth20Extension$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage. Supported methods: - VerifyToken to verify token from header - AddTokenToRevocationList to revoke token with TTL
+   * This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage.
    */
   createLogout(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

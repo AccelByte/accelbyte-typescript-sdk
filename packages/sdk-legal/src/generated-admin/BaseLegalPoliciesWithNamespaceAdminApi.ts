@@ -27,7 +27,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Retrieve all supported policy types.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve all supported policy types.
    */
   async function getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<RetrievePolicyTypeResponseArray> {
     const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -37,17 +37,17 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
   }
 
   /**
-   * Retrieve all base policies in the namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve all base policies in the namespace.
    */
-  async function getBasePolicies(): Promise<RetrieveBasePolicyResponseArray> {
+  async function getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<RetrieveBasePolicyResponseArray> {
     const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getBasePolicies()
+    const resp = await $.getBasePolicies(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Create a legal policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Create a legal policy.
    */
   async function createBasePolicy(data: CreateBasePolicyRequestV2): Promise<CreateBasePolicyResponse> {
     const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -57,7 +57,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
   }
 
   /**
-   * Retrieve a base policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve a base policy.
    */
   async function getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<RetrieveBasePolicyResponse> {
     const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -67,7 +67,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
   }
 
   /**
-   * Update an existing base policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update an existing base policy.
    */
   async function patchBasePolicy_ByBasePolicyId(basePolicyId: string, data: UpdateBasePolicyRequestV2): Promise<UpdateBasePolicyResponse> {
     const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -77,7 +77,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
   }
 
   /**
-   * Retrieve a Base Legal Policy based on a Particular Country.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve a Base Legal Policy based on a Particular Country.
    */
   async function getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<RetrievePolicyResponse> {
     const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)

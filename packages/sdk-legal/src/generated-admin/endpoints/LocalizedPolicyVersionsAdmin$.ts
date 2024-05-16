@@ -23,7 +23,7 @@ export class LocalizedPolicyVersionsAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Retrieve a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve a version of a particular country-specific policy.
    */
   getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
@@ -44,7 +44,7 @@ export class LocalizedPolicyVersionsAdmin$ {
   }
 
   /**
-   * Update a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a version of a particular country-specific policy.
    */
   updateLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string,
@@ -66,12 +66,13 @@ export class LocalizedPolicyVersionsAdmin$ {
   }
 
   /**
-   * Retrieve versions of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve versions of a particular country-specific policy.
    */
   getLocalizedPolicyVersionVersion_ByPolicyVersionId(
-    policyVersionId: string
+    policyVersionId: string,
+    queryParams?: { visibleOnly?: boolean | null }
   ): Promise<IResponse<RetrieveLocalizedPolicyVersionResponseArray>> {
-    const params = {} as SDKRequestConfig
+    const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/localized-policy-versions/versions/{policyVersionId}'.replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -84,7 +85,7 @@ export class LocalizedPolicyVersionsAdmin$ {
   }
 
   /**
-   * Create a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Create a version of a particular country-specific policy.
    */
   createLocalizedPolicyVersionVersion_ByPolicyVersionId(
     policyVersionId: string,
@@ -103,7 +104,7 @@ export class LocalizedPolicyVersionsAdmin$ {
   }
 
   /**
-   * Update a localized version policy to be the default.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a localized version policy to be the default.
    */
   patchDefault_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -117,7 +118,7 @@ export class LocalizedPolicyVersionsAdmin$ {
   }
 
   /**
-   * Request presigned URL for upload attachment for a particular localized version of base policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Request presigned URL for upload attachment for a particular localized version of base policy.
    */
   createAttachment_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string,

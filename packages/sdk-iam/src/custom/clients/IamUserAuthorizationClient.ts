@@ -25,6 +25,7 @@ import { CodeChallenge } from './CodeChallenge.js'
 import { OAuth20$ } from '../../generated-public/endpoints/OAuth20$'
 import { TokenWithDeviceCookieResponseV3 } from '../../generated-definitions/TokenWithDeviceCookieResponseV3'
 import { OAuth20Extension$ } from '../../generated-public/endpoints/OAuth20Extension$'
+import { mandatoryAccountUpgradeLocalStorageName } from '../constants.js'
 
 const AUTHORIZE_URL = '/iam/v3/oauth/authorize'
 export const MFA_DATA_STORAGE_KEY = 'mfaData'
@@ -283,7 +284,13 @@ export class IamUserAuthorizationClient {
     }
 
     const searchParams = this.getSearchParams(sentState, challenge)
-    searchParams.append('createHeadless', 'false')
+
+    let isMandatoryThirdPartyAccountUpgradeOrLinkEnabled = ''
+    if (BrowserHelper.isOnBrowser()) {
+      isMandatoryThirdPartyAccountUpgradeOrLinkEnabled = localStorage.getItem(mandatoryAccountUpgradeLocalStorageName)?.toLowerCase() || ''
+    }
+    const createHeadless: boolean = isMandatoryThirdPartyAccountUpgradeOrLinkEnabled === 'false'
+    searchParams.append('createHeadless', createHeadless.toString())
 
     if (targetAuthPage) {
       searchParams.append('target_auth_page', targetAuthPage)

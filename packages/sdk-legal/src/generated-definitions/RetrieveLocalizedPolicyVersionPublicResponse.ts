@@ -17,6 +17,7 @@ export const RetrieveLocalizedPolicyVersionPublicResponse = z.object({
   createdAt: z.string().nullish(),
   description: z.string().nullish(),
   id: z.string(),
+  isHidden: z.boolean(),
   localeCode: z.string(),
   namespace: z.string(),
   policy: PolicyObject,

@@ -22,7 +22,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Retrieve all supported policy types.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve all supported policy types.
    */
   getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<IResponse<RetrievePolicyTypeResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -38,10 +38,10 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
   }
 
   /**
-   * Retrieve all base policies in the namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve all base policies in the namespace.
    */
-  getBasePolicies(): Promise<IResponse<RetrieveBasePolicyResponseArray>> {
-    const params = {} as SDKRequestConfig
+  getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<IResponse<RetrieveBasePolicyResponseArray>> {
+    const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/base-policies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -54,7 +54,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
   }
 
   /**
-   * Create a legal policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Create a legal policy.
    */
   createBasePolicy(data: CreateBasePolicyRequestV2): Promise<IResponse<CreateBasePolicyResponse>> {
     const params = {} as SDKRequestConfig
@@ -65,7 +65,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
   }
 
   /**
-   * Retrieve a base policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve a base policy.
    */
   getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<IResponse<RetrieveBasePolicyResponse>> {
     const params = {} as SDKRequestConfig
@@ -83,7 +83,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
   }
 
   /**
-   * Update an existing base policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update an existing base policy.
    */
   patchBasePolicy_ByBasePolicyId(basePolicyId: string, data: UpdateBasePolicyRequestV2): Promise<IResponse<UpdateBasePolicyResponse>> {
     const params = {} as SDKRequestConfig
@@ -96,7 +96,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
   }
 
   /**
-   * Retrieve a Base Legal Policy based on a Particular Country.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve a Base Legal Policy based on a Particular Country.
    */
   getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<IResponse<RetrievePolicyResponse>> {
     const params = {} as SDKRequestConfig

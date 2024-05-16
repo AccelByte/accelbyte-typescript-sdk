@@ -19,22 +19,22 @@ export function CompatibilityConfigsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
-  async function getTemplatesDefaultConfigs(): Promise<Configs> {
+  async function getTemplatesDefaultConfigs_DEPRECATED(): Promise<Configs> {
     const $ = new CompatibilityConfigs$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getTemplatesDefaultConfigs()
+    const resp = await $.getTemplatesDefaultConfigs_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getTemplatesTemplateDiscoveryConfigs(): Promise<Configs> {
+  async function getTemplatesTemplateDiscoveryConfigs_DEPRECATED(): Promise<Configs> {
     const $ = new CompatibilityConfigs$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getTemplatesTemplateDiscoveryConfigs()
+    const resp = await $.getTemplatesTemplateDiscoveryConfigs_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    getTemplatesDefaultConfigs,
-    getTemplatesTemplateDiscoveryConfigs
+    getTemplatesDefaultConfigs_DEPRECATED,
+    getTemplatesTemplateDiscoveryConfigs_DEPRECATED
   }
 }

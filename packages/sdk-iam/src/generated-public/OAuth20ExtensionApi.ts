@@ -25,7 +25,7 @@ export function OAuth20ExtensionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage. Supported methods: - VerifyToken to verify token from header - AddTokenToRevocationList to revoke token with TTL
+   * This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage.
    */
   async function createLogout(): Promise<unknown> {
     const $ = new OAuth20Extension$(Network.create(requestConfig), namespace, isZodEnabled)

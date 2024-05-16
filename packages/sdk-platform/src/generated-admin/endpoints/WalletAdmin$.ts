@@ -33,9 +33,9 @@ export class WalletAdmin$ {
 
   /**
    * @deprecated
-   * Query wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated wallets info&lt;/li&gt;&lt;/ul&gt;
+   * Query wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated wallets info&lt;/li&gt;&lt;/ul&gt;
    */
-  getWallets(queryParams?: {
+  getWallets_DEPRECATED(queryParams?: {
     currencyCode?: string | null
     limit?: number
     offset?: number
@@ -50,7 +50,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Debit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
+   * Debit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
    */
   createWalletDebit(data: BulkDebitRequest[]): Promise<IResponse<BulkDebitResult>> {
     const params = {} as SDKRequestConfig
@@ -61,7 +61,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Credit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
+   * Credit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
    */
   createWalletCredit(data: BulkCreditRequest[]): Promise<IResponse<BulkCreditResult>> {
     const params = {} as SDKRequestConfig
@@ -73,9 +73,9 @@ export class WalletAdmin$ {
 
   /**
    * @deprecated
-   * get a wallet by wallet id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
+   * get a wallet by wallet id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
-  getWallet_ByWalletId(walletId: string): Promise<IResponse<WalletInfo>> {
+  getWallet_ByWalletId_DEPRECATED(walletId: string): Promise<IResponse<WalletInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/wallets/{walletId}'
       .replace('{namespace}', this.namespace)
@@ -87,9 +87,9 @@ export class WalletAdmin$ {
 
   /**
    * @deprecated
-   * get a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
+   * get a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
-  getWallet_ByUserId_ByWalletId(userId: string, walletId: string): Promise<IResponse<WalletInfo>> {
+  getWallet_ByUserId_ByWalletId_DEPRECATED(userId: string, walletId: string): Promise<IResponse<WalletInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{walletId}'
       .replace('{namespace}', this.namespace)
@@ -101,7 +101,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Get platform wallet config list.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
+   * Get platform wallet config list.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
   getWalletConfig_ByPlatform(platform: string): Promise<IResponse<PlatformWalletConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -114,7 +114,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Update platform wallet config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
+   * Update platform wallet config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
    */
   updateWalletConfig_ByPlatform(platform: string, data: PlatformWalletConfigUpdate): Promise<IResponse<PlatformWalletConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -128,9 +128,9 @@ export class WalletAdmin$ {
 
   /**
    * @deprecated
-   * Debit a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Debit a user wallet.
    */
-  updateDebit_ByUserId_ByWalletId(userId: string, walletId: string, data: DebitRequest): Promise<IResponse<WalletInfo>> {
+  updateDebit_ByUserId_ByWalletId_DEPRECATED(userId: string, walletId: string, data: DebitRequest): Promise<IResponse<WalletInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{walletId}/debit'
       .replace('{namespace}', this.namespace)
@@ -142,7 +142,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Reset platform wallet config to default config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
+   * Reset platform wallet config to default config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
    */
   updateWalletConfigReset_ByPlatform(platform: string): Promise<IResponse<PlatformWalletConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -156,9 +156,9 @@ export class WalletAdmin$ {
 
   /**
    * @deprecated
-   * enable a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * enable a user wallet.
    */
-  updateEnable_ByUserId_ByWalletId(userId: string, walletId: string): Promise<IResponse<unknown>> {
+  updateEnable_ByUserId_ByWalletId_DEPRECATED(userId: string, walletId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{walletId}/enable'
       .replace('{namespace}', this.namespace)
@@ -171,9 +171,9 @@ export class WalletAdmin$ {
 
   /**
    * @deprecated
-   * disable a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * disable a user wallet.
    */
-  updateDisable_ByUserId_ByWalletId(userId: string, walletId: string): Promise<IResponse<unknown>> {
+  updateDisable_ByUserId_ByWalletId_DEPRECATED(userId: string, walletId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{walletId}/disable'
       .replace('{namespace}', this.namespace)
@@ -185,7 +185,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Get user currency wallet summary.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency wallet summary&lt;/li&gt;&lt;/ul&gt;
+   * Get user currency wallet summary.&lt;br&gt;Other detail info: &lt;ul&gt;(READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency wallet summary&lt;/li&gt;&lt;/ul&gt;
    */
   getWalletsCurrenciesSummary_ByUserId(userId: string): Promise<IResponse<CurrencyWalletArray>> {
     const params = {} as SDKRequestConfig
@@ -199,9 +199,9 @@ export class WalletAdmin$ {
 
   /**
    * @deprecated
-   * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Check wallet by balance origin and currency code whether it&#39;s inactive.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Check wallet by balance origin and currency code whether it&#39;s inactive.
    */
-  getCheck_ByUserId_ByCurrencyCode(
+  getCheck_ByUserId_ByCurrencyCode_DEPRECATED(
     userId: string,
     currencyCode: string,
     queryParams: {
@@ -219,7 +219,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Credit a user wallet by currency code and balance origin, if wallet not exists, it will create a new wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Credit a user wallet by currency code and balance origin, if wallet not exists, it will create a new wallet.&lt;br&gt;Other detail info: &lt;ul&gt;(UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   updateCredit_ByUserId_ByCurrencyCode(userId: string, currencyCode: string, data: CreditRequest): Promise<IResponse<WalletInfo>> {
     const params = {} as SDKRequestConfig
@@ -233,7 +233,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Pay with user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Pay with user wallet by currency code and client platform.
    */
   updatePayment_ByUserId_ByCurrencyCode(userId: string, currencyCode: string, data: PaymentRequest): Promise<IResponse<PlatformWallet>> {
     const params = {} as SDKRequestConfig
@@ -248,9 +248,9 @@ export class WalletAdmin$ {
 
   /**
    * @deprecated
-   * List user wallet transactions ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet transaction info&lt;/li&gt;&lt;/ul&gt;
+   * List user wallet transactions ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet transaction info&lt;/li&gt;&lt;/ul&gt;
    */
-  getTransactions_ByUserId_ByWalletId(
+  getTransactions_ByUserId_ByWalletId_DEPRECATED(
     userId: string,
     walletId: string,
     queryParams?: { limit?: number; offset?: number }
@@ -271,7 +271,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Checks if the user has enough balance based on the provided criteria.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: boolean value indicating if the user has enough balance&lt;/li&gt;&lt;/ul&gt;
+   * Checks if the user has enough balance based on the provided criteria.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: boolean value indicating if the user has enough balance&lt;/li&gt;&lt;/ul&gt;
    */
   createBalanceCheck_ByUserId_ByCurrencyCode(
     userId: string,
@@ -289,7 +289,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Debit a user wallet by currency code, default is debit system wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Debit a user wallet by currency code, default is debit system wallet.
    */
   updateDebitWallet_ByUserId_ByCurrencyCode(
     userId: string,
@@ -307,7 +307,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * Pay with user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for metadata&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
+   * Pay with user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for metadata&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
    */
   updateDebitByWalletPlatform_ByUserId_ByCurrencyCode(
     userId: string,
@@ -325,7 +325,7 @@ export class WalletAdmin$ {
   }
 
   /**
-   * List user currency transactions ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency transaction info&lt;/li&gt;&lt;/ul&gt;
+   * List user currency transactions ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency transaction info&lt;/li&gt;&lt;/ul&gt;
    */
   getTransactionsWallets_ByUserId_ByCurrencyCode(
     userId: string,

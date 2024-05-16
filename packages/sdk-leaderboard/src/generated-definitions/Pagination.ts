@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const Pagination = z.object({ first: z.string(), last: z.string(), next: z.string(), previous: z.string() })
+export const Pagination = z.object({ First: z.string(), Last: z.string(), Next: z.string(), Previous: z.string() })
 
 export interface Pagination extends z.TypeOf<typeof Pagination> {}

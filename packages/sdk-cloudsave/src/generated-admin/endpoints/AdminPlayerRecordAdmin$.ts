@@ -32,7 +32,7 @@ export class AdminPlayerRecordAdmin$ {
    * @deprecated
    * Retrieve list of player records key and userID under given namespace.
    */
-  getUsersRecords(queryParams?: {
+  getUsersRecords_DEPRECATED(queryParams?: {
     limit?: number
     offset?: number
     query?: string | null

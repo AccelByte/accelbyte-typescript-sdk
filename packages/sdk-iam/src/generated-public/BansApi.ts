@@ -24,9 +24,9 @@ export function BansApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans [GET]_**
    */
-  async function getBans(): Promise<Bans> {
+  async function getBans_DEPRECATED(): Promise<Bans> {
     const $ = new Bans$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getBans()
+    const resp = await $.getBans_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -35,15 +35,15 @@ export function BansApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans/reasons [GET]_**
    */
-  async function getBansReasons(): Promise<BanReasons> {
+  async function getBansReasons_DEPRECATED(): Promise<BanReasons> {
     const $ = new Bans$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getBansReasons()
+    const resp = await $.getBansReasons_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    getBans,
-    getBansReasons
+    getBans_DEPRECATED,
+    getBansReasons_DEPRECATED
   }
 }

@@ -18,7 +18,7 @@ export class AgreementAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * This API will return users who has accepted a specific policy version.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API will return users who has accepted a specific policy version.
    */
   getAgreementsPolicyVersionsUsers(queryParams: {
     policyVersionId: string | null
@@ -39,7 +39,7 @@ export class AgreementAdmin$ {
   }
 
   /**
-   * This API will return all accepted Legal Agreements for specified user. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API will return all accepted Legal Agreements for specified user
    */
   getAgreementPolicyUser_ByUserId(userId: string): Promise<IResponse<RetrieveAcceptedAgreementResponseArray>> {
     const params = {} as SDKRequestConfig
@@ -55,7 +55,7 @@ export class AgreementAdmin$ {
   }
 
   /**
-   * This API will Update Preference Consent. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API will Update Preference Consent
    */
   patchAgreementLocalizedPolicyVersionPreferenceUserId_ByUserId(
     userId: string,

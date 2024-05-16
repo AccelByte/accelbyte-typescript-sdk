@@ -13,7 +13,7 @@ export const MatchPoolConfig = z.object({
   crossplay_disabled: z.boolean().nullish(),
   match_function: z.string(),
   match_function_override: MatchFunctionOverride,
-  platfrom_group_enabled: z.boolean().nullish(),
+  platform_group_enabled: z.boolean().nullish(),
   rule_set: z.string(),
   session_template: z.string(),
   ticket_expiration_seconds: z.number().int()

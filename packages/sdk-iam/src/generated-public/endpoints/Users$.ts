@@ -95,7 +95,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users [POST]_** - **Substitute endpoint: _/iam/v4/public/namespaces/{namespace}/users [POST]_** - **Note:** 1. v3 &amp; v4 introduce optional verification code 2. format difference（Pascal case =&gt; Camel case) Available Authentication Types: 1. **EMAILPASSWD**: an authentication type used for new user registration through email. 2. **PHONEPASSWD**: an authentication type used for new user registration through phone number. Country use ISO3166-1 alpha-2 two letter, e.g. US.
    */
-  createUser(data: UserCreateRequest): Promise<IResponse<UserCreateResponse>> {
+  createUser_DEPRECATED(data: UserCreateRequest): Promise<IResponse<UserCreateResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -107,7 +107,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint(Public): _/iam/v3/admin/namespaces/{namespace}/roles/{roleId}/users [GET]_** - **Note:** difference in V3 response, format difference: Pascal case =&gt; Camel case This endpoint search admin users which have the roleId Notes : this endpoint only accept admin role. Admin Role is role which have admin status and members. Use endpoint [GET] /roles/{roleId}/admin to check the role status
    */
-  getUsersAdmin(queryParams?: {
+  getUsersAdmin_DEPRECATED(queryParams?: {
     after?: number
     before?: number
     limit?: number
@@ -132,7 +132,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/search [GET]_** Search all users that match the query on these fields: all login IDs (email address, phone number, and platform user id), userID, display name, and on the specified namespace. If the query is not defined, then it searches all users on the specified namespace.
    */
-  getUsersSearch(queryParams?: { query?: string | null }): Promise<IResponse<SearchUsersResponse>> {
+  getUsersSearch_DEPRECATED(queryParams?: { query?: string | null }): Promise<IResponse<SearchUsersResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -144,7 +144,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/information [DELETE]_**
    */
-  deleteUser_ByUserId(userId: string): Promise<IResponse<unknown>> {
+  deleteUser_ByUserId_DEPRECATED(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
@@ -156,7 +156,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint(Public): _/iam/v3/public/namespaces/{namespace}/users/{userId} [GET]_** - **Substitute endpoint(Admin): _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_** - **Note:** format difference in response: Pascal case =&gt; Camel case
    */
-  getUser_ByUserId(userId: string): Promise<IResponse<UserResponse>> {
+  getUser_ByUserId_DEPRECATED(userId: string): Promise<IResponse<UserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -168,7 +168,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint([PUT]): _/iam/v3/public/namespaces/{namespace}/users/me [PUT]_** - **Substitute endpoint([PATCH]): _/iam/v3/public/namespaces/{namespace}/users/me [PATCH]_** - **Substitute endpoint([PATCH]): _/iam/v4/public/namespaces/{namespace}/users/me [PATCH]_** - **Note:** 1. Prefer [PATCH] if client support PATCH method 2. Difference in V3/v4 request body, format difference: Pascal case =&gt; Camel case This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {Country, DisplayName, LanguageTag} Country use ISO3166-1 alpha-2 two letter, e.g. US. **Several case of updating email address** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address.
    */
-  updateUser_ByUserId(userId: string, data: UserUpdateRequest): Promise<IResponse<UserResponse>> {
+  updateUser_ByUserId_DEPRECATED(userId: string, data: UserUpdateRequest): Promise<IResponse<UserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
@@ -180,7 +180,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users [GET]_**
    */
-  getUsersByLoginId(queryParams?: { loginId?: string | null }): Promise<IResponse<PublicUserResponse>> {
+  getUsersByLoginId_DEPRECATED(queryParams?: { loginId?: string | null }): Promise<IResponse<PublicUserResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/byLoginId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -192,7 +192,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users [POST]_** - **Substitute endpoint: _/iam/v4/public/namespaces/{namespace}/users [POST]_** - **Note:** 1. v3 &amp; v4 introduce optional verification code 2. format difference（Pascal case =&gt; Camel case) Available Authentication Types: 1. *EMAILPASSWD*: an authentication type used for new user registration through email. Country use ISO3166-1 alpha-2 two letter, e.g. US.
    */
-  createUser_ByNS(data: UserCreateRequest): Promise<IResponse<UserCreateResponse>> {
+  createUser_ByNS_DEPRECATED(data: UserCreateRequest): Promise<IResponse<UserCreateResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -201,7 +201,7 @@ export class Users$ {
   }
 
   /**
-   * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length should between 3-20, otherwise will not query the database. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the supported platform id 3. set __platformBy__ to __platformDisplayName__ --- ### Supported platform: * Steam group(steamnetwork) * steam * steamopenid * PSN group(psn) * ps4web * ps4 * ps5 * XBOX group(xbox) * live * xblweb * Oculus group(oculusgroup) * oculus * oculusweb * facebook * google * twitch * discord * android * ios * apple * device * epicgames * nintendo * awscognito * netflix * snapchat * oidc platform id Note: you can use either platform ID or platform group as platformId query parameter
+   * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length should between 3-20, otherwise will not query the database. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ ### Supported platform id: * Steam group(steamnetwork) * steam * steamopenid * PSN group(psn) * ps4web * ps4 * ps5 * XBOX group(xbox) * live * xblweb * Oculus group(oculusgroup) * oculus * oculusweb * facebook * google * twitch * discord * android * ios * apple * device * epicgames * nintendo * awscognito * netflix * snapchat * _oidc platform id_ Note: you can use either platform ID or platform group as __platformId__ query parameter.
    */
   getUsers(queryParams?: {
     by?: string | null
@@ -249,7 +249,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [POST]_**
    */
-  createBan_ByUserId(userId: string, data: BanCreateRequest): Promise<IResponse<UserBanResponse>> {
+  createBan_ByUserId_DEPRECATED(userId: string, data: BanCreateRequest): Promise<IResponse<UserBanResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/ban'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -301,7 +301,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [GET]_**
    */
-  getBans_ByUserId(userId: string): Promise<IResponse<UserBanResponseArray>> {
+  getBans_ByUserId_DEPRECATED(userId: string): Promise<IResponse<UserBanResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/bans'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -313,7 +313,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/reset [POST]_**
    */
-  createUserResetPassword(data: ResetPasswordRequest): Promise<IResponse<unknown>> {
+  createUserResetPassword_DEPRECATED(data: ResetPasswordRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/resetPassword'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -325,7 +325,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
    */
-  createRole_ByUserId(userId: string, data: string[]): Promise<IResponse<unknown>> {
+  createRole_ByUserId_DEPRECATED(userId: string, data: string[]): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/roles'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -337,7 +337,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/forgot [POST]_** **Special note for publisher-game scenario:** Game Client should provide game namespace path parameter and Publisher Client should provide publisher namespace path parameter. The password reset code will be sent to the publisher account&#39;s email address.
    */
-  createUserForgotPassword(data: SendVerificationCodeRequest): Promise<IResponse<unknown>> {
+  createUserForgotPassword_DEPRECATED(data: SendVerificationCodeRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/forgotPassword'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -349,7 +349,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint(query by email list): _/iam/v3/public/namespaces/{namespace}/users/bulk/basic [POST]_** - **Substitute endpoint(query by user id list): _/iam/v3/admin/namespaces/{namespace}/users/search/bulk [POST]_**
    */
-  getUsersListByLoginIds(queryParams?: { loginIds?: string | null }): Promise<IResponse<PublicUsersResponse>> {
+  getUsersListByLoginIds_DEPRECATED(queryParams?: { loginIds?: string | null }): Promise<IResponse<PublicUsersResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/listByLoginIds'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -361,7 +361,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_**
    */
-  updateEnable_ByUserId(userId: string): Promise<IResponse<unknown>> {
+  updateEnable_ByUserId_DEPRECATED(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/enable'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
@@ -384,7 +384,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_** For **Deletion Account** purpose fill the reason with: - **DeactivateAccount** : if your deletion request comes from user - **AdminDeactivateAccount** : if your deletion request comes from admin
    */
-  updateDisable_ByUserId(userId: string, data: DisableUserRequest): Promise<IResponse<unknown>> {
+  updateDisable_ByUserId_DEPRECATED(userId: string, data: DisableUserRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/disable'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
@@ -396,7 +396,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint(Public): _/iam/v3/public/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId} [GET]_** - **Substitute endpoint(Admin): _/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId} [GET]_** - **Note:** 1. difference in V3 response, format difference: Pascal case =&gt; Camel case
    */
-  getUsersByPlatformUserId(queryParams: {
+  getUsersByPlatformUserId_DEPRECATED(queryParams: {
     platformID: string | null
     platformUserID: string | null
   }): Promise<IResponse<PublicUserResponse>> {
@@ -422,7 +422,7 @@ export class Users$ {
    * @deprecated
    *  ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/password [PUT]_**
    */
-  updatePassword_ByUserId(userId: string, data: UserPasswordUpdateRequest): Promise<IResponse<unknown>> {
+  updatePassword_ByUserId_DEPRECATED(userId: string, data: UserPasswordUpdateRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/password'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
@@ -434,7 +434,10 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId} [POST]_** Access token from original namespace is needed as authorization header. Access token from designated account needed as form parameter to verify the ownership of that account. When platformID (device platfom ID) is specified, platform login method for that specific platform ID is removed. This means to protect account from second hand device usage.
    */
-  postCrosslink_ByUserId(userId: string, data: { linkingToken: string | null; platformId?: string | null }): Promise<IResponse<unknown>> {
+  postCrosslink_ByUserId_DEPRECATED(
+    userId: string,
+    data: { linkingToken: string | null; platformId?: string | null }
+  ): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/crosslink'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -449,7 +452,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms [GET]_** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms [GET]_** ## Justice Platform Account The permission ’ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId}’ [READ] is required in order to read the UserID who linked with the user.
    */
-  getPlatforms_ByUserId(userId: string): Promise<IResponse<UserLinkedPlatformArray>> {
+  getPlatforms_ByUserId_DEPRECATED(userId: string): Promise<IResponse<UserLinkedPlatformArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/platforms'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -461,7 +464,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/publisher [GET]_** **Restriction:** Path Parameter *namespace* can be provided only with game namespace
    */
-  getPublisher_ByUserId(userId: string): Promise<IResponse<GetPublisherUserResponse>> {
+  getPublisher_ByUserId_DEPRECATED(userId: string): Promise<IResponse<GetPublisherUserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/publisher'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -473,7 +476,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint(Public): _/iam/v3/public/namespaces/{namespace}/users/{userId} [GET]_** - **Substitute endpoint(Admin): _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_** - **Note:** format difference in response: Pascal case =&gt; Camel case
    */
-  getUser_ByUserId_ByNS(userId: string): Promise<IResponse<UserResponse>> {
+  getUser_ByUserId_ByNS_DEPRECATED(userId: string): Promise<IResponse<UserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -485,7 +488,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint([PUT]): _/iam/v3/public/namespaces/{namespace}/users/me [PUT]_** - **Substitute endpoint([PATCH]): _/iam/v3/public/namespaces/{namespace}/users/me [PATCH]_** - **Substitute endpoint([PATCH]): _/iam/v4/public/namespaces/{namespace}/users/me [PATCH]_** - **Note:** 1. Prefer [PATCH] if client support PATCH method 2. Difference in V3/v4 request body, format difference: Pascal case =&gt; Camel case This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {Country, DisplayName, LanguageTag}
    */
-  patchUser_ByUserId(userId: string, data: UserUpdateRequest): Promise<IResponse<UserResponseArray>> {
+  patchUser_ByUserId_DEPRECATED(userId: string, data: UserUpdateRequest): Promise<IResponse<UserResponseArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
@@ -497,7 +500,7 @@ export class Users$ {
    * @deprecated
    * This endpoint retrieve user attributes. action code: 10129 **Substitute endpoint:** /v4/public/namespaces/{namespace}/users/{userId} [READ]
    */
-  getUser_ByUserId_ByNS_v3(userId: string): Promise<IResponse<PublicUserResponseV3>> {
+  getUser_ByUserId_ByNS_v3_DEPRECATED(userId: string): Promise<IResponse<PublicUserResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -536,7 +539,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/information [DELETE]_**
    */
-  deleteInformation_ByUserId(userId: string): Promise<IResponse<unknown>> {
+  deleteInformation_ByUserId_DEPRECATED(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/information'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
@@ -548,7 +551,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/information [GET]_**
    */
-  getInformation_ByUserId(userId: string): Promise<IResponse<UserInformation>> {
+  getInformation_ByUserId_DEPRECATED(userId: string): Promise<IResponse<UserInformation>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/information'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -560,7 +563,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/permissions [POST]_** This endpoint will REPLACE user&#39;s permissions with the ones defined in body Schedule contains cron string or date range (both are UTC, also in cron syntax) to indicate when a permission and action are in effect. Both schedule types accepts quartz compatible cron syntax e.g. * * * * * * *. In ranged schedule, first element will be start date, and second one will be end date If schedule is set, the scheduled action must be valid too, that is between 1 to 15, inclusive Syntax reference Fields: 1. Seconds: 0-59 * / , - 2. Minutes: 0-59 * / , - 3. Hours: 0-23 * / , - 4. Day of month: 1-31 * / , - L W 5. Month: 1-12 JAN-DEC * / , - 6. Day of week: 0-6 SUN-SAT * / , - L # 7. Year: 1970-2099 * / , - Special characters: 1. *: all values in the fields, e.g. * in seconds fields indicates every second 2. /: increments of ranges, e.g. 3-59/15 in the minute field indicate the third minute of the hour and every 15 minutes thereafter 3. ,: separate items of a list, e.g. MON,WED,FRI in day of week 4. -: range, e.g. 2010-2018 indicates every year between 2010 and 2018, inclusive 5. L: last, e.g. When used in the day-of-week field, it allows you to specify constructs such as &#34;the last Friday&#34; (5L) of a given month. In the day-of-month field, it specifies the last day of the month. 6. W: business day, e.g. if you were to specify 15W as the value for the day-of-month field, the meaning is: &#34;the nearest business day to the 15th of the month.&#34; 7. #: must be followed by a number between one and five. It allows you to specify constructs such as &#34;the second Friday&#34; of a given month.
    */
-  createPermission_ByUserId(userId: string, data: Permissions): Promise<IResponse<unknown>> {
+  createPermission_ByUserId_DEPRECATED(userId: string, data: Permissions): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/permissions'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -583,7 +586,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/code/verify [POST]_** Redeems a verification code sent to a user to verify the user&#39;s contact address is correct Available ContactType : *email* or *phone*
    */
-  createVerification_ByUserId(userId: string, data: UserVerificationRequest): Promise<IResponse<unknown>> {
+  createVerification_ByUserId_DEPRECATED(userId: string, data: UserVerificationRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/verification'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -639,7 +642,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles/{roleId} [DELETE]_**
    */
-  deleteRole_ByUserId_ByRoleId(userId: string, roleId: string): Promise<IResponse<unknown>> {
+  deleteRole_ByUserId_ByRoleId_DEPRECATED(userId: string, roleId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/roles/{roleId}'
       .replace('{namespace}', this.namespace)
@@ -654,7 +657,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles/{roleId} [POST]_**
    */
-  createRole_ByUserId_ByRoleId(userId: string, roleId: string): Promise<IResponse<unknown>> {
+  createRole_ByUserId_ByRoleId_DEPRECATED(userId: string, roleId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/roles/{roleId}'
       .replace('{namespace}', this.namespace)
@@ -669,7 +672,10 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/bans [GET]_**
    */
-  getBans_ByUserId_ByNS(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<IResponse<UserBanResponseArray>> {
+  getBans_ByUserId_ByNS_DEPRECATED(
+    userId: string,
+    queryParams?: { activeOnly?: boolean | null }
+  ): Promise<IResponse<UserBanResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users/{userId}/bans'
       .replace('{namespace}', this.namespace)
@@ -683,7 +689,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/reset [POST]_**
    */
-  createUserResetPassword_ByNS(data: ResetPasswordRequest): Promise<IResponse<unknown>> {
+  createUserResetPassword_ByNS_DEPRECATED(data: ResetPasswordRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users/resetPassword'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -711,7 +717,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/forgot [POST]_** **Special note for publisher-game scenario:** Game Client should provide game namespace path parameter and Publisher Client should provide publisher namespace path parameter. The password reset code will be sent to the publisher account&#39;s email address.
    */
-  createUserForgotPassword_ByNS(data: SendVerificationCodeRequest): Promise<IResponse<unknown>> {
+  createUserForgotPassword_ByNS_DEPRECATED(data: SendVerificationCodeRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users/forgotPassword'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -734,7 +740,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/logins/histories [GET]_** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/logins/histories [GET]_** Notes for this endpoint: - This endpoint retrieve the first page of the data if &#39;after&#39; and &#39;before&#39; parameters is empty. - The maximum value of the limit is 100 and the minimum value of the limit is 1. - This endpoint retrieve the next page of the data if we provide &#39;after&#39; parameters with valid Unix timestamp. - This endpoint retrieve the previous page of the data if we provide &#39;before&#39; parameter with valid data Unix timestamp.
    */
-  getLoginsHistories_ByUserId(
+  getLoginsHistories_ByUserId_DEPRECATED(
     userId: string,
     queryParams?: { after?: number; before?: number; limit?: number }
   ): Promise<IResponse<LoginHistoriesResponse>> {
@@ -751,7 +757,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/code/request [POST]_** The verification code is sent to either the phone number or email address. It depends on the LoginID&#39;s value. Available contexts for use : 1. **UserAccountRegistration** a context type used for verifying email address in user account registration. It returns 409 if the email address already verified. **_It is the default context if the Context field is empty_** 2. **UpdateEmailAddress** a context type used for verify user before updating email address.(Without email address verified checking) 3. **upgradeHeadlessAccount** The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account. If this context used, IAM rejects the request if the loginId field&#39;s value is already used by others by returning HTTP Status Code 409.
    */
-  createVerificationcode_ByUserId(userId: string, data: SendVerificationCodeRequest): Promise<IResponse<unknown>> {
+  createVerificationcode_ByUserId_DEPRECATED(userId: string, data: SendVerificationCodeRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/verificationcode'
       .replace('{namespace}', this.namespace)
@@ -776,7 +782,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/password [PUT]_**
    */
-  updatePassword_ByUserId_ByNS(userId: string, data: UserPasswordUpdateRequest): Promise<IResponse<unknown>> {
+  updatePassword_ByUserId_ByNS_DEPRECATED(userId: string, data: UserPasswordUpdateRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users/{userId}/password'
       .replace('{namespace}', this.namespace)
@@ -806,7 +812,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans/{banId} [PATCH]_**
    */
-  updateEnable_ByUserId_ByBanId(userId: string, banId: string): Promise<IResponse<UserBanResponse>> {
+  updateEnable_ByUserId_ByBanId_DEPRECATED(userId: string, banId: string): Promise<IResponse<UserBanResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/bans/{banId}/enable'
       .replace('{namespace}', this.namespace)
@@ -869,7 +875,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans/{banId} [PATCH]_** **Notes for using IAM in publisher - game studio scenarios** The endpoint allows: - The admin user in publisher namespace disables user’s ban in publisher namespace. - The admin user in game namespace disables user’s ban in game namespace. - The admin user in publisher namespace disables user’s ban in publisher namespace. Other scenarios are not supported and will return 403: Forbidden.
    */
-  updateDisable_ByUserId_ByBanId(userId: string, banId: string): Promise<IResponse<UserBanResponse>> {
+  updateDisable_ByUserId_ByBanId_DEPRECATED(userId: string, banId: string): Promise<IResponse<UserBanResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/bans/{banId}/disable'
       .replace('{namespace}', this.namespace)
@@ -897,7 +903,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/headless/verify [POST]_**
    */
-  createUpgradeHeadlessAccount_ByUserId(userId: string, data: UpgradeHeadlessAccountRequest): Promise<IResponse<UserResponse>> {
+  createUpgradeHeadlessAccount_ByUserId_DEPRECATED(userId: string, data: UpgradeHeadlessAccountRequest): Promise<IResponse<UserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/upgradeHeadlessAccount'
       .replace('{namespace}', this.namespace)
@@ -1026,7 +1032,11 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId} [POST]_** **Prerequisite:** Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables). ## Supported platforms: - **steam**: The ticket’s value is the authentication code returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The ticket&#39;s value is URL generated by Steam on web authentication - **facebook**: The ticket’s value is the authorization code returned by Facebook OAuth - **google**: The ticket’s value is the authorization code returned by Google OAuth - **oculus**: The ticket’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The ticket’s value is the authorization code returned by Twitch OAuth. - **android**: The ticket&#39;s value is the Android’s device ID - **ios**: The ticket&#39;s value is the iOS’s device ID. - **apple**: The ticket’s value is the authorization code returned by Apple OAuth. - **device**: Every device that does’nt run Android and iOS is categorized as a device platform. The ticket&#39;s value is the device’s ID. - **discord**: The ticket’s value is the authorization code returned by Discord OAuth.
    */
-  postLink_ByUserId_ByPlatformId(userId: string, platformId: string, data: { ticket: string | null }): Promise<IResponse<unknown>> {
+  postLink_ByUserId_ByPlatformId_DEPRECATED(
+    userId: string,
+    platformId: string,
+    data: { ticket: string | null }
+  ): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link'
       .replace('{namespace}', this.namespace)
@@ -1044,7 +1054,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/justice [GET]_** This endpoint gets list justice platform account by providing publisher namespace and publisher userID.
    */
-  getPlatformsJustice_ByUserId(userId: string): Promise<IResponse<GetUserMappingArray>> {
+  getPlatformsJustice_ByUserId_DEPRECATED(userId: string): Promise<IResponse<GetUserMappingArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users/{userId}/platforms/justice'
       .replace('{namespace}', this.namespace)
@@ -1102,7 +1112,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId} [DELETE]_** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/all [DELETE]_** ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **android** - **ios** - **device** - **justice**: A user might have several &#39;justice’ platform on different namespaces. That’s why the platform_namespace need to be specified when the platform ID is ‘justice’. The platform_namespace is the designated user’s namespace. Unlink user&#39;s account with platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. platform_namespace need to be specified when the platform ID is &#39;justice&#39;. Unlinking justice platform will enable password token grant and password update.
    */
-  postUnlink_ByUserId_ByPlatformId(
+  postUnlink_ByUserId_ByPlatformId_DEPRECATED(
     userId: string,
     platformId: string,
     data: { platform_namespace?: string | null }
@@ -1137,7 +1147,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/permissions/{resource}/{action} [DELETE]_**
    */
-  deletePermission_ByUserId_ByResource_ByAction(userId: string, resource: string, action: number): Promise<IResponse<unknown>> {
+  deletePermission_ByUserId_ByResource_ByAction_DEPRECATED(userId: string, resource: string, action: number): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/permissions/{resource}/{action}'
       .replace('{namespace}', this.namespace)
@@ -1153,7 +1163,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/permissions [POST]_** This endpoint will update existing permission (bitwise OR the action) if found one with same resource, otherwise it will append a new permission Schedule contains cron string or date range (both are UTC, also in cron syntax) to indicate when a permission and action are in effect. Both schedule types accepts quartz compatible cron syntax e.g. * * * * * * *. In ranged schedule, first element will be start date, and second one will be end date If schedule is set, the scheduled action must be valid too, that is between 1 to 15, inclusive Syntax reference Fields: 1. Seconds: 0-59 * / , - 2. Minutes: 0-59 * / , - 3. Hours: 0-23 * / , - 4. Day of month: 1-31 * / , - L W 5. Month: 1-12 JAN-DEC * / , - 6. Day of week: 0-6 SUN-SAT * / , - L # 7. Year: 1970-2099 * / , - Special characters: 1. *: all values in the fields, e.g. * in seconds fields indicates every second 2. /: increments of ranges, e.g. 3-59/15 in the minute field indicate the third minute of the hour and every 15 minutes thereafter 3. ,: separate items of a list, e.g. MON,WED,FRI in day of week 4. -: range, e.g. 2010-2018 indicates every year between 2010 and 2018, inclusive 5. L: last, e.g. When used in the day-of-week field, it allows you to specify constructs such as &#34;the last Friday&#34; (5L) of a given month. In the day-of-month field, it specifies the last day of the month. 6. W: business day, e.g. if you were to specify 15W as the value for the day-of-month field, the meaning is: &#34;the nearest business day to the 15th of the month.&#34; 7. #: must be followed by a number between one and five. It allows you to specify constructs such as &#34;the second Friday&#34; of a given month.
    */
-  createPermission_ByUserId_ByResource_ByAction(
+  createPermission_ByUserId_ByResource_ByAction_DEPRECATED(
     userId: string,
     resource: string,
     action: number,
@@ -1190,7 +1200,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/agerestrictions/countries/{countryCode} [GET]_**
    */
-  getAgerestrictions_ByCountryCode(countryCode: string): Promise<IResponse<Country>> {
+  getAgerestrictions_ByCountryCode_DEPRECATED(countryCode: string): Promise<IResponse<Country>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/countries/{countryCode}/agerestrictions'
       .replace('{namespace}', this.namespace)
@@ -1217,7 +1227,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/justice/{targetNamespace} [GET]_** This endpoint requires the client access token as the bearer token This endpoint will support publisher access to game and game access to publisher If targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace. If targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace. **Will create game user id if not exists.**
    */
-  getPlatformJustice_ByUserId_ByTargetNamespace(userId: string, targetNamespace: string): Promise<IResponse<GetUserMapping>> {
+  getPlatformJustice_ByUserId_ByTargetNamespace_DEPRECATED(userId: string, targetNamespace: string): Promise<IResponse<GetUserMapping>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/namespaces/{namespace}/users/{userId}/platforms/justice/{targetNamespace}'
       .replace('{namespace}', this.namespace)
@@ -1232,7 +1242,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/justice/{targetNamespace} [GET]_** This endpoint requires the client access token as the bearer token The endpoint returns user Justice platform account linked with the given user. If the user Justice platform account doesn&#39;t exist in the designated namespace, the endpoint is going to *create and return the new Justice platform account.* The newly user Justice platform account is going to be forced to perform token grant through the given user and can&#39;t perform password update ### Read Justice Platform Account UserID Without permission the UserID is going to be censored and replaced with “Redacted” text.
    */
-  createPlatformJustice_ByUserId_ByTargetNamespace(
+  createPlatformJustice_ByUserId_ByTargetNamespace_DEPRECATED(
     userId: string,
     targetNamespace: string
   ): Promise<IResponse<GetUserJusticePlatformAccountResponse>> {
@@ -1271,7 +1281,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId} [DELETE]_** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/all [DELETE]_** ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **android** - **ios** - **device** - **discord** Delete link of user&#39;s account with platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. platform_namespace need to be specified when the platform ID is &#39;justice&#39;. Delete link of justice platform will enable password token grant and password update.
    */
-  deleteLink_ByUserId_ByPlatformId(
+  deleteLink_ByUserId_ByPlatformId_DEPRECATED(
     userId: string,
     platformId: string,
     data: { platform_namespace?: string | null }
@@ -1290,7 +1300,11 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId} [POST]_** **Prerequisite:** Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables). ## Supported platforms: - **steam**: The ticket’s value is the authentication code returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The ticket&#39;s value is URL generated by Steam on web authentication - **facebook**: The ticket’s value is the authorization code returned by Facebook OAuth - **google**: The ticket’s value is the authorization code returned by Google OAuth - **oculus**: The ticket’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The ticket’s value is the authorization code returned by Twitch OAuth. - **android**: The ticket&#39;s value is the Android’s device ID - **ios**: The ticket&#39;s value is the iOS’s device ID. - **device**: Every device that doesn&#39;t run Android and iOS is categorized as a device platform. The ticket&#39;s value is the device’s ID. - **discord**: The ticket’s value is the authorization code returned by Discord OAuth.
    */
-  postLink_ByUserId_ByPlatformId_ByNS(userId: string, platformId: string, data: { ticket: string | null }): Promise<IResponse<unknown>> {
+  postLink_ByUserId_ByPlatformId_ByNS_DEPRECATED(
+    userId: string,
+    platformId: string,
+    data: { ticket: string | null }
+  ): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/public/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link'
       .replace('{namespace}', this.namespace)
@@ -1348,7 +1362,7 @@ export class Users$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/headless/code/verify [POST]_** The endpoint upgrades a headless account by linking the headless account with the email address and the password. By upgrading the headless account into a full account, the user could use the email address and password for using Justice IAM. The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the send verification code endpoint.
    */
-  createUpgradeHeadlessAccountWithVerificationCode_ByUserId(
+  createUpgradeHeadlessAccountWithVerificationCode_ByUserId_DEPRECATED(
     userId: string,
     data: UpgradeHeadlessAccountWithVerificationCodeRequest
   ): Promise<IResponse<UserResponse>> {

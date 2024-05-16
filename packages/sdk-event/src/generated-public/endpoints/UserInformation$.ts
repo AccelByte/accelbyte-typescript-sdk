@@ -20,7 +20,7 @@ export class UserInformation$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  deleteActivity_ByUserId(userId: string): Promise<IResponse<unknown>> {
+  deleteActivity_ByUserId_DEPRECATED(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/users/{userId}/activities'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
@@ -32,7 +32,7 @@ export class UserInformation$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getActivities_ByUserId(userId: string, queryParams: { pageSize: number; offset?: number }): Promise<IResponse<EventResponse>> {
+  getActivities_ByUserId_DEPRECATED(userId: string, queryParams: { pageSize: number; offset?: number }): Promise<IResponse<EventResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/users/{userId}/activities'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -44,7 +44,7 @@ export class UserInformation$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getLastActivityTime_ByUserId(userId: string): Promise<IResponse<UserLastActivity>> {
+  getLastActivityTime_ByUserId_DEPRECATED(userId: string): Promise<IResponse<UserLastActivity>> {
     const params = {} as SDKRequestConfig
     const url = '/event/namespaces/{namespace}/users/{userId}/lastActivityTime'
       .replace('{namespace}', this.namespace)

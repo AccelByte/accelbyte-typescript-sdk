@@ -89,7 +89,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/search [GET]_**
    */
-  getUsers(queryParams: {
+  getUsers_DEPRECATED(queryParams: {
     platformId: string | null
     after?: string | null
     before?: string | null
@@ -227,7 +227,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_**
    */
-  getUser_ByUserId(userId: string): Promise<IResponse<UserResponse>> {
+  getUser_ByUserId_DEPRECATED(userId: string): Promise<IResponse<UserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -239,7 +239,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [PATCH]_** This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {Country, DisplayName, LanguageTag} Country use ISO3166-1 alpha-2 two letter, e.g. US. **Several case of updating email address** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address.
    */
-  patchUser_ByUserId(userId: string, data: UserUpdateRequest): Promise<IResponse<UserResponse>> {
+  patchUser_ByUserId_DEPRECATED(userId: string, data: UserUpdateRequest): Promise<IResponse<UserResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
@@ -273,7 +273,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [GET]_** - **Note:** difference in V3 response, format difference: Pascal case =&gt; Camel case
    */
-  getAgerestrictions(): Promise<IResponse<AgeRestrictionResponse>> {
+  getAgerestrictions_DEPRECATED(): Promise<IResponse<AgeRestrictionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/agerestrictions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -285,7 +285,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [PATCH]_**
    */
-  patchAgerestriction(data: AgeRestrictionRequest): Promise<IResponse<AgeRestrictionResponse>> {
+  patchAgerestriction_DEPRECATED(data: AgeRestrictionRequest): Promise<IResponse<AgeRestrictionResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/agerestrictions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
@@ -330,7 +330,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [POST]_**
    */
-  createBan_ByUserId(userId: string, data: BanCreateRequest): Promise<IResponse<UserBanResponse>> {
+  createBan_ByUserId_DEPRECATED(userId: string, data: BanCreateRequest): Promise<IResponse<UserBanResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/ban'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -342,7 +342,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [GET]_**
    */
-  getBans_ByUserId(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<IResponse<UserBanResponseArray>> {
+  getBans_ByUserId_DEPRECATED(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<IResponse<UserBanResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/bans'
       .replace('{namespace}', this.namespace)
@@ -406,7 +406,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
    */
-  createRole_ByUserId(userId: string, data: string[]): Promise<IResponse<unknown>> {
+  createRole_ByUserId_DEPRECATED(userId: string, data: string[]): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/roles'
       .replace('{namespace}', this.namespace)
@@ -420,7 +420,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
    */
-  updateRole_ByUserId(userId: string, data: string[]): Promise<IResponse<unknown>> {
+  updateRole_ByUserId_DEPRECATED(userId: string, data: string[]): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/roles'
       .replace('{namespace}', this.namespace)
@@ -510,7 +510,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_**
    */
-  updateEnable_ByUserId(userId: string): Promise<IResponse<unknown>> {
+  updateEnable_ByUserId_DEPRECATED(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/enable'
       .replace('{namespace}', this.namespace)
@@ -550,7 +550,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_** For **Deletion Account** purpose fill the reason with: - **DeactivateAccount** : if your deletion request comes from user - **AdminDeactivateAccount** : if your deletion request comes from admin
    */
-  updateDisable_ByUserId(userId: string, data: DisableUserRequest): Promise<IResponse<unknown>> {
+  updateDisable_ByUserId_DEPRECATED(userId: string, data: DisableUserRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/disable'
       .replace('{namespace}', this.namespace)
@@ -564,7 +564,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries/{countryCode} [PATCH]_**
    */
-  patchCountry_ByCountryCode(countryCode: string, data: CountryAgeRestrictionRequest): Promise<IResponse<Country>> {
+  patchCountry_ByCountryCode_DEPRECATED(countryCode: string, data: CountryAgeRestrictionRequest): Promise<IResponse<Country>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/countries/{countryCode}'
       .replace('{namespace}', this.namespace)
@@ -578,7 +578,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/password [PUT]_**
    */
-  updatePassword_ByUserId(userId: string, data: UserPasswordUpdateRequest): Promise<IResponse<unknown>> {
+  updatePassword_ByUserId_DEPRECATED(userId: string, data: UserPasswordUpdateRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/users/{userId}/password'
       .replace('{namespace}', this.namespace)
@@ -642,7 +642,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries [GET]_**
    */
-  getCountriesAgerestrictions(): Promise<IResponse<CountryAgeRestrictionArray>> {
+  getCountriesAgerestrictions_DEPRECATED(): Promise<IResponse<CountryAgeRestrictionArray>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v2/admin/namespaces/{namespace}/countries/agerestrictions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -975,7 +975,7 @@ export class UsersAdmin$ {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId} [DELETE]_** ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **android** - **ios** - **device** - **discord** Delete link of user&#39;s account with platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. platform_namespace need to be specified when the platform ID is &#39;justice&#39;. Delete link of justice platform will enable password token grant and password update.
    */
-  deleteLink_ByUserId_ByPlatformId(
+  deleteLink_ByUserId_ByPlatformId_DEPRECATED(
     userId: string,
     platformId: string,
     data: { platform_namespace?: string | null }

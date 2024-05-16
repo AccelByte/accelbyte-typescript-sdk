@@ -17,6 +17,7 @@ export const ConfigResponse = z.object({
   filterType: z.string().nullish(),
   generalRateLimitBurst: z.number().int().nullish(),
   generalRateLimitDuration: z.number().int().nullish(),
+  maxChatMessageLength: z.number().int().nullish(),
   shardCapacityLimit: z.number().int().nullish(),
   shardDefaultLimit: z.number().int().nullish(),
   shardHardLimit: z.number().int().nullish(),

@@ -7,8 +7,11 @@ import { z } from 'zod'
 
 export const RequirementProgressionResponse = z.object({
   completedAt: z.string().nullish(),
-  currrentValue: z.number().nullish(),
+  currentValue: z.number(),
   id: z.string(),
+  matcher: z.string(),
+  parameterName: z.string(),
+  parameterType: z.string(),
   targetValue: z.number()
 })
 

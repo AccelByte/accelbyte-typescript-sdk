@@ -61,7 +61,7 @@ export class UsersV4Admin$ {
    * @deprecated
    * Use this endpoint to invite admin or non-admin user and assign role to them. The role must be scoped to namespace. An admin user can only assign role with **assignedNamespaces** if the admin user has required permission which is same as the required permission of endpoint: [AdminAddUserRoleV4]. Detail request body : - Email Address is required, List of email addresses that will be invited - isAdmin is required, true if user is admin, false if user is not admin - Namespace is optional. Only works on multi tenant mode, if not specified then it will be assigned Publisher namespace, if specified, it will become that studio/publisher where user is invited to. - Role is optional, if not specified then it will only assign User role. - Assigned Namespaces is optional, List of namespaces which the Role will be assigned to the user, only works when Role is not empty. The invited admin will also assigned with &#34;User&#34; role by default. Substitute endpoint: /iam/v4/admin/users/invite
    */
-  createUserUserInvite(data: InviteUserRequestV4): Promise<IResponse<InviteUserResponseV3>> {
+  createUserUserInvite_DEPRECATED(data: InviteUserRequestV4): Promise<IResponse<InviteUserResponseV3>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/users/invite'
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -118,7 +118,7 @@ export class UsersV4Admin$ {
    * @deprecated
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
-  getUsersMeMfaBackupCode(): Promise<IResponse<BackupCodesResponseV4>> {
+  getUsersMeMfaBackupCode_DEPRECATED(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/backupCode'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -130,7 +130,7 @@ export class UsersV4Admin$ {
    * @deprecated
    * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
-  createUserMeMfaBackupCode(): Promise<IResponse<BackupCodesResponseV4>> {
+  createUserMeMfaBackupCode_DEPRECATED(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/backupCode'
     const resultPromise = this.axiosInstance.post(url, null, { params })
@@ -227,7 +227,7 @@ export class UsersV4Admin$ {
    * @deprecated
    * This endpoint is used to enable 2FA backup codes.
    */
-  createUserMeMfaBackupCodeEnable(): Promise<IResponse<BackupCodesResponseV4>> {
+  createUserMeMfaBackupCodeEnable_DEPRECATED(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/backupCode/enable'
     const resultPromise = this.axiosInstance.post(url, null, { params })
@@ -261,7 +261,7 @@ export class UsersV4Admin$ {
    * @deprecated
    * This endpoint is used to download backup codes.
    */
-  getUsersMeMfaBackupCodeDownload(): Promise<IResponse<unknown>> {
+  getUsersMeMfaBackupCodeDownload_DEPRECATED(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/backupCode/download'
     const resultPromise = this.axiosInstance.get(url, { params })

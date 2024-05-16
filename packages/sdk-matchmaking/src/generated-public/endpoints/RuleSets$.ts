@@ -28,7 +28,7 @@ export class RuleSets$ {
   }
 
   /**
-   * Creates a new rules set. A rule set has a name and contains arbitrary data which is meaningful to some particular match function(s) The name is used for a match pool to select the ruleset data that should be sent to the match function when matchmaking in that pool. To use custom rules set please set enable_custom_match_function=true. Default (false).
+   * Creates a new rules set. A rule set has a name and contains arbitrary data which is meaningful to some particular match function(s) The name is used for a match pool to select the ruleset data that should be sent to the match function when matchmaking in that pool. To use custom rules set please set enable_custom_match_function=true. Default (false). When custom enable_custom_match_function=true, the ruleset will only validate if the rule is valid json.
    */
   createRuleset(data: RuleSetPayload): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -61,7 +61,7 @@ export class RuleSets$ {
   }
 
   /**
-   * Updates an existing matchmaking rule set. To use custom rules set please set enable_custom_match_function=true. Default (false).
+   * Updates an existing matchmaking rule set. To use custom rules set please set enable_custom_match_function=true. Default (false). When custom enable_custom_match_function=true, the ruleset will only validate if the rule is valid json.
    */
   updateRuleset_ByRuleset(ruleset: string, data: RuleSetPayload): Promise<IResponse<RuleSetPayload>> {
     const params = {} as SDKRequestConfig

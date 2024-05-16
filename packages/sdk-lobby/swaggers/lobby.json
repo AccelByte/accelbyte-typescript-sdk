@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Lobby Server",
     "title": "justice-lobby-server",
-    "version": "3.35.2"
+    "version": "3.35.5"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -9086,11 +9086,11 @@
     "path": "/lobby/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-03T08:23:45+00:00",
-    "gitHash": "f2d3c0a6fd20f122cf739e5d5c8fbf6c4733faa6",
+    "buildDate": "2024-04-26T03:48:38+00:00",
+    "gitHash": "65bd917f482a2533dd99c82236f646c14bf1360e",
     "name": "justice-lobby-server",
-    "revisionID": "3.35.2",
-    "version": "3.35.2",
+    "revisionID": "3.35.5",
+    "version": "3.35.5",
     "version-justice": "3.45.0",
     "version-roles-seeding": "1.0.1"
   }

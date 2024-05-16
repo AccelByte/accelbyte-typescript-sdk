@@ -24,7 +24,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.
    */
   async function getVersions_ByPolicyId(
     policyId: string,
@@ -37,7 +37,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
   }
 
   /**
-   * Create a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Create a version of a particular country-specific policy.
    */
   async function createVersion_ByPolicyId(policyId: string, data: CreatePolicyVersionRequest): Promise<CreatePolicyVersionResponse> {
     const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -47,7 +47,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
   }
 
   /**
-   * Update a particular policy version.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a particular policy version.
    */
   async function patchPolicyVersion_ByPolicyVersionId(
     policyVersionId: string,
@@ -60,7 +60,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
   }
 
   /**
-   * Manually publish a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Manually publish a version of a particular country-specific policy.
    */
   async function patchLatestPolicy_ByPolicyVersionId(
     policyVersionId: string,

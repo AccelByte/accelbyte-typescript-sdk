@@ -31,9 +31,9 @@ export class ChallengeProgression$ {
    */
   getUserMeProgres_ByChallengeCode(
     challengeCode: string,
-    queryParams?: { goalCode?: string | null }
+    queryParams?: { goalCode?: string | null; limit?: number; offset?: number; tags?: string[] }
   ): Promise<IResponse<UserProgressionResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/challenge/v1/public/namespaces/{namespace}/users/me/progress/{challengeCode}'
       .replace('{namespace}', this.namespace)
       .replace('{challengeCode}', challengeCode)

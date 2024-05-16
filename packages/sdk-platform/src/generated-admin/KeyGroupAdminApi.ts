@@ -26,7 +26,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Query key groups, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of key group&lt;/li&gt;&lt;/ul&gt;
+   * Query key groups, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of key group&lt;/li&gt;&lt;/ul&gt;
    */
   async function getKeygroups(queryParams?: {
     limit?: number
@@ -41,7 +41,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Create key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created key group&lt;/li&gt;&lt;/ul&gt;
+   * Create key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created key group&lt;/li&gt;&lt;/ul&gt;
    */
   async function createKeygroup(data: KeyGroupCreate): Promise<KeyGroupInfo> {
     const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -52,17 +52,17 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
+   * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getKeygroupsByBoothName(queryParams: { boothName: string | null }): Promise<KeyGroupInfo> {
+  async function getKeygroupsByBoothName_DEPRECATED(queryParams: { boothName: string | null }): Promise<KeyGroupInfo> {
     const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getKeygroupsByBoothName(queryParams)
+    const resp = await $.getKeygroupsByBoothName_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
+   * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getKeygroup_ByKeyGroupId(keyGroupId: string): Promise<KeyGroupInfo> {
     const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -72,7 +72,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated key group&lt;/li&gt;&lt;/ul&gt;
+   * Update key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated key group&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateKeygroup_ByKeyGroupId(keyGroupId: string, data: KeyGroupUpdate): Promise<KeyGroupInfo> {
     const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -82,7 +82,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to list keys of a key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: keys&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to list keys of a key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: keys&lt;/li&gt;&lt;/ul&gt;
    */
   async function getKeys_ByKeyGroupId(
     keyGroupId: string,
@@ -95,7 +95,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to upload keys with csv format to a key group.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to upload keys with csv format to a key group.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
    */
   async function createKey_ByKeyGroupId(keyGroupId: string, data: { file?: File }): Promise<BulkOperationResult> {
     const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -105,7 +105,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get key group dynamic.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:KEYGROUP&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
+   * Get key group dynamic.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getDynamic_ByKeyGroupId(keyGroupId: string): Promise<KeyGroupDynamicInfo> {
     const $ = new KeyGroupAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -117,7 +117,7 @@ export function KeyGroupAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getKeygroups,
     createKeygroup,
-    getKeygroupsByBoothName,
+    getKeygroupsByBoothName_DEPRECATED,
     getKeygroup_ByKeyGroupId,
     updateKeygroup_ByKeyGroupId,
     getKeys_ByKeyGroupId,

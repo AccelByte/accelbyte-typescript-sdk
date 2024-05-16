@@ -18,7 +18,7 @@ export class CatalogChangesAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Select all changes.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Select all changes.
    */
   updateCatalogChangeSelectAll_ByStoreId(storeId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -31,7 +31,7 @@ export class CatalogChangesAdmin$ {
   }
 
   /**
-   * This API is used to query changes .&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the pagination of changes&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to query changes .&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the pagination of changes&lt;/li&gt;&lt;/ul&gt;
    */
   getCatalogChangesByCriteria_ByStoreId(
     storeId: string,
@@ -71,7 +71,7 @@ export class CatalogChangesAdmin$ {
   }
 
   /**
-   * This API is used to publish all unpublished changes.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: no content&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to publish all unpublished changes.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: no content&lt;/li&gt;&lt;/ul&gt;
    */
   updateCatalogChangePublishAll_ByStoreId(storeId: string): Promise<IResponse<StoreInfo>> {
     const params = {} as SDKRequestConfig
@@ -84,7 +84,7 @@ export class CatalogChangesAdmin$ {
   }
 
   /**
-   * This API is used to query catalog changes statistics .&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: catalog changes statistics changes&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to query catalog changes statistics .&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: catalog changes statistics changes&lt;/li&gt;&lt;/ul&gt;
    */
   getCatalogChangesStatistics_ByStoreId(
     storeId: string,
@@ -118,7 +118,7 @@ export class CatalogChangesAdmin$ {
   }
 
   /**
-   * Unselect all change.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Unselect all change.
    */
   updateCatalogChangeUnselectAll_ByStoreId(storeId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -131,7 +131,7 @@ export class CatalogChangesAdmin$ {
   }
 
   /**
-   * This API is used to publish selected unpublished changes.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: no content&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to publish selected unpublished changes.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: no content&lt;/li&gt;&lt;/ul&gt;
    */
   updateCatalogChangePublishSelected_ByStoreId(storeId: string): Promise<IResponse<StoreInfo>> {
     const params = {} as SDKRequestConfig
@@ -144,7 +144,7 @@ export class CatalogChangesAdmin$ {
   }
 
   /**
-   * Select a change, it will be included when partial publish.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Select a change, it will be included when partial publish.
    */
   updateSelect_ByStoreId_ByChangeId(storeId: string, changeId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -158,7 +158,7 @@ export class CatalogChangesAdmin$ {
   }
 
   /**
-   * Unselect a change, it will not be included when partial publish.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Unselect a change, it will not be included when partial publish.
    */
   updateUnselect_ByStoreId_ByChangeId(storeId: string, changeId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -172,7 +172,7 @@ export class CatalogChangesAdmin$ {
   }
 
   /**
-   * Select all changes by criteria&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Select all changes by criteria
    */
   updateCatalogChangeSelectAllByCriteria_ByStoreId(
     storeId: string,

@@ -24,6 +24,7 @@ export interface AccelbyteSDK {
     redirectURI: string
     baseURL: string
     refreshToken?: string
+    useSchemaValidation?: boolean // default is true
   }
 }
 
@@ -49,16 +50,12 @@ class AccelbyteSDKImpl {
       }
     }
 
-    // TODO: what we can do for next breaking change is that,
-    // instead of having a "global" axios interceptors, we can create the instance here.
-    //
+    // TODO: instead of having a "global" axios interceptors, we can create the instance here.
     // ```
     // this.axiosInstance = Network.create(...)
     // this.axiosInstance.interceptors.use(...)
     // ```
-    //
     // After that, our SDK assembly will return this axiosInstance, which will be used by each of the service SDKs.
-    //
     // ```
     // const { axiosInstance, opts } = sdk.assembly()
     // axiosInstance.defaults = {
@@ -70,7 +67,6 @@ class AccelbyteSDKImpl {
     //   }
     // }
     // ```
-    //
     // This way, each of the SDK instance will have their own interceptors and will not "pollute"
     // the global axios interceptors. It's easier to test in isolation as well, because with the global
     // interceptors, we can't isolate test the SDK instance... or maybe we can, with `axios.interceptors.request.clear`,
@@ -109,7 +105,8 @@ class AccelbyteSDKImpl {
           clientId: this.options.clientId,
           redirectURI: this.options.redirectURI,
           baseURL: this.options.baseURL,
-          refreshToken: this.refreshToken
+          refreshToken: this.refreshToken,
+          useSchemaValidation: this.options.useSchemaValidation !== undefined ? this.options.useSchemaValidation : true
         }
       }
     }

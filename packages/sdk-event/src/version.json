@@ -1,8 +1,8 @@
 {
-  "buildDate": "2024-03-01T06:30:57+00:00",
-  "gitHash": "e1bb2c608c919bedeca8b04e280b7eabbcf8114a",
+  "buildDate": "2024-04-05T10:22:17+00:00",
+  "gitHash": "fadf0c794b5f8cb9d9c54dc732749ecdfd8b65e7",
   "name": "justice-event-log-service",
   "realm": "dev",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "version-roles-seeding": "0.0.3"
 }

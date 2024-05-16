@@ -188,7 +188,7 @@ export class PublicContentLegacy$ {
    * @deprecated
    * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  createContent_ByUserId_ByChannelId(
+  createContent_ByUserId_ByChannelId_DEPRECATED(
     userId: string,
     channelId: string,
     data: CreateContentRequest
@@ -276,7 +276,7 @@ export class PublicContentLegacy$ {
    * @deprecated
    * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  updateContent_ByUserId_ByChannelId_ByContentId(
+  updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED(
     userId: string,
     channelId: string,
     contentId: string,

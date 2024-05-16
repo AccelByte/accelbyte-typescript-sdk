@@ -15,7 +15,6 @@ const REFRESH_EXPIRY_CHECK_RATE = 1000
 
 enum LoginUrls {
   GRANT_TOKEN = '/iam/v3/oauth/token',
-  LOGOUT = '/iam/v3/logout',
   REVOKE = '/iam/v3/oauth/revoke'
 }
 
@@ -145,8 +144,9 @@ export const injectAuthInterceptors = (
       }
 
       if (!response) {
-        console.error(`\n[ERROR] response from ${config?.baseURL}${config?.url}. ${(error as AxiosError).message}\n`)
-        console.error('injectResponseInterceptors net::ERR_INTERNET_DISCONNECTED')
+        console.error(
+          `injectResponseInterceptors net::ERR_INTERNET_DISCONNECTED ${config?.baseURL}${config?.url}. ${(error as AxiosError).message}\n`
+        )
       }
 
       if (response?.status === 401) {
@@ -164,9 +164,6 @@ export const injectAuthInterceptors = (
         return refreshWithLock({ axiosConfig, clientId, refreshToken }).then(tokenResponse => {
           return uponRefreshComplete(error, tokenResponse, onSessionExpired, axiosConfig, config || {})
         })
-      }
-      if (response && response?.status >= 500 && response?.status <= 599) {
-        console.error(`\n[ERROR][${response?.status}] response from ${config?.baseURL}${config?.url}. Please contact this service PIC.\n`)
       }
       return Promise.reject(error)
     }

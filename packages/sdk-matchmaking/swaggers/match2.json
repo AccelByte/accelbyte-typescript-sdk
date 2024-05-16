@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Match Service v2",
-    "version": "2.18.2"
+    "version": "2.19.2"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -1931,7 +1931,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Creates a new rules set.\n\nA rule set has a name and contains arbitrary data which is meaningful to some particular match function(s)\nThe name is used for a match pool to select the ruleset data that should be sent to the match function when matchmaking in that pool.\n\nTo use custom rules set please set enable_custom_match_function=true. Default (false).\n",
+        "description": "Creates a new rules set.\n\nA rule set has a name and contains arbitrary data which is meaningful to some particular match function(s)\nThe name is used for a match pool to select the ruleset data that should be sent to the match function when matchmaking in that pool.\n\nTo use custom rules set please set enable_custom_match_function=true. Default (false).\n\nWhen custom enable_custom_match_function=true, the ruleset will only validate if the rule is valid json.\n",
         "operationId": "CreateRuleSet",
         "parameters": [
           {
@@ -2126,7 +2126,7 @@
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "Updates an existing matchmaking rule set.\n\t\nTo use custom rules set please set enable_custom_match_function=true. Default (false).\n",
+        "description": "Updates an existing matchmaking rule set.\n\t\nTo use custom rules set please set enable_custom_match_function=true. Default (false).\n\nWhen custom enable_custom_match_function=true, the ruleset will only validate if the rule is valid json.\n",
         "operationId": "UpdateRuleSet",
         "parameters": [
           {
@@ -2500,7 +2500,7 @@
         "name": {
           "type": "string"
         },
-        "platfrom_group_enabled": {
+        "platform_group_enabled": {
           "type": "boolean",
           "x-omitempty": false
         },
@@ -2551,7 +2551,7 @@
         "match_function_override": {
           "$ref": "#/definitions/api.MatchFunctionOverride"
         },
-        "platfrom_group_enabled": {
+        "platform_group_enabled": {
           "type": "boolean",
           "x-omitempty": false
         },
@@ -3292,9 +3292,9 @@
     "path": "/match2/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-03T00:38:34+00:00",
-    "gitHash": "9e040332a45a6286552b4649b76f9cd1712ee0ec",
-    "version": "2.18.2",
+    "buildDate": "2024-04-25T09:35:51+00:00",
+    "gitHash": "58df903743576b6592c445bf12845900e98c902f",
+    "version": "2.19.2",
     "version-roles-seeding": "1.2.17"
   }
 }

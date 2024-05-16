@@ -115,13 +115,13 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment provider customization, at current only Adyen provide customization. This api has been deprecated, pls use /public/namespaces/{namespace}/payment/publicconfig to get adyen config&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: customization&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getPaymentCustomization(queryParams: {
+  async function getPaymentCustomization_DEPRECATED(queryParams: {
     paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     region: string | null
     sandbox?: boolean | null
   }): Promise<Customization> {
     const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getPaymentCustomization(queryParams)
+    const resp = await $.getPaymentCustomization_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -170,7 +170,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getPaymentMethods,
     getPaymentReturnurl,
     getPaymentPublicconfig,
-    getPaymentCustomization,
+    getPaymentCustomization_DEPRECATED,
     createPayPayment_ByPaymentOrderNo,
     getInfoPayment_ByPaymentOrderNo,
     getStatusPayment_ByPaymentOrderNo

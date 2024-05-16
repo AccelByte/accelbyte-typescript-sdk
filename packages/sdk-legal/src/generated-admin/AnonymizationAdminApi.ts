@@ -19,7 +19,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * This API will anonymize agreement record for specified user. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * This API will anonymize agreement record for specified user.
    */
   async function deleteAnonymizationAgreement_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)

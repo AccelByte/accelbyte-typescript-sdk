@@ -17,7 +17,7 @@ export class PoliciesAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Update country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update country-specific policy.
    */
   patchPolicy_ByPolicyId(policyId: string, data: UpdatePolicyRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -28,7 +28,7 @@ export class PoliciesAdmin$ {
   }
 
   /**
-   * Update a policy to be the default.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a policy to be the default.
    */
   patchDefault_ByPolicyId(policyId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -39,7 +39,7 @@ export class PoliciesAdmin$ {
   }
 
   /**
-   * Retrieve all active policies based on a country.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve all active policies based on a country.
    */
   getPolicyCountry_ByCountryCode(countryCode: string): Promise<IResponse<RetrievePolicyResponseArray>> {
     const params = {} as SDKRequestConfig

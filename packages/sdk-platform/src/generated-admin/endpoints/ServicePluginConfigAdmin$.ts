@@ -25,9 +25,9 @@ export class ServicePluginConfigAdmin$ {
 
   /**
    * @deprecated
-   * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Delete service plugin config
    */
-  deleteConfigServicePlugin(): Promise<IResponse<unknown>> {
+  deleteConfigServicePlugin_DEPRECATED(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
@@ -37,9 +37,9 @@ export class ServicePluginConfigAdmin$ {
 
   /**
    * @deprecated
-   * Get service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get service plugin config
    */
-  getConfigsServicePlugin(): Promise<IResponse<ServicePluginConfigInfo>> {
+  getConfigsServicePlugin_DEPRECATED(): Promise<IResponse<ServicePluginConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -49,9 +49,9 @@ export class ServicePluginConfigAdmin$ {
 
   /**
    * @deprecated
-   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
-  updateConfigServicePlugin(data: ServicePluginConfigUpdate): Promise<IResponse<ServicePluginConfigInfo>> {
+  updateConfigServicePlugin_DEPRECATED(data: ServicePluginConfigUpdate): Promise<IResponse<ServicePluginConfigInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
@@ -60,7 +60,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Delete service plugin config.
    */
   deleteCatalogPluginLootbox(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -71,7 +71,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Get lootbox plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get lootbox plugin config.
    */
   getCatalogPluginsLootbox(): Promise<IResponse<LootBoxPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -82,7 +82,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Update lootbox plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Update lootbox plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   updateCatalogPluginLootbox(data: LootBoxPluginConfigUpdate): Promise<IResponse<LootBoxPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -93,7 +93,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Delete section plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Delete section plugin config.
    */
   deleteCatalogPluginSection(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -104,7 +104,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Get section plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get section plugin config.
    */
   getCatalogPluginsSection(): Promise<IResponse<SectionPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -115,7 +115,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Update section config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Update section config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   updateCatalogPluginSection(data: SectionPluginConfigUpdate): Promise<IResponse<SectionPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -126,7 +126,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Delete service plugin config.
    */
   deleteRevocationPluginRevocation(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -137,7 +137,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Get revocation plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get revocation plugin config.
    */
   getRevocationPluginsRevocation(): Promise<IResponse<RevocationPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -153,7 +153,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Update revocation plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Update revocation plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   updateRevocationPluginRevocation(data: RevocationPluginConfigUpdate): Promise<IResponse<RevocationPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -169,7 +169,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Get lootbox plugin gRPC info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get lootbox plugin gRPC info.
    */
   getCatalogPluginsLootboxGrpcInfo(queryParams?: { force?: boolean | null }): Promise<IResponse<GrpcServerInfo>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -180,7 +180,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Upload lootbox plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Upload lootbox plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   updateCatalogPluginLootboxCustomConfigCert(data: { file?: File }): Promise<IResponse<LootBoxPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -192,7 +192,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Upload section plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Upload section plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   updateCatalogPluginSectionCustomConfigCert(data: { file?: File }): Promise<IResponse<SectionPluginConfigInfo>> {
     const params = {} as SDKRequestConfig
@@ -204,7 +204,7 @@ export class ServicePluginConfigAdmin$ {
   }
 
   /**
-   * Upload revocation plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Upload revocation plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   updateRevocationPluginRevocationRevocationCustomConfigCert(data: { file?: File }): Promise<IResponse<RevocationPluginConfigInfo>> {
     const params = {} as SDKRequestConfig

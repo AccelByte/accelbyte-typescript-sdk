@@ -23,9 +23,9 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getRegistryEventIds(): Promise<EventRegistry> {
+  async function getRegistryEventIds_DEPRECATED(): Promise<EventRegistry> {
     const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getRegistryEventIds()
+    const resp = await $.getRegistryEventIds_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -34,9 +34,9 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [CREATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function createRegistryEventId(data: EventRegistry): Promise<unknown> {
+  async function createRegistryEventId_DEPRECATED(data: EventRegistry): Promise<unknown> {
     const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createRegistryEventId(data)
+    const resp = await $.createRegistryEventId_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -45,9 +45,9 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [DELETE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function deleteRegistryEventId_ByEventId(eventId: string): Promise<unknown> {
+  async function deleteRegistryEventId_ByEventId_DEPRECATED(eventId: string): Promise<unknown> {
     const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteRegistryEventId_ByEventId(eventId)
+    const resp = await $.deleteRegistryEventId_ByEventId_DEPRECATED(eventId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -56,9 +56,9 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getRegistryEventId_ByEventId(eventId: string): Promise<EventRegistry> {
+  async function getRegistryEventId_ByEventId_DEPRECATED(eventId: string): Promise<EventRegistry> {
     const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getRegistryEventId_ByEventId(eventId)
+    const resp = await $.getRegistryEventId_ByEventId_DEPRECATED(eventId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -67,9 +67,9 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function createRegistryEventId_ByEventId(eventId: string, data: EventRegistry): Promise<unknown> {
+  async function createRegistryEventId_ByEventId_DEPRECATED(eventId: string, data: EventRegistry): Promise<unknown> {
     const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createRegistryEventId_ByEventId(eventId, data)
+    const resp = await $.createRegistryEventId_ByEventId_DEPRECATED(eventId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -78,19 +78,19 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getRegistryEventType_ByEventType(eventType: string): Promise<EventRegistry> {
+  async function getRegistryEventType_ByEventType_DEPRECATED(eventType: string): Promise<EventRegistry> {
     const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getRegistryEventType_ByEventType(eventType)
+    const resp = await $.getRegistryEventType_ByEventType_DEPRECATED(eventType)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    getRegistryEventIds,
-    createRegistryEventId,
-    deleteRegistryEventId_ByEventId,
-    getRegistryEventId_ByEventId,
-    createRegistryEventId_ByEventId,
-    getRegistryEventType_ByEventType
+    getRegistryEventIds_DEPRECATED,
+    createRegistryEventId_DEPRECATED,
+    deleteRegistryEventId_ByEventId_DEPRECATED,
+    getRegistryEventId_ByEventId_DEPRECATED,
+    createRegistryEventId_ByEventId_DEPRECATED,
+    getRegistryEventType_ByEventType_DEPRECATED
   }
 }

@@ -90,6 +90,36 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * **[TEST FACILITY ONLY]** Reset registered platform account closure services configuration to use the default configuration. Scope: account
+   */
+  async function deleteServicePlatformClosureConfig(): Promise<unknown> {
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const resp = await $.deleteServicePlatformClosureConfig()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Get registered platform account closure services configuration. Scope: account
+   */
+  async function getServicesPlatformsClosureConfig(): Promise<ServicesConfigurationResponse> {
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const resp = await $.getServicesPlatformsClosureConfig()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Update registered platform account closure services configuration. Scope: account
+   */
+  async function updateServicePlatformClosureConfig(data: ServiceConfigurationUpdateRequest): Promise<ServiceConfigurationUpdateRequest> {
+    const $ = new ConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const resp = await $.updateServicePlatformClosureConfig(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     deleteEmailConfiguration,
     getEmailsConfigurations,
@@ -97,6 +127,9 @@ export function ConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     updateEmailConfiguration,
     getServicesConfigurations,
     updateServiceConfiguration,
-    deleteServiceConfigurationReset
+    deleteServiceConfigurationReset,
+    deleteServicePlatformClosureConfig,
+    getServicesPlatformsClosureConfig,
+    updateServicePlatformClosureConfig
   }
 }

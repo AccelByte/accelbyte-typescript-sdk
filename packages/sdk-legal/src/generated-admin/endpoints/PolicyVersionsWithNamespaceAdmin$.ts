@@ -20,7 +20,7 @@ export class PolicyVersionsWithNamespaceAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.
    */
   getVersions_ByPolicyId(
     policyId: string,
@@ -41,7 +41,7 @@ export class PolicyVersionsWithNamespaceAdmin$ {
   }
 
   /**
-   * Create a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Create a version of a particular country-specific policy.
    */
   createVersion_ByPolicyId(policyId: string, data: CreatePolicyVersionRequest): Promise<IResponse<CreatePolicyVersionResponse>> {
     const params = {} as SDKRequestConfig
@@ -59,7 +59,7 @@ export class PolicyVersionsWithNamespaceAdmin$ {
   }
 
   /**
-   * Update a particular policy version.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a particular policy version.
    */
   patchPolicyVersion_ByPolicyVersionId(
     policyVersionId: string,
@@ -80,7 +80,7 @@ export class PolicyVersionsWithNamespaceAdmin$ {
   }
 
   /**
-   * Manually publish a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Manually publish a version of a particular country-specific policy.
    */
   patchLatestPolicy_ByPolicyVersionId(
     policyVersionId: string,

@@ -37,9 +37,9 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * Query wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated wallets info&lt;/li&gt;&lt;/ul&gt;
+   * Query wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated wallets info&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getWallets(queryParams?: {
+  async function getWallets_DEPRECATED(queryParams?: {
     currencyCode?: string | null
     limit?: number
     offset?: number
@@ -47,13 +47,13 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId?: string | null
   }): Promise<WalletPagingSlicedResult> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getWallets(queryParams)
+    const resp = await $.getWallets_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Debit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
+   * Debit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createWalletDebit(data: BulkDebitRequest[]): Promise<BulkDebitResult> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -63,7 +63,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Credit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
+   * Credit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createWalletCredit(data: BulkCreditRequest[]): Promise<BulkCreditResult> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -74,28 +74,28 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * get a wallet by wallet id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
+   * get a wallet by wallet id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getWallet_ByWalletId(walletId: string): Promise<WalletInfo> {
+  async function getWallet_ByWalletId_DEPRECATED(walletId: string): Promise<WalletInfo> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getWallet_ByWalletId(walletId)
+    const resp = await $.getWallet_ByWalletId_DEPRECATED(walletId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
    * @deprecated
-   * get a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
+   * get a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getWallet_ByUserId_ByWalletId(userId: string, walletId: string): Promise<WalletInfo> {
+  async function getWallet_ByUserId_ByWalletId_DEPRECATED(userId: string, walletId: string): Promise<WalletInfo> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getWallet_ByUserId_ByWalletId(userId, walletId)
+    const resp = await $.getWallet_ByUserId_ByWalletId_DEPRECATED(userId, walletId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Get platform wallet config list.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
+   * Get platform wallet config list.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getWalletConfig_ByPlatform(platform: string): Promise<PlatformWalletConfigInfo> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -105,7 +105,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update platform wallet config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
+   * Update platform wallet config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateWalletConfig_ByPlatform(platform: string, data: PlatformWalletConfigUpdate): Promise<PlatformWalletConfigInfo> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -116,17 +116,17 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * Debit a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Debit a user wallet.
    */
-  async function updateDebit_ByUserId_ByWalletId(userId: string, walletId: string, data: DebitRequest): Promise<WalletInfo> {
+  async function updateDebit_ByUserId_ByWalletId_DEPRECATED(userId: string, walletId: string, data: DebitRequest): Promise<WalletInfo> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateDebit_ByUserId_ByWalletId(userId, walletId, data)
+    const resp = await $.updateDebit_ByUserId_ByWalletId_DEPRECATED(userId, walletId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Reset platform wallet config to default config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:WALLET:CONFIG&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
+   * Reset platform wallet config to default config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: platform wallet config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateWalletConfigReset_ByPlatform(platform: string): Promise<PlatformWalletConfigInfo> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -137,28 +137,28 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * enable a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * enable a user wallet.
    */
-  async function updateEnable_ByUserId_ByWalletId(userId: string, walletId: string): Promise<unknown> {
+  async function updateEnable_ByUserId_ByWalletId_DEPRECATED(userId: string, walletId: string): Promise<unknown> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateEnable_ByUserId_ByWalletId(userId, walletId)
+    const resp = await $.updateEnable_ByUserId_ByWalletId_DEPRECATED(userId, walletId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
    * @deprecated
-   * disable a user wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * disable a user wallet.
    */
-  async function updateDisable_ByUserId_ByWalletId(userId: string, walletId: string): Promise<unknown> {
+  async function updateDisable_ByUserId_ByWalletId_DEPRECATED(userId: string, walletId: string): Promise<unknown> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateDisable_ByUserId_ByWalletId(userId, walletId)
+    const resp = await $.updateDisable_ByUserId_ByWalletId_DEPRECATED(userId, walletId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Get user currency wallet summary.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency wallet summary&lt;/li&gt;&lt;/ul&gt;
+   * Get user currency wallet summary.&lt;br&gt;Other detail info: &lt;ul&gt;(READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency wallet summary&lt;/li&gt;&lt;/ul&gt;
    */
   async function getWalletsCurrenciesSummary_ByUserId(userId: string): Promise<CurrencyWalletArray> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -169,9 +169,9 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Check wallet by balance origin and currency code whether it&#39;s inactive.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Check wallet by balance origin and currency code whether it&#39;s inactive.
    */
-  async function getCheck_ByUserId_ByCurrencyCode(
+  async function getCheck_ByUserId_ByCurrencyCode_DEPRECATED(
     userId: string,
     currencyCode: string,
     queryParams: {
@@ -179,13 +179,13 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     }
   ): Promise<unknown> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getCheck_ByUserId_ByCurrencyCode(userId, currencyCode, queryParams)
+    const resp = await $.getCheck_ByUserId_ByCurrencyCode_DEPRECATED(userId, currencyCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Credit a user wallet by currency code and balance origin, if wallet not exists, it will create a new wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Credit a user wallet by currency code and balance origin, if wallet not exists, it will create a new wallet.&lt;br&gt;Other detail info: &lt;ul&gt;(UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCredit_ByUserId_ByCurrencyCode(userId: string, currencyCode: string, data: CreditRequest): Promise<WalletInfo> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -195,7 +195,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Pay with user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Pay with user wallet by currency code and client platform.
    */
   async function updatePayment_ByUserId_ByCurrencyCode(
     userId: string,
@@ -210,21 +210,21 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * List user wallet transactions ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet transaction info&lt;/li&gt;&lt;/ul&gt;
+   * List user wallet transactions ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: wallet transaction info&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getTransactions_ByUserId_ByWalletId(
+  async function getTransactions_ByUserId_ByWalletId_DEPRECATED(
     userId: string,
     walletId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<DetailedWalletTransactionPagingSlicedResult> {
     const $ = new WalletAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getTransactions_ByUserId_ByWalletId(userId, walletId, queryParams)
+    const resp = await $.getTransactions_ByUserId_ByWalletId_DEPRECATED(userId, walletId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Checks if the user has enough balance based on the provided criteria.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: boolean value indicating if the user has enough balance&lt;/li&gt;&lt;/ul&gt;
+   * Checks if the user has enough balance based on the provided criteria.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: boolean value indicating if the user has enough balance&lt;/li&gt;&lt;/ul&gt;
    */
   async function createBalanceCheck_ByUserId_ByCurrencyCode(
     userId: string,
@@ -238,7 +238,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Debit a user wallet by currency code, default is debit system wallet.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Debit a user wallet by currency code, default is debit system wallet.
    */
   async function updateDebitWallet_ByUserId_ByCurrencyCode(
     userId: string,
@@ -252,7 +252,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Pay with user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for metadata&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
+   * Pay with user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for metadata&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
    */
   async function updateDebitByWalletPlatform_ByUserId_ByCurrencyCode(
     userId: string,
@@ -266,7 +266,7 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * List user currency transactions ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency transaction info&lt;/li&gt;&lt;/ul&gt;
+   * List user currency transactions ordered by create time desc.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: currency transaction info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getTransactionsWallets_ByUserId_ByCurrencyCode(
     userId: string,
@@ -280,22 +280,22 @@ export function WalletAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
-    getWallets,
+    getWallets_DEPRECATED,
     createWalletDebit,
     createWalletCredit,
-    getWallet_ByWalletId,
-    getWallet_ByUserId_ByWalletId,
+    getWallet_ByWalletId_DEPRECATED,
+    getWallet_ByUserId_ByWalletId_DEPRECATED,
     getWalletConfig_ByPlatform,
     updateWalletConfig_ByPlatform,
-    updateDebit_ByUserId_ByWalletId,
+    updateDebit_ByUserId_ByWalletId_DEPRECATED,
     updateWalletConfigReset_ByPlatform,
-    updateEnable_ByUserId_ByWalletId,
-    updateDisable_ByUserId_ByWalletId,
+    updateEnable_ByUserId_ByWalletId_DEPRECATED,
+    updateDisable_ByUserId_ByWalletId_DEPRECATED,
     getWalletsCurrenciesSummary_ByUserId,
-    getCheck_ByUserId_ByCurrencyCode,
+    getCheck_ByUserId_ByCurrencyCode_DEPRECATED,
     updateCredit_ByUserId_ByCurrencyCode,
     updatePayment_ByUserId_ByCurrencyCode,
-    getTransactions_ByUserId_ByWalletId,
+    getTransactions_ByUserId_ByWalletId_DEPRECATED,
     createBalanceCheck_ByUserId_ByCurrencyCode,
     updateDebitWallet_ByUserId_ByCurrencyCode,
     updateDebitByWalletPlatform_ByUserId_ByCurrencyCode,

@@ -21,7 +21,7 @@ export class Slot$ {
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Get list of slots for a given user in namespace.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of slots&lt;/li&gt;&lt;/ul&gt;
    */
-  getSlots_ByUserId(userId: string): Promise<IResponse<SlotInfoArray>> {
+  getSlots_ByUserId_DEPRECATED(userId: string): Promise<IResponse<SlotInfoArray>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/slots'
       .replace('{namespace}', this.namespace)
@@ -35,7 +35,7 @@ export class Slot$ {
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Creates a slot.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created slot info&lt;/li&gt;&lt;/ul&gt;
    */
-  createSlot_ByUserId(
+  createSlot_ByUserId_DEPRECATED(
     userId: string,
     data: { checksum?: string | null; customAttribute?: string | null; file?: File },
     queryParams?: { label?: string | null; tags?: string[] }
@@ -53,7 +53,7 @@ export class Slot$ {
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Deletes the slot.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
    */
-  deleteSlot_ByUserId_BySlotId(userId: string, slotId: string): Promise<IResponse<unknown>> {
+  deleteSlot_ByUserId_BySlotId_DEPRECATED(userId: string, slotId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/slots/{slotId}'
       .replace('{namespace}', this.namespace)
@@ -68,7 +68,7 @@ export class Slot$ {
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Get slot data.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slot data&lt;/li&gt;&lt;/ul&gt;
    */
-  getSlot_ByUserId_BySlotId(userId: string, slotId: string): Promise<IResponse<unknown>> {
+  getSlot_ByUserId_BySlotId_DEPRECATED(userId: string, slotId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/slots/{slotId}'
       .replace('{namespace}', this.namespace)
@@ -83,7 +83,7 @@ export class Slot$ {
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Updates a slot.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated slot&lt;/li&gt;&lt;/ul&gt;
    */
-  updateSlot_ByUserId_BySlotId(
+  updateSlot_ByUserId_BySlotId_DEPRECATED(
     userId: string,
     slotId: string,
     data: { checksum?: string | null; customAttribute?: string | null; file?: File },
@@ -103,7 +103,7 @@ export class Slot$ {
    * @deprecated
    * &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt;&lt;br&gt;Updates the slot metadata.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SLOTDATA&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated slot&lt;/li&gt;&lt;/ul&gt;
    */
-  updateMetadata_ByUserId_BySlotId(userId: string, slotId: string, data: SlotMetadataUpdate): Promise<IResponse<SlotInfo>> {
+  updateMetadata_ByUserId_BySlotId_DEPRECATED(userId: string, slotId: string, data: SlotMetadataUpdate): Promise<IResponse<SlotInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/slots/{slotId}/metadata'
       .replace('{namespace}', this.namespace)

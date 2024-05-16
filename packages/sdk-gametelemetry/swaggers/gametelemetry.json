@@ -411,7 +411,7 @@
           "title": "Eventnamespace",
           "type": "string"
         },
-        "EventTimeStamp": {
+        "EventTimestamp": {
           "title": "Eventtimestamp",
           "type": "string"
         },
@@ -432,7 +432,7 @@
           "type": "string"
         }
       },
-      "required": ["EventId", "EventName", "EventNamespace", "EventTimeStamp", "FlightId", "UserId", "UserNamespace"],
+      "required": ["EventId", "EventName", "EventNamespace", "EventTimestamp"],
       "title": "GetNamespaceEventResponse",
       "type": "object"
     },
@@ -473,12 +473,25 @@
           "type": "array"
         },
         "paging": {
-          "title": "Paging",
-          "type": "integer"
+          "$ref": "#/definitions/Paging"
         }
       },
       "required": ["data", "paging"],
       "title": "PagedResponse[GetNamespaceEventResponse]",
+      "type": "object"
+    },
+    "Paging": {
+      "properties": {
+        "next": {
+          "title": "Next",
+          "type": "string"
+        },
+        "previous": {
+          "title": "Previous",
+          "type": "string"
+        }
+      },
+      "title": "Paging",
       "type": "object"
     },
     "PlayTimeResponse": {
@@ -559,8 +572,8 @@
     "path": "/game-telemetry/openapi.json"
   },
   "x-version": {
-    "buildDate": "2024-03-12T07:24:10+00:00",
-    "gitHash": "e48917e82b6b60926c94266104fa28c1ce5d36a1",
+    "buildDate": "2024-04-29T01:57:26+00:00",
+    "gitHash": "efdb888999397ff389fa78dd6a8a7c42f9aa9368",
     "name": "analytics-game-telemetry",
     "realm": "dev",
     "version": "1.24.1",

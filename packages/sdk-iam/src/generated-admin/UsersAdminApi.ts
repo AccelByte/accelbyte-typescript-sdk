@@ -92,7 +92,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/search [GET]_**
    */
-  async function getUsers(queryParams: {
+  async function getUsers_DEPRECATED(queryParams: {
     platformId: string | null
     after?: string | null
     before?: string | null
@@ -104,7 +104,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId?: string | null
   }): Promise<SearchUsersByPlatformIdResponse> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUsers(queryParams)
+    const resp = await $.getUsers_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -207,9 +207,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [GET]_**
    */
-  async function getUser_ByUserId(userId: string): Promise<UserResponse> {
+  async function getUser_ByUserId_DEPRECATED(userId: string): Promise<UserResponse> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUser_ByUserId(userId)
+    const resp = await $.getUser_ByUserId_DEPRECATED(userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -218,9 +218,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId} [PATCH]_** This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {Country, DisplayName, LanguageTag} Country use ISO3166-1 alpha-2 two letter, e.g. US. **Several case of updating email address** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address.
    */
-  async function patchUser_ByUserId(userId: string, data: UserUpdateRequest): Promise<UserResponse> {
+  async function patchUser_ByUserId_DEPRECATED(userId: string, data: UserUpdateRequest): Promise<UserResponse> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.patchUser_ByUserId(userId, data)
+    const resp = await $.patchUser_ByUserId_DEPRECATED(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -249,9 +249,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [GET]_** - **Note:** difference in V3 response, format difference: Pascal case =&gt; Camel case
    */
-  async function getAgerestrictions(): Promise<AgeRestrictionResponse> {
+  async function getAgerestrictions_DEPRECATED(): Promise<AgeRestrictionResponse> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getAgerestrictions()
+    const resp = await $.getAgerestrictions_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -260,9 +260,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions [PATCH]_**
    */
-  async function patchAgerestriction(data: AgeRestrictionRequest): Promise<AgeRestrictionResponse> {
+  async function patchAgerestriction_DEPRECATED(data: AgeRestrictionRequest): Promise<AgeRestrictionResponse> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.patchAgerestriction(data)
+    const resp = await $.patchAgerestriction_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -301,9 +301,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [POST]_**
    */
-  async function createBan_ByUserId(userId: string, data: BanCreateRequest): Promise<UserBanResponse> {
+  async function createBan_ByUserId_DEPRECATED(userId: string, data: BanCreateRequest): Promise<UserBanResponse> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createBan_ByUserId(userId, data)
+    const resp = await $.createBan_ByUserId_DEPRECATED(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -312,9 +312,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [GET]_**
    */
-  async function getBans_ByUserId(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<UserBanResponseArray> {
+  async function getBans_ByUserId_DEPRECATED(userId: string, queryParams?: { activeOnly?: boolean | null }): Promise<UserBanResponseArray> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getBans_ByUserId(userId, queryParams)
+    const resp = await $.getBans_ByUserId_DEPRECATED(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -361,9 +361,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
    */
-  async function createRole_ByUserId(userId: string, data: string[]): Promise<unknown> {
+  async function createRole_ByUserId_DEPRECATED(userId: string, data: string[]): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createRole_ByUserId(userId, data)
+    const resp = await $.createRole_ByUserId_DEPRECATED(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -372,9 +372,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
    */
-  async function updateRole_ByUserId(userId: string, data: string[]): Promise<unknown> {
+  async function updateRole_ByUserId_DEPRECATED(userId: string, data: string[]): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateRole_ByUserId(userId, data)
+    const resp = await $.updateRole_ByUserId_DEPRECATED(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -436,9 +436,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_**
    */
-  async function updateEnable_ByUserId(userId: string): Promise<unknown> {
+  async function updateEnable_ByUserId_DEPRECATED(userId: string): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateEnable_ByUserId(userId)
+    const resp = await $.updateEnable_ByUserId_DEPRECATED(userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -467,9 +467,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/status [PATCH]_** For **Deletion Account** purpose fill the reason with: - **DeactivateAccount** : if your deletion request comes from user - **AdminDeactivateAccount** : if your deletion request comes from admin
    */
-  async function updateDisable_ByUserId(userId: string, data: DisableUserRequest): Promise<unknown> {
+  async function updateDisable_ByUserId_DEPRECATED(userId: string, data: DisableUserRequest): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateDisable_ByUserId(userId, data)
+    const resp = await $.updateDisable_ByUserId_DEPRECATED(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -478,9 +478,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries/{countryCode} [PATCH]_**
    */
-  async function patchCountry_ByCountryCode(countryCode: string, data: CountryAgeRestrictionRequest): Promise<Country> {
+  async function patchCountry_ByCountryCode_DEPRECATED(countryCode: string, data: CountryAgeRestrictionRequest): Promise<Country> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.patchCountry_ByCountryCode(countryCode, data)
+    const resp = await $.patchCountry_ByCountryCode_DEPRECATED(countryCode, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -489,9 +489,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/password [PUT]_**
    */
-  async function updatePassword_ByUserId(userId: string, data: UserPasswordUpdateRequest): Promise<unknown> {
+  async function updatePassword_ByUserId_DEPRECATED(userId: string, data: UserPasswordUpdateRequest): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updatePassword_ByUserId(userId, data)
+    const resp = await $.updatePassword_ByUserId_DEPRECATED(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -536,9 +536,9 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries [GET]_**
    */
-  async function getCountriesAgerestrictions(): Promise<CountryAgeRestrictionArray> {
+  async function getCountriesAgerestrictions_DEPRECATED(): Promise<CountryAgeRestrictionArray> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getCountriesAgerestrictions()
+    const resp = await $.getCountriesAgerestrictions_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -788,13 +788,13 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId} [DELETE]_** ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **android** - **ios** - **device** - **discord** Delete link of user&#39;s account with platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. platform_namespace need to be specified when the platform ID is &#39;justice&#39;. Delete link of justice platform will enable password token grant and password update.
    */
-  async function deleteLink_ByUserId_ByPlatformId(
+  async function deleteLink_ByUserId_ByPlatformId_DEPRECATED(
     userId: string,
     platformId: string,
     data: { platform_namespace?: string | null }
   ): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteLink_ByUserId_ByPlatformId(userId, platformId, data)
+    const resp = await $.deleteLink_ByUserId_ByPlatformId_DEPRECATED(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -888,7 +888,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getUsersMe,
-    getUsers,
+    getUsers_DEPRECATED,
     getUsers_ByNS,
     updateUser,
     getAdmins,
@@ -896,37 +896,37 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createUserBulk,
     createUserInvite,
     getUsersSearch,
-    getUser_ByUserId,
-    patchUser_ByUserId,
+    getUser_ByUserId_DEPRECATED,
+    patchUser_ByUserId_DEPRECATED,
     getUser_ByUserId_ByNS,
     patchUser_ByUserId_ByNS,
-    getAgerestrictions,
-    patchAgerestriction,
+    getAgerestrictions_DEPRECATED,
+    patchAgerestriction_DEPRECATED,
     getAgerestrictions_ByNS,
     patchAgerestriction_ByNS,
     createUserSearchBulk,
-    createBan_ByUserId,
-    getBans_ByUserId,
+    createBan_ByUserId_DEPRECATED,
+    getBans_ByUserId_DEPRECATED,
     getBans_ByUserId_ByNS,
     createBan_ByUserId_ByNS,
     getUsersLinkhistories,
-    createRole_ByUserId,
-    updateRole_ByUserId,
+    createRole_ByUserId_DEPRECATED,
+    updateRole_ByUserId_DEPRECATED,
     getUsers_ByRoleId,
     getCodes_ByUserId,
     deleteRole_ByUserId,
     patchRole_ByUserId,
     createUserBulkPlatform,
-    updateEnable_ByUserId,
+    updateEnable_ByUserId_DEPRECATED,
     patchStatus_ByUserId,
     updateVerify_ByUserId,
-    updateDisable_ByUserId,
-    patchCountry_ByCountryCode,
-    updatePassword_ByUserId,
+    updateDisable_ByUserId_DEPRECATED,
+    patchCountry_ByCountryCode_DEPRECATED,
+    updatePassword_ByUserId_DEPRECATED,
     updatePassword_ByUserId_ByNS,
     getUsersPlatformsJustice,
     getPlatforms_ByUserId,
-    getCountriesAgerestrictions,
+    getCountriesAgerestrictions_DEPRECATED,
     getAgerestrictionsCountries,
     createCodeVerify_ByUserId,
     deleteInformation_ByUserId,
@@ -949,7 +949,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     deletePlatform_ByUserId_ByPlatformId,
     patchAgerestrictionCountry_ByCountryCode,
     deleteAll_ByUserId_ByPlatformId,
-    deleteLink_ByUserId_ByPlatformId,
+    deleteLink_ByUserId_ByPlatformId_DEPRECATED,
     postLink_ByUserId_ByPlatformId,
     getUser_ByPlatformId_ByPlatformUserId,
     deletePermission_ByUserId_ByResource_ByAction,

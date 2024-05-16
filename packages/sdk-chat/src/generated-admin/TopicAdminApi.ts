@@ -179,7 +179,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Get chat history in a namespace.
    */
-  async function getChats_ByTopic(
+  async function getChats_ByTopic_DEPRECATED(
     topic: string,
     queryParams?: {
       endCreatedAt?: number
@@ -193,7 +193,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     }
   ): Promise<ChatMessageWithPaginationResponse> {
     const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getChats_ByTopic(topic, queryParams)
+    const resp = await $.getChats_ByTopic_DEPRECATED(topic, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -331,7 +331,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     updateTopic_ByTopic,
     getTopicChannel,
     createNamespaceTopic,
-    getChats_ByTopic,
+    getChats_ByTopic_DEPRECATED,
     createChat_ByTopic,
     getShards_ByTopic,
     getChannel_ByTopic,

@@ -15,6 +15,7 @@ export const PurchaseValidationReq = z.object({
   items: z.array(PurchaseValidationItemReq).nullish(),
   quantity: z.number().int(),
   sku: z.string(),
+  stackable: z.boolean(),
   useCount: z.number().int().nullish()
 })
 

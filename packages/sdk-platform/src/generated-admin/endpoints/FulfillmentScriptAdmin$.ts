@@ -19,7 +19,7 @@ export class FulfillmentScriptAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;List all fulfillment scripts.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:FULFILLMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;List all fulfillment scripts.
    */
   getFulfillmentScripts(): Promise<IResponse<FulfillmentScriptInfoArray>> {
     const params = {} as SDKRequestConfig
@@ -35,7 +35,7 @@ export class FulfillmentScriptAdmin$ {
   }
 
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Delete fulfillment script.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:FULFILLMENT&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Delete fulfillment script.
    */
   deleteFulfillmentScript_ById(id: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -46,7 +46,7 @@ export class FulfillmentScriptAdmin$ {
   }
 
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get fulfillment script by id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:FULFILLMENT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get fulfillment script&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get fulfillment script by id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get fulfillment script&lt;/li&gt;&lt;/ul&gt;
    */
   getFulfillmentScript_ById(id: string): Promise<IResponse<FulfillmentScriptInfo>> {
     const params = {} as SDKRequestConfig
@@ -57,7 +57,7 @@ export class FulfillmentScriptAdmin$ {
   }
 
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Update fulfillment script.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:FULFILLMENT&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Update fulfillment script.
    */
   patchFulfillmentScript_ById(id: string, data: FulfillmentScriptUpdate): Promise<IResponse<FulfillmentScriptInfo>> {
     const params = {} as SDKRequestConfig
@@ -68,7 +68,7 @@ export class FulfillmentScriptAdmin$ {
   }
 
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Create fulfillment script.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:FULFILLMENT&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;Fulfillment scripts are used for adding custom fulfillment logic based on &lt;b&gt;ITEM_TYPE&lt;/b&gt;: [MEDIA,INGAMEITEM] for now, and the custom scripts only cover grantDays.&lt;br&gt;Example for grantDays: &lt;br&gt;&lt;code&gt;order &amp;&amp; ((order.currency &amp;&amp; order.currency.currencyCode) == &#39;LP&#39; || order.isFree) ? 30 : -1&lt;/code&gt;&lt;br&gt;
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Create fulfillment script.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;Fulfillment scripts are used for adding custom fulfillment logic based on &lt;b&gt;ITEM_TYPE&lt;/b&gt;: [MEDIA,INGAMEITEM] for now, and the custom scripts only cover grantDays.&lt;br&gt;Example for grantDays: &lt;br&gt;&lt;code&gt;order &amp;&amp; ((order.currency &amp;&amp; order.currency.currencyCode) == &#39;LP&#39; || order.isFree) ? 30 : -1&lt;/code&gt;&lt;br&gt;
    */
   createFulfillmentScript_ById(id: string, data: FulfillmentScriptCreate): Promise<IResponse<FulfillmentScriptInfo>> {
     const params = {} as SDKRequestConfig

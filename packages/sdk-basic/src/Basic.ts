@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
@@ -19,18 +19,16 @@ import { UserProfileApi } from './generated-public/UserProfileApi.js'
 import { FileUploadApi } from './generated-public/FileUploadApi.js'
 
 const apis = {
-
-NamespaceAdminApi, 
-ConfigAdminApi, 
-MiscAdminApi, 
-UserProfileAdminApi, 
-FileUploadAdminApi, 
-AnonymizationAdminApi, 
-MiscApi, 
-NamespaceApi, 
-UserProfileApi, 
-FileUploadApi, 
+  NamespaceAdminApi,
+  ConfigAdminApi,
+  MiscAdminApi,
+  UserProfileAdminApi,
+  FileUploadAdminApi,
+  AnonymizationAdminApi,
+  MiscApi,
+  NamespaceApi,
+  UserProfileApi,
+  FileUploadApi
 }
 
 export const Basic = apis
-  

@@ -124,9 +124,9 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  async function createContent_ByChannelId(channelId: string, data: CreateContentRequest): Promise<CreateContentResponse> {
+  async function createContent_ByChannelId_DEPRECATED(channelId: string, data: CreateContentRequest): Promise<CreateContentResponse> {
     const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createContent_ByChannelId(channelId, data)
+    const resp = await $.createContent_ByChannelId_DEPRECATED(channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -235,13 +235,13 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  async function updateContent_ByChannelId_ByContentId(
+  async function updateContent_ByChannelId_ByContentId_DEPRECATED(
     channelId: string,
     contentId: string,
     data: CreateContentRequest
   ): Promise<CreateContentResponse> {
     const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateContent_ByChannelId_ByContentId(channelId, contentId, data)
+    const resp = await $.updateContent_ByChannelId_ByContentId_DEPRECATED(channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -294,14 +294,14 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  async function updateContent_ByUserId_ByChannelId_ByContentId(
+  async function updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED(
     userId: string,
     channelId: string,
     contentId: string,
     data: CreateContentRequest
   ): Promise<CreateContentResponse> {
     const $ = new AdminContentAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
+    const resp = await $.updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -358,7 +358,7 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getContents_ByUserId,
     createContentSharecodeBulk,
     getPreview_ByContentId,
-    createContent_ByChannelId,
+    createContent_ByChannelId_DEPRECATED,
     getVersions_ByContentId,
     getContentSharecode_ByShareCode,
     createContentS3_ByChannelId,
@@ -367,12 +367,12 @@ export function AdminContentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getContentsSearch_ByChannelId,
     updateHide_ByUserId_ByContentId,
     deleteContent_ByChannelId_ByContentId,
-    updateContent_ByChannelId_ByContentId,
+    updateContent_ByChannelId_ByContentId_DEPRECATED,
     updateRollback_ByContentId_ByVersionId,
     updateContentS3_ByChannelId_ByContentId,
     deleteScreenshot_ByContentId_ByScreenshotId,
     deleteContent_ByUserId_ByChannelId_ByContentId,
-    updateContent_ByUserId_ByChannelId_ByContentId,
+    updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED,
     updateContentS3_ByUserId_ByChannelId_ByContentId,
     deleteContentSharecode_ByUserId_ByChannelId_ByShareCode,
     updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode

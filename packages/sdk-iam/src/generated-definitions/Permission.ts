@@ -5,12 +5,6 @@
  */
 import { z } from 'zod'
 
-export const Permission = z.object({
-  Action: z.number().int(),
-  Resource: z.string(),
-  SchedAction: z.number().int().nullish(),
-  SchedCron: z.string().nullish(),
-  SchedRange: z.array(z.string()).nullish()
-})
+export const Permission = z.object({ action: z.number().int(), resource: z.string() })
 
 export interface Permission extends z.TypeOf<typeof Permission> {}

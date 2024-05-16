@@ -9,11 +9,11 @@ export const GetNamespaceEventResponse = z.object({
   EventId: z.string(),
   EventName: z.string(),
   EventNamespace: z.string(),
-  EventTimeStamp: z.string(),
-  FlightId: z.string(),
+  EventTimestamp: z.string(),
+  FlightId: z.string().nullish(),
   Payload: z.record(z.any()).nullish(),
-  UserId: z.string(),
-  UserNamespace: z.string()
+  UserId: z.string().nullish(),
+  UserNamespace: z.string().nullish()
 })
 
 export interface GetNamespaceEventResponse extends z.TypeOf<typeof GetNamespaceEventResponse> {}

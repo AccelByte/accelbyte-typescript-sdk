@@ -17,9 +17,9 @@ export class UserInfoAdmin$ {
 
   /**
    * @deprecated
-   * Invalidate user info cache in agreement service.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Invalidate user info cache in agreement service.
    */
-  deleteUserInfo(queryParams?: { namespace?: string | null }): Promise<IResponse<unknown>> {
+  deleteUserInfo_DEPRECATED(queryParams?: { namespace?: string | null }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/userInfo'
     const resultPromise = this.axiosInstance.delete(url, { params })
@@ -28,7 +28,7 @@ export class UserInfoAdmin$ {
   }
 
   /**
-   * Get user info cache last updated time per namespace.&lt;br&gt;The query parameter namespaces can be a list of namespace separated by comma.&lt;br&gt;If query parameter namespaces is empty, user info cache status for all available namespaces will be returned. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Get user info cache last updated time per namespace.&lt;br&gt;The query parameter namespaces can be a list of namespace separated by comma.&lt;br&gt;If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
    */
   getUserInfo(queryParams?: { namespaces?: string | null }): Promise<IResponse<RetrieveUserInfoCacheStatusResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -45,9 +45,9 @@ export class UserInfoAdmin$ {
 
   /**
    * @deprecated
-   * Sync user info cache in agreement service with iam service.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Sync user info cache in agreement service with iam service.
    */
-  updateUserInfo(queryParams: { namespace: string | null }): Promise<IResponse<unknown>> {
+  updateUserInfo_DEPRECATED(queryParams: { namespace: string | null }): Promise<IResponse<unknown>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/userInfo'
     const resultPromise = this.axiosInstance.put(url, null, { params })

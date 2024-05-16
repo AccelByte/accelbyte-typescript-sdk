@@ -22,7 +22,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Retrieve accepted Legal Agreements.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve accepted Legal Agreements.
    */
   async function getAgreementsPolicies(): Promise<RetrieveAcceptedAgreementResponseArray> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -32,7 +32,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.
    */
   async function createAgreementPolicy(data: AcceptAgreementRequest[]): Promise<AcceptAgreementResponse> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -43,17 +43,20 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.
    */
-  async function createAgreementPolicyUser_ByUserId(userId: string, data: AcceptAgreementRequest[]): Promise<AcceptAgreementResponse> {
+  async function createAgreementPolicyUser_ByUserId_DEPRECATED(
+    userId: string,
+    data: AcceptAgreementRequest[]
+  ): Promise<AcceptAgreementResponse> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createAgreementPolicyUser_ByUserId(userId, data)
+    const resp = await $.createAgreementPolicyUser_ByUserId_DEPRECATED(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Change marketing preference consent.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Change marketing preference consent.
    */
   async function patchAgreementLocalizedPolicyVersionPreference(data: AcceptAgreementRequest[]): Promise<unknown> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -63,7 +66,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Accepts a legal policy version. Supply with localized version policy id to accept an agreement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Accepts a legal policy version. Supply with localized version policy id to accept an agreement
    */
   async function createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<unknown> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -74,16 +77,16 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.
    */
-  async function createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(
+  async function createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId_DEPRECATED(
     countryCode: string,
     clientId: string,
     userId: string,
     data: AcceptAgreementRequest[]
   ): Promise<AcceptAgreementResponse> {
     const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(countryCode, clientId, userId, data)
+    const resp = await $.createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId_DEPRECATED(countryCode, clientId, userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -91,9 +94,9 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getAgreementsPolicies,
     createAgreementPolicy,
-    createAgreementPolicyUser_ByUserId,
+    createAgreementPolicyUser_ByUserId_DEPRECATED,
     patchAgreementLocalizedPolicyVersionPreference,
     createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId,
-    createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId
+    createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId_DEPRECATED
   }
 }

@@ -102,4 +102,47 @@ export class ConfigurationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
   }
+
+  /**
+   * **[TEST FACILITY ONLY]** Reset registered platform account closure services configuration to use the default configuration. Scope: account
+   */
+  deleteServicePlatformClosureConfig(): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/gdpr/admin/namespaces/{namespace}/services/platforms/closure/config'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Get registered platform account closure services configuration. Scope: account
+   */
+  getServicesPlatformsClosureConfig(): Promise<IResponse<ServicesConfigurationResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/gdpr/admin/namespaces/{namespace}/services/platforms/closure/config'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ServicesConfigurationResponse,
+      'ServicesConfigurationResponse'
+    )
+  }
+
+  /**
+   * Update registered platform account closure services configuration. Scope: account
+   */
+  updateServicePlatformClosureConfig(data: ServiceConfigurationUpdateRequest): Promise<IResponse<ServiceConfigurationUpdateRequest>> {
+    const params = {} as SDKRequestConfig
+    const url = '/gdpr/admin/namespaces/{namespace}/services/platforms/closure/config'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.isZodEnabled,
+      () => resultPromise,
+      ServiceConfigurationUpdateRequest,
+      'ServiceConfigurationUpdateRequest'
+    )
+  }
 }

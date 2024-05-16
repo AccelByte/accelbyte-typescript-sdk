@@ -24,9 +24,9 @@ export function UserInformationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function deleteActivity_ByUserId(userId: string): Promise<unknown> {
+  async function deleteActivity_ByUserId_DEPRECATED(userId: string): Promise<unknown> {
     const $ = new UserInformation$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteActivity_ByUserId(userId)
+    const resp = await $.deleteActivity_ByUserId_DEPRECATED(userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -35,9 +35,12 @@ export function UserInformationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getActivities_ByUserId(userId: string, queryParams: { pageSize: number; offset?: number }): Promise<EventResponse> {
+  async function getActivities_ByUserId_DEPRECATED(
+    userId: string,
+    queryParams: { pageSize: number; offset?: number }
+  ): Promise<EventResponse> {
     const $ = new UserInformation$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getActivities_ByUserId(userId, queryParams)
+    const resp = await $.getActivities_ByUserId_DEPRECATED(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -46,16 +49,16 @@ export function UserInformationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getLastActivityTime_ByUserId(userId: string): Promise<UserLastActivity> {
+  async function getLastActivityTime_ByUserId_DEPRECATED(userId: string): Promise<UserLastActivity> {
     const $ = new UserInformation$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getLastActivityTime_ByUserId(userId)
+    const resp = await $.getLastActivityTime_ByUserId_DEPRECATED(userId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    deleteActivity_ByUserId,
-    getActivities_ByUserId,
-    getLastActivityTime_ByUserId
+    deleteActivity_ByUserId_DEPRECATED,
+    getActivities_ByUserId_DEPRECATED,
+    getLastActivityTime_ByUserId_DEPRECATED
   }
 }

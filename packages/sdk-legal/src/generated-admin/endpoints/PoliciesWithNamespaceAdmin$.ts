@@ -16,7 +16,7 @@ export class PoliciesWithNamespaceAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Update country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update country-specific policy.
    */
   patchPolicy_ByPolicyId(policyId: string, data: UpdatePolicyRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -29,7 +29,7 @@ export class PoliciesWithNamespaceAdmin$ {
   }
 
   /**
-   * Update a policy to be the default.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a policy to be the default.
    */
   patchDefault_ByPolicyId(policyId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

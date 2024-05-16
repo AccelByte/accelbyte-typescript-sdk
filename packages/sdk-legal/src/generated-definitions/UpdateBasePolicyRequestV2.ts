@@ -10,6 +10,7 @@ export const UpdateBasePolicyRequestV2 = z.object({
   affectedCountries: z.array(z.string()).nullish(),
   basePolicyName: z.string().nullish(),
   description: z.string().nullish(),
+  isHidden: z.boolean().nullish(),
   tags: z.array(z.string()).nullish()
 })
 

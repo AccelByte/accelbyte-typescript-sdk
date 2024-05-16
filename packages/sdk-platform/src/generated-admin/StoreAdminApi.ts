@@ -31,7 +31,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * This API is used to list stores in a namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of stores&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to list stores in a namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of stores&lt;/li&gt;&lt;/ul&gt;
    */
   async function getStores(): Promise<StoreInfoArray> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -41,7 +41,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to create a non published store in a namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created store data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to create a non published store in a namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created store data&lt;/li&gt;&lt;/ul&gt;
    */
   async function createStore(data: StoreCreate): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -52,17 +52,17 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to import a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/import to import store.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to import a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/import to import store.&lt;br&gt;
    */
-  async function updateStoreImport(data: { file?: File }, queryParams?: { storeId?: string | null }): Promise<StoreInfo> {
+  async function updateStoreImport_DEPRECATED(data: { file?: File }, queryParams?: { storeId?: string | null }): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateStoreImport(data, queryParams)
+    const resp = await $.updateStoreImport_DEPRECATED(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Get catalog config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:STORE&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get catalog config.
    */
   async function getCatalogConfigs(): Promise<CatalogConfigInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -72,7 +72,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:STORE, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated catalog config&lt;/li&gt;&lt;/ul&gt;
+   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated catalog config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogConfig(data: CatalogConfigUpdate): Promise<CatalogConfigInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -82,7 +82,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to delete a store. Only non published store can be deleted.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to delete a store. Only non published store can be deleted.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteStore_ByStoreId(storeId: string): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -92,7 +92,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get a store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get a store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getStore_ByStoreId(storeId: string): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -102,7 +102,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to Update a store basic info.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated store data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to Update a store basic info.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated store data&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateStore_ByStoreId(storeId: string, data: StoreUpdate): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -112,7 +112,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to delete published store including category and items before release to public.&lt;p&gt;&lt;b&gt;Warning: Please do not use this API once published to public user.&lt;/b&gt;&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to delete published store including category and items before release to public.&lt;p&gt;&lt;b&gt;Warning: Please do not use this API once published to public user.&lt;/b&gt;
    */
   async function deleteStorePublished(): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -122,7 +122,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get a published store basic info, exclude category and item information.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get a published store basic info, exclude category and item information.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getStoresPublished(): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -132,7 +132,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to import a store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to import a store.
    */
   async function updateStoreImport_ByNS(
     data: { file?: File },
@@ -145,7 +145,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to export a store to CSV format&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to export a store to CSV format
    */
   async function createStoreExportByCsv(data: ExportStoreToCsvRequest): Promise<unknown> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -155,7 +155,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to clone a store. Usually clone a draft store to published store because published store can&#39;t directly edit content.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: clone store info&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to clone a store. Usually clone a draft store to published store because published store can&#39;t directly edit content.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: clone store info&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateClone_ByStoreId(storeId: string, queryParams?: { targetStoreId?: string | null }): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -166,17 +166,17 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to export a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/export to export store.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to export a store.&lt;p&gt;This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/export to export store.&lt;br&gt;
    */
-  async function getExport_ByStoreId(storeId: string): Promise<unknown> {
+  async function getExport_ByStoreId_DEPRECATED(storeId: string): Promise<unknown> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getExport_ByStoreId(storeId)
+    const resp = await $.getExport_ByStoreId_DEPRECATED(storeId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * This API is used to get a store&#39;s backup. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store backup info&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get a store&#39;s backup. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: store backup info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getStoresPublishedBackup(): Promise<StoreBackupInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -186,7 +186,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get catalog definition for import/export store by CSV&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:STORE, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: catalog definition&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get catalog definition for import/export store by CSV&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: catalog definition&lt;/li&gt;&lt;/ul&gt;
    */
   async function getStoresCatalogDefinition(queryParams: {
     catalogType: 'APP' | 'CATEGORY' | 'ITEM' | 'SECTION' | 'VIEW'
@@ -198,7 +198,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to rollback a published store. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated store info&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to rollback a published store. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated store info&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateStorePublishedRollback(): Promise<StoreInfo> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -208,7 +208,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to export a whole or partial store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to export a whole or partial store.
    */
   async function createExport_ByStoreId(storeId: string, data: ExportStoreRequest): Promise<unknown> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -218,7 +218,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to download store csv templates for store importing by CSV feature&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to download store csv templates for store importing by CSV feature
    */
   async function getStoresDownloadCsvTemplates(): Promise<unknown> {
     const $ = new StoreAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -228,7 +228,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to import a store by CSV format.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to import a store by CSV format.
    */
   async function createImportByCsv_ByStoreId(
     storeId: string,
@@ -241,7 +241,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to query import store history&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STORE&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to query import store history
    */
   async function getImportHistory_ByStoreId(
     storeId: string,
@@ -263,7 +263,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getStores,
     createStore,
-    updateStoreImport,
+    updateStoreImport_DEPRECATED,
     getCatalogConfigs,
     updateCatalogConfig,
     deleteStore_ByStoreId,
@@ -274,7 +274,7 @@ export function StoreAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     updateStoreImport_ByNS,
     createStoreExportByCsv,
     updateClone_ByStoreId,
-    getExport_ByStoreId,
+    getExport_ByStoreId_DEPRECATED,
     getStoresPublishedBackup,
     getStoresCatalogDefinition,
     updateStorePublishedRollback,

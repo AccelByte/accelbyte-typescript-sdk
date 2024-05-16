@@ -19,7 +19,7 @@ export class Bans$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans [GET]_**
    */
-  getBans(): Promise<IResponse<Bans>> {
+  getBans_DEPRECATED(): Promise<IResponse<Bans>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/bans'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -31,7 +31,7 @@ export class Bans$ {
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans/reasons [GET]_**
    */
-  getBansReasons(): Promise<IResponse<BanReasons>> {
+  getBansReasons_DEPRECATED(): Promise<IResponse<BanReasons>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/bans/reasons'
     const resultPromise = this.axiosInstance.get(url, { params })

@@ -4481,6 +4481,69 @@
         "summary": "get service messages"
       }
     },
+    "/chat/v1/public/config/namespaces/{namespace}": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get chat config of a namespace.",
+        "operationId": "publicGetConfigV1",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PublicConfigResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "public get namespace config",
+        "tags": ["config"],
+        "x-security": []
+      }
+    },
     "/chat/v1/public/namespaces/{namespace}/topic/{topic}/snapshot/{chatId}": {
       "get": {
         "consumes": ["application/json"],
@@ -5119,6 +5182,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "maxChatMessageLength": {
+          "format": "int32",
+          "type": "integer"
+        },
         "useDefaultDictionary": {
           "type": "boolean",
           "x-omitempty": false
@@ -5275,6 +5342,10 @@
         },
         "generalRateLimitDuration": {
           "format": "int64",
+          "type": "integer"
+        },
+        "maxChatMessageLength": {
+          "format": "int32",
           "type": "integer"
         },
         "shardCapacityLimit": {
@@ -5787,6 +5858,52 @@
       },
       "required": ["userIDs"]
     },
+    "models.PublicConfigResponse": {
+      "properties": {
+        "chatRateLimitBurst": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "chatRateLimitDuration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "generalRateLimitBurst": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "generalRateLimitDuration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "maxChatMessageLength": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "spamChatBurst": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "spamChatDuration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "spamMuteDuration": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "chatRateLimitBurst",
+        "chatRateLimitDuration",
+        "generalRateLimitBurst",
+        "generalRateLimitDuration",
+        "maxChatMessageLength",
+        "spamChatBurst",
+        "spamChatDuration",
+        "spamMuteDuration"
+      ]
+    },
     "models.PublicUnbanTopicMembersRequest": {
       "properties": {
         "userIDs": {
@@ -6152,11 +6269,11 @@
     "path": "/chat/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-02T02:50:59+00:00",
-    "gitHash": "d8e46dda27311e717b34ebddbf503930ef78b91f",
+    "buildDate": "2024-04-24T06:56:26+00:00",
+    "gitHash": "5c7fe4f70bbfa47d20ab0e9eaa7a5770a618cea3",
     "name": "justice-chat-service",
-    "revisionID": "0.4.25",
-    "version": "0.4.25",
+    "revisionID": "0.4.26",
+    "version": "0.4.26",
     "version-roles-seeding": "1.2.15"
   }
 }

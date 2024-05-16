@@ -5,7 +5,8 @@
  */
 import { z } from 'zod'
 import { GetNamespaceEventResponse } from './GetNamespaceEventResponse.js'
+import { Paging } from './Paging.js'
 
-export const PagedResponseGetNamespaceEventResponse = z.object({ data: z.array(GetNamespaceEventResponse), paging: z.number().int() })
+export const PagedResponseGetNamespaceEventResponse = z.object({ data: z.array(GetNamespaceEventResponse), paging: Paging })
 
 export interface PagedResponseGetNamespaceEventResponse extends z.TypeOf<typeof PagedResponseGetNamespaceEventResponse> {}

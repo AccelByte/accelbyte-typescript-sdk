@@ -22,7 +22,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
+   * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
    */
   async function getIapClawbackHistories(queryParams?: {
     endTime?: string | null
@@ -41,7 +41,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Mock Sync PlayStation Clawback event..&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:IAP:CLAWBACK, action=1(CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Mock Sync PlayStation Clawback event..
    */
   async function createIapClawbackPlaystationMock(data: StreamEvent): Promise<ClawbackInfo> {
     const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isZodEnabled)

@@ -63,9 +63,9 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Use this endpoint to invite admin or non-admin user and assign role to them. The role must be scoped to namespace. An admin user can only assign role with **assignedNamespaces** if the admin user has required permission which is same as the required permission of endpoint: [AdminAddUserRoleV4]. Detail request body : - Email Address is required, List of email addresses that will be invited - isAdmin is required, true if user is admin, false if user is not admin - Namespace is optional. Only works on multi tenant mode, if not specified then it will be assigned Publisher namespace, if specified, it will become that studio/publisher where user is invited to. - Role is optional, if not specified then it will only assign User role. - Assigned Namespaces is optional, List of namespaces which the Role will be assigned to the user, only works when Role is not empty. The invited admin will also assigned with &#34;User&#34; role by default. Substitute endpoint: /iam/v4/admin/users/invite
    */
-  async function createUserUserInvite(data: InviteUserRequestV4): Promise<InviteUserResponseV3> {
+  async function createUserUserInvite_DEPRECATED(data: InviteUserRequestV4): Promise<InviteUserResponseV3> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createUserUserInvite(data)
+    const resp = await $.createUserUserInvite_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -108,9 +108,9 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
-  async function getUsersMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
+  async function getUsersMeMfaBackupCode_DEPRECATED(): Promise<BackupCodesResponseV4> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUsersMeMfaBackupCode()
+    const resp = await $.getUsersMeMfaBackupCode_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -119,9 +119,9 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
-  async function createUserMeMfaBackupCode(): Promise<BackupCodesResponseV4> {
+  async function createUserMeMfaBackupCode_DEPRECATED(): Promise<BackupCodesResponseV4> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createUserMeMfaBackupCode()
+    const resp = await $.createUserMeMfaBackupCode_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -200,9 +200,9 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This endpoint is used to enable 2FA backup codes.
    */
-  async function createUserMeMfaBackupCodeEnable(): Promise<BackupCodesResponseV4> {
+  async function createUserMeMfaBackupCodeEnable_DEPRECATED(): Promise<BackupCodesResponseV4> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createUserMeMfaBackupCodeEnable()
+    const resp = await $.createUserMeMfaBackupCodeEnable_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -231,9 +231,9 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This endpoint is used to download backup codes.
    */
-  async function getUsersMeMfaBackupCodeDownload(): Promise<unknown> {
+  async function getUsersMeMfaBackupCodeDownload_DEPRECATED(): Promise<unknown> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUsersMeMfaBackupCodeDownload()
+    const resp = await $.getUsersMeMfaBackupCodeDownload_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -384,12 +384,12 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     patchUserMe,
     createUserInvite,
-    createUserUserInvite,
+    createUserUserInvite_DEPRECATED,
     getInvitationHistories,
     getUsersMeMfaFactor,
     postUserMeMfaFactor,
-    getUsersMeMfaBackupCode,
-    createUserMeMfaBackupCode,
+    getUsersMeMfaBackupCode_DEPRECATED,
+    createUserMeMfaBackupCode_DEPRECATED,
     createUserMeMfaEmailCode,
     getUsersMeMfaBackupCodes,
     createUserMeMfaBackupCode_v4,
@@ -397,10 +397,10 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createUserMeMfaEmailDisable,
     createUser,
     createUserMeMfaAuthenticatorKey,
-    createUserMeMfaBackupCodeEnable,
+    createUserMeMfaBackupCodeEnable_DEPRECATED,
     deleteUserMeMfaBackupCodeDisable,
     createUserMeMfaBackupCodeEnable_v4,
-    getUsersMeMfaBackupCodeDownload,
+    getUsersMeMfaBackupCodeDownload_DEPRECATED,
     createTestUser,
     postUserMeMfaAuthenticatorEnable,
     deleteUserMeMfaAuthenticatorDisable,

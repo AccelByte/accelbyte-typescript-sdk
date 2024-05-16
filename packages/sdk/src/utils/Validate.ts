@@ -27,12 +27,12 @@ export type IResponse<D> =
 
 export class Validate {
   static validateOrReturnResponse<D>(
-    isZodEnabled: boolean,
+    useSchemaValidation: boolean,
     networkCall: () => Promise<AxiosResponse<D>>,
     Codec: z.ZodType<D>,
     modelName: string
   ) {
-    return isZodEnabled ? Validate.responseType(() => networkCall(), Codec, modelName) : Validate.unsafeResponse(() => networkCall())
+    return useSchemaValidation ? Validate.responseType(() => networkCall(), Codec, modelName) : Validate.unsafeResponse(() => networkCall())
   }
 
   static responseType<D>(networkCall: () => Promise<AxiosResponse<D>>, Codec: z.ZodType<D>, modelName: string) {

@@ -18,7 +18,7 @@ export class Agreement$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Retrieve accepted Legal Agreements.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve accepted Legal Agreements.
    */
   getAgreementsPolicies(): Promise<IResponse<RetrieveAcceptedAgreementResponseArray>> {
     const params = {} as SDKRequestConfig
@@ -34,7 +34,7 @@ export class Agreement$ {
   }
 
   /**
-   * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.
    */
   createAgreementPolicy(data: AcceptAgreementRequest[]): Promise<IResponse<AcceptAgreementResponse>> {
     const params = {} as SDKRequestConfig
@@ -46,9 +46,12 @@ export class Agreement$ {
 
   /**
    * @deprecated
-   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.
    */
-  createAgreementPolicyUser_ByUserId(userId: string, data: AcceptAgreementRequest[]): Promise<IResponse<AcceptAgreementResponse>> {
+  createAgreementPolicyUser_ByUserId_DEPRECATED(
+    userId: string,
+    data: AcceptAgreementRequest[]
+  ): Promise<IResponse<AcceptAgreementResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/public/agreements/policies/users/{userId}'.replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -57,7 +60,7 @@ export class Agreement$ {
   }
 
   /**
-   * Change marketing preference consent.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Change marketing preference consent.
    */
   patchAgreementLocalizedPolicyVersionPreference(data: AcceptAgreementRequest[]): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -68,7 +71,7 @@ export class Agreement$ {
   }
 
   /**
-   * Accepts a legal policy version. Supply with localized version policy id to accept an agreement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * Accepts a legal policy version. Supply with localized version policy id to accept an agreement
    */
   createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -83,9 +86,9 @@ export class Agreement$ {
 
   /**
    * @deprecated
-   * Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.
    */
-  createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId(
+  createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId_DEPRECATED(
     countryCode: string,
     clientId: string,
     userId: string,

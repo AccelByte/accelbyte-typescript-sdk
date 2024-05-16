@@ -4,10 +4,12 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { DiscountConfig } from './DiscountConfig.js'
 import { RedeemableItem } from './RedeemableItem.js'
 
 export const CampaignUpdate = z.object({
   description: z.string().nullish(),
+  discountConfig: DiscountConfig.nullish(),
   items: z.array(RedeemableItem).nullish(),
   maxRedeemCountPerCampaignPerUser: z.number().int().nullish(),
   maxRedeemCountPerCode: z.number().int().nullish(),
@@ -16,7 +18,7 @@ export const CampaignUpdate = z.object({
   name: z.string(),
   redeemEnd: z.string().nullish(),
   redeemStart: z.string().nullish(),
-  redeemType: z.enum(['ITEM']).nullish(),
+  redeemType: z.enum(['DISCOUNT', 'ITEM']).nullish(),
   status: z.enum(['ACTIVE', 'INACTIVE']).nullish(),
   tags: z.array(z.string()).nullish()
 })

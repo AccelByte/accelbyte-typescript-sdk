@@ -39,9 +39,9 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint adds/modifies config. When there are ready servers and the server version is updated, those servers will be replaced with newer version. Port is where your game listens for incoming UDP connection, if empty it&#39;ll be set to 15000 CPU and Memory limit / request are formatted with Kubernetes format, e.g. CPU of 1000m is 1 core, and Memory of 512Mi is 512 MB. The creation/claim/session/unreachable/heartbeat timeouts are all in seconds. Creation timeout is time limit for DS to startup until registers itself. Claim timeout is time limit for game session manager to claim its ready DS. Session timeout is time limit for match session before deleted. Unreachable timeout is time limit for DS in UNREACHABLE state before deleted. Heartbeat timeout is time limit for DS to give heartbeat before marked as UNREACHABLE. Sample config: { &#34;namespace&#34;: &#34;accelbyte&#34;, &#34;providers&#34;: [ &#34;aws&#34; ], &#34;port&#34;: 7777, &#34;protocol&#34;: &#34;udp&#34;, &#34;creation_timeout&#34;: 120, &#34;claim_timeout&#34;: 60, &#34;session_timeout&#34;: 1800, &#34;heartbeat_timeout&#34;: 30, &#34;unreachable_timeout&#34;: 30, &#34;image_version_mapping&#34;: { &#34;1.4.0&#34;: &#34;accelbyte/sample-ds-go:1.4.0&#34; }, &#34;default_version&#34;: &#34;1.4.0&#34;, &#34;cpu_limit&#34;: &#34;100&#34;, &#34;mem_limit&#34;: &#34;64&#34;, &#34;params&#34;: &#34;&#34;, &#34;min_count&#34;: 0, &#34;max_count&#34;: 0, &#34;buffer_count&#34;: 0, &#34;configurations&#34;: { &#34;1player&#34;: { &#34;cpu_limit&#34;: &#34;100&#34;, &#34;mem_limit&#34;: &#34;64&#34;, &#34;params&#34;: &#34;-gamemode 1p&#34;, }, &#34;50players&#34;: { &#34;cpu_limit&#34;: &#34;200&#34;, &#34;mem_limit&#34;: &#34;512&#34;, &#34;params&#34;: &#34;-gamemode 50p&#34;, } }, &#34;deployments&#34;: { &#34;global-1p&#34;: { &#34;game_version&#34;: &#34;1.4.0&#34;&#34;, &#34;regions&#34;: [&#34;us-west&#34;, &#34;ap-southeast&#34;], &#34;configuration&#34;: &#34;1player&#34;, &#34;min_count&#34;: 0, &#34;max_count&#34;: 0, &#34;buffer_count&#34;: 2 }, &#34;us-50p&#34;: { &#34;game_version&#34;: &#34;1.4.0&#34;&#34;, &#34;regions&#34;: [&#34;us-west&#34;], &#34;configuration&#34;: &#34;50players&#34;, &#34;min_count&#34;: 0, &#34;max_count&#34;: 0, &#34;buffer_count&#34;: 5 }, }, } ```
    */
-  async function createConfig(data: DsmConfigRecord): Promise<unknown> {
+  async function createConfig_DEPRECATED(data: DsmConfigRecord): Promise<unknown> {
     const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createConfig(data)
+    const resp = await $.createConfig_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -148,7 +148,7 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getConfigs,
-    createConfig,
+    createConfig_DEPRECATED,
     deleteConfig,
     getConfigs_ByNS,
     patchConfig,

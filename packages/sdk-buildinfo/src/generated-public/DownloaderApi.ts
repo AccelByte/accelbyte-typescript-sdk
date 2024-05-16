@@ -49,9 +49,9 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to get build manifest of release version of the application. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getUpdategame_ByAppId(appId: string): Promise<BuildManifest> {
+  async function getUpdategame_ByAppId_DEPRECATED(appId: string): Promise<BuildManifest> {
     const $ = new Downloader$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUpdategame_ByAppId(appId)
+    const resp = await $.getUpdategame_ByAppId_DEPRECATED(appId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -70,9 +70,9 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and generate chunks difference and obsolete files list between two version. Only works for builds uploaded with BuildInfo v1 [DEPRECATED}&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getUpdategameBuild_ByBuildId(buildId: string): Promise<BuildManifest> {
+  async function getUpdategameBuild_ByBuildId_DEPRECATED(buildId: string): Promise<BuildManifest> {
     const $ = new Downloader$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUpdategameBuild_ByBuildId(buildId)
+    const resp = await $.getUpdategameBuild_ByBuildId_DEPRECATED(buildId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -91,9 +91,9 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to get build manifest that contains file difference between requested version and release version. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getUpdategame_ByAppId_ByVersion(appId: string, version: string): Promise<BuildManifest> {
+  async function getUpdategame_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<BuildManifest> {
     const $ = new Downloader$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUpdategame_ByAppId_ByVersion(appId, version)
+    const resp = await $.getUpdategame_ByAppId_ByVersion_DEPRECATED(appId, version)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -144,11 +144,11 @@ export function DownloaderApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getVersionHistory,
     getBulkCheckLatest,
-    getUpdategame_ByAppId,
+    getUpdategame_ByAppId_DEPRECATED,
     getAvailablebuild_ByAppId,
-    getUpdategameBuild_ByBuildId,
+    getUpdategameBuild_ByBuildId_DEPRECATED,
     createBlockUrl_ByBuildId,
-    getUpdategame_ByAppId_ByVersion,
+    getUpdategame_ByAppId_ByVersion_DEPRECATED,
     getUpdategameBuild_ByBuildId_ByNS,
     getUpdategame_ByAppId_ByPlatformId,
     getDiff_BySourceBuildId_ByDestinationBuildId,

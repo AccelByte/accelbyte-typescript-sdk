@@ -158,7 +158,7 @@ export class AdminContentAdmin$ {
    * @deprecated
    * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  createContent_ByChannelId(channelId: string, data: CreateContentRequest): Promise<IResponse<CreateContentResponse>> {
+  createContent_ByChannelId_DEPRECATED(channelId: string, data: CreateContentRequest): Promise<IResponse<CreateContentResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/ugc/v1/admin/namespaces/{namespace}/channels/{channelId}/contents'
       .replace('{namespace}', this.namespace)
@@ -304,7 +304,7 @@ export class AdminContentAdmin$ {
    * @deprecated
    * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  updateContent_ByChannelId_ByContentId(
+  updateContent_ByChannelId_ByContentId_DEPRECATED(
     channelId: string,
     contentId: string,
     data: CreateContentRequest
@@ -384,7 +384,7 @@ export class AdminContentAdmin$ {
    * @deprecated
    * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  updateContent_ByUserId_ByChannelId_ByContentId(
+  updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED(
     userId: string,
     channelId: string,
     contentId: string,

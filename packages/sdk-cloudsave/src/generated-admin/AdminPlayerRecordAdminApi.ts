@@ -36,13 +36,13 @@ export function AdminPlayerRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Retrieve list of player records key and userID under given namespace.
    */
-  async function getUsersRecords(queryParams?: {
+  async function getUsersRecords_DEPRECATED(queryParams?: {
     limit?: number
     offset?: number
     query?: string | null
   }): Promise<ListPlayerRecordKeysResponse> {
     const $ = new AdminPlayerRecordAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUsersRecords(queryParams)
+    const resp = await $.getUsersRecords_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -207,7 +207,7 @@ export function AdminPlayerRecordAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
-    getUsersRecords,
+    getUsersRecords_DEPRECATED,
     getRecords_ByUserId,
     createUserBulkRecordSize,
     createBulkUser_ByKey,

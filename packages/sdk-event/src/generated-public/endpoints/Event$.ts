@@ -20,7 +20,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getNamespace_ByNamespace(queryParams: {
+  getNamespace_ByNamespace_DEPRECATED(queryParams: {
     endDate: string | null
     pageSize: number
     startDate: string | null
@@ -37,7 +37,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [CREATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  createNamespace_ByNamespace(data: Event): Promise<IResponse<unknown>> {
+  createNamespace_ByNamespace_DEPRECATED(data: Event): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/event/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -49,7 +49,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getUser_ByUserId(
+  getUser_ByUserId_DEPRECATED(
     userId: string,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<IResponse<EventResponse>> {
@@ -64,7 +64,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getEventId_ByEventId(
+  getEventId_ByEventId_DEPRECATED(
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<IResponse<EventResponse>> {
@@ -81,7 +81,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getEventType_ByEventType(
+  getEventType_ByEventType_DEPRECATED(
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<IResponse<EventResponse>> {
@@ -98,7 +98,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getEventId_ByUserId_ByEventId(
+  getEventId_ByUserId_ByEventId_DEPRECATED(
     userId: string,
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
@@ -117,7 +117,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getEventType_ByUserId_ByEventType(
+  getEventType_ByUserId_ByEventType_DEPRECATED(
     userId: string,
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
@@ -136,7 +136,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getEventId_ByEventType_ByEventId(
+  getEventId_ByEventType_ByEventId_DEPRECATED(
     eventType: number,
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
@@ -155,7 +155,7 @@ export class Event$ {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  getEventId_ByUserId_ByEventType_ByEventId(
+  getEventId_ByUserId_ByEventType_ByEventId_DEPRECATED(
     userId: string,
     eventType: number,
     eventId: number,

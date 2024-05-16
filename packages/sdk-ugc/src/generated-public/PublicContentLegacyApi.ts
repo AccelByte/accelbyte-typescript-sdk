@@ -149,13 +149,13 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  async function createContent_ByUserId_ByChannelId(
+  async function createContent_ByUserId_ByChannelId_DEPRECATED(
     userId: string,
     channelId: string,
     data: CreateContentRequest
   ): Promise<CreateContentResponse> {
     const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createContent_ByUserId_ByChannelId(userId, channelId, data)
+    const resp = await $.createContent_ByUserId_ByChannelId_DEPRECATED(userId, channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -216,14 +216,14 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]&lt;/b&gt;.\n All request body are required except preview, tags and customAttributes.
    */
-  async function updateContent_ByUserId_ByChannelId_ByContentId(
+  async function updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED(
     userId: string,
     channelId: string,
     contentId: string,
     data: CreateContentRequest
   ): Promise<CreateContentResponse> {
     const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
+    const resp = await $.updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -310,12 +310,12 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getPreview_ByContentId,
     getContents_ByChannelId,
     getContentSharecode_ByShareCode,
-    createContent_ByUserId_ByChannelId,
+    createContent_ByUserId_ByChannelId_DEPRECATED,
     createContentS3_ByUserId_ByChannelId,
     createScreenshot_ByUserId_ByContentId,
     updateScreenshot_ByUserId_ByContentId,
     deleteContent_ByUserId_ByChannelId_ByContentId,
-    updateContent_ByUserId_ByChannelId_ByContentId,
+    updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED,
     updateContentS3_ByUserId_ByChannelId_ByContentId,
     deleteScreenshot_ByUserId_ByContentId_ByScreenshotId,
     patchSharecode_ByUserId_ByChannelId_ByContentId,

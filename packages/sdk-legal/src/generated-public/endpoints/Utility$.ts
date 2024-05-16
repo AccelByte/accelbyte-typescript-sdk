@@ -15,7 +15,7 @@ export class Utility$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.
    */
   getReadiness(): Promise<IResponse<LegalReadinessStatusResponse>> {
     const params = {} as SDKRequestConfig

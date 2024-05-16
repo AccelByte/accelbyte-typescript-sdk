@@ -21,17 +21,17 @@ export function UserInfoAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * Invalidate user info cache in agreement service.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Invalidate user info cache in agreement service.
    */
-  async function deleteUserInfo(queryParams?: { namespace?: string | null }): Promise<unknown> {
+  async function deleteUserInfo_DEPRECATED(queryParams?: { namespace?: string | null }): Promise<unknown> {
     const $ = new UserInfoAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteUserInfo(queryParams)
+    const resp = await $.deleteUserInfo_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Get user info cache last updated time per namespace.&lt;br&gt;The query parameter namespaces can be a list of namespace separated by comma.&lt;br&gt;If query parameter namespaces is empty, user info cache status for all available namespaces will be returned. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Get user info cache last updated time per namespace.&lt;br&gt;The query parameter namespaces can be a list of namespace separated by comma.&lt;br&gt;If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
    */
   async function getUserInfo(queryParams?: { namespaces?: string | null }): Promise<RetrieveUserInfoCacheStatusResponseArray> {
     const $ = new UserInfoAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -42,18 +42,18 @@ export function UserInfoAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * Sync user info cache in agreement service with iam service.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Sync user info cache in agreement service with iam service.
    */
-  async function updateUserInfo(queryParams: { namespace: string | null }): Promise<unknown> {
+  async function updateUserInfo_DEPRECATED(queryParams: { namespace: string | null }): Promise<unknown> {
     const $ = new UserInfoAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateUserInfo(queryParams)
+    const resp = await $.updateUserInfo_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    deleteUserInfo,
+    deleteUserInfo_DEPRECATED,
     getUserInfo,
-    updateUserInfo
+    updateUserInfo_DEPRECATED
   }
 }

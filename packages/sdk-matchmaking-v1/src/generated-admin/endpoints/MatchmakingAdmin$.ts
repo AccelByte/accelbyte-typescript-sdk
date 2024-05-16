@@ -88,7 +88,7 @@ export class MatchmakingAdmin$ {
    * @deprecated
    *  &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Search sessions.
    */
-  getSessionsHistorySearch(queryParams: {
+  getSessionsHistorySearch_DEPRECATED(queryParams: {
     limit: number
     offset: number
     channel?: string | null
@@ -113,7 +113,7 @@ export class MatchmakingAdmin$ {
    * @deprecated
    * &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Search sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace &amp; other filter (partyID, userID, matchID). Query with filter namespace only will not group whole session data while query with filter namespace &amp; other filter will include session data.
    */
-  getSessionsHistorySearch_ByNS(queryParams: {
+  getSessionsHistorySearch_ByNS_DEPRECATED(queryParams: {
     limit: number
     offset: number
     channel?: string | null
@@ -188,7 +188,7 @@ export class MatchmakingAdmin$ {
    * @deprecated
    *  &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/{sessionId}/history/detailed [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Get session history detailed. if party_id value empty/null, field will not show in response body.
    */
-  getHistoryDetailed_ByMatchId(matchID: string): Promise<IResponse<GetSessionHistoryDetailedResponseItemArray>> {
+  getHistoryDetailed_ByMatchId_DEPRECATED(matchID: string): Promise<IResponse<GetSessionHistoryDetailedResponseItemArray>> {
     const params = {} as SDKRequestConfig
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/sessions/{matchID}/history/detailed'
       .replace('{namespace}', this.namespace)

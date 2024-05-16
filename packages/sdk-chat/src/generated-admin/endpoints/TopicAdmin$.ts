@@ -205,7 +205,7 @@ export class TopicAdmin$ {
    * @deprecated
    * Get chat history in a namespace.
    */
-  getChats_ByTopic(
+  getChats_ByTopic_DEPRECATED(
     topic: string,
     queryParams?: {
       endCreatedAt?: number

@@ -20,7 +20,7 @@ export function UtilityApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.
    */
   async function getReadiness(): Promise<LegalReadinessStatusResponse> {
     const $ = new Utility$(Network.create(requestConfig), namespace, isZodEnabled)

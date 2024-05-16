@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 export const OrderCreate = z.object({
   currencyCode: z.string(),
+  discountCodes: z.array(z.string()).nullish(),
   discountedPrice: z.number().int(),
   ext: z.record(z.any()).nullish(),
   itemId: z.string(),

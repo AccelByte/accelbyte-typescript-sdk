@@ -14,7 +14,7 @@ export class CompatibilityConfigs$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
-  getTemplatesDefaultConfigs(): Promise<IResponse<Configs>> {
+  getTemplatesDefaultConfigs_DEPRECATED(): Promise<IResponse<Configs>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/public/namespaces/{namespace}/templates/default/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -22,7 +22,7 @@ export class CompatibilityConfigs$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Configs, 'Configs')
   }
 
-  getTemplatesTemplateDiscoveryConfigs(): Promise<IResponse<Configs>> {
+  getTemplatesTemplateDiscoveryConfigs_DEPRECATED(): Promise<IResponse<Configs>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/public/namespaces/{namespace}/templates/template-discovery/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

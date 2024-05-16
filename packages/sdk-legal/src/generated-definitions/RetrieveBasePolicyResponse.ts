@@ -12,6 +12,7 @@ export const RetrieveBasePolicyResponse = z.object({
   createdAt: z.string().nullish(),
   description: z.string().nullish(),
   id: z.string(),
+  isHidden: z.boolean().nullish(),
   namespace: z.string(),
   policies: z.array(PolicyObject).nullish(),
   policyTypeId: z.string().nullish(),

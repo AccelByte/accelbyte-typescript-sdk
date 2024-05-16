@@ -27,7 +27,7 @@ export function LocalizedPolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, 
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Retrieve a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve a version of a particular country-specific policy.
    */
   async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
@@ -39,7 +39,7 @@ export function LocalizedPolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, 
   }
 
   /**
-   * Update a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a version of a particular country-specific policy.
    */
   async function updateLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string,
@@ -52,19 +52,20 @@ export function LocalizedPolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, 
   }
 
   /**
-   * Retrieve versions of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve versions of a particular country-specific policy.
    */
   async function getLocalizedPolicyVersionVersion_ByPolicyVersionId(
-    policyVersionId: string
+    policyVersionId: string,
+    queryParams?: { visibleOnly?: boolean | null }
   ): Promise<RetrieveLocalizedPolicyVersionResponseArray> {
     const $ = new LocalizedPolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getLocalizedPolicyVersionVersion_ByPolicyVersionId(policyVersionId)
+    const resp = await $.getLocalizedPolicyVersionVersion_ByPolicyVersionId(policyVersionId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Create a version of a particular country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Create a version of a particular country-specific policy.
    */
   async function createLocalizedPolicyVersionVersion_ByPolicyVersionId(
     policyVersionId: string,
@@ -77,7 +78,7 @@ export function LocalizedPolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, 
   }
 
   /**
-   * Update a localized version policy to be the default.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a localized version policy to be the default.
    */
   async function patchDefault_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<unknown> {
     const $ = new LocalizedPolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -87,7 +88,7 @@ export function LocalizedPolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, 
   }
 
   /**
-   * Request presigned URL for upload attachment for a particular localized version of base policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:LEGAL&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * Request presigned URL for upload attachment for a particular localized version of base policy.
    */
   async function createAttachment_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string,

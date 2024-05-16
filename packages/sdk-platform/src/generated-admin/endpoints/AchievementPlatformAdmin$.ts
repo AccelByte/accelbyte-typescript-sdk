@@ -18,7 +18,7 @@ export class AchievementPlatformAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * This API is used to get xbox live user achievements(Only for test).&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get xbox live user achievements(Only for test).
    */
   getAchievementXbl_ByUserId(userId: string, queryParams: { xboxUserId: string | null }): Promise<IResponse<XblUserAchievements>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -31,7 +31,7 @@ export class AchievementPlatformAdmin$ {
   }
 
   /**
-   * This API is used to update xbox live achievements.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to update xbox live achievements.
    */
   updateAchievementXbl_ByUserId(userId: string, data: XblAchievementUpdateRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -44,7 +44,7 @@ export class AchievementPlatformAdmin$ {
   }
 
   /**
-   * This API is used to unlock steam achievement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to unlock steam achievement.
    */
   updateAchievementSteam_ByUserId(userId: string, data: SteamAchievementUpdateRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

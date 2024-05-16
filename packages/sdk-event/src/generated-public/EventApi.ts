@@ -24,14 +24,14 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getNamespace_ByNamespace(queryParams: {
+  async function getNamespace_ByNamespace_DEPRECATED(queryParams: {
     endDate: string | null
     pageSize: number
     startDate: string | null
     offset?: number
   }): Promise<EventResponse> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getNamespace_ByNamespace(queryParams)
+    const resp = await $.getNamespace_ByNamespace_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -40,9 +40,9 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [CREATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function createNamespace_ByNamespace(data: Event): Promise<unknown> {
+  async function createNamespace_ByNamespace_DEPRECATED(data: Event): Promise<unknown> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createNamespace_ByNamespace(data)
+    const resp = await $.createNamespace_ByNamespace_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -51,12 +51,12 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getUser_ByUserId(
+  async function getUser_ByUserId_DEPRECATED(
     userId: string,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getUser_ByUserId(userId, queryParams)
+    const resp = await $.getUser_ByUserId_DEPRECATED(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -65,12 +65,12 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getEventId_ByEventId(
+  async function getEventId_ByEventId_DEPRECATED(
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getEventId_ByEventId(eventId, queryParams)
+    const resp = await $.getEventId_ByEventId_DEPRECATED(eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -79,12 +79,12 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getEventType_ByEventType(
+  async function getEventType_ByEventType_DEPRECATED(
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getEventType_ByEventType(eventType, queryParams)
+    const resp = await $.getEventType_ByEventType_DEPRECATED(eventType, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -93,13 +93,13 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getEventId_ByUserId_ByEventId(
+  async function getEventId_ByUserId_ByEventId_DEPRECATED(
     userId: string,
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getEventId_ByUserId_ByEventId(userId, eventId, queryParams)
+    const resp = await $.getEventId_ByUserId_ByEventId_DEPRECATED(userId, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -108,13 +108,13 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getEventType_ByUserId_ByEventType(
+  async function getEventType_ByUserId_ByEventType_DEPRECATED(
     userId: string,
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getEventType_ByUserId_ByEventType(userId, eventType, queryParams)
+    const resp = await $.getEventType_ByUserId_ByEventType_DEPRECATED(userId, eventType, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -123,13 +123,13 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getEventId_ByEventType_ByEventId(
+  async function getEventId_ByEventType_ByEventId_DEPRECATED(
     eventType: number,
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getEventId_ByEventType_ByEventId(eventType, eventId, queryParams)
+    const resp = await $.getEventId_ByEventType_ByEventId_DEPRECATED(eventType, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -138,27 +138,27 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
-  async function getEventId_ByUserId_ByEventType_ByEventId(
+  async function getEventId_ByUserId_ByEventType_ByEventId_DEPRECATED(
     userId: string,
     eventType: number,
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
     const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getEventId_ByUserId_ByEventType_ByEventId(userId, eventType, eventId, queryParams)
+    const resp = await $.getEventId_ByUserId_ByEventType_ByEventId_DEPRECATED(userId, eventType, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    getNamespace_ByNamespace,
-    createNamespace_ByNamespace,
-    getUser_ByUserId,
-    getEventId_ByEventId,
-    getEventType_ByEventType,
-    getEventId_ByUserId_ByEventId,
-    getEventType_ByUserId_ByEventType,
-    getEventId_ByEventType_ByEventId,
-    getEventId_ByUserId_ByEventType_ByEventId
+    getNamespace_ByNamespace_DEPRECATED,
+    createNamespace_ByNamespace_DEPRECATED,
+    getUser_ByUserId_DEPRECATED,
+    getEventId_ByEventId_DEPRECATED,
+    getEventType_ByEventType_DEPRECATED,
+    getEventId_ByUserId_ByEventId_DEPRECATED,
+    getEventType_ByUserId_ByEventType_DEPRECATED,
+    getEventId_ByEventType_ByEventId_DEPRECATED,
+    getEventId_ByUserId_ByEventType_ByEventId_DEPRECATED
   }
 }

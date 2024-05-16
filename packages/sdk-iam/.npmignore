@@ -11,7 +11,6 @@ typedoc.json
 swaggers.json
 
 # Version files.
-version.json
 .changelog.json
 
 CHANGELOG.md

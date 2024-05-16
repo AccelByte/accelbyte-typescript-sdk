@@ -8,7 +8,7 @@
     },
     "description": "Justice Group Service",
     "title": "justice-group-service",
-    "version": "2.19.2"
+    "version": "2.19.4"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -44,134 +44,6 @@
   },
   "swagger": "2.0",
   "paths": {
-    "/group/debug/pprof": {
-      "get": {
-        "operationId": "indexHandler",
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ]
-      }
-    },
-    "/group/debug/pprof/block": {
-      "get": {
-        "operationId": "blockHandler",
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ]
-      }
-    },
-    "/group/debug/pprof/cmdline": {
-      "get": {
-        "operationId": "cmdlineHandler",
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ]
-      }
-    },
-    "/group/debug/pprof/goroutine": {
-      "get": {
-        "operationId": "goroutineHandler",
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ]
-      }
-    },
-    "/group/debug/pprof/heap": {
-      "get": {
-        "operationId": "heapHandler",
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ]
-      }
-    },
-    "/group/debug/pprof/profile": {
-      "get": {
-        "operationId": "profile",
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ]
-      }
-    },
-    "/group/debug/pprof/symbol": {
-      "get": {
-        "operationId": "symbolHandler",
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ]
-      }
-    },
-    "/group/debug/pprof/threadcreate": {
-      "get": {
-        "operationId": "threadcreateHandler",
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ]
-      }
-    },
     "/group/v1/admin/namespaces/{namespace}/configuration": {
       "get": {
         "description": "This endpoint is used to get existing configuration. This Configuration is used as the main rule of the service. Each namespace will have its own configuration\n\nAction Code: 73101\n\t\t",
@@ -6831,11 +6703,11 @@
     "path": "/group/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-03-29T05:19:09+00:00",
-    "gitHash": "67f931922f4960c9ac67e70d6ba2b6a296a546bf",
+    "buildDate": "2024-04-29T02:48:08+00:00",
+    "gitHash": "e1ca9b11163b195c8c3ac01274c58dd6289b4a23",
     "name": "justice-group-service",
     "realm": "dev",
-    "version": "2.19.2",
+    "version": "2.19.4",
     "version-roles-seeding": "0.0.3"
   }
 }

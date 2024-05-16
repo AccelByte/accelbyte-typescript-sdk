@@ -19,7 +19,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Anonymize order. At current it will only anonymize order, order history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize order. At current it will only anonymize order, order history.
    */
   async function deleteAnonymizationOrder_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -29,7 +29,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Anonymize payment. At current it will only anonymize payment order, payment order history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize payment. At current it will only anonymize payment order, payment order history.
    */
   async function deleteAnonymizationPayment_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -39,7 +39,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.
    */
   async function deleteAnonymizationWallet_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -49,7 +49,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Anonymize campaign. At current it will only anonymize redeem history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize campaign. At current it will only anonymize redeem history.
    */
   async function deleteAnonymizationCampaign_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -59,7 +59,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Anonymize revocation. At current it will only anonymize revocation history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize revocation. At current it will only anonymize revocation history.
    */
   async function deleteAnonymizationRevocation_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -69,7 +69,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Anonymize fulfillment. At current it will only anonymize fulfillment history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize fulfillment. At current it will only anonymize fulfillment history.
    */
   async function deleteAnonymizationFulfillment_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -79,7 +79,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.
    */
   async function deleteAnonymizationEntitlement_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -89,7 +89,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Anonymize integrations. At current it will only anonymize iap histories.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize integrations. At current it will only anonymize iap histories.
    */
   async function deleteAnonymizationIntegration_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -99,7 +99,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.
    */
   async function deleteAnonymizationSubscription_ByUserId(userId: string): Promise<unknown> {
     const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)

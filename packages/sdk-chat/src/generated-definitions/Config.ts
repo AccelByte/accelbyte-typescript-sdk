@@ -25,6 +25,7 @@ export const Config = z.object({
   SpamMuteDuration: z.number().int(),
   defaultDictionaryLoaded: z.boolean().nullish(),
   enableClanChat: z.boolean().nullish(),
+  maxChatMessageLength: z.number().int().nullish(),
   useDefaultDictionary: z.boolean().nullish()
 })
 

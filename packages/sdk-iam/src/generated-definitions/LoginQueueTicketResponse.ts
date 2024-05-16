@@ -9,6 +9,7 @@ import { TicketEndpointAction } from './TicketEndpointAction.js'
 export const LoginQueueTicketResponse = z.object({
   cancel: TicketEndpointAction,
   estimatedWaitingTimeInSeconds: z.number().int(),
+  playerPollingTimeInSeconds: z.number().int(),
   position: z.number().int(),
   reconnectExpiredAt: z.number().int(),
   refresh: TicketEndpointAction,

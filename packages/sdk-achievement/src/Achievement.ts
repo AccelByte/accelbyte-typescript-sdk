@@ -9,6 +9,7 @@
 
 import { TagsAdminApi } from './generated-admin/TagsAdminApi.js'
 import { AchievementsAdminApi } from './generated-admin/AchievementsAdminApi.js'
+import { PlatformAchievementAdminApi } from './generated-admin/PlatformAchievementAdminApi.js'
 import { GlobalAchievementsAdminApi } from './generated-admin/GlobalAchievementsAdminApi.js'
 import { UserAchievementsAdminApi } from './generated-admin/UserAchievementsAdminApi.js'
 import { AnonymizationAdminApi } from './generated-admin/AnonymizationAdminApi.js'
@@ -20,6 +21,7 @@ import { UserAchievementsApi } from './generated-public/UserAchievementsApi.js'
 const apis = {
   TagsAdminApi,
   AchievementsAdminApi,
+  PlatformAchievementAdminApi,
   GlobalAchievementsAdminApi,
   UserAchievementsAdminApi,
   AnonymizationAdminApi,

@@ -15,7 +15,7 @@ export class AnonymizationAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
   /**
-   * Anonymize order. At current it will only anonymize order, order history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize order. At current it will only anonymize order, order history.
    */
   deleteAnonymizationOrder_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -28,7 +28,7 @@ export class AnonymizationAdmin$ {
   }
 
   /**
-   * Anonymize payment. At current it will only anonymize payment order, payment order history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize payment. At current it will only anonymize payment order, payment order history.
    */
   deleteAnonymizationPayment_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -41,7 +41,7 @@ export class AnonymizationAdmin$ {
   }
 
   /**
-   * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.
    */
   deleteAnonymizationWallet_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -54,7 +54,7 @@ export class AnonymizationAdmin$ {
   }
 
   /**
-   * Anonymize campaign. At current it will only anonymize redeem history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize campaign. At current it will only anonymize redeem history.
    */
   deleteAnonymizationCampaign_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -67,7 +67,7 @@ export class AnonymizationAdmin$ {
   }
 
   /**
-   * Anonymize revocation. At current it will only anonymize revocation history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize revocation. At current it will only anonymize revocation history.
    */
   deleteAnonymizationRevocation_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -80,7 +80,7 @@ export class AnonymizationAdmin$ {
   }
 
   /**
-   * Anonymize fulfillment. At current it will only anonymize fulfillment history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize fulfillment. At current it will only anonymize fulfillment history.
    */
   deleteAnonymizationFulfillment_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -93,7 +93,7 @@ export class AnonymizationAdmin$ {
   }
 
   /**
-   * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.
    */
   deleteAnonymizationEntitlement_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -106,7 +106,7 @@ export class AnonymizationAdmin$ {
   }
 
   /**
-   * Anonymize integrations. At current it will only anonymize iap histories.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize integrations. At current it will only anonymize iap histories.
    */
   deleteAnonymizationIntegration_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -119,7 +119,7 @@ export class AnonymizationAdmin$ {
   }
 
   /**
-   * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.
    */
   deleteAnonymizationSubscription_ByUserId(userId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

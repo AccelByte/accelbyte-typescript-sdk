@@ -9,7 +9,6 @@ tsconfig.*
 typedoc.json
 
 # Version files.
-version.json
 .changelog.json
 
 CHANGELOG.md

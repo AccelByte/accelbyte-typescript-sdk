@@ -25,7 +25,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Get dlc reward simple map, only return the sku of durable item reward&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: Authorized user&lt;/li&gt;&lt;/ul&gt;
+   * Get dlc reward simple map, only return the sku of durable item reward.
    */
   async function getDlcRewardsDurableMap(queryParams: {
     dlcType: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
@@ -37,7 +37,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Synchronize with dlc entitlements in PSN Store.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
+   * Synchronize with dlc entitlements in PSN Store.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateDlcPsnSync_ByUserId(userId: string, data: PlayStationDlcSyncRequest): Promise<unknown> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -47,7 +47,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Sync Xbox inventory&#39;s dlc items.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   * Sync Xbox inventory&#39;s dlc items
    */
   async function updateDlcXblSync_ByUserId(userId: string, data: XblDlcSyncRequest): Promise<unknown> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -57,7 +57,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Sync steam dlc.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   * Sync steam dlc
    */
   async function updateDlcSteamSync_ByUserId(userId: string, data: SteamDlcSyncRequest): Promise<unknown> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -67,7 +67,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Sync oculus dlc.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   * Sync oculus dlc
    */
   async function updateDlcOculuSync_ByUserId(userId: string): Promise<unknown> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -77,7 +77,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Sync epic games dlc items.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   * Sync epic games dlc items
    */
   async function updateDlcEpicgameSync_ByUserId(userId: string, data: EpicGamesDlcSyncRequest): Promise<unknown> {
     const $ = new Dlc$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -87,7 +87,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Synchronize with dlc entitlements in PSN Store with multiple service labels.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=NAMESPACE:{namespace}:USER:{userId}:DLC, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
+   * Synchronize with dlc entitlements in PSN Store with multiple service labels.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateDlcPsnSyncMultiServiceLabel_ByUserId(
     userId: string,

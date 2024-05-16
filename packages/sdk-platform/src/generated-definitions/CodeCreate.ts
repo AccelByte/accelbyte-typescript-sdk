@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const CodeCreate = z.object({ quantity: z.number().int() })
+export const CodeCreate = z.object({ codeValue: z.string().nullish(), quantity: z.number().int().nullish() })
 
 export interface CodeCreate extends z.TypeOf<typeof CodeCreate> {}

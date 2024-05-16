@@ -8,7 +8,7 @@
     },
     "description": "Justice IAM Service",
     "title": "justice-iam-service",
-    "version": "7.13.0"
+    "version": "7.14.3"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -6714,7 +6714,11 @@
         ],
         "summary": "Delete Client config permissions by module and group",
         "tags": ["Clients Config V3"],
-        "x-security": {}
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CLIENTCONFIG [DELETE]"]
+          }
+        ]
       },
       "get": {
         "description": "List Client available permissions",
@@ -6805,7 +6809,11 @@
         ],
         "summary": "Update or create Client permissions module",
         "tags": ["Clients Config V3"],
-        "x-security": {}
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CLIENTCONFIG [UPDATE]"]
+          }
+        ]
       }
     },
     "/iam/v3/admin/clientConfig/templates": {
@@ -15190,7 +15198,7 @@
     "/iam/v3/logout": {
       "post": {
         "consumes": ["*/*"],
-        "description": "This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage.\nSupported methods:\n- VerifyToken to verify token from header\n- AddTokenToRevocationList to revoke token with TTL",
+        "description": "This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage.",
         "operationId": "Logout",
         "produces": ["application/json"],
         "responses": {
@@ -15265,7 +15273,7 @@
     "/iam/v3/oauth/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/platformToken": {
       "get": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Admin Retrieve User Third Party Platform Token\nThis endpoint used for retrieving third party platform token for user that login using third party,\nif user have not link requested platform in game namespace, will try to retrieving third party platform token from publisher namespace.\nPassing platform group name or it\u0026#39;s member will return same access token that can be used across the platform members.\n\nNotes:\nThe third party platform and platform group covered for this is:\n- (psn) ps4web\n- (psn) ps4\n- (psn) ps5\n- epicgames\n- twitch\n- awscognito\n- amazon\n- eaorigin\n- snapchat\n- twitch\n- live",
+        "description": "Admin Retrieve User Third Party Platform Token\nThis endpoint used for retrieving third party platform token for user that login using third party,\nif user have not link requested platform in game namespace, will try to retrieving third party platform token from publisher namespace.\nPassing platform group name or it\u0026#39;s member will return same access token that can be used across the platform members.\nIf platformUserId provided, IAM will prefer to get platform token by platform user id.\n\nNotes:\nThe third party platform and platform group covered for this is:\n- (psn) ps4web\n- (psn) ps4\n- (psn) ps5\n- epicgames\n- twitch\n- awscognito\n- amazon\n- eaorigin\n- snapchat\n- twitch\n- live",
         "operationId": "AdminRetrieveUserThirdPartyPlatformTokenV3",
         "parameters": [
           {
@@ -15287,6 +15295,12 @@
             "in": "path",
             "name": "userId",
             "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Platform user id.",
+            "in": "query",
+            "name": "platformUserId",
             "type": "string"
           }
         ],
@@ -16991,7 +17005,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/users": {
       "get": {
-        "description": "This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name.\nThe query length should between 3-20, otherwise will not query the database. \nThe default limit value is 20.\n\n## Searching by 3rd party platform\n\n**Note: searching by 3rd party platform display name will use exact query.**\n\nStep when searching by 3rd party platform display name:\n  1. set __by__ to __thirdPartyPlatform__\n  2. set __platformId__ to the supported platform id\n  3. set __platformBy__ to __platformDisplayName__\n---\n\n### Supported platform:\n* Steam group(steamnetwork)\n\t* steam\n\t* steamopenid\n* PSN group(psn)\n\t* ps4web\n\t* ps4\n\t* ps5\n* XBOX group(xbox) \n\t* live\n\t* xblweb\n* Oculus group(oculusgroup) \n\t* oculus\n\t* oculusweb\n* facebook\n* google\n* twitch\n* discord\n* android\n* ios\n* apple\n* device\n* epicgames\n* nintendo\n* awscognito\n* netflix\n* snapchat\n* oidc platform id\n\nNote: you can use either platform ID or platform group as platformId query parameter\n",
+        "description": "This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name.\nThe query length should between 3-20, otherwise will not query the database. \nThe default limit value is 20.\n\n## Searching by 3rd party platform\n\n**Note: searching by 3rd party platform display name will use exact query, not fuzzy query.**\n\nStep when searching by 3rd party platform display name:\n  1. set __by__ to __thirdPartyPlatform__\n  2. set __platformId__ to the _supported platform id_\n  3. set __platformBy__ to __platformDisplayName__\n\n### Supported platform id:\n* Steam group(steamnetwork)\n\t* steam\n\t* steamopenid\n* PSN group(psn)\n\t* ps4web\n\t* ps4\n\t* ps5\n* XBOX group(xbox) \n\t* live\n\t* xblweb\n* Oculus group(oculusgroup) \n\t* oculus\n\t* oculusweb\n* facebook\n* google\n* twitch\n* discord\n* android\n* ios\n* apple\n* device\n* epicgames\n* nintendo\n* awscognito\n* netflix\n* snapchat\n* _oidc platform id_\n\nNote: you can use either platform ID or platform group as __platformId__ query parameter.\n\n",
         "operationId": "PublicSearchUserV3",
         "parameters": [
           {
@@ -18963,11 +18977,7 @@
         ],
         "summary": "Get user's information v3",
         "tags": ["Users"],
-        "x-security": [
-          {
-            "userPermissions": ["NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]"]
-          }
-        ]
+        "x-security": {}
       }
     },
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/logins/histories": {
@@ -32471,6 +32481,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "playerPollingTimeInSeconds": {
+          "format": "int32",
+          "type": "integer"
+        },
         "position": {
           "format": "int32",
           "type": "integer"
@@ -32486,7 +32500,15 @@
           "type": "string"
         }
       },
-      "required": ["cancel", "estimatedWaitingTimeInSeconds", "position", "reconnectExpiredAt", "refresh", "ticket"]
+      "required": [
+        "cancel",
+        "estimatedWaitingTimeInSeconds",
+        "playerPollingTimeInSeconds",
+        "position",
+        "reconnectExpiredAt",
+        "refresh",
+        "ticket"
+      ]
     },
     "oauthmodel.OneTimeLinkingCodeResponse": {
       "properties": {
@@ -32901,6 +32923,9 @@
             "type": "string"
           },
           "type": "object"
+        },
+        "requiredPermission": {
+          "$ref": "#/definitions/rest.Permission"
         }
       },
       "required": ["errorCode", "errorMessage"]
@@ -32923,6 +32948,18 @@
         }
       },
       "required": ["errorCode", "errorMessage"]
+    },
+    "rest.Permission": {
+      "properties": {
+        "action": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resource": {
+          "type": "string"
+        }
+      },
+      "required": ["action", "resource"]
     }
   },
   "x-docs": {
@@ -32931,11 +32968,11 @@
     "path": "/iam/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-03T06:48:49+00:00",
-    "gitHash": "44d3d81baf38406c084d23d3b720cadd5e98932d",
+    "buildDate": "2024-04-30T14:25:46+00:00",
+    "gitHash": "f718aa11776b97edb92e0aa038f63213df8bd8f1",
     "name": "justice-iam-service",
     "realm": "dev",
-    "version": "7.13.0",
+    "version": "7.14.3",
     "version-roles-seeding": "1.2.21"
   }
 }

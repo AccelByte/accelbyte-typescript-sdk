@@ -13,6 +13,7 @@ export const PurchaseValidationItemReq = z.object({
   itemId: z.string(),
   itemType: z.string(),
   sku: z.string(),
+  stackable: z.boolean(),
   useCount: z.number().int().nullish()
 })
 

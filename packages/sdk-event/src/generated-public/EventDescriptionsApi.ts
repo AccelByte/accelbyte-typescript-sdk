@@ -23,86 +23,92 @@ export function EventDescriptionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
-  async function getDescriptionsUx(): Promise<MultipleUx> {
+  async function getDescriptionsUx_DEPRECATED(): Promise<MultipleUx> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsUx()
+    const resp = await $.getDescriptionsUx_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsEventId(): Promise<MultipleEventId> {
+  async function getDescriptionsEventId_DEPRECATED(): Promise<MultipleEventId> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsEventId()
+    const resp = await $.getDescriptionsEventId_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsAgentType(): Promise<MultipleAgentType> {
+  async function getDescriptionsAgentType_DEPRECATED(): Promise<MultipleAgentType> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsAgentType()
+    const resp = await $.getDescriptionsAgentType_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsEventType(): Promise<MultipleEventType> {
+  async function getDescriptionsEventType_DEPRECATED(): Promise<MultipleEventType> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsEventType()
+    const resp = await $.getDescriptionsEventType_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsEventLevel(): Promise<MultipleEventLevel> {
+  async function getDescriptionsEventLevel_DEPRECATED(): Promise<MultipleEventLevel> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsEventLevel()
+    const resp = await $.getDescriptionsEventLevel_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsUxListByUx(queryParams?: { ux?: string | null }): Promise<MultipleUx> {
+  async function getDescriptionsUxListByUx_DEPRECATED(queryParams?: { ux?: string | null }): Promise<MultipleUx> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsUxListByUx(queryParams)
+    const resp = await $.getDescriptionsUxListByUx_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsEventIdListByEventIds(queryParams?: { eventIds?: string | null }): Promise<MultipleEventId> {
+  async function getDescriptionsEventIdListByEventIds_DEPRECATED(queryParams?: { eventIds?: string | null }): Promise<MultipleEventId> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsEventIdListByEventIds(queryParams)
+    const resp = await $.getDescriptionsEventIdListByEventIds_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsAgentTypeListByAgentTypes(queryParams?: { agentTypes?: string | null }): Promise<MultipleAgentType> {
+  async function getDescriptionsAgentTypeListByAgentTypes_DEPRECATED(queryParams?: {
+    agentTypes?: string | null
+  }): Promise<MultipleAgentType> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsAgentTypeListByAgentTypes(queryParams)
+    const resp = await $.getDescriptionsAgentTypeListByAgentTypes_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsEventTypeListByEventTypes(queryParams?: { eventTypes?: string | null }): Promise<MultipleEventType> {
+  async function getDescriptionsEventTypeListByEventTypes_DEPRECATED(queryParams?: {
+    eventTypes?: string | null
+  }): Promise<MultipleEventType> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsEventTypeListByEventTypes(queryParams)
+    const resp = await $.getDescriptionsEventTypeListByEventTypes_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
-  async function getDescriptionsEventLevelListByEventLevels(queryParams?: { eventLevels?: string | null }): Promise<MultipleEventLevel> {
+  async function getDescriptionsEventLevelListByEventLevels_DEPRECATED(queryParams?: {
+    eventLevels?: string | null
+  }): Promise<MultipleEventLevel> {
     const $ = new EventDescriptions$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getDescriptionsEventLevelListByEventLevels(queryParams)
+    const resp = await $.getDescriptionsEventLevelListByEventLevels_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    getDescriptionsUx,
-    getDescriptionsEventId,
-    getDescriptionsAgentType,
-    getDescriptionsEventType,
-    getDescriptionsEventLevel,
-    getDescriptionsUxListByUx,
-    getDescriptionsEventIdListByEventIds,
-    getDescriptionsAgentTypeListByAgentTypes,
-    getDescriptionsEventTypeListByEventTypes,
-    getDescriptionsEventLevelListByEventLevels
+    getDescriptionsUx_DEPRECATED,
+    getDescriptionsEventId_DEPRECATED,
+    getDescriptionsAgentType_DEPRECATED,
+    getDescriptionsEventType_DEPRECATED,
+    getDescriptionsEventLevel_DEPRECATED,
+    getDescriptionsUxListByUx_DEPRECATED,
+    getDescriptionsEventIdListByEventIds_DEPRECATED,
+    getDescriptionsAgentTypeListByAgentTypes_DEPRECATED,
+    getDescriptionsEventTypeListByEventTypes_DEPRECATED,
+    getDescriptionsEventLevelListByEventLevels_DEPRECATED
   }
 }

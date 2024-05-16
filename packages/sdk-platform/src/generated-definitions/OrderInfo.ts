@@ -5,6 +5,7 @@
  */
 import { z } from 'zod'
 import { CurrencySummary } from './CurrencySummary.js'
+import { DeductionDetail } from './DeductionDetail.js'
 import { ItemSnapshot } from './ItemSnapshot.js'
 import { OrderBundleItemInfo } from './OrderBundleItemInfo.js'
 import { OrderCreationOptions } from './OrderCreationOptions.js'
@@ -17,6 +18,8 @@ export const OrderInfo = z.object({
   createdTime: z.string().nullish(),
   creationOptions: OrderCreationOptions.nullish(),
   currency: CurrencySummary,
+  deduction: z.number().int(),
+  deductionDetails: z.array(DeductionDetail).nullish(),
   discountedPrice: z.number().int(),
   expireTime: z.string().nullish(),
   ext: z.record(z.any()).nullish(),

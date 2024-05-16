@@ -20,7 +20,7 @@ export function SessionPlatformAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * This API is used to register/update a session on xbox.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:USER:{userId}:INTEGRATION, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to register/update a session on xbox.
    */
   async function updateSessionXbl_ByUserId(userId: string, data: XblUserSessionRequest): Promise<unknown> {
     const $ = new SessionPlatformAdmin$(Network.create(requestConfig), namespace, isZodEnabled)

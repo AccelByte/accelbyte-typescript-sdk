@@ -135,7 +135,7 @@ export class UsersV4$ {
    * @deprecated
    * This endpoint is used to get 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
-  getUsersMeMfaBackupCode(): Promise<IResponse<BackupCodesResponseV4>> {
+  getUsersMeMfaBackupCode_DEPRECATED(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -147,7 +147,7 @@ export class UsersV4$ {
    * @deprecated
    * This endpoint is used to generate 8-digits backup codes. Each code is a one-time code and will be deleted once used.
    */
-  createUserMeMfaBackupCode(): Promise<IResponse<BackupCodesResponseV4>> {
+  createUserMeMfaBackupCode_DEPRECATED(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
@@ -268,7 +268,7 @@ export class UsersV4$ {
    * @deprecated
    * This endpoint is used to enable 2FA backup codes.
    */
-  createUserMeMfaBackupCodeEnable(): Promise<IResponse<BackupCodesResponseV4>> {
+  createUserMeMfaBackupCodeEnable_DEPRECATED(): Promise<IResponse<BackupCodesResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/enable'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
@@ -302,7 +302,7 @@ export class UsersV4$ {
    * @deprecated
    * This endpoint is used to download backup codes.
    */
-  getUsersMeMfaBackupCodeDownload(): Promise<IResponse<unknown>> {
+  getUsersMeMfaBackupCodeDownload_DEPRECATED(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/download'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

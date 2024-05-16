@@ -41,9 +41,9 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to delete build manifest. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
-  async function deleteBuild_ByBuildId(buildId: string): Promise<unknown> {
+  async function deleteBuild_ByBuildId_DEPRECATED(buildId: string): Promise<unknown> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteBuild_ByBuildId(buildId)
+    const resp = await $.deleteBuild_ByBuildId_DEPRECATED(buildId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -62,9 +62,9 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to start chunk upload and retrieve upload url. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: upload data&lt;/li&gt;&lt;/ul&gt;
    */
-  async function createStartchunkupload(data: BinaryUpload): Promise<UploadSummary> {
+  async function createStartchunkupload_DEPRECATED(data: BinaryUpload): Promise<UploadSummary> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createStartchunkupload(data)
+    const resp = await $.createStartchunkupload_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -83,9 +83,9 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to commit build manifest. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
-  async function createCommitbuildmanifest(data: BuildManifest): Promise<unknown> {
+  async function createCommitbuildmanifest_DEPRECATED(data: BuildManifest): Promise<unknown> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createCommitbuildmanifest(data)
+    const resp = await $.createCommitbuildmanifest_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -148,9 +148,9 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to set current build as release version. [DEPRECATED] &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
-  async function updateSetcurrentbuild_ByAppId_ByVersion(appId: string, version: string): Promise<unknown> {
+  async function updateSetcurrentbuild_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<unknown> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateSetcurrentbuild_ByAppId_ByVersion(appId, version)
+    const resp = await $.updateSetcurrentbuild_ByAppId_ByVersion_DEPRECATED(appId, version)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -159,9 +159,9 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to start build upload. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
    */
-  async function createStartbuildupload_ByAppId_ByVersion(appId: string, version: string): Promise<BuildIdManifest> {
+  async function createStartbuildupload_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<BuildIdManifest> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createStartbuildupload_ByAppId_ByVersion(appId, version)
+    const resp = await $.createStartbuildupload_ByAppId_ByVersion_DEPRECATED(appId, version)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -170,9 +170,9 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to commit chunk that has been uploaded. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
    */
-  async function createUuid_ByHash_ByUuid_ByOffset(hash: string, uuid: string, offset: number): Promise<BlockManifest> {
+  async function createUuid_ByHash_ByUuid_ByOffset_DEPRECATED(hash: string, uuid: string, offset: number): Promise<BlockManifest> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createUuid_ByHash_ByUuid_ByOffset(hash, uuid, offset)
+    const resp = await $.createUuid_ByHash_ByUuid_ByOffset_DEPRECATED(hash, uuid, offset)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -181,33 +181,33 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * This API is used to commit chunk that has been uploaded. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
    */
-  async function createOffset_ByHash_ByUuid_ByOffset_ByBlockSize(
+  async function createOffset_ByHash_ByUuid_ByOffset_ByBlockSize_DEPRECATED(
     hash: string,
     uuid: string,
     offset: number,
     blockSize: number
   ): Promise<BlockManifest> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createOffset_ByHash_ByUuid_ByOffset_ByBlockSize(hash, uuid, offset, blockSize)
+    const resp = await $.createOffset_ByHash_ByUuid_ByOffset_ByBlockSize_DEPRECATED(hash, uuid, offset, blockSize)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
     getBuildsByAppId,
-    deleteBuild_ByBuildId,
+    deleteBuild_ByBuildId_DEPRECATED,
     getBuild_ByBuildId,
-    createStartchunkupload,
+    createStartchunkupload_DEPRECATED,
     getBuildsByNamespace,
-    createCommitbuildmanifest,
+    createCommitbuildmanifest_DEPRECATED,
     getBuildsdeletionByAppId,
     updateSetcurrentbuild_ByBuildId,
     getRetrievechunkbyhash_ByHash,
     updateRetry_ByBuildId,
     deleteCancel_ByBuildId,
-    updateSetcurrentbuild_ByAppId_ByVersion,
-    createStartbuildupload_ByAppId_ByVersion,
-    createUuid_ByHash_ByUuid_ByOffset,
-    createOffset_ByHash_ByUuid_ByOffset_ByBlockSize
+    updateSetcurrentbuild_ByAppId_ByVersion_DEPRECATED,
+    createStartbuildupload_ByAppId_ByVersion_DEPRECATED,
+    createUuid_ByHash_ByUuid_ByOffset_DEPRECATED,
+    createOffset_ByHash_ByUuid_ByOffset_ByBlockSize_DEPRECATED
   }
 }

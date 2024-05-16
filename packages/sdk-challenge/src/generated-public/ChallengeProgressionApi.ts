@@ -34,7 +34,7 @@ export function ChallengeProgressionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    */
   async function getUserMeProgres_ByChallengeCode(
     challengeCode: string,
-    queryParams?: { goalCode?: string | null }
+    queryParams?: { goalCode?: string | null; limit?: number; offset?: number; tags?: string[] }
   ): Promise<UserProgressionResponse> {
     const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, isZodEnabled)
     const resp = await $.getUserMeProgres_ByChallengeCode(challengeCode, queryParams)

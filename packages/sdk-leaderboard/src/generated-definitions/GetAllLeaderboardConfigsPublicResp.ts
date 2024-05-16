@@ -5,8 +5,8 @@
  */
 import { z } from 'zod'
 import { GetLeaderboardConfigPublicResp } from './GetLeaderboardConfigPublicResp.js'
-import { Pagination } from './Pagination.js'
+import { PaginationV2 } from './PaginationV2.js'
 
-export const GetAllLeaderboardConfigsPublicResp = z.object({ data: z.array(GetLeaderboardConfigPublicResp), paging: Pagination })
+export const GetAllLeaderboardConfigsPublicResp = z.object({ data: z.array(GetLeaderboardConfigPublicResp), paging: PaginationV2 })
 
 export interface GetAllLeaderboardConfigsPublicResp extends z.TypeOf<typeof GetAllLeaderboardConfigsPublicResp> {}

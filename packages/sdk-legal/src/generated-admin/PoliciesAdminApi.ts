@@ -21,7 +21,7 @@ export function PoliciesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
 
   /**
-   * Update country-specific policy.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update country-specific policy.
    */
   async function patchPolicy_ByPolicyId(policyId: string, data: UpdatePolicyRequest): Promise<unknown> {
     const $ = new PoliciesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -31,7 +31,7 @@ export function PoliciesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update a policy to be the default.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * Update a policy to be the default.
    */
   async function patchDefault_ByPolicyId(policyId: string): Promise<unknown> {
     const $ = new PoliciesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -41,7 +41,7 @@ export function PoliciesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Retrieve all active policies based on a country.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:*:LEGAL&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve all active policies based on a country.
    */
   async function getPolicyCountry_ByCountryCode(countryCode: string): Promise<RetrievePolicyResponseArray> {
     const $ = new PoliciesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)

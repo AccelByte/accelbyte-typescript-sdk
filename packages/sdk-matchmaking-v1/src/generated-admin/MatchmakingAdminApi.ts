@@ -82,7 +82,7 @@ export function MatchmakingAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    *  &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Search sessions.
    */
-  async function getSessionsHistorySearch(queryParams: {
+  async function getSessionsHistorySearch_DEPRECATED(queryParams: {
     limit: number
     offset: number
     channel?: string | null
@@ -92,7 +92,7 @@ export function MatchmakingAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userID?: string | null
   }): Promise<GetSessionHistorySearchResponse> {
     const $ = new MatchmakingAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getSessionsHistorySearch(queryParams)
+    const resp = await $.getSessionsHistorySearch_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -101,7 +101,7 @@ export function MatchmakingAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Search sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace &amp; other filter (partyID, userID, matchID). Query with filter namespace only will not group whole session data while query with filter namespace &amp; other filter will include session data.
    */
-  async function getSessionsHistorySearch_ByNS(queryParams: {
+  async function getSessionsHistorySearch_ByNS_DEPRECATED(queryParams: {
     limit: number
     offset: number
     channel?: string | null
@@ -111,7 +111,7 @@ export function MatchmakingAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userID?: string | null
   }): Promise<GetSessionHistorySearchResponseV2> {
     const $ = new MatchmakingAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getSessionsHistorySearch_ByNS(queryParams)
+    const resp = await $.getSessionsHistorySearch_ByNS_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -160,9 +160,9 @@ export function MatchmakingAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    *  &lt;p&gt; &lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt; &lt;strong&gt;Endpoint migration guide&lt;/strong&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/sessionbrowser/admin/namespaces/{namespace}/sessions/{sessionId}/history/detailed [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt; Get session history detailed. if party_id value empty/null, field will not show in response body.
    */
-  async function getHistoryDetailed_ByMatchId(matchID: string): Promise<GetSessionHistoryDetailedResponseItemArray> {
+  async function getHistoryDetailed_ByMatchId_DEPRECATED(matchID: string): Promise<GetSessionHistoryDetailedResponseItemArray> {
     const $ = new MatchmakingAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getHistoryDetailed_ByMatchId(matchID)
+    const resp = await $.getHistoryDetailed_ByMatchId_DEPRECATED(matchID)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -207,13 +207,13 @@ export function MatchmakingAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getChannelsAllParties,
     getChannel_ByChannelName,
     patchChannel_ByChannelName,
-    getSessionsHistorySearch,
-    getSessionsHistorySearch_ByNS,
+    getSessionsHistorySearch_DEPRECATED,
+    getSessionsHistorySearch_ByNS_DEPRECATED,
     getChannelsAllSessionsBulk,
     getStats_ByChannelName,
     getParties_ByChannelName,
     getSessions_ByChannelName,
-    getHistoryDetailed_ByMatchId,
+    getHistoryDetailed_ByMatchId_DEPRECATED,
     deleteSession_ByChannelName_ByMatchId,
     createSession_ByChannelName_ByMatchId,
     deleteUser_ByChannelName_ByMatchId_ByUserId

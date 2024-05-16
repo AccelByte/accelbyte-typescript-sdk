@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+ * Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,12 +13,14 @@ export const AgeGatingConfig = z.object({
     retryDuration: z.number(),
     retryMessage: z.string(),
     throwMessage: z.string(),
-    verificationMethod: z.string()
+    verificationMethod: z.string(),
+    isEarlyAgeGateEnabled: z.boolean()
   })
 })
 
 export interface AgeGatingConfig extends z.infer<typeof AgeGatingConfig> {}
 
 export enum AgeGatingCookie {
-  RETRY_DURATION_COOKIE_KEY = 'retry_duration_in_minute'
+  RETRY_DURATION_COOKIE_KEY = 'retry_duration_in_minute',
+  MESSAGE_COOKIE_KEY = 'age_gating_error_message'
 }

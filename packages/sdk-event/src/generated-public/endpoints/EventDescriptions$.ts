@@ -18,7 +18,7 @@ export class EventDescriptions$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
 
-  getDescriptionsUx(): Promise<IResponse<MultipleUx>> {
+  getDescriptionsUx_DEPRECATED(): Promise<IResponse<MultipleUx>> {
     const params = {} as SDKRequestConfig
     const url = '/event/descriptions/ux'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -26,7 +26,7 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleUx, 'MultipleUx')
   }
 
-  getDescriptionsEventId(): Promise<IResponse<MultipleEventId>> {
+  getDescriptionsEventId_DEPRECATED(): Promise<IResponse<MultipleEventId>> {
     const params = {} as SDKRequestConfig
     const url = '/event/descriptions/eventId'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -34,7 +34,7 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventId, 'MultipleEventId')
   }
 
-  getDescriptionsAgentType(): Promise<IResponse<MultipleAgentType>> {
+  getDescriptionsAgentType_DEPRECATED(): Promise<IResponse<MultipleAgentType>> {
     const params = {} as SDKRequestConfig
     const url = '/event/descriptions/agentType'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -42,7 +42,7 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleAgentType, 'MultipleAgentType')
   }
 
-  getDescriptionsEventType(): Promise<IResponse<MultipleEventType>> {
+  getDescriptionsEventType_DEPRECATED(): Promise<IResponse<MultipleEventType>> {
     const params = {} as SDKRequestConfig
     const url = '/event/descriptions/eventType'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -50,7 +50,7 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventType, 'MultipleEventType')
   }
 
-  getDescriptionsEventLevel(): Promise<IResponse<MultipleEventLevel>> {
+  getDescriptionsEventLevel_DEPRECATED(): Promise<IResponse<MultipleEventLevel>> {
     const params = {} as SDKRequestConfig
     const url = '/event/descriptions/eventLevel'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -58,7 +58,7 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventLevel, 'MultipleEventLevel')
   }
 
-  getDescriptionsUxListByUx(queryParams?: { ux?: string | null }): Promise<IResponse<MultipleUx>> {
+  getDescriptionsUxListByUx_DEPRECATED(queryParams?: { ux?: string | null }): Promise<IResponse<MultipleUx>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/descriptions/ux/listByUx'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -66,7 +66,7 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleUx, 'MultipleUx')
   }
 
-  getDescriptionsEventIdListByEventIds(queryParams?: { eventIds?: string | null }): Promise<IResponse<MultipleEventId>> {
+  getDescriptionsEventIdListByEventIds_DEPRECATED(queryParams?: { eventIds?: string | null }): Promise<IResponse<MultipleEventId>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/descriptions/eventId/listByEventIds'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -74,7 +74,7 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventId, 'MultipleEventId')
   }
 
-  getDescriptionsAgentTypeListByAgentTypes(queryParams?: { agentTypes?: string | null }): Promise<IResponse<MultipleAgentType>> {
+  getDescriptionsAgentTypeListByAgentTypes_DEPRECATED(queryParams?: { agentTypes?: string | null }): Promise<IResponse<MultipleAgentType>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/descriptions/agentType/listByAgentTypes'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -82,7 +82,7 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleAgentType, 'MultipleAgentType')
   }
 
-  getDescriptionsEventTypeListByEventTypes(queryParams?: { eventTypes?: string | null }): Promise<IResponse<MultipleEventType>> {
+  getDescriptionsEventTypeListByEventTypes_DEPRECATED(queryParams?: { eventTypes?: string | null }): Promise<IResponse<MultipleEventType>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/descriptions/eventType/listByEventTypes'
     const resultPromise = this.axiosInstance.get(url, { params })
@@ -90,7 +90,9 @@ export class EventDescriptions$ {
     return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MultipleEventType, 'MultipleEventType')
   }
 
-  getDescriptionsEventLevelListByEventLevels(queryParams?: { eventLevels?: string | null }): Promise<IResponse<MultipleEventLevel>> {
+  getDescriptionsEventLevelListByEventLevels_DEPRECATED(queryParams?: {
+    eventLevels?: string | null
+  }): Promise<IResponse<MultipleEventLevel>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/event/descriptions/eventLevel/listByEventLevels'
     const resultPromise = this.axiosInstance.get(url, { params })

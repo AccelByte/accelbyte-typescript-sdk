@@ -8,7 +8,7 @@
     },
     "description": "Justice GDPR Service",
     "title": "justice-gdpr-service",
-    "version": "2.8.0"
+    "version": "2.8.1"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -394,6 +394,155 @@
         ]
       }
     },
+    "/gdpr/admin/namespaces/{namespace}/platforms/{platform}/closure/client": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get platform account closure config.\nScope: account",
+        "operationId": "AdminGetPlatformAccountClosureClient",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "3rd party platform",
+            "in": "path",
+            "name": "platform",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.PlatformAccountClosureClientResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get Platform Account Closure Config",
+        "tags": ["Platform Account Closure Client"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Update platform account closure client.\nScope: account",
+        "operationId": "AdminUpdatePlatformAccountClosureClient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dto.PlatformAccountClosureClientRequest"
+            }
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "3rd party platform",
+            "in": "path",
+            "name": "platform",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Update Platform Account Closure Client",
+        "tags": ["Platform Account Closure Client"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]"]
+          }
+        ]
+      }
+    },
     "/gdpr/admin/namespaces/{namespace}/requests": {
       "get": {
         "consumes": ["application/json"],
@@ -645,6 +794,259 @@
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]"]
+          }
+        ]
+      }
+    },
+    "/gdpr/admin/namespaces/{namespace}/services/platforms/closure/config": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "**[TEST FACILITY ONLY]**\nReset registered platform account closure services configuration to use the default configuration.\nScope: account",
+        "operationId": "AdminResetPlatformAccountClosureServicesConfiguration",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Reset Registered Platform Account Closure Services Configuration",
+        "tags": ["Configuration"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]"]
+          }
+        ]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get registered platform account closure services configuration.\nScope: account",
+        "operationId": "AdminGetPlatformAccountClosureServicesConfiguration",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.ServicesConfigurationResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get Registered Platform Account Closure Services Configuration",
+        "tags": ["Configuration"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]"]
+          }
+        ]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "Update registered platform account closure services configuration.\nScope: account",
+        "operationId": "AdminUpdatePlatformAccountClosureServicesConfiguration",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dto.ServiceConfigurationUpdateRequest"
+            }
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.ServiceConfigurationUpdateRequest"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Update Registered Platform Account Closure Services Configuration",
+        "tags": ["Configuration"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/gdpr/admin/namespaces/{namespace}/users/platforms/closure/histories": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get user\u0026#39;s platform account closure histories.\n------\nSupported platforms:\n* psn\n\nScope: account",
+        "operationId": "AdminGetUserPlatformAccountClosureHistories",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "limit",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "3rd party platform",
+            "in": "query",
+            "name": "platform",
+            "type": "string"
+          },
+          {
+            "description": "IAM ID of the user",
+            "in": "query",
+            "name": "userId",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.UserPlatformAccountClosureHistoriesResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get User's Platform Account Closure Histories",
+        "tags": ["Platform Account Closure History"],
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"]
           }
         ]
       }
@@ -1823,12 +2225,48 @@
       },
       "required": ["appName", "namespace"]
     },
+    "dto.PlatformAccountClosureClientRequest": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        }
+      },
+      "required": ["clientId", "secret"]
+    },
+    "dto.PlatformAccountClosureClientResponse": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": ["clientId", "namespace", "platform", "secret", "updatedAt"]
+    },
     "dto.ServiceConfigDTO": {
       "properties": {
         "protocol": {
           "description": "protocol type",
           "enum": ["GRPC"],
           "type": "string"
+        },
+        "skipAck": {
+          "type": "boolean",
+          "x-omitempty": false
         },
         "url": {
           "description": "url of the service with port number",
@@ -1882,6 +2320,44 @@
         }
       },
       "required": ["services"]
+    },
+    "dto.UserPlatformAccountClosureHistoriesResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/dto.UserPlatformAccountClosureHistory"
+          },
+          "type": "array"
+        },
+        "pagination": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data", "pagination"]
+    },
+    "dto.UserPlatformAccountClosureHistory": {
+      "properties": {
+        "closedDate": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "platformUserId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["closedDate", "environment", "namespace", "platform", "platformUserId", "userId"]
     },
     "models.DataRetrievalResponse": {
       "properties": {
@@ -2098,11 +2574,11 @@
     "path": "/gdpr/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-03-28T07:39:33+00:00",
-    "gitHash": "a3a012bfe44dd563509650ecbc0a3612241ec662",
+    "buildDate": "2024-04-30T13:29:27+00:00",
+    "gitHash": "abb9ea410488adabd8380af4132ff0bf69dbec6e",
     "name": "justice-gdpr-service",
     "realm": "dev",
-    "version": "2.8.0",
+    "version": "2.8.1",
     "version-roles-seeding": "0.0.48"
   }
 }

@@ -31,7 +31,7 @@ export class Misc$ {
    * @deprecated
    * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
    */
-  getMiscCountries(queryParams?: { lang?: string | null }): Promise<IResponse<CountryObjectArray>> {
+  getMiscCountries_DEPRECATED(queryParams?: { lang?: string | null }): Promise<IResponse<CountryObjectArray>> {
     const params = { lang: 'en', ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

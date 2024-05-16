@@ -34,9 +34,9 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
    */
-  async function getMiscCountries(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
+  async function getMiscCountries_DEPRECATED(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
     const $ = new Misc$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getMiscCountries(queryParams)
+    const resp = await $.getMiscCountries_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -63,7 +63,7 @@ export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getMiscTime,
-    getMiscCountries,
+    getMiscCountries_DEPRECATED,
     getMiscLanguages,
     getMiscTimezones
   }

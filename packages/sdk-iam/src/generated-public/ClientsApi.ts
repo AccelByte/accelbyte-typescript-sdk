@@ -29,9 +29,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [GET]_**
    */
-  async function getClients(): Promise<ClientResponseArray> {
+  async function getClients_DEPRECATED(): Promise<ClientResponseArray> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getClients()
+    const resp = await $.getClients_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -40,9 +40,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [POST]_**
    */
-  async function createClient(data: ClientCreateRequest): Promise<ClientCreationResponse> {
+  async function createClient_DEPRECATED(data: ClientCreateRequest): Promise<ClientCreationResponse> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createClient(data)
+    const resp = await $.createClient_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -51,9 +51,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [DELETE]_**
    */
-  async function deleteClient_ByClientId(clientId: string): Promise<unknown> {
+  async function deleteClient_ByClientId_DEPRECATED(clientId: string): Promise<unknown> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteClient_ByClientId(clientId)
+    const resp = await $.deleteClient_ByClientId_DEPRECATED(clientId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -62,9 +62,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [GET]_**
    */
-  async function getClient_ByClientId(clientId: string): Promise<ClientResponse> {
+  async function getClient_ByClientId_DEPRECATED(clientId: string): Promise<ClientResponse> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getClient_ByClientId(clientId)
+    const resp = await $.getClient_ByClientId_DEPRECATED(clientId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -73,9 +73,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [PATCH]_**
    */
-  async function updateClient_ByClientId(clientId: string, data: ClientUpdateRequest): Promise<ClientResponse> {
+  async function updateClient_ByClientId_DEPRECATED(clientId: string, data: ClientUpdateRequest): Promise<ClientResponse> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateClient_ByClientId(clientId, data)
+    const resp = await $.updateClient_ByClientId_DEPRECATED(clientId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -84,9 +84,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/{clientId}/secret [PUT]_**
    */
-  async function updateSecret_ByClientId(clientId: string, data: ClientUpdateSecretRequest): Promise<unknown> {
+  async function updateSecret_ByClientId_DEPRECATED(clientId: string, data: ClientUpdateSecretRequest): Promise<unknown> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateSecret_ByClientId(clientId, data)
+    const resp = await $.updateSecret_ByClientId_DEPRECATED(clientId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -95,9 +95,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [GET]_**
    */
-  async function getClients_ByNS(): Promise<ClientResponseArray> {
+  async function getClients_ByNS_DEPRECATED(): Promise<ClientResponseArray> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getClients_ByNS()
+    const resp = await $.getClients_ByNS_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -106,9 +106,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/v3/admin/namespaces/{namespace}/clients [POST]_**
    */
-  async function createClient_ByNS(data: ClientCreateRequest): Promise<ClientCreationResponse> {
+  async function createClient_ByNS_DEPRECATED(data: ClientCreateRequest): Promise<ClientCreationResponse> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createClient_ByNS(data)
+    const resp = await $.createClient_ByNS_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -117,9 +117,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _iam/v3/admin/namespaces/{namespace}/clients/{clientId}/permissions [PUT]_**
    */
-  async function createClientpermission_ByClientId(clientId: string, data: ClientPermissions): Promise<unknown> {
+  async function createClientpermission_ByClientId_DEPRECATED(clientId: string, data: ClientPermissions): Promise<unknown> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createClientpermission_ByClientId(clientId, data)
+    const resp = await $.createClientpermission_ByClientId_DEPRECATED(clientId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -128,9 +128,9 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [DELETE]_**
    */
-  async function deleteClient_ByClientId_ByNS(clientId: string): Promise<unknown> {
+  async function deleteClient_ByClientId_ByNS_DEPRECATED(clientId: string): Promise<unknown> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteClient_ByClientId_ByNS(clientId)
+    const resp = await $.deleteClient_ByClientId_ByNS_DEPRECATED(clientId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -139,13 +139,13 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId}/permissions/{resource}/{action} [DELETE]_**
    */
-  async function deleteClientpermission_ByClientId_ByResource_ByAction(
+  async function deleteClientpermission_ByClientId_ByResource_ByAction_DEPRECATED(
     clientId: string,
     resource: string,
     action: number
   ): Promise<unknown> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteClientpermission_ByClientId_ByResource_ByAction(clientId, resource, action)
+    const resp = await $.deleteClientpermission_ByClientId_ByResource_ByAction_DEPRECATED(clientId, resource, action)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -154,29 +154,29 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId}/permissions [POST]_**
    */
-  async function createClientpermission_ByClientId_ByResource_ByAction(
+  async function createClientpermission_ByClientId_ByResource_ByAction_DEPRECATED(
     clientId: string,
     resource: string,
     action: number
   ): Promise<unknown> {
     const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.createClientpermission_ByClientId_ByResource_ByAction(clientId, resource, action)
+    const resp = await $.createClientpermission_ByClientId_ByResource_ByAction_DEPRECATED(clientId, resource, action)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   return {
-    getClients,
-    createClient,
-    deleteClient_ByClientId,
-    getClient_ByClientId,
-    updateClient_ByClientId,
-    updateSecret_ByClientId,
-    getClients_ByNS,
-    createClient_ByNS,
-    createClientpermission_ByClientId,
-    deleteClient_ByClientId_ByNS,
-    deleteClientpermission_ByClientId_ByResource_ByAction,
-    createClientpermission_ByClientId_ByResource_ByAction
+    getClients_DEPRECATED,
+    createClient_DEPRECATED,
+    deleteClient_ByClientId_DEPRECATED,
+    getClient_ByClientId_DEPRECATED,
+    updateClient_ByClientId_DEPRECATED,
+    updateSecret_ByClientId_DEPRECATED,
+    getClients_ByNS_DEPRECATED,
+    createClient_ByNS_DEPRECATED,
+    createClientpermission_ByClientId_DEPRECATED,
+    deleteClient_ByClientId_ByNS_DEPRECATED,
+    deleteClientpermission_ByClientId_ByResource_ByAction_DEPRECATED,
+    createClientpermission_ByClientId_ByResource_ByAction_DEPRECATED
   }
 }

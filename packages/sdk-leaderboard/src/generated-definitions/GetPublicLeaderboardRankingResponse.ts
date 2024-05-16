@@ -5,8 +5,8 @@
  */
 import { z } from 'zod'
 import { Entry } from './Entry.js'
-import { Pagination } from './Pagination.js'
+import { PaginationV2 } from './PaginationV2.js'
 
-export const GetPublicLeaderboardRankingResponse = z.object({ data: z.array(Entry), paging: Pagination })
+export const GetPublicLeaderboardRankingResponse = z.object({ data: z.array(Entry), paging: PaginationV2 })
 
 export interface GetPublicLeaderboardRankingResponse extends z.TypeOf<typeof GetPublicLeaderboardRankingResponse> {}

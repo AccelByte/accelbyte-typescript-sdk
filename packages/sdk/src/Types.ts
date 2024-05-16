@@ -32,6 +32,11 @@ export interface CustomInterceptors {
   error: ErrorInterceptor
 }
 
+export type ApiError = {
+  errorCode: number | string
+  errorMessage: string
+}
+
 export interface SDKOptions {
   /**
    * The client ID for the SDK. This value is retrieved from Admin Portal, OAuth Clients.
@@ -62,6 +67,11 @@ export interface SDKOptions {
    * When value is true, it will call `http://{service-name}/{path}` instead of `baseURL`
    */
   useInternalNetwork?: boolean
+
+  /**
+   * default is "true". When "false" is provided, the SDK bypasses Zod Schema Validation
+   */
+  useSchemaValidation?: boolean
 }
 
 export interface SDKEvents {

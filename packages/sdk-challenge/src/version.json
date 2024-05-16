@@ -1,8 +1,8 @@
 {
-  "buildDate": "2024-03-28T09:06:39+00:00",
-  "gitHash": "654efb2823dd5132a7fbc6036066fd55bcd28365",
+  "buildDate": "2024-04-30T15:20:20+00:00",
+  "gitHash": "f9cb56545df2b3a155dc28fdf2ebf45e3e06a258",
   "name": "justice-challenge-service",
   "realm": "DEV",
-  "version": "1.2.5",
+  "version": "1.3.1",
   "version-roles-seeding": "1.2.16"
 }

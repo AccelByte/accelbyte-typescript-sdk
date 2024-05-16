@@ -29,39 +29,39 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Delete service plugin config
    */
-  async function deleteConfigServicePlugin(): Promise<unknown> {
+  async function deleteConfigServicePlugin_DEPRECATED(): Promise<unknown> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.deleteConfigServicePlugin()
+    const resp = await $.deleteConfigServicePlugin_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
    * @deprecated
-   * Get service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get service plugin config
    */
-  async function getConfigsServicePlugin(): Promise<ServicePluginConfigInfo> {
+  async function getConfigsServicePlugin_DEPRECATED(): Promise<ServicePluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.getConfigsServicePlugin()
+    const resp = await $.getConfigsServicePlugin_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
    * @deprecated
-   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Update catalog config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
-  async function updateConfigServicePlugin(data: ServicePluginConfigUpdate): Promise<ServicePluginConfigInfo> {
+  async function updateConfigServicePlugin_DEPRECATED(data: ServicePluginConfigUpdate): Promise<ServicePluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
-    const resp = await $.updateConfigServicePlugin(data)
+    const resp = await $.updateConfigServicePlugin_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Delete service plugin config.
    */
   async function deleteCatalogPluginLootbox(): Promise<unknown> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -71,7 +71,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get lootbox plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get lootbox plugin config.
    */
   async function getCatalogPluginsLootbox(): Promise<LootBoxPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -81,7 +81,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update lootbox plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Update lootbox plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogPluginLootbox(data: LootBoxPluginConfigUpdate): Promise<LootBoxPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -91,7 +91,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Delete section plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Delete section plugin config.
    */
   async function deleteCatalogPluginSection(): Promise<unknown> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -101,7 +101,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get section plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get section plugin config.
    */
   async function getCatalogPluginsSection(): Promise<SectionPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -111,7 +111,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update section config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Update section config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogPluginSection(data: SectionPluginConfigUpdate): Promise<SectionPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -121,7 +121,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Delete service plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * Delete service plugin config.
    */
   async function deleteRevocationPluginRevocation(): Promise<unknown> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -131,7 +131,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get revocation plugin config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get revocation plugin config.
    */
   async function getRevocationPluginsRevocation(): Promise<RevocationPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -141,7 +141,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Update revocation plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Update revocation plugin config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRevocationPluginRevocation(data: RevocationPluginConfigUpdate): Promise<RevocationPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -151,7 +151,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get lootbox plugin gRPC info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG&lt;/b&gt;, action=2 &lt;b&gt;(READ)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
+   * Get lootbox plugin gRPC info.
    */
   async function getCatalogPluginsLootboxGrpcInfo(queryParams?: { force?: boolean | null }): Promise<GrpcServerInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -161,7 +161,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Upload lootbox plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Upload lootbox plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogPluginLootboxCustomConfigCert(data: { file?: File }): Promise<LootBoxPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -171,7 +171,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Upload section plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Upload section plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateCatalogPluginSectionCustomConfigCert(data: { file?: File }): Promise<SectionPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -181,7 +181,7 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Upload revocation plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
+   * Upload revocation plugin custom config tls cert.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated service plugin config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRevocationPluginRevocationRevocationCustomConfigCert(data: { file?: File }): Promise<RevocationPluginConfigInfo> {
     const $ = new ServicePluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
@@ -191,9 +191,9 @@ export function ServicePluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
-    deleteConfigServicePlugin,
-    getConfigsServicePlugin,
-    updateConfigServicePlugin,
+    deleteConfigServicePlugin_DEPRECATED,
+    getConfigsServicePlugin_DEPRECATED,
+    updateConfigServicePlugin_DEPRECATED,
     deleteCatalogPluginLootbox,
     getCatalogPluginsLootbox,
     updateCatalogPluginLootbox,

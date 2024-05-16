@@ -5681,7 +5681,7 @@
           "type": "array"
         },
         "paging": {
-          "$ref": "#/definitions/v2.Pagination"
+          "$ref": "#/definitions/v2.PaginationV2"
         }
       },
       "required": ["data", "paging"]
@@ -5712,12 +5712,12 @@
           "type": "array"
         },
         "paging": {
-          "$ref": "#/definitions/v2.Pagination"
+          "$ref": "#/definitions/v2.PaginationV2"
         }
       },
       "required": ["data", "paging"]
     },
-    "v2.Pagination": {
+    "v2.PaginationV2": {
       "properties": {
         "first": {
           "type": "string"
@@ -5741,8 +5741,8 @@
     "path": "/leaderboard/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-03-22T03:21:28+00:00",
-    "gitHash": "4936cc360f42586b8fc92043278726d333615335",
+    "buildDate": "2024-04-29T01:56:09+00:00",
+    "gitHash": "5d786574a7f8d551ca801c24a45d74b3c33822a0",
     "name": "justice-leaderboard-service",
     "realm": "dev",
     "version": "2.29.0",

@@ -46,7 +46,7 @@ export class Downloader$ {
    * @deprecated
    * This API is used to get build manifest of release version of the application. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategame_ByAppId(appId: string): Promise<IResponse<BuildManifest>> {
+  getUpdategame_ByAppId_DEPRECATED(appId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/updategame/{appId}'
       .replace('{namespace}', this.namespace)
@@ -73,7 +73,7 @@ export class Downloader$ {
    * @deprecated
    * This API is used to get build manifest of release version of the application. Supply it with source buildId and BuildInfo will output release build and generate chunks difference and obsolete files list between two version. Only works for builds uploaded with BuildInfo v1 [DEPRECATED}&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategameBuild_ByBuildId(buildId: string): Promise<IResponse<BuildManifest>> {
+  getUpdategameBuild_ByBuildId_DEPRECATED(buildId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/updategame/builds/{buildId}'
       .replace('{namespace}', this.namespace)
@@ -100,7 +100,7 @@ export class Downloader$ {
    * @deprecated
    * This API is used to get build manifest that contains file difference between requested version and release version. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build manifest&lt;/li&gt;&lt;/ul&gt;
    */
-  getUpdategame_ByAppId_ByVersion(appId: string, version: string): Promise<IResponse<BuildManifest>> {
+  getUpdategame_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/updategame/{appId}/{version}'
       .replace('{namespace}', this.namespace)
