@@ -9,15 +9,15 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { NativeSessionAdmin$ } from './endpoints/NativeSessionAdmin$.js'
 import { NativeSessionPagingResponse } from '../generated-definitions/NativeSessionPagingResponse.js'
+import { NativeSessionAdmin$ } from './endpoints/NativeSessionAdmin$.js'
 
 export function NativeSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * List of native sessions.
@@ -27,7 +27,7 @@ export function NativeSessionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     order?: string | null
   }): Promise<NativeSessionPagingResponse> {
-    const $ = new NativeSessionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new NativeSessionAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getNativeSessions(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

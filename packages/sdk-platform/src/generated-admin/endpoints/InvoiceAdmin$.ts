@@ -13,7 +13,7 @@ import { InvoiceSummary } from '../../generated-definitions/InvoiceSummary.js'
 
 export class InvoiceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Generate invoice summary.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query orders&lt;/li&gt;&lt;/ul&gt;
@@ -40,7 +40,7 @@ export class InvoiceAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/invoice/summary'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, InvoiceSummary, 'InvoiceSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, InvoiceSummary, 'InvoiceSummary')
   }
 
   /**
@@ -68,6 +68,6 @@ export class InvoiceAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/invoice/details.csv'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

@@ -20,7 +20,7 @@ import { UpdateRegionOverrideRequest } from '../../generated-definitions/UpdateR
 
 export class DeploymentConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a all deployments in a namespace Parameter Offset and Count is Required
@@ -30,7 +30,12 @@ export class DeploymentConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListDeploymentResponse, 'ListDeploymentResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListDeploymentResponse,
+      'ListDeploymentResponse'
+    )
   }
 
   /**
@@ -43,7 +48,7 @@ export class DeploymentConfigAdmin$ {
       .replace('{deployment}', deployment)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -56,7 +61,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{deployment}', deployment)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -69,7 +79,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{deployment}', deployment)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -82,7 +97,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{deployment}', deployment)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -96,7 +116,7 @@ export class DeploymentConfigAdmin$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -110,7 +130,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{region}', region)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -128,7 +153,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{region}', region)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -146,7 +176,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{region}', region)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -164,7 +199,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -178,7 +218,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -196,7 +241,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -215,7 +265,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{region}', region)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -235,7 +290,12 @@ export class DeploymentConfigAdmin$ {
       .replace('{region}', region)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -255,6 +315,11 @@ export class DeploymentConfigAdmin$ {
       .replace('{region}', region)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 }

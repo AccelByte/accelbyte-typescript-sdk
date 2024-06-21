@@ -59,6 +59,8 @@ import { UserCreateResponseV3 } from '../../generated-definitions/UserCreateResp
 import { UserIDsRequest } from '../../generated-definitions/UserIDsRequest.js'
 import { UserInformation } from '../../generated-definitions/UserInformation.js'
 import { UserInformationV3 } from '../../generated-definitions/UserInformationV3.js'
+import { UserInputValidationRequest } from '../../generated-definitions/UserInputValidationRequest.js'
+import { UserInputValidationResponse } from '../../generated-definitions/UserInputValidationResponse.js'
 import { UserInvitationV3 } from '../../generated-definitions/UserInvitationV3.js'
 import { UserLinkedPlatformArray } from '../../generated-definitions/UserLinkedPlatformArray.js'
 import { UserLinkedPlatformsResponseV3 } from '../../generated-definitions/UserLinkedPlatformsResponseV3.js'
@@ -78,7 +80,7 @@ import { WebLinkingResponse } from '../../generated-definitions/WebLinkingRespon
 
 export class Users$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get my user data __Supported 3rd platforms:__ * __PSN(ps4web, ps4, ps5)__ * account id * display name * avatar * __Xbox(live, xblweb)__ * xuid or pxuid * display name * __Steam(steam, steamopenid)__ * steam id * display name * avatar * __EpicGames(epicgames)__ * epic account id * display name action code : 10147
@@ -88,7 +90,7 @@ export class Users$ {
     const url = '/iam/v3/public/users/me'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV3, 'UserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV3, 'UserResponseV3')
   }
 
   /**
@@ -100,7 +102,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserCreateResponse, 'UserCreateResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserCreateResponse, 'UserCreateResponse')
   }
 
   /**
@@ -117,7 +119,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/admin'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetAdminUsersResponse, 'GetAdminUsersResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetAdminUsersResponse, 'GetAdminUsersResponse')
   }
 
   getUsersVerifyLinkVerify(queryParams?: { code?: string | null }): Promise<IResponse<unknown>> {
@@ -125,7 +127,7 @@ export class Users$ {
     const url = '/iam/v3/public/users/verify_link/verify'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -137,7 +139,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SearchUsersResponse, 'SearchUsersResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SearchUsersResponse, 'SearchUsersResponse')
   }
 
   /**
@@ -149,7 +151,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -161,7 +163,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponse, 'UserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponse, 'UserResponse')
   }
 
   /**
@@ -173,7 +175,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponse, 'UserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponse, 'UserResponse')
   }
 
   /**
@@ -185,7 +187,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/byLoginId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PublicUserResponse, 'PublicUserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PublicUserResponse, 'PublicUserResponse')
   }
 
   /**
@@ -197,11 +199,11 @@ export class Users$ {
     const url = '/iam/v2/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserCreateResponse, 'UserCreateResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserCreateResponse, 'UserCreateResponse')
   }
 
   /**
-   * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length should between 3-20, otherwise will not query the database. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ ### Supported platform id: * Steam group(steamnetwork) * steam * steamopenid * PSN group(psn) * ps4web * ps4 * ps5 * XBOX group(xbox) * live * xblweb * Oculus group(oculusgroup) * oculus * oculusweb * facebook * google * twitch * discord * android * ios * apple * device * epicgames * nintendo * awscognito * netflix * snapchat * _oidc platform id_ Note: you can use either platform ID or platform group as __platformId__ query parameter.
+   * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length should between 3-20, otherwise will not query the database. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ ### Supported platform id: * Steam group(steamnetwork) * steam * steamopenid * PSN group(psn) * ps4web * ps4 * ps5 * XBOX group(xbox) * live * xblweb * Oculus group(oculusgroup) * oculus * oculusweb * facebook * google group * google * googleplaygames * twitch * discord * android * ios * apple * device * epicgames * nintendo * awscognito * netflix * snapchat * _oidc platform id_ Note: you can use either platform ID or platform group as __platformId__ query parameter.
    */
   getUsers(queryParams?: {
     by?: string | null
@@ -216,7 +218,7 @@ export class Users$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PublicUserInformationResponseV3,
       'PublicUserInformationResponseV3'
@@ -231,7 +233,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserCreateResponseV3, 'UserCreateResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserCreateResponseV3, 'UserCreateResponseV3')
   }
 
   /**
@@ -242,7 +244,7 @@ export class Users$ {
     const url = '/iam/v3/public/users/me/verify_link/request'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -254,7 +256,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/ban'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserBanResponse, 'UserBanResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserBanResponse, 'UserBanResponse')
   }
 
   /**
@@ -265,7 +267,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV3, 'UserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV3, 'UserResponseV3')
   }
 
   /**
@@ -276,7 +278,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV3, 'UserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV3, 'UserResponseV3')
   }
 
   /**
@@ -290,7 +292,7 @@ export class Users$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetLinkHeadlessAccountConflictResponse,
       'GetLinkHeadlessAccountConflictResponse'
@@ -306,7 +308,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/bans'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserBanResponseArray, 'UserBanResponseArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserBanResponseArray, 'UserBanResponseArray')
   }
 
   /**
@@ -318,7 +320,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/resetPassword'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -330,7 +332,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/roles'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -342,7 +344,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/forgotPassword'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -354,7 +356,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/listByLoginIds'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PublicUsersResponse, 'PublicUsersResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PublicUsersResponse, 'PublicUsersResponse')
   }
 
   /**
@@ -366,7 +368,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/enable'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -377,7 +379,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/reset'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -389,7 +391,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/disable'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -404,7 +406,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/byPlatformUserID'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PublicUserResponse, 'PublicUserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PublicUserResponse, 'PublicUserResponse')
   }
 
   /**
@@ -415,7 +417,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/forgot'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -427,7 +429,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/password'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -445,7 +447,7 @@ export class Users$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -457,7 +459,12 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/platforms'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserLinkedPlatformArray, 'UserLinkedPlatformArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserLinkedPlatformArray,
+      'UserLinkedPlatformArray'
+    )
   }
 
   /**
@@ -469,7 +476,12 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/publisher'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetPublisherUserResponse, 'GetPublisherUserResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetPublisherUserResponse,
+      'GetPublisherUserResponse'
+    )
   }
 
   /**
@@ -481,7 +493,7 @@ export class Users$ {
     const url = '/iam/v2/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponse, 'UserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponse, 'UserResponse')
   }
 
   /**
@@ -493,7 +505,7 @@ export class Users$ {
     const url = '/iam/v2/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseArray, 'UserResponseArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseArray, 'UserResponseArray')
   }
 
   /**
@@ -505,7 +517,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PublicUserResponseV3, 'PublicUserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PublicUserResponseV3, 'PublicUserResponseV3')
   }
 
   /**
@@ -516,7 +528,7 @@ export class Users$ {
     const url = '/iam/v3/public/users/me/headless/linkWithProgression'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -528,7 +540,7 @@ export class Users$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UsersPlatformInfosResponse,
       'UsersPlatformInfosResponse'
@@ -544,7 +556,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/information'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -556,7 +568,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/information'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserInformation, 'UserInformation')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserInformation, 'UserInformation')
   }
 
   /**
@@ -568,7 +580,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/permissions'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -579,7 +591,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/bulk/basic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListBulkUserResponse, 'ListBulkUserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListBulkUserResponse, 'ListBulkUserResponse')
   }
 
   /**
@@ -591,7 +603,7 @@ export class Users$ {
     const url = '/iam/namespaces/{namespace}/users/{userId}/verification'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -602,7 +614,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/code/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -613,7 +625,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/password'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -624,7 +636,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/availability'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -635,7 +647,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/code/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -650,7 +662,7 @@ export class Users$ {
       .replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -665,7 +677,7 @@ export class Users$ {
       .replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -682,7 +694,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserBanResponseArray, 'UserBanResponseArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserBanResponseArray, 'UserBanResponseArray')
   }
 
   /**
@@ -694,7 +706,7 @@ export class Users$ {
     const url = '/iam/v2/public/namespaces/{namespace}/users/resetPassword'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -710,7 +722,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserBanV3Response, 'GetUserBanV3Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetUserBanV3Response, 'GetUserBanV3Response')
   }
 
   /**
@@ -722,7 +734,7 @@ export class Users$ {
     const url = '/iam/v2/public/namespaces/{namespace}/users/forgotPassword'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -733,7 +745,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/code/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -750,7 +762,12 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LoginHistoriesResponse, 'LoginHistoriesResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      LoginHistoriesResponse,
+      'LoginHistoriesResponse'
+    )
   }
 
   /**
@@ -764,7 +781,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -775,7 +792,23 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/code/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Validate user&#39;s input. -------- **note:** - this endpoint will check the input validation and profanity filter service(if this is enabled) - the namespace should be publisher namespace
+   */
+  createUserInputValidation(data: UserInputValidationRequest): Promise<IResponse<UserInputValidationResponse>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/namespaces/{namespace}/users/input/validation'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserInputValidationResponse,
+      'UserInputValidationResponse'
+    )
   }
 
   /**
@@ -789,7 +822,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -805,7 +838,7 @@ export class Users$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -820,7 +853,7 @@ export class Users$ {
       .replace('{banId}', banId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserBanResponse, 'UserBanResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserBanResponse, 'UserBanResponse')
   }
 
   /**
@@ -837,7 +870,7 @@ export class Users$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UserLinkedPlatformsResponseV3,
       'UserLinkedPlatformsResponseV3'
@@ -854,7 +887,12 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetPublisherUserResponse, 'GetPublisherUserResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetPublisherUserResponse,
+      'GetPublisherUserResponse'
+    )
   }
 
   /**
@@ -868,7 +906,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/headless/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV3, 'UserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV3, 'UserResponseV3')
   }
 
   /**
@@ -883,7 +921,7 @@ export class Users$ {
       .replace('{banId}', banId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserBanResponse, 'UserBanResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserBanResponse, 'UserBanResponse')
   }
 
   /**
@@ -896,7 +934,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserInformationV3, 'UserInformationV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserInformationV3, 'UserInformationV3')
   }
 
   /**
@@ -910,7 +948,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponse, 'UserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponse, 'UserResponse')
   }
 
   /**
@@ -923,7 +961,7 @@ export class Users$ {
       .replace('{invitationId}', invitationId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserInvitationV3, 'UserInvitationV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserInvitationV3, 'UserInvitationV3')
   }
 
   /**
@@ -936,13 +974,14 @@ export class Users$ {
       .replace('{invitationId}', invitationId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserCreateResponseV3, 'UserCreateResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserCreateResponseV3, 'UserCreateResponseV3')
   }
 
   /**
-   * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - oculusweb - facebook - google - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   * @deprecated
+   * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - oculusweb - facebook - google - googleplaygames - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
-  createUser_ByPlatformId(
+  createUser_ByPlatformId_DEPRECATED(
     platformId: string,
     data: PlatformUserIdRequest,
     queryParams?: { rawPID?: boolean | null }
@@ -953,7 +992,7 @@ export class Users$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserPlatforms, 'UserPlatforms')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserPlatforms, 'UserPlatforms')
   }
 
   /**
@@ -966,7 +1005,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -977,7 +1016,7 @@ export class Users$ {
     const url = '/iam/v3/public/namespaces/{namespace}/users/me/headless/code/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV3, 'UserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV3, 'UserResponseV3')
   }
 
   /**
@@ -993,11 +1032,16 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LoginHistoriesResponse, 'LoginHistoriesResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      LoginHistoriesResponse,
+      'LoginHistoriesResponse'
+    )
   }
 
   /**
-   * ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **android** - **ios** - **apple** - **device** - **discord** - **awscognito** - **epicgames** - **nintendo** Unlink user&#39;s account from a specific platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. _platformNamespace_ need to be specified when the platform ID is &#39;justice&#39;. Unlink user&#39;s account from justice platform will enable password token grant and password update. If you want to unlink user&#39;s account in a game namespace, you have to specify _platformNamespace_ to that game namespace. action code : 10121
+   * ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **googleplaygames** - **oculus** - **twitch** - **android** - **ios** - **apple** - **device** - **discord** - **awscognito** - **epicgames** - **nintendo** Unlink user&#39;s account from a specific platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. _platformNamespace_ need to be specified when the platform ID is &#39;justice&#39;. Unlink user&#39;s account from justice platform will enable password token grant and password update. If you want to unlink user&#39;s account in a game namespace, you have to specify _platformNamespace_ to that game namespace. action code : 10121
    */
   deleteUserMePlatform_ByPlatformId(platformId: string, data: UnlinkUserPlatformRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -1006,11 +1050,11 @@ export class Users$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * **Prerequisite:** Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables). ## Supported platforms: - **steam**: The ticket’s value is the binary ticket returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The ticket&#39;s value is URL generated by Steam on web authentication - **facebook**: The ticket’s value is the authorization code returned by Facebook OAuth - **google**: The ticket’s value is the authorization code returned by Google OAuth - **oculus**: The ticket’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The ticket’s value is the authorization code returned by Twitch OAuth. - **android**: The ticket&#39;s value is the Android’s device ID - **ios**: The ticket&#39;s value is the iOS’s device ID. - **apple**: The ticket’s value is the authorization code returned by Apple OAuth. - **device**: Every device that doesn&#39;t run Android and iOS is categorized as a device platform. The ticket&#39;s value is the device’s ID. - **discord**: The ticket’s value is the authorization code returned by Discord OAuth. - **ps4web**: The ticket’s value is the authorization code returned by PSN OAuth. - **ps4**: The ticket’s value is the authorization code returned by PSN OAuth. - **ps5**: The ticket’s value is the authorization code returned by PSN OAuth. - **xblweb**: The ticket’s value is the authorization code returned by XBox Live OAuth. - **live**: The ticket’s value is the XSTS token. - **awscognito**: The ticket’s value is the aws cognito access token (JWT). - **epicgames**: The ticket’s value is an access-token or authorization code obtained from Epicgames EOS Account Service. - **nintendo**: The ticket’s value is the id_token returned by Nintendo OAuth. - **netflix**: The ticket’s value is GAT (Gamer Access Token) returned by Netflix backend. - **snapchat**: The ticket’s value is authorization code returned by Snapchat OAuth. - **for specific generic oauth (OIDC)**: The platform_token’s value should be the same type as created OIDC auth type whether it is auth code, idToken or bearerToken. action code : 10144
+   * **Prerequisite:** Platform client configuration need to be added to database for specific platformId. Namespace service URL need to be specified (refer to required environment variables). ## Supported platforms: - **steam**: The ticket’s value is the binary ticket returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The ticket&#39;s value is URL generated by Steam on web authentication - **facebook**: The ticket’s value is the authorization code returned by Facebook OAuth - **google**: The ticket’s value is the authorization code returned by Google OAuth - **googleplaygames**: The ticket’s value is the authorization code returned by Google play games OAuth - **oculus**: The ticket’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The ticket’s value is the authorization code returned by Twitch OAuth. - **android**: The ticket&#39;s value is the Android’s device ID - **ios**: The ticket&#39;s value is the iOS’s device ID. - **apple**: The ticket’s value is the authorization code returned by Apple OAuth. - **device**: Every device that doesn&#39;t run Android and iOS is categorized as a device platform. The ticket&#39;s value is the device’s ID. - **discord**: The ticket’s value is the authorization code returned by Discord OAuth. - **ps4web**: The ticket’s value is the authorization code returned by PSN OAuth. - **ps4**: The ticket’s value is the authorization code returned by PSN OAuth. - **ps5**: The ticket’s value is the authorization code returned by PSN OAuth. - **xblweb**: The ticket’s value is the authorization code returned by XBox Live OAuth. - **live**: The ticket’s value is the XSTS token. - **awscognito**: The ticket’s value is the aws cognito access token (JWT). - **epicgames**: The ticket’s value is an access-token or authorization code obtained from Epicgames EOS Account Service. - **nintendo**: The ticket’s value is the id_token returned by Nintendo OAuth. - **netflix**: The ticket’s value is GAT (Gamer Access Token) returned by Netflix backend. - **snapchat**: The ticket’s value is authorization code returned by Snapchat OAuth. - **for specific generic oauth (OIDC)**: The platform_token’s value should be the same type as created OIDC auth type whether it is auth code, idToken or bearerToken. action code : 10144
    */
   postUserMePlatform_ByPlatformId(
     platformId: string,
@@ -1025,7 +1069,7 @@ export class Users$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -1047,7 +1091,7 @@ export class Users$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -1061,7 +1105,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserMappingArray, 'GetUserMappingArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetUserMappingArray, 'GetUserMappingArray')
   }
 
   /**
@@ -1075,7 +1119,7 @@ export class Users$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       DistinctPlatformResponseV3,
       'DistinctPlatformResponseV3'
@@ -1092,7 +1136,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserMappingV3Array, 'GetUserMappingV3Array')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetUserMappingV3Array, 'GetUserMappingV3Array')
   }
 
   /**
@@ -1105,7 +1149,7 @@ export class Users$ {
       .replace('{requestId}', requestId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LinkRequest, 'LinkRequest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, LinkRequest, 'LinkRequest')
   }
 
   /**
@@ -1127,11 +1171,11 @@ export class Users$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: if user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
+   * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google group - google - googleplaygames - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: if user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
    */
   deleteAllMeUser_ByPlatformId(platformId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -1140,7 +1184,7 @@ export class Users$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -1156,7 +1200,7 @@ export class Users$ {
       .replace('{action}', String(action))
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -1177,11 +1221,11 @@ export class Users$ {
       .replace('{action}', String(action))
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * Force linking user account with platform. If this platform account was already linked to another user account, this endpoint will perform force linking and remove platform from that conflict user, not only from the current request namespace but also include all the enrolled namespaces. If current user have linked to this platform with another platform account (include once linked but it is unlinked now), it will not allow user to perform linking. ## Supported platforms: - **steam**: The platform_token’s value is the binary ticket returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The platform_token&#39;s value is URL generated by Steam on web authentication - **facebook**: The platform_token’s value is the authorization code returned by Facebook OAuth - **google**: The platform_token’s value is the authorization code returned by Google OAuth - **oculus**: The platform_token’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The platform_token’s value is the authorization code returned by Twitch OAuth. - **discord**: The platform_token’s value is the authorization code returned by Discord OAuth - **android**: The device_id is the Android’s device ID - **ios**: The device_id is the iOS’s device ID. - **apple**: The platform_token’s value is the authorization code returned by Apple OAuth.(We will use this code to generate APP token) - **device**: Every device that does’nt run Android and iOS is categorized as a device. The device_id is the device’s ID. - **justice**: The platform_token’s value is the designated user’s access token. - **epicgames**: The platform_token’s value is an access-token obtained from Epicgames EOS Account Service. - **ps4**: The platform_token’s value is the authorization code returned by Sony OAuth. - **ps5**: The platform_token’s value is the authorization code returned by Sony OAuth. - **nintendo**: The platform_token’s value is the id_token returned by Nintendo OAuth. - **awscognito**: The platform_token’s value is the aws cognito access token or id token (JWT). - **live**: The platform_token’s value is xbox XSTS token - **xblweb**: The platform_token’s value is code returned by xbox after login - **netflix**: The platform_token’s value is GAT (Gamer Access Token) returned by Netflix backend - **snapchat**: The platform_token’s value is the authorization code returned by Snapchat OAuth. - **for specific generic oauth (OIDC)**: The platform_token’s value should be the same type as created OIDC auth type whether it is auth code, idToken or bearerToken.
+   * Force linking user account with platform. If this platform account was already linked to another user account, this endpoint will perform force linking and remove platform from that conflict user, not only from the current request namespace but also include all the enrolled namespaces. If current user have linked to this platform with another platform account (include once linked but it is unlinked now), it will not allow user to perform linking. ## Supported platforms: - **steam**: The platform_token’s value is the binary ticket returned by Steam. - **steamopenid**: Steam&#39;s user authentication method using OpenID 2.0. The platform_token&#39;s value is URL generated by Steam on web authentication - **facebook**: The platform_token’s value is the authorization code returned by Facebook OAuth - **google**: The platform_token’s value is the authorization code returned by Google OAuth - **googleplaygames**: The platform_token’s value is the authorization code returned by Google play games OAuth - **oculus**: The platform_token’s value is a string composed of Oculus&#39;s user ID and the nonce separated by a colon (:). - **twitch**: The platform_token’s value is the authorization code returned by Twitch OAuth. - **discord**: The platform_token’s value is the authorization code returned by Discord OAuth - **android**: The device_id is the Android’s device ID - **ios**: The device_id is the iOS’s device ID. - **apple**: The platform_token’s value is the authorization code returned by Apple OAuth.(We will use this code to generate APP token) - **device**: Every device that does’nt run Android and iOS is categorized as a device. The device_id is the device’s ID. - **justice**: The platform_token’s value is the designated user’s access token. - **epicgames**: The platform_token’s value is an access-token obtained from Epicgames EOS Account Service. - **ps4**: The platform_token’s value is the authorization code returned by Sony OAuth. - **ps5**: The platform_token’s value is the authorization code returned by Sony OAuth. - **nintendo**: The platform_token’s value is the id_token returned by Nintendo OAuth. - **awscognito**: The platform_token’s value is the aws cognito access token or id token (JWT). - **live**: The platform_token’s value is xbox XSTS token - **xblweb**: The platform_token’s value is code returned by xbox after login - **netflix**: The platform_token’s value is GAT (Gamer Access Token) returned by Netflix backend - **snapchat**: The platform_token’s value is the authorization code returned by Snapchat OAuth. - **for specific generic oauth (OIDC)**: The platform_token’s value should be the same type as created OIDC auth type whether it is auth code, idToken or bearerToken.
    */
   postForceMeUser_ByPlatformId(platformId: string, data: { ticket: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -1193,7 +1237,7 @@ export class Users$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -1207,7 +1251,7 @@ export class Users$ {
       .replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Country, 'Country')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Country, 'Country')
   }
 
   /**
@@ -1220,7 +1264,7 @@ export class Users$ {
       .replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryV3Response, 'CountryV3Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CountryV3Response, 'CountryV3Response')
   }
 
   /**
@@ -1235,7 +1279,7 @@ export class Users$ {
       .replace('{targetNamespace}', targetNamespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserMapping, 'GetUserMapping')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetUserMapping, 'GetUserMapping')
   }
 
   /**
@@ -1254,7 +1298,7 @@ export class Users$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserJusticePlatformAccountResponse,
       'GetUserJusticePlatformAccountResponse'
@@ -1274,7 +1318,7 @@ export class Users$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WebLinkingResponse, 'WebLinkingResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WebLinkingResponse, 'WebLinkingResponse')
   }
 
   /**
@@ -1293,7 +1337,7 @@ export class Users$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -1315,7 +1359,7 @@ export class Users$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -1328,7 +1372,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -1341,11 +1385,16 @@ export class Users$ {
       .replace('{targetNamespace}', targetNamespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateJusticeUserResponse, 'CreateJusticeUserResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CreateJusticeUserResponse,
+      'CreateJusticeUserResponse'
+    )
   }
 
   /**
-   * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google group - google - googleplaygames - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
   getUser_ByPlatformId_ByPlatformUserId(platformId: string, platformUserId: string): Promise<IResponse<UserResponseV3>> {
     const params = {} as SDKRequestConfig
@@ -1355,7 +1404,7 @@ export class Users$ {
       .replace('{platformUserId}', platformUserId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV3, 'UserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV3, 'UserResponseV3')
   }
 
   /**
@@ -1372,7 +1421,7 @@ export class Users$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponse, 'UserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponse, 'UserResponse')
   }
 
   /**
@@ -1391,7 +1440,7 @@ export class Users$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LinkRequest, 'LinkRequest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, LinkRequest, 'LinkRequest')
   }
 
   /**
@@ -1407,6 +1456,6 @@ export class Users$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

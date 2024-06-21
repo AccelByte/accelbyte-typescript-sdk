@@ -22,7 +22,7 @@ import { RepositoryRecord } from '../../generated-definitions/RepositoryRecord.j
 
 export class ImageConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint will create image. Sample image: { &#34;namespace&#34;:&#34;dewa&#34;, &#34;version&#34;:&#34;1.0.0&#34;, &#34;image&#34;:&#34;144436415367.dkr.ecr.us-west-2.amazonaws.com/dewa:1.0.0&#34;, &#34;persistent&#34;:false } ```
@@ -32,7 +32,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/images'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -43,7 +43,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/images'
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -54,7 +54,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/repository'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -65,7 +65,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/images/patches'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -76,7 +76,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -93,7 +93,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListImageResponse, 'ListImageResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListImageResponse, 'ListImageResponse')
   }
 
   /**
@@ -104,7 +104,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/repository'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RepositoryRecord, 'RepositoryRecord')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RepositoryRecord, 'RepositoryRecord')
   }
 
   /**
@@ -115,7 +115,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/limit'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetImageLimitResponse, 'GetImageLimitResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetImageLimitResponse, 'GetImageLimitResponse')
   }
 
   /**
@@ -130,7 +130,7 @@ export class ImageConfigAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/patches'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -143,7 +143,12 @@ export class ImageConfigAdmin$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetImageDetailResponse, 'GetImageDetailResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetImageDetailResponse,
+      'GetImageDetailResponse'
+    )
   }
 
   /**
@@ -156,7 +161,12 @@ export class ImageConfigAdmin$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListImagePatchesResponse, 'ListImagePatchesResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListImagePatchesResponse,
+      'ListImagePatchesResponse'
+    )
   }
 
   /**
@@ -171,7 +181,7 @@ export class ImageConfigAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetImagePatchDetailResponse,
       'GetImagePatchDetailResponse'

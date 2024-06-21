@@ -19,7 +19,7 @@ import { TicketSaleIncrementResult } from '../../generated-definitions/TicketSal
 
 export class TicketAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Get ticket(code/key) dynamic based on booth name.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ticket dynamic&lt;/li&gt;&lt;/ul&gt;
@@ -31,7 +31,7 @@ export class TicketAdmin$ {
       .replace('{boothName}', boothName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketDynamicInfo, 'TicketDynamicInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TicketDynamicInfo, 'TicketDynamicInfo')
   }
 
   /**
@@ -44,7 +44,7 @@ export class TicketAdmin$ {
       .replace('{boothName}', boothName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketBoothId, 'TicketBoothId')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TicketBoothId, 'TicketBoothId')
   }
 
   /**
@@ -57,7 +57,7 @@ export class TicketAdmin$ {
       .replace('{boothName}', boothName)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -70,7 +70,12 @@ export class TicketAdmin$ {
       .replace('{boothName}', boothName)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketSaleIncrementResult, 'TicketSaleIncrementResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      TicketSaleIncrementResult,
+      'TicketSaleIncrementResult'
+    )
   }
 
   /**
@@ -88,6 +93,6 @@ export class TicketAdmin$ {
       .replace('{boothName}', boothName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketAcquireResult, 'TicketAcquireResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TicketAcquireResult, 'TicketAcquireResult')
   }
 }

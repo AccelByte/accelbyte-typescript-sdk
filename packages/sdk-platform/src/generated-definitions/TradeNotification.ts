@@ -26,7 +26,7 @@ export const TradeNotification = z.object({
   paymentMethod: z.string().nullish(),
   paymentMethodFee: z.number().int().nullish(),
   paymentOrderNo: z.string(),
-  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
   paymentProviderFee: z.number().int().nullish(),
   paymentStationUrl: z.string().nullish(),
   price: z.number().int(),

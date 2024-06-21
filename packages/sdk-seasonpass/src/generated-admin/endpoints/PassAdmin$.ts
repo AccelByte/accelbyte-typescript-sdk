@@ -18,7 +18,7 @@ import { UserSeasonSummary } from '../../generated-definitions/UserSeasonSummary
 
 export class PassAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to query all passes for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of passes&lt;/li&gt;&lt;/ul&gt;
@@ -30,7 +30,7 @@ export class PassAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PassInfoArray, 'PassInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PassInfoArray, 'PassInfoArray')
   }
 
   /**
@@ -43,7 +43,7 @@ export class PassAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PassInfo, 'PassInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PassInfo, 'PassInfo')
   }
 
   /**
@@ -57,7 +57,7 @@ export class PassAdmin$ {
       .replace('{code}', code)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -71,7 +71,7 @@ export class PassAdmin$ {
       .replace('{code}', code)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PassInfo, 'PassInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PassInfo, 'PassInfo')
   }
 
   /**
@@ -85,7 +85,7 @@ export class PassAdmin$ {
       .replace('{code}', code)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PassInfo, 'PassInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PassInfo, 'PassInfo')
   }
 
   /**
@@ -98,6 +98,6 @@ export class PassAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
   }
 }

@@ -13,7 +13,7 @@ import { RewardPagingSlicedResult } from '../../generated-definitions/RewardPagi
 
 export class Reward$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to get reward by reward code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward instance&lt;/li&gt;&lt;/ul&gt;
@@ -23,7 +23,7 @@ export class Reward$ {
     const url = '/platform/public/namespaces/{namespace}/rewards/byCode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RewardInfo, 'RewardInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RewardInfo, 'RewardInfo')
   }
 
   /**
@@ -36,7 +36,7 @@ export class Reward$ {
       .replace('{rewardId}', rewardId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RewardInfo, 'RewardInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RewardInfo, 'RewardInfo')
   }
 
   /**
@@ -52,6 +52,11 @@ export class Reward$ {
     const url = '/platform/public/namespaces/{namespace}/rewards/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RewardPagingSlicedResult, 'RewardPagingSlicedResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      RewardPagingSlicedResult,
+      'RewardPagingSlicedResult'
+    )
   }
 }

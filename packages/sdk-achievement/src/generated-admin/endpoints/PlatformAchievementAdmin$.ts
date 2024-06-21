@@ -13,7 +13,7 @@ import { BulkCreatePsnEvents } from '../../generated-definitions/BulkCreatePsnEv
 
 export class PlatformAchievementAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Create PSN UDS events. Player need to login first using playstation token to IAM service.
@@ -24,7 +24,7 @@ export class PlatformAchievementAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkCreatePsnEventResponse,
       'BulkCreatePsnEventResponse'

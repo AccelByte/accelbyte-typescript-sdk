@@ -10,16 +10,16 @@
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AcceptAgreementRequest } from '../generated-definitions/AcceptAgreementRequest.js'
-import { AgreementAdmin$ } from './endpoints/AgreementAdmin$.js'
 import { PagedRetrieveUserAcceptedAgreementResponse } from '../generated-definitions/PagedRetrieveUserAcceptedAgreementResponse.js'
 import { RetrieveAcceptedAgreementResponseArray } from '../generated-definitions/RetrieveAcceptedAgreementResponseArray.js'
+import { AgreementAdmin$ } from './endpoints/AgreementAdmin$.js'
 
 export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * This API will return users who has accepted a specific policy version.
@@ -30,7 +30,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     limit?: number
     offset?: number
   }): Promise<PagedRetrieveUserAcceptedAgreementResponse> {
-    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getAgreementsPolicyVersionsUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +40,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This API will return all accepted Legal Agreements for specified user
    */
   async function getAgreementPolicyUser_ByUserId(userId: string): Promise<RetrieveAcceptedAgreementResponseArray> {
-    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getAgreementPolicyUser_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +53,7 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: AcceptAgreementRequest[]
   ): Promise<unknown> {
-    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchAgreementLocalizedPolicyVersionPreferenceUserId_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

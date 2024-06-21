@@ -14,38 +14,38 @@ import { PaymentMethodArray } from '../generated-definitions/PaymentMethodArray.
 import { PaymentOrderDetails } from '../generated-definitions/PaymentOrderDetails.js'
 import { PaymentOrderPaidResult } from '../generated-definitions/PaymentOrderPaidResult.js'
 import { PaymentProcessResult } from '../generated-definitions/PaymentProcessResult.js'
-import { PaymentStation$ } from './endpoints/PaymentStation$.js'
 import { PaymentToken } from '../generated-definitions/PaymentToken.js'
 import { PaymentUrl } from '../generated-definitions/PaymentUrl.js'
 import { PaymentUrlCreate } from '../generated-definitions/PaymentUrlCreate.js'
 import { TaxResult } from '../generated-definitions/TaxResult.js'
+import { PaymentStation$ } from './endpoints/PaymentStation$.js'
 
 export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Check and get a payment order&#39;s should pay tax.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: tax result&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentTax(queryParams: {
     paymentOrderNo: string | null
-    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     zipCode?: string | null
   }): Promise<TaxResult> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPaymentTax(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment url.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Get payment link&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment url.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;For Neon Pay payment provider, the &#39;neonPayConfig&#39; field can be used to provide success and cancel URL. If &#39;neonPayConfig&#39; field is not present, the &#39;returnUrl&#39; will be used for both success and cancel URL.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Get payment link&lt;/li&gt;&lt;/ul&gt;
    */
   async function createPaymentLink(data: PaymentUrlCreate): Promise<PaymentUrl> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createPaymentLink(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +55,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get qrcode.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: QRCode image stream&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentQrcode(queryParams: { code: string | null }): Promise<unknown> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPaymentQrcode(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -65,7 +65,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment methods.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment method list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentMethods(queryParams: { paymentOrderNo: string | null }): Promise<PaymentMethodArray> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPaymentMethods(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -77,7 +77,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getPaymentReturnurl(queryParams: {
     orderNo: string | null
     paymentOrderNo: string | null
-    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     returnUrl: string | null
     PayerID?: string | null
     foreinginvoice?: string | null
@@ -91,7 +91,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     type?: string | null
     user_id?: string | null
   }): Promise<unknown> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPaymentReturnurl(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -101,11 +101,11 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment provider public config, at current only Strip provide public config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Public config&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentPublicconfig(queryParams: {
-    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     region: string | null
     sandbox?: boolean | null
   }): Promise<unknown> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPaymentPublicconfig(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -116,11 +116,11 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment provider customization, at current only Adyen provide customization. This api has been deprecated, pls use /public/namespaces/{namespace}/payment/publicconfig to get adyen config&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: customization&lt;/li&gt;&lt;/ul&gt;
    */
   async function getPaymentCustomization_DEPRECATED(queryParams: {
-    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     region: string | null
     sandbox?: boolean | null
   }): Promise<Customization> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPaymentCustomization_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -133,11 +133,11 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     paymentOrderNo: string,
     data: PaymentToken,
     queryParams?: {
-      paymentProvider?: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+      paymentProvider?: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
       zipCode?: string | null
     }
   ): Promise<PaymentProcessResult> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createPayPayment_ByPaymentOrderNo(paymentOrderNo, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -147,7 +147,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment order info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment order details&lt;/li&gt;&lt;/ul&gt;
    */
   async function getInfoPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<PaymentOrderDetails> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInfoPayment_ByPaymentOrderNo(paymentOrderNo)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -157,7 +157,7 @@ export function PaymentStationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Check payment order paid status.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment order paid result&lt;/li&gt;&lt;/ul&gt;
    */
   async function getStatusPayment_ByPaymentOrderNo(paymentOrderNo: string): Promise<PaymentOrderPaidResult> {
-    const $ = new PaymentStation$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PaymentStation$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getStatusPayment_ByPaymentOrderNo(paymentOrderNo)
     if (resp.error) throw resp.error
     return resp.response.data

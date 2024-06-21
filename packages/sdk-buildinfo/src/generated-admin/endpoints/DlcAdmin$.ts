@@ -14,21 +14,21 @@ import { RetrieveDependencyLinkResponse } from '../../generated-definitions/Retr
 
 export class DlcAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to link DLC version(s) against the game version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to link DLC version(s) against the game version.&lt;p&gt;
    */
   updateDlcLink(data: CreateDependencyLinkRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/dlc/link'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to retrieve DLC versions against the game version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to retrieve DLC versions against the game version.
    */
   getLink_ByBuildId(buildId: string): Promise<IResponse<RetrieveDependencyLinkResponse>> {
     const params = {} as SDKRequestConfig
@@ -38,7 +38,7 @@ export class DlcAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveDependencyLinkResponse,
       'RetrieveDependencyLinkResponse'

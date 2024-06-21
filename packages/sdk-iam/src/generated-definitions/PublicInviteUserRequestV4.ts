@@ -8,6 +8,7 @@ import { z } from 'zod'
 export const PublicInviteUserRequestV4 = z.object({
   additionalData: z.string().nullish(),
   emailAddress: z.string(),
+  languageTag: z.string().nullish(),
   namespace: z.string(),
   namespaceDisplayName: z.string()
 })

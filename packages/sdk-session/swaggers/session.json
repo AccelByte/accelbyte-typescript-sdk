@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Session Service",
     "title": "justice-session-service",
-    "version": "3.14.5"
+    "version": "3.15.5"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -41,6 +41,7 @@
     "/healthz": {
       "get": {
         "operationId": "GetHealthcheckInfo",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -50,12 +51,14 @@
           {
             "authorization": []
           }
-        ]
+        ],
+        "x-errorCodes": {}
       }
     },
     "/session/healthz": {
       "get": {
         "operationId": "GetHealthcheckInfoV1",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -64,6 +67,98 @@
         "security": [
           {
             "authorization": []
+          }
+        ],
+        "x-errorCodes": {}
+      }
+    },
+    "/session/v1/admin/config/log": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get Log Configuration.\u0026lt;br\u0026gt;",
+        "operationId": "adminGetLogConfig",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get Log Configuration",
+        "tags": ["Config"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CONFIG:LOG [READ]"]
+          }
+        ]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "Update Log Configuration.\u0026lt;br\u0026gt;",
+        "operationId": "adminPatchUpdateLogConfig",
+        "parameters": [
+          {
+            "description": "Optional values can be omitted and will update partially",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Patch Update Log Configuration",
+        "tags": ["Config"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CONFIG:LOG [UPDATE]"]
           }
         ]
       }
@@ -119,6 +214,7 @@
         ],
         "summary": "Get dsmc default configuration.",
         "tags": ["DSMC Default Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]"]
@@ -159,6 +255,7 @@
         ],
         "summary": "List of environment variables.",
         "tags": ["Environment Variable"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:SESSION:CONFIGURATION:ENVIRONMENTVARIABLE [READ]"]
@@ -199,6 +296,7 @@
         ],
         "summary": "Delete of global configuration data.",
         "tags": ["Global Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:SESSION:CONFIGURATION [DELETE]"]
@@ -237,6 +335,7 @@
         ],
         "summary": "Record of global configuration data.",
         "tags": ["Global Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:SESSION:CONFIGURATION [READ]"]
@@ -286,6 +385,7 @@
         ],
         "summary": "Upsert global configuration data.",
         "tags": ["Global Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:SESSION:CONFIGURATION [UPDATE]"]
@@ -344,6 +444,7 @@
         ],
         "summary": "Delete configuration alert.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [DELETE]"]
@@ -409,6 +510,7 @@
         ],
         "summary": "Get configuration alert.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]"]
@@ -489,6 +591,7 @@
         ],
         "summary": "Create configuration alert.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [UPDATE]"]
@@ -563,6 +666,7 @@
         ],
         "summary": "Update configuration alert.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [UPDATE]"]
@@ -657,6 +761,7 @@
         ],
         "summary": "Upload certificates for xbox.",
         "tags": ["Certificate"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CERTIFICATES [UPDATE]"]
@@ -733,6 +838,7 @@
         ],
         "summary": "Create configuration template.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [CREATE]"]
@@ -826,6 +932,7 @@
         ],
         "summary": "Get configuration templates.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]"]
@@ -891,6 +998,7 @@
         ],
         "summary": "Delete configuration template.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [DELETE]"]
@@ -963,6 +1071,7 @@
         ],
         "summary": "Get configuration template.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]"]
@@ -1044,6 +1153,7 @@
         ],
         "summary": "Update configuration template.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [UPDATE]"]
@@ -1113,6 +1223,7 @@
         ],
         "summary": "Get Member Active Session.",
         "tags": ["Max Active"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]"]
@@ -1181,6 +1292,7 @@
         ],
         "summary": "Reconcile Max Active Session.",
         "tags": ["Max Active"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [UPDATE]"]
@@ -1248,6 +1360,7 @@
         ],
         "summary": "Get dsmc configuration .",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]"]
@@ -1315,6 +1428,7 @@
         ],
         "summary": "sync dsmc configuration.",
         "tags": ["Configuration Template"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:CONFIGURATION [READ]"]
@@ -1480,6 +1594,7 @@
         ],
         "summary": "Get all game sessions.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:GAME [READ]"]
@@ -1549,6 +1664,7 @@
         ],
         "summary": "Query game sessions by admin",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:GAME [READ]"]
@@ -1619,6 +1735,7 @@
         ],
         "summary": "Delete bulk game sessions.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:GAME [DELETE]"]
@@ -1692,6 +1809,7 @@
         ],
         "summary": "Admin set the DS ready to accept connection",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -1780,6 +1898,7 @@
         ],
         "summary": "Update status of a game session member.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -1849,6 +1968,7 @@
         ],
         "summary": "List of native sessions.",
         "tags": ["Native Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:NATIVE [READ]"]
@@ -1978,6 +2098,7 @@
         ],
         "summary": "Query parties.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PARTY [READ]"]
@@ -2042,6 +2163,7 @@
         ],
         "summary": "Delete platform credentials.",
         "tags": ["Platform Credential"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLATFORMCREDENTIAL [DELETE]"]
@@ -2109,6 +2231,7 @@
         ],
         "summary": "Get platform credentials. These are used to sync PSN sessions.",
         "tags": ["Platform Credential"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLATFORMCREDENTIAL [READ]"]
@@ -2185,6 +2308,7 @@
         ],
         "summary": "Update platform credentials. Currently only used to sync PSN sessions.",
         "tags": ["Platform Credential"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLATFORMCREDENTIAL [UPDATE]"]
@@ -2259,6 +2383,7 @@
         ],
         "summary": "Query recent player with given user id.",
         "tags": ["Recent Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLAYER:{userId} [READ]"]
@@ -2333,6 +2458,7 @@
         ],
         "summary": "Query recent player who were on the same team with given user id.",
         "tags": ["Recent Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLAYER:{userId} [READ]"]
@@ -2398,6 +2524,7 @@
         ],
         "summary": "Delete Session Storage.",
         "tags": ["Session Storage"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:STORAGE [DELETE]"]
@@ -2465,6 +2592,7 @@
         ],
         "summary": "Read Session Storage.",
         "tags": ["Session Storage"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:STORAGE [READ]"]
@@ -2541,6 +2669,7 @@
         ],
         "summary": "Read Session Storage User.",
         "tags": ["Session Storage"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:STORAGE [READ]"]
@@ -2611,6 +2740,7 @@
         ],
         "summary": "Query player attributes.",
         "tags": ["Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLAYER:{userId} [READ]"]
@@ -2679,9 +2809,76 @@
         ],
         "summary": "Get player attributes.",
         "tags": ["Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:PLAYER:{userId} [READ]"]
+          }
+        ]
+      }
+    },
+    "/session/v1/admin/namespaces/{namespace}/users/{userId}/native-sync": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Trigger user\u0026#39;s active party session to native platform.\n",
+        "operationId": "adminSyncNativeSession",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Trigger user's active party session to native platform.",
+        "tags": ["Party"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSION:NATIVE:SYNC [CREATE]"]
           }
         ]
       }
@@ -2749,6 +2946,7 @@
         ],
         "summary": "Create a game session.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [CREATE]"]
@@ -2820,6 +3018,7 @@
         ],
         "summary": "Query game sessions",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -2892,6 +3091,7 @@
         ],
         "summary": "Join a session by code.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME:PLAYER [CREATE]"]
@@ -2966,6 +3166,7 @@
         ],
         "summary": "Get game session detail.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [READ]"]
@@ -3025,6 +3226,7 @@
         ],
         "summary": "Delete a game session.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [DELETE]"]
@@ -3097,6 +3299,7 @@
         ],
         "summary": "Get game session detail.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [READ]"]
@@ -3178,6 +3381,7 @@
         ],
         "summary": "Patch update a game session.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -3259,6 +3463,7 @@
         ],
         "summary": "Update a game session.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -3336,6 +3541,7 @@
         ],
         "summary": "Update game session backfill ticket id .",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -3407,6 +3613,7 @@
         ],
         "summary": "Revoke game session code.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -3478,6 +3685,7 @@
         ],
         "summary": "Generate a game session code.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -3555,6 +3763,7 @@
         ],
         "summary": "Invite a user to a game session.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME:PLAYER [CREATE]"]
@@ -3628,6 +3837,7 @@
         ],
         "summary": "Join a game session.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME:PLAYER [CREATE]"]
@@ -3712,6 +3922,7 @@
         ],
         "summary": "Promote new game session leader.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -3782,6 +3993,7 @@
         ],
         "summary": "Leave a game session.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME:PLAYER [DELETE]"]
@@ -3853,6 +4065,7 @@
         ],
         "summary": "Reject a game session invitation.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME:PLAYER [DELETE]"]
@@ -3921,6 +4134,7 @@
         ],
         "summary": "Get Server Secret.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME:SECRET [READ]"]
@@ -3998,6 +4212,7 @@
         ],
         "summary": "Append new member or team to session.",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:GAME [UPDATE]"]
@@ -4074,6 +4289,7 @@
         ],
         "summary": "Join a party by code.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [CREATE]"]
@@ -4136,6 +4352,7 @@
         ],
         "summary": "Get party details.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY [READ]"]
@@ -4217,6 +4434,7 @@
         ],
         "summary": "Patch update a party.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]"]
@@ -4298,6 +4516,7 @@
         ],
         "summary": "Update a party.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]"]
@@ -4368,6 +4587,7 @@
         ],
         "summary": "Revoke party code.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]"]
@@ -4439,6 +4659,7 @@
         ],
         "summary": "Generate party code.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]"]
@@ -4519,6 +4740,7 @@
         ],
         "summary": "Invite a user to a party.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [CREATE]"]
@@ -4602,6 +4824,7 @@
         ],
         "summary": "Promote new party leader.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY [UPDATE]"]
@@ -4675,6 +4898,7 @@
         ],
         "summary": "Join a party.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [CREATE]"]
@@ -4734,6 +4958,7 @@
         ],
         "summary": "Leave a party.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [DELETE]"]
@@ -4805,6 +5030,7 @@
         ],
         "summary": "Reject a party invitation.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [DELETE]"]
@@ -4886,6 +5112,7 @@
         ],
         "summary": "Kick a player from a party.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY:PLAYER [DELETE]"]
@@ -4950,6 +5177,7 @@
         ],
         "summary": "Create a party.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PARTY [CREATE]"]
@@ -5018,6 +5246,7 @@
         ],
         "summary": "Query user's recent player",
         "tags": ["Recent Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PLAYER [READ]"]
@@ -5086,6 +5315,7 @@
         ],
         "summary": "Query user's recent player who were on the same team.",
         "tags": ["Recent Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PLAYER [READ]"]
@@ -5170,6 +5400,7 @@
         ],
         "summary": "Update Insert Session Storage Leader.",
         "tags": ["Session Storage"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:STORAGE [CREATE]"]
@@ -5261,6 +5492,7 @@
         ],
         "summary": "Update Insert Session Storage User.",
         "tags": ["Session Storage"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:STORAGE [CREATE]"]
@@ -5331,6 +5563,7 @@
         ],
         "summary": "Get player current platform in bulk.",
         "tags": ["Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PLAYER [READ]"]
@@ -5388,6 +5621,7 @@
         ],
         "summary": "Remove player attributes.",
         "tags": ["Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PLAYER [DELETE]"]
@@ -5446,6 +5680,7 @@
         ],
         "summary": "Get player attributes.",
         "tags": ["Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PLAYER [READ]"]
@@ -5508,6 +5743,7 @@
         ],
         "summary": "Store player attributes.",
         "tags": ["Player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION:PLAYER [CREATE]"]
@@ -5581,6 +5817,7 @@
         ],
         "summary": "Query user's game sessions",
         "tags": ["Game Session"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -5650,6 +5887,7 @@
         ],
         "summary": "Query my parties. Require valid JWT.",
         "tags": ["Party"],
+        "x-errorCodes": {},
         "x-security": []
       }
     }
@@ -5727,6 +5965,9 @@
           "type": "string"
         },
         "createdAt": {
+          "type": "string"
+        },
+        "customURLGRPC": {
           "type": "string"
         },
         "deployment": {
@@ -5885,6 +6126,9 @@
         "clientVersion": {
           "type": "string"
         },
+        "customURLGRPC": {
+          "type": "string"
+        },
         "deployment": {
           "type": "string"
         },
@@ -6006,6 +6250,9 @@
           "type": "string"
         },
         "configurationName": {
+          "type": "string"
+        },
+        "customURLGRPC": {
           "type": "string"
         },
         "deployment": {
@@ -6632,6 +6879,9 @@
         "clientVersion": {
           "type": "string"
         },
+        "customURLGRPC": {
+          "type": "string"
+        },
         "deployment": {
           "type": "string"
         },
@@ -6864,6 +7114,9 @@
           "x-omitempty": false
         },
         "clientVersion": {
+          "type": "string"
+        },
+        "customURLGRPC": {
           "type": "string"
         },
         "deployment": {
@@ -7146,6 +7399,14 @@
       },
       "required": ["id", "platformID", "platformUserID", "status", "statusV2", "updatedAt"]
     },
+    "logconfig.Configuration": {
+      "properties": {
+        "logLevel": {
+          "enum": ["debug", "error", "fatal", "info", "panic", "trace", "warning"],
+          "type": "string"
+        }
+      }
+    },
     "model.NativeSession": {
       "properties": {
         "CreatedAt": {
@@ -7262,6 +7523,9 @@
           "type": "string"
         },
         "deployment": {
+          "type": "string"
+        },
+        "extend_region": {
           "type": "string"
         },
         "game_version": {
@@ -7556,9 +7820,9 @@
     "path": "/session/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-30T06:55:11+00:00",
-    "gitHash": "07ab12948f5c6e18b7a49def90a3633a7ea542ce",
-    "version": "3.14.5",
-    "version-roles-seeding": "1.2.33"
+    "buildDate": "2024-05-29T10:10:06+00:00",
+    "gitHash": "b3859d074c0c5bc0f801114e557a4b60e2ff42f6",
+    "version": "3.15.5",
+    "version-roles-seeding": "1.2.37"
   }
 }

@@ -18,7 +18,7 @@ import { PlayerRecordResponse } from '../../generated-definitions/PlayerRecordRe
 
 export class PublicPlayerRecord$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve list of player records key under given namespace.
@@ -29,7 +29,7 @@ export class PublicPlayerRecord$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListPlayerRecordKeysResponse,
       'ListPlayerRecordKeysResponse'
@@ -45,7 +45,7 @@ export class PublicPlayerRecord$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkGetPlayerRecordResponse,
       'BulkGetPlayerRecordResponse'
@@ -63,7 +63,7 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -77,7 +77,7 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -91,7 +91,7 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -105,7 +105,7 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -122,7 +122,7 @@ export class PublicPlayerRecord$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListPlayerRecordKeysResponse,
       'ListPlayerRecordKeysResponse'
@@ -139,7 +139,7 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -153,7 +153,7 @@ export class PublicPlayerRecord$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkGetPlayerRecordResponse,
       'BulkGetPlayerRecordResponse'
@@ -171,7 +171,7 @@ export class PublicPlayerRecord$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkGetPlayerRecordResponse,
       'BulkGetPlayerRecordResponse'
@@ -189,7 +189,7 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -203,7 +203,7 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -217,6 +217,6 @@ export class PublicPlayerRecord$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 }

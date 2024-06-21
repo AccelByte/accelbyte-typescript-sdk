@@ -19,13 +19,13 @@ export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * List existing match functions.
    */
   async function getMatchFunctions(queryParams?: { limit?: number; offset?: number }): Promise<ListMatchFunctionsResponse> {
-    const $ = new MatchFunctions$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MatchFunctions$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMatchFunctions(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +35,7 @@ export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Creates a new matchmaking function.
    */
   async function createMatchFunction(data: MatchFunctionRequest): Promise<unknown> {
-    const $ = new MatchFunctions$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MatchFunctions$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createMatchFunction(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +45,7 @@ export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Deletes an existing match function.
    */
   async function deleteMatchFunction_ByName(name: string): Promise<unknown> {
-    const $ = new MatchFunctions$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MatchFunctions$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteMatchFunction_ByName(name)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +55,7 @@ export function MatchFunctionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update existing matchmaking function.
    */
   async function updateMatchFunction_ByName(name: string, data: MatchFunctionRequest): Promise<MatchFunctionConfig> {
-    const $ = new MatchFunctions$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MatchFunctions$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateMatchFunction_ByName(name, data)
     if (resp.error) throw resp.error
     return resp.response.data

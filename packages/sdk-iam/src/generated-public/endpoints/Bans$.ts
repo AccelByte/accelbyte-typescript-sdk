@@ -13,7 +13,7 @@ import { Bans } from '../../generated-definitions/Bans.js'
 
 export class Bans$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -24,7 +24,7 @@ export class Bans$ {
     const url = '/iam/bans'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Bans, 'Bans')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Bans, 'Bans')
   }
 
   /**
@@ -36,6 +36,6 @@ export class Bans$ {
     const url = '/iam/bans/reasons'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BanReasons, 'BanReasons')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BanReasons, 'BanReasons')
   }
 }

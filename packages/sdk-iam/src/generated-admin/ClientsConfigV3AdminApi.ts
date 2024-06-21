@@ -9,24 +9,24 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ClientsConfigV3Admin$ } from './endpoints/ClientsConfigV3Admin$.js'
 import { ListClientPermissionSet } from '../generated-definitions/ListClientPermissionSet.js'
 import { ListTemplatesResponse } from '../generated-definitions/ListTemplatesResponse.js'
 import { ListUpsertModulesRequest } from '../generated-definitions/ListUpsertModulesRequest.js'
 import { PermissionSetDeleteGroupRequest } from '../generated-definitions/PermissionSetDeleteGroupRequest.js'
+import { ClientsConfigV3Admin$ } from './endpoints/ClientsConfigV3Admin$.js'
 
 export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * List client templates
    */
   async function getClientConfigTemplates(): Promise<ListTemplatesResponse> {
-    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getClientConfigTemplates()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +39,7 @@ export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: PermissionSetDeleteGroupRequest,
     queryParams?: { forceDelete?: boolean | null }
   ): Promise<unknown> {
-    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteClientConfigPermission(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +49,7 @@ export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List Client available permissions
    */
   async function getClientConfigPermissions(queryParams?: { excludePermissions?: boolean | null }): Promise<ListClientPermissionSet> {
-    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getClientConfigPermissions(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +62,7 @@ export function ClientsConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: ListUpsertModulesRequest,
     queryParams?: { forceDelete?: boolean | null }
   ): Promise<unknown> {
-    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ClientsConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateClientConfigPermission(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

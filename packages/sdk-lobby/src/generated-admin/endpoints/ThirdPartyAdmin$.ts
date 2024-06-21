@@ -17,7 +17,7 @@ import { UpdateConfigResponse } from '../../generated-definitions/UpdateConfigRe
 
 export class ThirdPartyAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required permission : &lt;code&gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;delete third party config in a namespace.
@@ -27,7 +27,7 @@ export class ThirdPartyAdmin$ {
     const url = '/lobby/v1/admin/thirdparty/namespaces/{namespace}/config/steam'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -38,7 +38,7 @@ export class ThirdPartyAdmin$ {
     const url = '/lobby/v1/admin/thirdparty/namespaces/{namespace}/config/steam'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetConfigResponse, 'GetConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetConfigResponse, 'GetConfigResponse')
   }
 
   /**
@@ -49,7 +49,7 @@ export class ThirdPartyAdmin$ {
     const url = '/lobby/v1/admin/thirdparty/namespaces/{namespace}/config/steam'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateConfigResponse, 'CreateConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateConfigResponse, 'CreateConfigResponse')
   }
 
   /**
@@ -60,6 +60,6 @@ export class ThirdPartyAdmin$ {
     const url = '/lobby/v1/admin/thirdparty/namespaces/{namespace}/config/steam'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateConfigResponse, 'UpdateConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UpdateConfigResponse, 'UpdateConfigResponse')
   }
 }

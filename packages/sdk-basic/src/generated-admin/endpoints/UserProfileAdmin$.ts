@@ -18,7 +18,7 @@ import { UserProfileStatusUpdate } from '../../generated-definitions/UserProfile
 
 export class UserProfileAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Admin get user public profile by ids.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:PROFILE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(GET)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11405&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user public profiles&lt;/li&gt;&lt;/ul&gt;
@@ -29,7 +29,7 @@ export class UserProfileAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UserProfilePublicInfoArray,
       'UserProfilePublicInfoArray'
@@ -44,7 +44,7 @@ export class UserProfileAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/profiles/byPublicId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserProfileInfo, 'UserProfileInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserProfileInfo, 'UserProfileInfo')
   }
 
   /**
@@ -57,7 +57,12 @@ export class UserProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserProfilePrivateInfo, 'UserProfilePrivateInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserProfilePrivateInfo,
+      'UserProfilePrivateInfo'
+    )
   }
 
   /**
@@ -70,7 +75,12 @@ export class UserProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserProfilePrivateInfo, 'UserProfilePrivateInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserProfilePrivateInfo,
+      'UserProfilePrivateInfo'
+    )
   }
 
   /**
@@ -83,7 +93,12 @@ export class UserProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserProfilePrivateInfo, 'UserProfilePrivateInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserProfilePrivateInfo,
+      'UserProfilePrivateInfo'
+    )
   }
 
   /**
@@ -96,7 +111,12 @@ export class UserProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserProfilePrivateInfo, 'UserProfilePrivateInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserProfilePrivateInfo,
+      'UserProfilePrivateInfo'
+    )
   }
 
   /**
@@ -109,7 +129,7 @@ export class UserProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -122,7 +142,7 @@ export class UserProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -135,7 +155,7 @@ export class UserProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -148,6 +168,6 @@ export class UserProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

@@ -16,7 +16,7 @@ import { ViewUpdate } from '../../generated-definitions/ViewUpdate.js'
 
 export class ViewAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to list all views.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of views&lt;/li&gt;&lt;/ul&gt;
@@ -26,7 +26,7 @@ export class ViewAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/views'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListViewInfoArray, 'ListViewInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListViewInfoArray, 'ListViewInfoArray')
   }
 
   /**
@@ -37,7 +37,7 @@ export class ViewAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/views'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullViewInfo, 'FullViewInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullViewInfo, 'FullViewInfo')
   }
 
   /**
@@ -48,7 +48,7 @@ export class ViewAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/views/{viewId}'.replace('{namespace}', this.namespace).replace('{viewId}', viewId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -59,7 +59,7 @@ export class ViewAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/views/{viewId}'.replace('{namespace}', this.namespace).replace('{viewId}', viewId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullViewInfo, 'FullViewInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullViewInfo, 'FullViewInfo')
   }
 
   /**
@@ -70,6 +70,6 @@ export class ViewAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/views/{viewId}'.replace('{namespace}', this.namespace).replace('{viewId}', viewId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullViewInfo, 'FullViewInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullViewInfo, 'FullViewInfo')
   }
 }

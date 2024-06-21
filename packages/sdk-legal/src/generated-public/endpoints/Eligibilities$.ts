@@ -13,7 +13,7 @@ import { RetrieveUserEligibilitiesResponseArray } from '../../generated-definiti
 
 export class Eligibilities$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.
@@ -24,7 +24,7 @@ export class Eligibilities$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveUserEligibilitiesResponseArray,
       'RetrieveUserEligibilitiesResponseArray'
@@ -48,7 +48,7 @@ export class Eligibilities$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveUserEligibilitiesIndirectResponse,
       'RetrieveUserEligibilitiesIndirectResponse'

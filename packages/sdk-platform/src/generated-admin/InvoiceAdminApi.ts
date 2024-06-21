@@ -9,15 +9,15 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { InvoiceAdmin$ } from './endpoints/InvoiceAdmin$.js'
 import { InvoiceSummary } from '../generated-definitions/InvoiceSummary.js'
+import { InvoiceAdmin$ } from './endpoints/InvoiceAdmin$.js'
 
 export function InvoiceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Generate invoice summary.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query orders&lt;/li&gt;&lt;/ul&gt;
@@ -40,7 +40,7 @@ export function InvoiceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'SEASON'
       | 'SUBSCRIPTION'
   }): Promise<InvoiceSummary> {
-    const $ = new InvoiceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new InvoiceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInvoiceSummary(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +67,7 @@ export function InvoiceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'SEASON'
       | 'SUBSCRIPTION'
   }): Promise<unknown> {
-    const $ = new InvoiceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new InvoiceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInvoiceDetailsCsv(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

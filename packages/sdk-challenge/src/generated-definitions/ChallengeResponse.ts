@@ -16,9 +16,8 @@ export const ChallengeResponse = z.object({
   goalsVisibility: z.enum(['PERIODONLY', 'SHOWALL']),
   name: z.string(),
   repeatAfter: z.number().int().nullish(),
-  rotation: z.enum(['DAILY', 'MONTHLY', 'NONE', 'STAT_CYCLE', 'WEEKLY']),
+  rotation: z.enum(['DAILY', 'MONTHLY', 'NONE', 'WEEKLY']),
   startDate: z.string(),
-  statCycleId: z.string(),
   status: z.enum(['INIT', 'RETIRED', 'TIED']),
   updatedAt: z.string()
 })

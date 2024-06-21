@@ -7,6 +7,7 @@
  * AUTO GENERATED
  */
 
+import { ConfigAdminApi } from './generated-admin/ConfigAdminApi.js'
 import { DsmcDefaultConfigurationAdminApi } from './generated-admin/DsmcDefaultConfigurationAdminApi.js'
 import { EnvironmentVariableAdminApi } from './generated-admin/EnvironmentVariableAdminApi.js'
 import { GlobalConfigurationAdminApi } from './generated-admin/GlobalConfigurationAdminApi.js'
@@ -27,6 +28,7 @@ import { PlayerApi } from './generated-public/PlayerApi.js'
 import { SessionStorageApi } from './generated-public/SessionStorageApi.js'
 
 const apis = {
+  ConfigAdminApi,
   DsmcDefaultConfigurationAdminApi,
   EnvironmentVariableAdminApi,
   GlobalConfigurationAdminApi,

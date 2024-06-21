@@ -14,7 +14,7 @@ import { SetUserVisibilityRequest } from '../../generated-definitions/SetUserVis
 
 export class UserVisibilityV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * User with false visibility status will have &lt;b&gt;hidden&lt;/b&gt; attribute set to true on it&#39;s leaderboard entry
@@ -26,7 +26,12 @@ export class UserVisibilityV3Admin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetUserVisibilityResponse,
+      'GetUserVisibilityResponse'
+    )
   }
 
   /**
@@ -42,7 +47,7 @@ export class UserVisibilityV3Admin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetHiddenUserResponse, 'GetHiddenUserResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetHiddenUserResponse, 'GetHiddenUserResponse')
   }
 
   /**
@@ -56,7 +61,12 @@ export class UserVisibilityV3Admin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetUserVisibilityResponse,
+      'GetUserVisibilityResponse'
+    )
   }
 
   /**
@@ -74,6 +84,11 @@ export class UserVisibilityV3Admin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserVisibilityResponse, 'GetUserVisibilityResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetUserVisibilityResponse,
+      'GetUserVisibilityResponse'
+    )
   }
 }

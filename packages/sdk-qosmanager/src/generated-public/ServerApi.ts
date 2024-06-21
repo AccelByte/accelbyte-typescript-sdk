@@ -17,13 +17,13 @@ export function ServerApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * ``` Required permission: QOS:SERVER [CREATE][UPDATE] Required scope: social This endpoint is intended to be called by QoS service to register and periodically let QoS Manager know that it is still alive. ```
    */
   async function createServerHeartbeat(data: HeartbeatRequest): Promise<unknown> {
-    const $ = new Server$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Server$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createServerHeartbeat(data)
     if (resp.error) throw resp.error
     return resp.response.data

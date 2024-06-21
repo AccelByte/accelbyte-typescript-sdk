@@ -19,7 +19,7 @@ import { RewardsRequest } from '../../generated-definitions/RewardsRequest.js'
 
 export class FulfillmentAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query fulfillment histories in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillment history&lt;/li&gt;&lt;/ul&gt;
@@ -35,7 +35,7 @@ export class FulfillmentAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       FulfillmentHistoryPagingSlicedResult,
       'FulfillmentHistoryPagingSlicedResult'
@@ -52,7 +52,7 @@ export class FulfillmentAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
   }
 
   /**
@@ -65,7 +65,7 @@ export class FulfillmentAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
   }
 
   /**
@@ -78,7 +78,7 @@ export class FulfillmentAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -91,7 +91,7 @@ export class FulfillmentAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentItemArray, 'FulfillmentItemArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentItemArray, 'FulfillmentItemArray')
   }
 
   /**
@@ -104,6 +104,6 @@ export class FulfillmentAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
   }
 }

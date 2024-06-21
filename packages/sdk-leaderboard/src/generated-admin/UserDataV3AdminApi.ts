@@ -17,7 +17,7 @@ export function UserDataV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * &lt;p&gt;Get user leaderboard rankings&lt;/p&gt;
@@ -26,7 +26,7 @@ export function UserDataV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetAllUserLeaderboardsRespV3> {
-    const $ = new UserDataV3Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new UserDataV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getLeaderboards_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

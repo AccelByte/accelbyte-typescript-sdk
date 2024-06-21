@@ -11,15 +11,15 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ClaimUserRewardsReq } from '../generated-definitions/ClaimUserRewardsReq.js'
 import { ListUserRewardsResponse } from '../generated-definitions/ListUserRewardsResponse.js'
-import { PlayerReward$ } from './endpoints/PlayerReward$.js'
 import { UserRewardArray } from '../generated-definitions/UserRewardArray.js'
+import { PlayerReward$ } from './endpoints/PlayerReward$.js'
 
 export function PlayerRewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -30,7 +30,7 @@ export function PlayerRewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sortBy?: string | null
     status?: 'CLAIMED' | 'UNCLAIMED'
   }): Promise<ListUserRewardsResponse> {
-    const $ = new PlayerReward$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PlayerReward$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getUsersMeRewards(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +40,7 @@ export function PlayerRewardApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
    */
   async function createUserMeRewardClaim(data: ClaimUserRewardsReq): Promise<UserRewardArray> {
-    const $ = new PlayerReward$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PlayerReward$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUserMeRewardClaim(data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -12,7 +12,7 @@ import { PaginatedGetTypeResponse } from '../../generated-definitions/PaginatedG
 
 export class PublicType$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get available types paginated
@@ -22,6 +22,11 @@ export class PublicType$ {
     const url = '/ugc/v1/public/namespaces/{namespace}/types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGetTypeResponse, 'PaginatedGetTypeResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaginatedGetTypeResponse,
+      'PaginatedGetTypeResponse'
+    )
   }
 }

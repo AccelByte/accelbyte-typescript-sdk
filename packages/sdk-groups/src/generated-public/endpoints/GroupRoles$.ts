@@ -16,7 +16,7 @@ import { RemoveRoleFromMemberRequestV1 } from '../../generated-definitions/Remov
 
 export class GroupRoles$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required Member Role Permission: &#34;GROUP:ROLE \[READ\]&#34; This endpoint is used to get list of member roles Action Code: 73201
@@ -27,7 +27,7 @@ export class GroupRoles$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetMemberRolesListResponseV1,
       'GetMemberRolesListResponseV1'
@@ -43,7 +43,7 @@ export class GroupRoles$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetMemberRolesListResponseV1,
       'GetMemberRolesListResponseV1'
@@ -60,7 +60,7 @@ export class GroupRoles$ {
       .replace('{memberRoleId}', memberRoleId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -77,7 +77,7 @@ export class GroupRoles$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserGroupInformationResponseV1,
       'GetUserGroupInformationResponseV1'
@@ -99,7 +99,7 @@ export class GroupRoles$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -118,7 +118,7 @@ export class GroupRoles$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserGroupInformationResponseV1,
       'GetUserGroupInformationResponseV1'

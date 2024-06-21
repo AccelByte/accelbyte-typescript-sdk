@@ -9,6 +9,7 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+
 import { AnonymizationAdmin$ } from './endpoints/AnonymizationAdmin$.js'
 
 export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -16,13 +17,13 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Delete all user group
    */
   async function deleteGroup_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteGroup_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +33,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]
    */
   async function deleteState_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteState_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +43,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete all user channel
    */
   async function deleteChannel_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteChannel_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +53,7 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
    */
   async function deleteContent_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteContent_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

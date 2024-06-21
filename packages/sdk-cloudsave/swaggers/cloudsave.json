@@ -8,7 +8,7 @@
     },
     "description": "Justice Cloudsave Service",
     "title": "justice-cloudsave-service",
-    "version": "3.17.1"
+    "version": "3.19.1"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -124,6 +124,12 @@
         ],
         "summary": "List key of admin game record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18139": "unable to get record",
+          "18149": "invalid request body",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -202,6 +208,15 @@
         ],
         "summary": "Bulk get admin game records",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18168": "invalid request body",
+          "18169": "request record keys list exceed max size [%d]",
+          "18170": "unable to get record",
+          "18171": "record not found",
+          "18172": "unable to decode record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -270,6 +285,12 @@
         ],
         "summary": "Delete admin game record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18142": "unable to delete record",
+          "18167": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -339,6 +360,13 @@
         ],
         "summary": "Get admin game record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18138": "unable to decode record",
+          "18139": "unable to get record",
+          "18140": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -417,6 +445,17 @@
         ],
         "summary": "Create or append admin game record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18013": "unable to save record",
+          "18134": "invalid request body",
+          "18135": "unable to marshal request body",
+          "18136": "invalid request body: size of the request body must be less than [%d]MB",
+          "18165": "unable to decode record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -495,6 +534,17 @@
         ],
         "summary": "Create or replace admin game record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18144": "invalid request body",
+          "18145": "unable to marshal request body",
+          "18146": "invalid request body: size of the request body must be less than [%d]MB",
+          "18147": "unable to update record",
+          "18164": "unable to decode record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -589,6 +639,12 @@
         ],
         "summary": "Query game binary records",
         "tags": ["AdminGameBinaryRecord"],
+        "x-errorCodes": {
+          "18301": "unable to get record",
+          "18304": "invalid request body",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -665,6 +721,15 @@
         ],
         "summary": "Create game binary record",
         "tags": ["AdminGameBinaryRecord"],
+        "x-errorCodes": {
+          "18301": "unable to get record",
+          "18305": "invalid request body",
+          "18307": "unable to save record",
+          "18309": "key already exists",
+          "18310": "unable to get presigned URL",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -739,6 +804,13 @@
         ],
         "summary": "Delete game binary record",
         "tags": ["AdminGameBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18320": "unable to delete record",
+          "18322": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -808,6 +880,12 @@
         ],
         "summary": "Get game binary record",
         "tags": ["AdminGameBinaryRecord"],
+        "x-errorCodes": {
+          "18301": "unable to get record",
+          "18303": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -891,6 +969,14 @@
         ],
         "summary": "Update game binary record file",
         "tags": ["AdminGameBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18316": "invalid request body",
+          "18317": "record not found",
+          "18318": "unable to update record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -976,6 +1062,13 @@
         ],
         "summary": "Update game binary record metadata",
         "tags": ["AdminGameBinaryRecord"],
+        "x-errorCodes": {
+          "18316": "invalid request body",
+          "18317": "record not found",
+          "18318": "unable to update record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1061,6 +1154,15 @@
         ],
         "summary": "Request presigned URL for upload game binary records",
         "tags": ["AdminGameBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18311": "invalid request body",
+          "18312": "unable to get record",
+          "18313": "record not found",
+          "18314": "unable to get presigned URL",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1135,6 +1237,14 @@
         ],
         "summary": "Delete game binary record TTL config",
         "tags": ["TTLConfig"],
+        "x-errorCodes": {
+          "18317": "record not found",
+          "18318": "unable to update record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1217,6 +1327,17 @@
         ],
         "summary": "Create or replace admin game record",
         "tags": ["AdminConcurrentRecord"],
+        "x-errorCodes": {
+          "18144": "invalid request body",
+          "18145": "unable to marshal request body",
+          "18146": "invalid request body: size of the request body must be less than [%d]MB",
+          "18147": "unable to update record",
+          "18180": "precondition failed: record has changed",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1300,6 +1421,18 @@
         ],
         "summary": "Create or replace game record",
         "tags": ["AdminConcurrentRecord"],
+        "x-errorCodes": {
+          "18051": "unable to marshal request body",
+          "18052": "invalid request body: size of the request body must be less than [%d]MB",
+          "18053": "unable to update record",
+          "18056": "precondition failed: record has changed",
+          "18060": "invalid request body",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1361,6 +1494,12 @@
         ],
         "summary": "Delete plugin configuration",
         "tags": ["PluginConfig"],
+        "x-errorCodes": {
+          "18406": "plugins config not found",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1423,6 +1562,12 @@
         ],
         "summary": "Get plugin configuration",
         "tags": ["PluginConfig"],
+        "x-errorCodes": {
+          "18404": "plugins not found",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1499,6 +1644,14 @@
         ],
         "summary": "Update plugin configuration",
         "tags": ["PluginConfig"],
+        "x-errorCodes": {
+          "18408": "invalid request body",
+          "18409": "plugins config not found",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1575,6 +1728,14 @@
         ],
         "summary": "Create plugin configuration",
         "tags": ["PluginConfig"],
+        "x-errorCodes": {
+          "18401": "invalid request body",
+          "18402": "plugins already configured",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1671,6 +1832,12 @@
         ],
         "summary": "Query game records",
         "tags": ["AdminGameRecord"],
+        "x-errorCodes": {
+          "18001": "unable to get record",
+          "18004": "unable to retrieve list of key records",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1739,6 +1906,13 @@
         ],
         "summary": "Delete game record",
         "tags": ["AdminGameRecord"],
+        "x-errorCodes": {
+          "18040": "unable to delete record",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1808,6 +1982,13 @@
         ],
         "summary": "Get game record",
         "tags": ["AdminGameRecord"],
+        "x-errorCodes": {
+          "18001": "unable to get record",
+          "18003": "record not found",
+          "18005": "unable to decode record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1887,6 +2068,17 @@
         ],
         "summary": "Create or append game record",
         "tags": ["AdminGameRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18011": "invalid request body",
+          "18012": "unable to marshal request body",
+          "18013": "unable to save record",
+          "18015": "invalid request body: size of the request body must be less than [%d]MB",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1966,6 +2158,17 @@
         ],
         "summary": "Create or replace game record",
         "tags": ["AdminGameRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18050": "invalid request body",
+          "18051": "unable to marshal request body",
+          "18052": "invalid request body: size of the request body must be less than [%d]MB",
+          "18053": "unable to update record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2040,6 +2243,14 @@
         ],
         "summary": "Delete game record TTL config",
         "tags": ["TTLConfig"],
+        "x-errorCodes": {
+          "18003": "record not found",
+          "18053": "unable to update record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2118,6 +2329,12 @@
         ],
         "summary": "List tags",
         "tags": ["AdminTags"],
+        "x-errorCodes": {
+          "18502": "unable to list tags",
+          "18503": "unable to list tags",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2192,6 +2409,15 @@
         ],
         "summary": "Create a tag",
         "tags": ["AdminTags"],
+        "x-errorCodes": {
+          "18505": "invalid request body",
+          "18506": "tag already exists",
+          "18507": "unable to create tag",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2260,6 +2486,12 @@
         ],
         "summary": "Delete a tag",
         "tags": ["AdminTags"],
+        "x-errorCodes": {
+          "18509": "unable to delete tag",
+          "18510": "tag not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2345,6 +2577,14 @@
         ],
         "summary": "Bulk get admin player record by multiple user ID",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18184": "invalid request body",
+          "18185": "unable to get record",
+          "18186": "record not found",
+          "18187": "unable to decode record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2417,6 +2657,12 @@
         ],
         "summary": "Bulk get player records size",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18124": "unable to get record",
+          "18125": "invalid request body",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2502,6 +2748,12 @@
         ],
         "summary": "Retrieve list of public player records",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18113": "invalid request body",
+          "18114": "unable to retrieve list of key records",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2581,6 +2833,14 @@
         ],
         "summary": "Bulk get player records by multiple user ids",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18006": "unable to decode record",
+          "18124": "unable to get record",
+          "18125": "invalid request body",
+          "18126": "request record keys list exceed max size [%d]",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2661,6 +2921,15 @@
         ],
         "summary": "Bulk update player records by key",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18353": "invalid request body",
+          "18354": "records amount exceeded max limit",
+          "18355": "unable to marshal request body",
+          "18356": "invalid request body: size of the request body must be less than [%d]MB",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2762,6 +3031,12 @@
         ],
         "summary": "List key of admin player record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18159": "invalid request body",
+          "18160": "unable to retrieve list of key records",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2847,6 +3122,15 @@
         ],
         "summary": "Bulk get admin player records",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18174": "invalid request body",
+          "18175": "request record keys list exceed max size [%d]",
+          "18176": "unable to get record",
+          "18177": "record not found",
+          "18178": "unable to decode record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2922,6 +3206,12 @@
         ],
         "summary": "Delete admin player record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18154": "unable to delete record",
+          "18167": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2998,6 +3288,13 @@
         ],
         "summary": "Get admin player record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18151": "unable to get record",
+          "18152": "record not found",
+          "18157": "unable to decode record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3083,6 +3380,15 @@
         ],
         "summary": "Create or append admin player record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18033": "unable to save record",
+          "18150": "invalid request body",
+          "18163": "unable to decode record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3168,6 +3474,15 @@
         ],
         "summary": "Create or replace admin player record",
         "tags": ["AdminRecord"],
+        "x-errorCodes": {
+          "18061": "unable to update record",
+          "18156": "invalid request body",
+          "18162": "unable to decode record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3269,6 +3584,12 @@
         ],
         "summary": "Query player binary records",
         "tags": ["AdminPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18323": "unable to get record",
+          "18326": "invalid request body",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3352,6 +3673,15 @@
         ],
         "summary": "Create player binary record",
         "tags": ["AdminPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18323": "unable to get record",
+          "18327": "invalid request body",
+          "18328": "unable to save record",
+          "18330": "key already exists",
+          "18331": "unable to get presigned URL",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3427,6 +3757,12 @@
         ],
         "summary": "Delete player binary record",
         "tags": ["AdminPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18336": "unable to delete record",
+          "18338": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3503,6 +3839,12 @@
         ],
         "summary": "Get player binary record",
         "tags": ["AdminPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18323": "unable to get record",
+          "18325": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3593,6 +3935,13 @@
         ],
         "summary": "Update player binary record file",
         "tags": ["AdminPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18332": "invalid request body",
+          "18333": "record not found",
+          "18334": "unable to update record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3685,6 +4034,13 @@
         ],
         "summary": "Update player binary record metadata",
         "tags": ["AdminPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18332": "invalid request body",
+          "18333": "record not found",
+          "18334": "unable to update record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3777,6 +4133,14 @@
         ],
         "summary": "Request presigned URL for upload player binary records",
         "tags": ["AdminPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18311": "invalid request body",
+          "18312": "unable to get record",
+          "18313": "record not found",
+          "18314": "unable to get presigned URL",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3879,6 +4243,16 @@
         ],
         "summary": "Create or replace admin player record",
         "tags": ["AdminConcurrentRecord"],
+        "x-errorCodes": {
+          "18156": "invalid request body",
+          "18181": "validation error",
+          "18182": "unable to update record",
+          "18183": "precondition failed: record has changed",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3982,6 +4356,18 @@
         ],
         "summary": "Create or replace player private record",
         "tags": ["AdminConcurrentRecord"],
+        "x-errorCodes": {
+          "18060": "invalid request body",
+          "18061": "unable to update record",
+          "18064": "validation error",
+          "18065": "unable to update record",
+          "18066": "precondition failed: record has changed",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4085,6 +4471,17 @@
         ],
         "summary": "Create or replace player public record",
         "tags": ["AdminConcurrentRecord"],
+        "x-errorCodes": {
+          "18100": "invalid request body",
+          "18101": "unable to update record",
+          "18102": "validation error",
+          "18103": "precondition failed: record has changed",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4186,6 +4583,12 @@
         ],
         "summary": "Query player records",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18113": "invalid request body",
+          "18114": "unable to retrieve list of key records",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4271,6 +4674,15 @@
         ],
         "summary": "Bulk get player records by multiple record keys",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18006": "unable to decode record",
+          "18124": "unable to get record",
+          "18125": "invalid request body",
+          "18126": "request record keys list exceed max size [%d]",
+          "18186": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4345,6 +4757,14 @@
         ],
         "summary": "Bulk update player records",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18353": "invalid request body",
+          "18354": "records amount exceeded max limit",
+          "18355": "unable to marshal request body",
+          "18356": "invalid request body: size of the request body must be less than [%d]MB",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4414,6 +4834,11 @@
         ],
         "summary": "Delete player record",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18070": "unable to delete record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4490,6 +4915,13 @@
         ],
         "summary": "Get player record",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18020": "unable to get record",
+          "18022": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4576,6 +5008,15 @@
         ],
         "summary": "Create or append player record",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18030": "invalid request body",
+          "18033": "unable to save record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4662,6 +5103,15 @@
         ],
         "summary": "Create or replace player record",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18060": "invalid request body",
+          "18061": "unable to update record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4743,6 +5193,13 @@
         ],
         "summary": "Delete player public record",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18120": "unable to delete record",
+          "18122": "record not found",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4819,6 +5276,13 @@
         ],
         "summary": "Get player public record",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18080": "unable to get record",
+          "18081": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4904,6 +5368,15 @@
         ],
         "summary": "Create or append player public record",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18030": "invalid request body",
+          "18033": "unable to save record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4989,6 +5462,15 @@
         ],
         "summary": "Create or replace player public record",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18060": "invalid request body",
+          "18061": "unable to update record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5067,6 +5549,12 @@
         ],
         "summary": "Get player record size",
         "tags": ["AdminPlayerRecord"],
+        "x-errorCodes": {
+          "18020": "unable to get record",
+          "18022": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5161,6 +5649,12 @@
         ],
         "summary": "Query game binary records",
         "tags": ["PublicGameBinaryRecord"],
+        "x-errorCodes": {
+          "18301": "unable to get record",
+          "18304": "invalid request body",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5237,6 +5731,15 @@
         ],
         "summary": "Create game binary record",
         "tags": ["PublicGameBinaryRecord"],
+        "x-errorCodes": {
+          "18301": "unable to get record",
+          "18305": "invalid request body",
+          "18307": "unable to save record",
+          "18309": "key already exists",
+          "18310": "unable to get presigned URL",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5309,6 +5812,13 @@
         ],
         "summary": "Bulk get game binary records",
         "tags": ["PublicGameBinaryRecord"],
+        "x-errorCodes": {
+          "18349": "unable to get record",
+          "18350": "invalid request body",
+          "18351": "request record keys list exceed max size [%d]",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5380,6 +5890,13 @@
         ],
         "summary": "Delete game binary record",
         "tags": ["PublicGameBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18320": "unable to delete record",
+          "18322": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5449,6 +5966,12 @@
         ],
         "summary": "Get game binary record",
         "tags": ["PublicGameBinaryRecord"],
+        "x-errorCodes": {
+          "18301": "unable to get record",
+          "18303": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5532,6 +6055,14 @@
         ],
         "summary": "Update game binary record file",
         "tags": ["PublicGameBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18316": "invalid request body",
+          "18317": "record not found",
+          "18318": "unable to update record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5617,6 +6148,15 @@
         ],
         "summary": "Request presigned URL for upload game binary records",
         "tags": ["PublicGameBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18311": "invalid request body",
+          "18312": "unable to get record",
+          "18313": "record not found",
+          "18314": "unable to get presigned URL",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5699,6 +6239,18 @@
         ],
         "summary": "Create or replace game record",
         "tags": ["ConcurrentRecord"],
+        "x-errorCodes": {
+          "18051": "unable to marshal request body",
+          "18052": "invalid request body: size of the request body must be less than [%d]MB",
+          "18053": "unable to update record",
+          "18056": "precondition failed: record has changed",
+          "18060": "invalid request body",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5777,6 +6329,16 @@
         ],
         "summary": "Bulk get game records",
         "tags": ["PublicGameRecord"],
+        "x-errorCodes": {
+          "18128": "invalid request body",
+          "18129": "request record keys list exceed max size [%d]",
+          "18130": "unable to get record",
+          "18131": "unable to decode record",
+          "18133": "record not found",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5845,6 +6407,13 @@
         ],
         "summary": "Delete game record",
         "tags": ["PublicGameRecord"],
+        "x-errorCodes": {
+          "18040": "unable to delete record",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5920,6 +6489,15 @@
         ],
         "summary": "Get game record",
         "tags": ["PublicGameRecord"],
+        "x-errorCodes": {
+          "18001": "unable to get record",
+          "18003": "record not found",
+          "18005": "unable to decode record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5998,6 +6576,18 @@
         ],
         "summary": "Create or append game record",
         "tags": ["PublicGameRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18011": "invalid request body",
+          "18012": "unable to marshal request body",
+          "18013": "unable to save record",
+          "18015": "invalid request body: size of the request body must be less than [%d]MB",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6076,6 +6666,18 @@
         ],
         "summary": "Create or replace game record",
         "tags": ["PublicGameRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18050": "invalid request body",
+          "18051": "unable to marshal request body",
+          "18052": "invalid request body: size of the request body must be less than [%d]MB",
+          "18053": "unable to update record",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6154,6 +6756,12 @@
         ],
         "summary": "List tags",
         "tags": ["PublicTags"],
+        "x-errorCodes": {
+          "18502": "unable to list tags",
+          "18503": "unable to list tags",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6233,6 +6841,12 @@
         ],
         "summary": "Bulk get player public records",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18342": "invalid request body",
+          "18343": "unable to get record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6312,6 +6926,14 @@
         ],
         "summary": "Bulk get player public records",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18006": "unable to decode record",
+          "18083": "invalid request body",
+          "18084": "unable to get record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6406,6 +7028,13 @@
         ],
         "summary": "Query my binary records",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18125": "invalid request body",
+          "18126": "request record keys list exceed max size [%d]",
+          "18343": "unable to get record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6475,6 +7104,13 @@
         ],
         "summary": "Get player records bulk",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18125": "invalid request body",
+          "18126": "request record keys list exceed max size [%d]",
+          "18343": "unable to get record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6560,6 +7196,12 @@
         ],
         "summary": "Query player records key",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18113": "invalid request body",
+          "18114": "unable to retrieve list of key records",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6629,6 +7271,15 @@
         ],
         "summary": "Get player records bulk",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18006": "unable to decode record",
+          "18124": "unable to get record",
+          "18125": "invalid request body",
+          "18126": "request record keys list exceed max size [%d]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6700,6 +7351,13 @@
         ],
         "summary": "Delete player public record",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18120": "unable to delete record",
+          "18122": "record not found",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6782,6 +7440,15 @@
         ],
         "summary": "Create player binary record",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18323": "unable to get record",
+          "18327": "invalid request body",
+          "18328": "unable to save record",
+          "18330": "key already exists",
+          "18331": "unable to get presigned URL",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6877,6 +7544,12 @@
         ],
         "summary": "Query other player public binary record",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18345": "unable to retrieve list of key records",
+          "18347": "invalid request body",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6956,6 +7629,12 @@
         ],
         "summary": "Bulk get other player public binary record",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18342": "invalid request body",
+          "18343": "unable to get record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7037,6 +7716,13 @@
         ],
         "summary": "Delete player binary record",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18336": "unable to delete record",
+          "18338": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7113,6 +7799,12 @@
         ],
         "summary": "Get player binary record",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18323": "unable to get record",
+          "18325": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7203,6 +7895,14 @@
         ],
         "summary": "Update player binary record file",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18332": "invalid request body",
+          "18333": "record not found",
+          "18334": "unable to update record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7295,6 +7995,14 @@
         ],
         "summary": "Update player binary record metadata",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18332": "invalid request body",
+          "18333": "record not found",
+          "18334": "unable to update record",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7387,6 +8095,15 @@
         ],
         "summary": "Request presigned URL for upload player binary records",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "18311": "invalid request body",
+          "18312": "unable to get record",
+          "18313": "record not found",
+          "18314": "unable to get presigned URL",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7465,6 +8182,12 @@
         ],
         "summary": "Get player public binary record",
         "tags": ["PublicPlayerBinaryRecord"],
+        "x-errorCodes": {
+          "18339": "unable to get record",
+          "18340": "record not found",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7567,6 +8290,18 @@
         ],
         "summary": "Create or replace player private record",
         "tags": ["ConcurrentRecord"],
+        "x-errorCodes": {
+          "18060": "invalid request body",
+          "18061": "unable to update record",
+          "18064": "validation error",
+          "18065": "unable to update record",
+          "18066": "precondition failed: record has changed",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7669,6 +8404,17 @@
         ],
         "summary": "Create or replace player public record",
         "tags": ["ConcurrentRecord"],
+        "x-errorCodes": {
+          "18100": "invalid request body",
+          "18101": "unable to update record",
+          "18102": "validation error",
+          "18103": "precondition failed: record has changed",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7764,6 +8510,12 @@
         ],
         "summary": "Query other player public record key",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18113": "invalid request body",
+          "18114": "unable to retrieve list of key records",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7843,6 +8595,15 @@
         ],
         "summary": "Get other player public record bulk",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18006": "unable to decode record",
+          "18124": "unable to get record",
+          "18125": "invalid request body",
+          "18126": "request record keys list exceed max size [%d]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -7918,6 +8679,13 @@
         ],
         "summary": "Delete player record",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18070": "unable to delete record",
+          "18072": "delete action is forbidden on other user's record",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -8000,6 +8768,16 @@
         ],
         "summary": "Get player record",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18006": "unable to decode record",
+          "18020": "unable to get record",
+          "18022": "record not found",
+          "18023": "get action is forbidden on other user's record",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -8085,6 +8863,18 @@
         ],
         "summary": "Create or append player record",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18030": "invalid request body",
+          "18033": "unable to save record",
+          "18035": "post action is forbidden on other user's record",
+          "18060": "invalid request body",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -8170,6 +8960,17 @@
         ],
         "summary": "Create or replace player record",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18060": "invalid request body",
+          "18061": "unable to update record",
+          "18063": "put action is forbidden on other user's record",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -8254,6 +9055,15 @@
         ],
         "summary": "Get player public record",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18006": "unable to decode record",
+          "18080": "unable to get record",
+          "18081": "record not found",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -8339,6 +9149,16 @@
         ],
         "summary": "Create or append player public record",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18090": "invalid request body",
+          "18091": "unable to save record",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -8424,6 +9244,16 @@
         ],
         "summary": "Create or replace player public record",
         "tags": ["PublicPlayerRecord"],
+        "x-errorCodes": {
+          "18005": "unable to decode record",
+          "18100": "invalid request body",
+          "18101": "unable to update record",
+          "18201": "invalid record operator, expect [%s] but actual [%s]",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -9726,11 +10556,11 @@
     "path": "/cloudsave/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-30T04:06:37+00:00",
-    "gitHash": "70a6dc89c17519df58f46f50896a5846cd126106",
+    "buildDate": "2024-05-21T02:34:23+00:00",
+    "gitHash": "c4e6133572487049e5570dadcd5572229f2ac2fd",
     "name": "justice-cloudsave-service",
-    "revisionID": "3.17.1",
-    "version": "3.17.1",
+    "revisionID": "3.19.1",
+    "version": "3.19.1",
     "version-roles-seeding": "0.0.46"
   }
 }

@@ -12,7 +12,7 @@ import { LegalReadinessStatusResponse } from '../../generated-definitions/LegalR
 
 export class Utility$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.
@@ -23,7 +23,7 @@ export class Utility$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       LegalReadinessStatusResponse,
       'LegalReadinessStatusResponse'

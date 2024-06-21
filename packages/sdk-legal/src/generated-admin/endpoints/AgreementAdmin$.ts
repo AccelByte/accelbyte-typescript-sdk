@@ -15,7 +15,7 @@ import { RetrieveAcceptedAgreementResponseArray } from '../../generated-definiti
 
 export class AgreementAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API will return users who has accepted a specific policy version.
@@ -31,7 +31,7 @@ export class AgreementAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PagedRetrieveUserAcceptedAgreementResponse,
       'PagedRetrieveUserAcceptedAgreementResponse'
@@ -47,7 +47,7 @@ export class AgreementAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveAcceptedAgreementResponseArray,
       'RetrieveAcceptedAgreementResponseArray'
@@ -67,6 +67,6 @@ export class AgreementAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

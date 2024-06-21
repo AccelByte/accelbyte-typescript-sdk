@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const ServiceConfigDto = z.object({ protocol: z.enum(['GRPC']), skipAck: z.boolean().nullish(), url: z.string() })
+export const ServiceConfigDto = z.object({ protocol: z.enum(['EVENT', 'GRPC']), skipAck: z.boolean().nullish(), url: z.string().nullish() })
 
 export interface ServiceConfigDto extends z.TypeOf<typeof ServiceConfigDto> {}

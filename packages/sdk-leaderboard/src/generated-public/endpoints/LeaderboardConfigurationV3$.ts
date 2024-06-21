@@ -13,7 +13,7 @@ import { GetLeaderboardConfigPublicRespV3 } from '../../generated-definitions/Ge
 
 export class LeaderboardConfigurationV3$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
@@ -28,7 +28,7 @@ export class LeaderboardConfigurationV3$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetAllLeaderboardConfigsPublicRespV3,
       'GetAllLeaderboardConfigsPublicRespV3'
@@ -46,7 +46,7 @@ export class LeaderboardConfigurationV3$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetLeaderboardConfigPublicRespV3,
       'GetLeaderboardConfigPublicRespV3'

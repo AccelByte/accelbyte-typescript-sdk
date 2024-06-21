@@ -17,7 +17,7 @@ import { TemplateCompactArray } from '../../generated-definitions/TemplateCompac
 
 export class TemplatesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve templates on a given namespace
@@ -27,7 +27,7 @@ export class TemplatesAdmin$ {
     const url = '/odin-config/v1/admin/namespaces/{namespace}/templates'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TemplateCompactArray, 'TemplateCompactArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TemplateCompactArray, 'TemplateCompactArray')
   }
 
   /**
@@ -38,7 +38,7 @@ export class TemplatesAdmin$ {
     const url = '/odin-config/v1/admin/namespaces/{namespace}/templates'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Template, 'Template')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Template, 'Template')
   }
 
   /**
@@ -51,7 +51,7 @@ export class TemplatesAdmin$ {
       .replace('{template}', template)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CacheResult, 'CacheResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CacheResult, 'CacheResult')
   }
 
   /**
@@ -64,7 +64,7 @@ export class TemplatesAdmin$ {
       .replace('{template}', template)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -77,7 +77,7 @@ export class TemplatesAdmin$ {
       .replace('{template}', template)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Configs, 'Configs')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configs, 'Configs')
   }
 
   /**
@@ -90,7 +90,7 @@ export class TemplatesAdmin$ {
       .replace('{template}', template)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Config, 'Config')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Config, 'Config')
   }
 
   /**
@@ -104,7 +104,7 @@ export class TemplatesAdmin$ {
       .replace('{config}', config)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Config, 'Config')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Config, 'Config')
   }
 
   /**
@@ -118,6 +118,6 @@ export class TemplatesAdmin$ {
       .replace('{config}', config)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Config, 'Config')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Config, 'Config')
   }
 }

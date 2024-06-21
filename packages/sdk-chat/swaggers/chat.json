@@ -102,6 +102,7 @@
         ],
         "summary": "Return filtered chat message",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -231,6 +232,7 @@
         ],
         "summary": "admin get chat history",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -276,6 +278,7 @@
         ],
         "summary": "Use to create namespace group. Message that send to this group send to connected user in a namespace",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]"]
@@ -358,6 +361,7 @@
         ],
         "summary": "admin get list of topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -401,6 +405,7 @@
         ],
         "summary": "Use to create group. Only group admin can use this operation",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [CREATE]"]
@@ -480,6 +485,7 @@
         ],
         "summary": "admin get list of channel topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -541,6 +547,7 @@
         ],
         "summary": "admin get channel topic summary",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -654,6 +661,7 @@
         ],
         "summary": "admin query topic log",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -698,6 +706,7 @@
         ],
         "summary": "Use to delete group. Only group admin can use this operation",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"]
@@ -748,6 +757,7 @@
         ],
         "summary": "Use to update group information. Only group admin can use this operation",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -824,6 +834,7 @@
         ],
         "summary": "admins ban user in group topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -898,6 +909,7 @@
         ],
         "summary": "admin get channel topic detail",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -1015,6 +1027,7 @@
         ],
         "summary": "admin get chat history",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -1092,6 +1105,7 @@
         ],
         "summary": "admins send chat to group topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -1164,6 +1178,7 @@
         ],
         "summary": "admins delete chat",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"]
@@ -1264,6 +1279,7 @@
         ],
         "summary": "admin get topic member",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -1335,6 +1351,7 @@
         ],
         "summary": "admin get shard list of topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -1411,6 +1428,7 @@
         ],
         "summary": "admins unban user in group topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -1462,6 +1480,7 @@
         ],
         "summary": "admin remove user from topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -1519,6 +1538,7 @@
         ],
         "summary": "admin add user to topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -1646,6 +1666,7 @@
         ],
         "summary": "admin query topics",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -1747,6 +1768,7 @@
         ],
         "summary": "admin query user's topics",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -1811,6 +1833,7 @@
         ],
         "summary": "public get muted at topics",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -1889,6 +1912,7 @@
         ],
         "summary": "public get list of topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -1961,6 +1985,7 @@
         ],
         "summary": "public ban topic members in a group topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -2050,6 +2075,7 @@
         ],
         "summary": "public get chat history",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -2118,6 +2144,7 @@
         ],
         "summary": "public delete chat",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"]
@@ -2192,6 +2219,7 @@
         ],
         "summary": "public mute user in a topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -2268,6 +2296,7 @@
         ],
         "summary": "public unban topic members in a group topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -2342,6 +2371,7 @@
         ],
         "summary": "public unmute user in a topic",
         "tags": ["topic"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [UPDATE]"]
@@ -2400,6 +2430,7 @@
         ],
         "summary": "admin get all namespaces config",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]"]
@@ -2467,6 +2498,7 @@
         ],
         "summary": "admin get namespace config",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]"]
@@ -2547,6 +2579,7 @@
         ],
         "summary": "admin update namespace config",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]"]
@@ -2605,6 +2638,7 @@
         ],
         "summary": "Export chat config to a json file.",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [READ]"]
@@ -2666,6 +2700,7 @@
         ],
         "summary": "Import chat config from a json file.",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CONFIG [UPDATE]"]
@@ -2730,6 +2765,7 @@
         ],
         "summary": "admin get inbox categories",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]"]
@@ -2797,6 +2833,7 @@
         ],
         "summary": "add inbox category",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [CREATE]"]
@@ -2862,6 +2899,7 @@
         ],
         "summary": "admin delete inbox category",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [DELETE]"]
@@ -2933,6 +2971,7 @@
         ],
         "summary": "admin update inbox category",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [UPDATE]"]
@@ -3007,6 +3046,7 @@
         ],
         "summary": "admin get category schema",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]"]
@@ -3079,6 +3119,7 @@
         ],
         "summary": "admin delete inbox message",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [DELETE]"]
@@ -3208,6 +3249,7 @@
         ],
         "summary": "admin get inbox messages",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"]
@@ -3275,6 +3317,7 @@
         ],
         "summary": "admin save inbox message",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [CREATE]"]
@@ -3351,6 +3394,7 @@
         ],
         "summary": "admin unsend inbox message",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"]
@@ -3444,6 +3488,7 @@
         ],
         "summary": "admin get inbox users",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"]
@@ -3517,6 +3562,7 @@
         ],
         "summary": "admin update inbox message",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"]
@@ -3593,6 +3639,7 @@
         ],
         "summary": "admin send inbox message",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [UPDATE]"]
@@ -3664,6 +3711,7 @@
         ],
         "summary": "admin get inbox stats",
         "tags": ["inbox"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:INBOX [READ]"]
@@ -3735,6 +3783,7 @@
         ],
         "summary": "admin delete chat snapshot",
         "tags": ["moderation"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [DELETE]"]
@@ -3807,6 +3856,7 @@
         ],
         "summary": "admin get chat snapshot",
         "tags": ["moderation"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -3917,6 +3967,7 @@
         ],
         "summary": "admin query profanity words",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"]
@@ -3991,6 +4042,7 @@
         ],
         "summary": "admin insert new profanity words",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"]
@@ -4067,6 +4119,7 @@
         ],
         "summary": "admin bulk insert new profanity words",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"]
@@ -4128,6 +4181,7 @@
         ],
         "summary": "admin export profanity words",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"]
@@ -4204,6 +4258,7 @@
         ],
         "summary": "admin get profanity words group",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [READ]"]
@@ -4291,6 +4346,7 @@
         ],
         "summary": "admin import profanity words",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [CREATE]"]
@@ -4362,6 +4418,7 @@
         ],
         "summary": "admin delete profanity words",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [DELETE]"]
@@ -4443,6 +4500,7 @@
         ],
         "summary": "admin update profanity word",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:PROFANITY [UPDATE]"]
@@ -4478,7 +4536,8 @@
             "authorization": []
           }
         ],
-        "summary": "get service messages"
+        "summary": "get service messages",
+        "x-errorCodes": {}
       }
     },
     "/chat/v1/public/config/namespaces/{namespace}": {
@@ -4541,6 +4600,7 @@
         ],
         "summary": "public get namespace config",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -4618,6 +4678,7 @@
         ],
         "summary": "public get chat snapshot",
         "tags": ["moderation"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "groupPermissions": ["NAMESPACE:{namespace}:CHAT:TOPIC [READ]"]
@@ -5953,7 +6014,7 @@
           "type": "array"
         }
       },
-      "required": ["category", "expiredAt", "message", "scope", "status", "userIds"]
+      "required": ["expiredAt", "message", "scope", "status", "userIds"]
     },
     "models.SaveInboxMessageResponse": {
       "properties": {
@@ -5985,7 +6046,7 @@
           "type": "array"
         }
       },
-      "required": ["category", "expiredAt", "id", "scope", "status"]
+      "required": ["expiredAt", "id", "scope", "status"]
     },
     "models.SendInboxMessageRequest": {},
     "models.SendInboxMessageResponse": {},
@@ -6269,11 +6330,11 @@
     "path": "/chat/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-24T06:56:26+00:00",
-    "gitHash": "5c7fe4f70bbfa47d20ab0e9eaa7a5770a618cea3",
+    "buildDate": "2024-05-27T03:52:22+00:00",
+    "gitHash": "8c254bafc844317885ec87ec4a90716daaed58ef",
     "name": "justice-chat-service",
-    "revisionID": "0.4.26",
-    "version": "0.4.26",
+    "revisionID": "0.4.29",
+    "version": "0.4.29",
     "version-roles-seeding": "1.2.15"
   }
 }

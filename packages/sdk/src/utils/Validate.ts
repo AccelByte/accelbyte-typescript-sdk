@@ -5,7 +5,6 @@
  */
 import { AxiosError, AxiosResponse } from 'axios'
 import { z, ZodError } from 'zod'
-import { Logger } from './Logger'
 
 export type IResponseError = Error | AxiosError
 
@@ -80,7 +79,6 @@ export class DecodeError extends Error {
   constructor({ error, response, modelName }: { error: ZodError; response: AxiosResponse; modelName: string }) {
     const msg = `response from url "${response.config.url}" doesn't match model "${modelName}"`
     super(msg)
-
-    Logger.error(msg, error)
+    console.error(msg, error)
   }
 }

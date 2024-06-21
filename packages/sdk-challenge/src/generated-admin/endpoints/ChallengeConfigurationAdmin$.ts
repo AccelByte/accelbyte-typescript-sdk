@@ -18,7 +18,7 @@ import { UpdateChallengeRequest } from '../../generated-definitions/UpdateChalle
 
 export class ChallengeConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -33,7 +33,7 @@ export class ChallengeConfigurationAdmin$ {
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListChallengeResponse, 'ListChallengeResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListChallengeResponse, 'ListChallengeResponse')
   }
 
   /**
@@ -44,7 +44,7 @@ export class ChallengeConfigurationAdmin$ {
     const url = '/challenge/v1/admin/namespaces/{namespace}/challenges'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
   }
 
   /**
@@ -57,7 +57,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -70,11 +70,11 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
   }
 
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Request body:&lt;ul&gt;&lt;li&gt;name: name of the challenge&lt;/li&gt;&lt;li&gt;description: text describing about the challenge (optional)&lt;/li&gt;&lt;li&gt;startDate: timestamp of when the challenge is started&lt;/li&gt;&lt;li&gt;endDate: timestamp of when the challenge is ended (optional)&lt;/li&gt;&lt;li&gt;endAfter: describe number of period challenge will be retired after (optional)&lt;/li&gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.&lt;/ul&gt;&lt;/p&gt;
+   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Request body:&lt;ul&gt;&lt;li&gt;name: name of the challenge&lt;/li&gt;&lt;li&gt;description: text describing about the challenge (optional)&lt;/li&gt;&lt;li&gt;startDate: timestamp of when the challenge is started&lt;/li&gt;&lt;li&gt;endDate: timestamp of when the challenge is ended (optional)&lt;/li&gt;&lt;li&gt;endAfter: describe number of period challenge will be retired after (optional)&lt;/li&gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.&lt;li&gt;repeatAfter: describe number of period challenge&#39;s goals will be repeated after. Leave it empty if you don&#39;t want to repeat the challenge.&lt;/li&gt;&lt;li&gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)&lt;/li&gt;&lt;li&gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)&lt;/li&gt;&lt;li&gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED)&lt;/li&gt;&lt;li&gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;
    */
   updateChallenge_ByChallengeCode(challengeCode: string, data: UpdateChallengeRequest): Promise<IResponse<ChallengeResponse>> {
     const params = {} as SDKRequestConfig
@@ -83,7 +83,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChallengeResponse, 'ChallengeResponse')
   }
 
   /**
@@ -96,7 +96,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -112,7 +112,7 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListPeriodsResponse, 'ListPeriodsResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListPeriodsResponse, 'ListPeriodsResponse')
   }
 
   /**
@@ -125,6 +125,6 @@ export class ChallengeConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ScheduleArray, 'ScheduleArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ScheduleArray, 'ScheduleArray')
   }
 }

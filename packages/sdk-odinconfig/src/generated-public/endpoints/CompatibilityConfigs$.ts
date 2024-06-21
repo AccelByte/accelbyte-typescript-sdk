@@ -12,14 +12,14 @@ import { Configs } from '../../generated-definitions/Configs.js'
 
 export class CompatibilityConfigs$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   getTemplatesDefaultConfigs_DEPRECATED(): Promise<IResponse<Configs>> {
     const params = {} as SDKRequestConfig
     const url = '/odin-config/v1/public/namespaces/{namespace}/templates/default/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Configs, 'Configs')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configs, 'Configs')
   }
 
   getTemplatesTemplateDiscoveryConfigs_DEPRECATED(): Promise<IResponse<Configs>> {
@@ -27,6 +27,6 @@ export class CompatibilityConfigs$ {
     const url = '/odin-config/v1/public/namespaces/{namespace}/templates/template-discovery/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Configs, 'Configs')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configs, 'Configs')
   }
 }

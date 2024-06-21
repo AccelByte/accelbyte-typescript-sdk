@@ -15,7 +15,7 @@ import { RequestDeleteResponse } from '../../generated-definitions/RequestDelete
 
 export class DataDeletionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve all user&#39;s account deletion requests in specified date Scope: account
@@ -31,7 +31,12 @@ export class DataDeletionAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/deletions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListDeletionDataResponse, 'ListDeletionDataResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListDeletionDataResponse,
+      'ListDeletionDataResponse'
+    )
   }
 
   /**
@@ -44,7 +49,7 @@ export class DataDeletionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -57,11 +62,11 @@ export class DataDeletionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeletionData, 'DeletionData')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DeletionData, 'DeletionData')
   }
 
   /**
-   * Submit user&#39;s account deletion requests Scope: account
+   * Submit user&#39;s account deletion request. Scope: account
    */
   createDeletion_ByUserId(userId: string): Promise<IResponse<RequestDeleteResponse>> {
     const params = {} as SDKRequestConfig
@@ -70,6 +75,6 @@ export class DataDeletionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
   }
 }

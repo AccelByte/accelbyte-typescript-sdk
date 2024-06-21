@@ -26,7 +26,7 @@ import { PlayerRecordSizeResponse } from '../../generated-definitions/PlayerReco
 
 export class AdminPlayerRecordAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -42,7 +42,7 @@ export class AdminPlayerRecordAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListPlayerRecordKeysResponse,
       'ListPlayerRecordKeysResponse'
@@ -63,7 +63,7 @@ export class AdminPlayerRecordAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListPlayerRecordKeysResponse,
       'ListPlayerRecordKeysResponse'
@@ -79,7 +79,7 @@ export class AdminPlayerRecordAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkGetPlayerRecordSizeResponse,
       'BulkGetPlayerRecordSizeResponse'
@@ -97,7 +97,7 @@ export class AdminPlayerRecordAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkGetPlayerRecordResponse,
       'BulkGetPlayerRecordResponse'
@@ -118,7 +118,7 @@ export class AdminPlayerRecordAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkUpdatePlayerRecordByKeyResponseArray,
       'BulkUpdatePlayerRecordByKeyResponseArray'
@@ -136,7 +136,7 @@ export class AdminPlayerRecordAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkGetAdminPlayerRecordResponse,
       'BulkGetAdminPlayerRecordResponse'
@@ -154,7 +154,7 @@ export class AdminPlayerRecordAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkUpdatePlayerRecordResponseArray,
       'BulkUpdatePlayerRecordResponseArray'
@@ -172,7 +172,7 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -186,7 +186,7 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -200,7 +200,7 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -214,7 +214,7 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -228,7 +228,12 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordSizeResponse, 'PlayerRecordSizeResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PlayerRecordSizeResponse,
+      'PlayerRecordSizeResponse'
+    )
   }
 
   /**
@@ -242,7 +247,7 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -256,7 +261,7 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -270,7 +275,7 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 
   /**
@@ -284,6 +289,6 @@ export class AdminPlayerRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerRecordResponse, 'PlayerRecordResponse')
   }
 }

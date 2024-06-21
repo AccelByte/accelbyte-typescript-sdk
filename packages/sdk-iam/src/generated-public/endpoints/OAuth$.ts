@@ -15,7 +15,7 @@ import { TokenResponse } from '../../generated-definitions/TokenResponse.js'
 
 export class OAuth$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -26,7 +26,7 @@ export class OAuth$ {
     const url = '/iam/oauth/jwks'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, JwkSet, 'JwkSet')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, JwkSet, 'JwkSet')
   }
 
   /**
@@ -50,7 +50,7 @@ export class OAuth$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponse, 'TokenResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponse, 'TokenResponse')
   }
 
   /**
@@ -65,7 +65,7 @@ export class OAuth$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponse, 'TokenResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponse, 'TokenResponse')
   }
 
   /**
@@ -88,7 +88,7 @@ export class OAuth$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -103,7 +103,7 @@ export class OAuth$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -118,7 +118,7 @@ export class OAuth$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -130,7 +130,7 @@ export class OAuth$ {
     const url = '/iam/oauth/revocationlist'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RevocationList, 'RevocationList')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RevocationList, 'RevocationList')
   }
 
   /**
@@ -142,7 +142,7 @@ export class OAuth$ {
     const url = '/iam/oauth/namespaces/{namespace}/users/{userId}/revoke'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -162,6 +162,6 @@ export class OAuth$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponse, 'TokenResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponse, 'TokenResponse')
   }
 }

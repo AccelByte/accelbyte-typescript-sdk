@@ -26,7 +26,7 @@ import { UserStatItemPagingSlicedResult } from '../../generated-definitions/User
 
 export class UserStatistic$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Public bulk fetch multiple user&#39;s statitem value for a given namespace and statCode. Other detail info: + *Required permission*: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=2 (READ) + *Returns*: list of user&#39;s statItem
@@ -36,7 +36,7 @@ export class UserStatistic$ {
     const url = '/social/v1/public/namespaces/{namespace}/statitems/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserStatItemInfoArray, 'UserStatItemInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserStatItemInfoArray, 'UserStatItemInfoArray')
   }
 
   /**
@@ -54,7 +54,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UserStatItemPagingSlicedResult,
       'UserStatItemPagingSlicedResult'
@@ -70,7 +70,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -86,7 +86,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -102,7 +102,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -123,7 +123,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UserStatItemPagingSlicedResult,
       'UserStatItemPagingSlicedResult'
@@ -139,7 +139,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -157,7 +157,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -177,7 +177,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ADtoObjectForUserStatItemValueArray,
       'ADtoObjectForUserStatItemValueArray'
@@ -198,7 +198,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ADtoObjectForUserStatItemValueArray,
       'ADtoObjectForUserStatItemValueArray'
@@ -216,7 +216,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -234,7 +234,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -255,7 +255,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ADtoObjectForUserStatItemValueArray,
       'ADtoObjectForUserStatItemValueArray'
@@ -277,7 +277,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -295,7 +295,7 @@ export class UserStatistic$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatOperationResultArray,
       'BulkStatOperationResultArray'
@@ -313,7 +313,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -327,7 +327,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -341,7 +341,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
   }
 
   /**
@@ -355,7 +355,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
   }
 
   /**
@@ -374,7 +374,7 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
   }
 
   /**
@@ -388,6 +388,6 @@ export class UserStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
   }
 }

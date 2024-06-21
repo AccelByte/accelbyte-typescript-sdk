@@ -15,7 +15,7 @@ import { XblUserAchievements } from '../../generated-definitions/XblUserAchievem
 
 export class AchievementPlatformAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to get xbox live user achievements(Only for test).
@@ -27,7 +27,7 @@ export class AchievementPlatformAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, XblUserAchievements, 'XblUserAchievements')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, XblUserAchievements, 'XblUserAchievements')
   }
 
   /**
@@ -40,7 +40,7 @@ export class AchievementPlatformAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -53,6 +53,6 @@ export class AchievementPlatformAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

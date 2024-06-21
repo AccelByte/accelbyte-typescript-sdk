@@ -15,7 +15,7 @@ import { MatchFunctionRequest } from '../../generated-definitions/MatchFunctionR
 
 export class MatchFunctions$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List existing match functions.
@@ -26,7 +26,7 @@ export class MatchFunctions$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListMatchFunctionsResponse,
       'ListMatchFunctionsResponse'
@@ -41,7 +41,7 @@ export class MatchFunctions$ {
     const url = '/match2/v1/namespaces/{namespace}/match-functions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -52,7 +52,7 @@ export class MatchFunctions$ {
     const url = '/match2/v1/namespaces/{namespace}/match-functions/{name}'.replace('{namespace}', this.namespace).replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -63,6 +63,6 @@ export class MatchFunctions$ {
     const url = '/match2/v1/namespaces/{namespace}/match-functions/{name}'.replace('{namespace}', this.namespace).replace('{name}', name)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchFunctionConfig, 'MatchFunctionConfig')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MatchFunctionConfig, 'MatchFunctionConfig')
   }
 }

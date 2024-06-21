@@ -19,7 +19,7 @@ import { ThirdPartyLoginPlatformCredentialResponseArray } from '../../generated-
 
 export class ThirdPartyCredentialAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This is the API to check specific 3rd party platform availability. Passing platform group name or it&#39;s member will return same platform availability data Supported third party platform and platform group: - PSN group(psn) - ps4web - ps4 - ps5
@@ -29,7 +29,12 @@ export class ThirdPartyCredentialAdmin$ {
     const url = '/iam/v3/admin/platforms/{platformId}/availability'.replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CheckAvailabilityResponse, 'CheckAvailabilityResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CheckAvailabilityResponse,
+      'CheckAvailabilityResponse'
+    )
   }
 
   /**
@@ -41,7 +46,7 @@ export class ThirdPartyCredentialAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ThirdPartyLoginPlatformCredentialResponseArray,
       'ThirdPartyLoginPlatformCredentialResponseArray'
@@ -57,7 +62,7 @@ export class ThirdPartyCredentialAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ThirdPartyLoginPlatformCredentialResponseArray,
       'ThirdPartyLoginPlatformCredentialResponseArray'
@@ -74,7 +79,7 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -88,7 +93,7 @@ export class ThirdPartyCredentialAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ThirdPartyLoginPlatformCredentialResponse,
       'ThirdPartyLoginPlatformCredentialResponse'
@@ -109,7 +114,7 @@ export class ThirdPartyCredentialAdmin$ {
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ThirdPartyLoginPlatformCredentialResponse,
       'ThirdPartyLoginPlatformCredentialResponse'
@@ -130,7 +135,7 @@ export class ThirdPartyCredentialAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ThirdPartyLoginPlatformCredentialResponse,
       'ThirdPartyLoginPlatformCredentialResponse'
@@ -147,7 +152,7 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -160,6 +165,11 @@ export class ThirdPartyCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformDomainResponse, 'PlatformDomainResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PlatformDomainResponse,
+      'PlatformDomainResponse'
+    )
   }
 }

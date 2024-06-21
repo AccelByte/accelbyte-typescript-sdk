@@ -19,32 +19,32 @@ import { UploadSummary } from '../../generated-definitions/UploadSummary.js'
 
 export class UploaderV2Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to get basic build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get basic build manifests. Only committed build will be retrieved.
    */
   getBuildsByAppId(queryParams: { appId: string | null; platformId: string | null }): Promise<IResponse<BuildIdVersionArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/builds/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
   }
 
   /**
-   * This API is used to get basic DLC build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get basic DLC build manifests. Only committed build will be retrieved.
    */
   getDlcByGameAppId(queryParams: { appId: string | null; platformId: string | null }): Promise<IResponse<BuildIdVersionArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/dlc/byGameAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
   }
 
   /**
-   * This API is used to delete build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to delete build manifest.
    */
   deleteBuild_ByBuildId(buildId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -53,11 +53,11 @@ export class UploaderV2Admin$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to get build manifest for build uploaded with BuildInfo v2.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get build manifest for build uploaded with BuildInfo v2.
    */
   getBuild_ByBuildId(buildId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -66,11 +66,11 @@ export class UploaderV2Admin$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
-   * This API is used to edit build&#39;s launchArgument.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: None&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to edit build&#39;s launchArgument.
    */
   patchBuild_ByBuildId(buildId: string, data: UpdateBuildMetadataRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -79,66 +79,66 @@ export class UploaderV2Admin$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to start build upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId}&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start build upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId}&lt;/li&gt;&lt;/ul&gt;
    */
   createStartbuildupload(data: UploadBuildManifest): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/startbuildupload'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
-   * This API is used to get diff trigger status.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get diff trigger status.
    */
   getDifftriggerStatus(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/difftrigger/status'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to commit build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit build manifest.
    */
   createCommitbuildmanifest(data: BuildManifest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/commitbuildmanifest'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to start DLC build upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId} for normal (non-differential) upload&lt;/li&gt;&lt;li&gt;/v3/prezsyncupload for differential upload&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start DLC build upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId} for normal (non-differential) upload&lt;/li&gt;&lt;li&gt;/v3/prezsyncupload for differential upload&lt;/li&gt;&lt;/ul&gt;
    */
   createStartdlcbuildupload(data: UploadBuildManifest): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/startdlcbuildupload'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
-   * This API is used to commit build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit build manifest.
    */
   createCommitdlcbuildmanifest(data: BuildManifest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/v2/commitdlcbuildmanifest'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to toggle diff trigger status. Use 0 to turn off and 1 to turn on. Any values other than 0 will be regarded as 1.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to toggle diff trigger status. Use 0 to turn off and 1 to turn on. Any values other than 0 will be regarded as 1.
    */
   patchDifftriggerStatu_ByValue(value: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -147,11 +147,11 @@ export class UploaderV2Admin$ {
       .replace('{value}', value)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to start file upload and retrieve upload url.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: upload data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start file upload and retrieve upload url.
    */
   createStartfileupload_ByUploaderId(uploaderId: string, data: BinaryUpload): Promise<IResponse<UploadSummary>> {
     const params = {} as SDKRequestConfig
@@ -160,11 +160,11 @@ export class UploaderV2Admin$ {
       .replace('{uploaderId}', uploaderId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UploadSummary, 'UploadSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UploadSummary, 'UploadSummary')
   }
 
   /**
-   * This API is used to start zsync control file upload and retrieve upload url.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: upload data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start zsync control file upload and retrieve upload url.
    */
   createStartzsyncfileupload_ByFileHash(fileHash: string, data: BinaryUpload): Promise<IResponse<UploadSummary>> {
     const params = {} as SDKRequestConfig
@@ -173,11 +173,11 @@ export class UploaderV2Admin$ {
       .replace('{fileHash}', fileHash)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UploadSummary, 'UploadSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UploadSummary, 'UploadSummary')
   }
 
   /**
-   * This API is used to start incremental build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn&#39;t yet set as latest).&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start incremental build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn&#39;t yet set as latest).
    */
   createStartbuildupload_BySourceBuildId(sourceBuildId: string, data: UploadBuildManifest): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -186,11 +186,11 @@ export class UploaderV2Admin$ {
       .replace('{sourceBuildId}', sourceBuildId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
-   * This API is used to commit file that has been uploaded to signal completion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit file that has been uploaded to signal completion.
    */
   patchCommitfileupload_ByBuildId_ByHash(buildId: string, hash: string): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -200,11 +200,11 @@ export class UploaderV2Admin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
-   * This API is used to start DLC build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn&#39;t yet set as latest).&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start DLC build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn&#39;t yet set as latest).
    */
   createStartdlcbuildupload_BySourceBuildId(sourceBuildId: string, data: UploadBuildManifest): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -213,11 +213,11 @@ export class UploaderV2Admin$ {
       .replace('{sourceBuildId}', sourceBuildId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
-   * This API is used to commit file that has been uploaded to signal completion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit file that has been uploaded to signal completion
    */
   patchCommitzsyncfileupload_ByBuildId_ByHash(buildId: string, hash: string): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -227,11 +227,11 @@ export class UploaderV2Admin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
-   * This API is used to set current build as release version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to set current build as release version.
    */
   updateVersion_ByAppId_ByVersion_ByPlatformId(appId: string, version: string, platformId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -242,11 +242,11 @@ export class UploaderV2Admin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to start diff manifest upload.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: UploadSummary&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start diff manifest upload.
    */
   createDiffStart_BySourceBuildId_ByDestinationBuildId(
     sourceBuildId: string,
@@ -259,11 +259,11 @@ export class UploaderV2Admin$ {
       .replace('{destinationBuildId}', destinationBuildId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UploadSummary, 'UploadSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UploadSummary, 'UploadSummary')
   }
 
   /**
-   * This API is used to commit diff manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit diff manifest.
    */
   patchDiffCommit_BySourceBuildId_ByDestinationBuildId(sourceBuildId: string, destinationBuildId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -273,11 +273,11 @@ export class UploaderV2Admin$ {
       .replace('{destinationBuildId}', destinationBuildId)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to commit chunk that has been uploaded.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;/v2/startzsyncfileupload&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId}&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit chunk that has been uploaded.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;/v2/startzsyncfileupload&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId}&lt;/li&gt;&lt;/ul&gt;
    */
   patchHash_ByBuildId_ByHash_ByBlockSize(buildId: string, hash: string, blockSize: number): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -288,7 +288,7 @@ export class UploaderV2Admin$ {
       .replace('{blockSize}', String(blockSize))
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
@@ -305,6 +305,6 @@ export class UploaderV2Admin$ {
       .replace('{destinationBuildId}', destinationBuildId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UploadSummary, 'UploadSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UploadSummary, 'UploadSummary')
   }
 }

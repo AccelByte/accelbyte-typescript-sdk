@@ -14,7 +14,7 @@ import { RetrieveTimeResponse } from '../../generated-definitions/RetrieveTimeRe
 
 export class Misc$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get server time
@@ -24,7 +24,7 @@ export class Misc$ {
     const url = '/basic/v1/public/misc/time'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RetrieveTimeResponse, 'RetrieveTimeResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RetrieveTimeResponse, 'RetrieveTimeResponse')
   }
 
   /**
@@ -36,7 +36,7 @@ export class Misc$ {
     const url = '/basic/v1/public/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryObjectArray, 'CountryObjectArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CountryObjectArray, 'CountryObjectArray')
   }
 
   /**
@@ -47,7 +47,7 @@ export class Misc$ {
     const url = '/basic/v1/public/namespaces/{namespace}/misc/languages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -58,6 +58,6 @@ export class Misc$ {
     const url = '/basic/v1/public/namespaces/{namespace}/misc/timezones'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

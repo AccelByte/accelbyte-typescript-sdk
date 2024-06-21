@@ -16,7 +16,7 @@ import { UpdateStatusIntegrationConfigurationReq } from '../../generated-definit
 
 export class AdminIntegrationConfigurationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  Listing all integration configurations in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]
@@ -31,7 +31,7 @@ export class AdminIntegrationConfigurationsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListIntegrationConfigurationsResp,
       'ListIntegrationConfigurationsResp'
@@ -47,7 +47,7 @@ export class AdminIntegrationConfigurationsAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       IntegrationConfigurationResp,
       'IntegrationConfigurationResp'
@@ -68,7 +68,7 @@ export class AdminIntegrationConfigurationsAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       IntegrationConfigurationResp,
       'IntegrationConfigurationResp'
@@ -89,7 +89,7 @@ export class AdminIntegrationConfigurationsAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       IntegrationConfigurationResp,
       'IntegrationConfigurationResp'

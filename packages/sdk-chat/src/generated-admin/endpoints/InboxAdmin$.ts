@@ -27,7 +27,7 @@ import { UpdateInboxMessageRequest } from '../../generated-definitions/UpdateInb
 
 export class InboxAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get inbox stats
@@ -37,7 +37,7 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/stats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetInboxStatsResponse, 'GetInboxStatsResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetInboxStatsResponse, 'GetInboxStatsResponse')
   }
 
   /**
@@ -59,7 +59,12 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetInboxMessagesResponse, 'GetInboxMessagesResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetInboxMessagesResponse,
+      'GetInboxMessagesResponse'
+    )
   }
 
   /**
@@ -70,7 +75,12 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SaveInboxMessageResponse, 'SaveInboxMessageResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SaveInboxMessageResponse,
+      'SaveInboxMessageResponse'
+    )
   }
 
   /**
@@ -82,7 +92,7 @@ export class InboxAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetInboxCategoriesResponseItemArray,
       'GetInboxCategoriesResponseItemArray'
@@ -97,7 +107,12 @@ export class InboxAdmin$ {
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddInboxCategoryResponse, 'AddInboxCategoryResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      AddInboxCategoryResponse,
+      'AddInboxCategoryResponse'
+    )
   }
 
   /**
@@ -110,7 +125,7 @@ export class InboxAdmin$ {
       .replace('{messageId}', messageId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -123,7 +138,7 @@ export class InboxAdmin$ {
       .replace('{messageId}', messageId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -136,7 +151,7 @@ export class InboxAdmin$ {
       .replace('{category}', category)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -149,7 +164,7 @@ export class InboxAdmin$ {
       .replace('{category}', category)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -165,7 +180,7 @@ export class InboxAdmin$ {
       .replace('{inbox}', inbox)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetInboxUsersResponse, 'GetInboxUsersResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetInboxUsersResponse, 'GetInboxUsersResponse')
   }
 
   /**
@@ -179,7 +194,7 @@ export class InboxAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UnsendInboxMessageResponse,
       'UnsendInboxMessageResponse'
@@ -196,7 +211,12 @@ export class InboxAdmin$ {
       .replace('{messageId}', messageId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SendInboxMessageResponse, 'SendInboxMessageResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SendInboxMessageResponse,
+      'SendInboxMessageResponse'
+    )
   }
 
   /**
@@ -209,6 +229,6 @@ export class InboxAdmin$ {
       .replace('{category}', category)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, JsonSchemaType, 'JsonSchemaType')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, JsonSchemaType, 'JsonSchemaType')
   }
 }

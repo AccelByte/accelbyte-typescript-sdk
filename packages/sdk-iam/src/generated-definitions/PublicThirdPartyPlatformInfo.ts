@@ -10,6 +10,7 @@ export const PublicThirdPartyPlatformInfo = z.object({
   ClientId: z.string(),
   Environment: z.string(),
   IsActive: z.boolean(),
+  LogoURL: z.string().nullish(),
   PlatformId: z.string(),
   PlatformName: z.string(),
   TokenAuthenticationType: z.string()

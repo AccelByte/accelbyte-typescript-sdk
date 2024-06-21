@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const SectionItem = z.object({ id: z.string(), sku: z.string().nullish() })
+export const SectionItem = z.object({ discountPercentage: z.number().int().nullish(), id: z.string(), sku: z.string().nullish() })
 
 export interface SectionItem extends z.TypeOf<typeof SectionItem> {}

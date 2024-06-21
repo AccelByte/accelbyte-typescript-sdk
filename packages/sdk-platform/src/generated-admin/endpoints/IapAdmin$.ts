@@ -35,7 +35,7 @@ import { XblIapConfigRequest } from '../../generated-definitions/XblIapConfigReq
 
 export class IapAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Delete xbl iap config.
@@ -45,7 +45,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/xbl'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -56,7 +56,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/xbl'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, XblIapConfigInfo, 'XblIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, XblIapConfigInfo, 'XblIapConfigInfo')
   }
 
   /**
@@ -67,7 +67,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/xbl'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, XblIapConfigInfo, 'XblIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, XblIapConfigInfo, 'XblIapConfigInfo')
   }
 
   /**
@@ -78,7 +78,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/item'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -89,7 +89,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/item'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, IapItemConfigInfo, 'IapItemConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, IapItemConfigInfo, 'IapItemConfigInfo')
   }
 
   /**
@@ -100,7 +100,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/item'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, IapItemConfigInfo, 'IapItemConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, IapItemConfigInfo, 'IapItemConfigInfo')
   }
 
   /**
@@ -111,7 +111,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/apple'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -122,7 +122,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/apple'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AppleIapConfigInfo, 'AppleIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AppleIapConfigInfo, 'AppleIapConfigInfo')
   }
 
   /**
@@ -133,7 +133,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/apple'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AppleIapConfigInfo, 'AppleIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AppleIapConfigInfo, 'AppleIapConfigInfo')
   }
 
   /**
@@ -144,7 +144,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/steam'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -155,7 +155,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/steam'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SteamIapConfig, 'SteamIapConfig')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SteamIapConfig, 'SteamIapConfig')
   }
 
   /**
@@ -166,7 +166,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/steam'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SteamIapConfigInfo, 'SteamIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SteamIapConfigInfo, 'SteamIapConfigInfo')
   }
 
   /**
@@ -177,7 +177,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/google'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -188,7 +188,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/google'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GoogleIapConfigInfo, 'GoogleIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GoogleIapConfigInfo, 'GoogleIapConfigInfo')
   }
 
   /**
@@ -199,7 +199,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/google'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GoogleIapConfigInfo, 'GoogleIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GoogleIapConfigInfo, 'GoogleIapConfigInfo')
   }
 
   /**
@@ -210,7 +210,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/oculus'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -221,7 +221,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/oculus'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OculusIapConfigInfo, 'OculusIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OculusIapConfigInfo, 'OculusIapConfigInfo')
   }
 
   /**
@@ -232,7 +232,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/oculus'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OculusIapConfigInfo, 'OculusIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OculusIapConfigInfo, 'OculusIapConfigInfo')
   }
 
   /**
@@ -243,7 +243,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/twitch'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -254,7 +254,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/twitch'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TwitchIapConfigInfo, 'TwitchIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TwitchIapConfigInfo, 'TwitchIapConfigInfo')
   }
 
   /**
@@ -265,7 +265,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/twitch'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TwitchIapConfigInfo, 'TwitchIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TwitchIapConfigInfo, 'TwitchIapConfigInfo')
   }
 
   /**
@@ -290,7 +290,7 @@ export class IapAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       IapOrderPagingSlicedResult,
       'IapOrderPagingSlicedResult'
@@ -306,7 +306,7 @@ export class IapAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, XblIapConfigInfo, 'XblIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, XblIapConfigInfo, 'XblIapConfigInfo')
   }
 
   /**
@@ -317,7 +317,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/epicgames'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -328,7 +328,12 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/epicgames'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EpicGamesIapConfigInfo, 'EpicGamesIapConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      EpicGamesIapConfigInfo,
+      'EpicGamesIapConfigInfo'
+    )
   }
 
   /**
@@ -339,7 +344,12 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/epicgames'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EpicGamesIapConfigInfo, 'EpicGamesIapConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      EpicGamesIapConfigInfo,
+      'EpicGamesIapConfigInfo'
+    )
   }
 
   /**
@@ -351,7 +361,7 @@ export class IapAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GoogleIapConfigInfo, 'GoogleIapConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GoogleIapConfigInfo, 'GoogleIapConfigInfo')
   }
 
   /**
@@ -362,7 +372,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/playstation'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -373,7 +383,12 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/playstation'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayStationIapConfigInfo, 'PlayStationIapConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PlayStationIapConfigInfo,
+      'PlayStationIapConfigInfo'
+    )
   }
 
   /**
@@ -384,7 +399,12 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/playstation'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlayStationIapConfigInfo, 'PlayStationIapConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PlayStationIapConfigInfo,
+      'PlayStationIapConfigInfo'
+    )
   }
 
   /**
@@ -398,7 +418,7 @@ export class IapAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       IapOrderPagingSlicedResult,
       'IapOrderPagingSlicedResult'
@@ -413,7 +433,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/playstation/validate'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -424,7 +444,7 @@ export class IapAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/config/playstation/validate'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -437,7 +457,7 @@ export class IapAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -461,7 +481,7 @@ export class IapAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       IapConsumeHistoryPagingSlicedResult,
       'IapConsumeHistoryPagingSlicedResult'

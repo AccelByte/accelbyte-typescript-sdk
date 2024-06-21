@@ -17,13 +17,13 @@ export function PublicTypeApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get available types paginated
    */
   async function getTypes(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTypeResponse> {
-    const $ = new PublicType$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicType$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTypes(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

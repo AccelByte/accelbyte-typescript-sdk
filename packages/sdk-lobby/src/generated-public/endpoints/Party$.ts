@@ -15,7 +15,7 @@ import { PartyPutLimitSizeRequest } from '../../generated-definitions/PartyPutLi
 
 export class Party$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required valid user authorization &lt;br/&gt; &lt;br&gt;load personal party data in a namespace based on Party ID &lt;br/&gt; Action Code: 50101
@@ -27,7 +27,7 @@ export class Party$ {
       .replace('{partyId}', partyId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PartyData, 'PartyData')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PartyData, 'PartyData')
   }
 
   /**
@@ -40,7 +40,7 @@ export class Party$ {
       .replace('{partyId}', partyId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -53,6 +53,6 @@ export class Party$ {
       .replace('{partyId}', partyId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PartyData, 'PartyData')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PartyData, 'PartyData')
   }
 }

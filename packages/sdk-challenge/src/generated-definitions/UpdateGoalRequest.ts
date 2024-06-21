@@ -9,13 +9,13 @@ import { Requirement } from './Requirement.js'
 import { Reward } from './Reward.js'
 
 export const UpdateGoalRequest = z.object({
-  description: z.string(),
+  description: z.string().nullish(),
   isActive: z.boolean().nullish(),
   name: z.string(),
-  requirementGroups: z.array(Requirement),
-  rewards: z.array(Reward),
+  requirementGroups: z.array(Requirement).nullish(),
+  rewards: z.array(Reward).nullish(),
   schedule: GoalSchedule.nullish(),
-  tags: z.array(z.string())
+  tags: z.array(z.string()).nullish()
 })
 
 export interface UpdateGoalRequest extends z.TypeOf<typeof UpdateGoalRequest> {}

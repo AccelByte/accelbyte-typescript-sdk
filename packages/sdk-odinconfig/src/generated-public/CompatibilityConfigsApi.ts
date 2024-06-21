@@ -9,25 +9,25 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CompatibilityConfigs$ } from './endpoints/CompatibilityConfigs$.js'
 import { Configs } from '../generated-definitions/Configs.js'
+import { CompatibilityConfigs$ } from './endpoints/CompatibilityConfigs$.js'
 
 export function CompatibilityConfigsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   async function getTemplatesDefaultConfigs_DEPRECATED(): Promise<Configs> {
-    const $ = new CompatibilityConfigs$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new CompatibilityConfigs$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTemplatesDefaultConfigs_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
   async function getTemplatesTemplateDiscoveryConfigs_DEPRECATED(): Promise<Configs> {
-    const $ = new CompatibilityConfigs$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new CompatibilityConfigs$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTemplatesTemplateDiscoveryConfigs_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data

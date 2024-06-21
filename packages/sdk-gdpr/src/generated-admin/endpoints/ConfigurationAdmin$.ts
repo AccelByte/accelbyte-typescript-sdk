@@ -14,7 +14,7 @@ import { ServicesConfigurationResponse } from '../../generated-definitions/Servi
 
 export class ConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Delete a list of admin email addresses to stop receiving personal data request notification. Scope: account
@@ -24,7 +24,7 @@ export class ConfigurationAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -35,7 +35,7 @@ export class ConfigurationAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -46,7 +46,7 @@ export class ConfigurationAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -57,7 +57,7 @@ export class ConfigurationAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -69,7 +69,7 @@ export class ConfigurationAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ServicesConfigurationResponse,
       'ServicesConfigurationResponse'
@@ -85,7 +85,7 @@ export class ConfigurationAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ServiceConfigurationUpdateRequest,
       'ServiceConfigurationUpdateRequest'
@@ -100,7 +100,7 @@ export class ConfigurationAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/services/configurations/reset'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -111,7 +111,7 @@ export class ConfigurationAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/services/platforms/closure/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -123,7 +123,7 @@ export class ConfigurationAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ServicesConfigurationResponse,
       'ServicesConfigurationResponse'
@@ -139,7 +139,7 @@ export class ConfigurationAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ServiceConfigurationUpdateRequest,
       'ServiceConfigurationUpdateRequest'

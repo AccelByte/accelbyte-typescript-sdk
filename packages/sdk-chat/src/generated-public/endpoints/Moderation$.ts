@@ -12,7 +12,7 @@ import { ChatSnapshots } from '../../generated-definitions/ChatSnapshots.js'
 
 export class Moderation$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get the chat snapshot
@@ -25,6 +25,6 @@ export class Moderation$ {
       .replace('{chatId}', chatId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChatSnapshots, 'ChatSnapshots')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChatSnapshots, 'ChatSnapshots')
   }
 }

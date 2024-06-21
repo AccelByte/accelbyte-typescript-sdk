@@ -12,7 +12,7 @@ import { PaginatedTagResponse } from '../../generated-definitions/PaginatedTagRe
 
 export class TagsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
@@ -27,6 +27,6 @@ export class TagsAdmin$ {
     const url = '/achievement/v1/admin/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedTagResponse, 'PaginatedTagResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaginatedTagResponse, 'PaginatedTagResponse')
   }
 }

@@ -9,22 +9,22 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AdminAdmin$ } from './endpoints/AdminAdmin$.js'
 import { SetAliasRequest } from '../generated-definitions/SetAliasRequest.js'
 import { UpdateServerRequest } from '../generated-definitions/UpdateServerRequest.js'
+import { AdminAdmin$ } from './endpoints/AdminAdmin$.js'
 
 export function AdminAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * ``` Required permission: ADMIN:QOS:SERVER [DELETE] Required scope: social This endpoint delete a registered QoS service record. ```
    */
   async function deleteServer_ByRegion(region: string): Promise<unknown> {
-    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteServer_ByRegion(region)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +34,7 @@ export function AdminAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ``` Required permission: ADMIN:QOS:SERVER [UDPATE] Required scope: social This endpoint modifies a registered QoS service&#39;s region alias. ```
    */
   async function createAlia_ByRegion(region: string, data: SetAliasRequest): Promise<unknown> {
-    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createAlia_ByRegion(region, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +44,7 @@ export function AdminAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ``` Required permission: ADMIN:NAMESPACE:{namespace}:QOS:SERVER [UPDATE] Required scope: social This endpoint updates the registered QoS service&#39;s configurable configuration&#39;. ```
    */
   async function patchServer_ByRegion(region: string, data: UpdateServerRequest): Promise<unknown> {
-    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchServer_ByRegion(region, data)
     if (resp.error) throw resp.error
     return resp.response.data

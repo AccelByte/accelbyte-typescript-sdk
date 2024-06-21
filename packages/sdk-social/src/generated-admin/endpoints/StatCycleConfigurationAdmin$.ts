@@ -21,7 +21,7 @@ import { StatImportInfo } from '../../generated-definitions/StatImportInfo.js'
 
 export class StatCycleConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List stat cycles by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycles&lt;/li&gt;&lt;/ul&gt;
@@ -39,7 +39,7 @@ export class StatCycleConfigurationAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       StatCyclePagingSlicedResult,
       'StatCyclePagingSlicedResult'
@@ -54,7 +54,7 @@ export class StatCycleConfigurationAdmin$ {
     const url = '/social/v1/admin/namespaces/{namespace}/statCycles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
   }
 
   /**
@@ -65,7 +65,7 @@ export class StatCycleConfigurationAdmin$ {
     const url = '/social/v1/admin/namespaces/{namespace}/statCycles/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkStatCycleResult, 'BulkStatCycleResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkStatCycleResult, 'BulkStatCycleResult')
   }
 
   /**
@@ -76,7 +76,7 @@ export class StatCycleConfigurationAdmin$ {
     const url = '/social/v1/admin/namespaces/{namespace}/statCycles/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -88,7 +88,7 @@ export class StatCycleConfigurationAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatImportInfo, 'StatImportInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatImportInfo, 'StatImportInfo')
   }
 
   /**
@@ -101,7 +101,7 @@ export class StatCycleConfigurationAdmin$ {
       .replace('{cycleId}', cycleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -114,7 +114,7 @@ export class StatCycleConfigurationAdmin$ {
       .replace('{cycleId}', cycleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
   }
 
   /**
@@ -127,7 +127,7 @@ export class StatCycleConfigurationAdmin$ {
       .replace('{cycleId}', cycleId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
   }
 
   /**
@@ -140,7 +140,7 @@ export class StatCycleConfigurationAdmin$ {
       .replace('{cycleId}', cycleId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
   }
 
   /**
@@ -154,7 +154,7 @@ export class StatCycleConfigurationAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkStatCycleOperationResultArray,
       'BulkStatCycleOperationResultArray'

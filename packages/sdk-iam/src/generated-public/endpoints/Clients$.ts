@@ -19,7 +19,7 @@ import { ClientUpdateSecretRequest } from '../../generated-definitions/ClientUpd
 
 export class Clients$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -30,7 +30,7 @@ export class Clients$ {
     const url = '/iam/clients'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientResponseArray, 'ClientResponseArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientResponseArray, 'ClientResponseArray')
   }
 
   /**
@@ -42,7 +42,12 @@ export class Clients$ {
     const url = '/iam/clients'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientCreationResponse, 'ClientCreationResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ClientCreationResponse,
+      'ClientCreationResponse'
+    )
   }
 
   /**
@@ -54,7 +59,7 @@ export class Clients$ {
     const url = '/iam/clients/{clientId}'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -66,7 +71,7 @@ export class Clients$ {
     const url = '/iam/clients/{clientId}'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientResponse, 'ClientResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientResponse, 'ClientResponse')
   }
 
   /**
@@ -78,7 +83,7 @@ export class Clients$ {
     const url = '/iam/clients/{clientId}'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientResponse, 'ClientResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientResponse, 'ClientResponse')
   }
 
   /**
@@ -90,7 +95,7 @@ export class Clients$ {
     const url = '/iam/clients/{clientId}/secret'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -102,7 +107,7 @@ export class Clients$ {
     const url = '/iam/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientResponseArray, 'ClientResponseArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientResponseArray, 'ClientResponseArray')
   }
 
   /**
@@ -114,7 +119,12 @@ export class Clients$ {
     const url = '/iam/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientCreationResponse, 'ClientCreationResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ClientCreationResponse,
+      'ClientCreationResponse'
+    )
   }
 
   /**
@@ -126,7 +136,7 @@ export class Clients$ {
     const url = '/iam/clients/{clientId}/clientpermissions'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -138,7 +148,7 @@ export class Clients$ {
     const url = '/iam/namespaces/{namespace}/clients/{clientId}'.replace('{namespace}', this.namespace).replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -157,7 +167,7 @@ export class Clients$ {
       .replace('{action}', String(action))
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -176,6 +186,6 @@ export class Clients$ {
       .replace('{action}', String(action))
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

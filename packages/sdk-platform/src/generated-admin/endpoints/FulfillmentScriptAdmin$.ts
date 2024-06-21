@@ -16,7 +16,7 @@ import { FulfillmentScriptUpdate } from '../../generated-definitions/Fulfillment
 
 export class FulfillmentScriptAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;List all fulfillment scripts.
@@ -27,7 +27,7 @@ export class FulfillmentScriptAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       FulfillmentScriptInfoArray,
       'FulfillmentScriptInfoArray'
@@ -42,7 +42,7 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -53,7 +53,7 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
   }
 
   /**
@@ -64,7 +64,7 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
   }
 
   /**
@@ -75,6 +75,6 @@ export class FulfillmentScriptAdmin$ {
     const url = '/platform/admin/fulfillment/scripts/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentScriptInfo, 'FulfillmentScriptInfo')
   }
 }

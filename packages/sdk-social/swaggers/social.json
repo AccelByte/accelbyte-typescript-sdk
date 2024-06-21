@@ -8,7 +8,7 @@
     },
     "description": "Justice Statistics Service",
     "title": "justice-statistics-service",
-    "version": "2.12.6"
+    "version": "2.14.0"
   },
   "schemes": ["https"],
   "tags": [
@@ -133,6 +133,10 @@
         "x-authorization": {
           "action": "8",
           "resource": "ADMIN:NAMESPACE:{namespace}:SLOTCONFIG"
+        },
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SLOTCONFIG [DELETE]"]
         }
       },
       "get": {
@@ -171,6 +175,10 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:SLOTCONFIG"
+        },
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SLOTCONFIG [READ]"]
         }
       },
       "put": {
@@ -218,6 +226,10 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:SLOTCONFIG"
+        },
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SLOTCONFIG [UPDATE]"]
         }
       }
     },
@@ -261,6 +273,10 @@
         "x-authorization": {
           "action": "8",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTCONFIG"
+        },
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTCONFIG [DELETE]"]
         }
       },
       "get": {
@@ -306,6 +322,10 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTCONFIG"
+        },
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTCONFIG [READ]"]
         }
       },
       "put": {
@@ -360,6 +380,10 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTCONFIG"
+        },
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTCONFIG [UPDATE]"]
         }
       }
     },
@@ -427,6 +451,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [READ]"]
         }
       }
     },
@@ -504,6 +536,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "12041": "Game profile with id [{profileId}] is not found",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [READ]"]
         }
       }
     },
@@ -554,6 +595,10 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTDATA"
+        },
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTDATA [READ]"]
         }
       }
     },
@@ -615,6 +660,12 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTDATA"
+        },
+        "x-errorCodes": {
+          "12141": "Slot [{slotId}] not found in namespace [{namespace}]"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTDATA [READ]"]
         }
       }
     },
@@ -692,6 +743,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "12021": "{totalUser} users is requested. Cannot retrieve more than {limitUser} users at once",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:GAMEPROFILE [READ]"]
         }
       }
     },
@@ -759,6 +819,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [READ]"]
         }
       },
       "post": {
@@ -839,6 +907,15 @@
         "x-authorization": {
           "action": "1",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [CREATE]"]
         }
       }
     },
@@ -912,6 +989,15 @@
         "x-authorization": {
           "action": "8",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "12041": "Game profile with id [{profileId}] is not found",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [DELETE]"]
         }
       },
       "get": {
@@ -987,6 +1073,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "12041": "Game profile with id [{profileId}] is not found",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [READ]"]
         }
       },
       "put": {
@@ -1083,6 +1178,16 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "12041": "Game profile with id [{profileId}] is not found",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [UPDATE]"]
         }
       }
     },
@@ -1167,6 +1272,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "12041": "Game profile with id [{profileId}] is not found",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [READ]"]
         }
       },
       "put": {
@@ -1270,6 +1384,17 @@
         "x-authorization": {
           "action": "8",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE"
+        },
+        "x-errorCodes": {
+          "12022": "Game profile attribute name [{attrName1}] passed in request url mismatch the name [{attrName2}] in body",
+          "12041": "Game profile with id [{profileId}] is not found",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE [DELETE]"]
         }
       }
     },
@@ -1320,6 +1445,10 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:SLOTDATA"
+        },
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:SLOTDATA [READ]"]
         }
       },
       "post": {
@@ -1413,6 +1542,14 @@
         "x-authorization": {
           "action": "1",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:SLOTDATA"
+        },
+        "x-errorCodes": {
+          "12121": "Checksum mismatch for [{filename}]",
+          "12122": "[{filename}] exceeds the upload limit size of [{sizeLimit}] bytes",
+          "12171": "User [{userId}] exceed max slot count [{maxCount}] in namespace [{namespace}]"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:SLOTDATA [CREATE]"]
         }
       }
     },
@@ -1470,6 +1607,12 @@
         "x-authorization": {
           "action": "8",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:SLOTDATA"
+        },
+        "x-errorCodes": {
+          "12141": "Slot [{slotId}] not found in namespace [{namespace}]"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:SLOTDATA [DELETE]"]
         }
       },
       "get": {
@@ -1529,6 +1672,12 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:SLOTDATA"
+        },
+        "x-errorCodes": {
+          "12141": "Slot [{slotId}] not found in namespace [{namespace}]"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:SLOTDATA [READ]"]
         }
       },
       "put": {
@@ -1632,6 +1781,14 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:SLOTDATA"
+        },
+        "x-errorCodes": {
+          "12121": "Checksum mismatch for [{filename}]",
+          "12122": "[{filename}] exceeds the upload limit size of [{sizeLimit}] bytes",
+          "12141": "Slot [{slotId}] not found in namespace [{namespace}]"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:SLOTDATA [UPDATE]"]
         }
       }
     },
@@ -1701,6 +1858,12 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:SLOTDATA"
+        },
+        "x-errorCodes": {
+          "12141": "Slot [{slotId}] not found in namespace [{namespace}]"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:SLOTDATA [UPDATE]"]
         }
       }
     },
@@ -1781,6 +1944,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -1851,6 +2022,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12244": "Global stat item of [{statCode}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -1952,6 +2132,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [READ]"]
         }
       },
       "post": {
@@ -2028,6 +2216,17 @@
         "x-authorization": {
           "action": "1",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12225": "Invalid time range",
+          "12226": "Invalid date [{date}] of month [{month}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [CREATE]"]
         }
       }
     },
@@ -2106,6 +2305,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [READ]"]
         }
       }
     },
@@ -2163,6 +2371,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [READ]"]
         }
       }
     },
@@ -2241,6 +2457,15 @@
         "x-authorization": {
           "action": "1",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12222": "Stats data for namespace [{namespace}] is invalid",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [CREATE]"]
         }
       }
     },
@@ -2307,6 +2532,15 @@
         "x-authorization": {
           "action": "8",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [DELETE]"]
         }
       },
       "get": {
@@ -2375,6 +2609,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [READ]"]
         }
       },
       "put": {
@@ -2470,6 +2713,19 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12225": "Invalid time range",
+          "12226": "Invalid date [{date}] of month [{month}]",
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "12277": "Stat cycle [{id}] in namespace [{namespace}] with status [{status}] cannot be updated",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [UPDATE]"]
         }
       }
     },
@@ -2564,6 +2820,16 @@
         "x-authorization": {
           "action": "1",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [CREATE]"]
         }
       }
     },
@@ -2641,6 +2907,16 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "12279": "Invalid stat cycle status: Stat cycle [{id}], namespace [{namespace}], status [{status}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [UPDATE]"]
         }
       }
     },
@@ -2721,6 +2997,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -2805,6 +3090,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [UPDATE]"]
         }
       },
       "put": {
@@ -2887,6 +3181,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -2973,6 +3276,16 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -3057,6 +3370,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -3153,6 +3475,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [READ]"]
         }
       },
       "post": {
@@ -3241,6 +3571,17 @@
         "x-authorization": {
           "action": "1",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "12271": "Stat template with code [{statCode}] already exists in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [CREATE]"]
         }
       }
     },
@@ -3298,6 +3639,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [READ]"]
         }
       }
     },
@@ -3376,6 +3725,15 @@
         "x-authorization": {
           "action": "1",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12222": "Stats data for namespace [{namespace}] is invalid",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [CREATE]"]
         }
       }
     },
@@ -3472,6 +3830,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [READ]"]
         }
       }
     },
@@ -3538,6 +3904,15 @@
         "x-authorization": {
           "action": "8",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [DELETE]"]
         }
       },
       "get": {
@@ -3606,6 +3981,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [READ]"]
         }
       },
       "patch": {
@@ -3689,6 +4073,16 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [UPDATE]"]
         }
       }
     },
@@ -3773,6 +4167,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -3845,6 +4247,16 @@
         "x-authorization": {
           "action": "8",
           "resource": "ADMIN:NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12276": " Stat template with code [{statCode}] in namespace [{namespace}] not deletable due it is in an INIT status ",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STAT [DELETE]"]
         }
       }
     },
@@ -3966,6 +4378,16 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       }
     },
@@ -4082,6 +4504,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       }
     },
@@ -4173,6 +4604,15 @@
         "x-authorization": {
           "action": "1",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [CREATE]"]
         }
       }
     },
@@ -4264,6 +4704,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       },
       "put": {
@@ -4353,6 +4802,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -4444,6 +4902,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -4524,6 +4991,16 @@
         "x-authorization": {
           "action": "8",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12242": "Stat item of [{statCode}] of user [{profileId}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [DELETE]"]
         }
       },
       "post": {
@@ -4609,6 +5086,17 @@
         "x-authorization": {
           "action": "1",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12274": "Stat item with code [{statCode}] of user [{profileId}] already exists in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [CREATE]"]
         }
       }
     },
@@ -4713,6 +5201,20 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12221": "Invalid stat operator, expect [{expected}] but actual [{actual}]",
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12242": "Stat item of [{statCode}] of user [{profileId}] cannot be found in namespace [{namespace}]",
+          "12273": "Stat [{statCode}] is not decreasable",
+          "12275": "[{action}] value: [{value}] of stat [{statCode}]  is out of range while minimum [{minimum}] and maximum [{maximum}] in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -4818,6 +5320,17 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12221": "Invalid stat operator, expect [{expected}] but actual [{actual}]",
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -4898,6 +5411,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -4968,6 +5489,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12244": "Global stat item of [{statCode}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -5069,6 +5599,14 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STAT [READ]"]
         }
       }
     },
@@ -5147,6 +5685,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STAT [READ]"]
         }
       }
     },
@@ -5217,6 +5764,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STAT [READ]"]
         }
       }
     },
@@ -5297,6 +5853,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -5381,6 +5946,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STATITEM [UPDATE]"]
         }
       },
       "put": {
@@ -5463,6 +6037,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -5547,6 +6130,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -5637,6 +6229,17 @@
         "x-authorization": {
           "action": "1",
           "resource": "NAMESPACE:{namespace}:STAT"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "12271": "Stat template with code [{statCode}] already exists in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STAT [CREATE]"]
         }
       }
     },
@@ -5747,6 +6350,16 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       }
     },
@@ -5855,6 +6468,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       }
     },
@@ -5950,6 +6572,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12223": "Invalid stat codes in namespace [{namespace}]: [{statCodes}]",
+          "12243": "Stats cannot be found in namespace [{namespace}]",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       }
     },
@@ -6063,6 +6694,16 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12245": "Stat cycle [{id}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       }
     },
@@ -6170,6 +6811,15 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       }
     },
@@ -6261,6 +6911,15 @@
         "x-authorization": {
           "action": "1",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [CREATE]"]
         }
       }
     },
@@ -6375,6 +7034,17 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12223": "Invalid stat codes in namespace [{namespace}]: [{statCodes}]",
+          "12243": "Stats cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       },
       "patch": {
@@ -6464,6 +7134,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       },
       "put": {
@@ -6553,6 +7232,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -6644,6 +7332,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -6724,6 +7421,16 @@
         "x-authorization": {
           "action": "8",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12242": "Stat item of [{statCode}] of user [{profileId}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [DELETE]"]
         }
       },
       "post": {
@@ -6809,6 +7516,17 @@
         "x-authorization": {
           "action": "1",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12274": "Stat item with code [{statCode}] of user [{profileId}] already exists in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [CREATE]"]
         }
       }
     },
@@ -6913,6 +7631,20 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12221": "Invalid stat operator, expect [{expected}] but actual [{actual}]",
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12242": "Stat item of [{statCode}] of user [{profileId}] cannot be found in namespace [{namespace}]",
+          "12273": "Stat [{statCode}] is not decreasable",
+          "12275": "[{action}] value: [{value}] of stat [{statCode}]  is out of range while minimum [{minimum}] and maximum [{maximum}] in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       },
       "put": {
@@ -7015,6 +7747,20 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12221": "Invalid stat operator, expect [{expected}] but actual [{actual}]",
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12242": "Stat item of [{statCode}] of user [{profileId}] cannot be found in namespace [{namespace}]",
+          "12273": "Stat [{statCode}] is not decreasable",
+          "12275": "[{action}] value: [{value}] of stat [{statCode}]  is out of range while minimum [{minimum}] and maximum [{maximum}] in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -7105,6 +7851,17 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12221": "Invalid stat operator, expect [{expected}] but actual [{actual}]",
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "Unauthorized",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -7189,6 +7946,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -7282,6 +8048,16 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       }
     },
@@ -7392,6 +8168,17 @@
         "x-authorization": {
           "action": "2",
           "resource": "ADMIN:NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12223": "Invalid stat codes in namespace [{namespace}]: [{statCodes}]",
+          "12243": "Stats cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:STATITEM [READ]"]
         }
       },
       "put": {
@@ -7488,6 +8275,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -7586,6 +8382,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -7673,6 +8478,16 @@
         "x-authorization": {
           "action": "8",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12242": "Stat item of [{statCode}] of user [{profileId}] cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [DELETE]"]
         }
       }
     },
@@ -7784,6 +8599,19 @@
         "x-authorization": {
           "action": "4",
           "resource": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12221": "Invalid stat operator, expect [{expected}] but actual [{actual}]",
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12273": "Stat [{statCode}] is not decreasable",
+          "12275": "[{action}] value: [{value}] of stat [{statCode}] is out of range while minimum [{minimum}] and maximum [{maximum}] in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -7868,6 +8696,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -7982,6 +8819,17 @@
         "x-authorization": {
           "action": "2",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12223": "Invalid stat codes in namespace [{namespace}]: [{statCodes}]",
+          "12243": "Stats cannot be found in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"]
         }
       },
       "put": {
@@ -8078,6 +8926,15 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     },
@@ -8189,6 +9046,19 @@
         "x-authorization": {
           "action": "4",
           "resource": "NAMESPACE:{namespace}:USER:{userId}:STATITEM"
+        },
+        "x-errorCodes": {
+          "12221": "Invalid stat operator, expect [{expected}] but actual [{actual}]",
+          "12241": "Stat [{statCode}] cannot be found in namespace [{namespace}]",
+          "12273": "Stat [{statCode}] is not decreasable",
+          "12275": "[{action}] value: [{value}] of stat [{statCode}] is out of range while minimum [{minimum}] and maximum [{maximum}] in namespace [{namespace}]",
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"]
         }
       }
     }
@@ -9527,16 +10397,16 @@
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2024-04-30T09:19:09+00:00",
-    "buildID": "2.12.6",
+    "buildDate": "2024-05-17T08:18:10+00:00",
+    "buildID": "2.14.0",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-    "buildOS": "Linux amd64 5.10.214-202.855.amzn2.x86_64",
+    "buildOS": "Linux amd64 5.10.215-203.850.amzn2.x86_64",
     "gitBranchName": "master",
-    "gitHash": "7b674924bc",
+    "gitHash": "dac06821cf",
     "gitTag": "2.9.0",
     "name": "justice-social-service",
     "realm": "dev",
-    "version": "2.12.6",
+    "version": "2.14.0",
     "version-roles-seeding": "0.0.12"
   }
 }

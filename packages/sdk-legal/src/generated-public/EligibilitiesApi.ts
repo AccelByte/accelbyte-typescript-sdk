@@ -9,22 +9,22 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Eligibilities$ } from './endpoints/Eligibilities$.js'
 import { RetrieveUserEligibilitiesIndirectResponse } from '../generated-definitions/RetrieveUserEligibilitiesIndirectResponse.js'
 import { RetrieveUserEligibilitiesResponseArray } from '../generated-definitions/RetrieveUserEligibilitiesResponseArray.js'
+import { Eligibilities$ } from './endpoints/Eligibilities$.js'
 
 export function EligibilitiesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.
    */
   async function getEligibility_ByNamespace(): Promise<RetrieveUserEligibilitiesResponseArray> {
-    const $ = new Eligibilities$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Eligibilities$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEligibility_ByNamespace()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +38,7 @@ export function EligibilitiesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     clientId: string,
     userId: string
   ): Promise<RetrieveUserEligibilitiesIndirectResponse> {
-    const $ = new Eligibilities$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Eligibilities$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getUserEligibility_ByCountryCode_ByClientId_ByUserId(countryCode, clientId, userId)
     if (resp.error) throw resp.error
     return resp.response.data

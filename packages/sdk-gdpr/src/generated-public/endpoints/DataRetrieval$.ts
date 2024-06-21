@@ -15,7 +15,7 @@ import { UserPersonalDataResponse } from '../../generated-definitions/UserPerson
 
 export class DataRetrieval$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get user&#39;s personal data requests Requires valid user access token Scope: account
@@ -27,11 +27,16 @@ export class DataRetrieval$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserPersonalDataResponse, 'UserPersonalDataResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserPersonalDataResponse,
+      'UserPersonalDataResponse'
+    )
   }
 
   /**
-   * Submit personal data retrieval request. Scope: account
+   * Submit personal data retrieval request. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
   postRequest_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<DataRetrievalResponse>> {
     const params = {} as SDKRequestConfig
@@ -43,7 +48,7 @@ export class DataRetrieval$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DataRetrievalResponse, 'DataRetrievalResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DataRetrievalResponse, 'DataRetrievalResponse')
   }
 
   /**
@@ -57,11 +62,11 @@ export class DataRetrieval$ {
       .replace('{requestDate}', requestDate)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * Generate personal data download url Requires valid user access token Scope: account
+   * Generate personal data download url Requires valid user access token Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
   postGenerate_ByUserId_ByRequestDate(
     userId: string,
@@ -78,6 +83,6 @@ export class DataRetrieval$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserDataUrl, 'UserDataUrl')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserDataUrl, 'UserDataUrl')
   }
 }

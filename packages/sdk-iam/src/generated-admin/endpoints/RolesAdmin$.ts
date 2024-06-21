@@ -30,7 +30,7 @@ import { RoleV4Response } from '../../generated-definitions/RoleV4Response.js'
 
 export class RolesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * action code: 10414
@@ -46,7 +46,7 @@ export class RolesAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RoleResponseWithManagersAndPaginationV3,
       'RoleResponseWithManagersAndPaginationV3'
@@ -61,7 +61,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleV3, 'RoleV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleV3, 'RoleV3')
   }
 
   /**
@@ -77,7 +77,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListRoleV4Response, 'ListRoleV4Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListRoleV4Response, 'ListRoleV4Response')
   }
 
   /**
@@ -88,7 +88,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleV4Response, 'RoleV4Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleV4Response, 'RoleV4Response')
   }
 
   /**
@@ -99,7 +99,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -110,7 +110,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleResponseV3, 'RoleResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleResponseV3, 'RoleResponseV3')
   }
 
   /**
@@ -121,7 +121,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleResponseV3, 'RoleResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleResponseV3, 'RoleResponseV3')
   }
 
   /**
@@ -132,7 +132,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -143,7 +143,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleV4Response, 'RoleV4Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleV4Response, 'RoleV4Response')
   }
 
   /**
@@ -154,7 +154,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles/{roleId}'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleV4Response, 'RoleV4Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleV4Response, 'RoleV4Response')
   }
 
   /**
@@ -165,7 +165,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/admin'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -176,7 +176,12 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/admin'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleAdminStatusResponseV3, 'RoleAdminStatusResponseV3')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      RoleAdminStatusResponseV3,
+      'RoleAdminStatusResponseV3'
+    )
   }
 
   /**
@@ -187,7 +192,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/admin'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -198,7 +203,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles/{roleId}/users'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -213,7 +218,7 @@ export class RolesAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListAssignedUsersV4Response,
       'ListAssignedUsersV4Response'
@@ -228,7 +233,12 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles/{roleId}/users'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AssignedUserV4Response, 'AssignedUserV4Response')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      AssignedUserV4Response,
+      'AssignedUserV4Response'
+    )
   }
 
   /**
@@ -239,7 +249,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/members'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -253,7 +263,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/members'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleMembersResponseV3, 'RoleMembersResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleMembersResponseV3, 'RoleMembersResponseV3')
   }
 
   /**
@@ -264,7 +274,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/members'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -275,7 +285,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/managers'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -289,7 +299,12 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/managers'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleManagersResponsesV3, 'RoleManagersResponsesV3')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      RoleManagersResponsesV3,
+      'RoleManagersResponsesV3'
+    )
   }
 
   /**
@@ -300,7 +315,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/managers'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   deletePermission_ByRoleId(roleId: string, data: string[]): Promise<IResponse<unknown>> {
@@ -308,7 +323,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/permissions'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -319,7 +334,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/permissions'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -330,7 +345,7 @@ export class RolesAdmin$ {
     const url = '/iam/v3/admin/roles/{roleId}/permissions'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   deletePermission_ByRoleId_v4(roleId: string, data: string[]): Promise<IResponse<unknown>> {
@@ -338,7 +353,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles/{roleId}/permissions'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -349,7 +364,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles/{roleId}/permissions'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleV4Response, 'RoleV4Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleV4Response, 'RoleV4Response')
   }
 
   /**
@@ -360,7 +375,7 @@ export class RolesAdmin$ {
     const url = '/iam/v4/admin/roles/{roleId}/permissions'.replace('{roleId}', roleId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RoleV4Response, 'RoleV4Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RoleV4Response, 'RoleV4Response')
   }
 
   /**
@@ -374,6 +389,6 @@ export class RolesAdmin$ {
       .replace('{action}', String(action))
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

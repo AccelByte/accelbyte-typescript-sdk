@@ -15,7 +15,7 @@ import { UserFollowResponse } from '../../generated-definitions/UserFollowRespon
 
 export class PublicFollow$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Requires valid user token
@@ -26,7 +26,7 @@ export class PublicFollow$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedCreatorOverviewResponse,
       'PaginatedCreatorOverviewResponse'
@@ -42,7 +42,7 @@ export class PublicFollow$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponse,
       'PaginatedContentDownloadResponse'
@@ -59,7 +59,7 @@ export class PublicFollow$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserFollowResponse, 'UserFollowResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserFollowResponse, 'UserFollowResponse')
   }
 
   getFollowers_ByUserId(
@@ -73,7 +73,7 @@ export class PublicFollow$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedCreatorOverviewResponse,
       'PaginatedCreatorOverviewResponse'
@@ -91,7 +91,7 @@ export class PublicFollow$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedCreatorOverviewResponse,
       'PaginatedCreatorOverviewResponse'

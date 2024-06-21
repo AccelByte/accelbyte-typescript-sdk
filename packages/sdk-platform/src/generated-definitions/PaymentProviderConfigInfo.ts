@@ -6,13 +6,13 @@
 import { z } from 'zod'
 
 export const PaymentProviderConfigInfo = z.object({
-  aggregate: z.enum(['ADYEN', 'CHECKOUT', 'STRIPE', 'XSOLLA']).nullish(),
+  aggregate: z.enum(['ADYEN', 'CHECKOUT', 'NEONPAY', 'STRIPE', 'XSOLLA']).nullish(),
   id: z.string(),
   namespace: z.string(),
   paymentMerchantConfigId: z.string().nullish(),
   region: z.string(),
   sandboxTaxJarApiToken: z.string().nullish(),
-  specials: z.array(z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA'])).nullish(),
+  specials: z.array(z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA'])).nullish(),
   taxJarApiToken: z.string().nullish(),
   taxJarEnabled: z.boolean().nullish(),
   useGlobalTaxJarApiToken: z.boolean().nullish()

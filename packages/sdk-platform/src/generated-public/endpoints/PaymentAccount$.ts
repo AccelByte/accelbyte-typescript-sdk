@@ -13,7 +13,7 @@ import { PaymentAccountArray } from '../../generated-definitions/PaymentAccountA
 
 export class PaymentAccount$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment accounts.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment account list&lt;/li&gt;&lt;/ul&gt;
@@ -25,7 +25,7 @@ export class PaymentAccount$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentAccountArray, 'PaymentAccountArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentAccountArray, 'PaymentAccountArray')
   }
 
   /**
@@ -40,6 +40,6 @@ export class PaymentAccount$ {
       .replace('{id}', id)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

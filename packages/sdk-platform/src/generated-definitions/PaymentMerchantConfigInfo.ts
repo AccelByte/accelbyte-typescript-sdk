@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { AdyenConfig } from './AdyenConfig.js'
 import { AliPayConfig } from './AliPayConfig.js'
 import { CheckoutConfig } from './CheckoutConfig.js'
+import { NeonPayConfig } from './NeonPayConfig.js'
 import { PayPalConfig } from './PayPalConfig.js'
 import { StripeConfig } from './StripeConfig.js'
 import { WxPayConfigInfo } from './WxPayConfigInfo.js'
@@ -22,6 +23,8 @@ export const PaymentMerchantConfigInfo = z.object({
   checkoutSandboxConfig: CheckoutConfig.nullish(),
   createdAt: z.string(),
   id: z.string(),
+  neonPayConfig: NeonPayConfig.nullish(),
+  neonPaySandboxConfig: NeonPayConfig.nullish(),
   payPalConfig: PayPalConfig.nullish(),
   payPalSandboxConfig: PayPalConfig.nullish(),
   stripeConfig: StripeConfig.nullish(),

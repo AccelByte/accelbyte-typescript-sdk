@@ -11,21 +11,21 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AcceptAgreementRequest } from '../generated-definitions/AcceptAgreementRequest.js'
 import { AcceptAgreementResponse } from '../generated-definitions/AcceptAgreementResponse.js'
-import { Agreement$ } from './endpoints/Agreement$.js'
 import { RetrieveAcceptedAgreementResponseArray } from '../generated-definitions/RetrieveAcceptedAgreementResponseArray.js'
+import { Agreement$ } from './endpoints/Agreement$.js'
 
 export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Retrieve accepted Legal Agreements.
    */
   async function getAgreementsPolicies(): Promise<RetrieveAcceptedAgreementResponseArray> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getAgreementsPolicies()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +35,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Accepts many legal policy versions all at once. Supply with localized version policy id to accept an agreement.
    */
   async function createAgreementPolicy(data: AcceptAgreementRequest[]): Promise<AcceptAgreementResponse> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createAgreementPolicy(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +49,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: AcceptAgreementRequest[]
   ): Promise<AcceptAgreementResponse> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createAgreementPolicyUser_ByUserId_DEPRECATED(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +59,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Change marketing preference consent.
    */
   async function patchAgreementLocalizedPolicyVersionPreference(data: AcceptAgreementRequest[]): Promise<unknown> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchAgreementLocalizedPolicyVersionPreference(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +69,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Accepts a legal policy version. Supply with localized version policy id to accept an agreement
    */
   async function createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<unknown> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createAgreementLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -85,7 +85,7 @@ export function AgreementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: AcceptAgreementRequest[]
   ): Promise<AcceptAgreementResponse> {
-    const $ = new Agreement$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Agreement$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUserPolicyAgreement_ByCountryCode_ByClientId_ByUserId_DEPRECATED(countryCode, clientId, userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

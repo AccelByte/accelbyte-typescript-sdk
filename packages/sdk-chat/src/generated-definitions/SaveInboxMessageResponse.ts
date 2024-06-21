@@ -6,7 +6,7 @@
 import { z } from 'zod'
 
 export const SaveInboxMessageResponse = z.object({
-  category: z.string(),
+  category: z.string().nullish(),
   expiredAt: z.number().int(),
   id: z.string(),
   message: z.record(z.any()).nullish(),

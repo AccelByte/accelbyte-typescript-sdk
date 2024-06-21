@@ -12,10 +12,10 @@ import { UserPlatformAccountClosureHistoriesResponse } from '../../generated-def
 
 export class PlatformAccountClosureHistoryAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * Get user&#39;s platform account closure histories. ------ Supported platforms: * psn Scope: account
+   * Get user&#39;s platform account closure histories. Scope: account ------ Supported platforms: * psn
    */
   getUsersPlatformsClosureHistories(queryParams?: {
     limit?: number
@@ -28,7 +28,7 @@ export class PlatformAccountClosureHistoryAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UserPlatformAccountClosureHistoriesResponse,
       'UserPlatformAccountClosureHistoriesResponse'

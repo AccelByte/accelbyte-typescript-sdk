@@ -16,10 +16,10 @@ import { ReleaseNoteManifest } from '../../generated-definitions/ReleaseNoteMani
 
 export class ReleaseNoteAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to commit release note file that has been uploaded to signal completion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit release note file that has been uploaded to signal completion.
    */
   patchReleasenoteUploadCommit_ByHash(hash: string): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -28,11 +28,11 @@ export class ReleaseNoteAdmin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
-   * This API is used to start release note upload and get the presigned URL.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start release note upload and get the presigned URL.
    */
   createReleasenoteUploadStart_ByUploaderId(uploaderId: string, data: BinaryUpload): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -41,11 +41,11 @@ export class ReleaseNoteAdmin$ {
       .replace('{uploaderId}', uploaderId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
-   * This API is used to save release note manifest.&lt;p&gt;It will update the existing release note manifest if exist (based on namespace, appId, platformId and version).&lt;br/&gt;Otherwise, it will create a new release note manifest.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Upload Mode for existing release note manifest:&lt;/b&gt;&lt;br/&gt;0 = update, will merge the old localizations with the new localizations.&lt;br/&gt;1 = replace, will replace the old localizations with the new localizations.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to save release note manifest.&lt;p&gt;It will update the existing release note manifest if exist (based on namespace, appId, platformId and version).&lt;br/&gt;Otherwise, it will create a new release note manifest.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Upload Mode for existing release note manifest:&lt;/b&gt;&lt;br/&gt;0 = update, will merge the old localizations with the new localizations.&lt;br/&gt;1 = replace, will replace the old localizations with the new localizations.
    */
   createReleasenoteManifestSave_ByUploadMode(uploadMode: string, data: ReleaseNoteManifest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -54,11 +54,11 @@ export class ReleaseNoteAdmin$ {
       .replace('{uploadMode}', uploadMode)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to get release note manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get release note manifest.
    */
   getReleasenoteManifestGet_ByAppId_ByPlatformId(
     appId: string,
@@ -72,6 +72,6 @@ export class ReleaseNoteAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReleaseNoteDto, 'ReleaseNoteDto')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ReleaseNoteDto, 'ReleaseNoteDto')
   }
 }

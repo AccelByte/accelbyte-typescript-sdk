@@ -15,7 +15,7 @@ import { StoreInfo } from '../../generated-definitions/StoreInfo.js'
 
 export class CatalogChangesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Select all changes.
@@ -27,7 +27,7 @@ export class CatalogChangesAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -67,7 +67,12 @@ export class CatalogChangesAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CatalogChangePagingResult, 'CatalogChangePagingResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CatalogChangePagingResult,
+      'CatalogChangePagingResult'
+    )
   }
 
   /**
@@ -80,7 +85,7 @@ export class CatalogChangesAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -114,7 +119,12 @@ export class CatalogChangesAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CatalogChangeStatistics, 'CatalogChangeStatistics')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CatalogChangeStatistics,
+      'CatalogChangeStatistics'
+    )
   }
 
   /**
@@ -127,7 +137,7 @@ export class CatalogChangesAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -140,7 +150,7 @@ export class CatalogChangesAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StoreInfo, 'StoreInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StoreInfo, 'StoreInfo')
   }
 
   /**
@@ -154,7 +164,7 @@ export class CatalogChangesAdmin$ {
       .replace('{changeId}', changeId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -168,7 +178,7 @@ export class CatalogChangesAdmin$ {
       .replace('{changeId}', changeId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -203,6 +213,6 @@ export class CatalogChangesAdmin$ {
       .replace('{storeId}', storeId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

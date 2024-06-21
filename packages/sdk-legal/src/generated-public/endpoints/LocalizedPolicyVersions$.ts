@@ -12,7 +12,7 @@ import { RetrieveLocalizedPolicyVersionPublicResponse } from '../../generated-de
 
 export class LocalizedPolicyVersions$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
@@ -28,7 +28,7 @@ export class LocalizedPolicyVersions$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveLocalizedPolicyVersionPublicResponse,
       'RetrieveLocalizedPolicyVersionPublicResponse'

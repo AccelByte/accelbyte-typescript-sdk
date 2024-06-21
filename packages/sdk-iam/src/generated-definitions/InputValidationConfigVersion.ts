@@ -21,6 +21,7 @@ export const InputValidationConfigVersion = z.object({
   maxRepeatingSpecialCharacter: z.number().int(),
   minCharType: z.number().int(),
   minLength: z.number().int(),
+  profanityFilter: z.string().nullish(),
   regex: z.string(),
   specialCharacterLocation: z.string(),
   specialCharacters: z.array(z.string()),

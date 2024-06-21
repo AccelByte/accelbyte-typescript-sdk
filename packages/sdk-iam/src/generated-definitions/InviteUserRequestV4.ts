@@ -10,6 +10,7 @@ export const InviteUserRequestV4 = z.object({
   emailAddresses: z.array(z.string()),
   isAdmin: z.boolean(),
   isNewStudio: z.boolean().nullish(),
+  languageTag: z.string().nullish(),
   namespace: z.string().nullish(),
   roleId: z.string().nullish()
 })

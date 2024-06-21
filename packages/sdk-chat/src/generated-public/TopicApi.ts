@@ -16,21 +16,21 @@ import { PublicBanTopicMembersRequest } from '../generated-definitions/PublicBan
 import { PublicBanTopicMembersResponse } from '../generated-definitions/PublicBanTopicMembersResponse.js'
 import { PublicUnbanTopicMembersRequest } from '../generated-definitions/PublicUnbanTopicMembersRequest.js'
 import { PublicUnbanTopicMembersResponse } from '../generated-definitions/PublicUnbanTopicMembersResponse.js'
-import { Topic$ } from './endpoints/Topic$.js'
 import { UnmuteUserRequest } from '../generated-definitions/UnmuteUserRequest.js'
+import { Topic$ } from './endpoints/Topic$.js'
 
 export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * get chat muted topics in a namespace.
    */
   async function getMuted(): Promise<MutedTopicResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMuted()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +40,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * get chat list of topic in a namespace.
    */
   async function getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<ChatMessageResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTopic(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -50,7 +50,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Mute user.
    */
   async function updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateMute_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +63,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     topic: string,
     queryParams?: { limit?: number; order?: string | null; startCreatedAt?: number }
   ): Promise<ChatMessageResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getChats_ByTopic(topic, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +73,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Unmute user.
    */
   async function updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateUnmute_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +83,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Ban topic members in a group topic.
    */
   async function createBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<PublicBanTopicMembersResponse> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createBanMember_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +93,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Unban topic members in a group topic.
    */
   async function createUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<PublicUnbanTopicMembersResponse> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUnbanMember_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -103,7 +103,7 @@ export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete chat.
    */
   async function deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteChat_ByTopic_ByChatId(topic, chatId)
     if (resp.error) throw resp.error
     return resp.response.data

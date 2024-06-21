@@ -3,7 +3,7 @@
   "info": {
     "description": "This is analytics game telemetry to standardize avengers and justice telemetry",
     "title": "Analytics Game Telemetry",
-    "version": "1.24.1"
+    "version": "1.25.1"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -69,6 +69,7 @@
         ],
         "summary": "Get Namespaces",
         "tags": ["telemetry"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:*:TELEMETRY [READ]"]
@@ -184,6 +185,7 @@
         ],
         "summary": "Get Events",
         "tags": ["telemetry"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TELEMETRY [READ]"]
@@ -251,6 +253,7 @@
         ],
         "summary": "Protected Save Events",
         "tags": ["Gametelemetry Operations"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -311,6 +314,7 @@
         ],
         "summary": "Protected Get Playtime",
         "tags": ["Gametelemetry Operations"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -377,6 +381,7 @@
         ],
         "summary": "Protected Update Playtime",
         "tags": ["Gametelemetry Operations"],
+        "x-errorCodes": {},
         "x-security": []
       }
     }
@@ -572,11 +577,11 @@
     "path": "/game-telemetry/openapi.json"
   },
   "x-version": {
-    "buildDate": "2024-04-29T01:57:26+00:00",
-    "gitHash": "efdb888999397ff389fa78dd6a8a7c42f9aa9368",
+    "buildDate": "2024-05-20T10:34:34+00:00",
+    "gitHash": "af9c3db31bf54d07f3d604e94b5c9af7bac55a68",
     "name": "analytics-game-telemetry",
     "realm": "dev",
-    "version": "1.24.1",
+    "version": "1.25.1",
     "version-roles-seeding": "1.0.18"
   }
 }

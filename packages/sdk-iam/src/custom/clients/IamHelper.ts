@@ -62,4 +62,17 @@ export class IamHelper {
 
     return false
   }
+
+  static currentUserDisplayNameIsEmpty(user: UserResponseV3 | null, checkUniqueDisplayName = false): boolean {
+    if (!user) return false
+
+    const isDisplayNameEmpty = !user.displayName.length
+    const isUniqueDisplayNameEmpty = !user.uniqueDisplayName?.length
+
+    if (checkUniqueDisplayName) {
+      return isDisplayNameEmpty || isUniqueDisplayNameEmpty
+    }
+
+    return isDisplayNameEmpty
+  }
 }

@@ -15,7 +15,7 @@ import { LoadOutgoingFriendsWithTimeResponse } from '../../generated-definitions
 
 export class FriendsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get list of friends in a namespace.
@@ -30,7 +30,7 @@ export class FriendsAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetFriendsResponse, 'GetFriendsResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetFriendsResponse, 'GetFriendsResponse')
   }
 
   /**
@@ -47,7 +47,7 @@ export class FriendsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       LoadIncomingFriendsWithTimeResponse,
       'LoadIncomingFriendsWithTimeResponse'
@@ -68,7 +68,7 @@ export class FriendsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       LoadOutgoingFriendsWithTimeResponse,
       'LoadOutgoingFriendsWithTimeResponse'
@@ -89,7 +89,7 @@ export class FriendsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       FriendshipConnectionResponse,
       'FriendshipConnectionResponse'

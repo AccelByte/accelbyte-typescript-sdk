@@ -4,10 +4,12 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { PaymentOrderNeonPayConfig } from './PaymentOrderNeonPayConfig.js'
 
 export const PaymentUrlCreate = z.object({
+  neonPayConfig: PaymentOrderNeonPayConfig.nullish(),
   paymentOrderNo: z.string(),
-  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
   returnUrl: z.string().nullish(),
   ui: z.string().nullish(),
   zipCode: z.string().nullish()

@@ -13,7 +13,7 @@ import { PublicAchievementsResponse } from '../../generated-definitions/PublicAc
 
 export class Achievements$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
@@ -40,7 +40,7 @@ export class Achievements$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PublicAchievementsResponse,
       'PublicAchievementsResponse'
@@ -60,6 +60,11 @@ export class Achievements$ {
       .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PublicAchievementResponse, 'PublicAchievementResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PublicAchievementResponse,
+      'PublicAchievementResponse'
+    )
   }
 }

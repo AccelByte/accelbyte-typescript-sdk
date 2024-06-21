@@ -25,7 +25,6 @@ import { CreateTopicResponse } from '../generated-definitions/CreateTopicRespons
 import { MessageRequest } from '../generated-definitions/MessageRequest.js'
 import { MessageResultWithAttributes } from '../generated-definitions/MessageResultWithAttributes.js'
 import { SendChatParams } from '../generated-definitions/SendChatParams.js'
-import { TopicAdmin$ } from './endpoints/TopicAdmin$.js'
 import { TopicInfoArray } from '../generated-definitions/TopicInfoArray.js'
 import { TopicLogWithPaginationResponse } from '../generated-definitions/TopicLogWithPaginationResponse.js'
 import { TopicMemberWithPaginationResponse } from '../generated-definitions/TopicMemberWithPaginationResponse.js'
@@ -33,13 +32,14 @@ import { TopicResponseArray } from '../generated-definitions/TopicResponseArray.
 import { UnbanTopicMemberParam } from '../generated-definitions/UnbanTopicMemberParam.js'
 import { UnbanTopicMemberResult } from '../generated-definitions/UnbanTopicMemberResult.js'
 import { UpdateTopicParams } from '../generated-definitions/UpdateTopicParams.js'
+import { TopicAdmin$ } from './endpoints/TopicAdmin$.js'
 
 export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get chat history in a namespace.
@@ -56,7 +56,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     startCreatedAt?: number
     topic?: string[]
   }): Promise<ChatMessageWithPaginationResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getChats(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -66,7 +66,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get chat list of topic in a namespace.
    */
   async function getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<TopicResponseArray> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTopic(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -76,7 +76,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create new group topic in a namespace.
    */
   async function createTopic(data: CreateTopicParams): Promise<CreateTopicResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createTopic(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -96,7 +96,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     topicType?: 'GROUP' | 'PERSONAL'
     userId?: string | null
   }): Promise<TopicInfoArray> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTopics(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -115,7 +115,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     topicIds?: string[]
     userId?: string | null
   }): Promise<TopicLogWithPaginationResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTopicLog(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -125,7 +125,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * For testing purpose, doesn&#39;t send any message to the topic. Always do filter regardless of enableProfanityFilter configuration.
    */
   async function createChatFilter(data: MessageRequest, queryParams?: { detail?: boolean | null }): Promise<MessageResultWithAttributes> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createChatFilter(data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -135,7 +135,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete topic in a namespace.
    */
   async function deleteTopic_ByTopic(topic: string): Promise<ActionDeleteTopicResult> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteTopic_ByTopic(topic)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -145,7 +145,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update group topic in a namespace.
    */
   async function updateTopic_ByTopic(topic: string, data: UpdateTopicParams): Promise<CreateTopicResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateTopic_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -159,7 +159,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     topicName?: string | null
   }): Promise<ChannelTopicWithPaginationResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTopicChannel(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -169,7 +169,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create new namespace group topic in a namespace.
    */
   async function createNamespaceTopic(data: CreateNamespaceTopicParams): Promise<CreateTopicResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createNamespaceTopic(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -192,7 +192,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       startCreatedAt?: number
     }
   ): Promise<ChatMessageWithPaginationResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getChats_ByTopic_DEPRECATED(topic, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -202,7 +202,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Send message to chat topic as system.
    */
   async function createChat_ByTopic(topic: string, data: SendChatParams): Promise<ChatMessageResponseArray> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createChat_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -212,7 +212,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get shard list from topic.
    */
   async function getShards_ByTopic(topic: string): Promise<unknown> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getShards_ByTopic(topic)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -222,7 +222,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get chat list of topic in a namespace.
    */
   async function getChannel_ByTopic(topic: string): Promise<ChannelTopicResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getChannel_ByTopic(topic)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -235,7 +235,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     topic: string,
     queryParams?: { isBanned?: boolean | null; isModerator?: boolean | null; limit?: number; offset?: number; shardId?: string | null }
   ): Promise<TopicMemberWithPaginationResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMembers_ByTopic(topic, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -245,7 +245,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get chat list of topic in a namespace.
    */
   async function getTopicChannelSummary(): Promise<ChannelTopicSummaryResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTopicChannelSummary()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -264,7 +264,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       topicType?: 'GROUP' | 'PERSONAL'
     }
   ): Promise<TopicLogWithPaginationResponse> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTopics_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -274,7 +274,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Ban users in some topic. banned user not assigned to shard for channel topic, and cannot send and query chat.
    */
   async function createBanMember_ByTopic(topic: string, data: BanTopicMemberParam): Promise<BanTopicMemberResult> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createBanMember_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -284,7 +284,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Unban users in some topic.
    */
   async function createUnbanMember_ByTopic(topic: string, data: UnbanTopicMemberParam): Promise<UnbanTopicMemberResult> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUnbanMember_ByTopic(topic, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -294,7 +294,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Remove member from topic in a namespace.
    */
   async function deleteUser_ByTopic_ByUserId(topic: string, userId: string): Promise<ActionAddUserToTopicResult> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteUser_ByTopic_ByUserId(topic, userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -304,7 +304,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Add new member for topic in a namespace.
    */
   async function createUser_ByTopic_ByUserId(topic: string, userId: string, data: AddMemberParams): Promise<ActionAddUserToTopicResult> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUser_ByTopic_ByUserId(topic, userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -314,7 +314,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete chat.
    */
   async function deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<unknown> {
-    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteChat_ByTopic_ByChatId(topic, chatId)
     if (resp.error) throw resp.error
     return resp.response.data

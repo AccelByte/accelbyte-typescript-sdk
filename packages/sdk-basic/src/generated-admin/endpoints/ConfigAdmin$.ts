@@ -15,7 +15,7 @@ import { ConfigUpdate } from '../../generated-definitions/ConfigUpdate.js'
 
 export class ConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Create a config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created config&lt;/li&gt;&lt;/ul&gt;
@@ -25,7 +25,7 @@ export class ConfigAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/configs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigInfo, 'ConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigInfo, 'ConfigInfo')
   }
 
   /**
@@ -38,7 +38,7 @@ export class ConfigAdmin$ {
       .replace('{configKey}', configKey)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -51,7 +51,7 @@ export class ConfigAdmin$ {
       .replace('{configKey}', configKey)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigInfo, 'ConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigInfo, 'ConfigInfo')
   }
 
   /**
@@ -64,7 +64,7 @@ export class ConfigAdmin$ {
       .replace('{configKey}', configKey)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigInfo, 'ConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigInfo, 'ConfigInfo')
   }
 
   /**
@@ -77,6 +77,6 @@ export class ConfigAdmin$ {
       .replace('{configKey}', configKey)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigInfo, 'ConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigInfo, 'ConfigInfo')
   }
 }

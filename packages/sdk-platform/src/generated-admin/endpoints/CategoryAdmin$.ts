@@ -16,7 +16,7 @@ import { FullCategoryInfoArray } from '../../generated-definitions/FullCategoryI
 
 export class CategoryAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to get root categories.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: root category data&lt;/li&gt;&lt;/ul&gt;
@@ -26,7 +26,7 @@ export class CategoryAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
   }
 
   /**
@@ -37,7 +37,7 @@ export class CategoryAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
   }
 
   /**
@@ -48,7 +48,12 @@ export class CategoryAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/categories/basic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BasicCategoryInfoArray, 'BasicCategoryInfoArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      BasicCategoryInfoArray,
+      'BasicCategoryInfoArray'
+    )
   }
 
   /**
@@ -61,7 +66,7 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
   }
 
   /**
@@ -74,7 +79,7 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
   }
 
   /**
@@ -91,7 +96,7 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullCategoryInfo, 'FullCategoryInfo')
   }
 
   /**
@@ -104,7 +109,7 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
   }
 
   /**
@@ -120,6 +125,6 @@ export class CategoryAdmin$ {
       .replace('{categoryPath}', categoryPath)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullCategoryInfoArray, 'FullCategoryInfoArray')
   }
 }

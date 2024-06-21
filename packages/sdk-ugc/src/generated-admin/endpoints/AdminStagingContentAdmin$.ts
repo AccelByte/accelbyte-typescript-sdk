@@ -14,7 +14,7 @@ import { StagingContentResponse } from '../../generated-definitions/StagingConte
 
 export class AdminStagingContentAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List content that need admin&#39;s approval
@@ -30,7 +30,7 @@ export class AdminStagingContentAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedListStagingContentResponse,
       'PaginatedListStagingContentResponse'
@@ -47,7 +47,12 @@ export class AdminStagingContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StagingContentResponse, 'StagingContentResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      StagingContentResponse,
+      'StagingContentResponse'
+    )
   }
 
   /**
@@ -64,7 +69,7 @@ export class AdminStagingContentAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedListStagingContentResponse,
       'PaginatedListStagingContentResponse'
@@ -81,6 +86,11 @@ export class AdminStagingContentAdmin$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StagingContentResponse, 'StagingContentResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      StagingContentResponse,
+      'StagingContentResponse'
+    )
   }
 }

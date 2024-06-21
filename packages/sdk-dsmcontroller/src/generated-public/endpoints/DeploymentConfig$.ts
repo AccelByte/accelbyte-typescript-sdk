@@ -15,7 +15,7 @@ import { ListDeploymentResponse } from '../../generated-definitions/ListDeployme
 
 export class DeploymentConfig$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a all deployments in a namespace Parameter Offset and Count is Required
@@ -25,7 +25,12 @@ export class DeploymentConfig$ {
     const url = '/dsmcontroller/namespaces/{namespace}/configs/deployments'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListDeploymentResponse, 'ListDeploymentResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListDeploymentResponse,
+      'ListDeploymentResponse'
+    )
   }
 
   /**
@@ -38,7 +43,7 @@ export class DeploymentConfig$ {
       .replace('{deployment}', deployment)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -51,7 +56,12 @@ export class DeploymentConfig$ {
       .replace('{deployment}', deployment)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 
   /**
@@ -64,6 +74,11 @@ export class DeploymentConfig$ {
       .replace('{deployment}', deployment)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeploymentWithOverride, 'DeploymentWithOverride')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeploymentWithOverride,
+      'DeploymentWithOverride'
+    )
   }
 }

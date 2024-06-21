@@ -9,7 +9,6 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AdminItemsAdmin$ } from './endpoints/AdminItemsAdmin$.js'
 import { AdminUpdateItemReq } from '../generated-definitions/AdminUpdateItemReq.js'
 import { ConsumeItemReq } from '../generated-definitions/ConsumeItemReq.js'
 import { ItemResp } from '../generated-definitions/ItemResp.js'
@@ -18,19 +17,20 @@ import { RemoveInventoryItemReq } from '../generated-definitions/RemoveInventory
 import { SaveItemReq } from '../generated-definitions/SaveItemReq.js'
 import { SaveItemToInventoryReq } from '../generated-definitions/SaveItemToInventoryReq.js'
 import { UpdateItemRespArray } from '../generated-definitions/UpdateItemRespArray.js'
+import { AdminItemsAdmin$ } from './endpoints/AdminItemsAdmin$.js'
 
 export function AdminItemsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    *  Saving an item. The item will be saved in user&#39;s inventory, If it doesn&#39;t exist it&#39;ll be created. If the item already exists, its qty will be increased, so no new item with same sourceItemId will be created Tags will be auto-created. ItemType will be auto-created. For Ecommerce item, this fields will be override by ecommerce configuration (slotUsed, serverCustomAttributes, customAttributes, type) Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]
    */
   async function createItem_ByUserId(userId: string, data: SaveItemReq): Promise<ItemResp> {
-    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createItem_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,22 +44,12 @@ export function AdminItemsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     queryParams?: {
       limit?: number
       offset?: number
-      qtyGte?: number
-      sortBy?:
-        | 'createdAt'
-        | 'createdAt:asc'
-        | 'createdAt:desc'
-        | 'qty'
-        | 'qty:asc'
-        | 'qty:desc'
-        | 'updatedAt'
-        | 'updatedAt:asc'
-        | 'updatedAt:desc'
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
       sourceItemId?: string | null
       tags?: string | null
     }
   ): Promise<ListItemResp> {
-    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getItems_ByInventoryId(inventoryId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +59,7 @@ export function AdminItemsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]
    */
   async function updateItemEntitlementSync_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateItemEntitlementSync_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +73,7 @@ export function AdminItemsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     inventoryId: string,
     data: RemoveInventoryItemReq[]
   ): Promise<UpdateItemRespArray> {
-    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteItem_ByUserId_ByInventoryId(userId, inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +83,7 @@ export function AdminItemsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Saving an item to specific inventory. The item will be saved in specific user&#39;s inventory, If the item already exists, its qty will be increased, so no new item with same sourceItemId will be created Tags will be auto-created. ItemType will be auto-created. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]
    */
   async function createItem_ByUserId_ByInventoryId(userId: string, inventoryId: string, data: SaveItemToInventoryReq): Promise<ItemResp> {
-    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createItem_ByUserId_ByInventoryId(userId, inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -107,7 +97,7 @@ export function AdminItemsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     inventoryId: string,
     data: AdminUpdateItemReq[]
   ): Promise<UpdateItemRespArray> {
-    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateItem_ByUserId_ByInventoryId(userId, inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -117,7 +107,7 @@ export function AdminItemsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Consume user&#39;s own item Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]
    */
   async function createConsume_ByUserId_ByInventoryId(userId: string, inventoryId: string, data: ConsumeItemReq): Promise<ItemResp> {
-    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createConsume_ByUserId_ByInventoryId(userId, inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -131,7 +121,7 @@ export function AdminItemsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     slotId: string,
     sourceItemId: string
   ): Promise<ItemResp> {
-    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminItemsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getSourceItem_ByInventoryId_BySlotId_BySourceItemId(inventoryId, slotId, sourceItemId)
     if (resp.error) throw resp.error
     return resp.response.data

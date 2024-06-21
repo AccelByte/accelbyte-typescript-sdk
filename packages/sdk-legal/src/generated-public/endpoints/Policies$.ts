@@ -13,17 +13,17 @@ import { RetrievePolicyPublicResponseArray } from '../../generated-definitions/R
 
 export class Policies$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * Retrieve List of Countries that have Active Legal Policies.
+   * Retrieve List of Countries that have Active and Visible Legal Policies.
    */
   getPoliciesCountriesList(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/agreement/public/policies/countries/list'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -41,7 +41,7 @@ export class Policies$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrievePolicyPublicResponseArray,
       'RetrievePolicyPublicResponseArray'
@@ -65,7 +65,7 @@ export class Policies$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrievePolicyPublicResponseArray,
       'RetrievePolicyPublicResponseArray'
@@ -92,7 +92,7 @@ export class Policies$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrievePolicyPublicResponseArray,
       'RetrievePolicyPublicResponseArray'

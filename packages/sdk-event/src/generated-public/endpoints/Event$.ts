@@ -14,7 +14,7 @@ import { EventResponse } from '../../generated-definitions/EventResponse.js'
 
 export class Event$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -30,7 +30,7 @@ export class Event$ {
     const url = '/event/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 
   /**
@@ -42,7 +42,7 @@ export class Event$ {
     const url = '/event/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -57,7 +57,7 @@ export class Event$ {
     const url = '/event/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 
   /**
@@ -74,7 +74,7 @@ export class Event$ {
       .replace('{eventId}', String(eventId))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 
   /**
@@ -91,7 +91,7 @@ export class Event$ {
       .replace('{eventType}', String(eventType))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 
   /**
@@ -110,7 +110,7 @@ export class Event$ {
       .replace('{eventId}', String(eventId))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 
   /**
@@ -129,7 +129,7 @@ export class Event$ {
       .replace('{eventType}', String(eventType))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 
   /**
@@ -148,7 +148,7 @@ export class Event$ {
       .replace('{eventId}', String(eventId))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 
   /**
@@ -169,6 +169,6 @@ export class Event$ {
       .replace('{eventId}', String(eventId))
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 }

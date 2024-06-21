@@ -21,7 +21,7 @@ import { SetPlayerSessionAttributeRequest } from '../../generated-definitions/Se
 
 export class PlayerAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get the number of players connected to the Lobby in the given namespace.
@@ -31,7 +31,7 @@ export class PlayerAdmin$ {
     const url = '/lobby/v1/admin/player/namespaces/{namespace}/ccu'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLobbyCcuResponse, 'GetLobbyCcuResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetLobbyCcuResponse, 'GetLobbyCcuResponse')
   }
 
   /**
@@ -43,7 +43,7 @@ export class PlayerAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetBulkAllPlayerBlockedUsersResponse,
       'GetBulkAllPlayerBlockedUsersResponse'
@@ -61,7 +61,7 @@ export class PlayerAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetAllPlayerBlockedUsersResponse,
       'GetAllPlayerBlockedUsersResponse'
@@ -79,7 +79,7 @@ export class PlayerAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetAllPlayerSessionAttributeResponse,
       'GetAllPlayerSessionAttributeResponse'
@@ -96,7 +96,7 @@ export class PlayerAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -110,7 +110,7 @@ export class PlayerAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetAllPlayerBlockedByUsersResponse,
       'GetAllPlayerBlockedByUsersResponse'
@@ -127,7 +127,7 @@ export class PlayerAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -142,7 +142,7 @@ export class PlayerAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetPlayerSessionAttributeResponse,
       'GetPlayerSessionAttributeResponse'

@@ -17,7 +17,7 @@ import { ExtensionCategoryListApiResponse } from '../../generated-definitions/Ex
 
 export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get a list of auto moderation actions
@@ -27,7 +27,7 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
     const url = '/reporting/v1/admin/extensionActions'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ActionListApiResponse, 'ActionListApiResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ActionListApiResponse, 'ActionListApiResponse')
   }
 
   /**
@@ -38,7 +38,7 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
     const url = '/reporting/v1/admin/extensionActions'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ActionApiResponse, 'ActionApiResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ActionApiResponse, 'ActionApiResponse')
   }
 
   /**
@@ -53,7 +53,7 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ExtensionCategoryListApiResponse,
       'ExtensionCategoryListApiResponse'
@@ -69,7 +69,7 @@ export class AdminExtensionCategoriesAndAutoModerationActionsAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ExtensionCategoryApiResponse,
       'ExtensionCategoryApiResponse'

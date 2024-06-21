@@ -1,8 +1,8 @@
 {
-  "buildDate": "2024-04-25T08:16:23+00:00",
-  "gitHash": "3d742fc4e4dc617c83149ba71b3d57045fe65478",
+  "buildDate": "2024-05-17T03:35:55+00:00",
+  "gitHash": "19ae626b1f04ae52d288d10935ba52ae5f839d2e",
   "name": "justice-dedicated-server-manager-controller-service",
-  "revisionID": "6.7.6",
-  "version": "6.7.6",
+  "revisionID": "6.8.0",
+  "version": "6.8.0",
   "version-roles-seeding": "1.0.26"
 }

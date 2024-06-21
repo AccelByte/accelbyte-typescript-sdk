@@ -22,6 +22,7 @@ export const ThirdPartyLoginPlatformCredentialResponse = z.object({
   Issuer: z.string(),
   JWKSEndpoint: z.string(),
   KeyID: z.string(),
+  LogoURL: z.string().nullish(),
   Namespace: z.string(),
   NetflixCertificates: NetflixCertificates.nullish(),
   OrganizationId: z.string(),

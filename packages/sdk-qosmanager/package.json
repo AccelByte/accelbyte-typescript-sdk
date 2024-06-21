@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-qosmanager",
-  "version": "4.0.5-beta.0",
+  "version": "4.0.5-beta.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",
@@ -21,7 +21,7 @@
     "cg:lint": "find src -type d -empty -prune -o -type f -name '*.ts' -exec eslint --fix --config ../codegen/.eslintrc.json {} +",
     "cg:prettify": "prettier --write swaggers/*.json && prettier --write --no-error-on-unmatched-pattern src/**/*",
     "cg:download": "yarn cg download-swaggers --config swaggers.json --swaggersOutput swaggers",
-    "cg:generate": "rimraf src/generated-public && yarn cg generate-code --config swaggers.json --swaggersOutput swaggers --output src --snippetOutput ../../../apps/api-explorer-app/src/constants/Snippets",
+    "cg:generate": "rimraf src/generated-public && yarn cg generate-code --config swaggers.json --swaggersOutput swaggers --output src --snippetOutput ../../../apps/api-explorer-app/src/constants/Snippets --skipReactQuery",
     "cg": "ts-node ../codegen/src/cli.ts",
     "codegen": "yarn cg:generate && yarn cg:lint && yarn cg:prettify"
   },

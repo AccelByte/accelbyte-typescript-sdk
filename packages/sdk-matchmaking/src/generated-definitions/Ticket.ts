@@ -16,7 +16,8 @@ export const Ticket = z.object({
   Players: z.array(PlayerData),
   ProposedProposal,
   TicketAttributes: z.record(z.any()),
-  TicketID: z.string()
+  TicketID: z.string(),
+  TicketInformation: z.record(z.any())
 })
 
 export interface Ticket extends z.TypeOf<typeof Ticket> {}

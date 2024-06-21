@@ -11,7 +11,7 @@ export const PaymentNotificationInfo = z.object({
   id: z.string(),
   namespace: z.string(),
   notification: z.record(z.any()),
-  notificationSource: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
+  notificationSource: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
   notificationType: z.string(),
   paymentOrderNo: z.string(),
   status: z.enum(['ERROR', 'IGNORED', 'PROCESSED', 'WARN']),

@@ -9,22 +9,22 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PluginConfigAdmin$ } from './endpoints/PluginConfigAdmin$.js'
 import { PluginRequest } from '../generated-definitions/PluginRequest.js'
 import { PluginResponse } from '../generated-definitions/PluginResponse.js'
+import { PluginConfigAdmin$ } from './endpoints/PluginConfigAdmin$.js'
 
 export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * ## Description This endpoints will delete grpc plugins configuration
    */
   async function deletePlugin(): Promise<unknown> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deletePlugin()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +34,7 @@ export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will get grpc plugins configuration
    */
   async function getPlugins(): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPlugins()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +44,7 @@ export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will update grpc plugins configuration
    */
   async function patchPlugin(data: PluginRequest): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchPlugin(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +54,7 @@ export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will create new grpc plugins configuration per namespace
    */
   async function createPlugin(data: PluginRequest): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createPlugin(data)
     if (resp.error) throw resp.error
     return resp.response.data

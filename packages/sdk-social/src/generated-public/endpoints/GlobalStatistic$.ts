@@ -13,7 +13,7 @@ import { GlobalStatItemPagingSlicedResult } from '../../generated-definitions/Gl
 
 export class GlobalStatistic$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List global statItems by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STATITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat items&lt;/li&gt;&lt;/ul&gt;
@@ -28,7 +28,7 @@ export class GlobalStatistic$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GlobalStatItemPagingSlicedResult,
       'GlobalStatItemPagingSlicedResult'
@@ -45,6 +45,6 @@ export class GlobalStatistic$ {
       .replace('{statCode}', statCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GlobalStatItemInfo, 'GlobalStatItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GlobalStatItemInfo, 'GlobalStatItemInfo')
   }
 }

@@ -21,7 +21,7 @@ import { DevicesResponseV4 } from '../../generated-definitions/DevicesResponseV4
 
 export class DevicesV4Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This is the endpoint for an admin to get devices a user ever used to login
@@ -31,7 +31,7 @@ export class DevicesV4Admin$ {
     const url = '/iam/v4/admin/namespaces/{namespace}/devices'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DevicesResponseV4, 'DevicesResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DevicesResponseV4, 'DevicesResponseV4')
   }
 
   /**
@@ -42,7 +42,7 @@ export class DevicesV4Admin$ {
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/bans'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeviceBansResponseV4, 'DeviceBansResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DeviceBansResponseV4, 'DeviceBansResponseV4')
   }
 
   /**
@@ -53,7 +53,7 @@ export class DevicesV4Admin$ {
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/bans'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -64,7 +64,7 @@ export class DevicesV4Admin$ {
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeviceTypesResponseV4, 'DeviceTypesResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DeviceTypesResponseV4, 'DeviceTypesResponseV4')
   }
 
   /**
@@ -81,7 +81,12 @@ export class DevicesV4Admin$ {
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/banned'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeviceBannedResponseV4, 'DeviceBannedResponseV4')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeviceBannedResponseV4,
+      'DeviceBannedResponseV4'
+    )
   }
 
   /**
@@ -96,7 +101,7 @@ export class DevicesV4Admin$ {
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/report'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -107,7 +112,7 @@ export class DevicesV4Admin$ {
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/bans/{banId}'.replace('{namespace}', this.namespace).replace('{banId}', banId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeviceBanResponseV4, 'DeviceBanResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DeviceBanResponseV4, 'DeviceBanResponseV4')
   }
 
   /**
@@ -118,7 +123,7 @@ export class DevicesV4Admin$ {
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/bans/{banId}'.replace('{namespace}', this.namespace).replace('{banId}', banId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -131,7 +136,7 @@ export class DevicesV4Admin$ {
       .replace('{deviceId}', deviceId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeviceBansResponseV4, 'DeviceBansResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DeviceBansResponseV4, 'DeviceBansResponseV4')
   }
 
   /**
@@ -144,7 +149,7 @@ export class DevicesV4Admin$ {
       .replace('{deviceId}', deviceId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -157,7 +162,7 @@ export class DevicesV4Admin$ {
       .replace('{deviceId}', deviceId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeviceUsersResponseV4, 'DeviceUsersResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DeviceUsersResponseV4, 'DeviceUsersResponseV4')
   }
 
   /**
@@ -170,6 +175,11 @@ export class DevicesV4Admin$ {
       .replace('{deviceId}', deviceId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeviceIdDecryptResponseV4, 'DeviceIdDecryptResponseV4')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DeviceIdDecryptResponseV4,
+      'DeviceIdDecryptResponseV4'
+    )
   }
 }

@@ -144,9 +144,7 @@ export const injectAuthInterceptors = (
       }
 
       if (!response) {
-        console.error(
-          `injectResponseInterceptors net::ERR_INTERNET_DISCONNECTED ${config?.baseURL}${config?.url}. ${(error as AxiosError).message}\n`
-        )
+        console.warn(`sdk:ERR_INTERNET_DISCONNECTED ${config?.baseURL}${config?.url}. ${(error as AxiosError).message}\n`)
       }
 
       if (response?.status === 401) {

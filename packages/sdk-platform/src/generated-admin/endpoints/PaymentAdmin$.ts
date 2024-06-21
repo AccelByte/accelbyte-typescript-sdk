@@ -21,7 +21,7 @@ import { PaymentOrderRefund } from '../../generated-definitions/PaymentOrderRefu
 
 export class PaymentAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Query payment orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query payment orders&lt;/li&gt;&lt;/ul&gt;
@@ -51,7 +51,7 @@ export class PaymentAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaymentOrderPagingSlicedResult,
       'PaymentOrderPagingSlicedResult'
@@ -65,7 +65,7 @@ export class PaymentAdmin$ {
     endDate?: string | null
     externalId?: string | null
     limit?: number
-    notificationSource?: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    notificationSource?: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     notificationType?: string | null
     offset?: number
     paymentOrderNo?: string | null
@@ -77,7 +77,7 @@ export class PaymentAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaymentNotificationPagingSlicedResult,
       'PaymentNotificationPagingSlicedResult'
@@ -92,7 +92,7 @@ export class PaymentAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/payment/orders/byExtTxId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -105,7 +105,7 @@ export class PaymentAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
   }
 
   /**
@@ -118,7 +118,7 @@ export class PaymentAdmin$ {
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
   }
 
   /**
@@ -131,7 +131,7 @@ export class PaymentAdmin$ {
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
   }
 
   /**
@@ -144,7 +144,12 @@ export class PaymentAdmin$ {
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentOrderChargeStatus, 'PaymentOrderChargeStatus')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentOrderChargeStatus,
+      'PaymentOrderChargeStatus'
+    )
   }
 
   /**
@@ -160,7 +165,12 @@ export class PaymentAdmin$ {
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NotificationProcessResult, 'NotificationProcessResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      NotificationProcessResult,
+      'NotificationProcessResult'
+    )
   }
 
   /**
@@ -178,6 +188,6 @@ export class PaymentAdmin$ {
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentOrderInfo, 'PaymentOrderInfo')
   }
 }

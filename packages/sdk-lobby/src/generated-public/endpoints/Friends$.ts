@@ -28,7 +28,7 @@ import { UserUnfriendRequest } from '../../generated-definitions/UserUnfriendReq
 
 export class Friends$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get list of friends in a namespace.
@@ -39,7 +39,7 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserFriendsResponseArray,
       'GetUserFriendsResponseArray'
@@ -55,7 +55,7 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       NativeFriendSyncResponseArray,
       'NativeFriendSyncResponseArray'
@@ -70,7 +70,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/request'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -82,7 +82,7 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserIncomingFriendsResponseArray,
       'GetUserIncomingFriendsResponseArray'
@@ -98,7 +98,7 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserOutgoingFriendsResponseArray,
       'GetUserOutgoingFriendsResponseArray'
@@ -113,7 +113,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/unfriend'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -125,7 +125,7 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListBulkUserPlatformsResponse,
       'ListBulkUserPlatformsResponse'
@@ -144,7 +144,7 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       LoadIncomingFriendsWithTimeResponseArray,
       'LoadIncomingFriendsWithTimeResponseArray'
@@ -163,7 +163,7 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       LoadOutgoingFriendsWithTimeResponseArray,
       'LoadOutgoingFriendsWithTimeResponseArray'
@@ -178,7 +178,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/request/accept'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -189,7 +189,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/request/cancel'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -200,7 +200,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/me/request/reject'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -214,7 +214,7 @@ export class Friends$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UserGetFriendshipStatusResponse,
       'UserGetFriendshipStatusResponse'
@@ -229,7 +229,7 @@ export class Friends$ {
     const url = '/friends/namespaces/{namespace}/users/{userId}/add/bulk'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -242,6 +242,6 @@ export class Friends$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkFriendsResponse, 'BulkFriendsResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkFriendsResponse, 'BulkFriendsResponse')
   }
 }

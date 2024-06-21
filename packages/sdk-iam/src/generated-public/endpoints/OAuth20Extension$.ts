@@ -18,17 +18,17 @@ import { TokenResponseV3 } from '../../generated-definitions/TokenResponseV3.js'
 
 export class OAuth20Extension$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This endpoint is used to remove **access_token**, **refresh_token** from cookie and revoke token from usage.
+   * This endpoint is used to remove **access_token**, **refresh_token** from cookie.
    */
   createLogout(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v3/logout'
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -49,7 +49,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -67,7 +67,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
 
   /**
@@ -81,7 +81,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
 
   /**
@@ -92,11 +92,16 @@ export class OAuth20Extension$ {
     const url = '/iam/v3/location/country'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryLocationResponse, 'CountryLocationResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CountryLocationResponse,
+      'CountryLocationResponse'
+    )
   }
 
   /**
-   * This endpoint is being used to request the one time code [8 length] for headless account to link or upgrade to a full account. Should specify the target platform id and current user should already linked to this platform. Current user should be a headless account. ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **oculus** - **twitch** - **discord** - **android** - **ios** - **apple** - **device** - **justice** - **epicgames** - **ps4** - **ps5** - **nintendo** - **awscognito** - **live** - **xblweb** - **netflix** - **snapchat**
+   * This endpoint is being used to request the one time code [8 length] for headless account to link or upgrade to a full account. Should specify the target platform id and current user should already linked to this platform. Current user should be a headless account. ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **googleplaygames** - **oculus** - **twitch** - **discord** - **android** - **ios** - **apple** - **device** - **justice** - **epicgames** - **ps4** - **ps5** - **nintendo** - **awscognito** - **live** - **xblweb** - **netflix** - **snapchat**
    */
   postLinkCodeRequest(data: { platformId: string | null }): Promise<IResponse<OneTimeLinkingCodeResponse>> {
     const params = {} as SDKRequestConfig
@@ -107,7 +112,7 @@ export class OAuth20Extension$ {
     })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       OneTimeLinkingCodeResponse,
       'OneTimeLinkingCodeResponse'
@@ -126,7 +131,7 @@ export class OAuth20Extension$ {
     })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       OneTimeLinkingCodeValidationResponse,
       'OneTimeLinkingCodeValidationResponse'
@@ -149,7 +154,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
 
   /**
@@ -169,7 +174,7 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
 
   /**
@@ -186,7 +191,12 @@ export class OAuth20Extension$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TargetTokenCodeResponse, 'TargetTokenCodeResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      TargetTokenCodeResponse,
+      'TargetTokenCodeResponse'
+    )
   }
 
   /**
@@ -214,7 +224,7 @@ export class OAuth20Extension$ {
     const url = '/iam/v3/platforms/{platformId}/authenticate'.replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -232,7 +242,7 @@ export class OAuth20Extension$ {
     })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlatformTokenRefreshResponseV3,
       'PlatformTokenRefreshResponseV3'

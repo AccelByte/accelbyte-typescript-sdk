@@ -27,7 +27,7 @@ import { XblReconcileResultArray } from '../../generated-definitions/XblReconcil
 
 export class Iap$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get iap item mapping.
@@ -39,7 +39,7 @@ export class Iap$ {
     const url = '/platform/public/namespaces/{namespace}/iap/item/mapping'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, IapItemMappingInfo, 'IapItemMappingInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, IapItemMappingInfo, 'IapItemMappingInfo')
   }
 
   /**
@@ -50,7 +50,7 @@ export class Iap$ {
     const url = '/platform/public/namespaces/{namespace}/users/me/iap/twitch/sync'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TwitchSyncResultArray, 'TwitchSyncResultArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TwitchSyncResultArray, 'TwitchSyncResultArray')
   }
 
   /**
@@ -64,7 +64,7 @@ export class Iap$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlayStationReconcileResultArray,
       'PlayStationReconcileResultArray'
@@ -81,7 +81,12 @@ export class Iap$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, XblReconcileResultArray, 'XblReconcileResultArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      XblReconcileResultArray,
+      'XblReconcileResultArray'
+    )
   }
 
   /**
@@ -94,7 +99,7 @@ export class Iap$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -108,7 +113,7 @@ export class Iap$ {
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       OculusReconcileResultArray,
       'OculusReconcileResultArray'
@@ -125,7 +130,7 @@ export class Iap$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -138,7 +143,7 @@ export class Iap$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -152,7 +157,7 @@ export class Iap$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       EpicGamesReconcileResultArray,
       'EpicGamesReconcileResultArray'
@@ -170,7 +175,7 @@ export class Iap$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GoogleReceiptResolveResult,
       'GoogleReceiptResolveResult'
@@ -191,7 +196,7 @@ export class Iap$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlayStationReconcileResultArray,
       'PlayStationReconcileResultArray'

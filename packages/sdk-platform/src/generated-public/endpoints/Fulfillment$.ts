@@ -13,7 +13,7 @@ import { FulfillmentResult } from '../../generated-definitions/FulfillmentResult
 
 export class Fulfillment$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Redeem campaign code, this api have rate limit, default: only allow request once per user in 2 seconds&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
@@ -25,6 +25,6 @@ export class Fulfillment$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
   }
 }

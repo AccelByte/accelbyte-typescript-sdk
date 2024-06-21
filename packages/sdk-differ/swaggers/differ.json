@@ -91,6 +91,7 @@
         ],
         "summary": "Perform diff from buildId A to buildId B",
         "tags": ["Diff Calculation"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]"]
@@ -133,6 +134,7 @@
         ],
         "summary": "Ping this diff",
         "tags": ["Diff Calculation"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": []
@@ -193,6 +195,7 @@
         ],
         "summary": "Perform diff from buildId A to buildId B",
         "tags": ["Diff Calculation"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:DIFFCACHE [CREATE]"]

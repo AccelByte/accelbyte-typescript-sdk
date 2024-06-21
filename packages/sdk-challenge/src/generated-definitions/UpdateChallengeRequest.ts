@@ -15,8 +15,7 @@ export const UpdateChallengeRequest = z.object({
   name: z.string().nullish(),
   repeatAfter: z.number().int().nullish(),
   rotation: z.enum(['DAILY', 'MONTHLY', 'NONE', 'WEEKLY']).nullish(),
-  startDate: z.string().nullish(),
-  statCycleId: z.string().nullish()
+  startDate: z.string().nullish()
 })
 
 export interface UpdateChallengeRequest extends z.TypeOf<typeof UpdateChallengeRequest> {}

@@ -12,6 +12,7 @@ export const RequirementProgressionResponse = z.object({
   matcher: z.string(),
   parameterName: z.string(),
   parameterType: z.string(),
+  statCycleId: z.string().nullish(),
   targetValue: z.number()
 })
 

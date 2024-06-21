@@ -16,7 +16,7 @@ import { PlayersCurrentPlatformResponse } from '../../generated-definitions/Play
 
 export class Player$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get bulk players current platform.
@@ -27,7 +27,7 @@ export class Player$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlayersCurrentPlatformResponse,
       'PlayersCurrentPlatformResponse'
@@ -42,7 +42,7 @@ export class Player$ {
     const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -54,7 +54,7 @@ export class Player$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlayerAttributesResponseBody,
       'PlayerAttributesResponseBody'
@@ -70,7 +70,7 @@ export class Player$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlayerAttributesResponseBody,
       'PlayerAttributesResponseBody'

@@ -23,7 +23,7 @@ import { WorkerConfigRequest } from '../../generated-definitions/WorkerConfigReq
 
 export class AdminAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [READ] Required scope: social This endpoint retrieves a worker configuration to control the worker in the DSMC.
@@ -33,7 +33,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespace/{namespace}/workers'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WorkerConfig, 'WorkerConfig')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WorkerConfig, 'WorkerConfig')
   }
 
   /**
@@ -44,7 +44,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespace/{namespace}/workers'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WorkerConfig, 'WorkerConfig')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WorkerConfig, 'WorkerConfig')
   }
 
   /**
@@ -55,7 +55,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespace/{namespace}/workers'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -66,7 +66,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/servers'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListServerResponse, 'ListServerResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListServerResponse, 'ListServerResponse')
   }
 
   /**
@@ -82,7 +82,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/sessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListSessionResponse, 'ListSessionResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListSessionResponse, 'ListSessionResponse')
   }
 
   /**
@@ -93,7 +93,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/servers/count'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountServerResponse, 'CountServerResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CountServerResponse, 'CountServerResponse')
   }
 
   /**
@@ -104,7 +104,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/servers/local'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListServerResponse, 'ListServerResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListServerResponse, 'ListServerResponse')
   }
 
   /**
@@ -115,7 +115,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/workers/ghost'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -126,7 +126,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/sessions/count'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountSessionResponse, 'CountSessionResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CountSessionResponse, 'CountSessionResponse')
   }
 
   /**
@@ -137,7 +137,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/workers/zombie'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -148,7 +148,7 @@ export class AdminAdmin$ {
     const url = '/dsmcontroller/admin/namespaces/{namespace}/manual/buffer/add'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddBufferResponse, 'AddBufferResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AddBufferResponse, 'AddBufferResponse')
   }
 
   /**
@@ -161,7 +161,7 @@ export class AdminAdmin$ {
       .replace('{podName}', podName)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -174,7 +174,7 @@ export class AdminAdmin$ {
       .replace('{podName}', podName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ServerDetailsResponse, 'ServerDetailsResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ServerDetailsResponse, 'ServerDetailsResponse')
   }
 
   /**
@@ -187,7 +187,7 @@ export class AdminAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -200,7 +200,7 @@ export class AdminAdmin$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -212,7 +212,7 @@ export class AdminAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       DetailedCountServerResponse,
       'DetailedCountServerResponse'

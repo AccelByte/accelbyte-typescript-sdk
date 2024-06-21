@@ -19,7 +19,7 @@ import { RewardUpdate } from '../../generated-definitions/RewardUpdate.js'
 
 export class RewardAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to create a reward.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created reward data&lt;/li&gt;&lt;li&gt;&lt;i&gt;Acceptable values for rewardItem&#39;s identityType are&lt;/i&gt;: ITEM_ID or ITEM_SKU&lt;/li&gt;&lt;/ul&gt;
@@ -29,7 +29,7 @@ export class RewardAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/rewards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RewardInfo, 'RewardInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RewardInfo, 'RewardInfo')
   }
 
   /**
@@ -40,7 +40,7 @@ export class RewardAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/rewards/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -52,7 +52,7 @@ export class RewardAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -65,7 +65,7 @@ export class RewardAdmin$ {
       .replace('{rewardId}', rewardId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RewardInfo, 'RewardInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RewardInfo, 'RewardInfo')
   }
 
   /**
@@ -78,7 +78,7 @@ export class RewardAdmin$ {
       .replace('{rewardId}', rewardId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RewardInfo, 'RewardInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RewardInfo, 'RewardInfo')
   }
 
   /**
@@ -91,7 +91,7 @@ export class RewardAdmin$ {
       .replace('{rewardId}', rewardId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RewardInfo, 'RewardInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RewardInfo, 'RewardInfo')
   }
 
   /**
@@ -107,7 +107,12 @@ export class RewardAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/rewards/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RewardPagingSlicedResult, 'RewardPagingSlicedResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      RewardPagingSlicedResult,
+      'RewardPagingSlicedResult'
+    )
   }
 
   /**
@@ -120,7 +125,7 @@ export class RewardAdmin$ {
       .replace('{rewardId}', rewardId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConditionMatchResult, 'ConditionMatchResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConditionMatchResult, 'ConditionMatchResult')
   }
 
   /**
@@ -133,6 +138,6 @@ export class RewardAdmin$ {
       .replace('{rewardId}', rewardId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

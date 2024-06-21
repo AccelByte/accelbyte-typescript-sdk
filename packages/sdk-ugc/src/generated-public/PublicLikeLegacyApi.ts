@@ -19,7 +19,7 @@ export function PublicLikeLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
@@ -35,7 +35,7 @@ export function PublicLikeLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     tags?: string[]
     type?: string | null
   }): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicLikeLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicLikeLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContentsLiked(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +45,7 @@ export function PublicLikeLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will update like/unlike state from a content
    */
   async function updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<ContentLikeResponse> {
-    const $ = new PublicLikeLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicLikeLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateLike_ByContentId(contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data

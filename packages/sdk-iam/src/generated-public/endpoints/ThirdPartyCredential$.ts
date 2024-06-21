@@ -12,7 +12,7 @@ import { PublicThirdPartyPlatformInfoArray } from '../../generated-definitions/P
 
 export class ThirdPartyCredential$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This is the Public API to Get All Active OIDC Platform Credential By Client ID
@@ -23,7 +23,7 @@ export class ThirdPartyCredential$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PublicThirdPartyPlatformInfoArray,
       'PublicThirdPartyPlatformInfoArray'
@@ -39,7 +39,7 @@ export class ThirdPartyCredential$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PublicThirdPartyPlatformInfoArray,
       'PublicThirdPartyPlatformInfoArray'

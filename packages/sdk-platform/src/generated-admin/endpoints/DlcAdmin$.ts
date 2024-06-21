@@ -18,7 +18,7 @@ import { UserDlcRecordArray } from '../../generated-definitions/UserDlcRecordArr
 
 export class DlcAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * delete a DLC item config.
@@ -28,7 +28,7 @@ export class DlcAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/dlc/config/item'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -39,7 +39,7 @@ export class DlcAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/dlc/config/item'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DlcItemConfigInfo, 'DlcItemConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DlcItemConfigInfo, 'DlcItemConfigInfo')
   }
 
   /**
@@ -50,7 +50,7 @@ export class DlcAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/dlc/config/item'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DlcItemConfigInfo, 'DlcItemConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DlcItemConfigInfo, 'DlcItemConfigInfo')
   }
 
   /**
@@ -63,7 +63,7 @@ export class DlcAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserDlc, 'UserDlc')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserDlc, 'UserDlc')
   }
 
   /**
@@ -74,7 +74,7 @@ export class DlcAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/dlc/config/platformMap'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -85,7 +85,7 @@ export class DlcAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/dlc/config/platformMap'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformDlcConfigInfo, 'PlatformDlcConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlatformDlcConfigInfo, 'PlatformDlcConfigInfo')
   }
 
   /**
@@ -96,7 +96,7 @@ export class DlcAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/dlc/config/platformMap'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformDlcConfigInfo, 'PlatformDlcConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlatformDlcConfigInfo, 'PlatformDlcConfigInfo')
   }
 
   /**
@@ -112,6 +112,6 @@ export class DlcAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserDlcRecordArray, 'UserDlcRecordArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserDlcRecordArray, 'UserDlcRecordArray')
   }
 }

@@ -8,7 +8,7 @@
     },
     "description": "Justice Achievement Service",
     "title": "justice-achievement-service",
-    "version": "2.21.15"
+    "version": "2.22.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -158,6 +158,7 @@
         ],
         "summary": "Query achievements",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -230,6 +231,7 @@
         ],
         "summary": "Create new achievement",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -300,6 +302,7 @@
         ],
         "summary": "Export achievements configuration into a json file",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -378,6 +381,7 @@
         ],
         "summary": "Import achievements from file",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -448,6 +452,7 @@
         ],
         "summary": "Delete an achievement",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -519,6 +524,7 @@
         ],
         "summary": "Get an achievement",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -595,6 +601,7 @@
         ],
         "summary": "Update achievements listOrder",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -674,6 +681,7 @@
         ],
         "summary": "Update an achievement",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -776,6 +784,7 @@
         ],
         "summary": "Admin query global achievements [include achieved and in-progress]",
         "tags": ["Global Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -864,6 +873,7 @@
         ],
         "summary": "Admin list contributors of global achievement",
         "tags": ["Global Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -928,6 +938,7 @@
         ],
         "summary": "Reset global achievement",
         "tags": ["Global Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -994,6 +1005,7 @@
         ],
         "summary": "Create PSN UDS events",
         "tags": ["Platform Achievement"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1087,6 +1099,7 @@
         ],
         "summary": "Query tags",
         "tags": ["Tags"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1198,6 +1211,7 @@
         ],
         "summary": "Query user achievements [include achieved and in-progress]",
         "tags": ["User Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1275,6 +1289,7 @@
         ],
         "summary": "Reset an achievement",
         "tags": ["User Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1352,6 +1367,7 @@
         ],
         "summary": "Unlock an achievement",
         "tags": ["User Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1409,6 +1425,7 @@
         ],
         "summary": "Anonymize user's achievement",
         "tags": ["Anonymization"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]"]
@@ -1510,6 +1527,7 @@
         ],
         "summary": "Admin list of global achievements that has been contributed by the user",
         "tags": ["Global Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1632,6 +1650,7 @@
         ],
         "summary": "Query achievements",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1712,6 +1731,7 @@
         ],
         "summary": "Get an achievement",
         "tags": ["Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1814,6 +1834,7 @@
         ],
         "summary": "Query global achievements [include achieved and in-progress]",
         "tags": ["Global Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1902,6 +1923,7 @@
         ],
         "summary": "List contributors of global achievement",
         "tags": ["Global Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1995,6 +2017,7 @@
         ],
         "summary": "Query tags",
         "tags": ["Tags"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2106,6 +2129,7 @@
         ],
         "summary": "Query user achievements [include achieved and in-progress]",
         "tags": ["User Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2183,6 +2207,7 @@
         ],
         "summary": "Unlock an achievement",
         "tags": ["User Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2287,6 +2312,7 @@
         ],
         "summary": "List of global achievements that has been contributed by the user",
         "tags": ["Global Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2358,6 +2384,7 @@
         ],
         "summary": "Claim global achievement reward",
         "tags": ["Global Achievements"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3148,11 +3175,11 @@
     "path": "/achievement/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-23T08:18:33+00:00",
-    "gitHash": "457d1b59e76c7784792fba79f64234a9cfa781b6",
+    "buildDate": "2024-05-21T04:43:00+00:00",
+    "gitHash": "b5ca1cd095bd8d5159c883d2b3c03e5448260b6b",
     "name": "justice-achievement-service",
     "realm": "dev",
-    "version": "2.21.15",
+    "version": "2.22.0",
     "version-roles-seeding": "1.0.7"
   }
 }

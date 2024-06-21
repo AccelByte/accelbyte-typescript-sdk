@@ -18,13 +18,13 @@ export function TelemetryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * This endpoint requires valid JWT token and telemetry permission This endpoint retrieves namespace list
    */
   async function getNamespaces(): Promise<ListBaseResponseStr> {
-    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getNamespaces()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +44,7 @@ export function TelemetryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventName?: string | null
     eventPayload?: string | null
   }): Promise<PagedResponseGetNamespaceEventResponse> {
-    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEvents(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

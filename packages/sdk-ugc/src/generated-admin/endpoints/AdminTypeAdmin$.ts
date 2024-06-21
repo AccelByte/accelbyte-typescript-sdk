@@ -15,7 +15,7 @@ import { PaginatedGetTypeResponse } from '../../generated-definitions/PaginatedG
 
 export class AdminTypeAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get available types paginated
@@ -25,7 +25,12 @@ export class AdminTypeAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGetTypeResponse, 'PaginatedGetTypeResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaginatedGetTypeResponse,
+      'PaginatedGetTypeResponse'
+    )
   }
 
   /**
@@ -36,7 +41,7 @@ export class AdminTypeAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateTypeResponse, 'CreateTypeResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateTypeResponse, 'CreateTypeResponse')
   }
 
   /**
@@ -47,7 +52,7 @@ export class AdminTypeAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/types/{typeId}'.replace('{namespace}', this.namespace).replace('{typeId}', typeId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -58,6 +63,6 @@ export class AdminTypeAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/types/{typeId}'.replace('{namespace}', this.namespace).replace('{typeId}', typeId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateTypeResponse, 'CreateTypeResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateTypeResponse, 'CreateTypeResponse')
   }
 }

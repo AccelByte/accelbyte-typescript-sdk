@@ -13,7 +13,7 @@ import { UserRewardClaim } from '../../generated-definitions/UserRewardClaim.js'
 
 export class Reward$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to claim reward, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
@@ -25,7 +25,7 @@ export class Reward$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClaimableRewards, 'ClaimableRewards')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClaimableRewards, 'ClaimableRewards')
   }
 
   /**
@@ -38,6 +38,6 @@ export class Reward$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClaimableRewards, 'ClaimableRewards')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClaimableRewards, 'ClaimableRewards')
   }
 }

@@ -14,7 +14,7 @@ import { StreamEvent } from '../../generated-definitions/StreamEvent.js'
 
 export class ClawbackAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
@@ -34,7 +34,7 @@ export class ClawbackAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       IapClawbackPagingSlicedResult,
       'IapClawbackPagingSlicedResult'
@@ -49,6 +49,6 @@ export class ClawbackAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/iap/clawback/playstation/mock'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClawbackInfo, 'ClawbackInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClawbackInfo, 'ClawbackInfo')
   }
 }

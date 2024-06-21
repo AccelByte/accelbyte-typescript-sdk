@@ -16,7 +16,7 @@ import { PermissionSetDeleteGroupRequest } from '../../generated-definitions/Per
 
 export class ClientsConfigV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List client templates
@@ -26,7 +26,7 @@ export class ClientsConfigV3Admin$ {
     const url = '/iam/v3/admin/clientConfig/templates'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListTemplatesResponse, 'ListTemplatesResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListTemplatesResponse, 'ListTemplatesResponse')
   }
 
   /**
@@ -40,7 +40,7 @@ export class ClientsConfigV3Admin$ {
     const url = '/iam/v3/admin/clientConfig/permissions'
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -51,7 +51,12 @@ export class ClientsConfigV3Admin$ {
     const url = '/iam/v3/admin/clientConfig/permissions'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListClientPermissionSet, 'ListClientPermissionSet')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListClientPermissionSet,
+      'ListClientPermissionSet'
+    )
   }
 
   /**
@@ -65,6 +70,6 @@ export class ClientsConfigV3Admin$ {
     const url = '/iam/v3/admin/clientConfig/permissions'
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

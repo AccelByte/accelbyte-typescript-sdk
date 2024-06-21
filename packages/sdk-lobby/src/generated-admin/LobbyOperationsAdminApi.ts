@@ -9,22 +9,22 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { LobbyOperationsAdmin$ } from './endpoints/LobbyOperationsAdmin$.js'
 import { PartyData } from '../generated-definitions/PartyData.js'
 import { PartyPutCustomAttributesRequest } from '../generated-definitions/PartyPutCustomAttributesRequest.js'
+import { LobbyOperationsAdmin$ } from './endpoints/LobbyOperationsAdmin$.js'
 
 export function LobbyOperationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Update party attributes in a namespace.
    */
   async function updateAttributeParty_ByPartyId(partyId: string, data: PartyPutCustomAttributesRequest): Promise<PartyData> {
-    const $ = new LobbyOperationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new LobbyOperationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateAttributeParty_ByPartyId(partyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +34,7 @@ export function LobbyOperationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Admin join a player into a party.
    */
   async function createJoinParty_ByPartyId_ByUserId(partyId: string, userId: string): Promise<unknown> {
-    const $ = new LobbyOperationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new LobbyOperationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createJoinParty_ByPartyId_ByUserId(partyId, userId)
     if (resp.error) throw resp.error
     return resp.response.data

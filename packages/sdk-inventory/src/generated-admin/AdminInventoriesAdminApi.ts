@@ -9,20 +9,20 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AdminInventoriesAdmin$ } from './endpoints/AdminInventoriesAdmin$.js'
 import { CreateInventoryReq } from '../generated-definitions/CreateInventoryReq.js'
 import { DeleteInventoryReq } from '../generated-definitions/DeleteInventoryReq.js'
 import { InventoryResp } from '../generated-definitions/InventoryResp.js'
 import { ListInventoryResp } from '../generated-definitions/ListInventoryResp.js'
 import { PurchaseValidationReq } from '../generated-definitions/PurchaseValidationReq.js'
 import { UpdateInventoryReq } from '../generated-definitions/UpdateInventoryReq.js'
+import { AdminInventoriesAdmin$ } from './endpoints/AdminInventoriesAdmin$.js'
 
 export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    *  Listing all inventories in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]
@@ -43,7 +43,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'updatedAt:desc'
     userId?: string | null
   }): Promise<ListInventoryResp> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInventories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +53,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Creating an inventory. The inventory configuration must exists otherwise it will fail. The max slots and max upgrade slots of an inventory will be initialized according to the inventory configuration it used, but it can be changed later when using AdminUpdateInventory endpoint. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]
    */
   async function createInventory(data: CreateInventoryReq): Promise<InventoryResp> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createInventory(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +63,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Deleting an inventory. If an inventory still has items, it cannot be deleted. ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]
    */
   async function deleteInventory_ByInventoryId(inventoryId: string, data: DeleteInventoryReq): Promise<unknown> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteInventory_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -73,7 +73,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Getting an inventory info. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]
    */
   async function getInventory_ByInventoryId(inventoryId: string): Promise<InventoryResp> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInventory_ByInventoryId(inventoryId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +83,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Updating an inventory. Positive value will increase MaxSlots from existing value Negative value will decrease MaxSlots from existing value Limited slots can not be changed to unlimited, vice versa Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
    */
   async function updateInventory_ByInventoryId(inventoryId: string, data: UpdateInventoryReq): Promise<InventoryResp> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateInventory_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +93,7 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    *  Validate purchase ecommerce item. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
    */
   async function createPurchaseable_ByUserId(userId: string, data: PurchaseValidationReq): Promise<unknown> {
-    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createPurchaseable_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

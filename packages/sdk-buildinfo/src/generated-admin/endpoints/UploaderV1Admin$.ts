@@ -21,22 +21,22 @@ import { UploadSummary } from '../../generated-definitions/UploadSummary.js'
 
 export class UploaderV1Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to get basic build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get basic build manifests. Only committed build will be retrieved.
    */
   getBuildsByAppId(queryParams: { appId: string | null }): Promise<IResponse<BuildIdVersionArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/builds/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildIdVersionArray, 'BuildIdVersionArray')
   }
 
   /**
    * @deprecated
-   * This API is used to delete build manifest. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to delete build manifest.
    */
   deleteBuild_ByBuildId_DEPRECATED(buildId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -45,11 +45,11 @@ export class UploaderV1Admin$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to get build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get build manifest.
    */
   getBuild_ByBuildId(buildId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -58,46 +58,51 @@ export class UploaderV1Admin$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildManifest, 'BuildManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildManifest, 'BuildManifest')
   }
 
   /**
    * @deprecated
-   * This API is used to start chunk upload and retrieve upload url. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: upload data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start chunk upload and retrieve upload url.
    */
   createStartchunkupload_DEPRECATED(data: BinaryUpload): Promise<IResponse<UploadSummary>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/startchunkupload'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UploadSummary, 'UploadSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UploadSummary, 'UploadSummary')
   }
 
   /**
-   * This API is used to get basic build manifests. Only committed build will be retrieved. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get basic build manifests. Only committed build will be retrieved.
    */
   getBuildsByNamespace(): Promise<IResponse<BasicBuildManifestArray>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/builds/byNamespace'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BasicBuildManifestArray, 'BasicBuildManifestArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      BasicBuildManifestArray,
+      'BasicBuildManifestArray'
+    )
   }
 
   /**
    * @deprecated
-   * This API is used to commit build manifest. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit build manifest.
    */
   createCommitbuildmanifest_DEPRECATED(data: BuildManifest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/buildinfo/admin/namespaces/{namespace}/commitbuildmanifest'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to get build deletion. Only deleted build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: List of build deletion&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get build deletion. Only deleted build will be retrieved.
    */
   getBuildsdeletionByAppId(queryParams: {
     appId: string | null
@@ -108,11 +113,16 @@ export class UploaderV1Admin$ {
     const url = '/buildinfo/admin/namespaces/{namespace}/buildsdeletion/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildDeletionDataArray, 'BuildDeletionDataArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      BuildDeletionDataArray,
+      'BuildDeletionDataArray'
+    )
   }
 
   /**
-   * This API is used to set current build as release version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to set current build as release version.
    */
   updateSetcurrentbuild_ByBuildId(buildId: string, queryParams?: { sendNotification?: boolean | null }): Promise<IResponse<unknown>> {
     const params = { sendNotification: true, ...queryParams } as SDKRequestConfig
@@ -121,11 +131,11 @@ export class UploaderV1Admin$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This API is used to retrieve chunk by hash.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to retrieve chunk by hash.
    */
   getRetrievechunkbyhash_ByHash(hash: string): Promise<IResponse<BlockData>> {
     const params = {} as SDKRequestConfig
@@ -134,11 +144,11 @@ export class UploaderV1Admin$ {
       .replace('{hash}', hash)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockData, 'BlockData')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BlockData, 'BlockData')
   }
 
   /**
-   * This API is used to retry build deletion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to retry build deletion.
    */
   updateRetry_ByBuildId(buildId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -147,7 +157,7 @@ export class UploaderV1Admin$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -160,12 +170,12 @@ export class UploaderV1Admin$ {
       .replace('{buildId}', buildId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
    * @deprecated
-   * This API is used to set current build as release version. [DEPRECATED] &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to set current build as release version.
    */
   updateSetcurrentbuild_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -175,12 +185,12 @@ export class UploaderV1Admin$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
    * @deprecated
-   * This API is used to start build upload. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start build upload.
    */
   createStartbuildupload_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<IResponse<BuildIdManifest>> {
     const params = {} as SDKRequestConfig
@@ -190,12 +200,12 @@ export class UploaderV1Admin$ {
       .replace('{version}', version)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BuildIdManifest, 'BuildIdManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BuildIdManifest, 'BuildIdManifest')
   }
 
   /**
    * @deprecated
-   * This API is used to commit chunk that has been uploaded. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit chunk that has been uploaded.
    */
   createUuid_ByHash_ByUuid_ByOffset_DEPRECATED(hash: string, uuid: string, offset: number): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -206,12 +216,12 @@ export class UploaderV1Admin$ {
       .replace('{offset}', String(offset))
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 
   /**
    * @deprecated
-   * This API is used to commit chunk that has been uploaded. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit chunk that has been uploaded.
    */
   createOffset_ByHash_ByUuid_ByOffset_ByBlockSize_DEPRECATED(
     hash: string,
@@ -228,6 +238,6 @@ export class UploaderV1Admin$ {
       .replace('{blockSize}', String(blockSize))
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BlockManifest, 'BlockManifest')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BlockManifest, 'BlockManifest')
   }
 }

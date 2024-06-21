@@ -11,16 +11,16 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ChannelResponse } from '../generated-definitions/ChannelResponse.js'
 import { PaginatedGetChannelResponse } from '../generated-definitions/PaginatedGetChannelResponse.js'
-import { PublicChannel$ } from './endpoints/PublicChannel$.js'
 import { PublicChannelRequest } from '../generated-definitions/PublicChannelRequest.js'
 import { UpdateChannelRequest } from '../generated-definitions/UpdateChannelRequest.js'
+import { PublicChannel$ } from './endpoints/PublicChannel$.js'
 
 export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get user channel paginated
@@ -29,7 +29,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; name?: string | null; offset?: number }
   ): Promise<PaginatedGetChannelResponse> {
-    const $ = new PublicChannel$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicChannel$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getChannels_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +39,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create user channel
    */
   async function createChannel_ByUserId(userId: string, data: PublicChannelRequest): Promise<ChannelResponse> {
-    const $ = new PublicChannel$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicChannel$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createChannel_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +49,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete user channel
    */
   async function deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<unknown> {
-    const $ = new PublicChannel$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicChannel$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteChannel_ByUserId_ByChannelId(userId, channelId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +63,7 @@ export function PublicChannelApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     data: UpdateChannelRequest
   ): Promise<ChannelResponse> {
-    const $ = new PublicChannel$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicChannel$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateChannel_ByUserId_ByChannelId(userId, channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data

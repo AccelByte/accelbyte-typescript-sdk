@@ -46,7 +46,6 @@ export const injectResponseInterceptors = (responseInterceptor: ResponseIntercep
 const loggerInterceptor = (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.request.use(
     config => {
-      // Logger.info(config.method?.toUpperCase(), `${config.url}`)
       return config
     },
     error => {

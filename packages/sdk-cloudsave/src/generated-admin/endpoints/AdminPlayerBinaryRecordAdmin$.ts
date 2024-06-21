@@ -19,7 +19,7 @@ import { UploadBinaryRecordResponse } from '../../generated-definitions/UploadBi
 
 export class AdminPlayerBinaryRecordAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve list of player binary records by namespace.
@@ -35,7 +35,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListPlayerBinaryRecordsResponse,
       'ListPlayerBinaryRecordsResponse'
@@ -53,7 +53,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UploadBinaryRecordResponse,
       'UploadBinaryRecordResponse'
@@ -71,7 +71,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
       .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -86,7 +86,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlayerBinaryRecordResponse,
       'PlayerBinaryRecordResponse'
@@ -105,7 +105,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlayerBinaryRecordResponse,
       'PlayerBinaryRecordResponse'
@@ -128,7 +128,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlayerBinaryRecordResponse,
       'PlayerBinaryRecordResponse'
@@ -151,7 +151,7 @@ export class AdminPlayerBinaryRecordAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UploadBinaryRecordResponse,
       'UploadBinaryRecordResponse'

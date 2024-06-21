@@ -16,7 +16,7 @@ import { ListInventoryConfigurationsResp } from '../../generated-definitions/Lis
 
 export class AdminInventoryConfigurationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]
@@ -41,7 +41,7 @@ export class AdminInventoryConfigurationsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListInventoryConfigurationsResp,
       'ListInventoryConfigurationsResp'
@@ -57,7 +57,7 @@ export class AdminInventoryConfigurationsAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       InventoryConfigurationResp,
       'InventoryConfigurationResp'
@@ -74,7 +74,7 @@ export class AdminInventoryConfigurationsAdmin$ {
       .replace('{inventoryConfigurationId}', inventoryConfigurationId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -88,7 +88,7 @@ export class AdminInventoryConfigurationsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       InventoryConfigurationResp,
       'InventoryConfigurationResp'
@@ -109,7 +109,7 @@ export class AdminInventoryConfigurationsAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       InventoryConfigurationResp,
       'InventoryConfigurationResp'

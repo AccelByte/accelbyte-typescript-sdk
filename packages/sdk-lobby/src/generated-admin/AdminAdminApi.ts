@@ -9,22 +9,22 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AdminAdmin$ } from './endpoints/AdminAdmin$.js'
 import { GlobalConfiguration } from '../generated-definitions/GlobalConfiguration.js'
 import { PutGlobalConfigurationRequest } from '../generated-definitions/PutGlobalConfigurationRequest.js'
+import { AdminAdmin$ } from './endpoints/AdminAdmin$.js'
 
 export function AdminAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Delete of global configuration data.
    */
   async function deleteGlobalConfiguration(): Promise<unknown> {
-    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteGlobalConfiguration()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +34,7 @@ export function AdminAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get dsmc global configuration.
    */
   async function getGlobalConfigurations(): Promise<GlobalConfiguration> {
-    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getGlobalConfigurations()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +44,7 @@ export function AdminAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Upsert global configuration data.
    */
   async function updateGlobalConfiguration(data: PutGlobalConfigurationRequest): Promise<GlobalConfiguration> {
-    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateGlobalConfiguration(data)
     if (resp.error) throw resp.error
     return resp.response.data

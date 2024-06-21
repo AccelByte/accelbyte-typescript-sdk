@@ -16,7 +16,7 @@ import { GroupResponseV1 } from '../../generated-definitions/GroupResponseV1.js'
 
 export class GroupAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get list of groups. This endpoint will show any types of group Action Code: 73301
@@ -32,7 +32,12 @@ export class GroupAdmin$ {
     const url = '/group/v1/admin/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetGroupsListResponseV1, 'GetGroupsListResponseV1')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetGroupsListResponseV1,
+      'GetGroupsListResponseV1'
+    )
   }
 
   /**
@@ -43,7 +48,7 @@ export class GroupAdmin$ {
     const url = '/group/v2/admin/namespaces/{namespace}/groups/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetGroupsResponseV1, 'GetGroupsResponseV1')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetGroupsResponseV1, 'GetGroupsResponseV1')
   }
 
   /**
@@ -56,7 +61,7 @@ export class GroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -69,6 +74,6 @@ export class GroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GroupResponseV1, 'GroupResponseV1')
   }
 }

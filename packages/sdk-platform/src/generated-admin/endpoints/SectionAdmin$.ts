@@ -10,13 +10,14 @@ import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { FullSectionInfo } from '../../generated-definitions/FullSectionInfo.js'
+import { FullSectionInfoArray } from '../../generated-definitions/FullSectionInfoArray.js'
 import { SectionCreate } from '../../generated-definitions/SectionCreate.js'
 import { SectionPagingSlicedResult } from '../../generated-definitions/SectionPagingSlicedResult.js'
 import { SectionUpdate } from '../../generated-definitions/SectionUpdate.js'
 
 export class SectionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to query sections.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated sections&lt;/li&gt;&lt;/ul&gt;
@@ -33,7 +34,12 @@ export class SectionAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/sections'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SectionPagingSlicedResult, 'SectionPagingSlicedResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SectionPagingSlicedResult,
+      'SectionPagingSlicedResult'
+    )
   }
 
   /**
@@ -44,7 +50,18 @@ export class SectionAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/sections'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
+  }
+
+  /**
+   * This API is used to bulk create section.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created section list&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for section extension and localization extension&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
+   */
+  createSectionBulk(data: SectionCreate[], queryParams: { storeId: string | null }): Promise<IResponse<FullSectionInfoArray>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/sections/bulk'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullSectionInfoArray, 'FullSectionInfoArray')
   }
 
   /**
@@ -57,7 +74,7 @@ export class SectionAdmin$ {
       .replace('{sectionId}', sectionId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -70,7 +87,7 @@ export class SectionAdmin$ {
       .replace('{sectionId}', sectionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
   }
 
   /**
@@ -87,7 +104,7 @@ export class SectionAdmin$ {
       .replace('{sectionId}', sectionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
   }
 
   /**
@@ -98,6 +115,6 @@ export class SectionAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/sections/purge/expired'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

@@ -14,7 +14,7 @@ import { UpdateConfigRequest } from '../../generated-definitions/UpdateConfigReq
 
 export class AdminConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get config paginated
@@ -25,7 +25,7 @@ export class AdminConfigAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedGetConfigsResponse,
       'PaginatedGetConfigsResponse'
@@ -40,6 +40,6 @@ export class AdminConfigAdmin$ {
     const url = '/ugc/v2/admin/namespaces/{namespace}/configs/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

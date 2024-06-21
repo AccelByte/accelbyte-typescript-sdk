@@ -8,7 +8,7 @@
     },
     "description": "Justice UGC Service",
     "title": "justice-ugc-service",
-    "version": "2.20.2"
+    "version": "2.20.3"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -113,6 +113,11 @@
         ],
         "summary": "Get Channels",
         "tags": ["Admin Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770700": "Unable get user channels",
+          "770702": "invalid paging parameter"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"]
@@ -180,6 +185,12 @@
         ],
         "summary": "Create Channel",
         "tags": ["Admin Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770502": "Unable to save channel",
+          "770503": "Invalid channel {ID}: should uuid without hypen",
+          "770504": "Channel already exist"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]"]
@@ -239,6 +250,11 @@
         ],
         "summary": "Delete Channel",
         "tags": ["Admin Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772501": "Unable to delete channel",
+          "772502": "Channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
@@ -313,6 +329,12 @@
         ],
         "summary": "Update Channel",
         "tags": ["Admin Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770600": "Invalid request body",
+          "770602": "Unable to save channel",
+          "770603": "Channel was not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"]
@@ -397,6 +419,14 @@
         ],
         "summary": "Upload content to a channel",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "770100": "Malformed request/Invalid request body/channel do not exist",
+          "770102": "Unable to check user ban status/Unable to save ugc content: unable to get channel",
+          "770103": "Unable to save ugc content: shareCode exceed the limit",
+          "770104": "User has been banned to create content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -480,6 +510,14 @@
         ],
         "summary": "Upload content to S3 bucket",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770100": "Malformed request/Invalid request body/channel do not exist",
+          "770102": "Unable to check user ban status/Unable to save ugc content: unable to get channel",
+          "770103": "Unable to save ugc content: shareCode exceed the limit",
+          "770104": "User has been banned to create content",
+          "770107": "Unable to update ugc content: invalid shareCode format"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -576,6 +614,16 @@
         ],
         "summary": "Update content to S3 bucket",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL",
+          "772606": "Share code already used",
+          "772607": "Unable to update ugc content: invalid shareCode format"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -717,6 +765,12 @@
         ],
         "summary": "Search contents specific to a channel",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770800": "invalid paging parameter/max allowed number of tags is {maxTags}/invalid official parameter/invalid ishidden parameter",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770803": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -784,6 +838,11 @@
         ],
         "summary": "Delete content",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -873,6 +932,13 @@
         ],
         "summary": "Update content to a channel",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -943,6 +1009,12 @@
         ],
         "summary": "Get user's generated contents",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770900": "invalid paging parameter",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -1016,6 +1088,13 @@
         ],
         "summary": "Bulk get content by content IDs",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "773900": "Malformed request/Invalid request body",
+          "773901": "Unable to get ugc content: database/Unable to get creator",
+          "773902": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -1150,6 +1229,12 @@
         ],
         "summary": "Search contents",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770800": "invalid paging parameter/max allowed number of tags is {maxTags}/invalid official parameter/invalid ishidden parameter",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770803": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -1223,6 +1308,13 @@
         ],
         "summary": "Bulk get content by content sharecodes",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "773900": "Malformed request/Invalid request body",
+          "773901": "Unable to get ugc content: database/Unable to get creator",
+          "773902": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -1286,6 +1378,12 @@
         ],
         "summary": "Get content by sharecode",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770300": "ugc content not found",
+          "770301": "Unable to get ugc content/Unable to get creator",
+          "770303": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -1349,6 +1447,12 @@
         ],
         "summary": "Get user specific content",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773200": "ugc content not found",
+          "773201": "Unable to get ugc content/Unable to get creator/Unable to get included group",
+          "773203": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -1412,6 +1516,11 @@
         ],
         "summary": "Get content preview",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773701": "Unable to get ugc content",
+          "773702": "ugc content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -1488,6 +1597,12 @@
         ],
         "summary": "Rollback content's payload version",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "774101": "ugc content not found",
+          "774102": "version not found",
+          "774103": "unable to get ugc content/content cannot be restored using the current content version"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -1570,6 +1685,14 @@
         ],
         "summary": "Upload screenshots for official content",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -1650,6 +1773,13 @@
         ],
         "summary": "Update screenshot of content",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -1728,6 +1858,12 @@
         ],
         "summary": "Delete content's screenshot",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -1791,6 +1927,11 @@
         ],
         "summary": "List content's payload versions",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "774004": "ugc content not found",
+          "774005": "unable to get ugc content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -1860,6 +2001,11 @@
         ],
         "summary": "Get all user groups",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772301": "invalid paging parameter",
+          "772302": "Unable get groups"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
@@ -1921,6 +2067,11 @@
         ],
         "summary": "Create groups",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772101": "Malformed request/Invalid request body",
+          "772102": "Unable to create group"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]"]
@@ -1980,6 +2131,11 @@
         ],
         "summary": "Delete group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772402": "Unable delete groups",
+          "772403": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
@@ -2040,6 +2196,11 @@
         ],
         "summary": "Get specific user group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773001": "Unable get group",
+          "773002": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
@@ -2114,6 +2275,12 @@
         ],
         "summary": "Update group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772201": "Malformed request/Invalid request body",
+          "772202": "Unable to update group",
+          "772203": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"]
@@ -2196,6 +2363,14 @@
         ],
         "summary": "(Legacy) Get contents belong to a group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL",
+          "773101": "invalid paging parameter",
+          "773102": "Unable to get ugc content: database error",
+          "773103": "No group content was found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -2265,6 +2440,11 @@
         ],
         "summary": "Get tags",
         "tags": ["Admin Tag"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771402": "Unable to save ugc tag",
+          "771501": "invalid paging parameter"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"]
@@ -2332,6 +2512,12 @@
         ],
         "summary": "Create tags",
         "tags": ["Admin Tag"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771401": "Malformed request/Invalid request body",
+          "771402": "Unable to save ugc tag",
+          "771403": "Conflicted resource indentifier"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]"]
@@ -2391,6 +2577,11 @@
         ],
         "summary": "Delete tags",
         "tags": ["Admin Tag"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772002": "Unable delete tag",
+          "772003": "Tag not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]"]
@@ -2471,6 +2662,13 @@
         ],
         "summary": "Update tag",
         "tags": ["Admin Tag"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772801": "Malformed request/Invalid request body",
+          "772802": "Unable update tags",
+          "772803": "Tag not found",
+          "772804": "Proposed Tag already exist"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"]
@@ -2540,6 +2738,11 @@
         ],
         "summary": "Get types",
         "tags": ["Admin Type"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771801": "invalid paging parameter",
+          "771802": "Unable get types"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"]
@@ -2607,6 +2810,12 @@
         ],
         "summary": "Create types",
         "tags": ["Admin Type"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771701": "Malformed request/Invalid request body",
+          "771702": "Unable to save ugc type",
+          "771703": "Conflicted resource indentifier"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [CREATE]"]
@@ -2666,6 +2875,11 @@
         ],
         "summary": "Delete type",
         "tags": ["Admin Type"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772004": "Unable delete type",
+          "772005": "Type not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]"]
@@ -2746,6 +2960,13 @@
         ],
         "summary": "Update types",
         "tags": ["Admin Type"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771901": "Malformed request/Invalid request body",
+          "771902": "Unable update types",
+          "771903": "Type not found",
+          "771904": "Proposed Type already exist"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"]
@@ -2805,6 +3026,11 @@
         ],
         "summary": "Delete all user channel",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773501": "Unable to delete channel",
+          "773502": "Channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
@@ -2885,6 +3111,11 @@
         ],
         "summary": "Get Channels",
         "tags": ["Admin Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770700": "Unable get user channels",
+          "770702": "invalid paging parameter"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"]
@@ -2951,6 +3182,11 @@
         ],
         "summary": "Delete Channel",
         "tags": ["Admin Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772501": "Unable to delete channel",
+          "772502": "Channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
@@ -3032,6 +3268,12 @@
         ],
         "summary": "Update Channel",
         "tags": ["Admin Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770600": "Invalid request body",
+          "770602": "Unable to save channel",
+          "770603": "Channel was not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"]
@@ -3135,6 +3377,16 @@
         ],
         "summary": "Update content to S3 bucket by share code",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770107": "Unable to update ugc content: invalid shareCode format",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL",
+          "772606": "Share code already used"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -3238,6 +3490,13 @@
         ],
         "summary": "Update content to S3 bucket",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772604": "User has been banned to update content",
+          "772606": "Share code already used"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -3312,6 +3571,11 @@
         ],
         "summary": "Delete content by share code",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -3386,6 +3650,11 @@
         ],
         "summary": "Delete content",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -3482,6 +3751,13 @@
         ],
         "summary": "Update content to a channel",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -3542,6 +3818,11 @@
         ],
         "summary": "Delete all user content",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773401": "Unable to get all user content",
+          "773402": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -3617,6 +3898,12 @@
         ],
         "summary": "Get user's generated contents",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770900": "invalid paging parameter",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -3701,6 +3988,14 @@
         ],
         "summary": "Hide/Unhide user's generated contents",
         "tags": ["Admin Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773801": "Invalid request body/Malformed request",
+          "773802": "Unable to update hide status: database error",
+          "773803": "Unable to update hide status: content not found",
+          "773804": "Unable to save ugc content: failed generate upload URL",
+          "773805": "Unable to save ugc content preview: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -3760,6 +4055,11 @@
         ],
         "summary": "Delete all user group",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773301": "Unable to find all user group",
+          "773302": "Groups not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
@@ -3834,6 +4134,11 @@
         ],
         "summary": "Get all user groups",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772301": "invalid paging parameter",
+          "772302": "Unable get groups"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
@@ -3900,6 +4205,11 @@
         ],
         "summary": "Delete group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772402": "Unable delete groups",
+          "772403": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
@@ -3967,6 +4277,11 @@
         ],
         "summary": "Get specific user group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773001": "Unable get group",
+          "773002": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
@@ -4048,6 +4363,12 @@
         ],
         "summary": "Update group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772201": "Malformed request/Invalid request body",
+          "772202": "Unable to update group",
+          "772203": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"]
@@ -4137,6 +4458,14 @@
         ],
         "summary": "(Legacy) Get contents belong to a group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL",
+          "773101": "invalid paging parameter",
+          "773102": "Unable to get ugc content: database error",
+          "773103": "No group content was found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -4197,6 +4526,11 @@
         ],
         "summary": "Remove all user related state: likes, downloads, followers, following",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773601": "Unable to get all user contents/Unable to delete user states",
+          "773602": "user states are not found: content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"]
@@ -4337,6 +4671,12 @@
         ],
         "summary": "Search contents specific to a channel",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770800": "invalid paging parameter/max allowed number of tags is {maxTags}/invalid official parameter/invalid ishidden parameter",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770803": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -4466,6 +4806,12 @@
         ],
         "summary": "Search contents",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770800": "invalid paging parameter/max allowed number of tags is {maxTags}/invalid official parameter/invalid ishidden parameter",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770803": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -4528,6 +4874,12 @@
         ],
         "summary": "Get contents by content Ids ",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773900": "Malformed request/Invalid request body",
+          "773901": "Unable to get ugc content: database/Unable to get creator",
+          "773902": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -4593,6 +4945,13 @@
         ],
         "summary": "Get contents from followed creators",
         "tags": ["Public Follow"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770803": "Failed generate download URL",
+          "771310": "Unable to get ugc content: database error",
+          "771311": "invalid paging parameter"
+        },
         "x-security": {}
       }
     },
@@ -4705,6 +5064,13 @@
         ],
         "summary": "Get liked contents",
         "tags": ["Public Like (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770803": "Failed generate download URL",
+          "771100": "unable to parse isofficial param",
+          "771101": "Unable to get ugc content: database error"
+        },
         "x-security": {}
       }
     },
@@ -4773,6 +5139,13 @@
         ],
         "summary": "Bulk get content by content sharecodes",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "773900": "Malformed request/Invalid request body",
+          "773901": "Unable to get ugc content: database/Unable to get creator",
+          "773902": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -4831,6 +5204,12 @@
         ],
         "summary": "Get content by sharecode",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770300": "ugc content not found",
+          "770301": "Unable to get ugc content/Unable to get creator",
+          "770303": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -4889,6 +5268,12 @@
         ],
         "summary": "Get user specific content",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773200": "ugc content not found",
+          "773201": "Unable to get ugc content/Unable to get creator/Unable to get included group",
+          "773203": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -4947,6 +5332,11 @@
         ],
         "summary": "Add unique download count to a content",
         "tags": ["Public Download Count (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772902": "Unable to add content download: database error",
+          "772903": "Unable to add content download: content not found"
+        },
         "x-security": {}
       }
     },
@@ -5019,6 +5409,11 @@
         ],
         "summary": "Update like/unlike status to a content",
         "tags": ["Public Like (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771000": "Malformed request/Content not found/Unable to update like status: content not found",
+          "771001": "unable to like content/Unable to update like status: database error"
+        },
         "x-security": {}
       }
     },
@@ -5077,6 +5472,11 @@
         ],
         "summary": "Get content preview",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773701": "Unable to get ugc content",
+          "773702": "ugc content not found"
+        },
         "x-security": {}
       }
     },
@@ -5141,7 +5541,12 @@
           }
         ],
         "summary": "Get tags",
-        "tags": ["Public Tag"]
+        "tags": ["Public Tag"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771501": "invalid paging parameter",
+          "771502": "Unable get user tags"
+        }
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/types": {
@@ -5206,6 +5611,11 @@
         ],
         "summary": "Get types",
         "tags": ["Public Type"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771801": "invalid paging parameter",
+          "771802": "Unable get types"
+        },
         "x-security": {}
       }
     },
@@ -5283,6 +5693,11 @@
         ],
         "summary": "Search creator",
         "tags": ["Public Creator"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770800": "invalid paging parameter/max allowed number of tags is {maxTags}/invalid official parameter/invalid ishidden parameter",
+          "770801": "Unable to get ugc content: database/Unable to get creator"
+        },
         "x-security": {}
       }
     },
@@ -5348,6 +5763,11 @@
         ],
         "summary": "Get followed creators",
         "tags": ["Public Follow"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771300": "Unable to get creators: database error",
+          "771304": "invalid paging parameter"
+        },
         "x-security": {}
       }
     },
@@ -5406,6 +5826,11 @@
         ],
         "summary": "Get creator stats: number of total like by other user, number of total following and follower user",
         "tags": ["Public Creator"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771103": "Unable to get total liked content",
+          "771601": "Creator not found"
+        },
         "x-security": {}
       }
     },
@@ -5461,6 +5886,11 @@
         ],
         "summary": "Delete all user channel",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773501": "Unable to delete channel",
+          "773502": "Channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
@@ -5541,6 +5971,11 @@
         ],
         "summary": "Get Channels",
         "tags": ["Public Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770700": "Unable get user channels",
+          "770702": "invalid paging parameter"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]"]
@@ -5609,6 +6044,11 @@
         ],
         "summary": "Create Channel",
         "tags": ["Public Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770500": "Invalid request body",
+          "770502": "Unable to save channel"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]"]
@@ -5675,6 +6115,11 @@
         ],
         "summary": "Delete Channel",
         "tags": ["Public Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772501": "Unable to delete channel",
+          "772502": "Channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]"]
@@ -5756,6 +6201,12 @@
         ],
         "summary": "Update Channel",
         "tags": ["Public Channel"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770600": "Invalid request body",
+          "770602": "Unable to save channel",
+          "770603": "Channel was not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]"]
@@ -5841,6 +6292,13 @@
         ],
         "summary": "Upload content to a channel",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770100": "Malformed request/Invalid request body/channel do not exist",
+          "770102": "Unable to check user ban status/Unable to save ugc content: unable to get channel",
+          "770103": "Unable to save ugc content: shareCode exceed the limit",
+          "770104": "User has been banned to create content"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -5925,6 +6383,14 @@
         ],
         "summary": "Upload content to S3 bucket",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770100": "Malformed request/Invalid request body/channel do not exist",
+          "770102": "Unable to check user ban status/Unable to save ugc content: unable to get channel",
+          "770103": "Unable to save ugc content: shareCode exceed the limit",
+          "770104": "User has been banned to create content",
+          "770105": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -6028,6 +6494,16 @@
         ],
         "summary": "Update content to S3 bucket by share code",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL",
+          "772606": "Share code already used"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -6125,6 +6601,14 @@
         ],
         "summary": "Update content to S3 bucket",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -6199,6 +6683,11 @@
         ],
         "summary": "Delete content by share code",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -6273,6 +6762,11 @@
         ],
         "summary": "Delete content",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -6369,6 +6863,13 @@
         ],
         "summary": "Update content to a channel",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -6472,6 +6973,14 @@
         ],
         "summary": "Update content sharecode",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772606": "Share code already used"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]"]
@@ -6532,6 +7041,12 @@
         ],
         "summary": "Delete all user content",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771601": "Creator not found",
+          "773401": "Unable to get all user content",
+          "773402": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -6607,6 +7122,12 @@
         ],
         "summary": "Get user's generated contents",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770900": "invalid paging parameter",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -6692,6 +7213,14 @@
         ],
         "summary": "Upload screenshots for content",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -6779,6 +7308,13 @@
         ],
         "summary": "Update screenshot of content",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -6864,6 +7400,12 @@
         ],
         "summary": "Delete content's screenshot",
         "tags": ["Public Content (Legacy)"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -6934,6 +7476,11 @@
         ],
         "summary": "Update follow/unfollow status to a user",
         "tags": ["Public Follow"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771200": "Malformed request",
+          "771201": "Unable to update follow status: database error"
+        },
         "x-security": {}
       }
     },
@@ -7004,7 +7551,12 @@
           }
         ],
         "summary": "Get list of followers",
-        "tags": ["Public Follow"]
+        "tags": ["Public Follow"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771303": "Unable to get creators: database error",
+          "771304": "invalid paging parameter"
+        }
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/following": {
@@ -7074,7 +7626,12 @@
           }
         ],
         "summary": "Get list of following",
-        "tags": ["Public Follow"]
+        "tags": ["Public Follow"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771303": "Unable to get creators: database error",
+          "771304": "invalid paging parameter"
+        }
       }
     },
     "/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups": {
@@ -7129,6 +7686,11 @@
         ],
         "summary": "Delete all user group",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773301": "Unable to find all user group",
+          "773302": "Groups not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
@@ -7203,6 +7765,11 @@
         ],
         "summary": "Get all user groups",
         "tags": ["Public Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772301": "invalid paging parameter",
+          "772302": "Unable get groups"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
@@ -7271,6 +7838,11 @@
         ],
         "summary": "Create groups",
         "tags": ["Public Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772101": "Malformed request/Invalid request body",
+          "772102": "Unable to create group"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [CREATE]"]
@@ -7337,6 +7909,11 @@
         ],
         "summary": "Delete group",
         "tags": ["Public Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772402": "Unable delete groups",
+          "772403": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [DELETE]"]
@@ -7404,6 +7981,11 @@
         ],
         "summary": "Get user's groups",
         "tags": ["Public Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773001": "Unable get group",
+          "773002": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ]"]
@@ -7485,6 +8067,12 @@
         ],
         "summary": "Update group",
         "tags": ["Public Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772201": "Malformed request/Invalid request body",
+          "772202": "Unable to update group",
+          "772203": "Group not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [UPDATE]"]
@@ -7574,6 +8162,14 @@
         ],
         "summary": "(Legacy) Get contents belong to a group",
         "tags": ["Public Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL",
+          "773101": "invalid paging parameter",
+          "773102": "Unable to get ugc content: database error",
+          "773103": "No group content was found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -7634,6 +8230,11 @@
         ],
         "summary": "Remove all user related state: likes, downloads, followers, following",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "773601": "Unable to get all user contents/Unable to delete user states",
+          "773602": "user states are not found: content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId} [DELETE]"]
@@ -7723,6 +8324,11 @@
         ],
         "summary": "List contents specific to a channel",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770804": "invalid paging parameter",
+          "770805": "Unable to get ugc content: database error"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -7803,6 +8409,15 @@
         ],
         "summary": "Create a content",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770100": "Malformed request/Invalid request body/channel do not exist",
+          "770102": "Unable to check user ban status/Unable to save ugc content: unable to get channel",
+          "770103": "Unable to save ugc content: shareCode exceed the limit",
+          "770105": "Unable to save ugc content: failed generate upload URL",
+          "770106": "channel doesn't exist",
+          "770107": "Unable to update ugc content: invalid shareCode format"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -7869,6 +8484,11 @@
         ],
         "summary": "Delete official content",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -7956,6 +8576,14 @@
         ],
         "summary": "Update official content",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772606": "Share code already used",
+          "772607": "Unable to update ugc content: invalid shareCode format"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -8045,6 +8673,13 @@
         ],
         "summary": "Update content file location",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774001": "unable to read response body/unable to update file location",
+          "774002": "unable to update content file location: content not found",
+          "774003": "unable to update content file location"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -8128,6 +8763,13 @@
         ],
         "summary": "Generate official content upload URL",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772605": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -8201,6 +8843,12 @@
         ],
         "summary": "Get configs",
         "tags": ["Admin Config"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774204": "invalid paging parameter",
+          "774205": "Unable to get configs"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]"]
@@ -8274,6 +8922,12 @@
         ],
         "summary": "Update config",
         "tags": ["Admin Config"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774201": "Invalid request body",
+          "774202": "Unable to save config"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]"]
@@ -8385,6 +9039,12 @@
         ],
         "summary": "List contents",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770800": "invalid paging parameter/max allowed number of tags is {maxTags}/invalid official parameter/invalid ishidden parameter",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770803": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -8457,6 +9117,14 @@
         ],
         "summary": "Bulk get content by content IDs",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "773900": "Malformed request/Invalid request body",
+          "773901": "Unable to get ugc content: database/Unable to get creator",
+          "773902": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -8529,6 +9197,13 @@
         ],
         "summary": "Bulk get content by content sharecodes",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "773900": "Malformed request/Invalid request body",
+          "773901": "Unable to get ugc content: database/Unable to get creator",
+          "773902": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -8591,6 +9266,13 @@
         ],
         "summary": "Get content by sharecode",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770300": "ugc content not found",
+          "770301": "Unable to get ugc content/Unable to get creator",
+          "770303": "Failed generate download URL",
+          "773201": "Unable to get ugc content/Unable to get creator/Unable to get included group"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -8653,6 +9335,13 @@
         ],
         "summary": "Get content by content ID",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770301": "Unable to get ugc content/Unable to get creator",
+          "773200": "ugc content not found",
+          "773201": "Unable to get ugc content/Unable to get creator/Unable to get included group",
+          "773203": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [READ]"]
@@ -8728,6 +9417,12 @@
         ],
         "summary": "Rollback content's payload version",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "774101": "ugc content not found",
+          "774102": "version not found",
+          "774103": "unable to get ugc content/content cannot be restored using the current content version"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -8810,6 +9505,14 @@
         ],
         "summary": "Upload screenshots for content",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -8890,6 +9593,13 @@
         ],
         "summary": "Update screenshot of content",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -8968,6 +9678,12 @@
         ],
         "summary": "Delete screenshots content",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -9030,6 +9746,11 @@
         ],
         "summary": "List content's payload versions",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "774004": "ugc content not found",
+          "774005": "unable to get ugc content"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -9112,6 +9833,15 @@
         ],
         "summary": "Get contents belong to a group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL",
+          "773101": "invalid paging parameter",
+          "773102": "Unable to get ugc content: database error",
+          "773103": "No group content was found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -9198,6 +9928,13 @@
         ],
         "summary": "List staging contents",
         "tags": ["Admin Staging Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774301": "invalid paging parameter",
+          "774302": "unable to get staging content",
+          "774303": "unable to generate presigned URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -9266,6 +10003,13 @@
         ],
         "summary": "Get staging content by id",
         "tags": ["Admin Staging Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774401": "staging content not found",
+          "774402": "unable to get staging content",
+          "774403": "unable to generate presigned URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -9348,6 +10092,14 @@
         ],
         "summary": "Approve or reject content",
         "tags": ["Admin Staging Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774405": "Invalid request body",
+          "774406": "staging content not found",
+          "774407": "unable to approve staging content",
+          "774408": "nable to save ugc content: shareCode exceed the limit"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONTENT:APPROVAL [CREATE]"]
@@ -9450,6 +10202,15 @@
         ],
         "summary": "Update content to S3 bucket by share code",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770107": "Unable to update ugc content: invalid shareCode format",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772606": "Share code already used"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -9523,6 +10284,11 @@
         ],
         "summary": "Delete content by share code",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -9596,6 +10362,11 @@
         ],
         "summary": "Delete user content",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -9690,6 +10461,14 @@
         ],
         "summary": "Update user content",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772606": "Share code already used",
+          "772607": "Unable to update ugc content: invalid shareCode format"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -9786,6 +10565,13 @@
         ],
         "summary": "Update user content file location",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774001": "unable to read response body/unable to update file location",
+          "774002": "unable to update content file location: content not found",
+          "774003": "unable to update content file location"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -9876,6 +10662,13 @@
         ],
         "summary": "Generate user content upload URL",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772605": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -9959,6 +10752,13 @@
         ],
         "summary": "Get user's generated contents",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770900": "invalid paging parameter",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -10048,6 +10848,14 @@
         ],
         "summary": "Hide/Unhide user's generated contents",
         "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "773801": "Invalid request body/Malformed request",
+          "773802": "Unable to update hide status: database error",
+          "773803": "Unable to update hide status: content not found",
+          "773804": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -10137,6 +10945,15 @@
         ],
         "summary": "Get contents belong to a group",
         "tags": ["Admin Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL",
+          "773101": "invalid paging parameter",
+          "773102": "Unable to get ugc content: database error",
+          "773103": "No group content was found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -10230,6 +11047,13 @@
         ],
         "summary": "List user staging contents",
         "tags": ["Admin Staging Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774301": "invalid paging parameter",
+          "774302": "unable to get staging content",
+          "774303": "unable to generate presigned URL"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -10319,6 +11143,11 @@
         ],
         "summary": "List contents specific to a channel",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770804": "invalid paging parameter",
+          "770805": "Unable to get ugc content: database error"
+        },
         "x-security": {}
       }
     },
@@ -10426,6 +11255,12 @@
         ],
         "summary": "List contents",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770800": "invalid paging parameter/max allowed number of tags is {maxTags}/invalid official parameter/invalid ishidden parameter",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770803": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -10488,6 +11323,12 @@
         ],
         "summary": "Get contents by content Ids ",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "773900": "Malformed request/Invalid request body",
+          "773902": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -10556,6 +11397,13 @@
         ],
         "summary": "Bulk get content by content sharecodes",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "773900": "Malformed request/Invalid request body",
+          "773901": "Unable to get ugc content: database/Unable to get creator",
+          "773902": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -10614,6 +11462,12 @@
         ],
         "summary": "Get content by sharecode",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770300": "ugc content not found",
+          "770301": "Unable to get ugc content/Unable to get creator",
+          "770303": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -10672,6 +11526,13 @@
         ],
         "summary": "Get content by content ID",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770301": "Unable to get ugc content/Unable to get creator",
+          "773200": "ugc content not found",
+          "773201": "Unable to get ugc content/Unable to get creator/Unable to get included group",
+          "773203": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -10736,6 +11597,12 @@
         ],
         "summary": "Add unique download count to a content",
         "tags": ["Public Download Count V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772902": "Unable to add content download: database error",
+          "772903": "Unable to add content download: content not found",
+          "772906": "Unable to add content download: too many request"
+        },
         "x-security": {}
       }
     },
@@ -10820,7 +11687,12 @@
           }
         ],
         "summary": "List content downloader",
-        "tags": ["Public Download Count V2"]
+        "tags": ["Public Download Count V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770800": "invalid paging parameter/max allowed number of tags is {maxTags}/invalid official parameter/invalid ishidden parameter",
+          "772904": "Unable to list content downloader: database error"
+        }
       }
     },
     "/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/like": {
@@ -10898,7 +11770,12 @@
           }
         ],
         "summary": "Retrieve list of user that like specified content.",
-        "tags": ["Public Like V2"]
+        "tags": ["Public Like V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "771004": "invalid paging parameter",
+          "771006": "unable to get list of content like: database error"
+        }
       },
       "put": {
         "consumes": ["application/json", "application/octet-stream"],
@@ -10974,6 +11851,13 @@
         ],
         "summary": "Update like/unlike status to a content",
         "tags": ["Public Like V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770200": "Content not found",
+          "771000": "Malformed request/Content not found/Unable to update like status: content not found",
+          "771001": "unable to like content/Unable to update like status: database error",
+          "771003": "Unable to like content: too many request"
+        },
         "x-security": {}
       }
     },
@@ -11053,6 +11937,14 @@
         ],
         "summary": "Create a content",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770100": "Malformed request/Invalid request body/channel do not exist",
+          "770102": "Unable to check user ban status/Unable to save ugc content: unable to get channel",
+          "770103": "Unable to save ugc content: shareCode exceed the limit",
+          "770105": "Unable to save ugc content: failed generate upload URL",
+          "770106": "channel doesn't exist"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -11155,6 +12047,14 @@
         ],
         "summary": "Update content to S3 bucket by share code",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772606": "Share code already used"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -11228,6 +12128,11 @@
         ],
         "summary": "Delete content by share code",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -11301,6 +12206,11 @@
         ],
         "summary": "Delete content",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772701": "Unable to delete content/Unable to update user liked count/Unable to delete like state/Unable to delete like state",
+          "772702": "Content not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -11395,6 +12305,13 @@
         ],
         "summary": "Update content",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -11491,6 +12408,15 @@
         ],
         "summary": "Update content file location",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772604": "User has been banned to update content",
+          "774001": "unable to read response body/unable to update file location",
+          "774002": "unable to update content file location: content not found",
+          "774003": "unable to update content file location"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -11593,6 +12519,16 @@
         ],
         "summary": "Update content share code",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772606": "Share code already used",
+          "772607": "Unable to update ugc content: invalid shareCode format"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT:SHARECODE [UPDATE]"]
@@ -11689,6 +12625,14 @@
         ],
         "summary": "Generate content upload URL",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -11773,6 +12717,13 @@
         ],
         "summary": "Get content by user ID",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770900": "invalid paging parameter",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL"
+        },
         "x-security": {}
       }
     },
@@ -11852,6 +12803,13 @@
         ],
         "summary": "Upload screenshots for content",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772604": "User has been banned to update content",
+          "772605": "Unable to save ugc content: failed generate upload URL"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [CREATE]"]
@@ -11939,6 +12897,13 @@
         ],
         "summary": "Update screenshot of content",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772601": "Malformed request",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -12024,6 +12989,12 @@
         ],
         "summary": "Delete screenshots content",
         "tags": ["Public Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "772602": "Unable to check user ban status/Unable to get updated ugc content",
+          "772603": "Content not found",
+          "772604": "User has been banned to update content"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -12113,6 +13084,15 @@
         ],
         "summary": "Get contents belong to a group",
         "tags": ["Public Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "770801": "Unable to get ugc content: database/Unable to get creator",
+          "770901": "Unable to get ugc content: database error/Unable to get creator",
+          "770903": "Failed generate download URL",
+          "773101": "invalid paging parameter",
+          "773102": "Unable to get ugc content: database error",
+          "773103": "No group content was found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -12206,6 +13186,13 @@
         ],
         "summary": "List user staging contents",
         "tags": ["Public Staging Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774301": "invalid paging parameter",
+          "774302": "unable to get staging content",
+          "774303": "unable to generate presigned URL"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -12278,6 +13265,12 @@
         ],
         "summary": "Delete user staging content by id",
         "tags": ["Public Staging Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774417": "staging content not found",
+          "774418": "unable to delete staging content"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]"]
@@ -12351,6 +13344,13 @@
         ],
         "summary": "Get user staging content by id",
         "tags": ["Public Staging Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774401": "staging content not found",
+          "774402": "unable to get staging content",
+          "774403": "unable to generate presigned URL"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ]"]
@@ -12438,6 +13438,15 @@
         ],
         "summary": "Update staging content",
         "tags": ["Public Staging Content"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "774411": "Invalid request body",
+          "774412": "user has been banned to update content",
+          "774413": "staging content not found",
+          "774414": "unable to update staging content",
+          "774415": "unable to generate presigned URL"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
@@ -14148,11 +15157,11 @@
     "path": "/ugc/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-30T04:30:56+00:00",
-    "gitHash": "1daa4a67c94a02026b483ca875766bae81150fa8",
+    "buildDate": "2024-05-03T07:39:39+00:00",
+    "gitHash": "90aaaf10e148daabed5d9f51f4200b058ae64905",
     "name": "justice-ugc-service",
     "realm": "dev",
-    "version": "2.20.2",
+    "version": "2.20.3",
     "version-roles-seeding": "1.0.21"
   }
 }

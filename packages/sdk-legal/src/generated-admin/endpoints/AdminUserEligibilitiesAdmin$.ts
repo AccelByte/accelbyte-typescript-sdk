@@ -12,7 +12,7 @@ import { RetrieveUserEligibilitiesIndirectResponse } from '../../generated-defin
 
 export class AdminUserEligibilitiesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process only supports cross-namespace checking between game namespace and publisher namespace , that means if the active policy already accepted by the same user in publisher namespace, then it will also be considered as eligible in non-publisher namespace.
@@ -28,7 +28,7 @@ export class AdminUserEligibilitiesAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveUserEligibilitiesIndirectResponse,
       'RetrieveUserEligibilitiesIndirectResponse'

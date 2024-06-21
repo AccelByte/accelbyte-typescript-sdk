@@ -38,6 +38,7 @@ import { PaymentCallbackConfigAdminApi } from './generated-admin/PaymentCallback
 import { SessionPlatformAdminApi } from './generated-admin/SessionPlatformAdminApi.js'
 import { AchievementPlatformAdminApi } from './generated-admin/AchievementPlatformAdminApi.js'
 import { AnonymizationAdminApi } from './generated-admin/AnonymizationAdminApi.js'
+import { PlatformAccountClosureAdminApi } from './generated-admin/PlatformAccountClosureAdminApi.js'
 import { CatalogChangesAdminApi } from './generated-admin/CatalogChangesAdminApi.js'
 import { StoreApi } from './generated-public/StoreApi.js'
 import { CategoryApi } from './generated-public/CategoryApi.js'
@@ -88,6 +89,7 @@ const apis = {
   SessionPlatformAdminApi,
   AchievementPlatformAdminApi,
   AnonymizationAdminApi,
+  PlatformAccountClosureAdminApi,
   CatalogChangesAdminApi,
   StoreApi,
   CategoryApi,

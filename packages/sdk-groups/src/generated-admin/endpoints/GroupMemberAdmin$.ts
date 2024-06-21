@@ -13,7 +13,7 @@ import { GetUserGroupInformationResponseV1 } from '../../generated-definitions/G
 
 export class GroupMemberAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required valid user authentication This endpoint is used to get user joined group information. Get user group joined information. If user does not belong to any group, it will return warning to give information about it Group Member Status: * JOINED: status of user already joined to a group
@@ -26,7 +26,7 @@ export class GroupMemberAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetGroupMemberListResponseV1,
       'GetGroupMemberListResponseV1'
@@ -47,7 +47,7 @@ export class GroupMemberAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetGroupMemberListResponseV1,
       'GetGroupMemberListResponseV1'
@@ -66,7 +66,7 @@ export class GroupMemberAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserGroupInformationResponseV1,
       'GetUserGroupInformationResponseV1'

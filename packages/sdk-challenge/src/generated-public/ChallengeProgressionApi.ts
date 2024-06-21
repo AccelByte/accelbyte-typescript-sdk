@@ -9,21 +9,21 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ChallengeProgression$ } from './endpoints/ChallengeProgression$.js'
 import { UserProgressionResponse } from '../generated-definitions/UserProgressionResponse.js'
+import { ChallengeProgression$ } from './endpoints/ChallengeProgression$.js'
 
 export function ChallengeProgressionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;/ul&gt;
    */
   async function createUserMeProgresEvaluate(): Promise<unknown> {
-    const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUserMeProgresEvaluate()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +36,7 @@ export function ChallengeProgressionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     challengeCode: string,
     queryParams?: { goalCode?: string | null; limit?: number; offset?: number; tags?: string[] }
   ): Promise<UserProgressionResponse> {
-    const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ChallengeProgression$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getUserMeProgres_ByChallengeCode(challengeCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

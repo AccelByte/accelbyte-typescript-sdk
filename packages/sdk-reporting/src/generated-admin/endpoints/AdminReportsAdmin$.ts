@@ -14,7 +14,7 @@ import { SubmitReportResponse } from '../../generated-definitions/SubmitReportRe
 
 export class AdminReportsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:TICKET [READ] Reports list can be ordered by: - createdAt - updatedAt
@@ -30,7 +30,7 @@ export class AdminReportsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/reports'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReportListResponse, 'ReportListResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ReportListResponse, 'ReportListResponse')
   }
 
   /**
@@ -41,6 +41,6 @@ export class AdminReportsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/reports'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubmitReportResponse, 'SubmitReportResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SubmitReportResponse, 'SubmitReportResponse')
   }
 }

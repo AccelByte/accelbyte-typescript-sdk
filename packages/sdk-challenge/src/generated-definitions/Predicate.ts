@@ -8,7 +8,8 @@ import { z } from 'zod'
 export const Predicate = z.object({
   matcher: z.enum(['EQUAL', 'GREATER_THAN', 'GREATER_THAN_EQUAL', 'LESS_THAN', 'LESS_THAN_EQUAL']),
   parameterName: z.string(),
-  parameterType: z.enum(['ACHIEVEMENT', 'STATISTIC', 'USERACCOUNT']),
+  parameterType: z.enum(['ACHIEVEMENT', 'STATISTIC', 'STATISTIC_CYCLE', 'USERACCOUNT']),
+  statCycleId: z.string().nullish(),
   targetValue: z.number()
 })
 

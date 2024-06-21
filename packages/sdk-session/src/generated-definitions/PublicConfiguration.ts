@@ -11,6 +11,7 @@ export const PublicConfiguration = z.object({
   attributes: z.record(z.any()).nullish(),
   autoJoin: z.boolean(),
   clientVersion: z.string(),
+  customURLGRPC: z.string().nullish(),
   deployment: z.string(),
   disableCodeGeneration: z.boolean().nullish(),
   dsManualSetReady: z.boolean().nullish(),

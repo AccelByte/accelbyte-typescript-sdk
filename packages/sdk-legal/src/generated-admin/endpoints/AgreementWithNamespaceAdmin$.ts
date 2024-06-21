@@ -17,7 +17,7 @@ import { UsersAgreementsRequest } from '../../generated-definitions/UsersAgreeme
 
 export class AgreementWithNamespaceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API will return all accepted Legal Agreements for each user, including agreements of game users if publisher user has corresponding game account.
@@ -28,7 +28,7 @@ export class AgreementWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UserAgreementsResponseArray,
       'UserAgreementsResponseArray'
@@ -50,7 +50,7 @@ export class AgreementWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PagedRetrieveUserAcceptedAgreementResponse,
       'PagedRetrieveUserAcceptedAgreementResponse'
@@ -71,7 +71,7 @@ export class AgreementWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveAcceptedAgreementResponseArray,
       'RetrieveAcceptedAgreementResponseArray'
@@ -92,7 +92,7 @@ export class AgreementWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       DownloadExportedAgreementsInCsvResponse,
       'DownloadExportedAgreementsInCsvResponse'
@@ -115,7 +115,7 @@ export class AgreementWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       InitiateExportAgreementsToCsvResponse,
       'InitiateExportAgreementsToCsvResponse'

@@ -14,7 +14,7 @@ import { UserRewardArray } from '../../generated-definitions/UserRewardArray.js'
 
 export class PlayerReward$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -29,7 +29,12 @@ export class PlayerReward$ {
     const url = '/challenge/v1/public/namespaces/{namespace}/users/me/rewards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListUserRewardsResponse, 'ListUserRewardsResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListUserRewardsResponse,
+      'ListUserRewardsResponse'
+    )
   }
 
   /**
@@ -40,6 +45,6 @@ export class PlayerReward$ {
     const url = '/challenge/v1/public/namespaces/{namespace}/users/me/rewards/claim'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserRewardArray, 'UserRewardArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserRewardArray, 'UserRewardArray')
   }
 }

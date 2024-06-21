@@ -15,7 +15,7 @@ import { ImportConfigResponse } from '../../generated-definitions/ImportConfigRe
 
 export class ConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get chat config of all namespaces.
@@ -25,7 +25,7 @@ export class ConfigAdmin$ {
     const url = '/chat/v1/admin/config'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigList, 'ConfigList')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigList, 'ConfigList')
   }
 
   /**
@@ -36,7 +36,7 @@ export class ConfigAdmin$ {
     const url = '/chat/v1/admin/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigResponse, 'ConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigResponse, 'ConfigResponse')
   }
 
   /**
@@ -47,7 +47,7 @@ export class ConfigAdmin$ {
     const url = '/chat/v1/admin/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigResponse, 'ConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigResponse, 'ConfigResponse')
   }
 
   /**
@@ -58,7 +58,7 @@ export class ConfigAdmin$ {
     const url = '/chat/v1/admin/config/namespaces/{namespace}/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigExportArray, 'ConfigExportArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigExportArray, 'ConfigExportArray')
   }
 
   /**
@@ -70,6 +70,6 @@ export class ConfigAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
   }
 }

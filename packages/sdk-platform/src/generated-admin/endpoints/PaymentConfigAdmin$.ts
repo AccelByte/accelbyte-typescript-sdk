@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { AdyenConfig } from '../../generated-definitions/AdyenConfig.js'
 import { AliPayConfig } from '../../generated-definitions/AliPayConfig.js'
 import { CheckoutConfig } from '../../generated-definitions/CheckoutConfig.js'
+import { NeonPayConfig } from '../../generated-definitions/NeonPayConfig.js'
 import { PayPalConfig } from '../../generated-definitions/PayPalConfig.js'
 import { PaymentMerchantConfigInfo } from '../../generated-definitions/PaymentMerchantConfigInfo.js'
 import { PaymentProviderConfigEdit } from '../../generated-definitions/PaymentProviderConfigEdit.js'
@@ -27,7 +28,7 @@ import { XsollaPaywallConfigRequest } from '../../generated-definitions/XsollaPa
 
 export class PaymentConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment global tax config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment provider list&lt;/li&gt;&lt;/ul&gt;
@@ -37,7 +38,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/tax'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentTaxConfigInfo, 'PaymentTaxConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentTaxConfigInfo, 'PaymentTaxConfigInfo')
   }
 
   /**
@@ -48,7 +49,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/tax'
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentTaxConfigInfo, 'PaymentTaxConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentTaxConfigInfo, 'PaymentTaxConfigInfo')
   }
 
   /**
@@ -65,7 +66,7 @@ export class PaymentConfigAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaymentProviderConfigPagingSlicedResult,
       'PaymentProviderConfigPagingSlicedResult'
@@ -80,7 +81,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/provider'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentProviderConfigInfo, 'PaymentProviderConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentProviderConfigInfo,
+      'PaymentProviderConfigInfo'
+    )
   }
 
   /**
@@ -91,7 +97,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -102,7 +113,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/provider/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -113,7 +124,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/provider/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentProviderConfigInfo, 'PaymentProviderConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentProviderConfigInfo,
+      'PaymentProviderConfigInfo'
+    )
   }
 
   /**
@@ -127,7 +143,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/matched'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -141,7 +162,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/provider/matched'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentProviderConfigInfo, 'PaymentProviderConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentProviderConfigInfo,
+      'PaymentProviderConfigInfo'
+    )
   }
 
   /**
@@ -152,7 +178,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/provider/special'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -163,7 +189,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/provider/aggregate'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -178,7 +204,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/adyenconfig'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -193,7 +224,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/wxpayconfig'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -207,7 +243,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/adyenconfig/test'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -218,7 +254,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/wxpayconfig/test'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -233,7 +269,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/alipayconfig'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -248,7 +289,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/paypalconfig'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -263,7 +309,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/stripeconfig'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -278,7 +329,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/xsollaconfig'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -292,7 +348,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/alipayconfig/test'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -306,7 +362,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/paypalconfig/test'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -320,7 +376,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/stripeconfig/test'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -331,7 +387,41 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/xsollaconfig/test'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
+  }
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Update Neon Pay config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated payment merchant config&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateNeonpayconfigPayment_ById(
+    id: string,
+    data: NeonPayConfig,
+    queryParams?: { sandbox?: boolean | null; validate?: boolean | null }
+  ): Promise<IResponse<PaymentMerchantConfigInfo>> {
+    const params = { sandbox: true, ...queryParams } as SDKRequestConfig
+    const url = '/platform/admin/payment/config/merchant/{id}/neonpayconfig'.replace('{id}', id)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
+  }
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Check Neon Pay configuration, Reference: &lt;a href=&#34;https://docs.neonpay.com/docs/checkout&#34;&gt;Neon Pay Document&lt;/a&gt;.&lt;h4&gt;Check List:&lt;/h4&gt; &lt;ul&gt;&lt;li&gt;apiKey&lt;/li&gt;&lt;li&gt;webhookSecretKey&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test result&lt;/li&gt;&lt;/ul&gt;
+   */
+  createPaymentConfigMerchantNeonpayconfigTest(
+    data: NeonPayConfig,
+    queryParams?: { sandbox?: boolean | null }
+  ): Promise<IResponse<TestResult>> {
+    const params = { sandbox: true, ...queryParams } as SDKRequestConfig
+    const url = '/platform/admin/payment/config/merchant/neonpayconfig/test'
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -346,7 +436,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/checkoutconfig'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -357,7 +452,12 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/xsollauiconfig'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -371,7 +471,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/checkoutconfig/test'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -382,7 +482,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/adyenconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -394,7 +494,12 @@ export class PaymentConfigAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMerchantConfigInfo, 'PaymentMerchantConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentMerchantConfigInfo,
+      'PaymentMerchantConfigInfo'
+    )
   }
 
   /**
@@ -405,7 +510,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/wxpayconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -416,7 +521,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/alipayconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -427,7 +532,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/paypalconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -438,7 +543,7 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/stripeconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -449,7 +554,18 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/xsollaconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
+  }
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test Neon Pay configuration in payment merchant config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test result&lt;/li&gt;&lt;/ul&gt;
+   */
+  getNeonpayconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<IResponse<TestResult>> {
+    const params = { sandbox: true, ...queryParams } as SDKRequestConfig
+    const url = '/platform/admin/payment/config/merchant/{id}/neonpayconfig/test'.replace('{id}', id)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 
   /**
@@ -460,6 +576,6 @@ export class PaymentConfigAdmin$ {
     const url = '/platform/admin/payment/config/merchant/{id}/checkoutconfig/test'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TestResult, 'TestResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
   }
 }

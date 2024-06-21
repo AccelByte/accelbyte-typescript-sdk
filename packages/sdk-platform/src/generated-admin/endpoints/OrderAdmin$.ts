@@ -23,7 +23,7 @@ import { TradeNotification } from '../../generated-definitions/TradeNotification
 
 export class OrderAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query orders&lt;/li&gt;&lt;/ul&gt;
@@ -53,7 +53,7 @@ export class OrderAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/orders'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderPagingResult, 'OrderPagingResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderPagingResult, 'OrderPagingResult')
   }
 
   /**
@@ -64,7 +64,7 @@ export class OrderAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/orders/stats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderStatistics, 'OrderStatistics')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderStatistics, 'OrderStatistics')
   }
 
   /**
@@ -77,7 +77,7 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -110,7 +110,12 @@ export class OrderAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderPagingSlicedResult, 'OrderPagingSlicedResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      OrderPagingSlicedResult,
+      'OrderPagingSlicedResult'
+    )
   }
 
   /**
@@ -123,7 +128,7 @@ export class OrderAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -136,7 +141,7 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -150,7 +155,7 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -164,7 +169,7 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -177,7 +182,7 @@ export class OrderAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PurchasedItemCount, 'PurchasedItemCount')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PurchasedItemCount, 'PurchasedItemCount')
   }
 
   /**
@@ -192,7 +197,7 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderGrantInfo, 'OrderGrantInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderGrantInfo, 'OrderGrantInfo')
   }
 
   /**
@@ -206,7 +211,7 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderInfo, 'OrderInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
 
   /**
@@ -220,7 +225,7 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OrderHistoryInfoArray, 'OrderHistoryInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderHistoryInfoArray, 'OrderHistoryInfoArray')
   }
 
   /**
@@ -234,7 +239,7 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -248,6 +253,6 @@ export class OrderAdmin$ {
       .replace('{orderNo}', orderNo)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

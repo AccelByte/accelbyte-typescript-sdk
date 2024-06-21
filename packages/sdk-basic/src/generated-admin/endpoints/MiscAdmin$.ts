@@ -18,7 +18,7 @@ import { UpdateCountryGroupRequest } from '../../generated-definitions/UpdateCou
 
 export class MiscAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -29,7 +29,7 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryObjectArray, 'CountryObjectArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CountryObjectArray, 'CountryObjectArray')
   }
 
   /**
@@ -40,7 +40,7 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/languages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -51,7 +51,7 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/timezones'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -63,7 +63,7 @@ export class MiscAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveCountryGroupResponseArray,
       'RetrieveCountryGroupResponseArray'
@@ -78,7 +78,12 @@ export class MiscAdmin$ {
     const url = '/basic/v1/admin/namespaces/{namespace}/misc/countrygroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AddCountryGroupResponse, 'AddCountryGroupResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      AddCountryGroupResponse,
+      'AddCountryGroupResponse'
+    )
   }
 
   /**
@@ -91,7 +96,7 @@ export class MiscAdmin$ {
       .replace('{countryGroupCode}', countryGroupCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -107,6 +112,6 @@ export class MiscAdmin$ {
       .replace('{countryGroupCode}', countryGroupCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CountryGroupObject, 'CountryGroupObject')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CountryGroupObject, 'CountryGroupObject')
   }
 }

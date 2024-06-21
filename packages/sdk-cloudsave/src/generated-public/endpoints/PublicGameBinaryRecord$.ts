@@ -20,7 +20,7 @@ import { UploadBinaryRecordResponse } from '../../generated-definitions/UploadBi
 
 export class PublicGameBinaryRecord$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve list of binary records by namespace.
@@ -36,7 +36,7 @@ export class PublicGameBinaryRecord$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListGameBinaryRecordsResponse,
       'ListGameBinaryRecordsResponse'
@@ -52,7 +52,7 @@ export class PublicGameBinaryRecord$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UploadBinaryRecordResponse,
       'UploadBinaryRecordResponse'
@@ -68,7 +68,7 @@ export class PublicGameBinaryRecord$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BulkGetGameBinaryRecordResponse,
       'BulkGetGameBinaryRecordResponse'
@@ -83,7 +83,7 @@ export class PublicGameBinaryRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/binaries/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -94,7 +94,12 @@ export class PublicGameBinaryRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/binaries/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameBinaryRecordResponse, 'GameBinaryRecordResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GameBinaryRecordResponse,
+      'GameBinaryRecordResponse'
+    )
   }
 
   /**
@@ -105,7 +110,12 @@ export class PublicGameBinaryRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/binaries/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameBinaryRecordResponse, 'GameBinaryRecordResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GameBinaryRecordResponse,
+      'GameBinaryRecordResponse'
+    )
   }
 
   /**
@@ -117,7 +127,7 @@ export class PublicGameBinaryRecord$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UploadBinaryRecordResponse,
       'UploadBinaryRecordResponse'

@@ -12,7 +12,7 @@ import { Config } from '../../generated-definitions/Config.js'
 
 export class StaticConfigs$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   getStaticConfig_ByConfig(config: string): Promise<IResponse<Config>> {
     const params = {} as SDKRequestConfig
@@ -21,6 +21,6 @@ export class StaticConfigs$ {
       .replace('{config}', config)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Config, 'Config')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Config, 'Config')
   }
 }

@@ -9,15 +9,15 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { View$ } from './endpoints/View$.js'
 import { ViewInfoArray } from '../generated-definitions/ViewInfoArray.js'
+import { View$ } from './endpoints/View$.js'
 
 export function ViewApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * This API is used to get all views.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store views)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store views)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: all views&lt;/li&gt;&lt;/ul&gt;
@@ -26,7 +26,7 @@ export function ViewApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { language?: string | null; storeId?: string | null }
   ): Promise<ViewInfoArray> {
-    const $ = new View$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new View$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getViews_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

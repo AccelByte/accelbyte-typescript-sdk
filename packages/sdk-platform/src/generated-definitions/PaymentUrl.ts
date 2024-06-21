@@ -6,7 +6,7 @@
 import { z } from 'zod'
 
 export const PaymentUrl = z.object({
-  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
   paymentType: z.enum(['LINK', 'QR_CODE']),
   paymentUrl: z.string().nullish(),
   returnUrl: z.string().nullish(),

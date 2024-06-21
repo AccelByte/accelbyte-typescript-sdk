@@ -12,23 +12,23 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ActionApiRequest } from '../generated-definitions/ActionApiRequest.js'
 import { ActionApiResponse } from '../generated-definitions/ActionApiResponse.js'
 import { ActionListApiResponse } from '../generated-definitions/ActionListApiResponse.js'
-import { AdminExtensionCategoriesAndAutoModerationActionsAdmin$ } from './endpoints/AdminExtensionCategoriesAndAutoModerationActionsAdmin$.js'
 import { ExtensionCategoryApiRequest } from '../generated-definitions/ExtensionCategoryApiRequest.js'
 import { ExtensionCategoryApiResponse } from '../generated-definitions/ExtensionCategoryApiResponse.js'
 import { ExtensionCategoryListApiResponse } from '../generated-definitions/ExtensionCategoryListApiResponse.js'
+import { AdminExtensionCategoriesAndAutoModerationActionsAdmin$ } from './endpoints/AdminExtensionCategoriesAndAutoModerationActionsAdmin$.js'
 
 export function AdminExtensionCategoriesAndAutoModerationActionsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get a list of auto moderation actions
    */
   async function getExtensionActions(): Promise<ActionListApiResponse> {
-    const $ = new AdminExtensionCategoriesAndAutoModerationActionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminExtensionCategoriesAndAutoModerationActionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getExtensionActions()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +38,7 @@ export function AdminExtensionCategoriesAndAutoModerationActionsAdminApi(sdk: Ac
    * Create auto moderation action
    */
   async function createExtensionAction(data: ActionApiRequest): Promise<ActionApiResponse> {
-    const $ = new AdminExtensionCategoriesAndAutoModerationActionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminExtensionCategoriesAndAutoModerationActionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createExtensionAction(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -51,7 +51,7 @@ export function AdminExtensionCategoriesAndAutoModerationActionsAdminApi(sdk: Ac
     order?: 'asc' | 'ascending' | 'desc' | 'descending'
     sortBy?: 'extensionCategory' | 'extensionCategoryName'
   }): Promise<ExtensionCategoryListApiResponse> {
-    const $ = new AdminExtensionCategoriesAndAutoModerationActionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminExtensionCategoriesAndAutoModerationActionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getExtensionCategories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -61,7 +61,7 @@ export function AdminExtensionCategoriesAndAutoModerationActionsAdminApi(sdk: Ac
    * Create extension category data
    */
   async function createExtensionCategory(data: ExtensionCategoryApiRequest): Promise<ExtensionCategoryApiResponse> {
-    const $ = new AdminExtensionCategoriesAndAutoModerationActionsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminExtensionCategoriesAndAutoModerationActionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createExtensionCategory(data)
     if (resp.error) throw resp.error
     return resp.response.data

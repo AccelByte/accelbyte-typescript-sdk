@@ -9,7 +9,6 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { BaseLegalPoliciesWithNamespaceAdmin$ } from './endpoints/BaseLegalPoliciesWithNamespaceAdmin$.js'
 import { CreateBasePolicyRequestV2 } from '../generated-definitions/CreateBasePolicyRequestV2.js'
 import { CreateBasePolicyResponse } from '../generated-definitions/CreateBasePolicyResponse.js'
 import { RetrieveBasePolicyResponse } from '../generated-definitions/RetrieveBasePolicyResponse.js'
@@ -18,19 +17,20 @@ import { RetrievePolicyResponse } from '../generated-definitions/RetrievePolicyR
 import { RetrievePolicyTypeResponseArray } from '../generated-definitions/RetrievePolicyTypeResponseArray.js'
 import { UpdateBasePolicyRequestV2 } from '../generated-definitions/UpdateBasePolicyRequestV2.js'
 import { UpdateBasePolicyResponse } from '../generated-definitions/UpdateBasePolicyResponse.js'
+import { BaseLegalPoliciesWithNamespaceAdmin$ } from './endpoints/BaseLegalPoliciesWithNamespaceAdmin$.js'
 
 export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Retrieve all supported policy types.
    */
   async function getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<RetrievePolicyTypeResponseArray> {
-    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPolicyTypes(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +40,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
    * Retrieve all base policies in the namespace.
    */
   async function getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<RetrieveBasePolicyResponseArray> {
-    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getBasePolicies(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -50,7 +50,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
    * Create a legal policy.
    */
   async function createBasePolicy(data: CreateBasePolicyRequestV2): Promise<CreateBasePolicyResponse> {
-    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createBasePolicy(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -60,7 +60,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
    * Retrieve a base policy.
    */
   async function getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<RetrieveBasePolicyResponse> {
-    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getBasePolicy_ByBasePolicyId(basePolicyId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -70,7 +70,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
    * Update an existing base policy.
    */
   async function patchBasePolicy_ByBasePolicyId(basePolicyId: string, data: UpdateBasePolicyRequestV2): Promise<UpdateBasePolicyResponse> {
-    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchBasePolicy_ByBasePolicyId(basePolicyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -80,7 +80,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
    * Retrieve a Base Legal Policy based on a Particular Country.
    */
   async function getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<RetrievePolicyResponse> {
-    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getCountry_ByBasePolicyId_ByCountryCode(basePolicyId, countryCode)
     if (resp.error) throw resp.error
     return resp.response.data

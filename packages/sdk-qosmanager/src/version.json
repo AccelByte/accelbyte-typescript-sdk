@@ -1,8 +1,8 @@
 {
-  "buildDate": "2024-03-20T02:16:59+00:00",
-  "gitHash": "be4e42427cf0699df7f8b73fa78880020e124d14",
+  "buildDate": "2024-05-16T03:43:05+00:00",
+  "gitHash": "dfbb9690162cbc3002beb34ee05042c90e609e8d",
   "name": "Justice QoS Manager Service",
-  "revisionID": "1.19.3",
-  "version": "1.19.3",
+  "revisionID": "1.19.4",
+  "version": "1.19.4",
   "version-roles-seeding": "1.0.15"
 }

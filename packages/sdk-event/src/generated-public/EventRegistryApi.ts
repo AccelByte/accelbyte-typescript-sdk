@@ -17,14 +17,14 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * @deprecated
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function getRegistryEventIds_DEPRECATED(): Promise<EventRegistry> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getRegistryEventIds_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +35,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [CREATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function createRegistryEventId_DEPRECATED(data: EventRegistry): Promise<unknown> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createRegistryEventId_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -46,7 +46,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [DELETE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function deleteRegistryEventId_ByEventId_DEPRECATED(eventId: string): Promise<unknown> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteRegistryEventId_ByEventId_DEPRECATED(eventId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +57,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function getRegistryEventId_ByEventId_DEPRECATED(eventId: string): Promise<EventRegistry> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getRegistryEventId_ByEventId_DEPRECATED(eventId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +68,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [UPDATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function createRegistryEventId_ByEventId_DEPRECATED(eventId: string, data: EventRegistry): Promise<unknown> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createRegistryEventId_ByEventId_DEPRECATED(eventId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -79,7 +79,7 @@ export function EventRegistryApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:EVENT [READ]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function getRegistryEventType_ByEventType_DEPRECATED(eventType: string): Promise<EventRegistry> {
-    const $ = new EventRegistry$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EventRegistry$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getRegistryEventType_ByEventType_DEPRECATED(eventType)
     if (resp.error) throw resp.error
     return resp.response.data

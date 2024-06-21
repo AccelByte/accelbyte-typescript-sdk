@@ -19,7 +19,7 @@ export const Transaction = z.object({
   paymentMethod: z.string().nullish(),
   paymentMethodFee: z.number().int().nullish(),
   paymentProviderFee: z.number().int().nullish(),
-  provider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']).nullish(),
+  provider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']).nullish(),
   salesTax: z.number().int().nullish(),
   status: z.enum(['FAILED', 'FINISHED']).nullish(),
   tax: z.number().int().nullish(),

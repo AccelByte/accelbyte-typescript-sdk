@@ -5,6 +5,7 @@
  */
 import { z } from 'zod'
 import { CurrencySummary } from './CurrencySummary.js'
+import { PaymentOrderNeonPayConfig } from './PaymentOrderNeonPayConfig.js'
 import { Transaction } from './Transaction.js'
 
 export const PaymentOrder = z.object({
@@ -27,12 +28,13 @@ export const PaymentOrder = z.object({
   language: z.string().nullish(),
   metadata: z.record(z.string()).nullish(),
   namespace: z.string().nullish(),
+  neonPayConfig: PaymentOrderNeonPayConfig.nullish(),
   notifyUrl: z.string().nullish(),
   omitNotification: z.boolean().nullish(),
   paymentMethod: z.string().nullish(),
   paymentMethodFee: z.number().int().nullish(),
   paymentOrderNo: z.string().nullish(),
-  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']).nullish(),
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']).nullish(),
   paymentProviderFee: z.number().int().nullish(),
   paymentStationUrl: z.string().nullish(),
   platform: z.string().nullish(),

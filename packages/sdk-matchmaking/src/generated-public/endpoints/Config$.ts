@@ -14,7 +14,7 @@ import { PatchNamespaceConfigRequest } from '../../generated-definitions/PatchNa
 
 export class Config$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get matchmaking config of all namespaces. Will only return namespace configs than have been updated.
@@ -24,7 +24,7 @@ export class Config$ {
     const url = '/match2/v1/config'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceConfigList, 'NamespaceConfigList')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, NamespaceConfigList, 'NamespaceConfigList')
   }
 
   /**
@@ -35,7 +35,7 @@ export class Config$ {
     const url = '/match2/v1/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceConfig, 'NamespaceConfig')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, NamespaceConfig, 'NamespaceConfig')
   }
 
   /**
@@ -46,6 +46,6 @@ export class Config$ {
     const url = '/match2/v1/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceConfig, 'NamespaceConfig')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, NamespaceConfig, 'NamespaceConfig')
   }
 }

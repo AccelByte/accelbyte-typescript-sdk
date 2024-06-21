@@ -11,11 +11,12 @@ import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { ConfigList } from '../../generated-definitions/ConfigList.js'
 import { ConfigReq } from '../../generated-definitions/ConfigReq.js'
+import { Configuration } from '../../generated-definitions/Configuration.js'
 import { ImportConfigResponse } from '../../generated-definitions/ImportConfigResponse.js'
 
 export class ConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get lobby config of all namespaces.&lt;br&gt;default MaxDSWaitTime is 120 (second)
@@ -25,7 +26,29 @@ export class ConfigAdmin$ {
     const url = '/lobby/v1/admin/config'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigList, 'ConfigList')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigList, 'ConfigList')
+  }
+
+  /**
+   * Get Log Configuration.&lt;br&gt;
+   */
+  getConfigLog(): Promise<IResponse<Configuration>> {
+    const params = {} as SDKRequestConfig
+    const url = '/lobby/v1/admin/config/log'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configuration, 'Configuration')
+  }
+
+  /**
+   * Update Log Configuration.&lt;br&gt;
+   */
+  patchConfigLog(data: Configuration): Promise<IResponse<Configuration>> {
+    const params = {} as SDKRequestConfig
+    const url = '/lobby/v1/admin/config/log'
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configuration, 'Configuration')
   }
 
   /**
@@ -36,7 +59,7 @@ export class ConfigAdmin$ {
     const url = '/lobby/v1/admin/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigReq, 'ConfigReq')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigReq, 'ConfigReq')
   }
 
   /**
@@ -47,7 +70,7 @@ export class ConfigAdmin$ {
     const url = '/lobby/v1/admin/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigReq, 'ConfigReq')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigReq, 'ConfigReq')
   }
 
   /**
@@ -58,7 +81,7 @@ export class ConfigAdmin$ {
     const url = '/lobby/v1/admin/config/namespaces/{namespace}/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -70,6 +93,6 @@ export class ConfigAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
   }
 }

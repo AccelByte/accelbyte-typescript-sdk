@@ -16,7 +16,7 @@ import { UpdateChannelRequest } from '../../generated-definitions/UpdateChannelR
 
 export class AdminChannelAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get official channel paginated
@@ -27,7 +27,7 @@ export class AdminChannelAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedGetChannelResponse,
       'PaginatedGetChannelResponse'
@@ -42,7 +42,7 @@ export class AdminChannelAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelResponse, 'ChannelResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChannelResponse, 'ChannelResponse')
   }
 
   /**
@@ -55,7 +55,7 @@ export class AdminChannelAdmin$ {
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -68,7 +68,7 @@ export class AdminChannelAdmin$ {
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelResponse, 'ChannelResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChannelResponse, 'ChannelResponse')
   }
 
   /**
@@ -85,7 +85,7 @@ export class AdminChannelAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedGetChannelResponse,
       'PaginatedGetChannelResponse'
@@ -103,7 +103,7 @@ export class AdminChannelAdmin$ {
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -117,6 +117,6 @@ export class AdminChannelAdmin$ {
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelResponse, 'ChannelResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChannelResponse, 'ChannelResponse')
   }
 }

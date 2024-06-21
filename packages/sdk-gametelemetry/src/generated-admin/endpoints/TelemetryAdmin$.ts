@@ -13,7 +13,7 @@ import { PagedResponseGetNamespaceEventResponse } from '../../generated-definiti
 
 export class TelemetryAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This endpoint requires valid JWT token and telemetry permission This endpoint retrieves namespace list
@@ -23,7 +23,7 @@ export class TelemetryAdmin$ {
     const url = '/game-telemetry/v1/admin/namespaces'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListBaseResponseStr, 'ListBaseResponseStr')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListBaseResponseStr, 'ListBaseResponseStr')
   }
 
   /**
@@ -45,7 +45,7 @@ export class TelemetryAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PagedResponseGetNamespaceEventResponse,
       'PagedResponseGetNamespaceEventResponse'

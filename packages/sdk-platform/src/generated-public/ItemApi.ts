@@ -11,7 +11,6 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AppInfo } from '../generated-definitions/AppInfo.js'
 import { EstimatedPriceInfoArray } from '../generated-definitions/EstimatedPriceInfoArray.js'
-import { Item$ } from './endpoints/Item$.js'
 import { ItemDynamicDataInfo } from '../generated-definitions/ItemDynamicDataInfo.js'
 import { ItemInfo } from '../generated-definitions/ItemInfo.js'
 import { ItemInfoArray } from '../generated-definitions/ItemInfoArray.js'
@@ -19,13 +18,14 @@ import { ItemPagingSlicedResult } from '../generated-definitions/ItemPagingSlice
 import { ItemPurchaseConditionValidateRequest } from '../generated-definitions/ItemPurchaseConditionValidateRequest.js'
 import { ItemPurchaseConditionValidateResultArray } from '../generated-definitions/ItemPurchaseConditionValidateResultArray.js'
 import { PopulatedItemInfo } from '../generated-definitions/PopulatedItemInfo.js'
+import { Item$ } from './endpoints/Item$.js'
 
 export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * This API is used to get the item by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the item with sku&lt;/li&gt;&lt;/ul&gt;
@@ -37,7 +37,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<ItemInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getItemsBySku(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +67,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<ItemPagingSlicedResult> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getItemsSearch(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -82,7 +82,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<ItemInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getItemsByAppId(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -118,7 +118,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     storeId?: string | null
     tags?: string | null
   }): Promise<ItemPagingSlicedResult> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getItemsByCriteria(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -134,7 +134,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<ItemInfoArray> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getItemsLocaleByIds(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -148,7 +148,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     region?: string | null
     storeId?: string | null
   }): Promise<EstimatedPriceInfoArray> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getItemsEstimatedPrice(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -167,7 +167,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       storeId?: string | null
     }
   ): Promise<PopulatedItemInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getLocale_ByItemId(itemId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -177,7 +177,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get item dynamic data for a published item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item dynamic data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getDynamic_ByItemId(itemId: string): Promise<ItemDynamicDataInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getDynamic_ByItemId(itemId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -190,7 +190,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     itemId: string,
     queryParams?: { language?: string | null; region?: string | null; storeId?: string | null }
   ): Promise<AppInfo> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getAppLocale_ByItemId(itemId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -202,7 +202,7 @@ export function ItemApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createItemPurchaseConditionValidate(
     data: ItemPurchaseConditionValidateRequest
   ): Promise<ItemPurchaseConditionValidateResultArray> {
-    const $ = new Item$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Item$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createItemPurchaseConditionValidate(data)
     if (resp.error) throw resp.error
     return resp.response.data

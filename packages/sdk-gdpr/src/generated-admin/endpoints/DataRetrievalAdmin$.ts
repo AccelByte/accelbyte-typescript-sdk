@@ -16,7 +16,7 @@ import { UserPersonalDataResponse } from '../../generated-definitions/UserPerson
 
 export class DataRetrievalAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get list personal data requests Scope: account
@@ -30,7 +30,12 @@ export class DataRetrievalAdmin$ {
     const url = '/gdpr/admin/namespaces/{namespace}/requests'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListPersonalDataResponse, 'ListPersonalDataResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListPersonalDataResponse,
+      'ListPersonalDataResponse'
+    )
   }
 
   /**
@@ -43,11 +48,16 @@ export class DataRetrievalAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserPersonalDataResponse, 'UserPersonalDataResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserPersonalDataResponse,
+      'UserPersonalDataResponse'
+    )
   }
 
   /**
-   * Submit user personal data retrieval request If admin request data for themselves, password is need to be set Scope: account
+   * Submit user personal data retrieval request. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
   postRequest_ByUserId(userId: string, data: { password?: string | null }): Promise<IResponse<DataRetrievalResponse>> {
     const params = {} as SDKRequestConfig
@@ -59,7 +69,7 @@ export class DataRetrievalAdmin$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DataRetrievalResponse, 'DataRetrievalResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DataRetrievalResponse, 'DataRetrievalResponse')
   }
 
   /**
@@ -73,11 +83,11 @@ export class DataRetrievalAdmin$ {
       .replace('{requestDate}', requestDate)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * Generate personal data download url Scope: account
+   * Generate personal data download url. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
   postGenerate_ByUserId_ByRequestDate(
     userId: string,
@@ -94,6 +104,6 @@ export class DataRetrievalAdmin$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserDataUrl, 'UserDataUrl')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserDataUrl, 'UserDataUrl')
   }
 }

@@ -17,7 +17,7 @@ import { UpdatePolicyVersionResponse } from '../../generated-definitions/UpdateP
 
 export class PolicyVersionsWithNamespaceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.
@@ -33,7 +33,7 @@ export class PolicyVersionsWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrievePolicyVersionResponseArray,
       'RetrievePolicyVersionResponseArray'
@@ -51,7 +51,7 @@ export class PolicyVersionsWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       CreatePolicyVersionResponse,
       'CreatePolicyVersionResponse'
@@ -72,7 +72,7 @@ export class PolicyVersionsWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UpdatePolicyVersionResponse,
       'UpdatePolicyVersionResponse'
@@ -92,6 +92,6 @@ export class PolicyVersionsWithNamespaceAdmin$ {
       .replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

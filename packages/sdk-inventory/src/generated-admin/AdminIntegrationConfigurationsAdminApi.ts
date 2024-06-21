@@ -9,19 +9,19 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AdminIntegrationConfigurationsAdmin$ } from './endpoints/AdminIntegrationConfigurationsAdmin$.js'
 import { CreateIntegrationConfigurationReq } from '../generated-definitions/CreateIntegrationConfigurationReq.js'
 import { IntegrationConfigurationResp } from '../generated-definitions/IntegrationConfigurationResp.js'
 import { ListIntegrationConfigurationsResp } from '../generated-definitions/ListIntegrationConfigurationsResp.js'
 import { UpdateIntegrationConfigurationReq } from '../generated-definitions/UpdateIntegrationConfigurationReq.js'
 import { UpdateStatusIntegrationConfigurationReq } from '../generated-definitions/UpdateStatusIntegrationConfigurationReq.js'
+import { AdminIntegrationConfigurationsAdmin$ } from './endpoints/AdminIntegrationConfigurationsAdmin$.js'
 
 export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    *  Listing all integration configurations in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]
@@ -31,7 +31,7 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
     offset?: number
     sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc'
   }): Promise<ListIntegrationConfigurationsResp> {
-    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getIntegrationConfigurations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +41,7 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
    *  Creating integration configuration. There cannot be one duplicate serviceName per namespace. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]
    */
   async function createIntegrationConfiguration(data: CreateIntegrationConfigurationReq): Promise<IntegrationConfigurationResp> {
-    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createIntegrationConfiguration(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -54,7 +54,7 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
     integrationConfigurationId: string,
     data: UpdateIntegrationConfigurationReq
   ): Promise<IntegrationConfigurationResp> {
-    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIntegrationConfiguration_ByIntegrationConfigurationId(integrationConfigurationId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +67,7 @@ export function AdminIntegrationConfigurationsAdminApi(sdk: AccelbyteSDK, args?:
     integrationConfigurationId: string,
     data: UpdateStatusIntegrationConfigurationReq
   ): Promise<IntegrationConfigurationResp> {
-    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminIntegrationConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateStatus_ByIntegrationConfigurationId(integrationConfigurationId, data)
     if (resp.error) throw resp.error
     return resp.response.data

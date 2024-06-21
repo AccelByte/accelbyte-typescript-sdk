@@ -9,23 +9,23 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { CountryAdmin$ } from './endpoints/CountryAdmin$.js'
 import { CountryBlacklistRequest } from '../generated-definitions/CountryBlacklistRequest.js'
 import { CountryBlacklistResponse } from '../generated-definitions/CountryBlacklistResponse.js'
 import { CountryResponseArray } from '../generated-definitions/CountryResponseArray.js'
+import { CountryAdmin$ } from './endpoints/CountryAdmin$.js'
 
 export function CountryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Admin get country list
    */
   async function getCountries(queryParams?: { filterBlacklist?: boolean | null }): Promise<CountryResponseArray> {
-    const $ = new CountryAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new CountryAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getCountries(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -35,7 +35,7 @@ export function CountryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Admin get country blacklist
    */
   async function getCountriesBlacklist(): Promise<CountryBlacklistResponse> {
-    const $ = new CountryAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new CountryAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getCountriesBlacklist()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +45,7 @@ export function CountryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Admin update country blacklist
    */
   async function createCountryBlacklist(data: CountryBlacklistRequest): Promise<unknown> {
-    const $ = new CountryAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new CountryAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createCountryBlacklist(data)
     if (resp.error) throw resp.error
     return resp.response.data

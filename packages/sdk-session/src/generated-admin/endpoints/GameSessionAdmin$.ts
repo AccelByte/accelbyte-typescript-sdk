@@ -17,7 +17,7 @@ import { UpdateGameSessionMemberStatusResponse } from '../../generated-definitio
 
 export class GameSessionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get all game sessions.
@@ -45,7 +45,12 @@ export class GameSessionAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/gamesessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GameSessionQueryResponse,
+      'GameSessionQueryResponse'
+    )
   }
 
   /**
@@ -56,7 +61,12 @@ export class GameSessionAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/gamesessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameSessionQueryResponse, 'GameSessionQueryResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GameSessionQueryResponse,
+      'GameSessionQueryResponse'
+    )
   }
 
   /**
@@ -68,7 +78,7 @@ export class GameSessionAdmin$ {
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       DeleteBulkGameSessionsApiResponse,
       'DeleteBulkGameSessionsApiResponse'
@@ -85,7 +95,7 @@ export class GameSessionAdmin$ {
       .replace('{sessionId}', sessionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -105,7 +115,7 @@ export class GameSessionAdmin$ {
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UpdateGameSessionMemberStatusResponse,
       'UpdateGameSessionMemberStatusResponse'

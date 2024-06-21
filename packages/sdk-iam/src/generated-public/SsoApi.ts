@@ -9,6 +9,7 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+
 import { Sso$ } from './endpoints/Sso$.js'
 
 export function SsoApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -16,10 +17,10 @@ export function SsoApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   async function getSso_ByPlatformId(platformId: string, queryParams?: { payload?: string | null }): Promise<unknown> {
-    const $ = new Sso$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Sso$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getSso_ByPlatformId(platformId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -29,7 +30,7 @@ export function SsoApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Logout user&#39;s session on platform that logged in using SSO. Supported platforms: - discourse
    */
   async function createLogout_ByPlatformId(platformId: string): Promise<unknown> {
-    const $ = new Sso$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Sso$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createLogout_ByPlatformId(platformId)
     if (resp.error) throw resp.error
     return resp.response.data

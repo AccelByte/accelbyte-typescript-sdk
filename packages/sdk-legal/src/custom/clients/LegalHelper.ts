@@ -54,12 +54,16 @@ export class LegalHelper {
     return displayedPolicies
   }
 
-  static createLegalURL(legalWebURL?: string, policyId?: string): string {
-    if (!legalWebURL) return `/legal${policyId ? `/${policyId}` : ''}`
+  static createLegalURL({ legalBaseUrl, policyId, languageId }: { legalBaseUrl?: string; policyId?: string; languageId?: string }): string {
+    if (!legalBaseUrl) return `${languageId ? `/${languageId}` : ''}/legal${policyId ? `/${policyId}` : ''}`
 
-    if (isURL(legalWebURL)) return UrlHelper.combineURLPaths(legalWebURL, policyId || '')
+    if (isURL(legalBaseUrl)) {
+      const { origin, pathname } = new URL(legalBaseUrl)
+      const legalUrl = UrlHelper.combineURLPaths(origin, languageId || '', pathname)
+      return UrlHelper.combineURLPaths(legalUrl, policyId || '')
+    }
 
-    return UrlHelper.combinePaths(legalWebURL, policyId || '')
+    return UrlHelper.combinePaths(legalBaseUrl, policyId || '')
   }
 
   static getAcceptedPolicies(eligibilities: RetrieveUserEligibilitiesResponseArray): AcceptedPoliciesRequest[] {

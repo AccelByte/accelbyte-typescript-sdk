@@ -20,7 +20,7 @@ import { UploadPolicyVersionAttachmentRequest } from '../../generated-definition
 
 export class LocalizedPolicyVersionsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve a version of a particular country-specific policy.
@@ -36,7 +36,7 @@ export class LocalizedPolicyVersionsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveLocalizedPolicyVersionResponse,
       'RetrieveLocalizedPolicyVersionResponse'
@@ -58,7 +58,7 @@ export class LocalizedPolicyVersionsAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UpdateLocalizedPolicyVersionResponse,
       'UpdateLocalizedPolicyVersionResponse'
@@ -69,15 +69,14 @@ export class LocalizedPolicyVersionsAdmin$ {
    * Retrieve versions of a particular country-specific policy.
    */
   getLocalizedPolicyVersionVersion_ByPolicyVersionId(
-    policyVersionId: string,
-    queryParams?: { visibleOnly?: boolean | null }
+    policyVersionId: string
   ): Promise<IResponse<RetrieveLocalizedPolicyVersionResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    const params = {} as SDKRequestConfig
     const url = '/agreement/admin/localized-policy-versions/versions/{policyVersionId}'.replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveLocalizedPolicyVersionResponseArray,
       'RetrieveLocalizedPolicyVersionResponseArray'
@@ -96,7 +95,7 @@ export class LocalizedPolicyVersionsAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       CreateLocalizedPolicyVersionResponse,
       'CreateLocalizedPolicyVersionResponse'
@@ -114,7 +113,7 @@ export class LocalizedPolicyVersionsAdmin$ {
     )
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -132,7 +131,7 @@ export class LocalizedPolicyVersionsAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UploadLocalizedPolicyVersionAttachmentResponse,
       'UploadLocalizedPolicyVersionAttachmentResponse'

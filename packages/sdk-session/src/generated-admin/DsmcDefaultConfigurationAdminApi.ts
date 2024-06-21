@@ -17,13 +17,13 @@ export function DsmcDefaultConfigurationAdminApi(sdk: AccelbyteSDK, args?: ApiAr
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get dsmc default configuration.
    */
   async function getDsconfigsDefault(): Promise<DefaultDsmcConfig> {
-    const $ = new DsmcDefaultConfigurationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new DsmcDefaultConfigurationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getDsconfigsDefault()
     if (resp.error) throw resp.error
     return resp.response.data

@@ -12,7 +12,7 @@ import { ListInventoryResp } from '../../generated-definitions/ListInventoryResp
 
 export class PublicInventories$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  Listing all my inventories in a namespace. The response body will be in the form of standard pagination.
@@ -27,6 +27,6 @@ export class PublicInventories$ {
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListInventoryResp, 'ListInventoryResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListInventoryResp, 'ListInventoryResp')
   }
 }

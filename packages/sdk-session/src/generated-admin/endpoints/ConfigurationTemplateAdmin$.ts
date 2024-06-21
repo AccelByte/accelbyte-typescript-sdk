@@ -19,7 +19,7 @@ import { UpdateConfigurationTemplateRequest } from '../../generated-definitions/
 
 export class ConfigurationTemplateAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get a dsmc configuration.
@@ -29,7 +29,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/dsconfigs'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -41,7 +41,7 @@ export class ConfigurationTemplateAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ConfigurationTemplateResponse,
       'ConfigurationTemplateResponse'
@@ -63,7 +63,7 @@ export class ConfigurationTemplateAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ConfigurationTemplatesResponse,
       'ConfigurationTemplatesResponse'
@@ -78,7 +78,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/dsconfigs/sync'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DsmConfigRecord, 'DsmConfigRecord')
   }
 
   /**
@@ -89,7 +89,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -100,7 +100,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
   }
 
   /**
@@ -111,7 +111,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
   }
 
   /**
@@ -122,7 +122,7 @@ export class ConfigurationTemplateAdmin$ {
     const url = '/session/v1/admin/namespaces/{namespace}/alerts-configuration'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigAlertResponse, 'ConfigAlertResponse')
   }
 
   /**
@@ -135,7 +135,7 @@ export class ConfigurationTemplateAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -149,7 +149,7 @@ export class ConfigurationTemplateAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ConfigurationTemplateResponse,
       'ConfigurationTemplateResponse'
@@ -167,7 +167,7 @@ export class ConfigurationTemplateAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ConfigurationTemplateResponse,
       'ConfigurationTemplateResponse'

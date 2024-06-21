@@ -22,7 +22,7 @@ import { TradeNotification } from '../../generated-definitions/TradeNotification
 
 export class SubscriptionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query subscriptions.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated subscriptions&lt;/li&gt;&lt;/ul&gt;
@@ -42,7 +42,7 @@ export class SubscriptionAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       SubscriptionPagingSlicedResult,
       'SubscriptionPagingSlicedResult'
@@ -71,7 +71,7 @@ export class SubscriptionAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       SubscriptionPagingSlicedResult,
       'SubscriptionPagingSlicedResult'
@@ -92,7 +92,7 @@ export class SubscriptionAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       SubscriptionActivityPagingSlicedResult,
       'SubscriptionActivityPagingSlicedResult'
@@ -109,7 +109,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RecurringChargeResult, 'RecurringChargeResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RecurringChargeResult, 'RecurringChargeResult')
   }
 
   /**
@@ -123,7 +123,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -137,7 +137,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
   }
 
   /**
@@ -150,7 +150,7 @@ export class SubscriptionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
   }
 
   /**
@@ -163,7 +163,7 @@ export class SubscriptionAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Subscribable, 'Subscribable')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Subscribable, 'Subscribable')
   }
 
   /**
@@ -181,7 +181,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
   }
 
   /**
@@ -200,7 +200,7 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SubscriptionInfo, 'SubscriptionInfo')
   }
 
   /**
@@ -219,7 +219,7 @@ export class SubscriptionAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       BillingHistoryPagingSlicedResult,
       'BillingHistoryPagingSlicedResult'
@@ -241,6 +241,6 @@ export class SubscriptionAdmin$ {
       .replace('{subscriptionId}', subscriptionId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

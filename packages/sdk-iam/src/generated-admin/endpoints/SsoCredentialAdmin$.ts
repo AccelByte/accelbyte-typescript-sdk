@@ -15,7 +15,7 @@ import { SsoPlatformCredentialResponseArray } from '../../generated-definitions/
 
 export class SsoCredentialAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This is the API to Get All Active SSO Platform Credential.
@@ -26,7 +26,7 @@ export class SsoCredentialAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       SsoPlatformCredentialResponseArray,
       'SsoPlatformCredentialResponseArray'
@@ -43,7 +43,7 @@ export class SsoCredentialAdmin$ {
       .replace('{platformId}', platformId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -57,7 +57,7 @@ export class SsoCredentialAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       SsoPlatformCredentialResponse,
       'SsoPlatformCredentialResponse'
@@ -75,7 +75,7 @@ export class SsoCredentialAdmin$ {
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       SsoPlatformCredentialResponse,
       'SsoPlatformCredentialResponse'
@@ -93,7 +93,7 @@ export class SsoCredentialAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       SsoPlatformCredentialResponse,
       'SsoPlatformCredentialResponse'

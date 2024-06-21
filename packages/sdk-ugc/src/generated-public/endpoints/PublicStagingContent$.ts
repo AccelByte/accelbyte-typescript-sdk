@@ -15,7 +15,7 @@ import { UpdateStagingContentRequest } from '../../generated-definitions/UpdateS
 
 export class PublicStagingContent$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List user staging contents
@@ -31,7 +31,7 @@ export class PublicStagingContent$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedListStagingContentResponse,
       'PaginatedListStagingContentResponse'
@@ -49,7 +49,7 @@ export class PublicStagingContent$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -63,7 +63,12 @@ export class PublicStagingContent$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StagingContentResponse, 'StagingContentResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      StagingContentResponse,
+      'StagingContentResponse'
+    )
   }
 
   /**
@@ -81,6 +86,11 @@ export class PublicStagingContent$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StagingContentResponse, 'StagingContentResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      StagingContentResponse,
+      'StagingContentResponse'
+    )
   }
 }

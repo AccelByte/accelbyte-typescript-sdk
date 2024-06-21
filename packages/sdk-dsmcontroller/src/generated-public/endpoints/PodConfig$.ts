@@ -15,7 +15,7 @@ import { PodConfigRecord } from '../../generated-definitions/PodConfigRecord.js'
 
 export class PodConfig$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a all pod configs in a namespace Parameter Offset and Count is Required
@@ -25,7 +25,7 @@ export class PodConfig$ {
     const url = '/dsmcontroller/namespaces/{namespace}/configs/pods'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListPodConfigResponse, 'ListPodConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListPodConfigResponse, 'ListPodConfigResponse')
   }
 
   /**
@@ -36,7 +36,7 @@ export class PodConfig$ {
     const url = '/dsmcontroller/namespaces/{namespace}/configs/pods/{name}'.replace('{namespace}', this.namespace).replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -47,6 +47,6 @@ export class PodConfig$ {
     const url = '/dsmcontroller/namespaces/{namespace}/configs/pods/{name}'.replace('{namespace}', this.namespace).replace('{name}', name)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PodConfigRecord, 'PodConfigRecord')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PodConfigRecord, 'PodConfigRecord')
   }
 }

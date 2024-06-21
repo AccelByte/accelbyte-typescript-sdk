@@ -1,14 +1,14 @@
 {
   "buildBy": "Gradle 6.9.1",
-  "buildDate": "2024-04-30T21:58:05+00:00",
-  "buildID": "1.40.0",
+  "buildDate": "2024-05-15T06:29:59+00:00",
+  "buildID": "1.41.0",
   "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-  "buildOS": "Linux amd64 5.10.214-202.855.amzn2.x86_64",
-  "gitBranchName": "OS-12056-add-visible-only-filter-to-get-localized-policy-endpoint",
-  "gitHash": "ed6b0e6677",
+  "buildOS": "Linux amd64 5.10.215-203.850.amzn2.x86_64",
+  "gitBranchName": "master",
+  "gitHash": "83ddcbd375",
   "gitTag": "1.33.1",
   "name": "justice-legal-service",
   "realm": "dev",
-  "version": "1.40.0",
+  "version": "1.41.0",
   "version-roles-seeding": "0.0.3"
 }

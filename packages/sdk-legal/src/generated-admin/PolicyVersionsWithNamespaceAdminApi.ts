@@ -11,17 +11,17 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreatePolicyVersionRequest } from '../generated-definitions/CreatePolicyVersionRequest.js'
 import { CreatePolicyVersionResponse } from '../generated-definitions/CreatePolicyVersionResponse.js'
-import { PolicyVersionsWithNamespaceAdmin$ } from './endpoints/PolicyVersionsWithNamespaceAdmin$.js'
 import { RetrievePolicyVersionResponseArray } from '../generated-definitions/RetrievePolicyVersionResponseArray.js'
 import { UpdatePolicyVersionRequest } from '../generated-definitions/UpdatePolicyVersionRequest.js'
 import { UpdatePolicyVersionResponse } from '../generated-definitions/UpdatePolicyVersionResponse.js'
+import { PolicyVersionsWithNamespaceAdmin$ } from './endpoints/PolicyVersionsWithNamespaceAdmin$.js'
 
 export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.
@@ -30,7 +30,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyId: string,
     queryParams?: { versionId?: string | null }
   ): Promise<RetrievePolicyVersionResponseArray> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getVersions_ByPolicyId(policyId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +40,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
    * Create a version of a particular country-specific policy.
    */
   async function createVersion_ByPolicyId(policyId: string, data: CreatePolicyVersionRequest): Promise<CreatePolicyVersionResponse> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createVersion_ByPolicyId(policyId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -53,7 +53,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyVersionId: string,
     data: UpdatePolicyVersionRequest
   ): Promise<UpdatePolicyVersionResponse> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchPolicyVersion_ByPolicyVersionId(policyVersionId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -66,7 +66,7 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: Ap
     policyVersionId: string,
     queryParams?: { shouldNotify?: boolean | null }
   ): Promise<unknown> {
-    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PolicyVersionsWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchLatestPolicy_ByPolicyVersionId(policyVersionId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

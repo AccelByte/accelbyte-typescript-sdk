@@ -17,7 +17,7 @@ export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Requires valid user access token
@@ -26,7 +26,7 @@ export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { endDate?: string | null; eventName?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
   ): Promise<EventResponseV2> {
-    const $ = new EventV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EventV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEvent_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +39,7 @@ export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { endDate?: string | null; offset?: number; pageSize?: number; startDate?: string | null; type?: string | null }
   ): Promise<EventResponseV2> {
-    const $ = new EventV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EventV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEdithistory_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

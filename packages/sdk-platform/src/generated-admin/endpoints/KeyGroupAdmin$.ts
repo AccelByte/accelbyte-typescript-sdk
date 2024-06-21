@@ -18,7 +18,7 @@ import { KeyPagingSliceResult } from '../../generated-definitions/KeyPagingSlice
 
 export class KeyGroupAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query key groups, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of key group&lt;/li&gt;&lt;/ul&gt;
@@ -34,7 +34,7 @@ export class KeyGroupAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       KeyGroupPagingSlicedResult,
       'KeyGroupPagingSlicedResult'
@@ -49,7 +49,7 @@ export class KeyGroupAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/keygroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
   }
 
   /**
@@ -61,7 +61,7 @@ export class KeyGroupAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/keygroups/byBoothName'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
   }
 
   /**
@@ -74,7 +74,7 @@ export class KeyGroupAdmin$ {
       .replace('{keyGroupId}', keyGroupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
   }
 
   /**
@@ -87,7 +87,7 @@ export class KeyGroupAdmin$ {
       .replace('{keyGroupId}', keyGroupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
   }
 
   /**
@@ -103,7 +103,7 @@ export class KeyGroupAdmin$ {
       .replace('{keyGroupId}', keyGroupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, KeyPagingSliceResult, 'KeyPagingSliceResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyPagingSliceResult, 'KeyPagingSliceResult')
   }
 
   /**
@@ -117,7 +117,7 @@ export class KeyGroupAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
   }
 
   /**
@@ -130,6 +130,6 @@ export class KeyGroupAdmin$ {
       .replace('{keyGroupId}', keyGroupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, KeyGroupDynamicInfo, 'KeyGroupDynamicInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupDynamicInfo, 'KeyGroupDynamicInfo')
   }
 }

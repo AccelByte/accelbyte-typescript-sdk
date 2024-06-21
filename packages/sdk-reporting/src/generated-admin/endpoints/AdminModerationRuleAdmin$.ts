@@ -16,7 +16,7 @@ import { ModerationRulesList } from '../../generated-definitions/ModerationRules
 
 export class AdminModerationRuleAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This endpoint create moderation rule. Supported Category: - UGC - USER - CHAT - EXTENSION Supported Action (GOING TO DEPRECATE, for replacement please use &#34;actions&#34;): * HideContent Supported Actions: * **hideContent**: Hide the content * **banAccount**: Ban the user account * **deleteChat**: Delete chat
@@ -26,7 +26,7 @@ export class AdminModerationRuleAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/rule'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -42,7 +42,7 @@ export class AdminModerationRuleAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/rules'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ModerationRulesList, 'ModerationRulesList')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ModerationRulesList, 'ModerationRulesList')
   }
 
   /**
@@ -55,7 +55,7 @@ export class AdminModerationRuleAdmin$ {
       .replace('{ruleId}', ruleId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -68,7 +68,12 @@ export class AdminModerationRuleAdmin$ {
       .replace('{ruleId}', ruleId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ModerationRuleResponse, 'ModerationRuleResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ModerationRuleResponse,
+      'ModerationRuleResponse'
+    )
   }
 
   /**
@@ -81,7 +86,12 @@ export class AdminModerationRuleAdmin$ {
       .replace('{ruleId}', ruleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ModerationRuleResponse, 'ModerationRuleResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ModerationRuleResponse,
+      'ModerationRuleResponse'
+    )
   }
 
   /**
@@ -94,6 +104,6 @@ export class AdminModerationRuleAdmin$ {
       .replace('{ruleId}', ruleId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

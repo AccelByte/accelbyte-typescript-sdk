@@ -11,7 +11,8 @@ export const DistinctLinkedPlatformV3 = z.object({
   linkedAt: z.string(),
   platformGroup: z.string(),
   platformName: z.string(),
-  platformUserId: z.string().nullish()
+  platformUserId: z.string().nullish(),
+  logoURL: z.string().nullish()
 })
 
 export interface DistinctLinkedPlatformV3 extends z.TypeOf<typeof DistinctLinkedPlatformV3> {}

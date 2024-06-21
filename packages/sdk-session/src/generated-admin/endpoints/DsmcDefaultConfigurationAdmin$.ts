@@ -12,7 +12,7 @@ import { DefaultDsmcConfig } from '../../generated-definitions/DefaultDsmcConfig
 
 export class DsmcDefaultConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get dsmc default configuration.
@@ -22,6 +22,6 @@ export class DsmcDefaultConfigurationAdmin$ {
     const url = '/session/v1/admin/dsconfigs/default'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DefaultDsmcConfig, 'DefaultDsmcConfig')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DefaultDsmcConfig, 'DefaultDsmcConfig')
   }
 }

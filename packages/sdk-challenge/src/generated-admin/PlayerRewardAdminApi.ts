@@ -9,7 +9,11 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { ClaimUserRewardsReq } from '../generated-definitions/ClaimUserRewardsReq.js'
+import { ClaimUsersRewardsRequest } from '../generated-definitions/ClaimUsersRewardsRequest.js'
+import { ClaimUsersRewardsResponseArray } from '../generated-definitions/ClaimUsersRewardsResponseArray.js'
 import { ListUserRewardsResponse } from '../generated-definitions/ListUserRewardsResponse.js'
+import { UserRewardArray } from '../generated-definitions/UserRewardArray.js'
 import { PlayerRewardAdmin$ } from './endpoints/PlayerRewardAdmin$.js'
 
 export function PlayerRewardAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -17,7 +21,17 @@ export function PlayerRewardAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
+
+  /**
+   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function createUserRewardClaim(data: ClaimUsersRewardsRequest[]): Promise<ClaimUsersRewardsResponseArray> {
+    const $ = new PlayerRewardAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.createUserRewardClaim(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -26,13 +40,25 @@ export function PlayerRewardAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: 'CLAIMED' | 'UNCLAIMED' }
   ): Promise<ListUserRewardsResponse> {
-    const $ = new PlayerRewardAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PlayerRewardAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getRewards_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
+  /**
+   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function createRewardClaim_ByUserId(userId: string, data: ClaimUserRewardsReq): Promise<UserRewardArray> {
+    const $ = new PlayerRewardAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.createRewardClaim_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
-    getRewards_ByUserId
+    createUserRewardClaim,
+    getRewards_ByUserId,
+    createRewardClaim_ByUserId
   }
 }

@@ -19,7 +19,7 @@ import { UpdateBasePolicyResponse } from '../../generated-definitions/UpdateBase
 
 export class BaseLegalPoliciesWithNamespaceAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve all supported policy types.
@@ -30,7 +30,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrievePolicyTypeResponseArray,
       'RetrievePolicyTypeResponseArray'
@@ -46,7 +46,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveBasePolicyResponseArray,
       'RetrieveBasePolicyResponseArray'
@@ -61,7 +61,12 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
     const url = '/agreement/admin/namespaces/{namespace}/base-policies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateBasePolicyResponse, 'CreateBasePolicyResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CreateBasePolicyResponse,
+      'CreateBasePolicyResponse'
+    )
   }
 
   /**
@@ -75,7 +80,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveBasePolicyResponse,
       'RetrieveBasePolicyResponse'
@@ -92,7 +97,12 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
       .replace('{basePolicyId}', basePolicyId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateBasePolicyResponse, 'UpdateBasePolicyResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UpdateBasePolicyResponse,
+      'UpdateBasePolicyResponse'
+    )
   }
 
   /**
@@ -106,6 +116,11 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
       .replace('{countryCode}', countryCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RetrievePolicyResponse, 'RetrievePolicyResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      RetrievePolicyResponse,
+      'RetrievePolicyResponse'
+    )
   }
 }

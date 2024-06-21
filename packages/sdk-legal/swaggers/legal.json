@@ -8,7 +8,7 @@
     },
     "description": "Justice Legal Service",
     "title": "justice-legal-service",
-    "version": "1.40.0"
+    "version": "1.41.0"
   },
   "schemes": ["https"],
   "tags": [
@@ -139,6 +139,9 @@
         ],
         "summary": "Change Preference Consent",
         "tags": ["Agreement"],
+        "x-errorCodes": {
+          "40047": "errors.net.accelbyte.platform.legal.user_agreement_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [UPDATE]"
         }
@@ -176,6 +179,7 @@
         ],
         "summary": "Retrieve Accepted Legal Agreements",
         "tags": ["Agreement"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -240,6 +244,9 @@
         ],
         "summary": "Retrieve Users Accepting Legal Agreements",
         "tags": ["Agreement"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.policy_version_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -278,6 +285,7 @@
         ],
         "summary": "Retrieve All Base Legal Policy",
         "tags": ["Base Legal Policies"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -330,6 +338,12 @@
         ],
         "summary": "Create a Base Legal Policy",
         "tags": ["Base Legal Policies"],
+        "x-errorCodes": {
+          "20002": "validation error",
+          "40026": "errors.net.accelbyte.platform.legal.not_allow_create_studio_policy",
+          "40030": "errors.net.accelbyte.platform.legal.policy_type_not_exist",
+          "40038": "errors.net.accelbyte.platform.legal.invalid_affected_client_id"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [CREATE]"
         }
@@ -370,6 +384,9 @@
         ],
         "summary": "Retrieve a Base Legal Policy",
         "tags": ["Base Legal Policies"],
+        "x-errorCodes": {
+          "40031": "errors.net.accelbyte.platform.legal.base_policy_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -423,6 +440,11 @@
         ],
         "summary": "Update Base Legal Policy",
         "tags": ["Base Legal Policies"],
+        "x-errorCodes": {
+          "40030": "errors.net.accelbyte.platform.legal.policy_type_not_exist",
+          "40032": "errors.net.accelbyte.platform.legal.invalid_base_policy",
+          "40038": "errors.net.accelbyte.platform.legal.invalid_affected_client_id"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -470,6 +492,9 @@
         ],
         "summary": "Retrieve a Base Legal Policy based on a Particular Country",
         "tags": ["Base Legal Policies"],
+        "x-errorCodes": {
+          "40041": "errors.net.accelbyte.platform.legal.policy_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -486,14 +511,6 @@
             "name": "policyVersionId",
             "required": true,
             "type": "string"
-          },
-          {
-            "default": false,
-            "in": "query",
-            "name": "visibleOnly",
-            "required": false,
-            "type": "boolean",
-            "x-omitempty": false
           }
         ],
         "produces": ["application/json"],
@@ -515,6 +532,7 @@
         ],
         "summary": "Retrieve Versions from Country-Specific Policy",
         "tags": ["Localized Policy Versions"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -568,6 +586,10 @@
         ],
         "summary": "Create a Localized Version from Country-Specific Policy",
         "tags": ["Localized Policy Versions"],
+        "x-errorCodes": {
+          "40033": "errors.net.accelbyte.platform.legal.invalid_policy_version",
+          "40044": "errors.net.accelbyte.platform.legal.localized_policy_version_already_exist"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [CREATE]"
         }
@@ -608,6 +630,9 @@
         ],
         "summary": "Retrieve a Localized Version from Country-Specific Policy",
         "tags": ["Localized Policy Versions"],
+        "x-errorCodes": {
+          "2912": "errors.net.accelbyte.platform.legal.policy_version_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -655,6 +680,9 @@
         ],
         "summary": "Update a Localized Version from Country-Specific Policy",
         "tags": ["Localized Policy Versions"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.invalid_policy_version"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -704,6 +732,11 @@
         ],
         "summary": "Request Presigned URL for Upload Document",
         "tags": ["Localized Policy Versions"],
+        "x-errorCodes": {
+          "40034": "errors.net.accelbyte.platform.legal.invalid_file_type",
+          "40037": "errors.net.accelbyte.platform.legal.invalid_localized_policy_version",
+          "40042": "errors.net.accelbyte.platform.legal.policy_version_freezed"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [CREATE]"
         }
@@ -741,6 +774,9 @@
         ],
         "summary": "Set Default Localized Policy",
         "tags": ["Localized Policy Versions"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.invalid_localize_policy_version"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -787,6 +823,7 @@
         ],
         "summary": "Retrieve Accepted Legal Agreements For Multi Users",
         "tags": ["Agreement With Namespace"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -840,6 +877,7 @@
         ],
         "summary": "Retrieve Accepted Legal Agreements",
         "tags": ["Agreement With Namespace"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -920,6 +958,9 @@
         ],
         "summary": "Retrieve Users Accepting Legal Agreements",
         "tags": ["Agreement With Namespace"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.policy_version_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -967,6 +1008,9 @@
         ],
         "summary": "Download Exported Users Accepted Agreements in CSV",
         "tags": ["Agreement With Namespace"],
+        "x-errorCodes": {
+          "40047": "Exported agreements for exportId [{exportId}] not found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -1040,6 +1084,11 @@
         ],
         "summary": "Initiate Export Users Accepted Agreements to CSV",
         "tags": ["Agreement With Namespace"],
+        "x-errorCodes": {
+          "40027": "Too many export running currently",
+          "40045": "Policy version with id: [{policyVersionId}] not found on namespace [{namespace}]",
+          "40071": "Previous export still running for namespace [{namespace}] with exportId [{exportId}]"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -1085,6 +1134,7 @@
         ],
         "summary": "Retrieve All Base Legal Policy in the namespace",
         "tags": ["Base Legal Policies With Namespace"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -1144,6 +1194,12 @@
         ],
         "summary": "Create a Base Legal Policy",
         "tags": ["Base Legal Policies With Namespace"],
+        "x-errorCodes": {
+          "20002": "validation error",
+          "40026": "errors.net.accelbyte.platform.legal.not_allow_create_studio_policy",
+          "40030": "errors.net.accelbyte.platform.legal.invalid_policy_type",
+          "40032": "errors.net.accelbyte.platform.legal.base_policy_namespace_not_match"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [CREATE]"
         }
@@ -1191,6 +1247,9 @@
         ],
         "summary": "Retrieve a Base Legal Policy",
         "tags": ["Base Legal Policies With Namespace"],
+        "x-errorCodes": {
+          "40041": "errors.net.accelbyte.platform.legal.policy_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -1245,6 +1304,9 @@
         ],
         "summary": "Update Base Legal Policy",
         "tags": ["Base Legal Policies With Namespace"],
+        "x-errorCodes": {
+          "40032": "errors.net.accelbyte.platform.legal.invalid_base_policy"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [UPDATE]"
         }
@@ -1299,6 +1361,9 @@
         ],
         "summary": "Retrieve a Base Legal Policy based on a Particular Country",
         "tags": ["Base Legal Policies With Namespace"],
+        "x-errorCodes": {
+          "40031": "errors.net.accelbyte.platform.legal.base_policy_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -1322,14 +1387,6 @@
             "name": "policyVersionId",
             "required": true,
             "type": "string"
-          },
-          {
-            "default": false,
-            "in": "query",
-            "name": "visibleOnly",
-            "required": false,
-            "type": "boolean",
-            "x-omitempty": false
           }
         ],
         "produces": ["application/json"],
@@ -1351,6 +1408,7 @@
         ],
         "summary": "Retrieve Versions from Country-Specific Policy",
         "tags": ["Localized Policy Versions With Namespace"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -1411,6 +1469,10 @@
         ],
         "summary": "Create a Localized Version from Country-Specific Policy",
         "tags": ["Localized Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "40033": "errors.net.accelbyte.platform.legal.invalid_policy_version",
+          "40044": "errors.net.accelbyte.platform.legal.localized_policy_version_already_exist"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [CREATE]"
         }
@@ -1458,6 +1520,9 @@
         ],
         "summary": "Retrieve a Localized Version from Country-Specific Policy",
         "tags": ["Localized Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "2912": "errors.net.accelbyte.platform.legal.policy_version_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -1512,6 +1577,9 @@
         ],
         "summary": "Update a Localized Version from Country-Specific Policy",
         "tags": ["Localized Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.invalid_policy_version"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [UPDATE]"
         }
@@ -1568,6 +1636,11 @@
         ],
         "summary": "Request Presigned URL for Upload Document",
         "tags": ["Localized Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "40034": "errors.net.accelbyte.platform.legal.invalid_file_type",
+          "40037": "errors.net.accelbyte.platform.legal.invalid_localized_policy_version",
+          "40042": "errors.net.accelbyte.platform.legal.policy_version_freezed"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [CREATE]"
         }
@@ -1606,6 +1679,7 @@
         ],
         "summary": "Set Default Localized Policy",
         "tags": ["Localized Policy Versions With Namespace"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [UPDATE]"
         }
@@ -1668,6 +1742,11 @@
         ],
         "summary": "Update a Version of Policy",
         "tags": ["Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.invalid_policy_version",
+          "40042": "errors.net.accelbyte.platform.legal.policy_version_freezed",
+          "40043": "errors.net.accelbyte.platform.legal.localized_policy_version_already_exist"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -1727,6 +1806,13 @@
         ],
         "summary": "Manually Publish a Version from Country-Specific Policy",
         "tags": ["Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "40030": "errors.net.accelbyte.platform.legal.localized_policy_version_not_provided",
+          "40035": "errors.net.accelbyte.platform.legal.invalid_policy_version",
+          "40039": "errors.net.accelbyte.platform.legal.localized_policy_version_already_latest",
+          "40043": "errors.net.accelbyte.platform.legal.localized_policy_version_already_publish",
+          "40046": "errors.net.accelbyte.platform.legal.default_selection_not_provided"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -1780,6 +1866,9 @@
         ],
         "summary": "Update Country-Specific Policy",
         "tags": ["Policies With Namespace"],
+        "x-errorCodes": {
+          "40033": "errors.net.accelbyte.platform.legal.invalid_policy_id"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [UPDATE]"
         }
@@ -1824,6 +1913,9 @@
         ],
         "summary": "Set Default Policy",
         "tags": ["Policies With Namespace"],
+        "x-errorCodes": {
+          "40033": "errors.net.accelbyte.platform.legal.invalid_policy_id"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [UPDATE]"
         }
@@ -1881,6 +1973,9 @@
         ],
         "summary": "Retrieve a Version from Country-Specific Policy",
         "tags": ["Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "40036": "errors.net.accelbyte.platform.legal.policy_version_id_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -1935,6 +2030,9 @@
         ],
         "summary": "Create a Version from Country-Specific Policy",
         "tags": ["Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "40033": "errors.net.accelbyte.platform.legal.invalid_policy"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [CREATE]"
         }
@@ -1988,6 +2086,7 @@
         ],
         "summary": "Retrieve All Policy Type",
         "tags": ["Base Legal Policies With Namespace"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -2062,6 +2161,7 @@
         ],
         "summary": "Admin bulk accept Policy Versions",
         "tags": ["Admin User Agreement"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEGAL [CREATE]"
         }
@@ -2130,6 +2230,9 @@
         ],
         "summary": "Check User Legal Eligibility",
         "tags": ["Admin User Eligibilities"],
+        "x-errorCodes": {
+          "40045": "errors.net.accelbyte.platform.legal.user_id_needed"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:LEGAL [READ]"
         }
@@ -2167,6 +2270,7 @@
         ],
         "summary": "Retrieve Policies by Country",
         "tags": ["Policies"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -2222,6 +2326,11 @@
         ],
         "summary": "Update a Version of Policy",
         "tags": ["Policy Versions"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.invalid_policy_version",
+          "40042": "errors.net.accelbyte.platform.legal.policy_version_freezed",
+          "40043": "errors.net.accelbyte.platform.legal.localized_policy_version_already_exist"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -2274,6 +2383,13 @@
         ],
         "summary": "Manually Publish a Version from Country-Specific Policy",
         "tags": ["Policy Versions"],
+        "x-errorCodes": {
+          "40030": "errors.net.accelbyte.platform.legal.localized_policy_version_not_provided",
+          "40035": "errors.net.accelbyte.platform.legal.invalid_policy_version",
+          "40039": "errors.net.accelbyte.platform.legal.localized_policy_version_already_latest",
+          "40043": "errors.net.accelbyte.platform.legal.localized_policy_version_already_publish",
+          "40046": "errors.net.accelbyte.platform.legal.default_selection_not_provided"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -2320,6 +2436,9 @@
         ],
         "summary": "Update Country-Specific Policy",
         "tags": ["Policies"],
+        "x-errorCodes": {
+          "40033": "errors.net.accelbyte.platform.legal.invalid_policy_id"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -2357,6 +2476,9 @@
         ],
         "summary": "Set Default Policy",
         "tags": ["Policies"],
+        "x-errorCodes": {
+          "40033": "errors.net.accelbyte.platform.legal.invalid_policy_id"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -2407,6 +2529,9 @@
         ],
         "summary": "Retrieve a Version from Country-Specific Policy",
         "tags": ["Policy Versions"],
+        "x-errorCodes": {
+          "40036": "errors.net.accelbyte.platform.legal.policy_version_id_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -2454,6 +2579,9 @@
         ],
         "summary": "Create a Version from Country-Specific Policy",
         "tags": ["Policy Versions"],
+        "x-errorCodes": {
+          "40033": "errors.net.accelbyte.platform.legal.invalid_policy"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [CREATE]"
         }
@@ -2500,6 +2628,7 @@
         ],
         "summary": "Retrieve All Policy Type",
         "tags": ["Base Legal Policies"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -2532,6 +2661,7 @@
         ],
         "summary": "Invalidate user info cache",
         "tags": ["UserInfo"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [DELETE]"
         }
@@ -2566,6 +2696,7 @@
         ],
         "summary": "Get user info cache status",
         "tags": ["UserInfo"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [READ]"
         }
@@ -2595,6 +2726,7 @@
         ],
         "summary": "Sync user info with iam service ",
         "tags": ["UserInfo"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [UPDATE]"
         }
@@ -2633,6 +2765,9 @@
         ],
         "summary": "Anonymize user's agreement record",
         "tags": ["Anonymization"],
+        "x-errorCodes": {
+          "40045": "errors.net.accelbyte.platform.legal.user_agreement_not_found"
+        },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:*:LEGAL [DELETE]"
         }
@@ -2675,6 +2810,10 @@
         ],
         "summary": "Accept/Revoke Marketing Preference Consent",
         "tags": ["Agreement"],
+        "x-errorCodes": {
+          "40017": "Policy with id : [{policyId}] is not marketing preference",
+          "40045": "errors.net.accelbyte.platform.legal.user_id_needed"
+        },
         "x-security": {
           "userPermissions": "-"
         }
@@ -2712,6 +2851,10 @@
         ],
         "summary": "Accept a Policy Version",
         "tags": ["Agreement"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.invalid_localize_policy_version_id",
+          "40045": "errors.net.accelbyte.platform.legal.user_id_needed"
+        },
         "x-security": {
           "userPermissions": "-"
         }
@@ -2747,6 +2890,9 @@
         ],
         "summary": "Retrieve the accepted Legal Agreements",
         "tags": ["Agreement"],
+        "x-errorCodes": {
+          "40045": "errors.net.accelbyte.platform.legal.user_id_needed"
+        },
         "x-security": {
           "userPermissions": "-"
         }
@@ -2790,6 +2936,10 @@
         ],
         "summary": "Bulk Accept Policy Versions",
         "tags": ["Agreement"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.invalid_localize_policy_version_id",
+          "40045": "errors.net.accelbyte.platform.legal.user_id_needed"
+        },
         "x-security": {
           "userPermissions": "-"
         }
@@ -2858,6 +3008,7 @@
         ],
         "summary": "Bulk Accept Policy Versions (Indirect)",
         "tags": ["Agreement"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "NAMESPACE:{namespace}:LEGAL [CREATE]"
         }
@@ -2911,6 +3062,9 @@
         ],
         "summary": "Bulk Accept Policy Versions (Indirect)",
         "tags": ["Agreement"],
+        "x-errorCodes": {
+          "40035": "errors.net.accelbyte.platform.legal.policy_version_not_found"
+        },
         "x-security": {
           "userPermissions": "-"
         }
@@ -2960,6 +3114,10 @@
         ],
         "summary": "Check User Legal Eligibility",
         "tags": ["Eligibilities"],
+        "x-errorCodes": {
+          "40041": "errors.net.accelbyte.platform.legal.policy_not_found",
+          "40045": "errors.net.accelbyte.platform.legal.user_id_needed"
+        },
         "x-security": {
           "userPermissions": "-"
         }
@@ -3021,6 +3179,9 @@
         ],
         "summary": "Check User Legal Eligibility",
         "tags": ["Eligibilities"],
+        "x-errorCodes": {
+          "40045": "errors.net.accelbyte.platform.legal.user_id_needed"
+        },
         "x-security": {
           "userPermissions": "-"
         }
@@ -3055,7 +3216,10 @@
           }
         },
         "summary": "Retrieve a Localized Version",
-        "tags": ["Localized Policy Versions"]
+        "tags": ["Localized Policy Versions"],
+        "x-errorCodes": {
+          "40038": "errors.net.accelbyte.platform.legal.localized_policy_version_not_found"
+        }
       }
     },
     "/agreement/public/namespaces/{namespace}/localized-policy-versions/{localizedPolicyVersionId}": {
@@ -3094,12 +3258,15 @@
           }
         },
         "summary": "Retrieve a Localized Version",
-        "tags": ["Localized Policy Versions With Namespace"]
+        "tags": ["Localized Policy Versions With Namespace"],
+        "x-errorCodes": {
+          "40038": "errors.net.accelbyte.platform.legal.localized_policy_version_not_found"
+        }
       }
     },
     "/agreement/public/policies/countries/list": {
       "get": {
-        "description": "Retrieve List of Countries that have Active Legal Policies.",
+        "description": "Retrieve List of Countries that have Active and Visible Legal Policies.",
         "operationId": "retrieveCountryListWithPolicies",
         "parameters": [],
         "produces": ["application/json"],
@@ -3115,7 +3282,8 @@
           }
         },
         "summary": "Retrieve List of Countries that have Active Legal Policies",
-        "tags": ["Policies"]
+        "tags": ["Policies"],
+        "x-errorCodes": {}
       }
     },
     "/agreement/public/policies/countries/{countryCode}": {
@@ -3175,7 +3343,8 @@
           }
         },
         "summary": "Retrieve Latest Policies by Country",
-        "tags": ["Policies"]
+        "tags": ["Policies"],
+        "x-errorCodes": {}
       }
     },
     "/agreement/public/policies/namespaces/{namespace}": {
@@ -3255,6 +3424,9 @@
         ],
         "summary": "Retrieve Latest Policies by Namespace and Country",
         "tags": ["Policies"],
+        "x-errorCodes": {
+          "40040": "errors.net.accelbyte.platform.legal.user_has_no_country"
+        },
         "x-security": {
           "userPermissions": "-"
         }
@@ -3332,7 +3504,8 @@
           }
         },
         "summary": "Retrieve Latest Policies by Namespace and Country",
-        "tags": ["Policies"]
+        "tags": ["Policies"],
+        "x-errorCodes": {}
       }
     },
     "/agreement/public/readiness": {
@@ -3356,6 +3529,7 @@
         ],
         "summary": "Check Legal Data Readiness",
         "tags": ["Utility"],
+        "x-errorCodes": {},
         "x-security": {
           "userPermissions": "NAMESPACE:{namespace}:LEGAL [READ]"
         }
@@ -4096,6 +4270,10 @@
         },
         "id": {
           "type": "string"
+        },
+        "isHidden": {
+          "type": "boolean",
+          "x-omitempty": false
         },
         "localeCode": {
           "type": "string"
@@ -4895,16 +5073,16 @@
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2024-04-30T21:58:05+00:00",
-    "buildID": "1.40.0",
+    "buildDate": "2024-05-15T06:29:59+00:00",
+    "buildID": "1.41.0",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-    "buildOS": "Linux amd64 5.10.214-202.855.amzn2.x86_64",
-    "gitBranchName": "OS-12056-add-visible-only-filter-to-get-localized-policy-endpoint",
-    "gitHash": "ed6b0e6677",
+    "buildOS": "Linux amd64 5.10.215-203.850.amzn2.x86_64",
+    "gitBranchName": "master",
+    "gitHash": "83ddcbd375",
     "gitTag": "1.33.1",
     "name": "justice-legal-service",
     "realm": "dev",
-    "version": "1.40.0",
+    "version": "1.41.0",
     "version-roles-seeding": "0.0.3"
   }
 }

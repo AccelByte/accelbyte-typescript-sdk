@@ -13,7 +13,7 @@ import { Configs } from '../../generated-definitions/Configs.js'
 
 export class Templates$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   getConfigs_ByTemplate(template: string): Promise<IResponse<Configs>> {
     const params = {} as SDKRequestConfig
@@ -22,7 +22,7 @@ export class Templates$ {
       .replace('{template}', template)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Configs, 'Configs')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configs, 'Configs')
   }
 
   getConfig_ByTemplate_ByConfig(template: string, config: string): Promise<IResponse<Config>> {
@@ -33,6 +33,6 @@ export class Templates$ {
       .replace('{config}', config)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Config, 'Config')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Config, 'Config')
   }
 }

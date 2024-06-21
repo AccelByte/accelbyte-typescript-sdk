@@ -17,13 +17,13 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Required valid user authentication This endpoint is used to Get My Join Request To The Groups Get My Join Request To The Groups for the user calling this endpoint. It will check any join request group for this user Action Code: 73502
    */
   async function getUsersMeJoinRequest(queryParams?: { limit?: number; offset?: number }): Promise<GetMemberRequestsListResponseV1> {
-    const $ = new MemberRequest$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MemberRequest$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getUsersMeJoinRequest(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +33,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required valid user authentication This endpoint is used to Get Group Invitation Request List Get Group Invitation Request List for the user calling this endpoint. It will check any group invitation for this user Action Code: 73502
    */
   async function getUsersMeInviteRequest(queryParams?: { limit?: number; offset?: number }): Promise<GetMemberRequestsListResponseV1> {
-    const $ = new MemberRequest$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MemberRequest$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getUsersMeInviteRequest(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -46,7 +46,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetMemberRequestsListResponseV1> {
-    const $ = new MemberRequest$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MemberRequest$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getJoinRequest_ByGroupId(groupId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +59,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetMemberRequestsListResponseV1> {
-    const $ = new MemberRequest$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MemberRequest$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getJoinRequest_ByGroupId_ByNS(groupId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -72,7 +72,7 @@ export function MemberRequestApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<GetMemberRequestsListResponseV1> {
-    const $ = new MemberRequest$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MemberRequest$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInviteRequest_ByGroupId(groupId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

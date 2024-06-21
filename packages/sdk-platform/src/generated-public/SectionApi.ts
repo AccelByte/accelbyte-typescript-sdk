@@ -9,15 +9,15 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { Section$ } from './endpoints/Section$.js'
 import { SectionInfoArray } from '../generated-definitions/SectionInfoArray.js'
+import { Section$ } from './endpoints/Section$.js'
 
 export function SectionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * This API is used to list active section contents.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store sections)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store sections)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: active section contents&lt;/li&gt;&lt;/ul&gt;
@@ -32,7 +32,7 @@ export function SectionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       viewId?: string | null
     }
   ): Promise<SectionInfoArray> {
-    const $ = new Section$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Section$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getSections_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

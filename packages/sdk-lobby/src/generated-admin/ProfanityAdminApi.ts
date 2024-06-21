@@ -20,22 +20,22 @@ import { AdminUpdateProfanityList } from '../generated-definitions/AdminUpdatePr
 import { AdminVerifyMessageProfanityRequest } from '../generated-definitions/AdminVerifyMessageProfanityRequest.js'
 import { AdminVerifyMessageProfanityResponse } from '../generated-definitions/AdminVerifyMessageProfanityResponse.js'
 import { DebugProfanityFilterRequest } from '../generated-definitions/DebugProfanityFilterRequest.js'
-import { ProfanityAdmin$ } from './endpoints/ProfanityAdmin$.js'
 import { ProfanityFilterArray } from '../generated-definitions/ProfanityFilterArray.js'
 import { ProfanityRule } from '../generated-definitions/ProfanityRule.js'
+import { ProfanityAdmin$ } from './endpoints/ProfanityAdmin$.js'
 
 export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get current profanity rule
    */
   async function getProfanityRule(): Promise<ProfanityRule> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getProfanityRule()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -45,7 +45,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Set current profanity rule
    */
   async function createProfanityRule(data: AdminSetProfanityRuleForNamespaceRequest): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createProfanityRule(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +55,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get lists
    */
   async function getProfanityLists(): Promise<AdminGetProfanityListsListResponseArray> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getProfanityLists()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -65,7 +65,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create a new list
    */
   async function createProfanityList(data: AdminCreateProfanityListRequest): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createProfanityList(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -75,7 +75,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Verify a message directly from the UI or other services
    */
   async function createProfanityVerify(data: AdminVerifyMessageProfanityRequest): Promise<AdminVerifyMessageProfanityResponse> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createProfanityVerify(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -85,7 +85,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete a list include all filters inside of it
    */
   async function deleteProfanityList_ByList(list: string): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteProfanityList_ByList(list)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -95,7 +95,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update the list
    */
   async function createProfanityList_ByList(list: string, data: AdminUpdateProfanityList): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createProfanityList_ByList(list, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -105,7 +105,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get the list of filters that would modify the phrase
    */
   async function createProfanityFilterDebug(data: DebugProfanityFilterRequest): Promise<ProfanityFilterArray> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createProfanityFilterDebug(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -115,7 +115,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get the list of filters inside the list.
    */
   async function getFiltersProfanity_ByList(list: string): Promise<AdminGetProfanityListFiltersV1Response> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getFiltersProfanity_ByList(list)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -125,7 +125,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Add a single filter into the list
    */
   async function createFilterProfanity_ByList(list: string, data: AdminAddProfanityFilterIntoListRequest): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createFilterProfanity_ByList(list, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -135,7 +135,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Add multiple filters into the list
    */
   async function createFilterBulkProfanity_ByList(list: string, data: AdminAddProfanityFiltersRequest): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createFilterBulkProfanity_ByList(list, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -145,7 +145,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete the filter from the list
    */
   async function createFilterDeleteProfanity_ByList(list: string, data: AdminDeleteProfanityFilterRequest): Promise<ProfanityFilterArray> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createFilterDeleteProfanity_ByList(list, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -155,7 +155,7 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Import a file with filters
    */
   async function createFilterBulkFileProfanity_ByList(list: string, data: number[]): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createFilterBulkFileProfanity_ByList(list, data)
     if (resp.error) throw resp.error
     return resp.response.data

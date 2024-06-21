@@ -3,7 +3,7 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { AxiosError, HttpStatusCode } from 'axios'
+import { AxiosError } from 'axios'
 import { injectResponseInterceptors } from '../utils/Network'
 
 const ERROR_ELIGIBILITY_CODE = 13130
@@ -29,7 +29,7 @@ export const injectErrorInterceptors = ({ baseUrl, onError, onTooManyRequest, on
           }
         }
 
-        if (response?.status === HttpStatusCode.TooManyRequests && onTooManyRequest) {
+        if (response?.status === 429 /* TooManyRequests */ && onTooManyRequest) {
           onTooManyRequest(error)
         }
       }

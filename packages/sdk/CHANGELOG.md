@@ -1,16 +1,26 @@
 # @accelbyte/sdk
 
-## 3.0.0
+## 3.0.7
 
 ### Major Changes
 
-- Removed "cache" argument
+- dcda8313c feat(sdk): bump sdk to support useSchemaValidation
+- 8b2ab2a50 chore(validator): add explicit error messages to thrown errors
+- b8a9a9fe8 fix(validator): allow @accelbyte/validator to be able to validate URLs with hash
+- 4e4b00795 Cleanup dead files and unused isValidationEnabled argument
+- 466cfbf1a feat(WebSDK): Simplifies sdk Validate fetch call
+- ad0209304 fix(WebSDK) - no-jira fix build by removing dead "cache" args
+- b3e840f3e Fix Build due to "cache:false"
+- 7161c5eea feat(WebSDK): Remove "cache" argument from WebSDK
 
 ## 2.4.2
 
 ### Patch Changes
 
 - CW-3992 fix validate responseType to exclude 204 response status
+- 2668bd876 fix(sdk): web sdk add 204 empty payload support in web sdk validator
+- 519c32ab4 feat(sdk,login): add alert when request return 429 status code and fix reload button
+- e73dc0969 Merged in skip-zod-validation-web-sdk
 
 ## 2.3.1
 

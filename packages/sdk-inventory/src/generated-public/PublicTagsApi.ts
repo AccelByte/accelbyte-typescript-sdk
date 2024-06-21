@@ -17,7 +17,7 @@ export function PublicTagsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    *  This endpoint will list all tags in a namespace. The response body will be in the form of standard pagination.
@@ -27,7 +27,7 @@ export function PublicTagsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     offset?: number
     sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'name' | 'name:asc' | 'name:desc'
   }): Promise<ListTagsResp> {
-    const $ = new PublicTags$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicTags$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -17,13 +17,13 @@ export function PublicTagApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get available tags paginated
    */
   async function getTags(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetTagResponse> {
-    const $ = new PublicTag$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicTag$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

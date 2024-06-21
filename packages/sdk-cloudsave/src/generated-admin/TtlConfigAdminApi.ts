@@ -9,6 +9,7 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+
 import { TtlConfigAdmin$ } from './endpoints/TtlConfigAdmin$.js'
 
 export function TtlConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -16,13 +17,13 @@ export function TtlConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * ## Description This endpoints will delete the ttl config of the game record
    */
   async function deleteTtl_ByKey(key: string): Promise<unknown> {
-    const $ = new TtlConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TtlConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteTtl_ByKey(key)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -32,7 +33,7 @@ export function TtlConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## Description This endpoints will delete the ttl config of the game binary record
    */
   async function deleteTtl_ByKey_ByNS(key: string): Promise<unknown> {
-    const $ = new TtlConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TtlConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteTtl_ByKey_ByNS(key)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -12,7 +12,7 @@ import { ListItemTypesResp } from '../../generated-definitions/ListItemTypesResp
 
 export class PublicItemTypes$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  This endpoint will list all item types in a namespace. The response body will be in the form of standard pagination.
@@ -26,6 +26,6 @@ export class PublicItemTypes$ {
     const url = '/inventory/v1/public/namespaces/{namespace}/itemtypes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListItemTypesResp, 'ListItemTypesResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListItemTypesResp, 'ListItemTypesResp')
   }
 }

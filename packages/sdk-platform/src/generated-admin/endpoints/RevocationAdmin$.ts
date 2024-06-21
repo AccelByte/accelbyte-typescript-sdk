@@ -17,7 +17,7 @@ import { RevocationResult } from '../../generated-definitions/RevocationResult.j
 
 export class RevocationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Delete revocation config.
@@ -27,7 +27,7 @@ export class RevocationAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/revocation/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -38,7 +38,7 @@ export class RevocationAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/revocation/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RevocationConfigInfo, 'RevocationConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RevocationConfigInfo, 'RevocationConfigInfo')
   }
 
   /**
@@ -49,7 +49,7 @@ export class RevocationAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/revocation/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RevocationConfigInfo, 'RevocationConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RevocationConfigInfo, 'RevocationConfigInfo')
   }
 
   /**
@@ -70,7 +70,7 @@ export class RevocationAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RevocationHistoryPagingSlicedResult,
       'RevocationHistoryPagingSlicedResult'
@@ -87,6 +87,6 @@ export class RevocationAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RevocationResult, 'RevocationResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RevocationResult, 'RevocationResult')
   }
 }

@@ -16,7 +16,7 @@ import { UpdateGoalRequest } from '../../generated-definitions/UpdateGoalRequest
 
 export class GoalConfigurationAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -31,11 +31,11 @@ export class GoalConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetGoalsResponse, 'GetGoalsResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetGoalsResponse, 'GetGoalsResponse')
   }
 
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]&lt;/li&gt;&lt;p&gt;Request body:&lt;ul&gt;&lt;li&gt;code: unique within a challenge&lt;/li&gt;&lt;li&gt;name: name of the goal &lt;/li&gt;&lt;li&gt;description: text describing the goal (optional)&lt;/li&gt;&lt;li&gt;schedule: a time range that indicated the availability of a goal within a timeframe. used in fixed assignment rule&lt;/li&gt;&lt;li&gt;requirementGroups: list of conditions that conform with the goal progressions. &lt;/li&gt;&lt;li&gt;rewards: list of rewards that will be claimable once a goal is complete &lt;/li&gt;&lt;li&gt;tag: goal&#39;s labels&lt;/li&gt;&lt;li&gt;isActive: when goal is in a schedule, isActive determine whether goal is active to progress or not&lt;/li&gt;&lt;/ul&gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.
+   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]&lt;/li&gt;&lt;p&gt;Request body:&lt;ul&gt;&lt;li&gt;code: unique within a challenge&lt;/li&gt;&lt;li&gt;name: name of the goal &lt;/li&gt;&lt;li&gt;description: text describing the goal (optional)&lt;/li&gt;&lt;li&gt;schedule: a time range that indicated the availability of a goal within a timeframe. used in fixed assignment rule&lt;/li&gt;&lt;li&gt;requirementGroups: list of conditions that conform with the goal progressions.&lt;ul&gt;&lt;li&gt;operator: logical operator used to validate the completion of a goal. a goal is considered complete once complete predicates operated with operator result in true.&lt;/li&gt;&lt;li&gt;predicates: list of progression parameters to be tracked&lt;ul&gt;&lt;li&gt;parameterType: the type of parameter for challenge to be progressed with. the available options are:&lt;ul&gt;&lt;li&gt; STATISTIC: progress by user statistic item value &lt;/li&gt;&lt;li&gt; STATISTIC_CYCLE: progress user statistic cycle item value. statCycleId must be included. &lt;/li&gt;&lt;li&gt; ACHIVEMENT: progress by user achievement &lt;/li&gt;&lt;li&gt; USERACCOUNT: progress by user account event &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;parameterName: the name of the parameter for challenge to be progressed with.&lt;ul&gt;&lt;li&gt; STATISTIC: refers to stat code&lt;/li&gt;&lt;li&gt; STATISTIC_CYCLE: refers to stat code with statCycleId must be included &lt;/li&gt;&lt;li&gt; ACHIVEMENT: refers to achievement code &lt;/li&gt;&lt;li&gt; USERACCOUNT: one of the user account event. current possible values are (userAccountCreated, gameUserAccountCreated, userAccountVerified, userAccountLinked, userAccountUpgraded,thirdPartyAccountCreated) &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;matcher: the comparison operator used to compare the curent value of a parameter and targetValue to validate the completion of a predicate&lt;/li&gt;&lt;li&gt;targetValue: the target number to be reached by the parameter &lt;/li&gt;&lt;li&gt;statCycleId: used to track statistic type parameter value in a cycle (optional) &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;rewards: list of rewards that will be claimable once a goal is complete &lt;/li&gt;&lt;li&gt;tag: goal&#39;s labels&lt;/li&gt;&lt;li&gt;isActive: when goal is in a schedule, isActive determine whether goal is active to progress or not&lt;/li&gt;&lt;/ul&gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.
    */
   createGoal_ByChallengeCode(challengeCode: string, data: CreateGoalRequest): Promise<IResponse<GoalResponse>> {
     const params = {} as SDKRequestConfig
@@ -44,7 +44,7 @@ export class GoalConfigurationAdmin$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GoalResponse, 'GoalResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GoalResponse, 'GoalResponse')
   }
 
   /**
@@ -58,7 +58,7 @@ export class GoalConfigurationAdmin$ {
       .replace('{code}', code)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -72,7 +72,7 @@ export class GoalConfigurationAdmin$ {
       .replace('{code}', code)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GoalResponse, 'GoalResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GoalResponse, 'GoalResponse')
   }
 
   /**
@@ -86,6 +86,6 @@ export class GoalConfigurationAdmin$ {
       .replace('{code}', code)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GoalResponse, 'GoalResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GoalResponse, 'GoalResponse')
   }
 }

@@ -40,7 +40,7 @@ import { PurchaseConditionUpdate } from '../../generated-definitions/PurchaseCon
 
 export class ItemAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;This API is used to get all item type configs.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of items&lt;/li&gt;&lt;/ul&gt;
@@ -50,7 +50,12 @@ export class ItemAdmin$ {
     const url = '/platform/admin/items/configs'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemTypeConfigInfoArray, 'ItemTypeConfigInfoArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ItemTypeConfigInfoArray,
+      'ItemTypeConfigInfoArray'
+    )
   }
 
   /**
@@ -61,7 +66,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/items/configs'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -72,7 +77,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/items/configs/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -83,7 +88,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/items/configs/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
   }
 
   /**
@@ -94,7 +99,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/items/configs/{id}'.replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
   }
 
   /**
@@ -119,7 +124,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/items/configs/search'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemTypeConfigInfo, 'ItemTypeConfigInfo')
   }
 
   /**
@@ -130,7 +135,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -141,7 +146,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -156,7 +161,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/byIds'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfoArray, 'FullItemInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfoArray, 'FullItemInfoArray')
   }
 
   /**
@@ -171,7 +176,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/bySku'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -203,7 +208,7 @@ export class ItemAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       FullItemPagingSlicedResult,
       'FullItemPagingSlicedResult'
@@ -222,7 +227,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -233,7 +238,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}'.replace('{namespace}', this.namespace).replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -247,7 +252,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}'.replace('{namespace}', this.namespace).replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -258,7 +263,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}'.replace('{namespace}', this.namespace).replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -297,7 +302,7 @@ export class ItemAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       FullItemPagingSlicedResult,
       'FullItemPagingSlicedResult'
@@ -312,7 +317,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/regiondata'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -325,7 +330,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullAppInfo, 'FullAppInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullAppInfo, 'FullAppInfo')
   }
 
   /**
@@ -338,7 +343,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullAppInfo, 'FullAppInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullAppInfo, 'FullAppInfo')
   }
 
   /**
@@ -356,7 +361,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/bySku/locale'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
   }
 
   /**
@@ -371,7 +376,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/itemId/bySku'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemId, 'ItemId')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemId, 'ItemId')
   }
 
   /**
@@ -388,7 +393,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/locale/byIds'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemInfoArray, 'ItemInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemInfoArray, 'ItemInfoArray')
   }
 
   /**
@@ -399,7 +404,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/itemId/bySkus'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemIdArray, 'ItemIdArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemIdArray, 'ItemIdArray')
   }
 
   /**
@@ -417,7 +422,7 @@ export class ItemAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       FullItemPagingSlicedResult,
       'FullItemPagingSlicedResult'
@@ -436,18 +441,7 @@ export class ItemAdmin$ {
     includeSubCategoryItem?: boolean | null
     itemName?: string | null
     itemStatus?: 'ACTIVE' | 'INACTIVE'
-    itemType?:
-      | 'APP'
-      | 'BUNDLE'
-      | 'CODE'
-      | 'COINS'
-      | 'EXTENSION'
-      | 'INGAMEITEM'
-      | 'LOOTBOX'
-      | 'MEDIA'
-      | 'OPTIONBOX'
-      | 'SEASON'
-      | 'SUBSCRIPTION'
+    itemType?: string[]
     limit?: number
     offset?: number
     region?: string | null
@@ -462,7 +456,7 @@ export class ItemAdmin$ {
     const url = '/platform/v2/admin/namespaces/{namespace}/items/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemPagingResult, 'FullItemPagingResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemPagingResult, 'FullItemPagingResult')
   }
 
   /**
@@ -479,7 +473,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/estimatedPrice'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EstimatedPriceInfo, 'EstimatedPriceInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EstimatedPriceInfo, 'EstimatedPriceInfo')
   }
 
   /**
@@ -492,7 +486,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -514,7 +508,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
   }
 
   /**
@@ -527,7 +521,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -538,7 +532,12 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/predicate/types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AvailablePredicateArray, 'AvailablePredicateArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      AvailablePredicateArray,
+      'AvailablePredicateArray'
+    )
   }
 
   /**
@@ -551,7 +550,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemAcquireResult, 'ItemAcquireResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemAcquireResult, 'ItemAcquireResult')
   }
 
   /**
@@ -564,7 +563,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -577,7 +576,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemDynamicDataInfo, 'ItemDynamicDataInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemDynamicDataInfo, 'ItemDynamicDataInfo')
   }
 
   /**
@@ -588,7 +587,7 @@ export class ItemAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/items/byFeatures/basic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BasicItemArray, 'BasicItemArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BasicItemArray, 'BasicItemArray')
   }
 
   /**
@@ -606,7 +605,7 @@ export class ItemAdmin$ {
       .replace('{feature}', feature)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -624,7 +623,7 @@ export class ItemAdmin$ {
       .replace('{feature}', feature)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -641,7 +640,7 @@ export class ItemAdmin$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullItemInfo, 'FullItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
 
   /**
@@ -656,7 +655,7 @@ export class ItemAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ItemPurchaseConditionValidateResultArray,
       'ItemPurchaseConditionValidateResultArray'

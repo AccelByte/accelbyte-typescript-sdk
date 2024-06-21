@@ -9,26 +9,26 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AgreementWithNamespaceAdmin$ } from './endpoints/AgreementWithNamespaceAdmin$.js'
 import { DownloadExportedAgreementsInCsvResponse } from '../generated-definitions/DownloadExportedAgreementsInCsvResponse.js'
 import { InitiateExportAgreementsToCsvResponse } from '../generated-definitions/InitiateExportAgreementsToCsvResponse.js'
 import { PagedRetrieveUserAcceptedAgreementResponse } from '../generated-definitions/PagedRetrieveUserAcceptedAgreementResponse.js'
 import { RetrieveAcceptedAgreementResponseArray } from '../generated-definitions/RetrieveAcceptedAgreementResponseArray.js'
 import { UserAgreementsResponseArray } from '../generated-definitions/UserAgreementsResponseArray.js'
 import { UsersAgreementsRequest } from '../generated-definitions/UsersAgreementsRequest.js'
+import { AgreementWithNamespaceAdmin$ } from './endpoints/AgreementWithNamespaceAdmin$.js'
 
 export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * This API will return all accepted Legal Agreements for each user, including agreements of game users if publisher user has corresponding game account.
    */
   async function createAgreement(data: UsersAgreementsRequest): Promise<UserAgreementsResponseArray> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createAgreement(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +44,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
     limit?: number
     offset?: number
   }): Promise<PagedRetrieveUserAcceptedAgreementResponse> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getAgreementsPolicyVersionsUsers(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +57,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
     userId: string,
     queryParams?: { excludeOtherNamespacesPolicies?: boolean | null }
   ): Promise<RetrieveAcceptedAgreementResponseArray> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getAgreementPolicyUser_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +69,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
   async function getAgreementsPolicyVersionsUsersExportCsvDownload(queryParams: {
     exportId: string | null
   }): Promise<DownloadExportedAgreementsInCsvResponse> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getAgreementsPolicyVersionsUsersExportCsvDownload(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +83,7 @@ export function AgreementWithNamespaceAdminApi(sdk: AccelbyteSDK, args?: ApiArgs
     start: string | null
     end?: string | null
   }): Promise<InitiateExportAgreementsToCsvResponse> {
-    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AgreementWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createAgreementPolicyVersionUserExportCsvInitiate(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

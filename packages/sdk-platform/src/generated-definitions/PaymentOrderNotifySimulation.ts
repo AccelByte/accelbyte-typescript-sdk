@@ -9,7 +9,7 @@ export const PaymentOrderNotifySimulation = z.object({
   amount: z.number().int().nullish(),
   currencyCode: z.string(),
   notifyType: z.enum(['CHARGE', 'REFUND']),
-  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']),
   salesTax: z.number().int().nullish(),
   vat: z.number().int().nullish()
 })

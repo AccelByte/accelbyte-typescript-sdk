@@ -18,7 +18,7 @@ export function AdminUserAgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement.
@@ -28,7 +28,7 @@ export function AdminUserAgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     data: AcceptAgreementRequest[],
     queryParams: { clientId: string | null; countryCode: string | null; publisherUserId?: string | null }
   ): Promise<AcceptAgreementResponse> {
-    const $ = new AdminUserAgreementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminUserAgreementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createAgreementPolicy_ByUserId(userId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

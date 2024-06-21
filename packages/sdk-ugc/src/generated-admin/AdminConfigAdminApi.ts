@@ -9,22 +9,22 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AdminConfigAdmin$ } from './endpoints/AdminConfigAdmin$.js'
 import { PaginatedGetConfigsResponse } from '../generated-definitions/PaginatedGetConfigsResponse.js'
 import { UpdateConfigRequest } from '../generated-definitions/UpdateConfigRequest.js'
+import { AdminConfigAdmin$ } from './endpoints/AdminConfigAdmin$.js'
 
 export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get config paginated
    */
   async function getConfigs(queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGetConfigsResponse> {
-    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getConfigs(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -34,7 +34,7 @@ export function AdminConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint will create a new config if the *key* doesn&#39;t exist. Allowed key value: - *contentReview*: *enabled*,*disabled*
    */
   async function patchConfig_ByKey(key: string, data: UpdateConfigRequest): Promise<unknown> {
-    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchConfig_ByKey(key, data)
     if (resp.error) throw resp.error
     return resp.response.data

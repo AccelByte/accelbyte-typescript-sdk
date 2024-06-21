@@ -18,7 +18,7 @@ import { QueryMockBy } from '../../generated-definitions/QueryMockBy.js'
 
 export class MockMatchmakingAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  Delete all mock tickets and matches in a channel. &#39;
@@ -30,7 +30,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -43,7 +43,12 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetMockMatchesResponse,
+      'GetMockMatchesResponse'
+    )
   }
 
   /**
@@ -56,7 +61,12 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetMockMatchesResponse, 'GetMockMatchesResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetMockMatchesResponse,
+      'GetMockMatchesResponse'
+    )
   }
 
   /**
@@ -69,7 +79,12 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetMockTicketsResponse,
+      'GetMockTicketsResponse'
+    )
   }
 
   /**
@@ -82,7 +97,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MockTicketArray, 'MockTicketArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MockTicketArray, 'MockTicketArray')
   }
 
   /**
@@ -95,7 +110,7 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -108,6 +123,11 @@ export class MockMatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetMockTicketsResponse, 'GetMockTicketsResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetMockTicketsResponse,
+      'GetMockTicketsResponse'
+    )
   }
 }

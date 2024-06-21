@@ -15,7 +15,7 @@ import { ListGameRecordKeysResponse } from '../../generated-definitions/ListGame
 
 export class AdminGameRecordAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve list of records key by namespace
@@ -31,7 +31,7 @@ export class AdminGameRecordAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListGameRecordKeysResponse,
       'ListGameRecordKeysResponse'
@@ -46,7 +46,7 @@ export class AdminGameRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -57,7 +57,12 @@ export class AdminGameRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameRecordAdminResponse, 'GameRecordAdminResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GameRecordAdminResponse,
+      'GameRecordAdminResponse'
+    )
   }
 
   /**
@@ -68,7 +73,12 @@ export class AdminGameRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameRecordAdminResponse, 'GameRecordAdminResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GameRecordAdminResponse,
+      'GameRecordAdminResponse'
+    )
   }
 
   /**
@@ -79,6 +89,11 @@ export class AdminGameRecordAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameRecordAdminResponse, 'GameRecordAdminResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GameRecordAdminResponse,
+      'GameRecordAdminResponse'
+    )
   }
 }

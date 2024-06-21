@@ -8,7 +8,7 @@
     },
     "description": "Justice GDPR Service",
     "title": "justice-gdpr-service",
-    "version": "2.8.1"
+    "version": "2.10.1"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -132,6 +132,7 @@
         ],
         "summary": "Retrieve all user's account deletion requests in specified date",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER [READ]"]
@@ -209,6 +210,7 @@
         ],
         "summary": "Delete admin emails configurations",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [DELETE]"]
@@ -261,6 +263,7 @@
         ],
         "summary": "Get admin email addresses configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [READ]"]
@@ -324,6 +327,7 @@
         ],
         "summary": "Add admin email address configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [CREATE]"]
@@ -387,6 +391,7 @@
         ],
         "summary": "Update admin email address configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:EMAIL:CONFIGURATION [UPDATE]"]
@@ -395,6 +400,76 @@
       }
     },
     "/gdpr/admin/namespaces/{namespace}/platforms/{platform}/closure/client": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Delete platform account closure client.",
+        "operationId": "AdminDeletePlatformAccountClosureClient",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "3rd party platform",
+            "in": "path",
+            "name": "platform",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete Platform Account Closure Client",
+        "tags": ["Platform Account Closure Client"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]"]
+          }
+        ]
+      },
       "get": {
         "consumes": ["application/json"],
         "description": "Get platform account closure config.\nScope: account",
@@ -463,6 +538,7 @@
         ],
         "summary": "Get Platform Account Closure Config",
         "tags": ["Platform Account Closure Client"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]"]
@@ -536,6 +612,7 @@
         ],
         "summary": "Update Platform Account Closure Client",
         "tags": ["Platform Account Closure Client"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]"]
@@ -623,6 +700,7 @@
         ],
         "summary": "Get list personal data requests",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER [READ]"]
@@ -680,6 +758,7 @@
         ],
         "summary": "Get Registered Services Configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]"]
@@ -743,6 +822,7 @@
         ],
         "summary": "Update Registered Services Configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]"]
@@ -791,6 +871,7 @@
         ],
         "summary": "Reset Registered Services Configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]"]
@@ -839,6 +920,7 @@
         ],
         "summary": "Reset Registered Platform Account Closure Services Configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [DELETE]"]
@@ -894,6 +976,7 @@
         ],
         "summary": "Get Registered Platform Account Closure Services Configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [READ]"]
@@ -957,6 +1040,7 @@
         ],
         "summary": "Update Registered Platform Account Closure Services Configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:GDPR:CONFIGURATION [UPDATE]"]
@@ -967,7 +1051,7 @@
     "/gdpr/admin/namespaces/{namespace}/users/platforms/closure/histories": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Get user\u0026#39;s platform account closure histories.\n------\nSupported platforms:\n* psn\n\nScope: account",
+        "description": "Get user\u0026#39;s platform account closure histories.\nScope: account\n\n------\nSupported platforms:\n* psn",
         "operationId": "AdminGetUserPlatformAccountClosureHistories",
         "parameters": [
           {
@@ -1044,6 +1128,7 @@
         ],
         "summary": "Get User's Platform Account Closure Histories",
         "tags": ["Platform Account Closure History"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"]
@@ -1117,6 +1202,7 @@
         ],
         "summary": "Cancel user's account deletion request",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]"]
@@ -1185,6 +1271,7 @@
         ],
         "summary": "Retrieve specific user's account deletion request",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]"]
@@ -1193,7 +1280,7 @@
       },
       "post": {
         "consumes": ["*/*"],
-        "description": "Submit user\u0026#39;s account deletion requests\nScope: account",
+        "description": "Submit user\u0026#39;s account deletion request.\nScope: account\n",
         "operationId": "AdminSubmitUserAccountDeletionRequest",
         "parameters": [
           {
@@ -1257,8 +1344,9 @@
             "authorization": []
           }
         ],
-        "summary": "Submit user's account deletion requests",
+        "summary": "Submit user's account deletion request",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [CREATE]"]
@@ -1335,6 +1423,7 @@
         ],
         "summary": "Get user's personal data requests",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]"]
@@ -1343,7 +1432,7 @@
       },
       "post": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Submit user personal data retrieval request\nIf admin request data for themselves, password is need to be set\t\t\t\nScope: account",
+        "description": "Submit user personal data retrieval request.\nScope: account\n\n### Request Header: \n- **Content-Type: application/x-www-form-urlencoded**\n",
         "operationId": "AdminRequestDataRetrieval",
         "parameters": [
           {
@@ -1361,7 +1450,7 @@
             "type": "string"
           },
           {
-            "description": "IAM password of the user",
+            "description": "IAM password of the user, required if admin requests their own data",
             "in": "formData",
             "name": "password",
             "type": "string"
@@ -1387,6 +1476,18 @@
               "$ref": "#/definitions/response.Error"
             }
           },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -1403,6 +1504,7 @@
         ],
         "summary": "Submit user personal data retrieval request",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [CREATE]"]
@@ -1477,6 +1579,7 @@
         ],
         "summary": "Cancel user's personal data requests",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]"]
@@ -1487,7 +1590,7 @@
     "/gdpr/admin/namespaces/{namespace}/users/{userId}/requests/{requestDate}/generate": {
       "post": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Generate personal data download url\nScope: account",
+        "description": "Generate personal data download url.\nScope: account\n\n### Request Header: \n- **Content-Type: application/x-www-form-urlencoded**",
         "operationId": "AdminGeneratePersonalDataURL",
         "parameters": [
           {
@@ -1561,6 +1664,7 @@
         ],
         "summary": "Generate personal data download url",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]"]
@@ -1628,11 +1732,12 @@
         ],
         "summary": "Cancel user's account deletion request",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": []
       },
       "post": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Submit user\u0026#39;s account deletion requests\nRequires valid user access token and password\nScope: account",
+        "description": "Submit user\u0026#39;s account deletion request.\nRequires valid user access token and password\nScope: account\n\n### Request Header: \n- **Content-Type: application/x-www-form-urlencoded**\n",
         "operationId": "PublicSubmitUserAccountDeletionRequest",
         "parameters": [
           {
@@ -1689,6 +1794,12 @@
               "$ref": "#/definitions/response.Error"
             }
           },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -1703,8 +1814,9 @@
             "authorization": []
           }
         ],
-        "summary": "Submit user's account deletion requests",
+        "summary": "Submit user's account deletion request",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -1765,6 +1877,7 @@
         ],
         "summary": "Retrieve specific user's account deletion status",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -1837,11 +1950,12 @@
         ],
         "summary": "Get user's personal data requests",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": []
       },
       "post": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Submit personal data retrieval request.\nScope: account",
+        "description": "Submit personal data retrieval request.\nScope: account\n\n### Request Header: \n- **Content-Type: application/x-www-form-urlencoded**\n",
         "operationId": "PublicRequestDataRetrieval",
         "parameters": [
           {
@@ -1886,6 +2000,12 @@
               "$ref": "#/definitions/response.Error"
             }
           },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -1902,6 +2022,7 @@
         ],
         "summary": "Submit personal data retrieval request",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -1972,13 +2093,14 @@
         ],
         "summary": "Cancel user's personal data requests",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
     "/gdpr/public/namespaces/{namespace}/users/{userId}/requests/{requestDate}/generate": {
       "post": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Generate personal data download url\nRequires valid user access token\nScope: account",
+        "description": "Generate personal data download url\nRequires valid user access token\nScope: account\n\n### Request Header: \n- **Content-Type: application/x-www-form-urlencoded**\n",
         "operationId": "PublicGeneratePersonalDataURL",
         "parameters": [
           {
@@ -2052,6 +2174,7 @@
         ],
         "summary": "Generate personal data download url",
         "tags": ["Data Retrieval"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -2097,11 +2220,12 @@
         ],
         "summary": "Cancel my account deletion request",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": []
       },
       "post": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Submit my account deletion requests.\nRequires valid user access token\nThis is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest)",
+        "description": "Submit my account deletion requests.\nRequires valid user access token\nThis is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest)\n\n### Request Header: \n- **Content-Type: application/x-www-form-urlencoded**\n",
         "operationId": "PublicSubmitMyAccountDeletionRequest",
         "parameters": [
           {
@@ -2151,6 +2275,12 @@
               "$ref": "#/definitions/response.Error"
             }
           },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -2165,6 +2295,7 @@
         ],
         "summary": "Submit my account deletion requests.",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -2207,7 +2338,390 @@
         ],
         "summary": "Retrieve my account deletion status",
         "tags": ["Data Deletion"],
+        "x-errorCodes": {},
         "x-security": []
+      }
+    },
+    "/gdpr/s2s/namespaces/{namespace}/deletions/finished": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Scope: account\n\nGet list of finished account deletion requests based on the finished time period.\nUnfinished deletion requests will not appear here, i.e. have Status **Request**, **Pending** or **In-Progress**.\n\n**Anonymize userId for success deletion:**\nFor success deletion requests, the **userId** field in this API will be anonymized automatically after **7 days** from the success deletion. \nThis measure is implemented to ensure compliance with GDPR regulations. Please make sure to synchronize the data from this API before it undergoes anonymization.\n\n---\n## This API for S2S integration purpose only\n",
+        "operationId": "S2SGetListFinishedAccountDeletionRequest",
+        "parameters": [
+          {
+            "description": "Publisher Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Finished end time (RFC3339 format, example: 2024-01-01T01:30:59.12Z). Cannot exceed current time. End time is exclusive",
+            "in": "query",
+            "name": "end",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Finished start time (RFC3339 format, example: 2024-01-01T01:30:59.12Z). Start time is inclusive",
+            "in": "query",
+            "name": "start",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.ListFinishedDataDeletion"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get list of finished account deletion requests",
+        "tags": ["Data Deletion (S2S)"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:S2S:INFORMATION:USER [READ]"]
+          }
+        ]
+      }
+    },
+    "/gdpr/s2s/namespaces/{namespace}/requests/finished": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Scope: account\n\nGet list of finished personal data requests based on the finished time period.\nUnfinished personal data requests will not appear here, i.e. have Status **Pending**, **In-Progress** or **Canceled**.\n\n---\n## This API for S2S integration purpose only\n",
+        "operationId": "S2SGetListFinishedPersonalDataRequest",
+        "parameters": [
+          {
+            "description": "Publisher Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Finished end time (RFC3339 format, example: 2024-01-01T01:30:59.12Z). Cannot exceed current time. End time is exclusive",
+            "in": "query",
+            "name": "end",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Finished start time (RFC3339 format, example: 2024-01-01T01:30:59.12Z). Start time is inclusive",
+            "in": "query",
+            "name": "start",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/dto.ListFinishedDataRequests"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get list of finished personal data requests",
+        "tags": ["Data Retrieval (S2S)"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:S2S:INFORMATION:USER [READ]"]
+          }
+        ]
+      }
+    },
+    "/gdpr/s2s/namespaces/{namespace}/users/{userId}/deletions": {
+      "post": {
+        "consumes": ["*/*"],
+        "description": "Scope: account\n\nSubmit user\u0026#39;s account deletion request.\n\n**Limitation:** This API only accepts requests with a publisher userId and does not support game userId requests at this time.\n\n---\n## This API for S2S integration purpose only\n\n**Notes:**\n\n1. This API will **not send GDPR email notification** both for player and admin notification.\n2. This API will **perform account deletion immediately** without GDPR grace period (i.e. 28 days grace period).",
+        "operationId": "S2SSubmitUserAccountDeletionRequest",
+        "parameters": [
+          {
+            "description": "Publisher Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Publisher User Id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.S2SRequestDeleteResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Submit user's account deletion request",
+        "tags": ["Data Deletion (S2S)"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:S2S:INFORMATION:USER [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/gdpr/s2s/namespaces/{namespace}/users/{userId}/requests": {
+      "post": {
+        "consumes": ["*/*"],
+        "description": "Scope: account\n\nSubmit user personal data retrieval request.\n\n**Limitation:** This API only accepts requests with a publisher userId and does not support game userId requests at this time.\n\n---\n## This API for S2S integration purpose only\n\n**Notes:**\n\n1. This API will **not send GDPR email notification** both for player and admin notification.\n",
+        "operationId": "S2SRequestDataRetrieval",
+        "parameters": [
+          {
+            "description": "Publisher Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Publisher User Id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.S2SDataRetrievalResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Submit user personal data retrieval request",
+        "tags": ["Data Retrieval (S2S)"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:S2S:INFORMATION:USER [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/gdpr/s2s/namespaces/{namespace}/users/{userId}/requests/{requestDate}/generate": {
+      "post": {
+        "consumes": ["*/*"],
+        "description": "Scope: account\n\nGenerate personal data download url.\n\n**Limitation:** This API only accepts requests with a publisher userId and does not support game userId requests at this time.\n\n---\n## This API for S2S integration purpose only\n",
+        "operationId": "S2SGeneratePersonalDataURL",
+        "parameters": [
+          {
+            "description": "Publisher Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Request date in RFC3339 format",
+            "in": "path",
+            "name": "requestDate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Publisher User Id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.S2SUserDataURL"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [],
+            "HasScope": ["account"],
+            "authorization": []
+          }
+        ],
+        "summary": "Generate personal data download url",
+        "tags": ["Data Retrieval (S2S)"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:S2S:INFORMATION:USER [READ]"]
+          }
+        ]
       }
     }
   },
@@ -2224,6 +2738,93 @@
         }
       },
       "required": ["appName", "namespace"]
+    },
+    "dto.FinishedDataDeletion": {
+      "properties": {
+        "failedMessage": {
+          "description": "Failed message if status is Failed",
+          "type": "string"
+        },
+        "finishedDate": {
+          "description": "Finished deletion date",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "requestDate": {
+          "description": "Request deletion date",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "status": {
+          "description": "Status of request",
+          "enum": ["Completed,Failed"],
+          "type": "string"
+        },
+        "userId": {
+          "description": "User Id. This userId will be anonymized automatically after 7 days from the **Success** deletion",
+          "type": "string"
+        }
+      },
+      "required": ["finishedDate", "requestDate", "status", "userId"]
+    },
+    "dto.FinishedDataRequest": {
+      "properties": {
+        "dataExpirationDate": {
+          "description": "The expiration date of generated data, it was 28 days after finishedDate. Available only if the status is Completed",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "failedMessage": {
+          "description": "Failed message if status is Failed",
+          "type": "string"
+        },
+        "finishedDate": {
+          "description": "Finished date",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "requestDate": {
+          "description": "Request date",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "status": {
+          "description": "Status of request",
+          "enum": ["Completed,Failed"],
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["finishedDate", "requestDate", "status", "userId"]
+    },
+    "dto.ListFinishedDataDeletion": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/dto.FinishedDataDeletion"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "dto.ListFinishedDataRequests": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/dto.FinishedDataRequest"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
     },
     "dto.PlatformAccountClosureClientRequest": {
       "properties": {
@@ -2261,19 +2862,20 @@
       "properties": {
         "protocol": {
           "description": "protocol type",
-          "enum": ["GRPC"],
+          "enum": ["EVENT", "GRPC"],
           "type": "string"
         },
         "skipAck": {
+          "description": "skip waiting for ack event from this service, used in \"EVENT\" protocol only.",
           "type": "boolean",
           "x-omitempty": false
         },
         "url": {
-          "description": "url of the service with port number",
+          "description": "url of the service with port number, required in \"GRPC\" protocol",
           "type": "string"
         }
       },
-      "required": ["protocol", "url"]
+      "required": ["protocol"]
     },
     "dto.ServiceConfigurationDTO": {
       "properties": {
@@ -2515,6 +3117,41 @@
       },
       "required": ["Namespace", "UserID"]
     },
+    "models.S2SDataRetrievalResponse": {
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "requestDate": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["namespace", "requestDate", "userId"]
+    },
+    "models.S2SRequestDeleteResponse": {
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["namespace", "userId"]
+    },
+    "models.S2SUserDataURL": {
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": ["url"]
+    },
     "models.UserDataURL": {
       "properties": {
         "URL": {
@@ -2574,11 +3211,11 @@
     "path": "/gdpr/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-30T13:29:27+00:00",
-    "gitHash": "abb9ea410488adabd8380af4132ff0bf69dbec6e",
+    "buildDate": "2024-05-28T13:03:45+00:00",
+    "gitHash": "530c2159acd97b2559015197db5c4710488ba77f",
     "name": "justice-gdpr-service",
     "realm": "dev",
-    "version": "2.8.1",
-    "version-roles-seeding": "0.0.48"
+    "version": "2.10.1",
+    "version-roles-seeding": "1.2.39"
   }
 }

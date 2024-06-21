@@ -14,7 +14,7 @@ import { PartyPutCustomAttributesRequest } from '../../generated-definitions/Par
 
 export class LobbyOperationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Update party attributes in a namespace.
@@ -26,7 +26,7 @@ export class LobbyOperationsAdmin$ {
       .replace('{partyId}', partyId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PartyData, 'PartyData')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PartyData, 'PartyData')
   }
 
   /**
@@ -40,6 +40,6 @@ export class LobbyOperationsAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

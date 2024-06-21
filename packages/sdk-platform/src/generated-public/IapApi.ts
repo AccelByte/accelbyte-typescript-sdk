@@ -14,7 +14,6 @@ import { EpicGamesReconcileRequest } from '../generated-definitions/EpicGamesRec
 import { EpicGamesReconcileResultArray } from '../generated-definitions/EpicGamesReconcileResultArray.js'
 import { GoogleIapReceipt } from '../generated-definitions/GoogleIapReceipt.js'
 import { GoogleReceiptResolveResult } from '../generated-definitions/GoogleReceiptResolveResult.js'
-import { Iap$ } from './endpoints/Iap$.js'
 import { IapItemMappingInfo } from '../generated-definitions/IapItemMappingInfo.js'
 import { OculusReconcileResultArray } from '../generated-definitions/OculusReconcileResultArray.js'
 import { PlayStationMultiServiceLabelsReconcileRequest } from '../generated-definitions/PlayStationMultiServiceLabelsReconcileRequest.js'
@@ -25,13 +24,14 @@ import { TwitchSyncRequest } from '../generated-definitions/TwitchSyncRequest.js
 import { TwitchSyncResultArray } from '../generated-definitions/TwitchSyncResultArray.js'
 import { XblReconcileRequest } from '../generated-definitions/XblReconcileRequest.js'
 import { XblReconcileResultArray } from '../generated-definitions/XblReconcileResultArray.js'
+import { Iap$ } from './endpoints/Iap$.js'
 
 export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get iap item mapping.
@@ -39,7 +39,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getIapItemMapping(queryParams?: {
     platform?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'OCULUS' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
   }): Promise<IapItemMappingInfo> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getIapItemMapping(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +49,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sync my game twitch drops entitlements.
    */
   async function updateUserMeIapTwitchSync(data: TwitchSyncRequest): Promise<TwitchSyncResultArray> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateUserMeIapTwitchSync(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +59,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Synchronize with entitlements in PSN Store.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIapPsnSync_ByUserId(userId: string, data: PlayStationReconcileRequest): Promise<PlayStationReconcileResultArray> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapPsnSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +69,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sync Xbox inventory&#39;s items.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIapXblSync_ByUserId(userId: string, data: XblReconcileRequest): Promise<XblReconcileResultArray> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapXblSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -79,7 +79,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sync steam inventory&#39;s items.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIapSteamSync_ByUserId(userId: string, data: SteamSyncRequest): Promise<unknown> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapSteamSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -89,7 +89,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sync Oculus entitlements.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIapOculuSync_ByUserId(userId: string): Promise<OculusReconcileResultArray> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapOculuSync_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -99,7 +99,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sync twitch drops entitlements.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIapTwitchSync_ByUserId(userId: string, data: TwitchSyncRequest): Promise<unknown> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapTwitchSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -109,7 +109,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Verify apple iap receipt and fulfill item.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIapAppleReceipt_ByUserId(userId: string, data: AppleIapReceipt): Promise<unknown> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapAppleReceipt_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -119,7 +119,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Sync epic games inventory&#39;s items.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIapEpicgameSync_ByUserId(userId: string, data: EpicGamesReconcileRequest): Promise<EpicGamesReconcileResultArray> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapEpicgameSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -129,7 +129,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Verify google iap receipt and fulfill item.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
    */
   async function updateIapGoogleReceipt_ByUserId(userId: string, data: GoogleIapReceipt): Promise<GoogleReceiptResolveResult> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapGoogleReceipt_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -142,7 +142,7 @@ export function IapApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     data: PlayStationMultiServiceLabelsReconcileRequest
   ): Promise<PlayStationReconcileResultArray> {
-    const $ = new Iap$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Iap$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateIapPsnSyncMultiServiceLabel_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

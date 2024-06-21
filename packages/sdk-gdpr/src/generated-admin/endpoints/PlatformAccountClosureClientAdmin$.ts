@@ -14,7 +14,20 @@ import { PlatformAccountClosureClientResponse } from '../../generated-definition
 
 export class PlatformAccountClosureClientAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
+
+  /**
+   * Delete platform account closure client.
+   */
+  deleteClosureClient_ByPlatform(platform: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/gdpr/admin/namespaces/{namespace}/platforms/{platform}/closure/client'
+      .replace('{namespace}', this.namespace)
+      .replace('{platform}', platform)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
 
   /**
    * Get platform account closure config. Scope: account
@@ -27,7 +40,7 @@ export class PlatformAccountClosureClientAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PlatformAccountClosureClientResponse,
       'PlatformAccountClosureClientResponse'
@@ -44,6 +57,6 @@ export class PlatformAccountClosureClientAdmin$ {
       .replace('{platform}', platform)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

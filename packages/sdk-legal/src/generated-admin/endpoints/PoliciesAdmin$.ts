@@ -14,7 +14,7 @@ import { UpdatePolicyRequest } from '../../generated-definitions/UpdatePolicyReq
 
 export class PoliciesAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Update country-specific policy.
@@ -24,7 +24,7 @@ export class PoliciesAdmin$ {
     const url = '/agreement/admin/policies/{policyId}'.replace('{policyId}', policyId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -35,7 +35,7 @@ export class PoliciesAdmin$ {
     const url = '/agreement/admin/policies/{policyId}/default'.replace('{policyId}', policyId)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -47,7 +47,7 @@ export class PoliciesAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrievePolicyResponseArray,
       'RetrievePolicyResponseArray'

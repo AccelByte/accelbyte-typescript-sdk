@@ -18,7 +18,7 @@ import { UpdateLeaderboardConfigReqV3 } from '../../generated-definitions/Update
 
 export class LeaderboardConfigurationV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
@@ -33,7 +33,7 @@ export class LeaderboardConfigurationV3Admin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetAllLeaderboardConfigsRespV3,
       'GetAllLeaderboardConfigsRespV3'
@@ -49,7 +49,7 @@ export class LeaderboardConfigurationV3Admin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetLeaderboardConfigRespV3,
       'GetLeaderboardConfigRespV3'
@@ -65,7 +65,7 @@ export class LeaderboardConfigurationV3Admin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       DeleteBulkLeaderboardsResp,
       'DeleteBulkLeaderboardsResp'
@@ -82,7 +82,7 @@ export class LeaderboardConfigurationV3Admin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -96,7 +96,7 @@ export class LeaderboardConfigurationV3Admin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetLeaderboardConfigRespV3,
       'GetLeaderboardConfigRespV3'
@@ -117,7 +117,7 @@ export class LeaderboardConfigurationV3Admin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetLeaderboardConfigRespV3,
       'GetLeaderboardConfigRespV3'
@@ -134,6 +134,6 @@ export class LeaderboardConfigurationV3Admin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

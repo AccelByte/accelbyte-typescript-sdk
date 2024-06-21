@@ -10,15 +10,15 @@
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { Event } from '../generated-definitions/Event.js'
-import { Event$ } from './endpoints/Event$.js'
 import { EventResponse } from '../generated-definitions/EventResponse.js'
+import { Event$ } from './endpoints/Event$.js'
 
 export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * @deprecated
@@ -30,7 +30,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     startDate: string | null
     offset?: number
   }): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getNamespace_ByNamespace_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +41,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;code&gt;NAMESPACE:{namespace}:EVENT [CREATE]&lt;/code&gt;and scope &lt;code&gt;analytics&lt;/code&gt;
    */
   async function createNamespace_ByNamespace_DEPRECATED(data: Event): Promise<unknown> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createNamespace_ByNamespace_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -55,7 +55,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getUser_ByUserId_DEPRECATED(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +69,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEventId_ByEventId_DEPRECATED(eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +83,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEventType_ByEventType_DEPRECATED(eventType, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -98,7 +98,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEventId_ByUserId_ByEventId_DEPRECATED(userId, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -113,7 +113,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventType: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEventType_ByUserId_ByEventType_DEPRECATED(userId, eventType, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -128,7 +128,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEventId_ByEventType_ByEventId_DEPRECATED(eventType, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -144,7 +144,7 @@ export function EventApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId: number,
     queryParams: { endDate: string | null; pageSize: number; startDate: string | null; offset?: number }
   ): Promise<EventResponse> {
-    const $ = new Event$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Event$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEventId_ByUserId_ByEventType_ByEventId_DEPRECATED(userId, eventType, eventId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

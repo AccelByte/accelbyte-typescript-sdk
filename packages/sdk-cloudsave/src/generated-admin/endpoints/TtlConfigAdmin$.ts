@@ -12,7 +12,7 @@ import { z } from 'zod'
 
 export class TtlConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * ## Description This endpoints will delete the ttl config of the game record
@@ -22,7 +22,7 @@ export class TtlConfigAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/records/{key}/ttl'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -33,6 +33,6 @@ export class TtlConfigAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/binaries/{key}/ttl'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

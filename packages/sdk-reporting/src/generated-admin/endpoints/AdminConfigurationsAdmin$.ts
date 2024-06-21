@@ -13,7 +13,7 @@ import { ReportingLimit } from '../../generated-definitions/ReportingLimit.js'
 
 export class AdminConfigurationsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * TimeInterval is in nanoseconds. When there&#39;s no configuration set, the response is the default value (configurable through envar).
@@ -23,7 +23,7 @@ export class AdminConfigurationsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigResponse, 'ConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigResponse, 'ConfigResponse')
   }
 
   /**
@@ -34,6 +34,6 @@ export class AdminConfigurationsAdmin$ {
     const url = '/reporting/v1/admin/namespaces/{namespace}/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ConfigResponse, 'ConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigResponse, 'ConfigResponse')
   }
 }

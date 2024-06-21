@@ -8,7 +8,7 @@
     },
     "description": "Justice Group Service",
     "title": "justice-group-service",
-    "version": "2.19.4"
+    "version": "2.20.1"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -115,6 +115,13 @@
         ],
         "summary": "List Group Configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73131": "global configuration not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -191,6 +198,14 @@
         ],
         "summary": "create new configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73130": "global configuration already exist"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -254,6 +269,12 @@
         ],
         "summary": "initiate configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73130": "global configuration already exist"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -327,6 +348,13 @@
         ],
         "summary": "Delete group configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73131": "global configuration not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -401,6 +429,13 @@
         ],
         "summary": "get existing configuration",
         "tags": ["Configuration"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73131": "global configuration not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -483,7 +518,15 @@
           }
         ],
         "summary": "update existing configuration",
-        "tags": ["Configuration"]
+        "tags": ["Configuration"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73131": "global configuration not found"
+        }
       }
     },
     "/group/v1/admin/namespaces/{namespace}/configuration/{configurationCode}/rules/{allowedAction}": {
@@ -559,6 +602,14 @@
         ],
         "summary": "delete existing configuration global rule based on allowed action",
         "tags": ["Configuration"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73131": "global configuration not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -649,6 +700,14 @@
         ],
         "summary": "update existing configuration global rule",
         "tags": ["Configuration"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73131": "global configuration not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -742,6 +801,12 @@
         ],
         "summary": "get list of groups",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -815,6 +880,13 @@
         ],
         "summary": "Delete existing group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -889,6 +961,13 @@
         ],
         "summary": "get single group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -983,6 +1062,12 @@
         ],
         "summary": "Get list of group members",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73433": "member group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1058,6 +1143,11 @@
         ],
         "summary": "get all list of member roles",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1128,6 +1218,13 @@
         ],
         "summary": "create new member role",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1201,6 +1298,13 @@
         ],
         "summary": "delete member role",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73232": "member role not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1275,6 +1379,12 @@
         ],
         "summary": "get member role",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "73232": "member role not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1358,6 +1468,14 @@
         ],
         "summary": "update member role",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73232": "member role not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1443,6 +1561,14 @@
         ],
         "summary": "update member role permission",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73232": "member role not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1530,6 +1656,12 @@
         ],
         "summary": "get list of groups",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1606,6 +1738,13 @@
         ],
         "summary": "create new group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73342": "user already joined group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1680,6 +1819,14 @@
         ],
         "summary": "Delete existing group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1754,6 +1901,13 @@
         ],
         "summary": "get single group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1838,6 +1992,14 @@
         ],
         "summary": "update existing group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -1922,6 +2084,14 @@
         ],
         "summary": "update existing group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2008,6 +2178,14 @@
         ],
         "summary": "Update group custom attributes",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2090,6 +2268,13 @@
         ],
         "summary": "Accept Group Invitation",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73442": "user already joined in another group",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2172,6 +2357,13 @@
         ],
         "summary": "Reject Group Invitation",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73442": "user already joined in another group",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2248,6 +2440,12 @@
         ],
         "summary": "Join to group",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73442": "user already joined in another group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2324,6 +2522,12 @@
         ],
         "summary": "Cancel request to join group",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2406,6 +2610,12 @@
         ],
         "summary": "Get Group Join Request List",
         "tags": ["Member Request"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2500,6 +2710,12 @@
         ],
         "summary": "Get list of group members",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73433": "member group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2585,6 +2801,15 @@
         ],
         "summary": "update group custom rule",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2666,6 +2891,14 @@
         ],
         "summary": "Delete group predefined rule",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2757,6 +2990,15 @@
         ],
         "summary": "update predefined group rule",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2826,6 +3068,13 @@
         ],
         "summary": "Leave group",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73440": "group admin cannot leave group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2901,6 +3150,11 @@
         ],
         "summary": "get all list of member roles",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -2989,6 +3243,15 @@
         ],
         "summary": "Remove role from group member",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73232": "member role not found",
+          "73444": "member must have role"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3072,6 +3335,14 @@
         ],
         "summary": "Assign role to group member",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73232": "member role not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3147,6 +3418,11 @@
         ],
         "summary": "Get Group Invitation Request List",
         "tags": ["Member Request"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3223,6 +3499,12 @@
         ],
         "summary": "Get User Group Information",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3306,6 +3588,16 @@
         ],
         "summary": "Invite user to group",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73036": "insufficient member role permission",
+          "73437": "user already invited",
+          "73438": "user already requested to join",
+          "73442": "user already joined in another group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3388,6 +3680,14 @@
         ],
         "summary": "Accept Group Join Request",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73442": "user already joined in another group",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3470,6 +3770,14 @@
         ],
         "summary": "Reject Group Join Request",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73442": "user already joined in another group",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3546,6 +3854,14 @@
         ],
         "summary": "Kick Group Member",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73036": "insufficient member role permission",
+          "73433": "member group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3618,6 +3934,12 @@
         ],
         "summary": "get list of groups by group Ids",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3706,6 +4028,12 @@
         ],
         "summary": "Get User Joined Group Information",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3783,6 +4111,13 @@
         ],
         "summary": "User Group Status Information",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73036": "insufficient member role permission",
+          "73433": "member group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3861,6 +4196,13 @@
         ],
         "summary": "create new group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73342": "user already joined group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -3933,6 +4275,12 @@
         ],
         "summary": "get list of groups by group Ids",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4007,6 +4355,14 @@
         ],
         "summary": "Delete existing group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4091,6 +4447,14 @@
         ],
         "summary": "update existing group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4175,6 +4539,14 @@
         ],
         "summary": "update existing group",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4261,6 +4633,14 @@
         ],
         "summary": "Update group custom attributes",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4343,6 +4723,13 @@
         ],
         "summary": "Accept Group Invitation",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73442": "user already joined in another group",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4425,6 +4812,13 @@
         ],
         "summary": "Reject Group Invitation",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73442": "user already joined in another group",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4507,6 +4901,12 @@
         ],
         "summary": "Get Group Invite Request List",
         "tags": ["Member Request"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4583,6 +4983,12 @@
         ],
         "summary": "Join to group",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73442": "user already joined in another group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4665,6 +5071,12 @@
         ],
         "summary": "Get Group Join Request List",
         "tags": ["Member Request"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4741,6 +5153,13 @@
         ],
         "summary": "Leave group",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73440": "group admin cannot leave group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4826,6 +5245,15 @@
         ],
         "summary": "update group custom rule",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4907,6 +5335,14 @@
         ],
         "summary": "Delete group predefined rule",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -4998,6 +5434,15 @@
         ],
         "summary": "update predefined group rule",
         "tags": ["Group"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73333": "group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5073,6 +5518,11 @@
         ],
         "summary": "get all list of member roles",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5168,6 +5618,15 @@
         ],
         "summary": "Remove role from group member",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73232": "member role not found",
+          "73444": "member must have role"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5258,6 +5717,14 @@
         ],
         "summary": "Assign role to group member",
         "tags": ["Group Roles"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body",
+          "20022": "token is not user token",
+          "73232": "member role not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5339,6 +5806,12 @@
         ],
         "summary": "Get User Joined Group Information",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5414,6 +5887,11 @@
         ],
         "summary": "Get My Join Request To The Groups",
         "tags": ["Member Request"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5504,6 +5982,16 @@
         ],
         "summary": "Invite user to group",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73036": "insufficient member role permission",
+          "73437": "user already invited",
+          "73438": "user already requested to join",
+          "73442": "user already joined in another group"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5588,6 +6076,14 @@
         ],
         "summary": "Cancel Invitation Group Member",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73036": "insufficient member role permission",
+          "73433": "member group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5677,6 +6173,14 @@
         ],
         "summary": "Accept Group Join Request",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73442": "user already joined in another group",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5766,6 +6270,14 @@
         ],
         "summary": "Reject Group Join Request",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73036": "insufficient member role permission",
+          "73442": "user already joined in another group",
+          "73443": "member request not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5849,6 +6361,14 @@
         ],
         "summary": "Kick Group Member",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73036": "insufficient member role permission",
+          "73433": "member group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -5927,6 +6447,13 @@
         ],
         "summary": "User Group Status Information",
         "tags": ["Group Member"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20022": "token is not user token",
+          "73034": "user not belong to any group",
+          "73036": "insufficient member role permission",
+          "73433": "member group not found"
+        },
         "x-security": [
           {
             "iamClientScopes": ["social"]
@@ -6703,11 +7230,11 @@
     "path": "/group/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-29T02:48:08+00:00",
-    "gitHash": "e1ca9b11163b195c8c3ac01274c58dd6289b4a23",
+    "buildDate": "2024-05-17T08:16:16+00:00",
+    "gitHash": "9752f6d626459ee1f4b6628eafc993ebd11fb930",
     "name": "justice-group-service",
     "realm": "dev",
-    "version": "2.19.4",
+    "version": "2.20.1",
     "version-roles-seeding": "0.0.3"
   }
 }

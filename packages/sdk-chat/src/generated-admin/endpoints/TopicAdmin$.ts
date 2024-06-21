@@ -35,7 +35,7 @@ import { UpdateTopicParams } from '../../generated-definitions/UpdateTopicParams
 
 export class TopicAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get chat history in a namespace.
@@ -57,7 +57,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ChatMessageWithPaginationResponse,
       'ChatMessageWithPaginationResponse'
@@ -72,7 +72,7 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TopicResponseArray, 'TopicResponseArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TopicResponseArray, 'TopicResponseArray')
   }
 
   /**
@@ -83,7 +83,7 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateTopicResponse, 'CreateTopicResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateTopicResponse, 'CreateTopicResponse')
   }
 
   /**
@@ -104,7 +104,7 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/topics'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TopicInfoArray, 'TopicInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TopicInfoArray, 'TopicInfoArray')
   }
 
   /**
@@ -125,7 +125,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       TopicLogWithPaginationResponse,
       'TopicLogWithPaginationResponse'
@@ -141,7 +141,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MessageResultWithAttributes,
       'MessageResultWithAttributes'
@@ -156,7 +156,12 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ActionDeleteTopicResult, 'ActionDeleteTopicResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ActionDeleteTopicResult,
+      'ActionDeleteTopicResult'
+    )
   }
 
   /**
@@ -167,7 +172,7 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateTopicResponse, 'CreateTopicResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateTopicResponse, 'CreateTopicResponse')
   }
 
   /**
@@ -183,7 +188,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ChannelTopicWithPaginationResponse,
       'ChannelTopicWithPaginationResponse'
@@ -198,7 +203,7 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/namespace-topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateTopicResponse, 'CreateTopicResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateTopicResponse, 'CreateTopicResponse')
   }
 
   /**
@@ -223,7 +228,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ChatMessageWithPaginationResponse,
       'ChatMessageWithPaginationResponse'
@@ -238,7 +243,12 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChatMessageResponseArray, 'ChatMessageResponseArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ChatMessageResponseArray,
+      'ChatMessageResponseArray'
+    )
   }
 
   /**
@@ -249,7 +259,7 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/shards'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -260,7 +270,7 @@ export class TopicAdmin$ {
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/channel'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelTopicResponse, 'ChannelTopicResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChannelTopicResponse, 'ChannelTopicResponse')
   }
 
   /**
@@ -275,7 +285,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       TopicMemberWithPaginationResponse,
       'TopicMemberWithPaginationResponse'
@@ -291,7 +301,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ChannelTopicSummaryResponse,
       'ChannelTopicSummaryResponse'
@@ -318,7 +328,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       TopicLogWithPaginationResponse,
       'TopicLogWithPaginationResponse'
@@ -335,7 +345,7 @@ export class TopicAdmin$ {
       .replace('{topic}', topic)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BanTopicMemberResult, 'BanTopicMemberResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BanTopicMemberResult, 'BanTopicMemberResult')
   }
 
   /**
@@ -348,7 +358,12 @@ export class TopicAdmin$ {
       .replace('{topic}', topic)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UnbanTopicMemberResult, 'UnbanTopicMemberResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UnbanTopicMemberResult,
+      'UnbanTopicMemberResult'
+    )
   }
 
   /**
@@ -363,7 +378,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ActionAddUserToTopicResult,
       'ActionAddUserToTopicResult'
@@ -382,7 +397,7 @@ export class TopicAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ActionAddUserToTopicResult,
       'ActionAddUserToTopicResult'
@@ -400,6 +415,6 @@ export class TopicAdmin$ {
       .replace('{chatId}', chatId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

@@ -13,7 +13,7 @@ import { UserProgressionResponse } from '../../generated-definitions/UserProgres
 
 export class ChallengeProgression$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;/ul&gt;
@@ -23,7 +23,7 @@ export class ChallengeProgression$ {
     const url = '/challenge/v1/public/namespaces/{namespace}/users/me/progress/evaluate'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -39,6 +39,11 @@ export class ChallengeProgression$ {
       .replace('{challengeCode}', challengeCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserProgressionResponse, 'UserProgressionResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserProgressionResponse,
+      'UserProgressionResponse'
+    )
   }
 }

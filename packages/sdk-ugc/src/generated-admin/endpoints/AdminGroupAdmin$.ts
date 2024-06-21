@@ -17,7 +17,7 @@ import { PaginatedGroupResponse } from '../../generated-definitions/PaginatedGro
 
 export class AdminGroupAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get user group paginated
@@ -27,7 +27,12 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGroupResponse, 'PaginatedGroupResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaginatedGroupResponse,
+      'PaginatedGroupResponse'
+    )
   }
 
   /**
@@ -38,7 +43,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -49,7 +54,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups/{groupId}'.replace('{namespace}', this.namespace).replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -60,7 +65,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups/{groupId}'.replace('{namespace}', this.namespace).replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -71,7 +76,7 @@ export class AdminGroupAdmin$ {
     const url = '/ugc/v1/admin/namespaces/{namespace}/groups/{groupId}'.replace('{namespace}', this.namespace).replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -84,7 +89,12 @@ export class AdminGroupAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGroupResponse, 'PaginatedGroupResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaginatedGroupResponse,
+      'PaginatedGroupResponse'
+    )
   }
 
   /**
@@ -101,7 +111,7 @@ export class AdminGroupAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponse,
       'PaginatedContentDownloadResponse'
@@ -122,7 +132,7 @@ export class AdminGroupAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponseV2,
       'PaginatedContentDownloadResponseV2'
@@ -140,7 +150,7 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -154,7 +164,7 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -168,7 +178,7 @@ export class AdminGroupAdmin$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -187,7 +197,7 @@ export class AdminGroupAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponse,
       'PaginatedContentDownloadResponse'
@@ -210,7 +220,7 @@ export class AdminGroupAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponseV2,
       'PaginatedContentDownloadResponseV2'

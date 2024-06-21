@@ -19,7 +19,6 @@ import { GenerateContentUploadUrlRequest } from '../generated-definitions/Genera
 import { GenerateContentUploadUrlResponse } from '../generated-definitions/GenerateContentUploadUrlResponse.js'
 import { GetContentBulkByShareCodesRequest } from '../generated-definitions/GetContentBulkByShareCodesRequest.js'
 import { PaginatedContentDownloadResponseV2 } from '../generated-definitions/PaginatedContentDownloadResponseV2.js'
-import { PublicContentV2$ } from './endpoints/PublicContentV2$.js'
 import { PublicGetContentBulkRequest } from '../generated-definitions/PublicGetContentBulkRequest.js'
 import { UpdateContentRequestV2 } from '../generated-definitions/UpdateContentRequestV2.js'
 import { UpdateContentResponseV2 } from '../generated-definitions/UpdateContentResponseV2.js'
@@ -27,13 +26,14 @@ import { UpdateContentShareCodeRequest } from '../generated-definitions/UpdateCo
 import { UpdateFileLocationRequest } from '../generated-definitions/UpdateFileLocationRequest.js'
 import { UpdateScreenshotRequest } from '../generated-definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from '../generated-definitions/UpdateScreenshotResponse.js'
+import { PublicContentV2$ } from './endpoints/PublicContentV2$.js'
 
 export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
@@ -48,7 +48,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     tags?: string[]
     type?: string | null
   }): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -58,7 +58,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Maximum requested Ids: 100. Public user can access without token or if token specified, requires valid user token
    */
   async function createContentBulk(data: PublicGetContentBulkRequest): Promise<ContentDownloadResponseV2Array> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContentBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +68,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getContent_ByContentId(contentId: string): Promise<ContentDownloadResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContent_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -81,7 +81,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
   ): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -91,7 +91,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Require valid user token. Maximum sharecodes per request 100
    */
   async function createContentSharecodeBulk(data: GetContentBulkByShareCodesRequest): Promise<ContentDownloadResponseV2Array> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContentSharecodeBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -104,7 +104,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     queryParams?: { limit?: number; name?: string | null; offset?: number; sortBy?: string | null }
   ): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents_ByChannelId(channelId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -114,7 +114,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getContentSharecode_ByShareCode(shareCode: string): Promise<ContentDownloadResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContentSharecode_ByShareCode(shareCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -128,7 +128,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     data: ContentRequestV2
   ): Promise<CreateContentResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContent_ByUserId_ByChannelId(userId, channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -142,7 +142,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: CreateScreenshotRequest
   ): Promise<CreateScreenshotResponse> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createScreenshot_ByUserId_ByContentId(userId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -156,7 +156,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateScreenshotRequest
   ): Promise<UpdateScreenshotResponse> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateScreenshot_ByUserId_ByContentId(userId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -166,7 +166,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete existing content
    */
   async function deleteContent_ByUserId_ByChannelId_ByContentId(userId: string, channelId: string, contentId: string): Promise<unknown> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -181,7 +181,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateContentRequestV2
   ): Promise<UpdateContentResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -195,7 +195,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     screenshotId: string
   ): Promise<unknown> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteScreenshot_ByUserId_ByContentId_ByScreenshotId(userId, contentId, screenshotId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -210,7 +210,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateContentShareCodeRequest
   ): Promise<CreateContentResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchSharecode_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -225,7 +225,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: GenerateContentUploadUrlRequest
   ): Promise<GenerateContentUploadUrlResponse> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchUploadUrl_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -239,7 +239,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     shareCode: string
   ): Promise<unknown> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -254,7 +254,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateFileLocationRequest
   ): Promise<UpdateContentResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchFileLocation_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -269,7 +269,7 @@ export function PublicContentV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     shareCode: string,
     data: UpdateContentRequestV2
   ): Promise<CreateContentResponseV2> {
-    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentV2$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode, data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -5,6 +5,11 @@
  */
 import { z } from 'zod'
 
-export const UserPasswordUpdateV3Request = z.object({ languageTag: z.string(), newPassword: z.string(), oldPassword: z.string() })
+export const UserPasswordUpdateV3Request = z.object({
+  languageTag: z.string(),
+  mfaToken: z.string().nullish(),
+  newPassword: z.string(),
+  oldPassword: z.string()
+})
 
 export interface UserPasswordUpdateV3Request extends z.TypeOf<typeof UserPasswordUpdateV3Request> {}

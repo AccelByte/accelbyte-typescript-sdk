@@ -17,7 +17,7 @@ export function UserStatisticCycleApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * List user&#39;s statCycleItems by statCycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycle items&lt;/li&gt;&lt;/ul&gt;
@@ -26,7 +26,7 @@ export function UserStatisticCycleApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     cycleId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; statCodes?: string[] }
   ): Promise<UserStatCycleItemPagingSlicedResult> {
-    const $ = new UserStatisticCycle$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new UserStatisticCycle$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getStatCycleitemsMeUsers_ByCycleId(cycleId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -40,7 +40,7 @@ export function UserStatisticCycleApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     cycleId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; statCodes?: string | null }
   ): Promise<UserStatCycleItemPagingSlicedResult> {
-    const $ = new UserStatisticCycle$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new UserStatisticCycle$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getStatCycleitems_ByUserId_ByCycleId(userId, cycleId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -29,7 +29,7 @@ import { UserEntitlementHistoryPagingSlicedResultArray } from '../../generated-d
 
 export class Entitlement$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query user entitlements for a specific user.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement list&lt;/li&gt;&lt;/ul&gt;
@@ -53,7 +53,7 @@ export class Entitlement$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       EntitlementPagingSlicedResult,
       'EntitlementPagingSlicedResult'
@@ -73,7 +73,7 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EntitlementInfoArray, 'EntitlementInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EntitlementInfoArray, 'EntitlementInfoArray')
   }
 
   /**
@@ -93,7 +93,7 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EntitlementInfo, 'EntitlementInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EntitlementInfo, 'EntitlementInfo')
   }
 
   /**
@@ -106,7 +106,7 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AppEntitlementInfo, 'AppEntitlementInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AppEntitlementInfo, 'AppEntitlementInfo')
   }
 
   /**
@@ -129,7 +129,7 @@ export class Entitlement$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UserEntitlementHistoryPagingSlicedResultArray,
       'UserEntitlementHistoryPagingSlicedResultArray'
@@ -148,7 +148,7 @@ export class Entitlement$ {
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/any'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Ownership, 'Ownership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Ownership, 'Ownership')
   }
 
   /**
@@ -168,7 +168,7 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EntitlementInfo, 'EntitlementInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EntitlementInfo, 'EntitlementInfo')
   }
 
   /**
@@ -183,7 +183,7 @@ export class Entitlement$ {
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownershipToken'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, OwnershipToken, 'OwnershipToken')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OwnershipToken, 'OwnershipToken')
   }
 
   /**
@@ -200,7 +200,7 @@ export class Entitlement$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       AppEntitlementPagingSlicedResult,
       'AppEntitlementPagingSlicedResult'
@@ -218,7 +218,7 @@ export class Entitlement$ {
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/bySku'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TimedOwnership, 'TimedOwnership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TimedOwnership, 'TimedOwnership')
   }
 
   /**
@@ -229,7 +229,7 @@ export class Entitlement$ {
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Ownership, 'Ownership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Ownership, 'Ownership')
   }
 
   /**
@@ -243,7 +243,7 @@ export class Entitlement$ {
     const url = '/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byItemId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TimedOwnership, 'TimedOwnership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TimedOwnership, 'TimedOwnership')
   }
 
   /**
@@ -259,7 +259,7 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Ownership, 'Ownership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Ownership, 'Ownership')
   }
 
   /**
@@ -273,7 +273,7 @@ export class Entitlement$ {
       .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EntitlementInfo, 'EntitlementInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EntitlementInfo, 'EntitlementInfo')
   }
 
   /**
@@ -292,7 +292,7 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TimedOwnership, 'TimedOwnership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TimedOwnership, 'TimedOwnership')
   }
 
   /**
@@ -305,7 +305,7 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Ownership, 'Ownership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Ownership, 'Ownership')
   }
 
   /**
@@ -324,7 +324,7 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TimedOwnership, 'TimedOwnership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TimedOwnership, 'TimedOwnership')
   }
 
   /**
@@ -340,7 +340,12 @@ export class Entitlement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EntitlementOwnershipArray, 'EntitlementOwnershipArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      EntitlementOwnershipArray,
+      'EntitlementOwnershipArray'
+    )
   }
 
   /**
@@ -358,7 +363,7 @@ export class Entitlement$ {
       .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EntitlementSoldResult, 'EntitlementSoldResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EntitlementSoldResult, 'EntitlementSoldResult')
   }
 
   /**
@@ -376,7 +381,12 @@ export class Entitlement$ {
       .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EntitlementSplitResult, 'EntitlementSplitResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      EntitlementSplitResult,
+      'EntitlementSplitResult'
+    )
   }
 
   /**
@@ -394,7 +404,12 @@ export class Entitlement$ {
       .replace('{entitlementId}', entitlementId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EntitlementTransferResult, 'EntitlementTransferResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      EntitlementTransferResult,
+      'EntitlementTransferResult'
+    )
   }
 
   /**
@@ -413,7 +428,7 @@ export class Entitlement$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       EntitlementDecrementResult,
       'EntitlementDecrementResult'

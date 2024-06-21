@@ -13,7 +13,7 @@ import { LocalizedSeasonInfo } from '../../generated-definitions/LocalizedSeason
 
 export class Season$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to get current published season, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: localized season data&lt;/li&gt;&lt;/ul&gt;
@@ -23,7 +23,7 @@ export class Season$ {
     const url = '/seasonpass/public/namespaces/{namespace}/seasons/current'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LocalizedSeasonInfo, 'LocalizedSeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, LocalizedSeasonInfo, 'LocalizedSeasonInfo')
   }
 
   /**
@@ -36,7 +36,12 @@ export class Season$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClaimableUserSeasonInfo, 'ClaimableUserSeasonInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ClaimableUserSeasonInfo,
+      'ClaimableUserSeasonInfo'
+    )
   }
 
   /**
@@ -50,6 +55,11 @@ export class Season$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClaimableUserSeasonInfo, 'ClaimableUserSeasonInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ClaimableUserSeasonInfo,
+      'ClaimableUserSeasonInfo'
+    )
   }
 }

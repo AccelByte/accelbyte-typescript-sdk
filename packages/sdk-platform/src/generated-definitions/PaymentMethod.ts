@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export const PaymentMethod = z.object({
   name: z.string(),
-  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA'])
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA'])
 })
 
 export interface PaymentMethod extends z.TypeOf<typeof PaymentMethod> {}

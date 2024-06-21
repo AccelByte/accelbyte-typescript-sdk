@@ -18,20 +18,20 @@ import { CreateScreenshotResponse } from '../generated-definitions/CreateScreens
 import { GetContentBulkByShareCodesRequest } from '../generated-definitions/GetContentBulkByShareCodesRequest.js'
 import { GetContentPreviewResponse } from '../generated-definitions/GetContentPreviewResponse.js'
 import { PaginatedContentDownloadResponse } from '../generated-definitions/PaginatedContentDownloadResponse.js'
-import { PublicContentLegacy$ } from './endpoints/PublicContentLegacy$.js'
 import { PublicCreateContentRequestS3 } from '../generated-definitions/PublicCreateContentRequestS3.js'
 import { PublicGetContentBulkRequest } from '../generated-definitions/PublicGetContentBulkRequest.js'
 import { UpdateContentRequest } from '../generated-definitions/UpdateContentRequest.js'
 import { UpdateContentShareCodeRequest } from '../generated-definitions/UpdateContentShareCodeRequest.js'
 import { UpdateScreenshotRequest } from '../generated-definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from '../generated-definitions/UpdateScreenshotResponse.js'
+import { PublicContentLegacy$ } from './endpoints/PublicContentLegacy$.js'
 
 export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Public user can access without token or if token specified, requires valid user token. For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses () for priority. e.g: &lt;code&gt;tags=red&lt;/code&gt; &lt;code&gt;tags=red&amp;animal&lt;/code&gt; &lt;code&gt;tags=red|animal&lt;/code&gt; &lt;code&gt;tags=red&amp;animal|wild&lt;/code&gt; &lt;code&gt;tags=red&amp;(animal|wild)&lt;/code&gt; The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore &lt;code&gt;_&lt;/code&gt; and dash &lt;code&gt;-&lt;/code&gt; Allowed character for operator: &lt;code&gt;&amp;&lt;/code&gt; &lt;code&gt;|&lt;/code&gt; &lt;code&gt;(&lt;/code&gt; &lt;code&gt;)&lt;/code&gt; &lt;b&gt;Please note that value of tags query param should be URL encoded&lt;/b&gt;
@@ -50,7 +50,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     type?: string | null
     userId?: string | null
   }): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -60,7 +60,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Maximum requested Ids: 100. Public user can access without token or if token specified, requires valid user token
    */
   async function createContentBulk(data: PublicGetContentBulkRequest): Promise<ContentDownloadResponseArray> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContentBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -70,7 +70,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getContent_ByContentId(contentId: string): Promise<ContentDownloadResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContent_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +83,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +93,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Require valid user token. Maximum sharecodes per request 100
    */
   async function createContentSharecodeBulk(data: GetContentBulkByShareCodesRequest): Promise<ContentDownloadResponseArray> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContentSharecodeBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -103,7 +103,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * &lt;p&gt;Requires valid user token&lt;/p&gt;&lt;p&gt;&lt;b&gt;NOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content&lt;/b&gt;&lt;/p&gt;
    */
   async function getPreview_ByContentId(contentId: string): Promise<GetContentPreviewResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPreview_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -129,7 +129,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       userId?: string | null
     }
   ): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents_ByChannelId(channelId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -139,7 +139,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Public user can access without token or if token specified, requires valid user token
    */
   async function getContentSharecode_ByShareCode(shareCode: string): Promise<ContentDownloadResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContentSharecode_ByShareCode(shareCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -154,7 +154,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     data: CreateContentRequest
   ): Promise<CreateContentResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContent_ByUserId_ByChannelId_DEPRECATED(userId, channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -168,7 +168,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     data: PublicCreateContentRequestS3
   ): Promise<CreateContentResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContentS3_ByUserId_ByChannelId(userId, channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -182,7 +182,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: CreateScreenshotRequest
   ): Promise<CreateScreenshotResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createScreenshot_ByUserId_ByContentId(userId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -196,7 +196,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateScreenshotRequest
   ): Promise<UpdateScreenshotResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateScreenshot_ByUserId_ByContentId(userId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -206,7 +206,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Required permission &lt;b&gt;NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
    */
   async function deleteContent_ByUserId_ByChannelId_ByContentId(userId: string, channelId: string, contentId: string): Promise<unknown> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -222,7 +222,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: CreateContentRequest
   ): Promise<CreateContentResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateContent_ByUserId_ByChannelId_ByContentId_DEPRECATED(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -237,7 +237,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateContentRequest
   ): Promise<CreateContentResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateContentS3_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -251,7 +251,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     screenshotId: string
   ): Promise<unknown> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteScreenshot_ByUserId_ByContentId_ByScreenshotId(userId, contentId, screenshotId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -266,7 +266,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateContentShareCodeRequest
   ): Promise<CreateContentResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchSharecode_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -280,7 +280,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     shareCode: string
   ): Promise<unknown> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -295,7 +295,7 @@ export function PublicContentLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     shareCode: string,
     data: UpdateContentRequest
   ): Promise<CreateContentResponse> {
-    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicContentLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode, data)
     if (resp.error) throw resp.error
     return resp.response.data

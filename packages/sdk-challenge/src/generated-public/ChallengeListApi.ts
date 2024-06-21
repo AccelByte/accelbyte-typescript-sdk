@@ -9,16 +9,16 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ChallengeList$ } from './endpoints/ChallengeList$.js'
 import { GetGoalsResponse } from '../generated-definitions/GetGoalsResponse.js'
 import { ListChallengeResponse } from '../generated-definitions/ListChallengeResponse.js'
+import { ChallengeList$ } from './endpoints/ChallengeList$.js'
 
 export function ChallengeListApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
@@ -29,7 +29,7 @@ export function ChallengeListApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sortBy?: string | null
     status?: 'INIT' | 'RETIRED' | 'TIED'
   }): Promise<ListChallengeResponse> {
-    const $ = new ChallengeList$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ChallengeList$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getChallenges(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -42,7 +42,7 @@ export function ChallengeListApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     challengeCode: string,
     queryParams?: { limit?: number; offset?: number; tags?: string[] }
   ): Promise<GetGoalsResponse> {
-    const $ = new ChallengeList$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ChallengeList$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getGoals_ByChallengeCode(challengeCode, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

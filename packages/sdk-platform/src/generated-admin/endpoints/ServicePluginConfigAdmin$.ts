@@ -21,7 +21,7 @@ import { ServicePluginConfigUpdate } from '../../generated-definitions/ServicePl
 
 export class ServicePluginConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -32,7 +32,7 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -44,7 +44,12 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ServicePluginConfigInfo, 'ServicePluginConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ServicePluginConfigInfo,
+      'ServicePluginConfigInfo'
+    )
   }
 
   /**
@@ -56,7 +61,12 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/configs/servicePlugin'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ServicePluginConfigInfo, 'ServicePluginConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ServicePluginConfigInfo,
+      'ServicePluginConfigInfo'
+    )
   }
 
   /**
@@ -67,7 +77,7 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/lootbox'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -78,7 +88,12 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/lootbox'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LootBoxPluginConfigInfo, 'LootBoxPluginConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      LootBoxPluginConfigInfo,
+      'LootBoxPluginConfigInfo'
+    )
   }
 
   /**
@@ -89,7 +104,12 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/lootbox'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LootBoxPluginConfigInfo, 'LootBoxPluginConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      LootBoxPluginConfigInfo,
+      'LootBoxPluginConfigInfo'
+    )
   }
 
   /**
@@ -100,7 +120,7 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/section'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -111,7 +131,12 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/section'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SectionPluginConfigInfo, 'SectionPluginConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SectionPluginConfigInfo,
+      'SectionPluginConfigInfo'
+    )
   }
 
   /**
@@ -122,7 +147,12 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/section'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SectionPluginConfigInfo, 'SectionPluginConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SectionPluginConfigInfo,
+      'SectionPluginConfigInfo'
+    )
   }
 
   /**
@@ -133,7 +163,7 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/revocation/plugins/revocation'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -145,7 +175,7 @@ export class ServicePluginConfigAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RevocationPluginConfigInfo,
       'RevocationPluginConfigInfo'
@@ -161,7 +191,7 @@ export class ServicePluginConfigAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RevocationPluginConfigInfo,
       'RevocationPluginConfigInfo'
@@ -176,7 +206,7 @@ export class ServicePluginConfigAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/catalog/plugins/lootbox/grpcInfo'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GrpcServerInfo, 'GrpcServerInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GrpcServerInfo, 'GrpcServerInfo')
   }
 
   /**
@@ -188,7 +218,12 @@ export class ServicePluginConfigAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LootBoxPluginConfigInfo, 'LootBoxPluginConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      LootBoxPluginConfigInfo,
+      'LootBoxPluginConfigInfo'
+    )
   }
 
   /**
@@ -200,7 +235,12 @@ export class ServicePluginConfigAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SectionPluginConfigInfo, 'SectionPluginConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SectionPluginConfigInfo,
+      'SectionPluginConfigInfo'
+    )
   }
 
   /**
@@ -216,7 +256,7 @@ export class ServicePluginConfigAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RevocationPluginConfigInfo,
       'RevocationPluginConfigInfo'

@@ -21,13 +21,13 @@ export function TemplatesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Retrieve templates on a given namespace
    */
   async function getTemplates(): Promise<TemplateCompactArray> {
-    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTemplates()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +37,7 @@ export function TemplatesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create template on a given namespace
    */
   async function createTemplate(data: Template): Promise<Template> {
-    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createTemplate(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +47,7 @@ export function TemplatesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get template config on redis cache on a given namespace
    */
   async function getCache_ByTemplate(template: string): Promise<CacheResult> {
-    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getCache_ByTemplate(template)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +57,7 @@ export function TemplatesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Revalidate template config redis cache on a given namespace
    */
   async function createCache_ByTemplate(template: string): Promise<unknown> {
-    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createCache_ByTemplate(template)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +67,7 @@ export function TemplatesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Retrieve template configs from a given namespace.
    */
   async function getConfigs_ByTemplate(template: string): Promise<Configs> {
-    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getConfigs_ByTemplate(template)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -77,7 +77,7 @@ export function TemplatesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create template config on a given namespace
    */
   async function createConfig_ByTemplate(template: string, data: Config): Promise<Config> {
-    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createConfig_ByTemplate(template, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -87,7 +87,7 @@ export function TemplatesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Retrieve specific template config from a given namespace
    */
   async function getConfig_ByTemplate_ByConfig(template: string, config: string): Promise<Config> {
-    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getConfig_ByTemplate_ByConfig(template, config)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -97,7 +97,7 @@ export function TemplatesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update specific template config on a given namespace
    */
   async function updateConfig_ByTemplate_ByConfig(template: string, config: string, data: Config): Promise<Config> {
-    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new TemplatesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateConfig_ByTemplate_ByConfig(template, config, data)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -14,7 +14,7 @@ import { RuleSetPayload } from '../../generated-definitions/RuleSetPayload.js'
 
 export class RuleSets$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List rule sets.
@@ -24,7 +24,7 @@ export class RuleSets$ {
     const url = '/match2/v1/namespaces/{namespace}/rulesets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListRuleSetsResponse, 'ListRuleSetsResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListRuleSetsResponse, 'ListRuleSetsResponse')
   }
 
   /**
@@ -35,7 +35,7 @@ export class RuleSets$ {
     const url = '/match2/v1/namespaces/{namespace}/rulesets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -46,7 +46,7 @@ export class RuleSets$ {
     const url = '/match2/v1/namespaces/{namespace}/rulesets/{ruleset}'.replace('{namespace}', this.namespace).replace('{ruleset}', ruleset)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -57,7 +57,7 @@ export class RuleSets$ {
     const url = '/match2/v1/namespaces/{namespace}/rulesets/{ruleset}'.replace('{namespace}', this.namespace).replace('{ruleset}', ruleset)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RuleSetPayload, 'RuleSetPayload')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RuleSetPayload, 'RuleSetPayload')
   }
 
   /**
@@ -68,6 +68,6 @@ export class RuleSets$ {
     const url = '/match2/v1/namespaces/{namespace}/rulesets/{ruleset}'.replace('{namespace}', this.namespace).replace('{ruleset}', ruleset)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RuleSetPayload, 'RuleSetPayload')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RuleSetPayload, 'RuleSetPayload')
   }
 }

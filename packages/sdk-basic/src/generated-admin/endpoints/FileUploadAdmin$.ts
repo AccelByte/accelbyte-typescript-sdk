@@ -12,7 +12,7 @@ import { FileUploadUrlInfo } from '../../generated-definitions/FileUploadUrlInfo
 
 export class FileUploadAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Generate an upload URL for user content. It&#39;s valid for 10 minutes.&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11102&lt;/li&gt;&lt;li&gt;&lt;i&gt;Default maximum file count per user&lt;/i&gt;: 10 files&lt;/li&gt;&lt;li&gt;&lt;i&gt;Default maximum file size per user&lt;/i&gt;: 104857600 bytes&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: URL data&lt;/li&gt;&lt;/ul&gt;
@@ -27,7 +27,7 @@ export class FileUploadAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FileUploadUrlInfo, 'FileUploadUrlInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FileUploadUrlInfo, 'FileUploadUrlInfo')
   }
 
   /**
@@ -40,6 +40,6 @@ export class FileUploadAdmin$ {
       .replace('{folder}', folder)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FileUploadUrlInfo, 'FileUploadUrlInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FileUploadUrlInfo, 'FileUploadUrlInfo')
   }
 }

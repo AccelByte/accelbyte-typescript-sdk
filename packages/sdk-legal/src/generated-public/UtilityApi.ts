@@ -17,13 +17,13 @@ export function UtilityApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.
    */
   async function getReadiness(): Promise<LegalReadinessStatusResponse> {
-    const $ = new Utility$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Utility$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getReadiness()
     if (resp.error) throw resp.error
     return resp.response.data

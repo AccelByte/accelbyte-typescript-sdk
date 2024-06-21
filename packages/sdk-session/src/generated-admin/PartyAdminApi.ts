@@ -9,15 +9,15 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { PartyAdmin$ } from './endpoints/PartyAdmin$.js'
 import { PartyQueryResponse } from '../generated-definitions/PartyQueryResponse.js'
+import { PartyAdmin$ } from './endpoints/PartyAdmin$.js'
 
 export function PartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Query parties.
@@ -36,13 +36,24 @@ export function PartyAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     partyID?: string | null
     value?: string | null
   }): Promise<PartyQueryResponse> {
-    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getParties(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
 
+  /**
+   * Trigger user&#39;s active party session to native platform.
+   */
+  async function createNativeSync_ByUserId(userId: string): Promise<unknown> {
+    const $ = new PartyAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.createNativeSync_ByUserId(userId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
-    getParties
+    getParties,
+    createNativeSync_ByUserId
   }
 }

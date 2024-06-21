@@ -13,7 +13,7 @@ import { GameProfileInfo } from '../../generated-definitions/GameProfileInfo.js'
 
 export class GameProfileAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Returns all profiles&#39; header for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:GAMEPROFILE&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/li&gt;&lt;/ul&gt;
@@ -25,7 +25,12 @@ export class GameProfileAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameProfileHeaderArray, 'GameProfileHeaderArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GameProfileHeaderArray,
+      'GameProfileHeaderArray'
+    )
   }
 
   /**
@@ -39,6 +44,6 @@ export class GameProfileAdmin$ {
       .replace('{profileId}', profileId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameProfileInfo, 'GameProfileInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GameProfileInfo, 'GameProfileInfo')
   }
 }

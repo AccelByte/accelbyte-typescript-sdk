@@ -17,7 +17,6 @@ import { BulkEntitlementGrantRequest } from '../generated-definitions/BulkEntitl
 import { BulkEntitlementGrantResult } from '../generated-definitions/BulkEntitlementGrantResult.js'
 import { BulkEntitlementRevokeResult } from '../generated-definitions/BulkEntitlementRevokeResult.js'
 import { BulkOperationResult } from '../generated-definitions/BulkOperationResult.js'
-import { EntitlementAdmin$ } from './endpoints/EntitlementAdmin$.js'
 import { EntitlementConfigInfo } from '../generated-definitions/EntitlementConfigInfo.js'
 import { EntitlementDecrementResult } from '../generated-definitions/EntitlementDecrementResult.js'
 import { EntitlementGrant } from '../generated-definitions/EntitlementGrant.js'
@@ -36,13 +35,14 @@ import { Ownership } from '../generated-definitions/Ownership.js'
 import { RevokeUseCountRequest } from '../generated-definitions/RevokeUseCountRequest.js'
 import { StackableEntitlementInfoArray } from '../generated-definitions/StackableEntitlementInfoArray.js'
 import { TimedOwnership } from '../generated-definitions/TimedOwnership.js'
+import { EntitlementAdmin$ } from './endpoints/EntitlementAdmin$.js'
 
 export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Query entitlements.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement list&lt;/li&gt;&lt;/ul&gt;
@@ -58,7 +58,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     origin?: 'Epic' | 'GooglePlay' | 'IOS' | 'Nintendo' | 'Oculus' | 'Other' | 'Playstation' | 'Steam' | 'System' | 'Twitch' | 'Xbox'
     userId?: string | null
   }): Promise<EntitlementPagingSlicedResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlements(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -68,7 +68,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Grant entitlements to multiple users, skipped granting will be treated as fail.&lt;br&gt;&lt;br&gt;Notes: &lt;br&gt;&lt;br&gt;Support Item Types:&lt;ul&gt;&lt;li&gt;&lt;i&gt;APP&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;INGAMEITEM&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;CODE&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;SUBSCRIPTION&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;MEDIA&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;OPTIONBOX&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;LOOTBOX&lt;/i&gt;&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk grant entitlements result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createEntitlementGrant(data: BulkEntitlementGrantRequest): Promise<BulkEntitlementGrantResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createEntitlementGrant(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -78,7 +78,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Revoke entitlements, skipped revocation will be treated as fail.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk revoke entitlements result&lt;/li&gt;&lt;/ul&gt;
    */
   async function createEntitlementRevoke(data: string[]): Promise<BulkEntitlementRevokeResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createEntitlementRevoke(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +93,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     limit?: number
     offset?: number
   }): Promise<EntitlementPagingSlicedResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsByItemIds(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -103,7 +103,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get entitlement config info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlementsConfigInfo(queryParams?: { withoutCache?: boolean | null }): Promise<EntitlementConfigInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsConfigInfo(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -128,7 +128,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       origin?: 'Epic' | 'GooglePlay' | 'IOS' | 'Nintendo' | 'Oculus' | 'Other' | 'Playstation' | 'Steam' | 'System' | 'Twitch' | 'Xbox'
     }
   ): Promise<EntitlementPagingSlicedResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlements_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -138,7 +138,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Grant user entitlement.&lt;br&gt;&lt;br&gt;Notes: &lt;br&gt;&lt;br&gt;will skip un-supported item if input un-supported item types, please use /admin/namespaces/{namespace}/users/{userId}/fulfillment endpoint if want to fulfill other item type, like coin item&lt;br&gt;&lt;br&gt;Support Item Types:&lt;ul&gt;&lt;li&gt;&lt;i&gt;APP&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;INGAMEITEM&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;CODE&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;SUBSCRIPTION&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;MEDIA&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;OPTIONBOX&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;LOOTBOX&lt;/i&gt;&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: granted entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   async function createEntitlement_ByUserId(userId: string, data: EntitlementGrant[]): Promise<StackableEntitlementInfoArray> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createEntitlement_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -148,7 +148,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get entitlement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlement_ByEntitlementId(entitlementId: string): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlement_ByEntitlementId(entitlementId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -166,7 +166,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       platform?: string | null
     }
   ): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsBySku_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -176,7 +176,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Revoke all entitlements of a user (This API is for testing purpose only)&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoked entitlements count&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateEntitlementRevoke_ByUserId(userId: string): Promise<BulkOperationResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateEntitlementRevoke_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -189,7 +189,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { appId: string | null; activeOnly?: boolean | null }
   ): Promise<AppEntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsByAppId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -207,7 +207,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       platform?: string | null
     }
   ): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsByItemId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -220,7 +220,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { appType: 'DEMO' | 'DLC' | 'GAME' | 'SOFTWARE'; activeOnly?: boolean | null; limit?: number; offset?: number }
   ): Promise<AppEntitlementPagingSlicedResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsByAppType_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -233,7 +233,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { ids?: string[]; platform?: string | null }
   ): Promise<EntitlementInfoArray> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsByItemIds_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -243,7 +243,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get platform entitlement config list.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement info&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlementConfig_ByPlatform(platform: string): Promise<EntitlementPlatformConfigInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementConfig_ByPlatform(platform)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -256,7 +256,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platform: string,
     data: EntitlementPlatformConfigUpdate
   ): Promise<EntitlementPlatformConfigInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateEntitlementConfig_ByPlatform(platform, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -269,7 +269,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { entitlementIds: string | null }
   ): Promise<BulkOperationResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateEntitlementRevokeById_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -282,7 +282,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { appIds?: string[]; itemIds?: string[]; platform?: string | null; skus?: string[] }
   ): Promise<Ownership> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsOwnershipAny_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -292,7 +292,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user entitlement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   async function getEntitlement_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlement_ByUserId_ByEntitlementId(userId, entitlementId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -306,7 +306,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: EntitlementUpdate
   ): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateEntitlement_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -319,7 +319,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams: { itemIds: string[]; platform?: string | null }
   ): Promise<Ownership> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsOwnershipAnyOf_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -336,7 +336,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       platform?: string | null
     }
   ): Promise<TimedOwnership> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsOwnershipBySku_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -346,7 +346,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Enable Entitlement origin feature.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement info&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateEntitlementConfigEntitlementOriginEnable(): Promise<EntitlementConfigInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateEntitlementConfigEntitlementOriginEnable()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -356,7 +356,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user app entitlement ownership by appId.
    */
   async function getEntitlementsOwnershipByAppId_ByUserId(userId: string, queryParams: { appId: string | null }): Promise<Ownership> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsOwnershipByAppId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -373,7 +373,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       platform?: string | null
     }
   ): Promise<TimedOwnership> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsOwnershipByItemId_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -386,7 +386,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { ids?: string[]; platform?: string | null }
   ): Promise<EntitlementOwnershipArray> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEntitlementsOwnershipByItemIds_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -400,7 +400,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: AdminEntitlementSoldRequest
   ): Promise<EntitlementSoldResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateSell_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -410,7 +410,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Enable user entitlement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: enable entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateEnable_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateEnable_ByUserId_ByEntitlementId(userId, entitlementId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -420,7 +420,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Revoke user entitlement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRevoke_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateRevoke_ByUserId_ByEntitlementId(userId, entitlementId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -430,7 +430,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Disable user entitlement if entitlement, only active entitlement can be disable, disabled entitlement can&#39;t consume.&lt;br&gt;&lt;b&gt;Like revoke, it will lose the entitlement ownership, except disabled entitlement can enable.&lt;/b&gt;&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: disable entitlement&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateDisable_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateDisable_ByUserId_ByEntitlementId(userId, entitlementId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -440,7 +440,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user entitlement histories.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of entitlement history&lt;/li&gt;&lt;/ul&gt;
    */
   async function getHistory_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<EntitlementHistoryInfoArray> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getHistory_ByUserId_ByEntitlementId(userId, entitlementId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -454,7 +454,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: AdminEntitlementDecrement
   ): Promise<EntitlementDecrementResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateDecrement_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -469,7 +469,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: RevokeUseCountRequest
   ): Promise<EntitlementInfo> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateRevokeByUseCount_ByUserId_ByEntitlementId_DEPRECATED(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -483,7 +483,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     data: RevokeUseCountRequest
   ): Promise<EntitlementIfc> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createRevokeByUseCount_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -497,7 +497,7 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     entitlementId: string,
     queryParams: { quantity: number }
   ): Promise<EntitlementPrechekResult> {
-    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getRevokeByUseCountPreCheck_ByUserId_ByEntitlementId(userId, entitlementId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -15,7 +15,7 @@ import { StatCyclePagingSlicedResult } from '../../generated-definitions/StatCyc
 
 export class StatCycleConfiguration$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List stat cycles by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycles&lt;/li&gt;&lt;/ul&gt;
@@ -33,7 +33,7 @@ export class StatCycleConfiguration$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       StatCyclePagingSlicedResult,
       'StatCyclePagingSlicedResult'
@@ -48,7 +48,7 @@ export class StatCycleConfiguration$ {
     const url = '/social/v1/public/namespaces/{namespace}/statCycles/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkStatCycleResult, 'BulkStatCycleResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkStatCycleResult, 'BulkStatCycleResult')
   }
 
   /**
@@ -61,6 +61,6 @@ export class StatCycleConfiguration$ {
       .replace('{cycleId}', cycleId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatCycleInfo, 'StatCycleInfo')
   }
 }

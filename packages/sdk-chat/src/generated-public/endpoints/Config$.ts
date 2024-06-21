@@ -12,7 +12,7 @@ import { PublicConfigResponse } from '../../generated-definitions/PublicConfigRe
 
 export class Config$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get chat config of a namespace.
@@ -22,6 +22,6 @@ export class Config$ {
     const url = '/chat/v1/public/config/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PublicConfigResponse, 'PublicConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PublicConfigResponse, 'PublicConfigResponse')
   }
 }

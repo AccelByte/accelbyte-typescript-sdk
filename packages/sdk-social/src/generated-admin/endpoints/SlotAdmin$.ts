@@ -13,7 +13,7 @@ import { SlotInfoArray } from '../../generated-definitions/SlotInfoArray.js'
 
 export class SlotAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -26,7 +26,7 @@ export class SlotAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SlotInfoArray, 'SlotInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SlotInfoArray, 'SlotInfoArray')
   }
 
   /**
@@ -41,6 +41,6 @@ export class SlotAdmin$ {
       .replace('{slotId}', slotId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

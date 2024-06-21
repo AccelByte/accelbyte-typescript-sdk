@@ -18,7 +18,7 @@ import { PaginatedAchievementResponse } from '../../generated-definitions/Pagina
 
 export class AchievementsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
@@ -44,7 +44,7 @@ export class AchievementsAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedAchievementResponse,
       'PaginatedAchievementResponse'
@@ -59,7 +59,7 @@ export class AchievementsAdmin$ {
     const url = '/achievement/v1/admin/namespaces/{namespace}/achievements'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AchievementResponse, 'AchievementResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AchievementResponse, 'AchievementResponse')
   }
 
   /**
@@ -70,7 +70,7 @@ export class AchievementsAdmin$ {
     const url = '/achievement/v1/admin/namespaces/{namespace}/achievements/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -82,7 +82,7 @@ export class AchievementsAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
   }
 
   /**
@@ -95,7 +95,7 @@ export class AchievementsAdmin$ {
       .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -108,7 +108,7 @@ export class AchievementsAdmin$ {
       .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AchievementResponse, 'AchievementResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AchievementResponse, 'AchievementResponse')
   }
 
   /**
@@ -121,7 +121,7 @@ export class AchievementsAdmin$ {
       .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -134,6 +134,6 @@ export class AchievementsAdmin$ {
       .replace('{achievementCode}', achievementCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AchievementResponse, 'AchievementResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AchievementResponse, 'AchievementResponse')
   }
 }

@@ -18,7 +18,7 @@ export function LeaderboardConfigurationV3Api(sdk: AccelbyteSDK, args?: ApiArgs)
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
@@ -28,7 +28,7 @@ export function LeaderboardConfigurationV3Api(sdk: AccelbyteSDK, args?: ApiArgs)
     limit?: number
     offset?: number
   }): Promise<GetAllLeaderboardConfigsPublicRespV3> {
-    const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getLeaderboards(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +38,7 @@ export function LeaderboardConfigurationV3Api(sdk: AccelbyteSDK, args?: ApiArgs)
    * &lt;p&gt;This endpoint returns a leaderboard configuration&lt;/p&gt;
    */
   async function getLeaderboard_ByLeaderboardCode(leaderboardCode: string): Promise<GetLeaderboardConfigPublicRespV3> {
-    const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new LeaderboardConfigurationV3$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getLeaderboard_ByLeaderboardCode(leaderboardCode)
     if (resp.error) throw resp.error
     return resp.response.data

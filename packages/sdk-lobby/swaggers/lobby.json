@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Lobby Server",
     "title": "justice-lobby-server",
-    "version": "3.35.5"
+    "version": "3.35.8"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -113,6 +113,7 @@
         ],
         "summary": "get list of friends",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -192,6 +193,7 @@
         ],
         "summary": "get list of incoming friends",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -271,6 +273,7 @@
         ],
         "summary": "get list of incoming friends with requested time info",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -350,6 +353,7 @@
         ],
         "summary": "get list of outgoing friends",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -429,6 +433,7 @@
         ],
         "summary": "get list of outgoing friends with requested time info",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -505,6 +510,7 @@
         ],
         "summary": "get list of friends with platform data",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -580,6 +586,7 @@
         ],
         "summary": "user add friend",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -649,6 +656,7 @@
         ],
         "summary": "user accept friend",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -718,6 +726,7 @@
         ],
         "summary": "user cancel a friend request",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -787,6 +796,7 @@
         ],
         "summary": "user reject a friend request",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -850,6 +860,7 @@
         ],
         "summary": "user get friendship status",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -919,6 +930,7 @@
         ],
         "summary": "user unfriend a friend",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -989,6 +1001,7 @@
         ],
         "summary": "Add friends without confirmation",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [CREATE]"]
@@ -1066,6 +1079,7 @@
         ],
         "summary": "Delete friends, and incoming/outgoing friend requests",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [DELETE]"]
@@ -1142,6 +1156,7 @@
         ],
         "summary": "sync friends using server to server call to native first party server.",
         "tags": ["friends", "public"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -1214,6 +1229,7 @@
         ],
         "summary": "sync blocked user using server to server call to native first party server.",
         "tags": ["blocks"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -1268,9 +1284,76 @@
         ],
         "summary": "admin get all namespaces config",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:*:LOBBY:CONFIG [READ]"]
+          }
+        ]
+      }
+    },
+    "/lobby/v1/admin/config/log": {
+      "get": {
+        "description": "Get Log Configuration.\u0026lt;br\u0026gt;",
+        "operationId": "adminGetLogConfig",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get Log Configuration",
+        "tags": ["config"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CONFIG:LOG [READ]"]
+          }
+        ]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "Update Log Configuration.\u0026lt;br\u0026gt;",
+        "operationId": "adminPatchUpdateLogConfig",
+        "parameters": [
+          {
+            "description": "Optional values can be omitted and will update partially",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Patch Update Log Configuration",
+        "tags": ["config"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CONFIG:LOG [UPDATE]"]
           }
         ]
       }
@@ -1335,6 +1418,7 @@
         ],
         "summary": "admin get namespace config",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"]
@@ -1415,6 +1499,7 @@
         ],
         "summary": "admin update namespace config",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]"]
@@ -1469,6 +1554,7 @@
         ],
         "summary": "Export lobby config to a json file.",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"]
@@ -1530,6 +1616,7 @@
         ],
         "summary": "Import lobby config from a json file.",
         "tags": ["config"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]"]
@@ -1628,6 +1715,7 @@
         ],
         "summary": "get list of friends",
         "tags": ["friends"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"]
@@ -1716,6 +1804,7 @@
         ],
         "summary": "get incoming friend requests",
         "tags": ["friends"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"]
@@ -1812,6 +1901,7 @@
         ],
         "summary": "Load list friends of friends",
         "tags": ["friends"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"]
@@ -1894,6 +1984,7 @@
         ],
         "summary": "get list of outgoing friend requests",
         "tags": ["friends"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:FRIENDS [READ]"]
@@ -1934,6 +2025,7 @@
         ],
         "summary": "Delete of global configuration data.",
         "tags": ["admin", "global-configurations"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [DELETE]"]
@@ -1990,6 +2082,7 @@
         ],
         "summary": "Record of global configuration dsmc.",
         "tags": ["admin", "global-configurations"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [READ]"]
@@ -2039,6 +2132,7 @@
         ],
         "summary": "Upsert global configuration data.",
         "tags": ["admin", "global-configurations"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CONFIG [UPDATE]"]
@@ -2100,6 +2194,7 @@
         ],
         "summary": "send freeform notification to multiple users",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -2167,6 +2262,7 @@
         ],
         "summary": "send freeform notification to connected users",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -2241,6 +2337,7 @@
         ],
         "summary": "send freeform notification to a party",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -2315,6 +2412,7 @@
         ],
         "summary": "send templated notification to a party",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -2385,6 +2483,7 @@
         ],
         "summary": "get all notification template in a namespace",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
@@ -2456,6 +2555,7 @@
         ],
         "summary": "create new notification template",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -2523,6 +2623,7 @@
         ],
         "summary": "send notification to connected users with template",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -2588,6 +2689,7 @@
         ],
         "summary": "delete template slug in notification template",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"]
@@ -2672,6 +2774,7 @@
         ],
         "summary": "get all notification template localization in a slug",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
@@ -2744,6 +2847,7 @@
         ],
         "summary": "delete template localization",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"]
@@ -2817,6 +2921,7 @@
         ],
         "summary": "get a template localization",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
@@ -2901,6 +3006,7 @@
         ],
         "summary": "update template localization",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]"]
@@ -2973,6 +3079,7 @@
         ],
         "summary": "publish template localization draft",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -3052,6 +3159,7 @@
         ],
         "summary": "get topic by namespace",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
@@ -3111,6 +3219,7 @@
         ],
         "summary": "create new notification topic",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -3176,6 +3285,7 @@
         ],
         "summary": "delete topic information by topic name",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [DELETE]"]
@@ -3242,6 +3352,7 @@
         ],
         "summary": "get topic information by topic name",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]"]
@@ -3320,6 +3431,7 @@
         ],
         "summary": "update topic information by topic name",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [UPDATE]"]
@@ -3394,6 +3506,7 @@
         ],
         "summary": "send freeform notification to a user",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -3468,6 +3581,7 @@
         ],
         "summary": "send templated notification to specific user",
         "tags": ["notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -3542,6 +3656,7 @@
         ],
         "summary": "admin get party data",
         "tags": ["party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]"]
@@ -3631,6 +3746,7 @@
         ],
         "summary": "admin update party attributes",
         "tags": ["Lobby Operations"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]"]
@@ -3714,6 +3830,7 @@
         ],
         "summary": "admin join a player into a party",
         "tags": ["Lobby Operations"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [UPDATE]"]
@@ -3788,6 +3905,7 @@
         ],
         "summary": "admin get user party data",
         "tags": ["party"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PARTY:STORAGE [READ]"]
@@ -3855,6 +3973,7 @@
         ],
         "summary": "admin get number of players currently connected to the lobby.",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOBBY:CCU [READ]"]
@@ -3931,6 +4050,7 @@
         ],
         "summary": "admin get blocked players by bulk user ids",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"]
@@ -3993,6 +4113,7 @@
         ],
         "summary": "admin get all player's session attribute",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]"]
@@ -4071,6 +4192,7 @@
         ],
         "summary": "admin set player's session attribute",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [UPDATE]"]
@@ -4152,6 +4274,7 @@
         ],
         "summary": "admin get player's session attribute",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:ATTRIBUTES [READ]"]
@@ -4226,6 +4349,7 @@
         ],
         "summary": "admin get blocked players by user id",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"]
@@ -4300,6 +4424,7 @@
         ],
         "summary": "get players who blocked this player by user id",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [READ]"]
@@ -4374,6 +4499,7 @@
         ],
         "summary": "Admin bulk blocks player by list user id",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:PLAYER:BLOCK [CREATE]"]
@@ -4453,6 +4579,7 @@
         ],
         "summary": "get the list of filters that would modify the phrase",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
@@ -4527,6 +4654,7 @@
         ],
         "summary": "get the list of filters inside the list",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
@@ -4605,6 +4733,7 @@
         ],
         "summary": "add a single filter into the list",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"]
@@ -4685,6 +4814,7 @@
         ],
         "summary": "add multiple filters into the list",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"]
@@ -4768,6 +4898,7 @@
         ],
         "summary": "import a file with filters",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"]
@@ -4854,6 +4985,7 @@
         ],
         "summary": "delete the filter from the list",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]"]
@@ -4924,6 +5056,7 @@
         ],
         "summary": "get lists",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
@@ -4995,6 +5128,7 @@
         ],
         "summary": "create a new list",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [CREATE]"]
@@ -5066,6 +5200,7 @@
         ],
         "summary": "delete a list include all filters inside of it",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [DELETE]"]
@@ -5144,6 +5279,7 @@
         ],
         "summary": "update the list",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]"]
@@ -5211,6 +5347,7 @@
         ],
         "summary": "get current profanity rule",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
@@ -5282,6 +5419,7 @@
         ],
         "summary": "set current profanity rule",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [UPDATE]"]
@@ -5358,6 +5496,7 @@
         ],
         "summary": "verify a message directly from the UI or other services",
         "tags": ["profanity"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:PROFANITY [READ]"]
@@ -5420,6 +5559,7 @@
         ],
         "summary": "Delete Third Party Steam Config",
         "tags": ["thirdParty"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]"]
@@ -5478,6 +5618,7 @@
         ],
         "summary": "Get Third Party Steam Config",
         "tags": ["thirdParty"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [READ]"]
@@ -5552,6 +5693,7 @@
         ],
         "summary": "Create Third Party Steam Config",
         "tags": ["thirdParty"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [CREATE]"]
@@ -5620,6 +5762,7 @@
         ],
         "summary": "Update Third Party Steam Config",
         "tags": ["thirdParty"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [UPDATE]"]
@@ -5656,7 +5799,8 @@
           }
         ],
         "summary": "get service messages",
-        "tags": ["Lobby Operations"]
+        "tags": ["Lobby Operations"],
+        "x-errorCodes": {}
       }
     },
     "/lobby/v1/public/party/namespaces/{namespace}/parties/{partyId}": {
@@ -5726,6 +5870,7 @@
         ],
         "summary": "get party data by party id",
         "tags": ["party"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -5811,6 +5956,7 @@
         ],
         "summary": "update party attributes",
         "tags": ["party"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -5887,6 +6033,7 @@
         ],
         "summary": "set party limit",
         "tags": ["party"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -5956,6 +6103,7 @@
         ],
         "summary": "block player by user id",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -6019,6 +6167,7 @@
         ],
         "summary": "get blocked players by user id",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -6082,6 +6231,7 @@
         ],
         "summary": "get players who blocked this player by user id",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -6151,6 +6301,7 @@
         ],
         "summary": "unblock player by user id",
         "tags": ["player"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -6216,6 +6367,7 @@
         ],
         "summary": "Query users presence",
         "tags": ["presence"],
+        "x-errorCodes": {},
         "x-security": []
       }
     },
@@ -6279,6 +6431,7 @@
         ],
         "summary": "send freeform notification to a user",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -6372,6 +6525,7 @@
         ],
         "summary": "Get list of notifications",
         "tags": ["notification", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TOPIC [READ]"]
@@ -6439,6 +6593,7 @@
         ],
         "summary": "send notification to a user with template",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:NOTIFICATION [CREATE]"]
@@ -6503,6 +6658,7 @@
         ],
         "summary": "get all notification template in a namespace",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [READ]"]
@@ -6568,6 +6724,7 @@
         ],
         "summary": "create new notification template",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [CREATE]"]
@@ -6633,6 +6790,7 @@
         ],
         "summary": "delete template localization",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [DELETE]"]
@@ -6717,6 +6875,7 @@
         ],
         "summary": "get all notification template in a slug",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [READ]"]
@@ -6789,6 +6948,7 @@
         ],
         "summary": "delete template localization",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [DELETE]"]
@@ -6862,6 +7022,7 @@
         ],
         "summary": "get a template localization",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [READ]"]
@@ -6940,6 +7101,7 @@
         ],
         "summary": "update template draft",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [UPDATE]"]
@@ -7012,6 +7174,7 @@
         ],
         "summary": "publish draft template",
         "tags": ["admin", "notification"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TEMPLATE [CREATE]"]
@@ -7091,6 +7254,7 @@
         ],
         "summary": "get topic by namespace",
         "tags": ["notification", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TOPIC [READ]"]
@@ -7156,6 +7320,7 @@
         ],
         "summary": "create new notification topic",
         "tags": ["notification", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TOPIC [CREATE]"]
@@ -7221,6 +7386,7 @@
         ],
         "summary": "delete topic information by topic name",
         "tags": ["notification", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TOPIC [DELETE]"]
@@ -7287,6 +7453,7 @@
         ],
         "summary": "get topic information by topic name",
         "tags": ["notification", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TOPIC [READ]"]
@@ -7359,6 +7526,7 @@
         ],
         "summary": "update topic information by topic name",
         "tags": ["notification", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:TOPIC [UPDATE]"]
@@ -7433,6 +7601,7 @@
         ],
         "summary": "send freeform notification to a user",
         "tags": ["notification", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]"]
@@ -7507,6 +7676,7 @@
         ],
         "summary": "send notification to a user with template",
         "tags": ["notification", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:NOTIFICATION [CREATE]"]
@@ -7595,6 +7765,18 @@
         }
       },
       "required": ["Attributes", "Code", "CodeName", "Section", "Service", "Text"]
+    },
+    "logconfig.Configuration": {
+      "properties": {
+        "logLevel": {
+          "enum": ["debug", "error", "fatal", "info", "panic", "trace", "warning"],
+          "type": "string"
+        },
+        "socketLogEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      }
     },
     "model.BulkFriendsRequest": {
       "properties": {
@@ -8616,6 +8798,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "disableRemoveSocketOldConnection": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "enableChat": {
           "type": "boolean",
           "x-omitempty": false
@@ -9086,12 +9272,12 @@
     "path": "/lobby/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-26T03:48:38+00:00",
-    "gitHash": "65bd917f482a2533dd99c82236f646c14bf1360e",
+    "buildDate": "2024-05-29T09:13:46+00:00",
+    "gitHash": "3759dd0225c4a844ee01f99fae6cd97f5899e4a9",
     "name": "justice-lobby-server",
-    "revisionID": "3.35.5",
-    "version": "3.35.5",
+    "revisionID": "3.35.8",
+    "version": "3.35.8",
     "version-justice": "3.45.0",
-    "version-roles-seeding": "1.0.1"
+    "version-roles-seeding": "1.2.36"
   }
 }

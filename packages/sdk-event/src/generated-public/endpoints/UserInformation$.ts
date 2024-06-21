@@ -14,7 +14,7 @@ import { UserLastActivity } from '../../generated-definitions/UserLastActivity.j
 
 export class UserInformation$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -25,7 +25,7 @@ export class UserInformation$ {
     const url = '/event/namespaces/{namespace}/users/{userId}/activities'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -37,7 +37,7 @@ export class UserInformation$ {
     const url = '/event/namespaces/{namespace}/users/{userId}/activities'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventResponse, 'EventResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventResponse, 'EventResponse')
   }
 
   /**
@@ -51,6 +51,6 @@ export class UserInformation$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserLastActivity, 'UserLastActivity')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserLastActivity, 'UserLastActivity')
   }
 }

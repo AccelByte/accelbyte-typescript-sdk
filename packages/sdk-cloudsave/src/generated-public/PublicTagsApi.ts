@@ -17,13 +17,13 @@ export function PublicTagsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * ## Description Retrieve list of available tags by namespace
    */
   async function getTags(queryParams?: { limit?: number; offset?: number }): Promise<ListTagsResponse> {
-    const $ = new PublicTags$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicTags$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getTags(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

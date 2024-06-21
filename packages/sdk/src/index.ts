@@ -5,7 +5,7 @@
  */
 export * from './Types'
 export * from './AccelbyteSDK'
-export * from './constants/InputValidations'
+export * from './constants/IamErrorCode'
 export * from './constants/LinkAccount'
 export * from './utils/ApiUtils'
 export * from './utils/BrowserHelper'

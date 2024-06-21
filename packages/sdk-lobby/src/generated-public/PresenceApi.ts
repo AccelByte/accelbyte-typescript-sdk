@@ -17,7 +17,7 @@ export function PresenceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Query users presence with given namespace and userIds.
@@ -26,7 +26,7 @@ export function PresenceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userIds: string | null
     countOnly?: boolean | null
   }): Promise<GetUsersPresenceResponse> {
-    const $ = new Presence$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Presence$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPresenceUsersPresence(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

@@ -21,32 +21,32 @@ import { TaxResult } from '../../generated-definitions/TaxResult.js'
 
 export class PaymentStation$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Check and get a payment order&#39;s should pay tax.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: tax result&lt;/li&gt;&lt;/ul&gt;
    */
   getPaymentTax(queryParams: {
     paymentOrderNo: string | null
-    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     zipCode?: string | null
   }): Promise<IResponse<TaxResult>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/tax'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TaxResult, 'TaxResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TaxResult, 'TaxResult')
   }
 
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment url.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Get payment link&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment url.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;For Neon Pay payment provider, the &#39;neonPayConfig&#39; field can be used to provide success and cancel URL. If &#39;neonPayConfig&#39; field is not present, the &#39;returnUrl&#39; will be used for both success and cancel URL.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Get payment link&lt;/li&gt;&lt;/ul&gt;
    */
   createPaymentLink(data: PaymentUrlCreate): Promise<IResponse<PaymentUrl>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/payment/link'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentUrl, 'PaymentUrl')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentUrl, 'PaymentUrl')
   }
 
   /**
@@ -57,7 +57,7 @@ export class PaymentStation$ {
     const url = '/platform/public/namespaces/{namespace}/payment/qrcode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -68,7 +68,7 @@ export class PaymentStation$ {
     const url = '/platform/public/namespaces/{namespace}/payment/methods'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentMethodArray, 'PaymentMethodArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentMethodArray, 'PaymentMethodArray')
   }
 
   /**
@@ -77,7 +77,7 @@ export class PaymentStation$ {
   getPaymentReturnurl(queryParams: {
     orderNo: string | null
     paymentOrderNo: string | null
-    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     returnUrl: string | null
     PayerID?: string | null
     foreinginvoice?: string | null
@@ -95,14 +95,14 @@ export class PaymentStation$ {
     const url = '/platform/public/namespaces/{namespace}/payment/returnurl'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment provider public config, at current only Strip provide public config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Public config&lt;/li&gt;&lt;/ul&gt;
    */
   getPaymentPublicconfig(queryParams: {
-    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     region: string | null
     sandbox?: boolean | null
   }): Promise<IResponse<unknown>> {
@@ -110,7 +110,7 @@ export class PaymentStation$ {
     const url = '/platform/public/namespaces/{namespace}/payment/publicconfig'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -118,7 +118,7 @@ export class PaymentStation$ {
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment provider customization, at current only Adyen provide customization. This api has been deprecated, pls use /public/namespaces/{namespace}/payment/publicconfig to get adyen config&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: customization&lt;/li&gt;&lt;/ul&gt;
    */
   getPaymentCustomization_DEPRECATED(queryParams: {
-    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+    paymentProvider: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
     region: string | null
     sandbox?: boolean | null
   }): Promise<IResponse<Customization>> {
@@ -126,7 +126,7 @@ export class PaymentStation$ {
     const url = '/platform/public/namespaces/{namespace}/payment/customization'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Customization, 'Customization')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Customization, 'Customization')
   }
 
   /**
@@ -136,7 +136,7 @@ export class PaymentStation$ {
     paymentOrderNo: string,
     data: PaymentToken,
     queryParams?: {
-      paymentProvider?: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
+      paymentProvider?: 'ADYEN' | 'ALIPAY' | 'CHECKOUT' | 'NEONPAY' | 'PAYPAL' | 'STRIPE' | 'WALLET' | 'WXPAY' | 'XSOLLA'
       zipCode?: string | null
     }
   ): Promise<IResponse<PaymentProcessResult>> {
@@ -146,7 +146,7 @@ export class PaymentStation$ {
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentProcessResult, 'PaymentProcessResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentProcessResult, 'PaymentProcessResult')
   }
 
   /**
@@ -159,7 +159,7 @@ export class PaymentStation$ {
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentOrderDetails, 'PaymentOrderDetails')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PaymentOrderDetails, 'PaymentOrderDetails')
   }
 
   /**
@@ -172,6 +172,11 @@ export class PaymentStation$ {
       .replace('{paymentOrderNo}', paymentOrderNo)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaymentOrderPaidResult, 'PaymentOrderPaidResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentOrderPaidResult,
+      'PaymentOrderPaidResult'
+    )
   }
 }

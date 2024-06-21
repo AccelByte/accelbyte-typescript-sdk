@@ -13,7 +13,7 @@ import { ReasonGroupListResponse } from '../../generated-definitions/ReasonGroup
 
 export class PublicReasons$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   getReasons(queryParams?: {
     group?: string | null
@@ -25,7 +25,12 @@ export class PublicReasons$ {
     const url = '/reporting/v1/public/namespaces/{namespace}/reasons'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PublicReasonListResponse, 'PublicReasonListResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PublicReasonListResponse,
+      'PublicReasonListResponse'
+    )
   }
 
   /**
@@ -36,6 +41,11 @@ export class PublicReasons$ {
     const url = '/reporting/v1/public/namespaces/{namespace}/reasonGroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReasonGroupListResponse, 'ReasonGroupListResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ReasonGroupListResponse,
+      'ReasonGroupListResponse'
+    )
   }
 }

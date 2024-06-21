@@ -10,15 +10,15 @@
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { InputValidationConfigVersion } from '../generated-definitions/InputValidationConfigVersion.js'
-import { InputValidations$ } from './endpoints/InputValidations$.js'
 import { InputValidationsPublicResponse } from '../generated-definitions/InputValidationsPublicResponse.js'
+import { InputValidations$ } from './endpoints/InputValidations$.js'
 
 export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * No role required This endpoint is to get list of input validation configuration. &lt;code&gt;regex&lt;/code&gt; parameter will be returned if &lt;code&gt;isCustomRegex&lt;/code&gt; is true. Otherwise, it will be empty.
@@ -27,7 +27,7 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     defaultOnEmpty?: boolean | null
     languageCode?: string | null
   }): Promise<InputValidationsPublicResponse> {
-    const $ = new InputValidations$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new InputValidations$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInputValidations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +37,7 @@ export function InputValidationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint is to get input validation configuration by field.
    */
   async function getInputValidation_ByField(field: string): Promise<InputValidationConfigVersion> {
-    const $ = new InputValidations$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new InputValidations$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInputValidation_ByField(field)
     if (resp.error) throw resp.error
     return resp.response.data

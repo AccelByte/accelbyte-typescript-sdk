@@ -28,7 +28,7 @@ import { UserSeasonSummaryArray } from '../../generated-definitions/UserSeasonSu
 
 export class SeasonAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to query seasons, seasons only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of season basic info&lt;/li&gt;&lt;/ul&gt;
@@ -39,7 +39,7 @@ export class SeasonAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListSeasonInfoPagingSlicedResult,
       'ListSeasonInfoPagingSlicedResult'
@@ -54,7 +54,7 @@ export class SeasonAdmin$ {
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SeasonInfo, 'SeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SeasonInfo, 'SeasonInfo')
   }
 
   /**
@@ -65,7 +65,7 @@ export class SeasonAdmin$ {
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons/current'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SeasonSummary, 'SeasonSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SeasonSummary, 'SeasonSummary')
   }
 
   /**
@@ -78,7 +78,7 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -91,7 +91,7 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SeasonInfo, 'SeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SeasonInfo, 'SeasonInfo')
   }
 
   /**
@@ -104,7 +104,7 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SeasonInfo, 'SeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SeasonInfo, 'SeasonInfo')
   }
 
   /**
@@ -121,7 +121,7 @@ export class SeasonAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ListUserSeasonInfoPagingSlicedResult,
       'ListUserSeasonInfoPagingSlicedResult'
@@ -138,7 +138,7 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, FullSeasonInfo, 'FullSeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullSeasonInfo, 'FullSeasonInfo')
   }
 
   /**
@@ -151,7 +151,7 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SeasonInfo, 'SeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SeasonInfo, 'SeasonInfo')
   }
 
   /**
@@ -164,7 +164,7 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SeasonInfo, 'SeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SeasonInfo, 'SeasonInfo')
   }
 
   /**
@@ -177,7 +177,7 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SeasonInfo, 'SeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SeasonInfo, 'SeasonInfo')
   }
 
   /**
@@ -190,7 +190,7 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SeasonInfo, 'SeasonInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SeasonInfo, 'SeasonInfo')
   }
 
   /**
@@ -215,7 +215,7 @@ export class SeasonAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ExpGrantHistoryPagingSlicedResult,
       'ExpGrantHistoryPagingSlicedResult'
@@ -232,7 +232,7 @@ export class SeasonAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -243,7 +243,12 @@ export class SeasonAdmin$ {
     const url = '/seasonpass/admin/namespaces/{namespace}/seasons/current/users/bulk/progression'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserSeasonSummaryArray, 'UserSeasonSummaryArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserSeasonSummaryArray,
+      'UserSeasonSummaryArray'
+    )
   }
 
   /**
@@ -257,7 +262,12 @@ export class SeasonAdmin$ {
       .replace('{seasonId}', seasonId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClaimableUserSeasonInfo, 'ClaimableUserSeasonInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ClaimableUserSeasonInfo,
+      'ClaimableUserSeasonInfo'
+    )
   }
 
   /**
@@ -270,7 +280,7 @@ export class SeasonAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ReasonTagsResult, 'ReasonTagsResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ReasonTagsResult, 'ReasonTagsResult')
   }
 
   /**
@@ -283,7 +293,7 @@ export class SeasonAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserSeasonSummary, 'UserSeasonSummary')
   }
 
   /**
@@ -296,7 +306,7 @@ export class SeasonAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -309,6 +319,6 @@ export class SeasonAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Ownership, 'Ownership')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Ownership, 'Ownership')
   }
 }

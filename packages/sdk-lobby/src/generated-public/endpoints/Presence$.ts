@@ -12,7 +12,7 @@ import { GetUsersPresenceResponse } from '../../generated-definitions/GetUsersPr
 
 export class Presence$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query users presence with given namespace and userIds.
@@ -25,6 +25,11 @@ export class Presence$ {
     const url = '/lobby/v1/public/presence/namespaces/{namespace}/users/presence'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUsersPresenceResponse, 'GetUsersPresenceResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetUsersPresenceResponse,
+      'GetUsersPresenceResponse'
+    )
   }
 }

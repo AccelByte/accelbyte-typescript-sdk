@@ -14,7 +14,7 @@ import { RequestReconcileMaxActiveSession } from '../../generated-definitions/Re
 
 export class MaxActiveAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  Reconcile Max Active Session.
@@ -26,7 +26,7 @@ export class MaxActiveAdmin$ {
       .replace('{name}', name)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -40,6 +40,6 @@ export class MaxActiveAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MemberActiveSession, 'MemberActiveSession')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MemberActiveSession, 'MemberActiveSession')
   }
 }

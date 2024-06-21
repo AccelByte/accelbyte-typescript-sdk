@@ -17,13 +17,13 @@ export function PublicDownloadCountLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) 
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * This endpoint can be used to count how many the ugc downloaded
    */
   async function createDownloadcount_ByContentId(contentId: string): Promise<AddDownloadCountResponse> {
-    const $ = new PublicDownloadCountLegacy$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicDownloadCountLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createDownloadcount_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data

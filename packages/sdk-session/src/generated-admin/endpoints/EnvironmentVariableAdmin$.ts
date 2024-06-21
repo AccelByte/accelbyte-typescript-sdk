@@ -12,7 +12,7 @@ import { EnvironmentVariableListResponse } from '../../generated-definitions/Env
 
 export class EnvironmentVariableAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * List of environment variables.
@@ -23,7 +23,7 @@ export class EnvironmentVariableAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       EnvironmentVariableListResponse,
       'EnvironmentVariableListResponse'

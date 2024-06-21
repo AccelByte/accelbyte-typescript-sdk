@@ -9,21 +9,21 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ChallengeProgressionAdmin$ } from './endpoints/ChallengeProgressionAdmin$.js'
 import { EvaluatePlayerProgressionRequest } from '../generated-definitions/EvaluatePlayerProgressionRequest.js'
+import { ChallengeProgressionAdmin$ } from './endpoints/ChallengeProgressionAdmin$.js'
 
 export function ChallengeProgressionAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;/ul&gt;
    */
   async function createProgresEvaluate(data: EvaluatePlayerProgressionRequest): Promise<unknown> {
-    const $ = new ChallengeProgressionAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ChallengeProgressionAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createProgresEvaluate(data)
     if (resp.error) throw resp.error
     return resp.response.data

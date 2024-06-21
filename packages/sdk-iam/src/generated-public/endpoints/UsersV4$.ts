@@ -14,20 +14,25 @@ import { BackupCodesResponseV4 } from '../../generated-definitions/BackupCodesRe
 import { CreateTestUserRequestV4 } from '../../generated-definitions/CreateTestUserRequestV4.js'
 import { CreateUserRequestV4 } from '../../generated-definitions/CreateUserRequestV4.js'
 import { CreateUserResponseV4 } from '../../generated-definitions/CreateUserResponseV4.js'
+import { DisableMfaRequest } from '../../generated-definitions/DisableMfaRequest.js'
 import { EmailUpdateRequestV4 } from '../../generated-definitions/EmailUpdateRequestV4.js'
 import { EnabledFactorsResponseV4 } from '../../generated-definitions/EnabledFactorsResponseV4.js'
 import { InviteUserResponseV3 } from '../../generated-definitions/InviteUserResponseV3.js'
+import { PlatformUserIdRequestV4 } from '../../generated-definitions/PlatformUserIdRequestV4.js'
 import { PublicInviteUserRequestV4 } from '../../generated-definitions/PublicInviteUserRequestV4.js'
 import { PublicUserUpdateRequestV3 } from '../../generated-definitions/PublicUserUpdateRequestV3.js'
 import { UpgradeHeadlessAccountRequestV4 } from '../../generated-definitions/UpgradeHeadlessAccountRequestV4.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from '../../generated-definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4.js'
+import { UserMfaStatusResponseV4 } from '../../generated-definitions/UserMfaStatusResponseV4.js'
+import { UserMfaTokenResponseV4 } from '../../generated-definitions/UserMfaTokenResponseV4.js'
+import { UserPlatforms } from '../../generated-definitions/UserPlatforms.js'
 import { UserPublicInfoResponseV4 } from '../../generated-definitions/UserPublicInfoResponseV4.js'
 import { UserResponseV3 } from '../../generated-definitions/UserResponseV3.js'
 import { UserResponseV4 } from '../../generated-definitions/UserResponseV4.js'
 
 export class UsersV4$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Request body details: - emailAddress: email address of the user to be invited - namespace: new namespace of the user to be created - namespaceDisplayName: display name of the new namespace - additionalData(optional): for utm parameter data The invited users will also be assigned with &#34;User&#34; role by default.
@@ -37,7 +42,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/users/invite'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, InviteUserResponseV3, 'InviteUserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, InviteUserResponseV3, 'InviteUserResponseV3')
   }
 
   /**
@@ -48,7 +53,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateUserResponseV4, 'CreateUserResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateUserResponseV4, 'CreateUserResponseV4')
   }
 
   /**
@@ -59,7 +64,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV3, 'UserResponseV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV3, 'UserResponseV3')
   }
 
   /**
@@ -70,7 +75,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/test_users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateUserResponseV4, 'CreateUserResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateUserResponseV4, 'CreateUserResponseV4')
   }
 
   /**
@@ -81,7 +86,12 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserPublicInfoResponseV4, 'UserPublicInfoResponseV4')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserPublicInfoResponseV4,
+      'UserPublicInfoResponseV4'
+    )
   }
 
   /**
@@ -92,7 +102,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/email'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -103,7 +113,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/device'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -114,7 +124,12 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/factor'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EnabledFactorsResponseV4, 'EnabledFactorsResponseV4')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      EnabledFactorsResponseV4,
+      'EnabledFactorsResponseV4'
+    )
   }
 
   /**
@@ -128,7 +143,23 @@ export class UsersV4$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * This endpoint will get user&#39;s&#39; MFA status.
+   */
+  createUserMeMfaStatus(): Promise<IResponse<UserMfaStatusResponseV4>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/status'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserMfaStatusResponseV4,
+      'UserMfaStatusResponseV4'
+    )
   }
 
   /**
@@ -140,7 +171,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BackupCodesResponseV4, 'BackupCodesResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BackupCodesResponseV4, 'BackupCodesResponseV4')
   }
 
   /**
@@ -152,18 +183,21 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BackupCodesResponseV4, 'BackupCodesResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BackupCodesResponseV4, 'BackupCodesResponseV4')
   }
 
   /**
-   * This endpoint is used to send email code.
+   * This endpoint is used to send email code. ---------------- Supported values of action: * ChangePassword * DisableMFAEmail
    */
-  createUserMeMfaEmailCode(): Promise<IResponse<unknown>> {
+  postUserMeMfaEmailCode(data: { action?: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/code'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, null, { params })
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -174,29 +208,29 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/headless/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV4, 'UserResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV4, 'UserResponseV4')
   }
 
   /**
    * This endpoint is used to get existing 8-digits backup codes. Each codes is a one-time code and will be deleted once used. The codes will be sent through linked email.
    */
-  getUsersMeMfaBackupCodes(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  getUsersMeMfaBackupCodes(queryParams?: { languageTag?: string | null }): Promise<IResponse<unknown>> {
+    const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCodes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
    * This endpoint is used to generate 8-digits backup codes. Each codes is a one-time code and will be deleted once used. The codes will be sent through linked email.
    */
-  createUserMeMfaBackupCode_ByNS(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createUserMeMfaBackupCode_ByNS(queryParams?: { languageTag?: string | null }): Promise<IResponse<unknown>> {
+    const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCodes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -210,18 +244,18 @@ export class UsersV4$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This endpoint is used to disable 2FA email.
+   * This endpoint is used to disable 2FA email. ------ **Note**: **mfaToken** is required when all the following are enabled: - The environment variable **SENSITIVE_MFA_AUTH_ENABLED** is true - The **Two-Factor Authentication** is enabled in the IAM client where user logs in - Users already enabled the MFA
    */
-  createUserMeMfaEmailDisable(): Promise<IResponse<unknown>> {
+  createUserMeMfaEmailDisable(data: DisableMfaRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/disable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.post(url, null, { params })
+    const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -234,7 +268,24 @@ export class UsersV4$ {
       .replace('{invitationId}', invitationId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateUserResponseV4, 'CreateUserResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateUserResponseV4, 'CreateUserResponseV4')
+  }
+
+  /**
+   * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - oculusweb - facebook - google - googleplaygames - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   */
+  createUser_ByPlatformId(
+    platformId: string,
+    data: PlatformUserIdRequestV4,
+    queryParams?: { rawPID?: boolean | null }
+  ): Promise<IResponse<UserPlatforms>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/platforms/{platformId}/users'
+      .replace('{namespace}', this.namespace)
+      .replace('{platformId}', platformId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserPlatforms, 'UserPlatforms')
   }
 
   /**
@@ -245,7 +296,26 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/headless/code/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserResponseV4, 'UserResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserResponseV4, 'UserResponseV4')
+  }
+
+  /**
+   * This endpoint will verify user&#39;s&#39; MFA code and generate a MFA token for the action.
+   */
+  postUserMeMfaChallengeVerify(data: { code?: string | null; factor?: string | null }): Promise<IResponse<UserMfaTokenResponseV4>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/challenge/verify'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserMfaTokenResponseV4,
+      'UserMfaTokenResponseV4'
+    )
   }
 
   /**
@@ -257,7 +327,7 @@ export class UsersV4$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       AuthenticatorKeyResponseV4,
       'AuthenticatorKeyResponseV4'
@@ -273,18 +343,18 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/enable'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BackupCodesResponseV4, 'BackupCodesResponseV4')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BackupCodesResponseV4, 'BackupCodesResponseV4')
   }
 
   /**
-   * This endpoint is used to disable 2FA backup codes.
+   * This endpoint is used to disable 2FA backup codes. ------ **Note**: **mfaToken** is required when all the following are enabled: - The environment variable **SENSITIVE_MFA_AUTH_ENABLED** is true - The **Two-Factor Authentication** is enabled in the IAM client where user logs in - Users already enabled the MFA
    */
-  deleteUserMeMfaBackupCodeDisable(): Promise<IResponse<unknown>> {
+  deleteUserMeMfaBackupCodeDisable(data: DisableMfaRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/disable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.delete(url, { params })
+    const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -295,7 +365,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCodes/enable'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -307,7 +377,7 @@ export class UsersV4$ {
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCode/download'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -321,17 +391,17 @@ export class UsersV4$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * This endpoint is used to disable 2FA authenticator.
+   * This endpoint is used to disable 2FA authenticator. ------ **Note**: **mfaToken** is required when all the following are enabled: - The environment variable **SENSITIVE_MFA_AUTH_ENABLED** is true - The **Two-Factor Authentication** is enabled in the IAM client where user logs in - Users already enabled the MFA
    */
-  deleteUserMeMfaAuthenticatorDisable(): Promise<IResponse<unknown>> {
+  deleteUserMeMfaAuthenticatorDisable(data: DisableMfaRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/disable'.replace('{namespace}', this.namespace)
-    const resultPromise = this.axiosInstance.delete(url, { params })
+    const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

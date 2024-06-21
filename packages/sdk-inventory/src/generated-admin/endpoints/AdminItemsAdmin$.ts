@@ -20,7 +20,7 @@ import { UpdateItemRespArray } from '../../generated-definitions/UpdateItemRespA
 
 export class AdminItemsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  Saving an item. The item will be saved in user&#39;s inventory, If it doesn&#39;t exist it&#39;ll be created. If the item already exists, its qty will be increased, so no new item with same sourceItemId will be created Tags will be auto-created. ItemType will be auto-created. For Ecommerce item, this fields will be override by ecommerce configuration (slotUsed, serverCustomAttributes, customAttributes, type) Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]
@@ -32,7 +32,7 @@ export class AdminItemsAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemResp, 'ItemResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
   }
 
   /**
@@ -43,28 +43,18 @@ export class AdminItemsAdmin$ {
     queryParams?: {
       limit?: number
       offset?: number
-      qtyGte?: number
-      sortBy?:
-        | 'createdAt'
-        | 'createdAt:asc'
-        | 'createdAt:desc'
-        | 'qty'
-        | 'qty:asc'
-        | 'qty:desc'
-        | 'updatedAt'
-        | 'updatedAt:asc'
-        | 'updatedAt:desc'
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
       sourceItemId?: string | null
       tags?: string | null
     }
   ): Promise<IResponse<ListItemResp>> {
-    const params = { limit: 25, qtyGte: 1, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
+    const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
     const url = '/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/items'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListItemResp, 'ListItemResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListItemResp, 'ListItemResp')
   }
 
   /**
@@ -77,7 +67,7 @@ export class AdminItemsAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -95,7 +85,7 @@ export class AdminItemsAdmin$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
   }
 
   /**
@@ -109,7 +99,7 @@ export class AdminItemsAdmin$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemResp, 'ItemResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
   }
 
   /**
@@ -127,7 +117,7 @@ export class AdminItemsAdmin$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
   }
 
   /**
@@ -141,7 +131,7 @@ export class AdminItemsAdmin$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemResp, 'ItemResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
   }
 
   /**
@@ -160,6 +150,6 @@ export class AdminItemsAdmin$ {
       .replace('{sourceItemId}', sourceItemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemResp, 'ItemResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
   }
 }

@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Match Service v2",
-    "version": "2.19.2"
+    "version": "2.20.1"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -36,6 +36,7 @@
     "/healthz": {
       "get": {
         "operationId": "GetHealthcheckInfo",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -45,12 +46,14 @@
           {
             "authorization": []
           }
-        ]
+        ],
+        "x-errorCodes": {}
       }
     },
     "/match2/healthz": {
       "get": {
         "operationId": "GetHealthcheckInfoV1",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -59,6 +62,73 @@
         "security": [
           {
             "authorization": []
+          }
+        ],
+        "x-errorCodes": {}
+      }
+    },
+    "/match2/v1/admin/config/log": {
+      "get": {
+        "description": "Get Log Configuration.\u0026lt;br\u0026gt;",
+        "operationId": "adminGetLogConfig",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get Log Configuration",
+        "tags": ["Config"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CONFIG:LOG [READ]"]
+          }
+        ]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "Update Log Configuration.\u0026lt;br\u0026gt;",
+        "operationId": "adminPatchUpdateLogConfig",
+        "parameters": [
+          {
+            "description": "Optional values can be omitted and will update partially",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Patch Update Log Configuration",
+        "tags": ["Config"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CONFIG:LOG [UPDATE]"]
           }
         ]
       }
@@ -102,6 +172,7 @@
         ],
         "summary": "admin get all namespaces config",
         "tags": ["Config", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:*:MATCHMAKING:CONFIG [READ]"]
@@ -157,6 +228,7 @@
         ],
         "summary": "admin get namespace config",
         "tags": ["Config", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CONFIG [READ]"]
@@ -218,6 +290,7 @@
         ],
         "summary": "admin patch update namespace config",
         "tags": ["Config", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CONFIG [READ]"]
@@ -258,6 +331,7 @@
         ],
         "summary": "List environment variables",
         "tags": ["Environment-Variables", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:MATCHMAKING:CONFIGURATION:ENVIRONMENTVARIABLE [READ]"]
@@ -339,6 +413,7 @@
         ],
         "summary": "Create a backfill ticket",
         "tags": ["Backfill", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [CREATE]"]
@@ -413,6 +488,7 @@
         ],
         "summary": "Get backfill proposal",
         "tags": ["Backfill", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [READ]"]
@@ -478,6 +554,7 @@
         ],
         "summary": "Delete a backfill ticket",
         "tags": ["Backfill", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [DELETE]"]
@@ -550,6 +627,7 @@
         ],
         "summary": "Get a backfill ticket",
         "tags": ["Backfill", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [READ]"]
@@ -632,6 +710,7 @@
         ],
         "summary": "Accept a backfill proposal",
         "tags": ["Backfill", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE]"]
@@ -711,6 +790,7 @@
         ],
         "summary": "Reject a backfill proposal",
         "tags": ["Backfill", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [UPDATE]"]
@@ -780,6 +860,7 @@
         ],
         "summary": "List existing match functions",
         "tags": ["Match-Functions", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [READ]"]
@@ -850,6 +931,7 @@
         ],
         "summary": "Create a match function",
         "tags": ["Match-Functions", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [CREATE]"]
@@ -915,6 +997,7 @@
         ],
         "summary": "Delete a match function",
         "tags": ["Match-Functions", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [DELETE]"]
@@ -995,6 +1078,7 @@
         ],
         "summary": "Update a match function",
         "tags": ["Match-Functions", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [UPDATE]"]
@@ -1070,6 +1154,7 @@
         ],
         "summary": "List match pools",
         "tags": ["Match-Pools", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [READ]"]
@@ -1140,6 +1225,7 @@
         ],
         "summary": "Create a match pool",
         "tags": ["Match-Pools", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [CREATE]"]
@@ -1205,6 +1291,7 @@
         ],
         "summary": "Delete a match pool",
         "tags": ["Match-Pools", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [DELETE]"]
@@ -1265,6 +1352,7 @@
         ],
         "summary": "Get details for a specific match pool",
         "tags": ["Match-Pools", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [READ]"]
@@ -1345,6 +1433,7 @@
         ],
         "summary": "Update a match pool",
         "tags": ["Match-Pools", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL [UPDATE]"]
@@ -1413,6 +1502,7 @@
         ],
         "summary": "Get metrics for a specific match pool",
         "tags": ["Match-Pools", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL:METRICS [READ]"]
@@ -1481,6 +1571,7 @@
         ],
         "summary": "Get metrics player for a specific match pool",
         "tags": ["Match-Pools", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:POOL:METRICS [READ]"]
@@ -1563,6 +1654,7 @@
         ],
         "summary": "Get tickets in queue for a specific match pool",
         "tags": ["Match-Pools", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:POOL:TICKETS [READ]"]
@@ -1644,6 +1736,7 @@
         ],
         "summary": "Create a matchmaking ticket",
         "tags": ["Match-Tickets", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:TICKET [CREATE]"]
@@ -1717,6 +1810,7 @@
         ],
         "summary": "Get my match tickets",
         "tags": ["Match-Tickets", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:TICKET [READ]"]
@@ -1782,6 +1876,7 @@
         ],
         "summary": "Delete a match ticket",
         "tags": ["Match-Tickets", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:TICKET [DELETE]"]
@@ -1848,6 +1943,7 @@
         ],
         "summary": "Get details for a specific match ticket",
         "tags": ["Match-Tickets", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:TICKET [READ]"]
@@ -1923,6 +2019,7 @@
         ],
         "summary": "List existing rule sets",
         "tags": ["Rule-Sets", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [READ]"]
@@ -1993,6 +2090,7 @@
         ],
         "summary": "Create a match rule set",
         "tags": ["Rule-Sets", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [CREATE]"]
@@ -2058,6 +2156,7 @@
         ],
         "summary": "Delete a rule set",
         "tags": ["Rule-Sets", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [DELETE]"]
@@ -2118,6 +2217,7 @@
         ],
         "summary": "Get details for a specific rule set",
         "tags": ["Rule-Sets", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [READ]"]
@@ -2198,6 +2298,7 @@
         ],
         "summary": "Update a match rule set",
         "tags": ["Rule-Sets", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:RULES [UPDATE]"]
@@ -2217,7 +2318,8 @@
           {
             "authorization": []
           }
-        ]
+        ],
+        "x-errorCodes": {}
       }
     }
   },
@@ -2847,6 +2949,14 @@
       },
       "required": ["namespace"]
     },
+    "logconfig.Configuration": {
+      "properties": {
+        "logLevel": {
+          "enum": ["debug", "error", "fatal", "info", "panic", "trace", "warning"],
+          "type": "string"
+        }
+      }
+    },
     "matchmaker.MatchTicketRecord": {
       "properties": {
         "CreatedAt": {
@@ -2958,6 +3068,9 @@
         },
         "TicketID": {
           "type": "string"
+        },
+        "TicketInformation": {
+          "type": "object"
         }
       },
       "required": [
@@ -2969,7 +3082,8 @@
         "Players",
         "ProposedProposal",
         "TicketAttributes",
-        "TicketID"
+        "TicketID",
+        "TicketInformation"
       ]
     },
     "models.Configuration": {
@@ -3292,9 +3406,9 @@
     "path": "/match2/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-25T09:35:51+00:00",
-    "gitHash": "58df903743576b6592c445bf12845900e98c902f",
-    "version": "2.19.2",
-    "version-roles-seeding": "1.2.17"
+    "buildDate": "2024-05-28T07:40:27+00:00",
+    "gitHash": "f00cdc9e53133bc4131e3499fa1452daa1340c17",
+    "version": "2.20.1",
+    "version-roles-seeding": "1.2.36"
   }
 }

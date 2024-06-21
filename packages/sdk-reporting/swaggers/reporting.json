@@ -8,7 +8,7 @@
     },
     "description": "Justice Reporting Service",
     "title": "justice-reporting-service",
-    "version": "0.1.33"
+    "version": "0.1.36"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -73,6 +73,7 @@
         ],
         "summary": "Find Auto Moderation Action List",
         "tags": ["Admin Extension Categories and Auto Moderation Actions"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:REPORTINGCONFIG [READ]"]
@@ -121,6 +122,7 @@
         ],
         "summary": "Create Auto Moderation Action data",
         "tags": ["Admin Extension Categories and Auto Moderation Actions"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:REPORTINGCONFIG [CREATE]"]
@@ -179,6 +181,7 @@
         ],
         "summary": "Find Extension Category List",
         "tags": ["Admin Extension Categories and Auto Moderation Actions"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:REPORTINGCONFIG [READ]"]
@@ -227,6 +230,7 @@
         ],
         "summary": "Create Extension Category",
         "tags": ["Admin Extension Categories and Auto Moderation Actions"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:REPORTINGCONFIG [CREATE]"]
@@ -276,6 +280,7 @@
         ],
         "summary": "Get configuration",
         "tags": ["Admin Configurations"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REPORTINGCONFIG [READ]"]
@@ -330,6 +335,7 @@
         ],
         "summary": "Create/Update configuration",
         "tags": ["Admin Configurations"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REPORTINGCONFIG [CREATE]"]
@@ -384,6 +390,7 @@
         ],
         "summary": "List reason groups under a namespace",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [READ]"]
@@ -444,6 +451,7 @@
         ],
         "summary": "Create a reason group",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [CREATE]"]
@@ -490,6 +498,7 @@
         ],
         "summary": "Delete a reason group",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [DELETE]"]
@@ -542,6 +551,7 @@
         ],
         "summary": "Get reason group",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [READ]"]
@@ -609,6 +619,7 @@
         ],
         "summary": "Update a reason group",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [UPDATE]"]
@@ -681,6 +692,7 @@
         ],
         "summary": "Get list of reasons",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [READ]"]
@@ -741,6 +753,7 @@
         ],
         "summary": "Create a report reason",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [CREATE]"]
@@ -783,6 +796,7 @@
         ],
         "summary": "Get all reasons",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [READ]"]
@@ -842,6 +856,7 @@
         ],
         "summary": "Get list of reasons that not used by moderation rules",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [READ]"]
@@ -887,6 +902,7 @@
         ],
         "summary": "Delete a report reason",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [DELETE]"]
@@ -939,6 +955,7 @@
         ],
         "summary": "Get a single reason",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [READ]"]
@@ -1005,6 +1022,7 @@
         ],
         "summary": "Update a report reason",
         "tags": ["Admin Reasons"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:REASON [UPDATE]"]
@@ -1079,6 +1097,7 @@
         ],
         "summary": "List reports",
         "tags": ["Admin Reports"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TICKET [READ]"]
@@ -1139,6 +1158,7 @@
         ],
         "summary": "Submit a report by admin",
         "tags": ["Admin Reports"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TICKET [CREATE]"]
@@ -1198,6 +1218,7 @@
         ],
         "summary": "Create auto moderation rule",
         "tags": ["Admin Moderation Rule"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:RULE [CREATE]"]
@@ -1249,6 +1270,7 @@
         ],
         "summary": "Delete auto moderation rule",
         "tags": ["Admin Moderation Rule"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:RULE [DELETE]"]
@@ -1321,6 +1343,7 @@
         ],
         "summary": "Update auto moderation rule",
         "tags": ["Admin Moderation Rule"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:RULE [UPDATE]"]
@@ -1386,6 +1409,7 @@
         ],
         "summary": "Enable/Disable auto moderation rule",
         "tags": ["Admin Moderation Rule"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:RULE [UPDATE]"]
@@ -1464,6 +1488,7 @@
         ],
         "summary": "Get auto moderation rules",
         "tags": ["Admin Moderation Rule"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:RULE [READ]"]
@@ -1518,6 +1543,7 @@
         ],
         "summary": "Get auto moderation rule",
         "tags": ["Admin Moderation Rule"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:RULE [READ]"]
@@ -1608,6 +1634,7 @@
         ],
         "summary": "List report tickets",
         "tags": ["Admin Tickets"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TICKET [READ]"]
@@ -1663,6 +1690,7 @@
         ],
         "summary": "Ticket statistic",
         "tags": ["Admin Tickets"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TICKET [READ]"]
@@ -1714,6 +1742,7 @@
         ],
         "summary": "Delete single ticket",
         "tags": ["Admin Tickets"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TICKET [DELETE]"]
@@ -1766,6 +1795,7 @@
         ],
         "summary": "Get single ticket",
         "tags": ["Admin Tickets"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TICKET [READ]"]
@@ -1826,6 +1856,7 @@
         ],
         "summary": "Get reports by ticket ID",
         "tags": ["Admin Tickets"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TICKET [READ]"]
@@ -1882,6 +1913,7 @@
         ],
         "summary": "Update ticket resolution to a given status",
         "tags": ["Admin Tickets"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:TICKET [UPDATE]"]
@@ -1935,7 +1967,8 @@
           }
         ],
         "summary": "List reason groups under a namespace",
-        "tags": ["Public Reasons"]
+        "tags": ["Public Reasons"],
+        "x-errorCodes": {}
       }
     },
     "/reporting/v1/public/namespaces/{namespace}/reasons": {
@@ -2001,7 +2034,8 @@
           }
         ],
         "summary": "Get list of reasons",
-        "tags": ["Public Reasons"]
+        "tags": ["Public Reasons"],
+        "x-errorCodes": {}
       }
     },
     "/reporting/v1/public/namespaces/{namespace}/reports": {
@@ -2064,7 +2098,8 @@
           }
         ],
         "summary": "Submit a report",
-        "tags": ["Public Reports"]
+        "tags": ["Public Reports"],
+        "x-errorCodes": {}
       }
     }
   },
@@ -2887,11 +2922,11 @@
     "path": "/reporting/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-26T07:42:10+00:00",
-    "gitHash": "2cc6a848727e5253f3c2513422402bf5602867f1",
+    "buildDate": "2024-05-17T10:01:14+00:00",
+    "gitHash": "c6201f96a0c5c35079a6aaa5ef8c523d9185ebc9",
     "name": "justice-reporting-service",
     "realm": "dev",
-    "version": "0.1.33",
+    "version": "0.1.36",
     "version-roles-seeding": "0.0.3"
   }
 }

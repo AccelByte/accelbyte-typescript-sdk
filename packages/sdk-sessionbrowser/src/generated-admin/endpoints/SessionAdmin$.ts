@@ -18,7 +18,7 @@ import { SessionQueryResponse } from '../../generated-definitions/SessionQueryRe
 
 export class SessionAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query to available game session
@@ -39,7 +39,7 @@ export class SessionAdmin$ {
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
   }
 
   /**
@@ -52,7 +52,7 @@ export class SessionAdmin$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
   }
 
   /**
@@ -65,7 +65,7 @@ export class SessionAdmin$ {
       .replace('{sessionID}', sessionID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
   }
 
   /**
@@ -87,7 +87,7 @@ export class SessionAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetSessionHistorySearchResponseV2,
       'GetSessionHistorySearchResponseV2'
@@ -103,7 +103,7 @@ export class SessionAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       CountActiveSessionResponse,
       'CountActiveSessionResponse'
@@ -123,7 +123,12 @@ export class SessionAdmin$ {
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/custom-game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ActiveCustomGameResponse, 'ActiveCustomGameResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ActiveCustomGameResponse,
+      'ActiveCustomGameResponse'
+    )
   }
 
   /**
@@ -141,7 +146,7 @@ export class SessionAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ActiveMatchmakingGameResponse,
       'ActiveMatchmakingGameResponse'
@@ -159,7 +164,7 @@ export class SessionAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetSessionHistoryDetailedResponseItemArray,
       'GetSessionHistoryDetailedResponseItemArray'

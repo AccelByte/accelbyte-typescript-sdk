@@ -9,15 +9,15 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { LocalizedPolicyVersionsWithNamespace$ } from './endpoints/LocalizedPolicyVersionsWithNamespace$.js'
 import { RetrieveLocalizedPolicyVersionPublicResponse } from '../generated-definitions/RetrieveLocalizedPolicyVersionPublicResponse.js'
+import { LocalizedPolicyVersionsWithNamespace$ } from './endpoints/LocalizedPolicyVersionsWithNamespace$.js'
 
 export function LocalizedPolicyVersionsWithNamespaceApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
@@ -25,7 +25,7 @@ export function LocalizedPolicyVersionsWithNamespaceApi(sdk: AccelbyteSDK, args?
   async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
   ): Promise<RetrieveLocalizedPolicyVersionPublicResponse> {
-    const $ = new LocalizedPolicyVersionsWithNamespace$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new LocalizedPolicyVersionsWithNamespace$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
     if (resp.error) throw resp.error
     return resp.response.data

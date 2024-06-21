@@ -12,7 +12,7 @@ import { GetAllUserLeaderboardsRespV3 } from '../../generated-definitions/GetAll
 
 export class UserDataV3Admin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;p&gt;Get user leaderboard rankings&lt;/p&gt;
@@ -28,7 +28,7 @@ export class UserDataV3Admin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetAllUserLeaderboardsRespV3,
       'GetAllUserLeaderboardsRespV3'

@@ -18,14 +18,14 @@ export function BansApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans [GET]_**
    */
   async function getBans_DEPRECATED(): Promise<Bans> {
-    const $ = new Bans$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Bans$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getBans_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -36,7 +36,7 @@ export function BansApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/bans/reasons [GET]_**
    */
   async function getBansReasons_DEPRECATED(): Promise<BanReasons> {
-    const $ = new Bans$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Bans$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getBansReasons_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data

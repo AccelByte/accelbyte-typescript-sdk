@@ -16,7 +16,7 @@ import { GameRecordResponse } from '../../generated-definitions/GameRecordRespon
 
 export class PublicGameRecord$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Bulk get game records. Maximum key per request 20.
@@ -26,7 +26,12 @@ export class PublicGameRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/records/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkGetGameRecordResponse, 'BulkGetGameRecordResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      BulkGetGameRecordResponse,
+      'BulkGetGameRecordResponse'
+    )
   }
 
   /**
@@ -37,7 +42,7 @@ export class PublicGameRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -48,7 +53,7 @@ export class PublicGameRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameRecordResponse, 'GameRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GameRecordResponse, 'GameRecordResponse')
   }
 
   /**
@@ -59,7 +64,7 @@ export class PublicGameRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameRecordResponse, 'GameRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GameRecordResponse, 'GameRecordResponse')
   }
 
   /**
@@ -70,6 +75,6 @@ export class PublicGameRecord$ {
     const url = '/cloudsave/v1/namespaces/{namespace}/records/{key}'.replace('{namespace}', this.namespace).replace('{key}', key)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GameRecordResponse, 'GameRecordResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GameRecordResponse, 'GameRecordResponse')
   }
 }

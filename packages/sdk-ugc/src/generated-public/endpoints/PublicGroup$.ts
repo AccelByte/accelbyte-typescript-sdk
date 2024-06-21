@@ -17,7 +17,7 @@ import { PaginatedGroupResponse } from '../../generated-definitions/PaginatedGro
 
 export class PublicGroup$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get user groups paginated
@@ -29,7 +29,12 @@ export class PublicGroup$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PaginatedGroupResponse, 'PaginatedGroupResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaginatedGroupResponse,
+      'PaginatedGroupResponse'
+    )
   }
 
   /**
@@ -42,7 +47,7 @@ export class PublicGroup$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -56,7 +61,7 @@ export class PublicGroup$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -70,7 +75,7 @@ export class PublicGroup$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -84,7 +89,7 @@ export class PublicGroup$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
 
   /**
@@ -103,7 +108,7 @@ export class PublicGroup$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponse,
       'PaginatedContentDownloadResponse'
@@ -126,7 +131,7 @@ export class PublicGroup$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponseV2,
       'PaginatedContentDownloadResponseV2'

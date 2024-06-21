@@ -15,7 +15,7 @@ import { SlotMetadataUpdate } from '../../generated-definitions/SlotMetadataUpda
 
 export class Slot$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -28,7 +28,7 @@ export class Slot$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SlotInfoArray, 'SlotInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SlotInfoArray, 'SlotInfoArray')
   }
 
   /**
@@ -46,7 +46,7 @@ export class Slot$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -61,7 +61,7 @@ export class Slot$ {
       .replace('{slotId}', slotId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -76,7 +76,7 @@ export class Slot$ {
       .replace('{slotId}', slotId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -96,7 +96,7 @@ export class Slot$ {
       .replace('{slotId}', slotId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SlotInfo, 'SlotInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SlotInfo, 'SlotInfo')
   }
 
   /**
@@ -111,6 +111,6 @@ export class Slot$ {
       .replace('{slotId}', slotId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, SlotInfo, 'SlotInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SlotInfo, 'SlotInfo')
   }
 }

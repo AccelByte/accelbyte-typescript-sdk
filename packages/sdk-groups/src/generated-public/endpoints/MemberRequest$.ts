@@ -12,7 +12,7 @@ import { GetMemberRequestsListResponseV1 } from '../../generated-definitions/Get
 
 export class MemberRequest$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required valid user authentication This endpoint is used to Get My Join Request To The Groups Get My Join Request To The Groups for the user calling this endpoint. It will check any join request group for this user Action Code: 73502
@@ -23,7 +23,7 @@ export class MemberRequest$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetMemberRequestsListResponseV1,
       'GetMemberRequestsListResponseV1'
@@ -39,7 +39,7 @@ export class MemberRequest$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetMemberRequestsListResponseV1,
       'GetMemberRequestsListResponseV1'
@@ -60,7 +60,7 @@ export class MemberRequest$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetMemberRequestsListResponseV1,
       'GetMemberRequestsListResponseV1'
@@ -81,7 +81,7 @@ export class MemberRequest$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetMemberRequestsListResponseV1,
       'GetMemberRequestsListResponseV1'
@@ -102,7 +102,7 @@ export class MemberRequest$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetMemberRequestsListResponseV1,
       'GetMemberRequestsListResponseV1'

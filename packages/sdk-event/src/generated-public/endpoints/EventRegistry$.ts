@@ -13,7 +13,7 @@ import { EventRegistry } from '../../generated-definitions/EventRegistry.js'
 
 export class EventRegistry$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -24,7 +24,7 @@ export class EventRegistry$ {
     const url = '/event/registry/eventIds'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventRegistry, 'EventRegistry')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventRegistry, 'EventRegistry')
   }
 
   /**
@@ -36,7 +36,7 @@ export class EventRegistry$ {
     const url = '/event/registry/eventIds'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -48,7 +48,7 @@ export class EventRegistry$ {
     const url = '/event/registry/eventIds/{eventId}'.replace('{eventId}', eventId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -60,7 +60,7 @@ export class EventRegistry$ {
     const url = '/event/registry/eventIds/{eventId}'.replace('{eventId}', eventId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventRegistry, 'EventRegistry')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventRegistry, 'EventRegistry')
   }
 
   /**
@@ -72,7 +72,7 @@ export class EventRegistry$ {
     const url = '/event/registry/eventIds/{eventId}'.replace('{eventId}', eventId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -84,6 +84,6 @@ export class EventRegistry$ {
     const url = '/event/registry/eventTypes/{eventType}'.replace('{eventType}', eventType)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EventRegistry, 'EventRegistry')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EventRegistry, 'EventRegistry')
   }
 }

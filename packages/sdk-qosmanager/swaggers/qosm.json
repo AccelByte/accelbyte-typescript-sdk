@@ -100,7 +100,8 @@
           }
         ],
         "summary": "Update QoS Service configuration",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/qosm/admin/servers/{region}": {
@@ -137,7 +138,8 @@
           }
         ],
         "summary": "Delete a QoS service record",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/qosm/admin/servers/{region}/alias": {
@@ -194,7 +196,8 @@
           }
         ],
         "summary": "Modify a QoS service's region alias",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/qosm/public/namespaces/{namespace}/qos": {
@@ -238,7 +241,8 @@
           }
         ],
         "summary": "Get list of QoS services per region",
-        "tags": ["Public"]
+        "tags": ["Public"],
+        "x-errorCodes": {}
       }
     },
     "/qosm/public/qos": {
@@ -267,7 +271,8 @@
           }
         ],
         "summary": "Get list of QoS services",
-        "tags": ["Public"]
+        "tags": ["Public"],
+        "x-errorCodes": {}
       }
     },
     "/qosm/servers/heartbeat": {
@@ -311,7 +316,8 @@
           }
         ],
         "summary": "Send heartbeat",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     }
   },
@@ -403,11 +409,11 @@
     "path": "/qosm/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-03-20T02:16:59+00:00",
-    "gitHash": "be4e42427cf0699df7f8b73fa78880020e124d14",
+    "buildDate": "2024-05-16T03:43:05+00:00",
+    "gitHash": "dfbb9690162cbc3002beb34ee05042c90e609e8d",
     "name": "Justice QoS Manager Service",
-    "revisionID": "1.19.3",
-    "version": "1.19.3",
+    "revisionID": "1.19.4",
+    "version": "1.19.4",
     "version-roles-seeding": "1.0.15"
   }
 }

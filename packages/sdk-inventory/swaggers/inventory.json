@@ -3,7 +3,7 @@
   "info": {
     "description": "justice-inventory-service",
     "title": "justice-inventory-service",
-    "version": "0.1.2"
+    "version": "0.1.4"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -123,7 +123,8 @@
           }
         ],
         "summary": "To Create Chaining Operation",
-        "tags": ["Admin Chaining Operations"]
+        "tags": ["Admin Chaining Operations"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations": {
@@ -188,7 +189,8 @@
           }
         ],
         "summary": "To list integration configurations",
-        "tags": ["Admin Integration Configurations"]
+        "tags": ["Admin Integration Configurations"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -245,7 +247,8 @@
           }
         ],
         "summary": "To create integration configuration",
-        "tags": ["Admin Integration Configurations"]
+        "tags": ["Admin Integration Configurations"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations/{integrationConfigurationId}": {
@@ -317,7 +320,8 @@
           }
         ],
         "summary": "To update integration configuration",
-        "tags": ["Admin Integration Configurations"]
+        "tags": ["Admin Integration Configurations"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations/{integrationConfigurationId}/status": {
@@ -389,7 +393,8 @@
           }
         ],
         "summary": "To update status integration configuration to be active / not active ",
-        "tags": ["Admin Integration Configurations"]
+        "tags": ["Admin Integration Configurations"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories": {
@@ -476,7 +481,8 @@
           }
         ],
         "summary": "To list all inventories",
-        "tags": ["Admin Inventories"]
+        "tags": ["Admin Inventories"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -527,7 +533,8 @@
           }
         ],
         "summary": "To create inventory",
-        "tags": ["Admin Inventories"]
+        "tags": ["Admin Inventories"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}": {
@@ -590,7 +597,8 @@
           }
         ],
         "summary": "To delete inventory",
-        "tags": ["Admin Inventories"]
+        "tags": ["Admin Inventories"],
+        "x-errorCodes": {}
       },
       "get": {
         "consumes": ["application/json"],
@@ -646,7 +654,8 @@
           }
         ],
         "summary": "To get an inventory",
-        "tags": ["Admin Inventories"]
+        "tags": ["Admin Inventories"],
+        "x-errorCodes": {}
       },
       "put": {
         "consumes": ["application/json"],
@@ -710,7 +719,8 @@
           }
         ],
         "summary": "To update inventory",
-        "tags": ["Admin Inventories"]
+        "tags": ["Admin Inventories"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/items": {
@@ -746,26 +756,9 @@
             "type": "integer"
           },
           {
-            "default": 1,
-            "description": "Qty",
-            "in": "query",
-            "name": "qtyGte",
-            "type": "integer"
-          },
-          {
             "default": "createdAt",
             "description": "Only support one level of sortBy; default createdAt",
-            "enum": [
-              "createdAt",
-              "createdAt:asc",
-              "createdAt:desc",
-              "qty",
-              "qty:asc",
-              "qty:desc",
-              "updatedAt",
-              "updatedAt:asc",
-              "updatedAt:desc"
-            ],
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "updatedAt", "updatedAt:asc", "updatedAt:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -811,7 +804,8 @@
           }
         ],
         "summary": "To list all items",
-        "tags": ["Admin Items"]
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}": {
@@ -883,7 +877,8 @@
           }
         ],
         "summary": "To get an item",
-        "tags": ["Admin Items"]
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations": {
@@ -964,7 +959,8 @@
           }
         ],
         "summary": "To list inventory configurations",
-        "tags": ["Admin Inventory Configurations"]
+        "tags": ["Admin Inventory Configurations"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -1021,7 +1017,8 @@
           }
         ],
         "summary": "To create inventory configuration",
-        "tags": ["Admin Inventory Configurations"]
+        "tags": ["Admin Inventory Configurations"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations/{inventoryConfigurationId}": {
@@ -1076,7 +1073,8 @@
           }
         ],
         "summary": "To delete inventory configuration",
-        "tags": ["Admin Inventory Configurations"]
+        "tags": ["Admin Inventory Configurations"],
+        "x-errorCodes": {}
       },
       "get": {
         "consumes": ["application/json"],
@@ -1132,7 +1130,8 @@
           }
         ],
         "summary": "To get inventory configuration",
-        "tags": ["Admin Inventory Configurations"]
+        "tags": ["Admin Inventory Configurations"],
+        "x-errorCodes": {}
       },
       "put": {
         "consumes": ["application/json"],
@@ -1202,7 +1201,8 @@
           }
         ],
         "summary": "To update inventory configuration",
-        "tags": ["Admin Inventory Configurations"]
+        "tags": ["Admin Inventory Configurations"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/itemtypes": {
@@ -1267,7 +1267,8 @@
           }
         ],
         "summary": "To list itemtypes",
-        "tags": ["Admin Item Types"]
+        "tags": ["Admin Item Types"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -1324,7 +1325,8 @@
           }
         ],
         "summary": "To create an itemtype",
-        "tags": ["Admin Item Types"]
+        "tags": ["Admin Item Types"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/itemtypes/{itemTypeName}": {
@@ -1373,7 +1375,8 @@
           }
         ],
         "summary": "To delete an item type",
-        "tags": ["Admin Item Types"]
+        "tags": ["Admin Item Types"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/tags": {
@@ -1444,7 +1447,8 @@
           }
         ],
         "summary": "To list tags",
-        "tags": ["Admin Tags"]
+        "tags": ["Admin Tags"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -1501,7 +1505,8 @@
           }
         ],
         "summary": "To create a tag",
-        "tags": ["Admin Tags"]
+        "tags": ["Admin Tags"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/tags/{tagName}": {
@@ -1550,7 +1555,8 @@
           }
         ],
         "summary": "To delete a tag",
-        "tags": ["Admin Tags"]
+        "tags": ["Admin Tags"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/consume": {
@@ -1623,7 +1629,8 @@
           }
         ],
         "summary": "To consume item",
-        "tags": ["Admin Items"]
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items": {
@@ -1702,7 +1709,8 @@
           }
         ],
         "summary": "To bulk remove items",
-        "tags": ["Admin Items"]
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -1767,7 +1775,8 @@
           }
         ],
         "summary": "To save item to specific inventory",
-        "tags": ["Admin Items"]
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
       },
       "put": {
         "consumes": ["application/json"],
@@ -1844,7 +1853,8 @@
           }
         ],
         "summary": "To bulk update items",
-        "tags": ["Admin Items"]
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items": {
@@ -1904,7 +1914,8 @@
           }
         ],
         "summary": "To save item",
-        "tags": ["Admin Items"]
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items/entitlements/sync": {
@@ -1971,7 +1982,8 @@
           }
         ],
         "summary": "To sync user's entitlements to e-commerce",
-        "tags": ["Admin Items"]
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/purchaseable": {
@@ -2040,7 +2052,8 @@
           }
         ],
         "summary": "To validate user inventory capacity when purchase ecommerce item",
-        "tags": ["Admin Inventories"]
+        "tags": ["Admin Inventories"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/inventoryConfigurations": {
@@ -2120,7 +2133,8 @@
           }
         ],
         "summary": "To list inventory configurations",
-        "tags": ["Public Inventory Configurations"]
+        "tags": ["Public Inventory Configurations"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/itemtypes": {
@@ -2184,7 +2198,8 @@
           }
         ],
         "summary": "To list item types",
-        "tags": ["Public Item Types"]
+        "tags": ["Public Item Types"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/tags": {
@@ -2248,7 +2263,8 @@
           }
         ],
         "summary": "To list tags",
-        "tags": ["Public Tags"]
+        "tags": ["Public Tags"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories": {
@@ -2318,7 +2334,8 @@
           }
         ],
         "summary": "To list all my inventories",
-        "tags": ["Public Inventories"]
+        "tags": ["Public Inventories"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/consume": {
@@ -2383,7 +2400,8 @@
           }
         ],
         "summary": "To consume item",
-        "tags": ["Public Items"]
+        "tags": ["Public Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items": {
@@ -2454,7 +2472,8 @@
           }
         ],
         "summary": "To bulk remove items",
-        "tags": ["Public Items"]
+        "tags": ["Public Items"],
+        "x-errorCodes": {}
       },
       "get": {
         "consumes": ["application/json"],
@@ -2488,26 +2507,9 @@
             "type": "integer"
           },
           {
-            "default": 1,
-            "description": "Qty",
-            "in": "query",
-            "name": "qtyGte",
-            "type": "integer"
-          },
-          {
             "default": "createdAt",
             "description": "Only support one level of sortBy; default createdAt",
-            "enum": [
-              "createdAt",
-              "createdAt:asc",
-              "createdAt:desc",
-              "qty",
-              "qty:asc",
-              "qty:desc",
-              "updatedAt",
-              "updatedAt:asc",
-              "updatedAt:desc"
-            ],
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "updatedAt", "updatedAt:asc", "updatedAt:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -2552,7 +2554,8 @@
           }
         ],
         "summary": "To list all items",
-        "tags": ["Public Items"]
+        "tags": ["Public Items"],
+        "x-errorCodes": {}
       },
       "put": {
         "consumes": ["application/json"],
@@ -2621,7 +2624,8 @@
           }
         ],
         "summary": "To bulk update items",
-        "tags": ["Public Items"]
+        "tags": ["Public Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/movement": {
@@ -2680,7 +2684,8 @@
           }
         ],
         "summary": "To move items between my inventories",
-        "tags": ["Public Items"]
+        "tags": ["Public Items"],
+        "x-errorCodes": {}
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}": {
@@ -2751,7 +2756,8 @@
           }
         ],
         "summary": "To get an item",
-        "tags": ["Public Items"]
+        "tags": ["Public Items"],
+        "x-errorCodes": {}
       }
     }
   },
@@ -3534,7 +3540,7 @@
           "type": "integer"
         }
       },
-      "required": ["itemId", "itemType", "quantity", "sku", "stackable"]
+      "required": ["itemId", "itemType", "quantity", "sku"]
     },
     "apimodels.RemoveInventoryItemReq": {
       "properties": {
@@ -3790,11 +3796,11 @@
     "path": "/inventory/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-30T02:19:15+00:00",
-    "gitHash": "ca928c13dbcaf059bfe8a8cfbfdc080e91f30b08",
+    "buildDate": "2024-05-29T02:03:09+00:00",
+    "gitHash": "32dbf1852a45bf9daa3835ce004b5165abae16a6",
     "name": "justice-inventory-service",
     "realm": "DEV",
-    "version": "0.1.2",
-    "version-roles-seeding": "1.2.32"
+    "version": "0.1.4",
+    "version-roles-seeding": "1.2.34"
   }
 }

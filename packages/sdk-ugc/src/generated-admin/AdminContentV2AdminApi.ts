@@ -10,7 +10,6 @@
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AdminContentRequestV2 } from '../generated-definitions/AdminContentRequestV2.js'
-import { AdminContentV2Admin$ } from './endpoints/AdminContentV2Admin$.js'
 import { AdminGetContentBulkRequest } from '../generated-definitions/AdminGetContentBulkRequest.js'
 import { AdminUpdateContentRequestV2 } from '../generated-definitions/AdminUpdateContentRequestV2.js'
 import { ContentDownloadResponse } from '../generated-definitions/ContentDownloadResponse.js'
@@ -29,13 +28,14 @@ import { UpdateContentResponseV2 } from '../generated-definitions/UpdateContentR
 import { UpdateFileLocationRequest } from '../generated-definitions/UpdateFileLocationRequest.js'
 import { UpdateScreenshotRequest } from '../generated-definitions/UpdateScreenshotRequest.js'
 import { UpdateScreenshotResponse } from '../generated-definitions/UpdateScreenshotResponse.js'
+import { AdminContentV2Admin$ } from './endpoints/AdminContentV2Admin$.js'
 
 export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
@@ -50,7 +50,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     tags?: string[]
     type?: string | null
   }): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -60,7 +60,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Maximum contentId per request 100
    */
   async function createContentBulk(data: AdminGetContentBulkRequest): Promise<ContentDownloadResponseV2Array> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContentBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -70,7 +70,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get content by content ID
    */
   async function getContent_ByContentId(contentId: string): Promise<ContentDownloadResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContent_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -83,7 +83,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
   ): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -93,7 +93,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Maximum sharecodes per request 100
    */
   async function createContentSharecodeBulk(data: GetContentBulkByShareCodesRequest): Promise<ContentDownloadResponseV2Array> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContentSharecodeBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -106,7 +106,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     queryParams?: { limit?: number; name?: string | null; offset?: number; sortBy?: string | null }
   ): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents_ByChannelId(channelId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -116,7 +116,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create official content
    */
   async function createContent_ByChannelId(channelId: string, data: AdminContentRequestV2): Promise<CreateContentResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createContent_ByChannelId(channelId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -126,7 +126,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Content&#39;s payload versions created when UGC is created or updated with &lt;code&gt;updateContentFile&lt;/code&gt; set to true. Only list up to 10 latest versions.
    */
   async function getVersions_ByContentId(contentId: string): Promise<ListContentVersionsResponse> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getVersions_ByContentId(contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -136,7 +136,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get content by share code
    */
   async function getContentSharecode_ByShareCode(shareCode: string): Promise<ContentDownloadResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContentSharecode_ByShareCode(shareCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -146,7 +146,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * This endpoint used to request upload URL from content&#39;s screenshot. If *contentType* is not specified, it will use *fileExtension* value. Supported file extensions: pjp, jpg, jpeg, jfif, bmp, png. Maximum description length: 1024
    */
   async function createScreenshot_ByContentId(contentId: string, data: CreateScreenshotRequest): Promise<CreateScreenshotResponse> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createScreenshot_ByContentId(contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -156,7 +156,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Maximum description length: 1024
    */
   async function updateScreenshot_ByContentId(contentId: string, data: UpdateScreenshotRequest): Promise<UpdateScreenshotResponse> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateScreenshot_ByContentId(contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -170,7 +170,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: HideContentRequest
   ): Promise<CreateContentResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateHide_ByUserId_ByContentId(userId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -180,7 +180,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete existing official content
    */
   async function deleteContent_ByChannelId_ByContentId(channelId: string, contentId: string): Promise<unknown> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteContent_ByChannelId_ByContentId(channelId, contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -194,7 +194,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: AdminUpdateContentRequestV2
   ): Promise<UpdateContentResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchContent_ByChannelId_ByContentId(channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -204,7 +204,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Rollback content&#39;s payload to specified version
    */
   async function updateRollback_ByContentId_ByVersionId(contentId: string, versionId: string): Promise<ContentDownloadResponse> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateRollback_ByContentId_ByVersionId(contentId, versionId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -214,7 +214,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete screenshot from a content
    */
   async function deleteScreenshot_ByContentId_ByScreenshotId(contentId: string, screenshotId: string): Promise<unknown> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteScreenshot_ByContentId_ByScreenshotId(contentId, screenshotId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -228,7 +228,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: GenerateContentUploadUrlRequest
   ): Promise<GenerateContentUploadUrlResponse> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchUploadUrl_ByChannelId_ByContentId(channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -242,7 +242,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateFileLocationRequest
   ): Promise<UpdateContentResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchFileLocation_ByChannelId_ByContentId(channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -252,7 +252,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete user content by content ID
    */
   async function deleteContent_ByUserId_ByChannelId_ByContentId(userId: string, channelId: string, contentId: string): Promise<unknown> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -267,7 +267,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: AdminUpdateContentRequestV2
   ): Promise<UpdateContentResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchContent_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -282,7 +282,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: GenerateContentUploadUrlRequest
   ): Promise<GenerateContentUploadUrlResponse> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchUploadUrl_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -296,7 +296,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     channelId: string,
     shareCode: string
   ): Promise<unknown> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteContentSharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -311,7 +311,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateFileLocationRequest
   ): Promise<UpdateContentResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.patchFileLocation_ByUserId_ByChannelId_ByContentId(userId, channelId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -326,7 +326,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     shareCode: string,
     data: AdminUpdateContentRequestV2
   ): Promise<CreateContentResponseV2> {
-    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateContentS3Sharecode_ByUserId_ByChannelId_ByShareCode(userId, channelId, shareCode, data)
     if (resp.error) throw resp.error
     return resp.response.data

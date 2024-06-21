@@ -23,14 +23,14 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [GET]_**
    */
   async function getClients_DEPRECATED(): Promise<ClientResponseArray> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getClients_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -41,7 +41,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [POST]_**
    */
   async function createClient_DEPRECATED(data: ClientCreateRequest): Promise<ClientCreationResponse> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createClient_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -52,7 +52,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [DELETE]_**
    */
   async function deleteClient_ByClientId_DEPRECATED(clientId: string): Promise<unknown> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteClient_ByClientId_DEPRECATED(clientId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -63,7 +63,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [GET]_**
    */
   async function getClient_ByClientId_DEPRECATED(clientId: string): Promise<ClientResponse> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getClient_ByClientId_DEPRECATED(clientId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -74,7 +74,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [PATCH]_**
    */
   async function updateClient_ByClientId_DEPRECATED(clientId: string, data: ClientUpdateRequest): Promise<ClientResponse> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateClient_ByClientId_DEPRECATED(clientId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -85,7 +85,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/{clientId}/secret [PUT]_**
    */
   async function updateSecret_ByClientId_DEPRECATED(clientId: string, data: ClientUpdateSecretRequest): Promise<unknown> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateSecret_ByClientId_DEPRECATED(clientId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -96,7 +96,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [GET]_**
    */
   async function getClients_ByNS_DEPRECATED(): Promise<ClientResponseArray> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getClients_ByNS_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -107,7 +107,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/v3/admin/namespaces/{namespace}/clients [POST]_**
    */
   async function createClient_ByNS_DEPRECATED(data: ClientCreateRequest): Promise<ClientCreationResponse> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createClient_ByNS_DEPRECATED(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -118,7 +118,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _iam/v3/admin/namespaces/{namespace}/clients/{clientId}/permissions [PUT]_**
    */
   async function createClientpermission_ByClientId_DEPRECATED(clientId: string, data: ClientPermissions): Promise<unknown> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createClientpermission_ByClientId_DEPRECATED(clientId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -129,7 +129,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [DELETE]_**
    */
   async function deleteClient_ByClientId_ByNS_DEPRECATED(clientId: string): Promise<unknown> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteClient_ByClientId_ByNS_DEPRECATED(clientId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -144,7 +144,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     resource: string,
     action: number
   ): Promise<unknown> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteClientpermission_ByClientId_ByResource_ByAction_DEPRECATED(clientId, resource, action)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -159,7 +159,7 @@ export function ClientsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     resource: string,
     action: number
   ): Promise<unknown> {
-    const $ = new Clients$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new Clients$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createClientpermission_ByClientId_ByResource_ByAction_DEPRECATED(clientId, resource, action)
     if (resp.error) throw resp.error
     return resp.response.data

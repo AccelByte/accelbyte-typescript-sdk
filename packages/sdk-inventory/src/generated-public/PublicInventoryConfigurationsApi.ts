@@ -17,7 +17,7 @@ export function PublicInventoryConfigurationsApi(sdk: AccelbyteSDK, args?: ApiAr
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination.
@@ -37,7 +37,7 @@ export function PublicInventoryConfigurationsApi(sdk: AccelbyteSDK, args?: ApiAr
       | 'updatedAt:asc'
       | 'updatedAt:desc'
   }): Promise<ListInventoryConfigurationsResp> {
-    const $ = new PublicInventoryConfigurations$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicInventoryConfigurations$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInventoryConfigurations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

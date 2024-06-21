@@ -5,6 +5,7 @@
  */
 
 import { ApiArgs, SDKRequestConfig } from '../Types'
+import axios from 'axios'
 
 export class ApiUtils {
   static mergedConfigs = (config: SDKRequestConfig, overrides?: ApiArgs): SDKRequestConfig => {
@@ -16,5 +17,12 @@ export class ApiUtils {
         ...overrides?.config?.headers
       }
     }
+  }
+
+  static is4xxError = (error: unknown): boolean => {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response.status >= 400 && error.response.status <= 499
+    }
+    return false
   }
 }

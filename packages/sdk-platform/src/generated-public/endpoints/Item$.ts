@@ -20,7 +20,7 @@ import { PopulatedItemInfo } from '../../generated-definitions/PopulatedItemInfo
 
 export class Item$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This API is used to get the item by sku.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;PREVIEW&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Optional permission&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1(CREATE) (user with this permission can view draft store item)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the item with sku&lt;/li&gt;&lt;/ul&gt;
@@ -36,7 +36,7 @@ export class Item$ {
     const url = '/platform/public/namespaces/{namespace}/items/bySku'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemInfo, 'ItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemInfo, 'ItemInfo')
   }
 
   /**
@@ -67,7 +67,12 @@ export class Item$ {
     const url = '/platform/public/namespaces/{namespace}/items/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemPagingSlicedResult, 'ItemPagingSlicedResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ItemPagingSlicedResult,
+      'ItemPagingSlicedResult'
+    )
   }
 
   /**
@@ -83,7 +88,7 @@ export class Item$ {
     const url = '/platform/public/namespaces/{namespace}/items/byAppId'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemInfo, 'ItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemInfo, 'ItemInfo')
   }
 
   /**
@@ -120,7 +125,12 @@ export class Item$ {
     const url = '/platform/public/namespaces/{namespace}/items/byCriteria'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemPagingSlicedResult, 'ItemPagingSlicedResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ItemPagingSlicedResult,
+      'ItemPagingSlicedResult'
+    )
   }
 
   /**
@@ -137,7 +147,7 @@ export class Item$ {
     const url = '/platform/public/namespaces/{namespace}/items/locale/byIds'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemInfoArray, 'ItemInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemInfoArray, 'ItemInfoArray')
   }
 
   /**
@@ -152,7 +162,12 @@ export class Item$ {
     const url = '/platform/public/namespaces/{namespace}/items/estimatedPrice'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, EstimatedPriceInfoArray, 'EstimatedPriceInfoArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      EstimatedPriceInfoArray,
+      'EstimatedPriceInfoArray'
+    )
   }
 
   /**
@@ -174,7 +189,7 @@ export class Item$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PopulatedItemInfo, 'PopulatedItemInfo')
   }
 
   /**
@@ -187,7 +202,7 @@ export class Item$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemDynamicDataInfo, 'ItemDynamicDataInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemDynamicDataInfo, 'ItemDynamicDataInfo')
   }
 
   /**
@@ -203,7 +218,7 @@ export class Item$ {
       .replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AppInfo, 'AppInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AppInfo, 'AppInfo')
   }
 
   /**
@@ -217,7 +232,7 @@ export class Item$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ItemPurchaseConditionValidateResultArray,
       'ItemPurchaseConditionValidateResultArray'

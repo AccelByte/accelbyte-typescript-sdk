@@ -25,7 +25,7 @@ import { RedeemResult } from '../../generated-definitions/RedeemResult.js'
 
 export class CampaignAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query campaigns, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of campaigns&lt;/li&gt;&lt;/ul&gt;
@@ -41,7 +41,7 @@ export class CampaignAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       CampaignPagingSlicedResult,
       'CampaignPagingSlicedResult'
@@ -56,7 +56,7 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/campaigns'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CampaignInfo, 'CampaignInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CampaignInfo, 'CampaignInfo')
   }
 
   /**
@@ -67,7 +67,7 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/codes/{code}'.replace('{namespace}', this.namespace).replace('{code}', code)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CodeInfo, 'CodeInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CodeInfo, 'CodeInfo')
   }
 
   /**
@@ -78,7 +78,7 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/codes/{code}/enable'.replace('{namespace}', this.namespace).replace('{code}', code)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CodeInfo, 'CodeInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CodeInfo, 'CodeInfo')
   }
 
   /**
@@ -89,7 +89,7 @@ export class CampaignAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/codes/{code}/disable'.replace('{namespace}', this.namespace).replace('{code}', code)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CodeInfo, 'CodeInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CodeInfo, 'CodeInfo')
   }
 
   /**
@@ -102,7 +102,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CampaignInfo, 'CampaignInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CampaignInfo, 'CampaignInfo')
   }
 
   /**
@@ -115,7 +115,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CampaignInfo, 'CampaignInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CampaignInfo, 'CampaignInfo')
   }
 
   /**
@@ -128,7 +128,7 @@ export class CampaignAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RedeemResult, 'RedeemResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RedeemResult, 'RedeemResult')
   }
 
   /**
@@ -145,7 +145,7 @@ export class CampaignAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       CodeInfoPagingSlicedResult,
       'CodeInfoPagingSlicedResult'
@@ -162,7 +162,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CodeCreateResult, 'CodeCreateResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CodeCreateResult, 'CodeCreateResult')
   }
 
   /**
@@ -175,7 +175,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CampaignDynamicInfo, 'CampaignDynamicInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CampaignDynamicInfo, 'CampaignDynamicInfo')
   }
 
   /**
@@ -192,7 +192,7 @@ export class CampaignAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RedeemHistoryPagingSlicedResult,
       'RedeemHistoryPagingSlicedResult'
@@ -209,7 +209,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -222,7 +222,7 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
   }
 
   /**
@@ -235,6 +235,6 @@ export class CampaignAdmin$ {
       .replace('{campaignId}', campaignId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
   }
 }

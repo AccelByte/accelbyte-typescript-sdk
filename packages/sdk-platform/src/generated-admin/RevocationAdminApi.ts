@@ -9,25 +9,25 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { RevocationAdmin$ } from './endpoints/RevocationAdmin$.js'
 import { RevocationConfigInfo } from '../generated-definitions/RevocationConfigInfo.js'
 import { RevocationConfigUpdate } from '../generated-definitions/RevocationConfigUpdate.js'
 import { RevocationHistoryPagingSlicedResult } from '../generated-definitions/RevocationHistoryPagingSlicedResult.js'
 import { RevocationRequest } from '../generated-definitions/RevocationRequest.js'
 import { RevocationResult } from '../generated-definitions/RevocationResult.js'
+import { RevocationAdmin$ } from './endpoints/RevocationAdmin$.js'
 
 export function RevocationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Delete revocation config.
    */
   async function deleteRevocationConfig(): Promise<unknown> {
-    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteRevocationConfig()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +37,7 @@ export function RevocationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get revocation configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Revocation config&lt;/li&gt;&lt;/ul&gt;
    */
   async function getRevocationConfig(): Promise<RevocationConfigInfo> {
-    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getRevocationConfig()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +47,7 @@ export function RevocationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Update revocation configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Revocation config&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRevocationConfig(data: RevocationConfigUpdate): Promise<RevocationConfigInfo> {
-    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateRevocationConfig(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -66,7 +66,7 @@ export function RevocationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     transactionId?: string | null
     userId?: string | null
   }): Promise<RevocationHistoryPagingSlicedResult> {
-    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getRevocationHistory(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -76,7 +76,7 @@ export function RevocationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Do revocation.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revocation results&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateRevocation_ByUserId(userId: string, data: RevocationRequest): Promise<RevocationResult> {
-    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new RevocationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateRevocation_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data

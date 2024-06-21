@@ -17,13 +17,13 @@ export function LobbyOperationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * get the list of messages.
    */
   async function getMessages(): Promise<AppMessageDeclarationArray> {
-    const $ = new LobbyOperations$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new LobbyOperations$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMessages()
     if (resp.error) throw resp.error
     return resp.response.data

@@ -9,6 +9,7 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+
 import { AnonymizationAdmin$ } from './endpoints/AnonymizationAdmin$.js'
 
 export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
@@ -16,13 +17,13 @@ export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Anonymize user profile.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11501&lt;/li&gt;&lt;/ul&gt;
    */
   async function deleteAnonymizationProfile_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationProfile_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response.data

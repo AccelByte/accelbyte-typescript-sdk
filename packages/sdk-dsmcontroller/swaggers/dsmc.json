@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice DSM Controller Service",
     "title": "justice-dsm-controller-service",
-    "version": "6.7.6"
+    "version": "6.8.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -91,7 +91,8 @@
           }
         ],
         "summary": "List all configs",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -140,7 +141,8 @@
           }
         ],
         "summary": "Save config",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/images": {
@@ -202,7 +204,8 @@
           }
         ],
         "summary": "Create image",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       },
       "put": {
         "consumes": ["application/json"],
@@ -250,7 +253,8 @@
           }
         ],
         "summary": "Update image",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/images/patches": {
@@ -306,7 +310,8 @@
           }
         ],
         "summary": "Create image patch",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/instances/spec/lowest": {
@@ -343,7 +348,8 @@
           }
         ],
         "summary": "Get lowest instance spec.",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespace/{namespace}/workers": {
@@ -401,7 +407,8 @@
           }
         ],
         "summary": "Get worker configuration",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -459,7 +466,8 @@
           }
         ],
         "summary": "Create worker configuration",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       },
       "put": {
         "consumes": ["application/json"],
@@ -520,7 +528,8 @@
           }
         ],
         "summary": "Update worker configuration",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs": {
@@ -575,7 +584,8 @@
           }
         ],
         "summary": "Delete config",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       },
       "get": {
         "consumes": ["application/json"],
@@ -625,7 +635,8 @@
           }
         ],
         "summary": "Get config for a namespace",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       },
       "patch": {
         "consumes": ["application/json"],
@@ -689,7 +700,8 @@
           }
         ],
         "summary": "Update config",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -753,7 +765,8 @@
           }
         ],
         "summary": "Create config",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/cache": {
@@ -796,7 +809,8 @@
           }
         ],
         "summary": "Clear config cache",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/deployments": {
@@ -868,7 +882,8 @@
           }
         ],
         "summary": "Get All Deployments",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}": {
@@ -930,7 +945,8 @@
           }
         ],
         "summary": "Delete Deployment",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "get": {
         "consumes": ["application/json"],
@@ -993,7 +1009,8 @@
           }
         ],
         "summary": "Get Deployment",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "patch": {
         "consumes": ["application/json"],
@@ -1070,7 +1087,8 @@
           }
         ],
         "summary": "Update deployment",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -1141,7 +1159,8 @@
           }
         ],
         "summary": "Create deployment",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/regions/{region}": {
@@ -1213,7 +1232,8 @@
           }
         ],
         "summary": "Delete Region Override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "patch": {
         "consumes": ["application/json"],
@@ -1291,7 +1311,8 @@
           }
         ],
         "summary": "Update region override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -1375,7 +1396,8 @@
           }
         ],
         "summary": "Create region override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/version/{version}": {
@@ -1461,7 +1483,8 @@
           }
         ],
         "summary": "Create deployment override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/versions/{version}": {
@@ -1533,7 +1556,8 @@
           }
         ],
         "summary": "Delete Deployment Override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "patch": {
         "consumes": ["application/json"],
@@ -1611,7 +1635,8 @@
           }
         ],
         "summary": "Update deployment override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/versions/{version}/regions/{region}": {
@@ -1690,7 +1715,8 @@
           }
         ],
         "summary": "Delete region override for deployment override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "patch": {
         "consumes": ["application/json"],
@@ -1775,7 +1801,8 @@
           }
         ],
         "summary": "Update region override for deployment override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -1866,7 +1893,8 @@
           }
         ],
         "summary": "Create region override for deployment override",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/versions/{version}/queues": {
@@ -1935,7 +1963,8 @@
           }
         ],
         "summary": "Delete creating server count deployment queue",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/pods": {
@@ -2001,7 +2030,8 @@
           }
         ],
         "summary": "Get all pod configs",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/pods/{name}": {
@@ -2069,7 +2099,8 @@
           }
         ],
         "summary": "Delete pod config",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       },
       "get": {
         "consumes": ["application/json"],
@@ -2132,7 +2163,8 @@
           }
         ],
         "summary": "Get Pod Config",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       },
       "patch": {
         "consumes": ["application/json"],
@@ -2209,7 +2241,8 @@
           }
         ],
         "summary": "Update pod config",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -2280,7 +2313,8 @@
           }
         ],
         "summary": "Create pod config",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/configs/ports/{name}": {
@@ -2345,7 +2379,8 @@
           }
         ],
         "summary": "Delete port config",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       },
       "patch": {
         "consumes": ["application/json"],
@@ -2416,7 +2451,8 @@
           }
         ],
         "summary": "Update port config",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -2493,7 +2529,8 @@
           }
         ],
         "summary": "Create port config",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/images": {
@@ -2568,7 +2605,8 @@
           }
         ],
         "summary": "Delete an image",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       },
       "get": {
         "consumes": ["application/json"],
@@ -2654,7 +2692,8 @@
           }
         ],
         "summary": "List all DS images",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/images/limit": {
@@ -2706,7 +2745,8 @@
           }
         ],
         "summary": "DS Image Limit",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/images/patches": {
@@ -2788,7 +2828,8 @@
           }
         ],
         "summary": "Delete an image patch",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}": {
@@ -2847,7 +2888,8 @@
           }
         ],
         "summary": "DS Image Detail",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}/patches": {
@@ -2900,7 +2942,8 @@
           }
         ],
         "summary": "Get All Image Patches by Version",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}/patches/{versionPatch}": {
@@ -2966,7 +3009,8 @@
           }
         ],
         "summary": "DS Image patch Detail",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/manual/buffer/add": {
@@ -3032,7 +3076,8 @@
           }
         ],
         "summary": "Manual Add Buffer",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/repository": {
@@ -3084,7 +3129,8 @@
           }
         ],
         "summary": "Get repository for a namespace",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/servers": {
@@ -3150,7 +3196,8 @@
           }
         ],
         "summary": "List all managed servers in a region",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/servers/count": {
@@ -3196,7 +3243,8 @@
           }
         ],
         "summary": "Count all managed servers",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/servers/count/detailed": {
@@ -3248,7 +3296,8 @@
           }
         ],
         "summary": "Get detailed count of managed servers in a region",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/servers/local": {
@@ -3294,7 +3343,8 @@
           }
         ],
         "summary": "List all managed local servers",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/servers/local/{name}": {
@@ -3344,7 +3394,8 @@
           }
         ],
         "summary": "Delete a local server",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/servers/{podName}": {
@@ -3400,7 +3451,8 @@
           }
         ],
         "summary": "Delete a server in a region",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       },
       "get": {
         "consumes": ["application/json"],
@@ -3457,7 +3509,8 @@
           }
         ],
         "summary": "Query a server in a region",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/sessions": {
@@ -3530,7 +3583,8 @@
           }
         ],
         "summary": "List all managed sessions in a region",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/sessions/count": {
@@ -3582,7 +3636,8 @@
           }
         ],
         "summary": "Count all sessions",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/sessions/{sessionID}": {
@@ -3632,7 +3687,8 @@
           }
         ],
         "summary": "Delete a session in a region",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/workers/ghost": {
@@ -3669,7 +3725,8 @@
           }
         ],
         "summary": "Run Ghost Cleaner",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/workers/zombie": {
@@ -3714,7 +3771,8 @@
           }
         ],
         "summary": "Run Zombie Cleaner",
-        "tags": ["Admin"]
+        "tags": ["Admin"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/repository": {
@@ -3764,7 +3822,8 @@
           }
         ],
         "summary": "Create repository",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/v1/namespaces/{namespace}/configs/export": {
@@ -3822,7 +3881,8 @@
           }
         ],
         "summary": "export DSM Controller configuration for a namespace",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/admin/v1/namespaces/{namespace}/configs/import": {
@@ -3892,7 +3952,8 @@
           }
         ],
         "summary": "import config for a namespace",
-        "tags": ["Config"]
+        "tags": ["Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/configs/deployments": {
@@ -3964,7 +4025,8 @@
           }
         ],
         "summary": "Get All Deployments for client",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/configs/deployments/{deployment}": {
@@ -4026,7 +4088,8 @@
           }
         ],
         "summary": "Delete Deployment for client",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -4097,7 +4160,8 @@
           }
         ],
         "summary": "Create deployment for client",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/configs/pods": {
@@ -4163,7 +4227,8 @@
           }
         ],
         "summary": "Get all pod configs for client",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/configs/pods/{name}": {
@@ -4231,7 +4296,8 @@
           }
         ],
         "summary": "Delete pod config for client",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       },
       "post": {
         "consumes": ["application/json"],
@@ -4302,7 +4368,8 @@
           }
         ],
         "summary": "Create pod config for client",
-        "tags": ["Pod Config"]
+        "tags": ["Pod Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/images": {
@@ -4390,7 +4457,8 @@
           }
         ],
         "summary": "List all DS images for Client Credential authorization type",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/images/limit": {
@@ -4442,7 +4510,8 @@
           }
         ],
         "summary": "DS Image Limit for Client",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/images/versions/{version}": {
@@ -4501,7 +4570,8 @@
           }
         ],
         "summary": "DS Image Detail Client",
-        "tags": ["Image Config"]
+        "tags": ["Image Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/namespaces/{namespace}/configs/deployments/{deployment}": {
@@ -4566,7 +4636,8 @@
           }
         ],
         "summary": "Get Deployment for Client",
-        "tags": ["Deployment Config"]
+        "tags": ["Deployment Config"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers": {
@@ -4632,7 +4703,8 @@
           }
         ],
         "summary": "List all managed servers in a region for client",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers/count/detailed": {
@@ -4684,7 +4756,8 @@
           }
         ],
         "summary": "Get detailed count of managed servers in a region",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers/heartbeat": {
@@ -4747,7 +4820,8 @@
           }
         ],
         "summary": "Server Heartbeat",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers/local/deregister": {
@@ -4804,7 +4878,8 @@
           }
         ],
         "summary": "Deregister local DS",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers/local/register": {
@@ -4870,7 +4945,8 @@
           }
         ],
         "summary": "Register a local DS",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers/register": {
@@ -4942,7 +5018,8 @@
           }
         ],
         "summary": "Register a DS",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers/shutdown": {
@@ -5005,7 +5082,8 @@
           }
         ],
         "summary": "Mark a DS is shutting down",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers/{podName}/config/sessiontimeout": {
@@ -5070,7 +5148,8 @@
           }
         ],
         "summary": "Get the session timeout that will be used for the server",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/servers/{podName}/session": {
@@ -5135,7 +5214,8 @@
           }
         ],
         "summary": "Get Session ID",
-        "tags": ["Server"]
+        "tags": ["Server"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/sessions": {
@@ -5213,7 +5293,8 @@
           }
         ],
         "summary": "Register a new game session",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/sessions/claim": {
@@ -5288,7 +5369,8 @@
           }
         ],
         "summary": "Claim a DS for a game session",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/sessions/{sessionID}": {
@@ -5347,7 +5429,8 @@
           }
         ],
         "summary": "Query specified session",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/namespaces/{namespace}/sessions/{sessionID}/cancel": {
@@ -5409,7 +5492,8 @@
           }
         ],
         "summary": "Cancel session of a Temporary DS",
-        "tags": ["Session"]
+        "tags": ["Session"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/public/provider/default": {
@@ -5432,7 +5516,8 @@
           }
         ],
         "summary": "Get default provider",
-        "tags": ["Public"]
+        "tags": ["Public"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/public/providers": {
@@ -5458,7 +5543,8 @@
           }
         ],
         "summary": "List all supported providers",
-        "tags": ["Public"]
+        "tags": ["Public"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/public/providers/regions/{region}": {
@@ -5493,7 +5579,8 @@
           }
         ],
         "summary": "List providers by region",
-        "tags": ["Public"]
+        "tags": ["Public"],
+        "x-errorCodes": {}
       }
     },
     "/dsmcontroller/v1/messages": {
@@ -5525,7 +5612,8 @@
           }
         ],
         "summary": "get service messages",
-        "tags": ["Dsmc Operations"]
+        "tags": ["Dsmc Operations"],
+        "x-errorCodes": {}
       }
     }
   },
@@ -7675,11 +7763,11 @@
     "path": "/dsmcontroller/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-25T08:16:23+00:00",
-    "gitHash": "3d742fc4e4dc617c83149ba71b3d57045fe65478",
+    "buildDate": "2024-05-17T03:35:55+00:00",
+    "gitHash": "19ae626b1f04ae52d288d10935ba52ae5f839d2e",
     "name": "justice-dedicated-server-manager-controller-service",
-    "revisionID": "6.7.6",
-    "version": "6.7.6",
+    "revisionID": "6.8.0",
+    "version": "6.8.0",
     "version-roles-seeding": "1.0.26"
   }
 }

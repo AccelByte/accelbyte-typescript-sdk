@@ -17,13 +17,13 @@ export function ModerationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Delete the chat snapshot
    */
   async function deleteSnapshot_ByChatId(chatId: string): Promise<unknown> {
-    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteSnapshot_ByChatId(chatId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -33,7 +33,7 @@ export function ModerationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get the chat snapshot
    */
   async function getSnapshot_ByChatId(chatId: string): Promise<ChatSnapshots> {
-    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ModerationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getSnapshot_ByChatId(chatId)
     if (resp.error) throw resp.error
     return resp.response.data

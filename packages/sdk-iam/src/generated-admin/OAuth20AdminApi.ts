@@ -9,21 +9,21 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { OAuth20Admin$ } from './endpoints/OAuth20Admin$.js'
 import { TokenThirdPartyResponse } from '../generated-definitions/TokenThirdPartyResponse.js'
+import { OAuth20Admin$ } from './endpoints/OAuth20Admin$.js'
 
 export function OAuth20AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * This endpoint revokes all access tokens and refresh tokens a user has prior the revocation time. This endpoint requires authorized requests header with valid access token. It is a convenient feature for the developer (or admin) who wanted to revokes all user&#39;s access tokens and refresh tokens generated before some period of time. action code : 10707
    */
   async function createRevokeOauth_ByUserId(userId: string, queryParams?: { includeGameNamespace?: boolean | null }): Promise<unknown> {
-    const $ = new OAuth20Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new OAuth20Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createRevokeOauth_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +37,7 @@ export function OAuth20AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     platformId: string,
     queryParams?: { platformUserId?: string | null }
   ): Promise<TokenThirdPartyResponse> {
-    const $ = new OAuth20Admin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new OAuth20Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPlatformTokenOauth_ByUserId_ByPlatformId(userId, platformId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

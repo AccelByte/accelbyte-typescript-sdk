@@ -13,7 +13,7 @@ import { LeaderboardConfigReq } from '../../generated-definitions/LeaderboardCon
 
 export class LeaderboardConfiguration$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
@@ -29,7 +29,7 @@ export class LeaderboardConfiguration$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetAllLeaderboardConfigsPublicResp,
       'GetAllLeaderboardConfigsPublicResp'
@@ -44,7 +44,7 @@ export class LeaderboardConfiguration$ {
     const url = '/leaderboard/v1/public/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LeaderboardConfigReq, 'LeaderboardConfigReq')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, LeaderboardConfigReq, 'LeaderboardConfigReq')
   }
 
   /**
@@ -56,7 +56,7 @@ export class LeaderboardConfiguration$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetAllLeaderboardConfigsPublicResp,
       'GetAllLeaderboardConfigsPublicResp'

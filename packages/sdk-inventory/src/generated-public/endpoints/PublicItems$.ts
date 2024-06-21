@@ -19,7 +19,7 @@ import { UpdateItemRespArray } from '../../generated-definitions/UpdateItemRespA
 
 export class PublicItems$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  Bulk remove user&#39;s own items.
@@ -31,7 +31,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.delete(url, { data, params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
   }
 
   /**
@@ -42,28 +42,18 @@ export class PublicItems$ {
     queryParams?: {
       limit?: number
       offset?: number
-      qtyGte?: number
-      sortBy?:
-        | 'createdAt'
-        | 'createdAt:asc'
-        | 'createdAt:desc'
-        | 'qty'
-        | 'qty:asc'
-        | 'qty:desc'
-        | 'updatedAt'
-        | 'updatedAt:asc'
-        | 'updatedAt:desc'
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
       sourceItemId?: string | null
       tags?: string | null
     }
   ): Promise<IResponse<ListItemResp>> {
-    const params = { limit: 25, qtyGte: 1, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
+    const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListItemResp, 'ListItemResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListItemResp, 'ListItemResp')
   }
 
   /**
@@ -76,7 +66,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
   }
 
   /**
@@ -89,7 +79,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemResp, 'ItemResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
   }
 
   /**
@@ -102,7 +92,7 @@ export class PublicItems$ {
       .replace('{inventoryId}', inventoryId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MoveItemsResp, 'MoveItemsResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MoveItemsResp, 'MoveItemsResp')
   }
 
   /**
@@ -121,6 +111,6 @@ export class PublicItems$ {
       .replace('{sourceItemId}', sourceItemId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ItemResp, 'ItemResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
   }
 }

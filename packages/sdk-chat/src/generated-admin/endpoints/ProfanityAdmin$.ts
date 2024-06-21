@@ -20,7 +20,7 @@ import { DictionaryUpdateRequest } from '../../generated-definitions/DictionaryU
 
 export class ProfanityAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Query all profanity words.
@@ -38,7 +38,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DictionaryQueryResult, 'DictionaryQueryResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DictionaryQueryResult, 'DictionaryQueryResult')
   }
 
   /**
@@ -49,7 +49,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Dictionary, 'Dictionary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Dictionary, 'Dictionary')
   }
 
   /**
@@ -60,7 +60,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/{id}'.replace('{namespace}', this.namespace).replace('{id}', id)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -71,7 +71,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/{id}'.replace('{namespace}', this.namespace).replace('{id}', id)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Dictionary, 'Dictionary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Dictionary, 'Dictionary')
   }
 
   /**
@@ -82,7 +82,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, Dictionary, 'Dictionary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Dictionary, 'Dictionary')
   }
 
   /**
@@ -93,7 +93,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/group'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DictionaryGroupArray, 'DictionaryGroupArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DictionaryGroupArray, 'DictionaryGroupArray')
   }
 
   /**
@@ -104,7 +104,7 @@ export class ProfanityAdmin$ {
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DictionaryExport, 'DictionaryExport')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DictionaryExport, 'DictionaryExport')
   }
 
   /**
@@ -119,6 +119,11 @@ export class ProfanityAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DictionaryImportResult, 'DictionaryImportResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DictionaryImportResult,
+      'DictionaryImportResult'
+    )
   }
 }

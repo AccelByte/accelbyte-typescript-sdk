@@ -18,13 +18,13 @@ export function PlatformAchievementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Create PSN UDS events. Player need to login first using playstation token to IAM service.
    */
   async function createPlatformPsnBulk(data: BulkCreatePsnEvents): Promise<BulkCreatePsnEventResponse> {
-    const $ = new PlatformAchievementAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PlatformAchievementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createPlatformPsnBulk(data)
     if (resp.error) throw resp.error
     return resp.response.data

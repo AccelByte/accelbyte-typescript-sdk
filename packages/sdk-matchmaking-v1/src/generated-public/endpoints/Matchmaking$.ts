@@ -24,7 +24,7 @@ import { TicketMetricResultRecord } from '../../generated-definitions/TicketMetr
 
 export class Matchmaking$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Reads all available channels in a namespace
@@ -34,7 +34,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetChannelsResponse, 'GetChannelsResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetChannelsResponse, 'GetChannelsResponse')
   }
 
   /**
@@ -45,7 +45,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateChannelResponse, 'CreateChannelResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateChannelResponse, 'CreateChannelResponse')
   }
 
   /**
@@ -56,7 +56,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/sessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -67,7 +67,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/rebalance'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RebalanceResponse, 'RebalanceResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RebalanceResponse, 'RebalanceResponse')
   }
 
   /**
@@ -78,7 +78,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/matchresult'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchResultResponse, 'MatchResultResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MatchResultResponse, 'MatchResultResponse')
   }
 
   /**
@@ -89,7 +89,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/namespaces/{namespace}/sessions/dequeue'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -102,7 +102,7 @@ export class Matchmaking$ {
       .replace('{channel}', channel)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -113,7 +113,7 @@ export class Matchmaking$ {
     const url = '/matchmaking/v1/public/namespaces/{namespace}/channels'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelV1Array, 'ChannelV1Array')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChannelV1Array, 'ChannelV1Array')
   }
 
   /**
@@ -126,7 +126,7 @@ export class Matchmaking$ {
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchmakingResult, 'MatchmakingResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MatchmakingResult, 'MatchmakingResult')
   }
 
   /**
@@ -139,7 +139,12 @@ export class Matchmaking$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, TicketMetricResultRecord, 'TicketMetricResultRecord')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      TicketMetricResultRecord,
+      'TicketMetricResultRecord'
+    )
   }
 
   /**
@@ -152,6 +157,6 @@ export class Matchmaking$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelV1, 'ChannelV1')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChannelV1, 'ChannelV1')
   }
 }

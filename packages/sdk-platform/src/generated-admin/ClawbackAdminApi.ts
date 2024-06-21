@@ -9,17 +9,17 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { ClawbackAdmin$ } from './endpoints/ClawbackAdmin$.js'
 import { ClawbackInfo } from '../generated-definitions/ClawbackInfo.js'
 import { IapClawbackPagingSlicedResult } from '../generated-definitions/IapClawbackPagingSlicedResult.js'
 import { StreamEvent } from '../generated-definitions/StreamEvent.js'
+import { ClawbackAdmin$ } from './endpoints/ClawbackAdmin$.js'
 
 export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
@@ -34,7 +34,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     status?: 'FAIL' | 'IGNORED' | 'INIT' | 'SUCCESS'
     userId?: string | null
   }): Promise<IapClawbackPagingSlicedResult> {
-    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getIapClawbackHistories(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -44,7 +44,7 @@ export function ClawbackAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Mock Sync PlayStation Clawback event..
    */
   async function createIapClawbackPlaystationMock(data: StreamEvent): Promise<ClawbackInfo> {
-    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new ClawbackAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createIapClawbackPlaystationMock(data)
     if (resp.error) throw resp.error
     return resp.response.data

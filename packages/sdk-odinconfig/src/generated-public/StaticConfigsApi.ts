@@ -17,10 +17,10 @@ export function StaticConfigsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   async function getStaticConfig_ByConfig(config: string): Promise<Config> {
-    const $ = new StaticConfigs$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new StaticConfigs$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getStaticConfig_ByConfig(config)
     if (resp.error) throw resp.error
     return resp.response.data

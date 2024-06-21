@@ -15,6 +15,7 @@ export const Config = z.object({
   chatRateLimitDuration: z.number().int().nullish(),
   concurrentUsersLimit: z.number().int().nullish(),
   disableInvitationOnJoinParty: z.boolean().nullish(),
+  disableRemoveSocketOldConnection: z.boolean().nullish(),
   enableChat: z.boolean().nullish(),
   entitlementCheck: z.boolean().nullish(),
   entitlementItemID: z.string().nullish(),

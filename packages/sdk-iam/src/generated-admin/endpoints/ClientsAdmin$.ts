@@ -19,7 +19,7 @@ import { V3ClientUpdateSecretRequest } from '../../generated-definitions/V3Clien
 
 export class ClientsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * action code: 10308
@@ -36,7 +36,7 @@ export class ClientsAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientsV3Response, 'ClientsV3Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientsV3Response, 'ClientsV3Response')
   }
 
   /**
@@ -47,7 +47,7 @@ export class ClientsAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientV3Response, 'ClientV3Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientV3Response, 'ClientV3Response')
   }
 
   /**
@@ -58,7 +58,7 @@ export class ClientsAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -71,7 +71,7 @@ export class ClientsAdmin$ {
       .replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -84,7 +84,7 @@ export class ClientsAdmin$ {
       .replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -97,7 +97,7 @@ export class ClientsAdmin$ {
       .replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientV3Response, 'ClientV3Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientV3Response, 'ClientV3Response')
   }
 
   /**
@@ -110,7 +110,7 @@ export class ClientsAdmin$ {
       .replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ClientV3Response, 'ClientV3Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientV3Response, 'ClientV3Response')
   }
 
   /**
@@ -123,7 +123,7 @@ export class ClientsAdmin$ {
       .replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -136,7 +136,7 @@ export class ClientsAdmin$ {
       .replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -151,6 +151,6 @@ export class ClientsAdmin$ {
       .replace('{action}', String(action))
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

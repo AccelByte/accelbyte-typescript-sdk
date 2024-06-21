@@ -19,7 +19,7 @@ import { UserInvitationResponseV1 } from '../../generated-definitions/UserInvita
 
 export class GroupMember$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Required valid user authentication This endpoint is used to leave from group. leave from group. Admin is not allowed to leave the group. This endpoint will also give response if the user does not belong to any group. Action Code: 73404
@@ -29,7 +29,7 @@ export class GroupMember$ {
     const url = '/group/v1/public/namespaces/{namespace}/leave'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LeaveGroupResponseV1, 'LeaveGroupResponseV1')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, LeaveGroupResponseV1, 'LeaveGroupResponseV1')
   }
 
   /**
@@ -41,7 +41,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserGroupInformationResponseV1,
       'GetUserGroupInformationResponseV1'
@@ -57,7 +57,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetGroupMemberListResponseV1,
       'GetGroupMemberListResponseV1'
@@ -74,7 +74,12 @@ export class GroupMember$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, KickGroupMemberResponseV1, 'KickGroupMemberResponseV1')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      KickGroupMemberResponseV1,
+      'KickGroupMemberResponseV1'
+    )
   }
 
   /**
@@ -87,7 +92,7 @@ export class GroupMember$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, JoinGroupResponseV1, 'JoinGroupResponseV1')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, JoinGroupResponseV1, 'JoinGroupResponseV1')
   }
 
   /**
@@ -100,7 +105,12 @@ export class GroupMember$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserInvitationResponseV1, 'UserInvitationResponseV1')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserInvitationResponseV1,
+      'UserInvitationResponseV1'
+    )
   }
 
   /**
@@ -113,7 +123,7 @@ export class GroupMember$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, JoinGroupResponseV1, 'JoinGroupResponseV1')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, JoinGroupResponseV1, 'JoinGroupResponseV1')
   }
 
   /**
@@ -126,7 +136,7 @@ export class GroupMember$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, LeaveGroupResponseV1, 'LeaveGroupResponseV1')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, LeaveGroupResponseV1, 'LeaveGroupResponseV1')
   }
 
   /**
@@ -143,7 +153,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetGroupMemberListResponseV1,
       'GetGroupMemberListResponseV1'
@@ -161,7 +171,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -179,7 +189,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -197,7 +207,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -215,7 +225,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -233,7 +243,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -251,7 +261,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -269,7 +279,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -287,7 +297,12 @@ export class GroupMember$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, KickGroupMemberResponseV1, 'KickGroupMemberResponseV1')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      KickGroupMemberResponseV1,
+      'KickGroupMemberResponseV1'
+    )
   }
 
   /**
@@ -301,7 +316,12 @@ export class GroupMember$ {
       .replace('{groupId}', groupId)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserInvitationResponseV1, 'UserInvitationResponseV1')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserInvitationResponseV1,
+      'UserInvitationResponseV1'
+    )
   }
 
   /**
@@ -316,7 +336,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetUserGroupInformationResponseV1,
       'GetUserGroupInformationResponseV1'
@@ -335,7 +355,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -354,7 +374,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       MemberRequestGroupResponseV1,
       'MemberRequestGroupResponseV1'
@@ -373,7 +393,7 @@ export class GroupMember$ {
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       CancelInvitationGroupResponseV2,
       'CancelInvitationGroupResponseV2'

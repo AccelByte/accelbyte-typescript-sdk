@@ -21,13 +21,13 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * Get user groups paginated
    */
   async function getGroups_ByUserId(userId: string, queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGroupResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getGroups_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -37,7 +37,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Create group
    */
   async function createGroup_ByUserId(userId: string, data: CreateGroupRequest): Promise<CreateGroupResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createGroup_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -47,7 +47,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete user group by group ID
    */
   async function deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<unknown> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteGroup_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -57,7 +57,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user groups by group ID
    */
   async function getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<CreateGroupResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getGroup_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -67,7 +67,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Replace group name and contents with new ones
    */
   async function updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<CreateGroupResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateGroup_ByUserId_ByGroupId(userId, groupId, data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -81,7 +81,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents_ByUserId_ByGroupId(userId, groupId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -95,7 +95,7 @@ export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
   ): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getContents_ByUserId_ByGroupId_ByNS(userId, groupId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data

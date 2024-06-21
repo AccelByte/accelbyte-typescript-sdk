@@ -29,7 +29,7 @@ import { UpdateScreenshotResponse } from '../../generated-definitions/UpdateScre
 
 export class PublicContentV2$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
@@ -49,7 +49,7 @@ export class PublicContentV2$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponseV2,
       'PaginatedContentDownloadResponseV2'
@@ -65,7 +65,7 @@ export class PublicContentV2$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ContentDownloadResponseV2Array,
       'ContentDownloadResponseV2Array'
@@ -82,7 +82,12 @@ export class PublicContentV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ContentDownloadResponseV2, 'ContentDownloadResponseV2')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ContentDownloadResponseV2,
+      'ContentDownloadResponseV2'
+    )
   }
 
   /**
@@ -99,7 +104,7 @@ export class PublicContentV2$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponseV2,
       'PaginatedContentDownloadResponseV2'
@@ -115,7 +120,7 @@ export class PublicContentV2$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ContentDownloadResponseV2Array,
       'ContentDownloadResponseV2Array'
@@ -136,7 +141,7 @@ export class PublicContentV2$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       PaginatedContentDownloadResponseV2,
       'PaginatedContentDownloadResponseV2'
@@ -153,7 +158,12 @@ export class PublicContentV2$ {
       .replace('{shareCode}', shareCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ContentDownloadResponseV2, 'ContentDownloadResponseV2')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ContentDownloadResponseV2,
+      'ContentDownloadResponseV2'
+    )
   }
 
   /**
@@ -171,7 +181,12 @@ export class PublicContentV2$ {
       .replace('{channelId}', channelId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponseV2, 'CreateContentResponseV2')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CreateContentResponseV2,
+      'CreateContentResponseV2'
+    )
   }
 
   /**
@@ -189,7 +204,12 @@ export class PublicContentV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateScreenshotResponse, 'CreateScreenshotResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CreateScreenshotResponse,
+      'CreateScreenshotResponse'
+    )
   }
 
   /**
@@ -207,7 +227,12 @@ export class PublicContentV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateScreenshotResponse, 'UpdateScreenshotResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UpdateScreenshotResponse,
+      'UpdateScreenshotResponse'
+    )
   }
 
   /**
@@ -222,7 +247,7 @@ export class PublicContentV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -242,7 +267,12 @@ export class PublicContentV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateContentResponseV2, 'UpdateContentResponseV2')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UpdateContentResponseV2,
+      'UpdateContentResponseV2'
+    )
   }
 
   /**
@@ -261,7 +291,7 @@ export class PublicContentV2$ {
       .replace('{screenshotId}', screenshotId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -281,7 +311,12 @@ export class PublicContentV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponseV2, 'CreateContentResponseV2')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CreateContentResponseV2,
+      'CreateContentResponseV2'
+    )
   }
 
   /**
@@ -302,7 +337,7 @@ export class PublicContentV2$ {
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GenerateContentUploadUrlResponse,
       'GenerateContentUploadUrlResponse'
@@ -325,7 +360,7 @@ export class PublicContentV2$ {
       .replace('{shareCode}', shareCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -345,7 +380,12 @@ export class PublicContentV2$ {
       .replace('{contentId}', contentId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UpdateContentResponseV2, 'UpdateContentResponseV2')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UpdateContentResponseV2,
+      'UpdateContentResponseV2'
+    )
   }
 
   /**
@@ -365,6 +405,11 @@ export class PublicContentV2$ {
       .replace('{shareCode}', shareCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateContentResponseV2, 'CreateContentResponseV2')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CreateContentResponseV2,
+      'CreateContentResponseV2'
+    )
   }
 }

@@ -17,7 +17,7 @@ import { ListBulkUserBanResponseV3 } from '../../generated-definitions/ListBulkU
 
 export class BansAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Ban type is the code available for ban assignment. It is applicable globally for any namespace. action code : 10201
@@ -27,7 +27,7 @@ export class BansAdmin$ {
     const url = '/iam/v3/admin/bans'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BansV3, 'BansV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BansV3, 'BansV3')
   }
 
   /**
@@ -38,7 +38,7 @@ export class BansAdmin$ {
     const url = '/iam/v3/admin/bans/reasons'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BanReasonsV3, 'BanReasonsV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BanReasonsV3, 'BanReasonsV3')
   }
 
   /**
@@ -49,7 +49,7 @@ export class BansAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/bantypes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BansV3, 'BansV3')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BansV3, 'BansV3')
   }
 
   /**
@@ -65,7 +65,7 @@ export class BansAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/bans/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetUserBanV3Response, 'GetUserBanV3Response')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetUserBanV3Response, 'GetUserBanV3Response')
   }
 
   /**
@@ -76,7 +76,12 @@ export class BansAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/bans/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListBulkUserBanResponseV3, 'ListBulkUserBanResponseV3')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListBulkUserBanResponseV3,
+      'ListBulkUserBanResponseV3'
+    )
   }
 
   /**
@@ -87,6 +92,11 @@ export class BansAdmin$ {
     const url = '/iam/v3/admin/namespaces/{namespace}/bans/users/disabled'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListBulkUserBanResponseV3, 'ListBulkUserBanResponseV3')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListBulkUserBanResponseV3,
+      'ListBulkUserBanResponseV3'
+    )
   }
 }

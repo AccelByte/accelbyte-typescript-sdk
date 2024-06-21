@@ -12,6 +12,7 @@ export const CreateGameSessionRequest = z.object({
   backfillTicketID: z.string(),
   clientVersion: z.string(),
   configurationName: z.string(),
+  customURLGRPC: z.string().nullish(),
   deployment: z.string(),
   dsSource: z.string().nullish(),
   fallbackClaimKeys: z.array(z.string()).nullish(),

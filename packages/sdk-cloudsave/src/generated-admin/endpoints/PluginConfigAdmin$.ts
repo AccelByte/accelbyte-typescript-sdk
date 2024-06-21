@@ -14,7 +14,7 @@ import { PluginResponse } from '../../generated-definitions/PluginResponse.js'
 
 export class PluginConfigAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * ## Description This endpoints will delete grpc plugins configuration
@@ -24,7 +24,7 @@ export class PluginConfigAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/plugins'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -35,7 +35,7 @@ export class PluginConfigAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/plugins'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PluginResponse, 'PluginResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PluginResponse, 'PluginResponse')
   }
 
   /**
@@ -46,7 +46,7 @@ export class PluginConfigAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/plugins'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PluginResponse, 'PluginResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PluginResponse, 'PluginResponse')
   }
 
   /**
@@ -57,6 +57,6 @@ export class PluginConfigAdmin$ {
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/plugins'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PluginResponse, 'PluginResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PluginResponse, 'PluginResponse')
   }
 }

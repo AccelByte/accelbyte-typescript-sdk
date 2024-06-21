@@ -18,7 +18,7 @@ import { UserRankingResponse } from '../../generated-definitions/UserRankingResp
 
 export class LeaderboardDataAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Delete user ranking across leaderboard Remove entry with provided userId from leaderboard.
@@ -30,7 +30,7 @@ export class LeaderboardDataAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -45,7 +45,7 @@ export class LeaderboardDataAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       ArchiveLeaderboardSignedUrlResponseArray,
       'ArchiveLeaderboardSignedUrlResponseArray'
@@ -60,7 +60,7 @@ export class LeaderboardDataAdmin$ {
     const url = '/leaderboard/v1/admin/namespaces/{namespace}/leaderboards/archived'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -76,7 +76,12 @@ export class LeaderboardDataAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetLeaderboardRankingResp,
+      'GetLeaderboardRankingResp'
+    )
   }
 
   /**
@@ -92,7 +97,12 @@ export class LeaderboardDataAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetLeaderboardRankingResp,
+      'GetLeaderboardRankingResp'
+    )
   }
 
   /**
@@ -105,7 +115,7 @@ export class LeaderboardDataAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -121,7 +131,12 @@ export class LeaderboardDataAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetLeaderboardRankingResp,
+      'GetLeaderboardRankingResp'
+    )
   }
 
   /**
@@ -137,7 +152,12 @@ export class LeaderboardDataAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetLeaderboardRankingResp,
+      'GetLeaderboardRankingResp'
+    )
   }
 
   /**
@@ -153,7 +173,12 @@ export class LeaderboardDataAdmin$ {
       .replace('{leaderboardCode}', leaderboardCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, GetLeaderboardRankingResp, 'GetLeaderboardRankingResp')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetLeaderboardRankingResp,
+      'GetLeaderboardRankingResp'
+    )
   }
 
   /**
@@ -167,7 +192,7 @@ export class LeaderboardDataAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -185,7 +210,7 @@ export class LeaderboardDataAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, UserRankingResponse, 'UserRankingResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserRankingResponse, 'UserRankingResponse')
   }
 
   /**
@@ -204,7 +229,7 @@ export class LeaderboardDataAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       UpdateUserPointAdminV1Response,
       'UpdateUserPointAdminV1Response'

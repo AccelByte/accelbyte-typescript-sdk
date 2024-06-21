@@ -14,7 +14,7 @@ import { NamespaceSimpleInfo } from '../../generated-definitions/NamespaceSimple
 
 export class Namespace$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Get all namespaces.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11303&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of namespaces&lt;/li&gt;&lt;/ul&gt;
@@ -24,7 +24,7 @@ export class Namespace$ {
     const url = '/basic/v1/public/namespaces'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
   }
 
   /**
@@ -35,7 +35,7 @@ export class Namespace$ {
     const url = '/basic/v1/public/namespaces/{namespace}'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespaceSimpleInfo, 'NamespaceSimpleInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, NamespaceSimpleInfo, 'NamespaceSimpleInfo')
   }
 
   /**
@@ -46,6 +46,11 @@ export class Namespace$ {
     const url = '/basic/v1/public/namespaces/{namespace}/publisher'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, NamespacePublisherInfo, 'NamespacePublisherInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      NamespacePublisherInfo,
+      'NamespacePublisherInfo'
+    )
   }
 }

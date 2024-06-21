@@ -29,7 +29,7 @@ import { WalletTransactionPagingSlicedResult } from '../../generated-definitions
 
 export class WalletAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * @deprecated
@@ -46,7 +46,12 @@ export class WalletAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/wallets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WalletPagingSlicedResult, 'WalletPagingSlicedResult')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      WalletPagingSlicedResult,
+      'WalletPagingSlicedResult'
+    )
   }
 
   /**
@@ -57,7 +62,7 @@ export class WalletAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/wallets/debit'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkDebitResult, 'BulkDebitResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkDebitResult, 'BulkDebitResult')
   }
 
   /**
@@ -68,7 +73,7 @@ export class WalletAdmin$ {
     const url = '/platform/admin/namespaces/{namespace}/wallets/credit'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, BulkCreditResult, 'BulkCreditResult')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkCreditResult, 'BulkCreditResult')
   }
 
   /**
@@ -82,7 +87,7 @@ export class WalletAdmin$ {
       .replace('{walletId}', walletId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WalletInfo, 'WalletInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WalletInfo, 'WalletInfo')
   }
 
   /**
@@ -97,7 +102,7 @@ export class WalletAdmin$ {
       .replace('{walletId}', walletId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WalletInfo, 'WalletInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WalletInfo, 'WalletInfo')
   }
 
   /**
@@ -110,7 +115,12 @@ export class WalletAdmin$ {
       .replace('{platform}', platform)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformWalletConfigInfo, 'PlatformWalletConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PlatformWalletConfigInfo,
+      'PlatformWalletConfigInfo'
+    )
   }
 
   /**
@@ -123,7 +133,12 @@ export class WalletAdmin$ {
       .replace('{platform}', platform)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformWalletConfigInfo, 'PlatformWalletConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PlatformWalletConfigInfo,
+      'PlatformWalletConfigInfo'
+    )
   }
 
   /**
@@ -138,7 +153,7 @@ export class WalletAdmin$ {
       .replace('{walletId}', walletId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WalletInfo, 'WalletInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WalletInfo, 'WalletInfo')
   }
 
   /**
@@ -151,7 +166,12 @@ export class WalletAdmin$ {
       .replace('{platform}', platform)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformWalletConfigInfo, 'PlatformWalletConfigInfo')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PlatformWalletConfigInfo,
+      'PlatformWalletConfigInfo'
+    )
   }
 
   /**
@@ -166,7 +186,7 @@ export class WalletAdmin$ {
       .replace('{walletId}', walletId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -181,7 +201,7 @@ export class WalletAdmin$ {
       .replace('{walletId}', walletId)
     const resultPromise = this.axiosInstance.put(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -194,7 +214,7 @@ export class WalletAdmin$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CurrencyWalletArray, 'CurrencyWalletArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CurrencyWalletArray, 'CurrencyWalletArray')
   }
 
   /**
@@ -215,7 +235,7 @@ export class WalletAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -229,7 +249,7 @@ export class WalletAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WalletInfo, 'WalletInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WalletInfo, 'WalletInfo')
   }
 
   /**
@@ -243,7 +263,7 @@ export class WalletAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformWallet, 'PlatformWallet')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlatformWallet, 'PlatformWallet')
   }
 
   /**
@@ -263,7 +283,7 @@ export class WalletAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       DetailedWalletTransactionPagingSlicedResult,
       'DetailedWalletTransactionPagingSlicedResult'
@@ -285,7 +305,7 @@ export class WalletAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -303,7 +323,7 @@ export class WalletAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, WalletInfo, 'WalletInfo')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WalletInfo, 'WalletInfo')
   }
 
   /**
@@ -321,7 +341,7 @@ export class WalletAdmin$ {
       .replace('{currencyCode}', currencyCode)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformWallet, 'PlatformWallet')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlatformWallet, 'PlatformWallet')
   }
 
   /**
@@ -340,7 +360,7 @@ export class WalletAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       WalletTransactionPagingSlicedResult,
       'WalletTransactionPagingSlicedResult'

@@ -39,7 +39,7 @@ export const Order = z.object({
   paymentMethod: z.string().nullish(),
   paymentMethodFee: z.number().int().nullish(),
   paymentOrderNo: z.string().nullish(),
-  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']).nullish(),
+  paymentProvider: z.enum(['ADYEN', 'ALIPAY', 'CHECKOUT', 'NEONPAY', 'PAYPAL', 'STRIPE', 'WALLET', 'WXPAY', 'XSOLLA']).nullish(),
   paymentProviderFee: z.number().int().nullish(),
   paymentRemainSeconds: z.number().int().nullish(),
   paymentStationUrl: z.string().nullish(),
@@ -51,6 +51,7 @@ export const Order = z.object({
   rvn: z.number().int().nullish(),
   salesTax: z.number().int().nullish(),
   sandbox: z.boolean().nullish(),
+  sectionId: z.string().nullish(),
   status: z
     .enum([
       'CHARGEBACK',

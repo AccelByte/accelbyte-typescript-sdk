@@ -137,6 +137,7 @@
         ],
         "summary": "Query to available game session",
         "tags": ["Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -191,6 +192,7 @@
         ],
         "summary": "Get all active session",
         "tags": ["Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -265,6 +267,7 @@
         ],
         "summary": "Get all active session for custom game, this return only dedicated session type",
         "tags": ["Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -345,6 +348,7 @@
         ],
         "summary": "Get all active session for matchmaking game, this return only dedicated session type",
         "tags": ["Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -407,6 +411,7 @@
         ],
         "summary": "Admin delete specified session by session ID",
         "tags": ["Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"]
@@ -461,6 +466,7 @@
         ],
         "summary": "Admin get specified session by session ID",
         "tags": ["Session"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -579,6 +585,15 @@
         ],
         "summary": "Search sessions",
         "tags": ["Session"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -650,6 +665,15 @@
         ],
         "summary": "Get session history detailed",
         "tags": ["Session"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -762,6 +786,7 @@
         ],
         "summary": "Query to available game session",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -829,6 +854,7 @@
         ],
         "summary": "Register a new game session",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [CREATE]"]
@@ -885,6 +911,7 @@
         ],
         "summary": "Query game sessions by comma separated user ids",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -947,6 +974,7 @@
         ],
         "summary": "Delete specified (p2p) session by session ID",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"]
@@ -1001,6 +1029,7 @@
         ],
         "summary": "Get specified session by session ID",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -1069,6 +1098,7 @@
         ],
         "summary": "Update session",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"]
@@ -1145,6 +1175,7 @@
         ],
         "summary": "Join specified session by session ID",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [READ]"]
@@ -1207,6 +1238,7 @@
         ],
         "summary": "Only use for local DS entry, will error when calling non local DS entry",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [DELETE]"]
@@ -1277,6 +1309,7 @@
         ],
         "summary": "Add player to game session",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"]
@@ -1346,6 +1379,7 @@
         ],
         "summary": "remove player from game session",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"]
@@ -1416,6 +1450,7 @@
         ],
         "summary": "Update settings",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:SESSION [UPDATE]"]
@@ -1472,6 +1507,7 @@
         ],
         "summary": "Query recent players with given user id",
         "tags": ["Session", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSIONBROWSER:RECENTPLAYER [READ]"]

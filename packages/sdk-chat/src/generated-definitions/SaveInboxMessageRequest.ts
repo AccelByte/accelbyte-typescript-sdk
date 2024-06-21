@@ -6,7 +6,7 @@
 import { z } from 'zod'
 
 export const SaveInboxMessageRequest = z.object({
-  category: z.string(),
+  category: z.string().nullish(),
   expiredAt: z.number().int(),
   message: z.record(z.any()),
   scope: z.enum(['NAMESPACE', 'USER']),

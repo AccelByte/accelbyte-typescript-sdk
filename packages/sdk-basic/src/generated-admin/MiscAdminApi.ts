@@ -13,23 +13,23 @@ import { AddCountryGroupRequest } from '../generated-definitions/AddCountryGroup
 import { AddCountryGroupResponse } from '../generated-definitions/AddCountryGroupResponse.js'
 import { CountryGroupObject } from '../generated-definitions/CountryGroupObject.js'
 import { CountryObjectArray } from '../generated-definitions/CountryObjectArray.js'
-import { MiscAdmin$ } from './endpoints/MiscAdmin$.js'
 import { RetrieveCountryGroupResponseArray } from '../generated-definitions/RetrieveCountryGroupResponseArray.js'
 import { UpdateCountryGroupRequest } from '../generated-definitions/UpdateCountryGroupRequest.js'
+import { MiscAdmin$ } from './endpoints/MiscAdmin$.js'
 
 export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * @deprecated
    * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11204&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscCountries_DEPRECATED(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
-    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMiscCountries_DEPRECATED(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -39,7 +39,7 @@ export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11206&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscLanguages(): Promise<unknown> {
-    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMiscLanguages()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -49,7 +49,7 @@ export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List time zones.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11205&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: time zones&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscTimezones(): Promise<unknown> {
-    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMiscTimezones()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -59,7 +59,7 @@ export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * List country groups. Will return all available country groups if the query param is not specified&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11203&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of country groups&lt;/li&gt;&lt;/ul&gt;
    */
   async function getMiscCountrygroups(queryParams?: { groupCode?: string | null }): Promise<RetrieveCountryGroupResponseArray> {
-    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMiscCountrygroups(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -69,7 +69,7 @@ export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Add a country groups&lt;br&gt;Country code must follow ISO3166-1 alpha-2.&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11201&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: newly created country group&lt;/li&gt;&lt;/ul&gt;
    */
   async function createMiscCountrygroup(data: AddCountryGroupRequest): Promise<AddCountryGroupResponse> {
-    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createMiscCountrygroup(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -79,7 +79,7 @@ export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete a country groups by its country group code. This endpoint usually used for testing purpose to cleanup test data.&lt;br&gt;
    */
   async function deleteMiscCountrygroup_ByCountryGroupCode(countryGroupCode: string): Promise<unknown> {
-    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteMiscCountrygroup_ByCountryGroupCode(countryGroupCode)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -92,7 +92,7 @@ export function MiscAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     countryGroupCode: string,
     data: UpdateCountryGroupRequest
   ): Promise<CountryGroupObject> {
-    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MiscAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateMiscCountrygroup_ByCountryGroupCode(countryGroupCode, data)
     if (resp.error) throw resp.error
     return resp.response.data

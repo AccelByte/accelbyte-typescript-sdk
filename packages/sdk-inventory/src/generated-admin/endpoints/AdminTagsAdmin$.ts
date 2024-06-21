@@ -15,7 +15,7 @@ import { ListTagsResp } from '../../generated-definitions/ListTagsResp.js'
 
 export class AdminTagsAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    *  This endpoint will list all tags in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]
@@ -30,7 +30,7 @@ export class AdminTagsAdmin$ {
     const url = '/inventory/v1/admin/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ListTagsResp, 'ListTagsResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListTagsResp, 'ListTagsResp')
   }
 
   /**
@@ -41,7 +41,7 @@ export class AdminTagsAdmin$ {
     const url = '/inventory/v1/admin/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, CreateTagResp, 'CreateTagResp')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateTagResp, 'CreateTagResp')
   }
 
   /**
@@ -54,6 +54,6 @@ export class AdminTagsAdmin$ {
       .replace('{tagName}', tagName)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

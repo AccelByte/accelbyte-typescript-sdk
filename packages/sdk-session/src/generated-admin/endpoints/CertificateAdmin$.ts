@@ -12,7 +12,7 @@ import { PlatformCredentials } from '../../generated-definitions/PlatformCredent
 
 export class CertificateAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Upload certificates for xbox. Certificate must be in the valid form of PFX format.
@@ -28,6 +28,6 @@ export class CertificateAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, PlatformCredentials, 'PlatformCredentials')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlatformCredentials, 'PlatformCredentials')
   }
 }

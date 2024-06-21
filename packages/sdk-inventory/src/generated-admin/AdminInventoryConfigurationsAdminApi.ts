@@ -9,18 +9,18 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
-import { AdminInventoryConfigurationsAdmin$ } from './endpoints/AdminInventoryConfigurationsAdmin$.js'
 import { CreateInventoryConfigurationReq } from '../generated-definitions/CreateInventoryConfigurationReq.js'
 import { InventoryConfigurationReq } from '../generated-definitions/InventoryConfigurationReq.js'
 import { InventoryConfigurationResp } from '../generated-definitions/InventoryConfigurationResp.js'
 import { ListInventoryConfigurationsResp } from '../generated-definitions/ListInventoryConfigurationsResp.js'
+import { AdminInventoryConfigurationsAdmin$ } from './endpoints/AdminInventoryConfigurationsAdmin$.js'
 
 export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]
@@ -40,7 +40,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
       | 'updatedAt:asc'
       | 'updatedAt:desc'
   }): Promise<ListInventoryConfigurationsResp> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInventoryConfigurations(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -50,7 +50,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
    *  Creating inventory configuration. There cannot be one inventory configuration duplicate code per namespace. Permission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]
    */
   async function createInventoryConfiguration(data: CreateInventoryConfigurationReq): Promise<InventoryConfigurationResp> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createInventoryConfiguration(data)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -60,7 +60,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
    *  Deleting an inventory configuration. If an inventory already reference this type (i.e. STATUS is &#34;TIED&#34;), then the type cannot be deleted anymore. ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]
    */
   async function deleteInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId: string): Promise<unknown> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -72,7 +72,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
   async function getInventoryConfiguration_ByInventoryConfigurationId(
     inventoryConfigurationId: string
   ): Promise<InventoryConfigurationResp> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -85,7 +85,7 @@ export function AdminInventoryConfigurationsAdminApi(sdk: AccelbyteSDK, args?: A
     inventoryConfigurationId: string,
     data: InventoryConfigurationReq
   ): Promise<InventoryConfigurationResp> {
-    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new AdminInventoryConfigurationsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateInventoryConfiguration_ByInventoryConfigurationId(inventoryConfigurationId, data)
     if (resp.error) throw resp.error
     return resp.response.data

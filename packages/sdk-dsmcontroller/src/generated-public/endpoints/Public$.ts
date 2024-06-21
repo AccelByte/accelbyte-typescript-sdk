@@ -13,7 +13,7 @@ import { DefaultProvider } from '../../generated-definitions/DefaultProvider.js'
 
 export class Public$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * This endpoints returns list of supported providers. Armada is the default provider.
@@ -23,7 +23,7 @@ export class Public$ {
     const url = '/dsmcontroller/public/providers'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -34,7 +34,7 @@ export class Public$ {
     const url = '/dsmcontroller/public/provider/default'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DefaultProvider, 'DefaultProvider')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DefaultProvider, 'DefaultProvider')
   }
 
   /**
@@ -45,6 +45,6 @@ export class Public$ {
     const url = '/dsmcontroller/public/providers/regions/{region}'.replace('{region}', region)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

@@ -22,7 +22,7 @@ import { UpdateChannelRequest } from '../../generated-definitions/UpdateChannelR
 
 export class MatchmakingAdmin$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Export channels configuration to file. Action Code: 510114
@@ -32,7 +32,7 @@ export class MatchmakingAdmin$ {
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -44,7 +44,7 @@ export class MatchmakingAdmin$ {
     // TODO file upload not implemented
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ImportConfigResponse, 'ImportConfigResponse')
   }
 
   /**
@@ -55,7 +55,7 @@ export class MatchmakingAdmin$ {
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/all/parties'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -68,7 +68,7 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, ChannelV1, 'ChannelV1')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChannelV1, 'ChannelV1')
   }
 
   /**
@@ -81,7 +81,7 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -102,7 +102,7 @@ export class MatchmakingAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetSessionHistorySearchResponse,
       'GetSessionHistorySearchResponse'
@@ -127,7 +127,7 @@ export class MatchmakingAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetSessionHistorySearchResponseV2,
       'GetSessionHistorySearchResponseV2'
@@ -142,7 +142,12 @@ export class MatchmakingAdmin$ {
     const url = '/matchmaking/v1/admin/namespaces/{namespace}/channels/all/sessions/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      MatchmakingResultArray,
+      'MatchmakingResultArray'
+    )
   }
 
   /**
@@ -155,7 +160,7 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, StatResumeResponse, 'StatResumeResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatResumeResponse, 'StatResumeResponse')
   }
 
   /**
@@ -168,7 +173,7 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchingPartyArray, 'MatchingPartyArray')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MatchingPartyArray, 'MatchingPartyArray')
   }
 
   /**
@@ -181,7 +186,12 @@ export class MatchmakingAdmin$ {
       .replace('{channelName}', channelName)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, MatchmakingResultArray, 'MatchmakingResultArray')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      MatchmakingResultArray,
+      'MatchmakingResultArray'
+    )
   }
 
   /**
@@ -196,7 +206,7 @@ export class MatchmakingAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       GetSessionHistoryDetailedResponseItemArray,
       'GetSessionHistoryDetailedResponseItemArray'
@@ -214,7 +224,7 @@ export class MatchmakingAdmin$ {
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -232,7 +242,7 @@ export class MatchmakingAdmin$ {
       .replace('{matchID}', matchID)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -247,6 +257,6 @@ export class MatchmakingAdmin$ {
       .replace('{userID}', userID)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

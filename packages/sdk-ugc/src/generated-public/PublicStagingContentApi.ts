@@ -10,16 +10,16 @@
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { PaginatedListStagingContentResponse } from '../generated-definitions/PaginatedListStagingContentResponse.js'
-import { PublicStagingContent$ } from './endpoints/PublicStagingContent$.js'
 import { StagingContentResponse } from '../generated-definitions/StagingContentResponse.js'
 import { UpdateStagingContentRequest } from '../generated-definitions/UpdateStagingContentRequest.js'
+import { PublicStagingContent$ } from './endpoints/PublicStagingContent$.js'
 
 export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const sdkAssembly = sdk.assembly()
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
    * List user staging contents
@@ -28,7 +28,7 @@ export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     userId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: string | null }
   ): Promise<PaginatedListStagingContentResponse> {
-    const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getStagingContents_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -38,7 +38,7 @@ export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Delete user staging content by ID
    */
   async function deleteStagingContent_ByUserId_ByContentId(userId: string, contentId: string): Promise<unknown> {
-    const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.deleteStagingContent_ByUserId_ByContentId(userId, contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -48,7 +48,7 @@ export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * Get user staging content by ID
    */
   async function getStagingContent_ByUserId_ByContentId(userId: string, contentId: string): Promise<StagingContentResponse> {
-    const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getStagingContent_ByUserId_ByContentId(userId, contentId)
     if (resp.error) throw resp.error
     return resp.response.data
@@ -62,7 +62,7 @@ export function PublicStagingContentApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     contentId: string,
     data: UpdateStagingContentRequest
   ): Promise<StagingContentResponse> {
-    const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new PublicStagingContent$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateStagingContent_ByUserId_ByContentId(userId, contentId, data)
     if (resp.error) throw resp.error
     return resp.response.data

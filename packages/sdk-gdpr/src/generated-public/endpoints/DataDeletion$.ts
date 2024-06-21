@@ -14,7 +14,7 @@ import { RequestDeleteResponse } from '../../generated-definitions/RequestDelete
 
 export class DataDeletion$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Cancel my account deletion request Requires valid user access token
@@ -24,11 +24,11 @@ export class DataDeletion$ {
     const url = '/gdpr/public/users/me/deletions'
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * Submit my account deletion requests. Requires valid user access token This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest)
+   * Submit my account deletion requests. Requires valid user access token This is for in-game only and require a valid platformId and platform token. If a full account is not logged by 3rd platform, then please use [/gdpr/public/namespaces/{namespace}/users/{userId}/deletions](#operations-Data_Deletion-PublicSubmitUserAccountDeletionRequest) ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
   postUserMeDeletion(data: { platformId: string | null; platformToken: string | null }): Promise<IResponse<RequestDeleteResponse>> {
     const params = {} as SDKRequestConfig
@@ -38,7 +38,7 @@ export class DataDeletion$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
   }
 
   /**
@@ -49,7 +49,7 @@ export class DataDeletion$ {
     const url = '/gdpr/public/users/me/deletions/status'
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeletionStatus, 'DeletionStatus')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DeletionStatus, 'DeletionStatus')
   }
 
   /**
@@ -62,11 +62,11 @@ export class DataDeletion$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
-   * Submit user&#39;s account deletion requests Requires valid user access token and password Scope: account
+   * Submit user&#39;s account deletion request. Requires valid user access token and password Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
   postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<RequestDeleteResponse>> {
     const params = {} as SDKRequestConfig
@@ -78,7 +78,7 @@ export class DataDeletion$ {
       headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
     })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RequestDeleteResponse, 'RequestDeleteResponse')
   }
 
   /**
@@ -91,6 +91,6 @@ export class DataDeletion$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, DeletionStatus, 'DeletionStatus')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DeletionStatus, 'DeletionStatus')
   }
 }

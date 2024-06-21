@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Matchmaking Service",
-    "version": "2.30.3"
+    "version": "2.30.5"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -36,6 +36,7 @@
     "/healthz": {
       "get": {
         "operationId": "GetHealthcheckInfo",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -46,12 +47,14 @@
             "authorization": []
           }
         ],
-        "tags": ["Matchmaking Operations"]
+        "tags": ["Matchmaking Operations"],
+        "x-errorCodes": {}
       }
     },
     "/matchmaking/healthz": {
       "get": {
         "operationId": "handlerV3Healthz",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -62,7 +65,8 @@
             "authorization": []
           }
         ],
-        "tags": ["Matchmaking Operations"]
+        "tags": ["Matchmaking Operations"],
+        "x-errorCodes": {}
       }
     },
     "/matchmaking/namespaces/{namespace}/channels": {
@@ -137,6 +141,7 @@
         ],
         "summary": "Get all channels",
         "tags": ["Matchmaking", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -210,6 +215,7 @@
         ],
         "summary": "Create a channel",
         "tags": ["Matchmaking", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [CREATE]"]
@@ -278,6 +284,7 @@
         ],
         "summary": "Get metrics for a specific channel",
         "tags": ["Matchmaking", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:CHANNEL:METRICS [READ]"]
@@ -337,6 +344,7 @@
         ],
         "summary": "Delete a channel",
         "tags": ["Matchmaking", "admin"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [DELETE]"]
@@ -406,6 +414,7 @@
         ],
         "summary": "Store match result",
         "tags": ["Matchmaking", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHRESULT [CREATE]"]
@@ -481,6 +490,7 @@
         ],
         "summary": "Rebalance Matchmaking based on MMR",
         "tags": ["Matchmaking", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:REBALANCE [UPDATE]"]
@@ -547,6 +557,7 @@
         ],
         "summary": "Queue joinable session",
         "tags": ["Matchmaking", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION [CREATE]"]
@@ -619,6 +630,7 @@
         ],
         "summary": "Dequeue joinable session",
         "tags": ["Matchmaking", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION [UPDATE]"]
@@ -693,6 +705,7 @@
         ],
         "summary": "Query joinable session status",
         "tags": ["Matchmaking", "public"],
+        "x-errorCodes": {},
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:SESSION [READ]"]
@@ -768,6 +781,16 @@
         ],
         "summary": "Update player -- playtime connection weight",
         "tags": ["Social Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510301": "user playtime not found"
+        },
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [UPDATE]"]
@@ -841,6 +864,16 @@
         ],
         "summary": "Get all party in all channels",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -917,6 +950,16 @@
         ],
         "summary": "Bulk get sessions",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -978,6 +1021,13 @@
         ],
         "summary": "Export channels",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -1051,6 +1101,15 @@
         ],
         "summary": "Import channels",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "510109": "failed to read file"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [UPDATE]"]
@@ -1125,6 +1184,15 @@
         ],
         "summary": "Get single channel",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -1202,6 +1270,16 @@
         ],
         "summary": "Update a channel",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [UPDATE]"]
@@ -1273,6 +1351,16 @@
         ],
         "summary": "Delete all mock tickets and matches",
         "tags": ["Mock Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [UPDATE]"]
@@ -1347,6 +1435,16 @@
         ],
         "summary": "Get all mock matches",
         "tags": ["Mock Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -1428,6 +1526,16 @@
         ],
         "summary": "Get mock matches after timestamp",
         "tags": ["Mock Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -1502,6 +1610,16 @@
         ],
         "summary": "Get all mock tickets",
         "tags": ["Mock Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -1585,6 +1703,16 @@
         ],
         "summary": "Create mock tickets",
         "tags": ["Mock Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [CREATE]"]
@@ -1667,6 +1795,16 @@
         ],
         "summary": "Bulk create mock tickets",
         "tags": ["Mock Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [CREATE]"]
@@ -1750,6 +1888,16 @@
         ],
         "summary": "Get mock tickets after timestamp",
         "tags": ["Mock Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -1827,6 +1975,16 @@
         ],
         "summary": "Get all party in a channel",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -1904,6 +2062,16 @@
         ],
         "summary": "Get all channel sessions",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -1982,6 +2150,16 @@
         ],
         "summary": "Delete session in a channel",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [DELETE]"]
@@ -2066,6 +2244,16 @@
         ],
         "summary": "Add user into the session in a channel",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [CREATE]"]
@@ -2154,6 +2342,16 @@
         ],
         "summary": "Delete user from the session in a channel",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [DELETE]"]
@@ -2228,6 +2426,16 @@
         ],
         "summary": "Get stats",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -2341,6 +2549,16 @@
         ],
         "summary": "Search sessions",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -2419,6 +2637,16 @@
         ],
         "summary": "Get session history detailed",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -2455,7 +2683,8 @@
           }
         ],
         "summary": "get service messages",
-        "tags": ["Matchmaking Operations"]
+        "tags": ["Matchmaking Operations"],
+        "x-errorCodes": {}
       }
     },
     "/matchmaking/v1/public/namespaces/{namespace}/channels": {
@@ -2520,7 +2749,8 @@
           }
         ],
         "summary": "Get all channels",
-        "tags": ["Matchmaking"]
+        "tags": ["Matchmaking"],
+        "x-errorCodes": {}
       }
     },
     "/matchmaking/v1/public/namespaces/{namespace}/channels/{channelName}": {
@@ -2589,7 +2819,16 @@
           }
         ],
         "summary": "Get single channel",
-        "tags": ["Matchmaking"]
+        "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "510110": "channel not found"
+        }
       }
     },
     "/matchmaking/v2/admin/namespaces/{namespace}/sessions/history/search": {
@@ -2698,6 +2937,16 @@
         ],
         "summary": "Search sessions",
         "tags": ["Matchmaking"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20014": "invalid audience",
+          "20015": "insufficient scope",
+          "20019": "unable to parse request body",
+          "510110": "channel not found"
+        },
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CHANNEL [READ]"]
@@ -2718,7 +2967,8 @@
             "authorization": []
           }
         ],
-        "tags": ["Matchmaking Operations"]
+        "tags": ["Matchmaking Operations"],
+        "x-errorCodes": {}
       }
     }
   },
@@ -4822,9 +5072,9 @@
     "path": "/matchmaking/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-04-25T10:33:09+00:00",
-    "gitHash": "91be3cba9ecca1ba759bdcacfbc6a3a2f2bd1576",
-    "version": "2.30.3",
+    "buildDate": "2024-05-17T09:42:13+00:00",
+    "gitHash": "5860acb38d82b29e60f1fb44aa2a9d309a9f5ab1",
+    "version": "2.30.5",
     "version-roles-seeding": "0.0.23"
   }
 }

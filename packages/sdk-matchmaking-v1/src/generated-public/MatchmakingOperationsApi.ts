@@ -17,10 +17,10 @@ export function MatchmakingOperationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const isZodEnabled = typeof window !== 'undefined' && localStorage.getItem('ZodEnabled') !== 'false'
+  const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   async function getVersion(): Promise<unknown> {
-    const $ = new MatchmakingOperations$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MatchmakingOperations$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getVersion()
     if (resp.error) throw resp.error
     return resp.response.data
@@ -30,7 +30,7 @@ export function MatchmakingOperationsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
    * get the list of messages.
    */
   async function getMessages(): Promise<AppMessageDeclarationArray> {
-    const $ = new MatchmakingOperations$(Network.create(requestConfig), namespace, isZodEnabled)
+    const $ = new MatchmakingOperations$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getMessages()
     if (resp.error) throw resp.error
     return resp.response.data

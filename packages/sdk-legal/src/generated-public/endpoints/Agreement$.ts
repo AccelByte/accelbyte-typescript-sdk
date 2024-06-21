@@ -15,7 +15,7 @@ import { RetrieveAcceptedAgreementResponseArray } from '../../generated-definiti
 
 export class Agreement$ {
   // @ts-ignore
-  constructor(private axiosInstance: AxiosInstance, private namespace: string, private isZodEnabled = true) {}
+  constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
    * Retrieve accepted Legal Agreements.
@@ -26,7 +26,7 @@ export class Agreement$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
-      this.isZodEnabled,
+      this.useSchemaValidation,
       () => resultPromise,
       RetrieveAcceptedAgreementResponseArray,
       'RetrieveAcceptedAgreementResponseArray'
@@ -41,7 +41,12 @@ export class Agreement$ {
     const url = '/agreement/public/agreements/policies'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AcceptAgreementResponse, 'AcceptAgreementResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      AcceptAgreementResponse,
+      'AcceptAgreementResponse'
+    )
   }
 
   /**
@@ -56,7 +61,12 @@ export class Agreement$ {
     const url = '/agreement/public/agreements/policies/users/{userId}'.replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AcceptAgreementResponse, 'AcceptAgreementResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      AcceptAgreementResponse,
+      'AcceptAgreementResponse'
+    )
   }
 
   /**
@@ -67,7 +77,7 @@ export class Agreement$ {
     const url = '/agreement/public/agreements/localized-policy-versions/preferences'
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -81,7 +91,7 @@ export class Agreement$ {
     )
     const resultPromise = this.axiosInstance.post(url, null, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, z.unknown(), 'z.unknown()')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 
   /**
@@ -102,6 +112,11 @@ export class Agreement$ {
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.isZodEnabled, () => resultPromise, AcceptAgreementResponse, 'AcceptAgreementResponse')
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      AcceptAgreementResponse,
+      'AcceptAgreementResponse'
+    )
   }
 }
