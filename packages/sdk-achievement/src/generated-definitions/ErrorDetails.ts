@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const ErrorDetails = z.object({ errorCode: z.number().int(), errorMessage: z.string() })
+export const ErrorDetails = z.object({ errorCode: z.number().int(), errorMessage: z.string(), thirdPartyReferenceId: z.string().nullish() })
 
 export interface ErrorDetails extends z.TypeOf<typeof ErrorDetails> {}

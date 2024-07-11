@@ -13,7 +13,6 @@ export const ConfigurationTemplateResponse = z.object({
   autoLeaveSession: z.boolean().nullish(),
   clientVersion: z.string(),
   createdAt: z.string(),
-  customURLGRPC: z.string().nullish(),
   deployment: z.string(),
   disableCodeGeneration: z.boolean().nullish(),
   dsManualSetReady: z.boolean().nullish(),

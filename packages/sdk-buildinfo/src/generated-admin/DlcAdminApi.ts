@@ -21,7 +21,7 @@ export function DlcAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * This API is used to link DLC version(s) against the game version.&lt;p&gt;
+   * This API is used to link DLC version(s) against the game version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   async function updateDlcLink(data: CreateDependencyLinkRequest): Promise<unknown> {
     const $ = new DlcAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -31,7 +31,7 @@ export function DlcAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to retrieve DLC versions against the game version.
+   * This API is used to retrieve DLC versions against the game version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   async function getLink_ByBuildId(buildId: string): Promise<RetrieveDependencyLinkResponse> {
     const $ = new DlcAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)

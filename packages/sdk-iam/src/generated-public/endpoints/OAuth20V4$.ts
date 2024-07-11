@@ -28,6 +28,7 @@ export class OAuth20V4$ {
         | 'urn:ietf:params:oauth:grant-type:login_queue_ticket'
       additionalData?: string | null
       client_id?: string | null
+      client_secret?: string | null
       code?: string | null
       code_verifier?: string | null
       extendNamespace?: string | null
@@ -185,6 +186,7 @@ export class OAuth20V4$ {
       device_id?: string | null
       macAddress?: string | null
       platform_token?: string | null
+      serviceLabel?: number
       skipSetCookie?: boolean | null
     },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }

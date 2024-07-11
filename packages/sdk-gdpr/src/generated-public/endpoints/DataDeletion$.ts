@@ -68,7 +68,10 @@ export class DataDeletion$ {
   /**
    * Submit user&#39;s account deletion request. Requires valid user access token and password Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
-  postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<RequestDeleteResponse>> {
+  postDeletion_ByUserId(
+    userId: string,
+    data: { password: string | null; languageTag?: string | null }
+  ): Promise<IResponse<RequestDeleteResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/deletions'
       .replace('{namespace}', this.namespace)

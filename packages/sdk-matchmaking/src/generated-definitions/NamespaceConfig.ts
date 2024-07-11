@@ -5,6 +5,10 @@
  */
 import { z } from 'zod'
 
-export const NamespaceConfig = z.object({ namespace: z.string(), platformGroup: z.record(z.array(z.string())).nullish() })
+export const NamespaceConfig = z.object({
+  extraPlatforms: z.array(z.string()).nullish(),
+  namespace: z.string(),
+  platformGroup: z.record(z.array(z.string())).nullish()
+})
 
 export interface NamespaceConfig extends z.TypeOf<typeof NamespaceConfig> {}

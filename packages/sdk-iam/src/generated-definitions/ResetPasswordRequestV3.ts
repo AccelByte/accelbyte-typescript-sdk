@@ -5,6 +5,11 @@
  */
 import { z } from 'zod'
 
-export const ResetPasswordRequestV3 = z.object({ code: z.string(), emailAddress: z.string(), newPassword: z.string() })
+export const ResetPasswordRequestV3 = z.object({
+  code: z.string(),
+  emailAddress: z.string(),
+  languageTag: z.string().nullish(),
+  newPassword: z.string()
+})
 
 export interface ResetPasswordRequestV3 extends z.TypeOf<typeof ResetPasswordRequestV3> {}

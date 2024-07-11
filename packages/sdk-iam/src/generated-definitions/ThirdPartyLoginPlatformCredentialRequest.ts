@@ -15,6 +15,7 @@ export const ThirdPartyLoginPlatformCredentialRequest = z.object({
   AppId: z.string(),
   AuthorizationEndpoint: z.string(),
   ClientId: z.string(),
+  EmptyStrFieldList: z.array(z.string()).nullish(),
   Environment: z.string(),
   FederationMetadataURL: z.string(),
   GenericOauthFlow: z.boolean(),

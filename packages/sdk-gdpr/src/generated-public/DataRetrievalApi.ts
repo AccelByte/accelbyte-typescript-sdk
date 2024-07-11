@@ -37,7 +37,10 @@ export function DataRetrievalApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Submit personal data retrieval request. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
-  async function postRequest_ByUserId(userId: string, data: { password: string | null }): Promise<DataRetrievalResponse> {
+  async function postRequest_ByUserId(
+    userId: string,
+    data: { password: string | null; languageTag?: string | null }
+  ): Promise<DataRetrievalResponse> {
     const $ = new DataRetrieval$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.postRequest_ByUserId(userId, data)
     if (resp.error) throw resp.error

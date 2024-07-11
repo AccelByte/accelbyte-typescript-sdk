@@ -646,7 +646,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createUser_ByPlatformId(
     platformId: string,
     data: PlatformUserIdRequest,
-    queryParams?: { rawPID?: boolean | null }
+    queryParams?: { rawPID?: boolean | null; rawPUID?: boolean | null }
   ): Promise<UserPlatforms> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUser_ByPlatformId(platformId, data, queryParams)

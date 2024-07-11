@@ -222,6 +222,16 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * cancel a game session invitation.
+   */
+  async function deleteCancel_BySessionId_ByUserId(sessionId: string, userId: string): Promise<unknown> {
+    const $ = new GameSession$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.deleteCancel_BySessionId_ByUserId(sessionId, userId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     createGamesession,
     createGamesession_ByNS,
@@ -241,6 +251,7 @@ export function GameSessionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createLeader_BySessionId,
     deleteReject_BySessionId,
     getSecret_BySessionId,
-    updateBackfill_BySessionId
+    updateBackfill_BySessionId,
+    deleteCancel_BySessionId_ByUserId
   }
 }

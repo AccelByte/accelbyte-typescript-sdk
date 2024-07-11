@@ -22,7 +22,7 @@ export function DataRetrievalS2SApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * Scope: account Get list of finished personal data requests based on the finished time period. Unfinished personal data requests will not appear here, i.e. have Status **Pending**, **In-Progress** or **Canceled**. --- ## This API for S2S integration purpose only
+   * Scope: account Get list of finished personal data requests based on the finished time period. Unfinished personal data requests will not appear here, i.e. have Status **Pending**, **In-Progress** or **Canceled**. **Anonymize userId for deleted account:** For user accounts that have been deleted, the **userId** field in this API will be anonymized automatically after **7 days** from the success deletion. This measure is implemented to ensure compliance with GDPR regulations. Please make sure to synchronize the data from this API before it undergoes anonymization. --- ## This API for S2S integration purpose only
    */
   async function getS2SRequestsFinished(queryParams: { end: string | null; start: string | null }): Promise<ListFinishedDataRequests> {
     const $ = new DataRetrievalS2S$(Network.create(requestConfig), namespace, useSchemaValidation)

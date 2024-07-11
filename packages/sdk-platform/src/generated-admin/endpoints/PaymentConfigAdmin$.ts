@@ -14,6 +14,8 @@ import { AliPayConfig } from '../../generated-definitions/AliPayConfig.js'
 import { CheckoutConfig } from '../../generated-definitions/CheckoutConfig.js'
 import { NeonPayConfig } from '../../generated-definitions/NeonPayConfig.js'
 import { PayPalConfig } from '../../generated-definitions/PayPalConfig.js'
+import { PaymentDomainWhitelistConfigEdit } from '../../generated-definitions/PaymentDomainWhitelistConfigEdit.js'
+import { PaymentDomainWhitelistConfigInfo } from '../../generated-definitions/PaymentDomainWhitelistConfigInfo.js'
 import { PaymentMerchantConfigInfo } from '../../generated-definitions/PaymentMerchantConfigInfo.js'
 import { PaymentProviderConfigEdit } from '../../generated-definitions/PaymentProviderConfigEdit.js'
 import { PaymentProviderConfigInfo } from '../../generated-definitions/PaymentProviderConfigInfo.js'
@@ -472,6 +474,38 @@ export class PaymentConfigAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
+  }
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment domain whitelist config by namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment domain whitelist config info&lt;/li&gt;&lt;/ul&gt;
+   */
+  getPaymentConfigDomains(): Promise<IResponse<PaymentDomainWhitelistConfigInfo>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/payment/config/domains'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentDomainWhitelistConfigInfo,
+      'PaymentDomainWhitelistConfigInfo'
+    )
+  }
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Update payment provider config by namespace.&lt;br&gt;&lt;pre&gt;&lt;p&gt;&lt;strong&gt;Request Body Parameters:&lt;/strong&gt;&lt;/p&gt;&lt;pre&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Parameter&lt;/td&gt;&lt;td&gt;Type&lt;/td&gt;&lt;td&gt;Required&lt;/td&gt;&lt;td&gt;Description&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;domains&lt;/td&gt;&lt;td&gt;String&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;list of domains to whitelist for the return URL.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/pre&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Validation&lt;/i&gt;: the domain should include the protocol (http/https), but the whitelist check will only compare the host part (www.example.com)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment domain whitelist config&lt;/li&gt;&lt;/ul&gt;
+   */
+  updatePaymentConfigDomain(data: PaymentDomainWhitelistConfigEdit): Promise<IResponse<PaymentDomainWhitelistConfigInfo>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/payment/config/domains'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      PaymentDomainWhitelistConfigInfo,
+      'PaymentDomainWhitelistConfigInfo'
+    )
   }
 
   /**

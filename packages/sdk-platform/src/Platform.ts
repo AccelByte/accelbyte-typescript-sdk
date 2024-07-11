@@ -40,6 +40,7 @@ import { AchievementPlatformAdminApi } from './generated-admin/AchievementPlatfo
 import { AnonymizationAdminApi } from './generated-admin/AnonymizationAdminApi.js'
 import { PlatformAccountClosureAdminApi } from './generated-admin/PlatformAccountClosureAdminApi.js'
 import { CatalogChangesAdminApi } from './generated-admin/CatalogChangesAdminApi.js'
+import { PlatformAdminApi } from './generated-admin/PlatformAdminApi.js'
 import { StoreApi } from './generated-public/StoreApi.js'
 import { CategoryApi } from './generated-public/CategoryApi.js'
 import { CurrencyApi } from './generated-public/CurrencyApi.js'
@@ -91,6 +92,7 @@ const apis = {
   AnonymizationAdminApi,
   PlatformAccountClosureAdminApi,
   CatalogChangesAdminApi,
+  PlatformAdminApi,
   StoreApi,
   CategoryApi,
   CurrencyApi,

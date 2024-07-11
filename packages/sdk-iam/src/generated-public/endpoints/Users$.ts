@@ -984,7 +984,7 @@ export class Users$ {
   createUser_ByPlatformId_DEPRECATED(
     platformId: string,
     data: PlatformUserIdRequest,
-    queryParams?: { rawPID?: boolean | null }
+    queryParams?: { rawPID?: boolean | null; rawPUID?: boolean | null }
   ): Promise<IResponse<UserPlatforms>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/platforms/{platformId}/users'

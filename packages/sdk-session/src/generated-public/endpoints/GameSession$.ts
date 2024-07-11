@@ -276,4 +276,18 @@ export class GameSession$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GameSessionResponse, 'GameSessionResponse')
   }
+
+  /**
+   * cancel a game session invitation.
+   */
+  deleteCancel_BySessionId_ByUserId(sessionId: string, userId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/users/{userId}/cancel'
+      .replace('{namespace}', this.namespace)
+      .replace('{sessionId}', sessionId)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
 }

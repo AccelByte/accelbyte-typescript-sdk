@@ -819,7 +819,7 @@ export class UsersAdmin$ {
   createUser_ByPlatformId(
     platformId: string,
     data: PlatformUserIdRequest,
-    queryParams?: { rawPID?: boolean | null }
+    queryParams?: { rawPID?: boolean | null; rawPUID?: boolean | null }
   ): Promise<IResponse<UserPlatforms>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/users'

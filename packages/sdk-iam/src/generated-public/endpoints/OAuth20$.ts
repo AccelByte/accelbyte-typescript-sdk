@@ -44,6 +44,7 @@ export class OAuth20$ {
       | 'urn:ietf:params:oauth:grant-type:extend_client_credentials'
     additionalData?: string | null
     client_id?: string | null
+    client_secret?: string | null
     code?: string | null
     code_verifier?: string | null
     extendNamespace?: string | null
@@ -232,6 +233,7 @@ export class OAuth20$ {
       device_id?: string | null
       macAddress?: string | null
       platform_token?: string | null
+      serviceLabel?: number
       skipSetCookie?: boolean | null
     }
   ): Promise<IResponse<TokenResponse>> {

@@ -5,6 +5,9 @@
  */
 import { z } from 'zod'
 
-export const PatchNamespaceConfigRequest = z.object({ platformGroup: z.record(z.array(z.string())).nullish() })
+export const PatchNamespaceConfigRequest = z.object({
+  extraPlatforms: z.array(z.string()).nullish(),
+  platformGroup: z.record(z.array(z.string())).nullish()
+})
 
 export interface PatchNamespaceConfigRequest extends z.TypeOf<typeof PatchNamespaceConfigRequest> {}

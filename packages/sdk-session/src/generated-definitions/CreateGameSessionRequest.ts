@@ -4,6 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { SessionStorageRequest } from './SessionStorageRequest.js'
 import { Team } from './Team.js'
 
 export const CreateGameSessionRequest = z.object({
@@ -12,7 +13,6 @@ export const CreateGameSessionRequest = z.object({
   backfillTicketID: z.string(),
   clientVersion: z.string(),
   configurationName: z.string(),
-  customURLGRPC: z.string().nullish(),
   deployment: z.string(),
   dsSource: z.string().nullish(),
   fallbackClaimKeys: z.array(z.string()).nullish(),
@@ -25,6 +25,7 @@ export const CreateGameSessionRequest = z.object({
   preferredClaimKeys: z.array(z.string()).nullish(),
   requestedRegions: z.array(z.string()),
   serverName: z.string(),
+  storage: SessionStorageRequest.nullish(),
   teams: z.array(Team),
   textChat: z.boolean(),
   ticketIDs: z.array(z.string()),

@@ -63,7 +63,10 @@ export function DataDeletionApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Submit user&#39;s account deletion request. Requires valid user access token and password Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
-  async function postDeletion_ByUserId(userId: string, data: { password: string | null }): Promise<RequestDeleteResponse> {
+  async function postDeletion_ByUserId(
+    userId: string,
+    data: { password: string | null; languageTag?: string | null }
+  ): Promise<RequestDeleteResponse> {
     const $ = new DataDeletion$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.postDeletion_ByUserId(userId, data)
     if (resp.error) throw resp.error

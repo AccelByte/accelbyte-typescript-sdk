@@ -3,12 +3,12 @@
   "info": {
     "description": "justice-inventory-service",
     "title": "justice-inventory-service",
-    "version": "0.1.4"
+    "version": "0.2.1"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/inventory/apidocs"
+    "url": "https://stage.accelbyte.io/inventory/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -129,7 +129,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations": {
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tListing all integration configurations in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]\n\t\t",
         "operationId": "AdminListIntegrationConfigurations",
         "parameters": [
@@ -399,7 +398,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories": {
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tListing all inventories in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]\n\t\t",
         "operationId": "AdminListInventories",
         "parameters": [
@@ -601,7 +599,6 @@
         "x-errorCodes": {}
       },
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tGetting an inventory info.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]\n\t\t",
         "operationId": "AdminGetInventory",
         "parameters": [
@@ -725,7 +722,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/items": {
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tListing all items in an inventory.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]\n\t\t",
         "operationId": "AdminListItems",
         "parameters": [
@@ -810,7 +806,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}": {
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\t\t\tGetting an item info.\n\n\t\t\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]\n\t\t\t\t",
         "operationId": "AdminGetInventoryItem",
         "parameters": [
@@ -883,7 +878,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations": {
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tListing all inventory configurations in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]\n\t\t",
         "operationId": "AdminListInventoryConfigurations",
         "parameters": [
@@ -1023,7 +1017,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations/{inventoryConfigurationId}": {
       "delete": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tDeleting an inventory configuration.\n\t\t\tIf an inventory already reference this type (i.e. STATUS is \u0026#34;TIED\u0026#34;), then the type cannot be deleted anymore.\n\t\t\t\n\t\t\tADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]\n\t\t",
         "operationId": "AdminDeleteInventoryConfiguration",
         "parameters": [
@@ -1077,7 +1070,6 @@
         "x-errorCodes": {}
       },
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tGetting an inventory configuration info.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]\n\t\t",
         "operationId": "AdminGetInventoryConfiguration",
         "parameters": [
@@ -1207,7 +1199,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/itemtypes": {
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tThis endpoint will list all item types in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]\n\t\t",
         "operationId": "AdminListItemTypes",
         "parameters": [
@@ -1331,7 +1322,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/itemtypes/{itemTypeName}": {
       "delete": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tThis endpoint will delete a item type by itemtypeName in a specified namespace.\n\t\t\tIf the itemtypeName doesn\u0026#39;t exist in a namespace, it\u0026#39;ll return not found.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]\n\t\t",
         "operationId": "AdminDeleteItemType",
         "parameters": [
@@ -1381,7 +1371,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/tags": {
       "get": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tThis endpoint will list all tags in a namespace.\n\t\t\tThe response body will be in the form of standard pagination.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]\n\t\t",
         "operationId": "AdminListTags",
         "parameters": [
@@ -1511,7 +1500,6 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/tags/{tagName}": {
       "delete": {
-        "consumes": ["application/json"],
         "description": "\n\t\t\tThis endpoint will delete a tag by tagName in a specified namespace.\n\t\t\tIf the tagName doesn\u0026#39;t exist in a namespace, it\u0026#39;ll return not found.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]\n\t\t",
         "operationId": "AdminDeleteTag",
         "parameters": [
@@ -1714,7 +1702,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tSaving an item to specific inventory.\n\t\t\tThe item will be saved in specific user\u0026#39;s inventory,\n\t\t\t\n\t\t\tIf the item already exists, its qty will be increased,\n\t\t\tso no new item with same sourceItemId will be created\n\n\t\t\tTags will be auto-created.\n\t\t\tItemType will be auto-created.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "description": "\n\t\t\tSaving an item to specific inventory.\n\t\t\tThe item will be saved in specific user\u0026#39;s inventory,\n\t\t\t\n\t\t\tIf the item already exists, its qty will be increased,\n\t\t\tso no new item with same sourceItemId will be created\n\n\t\t\tTags will be auto-created.\n\t\t\tItemType will be auto-created.\n\n\t\t\tFor Ecommerce item, this fields will be override by ecommerce configuration \n\t\t\t(slotUsed, serverCustomAttributes, customAttributes, type)\n\n\t\t\tFor Ecommerce items, the quantity saved is dynamically adjusted based on an item\u0026#39;s useCount configured in Store. \n\t\t\tWhen saving items, the quantity specified for each item will be multiplied by the useCount.\n\t\t\ti.e. If the store item is configured with a useCount of 5 \n\t\t\tand the quantity of a particular item is set to 2 during saving, it will be stored as 10.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
         "operationId": "AdminSaveItemToInventory",
         "parameters": [
           {
@@ -1860,7 +1848,7 @@
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tSaving an item.\n\t\t\tThe item will be saved in user\u0026#39;s inventory,\n\t\t\tIf it doesn\u0026#39;t exist it\u0026#39;ll be created.\n\t\t\t\n\t\t\tIf the item already exists, its qty will be increased,\n\t\t\tso no new item with same sourceItemId will be created\n\n\t\t\tTags will be auto-created.\n\t\t\tItemType will be auto-created.\n\n\t\t\tFor Ecommerce item, this fields will be override by ecommerce configuration \n\t\t\t(slotUsed, serverCustomAttributes, customAttributes, type)\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "description": "\n\t\t\tSaving an item.\n\t\t\tThe item will be saved in user\u0026#39;s inventory,\n\t\t\tIf it doesn\u0026#39;t exist it\u0026#39;ll be created.\n\t\t\t\n\t\t\tIf the item already exists, its qty will be increased,\n\t\t\tso no new item with same sourceItemId will be created\n\n\t\t\tTags will be auto-created.\n\t\t\tItemType will be auto-created.\n\n\t\t\tFor Ecommerce item, this fields will be override by ecommerce configuration \n\t\t\t(slotUsed, serverCustomAttributes, customAttributes, type)\n\n\t\t\tFor Ecommerce items, the quantity saved is dynamically adjusted based on an item\u0026#39;s useCount configured in Store. \n\t\t\tWhen saving items, the quantity specified for each item will be multiplied by the useCount.\n\t\t\ti.e. If the store item is configured with a useCount of 5 \n\t\t\tand the quantity of a particular item is set to 2 during saving, it will be stored as 10.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
         "operationId": "AdminSaveItem",
         "parameters": [
           {
@@ -1920,8 +1908,7 @@
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items/entitlements/sync": {
       "put": {
-        "consumes": ["application/json"],
-        "description": "\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
+        "description": "\n\t\t\tSync user\u0026#39;s entitlement from e-commerce service to inventory for non exist item at user inventory.\n\t\t\twill skip the item if already exist at user inventory.\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
         "operationId": "AdminSyncUserEntitlements",
         "parameters": [
           {
@@ -2631,7 +2618,7 @@
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/movement": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tMove items between inventories that is owned by the same user.\n\t\t",
+        "description": "\n\t\t\tMove items between inventories that is owned by the same user.\n\n\t\t\tCurrently, this endpoint supports transferring items exclusively from source OTHER.\n\t\t\tItems from source ECOMMERCE are not yet eligible for transfer.\n\t\t\tWe are working on expanding support to include source ECOMMERCE in future updates.\n\t\t",
         "operationId": "PublicMoveMyItems",
         "parameters": [
           {
@@ -2935,6 +2922,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "source": {
+          "type": "string"
+        },
         "sourceItemId": {
           "type": "string"
         },
@@ -3237,6 +3227,9 @@
         "inventoryId": {
           "type": "string"
         },
+        "itemInfo": {
+          "type": "object"
+        },
         "namespace": {
           "type": "string"
         },
@@ -3287,6 +3280,7 @@
         "customAttributes",
         "id",
         "inventoryId",
+        "itemInfo",
         "namespace",
         "qty",
         "serverCustomAttributes",
@@ -3792,15 +3786,15 @@
   },
   "x-docs": {
     "alias": "inventory",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/inventory/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-05-29T02:03:09+00:00",
-    "gitHash": "32dbf1852a45bf9daa3835ce004b5165abae16a6",
+    "buildDate": "2024-06-26T04:45:29+00:00",
+    "gitHash": "4144599dbb7e81333a511653ca9df0679925736a",
     "name": "justice-inventory-service",
-    "realm": "DEV",
-    "version": "0.1.4",
+    "realm": "stage",
+    "version": "0.2.1",
     "version-roles-seeding": "1.2.34"
   }
 }

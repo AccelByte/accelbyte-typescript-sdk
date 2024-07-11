@@ -203,4 +203,18 @@ export class Party$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KickResponse, 'KickResponse')
   }
+
+  /**
+   * Cancel a party invitation.
+   */
+  deleteCancel_ByPartyId_ByUserId(partyId: string, userId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/session/v1/public/namespaces/{namespace}/parties/{partyId}/users/{userId}/cancel'
+      .replace('{namespace}', this.namespace)
+      .replace('{partyId}', partyId)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
 }

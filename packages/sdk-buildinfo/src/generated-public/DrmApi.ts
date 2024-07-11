@@ -21,7 +21,7 @@ export function DrmApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * This API is used to get encrypted userId and machineId for entitled user.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: data field containing encrypted userId and machineId separated by comma&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get encrypted userId and machineId for entitled user.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: data field containing encrypted userId and machineId separated by comma&lt;/li&gt;&lt;/ul&gt;
    */
   async function getDrmlicenseEncrypt(queryParams: { appId: string | null; machineId: string | null }): Promise<EncryptedIdentity> {
     const $ = new Drm$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -31,7 +31,7 @@ export function DrmApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get public key.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: url to download the key&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get public key.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: url to download the key&lt;/li&gt;&lt;/ul&gt;
    */
   async function getDrmlicenseRetrievePublicKey(): Promise<PublicKeyPresignedUrl> {
     const $ = new Drm$(Network.create(requestConfig), namespace, useSchemaValidation)

@@ -236,7 +236,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createUser_ByPlatformId(
     platformId: string,
     data: PlatformUserIdRequestV4,
-    queryParams?: { rawPID?: boolean | null }
+    queryParams?: { rawPUID?: boolean | null }
   ): Promise<UserPlatforms> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUser_ByPlatformId(platformId, data, queryParams)
@@ -298,9 +298,9 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * This endpoint is used to enable 2FA backup codes.
    */
-  async function createUserMeMfaBackupCodeEnable_ByNS(): Promise<unknown> {
+  async function createUserMeMfaBackupCodeEnable_ByNS(queryParams?: { languageTag?: string | null }): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createUserMeMfaBackupCodeEnable_ByNS()
+    const resp = await $.createUserMeMfaBackupCodeEnable_ByNS(queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }

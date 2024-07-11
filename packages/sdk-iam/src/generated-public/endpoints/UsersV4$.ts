@@ -277,7 +277,7 @@ export class UsersV4$ {
   createUser_ByPlatformId(
     platformId: string,
     data: PlatformUserIdRequestV4,
-    queryParams?: { rawPID?: boolean | null }
+    queryParams?: { rawPUID?: boolean | null }
   ): Promise<IResponse<UserPlatforms>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/platforms/{platformId}/users'
@@ -360,8 +360,8 @@ export class UsersV4$ {
   /**
    * This endpoint is used to enable 2FA backup codes.
    */
-  createUserMeMfaBackupCodeEnable_ByNS(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createUserMeMfaBackupCodeEnable_ByNS(queryParams?: { languageTag?: string | null }): Promise<IResponse<unknown>> {
+    const params = { ...queryParams } as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/backupCodes/enable'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
 

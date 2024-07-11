@@ -83,7 +83,7 @@ export class PublicItems$ {
   }
 
   /**
-   *  Move items between inventories that is owned by the same user.
+   *  Move items between inventories that is owned by the same user. Currently, this endpoint supports transferring items exclusively from source OTHER. Items from source ECOMMERCE are not yet eligible for transfer. We are working on expanding support to include source ECOMMERCE in future updates.
    */
   createItemMovementUser_ByInventoryId(inventoryId: string, data: MoveItemsReq): Promise<IResponse<MoveItemsResp>> {
     const params = {} as SDKRequestConfig

@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-gametelemetry",
-  "version": "4.0.5-beta.1",
+  "version": "4.0.5",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",

@@ -13,6 +13,7 @@ export const CreateItem = z.object({
   serverCustomAttributes: z.record(z.any()),
   slotId: z.string(),
   slotUsed: z.number().int(),
+  source: z.string().nullish(),
   sourceItemId: z.string(),
   tags: z.array(z.string()),
   toSpecificInventory: z.boolean(),

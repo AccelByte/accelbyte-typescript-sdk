@@ -4,13 +4,13 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { SectionItemInfo } from './SectionItemInfo.js'
+import { ItemInfo } from './ItemInfo.js'
 
 export const SectionInfo = z.object({
   active: z.boolean(),
   createdAt: z.string(),
   currentRotationExpireAt: z.string().nullish(),
-  currentRotationItems: z.array(SectionItemInfo).nullish(),
+  currentRotationItems: z.array(ItemInfo).nullish(),
   description: z.string().nullish(),
   displayOrder: z.number().int().nullish(),
   endDate: z.string(),

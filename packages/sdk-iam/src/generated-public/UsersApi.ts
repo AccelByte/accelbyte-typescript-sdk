@@ -837,7 +837,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createUser_ByPlatformId_DEPRECATED(
     platformId: string,
     data: PlatformUserIdRequest,
-    queryParams?: { rawPID?: boolean | null }
+    queryParams?: { rawPID?: boolean | null; rawPUID?: boolean | null }
   ): Promise<UserPlatforms> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUser_ByPlatformId_DEPRECATED(platformId, data, queryParams)

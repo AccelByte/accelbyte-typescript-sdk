@@ -47,6 +47,7 @@ export function OAuth20Api(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'urn:ietf:params:oauth:grant-type:extend_client_credentials'
     additionalData?: string | null
     client_id?: string | null
+    client_secret?: string | null
     code?: string | null
     code_verifier?: string | null
     extendNamespace?: string | null
@@ -186,6 +187,7 @@ export function OAuth20Api(sdk: AccelbyteSDK, args?: ApiArgs) {
       device_id?: string | null
       macAddress?: string | null
       platform_token?: string | null
+      serviceLabel?: number
       skipSetCookie?: boolean | null
     }
   ): Promise<TokenResponse> {

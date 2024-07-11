@@ -8,12 +8,12 @@
     },
     "description": "Justice IAM Service",
     "title": "justice-iam-service",
-    "version": "7.16.3"
+    "version": "7.18.2"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/iam/apidocs"
+    "url": "https://stage.accelbyte.io/iam/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -10285,9 +10285,17 @@
           },
           {
             "default": false,
-            "description": "if this is true, the platform user id in response will be raw id, if it is false, some platform user id will be encrypted, eg: xbox",
+            "description": "if this is true, the platform user id in response will be raw id, if it is false, some platform user id will be encrypted, eg: xbox; Note: this field is deprecated, please use: rawPUID",
             "in": "query",
             "name": "rawPID",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "default": false,
+            "description": "if this is true, the platform user id in response will be raw id, if it is false, some platform user id will be encrypted, eg: xbox",
+            "in": "query",
+            "name": "rawPUID",
             "type": "boolean",
             "x-omitempty": false
           }
@@ -17385,6 +17393,12 @@
             "type": "string"
           },
           {
+            "description": "Service label, it's used to validate PSN app when set AppId on ps5/ps4",
+            "in": "formData",
+            "name": "serviceLabel",
+            "type": "number"
+          },
+          {
             "default": false,
             "description": "If need skip set cookie. Default is false",
             "in": "formData",
@@ -17610,9 +17624,15 @@
             "type": "string"
           },
           {
-            "description": "client_id (used with grant type 'authorization_code')",
+            "description": "Client Id (used with grant type 'authorization_code')",
             "in": "formData",
             "name": "client_id",
+            "type": "string"
+          },
+          {
+            "description": "Confidential Client Secret (used with grant type 'authorization_code' when using confidential client with client_secret_post authentication method, i.e. not using HTTP Basic authentication)",
+            "in": "formData",
+            "name": "client_secret",
             "type": "string"
           },
           {
@@ -17641,7 +17661,7 @@
             "x-omitempty": false
           },
           {
-            "description": "Password (used with grant type 'password'",
+            "description": "Password (used with grant type 'password')",
             "in": "formData",
             "name": "password",
             "type": "string"
@@ -17659,7 +17679,7 @@
             "type": "string"
           },
           {
-            "description": "User Name (used with grant type 'password'",
+            "description": "User Name (used with grant type 'password')",
             "in": "formData",
             "name": "username",
             "type": "string"
@@ -18316,9 +18336,17 @@
           },
           {
             "default": false,
-            "description": "if this is true, the platform user id in response will be raw id, if it is false, some platform user id will be encrypted, eg: xbox",
+            "description": "if this is true, the platform user id in response will be raw id, if it is false, some platform user id will be encrypted, eg: xbox; Note: this field is deprecated, please use: rawPUID",
             "in": "query",
             "name": "rawPID",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "default": false,
+            "description": "if this is true, the platform user id in response will be raw id, if it is false, some platform user id will be encrypted, eg: xbox",
+            "in": "query",
+            "name": "rawPUID",
             "type": "boolean",
             "x-omitempty": false
           }
@@ -26643,6 +26671,12 @@
             "type": "string"
           },
           {
+            "description": "Service label, it's used to validate PSN app when set AppId on ps5/ps4",
+            "in": "formData",
+            "name": "serviceLabel",
+            "type": "number"
+          },
+          {
             "default": false,
             "description": "If need skip set cookie. Default is false",
             "in": "formData",
@@ -26845,9 +26879,15 @@
             "type": "string"
           },
           {
-            "description": "client_id (used with grant type 'authorization_code')",
+            "description": "Client Id (used with grant type 'authorization_code')",
             "in": "formData",
             "name": "client_id",
+            "type": "string"
+          },
+          {
+            "description": "Confidential Client Secret (used with grant type 'authorization_code' when using confidential client with client_secret_post authentication method, i.e. not using HTTP Basic authentication)",
+            "in": "formData",
+            "name": "client_secret",
             "type": "string"
           },
           {
@@ -26882,7 +26922,7 @@
             "type": "string"
           },
           {
-            "description": "Password (used with grant type 'password'",
+            "description": "Password (used with grant type 'password')",
             "in": "formData",
             "name": "password",
             "type": "string"
@@ -26900,7 +26940,7 @@
             "type": "string"
           },
           {
-            "description": "User Name (used with grant type 'password'",
+            "description": "User Name (used with grant type 'password')",
             "in": "formData",
             "name": "username",
             "type": "string"
@@ -27053,7 +27093,7 @@
             "default": false,
             "description": "if this is true, the platform user id in response will be raw id, if it is false, some platform user id will be encrypted, eg: xbox",
             "in": "query",
-            "name": "rawPID",
+            "name": "rawPUID",
             "type": "boolean",
             "x-omitempty": false
           }
@@ -28464,6 +28504,12 @@
             "in": "path",
             "name": "namespace",
             "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Language tag for email notification",
+            "in": "query",
+            "name": "languageTag",
             "type": "string"
           }
         ],
@@ -30135,6 +30181,9 @@
           "type": "array"
         },
         "linkedAt": {
+          "type": "string"
+        },
+        "logoURL": {
           "type": "string"
         },
         "platformGroup": {
@@ -33274,6 +33323,9 @@
         "emailAddress": {
           "type": "string"
         },
+        "languageTag": {
+          "type": "string"
+        },
         "newPassword": {
           "type": "string"
         }
@@ -33871,6 +33923,13 @@
         },
         "ClientId": {
           "type": "string"
+        },
+        "EmptyStrFieldList": {
+          "description": "specify which string fields need set empty value.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "Environment": {
           "type": "string"
@@ -36304,15 +36363,15 @@
   },
   "x-docs": {
     "alias": "iam",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/iam/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-05-31T17:04:49+00:00",
-    "gitHash": "9710d55cffd599fd2ae0d939d225762df28aa3da",
+    "buildDate": "2024-07-02T04:12:58+00:00",
+    "gitHash": "9269a02f19f73d44a062b02cdecbc0f820644f13",
     "name": "justice-iam-service",
-    "realm": "dev",
-    "version": "7.16.3",
-    "version-roles-seeding": "1.2.21"
+    "realm": "staging",
+    "version": "7.18.2",
+    "version-roles-seeding": "1.2.50"
   }
 }

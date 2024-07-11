@@ -38,7 +38,10 @@ export class DataRetrieval$ {
   /**
    * Submit personal data retrieval request. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
    */
-  postRequest_ByUserId(userId: string, data: { password: string | null }): Promise<IResponse<DataRetrievalResponse>> {
+  postRequest_ByUserId(
+    userId: string,
+    data: { password: string | null; languageTag?: string | null }
+  ): Promise<IResponse<DataRetrievalResponse>> {
     const params = {} as SDKRequestConfig
     const url = '/gdpr/public/namespaces/{namespace}/users/{userId}/requests'
       .replace('{namespace}', this.namespace)

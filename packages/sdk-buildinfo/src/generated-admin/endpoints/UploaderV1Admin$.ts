@@ -24,7 +24,7 @@ export class UploaderV1Admin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to get basic build manifests. Only committed build will be retrieved.
+   * This API is used to get basic build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getBuildsByAppId(queryParams: { appId: string | null }): Promise<IResponse<BuildIdVersionArray>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -36,7 +36,7 @@ export class UploaderV1Admin$ {
 
   /**
    * @deprecated
-   * This API is used to delete build manifest.
+   * This API is used to delete build manifest. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   deleteBuild_ByBuildId_DEPRECATED(buildId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -49,7 +49,7 @@ export class UploaderV1Admin$ {
   }
 
   /**
-   * This API is used to get build manifest.
+   * This API is used to get build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getBuild_ByBuildId(buildId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -63,7 +63,7 @@ export class UploaderV1Admin$ {
 
   /**
    * @deprecated
-   * This API is used to start chunk upload and retrieve upload url.
+   * This API is used to start chunk upload and retrieve upload url. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: upload data&lt;/li&gt;&lt;/ul&gt;
    */
   createStartchunkupload_DEPRECATED(data: BinaryUpload): Promise<IResponse<UploadSummary>> {
     const params = {} as SDKRequestConfig
@@ -74,7 +74,7 @@ export class UploaderV1Admin$ {
   }
 
   /**
-   * This API is used to get basic build manifests. Only committed build will be retrieved.
+   * This API is used to get basic build manifests. Only committed build will be retrieved. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getBuildsByNamespace(): Promise<IResponse<BasicBuildManifestArray>> {
     const params = {} as SDKRequestConfig
@@ -91,7 +91,7 @@ export class UploaderV1Admin$ {
 
   /**
    * @deprecated
-   * This API is used to commit build manifest.
+   * This API is used to commit build manifest. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   createCommitbuildmanifest_DEPRECATED(data: BuildManifest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -102,7 +102,7 @@ export class UploaderV1Admin$ {
   }
 
   /**
-   * This API is used to get build deletion. Only deleted build will be retrieved.
+   * This API is used to get build deletion. Only deleted build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: List of build deletion&lt;/li&gt;&lt;/ul&gt;
    */
   getBuildsdeletionByAppId(queryParams: {
     appId: string | null
@@ -122,7 +122,7 @@ export class UploaderV1Admin$ {
   }
 
   /**
-   * This API is used to set current build as release version.
+   * This API is used to set current build as release version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   updateSetcurrentbuild_ByBuildId(buildId: string, queryParams?: { sendNotification?: boolean | null }): Promise<IResponse<unknown>> {
     const params = { sendNotification: true, ...queryParams } as SDKRequestConfig
@@ -135,7 +135,7 @@ export class UploaderV1Admin$ {
   }
 
   /**
-   * This API is used to retrieve chunk by hash.
+   * This API is used to retrieve chunk by hash.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
    */
   getRetrievechunkbyhash_ByHash(hash: string): Promise<IResponse<BlockData>> {
     const params = {} as SDKRequestConfig
@@ -148,7 +148,7 @@ export class UploaderV1Admin$ {
   }
 
   /**
-   * This API is used to retry build deletion.
+   * This API is used to retry build deletion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   updateRetry_ByBuildId(buildId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -175,7 +175,7 @@ export class UploaderV1Admin$ {
 
   /**
    * @deprecated
-   * This API is used to set current build as release version.
+   * This API is used to set current build as release version. [DEPRECATED] &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   updateSetcurrentbuild_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -190,7 +190,7 @@ export class UploaderV1Admin$ {
 
   /**
    * @deprecated
-   * This API is used to start build upload.
+   * This API is used to start build upload. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
    */
   createStartbuildupload_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<IResponse<BuildIdManifest>> {
     const params = {} as SDKRequestConfig
@@ -205,7 +205,7 @@ export class UploaderV1Admin$ {
 
   /**
    * @deprecated
-   * This API is used to commit chunk that has been uploaded.
+   * This API is used to commit chunk that has been uploaded. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
    */
   createUuid_ByHash_ByUuid_ByOffset_DEPRECATED(hash: string, uuid: string, offset: number): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -221,7 +221,7 @@ export class UploaderV1Admin$ {
 
   /**
    * @deprecated
-   * This API is used to commit chunk that has been uploaded.
+   * This API is used to commit chunk that has been uploaded. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
    */
   createOffset_ByHash_ByUuid_ByOffset_ByBlockSize_DEPRECATED(
     hash: string,

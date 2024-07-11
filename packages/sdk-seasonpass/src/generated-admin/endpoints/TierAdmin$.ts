@@ -24,7 +24,7 @@ export class TierAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to query paginated tiers for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of passes&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to query paginated tiers for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of passes&lt;/li&gt;&lt;/ul&gt;
    */
   getTiers_BySeasonId(seasonId: string, queryParams?: { limit?: number; offset?: number }): Promise<IResponse<TierPagingSlicedResult>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
@@ -42,7 +42,7 @@ export class TierAdmin$ {
   }
 
   /**
-   * This API is used to create tier for a draft season, can create multiple tiers at same time.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to create tier for a draft season, can create multiple tiers at same time.&lt;p&gt;
    */
   createTier_BySeasonId(seasonId: string, data: TierCreate): Promise<IResponse<TierArray>> {
     const params = {} as SDKRequestConfig
@@ -55,7 +55,7 @@ export class TierAdmin$ {
   }
 
   /**
-   * This API is used to delete a tier permanently, only draft season pass can be deleted. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=8 (DELETE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to delete a tier permanently, only draft season pass can be deleted. &lt;p&gt;
    */
   deleteTier_BySeasonId_ById(seasonId: string, id: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -69,7 +69,7 @@ export class TierAdmin$ {
   }
 
   /**
-   * This API is used to update a tier. Only draft season pass can be updated.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to update a tier. Only draft season pass can be updated.&lt;p&gt;
    */
   updateTier_BySeasonId_ById(seasonId: string, id: string, data: TierInput): Promise<IResponse<Tier>> {
     const params = {} as SDKRequestConfig
@@ -83,7 +83,7 @@ export class TierAdmin$ {
   }
 
   /**
-   * This API is used to grant exp to user, it will auto enroll if there&#39;s no user season but active published season exist, season only located in non-publisher namespace, otherwise ignore.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to grant exp to user, it will auto enroll if there&#39;s no user season but active published season exist, season only located in non-publisher namespace, otherwise ignore.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
    */
   createSeasonCurrentExp_ByUserId(userId: string, data: UserExpGrant): Promise<IResponse<UserSeasonSummary>> {
     const params = {} as SDKRequestConfig
@@ -96,7 +96,7 @@ export class TierAdmin$ {
   }
 
   /**
-   * This API is used to grant tier to user, it will auto enroll if there&#39;s no user season but active published season exist, season only located in non-publisher namespace, otherwise ignore.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to grant tier to user, it will auto enroll if there&#39;s no user season but active published season exist, season only located in non-publisher namespace, otherwise ignore.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
    */
   createSeasonCurrentTier_ByUserId(userId: string, data: UserTierGrant): Promise<IResponse<UserSeasonSummary>> {
     const params = {} as SDKRequestConfig
@@ -109,7 +109,7 @@ export class TierAdmin$ {
   }
 
   /**
-   * This API is used to reorder a tier. Only draft season pass can be updated.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:SEASONPASS&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to reorder a tier. Only draft season pass can be updated.&lt;p&gt;
    */
   updateReorder_BySeasonId_ById(seasonId: string, id: string, data: TierReorder): Promise<IResponse<Tier>> {
     const params = {} as SDKRequestConfig

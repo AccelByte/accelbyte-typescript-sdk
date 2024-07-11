@@ -5,6 +5,7 @@
  */
 import { z } from 'zod'
 import { CurrencySummary } from './CurrencySummary.js'
+import { PaymentData } from './PaymentData.js'
 import { PaymentOrderNeonPayConfig } from './PaymentOrderNeonPayConfig.js'
 import { Transaction } from './Transaction.js'
 
@@ -15,6 +16,9 @@ export const PaymentOrder = z.object({
   chargebackTime: z.string().nullish(),
   chargedTime: z.string().nullish(),
   charging: z.boolean().nullish(),
+  checkoutUrl: z.string().nullish(),
+  checkoutUrlExpiredAt: z.string().nullish(),
+  checkoutUrlValid: z.boolean().nullish(),
   createdAt: z.string().nullish(),
   createdTime: z.string().nullish(),
   currency: CurrencySummary.nullish(),
@@ -31,6 +35,7 @@ export const PaymentOrder = z.object({
   neonPayConfig: PaymentOrderNeonPayConfig.nullish(),
   notifyUrl: z.string().nullish(),
   omitNotification: z.boolean().nullish(),
+  paymentData: PaymentData.nullish(),
   paymentMethod: z.string().nullish(),
   paymentMethodFee: z.number().int().nullish(),
   paymentOrderNo: z.string().nullish(),

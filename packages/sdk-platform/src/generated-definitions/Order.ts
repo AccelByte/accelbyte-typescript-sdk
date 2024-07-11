@@ -9,6 +9,7 @@ import { DeductionDetail } from './DeductionDetail.js'
 import { ItemSnapshot } from './ItemSnapshot.js'
 import { OrderBundleItemInfo } from './OrderBundleItemInfo.js'
 import { OrderCreationOptions } from './OrderCreationOptions.js'
+import { PaymentData } from './PaymentData.js'
 
 export const Order = z.object({
   chargebackReversedTime: z.string().nullish(),
@@ -36,6 +37,7 @@ export const Order = z.object({
   namespace: z.string().nullish(),
   orderBundleItemInfos: z.array(OrderBundleItemInfo).nullish(),
   orderNo: z.string().nullish(),
+  paymentData: PaymentData.nullish(),
   paymentMethod: z.string().nullish(),
   paymentMethodFee: z.number().int().nullish(),
   paymentOrderNo: z.string().nullish(),
@@ -51,7 +53,6 @@ export const Order = z.object({
   rvn: z.number().int().nullish(),
   salesTax: z.number().int().nullish(),
   sandbox: z.boolean().nullish(),
-  sectionId: z.string().nullish(),
   status: z
     .enum([
       'CHARGEBACK',

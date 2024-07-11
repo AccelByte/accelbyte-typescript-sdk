@@ -6,6 +6,7 @@
 import { z } from 'zod'
 import { AdditionalData } from './AdditionalData.js'
 import { CurrencySummary } from './CurrencySummary.js'
+import { PaymentData } from './PaymentData.js'
 
 export const TradeNotification = z.object({
   additionalData: AdditionalData.nullish(),
@@ -23,6 +24,7 @@ export const TradeNotification = z.object({
   metadata: z.record(z.string()).nullish(),
   namespace: z.string(),
   nonceStr: z.string(),
+  paymentData: PaymentData.nullish(),
   paymentMethod: z.string().nullish(),
   paymentMethodFee: z.number().int().nullish(),
   paymentOrderNo: z.string(),

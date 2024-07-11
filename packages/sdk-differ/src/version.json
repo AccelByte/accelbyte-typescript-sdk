@@ -1,7 +1,7 @@
 {
-  "buildDate": "2024-03-04T06:23:57+00:00",
-  "gitHash": "c3b0d85bd54c0ef7dd399882277814bfd34086f6",
+  "buildDate": "2023-09-25T01:16:24+00:00",
+  "gitHash": "5bd2fd845fb34bc4b7d8ef4d1256df7852793d3e",
   "name": "JusticeDiffer",
-  "realm": "dev",
+  "realm": "staging",
   "version": "1.25.5"
 }

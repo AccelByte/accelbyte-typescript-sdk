@@ -76,7 +76,7 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   *  Move items between inventories that is owned by the same user.
+   *  Move items between inventories that is owned by the same user. Currently, this endpoint supports transferring items exclusively from source OTHER. Items from source ECOMMERCE are not yet eligible for transfer. We are working on expanding support to include source ECOMMERCE in future updates.
    */
   async function createItemMovementUser_ByInventoryId(inventoryId: string, data: MoveItemsReq): Promise<MoveItemsResp> {
     const $ = new PublicItems$(Network.create(requestConfig), namespace, useSchemaValidation)

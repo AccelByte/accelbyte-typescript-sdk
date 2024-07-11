@@ -8,7 +8,7 @@
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/challenge/apidocs"
+    "url": "https://stage.accelbyte.io/challenge/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -129,7 +129,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Challenge is a collection of goals that can be completed by players. Challenge can have rules that specify what and when goals will be available for players to be taken.\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;code: only lowercase letters, numbers, and the separator - are allowed; must start and end with letter\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: name of the challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing about the challenge (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;startDate: timestamp of when the challenge is started\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endDate: timestamp of when the challenge is ended (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endAfter: describe number of period challenge will be retired after (optional)\u0026lt;/li\u0026gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.\u0026lt;li\u0026gt;repeatAfter: describe number of period challenge\u0026#39;s goals will be repeated after. Leave it empty if you don\u0026#39;t want to repeat the challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/p\u0026gt;",
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Challenge is a collection of goals that can be completed by players. Challenge can have rules that specify what and when goals will be available for players to be taken.\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;code: only lowercase letters, numbers, and the separator - are allowed; must start and end with letter\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: name of the challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing about the challenge (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;startDate: timestamp of when the challenge is started\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endDate: timestamp of when the challenge is ended (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endAfter: describe number of period challenge will be retired after (optional)\u0026lt;/li\u0026gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.\u0026lt;li\u0026gt;repeatAfter: describe number of period challenge\u0026#39;s goals will be repeated after. Leave it empty if you don\u0026#39;t want to repeat the challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetConfig: describe when rotation reset will happen (optional).\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;resetTime: Reset time must follow hours:minutes in 24 hours format (e.g. 01:30, 23:15) and in UTC timezone. Default to \u0026#34;00:00\u0026#34;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDay: Reset Day follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday). Default to 1 in WEEKLY rotation.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDate: Reset Date must be a number 1 - 31. Default to 1 in MONTHLY rotation.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/p\u0026gt;",
         "operationId": "adminCreateChallenge",
         "parameters": [
           {
@@ -352,7 +352,7 @@
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;name: name of the challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing about the challenge (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;startDate: timestamp of when the challenge is started\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endDate: timestamp of when the challenge is ended (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endAfter: describe number of period challenge will be retired after (optional)\u0026lt;/li\u0026gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.\u0026lt;li\u0026gt;repeatAfter: describe number of period challenge\u0026#39;s goals will be repeated after. Leave it empty if you don\u0026#39;t want to repeat the challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/p\u0026gt;",
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;name: name of the challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing about the challenge (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;startDate: timestamp of when the challenge is started\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endDate: timestamp of when the challenge is ended (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endAfter: describe number of period challenge will be retired after (optional)\u0026lt;/li\u0026gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.\u0026lt;li\u0026gt;repeatAfter: describe number of period challenge\u0026#39;s goals will be repeated after. Leave it empty if you don\u0026#39;t want to repeat the challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetConfig: describe when rotation reset will happen (optional).\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;resetTime: Reset time must follow hours:minutes in 24 hours format (e.g. 01:30, 23:15) and in UTC timezone. Default to \u0026#34;00:00\u0026#34;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDay: Reset Day follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday). Default to 1 in WEEKLY rotation.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDate: Reset Date must be a number 1 - 31. Default to 1 in MONTHLY rotation.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/p\u0026gt;",
         "operationId": "adminUpdateChallenge",
         "parameters": [
           {
@@ -360,7 +360,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/models.UpdateChallengeRequest"
+              "$ref": "#/definitions/model.UpdateChallengeRequest"
             }
           },
           {
@@ -526,7 +526,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]\u0026lt;/li\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;code: unique within a challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: name of the goal \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description:  text describing the goal (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;schedule:  a time range that indicated the availability of a goal within a timeframe. used in fixed assignment rule\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;requirementGroups:  list of conditions that conform with the goal progressions.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;operator: logical operator used to validate the completion of a goal. a goal is considered complete once complete predicates operated with operator result in true.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;predicates: list of progression parameters to be tracked\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;parameterType: the type of parameter for challenge to be progressed with. the available options are:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: progress by user statistic item value \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: progress user statistic cycle item value. statCycleId must be included. \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIVEMENT: progress by user achievement  \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: progress by user account event  \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;parameterName: the name of the parameter for challenge to be progressed with.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: refers to stat code\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: refers to stat code with statCycleId must be included \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIVEMENT: refers to achievement code  \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: one of the user account event. current possible values are (userAccountCreated, gameUserAccountCreated, userAccountVerified, userAccountLinked, userAccountUpgraded,thirdPartyAccountCreated)  \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;matcher: the comparison operator used to compare the curent value of a parameter and targetValue to validate the completion of a predicate\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;targetValue: the target number to be reached by the parameter \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;statCycleId: used to track statistic type parameter value in a cycle (optional) \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rewards: list of rewards that will be claimable once a goal is complete  \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;tag: goal\u0026#39;s labels\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;isActive: when goal is in a schedule, isActive determine whether goal is active to progress or not\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.",
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]\u0026lt;/li\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;code: unique within a challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: name of the goal.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing the goal (optional).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;schedule: a time range that indicated the availability of a goal within a timeframe. used in fixed assignment rule.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;requirementGroups: list of conditions that conform with the goal progressions.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;operator: logical operator used to validate the completion of a goal. a goal is considered complete once complete predicates operated with operator result in true.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;predicates: list of progression parameters to be tracked.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;parameterType: the type of parameter for challenge to be progressed with. the available options are:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: progress by user statistic item value.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: progress user statistic cycle item value. statCycleId must be included.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIEVEMENT: progress by user achievement.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: progress by user account event.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ENTITLEMENT: progress by user\u0026#39;s item entitlement ownership. Supported item types are APP, CODE, INGAMEITEM, LOOTBOX, MEDIA, and OPTIONBOX.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;parameterName: the name of the parameter for challenge to be progressed with.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: refers to stat code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: refers to stat code with statCycleId must be included.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIEVEMENT: refers to achievement code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: one of the user account event. current possible values are (userAccountCreated, gameUserAccountCreated, userAccountVerified, userAccountLinked, userAccountUpgraded,thirdPartyAccountCreated).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ENTITLEMENT: ecommerce store\u0026#39;s item SKU.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;matcher: the comparison operator used to compare the curent value of a parameter and targetValue to validate the completion of a predicate. Possible values are EQUAL, LESS_THAN, GREATER_THAN, LESS_THAN_EQUAL, and GREATER_THAN_EQUAL.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;targetValue: the target number to be reached by the parameter.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;statCycleId: specify the statCycleId used to track statistic value in a cycle with STATISTIC_CYCLE parameterType (optional).\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rewards: list of rewards that will be claimable once a goal is complete.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;tag: goal\u0026#39;s labels.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;isActive: when goal is in a schedule, isActive determine whether goal is active to progress or not.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.Supported item type for ENTITLEMENT reward type: APP, BUNDLE, CODE, COINS, EXTENSION, INGAMEITEM, LOOTBOX, MEDIA, OPTIONBOX",
         "operationId": "adminCreateGoal",
         "parameters": [
           {
@@ -754,7 +754,7 @@
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;name: name of the goal \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description:  text describing the goal (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;schedule (optional):  a time range that indicated the availability of a goal within a timeframe. used in fixed assignment rule\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;requirementGroups:  list of conditions that conform with the goal progressions. \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rewards: list of rewards that will be claimable once a goal is complete  \u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;tag: goal\u0026#39;s labels\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;isActive (optional): when goal is in a schedule, isActive determine whether goal is active to progress or not\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.",
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;name: name of the goal.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing the goal (optional).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;schedule: a time range that indicated the availability of a goal within a timeframe. used in fixed assignment rule (optional).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;requirementGroups: list of conditions that conform with the goal progressions.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;operator: logical operator used to validate the completion of a goal. a goal is considered complete once complete predicates operated with operator result in true.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;predicates: list of progression parameters to be tracked.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;parameterType: the type of parameter for challenge to be progressed with. the available options are:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: progress by user statistic item value.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: progress user statistic cycle item value. statCycleId must be included.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIEVEMENT: progress by user achievement.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: progress by user account event.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ENTITLEMENT: progress by user\u0026#39;s item entitlement ownership. Supported item types are APP, CODE, INGAMEITEM, LOOTBOX, MEDIA, and OPTIONBOX.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;parameterName: the name of the parameter for challenge to be progressed with.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: refers to stat code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: refers to stat code with statCycleId must be included.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIEVEMENT: refers to achievement code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: one of the user account event. Current possible values are (userAccountCreated, gameUserAccountCreated, userAccountVerified, userAccountLinked, userAccountUpgraded,thirdPartyAccountCreated).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ENTITLEMENT: ecommerce store\u0026#39;s item SKU.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;matcher: the comparison operator used to compare the curent value of a parameter and targetValue to validate the completion of a predicate. Possible values are EQUAL, LESS_THAN, GREATER_THAN, LESS_THAN_EQUAL, and GREATER_THAN_EQUAL.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;targetValue: the target number to be reached by the parameter.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;statCycleId: specify the statCycleId used to track statistic value in a cycle with STATISTIC_CYCLE parameterType (optional).\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rewards: list of rewards that will be claimable once a goal is complete.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;tag: goal\u0026#39;s labels.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;isActive: when goal is in a schedule, isActive determine whether goal is active to progress or not (optional).\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.Supported item type for ENTITLEMENT reward type: APP, BUNDLE, CODE, COINS, EXTENSION, INGAMEITEM, LOOTBOX, MEDIA, OPTIONBOX",
         "operationId": "adminUpdateGoals",
         "parameters": [
           {
@@ -1159,6 +1159,12 @@
               "type": "array"
             }
           },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "401": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
@@ -1196,6 +1202,7 @@
           "20000": "internal server error: {{message}}",
           "20001": "unauthorized access",
           "20013": "insufficient permission",
+          "20018": "bad request: {{message}}",
           "20029": "not found"
         }
       }
@@ -1311,6 +1318,7 @@
             "type": "string"
           },
           {
+            "description": "user id",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -1346,6 +1354,12 @@
               "$ref": "#/definitions/iam.ErrorResponse"
             }
           },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e99004\u003c/td\u003e\u003ctd\u003eunprocessable entity: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
           "500": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
@@ -1365,7 +1379,8 @@
           "20000": "internal server error: {{message}}",
           "20001": "unauthorized access",
           "20013": "insufficient permission",
-          "20029": "not found"
+          "20029": "not found",
+          "99004": "unprocessable entity: {{message}}"
         }
       }
     },
@@ -1828,6 +1843,12 @@
               "$ref": "#/definitions/iam.ErrorResponse"
             }
           },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e99004\u003c/td\u003e\u003ctd\u003eunprocessable entity: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
           "500": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
@@ -1847,7 +1868,8 @@
           "20000": "internal server error: {{message}}",
           "20001": "unauthorized access",
           "20013": "insufficient permission",
-          "20029": "not found"
+          "20029": "not found",
+          "99004": "unprocessable entity: {{message}}"
         }
       }
     }
@@ -1861,9 +1883,24 @@
         },
         "errorMessage": {
           "type": "string"
+        },
+        "requiredPermission": {
+          "$ref": "#/definitions/iam.Permission"
         }
       },
       "required": ["errorCode", "errorMessage"]
+    },
+    "iam.Permission": {
+      "properties": {
+        "action": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resource": {
+          "type": "string"
+        }
+      },
+      "required": ["action", "resource"]
     },
     "model.ChallengeResponse": {
       "properties": {
@@ -1902,6 +1939,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "resetConfig": {
+          "$ref": "#/definitions/model.ResetConfig"
+        },
         "rotation": {
           "enum": ["DAILY", "MONTHLY", "NONE", "WEEKLY"],
           "type": "string"
@@ -1925,6 +1965,7 @@
         "description",
         "goalsVisibility",
         "name",
+        "resetConfig",
         "rotation",
         "startDate",
         "status",
@@ -1976,7 +2017,7 @@
           "type": "string"
         }
       },
-      "required": ["errorDetail", "isSuccess", "rewards", "userId"]
+      "required": ["isSuccess", "rewards", "userId"]
     },
     "model.CreateChallengeRequest": {
       "properties": {
@@ -2014,6 +2055,9 @@
         "repeatAfter": {
           "format": "int32",
           "type": "integer"
+        },
+        "resetConfig": {
+          "$ref": "#/definitions/model.ResetConfig"
         },
         "rotation": {
           "enum": ["DAILY", "MONTHLY", "NONE", "WEEKLY"],
@@ -2314,7 +2358,7 @@
           "type": "string"
         },
         "parameterType": {
-          "enum": ["ACHIEVEMENT", "STATISTIC", "STATISTIC_CYCLE", "USERACCOUNT"],
+          "enum": ["ACHIEVEMENT", "ENTITLEMENT", "STATISTIC", "STATISTIC_CYCLE", "USERACCOUNT"],
           "type": "string"
         },
         "statCycleId": {
@@ -2373,6 +2417,24 @@
       },
       "required": ["currentValue", "id", "matcher", "parameterName", "parameterType", "targetValue"]
     },
+    "model.ResetConfig": {
+      "properties": {
+        "resetDate": {
+          "description": "valid value are 1 to 31, default to 1 for MONTHLY rotation",
+          "format": "int32",
+          "type": "integer"
+        },
+        "resetDay": {
+          "description": "valid value are 1 (Monday) to 7 (Sunday), default to 1 for WEEKLY rotation",
+          "format": "int32",
+          "type": "integer"
+        },
+        "resetTime": {
+          "description": "format hh:mm, must be in UTC timezone, default '00:00' for all rotation",
+          "type": "string"
+        }
+      }
+    },
     "model.Reward": {
       "properties": {
         "itemId": {
@@ -2420,6 +2482,53 @@
         }
       },
       "required": ["challengeCode", "createdAt", "endTime", "goals", "namespace", "startTime", "updatedAt"]
+    },
+    "model.UpdateChallengeRequest": {
+      "properties": {
+        "activeGoalsPerRotation": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "assignmentRule": {
+          "enum": ["FIXED", "RANDOMIZED", "UNSCHEDULED"],
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "endAfter": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "goalsVisibility": {
+          "enum": ["PERIODONLY", "SHOWALL"],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "repeatAfter": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resetConfig": {
+          "$ref": "#/definitions/model.ResetConfig"
+        },
+        "rotation": {
+          "enum": ["DAILY", "MONTHLY", "NONE", "WEEKLY"],
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     },
     "model.UpdateGoalRequest": {
       "properties": {
@@ -2523,9 +2632,11 @@
           "type": "number"
         },
         "status": {
+          "enum": ["CLAIM", "UNCLAIMED"],
           "type": "string"
         },
         "type": {
+          "enum": ["ENTITLEMENT", "STATISTIC"],
           "type": "string"
         },
         "updatedAt": {
@@ -2556,50 +2667,6 @@
       },
       "required": ["endTime", "slot", "startTime"]
     },
-    "models.UpdateChallengeRequest": {
-      "properties": {
-        "activeGoalsPerRotation": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "assignmentRule": {
-          "enum": ["FIXED", "RANDOMIZED", "UNSCHEDULED"],
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "endAfter": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "endDate": {
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": true
-        },
-        "goalsVisibility": {
-          "enum": ["PERIODONLY", "SHOWALL"],
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "repeatAfter": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "rotation": {
-          "enum": ["DAILY", "MONTHLY", "NONE", "WEEKLY"],
-          "type": "string"
-        },
-        "startDate": {
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": true
-        }
-      }
-    },
     "response.Error": {
       "properties": {
         "attributes": {
@@ -2627,15 +2694,15 @@
   },
   "x-docs": {
     "alias": "challenge",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/challenge/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-05-28T12:21:11+00:00",
-    "gitHash": "5bc9251d029300fca4907c4c8caebcc0824fa313",
+    "buildDate": "2024-07-10T06:22:41+00:00",
+    "gitHash": "5403e42a5511dfb8b2a72fa3b819d294a054641e",
     "name": "justice-challenge-service",
-    "realm": "DEV",
-    "version": "1.5.0",
-    "version-roles-seeding": "1.2.16"
+    "realm": "staging",
+    "version": "1.7.2",
+    "version-roles-seeding": "1.2.48"
   }
 }

@@ -31,7 +31,7 @@ export function SeasonApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get current user season data, it will auto enroll if there&#39;s no user season but active published season exist, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get current user season data, it will auto enroll if there&#39;s no user season but active published season exist, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getSeasonsCurrentData_ByUserId(userId: string): Promise<ClaimableUserSeasonInfo> {
     const $ = new Season$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -41,7 +41,7 @@ export function SeasonApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get user season data, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:USER:{userId}:SEASONPASS&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get user season data, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
    */
   async function getData_ByUserId_BySeasonId(userId: string, seasonId: string): Promise<ClaimableUserSeasonInfo> {
     const $ = new Season$(Network.create(requestConfig), namespace, useSchemaValidation)

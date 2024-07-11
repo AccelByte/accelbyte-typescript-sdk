@@ -47,14 +47,14 @@ export class DeploymentConfig$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint create a dedicated servers deployment in a namespace.
+   * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server deployment in a namespace
    */
-  createConfigDeployment_ByDeployment(deployment: string, data: CreateDeploymentRequest): Promise<IResponse<DeploymentWithOverride>> {
+  getConfigDeployment_ByDeployment(deployment: string): Promise<IResponse<DeploymentWithOverride>> {
     const params = {} as SDKRequestConfig
     const url = '/dsmcontroller/namespaces/{namespace}/configs/deployments/{deployment}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
-    const resultPromise = this.axiosInstance.post(url, data, { params })
+    const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
       this.useSchemaValidation,
@@ -65,14 +65,14 @@ export class DeploymentConfig$ {
   }
 
   /**
-   * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server deployment in a namespace
+   * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint create a dedicated servers deployment in a namespace.
    */
-  getConfigDeployment_ByNamespace_ByDeployment(deployment: string): Promise<IResponse<DeploymentWithOverride>> {
+  createConfigDeployment_ByDeployment(deployment: string, data: CreateDeploymentRequest): Promise<IResponse<DeploymentWithOverride>> {
     const params = {} as SDKRequestConfig
-    const url = '/dsmcontroller/namespaces/{namespace}/namespaces/{namespace}/configs/deployments/{deployment}'
+    const url = '/dsmcontroller/namespaces/{namespace}/configs/deployments/{deployment}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
-    const resultPromise = this.axiosInstance.get(url, { params })
+    const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
       this.useSchemaValidation,

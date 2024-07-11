@@ -8,7 +8,7 @@
     },
     "description": "Justice Platform Service",
     "title": "justice-platform-service",
-    "version": "4.52.1"
+    "version": "4.53.1"
   },
   "schemes": ["https"],
   "tags": [
@@ -82,6 +82,9 @@
       "name": "PaymentStation"
     },
     {
+      "name": "Platform"
+    },
+    {
       "name": "Platform Account Closure"
     },
     {
@@ -120,7 +123,7 @@
   ],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/platform"
+    "url": "https://stage.accelbyte.io/platform"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -8163,6 +8166,90 @@
         }
       }
     },
+    "/platform/admin/namespaces/{namespace}/payment/config/domains": {
+      "get": {
+        "description": "\u0026lt;b\u0026gt;[Not Supported Yet In Starter]\u0026lt;/b\u0026gt;Get payment domain whitelist config by namespace.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: payment domain whitelist config info\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "getPaymentMerchantConfig",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PaymentDomainWhitelistConfigInfo"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get payment domain whitelist config",
+        "tags": ["PaymentConfig"],
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": "ADMIN:PAYMENT:CONFIG [READ]"
+        }
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;b\u0026gt;[Not Supported Yet In Starter]\u0026lt;/b\u0026gt;Update payment provider config by namespace.\u0026lt;br\u0026gt;\u0026lt;pre\u0026gt;\u0026lt;p\u0026gt;\u0026lt;strong\u0026gt;Request Body Parameters:\u0026lt;/strong\u0026gt;\u0026lt;/p\u0026gt;\u0026lt;pre\u0026gt;\u0026lt;table\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;td\u0026gt;Parameter\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;Type\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;Required\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;Description\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;td\u0026gt;domains\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;String\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;Yes\u0026lt;/td\u0026gt;\u0026lt;td\u0026gt;list of domains to whitelist for the return URL.\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;/table\u0026gt;\u0026lt;/pre\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Validation\u0026lt;/i\u0026gt;: the domain should include the protocol (http/https), but the whitelist check will only compare the host part (www.example.com)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: payment domain whitelist config\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "updatePaymentDomainWhitelistConfig",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PaymentDomainWhitelistConfigEdit"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PaymentDomainWhitelistConfigInfo"
+            }
+          },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ValidationErrorEntity"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update payment domain whitelist config",
+        "tags": ["PaymentConfig"],
+        "x-errorCodes": {
+          "20002": "validation error"
+        },
+        "x-security": {
+          "userPermissions": "ADMIN:PAYMENT:CONFIG [UPDATE]"
+        }
+      }
+    },
     "/platform/admin/namespaces/{namespace}/payment/notifications": {
       "get": {
         "description": "\u0026lt;b\u0026gt;[Not Supported Yet In Starter]\u0026lt;/b\u0026gt;Query payment notifications.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: Payment notifications\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
@@ -8768,6 +8855,104 @@
         },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:PAYMENT [READ]"
+        }
+      }
+    },
+    "/platform/admin/namespaces/{namespace}/platforms/psn/entitlements/{entitlementLabel}/ownership": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Get user psn entitlement ownership by entitlement label.",
+        "operationId": "getPsnEntitlementOwnership",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entitlementLabel",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PsnEntitlementOwnershipRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Ownership"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get user psn entitlement ownership by entitlement label",
+        "tags": ["Platform"],
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": "ADMIN:NAMESPACE:{namespace}:INTEGRATION [READ]"
+        }
+      }
+    },
+    "/platform/admin/namespaces/{namespace}/platforms/xbl/entitlements/{productSku}/ownership": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Get Xbox entitlement ownership by product sku.",
+        "operationId": "getXboxEntitlementOwnership",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "productSku",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/XblEntitlementOwnershipRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PlatformOwnership"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get Xbox entitlement ownership by product sku.",
+        "tags": ["Platform"],
+        "x-errorCodes": {},
+        "x-security": {
+          "userPermissions": "ADMIN:NAMESPACE:{namespace}:INTEGRATION [READ]"
         }
       }
     },
@@ -10058,94 +10243,6 @@
           }
         ],
         "summary": "Create a section",
-        "tags": ["Section"],
-        "x-errorCodes": {
-          "20002": "validation error",
-          "20027": "Invalid time range",
-          "30021": "Default language [{language}] required",
-          "30023": "Catalog plugin grpc server address required",
-          "30141": "Store [{storeId}] does not exist in namespace [{namespace}]",
-          "30173": "Published store can't modify content",
-          "30641": "View [{viewId}] does not exist in namespace [{namespace}]"
-        },
-        "x-security": {
-          "userPermissions": "ADMIN:NAMESPACE:{namespace}:STORE [CREATE]"
-        }
-      }
-    },
-    "/platform/admin/namespaces/{namespace}/sections/bulk": {
-      "post": {
-        "consumes": ["application/json"],
-        "description": "This API is used to bulk create section.\u0026lt;p\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: created section list\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;h2\u0026gt;Restrictions for section extension and localization extension\u0026lt;/h2\u0026gt;\n1. Cannot use \u0026lt;b\u0026gt;\u0026#34;.\u0026#34;\u0026lt;/b\u0026gt; as the key name\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;data.2\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;\n2. Cannot use \u0026lt;b\u0026gt;\u0026#34;$\u0026#34;\u0026lt;/b\u0026gt; as the prefix in key names\n-\t\u0026lt;pre\u0026gt;{ \u0026#34;$data\u0026#34;: \u0026#34;value\u0026#34; }\u0026lt;/pre\u0026gt;",
-        "operationId": "bulkCreateSection",
-        "parameters": [
-          {
-            "description": "Namespace",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "storeId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": false,
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/SectionCreate"
-              },
-              "type": "array"
-            }
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "201": {
-            "description": "successful operation",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/FullSectionInfo"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20027\u003c/td\u003e\u003ctd\u003eInvalid time range\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e30021\u003c/td\u003e\u003ctd\u003eDefault language [{language}] required\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e30023\u003c/td\u003e\u003ctd\u003eCatalog plugin grpc server address required\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
-            "schema": {
-              "$ref": "#/definitions/ErrorEntity"
-            }
-          },
-          "404": {
-            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e30141\u003c/td\u003e\u003ctd\u003eStore [{storeId}] does not exist in namespace [{namespace}]\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e30641\u003c/td\u003e\u003ctd\u003eView [{viewId}] does not exist in namespace [{namespace}]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
-            "schema": {
-              "$ref": "#/definitions/ErrorEntity"
-            }
-          },
-          "409": {
-            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e30173\u003c/td\u003e\u003ctd\u003ePublished store can't modify content\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
-            "schema": {
-              "$ref": "#/definitions/ErrorEntity"
-            }
-          },
-          "422": {
-            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
-            "schema": {
-              "$ref": "#/definitions/ValidationErrorEntity"
-            }
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ],
-        "summary": "Bulk Create section",
         "tags": ["Section"],
         "x-errorCodes": {
           "20002": "validation error",
@@ -19123,7 +19220,7 @@
     "/platform/admin/payment/config/merchant/{id}": {
       "get": {
         "description": "\u0026lt;b\u0026gt;[Not Supported Yet In Starter]\u0026lt;/b\u0026gt;Get payment merchant config by id.\u0026lt;br\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: payment merchant config info\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
-        "operationId": "getPaymentMerchantConfig",
+        "operationId": "getPaymentMerchantConfig_1",
         "parameters": [
           {
             "in": "path",
@@ -35320,6 +35417,9 @@
         "orderNo": {
           "type": "string"
         },
+        "paymentData": {
+          "$ref": "#/definitions/PaymentData"
+        },
         "paymentMethod": {
           "type": "string"
         },
@@ -35375,9 +35475,6 @@
         "sandbox": {
           "type": "boolean",
           "x-omitempty": false
-        },
-        "sectionId": {
-          "type": "string"
         },
         "status": {
           "enum": [
@@ -36172,6 +36269,54 @@
       },
       "type": "object"
     },
+    "PaymentData": {
+      "properties": {
+        "subtotalPrice": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "tax": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalPrice": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentDomainWhitelistConfigEdit": {
+      "description": "A DTO object for updating payment domain whitelist config",
+      "properties": {
+        "domains": {
+          "description": "domains",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["domains"],
+      "type": "object"
+    },
+    "PaymentDomainWhitelistConfigInfo": {
+      "properties": {
+        "domains": {
+          "description": "domains",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "namespace": {
+          "description": "namespace",
+          "type": "string"
+        }
+      },
+      "required": ["domains", "namespace"],
+      "type": "object"
+    },
     "PaymentMerchantConfigInfo": {
       "properties": {
         "adyenConfig": {
@@ -36381,6 +36526,18 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "checkoutUrl": {
+          "type": "string"
+        },
+        "checkoutUrlExpiredAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "checkoutUrlValid": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "createdAt": {
           "format": "date-time",
           "type": "string",
@@ -36434,6 +36591,9 @@
         "omitNotification": {
           "type": "boolean",
           "x-omitempty": false
+        },
+        "paymentData": {
+          "$ref": "#/definitions/PaymentData"
         },
         "paymentMethod": {
           "type": "string"
@@ -37614,6 +37774,17 @@
       },
       "type": "object"
     },
+    "PlatformOwnership": {
+      "properties": {
+        "owned": {
+          "description": "ownership",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["owned"],
+      "type": "object"
+    },
     "PlatformReward": {
       "properties": {
         "currency": {
@@ -38315,6 +38486,18 @@
           "description": "is validated",
           "type": "boolean",
           "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "PsnEntitlementOwnershipRequest": {
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "serviceLabel": {
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -39638,7 +39821,7 @@
         "currentRotationItems": {
           "description": "current rotation item infos",
           "items": {
-            "$ref": "#/definitions/SectionItemInfo"
+            "$ref": "#/definitions/ItemInfo"
           },
           "type": "array"
         },
@@ -39712,11 +39895,6 @@
     },
     "SectionItem": {
       "properties": {
-        "discountPercentage": {
-          "description": "section exclusive discount, only works when rotation type is NONE, if it's fixed or custom, will ignore this config.",
-          "format": "int32",
-          "type": "integer"
-        },
         "id": {
           "description": "item id",
           "type": "string"
@@ -39727,284 +39905,6 @@
         }
       },
       "required": ["id"],
-      "type": "object"
-    },
-    "SectionItemInfo": {
-      "properties": {
-        "appId": {
-          "description": "App id, required when itemType is APP",
-          "type": "string"
-        },
-        "appType": {
-          "description": "App type, required when itemType is APP",
-          "enum": ["DEMO", "DLC", "GAME", "SOFTWARE"],
-          "type": "string"
-        },
-        "baseAppId": {
-          "description": "Base app id",
-          "type": "string"
-        },
-        "boothName": {
-          "description": "booth name to get tickets while it's item type is CODE",
-          "type": "string"
-        },
-        "boundItemIds": {
-          "description": "the items which this item being bounded to",
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "categoryPath": {
-          "description": "Item category path",
-          "type": "string"
-        },
-        "clazz": {
-          "description": "customized item clazz",
-          "type": "string"
-        },
-        "createdAt": {
-          "description": "created at",
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": false
-        },
-        "description": {
-          "description": "description info",
-          "type": "string"
-        },
-        "displayOrder": {
-          "description": "display order",
-          "format": "int32",
-          "type": "integer"
-        },
-        "entitlementType": {
-          "description": "Entitlement type",
-          "enum": ["CONSUMABLE", "DURABLE"],
-          "type": "string"
-        },
-        "ext": {
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "customized item properties",
-          "type": "object"
-        },
-        "features": {
-          "description": "Features",
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "flexible": {
-          "description": "whether flexible pricing applied, only applied if itemType is BUNDLE",
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "fresh": {
-          "description": "fresh",
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "images": {
-          "description": "images",
-          "items": {
-            "$ref": "#/definitions/Image"
-          },
-          "type": "array"
-        },
-        "inventoryConfig": {
-          "$ref": "#/definitions/InventoryConfig",
-          "description": "inventory config"
-        },
-        "itemId": {
-          "description": "Item id",
-          "type": "string"
-        },
-        "itemIds": {
-          "description": "itemIds, should be empty if item type is not \"BUNDLE\"",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "itemQty": {
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "description": "itemQty, the quantity of item in itemIds, default 1, should be empty if item type is not \"BUNDLE\"",
-          "type": "object"
-        },
-        "itemType": {
-          "description": "Item type",
-          "enum": ["APP", "BUNDLE", "CODE", "COINS", "EXTENSION", "INGAMEITEM", "LOOTBOX", "MEDIA", "OPTIONBOX", "SEASON", "SUBSCRIPTION"],
-          "type": "string"
-        },
-        "language": {
-          "description": "language",
-          "type": "string"
-        },
-        "listable": {
-          "description": "Whether can be visible in Store for public user",
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "localExt": {
-          "additionalProperties": {
-            "type": "object"
-          },
-          "type": "object"
-        },
-        "longDescription": {
-          "description": "long description info",
-          "type": "string"
-        },
-        "lootBoxConfig": {
-          "$ref": "#/definitions/LootBoxConfig",
-          "description": "loot box config"
-        },
-        "maxCount": {
-          "description": "Max count, -1 means UNLIMITED, unset when itemType is CODE",
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxCountPerUser": {
-          "description": "Max count per user, -1 means UNLIMITED",
-          "format": "int32",
-          "type": "integer"
-        },
-        "name": {
-          "description": "Name",
-          "type": "string"
-        },
-        "namespace": {
-          "description": "Item namespace",
-          "type": "string"
-        },
-        "optionBoxConfig": {
-          "$ref": "#/definitions/OptionBoxConfig",
-          "description": "option box config"
-        },
-        "purchasable": {
-          "description": "Whether can be purchased",
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "purchaseCondition": {
-          "$ref": "#/definitions/PurchaseCondition",
-          "description": "purchase condition"
-        },
-        "recurring": {
-          "$ref": "#/definitions/Recurring",
-          "description": "recurring for subscription"
-        },
-        "region": {
-          "description": "region",
-          "type": "string"
-        },
-        "regionData": {
-          "description": "Region data",
-          "items": {
-            "$ref": "#/definitions/RegionDataItem"
-          },
-          "type": "array"
-        },
-        "saleConfig": {
-          "$ref": "#/definitions/SaleConfig",
-          "description": "sale config"
-        },
-        "seasonType": {
-          "description": "Season type, required while itemType is SEASON",
-          "enum": ["PASS", "TIER"],
-          "type": "string"
-        },
-        "sectionExclusive": {
-          "description": "whether it is sold in section only",
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "sectionExclusiveDiscountPercentage": {
-          "description": "section exclusive discount, only works when rotation type is NONE, if it's fixed or custom, will ignore this config.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "sellable": {
-          "description": "whether allow to sell back to store",
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "sku": {
-          "description": "Sku",
-          "type": "string"
-        },
-        "stackable": {
-          "description": "Whether stack the CONSUMABLE entitlement",
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "status": {
-          "description": "Item status",
-          "enum": ["ACTIVE", "INACTIVE"],
-          "type": "string"
-        },
-        "tags": {
-          "description": "Tags",
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "targetCurrencyCode": {
-          "description": "Target currency code of coin item",
-          "type": "string"
-        },
-        "targetItemId": {
-          "description": "[Going to deprecate]Target item id if this item is mapping from game namespace.",
-          "type": "string"
-        },
-        "targetNamespace": {
-          "description": "The target namespace of a cross namespace item",
-          "type": "string"
-        },
-        "thumbnailUrl": {
-          "description": "thumbnail url",
-          "type": "string"
-        },
-        "title": {
-          "description": "title info",
-          "type": "string"
-        },
-        "updatedAt": {
-          "description": "updated at",
-          "format": "date-time",
-          "type": "string",
-          "x-nullable": false
-        },
-        "useCount": {
-          "description": "Item use count, required when entitlement type is consumable or itemType is COINS",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "categoryPath",
-        "createdAt",
-        "entitlementType",
-        "itemId",
-        "itemType",
-        "language",
-        "name",
-        "namespace",
-        "region",
-        "status",
-        "title",
-        "updatedAt"
-      ],
       "type": "object"
     },
     "SectionPagingSlicedResult": {
@@ -41635,6 +41535,10 @@
           "description": "Random string",
           "type": "string"
         },
+        "paymentData": {
+          "$ref": "#/definitions/PaymentData",
+          "description": "payment data"
+        },
         "paymentMethod": {
           "description": "Payment method",
           "type": "string"
@@ -41804,6 +41708,9 @@
         "notified": {
           "type": "boolean",
           "x-omitempty": false
+        },
+        "paymentData": {
+          "$ref": "#/definitions/PaymentData"
         },
         "paymentMethod": {
           "type": "string"
@@ -42483,6 +42390,17 @@
       },
       "type": "object"
     },
+    "XblEntitlementOwnershipRequest": {
+      "properties": {
+        "delegationToken": {
+          "type": "string"
+        },
+        "sandboxId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "XblIAPConfigInfo": {
       "properties": {
         "businessPartnerCertExpiredTime": {
@@ -42697,21 +42615,21 @@
   },
   "x-docs": {
     "alias": "platform",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/platform/swagger.json"
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2024-05-28T09:30:44+00:00",
-    "buildID": "4.52.1",
+    "buildDate": "2024-07-10T05:47:32+00:00",
+    "buildID": "4.53.1",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-    "buildOS": "Linux amd64 5.10.215-203.850.amzn2.x86_64",
-    "gitBranchName": "master",
-    "gitHash": "1409ef44f9",
-    "gitTag": "3.31.0",
+    "buildOS": "Linux amd64 5.10.219-208.866.amzn2.x86_64",
+    "gitBranchName": "release-candidate",
+    "gitHash": "2c387bfe11",
+    "gitTag": "4.53.1",
     "name": "justice-platform-service",
-    "realm": "dev",
-    "version": "4.52.1",
-    "version-roles-seeding": "1.2.8"
+    "realm": "staging",
+    "version": "4.53.1",
+    "version-roles-seeding": "1.2.49"
   }
 }

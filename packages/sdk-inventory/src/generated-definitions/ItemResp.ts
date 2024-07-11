@@ -10,6 +10,7 @@ export const ItemResp = z.object({
   customAttributes: z.record(z.any()),
   id: z.string(),
   inventoryId: z.string(),
+  itemInfo: z.record(z.any()),
   namespace: z.string(),
   platformAvailable: z.boolean().nullish(),
   qty: z.number().int(),

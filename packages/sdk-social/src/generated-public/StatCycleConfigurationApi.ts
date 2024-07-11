@@ -23,7 +23,7 @@ export function StatCycleConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * List stat cycles by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycles&lt;/li&gt;&lt;/ul&gt;
+   * List stat cycles by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycles&lt;/li&gt;&lt;/ul&gt;
    */
   async function getStatCycles(queryParams?: {
     cycleType?: 'ANNUALLY' | 'DAILY' | 'MONTHLY' | 'SEASONAL' | 'WEEKLY'
@@ -40,7 +40,7 @@ export function StatCycleConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Bulk get stat cycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of stat cycles&lt;/li&gt;&lt;/ul&gt;
+   * Bulk get stat cycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of stat cycles&lt;/li&gt;&lt;/ul&gt;
    */
   async function createStatCycleBulk(data: BulkStatCycleRequest): Promise<BulkStatCycleResult> {
     const $ = new StatCycleConfiguration$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -50,7 +50,7 @@ export function StatCycleConfigurationApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get stat cycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;NAMESPACE:{namespace}:STAT&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycle info&lt;/ul&gt;
+   * Get stat cycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycle info&lt;/ul&gt;
    */
   async function getStatCycle_ByCycleId(cycleId: string): Promise<StatCycleInfo> {
     const $ = new StatCycleConfiguration$(Network.create(requestConfig), namespace, useSchemaValidation)

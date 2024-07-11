@@ -4,6 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { ResetConfig } from './ResetConfig.js'
 
 export const UpdateChallengeRequest = z.object({
   activeGoalsPerRotation: z.number().int().nullish(),
@@ -14,6 +15,7 @@ export const UpdateChallengeRequest = z.object({
   goalsVisibility: z.enum(['PERIODONLY', 'SHOWALL']).nullish(),
   name: z.string().nullish(),
   repeatAfter: z.number().int().nullish(),
+  resetConfig: ResetConfig.nullish(),
   rotation: z.enum(['DAILY', 'MONTHLY', 'NONE', 'WEEKLY']).nullish(),
   startDate: z.string().nullish()
 })

@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Match Service v2",
-    "version": "2.20.1"
+    "version": "2.21.1"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/match2/apidocs"
+    "url": "https://stage.accelbyte.io/match2/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -2703,6 +2703,10 @@
         },
         "sessionID": {
           "type": "string"
+        },
+        "storage": {
+          "description": "leader session storage",
+          "type": "object"
         }
       },
       "required": ["attributes", "latencies", "matchPool"]
@@ -2780,6 +2784,13 @@
     },
     "api.PatchNamespaceConfigRequest": {
       "properties": {
+        "extraPlatforms": {
+          "description": "additional platforms that will be included in the cross_platform attribute alongside the login method",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "platformGroup": {
           "additionalProperties": {
             "items": {
@@ -2829,7 +2840,7 @@
     "api.RuleSetPayload": {
       "properties": {
         "data": {
-          "$ref": "#/definitions/api.RuleSetPayloadData"
+          "type": "object"
         },
         "enable_custom_match_function": {
           "type": "boolean",
@@ -2841,7 +2852,6 @@
       },
       "required": ["data", "enable_custom_match_function", "name"]
     },
-    "api.RuleSetPayloadData": {},
     "api.Team": {
       "properties": {
         "parties": {
@@ -2934,6 +2944,12 @@
     },
     "configmodels.NamespaceConfig": {
       "properties": {
+        "extraPlatforms": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "namespace": {
           "type": "string"
         },
@@ -3039,6 +3055,10 @@
           "type": "string",
           "x-nullable": false
         },
+        "IsActive": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "Latencies": {
           "additionalProperties": {
             "type": "integer"
@@ -3075,6 +3095,7 @@
       },
       "required": [
         "CreatedAt",
+        "IsActive",
         "Latencies",
         "MatchPool",
         "Namespace",
@@ -3402,13 +3423,13 @@
   },
   "x-docs": {
     "alias": "match2",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/match2/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-05-28T07:40:27+00:00",
-    "gitHash": "f00cdc9e53133bc4131e3499fa1452daa1340c17",
-    "version": "2.20.1",
+    "buildDate": "2024-06-13T06:36:45+00:00",
+    "gitHash": "1cba48105aae897aa8b81caa78e58c38ce85652d",
+    "version": "2.21.1",
     "version-roles-seeding": "1.2.36"
   }
 }

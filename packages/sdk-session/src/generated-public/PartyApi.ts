@@ -171,6 +171,16 @@ export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * Cancel a party invitation.
+   */
+  async function deleteCancel_ByPartyId_ByUserId(partyId: string, userId: string): Promise<unknown> {
+    const $ = new Party$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.deleteCancel_ByPartyId_ByUserId(partyId, userId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     createParty,
     getUsersMeParties,
@@ -185,6 +195,7 @@ export function PartyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createUserMeJoin_ByPartyId,
     deleteUserMeLeave_ByPartyId,
     deleteUserMeReject_ByPartyId,
-    deleteKick_ByPartyId_ByUserId
+    deleteKick_ByPartyId_ByUserId,
+    deleteCancel_ByPartyId_ByUserId
   }
 }

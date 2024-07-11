@@ -46,6 +46,16 @@ export function DeploymentConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server deployment in a namespace
+   */
+  async function getConfigDeployment_ByDeployment(deployment: string): Promise<DeploymentWithOverride> {
+    const $ = new DeploymentConfig$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.getConfigDeployment_ByDeployment(deployment)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint create a dedicated servers deployment in a namespace.
    */
   async function createConfigDeployment_ByDeployment(deployment: string, data: CreateDeploymentRequest): Promise<DeploymentWithOverride> {
@@ -55,20 +65,10 @@ export function DeploymentConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
-  /**
-   * Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server deployment in a namespace
-   */
-  async function getConfigDeployment_ByNamespace_ByDeployment(deployment: string): Promise<DeploymentWithOverride> {
-    const $ = new DeploymentConfig$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getConfigDeployment_ByNamespace_ByDeployment(deployment)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
   return {
     getConfigsDeployments,
     deleteConfigDeployment_ByDeployment,
-    createConfigDeployment_ByDeployment,
-    getConfigDeployment_ByNamespace_ByDeployment
+    getConfigDeployment_ByDeployment,
+    createConfigDeployment_ByDeployment
   }
 }

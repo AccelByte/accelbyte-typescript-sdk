@@ -14,6 +14,8 @@ import { AliPayConfig } from '../generated-definitions/AliPayConfig.js'
 import { CheckoutConfig } from '../generated-definitions/CheckoutConfig.js'
 import { NeonPayConfig } from '../generated-definitions/NeonPayConfig.js'
 import { PayPalConfig } from '../generated-definitions/PayPalConfig.js'
+import { PaymentDomainWhitelistConfigEdit } from '../generated-definitions/PaymentDomainWhitelistConfigEdit.js'
+import { PaymentDomainWhitelistConfigInfo } from '../generated-definitions/PaymentDomainWhitelistConfigInfo.js'
 import { PaymentMerchantConfigInfo } from '../generated-definitions/PaymentMerchantConfigInfo.js'
 import { PaymentProviderConfigEdit } from '../generated-definitions/PaymentProviderConfigEdit.js'
 import { PaymentProviderConfigInfo } from '../generated-definitions/PaymentProviderConfigInfo.js'
@@ -376,6 +378,26 @@ export function PaymentConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment domain whitelist config by namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment domain whitelist config info&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getPaymentConfigDomains(): Promise<PaymentDomainWhitelistConfigInfo> {
+    const $ = new PaymentConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.getPaymentConfigDomains()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Update payment provider config by namespace.&lt;br&gt;&lt;pre&gt;&lt;p&gt;&lt;strong&gt;Request Body Parameters:&lt;/strong&gt;&lt;/p&gt;&lt;pre&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Parameter&lt;/td&gt;&lt;td&gt;Type&lt;/td&gt;&lt;td&gt;Required&lt;/td&gt;&lt;td&gt;Description&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;domains&lt;/td&gt;&lt;td&gt;String&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;list of domains to whitelist for the return URL.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/pre&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Validation&lt;/i&gt;: the domain should include the protocol (http/https), but the whitelist check will only compare the host part (www.example.com)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: payment domain whitelist config&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function updatePaymentConfigDomain(data: PaymentDomainWhitelistConfigEdit): Promise<PaymentDomainWhitelistConfigInfo> {
+    const $ = new PaymentConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.updatePaymentConfigDomain(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Test adyen configuration in payment merchant config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: test adyen config&lt;/li&gt;&lt;/ul&gt;
    */
   async function getAdyenconfigTestPayment_ById(id: string, queryParams?: { sandbox?: boolean | null }): Promise<TestResult> {
@@ -494,6 +516,8 @@ export function PaymentConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     updateCheckoutconfigPayment_ById,
     updateXsollauiconfigPayment_ById,
     createPaymentConfigMerchantCheckoutconfigTest,
+    getPaymentConfigDomains,
+    updatePaymentConfigDomain,
     getAdyenconfigTestPayment_ById,
     updateWxpayconfigCertPayment_ById,
     getWxpayconfigTestPayment_ById,

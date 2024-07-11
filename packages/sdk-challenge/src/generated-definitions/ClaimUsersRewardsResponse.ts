@@ -8,7 +8,7 @@ import { Error } from './Error.js'
 import { UserReward } from './UserReward.js'
 
 export const ClaimUsersRewardsResponse = z.object({
-  errorDetail: Error,
+  errorDetail: Error.nullish(),
   isSuccess: z.boolean(),
   rewards: z.array(UserReward),
   userId: z.string()

@@ -8,12 +8,12 @@
     },
     "description": "Justice GDPR Service",
     "title": "justice-gdpr-service",
-    "version": "2.10.1"
+    "version": "2.11.1"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/gdpr/apidocs"
+    "url": "https://stage.accelbyte.io/gdpr/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -1760,6 +1760,12 @@
             "name": "userId",
             "required": true,
             "type": "string"
+          },
+          {
+            "description": "Language tag",
+            "in": "formData",
+            "name": "languageTag",
+            "type": "string"
           }
         ],
         "produces": ["application/json"],
@@ -1977,6 +1983,12 @@
             "in": "path",
             "name": "userId",
             "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Language tag",
+            "in": "formData",
+            "name": "languageTag",
             "type": "string"
           }
         ],
@@ -2345,7 +2357,7 @@
     "/gdpr/s2s/namespaces/{namespace}/deletions/finished": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Scope: account\n\nGet list of finished account deletion requests based on the finished time period.\nUnfinished deletion requests will not appear here, i.e. have Status **Request**, **Pending** or **In-Progress**.\n\n**Anonymize userId for success deletion:**\nFor success deletion requests, the **userId** field in this API will be anonymized automatically after **7 days** from the success deletion. \nThis measure is implemented to ensure compliance with GDPR regulations. Please make sure to synchronize the data from this API before it undergoes anonymization.\n\n---\n## This API for S2S integration purpose only\n",
+        "description": "Scope: account\n\nGet list of finished account deletion requests based on the finished time period.\nUnfinished deletion requests will not appear here, i.e. have Status **Request**, **Pending** or **In-Progress**.\n\n**Anonymize userId for deleted account:**\nFor user accounts that have been deleted, the **userId** field in this API will be anonymized automatically after **7 days** from the success deletion. \nThis measure is implemented to ensure compliance with GDPR regulations. Please make sure to synchronize the data from this API before it undergoes anonymization.\n\n---\n## This API for S2S integration purpose only\n",
         "operationId": "S2SGetListFinishedAccountDeletionRequest",
         "parameters": [
           {
@@ -2423,7 +2435,7 @@
     "/gdpr/s2s/namespaces/{namespace}/requests/finished": {
       "get": {
         "consumes": ["application/json"],
-        "description": "Scope: account\n\nGet list of finished personal data requests based on the finished time period.\nUnfinished personal data requests will not appear here, i.e. have Status **Pending**, **In-Progress** or **Canceled**.\n\n---\n## This API for S2S integration purpose only\n",
+        "description": "Scope: account\n\nGet list of finished personal data requests based on the finished time period.\nUnfinished personal data requests will not appear here, i.e. have Status **Pending**, **In-Progress** or **Canceled**.\n\n**Anonymize userId for deleted account:**\nFor user accounts that have been deleted, the **userId** field in this API will be anonymized automatically after **7 days** from the success deletion. \nThis measure is implemented to ensure compliance with GDPR regulations. Please make sure to synchronize the data from this API before it undergoes anonymization.\n\n---\n## This API for S2S integration purpose only\n",
         "operationId": "S2SGetListFinishedPersonalDataRequest",
         "parameters": [
           {
@@ -3207,15 +3219,15 @@
   },
   "x-docs": {
     "alias": "gdpr",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/gdpr/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-05-28T13:03:45+00:00",
-    "gitHash": "530c2159acd97b2559015197db5c4710488ba77f",
+    "buildDate": "2024-07-02T04:18:40+00:00",
+    "gitHash": "5d5ee3b24319147a5e687cd49303e05970e0c99e",
     "name": "justice-gdpr-service",
-    "realm": "dev",
-    "version": "2.10.1",
+    "realm": "staging",
+    "version": "2.11.1",
     "version-roles-seeding": "1.2.39"
   }
 }

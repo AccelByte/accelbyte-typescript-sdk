@@ -13,8 +13,8 @@ export const UserReward = z.object({
   itemId: z.string(),
   itemName: z.string(),
   qty: z.number(),
-  status: z.string(),
-  type: z.string(),
+  status: z.enum(['CLAIM', 'UNCLAIMED']),
+  type: z.enum(['ENTITLEMENT', 'STATISTIC']),
   updatedAt: z.string(),
   userId: z.string()
 })

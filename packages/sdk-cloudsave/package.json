@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-cloudsave",
-  "version": "5.0.1-beta.1",
+  "version": "5.0.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",

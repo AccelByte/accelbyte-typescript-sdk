@@ -13,7 +13,7 @@
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://development.accelbyte.io/ugc/apidocs"
+    "url": "https://stage.accelbyte.io/ugc/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -4578,7 +4578,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
+            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -4616,7 +4616,7 @@
           },
           {
             "collectionFormat": "csv",
-            "description": "content tag. max number of tags: 5 tags (-1 means unlimited).",
+            "description": "content tag. max number of tags: -1 tags (-1 means unlimited).",
             "in": "query",
             "items": {
               "type": "string"
@@ -4713,7 +4713,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
+            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -4751,7 +4751,7 @@
           },
           {
             "collectionFormat": "csv",
-            "description": "content tag. max number of tags: 5 tags (-1 means unlimited).",
+            "description": "content tag. max number of tags: -1 tags (-1 means unlimited).",
             "in": "query",
             "items": {
               "type": "string"
@@ -7074,7 +7074,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
+            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -11083,7 +11083,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
+            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -11173,7 +11173,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
+            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -11206,7 +11206,7 @@
           },
           {
             "collectionFormat": "csv",
-            "description": "content tag. max number of tags: 5 tags (-1 means unlimited).",
+            "description": "content tag. max number of tags: -1 tags (-1 means unlimited).",
             "in": "query",
             "items": {
               "type": "string"
@@ -12662,7 +12662,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
+            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -15153,14 +15153,14 @@
   },
   "x-docs": {
     "alias": "ugc",
-    "host": "https://development.accelbyte.io",
+    "host": "https://stage.accelbyte.io",
     "path": "/ugc/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-05-03T07:39:39+00:00",
-    "gitHash": "90aaaf10e148daabed5d9f51f4200b058ae64905",
+    "buildDate": "2024-05-03T07:39:36+00:00",
+    "gitHash": "f46c3dfc58f8a5c3aec696d40be21142c13757c5",
     "name": "justice-ugc-service",
-    "realm": "dev",
+    "realm": "staging",
     "version": "2.20.3",
     "version-roles-seeding": "1.0.21"
   }

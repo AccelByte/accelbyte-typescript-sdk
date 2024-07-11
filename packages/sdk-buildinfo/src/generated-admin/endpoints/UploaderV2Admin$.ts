@@ -22,7 +22,7 @@ export class UploaderV2Admin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to get basic build manifests. Only committed build will be retrieved.
+   * This API is used to get basic build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getBuildsByAppId(queryParams: { appId: string | null; platformId: string | null }): Promise<IResponse<BuildIdVersionArray>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -33,7 +33,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to get basic DLC build manifests. Only committed build will be retrieved.
+   * This API is used to get basic DLC build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getDlcByGameAppId(queryParams: { appId: string | null; platformId: string | null }): Promise<IResponse<BuildIdVersionArray>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -44,7 +44,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to delete build manifest.
+   * This API is used to delete build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   deleteBuild_ByBuildId(buildId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -57,7 +57,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to get build manifest for build uploaded with BuildInfo v2.
+   * This API is used to get build manifest for build uploaded with BuildInfo v2.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Build Manifest&lt;/li&gt;&lt;/ul&gt;
    */
   getBuild_ByBuildId(buildId: string): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -70,7 +70,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to edit build&#39;s launchArgument.
+   * This API is used to edit build&#39;s launchArgument.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: None&lt;/li&gt;&lt;/ul&gt;
    */
   patchBuild_ByBuildId(buildId: string, data: UpdateBuildMetadataRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -83,7 +83,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to start build upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId}&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start build upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId}&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
    */
   createStartbuildupload(data: UploadBuildManifest): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -94,7 +94,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to get diff trigger status.
+   * This API is used to get diff trigger status.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;/ul&gt;
    */
   getDifftriggerStatus(): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -105,7 +105,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to commit build manifest.
+   * This API is used to commit build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   createCommitbuildmanifest(data: BuildManifest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -116,7 +116,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to start DLC build upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId} for normal (non-differential) upload&lt;/li&gt;&lt;li&gt;/v3/prezsyncupload for differential upload&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start DLC build upload.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;none&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId} for normal (non-differential) upload&lt;/li&gt;&lt;li&gt;/v3/prezsyncupload for differential upload&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
    */
   createStartdlcbuildupload(data: UploadBuildManifest): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -127,7 +127,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to commit build manifest.
+   * This API is used to commit build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   createCommitdlcbuildmanifest(data: BuildManifest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -138,7 +138,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to toggle diff trigger status. Use 0 to turn off and 1 to turn on. Any values other than 0 will be regarded as 1.
+   * This API is used to toggle diff trigger status. Use 0 to turn off and 1 to turn on. Any values other than 0 will be regarded as 1.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   patchDifftriggerStatu_ByValue(value: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -151,7 +151,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to start file upload and retrieve upload url.
+   * This API is used to start file upload and retrieve upload url.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: upload data&lt;/li&gt;&lt;/ul&gt;
    */
   createStartfileupload_ByUploaderId(uploaderId: string, data: BinaryUpload): Promise<IResponse<UploadSummary>> {
     const params = {} as SDKRequestConfig
@@ -164,7 +164,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to start zsync control file upload and retrieve upload url.
+   * This API is used to start zsync control file upload and retrieve upload url.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: upload data&lt;/li&gt;&lt;/ul&gt;
    */
   createStartzsyncfileupload_ByFileHash(fileHash: string, data: BinaryUpload): Promise<IResponse<UploadSummary>> {
     const params = {} as SDKRequestConfig
@@ -177,7 +177,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to start incremental build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn&#39;t yet set as latest).
+   * This API is used to start incremental build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn&#39;t yet set as latest).&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
    */
   createStartbuildupload_BySourceBuildId(sourceBuildId: string, data: UploadBuildManifest): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -190,7 +190,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to commit file that has been uploaded to signal completion.
+   * This API is used to commit file that has been uploaded to signal completion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
    */
   patchCommitfileupload_ByBuildId_ByHash(buildId: string, hash: string): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -204,7 +204,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to start DLC build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn&#39;t yet set as latest).
+   * This API is used to start DLC build upload. This endpoint used for incremental build upload, where developer update the files from existing build version (that hasn&#39;t yet set as latest).&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
    */
   createStartdlcbuildupload_BySourceBuildId(sourceBuildId: string, data: UploadBuildManifest): Promise<IResponse<BuildManifest>> {
     const params = {} as SDKRequestConfig
@@ -217,7 +217,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to commit file that has been uploaded to signal completion
+   * This API is used to commit file that has been uploaded to signal completion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
    */
   patchCommitzsyncfileupload_ByBuildId_ByHash(buildId: string, hash: string): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig
@@ -231,7 +231,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to set current build as release version.
+   * This API is used to set current build as release version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   updateVersion_ByAppId_ByVersion_ByPlatformId(appId: string, version: string, platformId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -246,7 +246,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to start diff manifest upload.
+   * This API is used to start diff manifest upload.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: UploadSummary&lt;/li&gt;&lt;/ul&gt;
    */
   createDiffStart_BySourceBuildId_ByDestinationBuildId(
     sourceBuildId: string,
@@ -263,7 +263,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to commit diff manifest.
+   * This API is used to commit diff manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
    */
   patchDiffCommit_BySourceBuildId_ByDestinationBuildId(sourceBuildId: string, destinationBuildId: string): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -277,7 +277,7 @@ export class UploaderV2Admin$ {
   }
 
   /**
-   * This API is used to commit chunk that has been uploaded.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;/v2/startzsyncfileupload&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId}&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit chunk that has been uploaded.&lt;p&gt;Previous API:&lt;ul&gt;&lt;li&gt;/v2/startzsyncfileupload&lt;/li&gt;&lt;/ul&gt;Next API:&lt;ul&gt;&lt;li&gt;/v2/startfileupload/{uploaderId}&lt;/li&gt;&lt;/ul&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
    */
   patchHash_ByBuildId_ByHash_ByBlockSize(buildId: string, hash: string, blockSize: number): Promise<IResponse<BlockManifest>> {
     const params = {} as SDKRequestConfig

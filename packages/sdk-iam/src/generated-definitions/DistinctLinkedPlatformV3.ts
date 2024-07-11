@@ -9,10 +9,10 @@ import { SimpleUserPlatformInfoV3 } from './SimpleUserPlatformInfoV3.js'
 export const DistinctLinkedPlatformV3 = z.object({
   details: z.array(SimpleUserPlatformInfoV3),
   linkedAt: z.string(),
+  logoURL: z.string().nullish(),
   platformGroup: z.string(),
   platformName: z.string(),
-  platformUserId: z.string().nullish(),
-  logoURL: z.string().nullish()
+  platformUserId: z.string().nullish()
 })
 
 export interface DistinctLinkedPlatformV3 extends z.TypeOf<typeof DistinctLinkedPlatformV3> {}
