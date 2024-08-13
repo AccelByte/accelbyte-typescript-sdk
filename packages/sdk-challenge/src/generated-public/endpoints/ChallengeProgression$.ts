@@ -31,12 +31,35 @@ export class ChallengeProgression$ {
    */
   getUserMeProgres_ByChallengeCode(
     challengeCode: string,
-    queryParams?: { goalCode?: string | null; limit?: number; offset?: number; tags?: string[] }
+    queryParams?: { dateTime?: string | null; goalCode?: string | null; limit?: number; offset?: number; tags?: string[] }
   ): Promise<IResponse<UserProgressionResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/challenge/v1/public/namespaces/{namespace}/users/me/progress/{challengeCode}'
       .replace('{namespace}', this.namespace)
       .replace('{challengeCode}', challengeCode)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserProgressionResponse,
+      'UserProgressionResponse'
+    )
+  }
+
+  /**
+   * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+   */
+  getIndexMeUser_ByChallengeCode_ByIndex(
+    challengeCode: string,
+    index: number,
+    queryParams?: { goalCode?: string | null; limit?: number; offset?: number; tags?: string[] }
+  ): Promise<IResponse<UserProgressionResponse>> {
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    const url = '/challenge/v1/public/namespaces/{namespace}/users/me/progress/{challengeCode}/index/{index}'
+      .replace('{namespace}', this.namespace)
+      .replace('{challengeCode}', challengeCode)
+      .replace('{index}', String(index))
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(

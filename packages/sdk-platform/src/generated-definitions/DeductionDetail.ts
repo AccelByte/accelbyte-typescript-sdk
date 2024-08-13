@@ -7,8 +7,9 @@ import { z } from 'zod'
 import { DiscountCodeDeductionDetail } from './DiscountCodeDeductionDetail.js'
 
 export const DeductionDetail = z.object({
-  deductionType: z.enum(['DISCOUNT_CODE']).nullish(),
-  discountCodeDeductionDetail: DiscountCodeDeductionDetail.nullish()
+  deductionType: z.enum(['DISCOUNT_CODE', 'PAYMENT_DISCOUNT_CODE']).nullish(),
+  discountCodeDeductionDetail: DiscountCodeDeductionDetail.nullish(),
+  discountProviderName: z.string().nullish()
 })
 
 export interface DeductionDetail extends z.TypeOf<typeof DeductionDetail> {}

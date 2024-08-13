@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-legal",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",
@@ -34,7 +34,7 @@
     "typescript": "4.6.4"
   },
   "dependencies": {
-    "@accelbyte/sdk-iam": "5.0.1",
+    "@accelbyte/sdk-iam": "5.0.3",
     "@accelbyte/validator": "0.2.21",
     "axios": "1.3.6",
     "buffer": "6.0.3",

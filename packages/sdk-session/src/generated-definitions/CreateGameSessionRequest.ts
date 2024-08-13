@@ -8,11 +8,13 @@ import { SessionStorageRequest } from './SessionStorageRequest.js'
 import { Team } from './Team.js'
 
 export const CreateGameSessionRequest = z.object({
+  appName: z.string().nullish(),
   attributes: z.record(z.any()),
   autoJoin: z.boolean().nullish(),
   backfillTicketID: z.string(),
   clientVersion: z.string(),
   configurationName: z.string(),
+  customURLGRPC: z.string().nullish(),
   deployment: z.string(),
   dsSource: z.string().nullish(),
   fallbackClaimKeys: z.array(z.string()).nullish(),

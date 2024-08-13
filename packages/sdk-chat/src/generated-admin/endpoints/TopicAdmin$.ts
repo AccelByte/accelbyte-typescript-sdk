@@ -51,6 +51,7 @@ export class TopicAdmin$ {
     shardId?: string | null
     startCreatedAt?: number
     topic?: string[]
+    unfiltered?: boolean | null
   }): Promise<IResponse<ChatMessageWithPaginationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/chats'.replace('{namespace}', this.namespace)
@@ -221,6 +222,7 @@ export class TopicAdmin$ {
       senderUserId?: string | null
       shardId?: string | null
       startCreatedAt?: number
+      unfiltered?: boolean | null
     }
   ): Promise<IResponse<ChatMessageWithPaginationResponse>> {
     const params = { ...queryParams } as SDKRequestConfig

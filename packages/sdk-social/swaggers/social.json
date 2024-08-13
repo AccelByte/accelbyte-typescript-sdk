@@ -8,7 +8,7 @@
     },
     "description": "Justice Statistics Service",
     "title": "justice-statistics-service",
-    "version": "2.16.0"
+    "version": "2.17.0"
   },
   "schemes": ["https"],
   "tags": [
@@ -39,13 +39,15 @@
   ],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/social"
+    "url": "https://development.accelbyte.io/social"
   },
   "securityDefinitions": {
     "HasPermission": {
       "authorizationUrl": "https://dummy.oauth.net/auth",
       "flow": "accessCode",
-      "scopes": {},
+      "scopes": {
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"
+      },
       "tokenUrl": "https://dumy.oauth.net/token",
       "type": "oauth2"
     },
@@ -1893,7 +1895,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Create stat cycle.\u0026lt;br\u0026gt;Fields:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;name: Cycle name, maximum length is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetTime: Reset time must follow \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 23:15. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDay: Reset Day follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday). Required when cycleType is WEEKLY.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDate: Reset Date must be a number 1 - 31. Required when cycleType is MONTHLY or ANNUALLY.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetMonth: Reset Month must be a number 1 - 12. Required when cycleType is ANNUALLY.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;seasonPeriod: Season period must be a number greater than or equal to 1 (days). Required when cycleType is SEASONAL.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;start: Start time must follow RFC3339 standard. e.g. 2023-02-24T05:10:24.865Z. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;end: End time must follow RFC3339 standard. e.g. 2023-02-24T05:10:24.865Z.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Other detail info:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: created stat cycle\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "description": "Create stat cycle.\u0026lt;br\u0026gt;Fields:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;id: Cycle id, consist of alphanumeric characters with a maximum of 32 characters. if not provided will be generated. \u0026lt;b\u0026gt;(optional)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: Cycle name, maximum length is 128 characters. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetTime: Reset time must follow \u0026lt;b\u0026gt;hours:minutes\u0026lt;/b\u0026gt; in 24 hours format e.g. 01:30, 23:15. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDay: Reset Day follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday). Required when cycleType is WEEKLY.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDate: Reset Date must be a number 1 - 31. Required when cycleType is MONTHLY or ANNUALLY.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetMonth: Reset Month must be a number 1 - 12. Required when cycleType is ANNUALLY.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;seasonPeriod: Season period must be a number greater than or equal to 1 (days). Required when cycleType is SEASONAL.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;start: Start time must follow RFC3339 standard. e.g. 2023-02-24T05:10:24.865Z. \u0026lt;b\u0026gt;(required)\u0026lt;/b\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;end: End time must follow RFC3339 standard. e.g. 2023-02-24T05:10:24.865Z.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Other detail info:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: created stat cycle\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "createStatCycle",
         "parameters": [
           {
@@ -7336,7 +7338,7 @@
     },
     "/social/v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk": {
       "get": {
-        "description": "Admin list all statItems of user\u0026lt;br\u0026gt;NOTE: \u0026lt;li\u0026gt;If stat code does not exist, will ignore this stat code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;If stat item does not exist, will return default value\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Other detail info:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: stat items\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "description": "Admin list all statItems of user\u0026lt;br\u0026gt;NOTE: \u0026lt;b\u0026gt;Legacy endpoint\u0026lt;/b\u0026gt;, please use POST /v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk/getOrDefault\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;If stat code does not exist, will ignore this stat code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;If stat item does not exist, will return default value\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Other detail info:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: stat items\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "AdminListUsersStatItems",
         "parameters": [
           {
@@ -7436,7 +7438,7 @@
             "authorization": []
           }
         ],
-        "summary": "Admin list user's statItems",
+        "summary": "(Legacy) Admin list user's statItems",
         "tags": ["UserStatistic"],
         "x-errorCodes": {
           "12223": "Invalid stat codes in namespace [{namespace}]: [{statCodes}]",
@@ -7545,6 +7547,100 @@
         },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [UPDATE]"
+        }
+      }
+    },
+    "/social/v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk/getOrDefault": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Bulk get user\u0026#39;s statitems value for given namespace and user by multiple stat codes.  \nWill return default value if player doesn\u0026#39;t have the stat. \nOther detail info:\n+ *Required permission*: resource=\u0026#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM\u0026#34;, action=2 (READ)\n+ *Max stat codes*: 20\n+ *Returns*: list of user\u0026#39;s stat item values",
+        "operationId": "bulkGetOrDefaultByUserId",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BulkUserStatItemByStatCodes"
+            }
+          },
+          {
+            "description": "additional key",
+            "in": "query",
+            "name": "additionalKey",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/A DTO object for user stat item value"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ValidationErrorEntity"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003eInternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk get user's statitems value by user id and multiple stat codes",
+        "tags": ["UserStatistic"],
+        "x-errorCodes": {
+          "20000": "Internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permission"
+        },
+        "x-security": {
+          "userPermissions": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"
         }
       }
     },
@@ -8443,6 +8539,18 @@
       },
       "type": "object"
     },
+    "BulkUserStatItemByStatCodes": {
+      "properties": {
+        "statCodes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
     "BulkUserStatItemInc": {
       "properties": {
         "inc": {
@@ -8523,6 +8631,9 @@
           },
           "description": "message variables",
           "type": "object"
+        },
+        "requiredPermission": {
+          "$ref": "#/definitions/Permission"
         }
       },
       "required": ["errorCode", "errorMessage"],
@@ -8776,6 +8887,18 @@
       },
       "type": "object"
     },
+    "Permission": {
+      "properties": {
+        "action": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resource": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "SlotConfigUpdate": {
       "properties": {
         "maxSlotSize": {
@@ -8947,6 +9070,10 @@
           "format": "date-time",
           "type": "string",
           "x-nullable": true
+        },
+        "id": {
+          "description": "cycle id",
+          "type": "string"
         },
         "name": {
           "type": "string"
@@ -9597,21 +9724,21 @@
   },
   "x-docs": {
     "alias": "social",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/social/swagger.json"
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2024-06-21T12:33:21+00:00",
-    "buildID": "2.16.0",
+    "buildDate": "2024-08-06T04:33:28+00:00",
+    "buildID": "2.17.0",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-    "buildOS": "Linux amd64 5.10.218-208.862.amzn2.x86_64",
-    "gitBranchName": "release-candidate",
-    "gitHash": "2ed9ccd803",
-    "gitTag": "2.16.0",
+    "buildOS": "Linux amd64 5.10.220-209.869.amzn2.x86_64",
+    "gitBranchName": "JES-3570-make-imports-process-async",
+    "gitHash": "3d683e384b",
+    "gitTag": "2.9.0",
     "name": "justice-social-service",
-    "realm": "staging",
-    "version": "2.16.0",
+    "realm": "dev",
+    "version": "2.17.0",
     "version-roles-seeding": "0.0.12"
   }
 }

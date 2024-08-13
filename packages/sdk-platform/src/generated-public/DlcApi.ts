@@ -13,6 +13,7 @@ import { DlcConfigRewardShortInfo } from '../generated-definitions/DlcConfigRewa
 import { EpicGamesDlcSyncRequest } from '../generated-definitions/EpicGamesDlcSyncRequest.js'
 import { PlayStationDlcSyncMultiServiceLabelsRequest } from '../generated-definitions/PlayStationDlcSyncMultiServiceLabelsRequest.js'
 import { PlayStationDlcSyncRequest } from '../generated-definitions/PlayStationDlcSyncRequest.js'
+import { SimpleUserDlcRewardContentsResponse } from '../generated-definitions/SimpleUserDlcRewardContentsResponse.js'
 import { SteamDlcSyncRequest } from '../generated-definitions/SteamDlcSyncRequest.js'
 import { XblDlcSyncRequest } from '../generated-definitions/XblDlcSyncRequest.js'
 import { Dlc$ } from './endpoints/Dlc$.js'
@@ -23,6 +24,19 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
   const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
   const useSchemaValidation = sdkAssembly.useSchemaValidation
+
+  /**
+   * Get user dlc reward contents. If includeAllNamespaces is false, will only return the dlc synced from the current namespace&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function getUsersMeDlcContent(queryParams: {
+    type: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
+    includeAllNamespaces?: boolean | null
+  }): Promise<SimpleUserDlcRewardContentsResponse> {
+    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.getUsersMeDlcContent(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
 
   /**
    * Get dlc reward simple map, only return the sku of durable item reward.
@@ -100,6 +114,7 @@ export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   return {
+    getUsersMeDlcContent,
     getDlcRewardsDurableMap,
     updateDlcPsnSync_ByUserId,
     updateDlcXblSync_ByUserId,

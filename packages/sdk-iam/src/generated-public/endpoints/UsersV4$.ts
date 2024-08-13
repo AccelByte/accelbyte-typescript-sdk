@@ -189,7 +189,7 @@ export class UsersV4$ {
   /**
    * This endpoint is used to send email code. ---------------- Supported values of action: * ChangePassword * DisableMFAEmail
    */
-  postUserMeMfaEmailCode(data: { action?: string | null }): Promise<IResponse<unknown>> {
+  postUserMeMfaEmailCode(data: { action?: string | null; languageTag?: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/code'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -272,7 +272,7 @@ export class UsersV4$ {
   }
 
   /**
-   * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - oculusweb - facebook - google - googleplaygames - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - oculusweb - facebook - google - googleplaygames - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 &lt;br&gt; If the request body exceed the max limitation, the max count will be in response body&#39;s messageVariables: &#34;messageVariables&#34;: {&#34;maxCount&#34;: &#34;100&#34;}
    */
   createUser_ByPlatformId(
     platformId: string,

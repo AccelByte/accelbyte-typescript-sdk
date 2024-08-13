@@ -9,6 +9,7 @@
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
+import { UserProfileBulkRequest } from '../../generated-definitions/UserProfileBulkRequest.js'
 import { UserProfileCreate } from '../../generated-definitions/UserProfileCreate.js'
 import { UserProfileInfo } from '../../generated-definitions/UserProfileInfo.js'
 import { UserProfilePrivateCreate } from '../../generated-definitions/UserProfilePrivateCreate.js'
@@ -31,6 +32,22 @@ export class UserProfile$ {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/basic/v1/public/namespaces/{namespace}/profiles/public'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserProfilePublicInfoArray,
+      'UserProfilePublicInfoArray'
+    )
+  }
+
+  /**
+   * Bulk get user public profile by ids.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user public profiles&lt;/li&gt;&lt;/ul&gt;
+   */
+  createProfilePublic(data: UserProfileBulkRequest): Promise<IResponse<UserProfilePublicInfoArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/basic/v1/public/namespaces/{namespace}/profiles/public'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
       this.useSchemaValidation,

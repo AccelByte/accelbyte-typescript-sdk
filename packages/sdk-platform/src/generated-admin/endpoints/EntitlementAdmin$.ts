@@ -28,6 +28,7 @@ import { EntitlementPagingSlicedResult } from '../../generated-definitions/Entit
 import { EntitlementPlatformConfigInfo } from '../../generated-definitions/EntitlementPlatformConfigInfo.js'
 import { EntitlementPlatformConfigUpdate } from '../../generated-definitions/EntitlementPlatformConfigUpdate.js'
 import { EntitlementPrechekResult } from '../../generated-definitions/EntitlementPrechekResult.js'
+import { EntitlementRevokeRequest } from '../../generated-definitions/EntitlementRevokeRequest.js'
 import { EntitlementSoldResult } from '../../generated-definitions/EntitlementSoldResult.js'
 import { EntitlementUpdate } from '../../generated-definitions/EntitlementUpdate.js'
 import { Ownership } from '../../generated-definitions/Ownership.js'
@@ -540,13 +541,17 @@ export class EntitlementAdmin$ {
   /**
    * Revoke user entitlement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke entitlement&lt;/li&gt;&lt;/ul&gt;
    */
-  updateRevoke_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<IResponse<EntitlementInfo>> {
+  updateRevoke_ByUserId_ByEntitlementId(
+    userId: string,
+    entitlementId: string,
+    data: EntitlementRevokeRequest
+  ): Promise<IResponse<EntitlementInfo>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/revoke'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
       .replace('{entitlementId}', entitlementId)
-    const resultPromise = this.axiosInstance.put(url, null, { params })
+    const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EntitlementInfo, 'EntitlementInfo')
   }

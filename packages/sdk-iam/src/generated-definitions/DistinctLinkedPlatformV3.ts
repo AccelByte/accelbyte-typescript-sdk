@@ -7,12 +7,14 @@ import { z } from 'zod'
 import { SimpleUserPlatformInfoV3 } from './SimpleUserPlatformInfoV3.js'
 
 export const DistinctLinkedPlatformV3 = z.object({
-  details: z.array(SimpleUserPlatformInfoV3),
+  details: z.array(SimpleUserPlatformInfoV3).nullish(),
   linkedAt: z.string(),
   logoURL: z.string().nullish(),
+  platformDisplayName: z.string().nullish(),
   platformGroup: z.string(),
   platformName: z.string(),
-  platformUserId: z.string().nullish()
+  platformUserId: z.string().nullish(),
+  status: z.string()
 })
 
 export interface DistinctLinkedPlatformV3 extends z.TypeOf<typeof DistinctLinkedPlatformV3> {}

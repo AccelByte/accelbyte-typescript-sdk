@@ -6,6 +6,7 @@
 import { z } from 'zod'
 
 export const AdminEntitlementDecrement = z.object({
+  metadata: z.record(z.any()).nullish(),
   options: z.array(z.string()).nullish(),
   platform: z.string().nullish(),
   requestId: z.string().nullish(),

@@ -13,6 +13,7 @@ export const PlatformWallet = z.object({
   id: z.string().nullish(),
   namespace: z.string(),
   status: z.enum(['ACTIVE', 'INACTIVE']).nullish(),
+  transactionId: z.string().nullish(),
   userId: z.string(),
   walletInfos: z.array(WalletInfo).nullish(),
   walletStatus: z.enum(['ACTIVE', 'INACTIVE']).nullish()

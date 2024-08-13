@@ -87,12 +87,23 @@ export function LeaderboardDataV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * &lt;p&gt;&lt;b&gt;[Test Facility Only]&lt;/b&gt;&lt;/p&gt; &lt;p&gt;This endpoint will delete user ranking by cycleId&lt;/p&gt; &lt;p&gt;Note: this endpoint only works on development environment.&lt;/p&gt;
+   */
+  async function deleteReset_ByLeaderboardCode_ByCycleId(leaderboardCode: string, cycleId: string): Promise<unknown> {
+    const $ = new LeaderboardDataV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.deleteReset_ByLeaderboardCode_ByCycleId(leaderboardCode, cycleId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     deleteUser_ByUserId,
     deleteReset_ByLeaderboardCode,
     getAlltime_ByLeaderboardCode,
     deleteUser_ByLeaderboardCode_ByUserId,
     getUser_ByLeaderboardCode_ByUserId,
-    getCycle_ByLeaderboardCode_ByCycleId
+    getCycle_ByLeaderboardCode_ByCycleId,
+    deleteReset_ByLeaderboardCode_ByCycleId
   }
 }

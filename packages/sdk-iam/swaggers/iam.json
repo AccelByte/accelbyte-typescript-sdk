@@ -8,12 +8,12 @@
     },
     "description": "Justice IAM Service",
     "title": "justice-iam-service",
-    "version": "7.18.2"
+    "version": "7.20.1"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/iam/apidocs"
+    "url": "https://development.accelbyte.io/iam/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -10355,7 +10355,7 @@
     },
     "/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId}": {
       "get": {
-        "description": "Get User By Platform User ID\nThis endpoint return user information by given platform ID and platform user ID.\nSeveral platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter.\nexample: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter.\n\nSupported platform:\n- Steam group(steamnetwork)\n\t- steam\n\t- steamopenid\n- PSN group(psn)\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox) \n\t- live\n\t- xblweb\n- Oculus group(oculusgroup) \n\t- oculus\n\t- oculusweb\n- facebook\n- google group\n\t- google\n\t- googleplaygames\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- justice\n- epicgames\n- nintendo\n- awscognito\n- netflix\n- snapchat\n- oidc platform id\n\nNote:\n**nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
+        "description": "Get User By Platform User ID\nThis endpoint return user information by given platform ID and platform user ID.\nSeveral platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter.\nexample: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter.\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
         "operationId": "AdminGetUserByPlatformUserIDV3",
         "parameters": [
           {
@@ -10430,6 +10430,397 @@
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER [READ]"]
+          }
+        ]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/roleoverride": {
+      "get": {
+        "description": "Get role override config.\nThis API has upsert behavior, if there is no config yet, it will create a new one with inactive status.\n",
+        "operationId": "AdminGetRoleOverrideConfigV3",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "USER",
+            "description": "Role identity",
+            "enum": ["GAME_ADMIN", "USER", "VIEW_ONLY"],
+            "in": "query",
+            "name": "identity",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.RoleOverrideResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20019\u003c/td\u003e\u003ctd\u003eunable to parse request body\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get role override config",
+        "tags": ["Override Role Config v3"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:ROLE:OVERRIDE [READ]"]
+          }
+        ]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "This API is for updating role override config.\nNote:\nThis API has upsert behavior, if there is no config yet, it will create a new one first.\n",
+        "operationId": "AdminUpdateRoleOverrideConfigV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.RoleOverrideUpdateRequest"
+            }
+          },
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "USER",
+            "description": "Role identity",
+            "enum": ["GAME_ADMIN", "USER", "VIEW_ONLY"],
+            "in": "query",
+            "name": "identity",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.RoleOverrideResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20019\u003c/td\u003e\u003ctd\u003eunable to parse request body\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update role override config",
+        "tags": ["Override Role Config v3"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:ROLE:OVERRIDE [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/roleoverride/source": {
+      "get": {
+        "description": "Get role source permission set.",
+        "operationId": "AdminGetRoleSourceV3",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "USER",
+            "description": "Role identity",
+            "enum": ["GAME_ADMIN", "USER", "VIEW_ONLY"],
+            "in": "query",
+            "name": "identity",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.RoleOverrideSourceResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e10456\u003c/td\u003e\u003ctd\u003erole not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get role source permission set",
+        "tags": ["Override Role Config v3"],
+        "x-errorCodes": {
+          "10456": "role not found",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:ROLE:OVERRIDE [READ]"]
+          }
+        ]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/roleoverride/status": {
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "Enable or disable the target role override feature in path namespace.\nNote:\nThis API has upsert behavior, if there is no config yet, it will create a new one first.\n",
+        "operationId": "AdminChangeRoleOverrideConfigStatusV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.RoleOverrideStatsUpdateRequest"
+            }
+          },
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "USER",
+            "description": "Role identity",
+            "enum": ["GAME_ADMIN", "USER", "VIEW_ONLY"],
+            "in": "query",
+            "name": "identity",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.RoleOverrideResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Change role override config active status",
+        "tags": ["Override Role Config v3"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permissions"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:ROLE:OVERRIDE [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/roleoverride/{roleId}/permissions": {
+      "get": {
+        "description": "Get role namespace permission set.",
+        "operationId": "AdminGetRoleNamespacePermissionV3",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Role ID, should follow UUID version 4 without hyphen",
+            "in": "path",
+            "name": "roleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.RolePermissionResponseV3"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e10456\u003c/td\u003e\u003ctd\u003erole not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get role namespace permission",
+        "tags": ["Override Role Config v3"],
+        "x-errorCodes": {
+          "10456": "role not found",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permissions"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:ROLE [READ]"]
           }
         ]
       }
@@ -11029,7 +11420,7 @@
             "type": "string"
           },
           {
-            "description": "Platform Id that want to be searched,\nSupported Platform: \n- Steam group(steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group(psn)\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox) \n\t- live\n\t- xblweb\n- Oculus group(oculusgroup) \n\t- oculus\n\t- oculusweb\n- epicgames\n- nintendo\n- aws cognito\n- facebook\n- google group\n\t- google\n\t- googleplaygames\t\n- discord\n- twitch\n- snapchat\n- amazon\n\nNote: you can use either platform ID or platform group as platformId query parameter",
+            "description": "Platform Id that want to be searched,\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
             "in": "query",
             "name": "platformId",
             "required": true,
@@ -11237,7 +11628,7 @@
             "type": "string"
           },
           {
-            "description": "Platform Id that want to be searched. \nSupported Platform: \n- Steam group(steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group(psn)\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox) \n\t- live\n\t- xblweb\n- Oculus group(oculusgroup) \n\t- oculus\n\t- oculusweb\n- epicgames\n- nintendo\n- aws cognito\n- facebook\n- google group\n\t- google\n\t- googleplaygames\n- discord\n- twitch\n- snapchat\n- amazon\n\nNote: you can use either platform ID or platform group as platformId query parameter",
+            "description": "Platform Id that want to be searched. \n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
             "in": "query",
             "name": "platformId",
             "type": "string"
@@ -13098,7 +13489,7 @@
     },
     "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms": {
       "get": {
-        "description": "## Justice Platform Account\nThe permission ’ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId}’ [READ] \n\tis required in order to read the UserID who linked with the user.\nGets platform accounts that are already linked with user account\n     \taction code : 10128",
+        "description": "Gets platform accounts that are already linked with user account.\nAction code : 10128\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1\n\n## Justice Platform Account\nThe permission ’ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId}’ [READ] is required in order to read the UserID who linked with the user.\n",
         "operationId": "AdminGetUserPlatformAccountsV3",
         "parameters": [
           {
@@ -13116,19 +13507,19 @@
             "type": "string"
           },
           {
-            "description": "The cursor that points to query data for the next page",
+            "description": "DEPRECATED. The cursor that points to query data for the next page",
             "in": "query",
             "name": "after",
             "type": "string"
           },
           {
-            "description": "The cursor that points to query data for the previous page",
+            "description": "DEPRECATED. The cursor that points to query data for the previous page",
             "in": "query",
             "name": "before",
             "type": "string"
           },
           {
-            "description": "the maximum number of data that may be returned (1...100)",
+            "description": "DEPRECATED. the maximum number of data that may be returned (1...100)",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -13192,6 +13583,92 @@
           }
         ],
         "summary": "Get platform accounts linked to the user",
+        "tags": ["Users"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20008": "user not found",
+          "20013": "insufficient permissions"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"]
+          }
+        ]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/distinct": {
+      "get": {
+        "description": "This endpoint only retrieves 3rd party platform accounts linked to user.\nIt will query platform accounts and result will be distinct \u0026amp; grouped, same platform we will pick oldest linked one.\n------\nSupported status:\n  - LINKED\n  - RESTRICTIVELY_UNLINKED\n  - UNLINKED\n  - ALL\n",
+        "operationId": "AdminListAllDistinctPlatformAccountsV3",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID, should follow UUID version 4 without hyphen",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "status",
+            "in": "query",
+            "name": "status",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/accountcommon.DistinctPlatformResponseV3"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20008\u003c/td\u003e\u003ctd\u003euser not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Admin get distinct platforms linked to the user",
         "tags": ["Users"],
         "x-errorCodes": {
           "20000": "internal server error",
@@ -13286,14 +13763,14 @@
         },
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{UserId} [READ]"]
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"]
           }
         ]
       }
     },
     "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/justice/{targetNamespace}": {
       "get": {
-        "description": "This endpoint requires the client access token as the bearer token\nThis endpoint will support publisher access to game and game access to publisher\nIf targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace.\nIf targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace.",
+        "description": "This endpoint will support publisher access to game and game access to publisher\nIf targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace.\nIf targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace.",
         "operationId": "AdminGetUserMapping",
         "parameters": [
           {
@@ -13549,9 +14026,90 @@
         ]
       }
     },
+    "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/link/histories": {
+      "get": {
+        "description": "This API is for admin to get user\u0026#39;s link history.\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
+        "operationId": "AdminGetUserLinkHistoriesV3",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID, should follow UUID version 4 without hyphen",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Target platform id",
+            "in": "query",
+            "name": "platformId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/model.UserPlatformLinkHistories"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Admin get user's platform link histories.",
+        "tags": ["Users"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20013": "insufficient permissions"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"]
+          }
+        ]
+      }
+    },
     "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}": {
       "delete": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "## Supported platforms:\n- **steam**\n- **steamopenid**\n- **facebook**\n- **google**\n- **googleplaygames**\n- **oculus**\n- **twitch**\n- **android**\n- **ios**\n- **apple**\n- **device**\n- **discord**\n- **awscognito**\n- **epicgames**\n- **nintendo**\n- **snapchat**\n\nUnlink user\u0026#39;s account from a specific platform. \u0026#39;justice\u0026#39; platform might have multiple accounts from different namespaces linked.\n_platformNamespace_ need to be specified when the platform ID is \u0026#39;justice\u0026#39;.\nUnlink user\u0026#39;s account from justice platform will enable password token grant and password update.\nIf you want to unlink user\u0026#39;s account in a game namespace, you have to specify _platformNamespace_ to that game namespace.\naction code : 10121 ",
         "operationId": "AdminPlatformUnlinkV3",
         "parameters": [
@@ -13646,7 +14204,7 @@
     "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/all": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Unlink user\u0026#39;s account from third platform in all namespaces.\nSeveral platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. \nexample: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter\n\nSupported platform:\n- Steam group(steamnetwork)\n\t- steam\n\t- steamopenid\n- PSN group(psn)\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox) \n\t- live\n\t- xblweb\n- Oculus group(oculusgroup) \n\t- oculus\n\t- oculusweb\n- facebook\n- google group\n\t- google\n\t- googleplaygames\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- justice\n- epicgames\n- nintendo\n- awscognito\n- netflix\n- snapchat\n- oidc platform id\n\t\nNote: \nif user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. \nexample: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well",
+        "description": "Unlink user\u0026#39;s account from third platform in all namespaces.\nSeveral platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. \nexample: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter.\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1\n\nUnlink platform account associated with a group:\nIf user unlink platform account associated with a group, the API logic will unlink all of platform account under that group as well. \nexample: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well",
         "operationId": "AdminPlatformUnlinkAllV3",
         "parameters": [
           {
@@ -13814,7 +14372,8 @@
     },
     "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link/histories": {
       "delete": {
-        "description": "This API is for admin to delete user\u0026#39;s linking history with target platform id.\nSupported platform:\n- Steam group(steamnetwork)\n\t- steam\n\t- steamopenid\n- PSN group(psn)\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox) \n\t- live\n\t- xblweb\n- Oculus group(oculusgroup) \n\t- oculus\n\t- oculusweb\n- facebook\n- google group\n\t- google\n\t- googleplaygames\n- twitch\n- discord\t\n- apple\n- epicgames\n- nintendo\n- awscognito\n- netflix\n- snapchat\n- oidc platform id\n\nNote: you can use either platform ID or platform group as platformId query parameter",
+        "deprecated": true,
+        "description": "This API is for admin to delete user\u0026#39;s linking history with target platform id.\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1\n\n----\n**Substitute endpoint**: /v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link/restrictions\n",
         "operationId": "AdminDeleteUserLinkingHistoryByPlatformIDV3",
         "parameters": [
           {
@@ -13892,6 +14451,90 @@
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link/restrictions": {
+      "delete": {
+        "description": "This API is for admin to delete user\u0026#39;s linking restriction with target platform id.\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
+        "operationId": "AdminDeleteUserLinkingRestrictionByPlatformIDV3",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Target platform id",
+            "in": "path",
+            "name": "platformId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID, should follow UUID version 4 without hyphen",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Operation succeeded"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20008\u003c/td\u003e\u003ctd\u003euser not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Admin remove user's platform linking restriction.",
+        "tags": ["Users"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20002": "validation error",
+          "20008": "user not found",
+          "20013": "insufficient permissions"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"]
           }
         ]
       }
@@ -13994,7 +14637,7 @@
     },
     "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/metadata": {
       "get": {
-        "description": "This endpoint gets user single platform account metadata.\nSupported Platform: \n- Steam group(steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group(psn)\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox) \n\t- live\n\t- xblweb\n- Oculus group(oculusgroup) \n\t- oculus\n\t- oculusweb\n- epicgames\n- nintendo\n- aws cognito\n- facebook\n- google group\n\t- google\n\t- googleplaygames\n- discord\n- twitch\n- snapchat\n- amazon\n\nNote: you can use either platform ID or platform group as platformId query parameter\n",
+        "description": "This endpoint gets user single platform account metadata.\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
         "operationId": "AdminGetUserSinglePlatformAccount",
         "parameters": [
           {
@@ -14017,6 +14660,14 @@
             "name": "userId",
             "required": true,
             "type": "string"
+          },
+          {
+            "default": false,
+            "description": "By default, this API will query the platform account in the specified namespace path only. If 'crossNamespace' is set to true, it will query across all namespaces and find one.",
+            "in": "query",
+            "name": "crossNamespace",
+            "type": "boolean",
+            "x-omitempty": false
           }
         ],
         "produces": ["application/json"],
@@ -14075,7 +14726,7 @@
         },
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{UserId} [READ]"]
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"]
           }
         ]
       }
@@ -14693,7 +15344,7 @@
         },
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]"]
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:VERIFY [UPDATE]"]
           }
         ]
       }
@@ -17222,7 +17873,7 @@
     "/iam/v3/oauth/namespaces/{namespace}/users/{userId}/platforms/{platformId}/platformToken": {
       "get": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "Retrieve User Third Party Platform Token\nThis endpoint used for retrieving third party platform token for user that login using third party,\nif user have not link requested platform in game namespace, will try to retrieving third party platform token from publisher namespace.\nPassing platform group name or it\u0026#39;s member will return same access token that can be used across the platform members. \n\nThe third party platform and platform group covered for this is:\n- (psn) ps4web\n- (psn) ps4\n- (psn) ps5\n- epicgames\n- twitch\n- awscognito\n- \u0026lt;amazon/li\u0026gt;\n- eaorigin\n- snapchat\n- twitch\n- live",
+        "description": "Retrieve User Third Party Platform Token\nThis endpoint used for retrieving third party platform token for user that login using third party,\nif user have not link requested platform in game namespace, will try to retrieving third party platform token from publisher namespace.\nPassing platform group name or it\u0026#39;s member will return same access token that can be used across the platform members. \n\nThe third party platform and platform group covered for this is:\n- (psn) ps4web\n- (psn) ps4\n- (psn) ps5\n- epicgames\n- twitch\n- awscognito\n- \u0026lt;amazon/li\u0026gt;\n- eaorigin\n- snapchat\n- twitch\n- live\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "RetrieveUserThirdPartyPlatformTokenV3",
         "parameters": [
           {
@@ -17240,7 +17891,7 @@
             "type": "string"
           },
           {
-            "description": "UserId",
+            "description": "UserId. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -18403,7 +19054,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId}": {
       "get": {
-        "description": "Get User By Platform User ID.\nThis endpoint return user information by given platform ID and platform user ID.\nSeveral platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter.\nexample: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter.\n\nSupported platform:\n- Steam group(steamnetwork)\n\t- steam\n\t- steamopenid\n- PSN group(psn)\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox) \n\t- live\n\t- xblweb\n- Oculus group(oculusgroup) \n\t- oculus\n\t- oculusweb\n- facebook\n- google group\n\t- google\n\t- googleplaygames\t\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- justice\n- epicgames\n- nintendo\n- awscognito\n- netflix\n- snapchat\n- oidc platform id\n\nNote:\n**nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
+        "description": "Get User By Platform User ID.\nThis endpoint return user information by given platform ID and platform user ID.\nSeveral platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter.\nexample: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter.\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
         "operationId": "PublicGetUserByPlatformUserIDV3",
         "parameters": [
           {
@@ -18543,7 +19194,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/users": {
       "get": {
-        "description": "This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name.\nThe query length should between 3-20, otherwise will not query the database. \nThe default limit value is 20.\n\n## Searching by 3rd party platform\n\n**Note: searching by 3rd party platform display name will use exact query, not fuzzy query.**\n\nStep when searching by 3rd party platform display name:\n  1. set __by__ to __thirdPartyPlatform__\n  2. set __platformId__ to the _supported platform id_\n  3. set __platformBy__ to __platformDisplayName__\n\n### Supported platform id:\n* Steam group(steamnetwork)\n\t* steam\n\t* steamopenid\n* PSN group(psn)\n\t* ps4web\n\t* ps4\n\t* ps5\n* XBOX group(xbox) \n\t* live\n\t* xblweb\n* Oculus group(oculusgroup) \n\t* oculus\n\t* oculusweb\n* facebook\n* google group\n\t* google\n\t* googleplaygames\n* twitch\n* discord\n* android\n* ios\n* apple\n* device\n* epicgames\n* nintendo\n* awscognito\n* netflix\n* snapchat\n* _oidc platform id_\n\nNote: you can use either platform ID or platform group as __platformId__ query parameter.\n\n",
+        "description": "This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name.\nThe query length should between 3-20, otherwise will not query the database. \nThe default limit value is 20.\n\n## Searching by 3rd party platform\n\n**Note: searching by 3rd party platform display name will use exact query, not fuzzy query.**\n\nStep when searching by 3rd party platform display name:\n  1. set __by__ to __thirdPartyPlatform__\n  2. set __platformId__ to the _supported platform id_\n  3. set __platformBy__ to __platformDisplayName__\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1\n\n",
         "operationId": "PublicSearchUserV3",
         "parameters": [
           {
@@ -19873,6 +20524,7 @@
     "/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}": {
       "delete": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "## Supported platforms:\n- **steam**\n- **steamopenid**\n- **facebook**\n- **google**\n- **googleplaygames**\n- **oculus**\n- **twitch**\n- **android**\n- **ios**\n- **apple**\n- **device**\n- **discord**\n- **awscognito**\n- **epicgames**\n- **nintendo**\n\nUnlink user\u0026#39;s account from a specific platform. \u0026#39;justice\u0026#39; platform might have multiple accounts from different namespaces linked.\n_platformNamespace_ need to be specified when the platform ID is \u0026#39;justice\u0026#39;.\nUnlink user\u0026#39;s account from justice platform will enable password token grant and password update.\nIf you want to unlink user\u0026#39;s account in a game namespace, you have to specify _platformNamespace_ to that game namespace.\naction code : 10121",
         "operationId": "PublicPlatformUnlinkV3",
         "parameters": [
@@ -20040,7 +20692,7 @@
     "/iam/v3/public/namespaces/{namespace}/users/me/platforms/{platformId}/all": {
       "delete": {
         "consumes": ["application/json"],
-        "description": "Unlink user\u0026#39;s account from third platform in all namespaces.\nSeveral platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. \nexample: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter.\n\nSupported platform:\n- Steam group(steamnetwork)\n\t- steam\n\t- steamopenid\n- PSN group(psn)\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox) \n\t- live\n\t- xblweb\n- Oculus group(oculusgroup) \n\t- oculus\n\t- oculusweb\n- facebook\n- google group\n\t- google\n\t- googleplaygames\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- justice\n- epicgames\n- nintendo\n- awscognito\n- netflix\n- snapchat\n- oidc platform id\n\t\nNote: \nif user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. \nexample: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well",
+        "description": "Unlink user\u0026#39;s account from third platform in all namespaces.\nSeveral platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. \nexample: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter.\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1\n\t\nUnlink platform account associated with a group:\nIf user unlink platform account associated with a group, the API logic will unlink all of platform account under that group as well. \nexample: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well",
         "operationId": "PublicPlatformUnlinkAllV3",
         "parameters": [
           {
@@ -20580,7 +21232,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/bans": {
       "get": {
-        "description": "Notes:\n- This endpoint retrieve the first page of the data if after and before parameters is empty\n- **The pagination is not working yet**",
+        "description": "Notes:\n- This endpoint retrieve the first page of the data if after and before parameters is empty\n- **The pagination is not working yet**\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "PublicGetUserBanHistoryV3",
         "parameters": [
           {
@@ -20591,7 +21243,7 @@
             "type": "string"
           },
           {
-            "description": "User ID, should follow UUID version 4 without hyphen",
+            "description": "User ID, should follow UUID version 4 without hyphen. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -20682,7 +21334,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/distinctPlatforms": {
       "get": {
-        "description": "This endpoint retrieves platform accounts linked to user.\nIt will query all linked platform accounts and result will be distinct \u0026amp; grouped, same platform we will pick oldest linked one.",
+        "description": "This endpoint retrieves platform accounts linked to user.\nIt will query all linked platform accounts. The results will be distinct and grouped by platform, and for each platform, we will select the oldest linked one.\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "PublicListUserAllPlatformAccountsDistinctV3",
         "parameters": [
           {
@@ -20693,7 +21345,7 @@
             "type": "string"
           },
           {
-            "description": "User ID, should follow UUID version 4 without hyphen",
+            "description": "User ID, should follow UUID version 4 without hyphen. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -20759,7 +21411,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/information": {
       "get": {
-        "description": "This endpoint retrieves user info and linked platform accounts",
+        "description": "This endpoint retrieves user info and linked platform accounts.\n\n\t\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "PublicGetUserInformationV3",
         "parameters": [
           {
@@ -20770,7 +21422,7 @@
             "type": "string"
           },
           {
-            "description": "User ID, should follow UUID version 4 without hyphen",
+            "description": "User ID, should follow UUID version 4 without hyphen. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -20829,7 +21481,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/logins/histories": {
       "get": {
-        "description": "Notes for this endpoint:\n- This endpoint retrieve the first page of the data if \u0026lt;code\u0026gt;after\u0026lt;/code\u0026gt; and \u0026lt;code\u0026gt;before\u0026lt;/code\u0026gt; parameters is empty.\n- The maximum value of the limit is 100 and the minimum value of the limit is 1.\n- This endpoint retrieve the next page of the data if we provide \u0026lt;code\u0026gt;after\u0026lt;/code\u0026gt; parameters with valid Unix timestamp.\n- This endpoint retrieve the previous page of the data if we provide \u0026lt;code\u0026gt;before\u0026lt;/code\u0026gt; parameter with valid data Unix timestamp.",
+        "description": "Notes for this endpoint:\n- This endpoint retrieve the first page of the data if \u0026lt;code\u0026gt;after\u0026lt;/code\u0026gt; and \u0026lt;code\u0026gt;before\u0026lt;/code\u0026gt; parameters is empty.\n- The maximum value of the limit is 100 and the minimum value of the limit is 1.\n- This endpoint retrieve the next page of the data if we provide \u0026lt;code\u0026gt;after\u0026lt;/code\u0026gt; parameters with valid Unix timestamp.\n- This endpoint retrieve the previous page of the data if we provide \u0026lt;code\u0026gt;before\u0026lt;/code\u0026gt; parameter with valid data Unix timestamp.\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "PublicGetUserLoginHistoriesV3",
         "parameters": [
           {
@@ -20840,7 +21492,7 @@
             "type": "string"
           },
           {
-            "description": "User ID, should follow UUID version 4 without hyphen",
+            "description": "User ID, should follow UUID version 4 without hyphen. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -20905,7 +21557,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms": {
       "get": {
-        "description": "This endpoint retrieves platform accounts linked to user.\naction code: 10128 ",
+        "description": "This endpoint retrieves platform accounts linked to user.\n\n\n**Supported Platforms:**\n- Steam group (steamnetwork):\n\t- steam\n\t- steamopenid\n- PSN group (psn):\n\t- ps4web\n\t- ps4\n\t- ps5\n- XBOX group(xbox):\n\t- live\n\t- xblweb\n- Oculus group (oculusgroup):\n\t- oculus\n\t- oculusweb\n- Google group (google):\n\t- google\n\t- googleplaygames:\n- epicgames\n- facebook\n- twitch\n- discord\n- android\n- ios\n- apple\n- device\n- nintendo\n- awscognito\n- amazon\n- netflix\n- snapchat\n- _oidc platform id_\n\nNote:\n- You can use either platform id or platform group as **platformId** parameter.\n- **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.\n\naction code: 10128 ",
         "operationId": "PublicGetUserPlatformAccountsV3",
         "parameters": [
           {
@@ -20916,26 +21568,26 @@
             "type": "string"
           },
           {
-            "description": "User ID, should follow UUID version 4 without hyphen",
+            "description": "User ID, should follow UUID version 4 without hyphen. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
             "type": "string"
           },
           {
-            "description": "The cursor that points to query data for the next page",
+            "description": "DEPRECATED. The cursor that points to query data for the next page",
             "in": "query",
             "name": "after",
             "type": "string"
           },
           {
-            "description": "The cursor that points to query data for the previous page",
+            "description": "DEPRECATED. The cursor that points to query data for the previous page",
             "in": "query",
             "name": "before",
             "type": "string"
           },
           {
-            "description": "the maximum number of data that may be returned (1...100)",
+            "description": "DEPRECATED. the maximum number of data that may be returned (1...100)",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -21006,7 +21658,7 @@
     },
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/justice": {
       "get": {
-        "description": "This endpoint gets list justice platform account by providing publisher namespace and publisher userID",
+        "description": "This endpoint gets list justice platform account by providing publisher namespace and publisher userID.\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "PublicListJusticePlatformAccountsV3",
         "parameters": [
           {
@@ -21017,7 +21669,7 @@
             "type": "string"
           },
           {
-            "description": " Publisher User ID",
+            "description": " Publisher User ID. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -21087,7 +21739,7 @@
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/link": {
       "post": {
         "consumes": ["application/json"],
-        "description": "It is going to be **DEPRECATED**.\nUpdate Platform Account relation to current User Account.\n\nNote: Game progression data (statistics, reward, etc) associated with previous User Account will not be \ntransferred. If the data is tight to game user ID, the user will have the game progression data.",
+        "description": "It is going to be **DEPRECATED**.\nUpdate Platform Account relation to current User Account.\n\nNote: Game progression data (statistics, reward, etc) associated with previous User Account will not be \ntransferred. If the data is tight to game user ID, the user will have the game progression data.\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "PublicLinkPlatformAccount",
         "parameters": [
           {
@@ -21106,7 +21758,7 @@
             "type": "string"
           },
           {
-            "description": "Current user ID",
+            "description": "Current user ID. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -21163,7 +21815,7 @@
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/platforms/linkWithProgression": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Force update other account\u0026#39;s Platform Account relation to current User Account. \nThis endpoint can transfer progression from 3rd platform binding account\u0026#39;s to current account.\nThis endpoint need the same requestID which also used in [Get link status](#operations-Users-PublicGetAsyncStatus).",
+        "description": "Force update other account\u0026#39;s Platform Account relation to current User Account. \nThis endpoint can transfer progression from 3rd platform binding account\u0026#39;s to current account.\nThis endpoint need the same requestID which also used in [Get link status](#operations-Users-PublicGetAsyncStatus).\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "PublicForceLinkPlatformWithProgression",
         "parameters": [
           {
@@ -21182,7 +21834,7 @@
             "type": "string"
           },
           {
-            "description": "Current user ID",
+            "description": "Current user ID. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -21307,7 +21959,7 @@
     "/iam/v3/public/namespaces/{namespace}/users/{userId}/validate": {
       "post": {
         "consumes": ["application/x-www-form-urlencoded"],
-        "description": "This endpoint is used to validate the user password. Require valid user ID.\n\nNotes:\n- This endpoint validate the user password by specifying the userId and password",
+        "description": "This endpoint is used to validate the user password.\nThis endpoint validate the user password by specifying the userId and password.\n\n\n**Authentication:**\nThe _**userId**_ parameter should match the one in the access token.",
         "operationId": "PublicValidateUserByUserIDAndPasswordV3",
         "parameters": [
           {
@@ -21325,7 +21977,7 @@
             "type": "string"
           },
           {
-            "description": "User ID, should follow UUID version 4 without hyphen",
+            "description": "User ID, should follow UUID version 4 without hyphen. Should match the one in the access token",
             "in": "path",
             "name": "userId",
             "required": true,
@@ -23123,7 +23775,7 @@
     "/iam/v4/admin/namespaces/{namespace}/test_users": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Create test users and not send verification code email.",
+        "description": "Create test users and not send verification code email.\nEnter the number of test users you want to create in the count field.\nThe maximum value of the user count is 100. \n",
         "operationId": "AdminCreateTestUsersV4",
         "parameters": [
           {
@@ -25898,6 +26550,12 @@
             "in": "formData",
             "name": "action",
             "type": "string"
+          },
+          {
+            "description": "Language Tag",
+            "in": "formData",
+            "name": "languageTag",
+            "type": "string"
           }
         ],
         "produces": ["application/json"],
@@ -27064,7 +27722,7 @@
     "/iam/v4/public/namespaces/{namespace}/platforms/{platformId}/users": {
       "post": {
         "consumes": ["application/json"],
-        "description": "List User ID By Platform User ID\nThis endpoint intended to list game user ID from the given namespace\nThis endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. \n\nSupported platform:\n- steam\n- steamopenid\n- ps4web\n- ps4\n- ps5 \n- live\n- xblweb \n- oculus\n- oculusweb\n- facebook\n- google\n- googleplaygames\n- twitch\n- discord\n- apple\n- device\n- justice\n- epicgames\n- nintendo\n- awscognito\n- netflix\n- snapchat\n- oidc platform id\n\nNote:\n**nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1",
+        "description": "List User ID By Platform User ID\nThis endpoint intended to list game user ID from the given namespace\nThis endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. \n\nSupported platform:\n- steam\n- steamopenid\n- ps4web\n- ps4\n- ps5 \n- live\n- xblweb \n- oculus\n- oculusweb\n- facebook\n- google\n- googleplaygames\n- twitch\n- discord\n- apple\n- device\n- justice\n- epicgames\n- nintendo\n- awscognito\n- netflix\n- snapchat\n- oidc platform id\n\nNote:\n**nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 \u0026lt;br\u0026gt;\nIf the request body exceed the max limitation, the max count will be in response body\u0026#39;s messageVariables: \u0026#34;messageVariables\u0026#34;: {\u0026#34;maxCount\u0026#34;: \u0026#34;100\u0026#34;}",
         "operationId": "PublicListUserIDByPlatformUserIDsV4",
         "parameters": [
           {
@@ -27107,7 +27765,7 @@
             }
           },
           "400": {
-            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e10229\u003c/td\u003e\u003ctd\u003erequest body exceed max limitation\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
               "$ref": "#/definitions/rest.ErrorResponse"
             }
@@ -27139,6 +27797,7 @@
         "summary": "List User ID By Platform User ID",
         "tags": ["Users V4"],
         "x-errorCodes": {
+          "10229": "request body exceed max limitation",
           "20000": "internal server error",
           "20001": "unauthorized access",
           "20002": "validation error",
@@ -28756,6 +29415,12 @@
             "in": "formData",
             "name": "action",
             "type": "string"
+          },
+          {
+            "description": "Language Tag",
+            "in": "formData",
+            "name": "languageTag",
+            "type": "string"
           }
         ],
         "produces": ["application/json"],
@@ -29879,6 +30544,7 @@
       "properties": {
         "allowedActions": {
           "items": {
+            "format": "int32",
             "type": "integer"
           },
           "type": "array"
@@ -30099,6 +30765,7 @@
         },
         "selectedActions": {
           "items": {
+            "format": "int32",
             "type": "integer"
           },
           "type": "array"
@@ -30186,6 +30853,9 @@
         "logoURL": {
           "type": "string"
         },
+        "platformDisplayName": {
+          "type": "string"
+        },
         "platformGroup": {
           "type": "string"
         },
@@ -30194,9 +30864,12 @@
         },
         "platformUserId": {
           "type": "string"
+        },
+        "status": {
+          "type": "string"
         }
       },
-      "required": ["details", "linkedAt", "platformGroup", "platformName"]
+      "required": ["linkedAt", "platformGroup", "platformName", "status"]
     },
     "accountcommon.DistinctPlatformResponseV3": {
       "properties": {
@@ -30306,6 +30979,21 @@
         "rootCertificate",
         "rootCertificateName"
       ]
+    },
+    "accountcommon.OverrideRolePermission": {
+      "properties": {
+        "actions": {
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "resource": {
+          "type": "string"
+        }
+      },
+      "required": ["actions", "resource"]
     },
     "accountcommon.Pagination": {
       "properties": {
@@ -30508,6 +31196,17 @@
         }
       },
       "required": ["affectedClientIDs", "domain", "namespaces", "roleId"]
+    },
+    "accountcommon.ReplaceRolePermission": {
+      "properties": {
+        "replacement": {
+          "$ref": "#/definitions/accountcommon.OverrideRolePermission"
+        },
+        "target": {
+          "type": "string"
+        }
+      },
+      "required": ["replacement", "target"]
     },
     "accountcommon.Role": {
       "properties": {
@@ -32918,10 +33617,12 @@
     "model.PlatformUserIDRequestV4": {
       "properties": {
         "platformUserIds": {
-          "description": "max length is 100",
+          "description": "max length is 100, min length is 1",
           "items": {
             "type": "string"
           },
+          "maxItems": 100,
+          "minItems": 1,
           "type": "array"
         }
       },
@@ -33317,6 +34018,10 @@
     },
     "model.ResetPasswordRequestV3": {
       "properties": {
+        "clientId": {
+          "description": "for tracking which client this request comes from",
+          "type": "string"
+        },
         "code": {
           "type": "string"
         },
@@ -33536,6 +34241,115 @@
         }
       },
       "required": ["data", "paging"]
+    },
+    "model.RoleOverrideResponse": {
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "additions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.OverrideRolePermission"
+          },
+          "type": "array"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "exclusions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.OverrideRolePermission"
+          },
+          "type": "array"
+        },
+        "identity": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "overrides": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.OverrideRolePermission"
+          },
+          "type": "array"
+        },
+        "replacements": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.ReplaceRolePermission"
+          },
+          "type": "array"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": ["active", "additions", "exclusions", "identity", "namespace", "overrides", "replacements"]
+    },
+    "model.RoleOverrideSourceResponse": {
+      "properties": {
+        "permissions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.OverrideRolePermission"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["permissions"]
+    },
+    "model.RoleOverrideStatsUpdateRequest": {
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["active"]
+    },
+    "model.RoleOverrideUpdateRequest": {
+      "properties": {
+        "additions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.OverrideRolePermission"
+          },
+          "type": "array"
+        },
+        "exclusions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.OverrideRolePermission"
+          },
+          "type": "array"
+        },
+        "overrides": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.OverrideRolePermission"
+          },
+          "type": "array"
+        },
+        "replacements": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.ReplaceRolePermission"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["additions", "exclusions", "overrides", "replacements"]
+    },
+    "model.RolePermissionResponseV3": {
+      "properties": {
+        "permissions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.Permission"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["permissions"]
     },
     "model.RoleResponse": {
       "properties": {
@@ -33931,6 +34745,11 @@
           },
           "type": "array"
         },
+        "EnableServerLicenseValidation": {
+          "description": "a flag indicates whether enable server license validation",
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "Environment": {
           "type": "string"
         },
@@ -33939,6 +34758,11 @@
           "type": "string"
         },
         "GenericOauthFlow": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "IncludePUID": {
+          "description": "a flag indicates whether need to include puid in access token claim",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -34079,6 +34903,11 @@
         "ClientId": {
           "type": "string"
         },
+        "EnableServerLicenseValidation": {
+          "description": "a flag indicates whether enable server license validation, only available on ps5, ps4, xbl",
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "Environment": {
           "type": "string"
         },
@@ -34089,6 +34918,11 @@
         "GenericOauthFlow": {
           "default": false,
           "description": "GenericOauthFlow is a flag that indicate this client is using generic oauth/open id flow or not",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "IncludePUID": {
+          "description": "a flag indicates whether need to include puid in access token claim",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -34179,6 +35013,7 @@
         "AWSCognitoUserPool",
         "AppId",
         "ClientId",
+        "EnableServerLicenseValidation",
         "Environment",
         "FederationMetadataURL",
         "GenericOauthFlow",
@@ -34775,6 +35610,9 @@
         "displayName": {
           "type": "string"
         },
+        "password": {
+          "type": "string"
+        },
         "uniqueDisplayName": {
           "type": "string"
         },
@@ -35002,18 +35840,78 @@
       },
       "required": ["platformInfos", "userId"]
     },
+    "model.UserPlatformLinkHistories": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/model.UserPlatformLinkHistory"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["data"]
+    },
+    "model.UserPlatformLinkHistory": {
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "actorType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "platformDisplayName": {
+          "type": "string"
+        },
+        "platformId": {
+          "type": "string"
+        },
+        "platformUserId": {
+          "type": "string"
+        },
+        "publisherUserId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "action",
+        "actor",
+        "actorType",
+        "createdAt",
+        "namespace",
+        "platform",
+        "platformDisplayName",
+        "platformId",
+        "platformUserId",
+        "publisherUserId"
+      ]
+    },
     "model.UserPlatformMetadata": {
       "properties": {
         "metadata": {
           "type": "object"
         },
         "namespace": {
+          "description": "the namespace of this metadata query from",
           "type": "string"
         },
         "platformUserId": {
           "type": "string"
         },
         "userId": {
+          "description": "it is always the publisher user id. this is deprecate, and will be removed",
           "type": "string"
         }
       },
@@ -36058,6 +36956,7 @@
           "type": "string"
         },
         "refresh_expires_in": {
+          "description": "present if it is user token",
           "format": "int32",
           "type": "integer"
         },
@@ -36150,7 +37049,7 @@
           "type": "string"
         },
         "roles": {
-          "description": "present if it is user token",
+          "description": "roles is deprecated, only NamespaceRoles would work",
           "items": {
             "type": "string"
           },
@@ -36262,7 +37161,7 @@
           "type": "string"
         },
         "roles": {
-          "description": "present if it is user token",
+          "description": "roles is deprecated, only NamespaceRoles would work",
           "items": {
             "type": "string"
           },
@@ -36363,15 +37262,15 @@
   },
   "x-docs": {
     "alias": "iam",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/iam/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-07-02T04:12:58+00:00",
-    "gitHash": "9269a02f19f73d44a062b02cdecbc0f820644f13",
+    "buildDate": "2024-08-07T01:32:41+00:00",
+    "gitHash": "f3785e3ac5db3942b6dd78c3f2881a3ec2bee2f3",
     "name": "justice-iam-service",
-    "realm": "staging",
-    "version": "7.18.2",
-    "version-roles-seeding": "1.2.50"
+    "realm": "dev",
+    "version": "7.20.1",
+    "version-roles-seeding": "1.2.61"
   }
 }

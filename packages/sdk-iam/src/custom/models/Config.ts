@@ -8,7 +8,8 @@ import { z } from 'zod'
 
 export const IamConfigData = z.object({
   usernameDisabled: z.boolean().default(false),
-  uniqueDisplayNameEnabled: z.boolean().default(false)
+  uniqueDisplayNameEnabled: z.boolean().default(false),
+  mandatoryEmailVerificationEnabled: z.boolean().default(true)
 })
 
 export interface IamConfigData extends z.infer<typeof IamConfigData> {}

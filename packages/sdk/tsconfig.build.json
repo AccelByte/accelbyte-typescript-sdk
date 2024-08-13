@@ -45,6 +45,9 @@
         "./src",
         "../../accelbyte-web-sdk/packages/sdk/src"
       ],
+      "@accelbyte/sdk-audit": [
+        "../sdk-audit/src"
+      ],
       "@accelbyte/sdk-basic": [
         "../sdk-basic/src"
       ],

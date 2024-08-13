@@ -7,11 +7,12 @@ import { z } from 'zod'
 
 export const Predicate = z.object({
   anyOf: z.number().int().nullish(),
+  code: z.string().nullish(),
   comparison: z
     .enum(['excludes', 'includes', 'is', 'isGreaterThan', 'isGreaterThanOrEqual', 'isLessThan', 'isLessThanOrEqual', 'isNot'])
     .nullish(),
   name: z.string().nullish(),
-  predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate']).nullish(),
+  predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate', 'StatisticCodePredicate']).nullish(),
   value: z.string().nullish(),
   values: z.array(z.string()).nullish()
 })

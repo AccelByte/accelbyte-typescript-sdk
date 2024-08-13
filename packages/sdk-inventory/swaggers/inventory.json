@@ -8,7 +8,7 @@
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/inventory/apidocs"
+    "url": "https://development.accelbyte.io/inventory/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -1845,6 +1845,193 @@
         "x-errorCodes": {}
       }
     },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will be used by client to save the purchased item to user\u0026#39;s inventory, \n\t\t\tsince want to integrate the inventory service to e-commerce, source field will be mandatory to determine the item, \n\t\t\tsupported field “OTHER” and “ECOMMERCE”\n\n\t\t\tNotes :\n\t\t\tsource ECOMMERCE, the quantity of ecommerce items saved is dynamically adjusted based on an item\u0026#39;s useCount configured in Store. \n\t\t\tWhen saving items, the quantity specified for each item will be multiplied by the useCount \n\t\t\ti.e. If the store item is configured with a useCount of 5 and the quantity of a particular item is set to 2 during saving, it will be stored as 10\n\n\t\t\tType:\n\t\t\t- ingame\n\t\t\t- app\n\t\t\t- coin\n\t\t\tetc..\n\n\t\t\tMax length of the payload is 10 items\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "operationId": "AdminBulkSaveItemToInventory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.SaveItemToInventoryReq"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "inventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "UserID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.BulkSaveItemResp"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk save items to specific inventory",
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventoryConfigurations/{inventoryConfigurationCode}/inventories": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tUpdating user inventories.\n\t\t\tPositive value will increase MaxSlots from existing value\n\t\t\tNegative value will decrease MaxSlots from existing value\n\t\t\tLimited slots can not be changed to unlimited, vice versa\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]\n\t\t",
+        "operationId": "AdminUpdateUserInventoriesByInventoryCode",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateInventoryReq"
+            }
+          },
+          {
+            "description": "InventoryConfigurationCode",
+            "in": "path",
+            "name": "inventoryConfigurationCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "UserID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.InventoryResp"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "To update user inventories by inventory code",
+        "tags": ["Admin Inventories"],
+        "x-errorCodes": {}
+      }
+    },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items": {
       "post": {
         "consumes": ["application/json"],
@@ -1902,6 +2089,97 @@
           }
         ],
         "summary": "To save item",
+        "tags": ["Admin Items"],
+        "x-errorCodes": {}
+      }
+    },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items/bulk": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\tThis endpoint will be used by client to save the purchased item to user\u0026#39;s inventory, \n\t\t\tsince want to integrate the inventory service to e-commerce, source field will be mandatory to determine the item, \n\t\t\tsupported field “OTHER” and “ECOMMERCE”\n\n\t\t\tNotes :\n\t\t\tsource ECOMMERCE, the quantity of ecommerce items saved is dynamically adjusted based on an item\u0026#39;s useCount configured in Store. \n\t\t\tWhen saving items, the quantity specified for each item will be multiplied by the useCount \n\t\t\ti.e. If the store item is configured with a useCount of 5 and the quantity of a particular item is set to 2 during saving, it will be stored as 10\n\n\t\t\tTarget inventory will be based on the specified inventoryConfigurationCode. If the inventory exist then will put to the existing one, \n\t\t\tif not exist at all then will create at least one inventory, if full then will return failed at the response. \n\t\t\tWe implement the logic as proportional to store the item to inventory, will loop from createdAt until find the available slots at inventory.\n\n\t\t\tType:\n\t\t\t- ingame\n\t\t\t- app\n\t\t\t- coin\n\t\t\tetc..\n\n\t\t\tMax length of the payload is 10 items\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "operationId": "AdminBulkSaveItem",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.SaveItemReq"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "UserID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/apimodels.BulkSaveItemResp"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk save items to inventory",
         "tags": ["Admin Items"],
         "x-errorCodes": {}
       }
@@ -2775,6 +3053,39 @@
       },
       "required": ["customAttributes", "serverCustomAttributes", "slotId", "sourceItemId", "tags", "type"]
     },
+    "apimodels.BulkSaveItemError": {
+      "properties": {
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": ["errorCode", "errorMessage", "slotId", "sourceItemId"]
+    },
+    "apimodels.BulkSaveItemResp": {
+      "properties": {
+        "errorDetails": {
+          "$ref": "#/definitions/apimodels.BulkSaveItemError"
+        },
+        "item": {
+          "$ref": "#/definitions/apimodels.ItemResp"
+        },
+        "success": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["success"]
+    },
     "apimodels.ChainingOperationReq": {
       "properties": {
         "message": {
@@ -2923,6 +3234,7 @@
           "type": "integer"
         },
         "source": {
+          "enum": ["ECOMMERCE", "OTHER"],
           "type": "string"
         },
         "sourceItemId": {
@@ -3786,14 +4098,14 @@
   },
   "x-docs": {
     "alias": "inventory",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/inventory/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-06-26T04:45:29+00:00",
-    "gitHash": "4144599dbb7e81333a511653ca9df0679925736a",
+    "buildDate": "2024-07-29T08:11:14+00:00",
+    "gitHash": "ff82bf460a1c0bb3338de3459861f9b1e3f3e327",
     "name": "justice-inventory-service",
-    "realm": "stage",
+    "realm": "DEV",
     "version": "0.2.1",
     "version-roles-seeding": "1.2.34"
   }

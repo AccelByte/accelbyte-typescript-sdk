@@ -14,12 +14,39 @@ import { FulfillmentHistoryPagingSlicedResult } from '../../generated-definition
 import { FulfillmentItemArray } from '../../generated-definitions/FulfillmentItemArray.js'
 import { FulfillmentRequest } from '../../generated-definitions/FulfillmentRequest.js'
 import { FulfillmentResult } from '../../generated-definitions/FulfillmentResult.js'
+import { FulfillmentV2Request } from '../../generated-definitions/FulfillmentV2Request.js'
+import { FulfillmentV2Result } from '../../generated-definitions/FulfillmentV2Result.js'
 import { PreCheckFulfillmentRequest } from '../../generated-definitions/PreCheckFulfillmentRequest.js'
+import { RevokeFulfillmentV2Result } from '../../generated-definitions/RevokeFulfillmentV2Result.js'
 import { RewardsRequest } from '../../generated-definitions/RewardsRequest.js'
 
 export class FulfillmentAdmin$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Query fulfillments in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillments&lt;/li&gt;&lt;/ul&gt;
+   */
+  getFulfillments(queryParams?: {
+    endTime?: string | null
+    limit?: number
+    offset?: number
+    startTime?: string | null
+    state?: 'FULFILLED' | 'FULFILL_FAILED' | 'REVOKED' | 'REVOKE_FAILED'
+    transactionId?: string | null
+    userId?: string | null
+  }): Promise<IResponse<FulfillmentHistoryPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    const url = '/platform/v2/admin/namespaces/{namespace}/fulfillments'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      FulfillmentHistoryPagingSlicedResult,
+      'FulfillmentHistoryPagingSlicedResult'
+    )
+  }
 
   /**
    * Query fulfillment histories in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillment history&lt;/li&gt;&lt;/ul&gt;
@@ -105,5 +132,42 @@ export class FulfillmentAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
+  }
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateFulfillment_ByUserId_ByTransactionId(
+    userId: string,
+    transactionId: string,
+    data: FulfillmentV2Request
+  ): Promise<IResponse<FulfillmentV2Result>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{transactionId}', transactionId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentV2Result, 'FulfillmentV2Result')
+  }
+
+  /**
+   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateRevoke_ByUserId_ByTransactionId(userId: string, transactionId: string): Promise<IResponse<RevokeFulfillmentV2Result>> {
+    const params = {} as SDKRequestConfig
+    const url = '/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/revoke'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{transactionId}', transactionId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      RevokeFulfillmentV2Result,
+      'RevokeFulfillmentV2Result'
+    )
   }
 }

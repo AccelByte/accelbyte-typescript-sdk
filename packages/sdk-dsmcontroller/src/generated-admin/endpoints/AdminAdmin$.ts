@@ -59,6 +59,17 @@ export class AdminAdmin$ {
   }
 
   /**
+   * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE] Required scope: social This endpoint deletes all dedicated servers from DB and terminates the DS pod.
+   */
+  deleteServer(queryParams: { version: string | null }): Promise<IResponse<unknown>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/dsmcontroller/admin/namespaces/{namespace}/servers'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint lists all of dedicated servers in a namespace managed by this service. Parameter Offset and Count is Required
    */
   getServers(queryParams: { count: number; offset: number; region?: string | null }): Promise<IResponse<ListServerResponse>> {

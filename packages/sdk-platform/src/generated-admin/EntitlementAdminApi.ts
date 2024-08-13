@@ -29,6 +29,7 @@ import { EntitlementPagingSlicedResult } from '../generated-definitions/Entitlem
 import { EntitlementPlatformConfigInfo } from '../generated-definitions/EntitlementPlatformConfigInfo.js'
 import { EntitlementPlatformConfigUpdate } from '../generated-definitions/EntitlementPlatformConfigUpdate.js'
 import { EntitlementPrechekResult } from '../generated-definitions/EntitlementPrechekResult.js'
+import { EntitlementRevokeRequest } from '../generated-definitions/EntitlementRevokeRequest.js'
 import { EntitlementSoldResult } from '../generated-definitions/EntitlementSoldResult.js'
 import { EntitlementUpdate } from '../generated-definitions/EntitlementUpdate.js'
 import { Ownership } from '../generated-definitions/Ownership.js'
@@ -419,9 +420,13 @@ export function EntitlementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * Revoke user entitlement.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke entitlement&lt;/li&gt;&lt;/ul&gt;
    */
-  async function updateRevoke_ByUserId_ByEntitlementId(userId: string, entitlementId: string): Promise<EntitlementInfo> {
+  async function updateRevoke_ByUserId_ByEntitlementId(
+    userId: string,
+    entitlementId: string,
+    data: EntitlementRevokeRequest
+  ): Promise<EntitlementInfo> {
     const $ = new EntitlementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.updateRevoke_ByUserId_ByEntitlementId(userId, entitlementId)
+    const resp = await $.updateRevoke_ByUserId_ByEntitlementId(userId, entitlementId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }

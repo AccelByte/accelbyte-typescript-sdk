@@ -15,6 +15,8 @@ import { AdminUpdateContentRequestV2 } from '../../generated-definitions/AdminUp
 import { ContentDownloadResponse } from '../../generated-definitions/ContentDownloadResponse.js'
 import { ContentDownloadResponseV2 } from '../../generated-definitions/ContentDownloadResponseV2.js'
 import { ContentDownloadResponseV2Array } from '../../generated-definitions/ContentDownloadResponseV2Array.js'
+import { CopyContentRequest } from '../../generated-definitions/CopyContentRequest.js'
+import { CopyContentResponseArray } from '../../generated-definitions/CopyContentResponseArray.js'
 import { CreateContentResponseV2 } from '../../generated-definitions/CreateContentResponseV2.js'
 import { CreateScreenshotRequest } from '../../generated-definitions/CreateScreenshotRequest.js'
 import { CreateScreenshotResponse } from '../../generated-definitions/CreateScreenshotResponse.js'
@@ -316,6 +318,26 @@ export class AdminContentV2Admin$ {
       () => resultPromise,
       ContentDownloadResponse,
       'ContentDownloadResponse'
+    )
+  }
+
+  createCopy_ByChannelId_ByContentId(
+    channelId: string,
+    contentId: string,
+    data: CopyContentRequest
+  ): Promise<IResponse<CopyContentResponseArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/ugc/v2/admin/namespaces/{namespace}/channels/{channelId}/contents/{contentId}/copy'
+      .replace('{namespace}', this.namespace)
+      .replace('{channelId}', channelId)
+      .replace('{contentId}', contentId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      CopyContentResponseArray,
+      'CopyContentResponseArray'
     )
   }
 

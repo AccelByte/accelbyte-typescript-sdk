@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 export const UserInputValidationRequest = z.object({
   displayName: z.string().nullish(),
+  password: z.string().nullish(),
   uniqueDisplayName: z.string().nullish(),
   username: z.string().nullish()
 })

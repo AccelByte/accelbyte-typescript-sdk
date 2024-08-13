@@ -8,7 +8,7 @@
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/dsmcontroller/apidocs"
+    "url": "https://development.accelbyte.io/dsmcontroller/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -3134,6 +3134,61 @@
       }
     },
     "/dsmcontroller/admin/namespaces/{namespace}/servers": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]\n\nRequired scope: social\n\nThis endpoint deletes all dedicated servers from DB and terminates the DS pod.",
+        "operationId": "DeleteServers",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "image version",
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "servers deleted"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "server not found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE]"],
+            "HasScope": ["social"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete all servers",
+        "tags": ["Admin"],
+        "x-errorCodes": {}
+      },
       "get": {
         "consumes": ["application/json"],
         "description": "Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ]\n\nRequired scope: social\n\nThis endpoint lists all of dedicated servers in a namespace managed by this service.\n\nParameter Offset and Count is Required",
@@ -7757,7 +7812,7 @@
   },
   "x-docs": {
     "alias": "dsmcontroller",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/dsmcontroller/apidocs/api.json"
   },
   "x-messages": [
@@ -7970,12 +8025,12 @@
       "Text": "unable to update config for {{namespace}}: invalid config"
     },
     {
-      "Attributes": ["namespace"],
+      "Attributes": ["error", "namespace"],
       "Code": "720131",
       "CodeName": "UpdateConfigInternalError",
       "Section": "config",
       "Service": "dsmc",
-      "Text": "unable to update config for {{namespace}}: DB error"
+      "Text": "unable to update config for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["namespace"],
@@ -8018,20 +8073,20 @@
       "Text": "{{message}}"
     },
     {
-      "Attributes": [],
+      "Attributes": ["error"],
       "Code": "720138",
       "CodeName": "ListConfigInternalError",
       "Section": "config",
       "Service": "dsmc",
-      "Text": "unable to list config: DB error"
+      "Text": "unable to list config: {{error}}"
     },
     {
-      "Attributes": ["namespace"],
+      "Attributes": ["error", "namespace"],
       "Code": "720139",
       "CodeName": "GetConfigInternalError",
       "Section": "config",
       "Service": "dsmc",
-      "Text": "unable to get config for namespace {{namespace}}: DB error"
+      "Text": "unable to get config for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["message"],
@@ -8050,12 +8105,12 @@
       "Text": "unable to delete config for namespace {{namespace}}: config not found"
     },
     {
-      "Attributes": ["namespace"],
+      "Attributes": ["error", "namespace"],
       "Code": "720142",
       "CodeName": "DeleteConfigInternalError",
       "Section": "config",
       "Service": "dsmc",
-      "Text": "unable to delete config for namespace {{namespace}}: DB error"
+      "Text": "unable to delete config for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -8106,12 +8161,12 @@
       "Text": "unable to create config port {{name}} for {{namespace}}: port is already used"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720149",
       "CodeName": "CreateConfigPortInternalError",
       "Section": "config",
       "Service": "dsmc",
-      "Text": "unable to create config port {{name}} for {{namespace}}: DB error"
+      "Text": "unable to create config port {{name}} for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -8170,12 +8225,12 @@
       "Text": "unable to update config port {{name}} for {{namespace}}: port not found"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720157",
       "CodeName": "UpdateConfigPortInternalError",
       "Section": "config",
       "Service": "dsmc",
-      "Text": "unable to update config port {{name}} for {{namespace}}: DB error"
+      "Text": "unable to update config port {{name}} for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -8210,12 +8265,12 @@
       "Text": "unable to delete config port {{name}} for {{namespace}}: port not found"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720162",
       "CodeName": "DeleteConfigPortInternalError",
       "Section": "config",
       "Service": "dsmc",
-      "Text": "unable to delete config port {{name}} for {{namespace}}: DB error"
+      "Text": "unable to delete config port {{name}} for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["namespace"],
@@ -8386,12 +8441,12 @@
       "Text": "unable to register local server: {{error}}"
     },
     {
-      "Attributes": [],
+      "Attributes": ["error"],
       "Code": "720211",
       "CodeName": "RegisterLocalServerInternalError",
       "Section": "server",
       "Service": "dsmc",
-      "Text": "unable to register local server: DB error"
+      "Text": "unable to register local server: {{error}}"
     },
     {
       "Attributes": ["message"],
@@ -8898,12 +8953,12 @@
       "Text": "successfully get default provider"
     },
     {
-      "Attributes": [],
+      "Attributes": ["error"],
       "Code": "720403",
       "CodeName": "ListProviderInternalServerError",
       "Section": "provider",
       "Service": "dsmc",
-      "Text": "unable to get list of supported providers from storage: DB error"
+      "Text": "unable to get list of supported providers from storage: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -8922,12 +8977,12 @@
       "Text": "unable to create config deployment {{name}} for namespace {{namespace}}: malformed request: {{details}}"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720503",
       "CodeName": "CreateDeploymentInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to create config deployment {{name}} for namespace {{namespace}}: DB error"
+      "Text": "unable to create config deployment {{name}} for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -8946,12 +9001,12 @@
       "Text": "unable to get config deployment {{name}} for namespace {{namespace}}: Not found"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720506",
       "CodeName": "GetDeploymentInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to get config deployment {{name}} for namespace {{namespace}}: DB error"
+      "Text": "unable to get config deployment {{name}} for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -8970,12 +9025,12 @@
       "Text": "unable to delete config deployment {{name}} for namespace {{namespace}}: Not found"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720509",
       "CodeName": "DeleteDeploymentInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to delete config deployment {{name}} for namespace {{namespace}}: DB error"
+      "Text": "unable to delete config deployment {{name}} for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["deployment", "details", "namespace"],
@@ -8986,12 +9041,12 @@
       "Text": "unable to update config deployment: {{deployment}} for {{namespace}}: malformed request {{details}}"
     },
     {
-      "Attributes": ["deployment", "namespace"],
+      "Attributes": ["deployment", "error", "namespace"],
       "Code": "720511",
       "CodeName": "UpdateDeploymentInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to update config deployment: {{deployment}} for {{namespace}}: DB error"
+      "Text": "unable to update config deployment: {{deployment}} for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["deployment", "namespace"],
@@ -9018,12 +9073,12 @@
       "Text": "unable to create config deployment {{deployment}} override {{version}} for namespace {{namespace}}: malformed request: {{details}}"
     },
     {
-      "Attributes": ["deployment", "namespace", "version"],
+      "Attributes": ["deployment", "error", "namespace", "version"],
       "Code": "720515",
       "CodeName": "CreateDeploymentOverrideInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to create config deployment {{deployment}} override {{version}} for namespace {{namespace}}: DB error"
+      "Text": "unable to create config deployment {{deployment}} override {{version}} for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["deployment", "details", "namespace", "version"],
@@ -9042,12 +9097,12 @@
       "Text": "deployment {{deployment}} override {{version}} for namespace {{namespace}} updated"
     },
     {
-      "Attributes": ["deployment", "namespace", "version"],
+      "Attributes": ["deployment", "error", "namespace", "version"],
       "Code": "720518",
       "CodeName": "UpdateDeploymentOverrideInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to update config deployment {{deployment}} override {{version}} for {{namespace}}: DB error"
+      "Text": "unable to update config deployment {{deployment}} override {{version}} for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["deployment", "details", "namespace", "version"],
@@ -9074,12 +9129,12 @@
       "Text": "unable to delete config deployment {{deployment}} override {{version}} for {{namespace}}: malformed request {{details}}"
     },
     {
-      "Attributes": ["deployment", "namespace", "version"],
+      "Attributes": ["deployment", "error", "namespace", "version"],
       "Code": "720522",
       "CodeName": "DeleteDeploymentOverrideInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to delete config deployment {{deployment}} override {{version}} for {{namespace}}: DB error"
+      "Text": "unable to delete config deployment {{deployment}} override {{version}} for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["deployment", "details", "namespace", "version"],
@@ -9106,12 +9161,12 @@
       "Text": "unable to create deployment {{deployment}} region {{region}} override for {{namespace}}: malformed request: {{details}}"
     },
     {
-      "Attributes": ["deployment", "namespace", "region"],
+      "Attributes": ["deployment", "error", "namespace", "region"],
       "Code": "720526",
       "CodeName": "CreateRegionOverrideInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to create deployment {{deployment}} region {{region}} override for {{namespace}}: DB error"
+      "Text": "unable to create deployment {{deployment}} region {{region}} override for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["deployment", "namespace", "region"],
@@ -9130,12 +9185,12 @@
       "Text": "unable to update deployment {{deployment}} region {{region}} override for {{namespace}}: malformed request {{details}}"
     },
     {
-      "Attributes": ["deployment", "namespace", "region"],
+      "Attributes": ["deployment", "error", "namespace", "region"],
       "Code": "720529",
       "CodeName": "UpdateRegionOverrideInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to update deployment {{deployment}} region {{region}} override for {{namespace}}: DB error"
+      "Text": "unable to update deployment {{deployment}} region {{region}} override for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["deployment", "details", "namespace", "region"],
@@ -9162,12 +9217,12 @@
       "Text": "unable to delete deployment {{deployment}} region {{region}} override for {{namespace}}: malformed request {{details}}"
     },
     {
-      "Attributes": ["deployment", "namespace", "region"],
+      "Attributes": ["deployment", "error", "namespace", "region"],
       "Code": "720533",
       "CodeName": "DeleteRegionOverrideInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to delete deployment {{deployment}} region {{region}} override for {{namespace}}: DB error"
+      "Text": "unable to delete deployment {{deployment}} region {{region}} override for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["deployment", "details", "namespace", "region"],
@@ -9290,12 +9345,12 @@
       "Text": "all deployment for namespace {{namespace}} queried"
     },
     {
-      "Attributes": ["namespace"],
+      "Attributes": ["error", "namespace"],
       "Code": "720549",
       "CodeName": "GetAllDeploymentInternalServerError",
       "Section": "deployment",
       "Service": "dsmc",
-      "Text": "unable to get all deployments for namespace {{namespace}}: DB error"
+      "Text": "unable to get all deployments for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["details", "namespace"],
@@ -9378,12 +9433,12 @@
       "Text": "unable to create pod config {{name}} for namespace {{namespace}}: malformed request"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720603",
       "CodeName": "CreatePodConfigInternalServerError",
       "Section": "podconfig",
       "Service": "dsmc",
-      "Text": "unable to create pod config {{name}} for namespace {{namespace}}: DB error"
+      "Text": "unable to create pod config {{name}} for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -9402,12 +9457,12 @@
       "Text": "unable to get pod config {{name}} for namespace {{namespace}}: Not found"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720606",
       "CodeName": "GetPodConfigInternalServerError",
       "Section": "podconfig",
       "Service": "dsmc",
-      "Text": "unable to get pod config {{name}} for namespace {{namespace}}: DB error"
+      "Text": "unable to get pod config {{name}} for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -9426,12 +9481,12 @@
       "Text": "unable to delete pod config {{name}} for namespace {{namespace}}: Not found"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720609",
       "CodeName": "DeletePodConfigInternalServerError",
       "Section": "podconfig",
       "Service": "dsmc",
-      "Text": "unable to delete pod config {{name}} for namespace {{namespace}}: DB error"
+      "Text": "unable to delete pod config {{name}} for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -9442,12 +9497,12 @@
       "Text": "unable to update pod config {{name}} for {{namespace}}: malformed request"
     },
     {
-      "Attributes": ["name", "namespace"],
+      "Attributes": ["error", "name", "namespace"],
       "Code": "720611",
       "CodeName": "UpdatePodConfigInternalServerError",
       "Section": "podconfig",
       "Service": "dsmc",
-      "Text": "unable to update pod config {{name}} for {{namespace}}: DB error"
+      "Text": "unable to update pod config {{name}} for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -9466,12 +9521,12 @@
       "Text": "all pod config in {{namespace}} queried"
     },
     {
-      "Attributes": ["namespace"],
+      "Attributes": ["error", "namespace"],
       "Code": "720614",
       "CodeName": "GetAllPodConfigInternalServerError",
       "Section": "podconfig",
       "Service": "dsmc",
-      "Text": "unable to get all pod configs for namespace {{namespace}}: DB error"
+      "Text": "unable to get all pod configs for namespace {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["name", "namespace"],
@@ -10002,28 +10057,28 @@
       "Text": "unable to create image {{version}} for {{namespace}}: error on checking image in container registry"
     },
     {
-      "Attributes": ["namespace"],
+      "Attributes": ["error", "namespace"],
       "Code": "720784",
       "CodeName": "ListImageInternalServerError",
       "Section": "image",
       "Service": "dsmc",
-      "Text": "unable to list images for {{namespace}}: DB error"
+      "Text": "unable to list images for {{namespace}}: {{error}}"
     },
     {
-      "Attributes": ["namespace", "version"],
+      "Attributes": ["error", "namespace", "version"],
       "Code": "720785",
       "CodeName": "GetImageDetailInternalServerError",
       "Section": "image",
       "Service": "dsmc",
-      "Text": "unable to query image version {{version}} for {{namespace}}: DB error"
+      "Text": "unable to query image version {{version}} for {{namespace}}: {{error}}"
     },
     {
-      "Attributes": ["namespace"],
+      "Attributes": ["error", "namespace"],
       "Code": "720787",
       "CodeName": "ExportImageInternalServerError",
       "Section": "image",
       "Service": "dsmc",
-      "Text": "unable to export image for {{namespace}}: DB error"
+      "Text": "unable to export image for {{namespace}}: {{error}}"
     },
     {
       "Attributes": ["namespace"],
@@ -10034,20 +10089,20 @@
       "Text": "unable to export image for {{namespace}}: failed write response"
     },
     {
-      "Attributes": [],
+      "Attributes": ["error"],
       "Code": "720789",
       "CodeName": "ImportImageInternalServerError",
       "Section": "image",
       "Service": "dsmc",
-      "Text": "unable to import image: DB error"
+      "Text": "unable to import image: {{error}}"
     },
     {
-      "Attributes": [],
+      "Attributes": ["error"],
       "Code": "720790",
       "CodeName": "GetImageLimitInternalServerError",
       "Section": "image",
       "Service": "dsmc",
-      "Text": "unable to get image limit: DB error"
+      "Text": "unable to get image limit: {{error}}"
     },
     {
       "Attributes": ["namespace"],
@@ -10179,8 +10234,8 @@
     }
   ],
   "x-version": {
-    "buildDate": "2024-06-18T04:29:18+00:00",
-    "gitHash": "be7a558436877e1c6ce17c8e095cc74ff03a2e5e",
+    "buildDate": "2024-07-18T08:10:11+00:00",
+    "gitHash": "859c496203c5bdaf1db1fe176214e269b6c887cc",
     "name": "justice-dedicated-server-manager-controller-service",
     "revisionID": "6.8.2",
     "version": "6.8.2",

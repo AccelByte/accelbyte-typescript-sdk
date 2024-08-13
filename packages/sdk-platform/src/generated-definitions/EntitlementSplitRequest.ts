@@ -4,7 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { PublicEntitlementMetadata } from './PublicEntitlementMetadata.js'
 
-export const EntitlementSplitRequest = z.object({ useCount: z.number().int().nullish() })
+export const EntitlementSplitRequest = z.object({ metadata: PublicEntitlementMetadata.nullish(), useCount: z.number().int().nullish() })
 
 export interface EntitlementSplitRequest extends z.TypeOf<typeof EntitlementSplitRequest> {}

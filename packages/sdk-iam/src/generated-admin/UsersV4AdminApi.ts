@@ -142,7 +142,7 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * This endpoint is used to send email code. -------------- Supported actions: * ChangePassword * DisableMFAEmail
    */
-  async function postUserMeMfaEmailCode(data: { action?: string | null }): Promise<unknown> {
+  async function postUserMeMfaEmailCode(data: { action?: string | null; languageTag?: string | null }): Promise<unknown> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.postUserMeMfaEmailCode(data)
     if (resp.error) throw resp.error
@@ -262,7 +262,7 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Create test users and not send verification code email.
+   * Create test users and not send verification code email. Enter the number of test users you want to create in the count field. The maximum value of the user count is 100.
    */
   async function createTestUser(data: CreateTestUsersRequestV4): Promise<CreateTestUsersResponseV4> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)

@@ -13,12 +13,32 @@ import { DlcConfigRewardShortInfo } from '../../generated-definitions/DlcConfigR
 import { EpicGamesDlcSyncRequest } from '../../generated-definitions/EpicGamesDlcSyncRequest.js'
 import { PlayStationDlcSyncMultiServiceLabelsRequest } from '../../generated-definitions/PlayStationDlcSyncMultiServiceLabelsRequest.js'
 import { PlayStationDlcSyncRequest } from '../../generated-definitions/PlayStationDlcSyncRequest.js'
+import { SimpleUserDlcRewardContentsResponse } from '../../generated-definitions/SimpleUserDlcRewardContentsResponse.js'
 import { SteamDlcSyncRequest } from '../../generated-definitions/SteamDlcSyncRequest.js'
 import { XblDlcSyncRequest } from '../../generated-definitions/XblDlcSyncRequest.js'
 
 export class Dlc$ {
   // @ts-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
+
+  /**
+   * Get user dlc reward contents. If includeAllNamespaces is false, will only return the dlc synced from the current namespace&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
+   */
+  getUsersMeDlcContent(queryParams: {
+    type: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
+    includeAllNamespaces?: boolean | null
+  }): Promise<IResponse<SimpleUserDlcRewardContentsResponse>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/platform/public/users/me/dlc/content'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SimpleUserDlcRewardContentsResponse,
+      'SimpleUserDlcRewardContentsResponse'
+    )
+  }
 
   /**
    * Get dlc reward simple map, only return the sku of durable item reward.

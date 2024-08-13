@@ -100,11 +100,15 @@ export class DlcAdmin$ {
   }
 
   /**
-   * Get user dlc records.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
+   * Get user dlc records.&lt;br&gt;Note: includeAllNamespaces means this endpoint will return user dlcs from all namespace, example scenario isadmin may need to check the user dlcs before unlink a 3rd party account, so the user dlcs should be from all namespaces because unlinking is a platform level action &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
    */
   getDlcRecords_ByUserId(
     userId: string,
-    queryParams?: { type?: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX' }
+    queryParams?: {
+      includeAllNamespaces?: boolean | null
+      status?: 'FULFILLED' | 'REVOKED' | 'REVOKE_FAILED'
+      type?: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
+    }
   ): Promise<IResponse<UserDlcRecordArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/dlc/records'

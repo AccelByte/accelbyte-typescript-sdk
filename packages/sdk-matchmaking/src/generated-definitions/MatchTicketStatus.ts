@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { ProposedProposal } from './ProposedProposal.js'
 
 export const MatchTicketStatus = z.object({
+  isActive: z.boolean().nullish(),
   matchFound: z.boolean(),
   matchPool: z.string().nullish(),
   matchTicketID: z.string().nullish(),

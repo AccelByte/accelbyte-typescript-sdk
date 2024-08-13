@@ -1,8 +1,8 @@
 {
-  "buildDate": "2024-07-10T06:22:41+00:00",
-  "gitHash": "5403e42a5511dfb8b2a72fa3b819d294a054641e",
+  "buildDate": "2024-08-07T04:42:37+00:00",
+  "gitHash": "5e0be04fecabfec4e4544a2c4c482b84d1bb6fdb",
   "name": "justice-challenge-service",
-  "realm": "staging",
-  "version": "1.7.2",
+  "realm": "DEV",
+  "version": "1.8.2",
   "version-roles-seeding": "1.2.48"
 }

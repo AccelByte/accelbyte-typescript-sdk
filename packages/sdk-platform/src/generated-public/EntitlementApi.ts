@@ -11,7 +11,6 @@
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { AppEntitlementInfo } from '../generated-definitions/AppEntitlementInfo.js'
 import { AppEntitlementPagingSlicedResult } from '../generated-definitions/AppEntitlementPagingSlicedResult.js'
-import { EntitlementDecrement } from '../generated-definitions/EntitlementDecrement.js'
 import { EntitlementDecrementResult } from '../generated-definitions/EntitlementDecrementResult.js'
 import { EntitlementInfo } from '../generated-definitions/EntitlementInfo.js'
 import { EntitlementInfoArray } from '../generated-definitions/EntitlementInfoArray.js'
@@ -25,6 +24,7 @@ import { EntitlementTransferRequest } from '../generated-definitions/Entitlement
 import { EntitlementTransferResult } from '../generated-definitions/EntitlementTransferResult.js'
 import { Ownership } from '../generated-definitions/Ownership.js'
 import { OwnershipToken } from '../generated-definitions/OwnershipToken.js'
+import { PublicEntitlementDecrement } from '../generated-definitions/PublicEntitlementDecrement.js'
 import { TimedOwnership } from '../generated-definitions/TimedOwnership.js'
 import { UserEntitlementHistoryPagingSlicedResultArray } from '../generated-definitions/UserEntitlementHistoryPagingSlicedResultArray.js'
 import { Entitlement$ } from './endpoints/Entitlement$.js'
@@ -336,7 +336,7 @@ export function EntitlementApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function updateDecrement_ByUserId_ByEntitlementId(
     userId: string,
     entitlementId: string,
-    data: EntitlementDecrement
+    data: PublicEntitlementDecrement
   ): Promise<EntitlementDecrementResult> {
     const $ = new Entitlement$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.updateDecrement_ByUserId_ByEntitlementId(userId, entitlementId, data)

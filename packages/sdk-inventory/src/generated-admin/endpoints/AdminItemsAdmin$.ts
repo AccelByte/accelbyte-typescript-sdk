@@ -10,6 +10,7 @@ import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { z } from 'zod'
 import { AdminUpdateItemReq } from '../../generated-definitions/AdminUpdateItemReq.js'
+import { BulkSaveItemRespArray } from '../../generated-definitions/BulkSaveItemRespArray.js'
 import { ConsumeItemReq } from '../../generated-definitions/ConsumeItemReq.js'
 import { ItemResp } from '../../generated-definitions/ItemResp.js'
 import { ListItemResp } from '../../generated-definitions/ListItemResp.js'
@@ -33,6 +34,19 @@ export class AdminItemsAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
+  }
+
+  /**
+   *  This endpoint will be used by client to save the purchased item to user&#39;s inventory, since want to integrate the inventory service to e-commerce, source field will be mandatory to determine the item, supported field “OTHER” and “ECOMMERCE” Notes : source ECOMMERCE, the quantity of ecommerce items saved is dynamically adjusted based on an item&#39;s useCount configured in Store. When saving items, the quantity specified for each item will be multiplied by the useCount i.e. If the store item is configured with a useCount of 5 and the quantity of a particular item is set to 2 during saving, it will be stored as 10 Target inventory will be based on the specified inventoryConfigurationCode. If the inventory exist then will put to the existing one, if not exist at all then will create at least one inventory, if full then will return failed at the response. We implement the logic as proportional to store the item to inventory, will loop from createdAt until find the available slots at inventory. Type: - ingame - app - coin etc.. Max length of the payload is 10 items Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]
+   */
+  createItemBulk_ByUserId(userId: string, data: SaveItemReq[]): Promise<IResponse<BulkSaveItemRespArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items/bulk'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkSaveItemRespArray, 'BulkSaveItemRespArray')
   }
 
   /**
@@ -132,6 +146,24 @@ export class AdminItemsAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
+  }
+
+  /**
+   *  This endpoint will be used by client to save the purchased item to user&#39;s inventory, since want to integrate the inventory service to e-commerce, source field will be mandatory to determine the item, supported field “OTHER” and “ECOMMERCE” Notes : source ECOMMERCE, the quantity of ecommerce items saved is dynamically adjusted based on an item&#39;s useCount configured in Store. When saving items, the quantity specified for each item will be multiplied by the useCount i.e. If the store item is configured with a useCount of 5 and the quantity of a particular item is set to 2 during saving, it will be stored as 10 Type: - ingame - app - coin etc.. Max length of the payload is 10 items Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]
+   */
+  createItemBulk_ByUserId_ByInventoryId(
+    userId: string,
+    inventoryId: string,
+    data: SaveItemToInventoryReq[]
+  ): Promise<IResponse<BulkSaveItemRespArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items/bulk'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{inventoryId}', inventoryId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkSaveItemRespArray, 'BulkSaveItemRespArray')
   }
 
   /**

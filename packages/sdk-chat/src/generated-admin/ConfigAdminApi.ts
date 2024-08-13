@@ -12,6 +12,7 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { ConfigExportArray } from '../generated-definitions/ConfigExportArray.js'
 import { ConfigList } from '../generated-definitions/ConfigList.js'
 import { ConfigResponse } from '../generated-definitions/ConfigResponse.js'
+import { Configuration } from '../generated-definitions/Configuration.js'
 import { ImportConfigResponse } from '../generated-definitions/ImportConfigResponse.js'
 import { ConfigAdmin$ } from './endpoints/ConfigAdmin$.js'
 
@@ -28,6 +29,26 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getConfig(): Promise<ConfigList> {
     const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getConfig()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Get Log Configuration.&lt;br&gt;
+   */
+  async function getConfigLog(): Promise<Configuration> {
+    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.getConfigLog()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Update Log Configuration.&lt;br&gt;
+   */
+  async function patchConfigLog(data: Configuration): Promise<Configuration> {
+    const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.patchConfigLog(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -74,6 +95,8 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getConfig,
+    getConfigLog,
+    patchConfigLog,
     getConfig_ByNamespace,
     updateConfig_ByNamespace,
     getConfigExport,

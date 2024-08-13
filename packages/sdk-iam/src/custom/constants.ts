@@ -8,7 +8,8 @@ import cryptoJs from 'crypto-js'
 
 export enum IamConfigKey {
   UNIQUE_DISPLAY_NAME_ENABLED = 'uniqueDisplayNameEnabled',
-  USERNAME_DISABLED = 'usernameDisabled'
+  USERNAME_DISABLED = 'usernameDisabled',
+  MANDATORY_EMAIL_VERIFICATION_ENABLED = 'mandatoryEmailVerificationEnabled'
 }
 
 // feature flag name is changed to avoid being tampered in the local storage

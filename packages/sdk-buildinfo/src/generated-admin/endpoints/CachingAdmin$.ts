@@ -19,7 +19,7 @@ export class CachingAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to save detailed diff cache. Only used by differ. Not to be used directly.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:DIFFCACHE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to save detailed diff cache. Only used by differ. Not to be used directly.
    */
   createDiffCache(data: CreateDiffCacheRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -30,7 +30,7 @@ export class CachingAdmin$ {
   }
 
   /**
-   * This API is used to mark that the diff caching is complete and diff summary file uploaded to s3. Only used by differ. Not to be used directly.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:DIFFCACHE&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to mark that the diff caching is complete and diff summary file uploaded to s3. Only used by differ. Not to be used directly.
    */
   updateDiffCache(data: CommitDiffCacheRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -41,7 +41,7 @@ export class CachingAdmin$ {
   }
 
   /**
-   * This API is used to dispatch diff caching request.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:DIFFCACHE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to dispatch diff caching request.
    */
   createDiffCalculate(data: CalculateDiffCacheRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
@@ -52,7 +52,7 @@ export class CachingAdmin$ {
   }
 
   /**
-   * This API is used to bulk dispatch diff caching requests to differ instance.&lt;br/&gt;The processing order will follow the order of the array.&lt;br/&gt;The &lt;b&gt;priority&lt;/b&gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;Request is skipped if the source and destination versions is same&lt;/li&gt;&lt;li&gt;Request is skipped if the source version is not found&lt;/li&gt;&lt;li&gt;Request is skipped if the destination version is not found&lt;/li&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:DIFFCACHE&#34;, action=1 (CREATE)&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to bulk dispatch diff caching requests to differ instance.&lt;br/&gt;The processing order will follow the order of the array.&lt;br/&gt;The &lt;b&gt;priority&lt;/b&gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;Request is skipped if the source and destination versions is same&lt;/li&gt;&lt;li&gt;Request is skipped if the source version is not found&lt;/li&gt;&lt;li&gt;Request is skipped if the destination version is not found&lt;/li&gt;&lt;/ul&gt;
    */
   createDiffCalculateBulk(data: BulkCalculateDiffCacheRequest): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig

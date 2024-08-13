@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { CreateInventoryReq } from '../../generated-definitions/CreateInventoryReq.js'
 import { DeleteInventoryReq } from '../../generated-definitions/DeleteInventoryReq.js'
 import { InventoryResp } from '../../generated-definitions/InventoryResp.js'
+import { InventoryRespArray } from '../../generated-definitions/InventoryRespArray.js'
 import { ListInventoryResp } from '../../generated-definitions/ListInventoryResp.js'
 import { PurchaseValidationReq } from '../../generated-definitions/PurchaseValidationReq.js'
 import { UpdateInventoryReq } from '../../generated-definitions/UpdateInventoryReq.js'
@@ -107,5 +108,23 @@ export class AdminInventoriesAdmin$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   *  Updating user inventories. Positive value will increase MaxSlots from existing value Negative value will decrease MaxSlots from existing value Limited slots can not be changed to unlimited, vice versa Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
+   */
+  updateInventory_ByUserId_ByInventoryConfigurationCode(
+    userId: string,
+    inventoryConfigurationCode: string,
+    data: UpdateInventoryReq
+  ): Promise<IResponse<InventoryRespArray>> {
+    const params = {} as SDKRequestConfig
+    const url = '/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventoryConfigurations/{inventoryConfigurationCode}/inventories'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{inventoryConfigurationCode}', inventoryConfigurationCode)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, InventoryRespArray, 'InventoryRespArray')
   }
 }

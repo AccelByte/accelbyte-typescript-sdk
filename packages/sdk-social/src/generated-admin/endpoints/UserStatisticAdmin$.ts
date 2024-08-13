@@ -16,6 +16,7 @@ import { BulkStatItemInc } from '../../generated-definitions/BulkStatItemInc.js'
 import { BulkStatItemReset } from '../../generated-definitions/BulkStatItemReset.js'
 import { BulkStatItemUpdate } from '../../generated-definitions/BulkStatItemUpdate.js'
 import { BulkStatOperationResultArray } from '../../generated-definitions/BulkStatOperationResultArray.js'
+import { BulkUserStatItemByStatCodes } from '../../generated-definitions/BulkUserStatItemByStatCodes.js'
 import { BulkUserStatItemInc } from '../../generated-definitions/BulkUserStatItemInc.js'
 import { BulkUserStatItemReset } from '../../generated-definitions/BulkUserStatItemReset.js'
 import { BulkUserStatItemUpdate } from '../../generated-definitions/BulkUserStatItemUpdate.js'
@@ -249,7 +250,7 @@ export class UserStatisticAdmin$ {
   }
 
   /**
-   * Admin list all statItems of user&lt;br&gt;NOTE: &lt;li&gt;If stat code does not exist, will ignore this stat code.&lt;/li&gt;&lt;li&gt;If stat item does not exist, will return default value&lt;/li&gt;&lt;/ul&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat items&lt;/li&gt;&lt;/ul&gt;
+   * Admin list all statItems of user&lt;br&gt;NOTE: &lt;b&gt;Legacy endpoint&lt;/b&gt;, please use POST /v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk/getOrDefault&lt;ul&gt;&lt;li&gt;If stat code does not exist, will ignore this stat code.&lt;/li&gt;&lt;li&gt;If stat item does not exist, will return default value&lt;/li&gt;&lt;/ul&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat items&lt;/li&gt;&lt;/ul&gt;
    */
   getStatitemsValueBulk_ByUserId(
     userId: string,
@@ -408,6 +409,28 @@ export class UserStatisticAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, StatItemIncResult, 'StatItemIncResult')
+  }
+
+  /**
+   * Bulk get user&#39;s statitems value for given namespace and user by multiple stat codes. Will return default value if player doesn&#39;t have the stat. Other detail info: + *Required permission*: resource=&#34;ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM&#34;, action=2 (READ) + *Max stat codes*: 20 + *Returns*: list of user&#39;s stat item values
+   */
+  createStatitemValueBulkGetOrDefault_ByUserId(
+    userId: string,
+    data: BulkUserStatItemByStatCodes,
+    queryParams?: { additionalKey?: string | null }
+  ): Promise<IResponse<ADtoObjectForUserStatItemValueArray>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/social/v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk/getOrDefault'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ADtoObjectForUserStatItemValueArray,
+      'ADtoObjectForUserStatItemValueArray'
+    )
   }
 
   /**

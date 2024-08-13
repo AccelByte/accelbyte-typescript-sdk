@@ -15,6 +15,8 @@ import { AdminUpdateContentRequestV2 } from '../generated-definitions/AdminUpdat
 import { ContentDownloadResponse } from '../generated-definitions/ContentDownloadResponse.js'
 import { ContentDownloadResponseV2 } from '../generated-definitions/ContentDownloadResponseV2.js'
 import { ContentDownloadResponseV2Array } from '../generated-definitions/ContentDownloadResponseV2Array.js'
+import { CopyContentRequest } from '../generated-definitions/CopyContentRequest.js'
+import { CopyContentResponseArray } from '../generated-definitions/CopyContentResponseArray.js'
 import { CreateContentResponseV2 } from '../generated-definitions/CreateContentResponseV2.js'
 import { CreateScreenshotRequest } from '../generated-definitions/CreateScreenshotRequest.js'
 import { CreateScreenshotResponse } from '../generated-definitions/CreateScreenshotResponse.js'
@@ -210,6 +212,17 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  async function createCopy_ByChannelId_ByContentId(
+    channelId: string,
+    contentId: string,
+    data: CopyContentRequest
+  ): Promise<CopyContentResponseArray> {
+    const $ = new AdminContentV2Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.createCopy_ByChannelId_ByContentId(channelId, contentId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   /**
    * Delete screenshot from a content
    */
@@ -348,6 +361,7 @@ export function AdminContentV2AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     deleteContent_ByChannelId_ByContentId,
     patchContent_ByChannelId_ByContentId,
     updateRollback_ByContentId_ByVersionId,
+    createCopy_ByChannelId_ByContentId,
     deleteScreenshot_ByContentId_ByScreenshotId,
     patchUploadUrl_ByChannelId_ByContentId,
     patchFileLocation_ByChannelId_ByContentId,

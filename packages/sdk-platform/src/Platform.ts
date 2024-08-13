@@ -29,8 +29,8 @@ import { IapAdminApi } from './generated-admin/IapAdminApi.js'
 import { PaymentAdminApi } from './generated-admin/PaymentAdminApi.js'
 import { DlcAdminApi } from './generated-admin/DlcAdminApi.js'
 import { InvoiceAdminApi } from './generated-admin/InvoiceAdminApi.js'
-import { RevocationAdminApi } from './generated-admin/RevocationAdminApi.js'
 import { FulfillmentAdminApi } from './generated-admin/FulfillmentAdminApi.js'
+import { RevocationAdminApi } from './generated-admin/RevocationAdminApi.js'
 import { TicketAdminApi } from './generated-admin/TicketAdminApi.js'
 import { ServicePluginConfigAdminApi } from './generated-admin/ServicePluginConfigAdminApi.js'
 import { ClawbackAdminApi } from './generated-admin/ClawbackAdminApi.js'
@@ -41,6 +41,7 @@ import { AnonymizationAdminApi } from './generated-admin/AnonymizationAdminApi.j
 import { PlatformAccountClosureAdminApi } from './generated-admin/PlatformAccountClosureAdminApi.js'
 import { CatalogChangesAdminApi } from './generated-admin/CatalogChangesAdminApi.js'
 import { PlatformAdminApi } from './generated-admin/PlatformAdminApi.js'
+import { DlcApi } from './generated-public/DlcApi.js'
 import { StoreApi } from './generated-public/StoreApi.js'
 import { CategoryApi } from './generated-public/CategoryApi.js'
 import { CurrencyApi } from './generated-public/CurrencyApi.js'
@@ -50,7 +51,6 @@ import { RewardApi } from './generated-public/RewardApi.js'
 import { IapApi } from './generated-public/IapApi.js'
 import { ViewApi } from './generated-public/ViewApi.js'
 import { OrderApi } from './generated-public/OrderApi.js'
-import { DlcApi } from './generated-public/DlcApi.js'
 import { SectionApi } from './generated-public/SectionApi.js'
 import { EntitlementApi } from './generated-public/EntitlementApi.js'
 import { SubscriptionApi } from './generated-public/SubscriptionApi.js'
@@ -81,8 +81,8 @@ const apis = {
   PaymentAdminApi,
   DlcAdminApi,
   InvoiceAdminApi,
-  RevocationAdminApi,
   FulfillmentAdminApi,
+  RevocationAdminApi,
   TicketAdminApi,
   ServicePluginConfigAdminApi,
   ClawbackAdminApi,
@@ -93,6 +93,7 @@ const apis = {
   PlatformAccountClosureAdminApi,
   CatalogChangesAdminApi,
   PlatformAdminApi,
+  DlcApi,
   StoreApi,
   CategoryApi,
   CurrencyApi,
@@ -102,7 +103,6 @@ const apis = {
   IapApi,
   ViewApi,
   OrderApi,
-  DlcApi,
   SectionApi,
   EntitlementApi,
   SubscriptionApi,

@@ -1,12 +1,12 @@
 # Web Widgets example using Next.js
 
-This is example Next.js app utilizing AGS Starter, showcasing AccelByte Web Widgets and AccelByte Web SDK. The example provides a login page, catalog page, item page and payment page built with the AccelByte Web Widgets.
+This sample Next.js app utilizes AccelByte Gaming Services (AGS) Shared Cloud, showcasing AccelByte Web Widgets and AccelByte Web SDK. The example provides a login page, catalog page, item page and payment page built with the AccelByte Web Widgets.
 
-## Nomenclature:
+## Nomenclature
 
- - **AGS** - AccelByte Gaming Services
- - **AGS Starter** - AccelByte Gaming Services Starter
- - **AGS Premium** - AccelByte Gaming Services Premium
+ - **AGS**: AccelByte Gaming Services
+ - **AGS Shared Cloud**
+ - **AGS Private Cloud**
 
 ## How to Run
 
@@ -32,12 +32,11 @@ Open you browser at [http://localhost:3030](http://localhost:3030) to see the re
 
 The Login Page utilizes AccelByte [IAM password login flow](https://docs-preview.accelbyte.io/api-explorer/?api=IAM&path=/iam/v3/oauth/token&method=post) using `Grant Type password`
 
-
-Note, that the login page does not use Cookie, but a `localStorage`. As such, this being considered a Cross Site Scripting(XSS) vulnerable, a spacial care should be taken when embedding third party JavaScript files, as this may result in third party JS high-jacking the AccelByte `accessToken`. 
+Note that the login page does not use cookies but a `localStorage`. As such, considering that Cross Site Scripting(XSS) is vulnerable, special care should be taken when embedding third-party JavaScript files as this may result in third-party JS high-jacking of the AccelByte `accessToken`.
 
 ##### Login Curl example using `password` Grant Type
 
-**AGS Starter curl:**
+**AGS Shared Cloud curl:**
 
     ```shell
     curl --location 'https://foundations.dev.gamingservices.accelbyte.io/iam/v3/oauth/token' \
@@ -143,4 +142,3 @@ export default function OrderHistoryDetailPage() {
     return <PaymentWidget namespace={'foundations'} paymentOrderNo={orderNo as string} redirectPath={PlayerPortalRoutes.home.link} />
 }
 ```
-

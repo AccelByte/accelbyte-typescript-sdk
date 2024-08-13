@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Chat Service",
     "title": "justice-chat-service",
-    "version": "staging"
+    "version": "dev"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/chat/apidocs"
+    "url": "https://development.accelbyte.io/chat/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -190,6 +190,13 @@
             },
             "name": "topic",
             "type": "array"
+          },
+          {
+            "description": "unfiltered chat messages",
+            "in": "query",
+            "name": "unfiltered",
+            "type": "boolean",
+            "x-omitempty": false
           }
         ],
         "produces": ["application/json"],
@@ -985,6 +992,13 @@
             "in": "query",
             "name": "startCreatedAt",
             "type": "integer"
+          },
+          {
+            "description": "unfiltered chat messages",
+            "in": "query",
+            "name": "unfiltered",
+            "type": "boolean",
+            "x-omitempty": false
           }
         ],
         "produces": ["application/json"],
@@ -2434,6 +2448,72 @@
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:*:CHAT:CONFIG [READ]"]
+          }
+        ]
+      }
+    },
+    "/chat/v1/admin/config/log": {
+      "get": {
+        "description": "Get Log Configuration.\u0026lt;br\u0026gt;",
+        "operationId": "adminGetLogConfig",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get Log Configuration",
+        "tags": ["config"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CONFIG:LOG [READ]"]
+          }
+        ]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "Update Log Configuration.\u0026lt;br\u0026gt;",
+        "operationId": "adminPatchUpdateLogConfig",
+        "parameters": [
+          {
+            "description": "Optional values can be omitted and will update partially",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/logconfig.Configuration"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Patch Update Log Configuration",
+        "tags": ["config"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:CONFIG:LOG [UPDATE]"]
           }
         ]
       }
@@ -4866,6 +4946,18 @@
       },
       "required": ["Attributes", "Code", "CodeName", "Section", "Service", "Text"]
     },
+    "logconfig.Configuration": {
+      "properties": {
+        "logLevel": {
+          "enum": ["debug", "error", "fatal", "info", "panic", "trace", "warning"],
+          "type": "string"
+        },
+        "socketLogEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      }
+    },
     "message.ActionAddUserToTopicResult": {
       "properties": {
         "processed": {
@@ -6326,7 +6418,7 @@
   },
   "x-docs": {
     "alias": "chat",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/chat/apidocs/api.json"
   },
   "x-messages": [
@@ -6441,6 +6533,14 @@
       "Section": "general",
       "Service": "general",
       "Text": "query failed: {{message}}"
+    },
+    {
+      "Attributes": [],
+      "Code": "20025",
+      "CodeName": "InvalidRequestBody",
+      "Section": "general",
+      "Service": "general",
+      "Text": "invalid request body, please check the documentation"
     },
     {
       "Attributes": ["message"],
@@ -8980,11 +9080,11 @@
     }
   ],
   "x-version": {
-    "buildDate": "2024-06-07T07:00:22+00:00",
-    "gitHash": "ef38159a0a2579f9d148c33495b4616d9674a1b9",
+    "buildDate": "2024-07-22T02:21:00+00:00",
+    "gitHash": "1830105b1e7e9344973377a501b762e0cc6c5cc1",
     "name": "justice-chat-service",
-    "revisionID": "0.4.30",
-    "version": "0.4.30",
+    "revisionID": "0.4.31",
+    "version": "0.4.31",
     "version-roles-seeding": "1.2.15"
   }
 }

@@ -6,6 +6,7 @@
 import { z } from 'zod'
 
 export const PutGlobalConfigurationRequest = z.object({
+  metricExcludedNamespaces: z.array(z.string()),
   regionRetryMapping: z.record(z.array(z.string())),
   regionURLMapping: z.array(z.string()),
   testGameMode: z.string(),

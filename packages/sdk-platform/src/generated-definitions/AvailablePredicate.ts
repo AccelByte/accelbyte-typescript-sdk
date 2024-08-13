@@ -8,7 +8,7 @@ import { AvailableComparison } from './AvailableComparison.js'
 
 export const AvailablePredicate = z.object({
   availableComparisons: z.array(AvailableComparison).nullish(),
-  predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate']).nullish(),
+  predicateType: z.enum(['EntitlementPredicate', 'SeasonPassPredicate', 'SeasonTierPredicate', 'StatisticCodePredicate']).nullish(),
   showAnyOf: z.boolean().nullish(),
   valueType: z.enum(['List', 'Number', 'String']).nullish()
 })

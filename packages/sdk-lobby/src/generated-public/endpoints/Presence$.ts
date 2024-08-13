@@ -9,6 +9,7 @@
 import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { GetUsersPresenceResponse } from '../../generated-definitions/GetUsersPresenceResponse.js'
+import { RequestUserPresence } from '../../generated-definitions/RequestUserPresence.js'
 
 export class Presence$ {
   // @ts-ignore
@@ -24,6 +25,25 @@ export class Presence$ {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/lobby/v1/public/presence/namespaces/{namespace}/users/presence'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetUsersPresenceResponse,
+      'GetUsersPresenceResponse'
+    )
+  }
+
+  /**
+   * Query users presence with given namespace and userIds.
+   */
+  createPresenceUserPresence(
+    data: RequestUserPresence,
+    queryParams?: { countOnly?: boolean | null }
+  ): Promise<IResponse<GetUsersPresenceResponse>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/lobby/v1/public/presence/namespaces/{namespace}/users/presence'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(
       this.useSchemaValidation,

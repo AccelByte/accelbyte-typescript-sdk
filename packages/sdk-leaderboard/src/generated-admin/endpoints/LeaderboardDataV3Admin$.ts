@@ -113,4 +113,18 @@ export class LeaderboardDataV3Admin$ {
       'GetLeaderboardRankingResp'
     )
   }
+
+  /**
+   * &lt;p&gt;&lt;b&gt;[Test Facility Only]&lt;/b&gt;&lt;/p&gt; &lt;p&gt;This endpoint will delete user ranking by cycleId&lt;/p&gt; &lt;p&gt;Note: this endpoint only works on development environment.&lt;/p&gt;
+   */
+  deleteReset_ByLeaderboardCode_ByCycleId(leaderboardCode: string, cycleId: string): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/cycles/{cycleId}/reset'
+      .replace('{namespace}', this.namespace)
+      .replace('{leaderboardCode}', leaderboardCode)
+      .replace('{cycleId}', cycleId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
 }

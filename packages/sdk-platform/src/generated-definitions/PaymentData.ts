@@ -6,6 +6,8 @@
 import { z } from 'zod'
 
 export const PaymentData = z.object({
+  discountAmount: z.number().int().nullish(),
+  discountCode: z.string().nullish(),
   subtotalPrice: z.number().int().nullish(),
   tax: z.number().int().nullish(),
   totalPrice: z.number().int().nullish()

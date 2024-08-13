@@ -11,6 +11,7 @@ import { AxiosInstance } from 'axios'
 import { ConfigExportArray } from '../../generated-definitions/ConfigExportArray.js'
 import { ConfigList } from '../../generated-definitions/ConfigList.js'
 import { ConfigResponse } from '../../generated-definitions/ConfigResponse.js'
+import { Configuration } from '../../generated-definitions/Configuration.js'
 import { ImportConfigResponse } from '../../generated-definitions/ImportConfigResponse.js'
 
 export class ConfigAdmin$ {
@@ -26,6 +27,28 @@ export class ConfigAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigList, 'ConfigList')
+  }
+
+  /**
+   * Get Log Configuration.&lt;br&gt;
+   */
+  getConfigLog(): Promise<IResponse<Configuration>> {
+    const params = {} as SDKRequestConfig
+    const url = '/chat/v1/admin/config/log'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configuration, 'Configuration')
+  }
+
+  /**
+   * Update Log Configuration.&lt;br&gt;
+   */
+  patchConfigLog(data: Configuration): Promise<IResponse<Configuration>> {
+    const params = {} as SDKRequestConfig
+    const url = '/chat/v1/admin/config/log'
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configuration, 'Configuration')
   }
 
   /**

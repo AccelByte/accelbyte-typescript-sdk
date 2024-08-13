@@ -142,11 +142,12 @@ export class InputValidationHelper {
     const field = validations.find(validation => validation.field === key)
     if (!field) return []
     return field.validation.description.message.map(message => {
-      const lastChar = message.slice(message.length - 1)
+      const trimmedMessage = message.trim()
+      const lastChar = trimmedMessage.slice(trimmedMessage.length - 1)
       if (lastChar === '.') {
-        return message.slice(0, -1)
+        return trimmedMessage.slice(0, -1)
       }
-      return message
+      return trimmedMessage
     })
   }
 

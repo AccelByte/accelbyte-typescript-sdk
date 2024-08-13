@@ -6,6 +6,7 @@
 import { z } from 'zod'
 
 export const ResetPasswordRequestV3 = z.object({
+  clientId: z.string().nullish(),
   code: z.string(),
   emailAddress: z.string(),
   languageTag: z.string().nullish(),

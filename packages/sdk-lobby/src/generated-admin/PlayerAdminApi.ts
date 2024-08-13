@@ -17,6 +17,7 @@ import { GetBulkAllPlayerBlockedUsersResponse } from '../generated-definitions/G
 import { GetLobbyCcuResponse } from '../generated-definitions/GetLobbyCcuResponse.js'
 import { GetPlayerSessionAttributeResponse } from '../generated-definitions/GetPlayerSessionAttributeResponse.js'
 import { ListBlockedPlayerRequest } from '../generated-definitions/ListBlockedPlayerRequest.js'
+import { ListUnblockPlayerRequest } from '../generated-definitions/ListUnblockPlayerRequest.js'
 import { SetPlayerSessionAttributeRequest } from '../generated-definitions/SetPlayerSessionAttributeRequest.js'
 import { PlayerAdmin$ } from './endpoints/PlayerAdmin$.js'
 
@@ -98,6 +99,16 @@ export function PlayerAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Bulk unblock player in a namespace by list of user id
+   */
+  async function deleteBulkUnblockPlayer_ByUserId(userId: string, data: ListUnblockPlayerRequest): Promise<unknown> {
+    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.deleteBulkUnblockPlayer_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Get player&#39;s specific session attribute by user id in a namespace.
    */
   async function getAttributePlayer_ByUserId_ByAttribute(userId: string, attribute: string): Promise<GetPlayerSessionAttributeResponse> {
@@ -115,6 +126,7 @@ export function PlayerAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     updateAttributePlayer_ByUserId,
     getBlockedByPlayer_ByUserId,
     createBulkBlockPlayer_ByUserId,
+    deleteBulkUnblockPlayer_ByUserId,
     getAttributePlayer_ByUserId_ByAttribute
   }
 }

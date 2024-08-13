@@ -9,6 +9,7 @@ export const StatCycleCreate = z.object({
   cycleType: z.enum(['ANNUALLY', 'DAILY', 'MONTHLY', 'SEASONAL', 'WEEKLY']),
   description: z.string().nullish(),
   end: z.string().nullish(),
+  id: z.string().nullish(),
   name: z.string(),
   resetDate: z.number().int().nullish(),
   resetDay: z.number().int().nullish(),

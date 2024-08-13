@@ -61,6 +61,7 @@ import { UserIdentityUpdateRequestV3 } from '../generated-definitions/UserIdenti
 import { UserLinkedPlatformsResponseV3 } from '../generated-definitions/UserLinkedPlatformsResponseV3.js'
 import { UserPasswordUpdateRequest } from '../generated-definitions/UserPasswordUpdateRequest.js'
 import { UserPasswordUpdateV3Request } from '../generated-definitions/UserPasswordUpdateV3Request.js'
+import { UserPlatformLinkHistories } from '../generated-definitions/UserPlatformLinkHistories.js'
 import { UserPlatformMetadata } from '../generated-definitions/UserPlatformMetadata.js'
 import { UserPlatforms } from '../generated-definitions/UserPlatforms.js'
 import { UserResponse } from '../generated-definitions/UserResponse.js'
@@ -521,7 +522,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * ## Justice Platform Account The permission ’ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId}’ [READ] is required in order to read the UserID who linked with the user. Gets platform accounts that are already linked with user account action code : 10128
+   * Gets platform accounts that are already linked with user account. Action code : 10128 **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 ## Justice Platform Account The permission ’ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId}’ [READ] is required in order to read the UserID who linked with the user.
    */
   async function getPlatforms_ByUserId(
     userId: string,
@@ -752,6 +753,19 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * This endpoint only retrieves 3rd party platform accounts linked to user. It will query platform accounts and result will be distinct &amp; grouped, same platform we will pick oldest linked one. ------ Supported status: - LINKED - RESTRICTIVELY_UNLINKED - UNLINKED - ALL
+   */
+  async function getPlatformsDistinct_ByUserId(
+    userId: string,
+    queryParams?: { status?: string | null }
+  ): Promise<DistinctPlatformResponseV3> {
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.getPlatformsDistinct_ByUserId(userId, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * If validateOnly is set false, will upgrade headless account with verification code The endpoint upgrades a headless account by linking the headless account with the email address and the password. By upgrading the headless account into a full account, the user could use the email address and password for using Justice IAM. The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the send verification code endpoint. This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done. Supported user data fields : - displayName - dateOfBirth : format YYYY-MM-DD, e.g. 2019-04-29 - country : format ISO3166-1 alpha-2 two letter, e.g. US action code : 10124
    */
   async function createHeadlesCodeVerify_ByUserId(
@@ -765,15 +779,16 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **googleplaygames** - **oculus** - **twitch** - **android** - **ios** - **apple** - **device** - **discord** - **awscognito** - **epicgames** - **nintendo** - **snapchat** Unlink user&#39;s account from a specific platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. _platformNamespace_ need to be specified when the platform ID is &#39;justice&#39;. Unlink user&#39;s account from justice platform will enable password token grant and password update. If you want to unlink user&#39;s account in a game namespace, you have to specify _platformNamespace_ to that game namespace. action code : 10121
    */
-  async function deletePlatform_ByUserId_ByPlatformId(
+  async function deletePlatform_ByUserId_ByPlatformId_DEPRECATED(
     userId: string,
     platformId: string,
     data: UnlinkUserPlatformRequest
   ): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.deletePlatform_ByUserId_ByPlatformId(userId, platformId, data)
+    const resp = await $.deletePlatform_ByUserId_ByPlatformId_DEPRECATED(userId, platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -792,7 +807,20 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google group - google - googleplaygames - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: if user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
+   * This API is for admin to get user&#39;s link history. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   */
+  async function getPlatformsLinkHistories_ByUserId(
+    userId: string,
+    queryParams: { platformId: string | null }
+  ): Promise<UserPlatformLinkHistories> {
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.getPlatformsLinkHistories_ByUserId(userId, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 Unlink platform account associated with a group: If user unlink platform account associated with a group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
    */
   async function deleteAll_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -827,7 +855,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get User By Platform User ID This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google group - google - googleplaygames - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   * Get User By Platform User ID This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
   async function getUser_ByPlatformId_ByPlatformUserId(platformId: string, platformUserId: string): Promise<UserResponseV3> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -847,11 +875,15 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint gets user single platform account metadata. Supported Platform: - Steam group(steamnetwork): - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - epicgames - nintendo - aws cognito - facebook - google group - google - googleplaygames - discord - twitch - snapchat - amazon Note: you can use either platform ID or platform group as platformId query parameter
+   * This endpoint gets user single platform account metadata. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
-  async function getMetadata_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<UserPlatformMetadata> {
+  async function getMetadata_ByUserId_ByPlatformId(
+    userId: string,
+    platformId: string,
+    queryParams?: { crossNamespace?: boolean | null }
+  ): Promise<UserPlatformMetadata> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getMetadata_ByUserId_ByPlatformId(userId, platformId)
+    const resp = await $.getMetadata_ByUserId_ByPlatformId(userId, platformId, queryParams)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -871,7 +903,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint requires the client access token as the bearer token This endpoint will support publisher access to game and game access to publisher If targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace. If targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace.
+   * This endpoint will support publisher access to game and game access to publisher If targetNamespace filled with publisher namespace then this endpoint will return its publisher user id and publisher namespace. If targetNamespace filled with game namespace then this endpoint will return its game user id and game namespace.
    */
   async function getPlatformJustice_ByUserId_ByTargetNamespace(userId: string, targetNamespace: string): Promise<GetUserMappingV3> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -894,11 +926,22 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is for admin to delete user&#39;s linking history with target platform id. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google group - google - googleplaygames - twitch - discord - apple - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: you can use either platform ID or platform group as platformId query parameter
+   * @deprecated
+   * This API is for admin to delete user&#39;s linking history with target platform id. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 ---- **Substitute endpoint**: /v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link/restrictions
    */
-  async function deleteLinkHistory_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<unknown> {
+  async function deleteLinkHistory_ByUserId_ByPlatformId_DEPRECATED(userId: string, platformId: string): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.deleteLinkHistory_ByUserId_ByPlatformId(userId, platformId)
+    const resp = await $.deleteLinkHistory_ByUserId_ByPlatformId_DEPRECATED(userId, platformId)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This API is for admin to delete user&#39;s linking restriction with target platform id. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   */
+  async function deleteLinkRestriction_ByUserId_ByPlatformId(userId: string, platformId: string): Promise<unknown> {
+    const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.deleteLinkRestriction_ByUserId_ByPlatformId(userId, platformId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -963,9 +1006,11 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     patchTrustlyIdentity_ByUserId,
     getDistinctPlatforms_ByUserId,
     getPlatformsJustice_ByUserId,
+    getPlatformsDistinct_ByUserId,
     createHeadlesCodeVerify_ByUserId,
-    deletePlatform_ByUserId_ByPlatformId,
+    deletePlatform_ByUserId_ByPlatformId_DEPRECATED,
     patchAgerestrictionCountry_ByCountryCode,
+    getPlatformsLinkHistories_ByUserId,
     deleteAll_ByUserId_ByPlatformId,
     deleteLink_ByUserId_ByPlatformId_DEPRECATED,
     postLink_ByUserId_ByPlatformId,
@@ -975,6 +1020,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     postLinkStatu_ByUserId_ByPlatformId,
     getPlatformJustice_ByUserId_ByTargetNamespace,
     createPlatformJustice_ByUserId_ByTargetNamespace,
-    deleteLinkHistory_ByUserId_ByPlatformId
+    deleteLinkHistory_ByUserId_ByPlatformId_DEPRECATED,
+    deleteLinkRestriction_ByUserId_ByPlatformId
   }
 }

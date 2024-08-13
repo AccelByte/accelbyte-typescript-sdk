@@ -39,6 +39,7 @@ export class TelemetryAdmin$ {
     eventId?: string | null
     eventName?: string | null
     eventPayload?: string | null
+    deviceType?: string | null
   }): Promise<IResponse<PagedResponseGetNamespaceEventResponse>> {
     const params = { limit: 100, ...queryParams } as SDKRequestConfig
     const url = '/game-telemetry/v1/admin/namespaces/{namespace}/events'.replace('{namespace}', this.namespace)

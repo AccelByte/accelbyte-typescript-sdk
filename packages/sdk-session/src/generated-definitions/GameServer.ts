@@ -11,6 +11,7 @@ export const GameServer = z.object({
   ams_protocol: z.array(PortConfigurationAms).nullish(),
   custom_attribute: z.string(),
   deployment: z.string().nullish(),
+  extend_region: z.string().nullish(),
   game_version: z.string().nullish(),
   image_version: z.string().nullish(),
   ip: z.string().nullish(),

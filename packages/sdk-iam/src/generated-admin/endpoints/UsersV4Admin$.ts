@@ -165,7 +165,7 @@ export class UsersV4Admin$ {
   /**
    * This endpoint is used to send email code. -------------- Supported actions: * ChangePassword * DisableMFAEmail
    */
-  postUserMeMfaEmailCode(data: { action?: string | null }): Promise<IResponse<unknown>> {
+  postUserMeMfaEmailCode(data: { action?: string | null; languageTag?: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/email/code'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -316,7 +316,7 @@ export class UsersV4Admin$ {
   }
 
   /**
-   * Create test users and not send verification code email.
+   * Create test users and not send verification code email. Enter the number of test users you want to create in the count field. The maximum value of the user count is 100.
    */
   createTestUser(data: CreateTestUsersRequestV4): Promise<IResponse<CreateTestUsersResponseV4>> {
     const params = {} as SDKRequestConfig

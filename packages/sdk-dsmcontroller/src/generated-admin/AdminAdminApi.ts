@@ -60,6 +60,16 @@ export function AdminAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [DELETE] Required scope: social This endpoint deletes all dedicated servers from DB and terminates the DS pod.
+   */
+  async function deleteServer(queryParams: { version: string | null }): Promise<unknown> {
+    const $ = new AdminAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.deleteServer(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:SERVER [READ] Required scope: social This endpoint lists all of dedicated servers in a namespace managed by this service. Parameter Offset and Count is Required
    */
   async function getServers(queryParams: { count: number; offset: number; region?: string | null }): Promise<ListServerResponse> {
@@ -198,6 +208,7 @@ export function AdminAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getWorkers,
     createWorker,
     updateWorker,
+    deleteServer,
     getServers,
     getSessions,
     getServersCount,

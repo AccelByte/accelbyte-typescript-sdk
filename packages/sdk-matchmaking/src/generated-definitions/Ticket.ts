@@ -10,6 +10,7 @@ import { ProposedProposal } from './ProposedProposal.js'
 export const Ticket = z.object({
   CreatedAt: z.string(),
   IsActive: z.boolean(),
+  IsPivot: z.boolean(),
   Latencies: z.record(z.number().int()),
   MatchPool: z.string(),
   Namespace: z.string(),

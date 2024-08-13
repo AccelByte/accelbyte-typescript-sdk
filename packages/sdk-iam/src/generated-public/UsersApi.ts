@@ -197,7 +197,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length should between 3-20, otherwise will not query the database. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ ### Supported platform id: * Steam group(steamnetwork) * steam * steamopenid * PSN group(psn) * ps4web * ps4 * ps5 * XBOX group(xbox) * live * xblweb * Oculus group(oculusgroup) * oculus * oculusweb * facebook * google group * google * googleplaygames * twitch * discord * android * ios * apple * device * epicgames * nintendo * awscognito * netflix * snapchat * _oidc platform id_ Note: you can use either platform ID or platform group as __platformId__ query parameter.
+   * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length should between 3-20, otherwise will not query the database. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
   async function getUsers(queryParams?: {
     by?: string | null
@@ -629,7 +629,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Notes: - This endpoint retrieve the first page of the data if after and before parameters is empty - **The pagination is not working yet**
+   * Notes: - This endpoint retrieve the first page of the data if after and before parameters is empty - **The pagination is not working yet** **Authentication:** The _**userId**_ parameter should match the one in the access token.
    */
   async function getBans_ByUserId_ByNS_v3(
     userId: string,
@@ -719,7 +719,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint is used to validate the user password. Require valid user ID. Notes: - This endpoint validate the user password by specifying the userId and password
+   * This endpoint is used to validate the user password. This endpoint validate the user password by specifying the userId and password. **Authentication:** The _**userId**_ parameter should match the one in the access token.
    */
   async function postValidate_ByUserId(userId: string, data: { password: string | null }): Promise<unknown> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -740,7 +740,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint retrieves platform accounts linked to user. action code: 10128
+   * This endpoint retrieves platform accounts linked to user. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 **Authentication:** The _**userId**_ parameter should match the one in the access token. action code: 10128
    */
   async function getPlatforms_ByUserId_ByNS(
     userId: string,
@@ -787,7 +787,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint retrieves user info and linked platform accounts
+   * This endpoint retrieves user info and linked platform accounts. **Authentication:** The _**userId**_ parameter should match the one in the access token.
    */
   async function getInformation_ByUserId_ByNS(userId: string): Promise<UserInformationV3> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -846,7 +846,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * It is going to be **DEPRECATED**. Update Platform Account relation to current User Account. Note: Game progression data (statistics, reward, etc) associated with previous User Account will not be transferred. If the data is tight to game user ID, the user will have the game progression data.
+   * It is going to be **DEPRECATED**. Update Platform Account relation to current User Account. Note: Game progression data (statistics, reward, etc) associated with previous User Account will not be transferred. If the data is tight to game user ID, the user will have the game progression data. **Authentication:** The _**userId**_ parameter should match the one in the access token.
    */
   async function createPlatformLink_ByUserId(userId: string, data: LinkPlatformAccountRequest): Promise<unknown> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -866,7 +866,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Notes for this endpoint: - This endpoint retrieve the first page of the data if &lt;code&gt;after&lt;/code&gt; and &lt;code&gt;before&lt;/code&gt; parameters is empty. - The maximum value of the limit is 100 and the minimum value of the limit is 1. - This endpoint retrieve the next page of the data if we provide &lt;code&gt;after&lt;/code&gt; parameters with valid Unix timestamp. - This endpoint retrieve the previous page of the data if we provide &lt;code&gt;before&lt;/code&gt; parameter with valid data Unix timestamp.
+   * Notes for this endpoint: - This endpoint retrieve the first page of the data if &lt;code&gt;after&lt;/code&gt; and &lt;code&gt;before&lt;/code&gt; parameters is empty. - The maximum value of the limit is 100 and the minimum value of the limit is 1. - This endpoint retrieve the next page of the data if we provide &lt;code&gt;after&lt;/code&gt; parameters with valid Unix timestamp. - This endpoint retrieve the previous page of the data if we provide &lt;code&gt;before&lt;/code&gt; parameter with valid data Unix timestamp. **Authentication:** The _**userId**_ parameter should match the one in the access token.
    */
   async function getLoginsHistories_ByUserId_ByNS(
     userId: string,
@@ -879,11 +879,12 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **googleplaygames** - **oculus** - **twitch** - **android** - **ios** - **apple** - **device** - **discord** - **awscognito** - **epicgames** - **nintendo** Unlink user&#39;s account from a specific platform. &#39;justice&#39; platform might have multiple accounts from different namespaces linked. _platformNamespace_ need to be specified when the platform ID is &#39;justice&#39;. Unlink user&#39;s account from justice platform will enable password token grant and password update. If you want to unlink user&#39;s account in a game namespace, you have to specify _platformNamespace_ to that game namespace. action code : 10121
    */
-  async function deleteUserMePlatform_ByPlatformId(platformId: string, data: UnlinkUserPlatformRequest): Promise<unknown> {
+  async function deleteUserMePlatform_ByPlatformId_DEPRECATED(platformId: string, data: UnlinkUserPlatformRequest): Promise<unknown> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.deleteUserMePlatform_ByPlatformId(platformId, data)
+    const resp = await $.deleteUserMePlatform_ByPlatformId_DEPRECATED(platformId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -928,7 +929,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint retrieves platform accounts linked to user. It will query all linked platform accounts and result will be distinct &amp; grouped, same platform we will pick oldest linked one.
+   * This endpoint retrieves platform accounts linked to user. It will query all linked platform accounts. The results will be distinct and grouped by platform, and for each platform, we will select the oldest linked one. **Authentication:** The _**userId**_ parameter should match the one in the access token.
    */
   async function getDistinctPlatforms_ByUserId(userId: string): Promise<DistinctPlatformResponseV3> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -938,7 +939,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint gets list justice platform account by providing publisher namespace and publisher userID
+   * This endpoint gets list justice platform account by providing publisher namespace and publisher userID. **Authentication:** The _**userId**_ parameter should match the one in the access token.
    */
   async function getPlatformsJustice_ByUserId_ByNS(userId: string): Promise<GetUserMappingV3Array> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -973,7 +974,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google group - google - googleplaygames - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: if user unlink platform account that have group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
+   * Unlink user&#39;s account from third platform in all namespaces. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: to unlink steam third party account, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 Unlink platform account associated with a group: If user unlink platform account associated with a group, the API logic will unlink all of platform account under that group as well. example: if user unlink from ps4, the API logic will unlink ps5 and ps4web as well
    */
   async function deleteAllMeUser_ByPlatformId(platformId: string): Promise<unknown> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -1116,7 +1117,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Force update other account&#39;s Platform Account relation to current User Account. This endpoint can transfer progression from 3rd platform binding account&#39;s to current account. This endpoint need the same requestID which also used in [Get link status](#operations-Users-PublicGetAsyncStatus).
+   * Force update other account&#39;s Platform Account relation to current User Account. This endpoint can transfer progression from 3rd platform binding account&#39;s to current account. This endpoint need the same requestID which also used in [Get link status](#operations-Users-PublicGetAsyncStatus). **Authentication:** The _**userId**_ parameter should match the one in the access token.
    */
   async function createPlatformLinkWithProgression_ByUserId(
     userId: string,
@@ -1139,7 +1140,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. Supported platform: - Steam group(steamnetwork) - steam - steamopenid - PSN group(psn) - ps4web - ps4 - ps5 - XBOX group(xbox) - live - xblweb - Oculus group(oculusgroup) - oculus - oculusweb - facebook - google group - google - googleplaygames - twitch - discord - android - ios - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+   * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
    */
   async function getUser_ByPlatformId_ByPlatformUserId(platformId: string, platformUserId: string): Promise<UserResponseV3> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -1260,7 +1261,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     createPlatformLink_ByUserId,
     createUserMeHeadlesCodeVerify,
     getLoginsHistories_ByUserId_ByNS,
-    deleteUserMePlatform_ByPlatformId,
+    deleteUserMePlatform_ByPlatformId_DEPRECATED,
     postUserMePlatform_ByPlatformId,
     postLink_ByUserId_ByPlatformId_DEPRECATED,
     getPlatformsJustice_ByUserId_DEPRECATED,

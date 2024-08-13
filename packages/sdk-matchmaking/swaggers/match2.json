@@ -3,12 +3,12 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Match Service v2",
-    "version": "2.21.1"
+    "version": "2.25.1"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/match2/apidocs"
+    "url": "https://development.accelbyte.io/match2/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -2589,6 +2589,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "best_latency_calculation_method": {
+          "type": "string"
+        },
         "crossplay_disabled": {
           "type": "boolean",
           "x-omitempty": false
@@ -2642,6 +2645,9 @@
         "backfill_ticket_expiration_seconds": {
           "format": "int32",
           "type": "integer"
+        },
+        "best_latency_calculation_method": {
+          "type": "string"
         },
         "crossplay_disabled": {
           "type": "boolean",
@@ -2725,6 +2731,10 @@
     },
     "api.MatchTicketStatus": {
       "properties": {
+        "isActive": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "matchFound": {
           "type": "boolean",
           "x-omitempty": false
@@ -2840,7 +2850,7 @@
     "api.RuleSetPayload": {
       "properties": {
         "data": {
-          "type": "object"
+          "$ref": "#/definitions/api.RuleSetPayloadData"
         },
         "enable_custom_match_function": {
           "type": "boolean",
@@ -2852,6 +2862,7 @@
       },
       "required": ["data", "enable_custom_match_function", "name"]
     },
+    "api.RuleSetPayloadData": {},
     "api.Team": {
       "properties": {
         "parties": {
@@ -3059,6 +3070,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "IsPivot": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "Latencies": {
           "additionalProperties": {
             "type": "integer"
@@ -3096,6 +3111,7 @@
       "required": [
         "CreatedAt",
         "IsActive",
+        "IsPivot",
         "Latencies",
         "MatchPool",
         "Namespace",
@@ -3378,7 +3394,13 @@
         "PlatformUserID": {
           "type": "string"
         },
+        "PreviousStatus": {
+          "type": "string"
+        },
         "Status": {
+          "type": "string"
+        },
+        "StatusV2": {
           "type": "string"
         },
         "UpdatedAt": {
@@ -3387,7 +3409,7 @@
           "x-nullable": false
         }
       },
-      "required": ["ID", "PlatformID", "PlatformUserID", "Status", "UpdatedAt"]
+      "required": ["ID", "PlatformID", "PlatformUserID", "PreviousStatus", "Status", "StatusV2", "UpdatedAt"]
     },
     "player.PlayerData": {
       "properties": {
@@ -3423,13 +3445,13 @@
   },
   "x-docs": {
     "alias": "match2",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/match2/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-06-13T06:36:45+00:00",
-    "gitHash": "1cba48105aae897aa8b81caa78e58c38ce85652d",
-    "version": "2.21.1",
+    "buildDate": "2024-08-06T06:15:59+00:00",
+    "gitHash": "b2bf535531dd0c136f1156d6fcb3a0e54f30cff1",
+    "version": "2.25.1",
     "version-roles-seeding": "1.2.36"
   }
 }

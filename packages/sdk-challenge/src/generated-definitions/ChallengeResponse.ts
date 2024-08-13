@@ -16,6 +16,7 @@ export const ChallengeResponse = z.object({
   endDate: z.string().nullish(),
   goalsVisibility: z.enum(['PERIODONLY', 'SHOWALL']),
   name: z.string(),
+  randomizedPerRotation: z.boolean(),
   repeatAfter: z.number().int().nullish(),
   resetConfig: ResetConfig,
   rotation: z.enum(['DAILY', 'MONTHLY', 'NONE', 'WEEKLY']),

@@ -4,7 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, CodeGenUtil, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
+import { AccelbyteSDK, ApiArgs, ApiUtils, CodeGenUtil, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { Buffer } from 'buffer'
 import { MFA_DATA_STORAGE_KEY } from './IamUserAuthorizationClient.js'
 import { Request2FAEmailCode, Verify2FAParam } from '../models/TwoFA.js'
@@ -25,12 +25,16 @@ export class IamOAuthClient {
   options: OAuthApiOptions
 
   constructor(sdk: AccelbyteSDK, args?: ApiArgs) {
-    const amb = sdk.assembly()
-    this.conf = amb.config
-    this.namespace = args?.namespace ? args?.namespace : amb.namespace
+    const { config, namespace, clientId } = sdk.assembly()
+    this.conf = ApiUtils.mergedConfigs(config, args)
+    this.namespace = args?.namespace ? args?.namespace : namespace
     this.options = {
-      clientId: amb.clientId
+      clientId
     }
+  }
+
+  private newInstance() {
+    return new OAuth20$(Network.create(this.conf), this.namespace)
   }
 
   /**
@@ -92,10 +96,6 @@ export class IamOAuthClient {
     const result = await this.newInstance().postOauthMfaCode({ mfaToken, clientId: this.options.clientId, factor })
     if (result.error) throw result.error
     return result.response
-  }
-
-  private newInstance() {
-    return new OAuth20$(Network.create(this.conf), this.namespace)
   }
 
   static exchangeTokenOauthByPlatformId = (

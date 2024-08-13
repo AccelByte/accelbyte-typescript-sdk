@@ -7,6 +7,7 @@
 import {
   AccelbyteSDK,
   ApiArgs,
+  ApiUtils,
   BrowserHelper,
   DesktopChecker,
   doRefreshSession,
@@ -70,8 +71,8 @@ export class IamUserAuthorizationClient {
 
   constructor(private sdk: AccelbyteSDK, args?: ApiArgs) {
     const { config, namespace, baseURL, clientId, redirectURI } = sdk.assembly()
-    this.conf = config
-    this.namespace = args?.namespace || namespace
+    this.conf = ApiUtils.mergedConfigs(config, args)
+    this.namespace = args?.namespace ? args?.namespace : namespace
     this.options = {
       baseURL,
       clientId,

@@ -9,6 +9,7 @@
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { UserProfileBulkRequest } from '../generated-definitions/UserProfileBulkRequest.js'
 import { UserProfileCreate } from '../generated-definitions/UserProfileCreate.js'
 import { UserProfileInfo } from '../generated-definitions/UserProfileInfo.js'
 import { UserProfilePrivateCreate } from '../generated-definitions/UserProfilePrivateCreate.js'
@@ -34,6 +35,16 @@ export function UserProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getProfilesPublic(queryParams: { userIds: string | null }): Promise<UserProfilePublicInfoArray> {
     const $ = new UserProfile$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getProfilesPublic(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * Bulk get user public profile by ids.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user public profiles&lt;/li&gt;&lt;/ul&gt;
+   */
+  async function createProfilePublic(data: UserProfileBulkRequest): Promise<UserProfilePublicInfoArray> {
+    const $ = new UserProfile$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.createProfilePublic(data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -190,6 +201,7 @@ export function UserProfileApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   return {
     getProfilesPublic,
+    createProfilePublic,
     getUsersMeProfiles,
     createUserMeProfile,
     updateUserMeProfile,

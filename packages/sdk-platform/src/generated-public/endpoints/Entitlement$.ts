@@ -10,7 +10,6 @@ import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { AxiosInstance } from 'axios'
 import { AppEntitlementInfo } from '../../generated-definitions/AppEntitlementInfo.js'
 import { AppEntitlementPagingSlicedResult } from '../../generated-definitions/AppEntitlementPagingSlicedResult.js'
-import { EntitlementDecrement } from '../../generated-definitions/EntitlementDecrement.js'
 import { EntitlementDecrementResult } from '../../generated-definitions/EntitlementDecrementResult.js'
 import { EntitlementInfo } from '../../generated-definitions/EntitlementInfo.js'
 import { EntitlementInfoArray } from '../../generated-definitions/EntitlementInfoArray.js'
@@ -24,6 +23,7 @@ import { EntitlementTransferRequest } from '../../generated-definitions/Entitlem
 import { EntitlementTransferResult } from '../../generated-definitions/EntitlementTransferResult.js'
 import { Ownership } from '../../generated-definitions/Ownership.js'
 import { OwnershipToken } from '../../generated-definitions/OwnershipToken.js'
+import { PublicEntitlementDecrement } from '../../generated-definitions/PublicEntitlementDecrement.js'
 import { TimedOwnership } from '../../generated-definitions/TimedOwnership.js'
 import { UserEntitlementHistoryPagingSlicedResultArray } from '../../generated-definitions/UserEntitlementHistoryPagingSlicedResultArray.js'
 
@@ -418,7 +418,7 @@ export class Entitlement$ {
   updateDecrement_ByUserId_ByEntitlementId(
     userId: string,
     entitlementId: string,
-    data: EntitlementDecrement
+    data: PublicEntitlementDecrement
   ): Promise<IResponse<EntitlementDecrementResult>> {
     const params = {} as SDKRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/decrement'

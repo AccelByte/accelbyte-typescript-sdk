@@ -8,13 +8,16 @@ import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const ConfigurationTemplateResponse = z.object({
   PSNBaseUrl: z.string().nullish(),
+  appName: z.string().nullish(),
   attributes: z.record(z.any()).nullish(),
   autoJoin: z.boolean().nullish(),
   autoLeaveSession: z.boolean().nullish(),
   clientVersion: z.string(),
   createdAt: z.string(),
+  customURLGRPC: z.string().nullish(),
   deployment: z.string(),
   disableCodeGeneration: z.boolean().nullish(),
+  disableResendInvite: z.boolean().nullish(),
   dsManualSetReady: z.boolean().nullish(),
   dsSource: z.string().nullish(),
   enableSecret: z.boolean().nullish(),

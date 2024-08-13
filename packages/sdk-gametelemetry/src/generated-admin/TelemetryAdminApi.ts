@@ -43,6 +43,7 @@ export function TelemetryAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     eventId?: string | null
     eventName?: string | null
     eventPayload?: string | null
+    deviceType?: string | null
   }): Promise<PagedResponseGetNamespaceEventResponse> {
     const $ = new TelemetryAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getEvents(queryParams)

@@ -28,7 +28,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * This API is used to get basic build manifests. Only committed build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get basic build manifests. Only committed build will be retrieved.
    */
   async function getBuildsByAppId(queryParams: { appId: string | null }): Promise<BuildIdVersionArray> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -39,7 +39,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to delete build manifest. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=8 (DELETE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to delete build manifest.
    */
   async function deleteBuild_ByBuildId_DEPRECATED(buildId: string): Promise<unknown> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -49,7 +49,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get build manifest.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get build manifest.
    */
   async function getBuild_ByBuildId(buildId: string): Promise<BuildManifest> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -60,7 +60,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to start chunk upload and retrieve upload url. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: upload data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start chunk upload and retrieve upload url.
    */
   async function createStartchunkupload_DEPRECATED(data: BinaryUpload): Promise<UploadSummary> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -70,7 +70,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get basic build manifests. Only committed build will be retrieved. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Basic Build Manifest&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get basic build manifests. Only committed build will be retrieved.
    */
   async function getBuildsByNamespace(): Promise<BasicBuildManifestArray> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -81,7 +81,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to commit build manifest. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit build manifest.
    */
   async function createCommitbuildmanifest_DEPRECATED(data: BuildManifest): Promise<unknown> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -91,7 +91,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to get build deletion. Only deleted build will be retrieved.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: List of build deletion&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to get build deletion. Only deleted build will be retrieved.
    */
   async function getBuildsdeletionByAppId(queryParams: {
     appId: string | null
@@ -105,7 +105,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to set current build as release version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to set current build as release version.
    */
   async function updateSetcurrentbuild_ByBuildId(buildId: string, queryParams?: { sendNotification?: boolean | null }): Promise<unknown> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -115,7 +115,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to retrieve chunk by hash.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=2 (READ)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to retrieve chunk by hash.
    */
   async function getRetrievechunkbyhash_ByHash(hash: string): Promise<BlockData> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -125,7 +125,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This API is used to retry build deletion.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to retry build deletion.
    */
   async function updateRetry_ByBuildId(buildId: string): Promise<unknown> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -146,7 +146,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to set current build as release version. [DEPRECATED] &lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: none&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to set current build as release version.
    */
   async function updateSetcurrentbuild_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<unknown> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -157,7 +157,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to start build upload. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: build id&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to start build upload.
    */
   async function createStartbuildupload_ByAppId_ByVersion_DEPRECATED(appId: string, version: string): Promise<BuildIdManifest> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -168,7 +168,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to commit chunk that has been uploaded. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit chunk that has been uploaded.
    */
   async function createUuid_ByHash_ByUuid_ByOffset_DEPRECATED(hash: string, uuid: string, offset: number): Promise<BlockManifest> {
     const $ = new UploaderV1Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -179,7 +179,7 @@ export function UploaderV1AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
 
   /**
    * @deprecated
-   * This API is used to commit chunk that has been uploaded. [DEPRECATED]&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&#34;ADMIN:NAMESPACE:{namespace}:BUILDINFO&#34;, action=4 (UPDATE)&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: chunk data&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to commit chunk that has been uploaded.
    */
   async function createOffset_ByHash_ByUuid_ByOffset_ByBlockSize_DEPRECATED(
     hash: string,

@@ -55,6 +55,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     shardId?: string | null
     startCreatedAt?: number
     topic?: string[]
+    unfiltered?: boolean | null
   }): Promise<ChatMessageWithPaginationResponse> {
     const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getChats(queryParams)
@@ -190,6 +191,7 @@ export function TopicAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       senderUserId?: string | null
       shardId?: string | null
       startCreatedAt?: number
+      unfiltered?: boolean | null
     }
   ): Promise<ChatMessageWithPaginationResponse> {
     const $ = new TopicAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)

@@ -8,12 +8,12 @@
     },
     "description": "Justice UGC Service",
     "title": "justice-ugc-service",
-    "version": "2.20.3"
+    "version": "2.20.4"
   },
   "schemes": ["https"],
   "externalDocs": {
     "description": "API Docs",
-    "url": "https://stage.accelbyte.io/ugc/apidocs"
+    "url": "https://development.accelbyte.io/ugc/apidocs"
   },
   "securityDefinitions": {
     "HasPermission": {
@@ -4578,7 +4578,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
+            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -4616,7 +4616,7 @@
           },
           {
             "collectionFormat": "csv",
-            "description": "content tag. max number of tags: -1 tags (-1 means unlimited).",
+            "description": "content tag. max number of tags: 5 tags (-1 means unlimited).",
             "in": "query",
             "items": {
               "type": "string"
@@ -4713,7 +4713,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
+            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -4751,7 +4751,7 @@
           },
           {
             "collectionFormat": "csv",
-            "description": "content tag. max number of tags: -1 tags (-1 means unlimited).",
+            "description": "content tag. max number of tags: 5 tags (-1 means unlimited).",
             "in": "query",
             "items": {
               "type": "string"
@@ -7074,7 +7074,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
+            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -8587,6 +8587,101 @@
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/ugc/v2/admin/namespaces/{namespace}/channels/{channelId}/contents/{contentId}/copy": {
+      "post": {
+        "consumes": ["application/json"],
+        "operationId": "AdminCopyContent",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.CopyContentRequest"
+            }
+          },
+          {
+            "description": "source channel id",
+            "in": "path",
+            "name": "channelId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "source content id",
+            "in": "path",
+            "name": "contentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "contents copied",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/models.CopyContentResponse"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Copy contents from a channel to another",
+        "tags": ["Admin Content V2"],
+        "x-errorCodes": {
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:*:CONTENT [CREATE]"]
           }
         ]
       }
@@ -11083,7 +11178,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
+            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -11173,7 +11268,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
+            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -11206,7 +11301,7 @@
           },
           {
             "collectionFormat": "csv",
-            "description": "content tag. max number of tags: -1 tags (-1 means unlimited).",
+            "description": "content tag. max number of tags: 5 tags (-1 means unlimited).",
             "in": "query",
             "items": {
               "type": "string"
@@ -12662,7 +12757,7 @@
           },
           {
             "default": 20,
-            "description": "number of content per page. max limit: -1 (-1 means unlimited).",
+            "description": "number of content per page. max limit: 100 (-1 means unlimited).",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -13976,6 +14071,50 @@
       },
       "required": ["content", "id", "updatedAt", "version"]
     },
+    "models.CopyContentRequest": {
+      "properties": {
+        "Tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "customAttributes": {
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "subType": {
+          "type": "string"
+        },
+        "targetChannelId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["Tags", "targetChannelId"]
+    },
+    "models.CopyContentResponse": {
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/models.ContentDownloadResponseV2"
+        },
+        "error": {
+          "$ref": "#/definitions/response.Error"
+        },
+        "isSuccess": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "sourceContentId": {
+          "type": "string"
+        }
+      },
+      "required": ["isSuccess", "sourceContentId"]
+    },
     "models.CreateContentRequest": {
       "properties": {
         "customAttributes": {
@@ -15153,15 +15292,15 @@
   },
   "x-docs": {
     "alias": "ugc",
-    "host": "https://stage.accelbyte.io",
+    "host": "https://development.accelbyte.io",
     "path": "/ugc/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-05-03T07:39:36+00:00",
-    "gitHash": "f46c3dfc58f8a5c3aec696d40be21142c13757c5",
+    "buildDate": "2024-08-07T04:21:59+00:00",
+    "gitHash": "cd3a7b118121b588d555da06fad0f6766c39797a",
     "name": "justice-ugc-service",
-    "realm": "staging",
-    "version": "2.20.3",
+    "realm": "dev",
+    "version": "2.20.4",
     "version-roles-seeding": "1.0.21"
   }
 }

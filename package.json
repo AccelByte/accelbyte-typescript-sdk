@@ -28,6 +28,7 @@
     "packages/sdk-seasonpass",
     "packages/sdk-session",
     "packages/sdk-sessionbrowser",
+    "packages/sdk-sessionhistory",
     "packages/sdk-social",
     "packages/sdk-ugc",
     "packages/examples"

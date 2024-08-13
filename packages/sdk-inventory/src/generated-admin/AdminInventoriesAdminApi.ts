@@ -12,6 +12,7 @@ import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
 import { CreateInventoryReq } from '../generated-definitions/CreateInventoryReq.js'
 import { DeleteInventoryReq } from '../generated-definitions/DeleteInventoryReq.js'
 import { InventoryResp } from '../generated-definitions/InventoryResp.js'
+import { InventoryRespArray } from '../generated-definitions/InventoryRespArray.js'
 import { ListInventoryResp } from '../generated-definitions/ListInventoryResp.js'
 import { PurchaseValidationReq } from '../generated-definitions/PurchaseValidationReq.js'
 import { UpdateInventoryReq } from '../generated-definitions/UpdateInventoryReq.js'
@@ -99,12 +100,27 @@ export function AdminInventoriesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   *  Updating user inventories. Positive value will increase MaxSlots from existing value Negative value will decrease MaxSlots from existing value Limited slots can not be changed to unlimited, vice versa Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
+   */
+  async function updateInventory_ByUserId_ByInventoryConfigurationCode(
+    userId: string,
+    inventoryConfigurationCode: string,
+    data: UpdateInventoryReq
+  ): Promise<InventoryRespArray> {
+    const $ = new AdminInventoriesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.updateInventory_ByUserId_ByInventoryConfigurationCode(userId, inventoryConfigurationCode, data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
     getInventories,
     createInventory,
     deleteInventory_ByInventoryId,
     getInventory_ByInventoryId,
     updateInventory_ByInventoryId,
-    createPurchaseable_ByUserId
+    createPurchaseable_ByUserId,
+    updateInventory_ByUserId_ByInventoryConfigurationCode
   }
 }

@@ -12,6 +12,7 @@ export const EntitlementGrant = z.object({
   itemId: z.string(),
   itemNamespace: z.string(),
   language: z.string().nullish(),
+  metadata: z.record(z.any()).nullish(),
   origin: z
     .enum(['Epic', 'GooglePlay', 'IOS', 'Nintendo', 'Oculus', 'Other', 'Playstation', 'Steam', 'System', 'Twitch', 'Xbox'])
     .nullish(),

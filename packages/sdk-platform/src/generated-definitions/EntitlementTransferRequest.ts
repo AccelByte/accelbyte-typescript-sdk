@@ -4,7 +4,12 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { PublicEntitlementMetadata } from './PublicEntitlementMetadata.js'
 
-export const EntitlementTransferRequest = z.object({ entitlementId: z.string().nullish(), useCount: z.number().int().nullish() })
+export const EntitlementTransferRequest = z.object({
+  entitlementId: z.string().nullish(),
+  metadata: PublicEntitlementMetadata.nullish(),
+  useCount: z.number().int().nullish()
+})
 
 export interface EntitlementTransferRequest extends z.TypeOf<typeof EntitlementTransferRequest> {}

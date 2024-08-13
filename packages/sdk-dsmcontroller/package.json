@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-dsmcontroller",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",

@@ -3,7 +3,7 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { AccelbyteSDK, ApiArgs, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
+import { AccelbyteSDK, ApiArgs, ApiUtils, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
 import { ReadyPlayerMe } from '../models/ReadyPlayerMe.js'
 import { Users$ } from '../../generated-public/endpoints/Users$'
 
@@ -18,9 +18,9 @@ export class IamUserClient {
    * @internal
    */
   constructor(sdk: AccelbyteSDK, args?: ApiArgs) {
-    const amb = sdk.assembly()
-    this.conf = amb.config
-    this.namespace = args?.namespace ? args?.namespace : amb.namespace
+    const { config, namespace } = sdk.assembly()
+    this.conf = ApiUtils.mergedConfigs(config, args)
+    this.namespace = args?.namespace ? args?.namespace : namespace
   }
 
   /**

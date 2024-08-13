@@ -16,6 +16,7 @@ import { ClientsConfigV3AdminApi } from './generated-admin/ClientsConfigV3AdminA
 import { ClientsAdminApi } from './generated-admin/ClientsAdminApi.js'
 import { DevicesV4AdminApi } from './generated-admin/DevicesV4AdminApi.js'
 import { CountryAdminApi } from './generated-admin/CountryAdminApi.js'
+import { OverrideRoleConfigV3AdminApi } from './generated-admin/OverrideRoleConfigV3AdminApi.js'
 import { ThirdPartyCredentialAdminApi } from './generated-admin/ThirdPartyCredentialAdminApi.js'
 import { SsoCredentialAdminApi } from './generated-admin/SsoCredentialAdminApi.js'
 import { ConfigAdminApi } from './generated-admin/ConfigAdminApi.js'
@@ -46,6 +47,7 @@ const apis = {
   ClientsAdminApi,
   DevicesV4AdminApi,
   CountryAdminApi,
+  OverrideRoleConfigV3AdminApi,
   ThirdPartyCredentialAdminApi,
   SsoCredentialAdminApi,
   ConfigAdminApi,

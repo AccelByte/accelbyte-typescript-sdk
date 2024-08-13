@@ -18,7 +18,7 @@ export class Dlc$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This API is used to retrieve DLC versions against the game version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to retrieve DLC versions against the game version.
    */
   getLink_ByBuildId(buildId: string): Promise<IResponse<RetrieveDependencyLinkResponse>> {
     const params = {} as SDKRequestConfig
@@ -36,7 +36,7 @@ export class Dlc$ {
   }
 
   /**
-   * This API is used to retrieve compatibility of specific DLC versions against the game version.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: login user&lt;/li&gt;&lt;/ul&gt;
+   * This API is used to retrieve compatibility of specific DLC versions against the game version.
    */
   getCompatibility_ByBuildId(buildId: string): Promise<IResponse<RetrieveDependencyCompatibilityResponse>> {
     const params = {} as SDKRequestConfig
@@ -54,7 +54,7 @@ export class Dlc$ {
   }
 
   /**
-   * Retrieve the list of DLC available on specific game. Use game&#39;s appId to query.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of DLC&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve the list of DLC available on specific game. Use game&#39;s appId to query.
    */
   getDlcLatestByGameAppId_ByAppId(appId: string): Promise<IResponse<RetrieveLatestDlcResponseArray>> {
     const params = {} as SDKRequestConfig
@@ -72,7 +72,7 @@ export class Dlc$ {
   }
 
   /**
-   * Retrieve the list of DLC available on specific game. Use DLC&#39;s appId to query.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: appId of game and list of its builds by platformId&lt;/li&gt;&lt;/ul&gt;
+   * Retrieve the list of DLC available on specific game. Use DLC&#39;s appId to query.
    */
   getAppLatestByDlcAppId_ByDlcAppId(dlcAppId: string): Promise<IResponse<RetrieveBaseGameResponseArray>> {
     const params = {} as SDKRequestConfig

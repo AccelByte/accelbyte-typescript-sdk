@@ -17,6 +17,7 @@ import { GetBulkAllPlayerBlockedUsersResponse } from '../../generated-definition
 import { GetLobbyCcuResponse } from '../../generated-definitions/GetLobbyCcuResponse.js'
 import { GetPlayerSessionAttributeResponse } from '../../generated-definitions/GetPlayerSessionAttributeResponse.js'
 import { ListBlockedPlayerRequest } from '../../generated-definitions/ListBlockedPlayerRequest.js'
+import { ListUnblockPlayerRequest } from '../../generated-definitions/ListUnblockPlayerRequest.js'
 import { SetPlayerSessionAttributeRequest } from '../../generated-definitions/SetPlayerSessionAttributeRequest.js'
 
 export class PlayerAdmin$ {
@@ -126,6 +127,19 @@ export class PlayerAdmin$ {
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * Bulk unblock player in a namespace by list of user id
+   */
+  deleteBulkUnblockPlayer_ByUserId(userId: string, data: ListUnblockPlayerRequest): Promise<IResponse<unknown>> {
+    const params = {} as SDKRequestConfig
+    const url = '/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/bulk/unblock'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.delete(url, { data, params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
