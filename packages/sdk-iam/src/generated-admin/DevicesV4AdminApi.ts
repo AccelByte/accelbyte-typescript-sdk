@@ -148,11 +148,12 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
+   * @deprecated
    * This is the endpoint for an admin to decrypt device id
    */
-  async function getDecrypt_ByDeviceId(deviceId: string): Promise<DeviceIdDecryptResponseV4> {
+  async function getDecrypt_ByDeviceId_DEPRECATED(deviceId: string): Promise<DeviceIdDecryptResponseV4> {
     const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getDecrypt_ByDeviceId(deviceId)
+    const resp = await $.getDecrypt_ByDeviceId_DEPRECATED(deviceId)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -169,6 +170,6 @@ export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getBans_ByDeviceId,
     updateUnban_ByDeviceId,
     getUsers_ByDeviceId,
-    getDecrypt_ByDeviceId
+    getDecrypt_ByDeviceId_DEPRECATED
   }
 }

@@ -24,7 +24,7 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
   /**
    * Retrieve all supported policy types.
    */
-  getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<IResponse<RetrievePolicyTypeResponseArray>> {
+  getPolicyTypes(queryParams: { offset?: number; limit: number }): Promise<IResponse<RetrievePolicyTypeResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/policy-types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })

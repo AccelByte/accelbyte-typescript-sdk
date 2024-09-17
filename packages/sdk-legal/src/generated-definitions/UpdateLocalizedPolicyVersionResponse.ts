@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const UpdateLocalizedPolicyVersionResponse = z.object({
-  attachmentChecksum: z.string().nullish(),
-  attachmentLocation: z.string().nullish(),
-  attachmentVersionIdentifier: z.string().nullish(),
-  contentType: z.string().nullish(),
-  createdAt: z.string().nullish(),
-  description: z.string().nullish(),
   id: z.string(),
+  createdAt: z.string().nullish(),
+  updatedAt: z.string().nullish(),
   localeCode: z.string().nullish(),
-  updatedAt: z.string().nullish()
+  contentType: z.string().nullish(),
+  attachmentLocation: z.string().nullish(),
+  attachmentChecksum: z.string().nullish(),
+  attachmentVersionIdentifier: z.string().nullish(),
+  description: z.string().nullish()
 })
 
 export interface UpdateLocalizedPolicyVersionResponse extends z.TypeOf<typeof UpdateLocalizedPolicyVersionResponse> {}

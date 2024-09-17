@@ -6,18 +6,18 @@
 import { z } from 'zod'
 
 export const PolicyObject = z.object({
+  id: z.string(),
+  createdAt: z.string().nullish(),
+  updatedAt: z.string().nullish(),
+  readableId: z.string().nullish(),
+  policyName: z.string(),
   countryCode: z.string(),
   countryGroupCode: z.string().nullish(),
-  createdAt: z.string().nullish(),
-  description: z.string().nullish(),
-  id: z.string(),
-  isDefaultOpted: z.boolean(),
-  isDefaultSelection: z.boolean(),
-  isMandatory: z.boolean(),
-  policyName: z.string(),
-  readableId: z.string().nullish(),
   shouldNotifyOnUpdate: z.boolean(),
-  updatedAt: z.string().nullish()
+  description: z.string().nullish(),
+  isMandatory: z.boolean(),
+  isDefaultOpted: z.boolean(),
+  isDefaultSelection: z.boolean()
 })
 
 export interface PolicyObject extends z.TypeOf<typeof PolicyObject> {}

@@ -20,7 +20,7 @@ export function LocalizedPolicyVersionsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
+   * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.<br>Other detail info: <ul></ul>
    */
   async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string

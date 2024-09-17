@@ -7,8 +7,8 @@ import { z } from 'zod'
 import { RetrieveAcceptedAgreementResponse } from './RetrieveAcceptedAgreementResponse.js'
 
 export const UserAgreementsResponse = z.object({
-  agreements: z.array(RetrieveAcceptedAgreementResponse).nullish(),
-  userId: z.string().nullish()
+  userId: z.string().nullish(),
+  agreements: z.array(RetrieveAcceptedAgreementResponse).nullish()
 })
 
 export interface UserAgreementsResponse extends z.TypeOf<typeof UserAgreementsResponse> {}

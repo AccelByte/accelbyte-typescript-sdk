@@ -26,7 +26,7 @@ export function AdminUserAgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createAgreementPolicy_ByUserId(
     userId: string,
     data: AcceptAgreementRequest[],
-    queryParams: { clientId: string | null; countryCode: string | null; publisherUserId?: string | null }
+    queryParams: { countryCode: string | null; clientId: string | null; publisherUserId?: string | null }
   ): Promise<AcceptAgreementResponse> {
     const $ = new AdminUserAgreementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createAgreementPolicy_ByUserId(userId, data, queryParams)

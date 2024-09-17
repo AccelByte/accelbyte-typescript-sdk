@@ -16,7 +16,7 @@ export class Eligibilities$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.
+   * Retrieve the active policies and its conformance status by user.<br>This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.
    */
   getEligibility_ByNamespace(): Promise<IResponse<RetrieveUserEligibilitiesResponseArray>> {
     const params = {} as SDKRequestConfig
@@ -32,7 +32,7 @@ export class Eligibilities$ {
   }
 
   /**
-   * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process only supports cross-namespace checking between game namespace and publisher namespace , that means if the active policy already accepted by the same user in publisher namespace, then it will also be considered as eligible in non-publisher namespace.
+   * Retrieve the active policies and its conformance status by user.<br>This process only supports cross-namespace checking between game namespace and publisher namespace , that means if the active policy already accepted by the same user in publisher namespace, then it will also be considered as eligible in non-publisher namespace.
    */
   getUserEligibility_ByCountryCode_ByClientId_ByUserId(
     countryCode: string,

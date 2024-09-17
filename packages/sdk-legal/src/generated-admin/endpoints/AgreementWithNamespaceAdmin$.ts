@@ -40,10 +40,10 @@ export class AgreementWithNamespaceAdmin$ {
    */
   getAgreementsPolicyVersionsUsers(queryParams: {
     policyVersionId: string | null
-    convertGameUserId?: boolean | null
     keyword?: string | null
-    limit?: number
     offset?: number
+    limit?: number
+    convertGameUserId?: boolean | null
   }): Promise<IResponse<PagedRetrieveUserAcceptedAgreementResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/agreements/policy-versions/users'.replace('{namespace}', this.namespace)
@@ -79,7 +79,7 @@ export class AgreementWithNamespaceAdmin$ {
   }
 
   /**
-   * This API will check the status of export process.&lt;br&gt;If the export process has been completed, the response body will include the download url.
+   * This API will check the status of export process.<br>If the export process has been completed, the response body will include the download url.
    */
   getAgreementsPolicyVersionsUsersExportCsvDownload(queryParams: {
     exportId: string | null
@@ -100,7 +100,7 @@ export class AgreementWithNamespaceAdmin$ {
   }
 
   /**
-   * This API will initiate a worker to export list of users who has accepted a specific policy version into a CSV file.&lt;br&gt;To check the export state after initialize it, use `GET /admin/namespaces/{namespace}/agreements/policy-versions/users/export-csv/download` API.&lt;br/&gt;&lt;br/&gt;This Initiate API is &lt;b&gt;not allow&lt;/b&gt; multiple export worker running for the same namespace, it will return 409 http error if so.&lt;br/&gt;
+   * This API will initiate a worker to export list of users who has accepted a specific policy version into a CSV file.<br>To check the export state after initialize it, use `GET /admin/namespaces/{namespace}/agreements/policy-versions/users/export-csv/download` API.<br/><br/>This Initiate API is <b>not allow</b> multiple export worker running for the same namespace, it will return 409 http error if so.<br/>
    */
   createAgreementPolicyVersionUserExportCsvInitiate(queryParams: {
     policyVersionId: string | null

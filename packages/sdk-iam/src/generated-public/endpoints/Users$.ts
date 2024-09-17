@@ -67,6 +67,7 @@ import { UserLinkedPlatformsResponseV3 } from '../../generated-definitions/UserL
 import { UserPasswordUpdateRequest } from '../../generated-definitions/UserPasswordUpdateRequest.js'
 import { UserPasswordUpdateV3Request } from '../../generated-definitions/UserPasswordUpdateV3Request.js'
 import { UserPlatforms } from '../../generated-definitions/UserPlatforms.js'
+import { UserProfileUpdateAllowStatus } from '../../generated-definitions/UserProfileUpdateAllowStatus.js'
 import { UserResponse } from '../../generated-definitions/UserResponse.js'
 import { UserResponseArray } from '../../generated-definitions/UserResponseArray.js'
 import { UserResponseV3 } from '../../generated-definitions/UserResponseV3.js'
@@ -103,6 +104,22 @@ export class Users$ {
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserCreateResponse, 'UserCreateResponse')
+  }
+
+  /**
+   * This API is for user to get self profile update allow status. Note: If the config is not found, this API will return a config with unlimited.
+   */
+  getUsersMeProfileStatus(): Promise<IResponse<UserProfileUpdateAllowStatus>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v3/public/users/me/profileStatus'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserProfileUpdateAllowStatus,
+      'UserProfileUpdateAllowStatus'
+    )
   }
 
   /**
@@ -226,7 +243,7 @@ export class Users$ {
   }
 
   /**
-   * Available Authentication Types: 1. **EMAILPASSWD**: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
+   * Available Authentication Types: 1. **EMAILPASSWD**: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. * **code**: this is required when mandatoryEmailVerificationEnabled config is true. please refer to the config from /iam/v3/public/namespaces/{namespace}/config/{configKey} [GET] API. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   createUser_ByNS_v3(data: UserCreateRequestV3): Promise<IResponse<UserCreateResponseV3>> {
     const params = {} as SDKRequestConfig

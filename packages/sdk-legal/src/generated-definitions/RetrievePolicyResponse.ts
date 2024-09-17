@@ -7,19 +7,19 @@ import { z } from 'zod'
 import { PolicyVersionObject } from './PolicyVersionObject.js'
 
 export const RetrievePolicyResponse = z.object({
+  id: z.string(),
+  createdAt: z.string().nullish(),
+  updatedAt: z.string().nullish(),
+  readableId: z.string().nullish(),
+  policyName: z.string(),
   countryCode: z.string(),
   countryGroupCode: z.string().nullish(),
-  createdAt: z.string().nullish(),
-  description: z.string().nullish(),
-  id: z.string(),
-  isDefaultOpted: z.boolean(),
-  isDefaultSelection: z.boolean(),
-  isMandatory: z.boolean(),
-  policyName: z.string(),
-  policyVersions: z.array(PolicyVersionObject).nullish(),
-  readableId: z.string().nullish(),
   shouldNotifyOnUpdate: z.boolean(),
-  updatedAt: z.string().nullish()
+  policyVersions: z.array(PolicyVersionObject).nullish(),
+  description: z.string().nullish(),
+  isMandatory: z.boolean(),
+  isDefaultOpted: z.boolean(),
+  isDefaultSelection: z.boolean()
 })
 
 export interface RetrievePolicyResponse extends z.TypeOf<typeof RetrievePolicyResponse> {}

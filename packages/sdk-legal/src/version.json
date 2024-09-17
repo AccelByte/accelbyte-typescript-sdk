@@ -1,14 +1,11 @@
 {
-  "buildBy": "Gradle 6.9.1",
-  "buildDate": "2024-08-05T02:36:31+00:00",
-  "buildID": "1.43.0",
-  "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-  "buildOS": "Linux amd64 5.10.220-209.869.amzn2.x86_64",
-  "gitBranchName": "master",
-  "gitHash": "d6d914f9a9",
-  "gitTag": "1.43.0",
-  "name": "justice-legal-service",
-  "realm": "dev",
+  "description": "Justice Legal Service",
   "version": "1.43.0",
-  "version-roles-seeding": "0.0.3"
+  "title": "justice-legal-service",
+  "contact": {
+    "name": "Engineering Team at AccelByte",
+    "url": "https://accelbyte.io",
+    "email": "engineering@accelbyte.io"
+  },
+  "gitHash": "1.43.0"
 }

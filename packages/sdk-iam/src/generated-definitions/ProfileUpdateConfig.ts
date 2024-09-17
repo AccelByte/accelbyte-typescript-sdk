@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const Paging = z.object({ previous: z.string().nullish(), next: z.string().nullish() })
+export const ProfileUpdateConfig = z.object({ minimumAllowedInterval: z.number().int().nullish() })
 
-export interface Paging extends z.TypeOf<typeof Paging> {}
+export interface ProfileUpdateConfig extends z.TypeOf<typeof ProfileUpdateConfig> {}

@@ -20,7 +20,7 @@ export function ConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled
+   * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled * mandatoryEmailVerificationEnabled
    */
   async function getConfig_ByConfigKey(configKey: string): Promise<ConfigValueResponseV3> {
     const $ = new ConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)

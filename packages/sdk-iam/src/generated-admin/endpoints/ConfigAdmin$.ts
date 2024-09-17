@@ -15,7 +15,7 @@ export class ConfigAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled
+   * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled * mandatoryEmailVerificationEnabled
    */
   getConfig_ByConfigKey(configKey: string): Promise<IResponse<ConfigValueResponseV3>> {
     const params = {} as SDKRequestConfig

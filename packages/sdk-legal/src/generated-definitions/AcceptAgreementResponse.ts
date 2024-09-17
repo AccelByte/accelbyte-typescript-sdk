@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const AcceptAgreementResponse = z.object({ comply: z.boolean(), proceed: z.boolean() })
+export const AcceptAgreementResponse = z.object({ proceed: z.boolean(), comply: z.boolean() })
 
 export interface AcceptAgreementResponse extends z.TypeOf<typeof AcceptAgreementResponse> {}

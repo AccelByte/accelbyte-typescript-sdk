@@ -20,18 +20,7 @@ export function UserInfoAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * @deprecated
-   * Invalidate user info cache in agreement service.
-   */
-  async function deleteUserInfo_DEPRECATED(queryParams?: { namespace?: string | null }): Promise<unknown> {
-    const $ = new UserInfoAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.deleteUserInfo_DEPRECATED(queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
-  }
-
-  /**
-   * Get user info cache last updated time per namespace.&lt;br&gt;The query parameter namespaces can be a list of namespace separated by comma.&lt;br&gt;If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
+   * Get user info cache last updated time per namespace.<br>The query parameter namespaces can be a list of namespace separated by comma.<br>If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
    */
   async function getUserInfo(queryParams?: { namespaces?: string | null }): Promise<RetrieveUserInfoCacheStatusResponseArray> {
     const $ = new UserInfoAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -51,9 +40,20 @@ export function UserInfoAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     return resp.response.data
   }
 
+  /**
+   * @deprecated
+   * Invalidate user info cache in agreement service.
+   */
+  async function deleteUserInfo_DEPRECATED(queryParams?: { namespace?: string | null }): Promise<unknown> {
+    const $ = new UserInfoAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.deleteUserInfo_DEPRECATED(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
   return {
-    deleteUserInfo_DEPRECATED,
     getUserInfo,
-    updateUserInfo_DEPRECATED
+    updateUserInfo_DEPRECATED,
+    deleteUserInfo_DEPRECATED
   }
 }

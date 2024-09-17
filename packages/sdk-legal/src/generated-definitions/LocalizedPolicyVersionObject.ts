@@ -6,18 +6,18 @@
 import { z } from 'zod'
 
 export const LocalizedPolicyVersionObject = z.object({
-  attachmentChecksum: z.string().nullish(),
-  attachmentLocation: z.string().nullish(),
-  attachmentVersionIdentifier: z.string().nullish(),
-  contentType: z.string().nullish(),
-  createdAt: z.string().nullish(),
-  description: z.string().nullish(),
   id: z.string(),
-  isDefaultSelection: z.boolean(),
+  createdAt: z.string().nullish(),
+  updatedAt: z.string().nullish(),
   localeCode: z.string(),
-  publishedDate: z.string().nullish(),
+  contentType: z.string().nullish(),
+  attachmentLocation: z.string().nullish(),
+  attachmentChecksum: z.string().nullish(),
+  attachmentVersionIdentifier: z.string().nullish(),
+  description: z.string().nullish(),
   status: z.string().nullish(),
-  updatedAt: z.string().nullish()
+  publishedDate: z.string().nullish(),
+  isDefaultSelection: z.boolean()
 })
 
 export interface LocalizedPolicyVersionObject extends z.TypeOf<typeof LocalizedPolicyVersionObject> {}

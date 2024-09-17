@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const Paging = z.object({ previous: z.string().nullish(), next: z.string().nullish() })
+export const UserInfo = z.object({ country: z.string().nullish() })
 
-export interface Paging extends z.TypeOf<typeof Paging> {}
+export interface UserInfo extends z.TypeOf<typeof UserInfo> {}

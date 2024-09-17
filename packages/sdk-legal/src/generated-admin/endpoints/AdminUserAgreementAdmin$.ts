@@ -21,7 +21,7 @@ export class AdminUserAgreementAdmin$ {
   createAgreementPolicy_ByUserId(
     userId: string,
     data: AcceptAgreementRequest[],
-    queryParams: { clientId: string | null; countryCode: string | null; publisherUserId?: string | null }
+    queryParams: { countryCode: string | null; clientId: string | null; publisherUserId?: string | null }
   ): Promise<IResponse<AcceptAgreementResponse>> {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/users/{userId}/agreements/policies'

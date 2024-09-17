@@ -110,9 +110,20 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * This endpoint will get user&#39;s&#39; MFA status.
    */
-  async function createUserMeMfaStatus(): Promise<UserMfaStatusResponseV4> {
+  async function getUsersMeMfaStatus(): Promise<UserMfaStatusResponseV4> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createUserMeMfaStatus()
+    const resp = await $.getUsersMeMfaStatus()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * This endpoint will get user&#39;s&#39; MFA status. ------------ **Substitute endpoint**: /iam/v4/admin/users/me/mfa/status [GET]
+   */
+  async function createUserMeMfaStatus_DEPRECATED(): Promise<UserMfaStatusResponseV4> {
+    const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.createUserMeMfaStatus_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -262,7 +273,7 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Create test users and not send verification code email. Enter the number of test users you want to create in the count field. The maximum value of the user count is 100.
+   * Create test users and not send verification code email. Note: - count : Enter the number of test users you want to create in the count field. The maximum value of the user count is 100. - userInfo(optional) : - country: you can specify country for the test user. Country use ISO3166-1 alpha-2 two letter, e.g. US
    */
   async function createTestUser(data: CreateTestUsersRequestV4): Promise<CreateTestUsersResponseV4> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -272,9 +283,9 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint is used to enable 2FA authenticator.
+   * This endpoint is used to enable 2FA authenticator. ---------- Prerequisites: - Generate the secret key/QR code uri by **_/iam/v4/admin/users/me/mfa/authenticator/key_** - Consume the secret key/QR code by an authenticator app - Get the code from the authenticator app
    */
-  async function postUserMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<unknown> {
+  async function postUserMeMfaAuthenticatorEnable(data: { code: string | null }): Promise<unknown> {
     const $ = new UsersV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.postUserMeMfaAuthenticatorEnable(data)
     if (resp.error) throw resp.error
@@ -411,7 +422,8 @@ export function UsersV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     getInvitationHistories,
     getUsersMeMfaFactor,
     postUserMeMfaFactor,
-    createUserMeMfaStatus,
+    getUsersMeMfaStatus,
+    createUserMeMfaStatus_DEPRECATED,
     getUsersMeMfaBackupCode_DEPRECATED,
     createUserMeMfaBackupCode_DEPRECATED,
     postUserMeMfaEmailCode,

@@ -67,6 +67,7 @@ import { UserLinkedPlatformsResponseV3 } from '../generated-definitions/UserLink
 import { UserPasswordUpdateRequest } from '../generated-definitions/UserPasswordUpdateRequest.js'
 import { UserPasswordUpdateV3Request } from '../generated-definitions/UserPasswordUpdateV3Request.js'
 import { UserPlatforms } from '../generated-definitions/UserPlatforms.js'
+import { UserProfileUpdateAllowStatus } from '../generated-definitions/UserProfileUpdateAllowStatus.js'
 import { UserResponse } from '../generated-definitions/UserResponse.js'
 import { UserResponseArray } from '../generated-definitions/UserResponseArray.js'
 import { UserResponseV3 } from '../generated-definitions/UserResponseV3.js'
@@ -103,6 +104,16 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function createUser_DEPRECATED(data: UserCreateRequest): Promise<UserCreateResponse> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.createUser_DEPRECATED(data)
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * This API is for user to get self profile update allow status. Note: If the config is not found, this API will return a config with unlimited.
+   */
+  async function getUsersMeProfileStatus(): Promise<UserProfileUpdateAllowStatus> {
+    const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.getUsersMeProfileStatus()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -214,7 +225,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Available Authentication Types: 1. **EMAILPASSWD**: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
+   * Available Authentication Types: 1. **EMAILPASSWD**: an authentication type used for new user registration through email. **Note**: * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true. * **code**: this is required when mandatoryEmailVerificationEnabled config is true. please refer to the config from /iam/v3/public/namespaces/{namespace}/config/{configKey} [GET] API. Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   async function createUser_ByNS_v3(data: UserCreateRequestV3): Promise<UserCreateResponseV3> {
     const $ = new Users$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -1192,6 +1203,7 @@ export function UsersApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   return {
     getUsersMe,
     createUser_DEPRECATED,
+    getUsersMeProfileStatus,
     getUsersAdmin_DEPRECATED,
     getUsersVerifyLinkVerify,
     getUsersSearch_DEPRECATED,

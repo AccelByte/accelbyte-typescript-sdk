@@ -27,8 +27,8 @@ export function AgreementAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   async function getAgreementsPolicyVersionsUsers(queryParams: {
     policyVersionId: string | null
     keyword?: string | null
-    limit?: number
     offset?: number
+    limit?: number
   }): Promise<PagedRetrieveUserAcceptedAgreementResponse> {
     const $ = new AgreementAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getAgreementsPolicyVersionsUsers(queryParams)

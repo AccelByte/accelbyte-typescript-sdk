@@ -6,12 +6,13 @@
 import { z } from 'zod'
 
 export const UpdateBasePolicyRequestV2 = z.object({
-  affectedClientIds: z.array(z.string()).nullish(),
-  affectedCountries: z.array(z.string()).nullish(),
   basePolicyName: z.string().nullish(),
   description: z.string().nullish(),
+  affectedCountries: z.array(z.string()).nullish(),
+  affectedClientIds: z.array(z.string()).nullish(),
+  tags: z.array(z.string()).nullish(),
   isHidden: z.boolean().nullish(),
-  tags: z.array(z.string()).nullish()
+  isHiddenPublic: z.boolean().nullish()
 })
 
 export interface UpdateBasePolicyRequestV2 extends z.TypeOf<typeof UpdateBasePolicyRequestV2> {}

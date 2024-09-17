@@ -21,7 +21,7 @@ export function EligibilitiesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   const useSchemaValidation = sdkAssembly.useSchemaValidation
 
   /**
-   * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.
+   * Retrieve the active policies and its conformance status by user.<br>This process supports cross-namespace checking, that means if the active policy already accepted by the same user in other namespace, then it will be considered as eligible.
    */
   async function getEligibility_ByNamespace(): Promise<RetrieveUserEligibilitiesResponseArray> {
     const $ = new Eligibilities$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -31,7 +31,7 @@ export function EligibilitiesApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Retrieve the active policies and its conformance status by user.&lt;br&gt;This process only supports cross-namespace checking between game namespace and publisher namespace , that means if the active policy already accepted by the same user in publisher namespace, then it will also be considered as eligible in non-publisher namespace.
+   * Retrieve the active policies and its conformance status by user.<br>This process only supports cross-namespace checking between game namespace and publisher namespace , that means if the active policy already accepted by the same user in publisher namespace, then it will also be considered as eligible in non-publisher namespace.
    */
   async function getUserEligibility_ByCountryCode_ByClientId_ByUserId(
     countryCode: string,

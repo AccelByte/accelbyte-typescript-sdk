@@ -6,15 +6,15 @@
 import { z } from 'zod'
 
 export const PolicyVersionObject = z.object({
-  createdAt: z.string().nullish(),
-  description: z.string().nullish(),
-  displayVersion: z.string(),
   id: z.string(),
-  isCommitted: z.boolean(),
-  isInEffect: z.boolean(),
-  publishedDate: z.string().nullish(),
+  createdAt: z.string().nullish(),
+  updatedAt: z.string().nullish(),
+  displayVersion: z.string(),
+  description: z.string().nullish(),
   status: z.string().nullish(),
-  updatedAt: z.string().nullish()
+  publishedDate: z.string().nullish(),
+  isCommitted: z.boolean(),
+  isInEffect: z.boolean()
 })
 
 export interface PolicyVersionObject extends z.TypeOf<typeof PolicyVersionObject> {}

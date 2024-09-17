@@ -6,12 +6,12 @@
 import { z } from 'zod'
 
 export const UpdatePolicyRequest = z.object({
-  description: z.string().nullish(),
-  isDefaultOpted: z.boolean(),
-  isMandatory: z.boolean(),
-  policyName: z.string(),
   readableId: z.string().nullish(),
-  shouldNotifyOnUpdate: z.boolean()
+  policyName: z.string(),
+  shouldNotifyOnUpdate: z.boolean(),
+  description: z.string().nullish(),
+  isMandatory: z.boolean(),
+  isDefaultOpted: z.boolean()
 })
 
 export interface UpdatePolicyRequest extends z.TypeOf<typeof UpdatePolicyRequest> {}

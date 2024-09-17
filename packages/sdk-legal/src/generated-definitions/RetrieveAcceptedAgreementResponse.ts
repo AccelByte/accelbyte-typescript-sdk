@@ -7,21 +7,21 @@ import { z } from 'zod'
 import { LocalizedPolicyVersionObject } from './LocalizedPolicyVersionObject.js'
 
 export const RetrieveAcceptedAgreementResponse = z.object({
-  countryCode: z.string().nullish(),
-  createdAt: z.string().nullish(),
-  description: z.string().nullish(),
-  displayVersion: z.string().nullish(),
   id: z.string(),
-  isAccepted: z.boolean().nullish(),
-  localizedPolicyVersion: LocalizedPolicyVersionObject.nullish(),
-  namespace: z.string().nullish(),
-  policyId: z.string().nullish(),
-  policyName: z.string().nullish(),
-  policyType: z.string().nullish(),
-  signingDate: z.string().nullish(),
-  tags: z.array(z.string()).nullish(),
+  createdAt: z.string().nullish(),
   updatedAt: z.string().nullish(),
-  userId: z.string().nullish()
+  userId: z.string().nullish(),
+  policyId: z.string().nullish(),
+  policyType: z.string().nullish(),
+  policyName: z.string().nullish(),
+  tags: z.array(z.string()).nullish(),
+  displayVersion: z.string().nullish(),
+  namespace: z.string().nullish(),
+  countryCode: z.string().nullish(),
+  description: z.string().nullish(),
+  localizedPolicyVersion: LocalizedPolicyVersionObject.nullish(),
+  signingDate: z.string().nullish(),
+  isAccepted: z.boolean().nullish()
 })
 
 export interface RetrieveAcceptedAgreementResponse extends z.TypeOf<typeof RetrieveAcceptedAgreementResponse> {}

@@ -125,7 +125,24 @@ export class UsersV4Admin$ {
   /**
    * This endpoint will get user&#39;s&#39; MFA status.
    */
-  createUserMeMfaStatus(): Promise<IResponse<UserMfaStatusResponseV4>> {
+  getUsersMeMfaStatus(): Promise<IResponse<UserMfaStatusResponseV4>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/admin/users/me/mfa/status'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserMfaStatusResponseV4,
+      'UserMfaStatusResponseV4'
+    )
+  }
+
+  /**
+   * @deprecated
+   * This endpoint will get user&#39;s&#39; MFA status. ------------ **Substitute endpoint**: /iam/v4/admin/users/me/mfa/status [GET]
+   */
+  createUserMeMfaStatus_DEPRECATED(): Promise<IResponse<UserMfaStatusResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/status'
     const resultPromise = this.axiosInstance.post(url, null, { params })
@@ -316,7 +333,7 @@ export class UsersV4Admin$ {
   }
 
   /**
-   * Create test users and not send verification code email. Enter the number of test users you want to create in the count field. The maximum value of the user count is 100.
+   * Create test users and not send verification code email. Note: - count : Enter the number of test users you want to create in the count field. The maximum value of the user count is 100. - userInfo(optional) : - country: you can specify country for the test user. Country use ISO3166-1 alpha-2 two letter, e.g. US
    */
   createTestUser(data: CreateTestUsersRequestV4): Promise<IResponse<CreateTestUsersResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -332,9 +349,9 @@ export class UsersV4Admin$ {
   }
 
   /**
-   * This endpoint is used to enable 2FA authenticator.
+   * This endpoint is used to enable 2FA authenticator. ---------- Prerequisites: - Generate the secret key/QR code uri by **_/iam/v4/admin/users/me/mfa/authenticator/key_** - Consume the secret key/QR code by an authenticator app - Get the code from the authenticator app
    */
-  postUserMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<IResponse<unknown>> {
+  postUserMeMfaAuthenticatorEnable(data: { code: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/users/me/mfa/authenticator/enable'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {

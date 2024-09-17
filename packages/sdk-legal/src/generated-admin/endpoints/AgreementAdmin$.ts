@@ -23,8 +23,8 @@ export class AgreementAdmin$ {
   getAgreementsPolicyVersionsUsers(queryParams: {
     policyVersionId: string | null
     keyword?: string | null
-    limit?: number
     offset?: number
+    limit?: number
   }): Promise<IResponse<PagedRetrieveUserAcceptedAgreementResponse>> {
     const params = { limit: 20, ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/agreements/policy-versions/users'

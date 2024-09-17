@@ -16,19 +16,7 @@ export class UserInfoAdmin$ {
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   /**
-   * @deprecated
-   * Invalidate user info cache in agreement service.
-   */
-  deleteUserInfo_DEPRECATED(queryParams?: { namespace?: string | null }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/agreement/admin/userInfo'
-    const resultPromise = this.axiosInstance.delete(url, { params })
-
-    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
-  }
-
-  /**
-   * Get user info cache last updated time per namespace.&lt;br&gt;The query parameter namespaces can be a list of namespace separated by comma.&lt;br&gt;If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
+   * Get user info cache last updated time per namespace.<br>The query parameter namespaces can be a list of namespace separated by comma.<br>If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
    */
   getUserInfo(queryParams?: { namespaces?: string | null }): Promise<IResponse<RetrieveUserInfoCacheStatusResponseArray>> {
     const params = { ...queryParams } as SDKRequestConfig
@@ -51,6 +39,18 @@ export class UserInfoAdmin$ {
     const params = { ...queryParams } as SDKRequestConfig
     const url = '/agreement/admin/userInfo'
     const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+
+  /**
+   * @deprecated
+   * Invalidate user info cache in agreement service.
+   */
+  deleteUserInfo_DEPRECATED(queryParams?: { namespace?: string | null }): Promise<IResponse<unknown>> {
+    const params = { ...queryParams } as SDKRequestConfig
+    const url = '/agreement/admin/userInfo'
+    const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }

@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const Permission = z.object({ action: z.number().int().nullish(), resource: z.string().nullish() })
+export const Permission = z.object({ resource: z.string().nullish(), action: z.number().int().nullish() })
 
 export interface Permission extends z.TypeOf<typeof Permission> {}

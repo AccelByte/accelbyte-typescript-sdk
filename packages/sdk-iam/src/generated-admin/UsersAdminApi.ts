@@ -395,7 +395,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * [WARNING] This endpoint is only for testing purpose. This endpoint get active user verification code. There are 3 scenario of getting verification codes : after account registration, after reset password request, and after headless account upgrade. All of them will be returned on this endpoint. action code: 10146
+   * **[WARNING] This endpoint is only for testing purpose.** This endpoint get active user verification code. There are some scenarios of getting verification codes, all of them will be returned on this endpoint: - After account registration - After reset password request - After headless account upgrade - After update email request This API only accept publisher/studio namespace and userId. Action code: 10146
    */
   async function getCodes_ByUserId(userId: string): Promise<VerificationCodeResponse> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -456,7 +456,7 @@ export function UsersAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint force verify user action code: 10118
+   * This endpoint force verify user Note: - namespace: only accept publisher/studio namespace - userId: only accept publisher/studio userId action code: 10118
    */
   async function updateVerify_ByUserId(userId: string): Promise<unknown> {
     const $ = new UsersAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)

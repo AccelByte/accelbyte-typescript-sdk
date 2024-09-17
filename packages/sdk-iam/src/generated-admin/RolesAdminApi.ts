@@ -210,11 +210,12 @@ export function RolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Admin roles has its members listed in the role. Role can only be assigned to other users by the role&#39;s manager. action code: 10411
+   * @deprecated
+   * Admin roles has its members listed in the role. Role can only be assigned to other users by the role&#39;s manager. action code: 10411 Deprecate: Suggest to use this: AdminRevokeUserFromRoleV4
    */
-  async function deleteMember_ByRoleId(roleId: string, data: RoleMembersRequestV3): Promise<unknown> {
+  async function deleteMember_ByRoleId_DEPRECATED(roleId: string, data: RoleMembersRequestV3): Promise<unknown> {
     const $ = new RolesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.deleteMember_ByRoleId(roleId, data)
+    const resp = await $.deleteMember_ByRoleId_DEPRECATED(roleId, data)
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -356,7 +357,7 @@ export function RolesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     deleteUser_ByRoleId,
     getUsers_ByRoleId,
     createUser_ByRoleId,
-    deleteMember_ByRoleId,
+    deleteMember_ByRoleId_DEPRECATED,
     getMembers_ByRoleId,
     createMember_ByRoleId,
     deleteManager_ByRoleId,

@@ -166,9 +166,10 @@ export class DevicesV4Admin$ {
   }
 
   /**
+   * @deprecated
    * This is the endpoint for an admin to decrypt device id
    */
-  getDecrypt_ByDeviceId(deviceId: string): Promise<IResponse<DeviceIdDecryptResponseV4>> {
+  getDecrypt_ByDeviceId_DEPRECATED(deviceId: string): Promise<IResponse<DeviceIdDecryptResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/decrypt'
       .replace('{namespace}', this.namespace)

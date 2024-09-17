@@ -6,8 +6,8 @@
 import { z } from 'zod'
 
 export const UploadLocalizedPolicyVersionAttachmentResponse = z.object({
-  attachmentChecksum: z.string().nullish(),
   attachmentLocation: z.string().nullish(),
+  attachmentChecksum: z.string().nullish(),
   attachmentUploadUrl: z.string().nullish()
 })
 

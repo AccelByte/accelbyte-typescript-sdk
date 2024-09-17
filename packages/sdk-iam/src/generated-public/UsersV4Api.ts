@@ -49,7 +49,7 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
+   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. - code: required when mandatoryEmailVerificationEnabled config is true, please refer to the config from /iam/v3/public/namespaces/{namespace}/config/{configKey} [GET] API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   async function createUser(data: CreateUserRequestV4): Promise<CreateUserResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, useSchemaValidation)
@@ -131,9 +131,20 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   /**
    * This endpoint will get user&#39;s&#39; MFA status.
    */
-  async function createUserMeMfaStatus(): Promise<UserMfaStatusResponseV4> {
+  async function getUsersMeMfaStatus(): Promise<UserMfaStatusResponseV4> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createUserMeMfaStatus()
+    const resp = await $.getUsersMeMfaStatus()
+    if (resp.error) throw resp.error
+    return resp.response.data
+  }
+
+  /**
+   * @deprecated
+   * This endpoint will get user&#39;s&#39; MFA status. --------- **Substitute endpoint**: /iam/v4/public/namespaces/{namespace}/users/me/mfa/status [GET]
+   */
+  async function createUserMeMfaStatus_DEPRECATED(): Promise<UserMfaStatusResponseV4> {
+    const $ = new UsersV4$(Network.create(requestConfig), namespace, useSchemaValidation)
+    const resp = await $.createUserMeMfaStatus_DEPRECATED()
     if (resp.error) throw resp.error
     return resp.response.data
   }
@@ -317,9 +328,9 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
   }
 
   /**
-   * This endpoint is used to enable 2FA authenticator.
+   * This endpoint is used to enable 2FA authenticator. ---------- Prerequisites: - Generate the secret key/QR code uri by **_/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/key_** - Consume the secret key/QR code by an authenticator app - Get the code from the authenticator app
    */
-  async function postUserMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<unknown> {
+  async function postUserMeMfaAuthenticatorEnable(data: { code: string | null }): Promise<unknown> {
     const $ = new UsersV4$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.postUserMeMfaAuthenticatorEnable(data)
     if (resp.error) throw resp.error
@@ -346,7 +357,8 @@ export function UsersV4Api(sdk: AccelbyteSDK, args?: ApiArgs) {
     deleteUserMeMfaDevice,
     getUsersMeMfaFactor,
     postUserMeMfaFactor,
-    createUserMeMfaStatus,
+    getUsersMeMfaStatus,
+    createUserMeMfaStatus_DEPRECATED,
     getUsersMeMfaBackupCode_DEPRECATED,
     createUserMeMfaBackupCode_DEPRECATED,
     postUserMeMfaEmailCode,

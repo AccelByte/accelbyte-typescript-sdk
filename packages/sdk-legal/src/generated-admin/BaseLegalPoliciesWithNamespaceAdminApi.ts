@@ -29,7 +29,7 @@ export function BaseLegalPoliciesWithNamespaceAdminApi(sdk: AccelbyteSDK, args?:
   /**
    * Retrieve all supported policy types.
    */
-  async function getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<RetrievePolicyTypeResponseArray> {
+  async function getPolicyTypes(queryParams: { offset?: number; limit: number }): Promise<RetrievePolicyTypeResponseArray> {
     const $ = new BaseLegalPoliciesWithNamespaceAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
     const resp = await $.getPolicyTypes(queryParams)
     if (resp.error) throw resp.error

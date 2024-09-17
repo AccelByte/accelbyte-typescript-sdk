@@ -6,8 +6,8 @@
 import { z } from 'zod'
 
 export const CreatePolicyVersionRequest = z.object({
-  description: z.string().nullish(),
   displayVersion: z.string().nullish(),
+  description: z.string().nullish(),
   isCommitted: z.boolean().nullish()
 })
 

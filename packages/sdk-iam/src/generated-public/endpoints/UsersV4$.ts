@@ -46,7 +46,7 @@ export class UsersV4$ {
   }
 
   /**
-   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
+   * Create a new user with unique email address and username. **Required attributes:** - authType: possible value is EMAILPASSWD - emailAddress: Please refer to the rule from /v3/public/inputValidations API. - username: Please refer to the rule from /v3/public/inputValidations API. - password: Please refer to the rule from /v3/public/inputValidations API. - country: ISO3166-1 alpha-2 two letter, e.g. US. - dateOfBirth: YYYY-MM-DD, e.g. 1990-01-01. valid values are between 1905-01-01 until current date. - uniqueDisplayName: required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true, please refer to the rule from /v3/public/inputValidations API. - code: required when mandatoryEmailVerificationEnabled config is true, please refer to the config from /iam/v3/public/namespaces/{namespace}/config/{configKey} [GET] API. **Not required attributes:** - displayName: Please refer to the rule from /v3/public/inputValidations API. This endpoint support accepting agreements for the created user. Supply the accepted agreements in acceptedPolicies attribute.
    */
   createUser(data: CreateUserRequestV4): Promise<IResponse<CreateUserResponseV4>> {
     const params = {} as SDKRequestConfig
@@ -149,7 +149,24 @@ export class UsersV4$ {
   /**
    * This endpoint will get user&#39;s&#39; MFA status.
    */
-  createUserMeMfaStatus(): Promise<IResponse<UserMfaStatusResponseV4>> {
+  getUsersMeMfaStatus(): Promise<IResponse<UserMfaStatusResponseV4>> {
+    const params = {} as SDKRequestConfig
+    const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/status'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      UserMfaStatusResponseV4,
+      'UserMfaStatusResponseV4'
+    )
+  }
+
+  /**
+   * @deprecated
+   * This endpoint will get user&#39;s&#39; MFA status. --------- **Substitute endpoint**: /iam/v4/public/namespaces/{namespace}/users/me/mfa/status [GET]
+   */
+  createUserMeMfaStatus_DEPRECATED(): Promise<IResponse<UserMfaStatusResponseV4>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/status'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
@@ -381,9 +398,9 @@ export class UsersV4$ {
   }
 
   /**
-   * This endpoint is used to enable 2FA authenticator.
+   * This endpoint is used to enable 2FA authenticator. ---------- Prerequisites: - Generate the secret key/QR code uri by **_/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/key_** - Consume the secret key/QR code by an authenticator app - Get the code from the authenticator app
    */
-  postUserMeMfaAuthenticatorEnable(data: { code?: string | null }): Promise<IResponse<unknown>> {
+  postUserMeMfaAuthenticatorEnable(data: { code: string | null }): Promise<IResponse<unknown>> {
     const params = {} as SDKRequestConfig
     const url = '/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/enable'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
