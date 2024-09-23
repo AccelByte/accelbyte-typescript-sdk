@@ -1,5 +1,11 @@
 # @accelbyte/error-translator
 
+## 0.3.5
+
+### Patch Changes
+
+- 2f84f3f: fix(packages): fix failed publish because of invalid tag
+
 ## 0.3.4
 
 ### Patch Changes

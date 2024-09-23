@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-dsmcontroller",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",
@@ -28,7 +28,7 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@accelbyte/validator": "0.2.22",
+    "@accelbyte/validator": "0.2.23",
     "axios": "1.7.7",
     "buffer": "6.0.3",
     "crypto-js": "4.1.1",
@@ -38,7 +38,7 @@
     "zod": "3.23.8"
   },
   "peerDependencies": {
-    "@accelbyte/sdk": "^4.0.0",
+    "@accelbyte/sdk": "^4.0.1",
     "@tanstack/react-query": "^4.36.1"
   },
   "sideEffects": false,
